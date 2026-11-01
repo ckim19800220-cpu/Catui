@@ -1,0 +1,37 @@
+<section aria-labelledby="states">
+<h2 id="states">상태 클래스 (정적 표시)</h2>
+<p>움직임은 <a href="doc:js/modules/fx">catui.js fx</a>가 붙이고, 아래 클래스는 그 상태를 그립니다. 여기서는 최종 상태를 고정해 모양만 보입니다.</p>
+<catui-example title="나타나기 · 글자 나누기 · 타자 커서">
+  <div class="Catui_vstack Catui_gap-4">
+    <p class="Catui_fx-reveal Catui_fx-in">fx-reveal + fx-in — 화면에 들어온 뒤 상태</p>
+    <p class="Catui_h2 Catui_fx-in" aria-label="한 글자씩"><span class="Catui_fx-char" aria-hidden="true" style="--i:0">한</span><span class="Catui_fx-char" aria-hidden="true"> </span><span class="Catui_fx-char" aria-hidden="true" style="--i:1">글</span><span class="Catui_fx-char" aria-hidden="true" style="--i:2">자</span><span class="Catui_fx-char" aria-hidden="true" style="--i:3">씩</span></p>
+    <p class="Catui_h3">타자기<span class="Catui_fx-caret" aria-hidden="true"></span></p>
+  </div>
+</catui-example>
+<catui-example title="기울기 · 스포트라이트 · 자석">
+  <div class="Catui_grid">
+    <article class="Catui_card Catui_span-4 Catui_fx-tilt" style="--Catui_fx-rx:4deg;--Catui_fx-ry:-6deg"><div class="Catui_card-b">fx-tilt (기울어진 상태)</div></article>
+    <article class="Catui_card Catui_span-4 Catui_fx-spot" style="--Catui_fx-x:30%;--Catui_fx-y:40%;--Catui_fx-o:1"><div class="Catui_card-b">fx-spot (빛이 켜진 상태)</div></article>
+    <div class="Catui_span-4"><button class="Catui_btn Catui_btn-md Catui_btn-primary Catui_fx-magnet" type="button" style="--Catui_fx-mx:6px;--Catui_fx-my:-3px">fx-magnet</button></div>
+  </div>
+</catui-example>
+<catui-example title="클릭 불꽃 · 배경 틀">
+  <div class="Catui_hstack Catui_gap-6">
+    <span style="position:relative;width:40px;height:40px;display:inline-block"><span class="Catui_fx-spark" aria-hidden="true" style="position:absolute;left:20px;top:20px"><i style="--a:0deg"></i><i style="--a:60deg"></i><i style="--a:120deg"></i><i style="--a:180deg"></i><i style="--a:240deg"></i><i style="--a:300deg"></i></span></span>
+    <div class="Catui_fx-bg Catui_bg-muted Catui_rounded-md" style="padding:24px;flex:1"><div class="Catui_canvas" aria-hidden="true"></div>fx-bg: 내용 뒤에 캔버스 배경이 깔리는 틀</div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>보통은 클래스를 직접 쓰지 않고 <code>data-catui-fx="reveal"</code>처럼 속성만 붙입니다. 직접 제어할 때 쓰는 변수: 나타나기 <code>--Catui_fx-y</code>·<code>--Catui_fx-delay</code>, 글자 간격 <code>--Catui_fx-stagger</code>, 기울기 <code>--Catui_fx-rx/ry</code>, 빛 위치 <code>--Catui_fx-x/y/o</code>, 자석 <code>--Catui_fx-mx/my</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>모션 줄이기 설정에서는 모든 움직임이 꺼지고 최종 상태가 바로 보입니다. 불꽃은 아예 그리지 않습니다.</li>
+  <li>나눈 글자·바뀌는 글자는 <code>aria-hidden</code>이고 원문은 <code>aria-label</code>·숨김 글자로 한 번에 읽힙니다. 효과는 꾸밈이며 정보를 움직임으로만 전하지 않습니다.</li>
+</ul>
+</section>

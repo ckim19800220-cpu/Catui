@@ -1,0 +1,71 @@
+<section aria-labelledby="about">
+<h2 id="about">효과 모음</h2>
+<p>텍스트·스크롤·커서·배경 효과를 의존성 없이 붙입니다. 함수로 부르거나 <code>data-catui-fx</code> 속성만 붙여도 되고, 모두 <code>{ destroy() }</code>로 원래대로 돌아갑니다. 모션 줄이기 설정에서는 최종 상태를 바로 보입니다. 효과의 종류는 React Bits 같은 애니메이션 모음이 다루는 범주를 참고했고, 코드는 Catui용으로 새로 작성했습니다.</p>
+</section>
+
+<section aria-labelledby="text">
+<h2 id="text">텍스트</h2>
+<catui-example title="split · count · type · scramble">
+  <div class="Catui_vstack Catui_gap-4">
+    <p class="Catui_display" data-catui-fx="split">한국어 화면을 위한 UI</p>
+    <p class="Catui_h2" data-catui-fx="split" data-catui-by="word">단어 단위로 차례차례 나타납니다</p>
+    <p class="Catui_metric"><span data-catui-fx="count" data-catui-to="128400">0</span>명이 쓰고 있습니다</p>
+    <p class="Catui_h3">Catui는 <span class="Catui_text-success" id="fx-type">빠르고|가볍고|접근성이 좋습니다</span></p>
+    <p class="Catui_h3" data-catui-fx="scramble">CATUI DESIGN SYSTEM</p>
+  </div>
+  <script>
+  catui.use(['fx'], function (fx) { fx.type('#fx-type', { speed: 80, pause: 1200 }); });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="scroll">
+<h2 id="scroll">스크롤 나타나기</h2>
+<catui-example title="reveal (화면에 들어오면 차례로)">
+  <div class="Catui_grid">
+    <article class="Catui_card Catui_span-4" data-catui-fx="reveal"><div class="Catui_card-b">첫 번째</div></article>
+    <article class="Catui_card Catui_span-4" data-catui-fx="reveal" data-catui-delay="120"><div class="Catui_card-b">두 번째 (120ms 뒤)</div></article>
+    <article class="Catui_card Catui_span-4" data-catui-fx="reveal" data-catui-delay="240"><div class="Catui_card-b">세 번째 (240ms 뒤)</div></article>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="pointer">
+<h2 id="pointer">커서 · 클릭</h2>
+<catui-example title="tilt · spotlight · magnet · spark (마우스를 올리거나 눌러 보세요)">
+  <div class="Catui_grid">
+    <article class="Catui_card Catui_span-4" data-catui-fx="tilt"><div class="Catui_card-b"><p class="Catui_h3">기울기</p><p class="Catui_help">커서 쪽으로 최대 8° 기울어집니다.</p></div></article>
+    <a class="Catui_card Catui_span-4" href="doc:css/components/card" data-catui-fx="spotlight"><div class="Catui_card-b"><p class="Catui_h3">스포트라이트</p><p class="Catui_help">커서를 따라 빛이 움직이고, 키보드 포커스에도 켜집니다.</p></div></a>
+    <div class="Catui_span-4 Catui_center"><button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="button" data-catui-fx="magnet spark">자석 + 불꽃</button></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="bg">
+<h2 id="bg">배경</h2>
+<catui-example title="particles (점과 선, 토큰 색·다크 모드 대응)">
+  <section class="Catui_rounded-lg Catui_border" id="fx-hero" style="padding:48px 24px;text-align:center"><p class="Catui_h1">점과 선 배경</p><p class="Catui_lead" style="margin-inline:auto">내용 뒤에 캔버스가 깔리고, 크기 변화·다크 모드·모션 줄이기에 맞춰집니다.</p></section>
+  <script>
+  catui.use(['fx'], function (fx) { fx.particles('#fx-hero', { count: 36, link: 100 }); });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">fx API</caption>
+<thead><tr><th scope="col">함수 · 속성</th><th scope="col">옵션</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>fx.reveal(el)</code> · <code>reveal</code></td><td><code>y</code> · <code>delay</code> · <code>once</code></td><td>화면에 들어오면 아래에서 떠오르며 나타남 (<code>data-catui-delay</code>)</td></tr>
+<tr><td><code>fx.split(el)</code> · <code>split</code></td><td><code>by: 'char'|'word'</code> · <code>stagger</code></td><td>글자·단어가 흐림에서 차례로 또렷해짐 (<code>data-catui-by</code>)</td></tr>
+<tr><td><code>fx.count(el)</code> · <code>count</code></td><td><code>to</code> · <code>from</code> · <code>duration</code> · <code>decimals</code> · <code>prefix/suffix</code></td><td>숫자가 올라감, 천 단위 구분 (<code>data-catui-to</code>)</td></tr>
+<tr><td><code>fx.type(el)</code> · <code>type</code></td><td><code>words</code> · <code>speed</code> · <code>pause</code> · <code>loop</code></td><td>타자기로 단어를 차례로 쓰고 지움 (글자에 <code>|</code>로 구분 가능)</td></tr>
+<tr><td><code>fx.scramble(el)</code> · <code>scramble</code></td><td><code>duration</code> · <code>chars</code> · <code>hover</code></td><td>무작위 글자에서 원문으로 해독</td></tr>
+<tr><td><code>fx.tilt(el)</code> · <code>tilt</code></td><td><code>max</code></td><td>커서 쪽 3D 기울기 (마우스 환경만)</td></tr>
+<tr><td><code>fx.spotlight(el)</code> · <code>spotlight</code></td><td>—</td><td>커서 따라 브랜드 빛, 포커스에도 켜짐</td></tr>
+<tr><td><code>fx.magnet(el)</code> · <code>magnet</code></td><td><code>strength</code></td><td>커서 쪽으로 살짝 끌림 (마우스 환경만)</td></tr>
+<tr><td><code>fx.spark(el)</code> · <code>spark</code></td><td><code>count</code></td><td>클릭 위치에 불꽃 조각</td></tr>
+<tr><td><code>fx.particles(el)</code> · <code>particles</code></td><td><code>count</code> · <code>link</code></td><td>점과 선 배경 (<a href="doc:js/modules/canvas">canvas</a> 사용)</td></tr>
+<tr><td><code>fx.bind(영역)</code></td><td>—</td><td><code>data-catui-fx="이름 이름"</code>을 찾아 연결 (자동 1회, 새 영역은 다시 호출). 해제 함수를 돌려줌</td></tr>
+</tbody></table></div>
+</section>

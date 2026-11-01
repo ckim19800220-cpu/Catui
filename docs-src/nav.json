@@ -416,6 +416,14 @@
               ]
             },
             {
+              "path": "css/components/fx",
+              "title": "효과(fx) 상태",
+              "desc": "catui.js fx 효과가 쓰는 상태 클래스.",
+              "css": [
+                "components/fx.css"
+              ]
+            },
+            {
               "path": "css/components/stat",
               "title": "지표",
               "desc": "라벨·수치·증감·스파크 막대로 된 지표 카드.",
@@ -1363,6 +1371,11 @@
               "path": "js/modules/canvas",
               "title": "canvas 캔버스",
               "desc": "고해상도·반응형 캔버스, 토큰 색, 애니메이션, 정리."
+            },
+            {
+              "path": "js/modules/fx",
+              "title": "fx 효과",
+              "desc": "텍스트·스크롤·커서·배경 효과 10종 (모션 줄이기·접근성 대응)."
             },
             {
               "path": "js/modules/util",
