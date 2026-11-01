@@ -1,0 +1,15 @@
+/* layout/masonry.css */
+/* 벽돌·벤토·쌓임 — 높이가 다른 카드를 빈틈없이(벽돌), 크기가 다른 칸 격자(벤토), 스크롤하면 위에 쌓이는 카드. */
+.Catui_masonry{columns:3 220px;column-gap:var(--Catui_grid-gap)}
+.Catui_masonry > *{break-inside:avoid;margin-bottom:var(--Catui_grid-gap);display:block}
+
+.Catui_bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(140px,auto);grid-auto-flow:dense;gap:var(--Catui_grid-gap)}
+.Catui_bento-wide{grid-column:span 2}
+.Catui_bento-tall{grid-row:span 2}
+.Catui_bento-big{grid-column:span 2;grid-row:span 2}
+@media (max-width:991px){.Catui_bento{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:767px){.Catui_bento{grid-template-columns:minmax(0,1fr)}.Catui_bento > *{grid-column:auto;grid-row:auto}}
+
+/* 쌓이는 카드: 자식마다 --i(0,1,2…)를 주면 조금씩 아래에 붙음 */
+.Catui_scrollstack{display:grid;gap:var(--Catui_space-6);padding-bottom:var(--Catui_space-6)}
+.Catui_scrollstack > *{position:sticky;top:calc(var(--Catui_fx-top,16px) + var(--i,0) * 14px);box-shadow:var(--Catui_shadow-md)}

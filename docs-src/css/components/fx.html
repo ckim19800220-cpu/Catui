@@ -23,6 +23,31 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="more">
+<h2 id="more">글자 · 테두리 · 띠 · 배경 (CSS로 움직임)</h2>
+<p>아래 효과는 클래스만으로 움직입니다(모션 줄이기에서는 멈춤). 단어 바꾸기·물결·독·띠 복제는 catui.js가 마크업을 준비합니다.</p>
+<catui-example title="shiny · gradient · rotate · glitch">
+  <div class="Catui_vstack Catui_gap-3">
+    <p class="Catui_h1"><span class="Catui_fx-shiny">빛이 지나가는 글자</span></p>
+    <p class="Catui_h1"><span class="Catui_fx-gradient">흐르는 그라디언트 글자</span></p>
+    <p class="Catui_h2">지금 <span class="Catui_fx-rotate" style="--Catui_fx-k:1" aria-label="디자인, 개발, 배포"><span aria-hidden="true">디자인</span><span aria-hidden="true">개발</span><span aria-hidden="true">배포</span></span> 중</p>
+    <p class="Catui_h2"><span class="Catui_fx-glitch" data-text="SYSTEM ERROR">SYSTEM ERROR</span></p>
+  </div>
+</catui-example>
+<catui-example title="border · glare · ripple">
+  <div class="Catui_grid">
+    <article class="Catui_card Catui_span-4 Catui_fx-border"><div class="Catui_card-b">테두리를 도는 빛</div></article>
+    <a class="Catui_card Catui_span-4 Catui_fx-glare" href="doc:css/components/card"><div class="Catui_card-b">마우스를 올리면 광택</div></a>
+    <div class="Catui_span-4"><button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_fx-ripple" type="button">물결 버튼<span class="Catui_fx-wave" aria-hidden="true" style="width:56px;height:56px;left:calc(50% - 28px);top:calc(50% - 28px);animation:none;transform:none"></span></button></div>
+  </div>
+</catui-example>
+<catui-example title="marquee · dock · aurora">
+  <div class="Catui_fx-marquee"><div class="Catui_fx-track"><span class="Catui_tag">디자인</span><span class="Catui_tag">토큰</span><span class="Catui_tag">접근성</span><span class="Catui_tag">다크 모드</span><span class="Catui_tag">캔버스</span><div style="display:contents" aria-hidden="true"><span class="Catui_tag">디자인</span><span class="Catui_tag">토큰</span><span class="Catui_tag">접근성</span><span class="Catui_tag">다크 모드</span><span class="Catui_tag">캔버스</span></div></div></div>
+  <div><nav class="Catui_fx-dock" aria-label="빠른 이동"><a class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" href="doc:index" aria-label="홈"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-house"></use></svg></a><a class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" href="doc:css/components/table" aria-label="표" style="--Catui_fx-s:1.3"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-table"></use></svg></a><a class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" href="doc:css/charts/line" aria-label="차트"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chart-line"></use></svg></a></nav></div>
+  <div class="Catui_fx-aurora Catui_rounded-lg Catui_border" style="padding:40px 24px;text-align:center"><p class="Catui_h2">오로라 배경</p></div>
+</catui-example>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p>보통은 클래스를 직접 쓰지 않고 <code>data-catui-fx="reveal"</code>처럼 속성만 붙입니다. 직접 제어할 때 쓰는 변수: 나타나기 <code>--Catui_fx-y</code>·<code>--Catui_fx-delay</code>, 글자 간격 <code>--Catui_fx-stagger</code>, 기울기 <code>--Catui_fx-rx/ry</code>, 빛 위치 <code>--Catui_fx-x/y/o</code>, 자석 <code>--Catui_fx-mx/my</code>.</p>

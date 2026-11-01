@@ -21,7 +21,7 @@ description: Catui UI 키트(CSS)와 catui.js 프레임워크의 디자인·구�
 
 CSS 분류: **foundation** tokens·reset·utilities·typography / **layout** grid·app-shell·site / **components** button·split-button·form·choice·badge·avatar·card·stat·progress·table·tabs·segment·pager·breadcrumb·feedback·modal·drawer·dropdown·toast·tooltip·mega·wizard·command·faq·spinner / **forms** upload·range·rating·tags·stepper·datepicker·counter·search / **views** tree·calendar·gantt·kanban·files·thread·heatmap·timeline·task·meter·feed / **charts** line·legend·donut·bars·stack·gauge·funnel·sparkline·radar·prose.
 
-JS 모듈: layer·form·laypage·table·tabs·dropdown·util·datePicker·upload·slider·rate·tree·collapse (+ core: catui·component·events·dom·html·base·init).
+JS 모듈: layer·form·laypage·table·tabs·dropdown·util·datePicker·upload·slider·rate·tree·collapse·canvas·fx (+ core: catui·component·events·dom·html·base·init). fx는 텍스트·스크롤·커서·배경 효과 10종(`data-catui-fx`)이며 외부 라이브러리 코드를 옮기지 않고 직접 구현한다(React Bits 등은 MIT+Commons Clause로 포팅 재배포 금지).
 
 ## 2. 네임스페이스 규칙 (필수)
 

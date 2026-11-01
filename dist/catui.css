@@ -437,6 +437,22 @@
 .Catui_center{display:flex;align-items:center;justify-content:center}
 .Catui_between{justify-content:space-between}
 
+/* layout/masonry.css */
+/* 벽돌·벤토·쌓임 — 높이가 다른 카드를 빈틈없이(벽돌), 크기가 다른 칸 격자(벤토), 스크롤하면 위에 쌓이는 카드. */
+.Catui_masonry{columns:3 220px;column-gap:var(--Catui_grid-gap)}
+.Catui_masonry > *{break-inside:avoid;margin-bottom:var(--Catui_grid-gap);display:block}
+
+.Catui_bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(140px,auto);grid-auto-flow:dense;gap:var(--Catui_grid-gap)}
+.Catui_bento-wide{grid-column:span 2}
+.Catui_bento-tall{grid-row:span 2}
+.Catui_bento-big{grid-column:span 2;grid-row:span 2}
+@media (max-width:991px){.Catui_bento{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:767px){.Catui_bento{grid-template-columns:minmax(0,1fr)}.Catui_bento > *{grid-column:auto;grid-row:auto}}
+
+/* 쌓이는 카드: 자식마다 --i(0,1,2…)를 주면 조금씩 아래에 붙음 */
+.Catui_scrollstack{display:grid;gap:var(--Catui_space-6);padding-bottom:var(--Catui_space-6)}
+.Catui_scrollstack > *{position:sticky;top:calc(var(--Catui_fx-top,16px) + var(--i,0) * 14px);box-shadow:var(--Catui_shadow-md)}
+
 /* layout/app-shell.css */
 /* App shell — .Catui_app sidebar rail, topbar, breadcrumb, content grid. */
 .Catui_app{display:flex;align-items:stretch}
@@ -1997,11 +2013,146 @@ button.Catui_dp-cell:not(.Catui_dp-dis):not(.Catui_dp-sel):hover{background:var(
 .Catui_fx-bg{position:relative;isolation:isolate;overflow:hidden}
 .Catui_fx-bg > .Catui_canvas{position:absolute;inset:0;z-index:-1;aspect-ratio:auto;height:100%;border:0;border-radius:inherit;background:transparent}
 
+/* 빛 지나가는 글자 · 흐르는 그라디언트 글자 (글자색은 AA 브랜드, 빛만 장식) */
+.Catui_fx-shiny{color:var(--Catui_color-brand-strong);background:linear-gradient(110deg,transparent 40%,color-mix(in srgb,var(--Catui_color-surface) 80%,transparent) 50%,transparent 60%) 0 0 / 250% 100% no-repeat,linear-gradient(var(--Catui_color-brand-strong),var(--Catui_color-brand-strong));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:Catui_fx-shine 2.8s linear infinite}
+@keyframes Catui_fx-shine{from{background-position:150% 0,0 0}to{background-position:-100% 0,0 0}}
+.Catui_fx-gradient{background:linear-gradient(90deg,var(--Catui_color-brand-strong),var(--Catui_badge-info-fg),var(--Catui_color-brand-strong)) 0 0 / 200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:Catui_fx-flow 4s linear infinite}
+@keyframes Catui_fx-flow{to{background-position:200% 0}}
+
+/* 위아래로 바뀌는 단어: 칸 높이 1줄, 안쪽 줄을 --k칸만큼 올림 */
+.Catui_fx-rotate{display:inline-flex;flex-direction:column;height:1.25em;line-height:1.25;overflow:hidden;vertical-align:bottom}
+.Catui_fx-rotate > span{transform:translateY(calc(var(--Catui_fx-k,0) * -100%));transition:transform calc(var(--Catui_dur-fast) * 4) var(--Catui_ease)}
+
+/* 글리치: 앞뒤 복제 글자를 어긋나게 (data-text 사용) */
+.Catui_fx-glitch{position:relative;display:inline-block}
+.Catui_fx-glitch::before,.Catui_fx-glitch::after{content:attr(data-text);position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.Catui_fx-glitch::before{color:var(--Catui_badge-info-fg);clip-path:inset(0 0 55% 0);animation:Catui_fx-glitch 2.4s steps(2) infinite}
+.Catui_fx-glitch::after{color:var(--Catui_badge-danger-fg);clip-path:inset(55% 0 0 0);animation:Catui_fx-glitch 2.4s steps(2) infinite reverse}
+@keyframes Catui_fx-glitch{0%,86%,100%{transform:none}88%{transform:translate(-2px,1px)}92%{transform:translate(2px,-1px)}96%{transform:translate(-1px,0)}}
+
+/* 테두리를 도는 빛 (conic, --Catui_fx-angle 회전) */
+@property --Catui_fx-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+.Catui_fx-border{position:relative;isolation:isolate;border-color:transparent}
+.Catui_fx-border::after{content:"";position:absolute;inset:-1px;z-index:-1;border-radius:inherit;padding:1px;background:conic-gradient(from var(--Catui_fx-angle),transparent 70%,var(--Catui_color-brand) 85%,transparent 100%) border-box,linear-gradient(var(--Catui_card-border),var(--Catui_card-border)) border-box;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:Catui_fx-spin 3.5s linear infinite;pointer-events:none}
+@keyframes Catui_fx-spin{to{--Catui_fx-angle:360deg}}
+
+/* 호버 광택: 왼쪽 위→오른쪽 아래로 빛이 한 번 지나감 */
+.Catui_fx-glare{position:relative;overflow:hidden}
+.Catui_fx-glare::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 35%,color-mix(in srgb,var(--Catui_color-surface) 55%,transparent) 50%,transparent 65%) 0 0 / 250% 100% no-repeat;background-position:150% 0;transition:background-position calc(var(--Catui_dur-fast) * 6) var(--Catui_ease)}
+.Catui_fx-glare:hover::after,.Catui_fx-glare:focus-visible::after{background-position:-100% 0}
+
+/* 클릭 물결 */
+.Catui_fx-ripple{position:relative;overflow:hidden}
+.Catui_fx-wave{position:absolute;border-radius:var(--Catui_radius-pill);background:currentColor;opacity:.25;transform:scale(0);pointer-events:none;animation:Catui_fx-ripple calc(var(--Catui_dur-fast) * 5) var(--Catui_ease) forwards}
+@keyframes Catui_fx-ripple{to{transform:scale(1);opacity:0}}
+
+/* 끝없이 흐르는 띠: 같은 내용 두 벌을 -50%까지 이동 */
+.Catui_fx-marquee{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.Catui_fx-track{display:flex;width:max-content;gap:var(--Catui_space-6);animation:Catui_fx-marquee var(--Catui_fx-speed,24s) linear infinite}
+.Catui_fx-marquee:hover .Catui_fx-track,.Catui_fx-marquee:focus-within .Catui_fx-track{animation-play-state:paused}
+@keyframes Catui_fx-marquee{to{transform:translateX(calc(-50% - var(--Catui_space-6) / 2))}}
+
+/* 독: 커서 거리만큼 커지는 아이콘 줄 (--Catui_fx-s는 fx.dock이 갱신) */
+.Catui_fx-dock{display:inline-flex;align-items:flex-end;gap:var(--Catui_space-2);padding:var(--Catui_space-2);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-lg);background:var(--Catui_card-bg);box-shadow:var(--Catui_shadow-md)}
+.Catui_fx-dock > *{transform:scale(var(--Catui_fx-s,1));transform-origin:50% 100%;transition:transform var(--Catui_dur-fast) var(--Catui_ease)}
+
+/* 오로라 배경 (CSS만) */
+.Catui_fx-aurora{position:relative;isolation:isolate;overflow:hidden}
+.Catui_fx-aurora::before{content:"";position:absolute;inset:-40%;z-index:-1;pointer-events:none;background:radial-gradient(40% 35% at 30% 40%,color-mix(in srgb,var(--Catui_color-brand) 35%,transparent),transparent 70%),radial-gradient(35% 30% at 70% 55%,color-mix(in srgb,var(--Catui_color-info) 30%,transparent),transparent 70%),radial-gradient(30% 30% at 50% 80%,color-mix(in srgb,var(--Catui_color-purple) 22%,transparent),transparent 70%);filter:blur(24px);animation:Catui_fx-aurora 14s ease-in-out infinite alternate}
+@keyframes Catui_fx-aurora{to{transform:translate(6%,-4%) rotate(12deg) scale(1.08)}}
+
 @media (prefers-reduced-motion:reduce){
+  .Catui_fx-shiny,.Catui_fx-gradient,.Catui_fx-glitch::before,.Catui_fx-glitch::after,.Catui_fx-border::after,.Catui_fx-track,.Catui_fx-aurora::before{animation:none}
+  .Catui_fx-glitch::before,.Catui_fx-glitch::after,.Catui_fx-wave{display:none}
+  .Catui_fx-rotate > span,.Catui_fx-dock > *{transition:none}
+  .Catui_fx-glare::after{transition:none}
   .Catui_fx-reveal,.Catui_fx-char{opacity:1;transform:none;filter:none;transition:none}
   .Catui_fx-caret{animation:none}
   .Catui_fx-tilt,.Catui_fx-magnet{transform:none;transition:none}
   .Catui_fx-spark{display:none}
+}
+
+/* components/fx-more.css */
+/* FX 2 — 누르고 있기·밀어서 동작·목록 등장·움직이는 표시·뒤집기·완료 체크·좋아요·눌림 탄성,
+   원형 글자·초점 글자·외곽선 글자·가장자리 흐림·그레인·커스텀 커서. 모션 줄이기에서는 움직임 해제. */
+
+/* 누르고 있기: 아래 막대가 --Catui_fx-p(0~1)만큼 참 */
+.Catui_fx-hold{position:relative;overflow:hidden}
+.Catui_fx-hold::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:calc(var(--Catui_fx-p,0) * 100%);background:currentColor;opacity:.7;pointer-events:none}
+
+/* 밀어서 동작: 앞면을 밀면 뒤 동작이 드러남. 키보드로 앞면에 포커스하면 열림 */
+.Catui_fx-swipe{position:relative;overflow:hidden;border-bottom:1px solid var(--Catui_divider-color);background:var(--Catui_color-surface-muted)}
+.Catui_fx-swipe-actions{position:absolute;top:0;right:0;bottom:0;display:flex}
+.Catui_fx-swipe-actions .Catui_btn{height:100%;border-radius:0}
+.Catui_fx-swipe-front{position:relative;z-index:1;display:flex;align-items:center;gap:var(--Catui_space-3);min-height:var(--Catui_control-h-lg);padding:var(--Catui_space-2) var(--Catui_space-4);background:var(--Catui_card-bg);transform:translateX(var(--Catui_fx-sx,0px));transition:transform calc(var(--Catui_dur-fast) * 2) var(--Catui_ease);touch-action:pan-y;cursor:grab}
+.Catui_fx-swipe:has(:focus-visible) .Catui_fx-swipe-front,.Catui_fx-swipe.Catui_fx-on .Catui_fx-swipe-front{--Catui_fx-sx:calc(var(--Catui_fx-aw,120px) * -1)}
+.Catui_fx-swipe-front:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+
+/* 목록: 항목이 차례로 등장하고 선택 항목 강조 */
+.Catui_fx-list > *{animation:Catui_up calc(var(--Catui_dur-fast) * 3) var(--Catui_ease) both;animation-delay:calc(var(--i,0) * 50ms)}
+.Catui_fx-list > [aria-selected="true"]{background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong)}
+.Catui_fx-list > :focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+
+/* 움직이는 현재 표시: 컨테이너 ::after가 현재 항목 위치(--Catui_fx-ix/iw/iy/ih)로 미끄러짐 */
+.Catui_fx-ind{position:relative;isolation:isolate}
+.Catui_fx-ind::after{content:"";position:absolute;z-index:-1;left:0;top:0;width:var(--Catui_fx-iw,0px);height:var(--Catui_fx-ih,0px);transform:translate(var(--Catui_fx-ix,0px),var(--Catui_fx-iy,0px));border-radius:var(--Catui_radius-pill);background:var(--Catui_color-brand-soft);transition:transform calc(var(--Catui_dur-fast) * 2.5) var(--Catui_ease),width calc(var(--Catui_dur-fast) * 2.5) var(--Catui_ease);pointer-events:none}
+.Catui_fx-ind.Catui_pills [aria-current="page"],.Catui_fx-ind.Catui_pills [aria-pressed="true"]{background:transparent}
+.Catui_fx-ind.Catui_subnav::after{top:auto;height:var(--Catui_tab-indicator-w);border-radius:0;background:var(--Catui_tab-indicator);transform:translateX(var(--Catui_fx-ix,0px));bottom:-1px}
+.Catui_fx-ind.Catui_subnav a[aria-current="page"]{border-bottom-color:transparent}
+
+/* 뒤집기 카드 */
+.Catui_fx-flip{perspective:1000px}
+.Catui_fx-flip-inner{display:grid;transition:transform calc(var(--Catui_dur-fast) * 5) var(--Catui_ease);transform-style:preserve-3d}
+.Catui_fx-flip-front,.Catui_fx-flip-back{grid-area:1 / 1;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.Catui_fx-flip-back{transform:rotateY(180deg)}
+.Catui_fx-flipped .Catui_fx-flip-inner{transform:rotateY(180deg)}
+
+/* 완료 체크: 원과 체크 표시가 그려짐 (Catui_fx-on일 때) */
+.Catui_fx-check{width:48px;height:48px;color:var(--Catui_badge-success-fg);fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.Catui_fx-check circle{stroke-dasharray:66;stroke-dashoffset:66}
+.Catui_fx-check path{stroke-dasharray:20;stroke-dashoffset:20}
+.Catui_fx-check.Catui_fx-on circle{animation:Catui_fx-draw calc(var(--Catui_dur-fast) * 4) var(--Catui_ease) forwards}
+.Catui_fx-check.Catui_fx-on path{animation:Catui_fx-draw calc(var(--Catui_dur-fast) * 3) var(--Catui_ease) calc(var(--Catui_dur-fast) * 3) forwards}
+@keyframes Catui_fx-draw{to{stroke-dashoffset:0}}
+
+/* 좋아요 톡 튀기 · 눌림 탄성 */
+.Catui_fx-pop{animation:Catui_fx-pop calc(var(--Catui_dur-fast) * 3) var(--Catui_ease)}
+@keyframes Catui_fx-pop{40%{transform:scale(1.25)}70%{transform:scale(.95)}}
+[aria-pressed="true"] > .Catui_icon.Catui_fx-heart{color:var(--Catui_badge-danger-fg);fill:currentColor}
+.Catui_fx-press :is(.Catui_btn,.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip){transition:transform var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_fx-press :is(.Catui_btn,.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip):active,.Catui_fx-press input:active + :is(.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip){transform:scale(.9)}
+
+/* 원형 글자: 글자마다 --a 각도, 반지름 --Catui_fx-r */
+.Catui_fx-circle{position:relative;display:inline-block;width:calc(var(--Catui_fx-r,60px) * 2);height:calc(var(--Catui_fx-r,60px) * 2);animation:Catui_fx-spin2 18s linear infinite;font-weight:600;font-size:var(--Catui_type-caption-size);letter-spacing:.1em}
+.Catui_fx-circle > span{position:absolute;left:50%;top:0;height:var(--Catui_fx-r,60px);transform-origin:0 100%;transform:rotate(var(--a))}
+@keyframes Catui_fx-spin2{to{transform:rotate(360deg)}}
+
+/* 초점 글자: 현재 단어만 또렷, 나머지 흐림 */
+.Catui_fx-focus > span{display:inline-block;filter:blur(3px);opacity:.45;transition:filter calc(var(--Catui_dur-fast) * 3) var(--Catui_ease),opacity calc(var(--Catui_dur-fast) * 3) var(--Catui_ease)}
+.Catui_fx-focus > .Catui_fx-on{filter:none;opacity:1;color:var(--Catui_color-brand-strong)}
+
+/* 외곽선 글자 (장식용 큰 제목에만) · 가장자리 흐림 · 그레인 */
+.Catui_fx-stroke{color:transparent;-webkit-text-stroke:1.5px var(--Catui_color-brand-strong);paint-order:stroke fill}
+.Catui_fx-edge{position:relative}
+.Catui_fx-edge::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--Catui_fx-edge,64px);pointer-events:none;background:linear-gradient(transparent,var(--Catui_color-page-bg));-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);-webkit-mask:linear-gradient(transparent,#000);mask:linear-gradient(transparent,#000)}
+.Catui_fx-noise{position:relative;isolation:isolate}
+.Catui_fx-noise::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* 커스텀 커서: 요소 위에서만 따라다니는 빛(기본) · 고리(data-type="ring") */
+.Catui_fx-cursor{position:fixed;z-index:70;left:0;top:0;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:var(--Catui_radius-pill);pointer-events:none;opacity:0;transform:translate(var(--Catui_fx-cx,0px),var(--Catui_fx-cy,0px));transition:opacity calc(var(--Catui_dur-fast) * 2) var(--Catui_ease);background:radial-gradient(circle,color-mix(in srgb,var(--Catui_color-brand) 28%,transparent),transparent 65%)}
+.Catui_fx-cursor[data-type="ring"]{width:32px;height:32px;margin:-16px 0 0 -16px;background:none;border:2px solid var(--Catui_color-brand-strong);transition:opacity calc(var(--Catui_dur-fast) * 2) var(--Catui_ease),width var(--Catui_dur-fast) var(--Catui_ease),height var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_fx-cursor.Catui_fx-on{opacity:1}
+
+@media (prefers-reduced-motion:reduce){
+  .Catui_fx-swipe-front,.Catui_fx-ind::after,.Catui_fx-flip-inner,.Catui_fx-focus > span{transition:none}
+  .Catui_fx-list > *,.Catui_fx-pop,.Catui_fx-circle{animation:none}
+  .Catui_fx-check circle,.Catui_fx-check path{stroke-dashoffset:0;animation:none}
+  .Catui_fx-flip-back{transform:none;visibility:hidden}
+  .Catui_fx-flipped .Catui_fx-flip-inner{transform:none}
+  .Catui_fx-flipped .Catui_fx-flip-front{visibility:hidden}
+  .Catui_fx-flipped .Catui_fx-flip-back{visibility:visible}
+  .Catui_fx-press :is(.Catui_btn,.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip):active{transform:none}
+  .Catui_fx-cursor{display:none}
 }
 
 /* foundation/interaction.css */
