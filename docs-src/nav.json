@@ -140,6 +140,14 @@
               ]
             },
             {
+              "path": "css/layout/masonry",
+              "title": "벽돌·벤토·쌓임",
+              "desc": "높이가 다른 카드 벽돌 배치, 크기가 다른 칸 벤토 격자, 스크롤하면 쌓이는 카드.",
+              "css": [
+                "layout/masonry.css"
+              ]
+            },
+            {
               "path": "css/layout/app-shell",
               "title": "관리 셸",
               "desc": "사이드바 200px·탑바 56px·본문으로 이루어진 관리 화면 골격입니다. 991px 이하에서 사이드바가 56px 레일로 접힙니다.",
@@ -420,7 +428,8 @@
               "title": "효과(fx) 상태",
               "desc": "catui.js fx 효과가 쓰는 상태 클래스.",
               "css": [
-                "components/fx.css"
+                "components/fx.css",
+                "components/fx-more.css"
               ]
             },
             {
@@ -688,6 +697,14 @@
                   "NEVER",
                   "스크림을 중첩하지 않는다"
                 ]
+              ]
+            },
+            {
+              "path": "css/components/layer",
+              "title": "레이어 확장",
+              "desc": "catui.js layer가 쓰는 큰 창·최대화·말풍선·사진 보기·탭·iframe·토스트 위치.",
+              "css": [
+                "components/layer.css"
               ]
             },
             {
@@ -1310,7 +1327,7 @@
             {
               "path": "js/modules/layer",
               "title": "layer 팝업",
-              "desc": "메시지·확인·입력·자유 레이어·드로어·로딩."
+              "desc": "토스트·대화상자·드로어·iframe·말풍선·사진 보기·탭, 최대화·옮기기·크기 조절, Promise."
             },
             {
               "path": "js/modules/form",
@@ -1375,7 +1392,7 @@
             {
               "path": "js/modules/fx",
               "title": "fx 효과",
-              "desc": "텍스트·스크롤·커서·띠·배경 효과 21종 (모션 줄이기·접근성 대응)."
+              "desc": "텍스트·스크롤·커서·화면 기능·배경 효과 38종 (모션 줄이기·키보드·접근성 대응)."
             },
             {
               "path": "js/modules/util",

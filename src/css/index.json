@@ -58,6 +58,7 @@
   "components/drawer.css",
   "components/dropdown.css",
   "components/toast.css",
+  "components/layer.css",
   "components/notifs.css",
   "components/tooltip.css",
   "components/mega.css",

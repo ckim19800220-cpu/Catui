@@ -48,6 +48,52 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="ui">
+<h2 id="ui">화면 기능 · 마이크로 상태</h2>
+<catui-example title="hold · swipe · list · ind (정적 표시)">
+  <div class="Catui_vstack Catui_gap-4">
+    <div><button class="Catui_btn Catui_btn-md Catui_btn-danger Catui_fx-hold" type="button" style="--Catui_fx-p:.6">길게 눌러 삭제 (60%)</button></div>
+    <div class="Catui_fx-swipe Catui_fx-on Catui_rounded-md" style="--Catui_fx-aw:140px;max-width:420px"><div class="Catui_fx-swipe-actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">보관</button><button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button">삭제</button></div><div class="Catui_fx-swipe-front" tabindex="0">밀어서 연 행 (fx-on)</div></div>
+    <ul class="Catui_fx-list Catui_list" role="listbox" aria-label="알림 목록" style="max-width:420px"><li class="Catui_list-item" role="option" aria-selected="false" style="--i:0">첫 항목</li><li class="Catui_list-item" role="option" aria-selected="true" style="--i:1">선택된 항목</li><li class="Catui_list-item" role="option" aria-selected="false" style="--i:2">셋째 항목</li></ul>
+    <nav class="Catui_pills Catui_fx-ind" aria-label="기간" style="--Catui_fx-ix:68px;--Catui_fx-iy:0px;--Catui_fx-iw:64px;--Catui_fx-ih:28px"><button type="button" aria-pressed="false">오늘</button><button type="button" aria-pressed="true">이번 주</button><button type="button" aria-pressed="false">이번 달</button></nav>
+  </div>
+</catui-example>
+<catui-example title="flip · check · pop · heart · press">
+  <div class="Catui_grid">
+    <div class="Catui_fx-flip Catui_fx-flipped Catui_span-4"><div class="Catui_fx-flip-inner">
+      <article class="Catui_card Catui_fx-flip-front" inert><div class="Catui_card-b">앞면</div></article>
+      <article class="Catui_card Catui_fx-flip-back"><div class="Catui_card-b">뒤집힌 뒷면 (fx-flipped)</div></article>
+    </div></div>
+    <div class="Catui_span-4 Catui_center"><svg class="Catui_fx-check Catui_fx-on" viewBox="0 0 24 24" role="img" aria-label="완료"><circle cx="12" cy="12" r="10.5"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></div>
+    <div class="Catui_span-4 Catui_hstack Catui_fx-press"><button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_fx-pop" type="button" aria-pressed="true"><svg class="Catui_icon Catui_i16 Catui_fx-heart" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-heart"></use></svg>좋아요 12</button></div>
+  </div>
+</catui-example>
+<catui-example title="circle · focus · stroke · edge · noise · cursor">
+  <div class="Catui_grid">
+    <div class="Catui_span-3 Catui_center"><span class="Catui_fx-circle" style="--Catui_fx-r:48px;animation:none" aria-label="CATUI DESIGN • "><span aria-hidden="true" style="--a:0deg">C</span><span aria-hidden="true" style="--a:30deg">A</span><span aria-hidden="true" style="--a:60deg">T</span><span aria-hidden="true" style="--a:90deg">U</span><span aria-hidden="true" style="--a:120deg">I</span><span aria-hidden="true" style="--a:150deg">•</span><span aria-hidden="true" style="--a:180deg">D</span><span aria-hidden="true" style="--a:210deg">E</span><span aria-hidden="true" style="--a:240deg">S</span><span aria-hidden="true" style="--a:270deg">I</span><span aria-hidden="true" style="--a:300deg">G</span><span aria-hidden="true" style="--a:330deg">N</span></span></div>
+    <div class="Catui_span-9 Catui_vstack Catui_gap-3">
+      <p class="Catui_h2 Catui_fx-focus" aria-label="한 단어씩 또렷하게"><span aria-hidden="true">한</span> <span class="Catui_fx-on" aria-hidden="true">단어씩</span> <span aria-hidden="true">또렷하게</span></p>
+      <p class="Catui_display Catui_fx-stroke">OUTLINE</p>
+      <div class="Catui_fx-edge Catui_fx-noise Catui_bg-surface Catui_border Catui_rounded-md" style="padding:16px;height:96px;overflow:hidden"><p>아래 가장자리가 흐려지고(fx-edge), 표면에 그레인 질감(fx-noise)이 깔립니다. 긴 내용이 잘리는 곳에 씁니다.</p><p>둘째 줄</p><p>셋째 줄</p></div>
+      <div style="position:relative;height:60px" class="Catui_bg-muted Catui_rounded-md"><span class="Catui_fx-cursor Catui_fx-on" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:none;width:60px;height:60px;margin:-30px 0 0 -30px"></span></div>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="layer">
+<h2 id="layer">겹쳐 쓰기 레이어</h2>
+<p>클래스를 요소에 직접 붙이면 덧칠 효과(spot·aurora·border·glare·edge·noise)는 요소의 <code>::before</code>/<code>::after</code>를 쓰므로 <b>한 요소에 하나만</b> 쓸 수 있습니다. catui.js로 붙이면 효과마다 요소 안에 전용 레이어(<code>.Catui_fx-layer</code>)를 만들어 여러 개를 겹칩니다.</p>
+<catui-example title="host · layer-back(내용 아래) · layer-front(내용 위)">
+  <article class="Catui_card Catui_fx-host Catui_fx-host-rel" style="max-width:420px">
+    <span class="Catui_fx-layer Catui_fx-layer-back Catui_fx-aurora" aria-hidden="true"></span>
+    <div class="Catui_card-b"><p class="Catui_h3">오로라 + 테두리 빛 + 그레인</p><p class="Catui_help">레이어 3장이 서로 지우지 않고 겹칩니다.</p></div>
+    <span class="Catui_fx-layer Catui_fx-layer-front Catui_fx-border" aria-hidden="true"></span>
+    <span class="Catui_fx-layer Catui_fx-layer-front Catui_fx-noise" aria-hidden="true"></span>
+  </article>
+</catui-example>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p>보통은 클래스를 직접 쓰지 않고 <code>data-catui-fx="reveal"</code>처럼 속성만 붙입니다. 직접 제어할 때 쓰는 변수: 나타나기 <code>--Catui_fx-y</code>·<code>--Catui_fx-delay</code>, 글자 간격 <code>--Catui_fx-stagger</code>, 기울기 <code>--Catui_fx-rx/ry</code>, 빛 위치 <code>--Catui_fx-x/y/o</code>, 자석 <code>--Catui_fx-mx/my</code>.</p>

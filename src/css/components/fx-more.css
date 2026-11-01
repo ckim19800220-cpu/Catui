@@ -2,6 +2,16 @@
 /* FX 2 — 누르고 있기·밀어서 동작·목록 등장·움직이는 표시·뒤집기·완료 체크·좋아요·눌림 탄성,
    원형 글자·초점 글자·외곽선 글자·가장자리 흐림·그레인·커스텀 커서. 모션 줄이기에서는 움직임 해제. */
 
+/* 레이어: catui.js가 덧칠 효과(spotlight·aurora·border·glare·edge·noise)를 요소 안 전용 레이어에 그려
+   ::before/::after가 겹쳐도 서로 지우지 않게 한다. 뒤 레이어는 내용 아래, 앞 레이어는 내용 위. */
+.Catui_fx-host{isolation:isolate}
+.Catui_fx-host-rel{position:relative}
+.Catui_fx-layer.Catui_fx-layer{position:absolute;inset:0;border-radius:inherit;pointer-events:none;overflow:hidden;isolation:auto;transform:none}
+.Catui_fx-layer.Catui_fx-border{overflow:visible}
+.Catui_fx-layer-back{z-index:-1}
+.Catui_fx-layer-front{z-index:2}
+.Catui_fx-host:is(:hover,:focus-visible) > .Catui_fx-layer.Catui_fx-glare::after{background-position:-100% 0}
+
 /* 누르고 있기: 아래 막대가 --Catui_fx-p(0~1)만큼 참 */
 .Catui_fx-hold{position:relative;overflow:hidden}
 .Catui_fx-hold::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:calc(var(--Catui_fx-p,0) * 100%);background:currentColor;opacity:.7;pointer-events:none}
@@ -23,7 +33,7 @@
 .Catui_fx-ind{position:relative;isolation:isolate}
 .Catui_fx-ind::after{content:"";position:absolute;z-index:-1;left:0;top:0;width:var(--Catui_fx-iw,0px);height:var(--Catui_fx-ih,0px);transform:translate(var(--Catui_fx-ix,0px),var(--Catui_fx-iy,0px));border-radius:var(--Catui_radius-pill);background:var(--Catui_color-brand-soft);transition:transform calc(var(--Catui_dur-fast) * 2.5) var(--Catui_ease),width calc(var(--Catui_dur-fast) * 2.5) var(--Catui_ease);pointer-events:none}
 .Catui_fx-ind.Catui_pills [aria-current="page"],.Catui_fx-ind.Catui_pills [aria-pressed="true"]{background:transparent}
-.Catui_fx-ind.Catui_subnav::after{top:auto;height:var(--Catui_tab-indicator-w);border-radius:0;background:var(--Catui_tab-indicator);transform:translateX(var(--Catui_fx-ix,0px));bottom:-1px}
+.Catui_fx-ind.Catui_subnav::after{top:auto;height:var(--Catui_tab-indicator-w);border-radius:0;background:var(--Catui_tab-indicator);transform:translateX(var(--Catui_fx-ix,0px));bottom:0}
 .Catui_fx-ind.Catui_subnav a[aria-current="page"]{border-bottom-color:transparent}
 
 /* 뒤집기 카드 */
@@ -43,10 +53,10 @@
 
 /* 좋아요 톡 튀기 · 눌림 탄성 */
 .Catui_fx-pop{animation:Catui_fx-pop calc(var(--Catui_dur-fast) * 3) var(--Catui_ease)}
-@keyframes Catui_fx-pop{40%{transform:scale(1.25)}70%{transform:scale(.95)}}
+@keyframes Catui_fx-pop{40%{scale:1.25}70%{scale:.95}}
 [aria-pressed="true"] > .Catui_icon.Catui_fx-heart{color:var(--Catui_badge-danger-fg);fill:currentColor}
-.Catui_fx-press :is(.Catui_btn,.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip){transition:transform var(--Catui_dur-fast) var(--Catui_ease)}
-.Catui_fx-press :is(.Catui_btn,.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip):active,.Catui_fx-press input:active + :is(.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip){transform:scale(.9)}
+.Catui_fx-press :is(.Catui_btn,.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip){transition:scale var(--Catui_dur-fast) var(--Catui_ease),translate var(--Catui_dur-fast) var(--Catui_ease),background var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_fx-press :is(.Catui_btn,.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip):active,.Catui_fx-press input:active + :is(.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip){scale:.9}
 
 /* 원형 글자: 글자마다 --a 각도, 반지름 --Catui_fx-r */
 .Catui_fx-circle{position:relative;display:inline-block;width:calc(var(--Catui_fx-r,60px) * 2);height:calc(var(--Catui_fx-r,60px) * 2);animation:Catui_fx-spin2 18s linear infinite;font-weight:600;font-size:var(--Catui_type-caption-size);letter-spacing:.1em}
@@ -77,6 +87,6 @@
   .Catui_fx-flipped .Catui_fx-flip-inner{transform:none}
   .Catui_fx-flipped .Catui_fx-flip-front{visibility:hidden}
   .Catui_fx-flipped .Catui_fx-flip-back{visibility:visible}
-  .Catui_fx-press :is(.Catui_btn,.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip):active{transform:none}
+  .Catui_fx-press :is(.Catui_btn,.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip):active,.Catui_fx-press input:active + *{scale:none}
   .Catui_fx-cursor{display:none}
 }

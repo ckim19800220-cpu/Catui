@@ -1,6 +1,6 @@
 <section aria-labelledby="about">
 <h2 id="about">효과 모음</h2>
-<p>텍스트·스크롤·커서·배경 효과 21종을 의존성 없이 붙입니다. 함수로 부르거나 <code>data-catui-fx</code> 속성만 붙여도 되고, 모두 <code>{ destroy() }</code>로 원래대로 돌아갑니다. 모션 줄이기 설정에서는 최종 상태를 바로 보입니다. 효과의 종류는 React Bits 같은 애니메이션 모음이 다루는 범주를 참고했고, 코드는 Catui용으로 새로 작성했습니다.</p>
+<p>텍스트·스크롤·커서·화면 기능·배경 효과 38종을 의존성 없이 붙입니다. 함수로 부르거나 <code>data-catui-fx</code> 속성만 붙여도 되고, 모두 <code>{ destroy() }</code>로 원래대로 돌아갑니다. 모션 줄이기 설정에서는 최종 상태를 바로 보입니다. 효과의 종류는 React Bits 같은 애니메이션 모음이 다루는 범주를 참고했고, 코드는 Catui용으로 새로 작성했습니다.</p>
 </section>
 
 <section aria-labelledby="text">
@@ -100,6 +100,95 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="ui3">
+<h2 id="ui3">화면 기능</h2>
+<catui-example title="hold (길게 눌러 실행) · swipe (밀어서 동작, Tab으로도 열림)">
+  <div class="Catui_vstack Catui_gap-4">
+    <div class="Catui_hstack"><button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button" id="fx-hold" data-catui-fx="hold">길게 눌러 삭제</button><span class="Catui_help" id="fx-hold-out" aria-live="polite">1.2초 동안 누르고 있으세요 (Space·Enter도 됨)</span></div>
+    <div class="Catui_rounded-md Catui_border" style="max-width:440px;overflow:hidden">
+      <div data-catui-fx="swipe"><div class="Catui_fx-swipe-actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">보관</button><button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button">삭제</button></div><div class="Catui_fx-swipe-front" tabindex="0"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-mail"></use></svg>견적서 회신 — 왼쪽으로 밀어 보세요</div></div>
+      <div data-catui-fx="swipe"><div class="Catui_fx-swipe-actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">보관</button><button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button">삭제</button></div><div class="Catui_fx-swipe-front" tabindex="0"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-mail"></use></svg>배송 일정 안내</div></div>
+    </div>
+  </div>
+  <script>
+  document.getElementById('fx-hold').addEventListener('catui:hold', function () { document.getElementById('fx-hold-out').textContent = '삭제했습니다 (예시)'; });
+  </script>
+</catui-example>
+<catui-example title="list (차례 등장 + 화살표 키) · indicator (미끄러지는 현재 표시)">
+  <div class="Catui_grid">
+    <div class="Catui_span-6"><ul class="Catui_list" data-catui-fx="list" aria-label="받은 알림" id="fx-list"><li class="Catui_list-item">김하늘님이 댓글을 남겼습니다</li><li class="Catui_list-item">결제 1건이 실패했습니다</li><li class="Catui_list-item">이준님이 주문을 처리했습니다</li><li class="Catui_list-item">새 버전이 출시되었습니다</li></ul><p class="Catui_help" id="fx-list-out" aria-live="polite">항목을 누르거나 ↑↓ 후 Enter</p></div>
+    <div class="Catui_span-6 Catui_vstack Catui_gap-4">
+      <div class="Catui_pills" role="group" aria-label="기간" data-catui-fx="indicator"><button type="button" aria-pressed="true">오늘</button><button type="button" aria-pressed="false">이번 주</button><button type="button" aria-pressed="false">이번 달</button><button type="button" aria-pressed="false">올해</button></div>
+      <nav class="Catui_subnav" aria-label="설정 탭" data-catui-fx="indicator"><a href="#" aria-current="page">프로필</a><a href="#">알림</a><a href="#">보안</a><a href="#">결제</a></nav>
+    </div>
+  </div>
+  <script>
+  document.getElementById('fx-list').addEventListener('catui:select', function (e) { document.getElementById('fx-list-out').textContent = (e.detail.index + 1) + '번째 선택: ' + e.detail.item.textContent; });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="micro3">
+<h2 id="micro3">마이크로 상호작용</h2>
+<catui-example title="flip · check · pulse · press">
+  <div class="Catui_grid">
+    <div class="Catui_span-4" data-catui-fx="flip"><div class="Catui_fx-flip-inner">
+      <article class="Catui_card Catui_fx-flip-front"><div class="Catui_card-b Catui_vstack"><p class="Catui_h3">팀 요금제</p><p class="Catui_help">월 29,000원</p><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-catui-flip>자세히</button></div></article>
+      <article class="Catui_card Catui_fx-flip-back"><div class="Catui_card-b Catui_vstack"><p class="Catui_help">10명 · 프로젝트 무제한 · 우선 지원</p><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-catui-flip>앞면으로</button></div></article>
+    </div></div>
+    <div class="Catui_span-4 Catui_vstack Catui_center"><svg class="Catui_fx-check" id="fx-check" viewBox="0 0 24 24" role="img" aria-label="저장 완료"><circle cx="12" cy="12" r="10.5"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="fx-check-btn">다시 그리기</button></div>
+    <div class="Catui_span-4 Catui_vstack Catui_gap-3" data-catui-fx="press">
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-catui-fx="pulse" aria-label="좋아요"><svg class="Catui_icon Catui_i16 Catui_fx-heart" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-heart"></use></svg>좋아요</button>
+      <span class="Catui_choice"><input class="Catui_clip" id="fx-sq" type="checkbox" role="switch" checked><label class="Catui_tgl" for="fx-sq"></label><label for="fx-sq">눌림 탄성 토글</label></span>
+    </div>
+  </div>
+  <script>
+  catui.use(['fx'], function (fx) { var c = fx.check('#fx-check'); document.getElementById('fx-check-btn').addEventListener('click', function () { fx.check('#fx-check'); }); });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="deco3">
+<h2 id="deco3">글자 · 커서 · 배경 꾸밈</h2>
+<catui-example title="circle · focus · stroke · velocity">
+  <div class="Catui_grid">
+    <div class="Catui_span-3 Catui_center"><span data-catui-fx="circle" data-catui-radius="52">CATUI • DESIGN • SYSTEM • </span></div>
+    <div class="Catui_span-9 Catui_vstack Catui_gap-3">
+      <p class="Catui_h1" data-catui-fx="focus">한 단어씩 또렷하게 읽힙니다</p>
+      <p class="Catui_display" data-catui-fx="stroke">CATUI</p>
+    </div>
+  </div>
+  <div data-catui-fx="velocity" aria-label="스크롤하면 빨라지는 띠"><span class="Catui_h2">스크롤하면 빨라집니다 ·</span><span class="Catui_h2 Catui_text-success">Catui ·</span><span class="Catui_h2">토큰 ·</span><span class="Catui_h2 Catui_text-success">접근성 ·</span></div>
+</catui-example>
+<catui-example title="edge · noise · cursor · dotgrid · ripplegrid">
+  <div class="Catui_grid">
+    <div class="Catui_span-6 Catui_bg-surface Catui_border Catui_rounded-md" data-catui-fx="edge noise" style="padding:16px;height:140px;overflow:hidden"><p class="Catui_h3">가장자리 흐림 + 그레인</p><p>긴 내용이 잘리는 아래쪽이 부드럽게 사라지고, 표면에 은은한 질감이 깔립니다.</p><p>둘째 줄</p><p>셋째 줄</p><p>넷째 줄</p></div>
+    <div class="Catui_span-6 Catui_bg-muted Catui_rounded-md Catui_center" data-catui-fx="cursor" style="height:140px"><p class="Catui_h3">마우스를 움직여 보세요 (빛 커서)</p></div>
+    <section class="Catui_span-6 Catui_rounded-lg Catui_border Catui_center" data-catui-fx="dotgrid" style="height:180px"><p class="Catui_h2">점 격자 (커서 근처가 커짐)</p></section>
+    <section class="Catui_span-6 Catui_rounded-lg Catui_border Catui_center" data-catui-fx="ripplegrid" style="height:180px"><p class="Catui_h2">물결 격자</p></section>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="combine">
+<h2 id="combine">함께 쓰기 · 충돌</h2>
+<p>한 요소에 <code>data-catui-fx="spotlight border glare noise tilt magnet"</code>처럼 여러 효과를 붙일 수 있습니다. 서로 지우는 조합은 fx가 미리 막습니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">fx 조합 규칙</caption>
+<thead><tr><th scope="col">경우</th><th scope="col">처리</th></tr></thead>
+<tbody>
+<tr><td>덧칠 효과 여러 개 (spotlight·aurora·border·glare·edge·noise)</td><td>효과마다 전용 레이어에 그려 함께 보임</td></tr>
+<tr><td>움직임 여러 개 (tilt·magnet·press·dock·reveal·버튼 눌림)</td><td><code>transform</code>·<code>translate</code>·<code>scale</code>을 나눠 써서 합쳐짐</td></tr>
+<tr><td>글자를 다시 쓰는 효과끼리 (split·count·type·scramble·rotate·focus·circle·glitch)</td><td>먼저 붙은 하나만 적용, 나머지는 건너뛰고 콘솔 경고</td></tr>
+<tr><td>글자 채움끼리 (shiny·gradient·stroke), 애니메이션 속성끼리 (shiny·gradient·circle·pulse)</td><td>〃</td></tr>
+<tr><td>배경 캔버스끼리 (particles·waves·dotgrid·ripplegrid), 흐르는 띠끼리 (marquee·velocity)</td><td>〃</td></tr>
+<tr><td>hold와 클릭 효과 (ripple·spark)</td><td>〃 — hold 버튼은 클릭을 항상 막고 <code>catui:hold</code>로만 실행</td></tr>
+<tr><td>같은 효과를 두 번</td><td>새로 만들지 않고 처음 핸들을 돌려줌</td></tr>
+</tbody></table></div>
+<catui-example title="덧칠 4종 + 움직임 2종을 한 카드에">
+  <div class="Catui_grid"><a class="Catui_card Catui_span-6" href="doc:css/components/card" data-catui-fx="spotlight border glare noise tilt magnet"><div class="Catui_card-b"><p class="Catui_h3">모두 함께</p><p class="Catui_help">빛·테두리·광택·질감과 기울기·자석이 서로 지우지 않습니다.</p></div></a></div>
+</catui-example>
+</section>
+
 <section aria-labelledby="api">
 <h2 id="api">API</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">fx API</caption>
@@ -123,6 +212,19 @@
 <tr><td><code>fx.marquee(el)</code> · <code>marquee</code></td><td><code>speed</code>(초)</td><td>자식들이 끝없이 흐름. 복제본은 화면 리더·탭에서 제외, 마우스·포커스에서 멈춤</td></tr>
 <tr><td><code>fx.dock(el)</code> · <code>dock</code></td><td><code>scale</code> · <code>radius</code></td><td>커서와 가까운 항목일수록 커짐 (마우스 환경만)</td></tr>
 <tr><td><code>aurora</code> · <code>fx.waves(el)</code></td><td><code>lines</code> · <code>amplitude</code></td><td>오로라 그라디언트(CSS) · 물결 선(캔버스) 배경</td></tr>
+<tr><td><code>fx.hold(el)</code> · <code>hold</code></td><td><code>duration</code>(ms) · <code>onHold</code></td><td>길게 누르면 실행. 진행 막대, Space·Enter 지원, <code>catui:hold</code> 이벤트, 떼면 취소</td></tr>
+<tr><td><code>fx.swipe(row)</code> · <code>swipe</code></td><td>—</td><td><code>.Catui_fx-swipe-front</code>를 밀면 <code>-actions</code>가 드러남. Tab 포커스로도 열리고 Esc로 닫힘</td></tr>
+<tr><td><code>fx.list(ul)</code> · <code>list</code></td><td>—</td><td>항목 차례 등장, ↑↓·Home·End 이동, Enter·Space 선택(<code>catui:select</code>)</td></tr>
+<tr><td><code>fx.indicator(nav)</code> · <code>indicator</code></td><td>—</td><td>현재 항목(aria-current·aria-pressed·aria-selected·checked) 표시가 미끄러짐. pressed 묶음은 하나만 눌림</td></tr>
+<tr><td><code>fx.flip(card)</code> · <code>flip</code></td><td>—</td><td><code>[data-catui-flip]</code> 버튼으로 앞뒤 전환, 안 보이는 면은 inert, <code>catui:flip</code></td></tr>
+<tr><td><code>fx.check(svg)</code></td><td>—</td><td>완료 체크를 다시 그림 (<code>.Catui_fx-check</code>)</td></tr>
+<tr><td><code>pulse</code> · <code>press</code></td><td>—</td><td>좋아요 토글(aria-pressed) + 톡 튀기 · 영역 안 버튼·토글·라디오·칩에 눌림 탄성</td></tr>
+<tr><td><code>fx.circle(el)</code> · <code>circle</code></td><td><code>radius</code> (<code>data-catui-radius</code>)</td><td>글자를 원형으로 배치해 천천히 회전</td></tr>
+<tr><td><code>fx.focus(el)</code> · <code>focus</code></td><td><code>interval</code></td><td>단어를 차례로 또렷하게, 나머지는 흐림</td></tr>
+<tr><td><code>velocity</code></td><td><code>speed</code></td><td>스크롤 속도만큼 빨라지는 흐르는 띠</td></tr>
+<tr><td><code>stroke</code> · <code>edge</code> · <code>noise</code></td><td>—</td><td>외곽선 글자(장식용 큰 제목) · 아래 가장자리 흐림 · 그레인 질감</td></tr>
+<tr><td><code>dotgrid</code> · <code>ripplegrid</code></td><td><code>gap</code> · <code>reach</code></td><td>커서에 반응하는 점 격자 · 퍼지는 물결 격자 (캔버스)</td></tr>
+<tr><td><code>fx.cursor(el)</code> · <code>cursor</code></td><td><code>type: 'glow'|'ring'</code> (<code>data-catui-cursor</code>)</td><td>요소 위에서만 따라다니는 빛·고리 (마우스 환경만)</td></tr>
 <tr><td><code>fx.bind(영역)</code></td><td>—</td><td><code>data-catui-fx="이름 이름"</code>을 찾아 연결 (자동 1회, 새 영역은 다시 호출). 해제 함수를 돌려줌</td></tr>
 </tbody></table></div>
 </section>

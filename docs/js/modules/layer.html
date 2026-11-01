@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>layer 팝업 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="토스트·대화상자·드로어·iframe·말풍선·사진 보기·탭, 최대화·옮기기·크기 조절, Promise.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html" aria-current="page">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html">util 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 모듈</p>
+<h1 class="Catui_h1">layer 팝업</h1>
+<p class="Catui_lead">토스트·대화상자·드로어·iframe·말풍선·사진 보기·탭, 최대화·옮기기·크기 조절, Promise.</p>
+
+<section aria-labelledby="msg">
+<h2 id="msg">메시지</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">layer.msg — 토스트</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions" id="ly-msg">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="success">완료</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="info">안내</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="warn">주의</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="danger">실패</button>
+  </div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    catui.$('#ly-msg').on('click', '[data-icon]', function (e, b) {
+      layer.msg(b.textContent + ' 메시지', { icon: b.dataset.icon, body: '3초 뒤 사라집니다. 마우스를 올리면 멈춥니다.' });
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="layer.msg — 토스트 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot; id=&quot;ly-msg&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-icon=&quot;success&quot;&gt;완료&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-icon=&quot;info&quot;&gt;안내&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-icon=&quot;warn&quot;&gt;주의&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-icon=&quot;danger&quot;&gt;실패&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  catui.$(&#39;#ly-msg&#39;).on(&#39;click&#39;, &#39;[data-icon]&#39;, function (e, b) {
+    layer.msg(b.textContent + &#39; 메시지&#39;, { icon: b.dataset.icon, body: &#39;3초 뒤 사라집니다. 마우스를 올리면 멈춥니다.&#39; });
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>옵션: <code>icon</code>(success·info·warn·danger), <code>body</code>, <code>time</code>(ms, 0이면 수동), <code>max</code>(동시에 보일 개수, 기본 3). 영역은 <code>aria-live="polite"</code>로 읽힙니다.</p>
+</section>
+
+<section aria-labelledby="dialog">
+<h2 id="dialog">확인·입력·알림</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">confirm · prompt · alert</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions" id="ly-dlg">
+    <button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button" data-k="confirm">삭제</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="prompt">이름 바꾸기</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="alert">알림</button>
+  </div>
+  <p class="Catui_help" id="ly-out" aria-live="polite"></p>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var out = function (t) { document.getElementById('ly-out').textContent = t; };
+    catui.$('#ly-dlg').on('click', '[data-k]', function (e, b) {
+      var k = b.dataset.k;
+      if (k === 'confirm') layer.confirm('주문을 삭제할까요? 되돌릴 수 없습니다.', { danger: true, okText: '삭제' },
+        function (index) { layer.close(index); out('삭제했습니다'); }, function () { out('취소했습니다'); });
+      if (k === 'prompt') layer.prompt({ title: '이름 바꾸기', value: '견적서.pdf' }, function (value, index) { layer.close(index); out('새 이름: ' + value); });
+      if (k === 'alert') layer.alert('점검은 내일 새벽입니다.');
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="confirm · prompt · alert 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot; id=&quot;ly-dlg&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-danger&quot; type=&quot;button&quot; data-k=&quot;confirm&quot;&gt;삭제&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-k=&quot;prompt&quot;&gt;이름 바꾸기&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-k=&quot;alert&quot;&gt;알림&lt;/button&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;ly-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  var out = function (t) { document.getElementById(&#39;ly-out&#39;).textContent = t; };
+  catui.$(&#39;#ly-dlg&#39;).on(&#39;click&#39;, &#39;[data-k]&#39;, function (e, b) {
+    var k = b.dataset.k;
+    if (k === &#39;confirm&#39;) layer.confirm(&#39;주문을 삭제할까요? 되돌릴 수 없습니다.&#39;, { danger: true, okText: &#39;삭제&#39; },
+      function (index) { layer.close(index); out(&#39;삭제했습니다&#39;); }, function () { out(&#39;취소했습니다&#39;); });
+    if (k === &#39;prompt&#39;) layer.prompt({ title: &#39;이름 바꾸기&#39;, value: &#39;견적서.pdf&#39; }, function (value, index) { layer.close(index); out(&#39;새 이름: &#39; + value); });
+    if (k === &#39;alert&#39;) layer.alert(&#39;점검은 내일 새벽입니다.&#39;);
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>네이티브 <code>&lt;dialog&gt;</code>라 Esc 닫기·포커스 가두기·닫힌 뒤 포커스 복귀가 기본입니다. <code>yes</code> 콜백에서는 <code>layer.close(index)</code>로 직접 닫고(layui와 같음), <code>false</code>를 돌려주면 열린 채 둡니다.</p>
+</section>
+
+<section aria-labelledby="open">
+<h2 id="open">자유 레이어 · 드로어 · 로딩</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">open · drawer · load</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions" id="ly-open">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="open">상세 보기</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="drawer">필터</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="load">불러오기</button>
+  </div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    catui.$('#ly-open').on('click', '[data-k]', function (e, b) {
+      var k = b.dataset.k;
+      if (k === 'open') layer.open({ title: '주문 1003', area: 'lg', btn: ['저장', '취소'],
+        content: catui.html`<p>고객 <b>${'박서연'}</b> · 금액 42,000원</p>`,
+        yes: function (index) { layer.close(index); layer.msg('저장했습니다', { icon: 'success' }); } });
+      if (k === 'drawer') layer.open({ type: 'drawer', title: '필터', btn: ['적용'],
+        content: catui.html`<div class="Catui_field"><label class="Catui_label" for="ly-q">고객</label><input class="Catui_input" id="ly-q"></div>`,
+        yes: function (index, dlg) { layer.msg('고객: ' + (dlg.querySelector('#ly-q').value || '전체')); layer.close(index); } });
+      if (k === 'load') { var i = layer.load('불러오는 중…'); setTimeout(function () { layer.close(i); }, 1200); }
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="open · drawer · load 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot; id=&quot;ly-open&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-k=&quot;open&quot;&gt;상세 보기&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-k=&quot;drawer&quot;&gt;필터&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-k=&quot;load&quot;&gt;불러오기&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  catui.$(&#39;#ly-open&#39;).on(&#39;click&#39;, &#39;[data-k]&#39;, function (e, b) {
+    var k = b.dataset.k;
+    if (k === &#39;open&#39;) layer.open({ title: &#39;주문 1003&#39;, area: &#39;lg&#39;, btn: [&#39;저장&#39;, &#39;취소&#39;],
+      content: catui.html`&lt;p&gt;고객 &lt;b&gt;${&#39;박서연&#39;}&lt;/b&gt; · 금액 42,000원&lt;/p&gt;`,
+      yes: function (index) { layer.close(index); layer.msg(&#39;저장했습니다&#39;, { icon: &#39;success&#39; }); } });
+    if (k === &#39;drawer&#39;) layer.open({ type: &#39;drawer&#39;, title: &#39;필터&#39;, btn: [&#39;적용&#39;],
+      content: catui.html`&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;ly-q&quot;&gt;고객&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;ly-q&quot;&gt;&lt;/div&gt;`,
+      yes: function (index, dlg) { layer.msg(&#39;고객: &#39; + (dlg.querySelector(&#39;#ly-q&#39;).value || &#39;전체&#39;)); layer.close(index); } });
+    if (k === &#39;load&#39;) { var i = layer.load(&#39;불러오는 중…&#39;); setTimeout(function () { layer.close(i); }, 1200); }
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="window">
+<h2 id="window">창 기능 · 크기</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">maxmin · move · resize · area · time</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-win">최대화·옮기기·크기 조절</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-xl">큰 창 (xl)</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-full">전체 화면 (full)</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-size">지정 크기 ['480px','300px']</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-time">3초 뒤 자동 닫힘</button>
+  </div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var on = function (id, fn) { document.getElementById(id).addEventListener('click', fn); };
+    on('ly-win', function () { layer.open({ title: '주문 상세', content: '머리를 끌어 옮기고, 오른쪽 위 버튼으로 최대화, 오른쪽 아래 모서리로 크기를 조절합니다.', maxmin: true, move: true, resize: true, btn: ['확인'] }); });
+    on('ly-xl', function () { layer.open({ title: '큰 창', area: 'xl', content: '표나 긴 폼을 넣는 960px 창입니다.', btn: ['닫기'] }); });
+    on('ly-full', function () { layer.open({ title: '전체 화면', area: 'full', content: '화면을 꽉 채우는 창입니다. Esc로 닫습니다.' }); });
+    on('ly-size', function () { layer.open({ title: '지정 크기', area: ['480px', '300px'], content: '너비·높이를 직접 지정했습니다.' }); });
+    on('ly-time', function () { layer.open({ title: '자동 닫힘', area: 'sm', time: 3000, content: '3초 뒤 저절로 닫힙니다.' }); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="maxmin · move · resize · area · time 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-win&quot;&gt;최대화·옮기기·크기 조절&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-xl&quot;&gt;큰 창 (xl)&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-full&quot;&gt;전체 화면 (full)&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-size&quot;&gt;지정 크기 [&#39;480px&#39;,&#39;300px&#39;]&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-time&quot;&gt;3초 뒤 자동 닫힘&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  var on = function (id, fn) { document.getElementById(id).addEventListener(&#39;click&#39;, fn); };
+  on(&#39;ly-win&#39;, function () { layer.open({ title: &#39;주문 상세&#39;, content: &#39;머리를 끌어 옮기고, 오른쪽 위 버튼으로 최대화, 오른쪽 아래 모서리로 크기를 조절합니다.&#39;, maxmin: true, move: true, resize: true, btn: [&#39;확인&#39;] }); });
+  on(&#39;ly-xl&#39;, function () { layer.open({ title: &#39;큰 창&#39;, area: &#39;xl&#39;, content: &#39;표나 긴 폼을 넣는 960px 창입니다.&#39;, btn: [&#39;닫기&#39;] }); });
+  on(&#39;ly-full&#39;, function () { layer.open({ title: &#39;전체 화면&#39;, area: &#39;full&#39;, content: &#39;화면을 꽉 채우는 창입니다. Esc로 닫습니다.&#39; }); });
+  on(&#39;ly-size&#39;, function () { layer.open({ title: &#39;지정 크기&#39;, area: [&#39;480px&#39;, &#39;300px&#39;], content: &#39;너비·높이를 직접 지정했습니다.&#39; }); });
+  on(&#39;ly-time&#39;, function () { layer.open({ title: &#39;자동 닫힘&#39;, area: &#39;sm&#39;, time: 3000, content: &#39;3초 뒤 저절로 닫힙니다.&#39; }); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">drawer offset (왼쪽·오른쪽·아래) · iframe</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-dl">왼쪽 드로어</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-db">아래 시트</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-frame">iframe (문서 홈)</button>
+  </div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var on = function (id, fn) { document.getElementById(id).addEventListener('click', fn); };
+    on('ly-dl', function () { layer.open({ type: 'drawer', offset: 'l', title: '메뉴', content: '왼쪽에서 여는 드로어입니다.' }); });
+    on('ly-db', function () { layer.open({ type: 'drawer', offset: 'b', title: '공유', content: '아래에서 올라오는 시트입니다.' }); });
+    on('ly-frame', function () { layer.open({ type: 'iframe', title: '문서 홈 미리보기', area: 'lg', maxmin: true, content: '../../index.html' }); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="drawer offset (왼쪽·오른쪽·아래) · iframe 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-dl&quot;&gt;왼쪽 드로어&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-db&quot;&gt;아래 시트&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-frame&quot;&gt;iframe (문서 홈)&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  var on = function (id, fn) { document.getElementById(id).addEventListener(&#39;click&#39;, fn); };
+  on(&#39;ly-dl&#39;, function () { layer.open({ type: &#39;drawer&#39;, offset: &#39;l&#39;, title: &#39;메뉴&#39;, content: &#39;왼쪽에서 여는 드로어입니다.&#39; }); });
+  on(&#39;ly-db&#39;, function () { layer.open({ type: &#39;drawer&#39;, offset: &#39;b&#39;, title: &#39;공유&#39;, content: &#39;아래에서 올라오는 시트입니다.&#39; }); });
+  on(&#39;ly-frame&#39;, function () { layer.open({ type: &#39;iframe&#39;, title: &#39;문서 홈 미리보기&#39;, area: &#39;lg&#39;, maxmin: true, content: &#39;../../index.html&#39; }); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="special">
+<h2 id="special">말풍선 · 사진 보기 · 탭</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">tips · photos · tab</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-tip">말풍선 (위)</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-tip2">말풍선 (오른쪽)</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-photo">사진 보기 (←→)</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-tab">탭 대화상자</button>
+  </div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var on = function (id, fn) { document.getElementById(id).addEventListener('click', fn); };
+    on('ly-tip', function (e) { layer.tips('복사했습니다', e.currentTarget, { side: 'top' }); });
+    on('ly-tip2', function (e) { layer.tips('오른쪽에 뜨는 말풍선 (화면 밖이면 반대쪽으로)', e.currentTarget, { side: 'right', time: 4000 }); });
+    on('ly-photo', function () { layer.photos({ title: '여행 사진', items: [
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23E6F7F3'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%2326B99A'/%3E%3C/svg%3E", caption: '제주 오름' },
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23EAF4FB'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%233498DB'/%3E%3C/svg%3E", caption: '속초 바다' },
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23F5EEF8'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%239B59B6'/%3E%3C/svg%3E", caption: '보라 언덕' } ] }); });
+    on('ly-tab', function () { layer.tab({ title: '설정', btn: ['저장', '취소'], tabs: [
+      { title: '일반', content: '이름과 언어를 바꿉니다.' },
+      { title: '알림', content: '받을 알림을 고릅니다.' },
+      { title: '보안', content: '비밀번호와 2단계 인증.' } ] }); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="tips · photos · tab 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-tip&quot;&gt;말풍선 (위)&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-tip2&quot;&gt;말풍선 (오른쪽)&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-photo&quot;&gt;사진 보기 (←→)&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-tab&quot;&gt;탭 대화상자&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  var on = function (id, fn) { document.getElementById(id).addEventListener(&#39;click&#39;, fn); };
+  on(&#39;ly-tip&#39;, function (e) { layer.tips(&#39;복사했습니다&#39;, e.currentTarget, { side: &#39;top&#39; }); });
+  on(&#39;ly-tip2&#39;, function (e) { layer.tips(&#39;오른쪽에 뜨는 말풍선 (화면 밖이면 반대쪽으로)&#39;, e.currentTarget, { side: &#39;right&#39;, time: 4000 }); });
+  on(&#39;ly-photo&#39;, function () { layer.photos({ title: &#39;여행 사진&#39;, items: [
+    { src: &quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 400&#39;%3E%3Crect width=&#39;640&#39; height=&#39;400&#39; fill=&#39;%23E6F7F3&#39;/%3E%3Cpath d=&#39;M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z&#39; fill=&#39;%2326B99A&#39;/%3E%3C/svg%3E&quot;, caption: &#39;제주 오름&#39; },
+    { src: &quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 400&#39;%3E%3Crect width=&#39;640&#39; height=&#39;400&#39; fill=&#39;%23EAF4FB&#39;/%3E%3Cpath d=&#39;M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z&#39; fill=&#39;%233498DB&#39;/%3E%3C/svg%3E&quot;, caption: &#39;속초 바다&#39; },
+    { src: &quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 400&#39;%3E%3Crect width=&#39;640&#39; height=&#39;400&#39; fill=&#39;%23F5EEF8&#39;/%3E%3Cpath d=&#39;M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z&#39; fill=&#39;%239B59B6&#39;/%3E%3C/svg%3E&quot;, caption: &#39;보라 언덕&#39; } ] }); });
+  on(&#39;ly-tab&#39;, function () { layer.tab({ title: &#39;설정&#39;, btn: [&#39;저장&#39;, &#39;취소&#39;], tabs: [
+    { title: &#39;일반&#39;, content: &#39;이름과 언어를 바꿉니다.&#39; },
+    { title: &#39;알림&#39;, content: &#39;받을 알림을 고릅니다.&#39; },
+    { title: &#39;보안&#39;, content: &#39;비밀번호와 2단계 인증.&#39; } ] }); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="promise">
+<h2 id="promise">Promise · 진행률 · 내용 바꾸기</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">ask · input · load({progress}) · setContent</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button" id="ly-ask">await ask</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-input">await input</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-prog">진행률 로딩</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-set">내용 바꾸기</button>
+  </div>
+  <p class="Catui_help" id="ly-out2" aria-live="polite">결과가 여기에 나옵니다.</p>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var on = function (id, fn) { document.getElementById(id).addEventListener('click', fn); };
+    var out = function (t) { document.getElementById('ly-out2').textContent = t; };
+    on('ly-ask', async function () { var ok = await layer.ask('이 파일을 삭제할까요?', { danger: true, okText: '삭제' }); out(ok ? '삭제를 골랐습니다' : '취소했습니다'); });
+    on('ly-input', async function () { var v = await layer.input({ title: '폴더 이름', placeholder: '새 폴더' }); out(v == null ? '입력을 취소했습니다' : '입력: ' + v); });
+    on('ly-prog', function () { var i = layer.load('업로드 중', { progress: true }), p = 0; var t = setInterval(function () { p += 20; layer.progress(i, p); if (p >= 100) { clearInterval(t); setTimeout(function () { layer.close(i); layer.msg('업로드 완료', { icon: 'success' }); }, 300); } }, 300); });
+    on('ly-set', function () { var i = layer.open({ title: '불러오는 중', content: '잠시만요…', area: 'sm' }); setTimeout(function () { layer.title(i, '불러왔습니다'); layer.setContent(i, catui.html`<p>새 내용으로 <b>바꿨습니다</b>.</p>`); }, 800); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="ask · input · load({progress}) · setContent 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-danger&quot; type=&quot;button&quot; id=&quot;ly-ask&quot;&gt;await ask&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-input&quot;&gt;await input&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-prog&quot;&gt;진행률 로딩&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-set&quot;&gt;내용 바꾸기&lt;/button&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;ly-out2&quot; aria-live=&quot;polite&quot;&gt;결과가 여기에 나옵니다.&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  var on = function (id, fn) { document.getElementById(id).addEventListener(&#39;click&#39;, fn); };
+  var out = function (t) { document.getElementById(&#39;ly-out2&#39;).textContent = t; };
+  on(&#39;ly-ask&#39;, async function () { var ok = await layer.ask(&#39;이 파일을 삭제할까요?&#39;, { danger: true, okText: &#39;삭제&#39; }); out(ok ? &#39;삭제를 골랐습니다&#39; : &#39;취소했습니다&#39;); });
+  on(&#39;ly-input&#39;, async function () { var v = await layer.input({ title: &#39;폴더 이름&#39;, placeholder: &#39;새 폴더&#39; }); out(v == null ? &#39;입력을 취소했습니다&#39; : &#39;입력: &#39; + v); });
+  on(&#39;ly-prog&#39;, function () { var i = layer.load(&#39;업로드 중&#39;, { progress: true }), p = 0; var t = setInterval(function () { p += 20; layer.progress(i, p); if (p &gt;= 100) { clearInterval(t); setTimeout(function () { layer.close(i); layer.msg(&#39;업로드 완료&#39;, { icon: &#39;success&#39; }); }, 300); } }, 300); });
+  on(&#39;ly-set&#39;, function () { var i = layer.open({ title: &#39;불러오는 중&#39;, content: &#39;잠시만요…&#39;, area: &#39;sm&#39; }); setTimeout(function () { layer.title(i, &#39;불러왔습니다&#39;); layer.setContent(i, catui.html`&lt;p&gt;새 내용으로 &lt;b&gt;바꿨습니다&lt;/b&gt;.&lt;/p&gt;`); }, 800); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="toast2">
+<h2 id="toast2">토스트 위치 · 동작 버튼</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">position · action · progress</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-tr">오른쪽 위</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-tc">가운데 위</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-undo">삭제 + 되돌리기</button>
+  </div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var on = function (id, fn) { document.getElementById(id).addEventListener('click', fn); };
+    on('ly-tr', function () { layer.msg('오른쪽 위에 표시', { icon: 'success', position: 'tr', progress: true }); });
+    on('ly-tc', function () { layer.msg('가운데 위에 표시', { icon: 'info', position: 'tc' }); });
+    on('ly-undo', function () { layer.msg('항목을 삭제했습니다', { icon: 'danger', progress: true, action: { text: '되돌리기', onClick: function () { layer.msg('되돌렸습니다', { icon: 'success' }); } } }); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="position · action · progress 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-tr&quot;&gt;오른쪽 위&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-tc&quot;&gt;가운데 위&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-undo&quot;&gt;삭제 + 되돌리기&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  var on = function (id, fn) { document.getElementById(id).addEventListener(&#39;click&#39;, fn); };
+  on(&#39;ly-tr&#39;, function () { layer.msg(&#39;오른쪽 위에 표시&#39;, { icon: &#39;success&#39;, position: &#39;tr&#39;, progress: true }); });
+  on(&#39;ly-tc&#39;, function () { layer.msg(&#39;가운데 위에 표시&#39;, { icon: &#39;info&#39;, position: &#39;tc&#39; }); });
+  on(&#39;ly-undo&#39;, function () { layer.msg(&#39;항목을 삭제했습니다&#39;, { icon: &#39;danger&#39;, progress: true, action: { text: &#39;되돌리기&#39;, onClick: function () { layer.msg(&#39;되돌렸습니다&#39;, { icon: &#39;success&#39; }); } } }); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="options">
+<h2 id="options">open 옵션</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">layer.open 옵션</caption>
+<thead><tr><th scope="col">옵션</th><th scope="col">기본값</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>type</code></td><td>'dialog'</td><td>'dialog' 또는 'drawer'</td></tr>
+<tr><td><code>title</code> · <code>content</code></td><td>''</td><td>내용: 문자열(글자) · html`` · Element</td></tr>
+<tr><td><code>area</code></td><td>'md'</td><td>'sm' 400 · 'md' 560 · 'lg' 720</td></tr>
+<tr><td><code>btn</code></td><td>[]</td><td>버튼 글자 배열. 첫 버튼이 주 버튼(<code>danger: true</code>면 위험색)</td></tr>
+<tr><td><code>yes(index, dlg)</code> · <code>btn2</code> · <code>cancel</code></td><td>—</td><td>버튼·닫기 콜백. false를 돌려주면 유지</td></tr>
+<tr><td><code>success(dlg, index)</code> · <code>end(index)</code></td><td>—</td><td>열린 뒤 / 닫힌 뒤</td></tr>
+<tr><td><code>area</code></td><td>'md'</td><td>'sm'·'md'·'lg'·'xl'·'full' 또는 ['너비', '높이']</td></tr>
+<tr><td><code>maxmin</code> · <code>move</code> · <code>resize</code></td><td>false</td><td>최대화 버튼 / 머리 끌어 옮기기 / 모서리 크기 조절</td></tr>
+<tr><td><code>time</code></td><td>0</td><td>ms 뒤 자동 닫힘 (end의 이유는 'time')</td></tr>
+<tr><td><code>type: 'drawer'</code> + <code>offset</code></td><td>'r'</td><td>드로어 방향 'l'·'r'·'b'</td></tr>
+<tr><td><code>type: 'iframe'</code></td><td>—</td><td>content에 주소 (같은 사이트·http·https만, javascript:·data: 차단)</td></tr>
+<tr><td><code>skin</code> · <code>full(index, on)</code></td><td>—</td><td>대화상자에 더할 클래스 / 최대화 전환 콜백</td></tr>
+<tr><td><code>msg: position</code> · <code>action</code> · <code>progress</code></td><td>'br'</td><td>'tr'·'tc'·'bc'·'br' / { text, onClick } 동작 버튼(5초) / 남은 시간 막대</td></tr>
+<tr><td><code>shadeClose</code> · <code>closeBtn</code></td><td>true</td><td>바깥 클릭으로 닫기 / 닫기 버튼</td></tr>
+</tbody></table></div>
+<p>함수: <code>msg · alert · confirm · prompt · open · load · progress(index, %) · tips(내용, 대상, { side, time }) · photos({ items, start, change }) · tab({ tabs, start, change }) · ask(내용) → Promise&lt;boolean&gt; · input(옵션) → Promise&lt;값|null&gt; · close(index) · closeAll(type) · closeLast(type) · title(index, 글자) · setContent(index, 내용) · style(index, { width, height }) · full(index) · restore(index) · getNode(index) · list(type) · count</code>. type은 'msg'·'dialog'·'drawer'·'iframe'·'load'·'tips'·'photos'·'tab'.</p>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/core/helpers.html"><span>이전</span>저장소·주소·환경</a><a class="doc-pager-next" href="../../js/modules/form.html"><span>다음</span>form 폼</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#msg">메시지</a></li><li><a href="#dialog">확인·입력·알림</a></li><li><a href="#open">자유 레이어 · 드로어 · 로딩</a></li><li><a href="#window">창 기능 · 크기</a></li><li><a href="#special">말풍선 · 사진 보기 · 탭</a></li><li><a href="#promise">Promise · 진행률 · 내용 바꾸기</a></li><li><a href="#toast2">토스트 위치 · 동작 버튼</a></li><li><a href="#options">open 옵션</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

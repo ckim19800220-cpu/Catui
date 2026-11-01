@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>form 폼 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="선언형 검증·제출 이벤트·선택 컨트롤·값.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html" aria-current="page">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html">util 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 모듈</p>
+<h1 class="Catui_h1">form 폼</h1>
+<p class="Catui_lead">선언형 검증·제출 이벤트·선택 컨트롤·값.</p>
+
+<section aria-labelledby="verify">
+<h2 id="verify">선언형 검증과 제출</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-verify + submit(filter)</figcaption>
+<div class="doc-example-preview">
+  <form class="Catui_fields" data-catui-form data-catui-filter="fm-signup" novalidate>
+    <div class="Catui_field"><label class="Catui_label" for="fm-email">이메일 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-email" name="email" autocomplete="email" data-catui-verify="required|email" data-catui-reqtext="이메일을 입력해 주세요."></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-phone">휴대전화</label><input class="Catui_input" id="fm-phone" name="phone" autocomplete="tel" data-catui-verify="phone"></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-pw">비밀번호 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-pw" name="password" type="password" autocomplete="new-password" data-catui-verify="required|pass"></div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit" data-catui-submit>가입</button></div>
+  </form>
+  <p class="Catui_help" id="fm-out" aria-live="polite"></p>
+  <script>
+  catui.use(['form'], function (form) {
+    form.verify({ pass: [/^(?=.*\d).{8,}$/, '숫자를 포함해 8자 이상 입력해 주세요.'] });
+    form.on('submit(fm-signup)', function (data) {
+      document.getElementById('fm-out').textContent = '제출: ' + JSON.stringify(data.field);
+      return false;   // 기본 제출 막기
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-verify + submit(filter) 코드 복사">복사</button><pre><code>&lt;form class=&quot;Catui_fields&quot; data-catui-form data-catui-filter=&quot;fm-signup&quot; novalidate&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-email&quot;&gt;이메일 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-email&quot; name=&quot;email&quot; autocomplete=&quot;email&quot; data-catui-verify=&quot;required|email&quot; data-catui-reqtext=&quot;이메일을 입력해 주세요.&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-phone&quot;&gt;휴대전화&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-phone&quot; name=&quot;phone&quot; autocomplete=&quot;tel&quot; data-catui-verify=&quot;phone&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-pw&quot;&gt;비밀번호 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-pw&quot; name=&quot;password&quot; type=&quot;password&quot; autocomplete=&quot;new-password&quot; data-catui-verify=&quot;required|pass&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;submit&quot; data-catui-submit&gt;가입&lt;/button&gt;&lt;/div&gt;
+&lt;/form&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;fm-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;form&#39;], function (form) {
+  form.verify({ pass: [/^(?=.*\d).{8,}$/, &#39;숫자를 포함해 8자 이상 입력해 주세요.&#39;] });
+  form.on(&#39;submit(fm-signup)&#39;, function (data) {
+    document.getElementById(&#39;fm-out&#39;).textContent = &#39;제출: &#39; + JSON.stringify(data.field);
+    return false;   // 기본 제출 막기
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>제출하면 검증하고, 처음 틀린 칸에 포커스한 뒤 오류를 색 + 문장(<code>aria-invalid</code>, <code>aria-describedby</code>)으로 알립니다. 틀린 칸은 입력할 때마다 다시 검사합니다. 빈 값은 <code>required</code>만 검사합니다.</p>
+</section>
+
+<section aria-labelledby="controls">
+<h2 id="controls">선택 컨트롤 이벤트 · 값</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">switch · checkbox · select · form.val</figcaption>
+<div class="doc-example-preview">
+  <form class="Catui_fields" data-catui-form data-catui-filter="fm-pref" novalidate>
+    <div class="Catui_field"><label class="Catui_label" for="fm-role">역할</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="fm-role" name="role" data-catui-filter="fm-role"><option>편집자</option><option>관리자</option></select></div></div>
+    <div class="Catui_choices">
+      <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="topics" value="주문" data-catui-filter="fm-topic"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>주문 알림</label>
+      <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="topics" value="배송" data-catui-filter="fm-topic"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>배송 알림</label>
+      <span class="Catui_choice"><input class="Catui_clip" id="fm-news" type="checkbox" name="news" role="switch" data-catui-filter="fm-news"><label class="Catui_tgl" for="fm-news"></label><label for="fm-news">소식 받기</label></span>
+    </div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="fm-fill">값 채우기</button><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="fm-read">값 읽기</button></div>
+  </form>
+  <p class="Catui_help" id="fm-out2" aria-live="polite"></p>
+  <script>
+  catui.use(['form'], function (form) {
+    var out = function (t) { document.getElementById('fm-out2').textContent = t; };
+    form.on('switch(fm-news)', function (d) { out('소식 받기: ' + (d.checked ? '켬' : '끔')); });
+    form.on('checkbox(fm-topic)', function (d) { out(d.value + ': ' + (d.checked ? '선택' : '해제')); });
+    form.on('select(fm-role)', function (d) { out('역할: ' + d.value); });
+    document.getElementById('fm-fill').addEventListener('click', function () { form.val('fm-pref', { role: '관리자', topics: ['주문', '배송'], news: true }); });
+    document.getElementById('fm-read').addEventListener('click', function () { out(JSON.stringify(form.val('fm-pref'))); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="switch · checkbox · select · form.val 코드 복사">복사</button><pre><code>&lt;form class=&quot;Catui_fields&quot; data-catui-form data-catui-filter=&quot;fm-pref&quot; novalidate&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-role&quot;&gt;역할&lt;/label&gt;&lt;div class=&quot;Catui_select-wrap&quot;&gt;&lt;select class=&quot;Catui_input Catui_select&quot; id=&quot;fm-role&quot; name=&quot;role&quot; data-catui-filter=&quot;fm-role&quot;&gt;&lt;option&gt;편집자&lt;/option&gt;&lt;option&gt;관리자&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_choices&quot;&gt;
+    &lt;label class=&quot;Catui_choice&quot;&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;checkbox&quot; name=&quot;topics&quot; value=&quot;주문&quot; data-catui-filter=&quot;fm-topic&quot;&gt;&lt;span class=&quot;Catui_cbx&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i12&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-check&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/span&gt;주문 알림&lt;/label&gt;
+    &lt;label class=&quot;Catui_choice&quot;&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;checkbox&quot; name=&quot;topics&quot; value=&quot;배송&quot; data-catui-filter=&quot;fm-topic&quot;&gt;&lt;span class=&quot;Catui_cbx&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i12&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-check&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/span&gt;배송 알림&lt;/label&gt;
+    &lt;span class=&quot;Catui_choice&quot;&gt;&lt;input class=&quot;Catui_clip&quot; id=&quot;fm-news&quot; type=&quot;checkbox&quot; name=&quot;news&quot; role=&quot;switch&quot; data-catui-filter=&quot;fm-news&quot;&gt;&lt;label class=&quot;Catui_tgl&quot; for=&quot;fm-news&quot;&gt;&lt;/label&gt;&lt;label for=&quot;fm-news&quot;&gt;소식 받기&lt;/label&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;fm-fill&quot;&gt;값 채우기&lt;/button&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost&quot; type=&quot;button&quot; id=&quot;fm-read&quot;&gt;값 읽기&lt;/button&gt;&lt;/div&gt;
+&lt;/form&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;fm-out2&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;form&#39;], function (form) {
+  var out = function (t) { document.getElementById(&#39;fm-out2&#39;).textContent = t; };
+  form.on(&#39;switch(fm-news)&#39;, function (d) { out(&#39;소식 받기: &#39; + (d.checked ? &#39;켬&#39; : &#39;끔&#39;)); });
+  form.on(&#39;checkbox(fm-topic)&#39;, function (d) { out(d.value + &#39;: &#39; + (d.checked ? &#39;선택&#39; : &#39;해제&#39;)); });
+  form.on(&#39;select(fm-role)&#39;, function (d) { out(&#39;역할: &#39; + d.value); });
+  document.getElementById(&#39;fm-fill&#39;).addEventListener(&#39;click&#39;, function () { form.val(&#39;fm-pref&#39;, { role: &#39;관리자&#39;, topics: [&#39;주문&#39;, &#39;배송&#39;], news: true }); });
+  document.getElementById(&#39;fm-read&#39;).addEventListener(&#39;click&#39;, function () { out(JSON.stringify(form.val(&#39;fm-pref&#39;))); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">form API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>data-catui-verify="required|email"</code></td><td>내장: required · email · phone · url · number · date</td></tr>
+<tr><td><code>data-catui-reqtext</code></td><td>필수 오류 문구 바꾸기</td></tr>
+<tr><td><code>data-catui-submit</code></td><td>제출 버튼이 여러 개일 때 이 버튼만 처리</td></tr>
+<tr><td><code>form.verify({ 이름: [정규식, 메시지] | fn(value, el) })</code></td><td>규칙 추가 (fn은 오류 문장 또는 '' 반환)</td></tr>
+<tr><td><code>form.on('submit(f)')</code></td><td><code>{ field, form, elem }</code>. false = 기본 제출 막기</td></tr>
+<tr><td><code>form.on('switch|checkbox|radio|select(f)')</code></td><td><code>{ elem, value, checked }</code> — 필터는 컨트롤 또는 상위의 data-catui-filter</td></tr>
+<tr><td><code>form.val(f, [값])</code></td><td>값 읽기/쓰기 (같은 name은 배열)</td></tr>
+<tr><td><code>form.validate(영역)</code> · <code>form.submit(f, [cb])</code></td><td>직접 검증 / 프로그램 제출</td></tr>
+<tr><td><code>form.render(영역)</code> · <code>form.setError(el, 문장)</code></td><td>셀렉트 화살표 보충 / 오류 직접 표시</td></tr>
+</tbody></table></div>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/layer.html"><span>이전</span>layer 팝업</a><a class="doc-pager-next" href="../../js/modules/table.html"><span>다음</span>table 표</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#verify">선언형 검증과 제출</a></li><li><a href="#controls">선택 컨트롤 이벤트 · 값</a></li><li><a href="#api">API</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

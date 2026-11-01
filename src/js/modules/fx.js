@@ -14,7 +14,7 @@ export const fx = (() => {
   const list = (target) => (typeof target === "string" ? [...document.querySelectorAll(target)] : target instanceof Element ? [target] : [...(target || [])]);
   const many = (target, one) => {
     const hs = list(target).map(one).filter(Boolean);
-    return { destroy() { hs.forEach((h) => h.destroy()); } };
+    return hs.length === 1 ? hs[0] : { destroy() { hs.forEach((h) => h.destroy()); } };
   };
   // 화면에 들어올 때 한 번(또는 매번) fn 실행
   const onView = (el, fn, once = true) => {
@@ -162,7 +162,7 @@ export const fx = (() => {
 
   function spotlight(target) {
     return many(target, (el) => {
-      el.classList.add("Catui_fx-spot");
+      const offLayer = addLayer(el, "Catui_fx-spot", true);
       const move = (e) => {
         const r = el.getBoundingClientRect();
         el.style.setProperty("--Catui_fx-x", `${e.clientX - r.left}px`);
@@ -173,7 +173,7 @@ export const fx = (() => {
       const off = pointer(el, move, leave);
       const focusIn = () => { el.style.setProperty("--Catui_fx-x", "50%"); el.style.setProperty("--Catui_fx-y", "50%"); el.style.setProperty("--Catui_fx-o", "1"); };
       el.addEventListener("focusin", focusIn); el.addEventListener("focusout", leave);
-      return { destroy() { off(); el.removeEventListener("focusin", focusIn); el.removeEventListener("focusout", leave); el.classList.remove("Catui_fx-spot"); ["x", "y", "o"].forEach((k) => el.style.removeProperty(`--Catui_fx-${k}`)); } };
+      return { destroy() { off(); el.removeEventListener("focusin", focusIn); el.removeEventListener("focusout", leave); offLayer(); ["x", "y", "o"].forEach((k) => el.style.removeProperty(`--Catui_fx-${k}`)); } };
     });
   }
 
@@ -247,7 +247,18 @@ export const fx = (() => {
 
   // 클래스만 붙이는 CSS 효과 (빛 글자·그라디언트 글자·테두리 빛·광택·오로라)
   const cls = (name) => (target) => many(target, (el) => { el.classList.add(name); return { destroy() { el.classList.remove(name); } }; });
-  const shiny = cls("Catui_fx-shiny"), gradient = cls("Catui_fx-gradient"), border = cls("Catui_fx-border"), glare = cls("Catui_fx-glare"), aurora = cls("Catui_fx-aurora");
+  // 덧칠 효과(::before/::after 사용)는 요소 안 전용 레이어에 그려 서로·컴포넌트 가상 요소와 겹치지 않게
+  const addLayer = (el, name, back) => {
+    const ly = document.createElement("span");
+    ly.className = "Catui_fx-layer " + (back ? "Catui_fx-layer-back " : "Catui_fx-layer-front ") + name;
+    ly.setAttribute("aria-hidden", "true");
+    el.classList.add("Catui_fx-host");
+    if (getComputedStyle(el).position === "static") el.classList.add("Catui_fx-host-rel");
+    back ? el.prepend(ly) : el.appendChild(ly);
+    return () => { ly.remove(); if (!el.querySelector(":scope > .Catui_fx-layer")) el.classList.remove("Catui_fx-host", "Catui_fx-host-rel"); };
+  };
+  const layered = (name, back) => (target) => many(target, (el) => { const off = addLayer(el, name, back); return { destroy: off }; });
+  const shiny = cls("Catui_fx-shiny"), gradient = cls("Catui_fx-gradient"), border = layered("Catui_fx-border"), glare = layered("Catui_fx-glare"), aurora = layered("Catui_fx-aurora", true);
 
   // 위아래로 바뀌는 단어. 화면 리더는 전체 목록을 한 번 읽는다
   function rotate(target, o = {}) {
@@ -359,7 +370,7 @@ export const fx = (() => {
   }
 
   // ---- 3차: 화면 기능 · 마이크로 · 꾸밈 ----
-  const stroke = cls("Catui_fx-stroke"), edge = cls("Catui_fx-edge"), noise = cls("Catui_fx-noise"), press = cls("Catui_fx-press");
+  const stroke = cls("Catui_fx-stroke"), edge = layered("Catui_fx-edge"), noise = layered("Catui_fx-noise"), press = cls("Catui_fx-press");
   const emitFx = (el, name, detail) => el.dispatchEvent(new CustomEvent(`catui:${name}`, { bubbles: true, detail }));
 
   // 누르고 있기: duration 동안 누르면 실행(catui:hold 이벤트 + onHold). Space·Enter로도 동작, 떼면 취소
@@ -380,11 +391,11 @@ export const fx = (() => {
       };
       const start = (e) => { if (timer || el.disabled || (e.type === "keydown" && e.key !== " " && e.key !== "Enter") || e.repeat) return; if (e.type === "keydown") e.preventDefault(); t0 = performance.now(); fired = false; tick(); };
       const keyup = (e) => { if (e.key === " " || e.key === "Enter") stop(); };
-      const block = (e) => { if (!fired) e.preventDefault(); };
+      const block = (e) => { e.preventDefault(); e.stopImmediatePropagation(); };
       el.addEventListener("pointerdown", start); el.addEventListener("keydown", start);
       ["pointerup", "pointerleave", "pointercancel", "blur"].forEach((n) => el.addEventListener(n, stop));
-      el.addEventListener("keyup", keyup); el.addEventListener("click", block);
-      return { destroy() { stop(); hint.remove(); el.classList.remove("Catui_fx-hold"); el.style.removeProperty("--Catui_fx-p"); el.removeEventListener("pointerdown", start); el.removeEventListener("keydown", start); ["pointerup", "pointerleave", "pointercancel", "blur"].forEach((n) => el.removeEventListener(n, stop)); el.removeEventListener("keyup", keyup); el.removeEventListener("click", block); } };
+      el.addEventListener("keyup", keyup); el.addEventListener("click", block, true);
+      return { destroy() { stop(); hint.remove(); el.classList.remove("Catui_fx-hold"); el.style.removeProperty("--Catui_fx-p"); el.removeEventListener("pointerdown", start); el.removeEventListener("keydown", start); ["pointerup", "pointerleave", "pointercancel", "blur"].forEach((n) => el.removeEventListener(n, stop)); el.removeEventListener("keyup", keyup); el.removeEventListener("click", block, true); } };
     });
   }
 
@@ -601,12 +612,33 @@ export const fx = (() => {
     const hs = [];
     scope.querySelectorAll?.("[data-catui-fx]").forEach((el) => {
       if (el.catuiFx) return;
-      el.catuiFx = el.dataset.catuiFx.split(/\s+/).filter((n) => effects[n]).map((n) => effects[n](el, {
+      el.catuiFx = el.dataset.catuiFx.split(/\s+/).filter((n) => effects[n]).map((n) => api[n](el, {
         by: el.dataset.catuiBy, to: el.dataset.catuiTo, delay: Number(el.dataset.catuiDelay) || 0,
       }));
       hs.push(...el.catuiFx);
     });
     return () => hs.forEach((h) => h.destroy());
   }
-  return { ...effects, bind };
+  const SLOTS = {
+    split: ["text"], count: ["text"], type: ["text"], scramble: ["text"], rotate: ["text"], focus: ["text"],
+    circle: ["text", "anim"], glitch: ["text", "after"], shiny: ["fill", "anim"], gradient: ["fill", "anim"], stroke: ["fill"],
+    pulse: ["anim"], hold: ["after", "click"], indicator: ["after"], marquee: ["children"], velocity: ["children"],
+    particles: ["bg"], waves: ["bg"], dotgrid: ["bg"], ripplegrid: ["bg"], ripple: ["click"], spark: ["click"],
+  };
+  const reg = new WeakMap();
+  const guard = (name, fn) => (target, o) => {
+    const hs = list(target).map((el) => {
+      const m = reg.get(el) || new Map(), mine = SLOTS[name] || [];
+      if (m.has(name)) return m.get(name).h;
+      const clash = [...m].find(([, v]) => v.slots.some((x) => mine.includes(x)));
+      if (clash) { console.warn(`[catui.fx] ${name}과 ${clash[0]}는 같은 요소에서 함께 쓸 수 없어 ${name}을 건너뜁니다 (겹치는 자리: ${mine.filter((x) => clash[1].slots.includes(x)).join(", ")})`, el); return null; }
+      const raw = fn(el, o);
+      const h = { ...raw, destroy() { raw.destroy(); m.delete(name); } };
+      m.set(name, { slots: mine, h }); reg.set(el, m);
+      return h;
+    }).filter(Boolean);
+    return hs.length === 1 ? hs[0] : { destroy() { hs.forEach((h) => h.destroy()); } };
+  };
+  const api = Object.fromEntries(Object.entries(effects).map(([k, f]) => [k, guard(k, f)]));
+  return { ...api, bind };
 })();

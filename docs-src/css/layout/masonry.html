@@ -1,0 +1,53 @@
+<section aria-labelledby="masonry">
+<h2 id="masonry">벽돌 배치</h2>
+<catui-example title="Catui_masonry (높이가 다른 카드를 빈틈없이, 폭에 따라 3→2→1열)">
+  <div class="Catui_masonry">
+    <article class="Catui_card"><div class="Catui_card-b"><p class="Catui_h3">짧은 카드</p><p class="Catui_help">한 줄 설명</p></div></article>
+    <article class="Catui_card"><div class="Catui_card-b"><p class="Catui_h3">긴 카드</p><p class="Catui_help">내용이 길면 카드가 길어지고, 다음 카드는 바로 아래에 붙습니다. 행 높이를 맞추지 않아 빈칸이 생기지 않습니다.</p></div></article>
+    <article class="Catui_card"><div class="Catui_card-b"><p class="Catui_h3">보통 카드</p><p class="Catui_help">두 줄 정도의 설명이 들어가는 카드입니다.</p></div></article>
+    <article class="Catui_card"><div class="Catui_card-b"><p class="Catui_h3">이미지 카드</p><div class="Catui_ratio Catui_ratio-4x3 Catui_bg-brand-soft"></div></div></article>
+    <article class="Catui_card"><div class="Catui_card-b"><p class="Catui_h3">짧은 카드</p></div></article>
+    <article class="Catui_card"><div class="Catui_card-b"><p class="Catui_h3">보통 카드</p><p class="Catui_help">세로 흐름으로 채워집니다.</p></div></article>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="bento">
+<h2 id="bento">벤토 격자</h2>
+<catui-example title="Catui_bento + bento-wide · bento-tall · bento-big (991px 2열, 767px 1열)">
+  <div class="Catui_bento">
+    <article class="Catui_card Catui_bento-big Catui_bg-gradient"><div class="Catui_card-b"><p class="Catui_h2">큰 칸 (2×2)</p><p class="Catui_help">대표 기능</p></div></article>
+    <article class="Catui_card"><div class="Catui_card-b"><p class="Catui_h3">작은 칸</p></div></article>
+    <article class="Catui_card Catui_bento-tall"><div class="Catui_card-b"><p class="Catui_h3">높은 칸 (1×2)</p></div></article>
+    <article class="Catui_card"><div class="Catui_card-b"><p class="Catui_h3">작은 칸</p></div></article>
+    <article class="Catui_card Catui_bento-wide"><div class="Catui_card-b"><p class="Catui_h3">넓은 칸 (2×1)</p></div></article>
+    <article class="Catui_card"><div class="Catui_card-b"><p class="Catui_h3">작은 칸</p></div></article>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="stack">
+<h2 id="stack">쌓이는 카드</h2>
+<catui-example title="Catui_scrollstack (아래로 스크롤하면 카드가 위에 쌓임)">
+  <div style="max-height:320px;overflow:auto" tabindex="0" role="region" aria-label="쌓이는 카드 (스크롤)">
+    <div class="Catui_scrollstack">
+      <article class="Catui_card" style="--i:0"><div class="Catui_card-b" style="min-height:160px"><p class="Catui_h2">1. 설계</p><p class="Catui_help">토큰과 컴포넌트를 정합니다.</p></div></article>
+      <article class="Catui_card" style="--i:1"><div class="Catui_card-b" style="min-height:160px"><p class="Catui_h2">2. 조립</p><p class="Catui_help">문서 예제로 화면을 만듭니다.</p></div></article>
+      <article class="Catui_card" style="--i:2"><div class="Catui_card-b" style="min-height:160px"><p class="Catui_h2">3. 배포</p><p class="Catui_help">빌드 검사를 통과하면 배포합니다.</p></div></article>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>벽돌은 CSS 다단(<code>columns</code>)이라 읽는 순서가 <b>위→아래, 왼쪽 열→오른쪽 열</b>입니다. 순서가 중요한 목록에는 <a href="doc:css/layout/grid">그리드</a>를 쓰세요. 벤토는 <code>grid-auto-flow:dense</code>로 빈칸을 채우므로 화면 순서와 소스 순서가 다를 수 있습니다. 쌓이는 카드는 자식마다 <code>style="--i:0,1,2…"</code>로 겹치는 간격을 주고, 위 여백은 <code>--Catui_fx-top</code>입니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>세 배치 모두 CSS만 바꾸며 마크업 순서는 그대로 읽힙니다. 키보드 이동 순서도 소스 순서입니다.</li>
+  <li>벤토에서 중요한 내용은 소스 앞쪽에 두어 화면 리더에서도 먼저 읽히게 합니다.</li>
+</ul>
+</section>

@@ -1,8 +1,8 @@
 /* components/fx.css */
 /* FX — catui.js fx 효과의 상태 클래스: 나타나기·글자 나누기·타자 커서·기울기·스포트라이트·자석·클릭 불꽃.
    모든 움직임은 prefers-reduced-motion에서 꺼지고 최종 상태로 보인다. */
-.Catui_fx-reveal{opacity:0;transform:translateY(var(--Catui_fx-y,16px));transition:opacity calc(var(--Catui_dur-fast) * 4) var(--Catui_ease),transform calc(var(--Catui_dur-fast) * 4) var(--Catui_ease);transition-delay:var(--Catui_fx-delay,0ms)}
-.Catui_fx-reveal.Catui_fx-in{opacity:1;transform:none}
+.Catui_fx-reveal{opacity:0;translate:0 var(--Catui_fx-y,16px);transition:opacity calc(var(--Catui_dur-fast) * 4) var(--Catui_ease),translate calc(var(--Catui_dur-fast) * 4) var(--Catui_ease);transition-delay:var(--Catui_fx-delay,0ms)}
+.Catui_fx-reveal.Catui_fx-in{opacity:1;translate:none}
 
 /* 글자·단어 나누기: --i 순서대로 지연 */
 .Catui_fx-char{display:inline-block;white-space:pre;opacity:0;transform:translateY(.5em);filter:blur(4px);transition:opacity calc(var(--Catui_dur-fast) * 3) var(--Catui_ease),transform calc(var(--Catui_dur-fast) * 3) var(--Catui_ease),filter calc(var(--Catui_dur-fast) * 3) var(--Catui_ease);transition-delay:calc(var(--i,0) * var(--Catui_fx-stagger,30ms))}
@@ -20,7 +20,7 @@
 .Catui_fx-spot::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:var(--Catui_fx-o,0);transition:opacity calc(var(--Catui_dur-fast) * 2) var(--Catui_ease);background:radial-gradient(220px circle at var(--Catui_fx-x,50%) var(--Catui_fx-y,50%),color-mix(in srgb,var(--Catui_color-brand) 22%,transparent),transparent 70%)}
 
 /* 자석: --Catui_fx-mx/my 만큼 이동 */
-.Catui_fx-magnet{transform:translate(var(--Catui_fx-mx,0px),var(--Catui_fx-my,0px));transition:transform calc(var(--Catui_dur-fast) * 2) var(--Catui_ease)}
+.Catui_fx-magnet{translate:var(--Catui_fx-mx,0px) var(--Catui_fx-my,0px);transition:translate calc(var(--Catui_dur-fast) * 2) var(--Catui_ease)}
 
 /* 클릭 불꽃: 클릭 위치에 생겼다가 사라지는 선 조각 */
 .Catui_fx-spark{position:fixed;z-index:70;width:0;height:0;pointer-events:none}
@@ -72,7 +72,7 @@
 
 /* 독: 커서 거리만큼 커지는 아이콘 줄 (--Catui_fx-s는 fx.dock이 갱신) */
 .Catui_fx-dock{display:inline-flex;align-items:flex-end;gap:var(--Catui_space-2);padding:var(--Catui_space-2);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-lg);background:var(--Catui_card-bg);box-shadow:var(--Catui_shadow-md)}
-.Catui_fx-dock > *{transform:scale(var(--Catui_fx-s,1));transform-origin:50% 100%;transition:transform var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_fx-dock > *{scale:var(--Catui_fx-s,1);transform-origin:50% 100%;transition:scale var(--Catui_dur-fast) var(--Catui_ease)}
 
 /* 오로라 배경 (CSS만) */
 .Catui_fx-aurora{position:relative;isolation:isolate;overflow:hidden}
@@ -84,8 +84,9 @@
   .Catui_fx-glitch::before,.Catui_fx-glitch::after,.Catui_fx-wave{display:none}
   .Catui_fx-rotate > span,.Catui_fx-dock > *{transition:none}
   .Catui_fx-glare::after{transition:none}
-  .Catui_fx-reveal,.Catui_fx-char{opacity:1;transform:none;filter:none;transition:none}
+  .Catui_fx-reveal,.Catui_fx-char{opacity:1;transform:none;translate:none;filter:none;transition:none}
   .Catui_fx-caret{animation:none}
-  .Catui_fx-tilt,.Catui_fx-magnet{transform:none;transition:none}
+  .Catui_fx-tilt{transform:none;transition:none}
+  .Catui_fx-magnet{translate:none;transition:none}
   .Catui_fx-spark{display:none}
 }

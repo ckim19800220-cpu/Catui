@@ -1,0 +1,69 @@
+<section aria-labelledby="sizes">
+<h2 id="sizes">크기 · 머리 도구</h2>
+<p>아래는 <a href="doc:js/modules/layer">catui.js layer</a>가 대화상자에 붙이는 클래스의 모양입니다. 실제로는 화면 가운데·전체에 고정되므로, 여기서는 위치를 풀고 틀만 보입니다.</p>
+<catui-example title="Catui_modal-xl · 최대화 버튼(layer-tools) · 끌어 옮기기(layer-move) · 크기 조절(layer-resize)">
+  <div class="Catui_modal Catui_modal-xl Catui_layer-move Catui_layer-resize" role="dialog" aria-label="큰 대화상자 예시" style="display:flex;position:static;transform:none;width:100%;max-width:100%;height:200px">
+    <header class="Catui_modal-h"><span>주문 상세 (머리를 끌어 옮김)</span><span class="Catui_layer-tools"><button class="Catui_close" type="button" aria-pressed="false" aria-label="최대화"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-maximize-2"></use></svg></button><button class="Catui_close" type="button" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></button></span></header>
+    <div class="Catui_modal-b"><p>오른쪽 아래 모서리로 크기를 조절합니다.</p></div>
+  </div>
+</catui-example>
+<catui-example title="Catui_modal-full · Catui_layer-max (화면을 꽉 채운 상태, 미리보기에서는 틀만)">
+  <div class="Catui_bg-muted Catui_rounded-md" style="position:relative;height:160px;overflow:hidden">
+    <dialog class="Catui_modal Catui_modal-full" open aria-label="전체 크기 예시" style="position:absolute;inset:12px;width:auto;height:auto;display:flex"><header class="Catui_modal-h"><span>전체 크기 (modal-full)</span></header><div class="Catui_modal-b"><p>내용이 남는 높이를 채웁니다.</p></div></dialog>
+  </div>
+  <div class="Catui_bg-muted Catui_rounded-md" style="position:relative;height:120px;overflow:hidden">
+    <dialog class="Catui_modal Catui_modal-md Catui_layer-max" open aria-label="최대화 예시" style="position:absolute;inset:12px;width:auto;height:auto;display:flex"><header class="Catui_modal-h"><span>최대화한 보통 창 (layer-max)</span></header><div class="Catui_modal-b"><p>원래 크기 버튼으로 돌아갑니다.</p></div></dialog>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="special">
+<h2 id="special">말풍선 · 사진 · 탭 · iframe</h2>
+<catui-example title="Catui_layer-tip (data-side 위·아래·왼쪽·오른쪽)">
+  <div class="Catui_hstack Catui_gap-6" style="padding:24px 0">
+    <div class="Catui_layer-tip" data-side="top" role="tooltip" style="position:relative"><p>위쪽 말풍선</p></div>
+    <div class="Catui_layer-tip" data-side="bottom" role="tooltip" style="position:relative"><p>아래쪽</p></div>
+    <div class="Catui_layer-tip" data-side="left" role="tooltip" style="position:relative"><p>왼쪽</p></div>
+    <div class="Catui_layer-tip" data-side="right" role="tooltip" style="position:relative"><p>오른쪽</p></div>
+  </div>
+</catui-example>
+<catui-example title="Catui_layer-photos · layer-photo · layer-nav (사진 보기)">
+  <dialog class="Catui_modal Catui_layer-photos" open aria-label="사진 보기 예시" style="position:static;transform:none;width:100%;display:flex">
+    <header class="Catui_modal-h"><span>사진</span></header>
+    <div class="Catui_modal-b"><figure class="Catui_layer-photo"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 280'%3E%3Crect width='640' height='280' fill='%23E6F7F3'/%3E%3Cpath d='M0 230 L180 140 L300 200 L460 90 L640 170 V280 H0Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="녹색 언덕" style="max-height:200px"><figcaption><span>제주 오름</span><span>2 / 5</span></figcaption><button class="Catui_layer-nav" type="button" data-dir="prev" aria-label="이전 사진"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button><button class="Catui_layer-nav" type="button" data-dir="next" aria-label="다음 사진"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button></figure></div>
+  </dialog>
+</catui-example>
+<catui-example title="Catui_layer-tabs · Catui_layer-frame">
+  <div class="Catui_modal" role="dialog" aria-label="탭 대화상자 예시" style="display:flex;position:static;transform:none;width:100%">
+    <div class="Catui_modal-b">
+      <div class="Catui_layer-tabs" role="tablist" aria-label="설정"><button type="button" role="tab" aria-selected="true">일반</button><button type="button" role="tab" aria-selected="false" tabindex="-1">알림</button><button type="button" role="tab" aria-selected="false" tabindex="-1">미리보기</button></div>
+      <iframe class="Catui_layer-frame" title="미리보기 예시" style="height:120px" srcdoc="&lt;body style='margin:0;display:grid;place-items:center;height:100vh;font:13px sans-serif;background:#F7F8FA'&gt;iframe 레이어 자리&lt;/body&gt;"></iframe>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="toast">
+<h2 id="toast">토스트 위치 · 동작 · 남은 시간</h2>
+<catui-example title="Catui_toasts-tr · -tc · -bc (기본은 오른쪽 아래) · toast-action · toast-bar">
+  <div class="Catui_bg-muted Catui_rounded-md" style="position:relative;height:200px;overflow:hidden">
+    <div class="Catui_toasts Catui_toasts-tr" style="position:absolute"><div class="Catui_toast"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg><div><p class="Catui_toast-title">오른쪽 위 (tr)</p></div></div></div>
+    <div class="Catui_toasts Catui_toasts-tc" style="position:absolute;width:260px"><div class="Catui_toast Catui_toast-info"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-info"></use></svg><div><p class="Catui_toast-title">가운데 위 (tc)</p></div></div></div>
+    <div class="Catui_toasts Catui_toasts-bc" style="position:absolute;width:320px"><div class="Catui_toast Catui_toast-danger"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-trash-2"></use></svg><div><p class="Catui_toast-title">항목을 삭제했습니다</p></div><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_toast-action" type="button">되돌리기</button><span class="Catui_toast-bar" aria-hidden="true" style="animation:none;transform:scaleX(.6)"></span></div></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>이 클래스들은 catui.js <code>layer</code>가 붙입니다. 마크업만으로 쓰는 모달·드로어는 <a href="doc:css/components/modal">모달</a>·<a href="doc:css/components/drawer">드로어</a>를 보세요. 큰 창은 <code>area: 'xl'</code>, 화면 전체는 <code>'full'</code>, 최대화는 <code>maxmin: true</code>, 옮기기 <code>move</code>, 크기 조절 <code>resize</code>, 토스트 위치는 <code>position: 'tr'|'tc'|'bc'|'br'</code>입니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>대화상자는 네이티브 <code>&lt;dialog&gt;</code>라 포커스 가두기·Esc·포커스 복귀가 기본입니다. 최대화 버튼은 <code>aria-pressed</code>와 이름("최대화"/"원래 크기")이 바뀝니다.</li>
+  <li>말풍선은 <code>role="tooltip"</code>이며 대상의 <code>aria-describedby</code>에 잠시 연결됩니다. 사진 보기는 ←→·Home·End, 탭은 ←→로 이동합니다. 끌어 옮기기는 꾸밈이며 키보드 사용에는 필요 없습니다.</li>
+  <li>동작 버튼이 있는 토스트는 5초 동안 보이고, 마우스·키보드 포커스가 들어오면 멈춥니다.</li>
+</ul>
+</section>

@@ -1,0 +1,58 @@
+/* components/layer.css */
+/* catui.js layer 확장 — 큰·전체 크기, 최대화, 끌어 옮기기, 크기 조절, 머리 도구 버튼, 드로어 방향,
+   말풍선(tips), 사진 보기(photos), 탭 대화상자, iframe, 토스트 위치·동작 버튼·남은 시간 막대. */
+.Catui_modal-xl{width:min(calc(var(--Catui_modal-w-lg) + 240px),calc(100% - var(--Catui_space-4) * 2))}
+dialog.Catui_modal-full,dialog.Catui_layer-max{left:var(--Catui_space-4);top:var(--Catui_space-4);transform:none;width:calc(100% - var(--Catui_space-4) * 2);height:calc(100% - var(--Catui_space-4) * 2);max-height:none}
+dialog.Catui_modal-full > .Catui_modal-b,dialog.Catui_layer-max > .Catui_modal-b{flex:1}
+.Catui_layer-tools{display:inline-flex;align-items:center;gap:var(--Catui_space-1);margin-left:auto}
+.Catui_modal-h > span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.Catui_layer-move > .Catui_modal-h{cursor:move;user-select:none;touch-action:none}
+.Catui_layer-resize{resize:both;overflow:auto;min-width:280px;min-height:160px}
+dialog.Catui_drawer.Catui_drawer-left{inset:0 auto 0 0}
+dialog.Catui_drawer.Catui_drawer-bottom{inset:auto 0 0 0;width:100%}
+
+/* 말풍선: 대상 옆에 뜨고 data-side 쪽으로 꼬리 */
+.Catui_layer-tip{position:fixed;z-index:60;max-width:260px;padding:var(--Catui_space-2) var(--Catui_space-3);border-radius:var(--Catui_radius-sm);background:var(--Catui_tooltip-bg);color:var(--Catui_tooltip-fg);font-size:var(--Catui_type-caption-size);line-height:1.5;box-shadow:var(--Catui_shadow-md)}
+.Catui_layer-tip p{margin:0}
+.Catui_layer-tip::after{content:"";position:absolute;width:8px;height:8px;background:inherit;transform:rotate(45deg)}
+.Catui_layer-tip[data-side="top"]::after{left:calc(50% - 4px);bottom:-4px}
+.Catui_layer-tip[data-side="bottom"]::after{left:calc(50% - 4px);top:-4px}
+.Catui_layer-tip[data-side="left"]::after{top:calc(50% - 4px);right:-4px}
+.Catui_layer-tip[data-side="right"]::after{top:calc(50% - 4px);left:-4px}
+
+/* 사진 보기: 어두운 전체 화면, 가운데 사진, 양옆 이동, 아래 캡션·순번 */
+dialog.Catui_layer-photos{background:var(--Catui_color-navy-900);color:var(--Catui_color-navy-text);border:0}
+dialog.Catui_layer-photos .Catui_modal-h{color:inherit}
+dialog.Catui_layer-photos .Catui_close{color:inherit}
+.Catui_layer-photo{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:var(--Catui_space-3);height:100%;margin:0}
+.Catui_layer-photo img{width:100%;height:100%;max-height:calc(100vh - 180px);object-fit:contain}
+.Catui_layer-photo figcaption{display:flex;justify-content:space-between;gap:var(--Catui_space-3);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-navy-muted)}
+.Catui_layer-nav{position:absolute;top:calc(50% - 40px);display:grid;place-items:center;width:var(--Catui_control-h-lg);height:var(--Catui_control-h-lg);border-radius:var(--Catui_radius-pill);background:color-mix(in srgb,var(--Catui_color-navy-700) 85%,transparent);color:var(--Catui_color-navy-text);cursor:pointer}
+.Catui_layer-nav:hover{background:var(--Catui_color-navy-700)}
+.Catui_layer-nav:focus-visible{outline:2px solid var(--Catui_color-navy-text);outline-offset:2px}
+.Catui_layer-nav[data-dir="prev"]{left:var(--Catui_space-2)}
+.Catui_layer-nav[data-dir="prev"] .Catui_icon{transform:rotate(180deg)}
+.Catui_layer-nav[data-dir="next"]{right:var(--Catui_space-2)}
+.Catui_layer-nav:disabled{opacity:.35;cursor:default}
+
+/* 탭 대화상자 */
+.Catui_layer-tabs{display:flex;gap:var(--Catui_space-5);margin:calc(var(--Catui_modal-pad) * -1) calc(var(--Catui_modal-pad) * -1) var(--Catui_space-4);padding:0 var(--Catui_modal-pad);box-shadow:inset 0 -1px 0 var(--Catui_tab-border);overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+.Catui_layer-tabs button{height:var(--Catui_tab-h);color:var(--Catui_tab-fg);border-bottom:var(--Catui_tab-indicator-w) solid transparent;white-space:nowrap;cursor:pointer;flex:none}
+.Catui_layer-tabs button[aria-selected="true"]{color:var(--Catui_tab-active-fg);border-bottom-color:var(--Catui_tab-indicator);font-weight:600}
+.Catui_layer-tabs button:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+
+/* iframe: 본문 여백 없이 꽉 채움 */
+.Catui_layer-frame{display:block;width:100%;height:min(70vh,640px);border:0}
+dialog.Catui_modal-full .Catui_layer-frame,dialog.Catui_layer-max .Catui_layer-frame{height:100%}
+
+/* 토스트 위치 · 동작 버튼 · 남은 시간 막대 */
+.Catui_toasts-tr{top:var(--Catui_space-4);bottom:auto}
+.Catui_toasts-tc{top:var(--Catui_space-4);bottom:auto;right:auto;left:50%;translate:-50% 0}
+.Catui_toasts-bc{right:auto;left:50%;translate:-50% 0}
+.Catui_toast{position:relative;overflow:hidden}
+.Catui_toast-action{margin-left:auto;align-self:center;flex:none}
+.Catui_toast-bar{position:absolute;left:0;bottom:0;height:2px;width:100%;background:currentColor;opacity:.35;transform-origin:0 50%;animation:Catui_toast-bar linear forwards;animation-duration:var(--Catui_toast-time,3000ms)}
+.Catui_toast:hover .Catui_toast-bar{animation-play-state:paused}
+@keyframes Catui_toast-bar{to{transform:scaleX(0)}}
+@media (prefers-reduced-motion:reduce){.Catui_toast-bar{animation:none;display:none}}
+@media (max-width:767px){dialog.Catui_modal-xl{width:calc(100% - var(--Catui_space-4) * 2)}}

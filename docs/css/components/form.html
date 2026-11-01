@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>입력 필드 · CSS · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="라벨·입력·선택·여러 줄·도움말·오류·잠김 상태.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html" aria-current="page">CSS</a><a href="../../js/start/introduction.html">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CSS 메뉴</summary><nav aria-label="CSS 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../css/start/introduction.html">소개</a></li><li><a href="../../css/start/install.html">설치와 빌드</a></li><li><a href="../../css/start/namespace.html">이름과 스코프</a></li><li><a href="../../css/start/accessibility.html">접근성 기준</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">기초</p><ul><li><a href="../../css/foundation/color.html">색상</a></li><li><a href="../../css/foundation/surface.html">배경</a></li><li><a href="../../css/foundation/theme.html">다크 모드</a></li><li><a href="../../css/foundation/typography.html">타이포그래피</a></li><li><a href="../../css/foundation/text.html">텍스트·링크</a></li><li><a href="../../css/foundation/spacing.html">간격·반경·그림자</a></li><li><a href="../../css/foundation/icons.html">아이콘</a></li><li><a href="../../css/foundation/media.html">미디어·이미지</a></li><li><a href="../../css/foundation/utilities.html">유틸리티</a></li><li><a href="../../css/foundation/helpers.html">도우미 클래스</a></li><li><a href="../../css/foundation/motion.html">모션</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">레이아웃</p><ul><li><a href="../../css/layout/grid.html">그리드</a></li><li><a href="../../css/layout/flex.html">정렬 도우미</a></li><li><a href="../../css/layout/masonry.html">벽돌·벤토·쌓임</a></li><li><a href="../../css/layout/app-shell.html">관리 셸</a></li><li><a href="../../css/layout/site.html">공개 홈</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">웹 블록</p><ul><li><a href="../../css/blocks/head.html">섹션 머리·공지 띠</a></li><li><a href="../../css/blocks/proof.html">신뢰 요소</a></li><li><a href="../../css/blocks/people.html">팀·프로필</a></li><li><a href="../../css/blocks/process.html">과정·단계</a></li><li><a href="../../css/blocks/gallery.html">갤러리·글 정보</a></li><li><a href="../../css/blocks/subscribe.html">구독 폼</a></li><li><a href="../../css/blocks/floating.html">떠 있는 요소</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">컴포넌트</p><ul><li><a href="../../css/components/button.html">버튼</a></li><li><a href="../../css/components/split-button.html">분할 버튼</a></li><li><a href="../../css/components/form.html" aria-current="page">입력 필드</a></li><li><a href="../../css/components/input-group.html">입력 그룹</a></li><li><a href="../../css/components/choice.html">체크·라디오·토글</a></li><li><a href="../../css/components/badge.html">배지·카운트</a></li><li><a href="../../css/components/indicator.html">알림·상태 표시</a></li><li><a href="../../css/components/avatar.html">아바타</a></li><li><a href="../../css/components/media.html">미디어 객체·임베드</a></li><li><a href="../../css/components/card.html">카드</a></li><li><a href="../../css/components/carousel.html">캐러셀</a></li><li><a href="../../css/components/canvas.html">캔버스</a></li><li><a href="../../css/components/fx.html">효과(fx) 상태</a></li><li><a href="../../css/components/stat.html">지표</a></li><li><a href="../../css/components/progress.html">진행</a></li><li><a href="../../css/components/table.html">표</a></li><li><a href="../../css/components/toolbar.html">도구 모음·작업 바</a></li><li><a href="../../css/components/list.html">목록</a></li><li><a href="../../css/components/setting.html">설정 행</a></li><li><a href="../../css/components/tabs.html">탭·세그먼트</a></li><li><a href="../../css/components/subnav.html">보조 탐색</a></li><li><a href="../../css/components/vnav.html">세로 내비게이션</a></li><li><a href="../../css/components/breadcrumb.html">경로</a></li><li><a href="../../css/components/pagehead.html">페이지 머리</a></li><li><a href="../../css/components/pager.html">페이지</a></li><li><a href="../../css/components/feedback.html">피드백</a></li><li><a href="../../css/components/result.html">결과 화면</a></li><li><a href="../../css/components/callout.html">안내 상자</a></li><li><a href="../../css/components/spinner.html">스피너</a></li><li><a href="../../css/components/code.html">코드</a></li><li><a href="../../css/components/quote.html">인용</a></li><li><a href="../../css/components/chat.html">채팅</a></li><li><a href="../../css/components/modal.html">모달</a></li><li><a href="../../css/components/drawer.html">드로어</a></li><li><a href="../../css/components/layer.html">레이어 확장</a></li><li><a href="../../css/components/dropdown.html">드롭다운</a></li><li><a href="../../css/components/toast.html">토스트</a></li><li><a href="../../css/components/notifs.html">알림 패널</a></li><li><a href="../../css/components/tooltip.html">툴팁·팝오버</a></li><li><a href="../../css/components/mega.html">메가 메뉴</a></li><li><a href="../../css/components/wizard.html">마법사</a></li><li><a href="../../css/components/command.html">명령 팔레트</a></li><li><a href="../../css/components/faq.html">질문(접기)</a></li><li><a href="../../css/components/accordion.html">아코디언</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">고급 입력</p><ul><li><a href="../../css/forms/upload.html">업로드</a></li><li><a href="../../css/forms/range.html">범위</a></li><li><a href="../../css/forms/rating.html">별점</a></li><li><a href="../../css/forms/tags.html">태그</a></li><li><a href="../../css/forms/chips.html">선택 칩</a></li><li><a href="../../css/forms/optcard.html">선택 카드</a></li><li><a href="../../css/forms/swatch.html">색상 견본</a></li><li><a href="../../css/forms/stepper.html">스테퍼</a></li><li><a href="../../css/forms/otp.html">인증 코드</a></li><li><a href="../../css/forms/datepicker.html">날짜</a></li><li><a href="../../css/forms/counter.html">글자 수</a></li><li><a href="../../css/forms/search.html">검색</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">데이터 뷰</p><ul><li><a href="../../css/views/tree.html">트리</a></li><li><a href="../../css/views/calendar.html">달력</a></li><li><a href="../../css/views/gantt.html">간트</a></li><li><a href="../../css/views/kanban.html">칸반</a></li><li><a href="../../css/views/files.html">파일 목록</a></li><li><a href="../../css/views/thread.html">스레드</a></li><li><a href="../../css/views/heatmap.html">히트맵</a></li><li><a href="../../css/views/timeline.html">타임라인</a></li><li><a href="../../css/views/feed-meter.html">피드·미터·작업</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">차트</p><ul><li><a href="../../css/charts/line.html">라인 차트</a></li><li><a href="../../css/charts/donut.html">도넛</a></li><li><a href="../../css/charts/bars.html">막대</a></li><li><a href="../../css/charts/stack.html">누적·세그먼트</a></li><li><a href="../../css/charts/gauge.html">게이지</a></li><li><a href="../../css/charts/funnel.html">퍼널</a></li><li><a href="../../css/charts/sparkline.html">스파크라인</a></li><li><a href="../../css/charts/radar.html">레이더</a></li><li><a href="../../css/charts/prose.html">본문</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CSS · 컴포넌트</p>
+<h1 class="Catui_h1">입력 필드</h1>
+<p class="Catui_lead">라벨·입력·선택·여러 줄·도움말·오류·잠김 상태.</p>
+<ul class="doc-rules" aria-label="견본 계약"><li><span class="Catui_pill Catui_pill-success">MUST</span> 포커스는 테두리 + 3px 링</li><li><span class="Catui_pill Catui_pill-info">SHOULD</span> 라벨은 위, 헬프는 아래 — placeholder를 라벨로 쓰지 않는다</li><li><span class="Catui_pill Catui_pill-danger">NEVER</span> 에러를 색만으로 전달하지 않는다</li></ul>
+<section aria-labelledby="basic">
+<h2 id="basic">기본 필드</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">라벨 · 입력 · 도움말</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_fields">
+    <div class="Catui_field"><label class="Catui_label" for="fm-name">이름 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-name" name="name" autocomplete="name" aria-describedby="fm-name-help"><p class="Catui_help" id="fm-name-help">한글 또는 영문 이름.</p></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-status">상태</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="fm-status" name="status"><option>전체</option><option>배송</option><option>처리</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-memo">메모</label><textarea class="Catui_input" id="fm-memo" name="memo"></textarea></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="라벨 · 입력 · 도움말 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_fields&quot;&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-name&quot;&gt;이름 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-name&quot; name=&quot;name&quot; autocomplete=&quot;name&quot; aria-describedby=&quot;fm-name-help&quot;&gt;&lt;p class=&quot;Catui_help&quot; id=&quot;fm-name-help&quot;&gt;한글 또는 영문 이름.&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-status&quot;&gt;상태&lt;/label&gt;&lt;div class=&quot;Catui_select-wrap&quot;&gt;&lt;select class=&quot;Catui_input Catui_select&quot; id=&quot;fm-status&quot; name=&quot;status&quot;&gt;&lt;option&gt;전체&lt;/option&gt;&lt;option&gt;배송&lt;/option&gt;&lt;option&gt;처리&lt;/option&gt;&lt;/select&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-chevron-down&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-memo&quot;&gt;메모&lt;/label&gt;&lt;textarea class=&quot;Catui_input&quot; id=&quot;fm-memo&quot; name=&quot;memo&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>라벨은 위, 도움말은 아래에 둡니다. placeholder를 라벨 대신 쓰지 않습니다.</p>
+</section>
+
+<section aria-labelledby="states">
+<h2 id="states">오류 · 잠김</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">aria-invalid + 오류 문장 · disabled</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_fields">
+    <div class="Catui_field"><label class="Catui_label" for="fm-email">이메일</label><input class="Catui_input" id="fm-email" type="email" value="not-an-email" aria-invalid="true" aria-describedby="fm-email-err"><p class="Catui_error" id="fm-email-err">이메일 형식이 아닙니다. 예: name@company.com</p></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-off">조직</label><input class="Catui_input" id="fm-off" value="Catui 팀" disabled aria-describedby="fm-off-help"><p class="Catui_help" id="fm-off-help">권한이 없어 바꿀 수 없습니다.</p></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="aria-invalid + 오류 문장 · disabled 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_fields&quot;&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-email&quot;&gt;이메일&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-email&quot; type=&quot;email&quot; value=&quot;not-an-email&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;fm-email-err&quot;&gt;&lt;p class=&quot;Catui_error&quot; id=&quot;fm-email-err&quot;&gt;이메일 형식이 아닙니다. 예: name@company.com&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-off&quot;&gt;조직&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-off&quot; value=&quot;Catui 팀&quot; disabled aria-describedby=&quot;fm-off-help&quot;&gt;&lt;p class=&quot;Catui_help&quot; id=&quot;fm-off-help&quot;&gt;권한이 없어 바꿀 수 없습니다.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="row">
+<h2 id="row">가로 배치 필드</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">field-row (라벨 왼쪽, 767px 이하 세로)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_fields">
+    <div class="Catui_field Catui_field-row"><label class="Catui_label" for="fr-name">이름</label><input class="Catui_input" id="fr-name" autocomplete="name"></div>
+    <div class="Catui_field Catui_field-row"><label class="Catui_label" for="fr-mail">이메일</label><input class="Catui_input" id="fr-mail" type="email" autocomplete="email" aria-describedby="fr-mail-help"><p class="Catui_help" id="fr-mail-help">알림을 받을 주소입니다.</p></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="field-row (라벨 왼쪽, 767px 이하 세로) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_fields&quot;&gt;
+  &lt;div class=&quot;Catui_field Catui_field-row&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fr-name&quot;&gt;이름&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fr-name&quot; autocomplete=&quot;name&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field Catui_field-row&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fr-mail&quot;&gt;이메일&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fr-mail&quot; type=&quot;email&quot; autocomplete=&quot;email&quot; aria-describedby=&quot;fr-mail-help&quot;&gt;&lt;p class=&quot;Catui_help&quot; id=&quot;fr-mail-help&quot;&gt;알림을 받을 주소입니다.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_fields</code> 안에 <code>.Catui_field</code>(라벨·입력·도움말·오류)를 쌓습니다. 셀렉트는 <code>.Catui_select-wrap</code>으로 감싸고 화살표 아이콘을 둡니다(catui.js가 있으면 자동 보충). 검증을 스크립트로 붙이려면 <a href="../../js/modules/form.html">catui.js form</a>을 쓰세요.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>모든 입력에 <code>label for</code>↔<code>id</code>. 도움말·오류는 <code>aria-describedby</code>로 연결합니다.</li>
+  <li>오류는 색과 함께 문장으로 알리고 <code>aria-invalid="true"</code>를 줍니다.</li>
+  <li>포커스는 테두리 + 3px 링을 함께 표시합니다. 적절한 <code>autocomplete</code>를 붙입니다.</li>
+</ul>
+</section>
+
+<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/form.css</span><code>.Catui_field</code> <code>.Catui_fields</code> <code>.Catui_app</code> <code>.Catui_site</code> <code>.Catui_h3</code> <code>.Catui_label</code> <code>.Catui_req</code> <code>.Catui_help</code> <code>.Catui_error</code> <code>.Catui_input</code> <code>.Catui_select</code> <code>.Catui_select-wrap</code> <code>.Catui_icon</code> <code>.Catui_field-row</code></li></ul></section>
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/components/split-button.html"><span>이전</span>분할 버튼</a><a class="doc-pager-next" href="../../css/components/input-group.html"><span>다음</span>입력 그룹</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">기본 필드</a></li><li><a href="#states">오류 · 잠김</a></li><li><a href="#row">가로 배치 필드</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

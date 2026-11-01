@@ -9,9 +9,9 @@
 .Catui_delay-1{animation-delay:calc(var(--Catui_dur-fast) * 1)}
 .Catui_delay-2{animation-delay:calc(var(--Catui_dur-fast) * 2)}
 .Catui_delay-3{animation-delay:calc(var(--Catui_dur-fast) * 3)}
-.Catui_transition{transition:background var(--Catui_dur-fast) var(--Catui_ease),color var(--Catui_dur-fast) var(--Catui_ease),border-color var(--Catui_dur-fast) var(--Catui_ease),box-shadow var(--Catui_dur-fast) var(--Catui_ease),transform var(--Catui_dur-fast) var(--Catui_ease)}
-.Catui_hover-lift:hover{transform:translateY(-2px);box-shadow:var(--Catui_shadow-md)}
+.Catui_transition{transition:background var(--Catui_dur-fast) var(--Catui_ease),color var(--Catui_dur-fast) var(--Catui_ease),border-color var(--Catui_dur-fast) var(--Catui_ease),box-shadow var(--Catui_dur-fast) var(--Catui_ease),transform var(--Catui_dur-fast) var(--Catui_ease),translate var(--Catui_dur-fast) var(--Catui_ease),scale var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_hover-lift:hover{translate:0 -2px;box-shadow:var(--Catui_shadow-md)}
 @media (prefers-reduced-motion:reduce){
   .Catui_anim-fade,.Catui_anim-up,.Catui_anim-scale{animation:none}
-  .Catui_hover-lift:hover{transform:none}
+  .Catui_hover-lift:hover{translate:none}
 }
