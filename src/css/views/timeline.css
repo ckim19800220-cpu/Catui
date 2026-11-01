@@ -1,0 +1,6 @@
+/* views/timeline.css */
+.Catui_atl{position:relative;display:grid;gap:var(--Catui_timeline-gap);padding-left:var(--Catui_space-5)}
+.Catui_atl::before{content:"";position:absolute;left:calc(var(--Catui_timeline-dot) / 2 - var(--Catui_timeline-line-w) / 2);top:12px;bottom:12px;width:var(--Catui_timeline-line-w);background:var(--Catui_timeline-line)}
+.Catui_atl-item{position:relative;display:flex;align-items:center;gap:var(--Catui_space-3)}
+.Catui_atl-item::before{content:"";position:absolute;left:calc(-1 * var(--Catui_space-5));top:calc(50% - var(--Catui_timeline-dot) / 2);width:var(--Catui_timeline-dot);height:var(--Catui_timeline-dot);border-radius:var(--Catui_radius-pill);background:var(--Catui_stat-dot-color);box-shadow:0 0 0 2px var(--Catui_card-bg)}
+.Catui_atl-main{flex:1;min-width:0}

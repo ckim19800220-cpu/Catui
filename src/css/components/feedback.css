@@ -1,0 +1,36 @@
+/* components/feedback.css */
+/* Feedback — banner, empty state, skeleton (shine), divider. */
+.Catui_banner{
+  display:flex;align-items:flex-start;gap:var(--Catui_space-3);
+  padding:var(--Catui_banner-py) var(--Catui_banner-px);border-radius:var(--Catui_banner-radius);
+  font-size:var(--Catui_banner-font);line-height:1.55;
+}
+.Catui_banner .Catui_icon{width:var(--Catui_banner-icon);height:var(--Catui_banner-icon);flex:none}
+.Catui_banner-info{background:var(--Catui_banner-info-bg);color:var(--Catui_color-text-primary)}
+.Catui_banner-info .Catui_icon{color:var(--Catui_banner-info-fg)}
+.Catui_banner-warn{background:var(--Catui_banner-warn-bg);color:var(--Catui_banner-warn-fg)}
+.Catui_banner-warn .Catui_icon{color:var(--Catui_banner-warn-fg)}
+.Catui_banner-danger{background:var(--Catui_banner-danger-bg);color:var(--Catui_color-text-primary)}
+.Catui_banner-danger .Catui_icon{color:var(--Catui_banner-danger-fg)}
+.Catui_empty{padding:var(--Catui_empty-pad);text-align:center;display:grid;justify-items:center;gap:var(--Catui_space-3)}
+.Catui_empty .Catui_icon{width:var(--Catui_empty-icon);height:var(--Catui_empty-icon);color:var(--Catui_empty-icon-color)}
+.Catui_empty-title{font-size:var(--Catui_empty-title-size);font-weight:600}
+.Catui_empty-text{font-size:var(--Catui_empty-text-size);color:var(--Catui_empty-text-color);max-width:var(--Catui_prose-measure)}
+.Catui_skeleton{position:relative;overflow:hidden;background:var(--Catui_skeleton-bg);border-radius:var(--Catui_skeleton-radius)}
+.Catui_skeleton::after{
+  content:"";position:absolute;inset:0;transform:translateX(-100%);
+  background:linear-gradient(90deg,transparent,var(--Catui_skeleton-shine),transparent);
+  animation:Catui_shine 1.6s var(--Catui_ease) infinite;
+}
+@keyframes Catui_shine{to{transform:translateX(100%)}}
+@media (prefers-reduced-motion:reduce){
+  .Catui_skeleton::after{animation:none}
+}
+.Catui_skeleton-text{height:var(--Catui_skeleton-h-text);width:100%}
+.Catui_skeleton-title{height:var(--Catui_skeleton-h-title);width:40%}
+.Catui_divider{height:var(--Catui_divider-w);background:var(--Catui_divider-color);border:0;margin:var(--Catui_divider-gap) 0}
+/* 글자 있는 구분선 · 배너 제목과 닫기 */
+.Catui_divider-text{display:flex;align-items:center;gap:var(--Catui_space-3);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_divider-text::before,.Catui_divider-text::after{content:"";flex:1;border-top:1px solid var(--Catui_divider-color)}
+.Catui_banner-title{font-weight:600}
+.Catui_banner-close{margin-left:auto;flex:none}

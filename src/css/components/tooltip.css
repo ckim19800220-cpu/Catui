@@ -1,0 +1,15 @@
+/* components/tooltip.css */
+.Catui_tooltip{
+  display:inline-block;background:var(--Catui_tooltip-bg);color:var(--Catui_tooltip-fg);
+  font-size:var(--Catui_tooltip-font);padding:var(--Catui_tooltip-py) var(--Catui_tooltip-px);
+  border-radius:var(--Catui_tooltip-radius);
+}
+.Catui_popover{
+  width:min(var(--Catui_popover-w),100%);background:var(--Catui_card-bg);
+  border-radius:var(--Catui_popover-radius);box-shadow:var(--Catui_popover-shadow);
+  padding:var(--Catui_popover-py) var(--Catui_popover-px);position:relative;
+}
+.Catui_popover::before{
+  content:"";position:absolute;top:calc(var(--Catui_popover-arrow) * -1);left:var(--Catui_space-4);
+  border:var(--Catui_popover-arrow) solid transparent;border-bottom-color:var(--Catui_card-bg);
+}

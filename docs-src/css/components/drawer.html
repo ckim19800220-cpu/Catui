@@ -1,0 +1,65 @@
+<section aria-labelledby="filter">
+<h2 id="filter">필터 드로어</h2>
+<catui-example title="오른쪽 320px 패널">
+  <div>
+    <input class="Catui_clip Catui_drawer-toggle" type="checkbox" id="dr-filter" aria-label="필터 열기">
+    <label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="dr-filter"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-filter"></use></svg>필터</label>
+    <div class="Catui_scrim"><label for="dr-filter"><span class="Catui_clip">닫기</span></label></div>
+    <aside class="Catui_drawer" role="dialog" aria-modal="true" aria-labelledby="dr-filter-t">
+      <header class="Catui_drawer-h"><span id="dr-filter-t">필터</span><label class="Catui_close" for="dr-filter" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></label></header>
+      <div class="Catui_drawer-b"><div class="Catui_fields">
+        <div class="Catui_field"><label class="Catui_label" for="dr-status">상태</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="dr-status"><option>전체</option><option>배송</option><option>처리</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+        <div class="Catui_field"><label class="Catui_label" for="dr-from">시작일</label><input class="Catui_input" id="dr-from" type="date"></div>
+      </div></div>
+    </aside>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="detail">
+<h2 id="detail">상세 보기 드로어</h2>
+<catui-example title="목록에서 항목 상세">
+  <div>
+    <input class="Catui_clip Catui_drawer-toggle" type="checkbox" id="dr-detail" aria-label="주문 상세 열기">
+    <label class="Catui_btn Catui_btn-md Catui_btn-ghost" for="dr-detail">주문 1003 상세</label>
+    <div class="Catui_scrim"><label for="dr-detail"><span class="Catui_clip">닫기</span></label></div>
+    <aside class="Catui_drawer" role="dialog" aria-modal="true" aria-labelledby="dr-detail-t">
+      <header class="Catui_drawer-h"><span id="dr-detail-t">주문 1003</span><label class="Catui_close" for="dr-detail" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></label></header>
+      <div class="Catui_drawer-b"><p>고객 박서연 · 42,000원</p><span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>대기</span></div>
+    </aside>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="sides">
+<h2 id="sides">왼쪽 · 아래 드로어</h2>
+<catui-example title="drawer-left · drawer-bottom">
+  <div class="Catui_hstack">
+    <div>
+      <input class="Catui_clip Catui_drawer-toggle" type="checkbox" id="dr-left" aria-label="메뉴 열기">
+      <label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="dr-left">왼쪽 메뉴</label>
+      <div class="Catui_scrim"><label for="dr-left"><span class="Catui_clip">닫기</span></label></div>
+      <aside class="Catui_drawer Catui_drawer-left" role="dialog" aria-modal="true" aria-labelledby="dr-left-t"><header class="Catui_drawer-h"><span id="dr-left-t">메뉴</span><label class="Catui_close" for="dr-left" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></label></header><div class="Catui_drawer-b"><p>왼쪽에서 여는 내비게이션입니다.</p></div></aside>
+    </div>
+    <div>
+      <input class="Catui_clip Catui_drawer-toggle" type="checkbox" id="dr-bottom" aria-label="공유 열기">
+      <label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="dr-bottom">아래 시트</label>
+      <div class="Catui_scrim"><label for="dr-bottom"><span class="Catui_clip">닫기</span></label></div>
+      <aside class="Catui_drawer Catui_drawer-bottom" role="dialog" aria-modal="true" aria-labelledby="dr-bottom-t"><header class="Catui_drawer-h"><span id="dr-bottom-t">공유</span><label class="Catui_close" for="dr-bottom" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></label></header><div class="Catui_drawer-b"><p>모바일에서 아래에서 올라오는 시트입니다. 높이는 화면의 70%까지.</p></div></aside>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>모달과 같은 체크박스 구조에서 <code>.Catui_drawer-toggle</code> + <code>aside.Catui_drawer</code>를 씁니다. 폭 320px, 오른쪽 고정, 반경 0. 스크립트로 열려면 <a href="doc:js/modules/layer">layer.open({ type: 'drawer' })</a>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>CSS만으로는 Esc·포커스 가두기가 안 됩니다. catui.js가 같은 마크업에 붙이고, <code>layer.open({ type: 'drawer' })</code>는 dialog로 기본 제공합니다.</li>
+  <li><code>role="dialog"</code> + <code>aria-modal</code> + 제목 연결, 닫기 버튼 생략 금지. 스크림을 겹치지 않습니다.</li>
+</ul>
+</section>

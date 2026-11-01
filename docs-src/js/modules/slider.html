@@ -1,0 +1,31 @@
+<section aria-labelledby="basic">
+<h2 id="basic">슬라이더</h2>
+<catui-example title="slider.render · 마크업 range">
+  <div class="Catui_grid">
+    <div class="Catui_span-6" id="sl-vol"></div>
+    <div class="Catui_span-6 Catui_field"><label class="Catui_label" for="sl-level">단계 (마크업)</label><input class="Catui_range" id="sl-level" type="range" min="0" max="10" value="3" data-catui-filter="sl-level"></div>
+  </div>
+  <p class="Catui_help" id="sl-out" aria-live="polite"></p>
+  <script>
+  catui.use(['slider'], function (slider) {
+    var out = function (t) { document.getElementById('sl-out').textContent = t; };
+    slider.render({ elem: '#sl-vol', id: 'vol', label: '음량', min: 0, max: 100, step: 10, value: 40, ticks: true,
+      setTips: function (v) { return v === 0 ? '음소거' : v + '%'; }, change: function (v) { out('음량: ' + v); } });
+    slider.on('change(sl-level)', function (o) { out('단계: ' + o.value); });
+  });
+  </script>
+</catui-example>
+<p>네이티브 range를 만들어 키보드·스크린리더 지원을 그대로 씁니다. <code>setTips</code>는 표시와 <code>aria-valuetext</code>에 함께 쓰입니다.</p>
+</section>
+
+<section aria-labelledby="options">
+<h2 id="options">옵션</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">slider 옵션</caption>
+<thead><tr><th scope="col">옵션</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>label · min · max · step · value · disabled</code></td><td>기본 값</td></tr>
+<tr><td><code>ticks · scale · tips · setTips(v)</code></td><td>눈금 · 양 끝 표시 · 현재값 · 표시 글자</td></tr>
+<tr><td><code>input(v)</code> · <code>change(v)</code></td><td>콜백 · 이벤트 <code>input(f)</code>·<code>change(f)</code></td></tr>
+<tr><td><code>slider.setValue(id, v)</code> · <code>inst.getValue()</code></td><td>값 바꾸기·읽기</td></tr>
+</tbody></table></div>
+</section>

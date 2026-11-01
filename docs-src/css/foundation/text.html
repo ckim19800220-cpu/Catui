@@ -1,0 +1,39 @@
+<section aria-labelledby="links">
+<h2 id="links">링크</h2>
+<catui-example title="본문 링크 · 조용한 링크 · 외부 링크">
+  <p>설치 방법은 <a class="Catui_link" href="doc:css/start/install">설치와 빌드</a> 문서를 보세요.</p>
+  <p>표 아래 <a class="Catui_link Catui_link-quiet" href="doc:css/components/table">표 문서</a>처럼 덜 눈에 띄는 링크도 있습니다.</p>
+  <p>아이콘 원본은 <a class="Catui_link Catui_link-ext" href="https://lucide.dev" rel="noopener" target="_blank">Lucide<span class="Catui_clip"> (새 창)</span></a>입니다.</p>
+</catui-example>
+<p>본문 링크는 AA 색(<code>brand-strong</code>)과 밑줄을 함께 씁니다. <code>.Catui_prose</code> 안의 클래스 없는 <code>a</code>도 같은 모양입니다. 버튼처럼 보여야 하면 <code>.Catui_btn</code>을 씁니다.</p>
+</section>
+
+<section aria-labelledby="colors">
+<h2 id="colors">의미 색</h2>
+<catui-example title="muted · success · info · warning · danger">
+  <p class="Catui_text-muted">보조 설명 (text-secondary, 4.6:1)</p>
+  <p class="Catui_text-success">저장했습니다</p>
+  <p class="Catui_text-info">새 버전이 있습니다</p>
+  <p class="Catui_text-warning">승인이 필요합니다</p>
+  <p class="Catui_text-danger">결제에 실패했습니다</p>
+</catui-example>
+<p>모두 흰 배경에서 AA(4.5:1)를 넘는 색입니다. 색만으로 의미를 전하지 말고 문장에 상태를 함께 씁니다.</p>
+</section>
+
+<section aria-labelledby="truncate">
+<h2 id="truncate">말줄임 · 줄 수 제한</h2>
+<catui-example title="truncate (한 줄) · clamp-2 (두 줄)">
+  <p class="Catui_truncate" style="max-width:280px" title="2026년 하반기 고객 만족도 조사 결과 보고서 최종본.pdf">2026년 하반기 고객 만족도 조사 결과 보고서 최종본.pdf</p>
+  <p class="Catui_clamp-2" style="max-width:320px">긴 설명은 두 줄까지만 보이고 나머지는 말줄임표로 줄입니다. 카드 목록처럼 높이를 맞춰야 하는 곳에서 씁니다. 전체 내용은 상세 화면에서 보여 줍니다.</p>
+  <p class="Catui_clamp-3" style="max-width:320px">세 줄 제한은 기사 요약처럼 조금 더 긴 미리보기에 씁니다. 줄 수만 다르고 동작은 같습니다. 넘치는 부분은 말줄임표로 끝나며, 전체 내용은 상세 화면이나 펼치기 버튼으로 보여 줍니다.</p>
+</catui-example>
+<p>잘린 전체 내용은 <code>title</code>이나 상세 화면으로 확인할 수 있게 합니다. 세 줄은 <code>.Catui_clamp-3</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>링크는 색과 밑줄을 함께 보이고, 키보드 포커스 링이 있습니다. 새 창 링크는 숨김 글자로 알립니다.</li>
+  <li><code>text-tertiary</code>(2.5:1)는 정보 글자에 쓰지 않습니다.</li>
+</ul>
+</section>

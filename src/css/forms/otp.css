@@ -1,0 +1,5 @@
+/* forms/otp.css */
+/* OTP — 인증 코드 칸(한 글자씩). 다음 칸 이동·붙여넣기 분배는 스크립트. */
+.Catui_otp{display:flex;align-items:center;gap:var(--Catui_space-2);border:0;padding:0;margin:0}
+.Catui_otp .Catui_input{width:var(--Catui_control-h-lg);height:calc(var(--Catui_control-h-lg) + var(--Catui_space-2));padding:0;text-align:center;font-size:var(--Catui_type-h2-size);font-weight:600;font-variant-numeric:tabular-nums}
+.Catui_otp-sep{color:var(--Catui_color-text-tertiary)}

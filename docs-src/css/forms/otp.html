@@ -1,0 +1,26 @@
+<section aria-labelledby="basic">
+<h2 id="basic">인증 코드</h2>
+<catui-example title="6자리 (3+3)">
+  <fieldset class="Catui_otp" aria-describedby="otp-help"><legend class="Catui_label">인증 코드</legend>
+    <input class="Catui_input" inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="1번째 숫자" value="4">
+    <input class="Catui_input" inputmode="numeric" maxlength="1" aria-label="2번째 숫자" value="8">
+    <input class="Catui_input" inputmode="numeric" maxlength="1" aria-label="3번째 숫자">
+    <span class="Catui_otp-sep" aria-hidden="true">–</span>
+    <input class="Catui_input" inputmode="numeric" maxlength="1" aria-label="4번째 숫자">
+    <input class="Catui_input" inputmode="numeric" maxlength="1" aria-label="5번째 숫자">
+    <input class="Catui_input" inputmode="numeric" maxlength="1" aria-label="6번째 숫자">
+  </fieldset>
+  <p class="Catui_help" id="otp-help">문자로 받은 6자리 숫자를 입력하세요. 3분 안에 입력해야 합니다.</p>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_otp</code> 안에 한 글자 입력 칸 <code>.Catui_input</code>(<code>maxlength="1"</code>, <code>inputmode="numeric"</code>)을 나열하고, 필요하면 구분 <code>.Catui_otp-sep</code>. 입력하면 다음 칸으로 이동, 붙여넣기 분배, 오류 표시는 스크립트로 붙입니다. 첫 칸에 <code>autocomplete="one-time-code"</code>를 주면 휴대폰이 문자 코드를 제안합니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>칸마다 "n번째 숫자" 이름을 주고, 묶음 이름은 <code>legend</code>, 안내는 <code>aria-describedby</code>.</li>
+  <li>남은 시간 같은 제한은 글자로 미리 알립니다.</li>
+</ul>
+</section>

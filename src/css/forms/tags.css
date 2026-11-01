@@ -1,0 +1,9 @@
+/* forms/tags.css */
+.Catui_tags{display:flex;flex-wrap:wrap;gap:var(--Catui_tag-gap)}
+.Catui_tag{
+  height:var(--Catui_tag-h);padding:0 var(--Catui_tag-px);border-radius:var(--Catui_tag-radius);
+  background:var(--Catui_tag-bg);color:var(--Catui_tag-fg);font-size:var(--Catui_tag-font);line-height:1;
+  display:inline-flex;align-items:center;gap:var(--Catui_space-1);
+}
+.Catui_tag button{width:var(--Catui_tag-close);height:var(--Catui_tag-close);display:inline-flex;align-items:center;justify-content:center}
+.Catui_tag-limit{color:var(--Catui_tag-limit-fg);font-weight:600}

@@ -1,0 +1,28 @@
+<section aria-labelledby="basic">
+<h2 id="basic">기본</h2>
+<catui-example title="감소 · 값 · 증가">
+  <span class="Catui_label" id="sp-qty">수량</span>
+  <div class="Catui_stepper" role="group" aria-labelledby="sp-qty"><button type="button" aria-label="감소"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-minus"></use></svg></button><output>2</output><button type="button" aria-label="증가"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-plus"></use></svg></button></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="bound">
+<h2 id="bound">경계</h2>
+<catui-example title="최솟값에서 감소 비활성">
+  <span class="Catui_label" id="sp-min">인원 (1~9)</span>
+  <div class="Catui_stepper" role="group" aria-labelledby="sp-min"><button type="button" aria-label="감소" disabled><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-minus"></use></svg></button><output>1</output><button type="button" aria-label="증가"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-plus"></use></svg></button></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_stepper</code> = 버튼 + <code>&lt;output&gt;</code> + 버튼. 묶음에 <code>role="group"</code>과 라벨을 주고, 경계에서는 해당 버튼을 <code>disabled</code>로 바꿉니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>감소·증가 버튼에 <code>aria-label</code>, 경계에서는 <code>disabled</code>.</li>
+  <li>가운데 값은 <code>output</code>으로 바뀔 때 읽힙니다.</li>
+</ul>
+</section>

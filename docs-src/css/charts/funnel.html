@@ -1,0 +1,25 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="2단계">
+  <div class="Catui_funnel"><div class="Catui_funnel-row"><span class="Catui_funnel-lab">방문</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:100%">47,325</div></div><span class="Catui_funnel-drop"></span></div><div class="Catui_funnel-row"><span class="Catui_funnel-lab">구매</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:40%">890</div></div><span class="Catui_funnel-drop">감소</span></div></div>
+</catui-example>
+<catui-example title="4단계 + 단계별 감소율">
+  <div class="Catui_funnel" role="list" aria-label="구매 전환 퍼널">
+    <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">방문</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:100%">10,000</div></div><span class="Catui_funnel-drop"></span></div>
+    <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">상품 보기</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:62%">6,200</div></div><span class="Catui_funnel-drop">−38%</span></div>
+    <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">장바구니</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:28%">2,800</div></div><span class="Catui_funnel-drop">−55%</span></div>
+    <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">구매</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:12%">1,200</div></div><span class="Catui_funnel-drop">−57%</span></div>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_funnel-row</code> = <code>funnel-lab</code> + <code>funnel-track &gt; funnel-bar</code> + <code>funnel-drop</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>단계 이름·값·감소율을 모두 글자로 보입니다.</li>
+</ul>
+</section>

@@ -1,0 +1,41 @@
+/* components/modal.css */
+/* Overlay — scrim/modal/drawer (checkbox), dd menu, toast, tooltip, popover, mega, wizard, cmdk, kbd. */
+.Catui_scrim{
+  position:fixed;inset:0;background:var(--Catui_overlay-scrim);z-index:40;
+}
+.Catui_scrim label{position:absolute;inset:0;cursor:pointer}
+.Catui_app:has(.Catui_modal-toggle:checked),.Catui_site:has(.Catui_modal-toggle:checked),
+.Catui_app:has(.Catui_drawer-toggle:checked),.Catui_site:has(.Catui_drawer-toggle:checked){overflow:hidden}
+.Catui_scrim,.Catui_modal,.Catui_drawer{display:none}
+.Catui_modal-toggle:checked ~ .Catui_scrim,
+.Catui_drawer-toggle:checked ~ .Catui_scrim{display:block}
+.Catui_modal-toggle:checked ~ .Catui_modal{display:flex}
+.Catui_modal{
+  position:fixed;z-index:50;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(var(--Catui_modal-w-md),calc(100% - var(--Catui_space-4) * 2));
+  background:var(--Catui_modal-bg);border:1px solid var(--Catui_modal-border);
+  border-radius:var(--Catui_modal-radius);box-shadow:var(--Catui_modal-shadow);
+  flex-direction:column;
+}
+.Catui_modal-sm{width:min(var(--Catui_modal-w-sm),calc(100% - var(--Catui_space-4) * 2))}
+.Catui_modal-md{width:min(var(--Catui_modal-w-md),calc(100% - var(--Catui_space-4) * 2))}
+.Catui_modal-lg{width:min(var(--Catui_modal-w-lg),calc(100% - var(--Catui_space-4) * 2))}
+.Catui_modal-h,.Catui_drawer-h{
+  height:var(--Catui_modal-header-h);display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--Catui_modal-pad);font-size:var(--Catui_modal-title-font);font-weight:var(--Catui_modal-title-weight);
+}
+.Catui_modal-b,.Catui_drawer-b{padding:var(--Catui_modal-pad);display:grid;gap:var(--Catui_modal-gap)}
+.Catui_modal-f{
+  height:var(--Catui_modal-footer-h);display:flex;align-items:center;justify-content:flex-end;gap:var(--Catui_space-2);
+  padding:0 var(--Catui_modal-pad);background:var(--Catui_modal-footer-bg);
+  border-radius:0 0 var(--Catui_modal-radius) var(--Catui_modal-radius);
+}
+.Catui_close{width:var(--Catui_modal-close);height:var(--Catui_modal-close);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+/* JS 상태 — catui.js layer/dropdown이 체크박스 없이 여는 오버레이. 네이티브 <dialog>로 Esc·포커스 가두기를 얻는다. */
+dialog.Catui_modal,dialog.Catui_drawer{padding:0;margin:0;max-width:none;color:inherit;overflow:visible}
+dialog.Catui_modal{max-height:calc(100vh - var(--Catui_space-8))}
+dialog.Catui_modal[open]{display:flex}
+dialog.Catui_modal::backdrop,dialog.Catui_drawer::backdrop{background:var(--Catui_overlay-scrim)}
+.Catui_modal-b{overflow:auto}
+.Catui_layer-load{display:flex;align-items:center;gap:var(--Catui_space-3);padding:var(--Catui_modal-pad)}
+.Catui_close:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}

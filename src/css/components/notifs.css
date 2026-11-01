@@ -1,0 +1,13 @@
+/* components/notifs.css */
+/* Notifications — 알림 패널(머리·항목·읽지 않음 점·꼬리). 드롭다운 안이나 단독으로. */
+.Catui_notifs{width:min(360px,100%);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);box-shadow:var(--Catui_shadow-md);overflow:hidden}
+.Catui_notifs-h{display:flex;align-items:center;gap:var(--Catui_space-2);height:var(--Catui_control-h-lg);padding:0 var(--Catui_space-4);border-bottom:1px solid var(--Catui_divider-color);font-weight:600;line-height:1}
+.Catui_notifs-h .Catui_btn{margin-left:auto}
+.Catui_notifs-list{max-height:320px;overflow-y:auto}
+.Catui_notif{position:relative;display:flex;gap:var(--Catui_space-3);padding:var(--Catui_space-3) var(--Catui_space-4) var(--Catui_space-3) var(--Catui_space-6);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_notif:last-child{border-bottom:0}
+.Catui_notif-unread{background:color-mix(in srgb,var(--Catui_color-brand-soft) 50%,transparent)}
+.Catui_notif-unread::before{content:"";position:absolute;left:var(--Catui_space-2);top:calc(var(--Catui_space-3) + 6px);width:var(--Catui_space-2);height:var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-brand-strong)}
+.Catui_notif-body{display:grid;gap:2px;min-width:0}
+.Catui_notif-time{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_notifs-f{display:block;text-align:center;padding:var(--Catui_space-2);border-top:1px solid var(--Catui_divider-color);font-size:var(--Catui_type-caption-size);font-weight:600;color:var(--Catui_color-brand-strong)}

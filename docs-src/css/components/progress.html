@@ -1,0 +1,52 @@
+<section aria-labelledby="single">
+<h2 id="single">단일 진행</h2>
+<catui-example title="라벨 + 퍼센트 + 막대">
+  <div class="Catui_prog-row">
+    <div class="Catui_prog-label"><span>업로드</span><span class="Catui_num">42%</span></div>
+    <div class="Catui_prog" role="progressbar" aria-label="업로드" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"><i class="Catui_pc1" style="width:42%"></i></div>
+  </div>
+  <div class="Catui_prog-row">
+    <div class="Catui_prog-label"><span>작게 (prog-sm)</span><span class="Catui_num">75%</span></div>
+    <div class="Catui_prog Catui_prog-sm" role="img" aria-label="75퍼센트"><i class="Catui_pc2" style="width:75%"></i></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="segments">
+<h2 id="segments">구간 진행</h2>
+<catui-example title="6색 구간 (pc1 → pc6)">
+  <div class="Catui_prog-row">
+    <div class="Catui_prog-label"><span>완료</span><span class="Catui_num">64%</span></div>
+    <div class="Catui_prog" role="img" aria-label="완료 64퍼센트, 6개 구간"><i class="Catui_pc1" style="width:28%"></i><i class="Catui_pc2" style="width:12%"></i><i class="Catui_pc3" style="width:8%"></i><i class="Catui_pc4" style="width:6%"></i><i class="Catui_pc5" style="width:6%"></i><i class="Catui_pc6" style="width:4%"></i></div>
+  </div>
+</catui-example>
+<catui-example title="크기 (prog-sm · 기본 · prog-lg)">
+  <div class="Catui_prog Catui_prog-sm" role="img" aria-label="작게 40퍼센트"><i class="Catui_pc1" style="width:40%"></i></div>
+  <div class="Catui_prog" role="img" aria-label="기본 60퍼센트"><i class="Catui_pc1" style="width:60%"></i></div>
+  <div class="Catui_prog Catui_prog-lg" role="img" aria-label="크게 80퍼센트"><i class="Catui_pc1" style="width:80%"></i></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="ring">
+<h2 id="ring">원형 진행</h2>
+<catui-example title="--Catui_ring-val로 값 지정">
+  <div class="Catui_hstack Catui_gap-4">
+    <span class="Catui_ring" style="--Catui_ring-val:25" role="progressbar" aria-label="업로드" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span>25</span></span>
+    <span class="Catui_ring" style="--Catui_ring-val:70" role="img" aria-label="70퍼센트"><span>70</span></span>
+    <span class="Catui_ring Catui_ring-lg" style="--Catui_ring-val:92" role="img" aria-label="프로필 완성도 92퍼센트"><span>92%</span></span>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_prog</code> 트랙(6px) 안에 <code>&lt;i class="Catui_pc1~6"&gt;</code>를 너비로 넣습니다. 색은 pc1부터 순서대로 쓰고, 그라디언트나 새 색을 만들지 않습니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>값이 바뀌는 진행은 <code>role="progressbar"</code> + <code>aria-valuenow/min/max</code>, 고정 표시는 <code>role="img"</code> + <code>aria-label</code>.</li>
+  <li>퍼센트 글자를 막대 옆에 함께 보입니다.</li>
+</ul>
+</section>

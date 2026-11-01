@@ -1,0 +1,47 @@
+<section aria-labelledby="pill">
+<h2 id="pill">상태 pill</h2>
+<catui-example title="soft 배경 + 점 + 글자">
+  <div class="Catui_actions">
+    <span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>배송</span>
+    <span class="Catui_pill Catui_pill-info"><i class="Catui_dot"></i>처리</span>
+    <span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>대기</span>
+    <span class="Catui_pill Catui_pill-danger"><i class="Catui_dot"></i>취소</span>
+    <span class="Catui_pill Catui_pill-neutral"><i class="Catui_dot"></i>초안</span>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="solid">
+<h2 id="solid">solid · 사각 badge · 카운트</h2>
+<catui-example title="강조 표식">
+  <div class="Catui_actions">
+    <span class="Catui_pill Catui_pill-solid-success">배포</span>
+    <span class="Catui_pill Catui_pill-solid-danger">중단</span>
+    <span class="Catui_badge Catui_badge-info">진행</span>
+    <span class="Catui_badge Catui_badge-warning">주의</span>
+    <span class="Catui_label">알림</span><span class="Catui_count" aria-label="읽지 않은 알림 4개">4</span>
+  </div>
+</catui-example>
+<catui-example title="전체 변형 (solid 5 · badge 5)">
+  <div class="Catui_actions">
+    <span class="Catui_pill Catui_pill-solid-success">완료</span><span class="Catui_pill Catui_pill-solid-info">처리</span><span class="Catui_pill Catui_pill-solid-warning">대기</span><span class="Catui_pill Catui_pill-solid-danger">취소</span><span class="Catui_pill Catui_pill-solid-neutral">초안</span>
+  </div>
+  <div class="Catui_actions">
+    <span class="Catui_badge Catui_badge-success">완료</span><span class="Catui_badge Catui_badge-info">처리</span><span class="Catui_badge Catui_badge-warning">대기</span><span class="Catui_badge Catui_badge-danger">취소</span><span class="Catui_badge Catui_badge-neutral">초안</span>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>상태 표시는 soft pill이 기본입니다. solid는 한 화면에서 꼭 눈에 띄어야 하는 표식에만, 사각 <code>.Catui_badge</code>는 표 안 짧은 꼬리표에 씁니다. 카운트는 브랜드 실색 18px입니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>색만으로 상태를 구분하지 않습니다 — 항상 글자를 함께 씁니다.</li>
+  <li>숫자만 있는 카운트에는 무엇의 개수인지 <code>aria-label</code>을 줍니다.</li>
+  <li>pill 안에 pill을 넣거나 높이를 늘리지 않습니다.</li>
+</ul>
+</section>

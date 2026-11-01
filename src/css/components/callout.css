@@ -1,0 +1,12 @@
+/* components/callout.css */
+/* Callout — 본문 속 안내 상자(참고·팁·주의·위험). 배너보다 내용이 길고 제목이 있다. */
+.Catui_callout{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:var(--Catui_space-3);row-gap:var(--Catui_space-1);padding:var(--Catui_space-4);border:1px solid var(--Catui_card-border);border-left-width:4px;border-left-color:var(--Catui_banner-info-fg);border-radius:var(--Catui_radius-md);background:var(--Catui_banner-info-bg)}
+.Catui_callout > .Catui_icon{grid-row:1 / span 2;color:var(--Catui_banner-info-fg);margin-top:2px}
+.Catui_callout-title{font-weight:600;color:var(--Catui_color-text-primary)}
+.Catui_callout > :not(.Catui_icon):not(.Catui_callout-title){grid-column:2;color:var(--Catui_color-text-primary)}
+.Catui_callout-tip{background:var(--Catui_badge-success-bg);border-left-color:var(--Catui_badge-success-fg)}
+.Catui_callout-tip > .Catui_icon{color:var(--Catui_badge-success-fg)}
+.Catui_callout-warn{background:var(--Catui_banner-warn-bg);border-left-color:var(--Catui_banner-warn-fg)}
+.Catui_callout-warn > .Catui_icon{color:var(--Catui_banner-warn-fg)}
+.Catui_callout-danger{background:var(--Catui_banner-danger-bg);border-left-color:var(--Catui_banner-danger-fg)}
+.Catui_callout-danger > .Catui_icon{color:var(--Catui_banner-danger-fg)}

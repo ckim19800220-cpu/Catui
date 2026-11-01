@@ -1,0 +1,20 @@
+<section aria-labelledby="basic">
+<h2 id="basic">세로 내비게이션</h2>
+<catui-example title="설정 화면 메뉴">
+  <nav class="Catui_vnav" aria-label="설정">
+    <div class="Catui_vnav-group"><p class="Catui_vnav-title">계정</p><a href="doc:css/components/form" aria-current="page"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-user"></use></svg>프로필</a><a href="doc:css/components/choice"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-bell"></use></svg>알림<span class="Catui_count" aria-label="새 설정 2개">2</span></a></div>
+    <div class="Catui_vnav-group"><p class="Catui_vnav-title">작업 공간</p><a href="doc:css/components/table"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-users"></use></svg>구성원</a><div class="Catui_vnav-sub"><a href="doc:css/components/list">권한</a><a href="doc:css/components/list">초대</a></div><a href="doc:css/components/setting"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-settings"></use></svg>일반</a></div>
+  </nav>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>nav.Catui_vnav</code> &gt; <code>.Catui_vnav-group</code>(제목 <code>-title</code> + 링크들), 하위 메뉴는 <code>.Catui_vnav-sub</code>. 현재 항목은 <code>aria-current="page"</code>. 앱 전체 사이드바는 <a href="doc:css/layout/app-shell">관리 셸</a>을 씁니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li><code>nav</code> + <code>aria-label</code>, 현재 위치는 <code>aria-current</code>.</li>
+  <li>카운트는 무엇의 개수인지 라벨을 줍니다.</li>
+</ul>
+</section>

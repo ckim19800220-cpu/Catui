@@ -1,0 +1,32 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="영역 + 비교 시리즈">
+  <svg class="Catui_chart" viewBox="0 0 320 200" preserveAspectRatio="xMinYMid meet" role="img" aria-label="3월~11월 매출 추이(실선)와 목표(점선): 매출이 목표를 계속 웃돎">
+      <path class="grid" d="M0 40H320M0 90H320M0 140H320"/>
+      <path class="area" d="M0 140 L40 120 L80 100 L120 110 L160 70 L200 80 L240 40 L280 60 L320 50 V180 H0 Z"/>
+      <path class="series" d="M0 140 L40 120 L80 100 L120 110 L160 70 L200 80 L240 40 L280 60 L320 50"/>
+      <path class="series-2" d="M0 150 L40 130 L80 125 L120 120 L160 100 L200 105 L240 80 L280 90 L320 85"/>
+      <g class="axis"><text x="0" y="196">3월</text><text x="80" y="196">5월</text><text x="160" y="196">7월</text><text x="240" y="196">9월</text></g>
+    </svg>
+    <ul class="Catui_legend Catui_legend-row"><li><i class="Catui_s1"></i>이번</li><li><i class="Catui_s2"></i>이전</li></ul>
+</catui-example>
+<catui-example title="선 하나 (영역 없음)">
+  <svg class="Catui_chart" viewBox="0 0 320 200" preserveAspectRatio="xMinYMid meet" role="img" aria-label="주간 방문 추이: 월 120에서 일 210으로 증가">
+    <path class="grid" d="M0 50H320M0 100H320M0 150H320"/>
+    <path class="series" d="M0 150 L53 140 L107 120 L160 125 L213 95 L267 80 L320 60"/>
+    <g class="axis"><text x="0" y="196">월</text><text x="107" y="196">수</text><text x="213" y="196">금</text><text x="300" y="196">일</text></g>
+  </svg>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_chart</code> SVG(grid/area/series/axis), 범례 <code>.Catui_legend</code>, 도넛 <code>.Catui_donut</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>SVG에 <code>role="img"</code>와 추이를 설명하는 <code>aria-label</code>.</li>
+  <li>시리즈는 색과 선 모양(실선·점선)으로 구분하고 범례를 둡니다.</li>
+</ul>
+</section>

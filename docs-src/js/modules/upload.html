@@ -1,0 +1,26 @@
+<section aria-labelledby="basic">
+<h2 id="basic">파일 올리기</h2>
+<catui-example title="upload.render">
+  <label class="Catui_upz" id="up-zone"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-upload"></use></svg><span class="Catui_upz-title">파일을 끌어 놓거나 눌러서 고르세요</span><span class="Catui_upz-hint">PDF·이미지, 2MB 이하, 최대 3개</span><input class="Catui_clip" type="file"></label>
+  <div id="up-list"></div>
+  <script>
+  catui.use(['upload'], function (upload) {
+    upload.render({ elem: '#up-zone', list: '#up-list', accept: '.pdf,image/*', size: 2048, number: 3 });
+  });
+  </script>
+</catui-example>
+<p>끌어 놓기와 선택을 모두 받고, 형식·용량·개수를 검사해 오류를 문장(<code>role=alert</code>)으로 알립니다. <code>url</code>을 주면 XHR로 진행률과 함께 올리고 목록에서 취소·다시 시도할 수 있습니다.</p>
+</section>
+
+<section aria-labelledby="options">
+<h2 id="options">옵션 · 이벤트</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">upload 옵션</caption>
+<thead><tr><th scope="col">이름</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>url · method · field · data · headers · withCredentials</code></td><td>서버 전송 (url이 없으면 고른 파일만 관리)</td></tr>
+<tr><td><code>accept · size(KB) · number · multiple · auto</code></td><td>검사와 자동 업로드</td></tr>
+<tr><td><code>list</code></td><td>파일 목록을 그릴 요소</td></tr>
+<tr><td><code>before(file)</code> · <code>choose(files)</code> · <code>progress(%, file)</code> · <code>done(res, file)</code> · <code>error(msg, file)</code></td><td>콜백 — 같은 이름 이벤트 + <code>remove(f)</code></td></tr>
+<tr><td><code>inst.upload()</code> · <code>inst.clear()</code> · <code>inst.files</code></td><td>수동 업로드 / 비우기 / 목록</td></tr>
+</tbody></table></div>
+</section>

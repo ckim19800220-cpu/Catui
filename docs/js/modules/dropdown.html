@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dropdown 메뉴 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="키보드·바깥 클릭·위로 뒤집기 메뉴.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html" aria-current="page">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/util.html">util 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 모듈</p>
+<h1 class="Catui_h1">dropdown 메뉴</h1>
+<p class="Catui_lead">키보드·바깥 클릭·위로 뒤집기 메뉴.</p>
+
+<section aria-labelledby="basic">
+<h2 id="basic">메뉴</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">dropdown.render</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="dd-more" data-catui-filter="dd-more">작업 <svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></button>
+    <span class="Catui_help" id="dd-out" aria-live="polite"></span>
+  </div>
+  <script>
+  catui.use(['dropdown'], function (dropdown) {
+    dropdown.render({ elem: '#dd-more', data: [
+      { type: 'group', title: '편집' }, { id: 'edit', title: '수정', icon: 'pen-line' }, { id: 'copy', title: '복제', icon: 'files' },
+      { id: 'share', title: '공유 불가', disabled: true }, { type: '-' }, { id: 'del', title: '삭제', icon: 'trash-2', danger: true },
+    ] });
+    dropdown.on('click(dd-more)', function (o) { document.getElementById('dd-out').textContent = '선택: ' + o.data.title; });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="dropdown.render 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;dd-more&quot; data-catui-filter=&quot;dd-more&quot;&gt;작업 &lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-chevron-down&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;
+  &lt;span class=&quot;Catui_help&quot; id=&quot;dd-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;dropdown&#39;], function (dropdown) {
+  dropdown.render({ elem: &#39;#dd-more&#39;, data: [
+    { type: &#39;group&#39;, title: &#39;편집&#39; }, { id: &#39;edit&#39;, title: &#39;수정&#39;, icon: &#39;pen-line&#39; }, { id: &#39;copy&#39;, title: &#39;복제&#39;, icon: &#39;files&#39; },
+    { id: &#39;share&#39;, title: &#39;공유 불가&#39;, disabled: true }, { type: &#39;-&#39; }, { id: &#39;del&#39;, title: &#39;삭제&#39;, icon: &#39;trash-2&#39;, danger: true },
+  ] });
+  dropdown.on(&#39;click(dd-more)&#39;, function (o) { document.getElementById(&#39;dd-out&#39;).textContent = &#39;선택: &#39; + o.data.title; });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>↓ 키로 열고 ↑↓·Home·End로 이동(비활성 건너뜀), Esc로 닫고 버튼으로 포커스가 돌아갑니다. 바깥을 누르면 닫히고, 화면 아래가 좁으면 위로 엽니다.</p>
+</section>
+
+<section aria-labelledby="details">
+<h2 id="details">마크업 메뉴 자동 향상</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">details.Catui_dd</figcaption>
+<div class="doc-example-preview">
+  <details class="Catui_dd"><summary class="Catui_btn Catui_btn-md Catui_btn-secondary">마크업 메뉴<svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></summary><div class="Catui_dd-menu" style="position:absolute;left:0;top:100%"><button class="Catui_dd-item" type="button">보기</button><button class="Catui_dd-item" type="button">복제</button></div></details>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="details.Catui_dd 코드 복사">복사</button><pre><code>&lt;details class=&quot;Catui_dd&quot;&gt;&lt;summary class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot;&gt;마크업 메뉴&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-chevron-down&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/summary&gt;&lt;div class=&quot;Catui_dd-menu&quot; style=&quot;position:absolute;left:0;top:100%&quot;&gt;&lt;button class=&quot;Catui_dd-item&quot; type=&quot;button&quot;&gt;보기&lt;/button&gt;&lt;button class=&quot;Catui_dd-item&quot; type=&quot;button&quot;&gt;복제&lt;/button&gt;&lt;/div&gt;&lt;/details&gt;</code></pre></details>
+</figure>
+<p>catui.js가 있으면 <code>details.Catui_dd</code>·<code>.Catui_mega</code>가 하나만 열리고, 바깥 클릭·Esc·항목 선택으로 닫힙니다.</p>
+</section>
+
+<section aria-labelledby="options">
+<h2 id="options">옵션</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">dropdown 옵션</caption>
+<thead><tr><th scope="col">옵션</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>data[]</code></td><td><code>{ id, title, icon, disabled, danger }</code> · <code>{ type: '-' }</code> 구분선 · <code>{ type: 'group', title }</code></td></tr>
+<tr><td><code>align</code> · <code>width</code></td><td>'left'|'right' · 'sm'|'md'|'lg'</td></tr>
+<tr><td><code>click(item, trigger)</code></td><td>false면 열린 채 유지 · 이벤트 <code>click(f)</code></td></tr>
+<tr><td><code>inst.open()</code> · <code>inst.close()</code> · <code>dropdown.close(id)</code></td><td>직접 열기·닫기</td></tr>
+</tbody></table></div>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/tabs.html"><span>이전</span>tabs 탭</a><a class="doc-pager-next" href="../../js/modules/datepicker.html"><span>다음</span>datePicker 날짜</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">메뉴</a></li><li><a href="#details">마크업 메뉴 자동 향상</a></li><li><a href="#options">옵션</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

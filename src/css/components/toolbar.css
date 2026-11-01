@@ -1,0 +1,9 @@
+/* components/toolbar.css */
+/* Toolbar — 표 위 도구 모음, 선택 시 일괄 작업 바, 폼 하단 고정 저장 바. */
+.Catui_toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2);margin-bottom:var(--Catui_space-3)}
+.Catui_toolbar .Catui_search{flex:1 1 220px;max-width:360px}
+.Catui_toolbar-end{margin-left:auto;display:flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_bulkbar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-3);min-height:var(--Catui_control-h-lg);padding:var(--Catui_space-1) var(--Catui_space-4);margin-bottom:var(--Catui_space-3);border-radius:var(--Catui_radius-md);background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong);font-weight:600}
+.Catui_bulkbar .Catui_btn{font-weight:600}
+.Catui_actionbar{position:sticky;bottom:0;z-index:20;display:flex;align-items:center;justify-content:flex-end;gap:var(--Catui_space-2);padding:var(--Catui_space-3) var(--Catui_space-4);background:var(--Catui_card-bg);border-top:1px solid var(--Catui_card-border);box-shadow:0 -4px 12px color-mix(in srgb,var(--Catui_sidebar-bg) 8%,transparent)}
+.Catui_actionbar-note{margin-right:auto;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}

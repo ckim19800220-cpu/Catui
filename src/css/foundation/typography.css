@@ -1,0 +1,17 @@
+/* foundation/typography.css */
+.Catui_help code,.Catui_lead code{
+  font-family:var(--Catui_font-mono);font-size:.92em;
+  background:var(--Catui_prose-code-bg);color:var(--Catui_prose-code-fg);
+  border-radius:var(--Catui_radius-xs);padding:1px 4px;
+}
+.Catui_display{
+  font-size:var(--Catui_type-display-size);font-weight:var(--Catui_type-display-weight);
+  line-height:var(--Catui_type-display-lh);letter-spacing:var(--Catui_type-display-ls);
+}
+.Catui_h1{font-size:var(--Catui_type-h1-size);font-weight:var(--Catui_type-h1-weight);line-height:var(--Catui_type-h1-lh)}
+.Catui_h2{font-size:var(--Catui_type-h2-size);font-weight:var(--Catui_type-h2-weight);line-height:var(--Catui_type-h2-lh)}
+.Catui_h4{font-size:var(--Catui_type-body-size);font-weight:600;line-height:var(--Catui_type-h3-lh)}
+.Catui_h3{font-size:var(--Catui_type-h3-size);font-weight:var(--Catui_type-h3-weight);line-height:var(--Catui_type-h3-lh)}
+.Catui_lead{max-width:var(--Catui_prose-measure);font-size:var(--Catui_prose-lead-font);line-height:var(--Catui_type-h3-lh);color:var(--Catui_prose-lead-fg)}
+.Catui_metric{font-size:var(--Catui_type-metric-xl-size);font-weight:var(--Catui_type-metric-xl-weight);line-height:var(--Catui_type-metric-xl-lh);font-variant-numeric:tabular-nums}
+.Catui_metric-lg{font-size:var(--Catui_type-metric-lg-size);font-weight:var(--Catui_type-metric-lg-weight);line-height:var(--Catui_type-metric-lg-lh);font-variant-numeric:tabular-nums}

@@ -1,0 +1,10 @@
+/* components/spinner.css */
+.Catui_spin{
+  width:var(--Catui_icon-20);height:var(--Catui_icon-20);flex:none;border-radius:var(--Catui_radius-pill);
+  border:2px solid var(--Catui_color-neutral-300);border-top-color:var(--Catui_color-brand-strong);
+  animation:Catui_spin .8s linear infinite;
+}
+@keyframes Catui_spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){
+  .Catui_spin{animation-duration:3s}
+}

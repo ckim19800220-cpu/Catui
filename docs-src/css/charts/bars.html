@@ -1,0 +1,31 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="5색 비교">
+  <div class="Catui_bars">
+  <div class="Catui_bar"><span class="Catui_bar-label">이미지</span><span class="Catui_bar-track"><i class="Catui_bar-fill" style="width:70%"></i></span><span class="Catui_bar-value">70</span></div>
+  <div class="Catui_bar"><span class="Catui_bar-label">영상</span><span class="Catui_bar-track"><i class="Catui_bar-fill Catui_bar-fill-2" style="width:40%"></i></span><span class="Catui_bar-value">40</span></div>
+  <div class="Catui_bar"><span class="Catui_bar-label">문서</span><span class="Catui_bar-track"><i class="Catui_bar-fill Catui_bar-fill-3" style="width:24%"></i></span><span class="Catui_bar-value">24</span></div>
+  <div class="Catui_bar"><span class="Catui_bar-label">시스템</span><span class="Catui_bar-track"><i class="Catui_bar-fill Catui_bar-fill-4" style="width:12%"></i></span><span class="Catui_bar-value">12</span></div>
+  <div class="Catui_bar"><span class="Catui_bar-label">기타</span><span class="Catui_bar-track"><i class="Catui_bar-fill Catui_bar-fill-5" style="width:8%"></i></span><span class="Catui_bar-value">8</span></div>
+  </div>
+</catui-example>
+<catui-example title="단일 색 순위 (목록 의미 · 단위)">
+  <div class="Catui_bars" role="list" aria-label="지역별 주문 수">
+    <div class="Catui_bar" role="listitem"><span class="Catui_bar-label">서울</span><span class="Catui_bar-track" aria-hidden="true"><i class="Catui_bar-fill" style="width:92%"></i></span><span class="Catui_bar-value">92건</span></div>
+    <div class="Catui_bar" role="listitem"><span class="Catui_bar-label">부산</span><span class="Catui_bar-track" aria-hidden="true"><i class="Catui_bar-fill" style="width:58%"></i></span><span class="Catui_bar-value">58건</span></div>
+    <div class="Catui_bar" role="listitem"><span class="Catui_bar-label">대전</span><span class="Catui_bar-track" aria-hidden="true"><i class="Catui_bar-fill" style="width:31%"></i></span><span class="Catui_bar-value">31건</span></div>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_bars</code> > <code>.Catui_bar</code>(라벨·트랙·값) + <code>.Catui_bar-fill(-2~5)</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>값을 막대 옆 글자로 함께 보입니다.</li>
+  <li>목록 의미(<code>role="list"</code>)를 주면 항목 수가 읽힙니다.</li>
+</ul>
+</section>

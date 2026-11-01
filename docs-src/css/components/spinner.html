@@ -1,0 +1,23 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="상태 문구와 함께">
+  <div class="Catui_actions" role="status"><span class="Catui_spin" aria-hidden="true"></span><span>불러오는 중…</span></div>
+</catui-example>
+<catui-example title="버튼 안 로딩">
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" disabled aria-busy="true"><span class="Catui_spin" aria-hidden="true"></span>저장 중…</button></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_spin</code>은 20px 원형 회전 표시입니다. 화면 전체를 막는 로딩은 <a href="doc:js/modules/layer">layer.load()</a>, 목록 자리 표시는 <a href="doc:css/components/feedback">스켈레톤</a>을 씁니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>스피너는 장식(<code>aria-hidden</code>)이고, 옆의 문구와 <code>role="status"</code>가 상태를 전합니다.</li>
+  <li>로딩 중인 버튼은 <code>disabled</code> + <code>aria-busy="true"</code>.</li>
+  <li>모션 줄이기 설정에서는 느리게 돕니다.</li>
+</ul>
+</section>

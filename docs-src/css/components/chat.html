@@ -1,0 +1,23 @@
+<section aria-labelledby="chat">
+<h2 id="chat">대화</h2>
+<catui-example title="말풍선 + 입력 줄">
+  <div class="Catui_chat" role="log" aria-label="고객 상담" style="max-width:520px">
+    <span class="Catui_chat-day">10월 31일</span>
+    <div class="Catui_chat-msg"><span class="Catui_av Catui_av-sm" aria-hidden="true">박</span><p class="Catui_chat-bubble"><span class="Catui_clip">박서연: </span>주문한 상품 배송지를 바꿀 수 있을까요?</p><time class="Catui_chat-time" datetime="2026-10-31T09:12">09:12</time></div>
+    <div class="Catui_chat-msg Catui_chat-me"><p class="Catui_chat-bubble"><span class="Catui_clip">나: </span>네, 출고 전이라 바로 변경해 드릴게요.</p><time class="Catui_chat-time" datetime="2026-10-31T09:13">09:13</time></div>
+    <div class="Catui_chat-msg"><span class="Catui_av Catui_av-sm" aria-hidden="true">박</span><p class="Catui_chat-bubble"><span class="Catui_clip">박서연: </span>감사합니다!</p><time class="Catui_chat-time" datetime="2026-10-31T09:14">09:14</time></div>
+    <form class="Catui_chat-input" aria-label="메시지 보내기"><label class="Catui_clip" for="ct-msg">메시지</label><input class="Catui_input" id="ct-msg" placeholder="메시지 입력"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">보내기</button></form>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_chat</code> 안에 <code>.Catui_chat-msg</code>(말풍선 <code>-bubble</code> + 시간 <code>-time</code>), 내 메시지는 <code>.Catui_chat-me</code>(오른쪽·브랜드 색), 날짜 구분 <code>-day</code>, 아래 입력 줄 <code>-input</code>. 긴 공개 토론은 <a href="doc:css/views/thread">스레드</a>가 맞습니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>대화 영역은 <code>role="log"</code>라 새 메시지가 차례로 읽힙니다.</li>
+  <li>말한 사람은 숨김 글자로 앞에 붙이고, 시간은 <code>time datetime</code>. 내 말풍선 흰 글자 대비 5.27:1.</li>
+</ul>
+</section>

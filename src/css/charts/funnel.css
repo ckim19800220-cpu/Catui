@@ -1,0 +1,14 @@
+/* charts/funnel.css */
+.Catui_funnel{display:grid;gap:var(--Catui_funnel-gap);width:100%}
+.Catui_funnel-row{height:var(--Catui_funnel-row-h);display:flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_funnel-lab{flex:0 0 64px;font-size:var(--Catui_funnel-label-font);color:var(--Catui_color-text-secondary);white-space:nowrap}
+.Catui_funnel-track{flex:1;min-width:0;display:flex;justify-content:center}
+.Catui_funnel-bar{
+  height:100%;display:flex;align-items:center;justify-content:center;gap:var(--Catui_space-2);
+  background:var(--Catui_badge-success-bg);
+  border:1px solid color-mix(in srgb, var(--Catui_btn-primary-bg) 25%, transparent);
+  border-radius:var(--Catui_radius-xs);
+  font-size:var(--Catui_funnel-label-font);font-weight:600;color:var(--Catui_badge-success-fg);
+  font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;
+}
+.Catui_funnel-drop{flex:0 0 68px;text-align:right;font-size:var(--Catui_funnel-drop-font);color:var(--Catui_funnel-drop-fg);font-variant-numeric:tabular-nums}

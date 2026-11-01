@@ -1,0 +1,33 @@
+/* components/card.css */
+/* Card — header/body/footer, link-card hover. */
+a.Catui_card:hover{box-shadow:var(--Catui_shadow-sm);border-color:var(--Catui_color-neutral-300)}
+.Catui_card{
+  background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);
+  border-radius:var(--Catui_card-radius);box-shadow:var(--Catui_card-shadow);min-width:0;
+}
+.Catui_card-h{
+  height:var(--Catui_card-header-h);display:flex;align-items:center;justify-content:space-between;gap:var(--Catui_space-2);
+  padding:0 var(--Catui_card-pad);border-bottom:1px solid var(--Catui_divider-color);
+  font-size:var(--Catui_card-title-size);font-weight:600;color:var(--Catui_card-title-color);
+}
+.Catui_card-b{padding:var(--Catui_card-pad)}
+.Catui_card-f{
+  height:var(--Catui_card-footer-h);display:flex;align-items:center;justify-content:space-between;gap:var(--Catui_space-2);
+  padding:0 var(--Catui_card-pad);border-top:1px solid var(--Catui_divider-color);
+  background:var(--Catui_modal-footer-bg);border-radius:0 0 var(--Catui_card-radius) var(--Catui_card-radius);
+  font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);
+}
+.Catui_card-f > :only-child,.Catui_card-f .Catui_pager{margin-left:auto}
+.Catui_card-tools{display:flex;align-items:center;gap:var(--Catui_space-2)}
+/* 이미지가 위에 있는 카드 · 가로 카드 */
+.Catui_card-media{display:block;width:100%;aspect-ratio:16 / 9;object-fit:cover;background:var(--Catui_color-neutral-100)}
+.Catui_card > .Catui_card-media:first-child{border-radius:var(--Catui_card-radius) var(--Catui_card-radius) 0 0}
+.Catui_card-row{display:flex;align-items:stretch}
+.Catui_card-row > .Catui_card-media:first-child{border-radius:var(--Catui_card-radius) 0 0 var(--Catui_card-radius)}
+.Catui_card-row > .Catui_card-media{width:var(--Catui_space-10);flex:none;aspect-ratio:auto;height:auto;min-width:120px}
+.Catui_card-row > .Catui_card-b{flex:1;min-width:0}
+@media (max-width:767px){
+  .Catui_card-row{flex-direction:column}
+  .Catui_card-row > .Catui_card-media{width:100%;aspect-ratio:16 / 9}
+}
+a.Catui_card:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}

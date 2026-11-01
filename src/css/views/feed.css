@@ -1,0 +1,10 @@
+/* views/feed.css */
+.Catui_feed{display:grid;gap:var(--Catui_feed-gap)}
+.Catui_feed-item{position:relative;display:grid;grid-template-columns:var(--Catui_feed-dot) 1fr auto;gap:var(--Catui_space-3);align-items:start}
+.Catui_feed-item:not(:last-child)::after{
+  content:"";position:absolute;left:calc(var(--Catui_feed-dot) / 2 - 0.5px);
+  top:calc(var(--Catui_feed-dot) + var(--Catui_space-2));bottom:calc(-1 * var(--Catui_feed-gap));
+  width:1px;background:var(--Catui_feed-line);
+}
+.Catui_feed-item::before{content:"";width:var(--Catui_feed-dot);height:var(--Catui_feed-dot);margin-top:var(--Catui_space-1);border-radius:var(--Catui_radius-pill);background:var(--Catui_feed-dot-color)}
+.Catui_feed-time{font-size:var(--Catui_feed-time-size);color:var(--Catui_feed-time-color)}

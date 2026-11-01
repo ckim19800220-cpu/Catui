@@ -1,0 +1,29 @@
+<section aria-labelledby="basic">
+<h2 id="basic">색상 고르기</h2>
+<catui-example title="상품 색상 (품절 포함)">
+  <fieldset class="Catui_swatches"><legend class="Catui_label">색상 <span class="Catui_swatch-value">· 초록</span></legend>
+    <input class="Catui_clip" type="radio" name="sw-c" id="sw-c-1" checked><label class="Catui_swatch" for="sw-c-1" style="--Catui_swatch:var(--Catui_color-brand)"><span class="Catui_clip">초록</span></label>
+    <input class="Catui_clip" type="radio" name="sw-c" id="sw-c-2"><label class="Catui_swatch" for="sw-c-2" style="--Catui_swatch:var(--Catui_color-info)"><span class="Catui_clip">파랑</span></label>
+    <input class="Catui_clip" type="radio" name="sw-c" id="sw-c-3"><label class="Catui_swatch" for="sw-c-3" style="--Catui_swatch:var(--Catui_color-purple)"><span class="Catui_clip">보라</span></label>
+    <input class="Catui_clip" type="radio" name="sw-c" id="sw-c-4"><label class="Catui_swatch" for="sw-c-4" style="--Catui_swatch:var(--Catui_color-amber)"><span class="Catui_clip">노랑</span></label>
+    <input class="Catui_clip" type="radio" name="sw-c" id="sw-c-5" disabled><label class="Catui_swatch" for="sw-c-5" style="--Catui_swatch:var(--Catui_sidebar-bg)"><span class="Catui_clip">남색 (품절)</span></label>
+  </fieldset>
+</catui-example>
+<catui-example title="큰 견본 (swatch-lg)">
+  <fieldset class="Catui_swatches"><legend class="Catui_clip">테마 색</legend>
+    <input class="Catui_clip" type="radio" name="sw-t" id="sw-t-1" checked><label class="Catui_swatch Catui_swatch-lg" for="sw-t-1" style="--Catui_swatch:var(--Catui_color-brand)"><span class="Catui_clip">브랜드</span></label>
+    <input class="Catui_clip" type="radio" name="sw-t" id="sw-t-2"><label class="Catui_swatch Catui_swatch-lg" for="sw-t-2" style="--Catui_swatch:var(--Catui_sidebar-bg)"><span class="Catui_clip">남색</span></label>
+  </fieldset>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>fieldset.Catui_swatches</code> 안에 <code>input.Catui_clip</code> + <code>label.Catui_swatch</code>. 색은 <code>style="--Catui_swatch:var(--Catui_color-…)"</code>로 넘기고, 색 이름은 라벨 안 숨김 글자로 씁니다. 품절은 <code>disabled</code>(빗금 표시). 현재 선택 이름은 <code>.Catui_swatch-value</code>로 보입니다(갱신은 스크립트).</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>색만 보이므로 색 이름을 숨김 글자로 반드시 넣습니다.</li>
+  <li>선택은 바깥 링(2중 테두리)으로 표시해 밝은 색에서도 보입니다.</li>
+</ul>
+</section>

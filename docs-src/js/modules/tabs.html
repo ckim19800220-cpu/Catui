@@ -1,0 +1,33 @@
+<section aria-labelledby="basic">
+<h2 id="basic">탭 이벤트와 추가·닫기</h2>
+<catui-example title="tabs.on · add · close">
+  <div class="Catui_tabs" data-catui-filter="tb-doc">
+    <input class="Catui_clip" type="radio" name="tb-doc" id="tb-doc-a" checked><label class="Catui_tab" for="tb-doc-a">개요</label><div class="Catui_panel"><p>개요 내용입니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tb-doc" id="tb-doc-b"><label class="Catui_tab" for="tb-doc-b">분석</label><div class="Catui_panel"><p>분석 내용입니다.</p></div>
+  </div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="tb-add">탭 추가</button><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="tb-close">마지막 탭 닫기</button><span class="Catui_help" id="tb-out2" aria-live="polite"></span></div>
+  <script>
+  catui.use(['tabs'], function (tabs) {
+    var n = 0;
+    tabs.on('tab(tb-doc)', function (o) { document.getElementById('tb-out2').textContent = (o.index + 1) + '번: ' + o.title; });
+    document.getElementById('tb-add').addEventListener('click', function () { n += 1; tabs.add('tb-doc', { title: '새 탭 ' + n, content: '새 탭 ' + n + ' 내용' }); });
+    document.getElementById('tb-close').addEventListener('click', function () {
+      var c = document.querySelectorAll('.Catui_tabs[data-catui-filter="tb-doc"] > input').length;
+      if (c > 1) tabs.close('tb-doc', c - 1);
+    });
+  });
+  </script>
+</catui-example>
+<p>CSS만으로 동작하는 radio 탭 구조를 그대로 씁니다. 화살표 키 이동은 radio 그룹 기본 동작입니다.</p>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">tabs API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>tabs.render({ elem, data: [{ title, content, id }], index, label })</code></td><td>마크업 생성</td></tr>
+<tr><td><code>tabs.add(f, { title, content, change })</code> · <code>close(f, i)</code> · <code>change(f, i)</code></td><td>추가 / 닫기 / 전환</td></tr>
+<tr><td><code>on('tab(f)')</code> · <code>on('close(f)')</code></td><td><code>{ index, title, elem }</code></td></tr>
+</tbody></table></div>
+</section>

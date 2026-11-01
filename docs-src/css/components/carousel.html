@@ -1,0 +1,33 @@
+<section aria-labelledby="basic">
+<h2 id="basic">캐러셀</h2>
+<catui-example title="한 장씩 + 점 탐색">
+  <div class="Catui_carousel" role="region" aria-roledescription="캐러셀" aria-label="이번 주 기획전">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide" id="cs-1" role="group" aria-roledescription="슬라이드" aria-label="1 / 3"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 280'%3E%3Crect width='640' height='280' fill='%23E6F7F3'/%3E%3Cpath d='M0 230 L180 140 L300 200 L460 90 L640 170 V280 H0Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="봄 기획전" width="640" height="280"></div>
+      <div class="Catui_carousel-slide" id="cs-2" role="group" aria-roledescription="슬라이드" aria-label="2 / 3"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 280'%3E%3Crect width='640' height='280' fill='%23EAF4FB'/%3E%3Cpath d='M0 230 L180 140 L300 200 L460 90 L640 170 V280 H0Z' fill='%233498DB'/%3E%3C/svg%3E" alt="여름 준비전" width="640" height="280"></div>
+      <div class="Catui_carousel-slide" id="cs-3" role="group" aria-roledescription="슬라이드" aria-label="3 / 3"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 280'%3E%3Crect width='640' height='280' fill='%23F5EEF8'/%3E%3Cpath d='M0 230 L180 140 L300 200 L460 90 L640 170 V280 H0Z' fill='%239B59B6'/%3E%3C/svg%3E" alt="신상품" width="640" height="280"></div>
+    </div>
+    <nav class="Catui_carousel-nav" aria-label="슬라이드 이동"><a class="Catui_carousel-dot" href="#cs-1" aria-current="true" aria-label="1번 슬라이드"></a><a class="Catui_carousel-dot" href="#cs-2" aria-label="2번 슬라이드"></a><a class="Catui_carousel-dot" href="#cs-3" aria-label="3번 슬라이드"></a></nav>
+  </div>
+</catui-example>
+<catui-example title="옆 슬라이드 엿보기 (carousel-peek)">
+  <div class="Catui_carousel Catui_carousel-peek" role="region" aria-label="추천 상품">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 280'%3E%3Crect width='640' height='280' fill='%23FEF7E0'/%3E%3Cpath d='M0 230 L180 140 L300 200 L460 90 L640 170 V280 H0Z' fill='%23F1C40F'/%3E%3C/svg%3E" alt="추천 1" width="640" height="280"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 280'%3E%3Crect width='640' height='280' fill='%23FDECEA'/%3E%3Cpath d='M0 230 L180 140 L300 200 L460 90 L640 170 V280 H0Z' fill='%23E67E22'/%3E%3C/svg%3E" alt="추천 2" width="640" height="280"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 280'%3E%3Crect width='640' height='280' fill='%23E6F7F3'/%3E%3Cpath d='M0 230 L180 140 L300 200 L460 90 L640 170 V280 H0Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="추천 3" width="640" height="280"></div>
+    </div>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_carousel-track</code>(가로 스크롤 스냅) 안에 <code>.Catui_carousel-slide</code>를 둡니다. 터치·트랙패드로 넘기고, 점 <code>.Catui_carousel-dot</code>은 <code>#슬라이드id</code> 링크라 스크립트 없이 이동합니다. 현재 점 표시(<code>aria-current</code>)와 자동 넘김은 스크립트로 붙입니다. 다음 장을 살짝 보이려면 <code>.Catui_carousel-peek</code>.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>자동으로 넘기지 않는 것이 기본입니다. 자동 넘김을 쓰면 정지 버튼을 둡니다.</li>
+  <li><code>aria-roledescription</code>으로 캐러셀·슬라이드임을, 슬라이드마다 "1 / 3" 위치를 알립니다. 모션 줄이기에서는 부드러운 스크롤을 끕니다.</li>
+</ul>
+</section>

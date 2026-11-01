@@ -1,0 +1,20 @@
+/* views/gantt.css */
+.Catui_gantt-scroll{overflow-x:auto}
+.Catui_gantt{min-width:560px;border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);overflow:hidden;background:var(--Catui_card-bg)}
+.Catui_gantt-head,.Catui_gantt-row{display:flex;align-items:stretch}
+.Catui_gantt-head > span,.Catui_gantt-row > span{flex:0 0 var(--Catui_gantt-label-w);width:var(--Catui_gantt-label-w);padding:0 var(--Catui_space-3);display:flex;align-items:center;border-right:1px solid var(--Catui_divider-color)}
+.Catui_gantt-head{height:var(--Catui_gantt-scale-h);background:var(--Catui_table-head-bg);border-bottom:1px solid var(--Catui_gantt-grid)}
+.Catui_gantt-scale{flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));height:100%}
+.Catui_gantt-scale span{display:flex;align-items:center;justify-content:center;font-size:var(--Catui_type-micro-size);color:var(--Catui_color-text-secondary);border-right:1px solid var(--Catui_gantt-grid)}
+.Catui_gantt-scale span:last-child{border-right:0}
+.Catui_gantt-row{height:var(--Catui_gantt-row-h);border-bottom:1px solid var(--Catui_gantt-grid)}
+.Catui_gantt-row:last-child{border-bottom:0}
+.Catui_gantt-track{flex:1;position:relative;background:repeating-linear-gradient(to right,transparent 0,transparent calc(100% / 6 - 1px),var(--Catui_gantt-grid) calc(100% / 6 - 1px),var(--Catui_gantt-grid) calc(100% / 6))}
+.Catui_gantt-bar{position:absolute;top:calc((var(--Catui_gantt-row-h) - var(--Catui_gantt-bar-h)) / 2);height:var(--Catui_gantt-bar-h);border-radius:var(--Catui_gantt-bar-radius);background:var(--Catui_chart-series-1)}
+.Catui_gantt-bar-2{background:var(--Catui_chart-series-2)}
+.Catui_gantt-bar-3{background:var(--Catui_chart-series-3)}
+.Catui_gantt-bar-4{background:var(--Catui_chart-series-4)}
+.Catui_gantt-bar-5{background:var(--Catui_chart-series-5)}
+.Catui_gantt-mile{position:absolute;top:calc((var(--Catui_gantt-row-h) - var(--Catui_gantt-milestone)) / 2);width:var(--Catui_gantt-milestone);height:var(--Catui_gantt-milestone);background:var(--Catui_sidebar-hover-bg);transform:rotate(45deg)}
+.Catui_gantt-today{position:absolute;top:0;bottom:0;width:1px;background:var(--Catui_badge-danger-fg)}
+.Catui_gantt-dep{position:absolute;top:0;bottom:0;border-left:1px dashed var(--Catui_gantt-dependency)}

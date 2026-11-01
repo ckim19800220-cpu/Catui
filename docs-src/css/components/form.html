@@ -1,0 +1,45 @@
+<section aria-labelledby="basic">
+<h2 id="basic">기본 필드</h2>
+<catui-example title="라벨 · 입력 · 도움말">
+  <div class="Catui_fields">
+    <div class="Catui_field"><label class="Catui_label" for="fm-name">이름 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-name" name="name" autocomplete="name" aria-describedby="fm-name-help"><p class="Catui_help" id="fm-name-help">한글 또는 영문 이름.</p></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-status">상태</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="fm-status" name="status"><option>전체</option><option>배송</option><option>처리</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-memo">메모</label><textarea class="Catui_input" id="fm-memo" name="memo"></textarea></div>
+  </div>
+</catui-example>
+<p>라벨은 위, 도움말은 아래에 둡니다. placeholder를 라벨 대신 쓰지 않습니다.</p>
+</section>
+
+<section aria-labelledby="states">
+<h2 id="states">오류 · 잠김</h2>
+<catui-example title="aria-invalid + 오류 문장 · disabled">
+  <div class="Catui_fields">
+    <div class="Catui_field"><label class="Catui_label" for="fm-email">이메일</label><input class="Catui_input" id="fm-email" type="email" value="not-an-email" aria-invalid="true" aria-describedby="fm-email-err"><p class="Catui_error" id="fm-email-err">이메일 형식이 아닙니다. 예: name@company.com</p></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-off">조직</label><input class="Catui_input" id="fm-off" value="Catui 팀" disabled aria-describedby="fm-off-help"><p class="Catui_help" id="fm-off-help">권한이 없어 바꿀 수 없습니다.</p></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="row">
+<h2 id="row">가로 배치 필드</h2>
+<catui-example title="field-row (라벨 왼쪽, 767px 이하 세로)">
+  <div class="Catui_fields">
+    <div class="Catui_field Catui_field-row"><label class="Catui_label" for="fr-name">이름</label><input class="Catui_input" id="fr-name" autocomplete="name"></div>
+    <div class="Catui_field Catui_field-row"><label class="Catui_label" for="fr-mail">이메일</label><input class="Catui_input" id="fr-mail" type="email" autocomplete="email" aria-describedby="fr-mail-help"><p class="Catui_help" id="fr-mail-help">알림을 받을 주소입니다.</p></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_fields</code> 안에 <code>.Catui_field</code>(라벨·입력·도움말·오류)를 쌓습니다. 셀렉트는 <code>.Catui_select-wrap</code>으로 감싸고 화살표 아이콘을 둡니다(catui.js가 있으면 자동 보충). 검증을 스크립트로 붙이려면 <a href="doc:js/modules/form">catui.js form</a>을 쓰세요.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>모든 입력에 <code>label for</code>↔<code>id</code>. 도움말·오류는 <code>aria-describedby</code>로 연결합니다.</li>
+  <li>오류는 색과 함께 문장으로 알리고 <code>aria-invalid="true"</code>를 줍니다.</li>
+  <li>포커스는 테두리 + 3px 링을 함께 표시합니다. 적절한 <code>autocomplete</code>를 붙입니다.</li>
+</ul>
+</section>

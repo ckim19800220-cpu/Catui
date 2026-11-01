@@ -1,0 +1,17 @@
+/* blocks/head.css */
+/* Section head — 소제목(eyebrow) + 제목 + 설명 묶음(가운데 정렬 변형), 상단 공지 띠. */
+.Catui_eyebrow{display:inline-block;font-size:var(--Catui_type-label-size);font-weight:600;letter-spacing:var(--Catui_type-label-ls);text-transform:uppercase;color:var(--Catui_color-brand-strong)}
+.Catui_section-head{display:grid;gap:var(--Catui_space-2);max-width:var(--Catui_prose-measure);margin-bottom:var(--Catui_space-7)}
+.Catui_section-head-center{margin-inline:auto;text-align:center;justify-items:center}
+.Catui_announce{display:flex;align-items:center;justify-content:center;gap:var(--Catui_space-3);min-height:var(--Catui_control-h-lg);padding:var(--Catui_space-2) var(--Catui_space-4);background:var(--Catui_sidebar-bg);color:var(--Catui_sidebar-fg);font-size:var(--Catui_type-caption-size);text-align:center}
+.Catui_announce a{color:inherit;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.Catui_announce a:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+/* 머리 + 오른쪽 동작 · 공지 띠 색 변형과 닫기 */
+.Catui_section-head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--Catui_space-4);max-width:none}
+.Catui_section-head-row > :first-child{display:grid;gap:var(--Catui_space-2);max-width:var(--Catui_prose-measure)}
+.Catui_announce-brand{background:var(--Catui_color-brand-fill);color:var(--Catui_color-text-inverse)}
+.Catui_announce-soft{background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong)}
+.Catui_announce-close{margin-left:var(--Catui_space-2);color:inherit;background:transparent;border:0;cursor:pointer;display:inline-grid;place-items:center;width:var(--Catui_control-h-sm);height:var(--Catui_control-h-sm);border-radius:var(--Catui_radius-xs);line-height:1}
+.Catui_announce-close:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+@media (max-width:767px){.Catui_section-head-row{flex-direction:column;align-items:flex-start}}
+.Catui_section-head:last-child{margin-bottom:0}

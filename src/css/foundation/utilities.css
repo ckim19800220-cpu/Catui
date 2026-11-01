@@ -1,0 +1,29 @@
+/* foundation/utilities.css */
+.Catui_skip{
+  position:absolute;left:var(--Catui_space-4);top:var(--Catui_space-2);
+  transform:translateY(-150%);
+  height:var(--Catui_control-h-md);padding:0 var(--Catui_space-3);
+  display:inline-flex;align-items:center;
+  background:var(--Catui_btn-primary-bg);color:var(--Catui_btn-primary-fg);
+  border-radius:var(--Catui_btn-radius);font-weight:600;z-index:70;
+}
+.Catui_skip:focus{transform:none;outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_clip{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+.Catui_num{font-variant-numeric:tabular-nums}
+.Catui_icon{
+  width:var(--Catui_icon-24);height:var(--Catui_icon-24);fill:none;stroke:currentColor;
+  stroke-width:var(--Catui_icon-stroke);stroke-linecap:round;stroke-linejoin:round;flex:none;
+}
+.Catui_i12{width:var(--Catui_icon-12);height:var(--Catui_icon-12)}
+.Catui_i16{width:var(--Catui_icon-16);height:var(--Catui_icon-16)}
+.Catui_i18{width:var(--Catui_icon-18);height:var(--Catui_icon-18)}
+.Catui_i20{width:var(--Catui_icon-20);height:var(--Catui_icon-20)}
+.Catui_actions{display:flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_actions:has(> .Catui_h1){width:100%}
+.Catui_actions:has(> .Catui_h1) > .Catui_btn{margin-left:auto}
+.Catui_card-b:has(> .Catui_line){display:grid;gap:var(--Catui_space-2)}
+.Catui_line{display:flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_line > .Catui_icon{color:var(--Catui_icon-color)}

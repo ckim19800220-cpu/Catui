@@ -1,0 +1,20 @@
+/* views/calendar.css */
+.Catui_cal{border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);overflow:hidden;background:var(--Catui_card-bg)}
+.Catui_cal-top{height:var(--Catui_cal-head-h);display:flex;align-items:center;padding:0 var(--Catui_space-3);border-bottom:1px solid var(--Catui_divider-color);font-weight:600}
+.Catui_cal-dows,.Catui_cal-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.Catui_cal-head{height:var(--Catui_cal-head-h);display:flex;align-items:center;justify-content:center;background:var(--Catui_card-bg);font-size:var(--Catui_type-micro-size);font-weight:var(--Catui_type-micro-weight);letter-spacing:var(--Catui_type-micro-ls);text-transform:uppercase;color:var(--Catui_color-text-secondary);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_cal-cell{height:var(--Catui_cal-cell-min);background:var(--Catui_card-bg);padding:var(--Catui_cal-cell-pad);display:flex;flex-direction:column;gap:var(--Catui_space-1);font-size:var(--Catui_cal-num-font);color:var(--Catui_cal-num-fg);min-width:0;border-right:1px solid var(--Catui_divider-color);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_cal-cell:nth-child(7n){border-right:0}
+.Catui_cal-week:last-child .Catui_cal-cell{border-bottom:0}
+.Catui_cal-cell:hover{background:var(--Catui_color-brand-ghost)}
+.Catui_cal-weekend{background:var(--Catui_cal-weekend-bg)}
+.Catui_cal-n{width:var(--Catui_icon-20);height:var(--Catui_icon-20);display:inline-flex;align-items:center;justify-content:center;border-radius:var(--Catui_radius-pill);font-variant-numeric:tabular-nums}
+.Catui_cal-out{color:var(--Catui_cal-num-fg-other)}
+.Catui_cal-today,.Catui_cal-sel{font-weight:600}
+.Catui_cal-today{background:var(--Catui_cal-today-bg);color:var(--Catui_cal-today-fg)}
+.Catui_cal-sel{background:var(--Catui_badge-success-bg);color:var(--Catui_badge-success-fg)}
+.Catui_cal-event{height:var(--Catui_cal-event-h);padding:0 var(--Catui_cal-event-px);border-radius:var(--Catui_radius-xs);background:var(--Catui_badge-success-bg);color:var(--Catui_badge-success-fg);font-size:var(--Catui_cal-event-font);display:flex;align-items:center;overflow:hidden;white-space:nowrap}
+.Catui_cal-ev-info{background:var(--Catui_badge-info-bg);color:var(--Catui_badge-info-fg)}
+.Catui_cal-ev-warn{background:var(--Catui_badge-warning-bg);color:var(--Catui_badge-warning-fg)}
+.Catui_cal-ev-3{background:color-mix(in srgb,var(--Catui_chart-series-3) 16%,transparent);color:var(--Catui_color-text-primary);box-shadow:inset 3px 0 0 var(--Catui_chart-series-3)}
+.Catui_cal-scroll{overflow-x:auto}

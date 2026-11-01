@@ -1,0 +1,6 @@
+/* forms/rating.css */
+.Catui_rating{display:inline-flex;gap:var(--Catui_rating-gap)}
+.Catui_rating .Catui_icon{width:var(--Catui_rating-size);height:var(--Catui_rating-size)}
+.Catui_rating label{color:var(--Catui_rating-off);cursor:pointer}
+.Catui_rating label:has(~ input:checked),.Catui_rating input:checked + label{color:var(--Catui_rating-on)}
+.Catui_rating input:focus-visible + label{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}

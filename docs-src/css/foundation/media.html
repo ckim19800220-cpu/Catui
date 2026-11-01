@@ -1,0 +1,52 @@
+<section aria-labelledby="reset">
+<h2 id="reset">반응형 리셋</h2>
+<p><code>.Catui_app</code>·<code>.Catui_site</code>·<code>.Catui_layer</code> 안의 <code>img·video·canvas·picture</code>는 <code>display:block; max-width:100%; height:auto</code>, <code>iframe</code>은 테두리 없이 최대 폭 100%입니다. 큰 그림을 넣어도 컨테이너 밖으로 넘치지 않습니다.</p>
+<catui-example title="넓은 그림도 컨테이너 폭에 맞춤">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='400' viewBox='0 0 1600 400'%3E%3Crect width='1600' height='400' fill='%23E6F7F3'/%3E%3Cpath d='M0 330 L400 180 L700 280 L1100 90 L1600 260 V400 H0Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="녹색 언덕 그림 (원본 폭 1600px)" width="1600" height="400">
+</catui-example>
+</section>
+
+<section aria-labelledby="shape">
+<h2 id="shape">이미지 모양</h2>
+<catui-example title="둥근 모서리 · 원형 · 썸네일 테두리">
+  <div class="Catui_actions">
+    <img class="Catui_img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 90'%3E%3Crect width='120' height='90' fill='%233498DB'/%3E%3Ccircle cx='38' cy='34' r='12' fill='%23EAF4FB'/%3E%3C/svg%3E" alt="파란 사각 그림 (둥근 모서리)" width="120" height="90">
+    <img class="Catui_img-round" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Crect width='90' height='90' fill='%239B59B6'/%3E%3C/svg%3E" alt="보라 원형 그림" width="90" height="90">
+    <img class="Catui_img-thumb" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 90'%3E%3Crect width='120' height='90' fill='%23F1C40F'/%3E%3C/svg%3E" alt="노란 사각 그림 (썸네일 테두리)" width="120" height="90">
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="ratio">
+<h2 id="ratio">비율 상자</h2>
+<catui-example title="1:1 · 4:3 · 16:9 (img는 cover로 채움)">
+  <div class="Catui_grid">
+    <div class="Catui_span-3"><div class="Catui_ratio Catui_ratio-1x1"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%2326B99A'/%3E%3Ccircle cx='150' cy='100' r='50' fill='%23E6F7F3'/%3E%3C/svg%3E" alt="1:1로 잘린 그림"></div></div>
+    <div class="Catui_span-4"><div class="Catui_ratio Catui_ratio-4x3"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%233498DB'/%3E%3Ccircle cx='150' cy='100' r='50' fill='%23EAF4FB'/%3E%3C/svg%3E" alt="4:3으로 잘린 그림"></div></div>
+    <div class="Catui_span-5"><div class="Catui_ratio Catui_ratio-16x9"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%239B59B6'/%3E%3Ccircle cx='150' cy='100' r='50' fill='%23F5EEF8'/%3E%3C/svg%3E" alt="16:9로 잘린 그림"></div></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="figure">
+<h2 id="figure">그림 + 캡션</h2>
+<catui-example title="figure.Catui_figure + figcaption">
+  <figure class="Catui_figure" style="max-width:360px">
+    <div class="Catui_ratio Catui_ratio-16x9"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%23E6F7F3'/%3E%3Cpath d='M20 150 L90 90 L150 120 L230 50 L300 80' stroke='%230E7A63' stroke-width='4' fill='none'/%3E%3C/svg%3E" alt="상승하는 선 그래프"></div>
+    <figcaption class="Catui_figure-cap">그림 1. 9월 이후 주문이 꾸준히 늘었습니다.</figcaption>
+  </figure>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>img</code>에는 항상 <code>width</code>·<code>height</code>(레이아웃 흔들림 방지)와 <code>alt</code>를 줍니다. 잘라서 맞춰야 하면 <code>.Catui_ratio(-1x1/4x3/16x9)</code> 안에 넣고, 영상·지도는 <a href="doc:css/components/media">임베드</a>를 씁니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>의미 있는 그림은 내용을 설명하는 <code>alt</code>, 장식 그림은 <code>alt=""</code>.</li>
+  <li>그림 안 글자로 정보를 전하지 않습니다 — 캡션이나 본문에 같은 내용을 씁니다.</li>
+</ul>
+</section>

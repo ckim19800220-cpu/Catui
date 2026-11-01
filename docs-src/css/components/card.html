@@ -1,0 +1,44 @@
+<section aria-labelledby="basic">
+<h2 id="basic">머리 · 본문 · 꼬리</h2>
+<catui-example title="기본 카드">
+  <article class="Catui_card">
+    <header class="Catui_card-h">최근 주문 <span class="Catui_card-tools"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" aria-label="필터"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-filter"></use></svg></button></span></header>
+    <div class="Catui_card-b"><p>이번 주 주문 12건입니다.</p></div>
+    <footer class="Catui_card-f"><a href="doc:css/components/table">전체 보기</a></footer>
+  </article>
+</catui-example>
+</section>
+
+<section aria-labelledby="link">
+<h2 id="link">링크 카드 · 그리드</h2>
+<catui-example title="카드 전체가 링크">
+  <div class="Catui_grid">
+    <a class="Catui_card Catui_span-4" href="doc:css/components/button"><div class="Catui_card-b"><p class="Catui_h3">버튼</p><p class="Catui_help">변형과 크기</p></div></a>
+    <a class="Catui_card Catui_span-4" href="doc:css/components/form"><div class="Catui_card-b"><p class="Catui_h3">입력 필드</p><p class="Catui_help">라벨·오류·잠김</p></div></a>
+    <a class="Catui_card Catui_span-4" href="doc:css/components/table"><div class="Catui_card-b"><p class="Catui_h3">표</p><p class="Catui_help">정렬·지브라</p></div></a>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="media">
+<h2 id="media">이미지 카드 · 가로 카드</h2>
+<catui-example title="위쪽 이미지 (card-media)">
+  <div class="Catui_grid"><article class="Catui_card Catui_span-4"><img class="Catui_card-media" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%23E6F7F3'/%3E%3Cpath d='M0 150 L90 90 L150 120 L230 50 L320 100 V180 H0Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="" width="320" height="180"><div class="Catui_card-b"><p class="Catui_h3">봄 기획전</p><p class="Catui_help">3월 한 달간 신상품 120종</p></div></article></div>
+</catui-example>
+<catui-example title="가로 카드 (card-row, 767px 이하 세로)">
+  <article class="Catui_card Catui_card-row" style="max-width:520px"><img class="Catui_card-media" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect width='320' height='180' fill='%23E6F7F3'/%3E%3Cpath d='M0 150 L90 90 L150 120 L230 50 L320 100 V180 H0Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="" width="160" height="120"><div class="Catui_card-b"><p class="Catui_h3">배송 안내</p><p class="Catui_help">평일 오후 2시 전 주문은 당일 출고합니다.</p></div></article>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_card</code> 안에 <code>.Catui_card-h</code>(52px)·<code>.Catui_card-b</code>(패딩 20)·<code>.Catui_card-f</code>(44px). 머리 오른쪽 도구는 <code>.Catui_card-tools</code>. <code>a.Catui_card</code>는 호버 시 그림자가 붙습니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>카드 전체가 링크면 안에 다른 링크·버튼을 넣지 않습니다.</li>
+  <li>카드 안에 md 이상 그림자를 겹치지 않습니다(위계가 흐려짐).</li>
+</ul>
+</section>

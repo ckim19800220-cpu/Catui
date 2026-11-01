@@ -1,0 +1,28 @@
+/* components/tabs.css */
+/* Tabs (radio-driven). 마크업은 input → label.Catui_tab → .Catui_panel 반복.
+   패널을 order:1로 보내 모든 탭이 첫 줄에 모이고, 구분선은 보이는 패널의 윗선이 맡는다.
+   활성 탭의 2px 밑줄이 그 선 위에 겹친다(margin-bottom:-1px + z-index). */
+.Catui_tabs{display:flex;flex-wrap:wrap;align-items:stretch;column-gap:var(--Catui_tab-gap);row-gap:0}
+.Catui_tabs:not(:has(> .Catui_panel)){border-bottom:1px solid var(--Catui_tab-border)}
+.Catui_tab{
+  position:relative;z-index:1;
+  height:var(--Catui_tab-h);display:inline-flex;align-items:center;font-size:var(--Catui_tab-font);line-height:1;
+  color:var(--Catui_tab-fg);border-bottom:var(--Catui_tab-indicator-w) solid transparent;margin-bottom:-1px;cursor:pointer;
+  transition:color var(--Catui_dur-fast) var(--Catui_ease);
+}
+.Catui_tab:hover{color:var(--Catui_color-text-primary)}
+.Catui_tabs input:checked + .Catui_tab{color:var(--Catui_tab-active-fg);border-bottom-color:var(--Catui_tab-indicator);font-weight:600}
+.Catui_tabs input:focus-visible + .Catui_tab{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_panel{order:1;flex-basis:100%;min-width:0;padding-top:var(--Catui_space-4);border-top:1px solid var(--Catui_tab-border)}
+.Catui_tabs input:not(:checked) + .Catui_tab + .Catui_panel{display:none}
+/* 세로 탭: 탭은 왼쪽 열, 보이는 패널은 오른쪽 열 (767px 이하에서는 가로 탭으로) */
+.Catui_tabs.Catui_tabs-v{display:grid;grid-template-columns:max-content minmax(0,1fr);grid-auto-rows:max-content;column-gap:var(--Catui_space-6);align-items:start}
+.Catui_tabs-v .Catui_tab{grid-column:1;border-bottom:0;border-right:var(--Catui_tab-indicator-w) solid transparent;margin:0;padding-right:var(--Catui_space-4)}
+.Catui_tabs-v input:checked + .Catui_tab{border-right-color:var(--Catui_tab-indicator)}
+.Catui_tabs-v .Catui_panel{grid-column:2;grid-row:1 / span 20;border-top:0;padding-top:0}
+@media (max-width:767px){
+  .Catui_tabs.Catui_tabs-v{display:flex}
+  .Catui_tabs-v .Catui_tab{border-right:0;border-bottom:var(--Catui_tab-indicator-w) solid transparent;padding-right:0}
+  .Catui_tabs-v input:checked + .Catui_tab{border-bottom-color:var(--Catui_tab-indicator)}
+  .Catui_tabs-v .Catui_panel{border-top:1px solid var(--Catui_tab-border);padding-top:var(--Catui_space-4)}
+}

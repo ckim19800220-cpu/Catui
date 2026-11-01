@@ -1,0 +1,36 @@
+<section aria-labelledby="toolbar">
+<h2 id="toolbar">도구 모음</h2>
+<catui-example title="검색 + 필터 + 오른쪽 버튼">
+  <div class="Catui_toolbar" role="toolbar" aria-label="주문 도구">
+    <form class="Catui_search" role="search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="tb-q">주문 찾기</label><input class="Catui_input" id="tb-q" type="search" placeholder="고객·주문 번호"></form>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-filter"></use></svg>필터</button>
+    <div class="Catui_toolbar-end"><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-download"></use></svg>내보내기</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-plus"></use></svg>새 주문</button></div>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="bulk">
+<h2 id="bulk">일괄 작업 바</h2>
+<catui-example title="행을 선택했을 때">
+  <div class="Catui_bulkbar" role="region" aria-label="선택한 항목 작업"><span aria-live="polite">3건 선택됨</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button">상태 변경</button><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button">내보내기</button><button class="Catui_btn Catui_btn-sm Catui_btn-danger" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-trash-2"></use></svg>삭제</button><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" style="margin-left:auto">선택 해제</button></div>
+</catui-example>
+</section>
+<section aria-labelledby="actionbar">
+<h2 id="actionbar">하단 저장 바</h2>
+<catui-example title="스크롤해도 아래에 붙는 저장 바 (sticky)">
+  <div style="max-height:220px;overflow:auto;border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md)" tabindex="0" role="region" aria-label="설정 폼 (스크롤)">
+    <div class="Catui_fields" style="padding:var(--Catui_space-4)"><div class="Catui_field"><label class="Catui_label" for="ab-1">회사 이름</label><input class="Catui_input" id="ab-1" value="Catui"></div><div class="Catui_field"><label class="Catui_label" for="ab-2">대표 메일</label><input class="Catui_input" id="ab-2" type="email" value="hello@catui.dev"></div><div class="Catui_field"><label class="Catui_label" for="ab-3">주소</label><input class="Catui_input" id="ab-3"></div></div>
+    <div class="Catui_actionbar"><span class="Catui_actionbar-note">저장하지 않은 변경 2건</span><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">취소</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">저장</button></div>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>표 위에는 <code>.Catui_toolbar</code>(검색·필터 왼쪽, <code>.Catui_toolbar-end</code> 오른쪽), 행을 선택하면 그 자리에 <code>.Catui_bulkbar</code>를 보입니다. 긴 설정 폼은 끝에 <code>.Catui_actionbar</code>를 두면 스크롤해도 아래에 붙습니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>도구 모음은 <code>role="toolbar"</code> + 이름. 선택 개수는 <code>aria-live</code>로 바뀔 때 읽힙니다.</li>
+  <li>저장 바가 마지막 입력을 가리지 않도록 폼 끝에 둡니다.</li>
+</ul>
+</section>

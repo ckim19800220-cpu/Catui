@@ -1,0 +1,52 @@
+<section aria-labelledby="use">
+<h2 id="use">켜는 법</h2>
+<p><code>&lt;html data-catui-theme="dark"&gt;</code>를 주면 전체가 다크 테마가 됩니다. 이 문서 오른쪽 위의 별 버튼으로 바로 바꿔 볼 수 있습니다.</p>
+<pre><code>&lt;html lang="ko" data-catui-theme="dark"&gt;
+
+&lt;!-- 시스템 설정을 따르려면 (head 안, 깜빡임 방지) --&gt;
+&lt;script&gt;
+  if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-catui-theme', 'dark');
+&lt;/script&gt;</code></pre>
+</section>
+
+<section aria-labelledby="preview">
+<h2 id="preview">미리보기</h2>
+<catui-example title="같은 마크업, 테마만 바뀜 (위 별 버튼으로 전환)">
+  <div class="Catui_grid">
+    <article class="Catui_card Catui_span-6"><div class="Catui_card-b Catui_vstack Catui_gap-3">
+      <span class="Catui_h4">주문 1003</span>
+      <span class="Catui_text-muted">박서연 · 42,000원</span>
+      <div class="Catui_hstack"><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>배송</span><span class="Catui_pill Catui_pill-danger"><i class="Catui_dot"></i>취소</span><span class="Catui_pill Catui_pill-solid-warning">대기</span></div>
+      <div class="Catui_hstack"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">저장</button><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">취소</button><a class="Catui_link" href="doc:css/foundation/text">자세히</a></div>
+    </div></article>
+    <div class="Catui_span-6 Catui_vstack Catui_gap-3">
+      <div class="Catui_banner Catui_banner-warn"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-alert-triangle"></use></svg><span>승인이 필요한 결제 2건</span></div>
+      <div class="Catui_field"><label class="Catui_label" for="th-in">검색</label><input class="Catui_input" id="th-in" placeholder="고객 이름"></div>
+      <div class="Catui_prog" role="img" aria-label="64퍼센트"><i class="Catui_pc1" style="width:64%"></i></div>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="how">
+<h2 id="how">동작 원리</h2>
+<ul>
+  <li>토큰이 모두 <code>:root</code>에 있으므로, 다크에서는 원본 색 토큰(면·글자·테두리·중립·연한 상태색·남색·코드)과 hex로 고정된 상태 글자색만 다시 정의합니다. 컴포넌트 토큰은 자동으로 따라옵니다(<code>src/css/foundation/theme-dark.css</code>).</li>
+  <li><b>글자용 브랜드</b> <code>--Catui_color-brand-strong</code>은 다크에서 밝아지고, <b>흰 글자를 올리는 채움</b> <code>--Catui_color-brand-fill</code>은 그대로입니다. 새 컴포넌트에서 흰 글자 위 배경에는 <code>brand-fill</code>, 글자·테두리·포커스에는 <code>brand-strong</code>을 씁니다.</li>
+  <li>상태 글자색을 배경으로 쓰는 solid pill은 다크에서 어두운 글자로 뒤집힙니다.</li>
+</ul>
+</section>
+
+<section aria-labelledby="contrast">
+<h2 id="contrast">다크 대비 실측</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">다크 테마 대비</caption>
+<thead><tr><th scope="col">조합</th><th scope="col" class="Catui_num">대비</th></tr></thead>
+<tbody>
+<tr><td>본문 글자 / 면</td><td class="Catui_num">13.42</td></tr>
+<tr><td>보조 글자 / 면</td><td class="Catui_num">7.54</td></tr>
+<tr><td>브랜드 글자 / 면</td><td class="Catui_num">8.49</td></tr>
+<tr><td>흰 글자 / 브랜드 채움 (primary 버튼)</td><td class="Catui_num">5.27</td></tr>
+<tr><td>정보·주의·위험 글자 / 각 연한 배경</td><td class="Catui_num">6.45 ~ 8.62</td></tr>
+<tr><td>힌트 글자(tertiary) / 면 — 비활성 전용</td><td class="Catui_num">3.86</td></tr>
+</tbody></table></div>
+</section>

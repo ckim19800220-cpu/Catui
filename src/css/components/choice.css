@@ -1,0 +1,43 @@
+/* components/choice.css */
+/* Choice — checkbox, radio, toggle + alt switch. Real input stays .Catui_clip. */
+.Catui_choice{display:flex;align-items:center;gap:var(--Catui_check-label-gap)}
+.Catui_cbx,.Catui_radio{
+  width:var(--Catui_check-size);height:var(--Catui_check-size);flex:none;
+  border:1px solid var(--Catui_check-border);background:var(--Catui_input-bg);
+  display:inline-flex;align-items:center;justify-content:center;color:var(--Catui_check-icon-color);
+  transition:background var(--Catui_dur-fast) var(--Catui_ease);
+}
+.Catui_cbx{border-radius:var(--Catui_check-radius)}
+.Catui_radio{width:var(--Catui_radio-size);height:var(--Catui_radio-size);border-color:var(--Catui_radio-border);border-radius:var(--Catui_radius-pill)}
+.Catui_cbx .Catui_icon{visibility:hidden}
+.Catui_choice input:checked + .Catui_cbx{background:var(--Catui_check-bg-on);border-color:var(--Catui_check-bg-on)}
+.Catui_choice input:checked + .Catui_cbx .Catui_icon{visibility:visible}
+.Catui_choice input:checked + .Catui_radio{border-color:var(--Catui_radio-dot-color)}
+.Catui_choice input:checked + .Catui_radio::after{
+  content:"";width:var(--Catui_radio-dot);height:var(--Catui_radio-dot);border-radius:var(--Catui_radius-pill);
+  background:var(--Catui_radio-dot-color);
+}
+.Catui_choice input:focus-visible + .Catui_cbx,
+.Catui_choice input:focus-visible + .Catui_radio,
+.Catui_choice input:focus-visible + .Catui_tgl{
+  outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px;
+}
+.Catui_tgl{
+  width:var(--Catui_toggle-w);height:var(--Catui_toggle-h);border-radius:var(--Catui_toggle-radius);
+  background:var(--Catui_toggle-track-off);position:relative;flex:none;
+  transition:background var(--Catui_dur-fast) var(--Catui_ease);
+}
+.Catui_tgl::after{
+  content:"";position:absolute;top:calc((var(--Catui_toggle-h) - var(--Catui_toggle-knob)) / 2);left:calc((var(--Catui_toggle-h) - var(--Catui_toggle-knob)) / 2);width:var(--Catui_toggle-knob);height:var(--Catui_toggle-knob);
+  border-radius:var(--Catui_radius-pill);background:var(--Catui_toggle-knob-color);box-shadow:var(--Catui_shadow-xs);
+  transition:transform var(--Catui_dur-fast) var(--Catui_ease);
+}
+.Catui_choice input:checked + .Catui_tgl{background:var(--Catui_toggle-track-on)}
+.Catui_choice input:checked + .Catui_tgl::after{transform:translateX(calc(var(--Catui_toggle-w) - var(--Catui_toggle-knob) - (var(--Catui_toggle-h) - var(--Catui_toggle-knob))))}
+.Catui_tgl-alt{width:var(--Catui_switch-alt-w);height:var(--Catui_switch-alt-h)}
+.Catui_tgl-alt::after{
+  width:var(--Catui_switch-alt-knob);height:var(--Catui_switch-alt-knob);
+  top:calc((var(--Catui_switch-alt-h) - var(--Catui_switch-alt-knob)) / 2);left:calc((var(--Catui_switch-alt-h) - var(--Catui_switch-alt-knob)) / 2);
+}
+.Catui_choice input:checked + .Catui_tgl-alt::after{transform:translateX(calc(var(--Catui_switch-alt-w) - var(--Catui_switch-alt-knob) - (var(--Catui_switch-alt-h) - var(--Catui_switch-alt-knob))))}
+.Catui_choices{display:flex;flex-wrap:wrap;gap:var(--Catui_space-4)}

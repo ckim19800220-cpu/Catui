@@ -1,0 +1,23 @@
+<section aria-labelledby="totop">
+<h2 id="totop">맨 위로</h2>
+<catui-example title="오른쪽 아래 고정 버튼 (정적 표시)">
+  <a class="Catui_totop" href="#doc-main" style="position:static" aria-label="맨 위로"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-arrow-right"></use></svg></a>
+</catui-example>
+</section>
+<section aria-labelledby="cookie">
+<h2 id="cookie">쿠키 동의</h2>
+<catui-example title="아래 고정 띠 (정적 표시)">
+  <div class="Catui_cookie" role="region" aria-label="쿠키 안내" style="position:static"><p>더 나은 경험을 위해 쿠키를 씁니다. <a class="Catui_link" href="doc:index">자세히</a></p><div class="Catui_cookie-actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button">설정</button><button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button">동의</button></div></div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>둘 다 실제로는 화면에 고정(<code>position:fixed</code>)됩니다. 예제는 미리보기 안에 보이도록 <code>position:static</code>으로 두었습니다. 맨 위로 버튼은 <code>href=&quot;#본문-id&quot;</code> 링크로 만들면 스크립트 없이 동작하고, 스크롤 후에만 보이게 하려면 스크립트로 붙입니다. 쿠키 띠는 동의 후 스크립트로 닫습니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>맨 위로 버튼에 <code>aria-label</code>, 쿠키 띠는 <code>role="region"</code> + 이름.</li>
+  <li>고정 요소가 본문 마지막 내용이나 다른 버튼을 가리지 않도록 아래 여백을 둡니다.</li>
+</ul>
+</section>

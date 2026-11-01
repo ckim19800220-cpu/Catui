@@ -1,0 +1,37 @@
+/* components/button.css */
+/* Button — primary/secondary/ghost/danger, sizes sm/md/lg, split button. */
+.Catui_btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--Catui_space-2);
+  border:1px solid transparent;border-radius:var(--Catui_btn-radius);
+  font-weight:600;line-height:1;white-space:nowrap;cursor:pointer;text-decoration:none;
+  transition:background var(--Catui_dur-fast) var(--Catui_ease),border-color var(--Catui_dur-fast) var(--Catui_ease),color var(--Catui_dur-fast) var(--Catui_ease);
+}
+.Catui_btn-sm{height:var(--Catui_btn-h-sm);padding:0 var(--Catui_btn-px-sm);font-size:var(--Catui_btn-font-sm)}
+.Catui_btn-md{height:var(--Catui_btn-h-md);padding:0 var(--Catui_btn-px-md);font-size:var(--Catui_btn-font-md)}
+.Catui_btn-lg{height:var(--Catui_btn-h-lg);padding:0 var(--Catui_btn-px-lg);font-size:var(--Catui_btn-font-lg)}
+.Catui_btn-primary{background:var(--Catui_btn-primary-bg);color:var(--Catui_btn-primary-fg)}
+.Catui_btn-primary:hover{background:var(--Catui_btn-primary-bg-hover)}
+.Catui_btn-secondary{background:var(--Catui_btn-secondary-bg);color:var(--Catui_btn-secondary-fg);border-color:var(--Catui_btn-secondary-border)}
+.Catui_btn-secondary:hover{border-color:var(--Catui_btn-secondary-border-hover);color:var(--Catui_btn-ghost-fg)}
+.Catui_btn-ghost{background:var(--Catui_btn-ghost-bg);color:var(--Catui_btn-ghost-fg)}
+.Catui_btn-ghost:hover{background:var(--Catui_badge-success-bg)}
+.Catui_btn-danger{background:var(--Catui_btn-danger-bg);color:var(--Catui_btn-danger-fg)}
+.Catui_btn:disabled,.Catui_btn[aria-disabled="true"]{
+  background:var(--Catui_btn-disabled-bg);color:var(--Catui_btn-disabled-fg);
+  border-color:var(--Catui_btn-disabled-border);pointer-events:none;
+}
+.Catui_btn:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+/* 아이콘 전용(정사각) · 전폭 버튼 */
+.Catui_btn-icon{padding:0;aspect-ratio:1}
+.Catui_btn-icon.Catui_btn-sm{width:var(--Catui_btn-h-sm)}
+.Catui_btn-icon.Catui_btn-md{width:var(--Catui_btn-h-md)}
+.Catui_btn-icon.Catui_btn-lg{width:var(--Catui_btn-h-lg)}
+.Catui_btn-block{display:flex;width:100%}
+/* 버튼 그룹: 맞닿은 면의 모서리를 지우고 테두리를 겹친다. 토글은 aria-pressed="true" */
+.Catui_btngroup{display:inline-flex;align-items:stretch}
+.Catui_btngroup > .Catui_btn{border-radius:0}
+.Catui_btngroup > .Catui_btn:not(:first-child){margin-left:-1px}
+.Catui_btngroup > .Catui_btn:first-child{border-radius:var(--Catui_btn-radius) 0 0 var(--Catui_btn-radius)}
+.Catui_btngroup > .Catui_btn:last-child{border-radius:0 var(--Catui_btn-radius) var(--Catui_btn-radius) 0}
+.Catui_btngroup > .Catui_btn:hover,.Catui_btngroup > .Catui_btn:focus-visible{position:relative;z-index:1}
+.Catui_btngroup > .Catui_btn[aria-pressed="true"]{background:var(--Catui_badge-success-bg);color:var(--Catui_badge-success-fg);border-color:var(--Catui_btn-primary-bg);position:relative;z-index:1}

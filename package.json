@@ -1,0 +1,17 @@
+{
+  "name": "catui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:css": "node scripts/build.mjs --only=css",
+    "build:js": "node scripts/build.mjs --only=js",
+    "build:docs": "node scripts/build.mjs --only=docs",
+    "dev": "node scripts/serve.mjs 8766"
+  },
+  "devDependencies": {
+    "lightningcss": "^1.30.2",
+    "lucide": "^0.545.0"
+  }
+}

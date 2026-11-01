@@ -1,0 +1,19 @@
+/* blocks/proof.css */
+/* Social proof — 고객 로고 띠, 큰 숫자 띠, 고객 후기 카드. */
+.Catui_logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:var(--Catui_space-6) var(--Catui_space-9)}
+.Catui_logos > *{color:var(--Catui_color-text-secondary);font-weight:700;font-size:var(--Catui_type-h3-size);letter-spacing:-.01em;opacity:1;filter:grayscale(1)}
+.Catui_logos img{height:28px;width:auto}
+.Catui_statband{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:var(--Catui_grid-gap);text-align:center}
+.Catui_statband-value{font-size:var(--Catui_type-display-size);font-weight:var(--Catui_type-display-weight);line-height:var(--Catui_type-display-lh);color:var(--Catui_color-brand-strong);font-variant-numeric:tabular-nums}
+.Catui_statband-label{margin-top:var(--Catui_space-1);color:var(--Catui_color-text-secondary)}
+.Catui_testi{display:grid;gap:var(--Catui_space-4);align-content:space-between;height:100%;padding:var(--Catui_space-6);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);box-shadow:var(--Catui_shadow-xs)}
+.Catui_testi-quote{font-size:var(--Catui_type-h3-size);line-height:var(--Catui_type-h3-lh)}
+.Catui_testi-person{display:flex;align-items:center;gap:var(--Catui_space-3)}
+.Catui_testi-name{font-weight:600}
+.Catui_testi-role{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+/* 숫자 띠 카드형 · 큰 후기(별점) */
+.Catui_statband-card > *{padding:var(--Catui_space-5);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_statband-note{margin-top:var(--Catui_space-1);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_testi-lg{max-width:720px;margin-inline:auto;text-align:center;justify-items:center;padding:var(--Catui_space-8)}
+.Catui_testi-lg .Catui_testi-quote{font-size:var(--Catui_type-h2-size);line-height:var(--Catui_type-h2-lh)}
+.Catui_testi-stars{display:flex;gap:2px;color:var(--Catui_rating-on)}

@@ -1,0 +1,12 @@
+/* charts/bars.css */
+/* Charts & prose — bars, stack, segbar, gauge, funnel, sparkline, radar, prose. */
+.Catui_bars{display:grid;gap:var(--Catui_bar-gap)}
+.Catui_bar{display:grid;grid-template-columns:56px minmax(0,1fr) 32px;gap:var(--Catui_space-2);align-items:center}
+.Catui_bar-label{font-size:var(--Catui_bar-label-font);color:var(--Catui_color-text-secondary)}
+.Catui_bar-value{font-size:var(--Catui_bar-value-font);font-variant-numeric:tabular-nums;text-align:right}
+.Catui_bar-track{height:var(--Catui_bar-h);background:var(--Catui_bar-track);border-radius:var(--Catui_bar-radius);overflow:hidden}
+.Catui_bar-fill{height:100%;background:var(--Catui_chart-series-1);display:block}
+.Catui_bar-fill-2{background:var(--Catui_chart-series-2)}
+.Catui_bar-fill-3{background:var(--Catui_chart-series-3)}
+.Catui_bar-fill-4{background:var(--Catui_chart-series-4)}
+.Catui_bar-fill-5{background:var(--Catui_chart-series-5)}

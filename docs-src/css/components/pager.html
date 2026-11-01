@@ -1,0 +1,42 @@
+<section aria-labelledby="basic">
+<h2 id="basic">기본</h2>
+<catui-example title="이전 · 번호 · 다음">
+  <nav class="Catui_pager" aria-label="페이지">
+    <button class="Catui_pg" type="button" aria-label="이전 페이지" disabled><svg class="Catui_icon Catui_i16 Catui_pg-prev" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button>
+    <button class="Catui_pg Catui_pg-active" type="button" aria-current="page">1</button>
+    <button class="Catui_pg" type="button">2</button>
+    <button class="Catui_pg" type="button">3</button>
+    <button class="Catui_pg" type="button" aria-label="다음 페이지"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button>
+  </nav>
+</catui-example>
+</section>
+
+<section aria-labelledby="long">
+<h2 id="long">많은 쪽</h2>
+<catui-example title="생략(…)과 끝 쪽">
+  <nav class="Catui_pager" aria-label="페이지 (긴 목록)">
+    <button class="Catui_pg" type="button" aria-label="이전 페이지"><svg class="Catui_icon Catui_i16 Catui_pg-prev" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button>
+    <button class="Catui_pg" type="button">1</button>
+    <span class="Catui_help" aria-hidden="true">…</span>
+    <button class="Catui_pg" type="button">11</button>
+    <button class="Catui_pg Catui_pg-active" type="button" aria-current="page">12</button>
+    <button class="Catui_pg" type="button">13</button>
+    <span class="Catui_help" aria-hidden="true">…</span>
+    <button class="Catui_pg" type="button">23</button>
+    <button class="Catui_pg" type="button" aria-label="다음 페이지"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button>
+  </nav>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_pager</code> 안에 <code>.Catui_pg</code> 버튼, 현재 쪽은 <code>.Catui_pg-active</code> + <code>aria-current="page"</code>. 이전 화살표는 오른쪽 화살표에 <code>.Catui_pg-prev</code>(180° 회전)를 붙입니다. 번호 계산·이동은 <a href="doc:js/modules/laypage">catui.js laypage</a>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li><code>nav aria-label="페이지"</code>, 현재 쪽은 <code>aria-current="page"</code>.</li>
+  <li>이전·다음 아이콘 버튼에 <code>aria-label</code>, 끝에서는 <code>disabled</code>.</li>
+</ul>
+</section>

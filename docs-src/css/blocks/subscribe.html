@@ -1,0 +1,29 @@
+<section aria-labelledby="form">
+<h2 id="form">뉴스레터 구독</h2>
+<catui-example title="한 줄 폼 (767px 이하 세로)">
+  <div class="Catui_section-head"><p class="Catui_h3">새 소식 받기</p></div>
+  <form class="Catui_subscribe" role="search" aria-label="뉴스레터 구독"><label class="Catui_clip" for="sb-mail">이메일</label><input class="Catui_input" id="sb-mail" type="email" autocomplete="email" placeholder="name@company.com" aria-describedby="sb-note"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">구독</button></form>
+  <p class="Catui_subscribe-note" id="sb-note">한 달에 한 번 보냅니다. 언제든 해지할 수 있습니다.</p>
+</catui-example>
+</section>
+<section aria-labelledby="subscribe-more">
+<h2 id="subscribe-more">구독 띠 · 완료 상태</h2>
+<catui-example title="브랜드 배경 띠 (subscribe-band)">
+  <div class="Catui_subscribe-band"><div><p class="Catui_h3">월간 Catui 소식</p><p class="Catui_subscribe-note">새 컴포넌트와 접근성 팁을 보냅니다.</p></div><form class="Catui_subscribe" aria-label="소식 구독"><label class="Catui_clip" for="sb-band">이메일</label><input class="Catui_input" id="sb-band" type="email" autocomplete="email" placeholder="name@company.com"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">구독</button></form></div>
+</catui-example>
+<catui-example title="구독 완료 (subscribe-done)">
+  <p class="Catui_subscribe-done" role="status"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>확인 메일을 보냈습니다. 메일함을 확인해 주세요.</p>
+</catui-example>
+<p>푸터 위 큰 구독 영역은 <code>.Catui_subscribe-band</code>, 제출 후에는 폼 자리에 <code>.Catui_subscribe-done</code>(<code>role="status"</code>)을 보입니다.</p>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>form.Catui_subscribe</code> = 숨김 라벨 + 이메일 입력 + 버튼, 아래에 <code>.Catui_subscribe-note</code>. 히어로나 푸터, <a href="doc:css/layout/site">안내(CTA)</a> 안에 넣습니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>보이는 라벨이 없으면 숨김 <code>label</code>을 두고, 안내 문구를 <code>aria-describedby</code>로 연결합니다.</li>
+</ul>
+</section>

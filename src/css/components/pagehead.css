@@ -1,0 +1,13 @@
+/* components/pagehead.css */
+/* Page head — 화면 맨 위 머리: 뒤로·경로 + 제목·상태 + 설명 + 오른쪽 동작 + (선택) 보조 탐색. */
+.Catui_pagehead{display:grid;gap:var(--Catui_space-2);padding-bottom:var(--Catui_space-4);margin-bottom:var(--Catui_space-5);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_pagehead-back{display:inline-flex;align-items:center;gap:var(--Catui_space-1);width:max-content;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_pagehead-back:hover{color:var(--Catui_color-brand-strong)}
+.Catui_pagehead-back .Catui_icon{transform:rotate(180deg)}
+.Catui_pagehead-back:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_pagehead-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-3)}
+.Catui_pagehead-title{font-size:var(--Catui_type-h1-size);font-weight:var(--Catui_type-h1-weight);line-height:var(--Catui_type-h1-lh)}
+.Catui_pagehead-actions{margin-left:auto;display:flex;flex-wrap:wrap;gap:var(--Catui_space-2)}
+.Catui_pagehead-text{color:var(--Catui_color-text-secondary);max-width:var(--Catui_prose-measure)}
+.Catui_pagehead > .Catui_subnav{margin-top:var(--Catui_space-2);margin-bottom:calc(-1 * var(--Catui_space-4) - 1px);border-bottom:0}
+@media (max-width:767px){.Catui_pagehead-actions{margin-left:0;width:100%}}

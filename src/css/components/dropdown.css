@@ -1,0 +1,32 @@
+/* components/dropdown.css */
+.Catui_dd{position:relative;z-index:20;display:inline-block;justify-self:start;max-width:100%}
+.Catui_dd summary{list-style:none;cursor:pointer}
+.Catui_dd summary::-webkit-details-marker{display:none}
+.Catui_dd-menu{
+  margin-top:var(--Catui_space-1);min-width:var(--Catui_dropdown-w-md);max-height:var(--Catui_dropdown-max-h);overflow:auto;
+  background:var(--Catui_dropdown-bg);border:1px solid var(--Catui_dropdown-border);
+  border-radius:var(--Catui_dropdown-radius);box-shadow:var(--Catui_dropdown-shadow);padding:var(--Catui_dropdown-pad);
+}
+.Catui_dd-sm{min-width:var(--Catui_dropdown-w-sm)}
+.Catui_dd-lg{min-width:var(--Catui_dropdown-w-lg)}
+.Catui_dd-item{
+  width:100%;height:var(--Catui_dropdown-item-h);display:flex;align-items:center;gap:var(--Catui_dropdown-item-gap);
+  padding:0 var(--Catui_dropdown-item-px);border-radius:var(--Catui_radius-xs);
+  font-size:var(--Catui_dropdown-item-font);line-height:1;color:var(--Catui_dropdown-item-fg);text-align:left;cursor:pointer;
+}
+.Catui_dd-item:hover{background:var(--Catui_dropdown-item-bg-hover)}
+.Catui_dd-item .Catui_icon{width:var(--Catui_dropdown-icon);height:var(--Catui_dropdown-icon)}
+.Catui_dd-item:disabled{color:var(--Catui_dropdown-item-fg-disabled)}
+.Catui_dd-group{
+  font-size:var(--Catui_dropdown-group-font);font-weight:600;text-transform:uppercase;letter-spacing:.04em;
+  color:var(--Catui_dropdown-group-fg);padding:var(--Catui_space-2) var(--Catui_dropdown-item-px) var(--Catui_space-1);
+}
+.Catui_dd-sep{height:1px;background:var(--Catui_dropdown-sep);margin:var(--Catui_space-1) 0}
+.Catui_dd-danger{color:var(--Catui_badge-danger-fg)}
+.Catui_dd-float{position:fixed;z-index:60;margin:0}
+/* 너비: 마크업 메뉴는 여는 버튼(details)과 같은 너비, JS 메뉴는 dropdown.js가 버튼 너비를 최소 너비로 준다 */
+.Catui_dd > .Catui_dd-menu:not(.Catui_dd-sm):not(.Catui_dd-lg){min-width:100%}
+.Catui_dd-float:not(.Catui_dd-sm):not(.Catui_dd-lg){min-width:0}
+/* 날짜 팝업은 메뉴 높이 제한·스크롤 없이 달력 전체를 보인다 */
+.Catui_dd-float:has(> .Catui_dp){max-height:none;overflow:visible}
+.Catui_dd-item[aria-current="true"],.Catui_dd-item:focus-visible{background:var(--Catui_dropdown-item-bg-hover);outline:none}

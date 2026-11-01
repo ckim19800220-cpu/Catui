@@ -1,0 +1,29 @@
+<section aria-labelledby="basic">
+<h2 id="basic">기본</h2>
+<catui-example title="라벨 + 값 + 범위">
+  <div class="Catui_field"><label class="Catui_label" for="rg-vol">음량 <output for="rg-vol" class="Catui_num">50</output></label><input class="Catui_range" id="rg-vol" type="range" min="0" max="100" value="50" aria-valuetext="50퍼센트"></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="ticks">
+<h2 id="ticks">눈금 · 양 끝 · 비활성</h2>
+<catui-example title="단계 눈금과 스케일">
+  <div class="Catui_field"><label class="Catui_label" for="rg-step">단계</label><input class="Catui_range" id="rg-step" type="range" min="0" max="10" step="1" value="3">
+    <div class="Catui_range-ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="Catui_range-scale" aria-hidden="true"><span>0</span><span>5</span><span>10</span></div></div>
+  <div class="Catui_field"><label class="Catui_label" for="rg-off">잠김</label><input class="Catui_range" id="rg-off" type="range" value="30" disabled></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>input[type=range].Catui_range</code>는 트랙·썸을 토큰으로 그립니다. 눈금은 <code>.Catui_range-ticks</code>(<code>&lt;i&gt;</code> 개수 = 단계 수), 양 끝 숫자는 <code>.Catui_range-scale</code>. 값 표시·스크린리더 문구는 <a href="doc:js/modules/slider">catui.js slider</a>가 자동으로 맞춥니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>label과 연결하고, 단위가 있으면 <code>aria-valuetext</code>로 읽히게 합니다.</li>
+  <li>눈금·양 끝 숫자는 장식이므로 <code>aria-hidden</code>.</li>
+</ul>
+</section>

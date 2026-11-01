@@ -1,0 +1,15 @@
+/* views/heatmap.css */
+.Catui_heat{display:flex;gap:var(--Catui_space-2);align-items:flex-start}
+.Catui_heat-days{display:grid;grid-template-rows:repeat(7,var(--Catui_heat-cell));gap:var(--Catui_heat-gap);font-size:var(--Catui_heat-label-font);color:var(--Catui_color-text-secondary)}
+.Catui_heat-days span{display:flex;align-items:center}
+.Catui_heat-grid{display:grid;grid-auto-flow:column;grid-template-columns:repeat(20,var(--Catui_heat-cell));grid-template-rows:repeat(7,var(--Catui_heat-cell));gap:var(--Catui_heat-gap)}
+/* 기본 칸은 :where()로 우선순위를 낮춰 아래 농도 클래스(.Catui_heat-1~5)가 이기게 한다 */
+.Catui_heat :where(i),.Catui_heat-legend :where(i){width:var(--Catui_heat-cell);height:var(--Catui_heat-cell);border-radius:var(--Catui_heat-radius);background:var(--Catui_color-neutral-100);display:block}
+.Catui_heat-1{background:var(--Catui_heat-1)}
+.Catui_heat-2{background:var(--Catui_heat-2)}
+.Catui_heat-3{background:var(--Catui_heat-3)}
+.Catui_heat-4{background:var(--Catui_heat-4)}
+.Catui_heat-5{background:var(--Catui_heat-5)}
+.Catui_heat-label,.Catui_heat-legend{font-size:var(--Catui_heat-label-font);color:var(--Catui_color-text-secondary)}
+.Catui_heat-legend{display:flex;align-items:center;gap:var(--Catui_heat-gap);margin-top:var(--Catui_space-2)}
+.Catui_heat-scroll{overflow-x:auto}

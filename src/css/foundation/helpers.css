@@ -1,0 +1,58 @@
+/* foundation/helpers.css */
+/* Helpers — 테두리·모서리·그림자·글자 정렬/굵기/크기·크기·넘침·고정·반응형 숨김·인쇄. 값은 모두 토큰. */
+.Catui_border{border:1px solid var(--Catui_card-border)}
+.Catui_border-top{border-top:1px solid var(--Catui_divider-color)}
+.Catui_border-bottom{border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_border-brand{border:1px solid var(--Catui_color-brand-strong)}
+.Catui_border-0{border:0}
+
+.Catui_rounded-0{border-radius:0}
+.Catui_rounded-sm{border-radius:var(--Catui_radius-sm)}
+.Catui_rounded-md{border-radius:var(--Catui_radius-md)}
+.Catui_rounded-lg{border-radius:var(--Catui_radius-lg)}
+.Catui_rounded-pill{border-radius:var(--Catui_radius-pill)}
+
+.Catui_shadow-0{box-shadow:none}
+.Catui_shadow-xs{box-shadow:var(--Catui_shadow-xs)}
+.Catui_shadow-sm{box-shadow:var(--Catui_shadow-sm)}
+.Catui_shadow-md{box-shadow:var(--Catui_shadow-md)}
+.Catui_shadow-lg{box-shadow:var(--Catui_shadow-lg)}
+
+.Catui_text-left{text-align:left}
+.Catui_text-center{text-align:center}
+.Catui_text-right{text-align:right}
+.Catui_fw-normal{font-weight:400}
+.Catui_fw-semibold{font-weight:600}
+.Catui_fw-bold{font-weight:700}
+.Catui_fs-caption{font-size:var(--Catui_type-caption-size)}
+.Catui_fs-body{font-size:var(--Catui_type-body-size)}
+.Catui_fs-lg{font-size:var(--Catui_type-h3-size)}
+.Catui_nowrap{white-space:nowrap}
+.Catui_break{overflow-wrap:anywhere}
+
+.Catui_w-full{width:100%}
+.Catui_h-full{height:100%}
+.Catui_max-prose{max-width:var(--Catui_prose-measure)}
+.Catui_mx-auto{margin-inline:auto}
+.Catui_block{display:block}
+.Catui_inline-block{display:inline-block}
+
+.Catui_overflow-auto{overflow:auto}
+.Catui_overflow-hidden{overflow:hidden}
+.Catui_scroll-x{overflow-x:auto;overflow-y:hidden}
+.Catui_sticky{position:sticky;top:0;z-index:10}
+.Catui_relative{position:relative}
+
+/* 반응형 숨김: hide-* 는 그 폭 이하에서 숨김, only-sm 은 767px 이하에서만 보임 */
+.Catui_only-sm{display:none}
+@media (max-width:991px){.Catui_hide-md{display:none}}
+@media (max-width:767px){.Catui_hide-sm{display:none}.Catui_only-sm{display:revert}}
+
+/* 인쇄 */
+.Catui_print-only{display:none}
+@media print{
+  .Catui_no-print{display:none}
+  .Catui_print-only{display:revert}
+  .Catui_app,.Catui_site{background:none}
+  .Catui_card,.Catui_tbl{box-shadow:none}
+}

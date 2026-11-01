@@ -1,0 +1,17 @@
+/* foundation/motion.css */
+/* Motion — 나타나기·밀려오기·커지기 진입 애니메이션과 지연. 모션 줄이기 설정에서는 모두 끈다. */
+@keyframes Catui_fade{from{opacity:0}}
+@keyframes Catui_up{from{opacity:0;transform:translateY(8px)}}
+@keyframes Catui_scale{from{opacity:0;transform:scale(.96)}}
+.Catui_anim-fade{animation:Catui_fade calc(var(--Catui_dur-fast) * 2) var(--Catui_ease) both}
+.Catui_anim-up{animation:Catui_up calc(var(--Catui_dur-fast) * 2.5) var(--Catui_ease) both}
+.Catui_anim-scale{animation:Catui_scale calc(var(--Catui_dur-fast) * 2) var(--Catui_ease) both}
+.Catui_delay-1{animation-delay:calc(var(--Catui_dur-fast) * 1)}
+.Catui_delay-2{animation-delay:calc(var(--Catui_dur-fast) * 2)}
+.Catui_delay-3{animation-delay:calc(var(--Catui_dur-fast) * 3)}
+.Catui_transition{transition:background var(--Catui_dur-fast) var(--Catui_ease),color var(--Catui_dur-fast) var(--Catui_ease),border-color var(--Catui_dur-fast) var(--Catui_ease),box-shadow var(--Catui_dur-fast) var(--Catui_ease),transform var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_hover-lift:hover{transform:translateY(-2px);box-shadow:var(--Catui_shadow-md)}
+@media (prefers-reduced-motion:reduce){
+  .Catui_anim-fade,.Catui_anim-up,.Catui_anim-scale{animation:none}
+  .Catui_hover-lift:hover{transform:none}
+}

@@ -1,0 +1,18 @@
+/* components/toast.css */
+.Catui_toast{
+  width:min(var(--Catui_toast-w),100%);display:flex;gap:var(--Catui_toast-gap);
+  padding:var(--Catui_toast-py) var(--Catui_toast-px);background:var(--Catui_card-bg);
+  border-radius:var(--Catui_toast-radius);box-shadow:var(--Catui_toast-shadow);
+  border-left:var(--Catui_toast-accent-w) solid var(--Catui_btn-primary-bg);
+}
+.Catui_toast .Catui_icon{width:var(--Catui_toast-icon);height:var(--Catui_toast-icon);flex:none;color:var(--Catui_badge-success-fg)}
+.Catui_toast-info .Catui_icon{color:var(--Catui_banner-info-fg)}
+.Catui_toast-warn .Catui_icon{color:var(--Catui_banner-warn-fg)}
+.Catui_toast-danger .Catui_icon{color:var(--Catui_badge-danger-fg)}
+.Catui_toast-title{font-size:var(--Catui_toast-title-font);font-weight:600}
+.Catui_toast-body{font-size:var(--Catui_toast-body-font);color:var(--Catui_color-text-secondary);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.Catui_toast-info{border-left-color:var(--Catui_banner-info-fg)}
+.Catui_toast-warn{border-left-color:var(--Catui_banner-warn-fg)}
+.Catui_toast-danger{border-left-color:var(--Catui_badge-danger-fg)}
+.Catui_toasts{position:fixed;right:var(--Catui_space-4);bottom:var(--Catui_space-4);z-index:60;display:grid;gap:var(--Catui_toast-gap)}
+.Catui_toasts-demo{position:static}

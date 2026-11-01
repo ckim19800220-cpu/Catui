@@ -1,0 +1,37 @@
+<section aria-labelledby="progress">
+<h2 id="progress">진행 중</h2>
+<catui-example title="완료 · 현재 · 미도달">
+  <ol class="Catui_steps" aria-label="주문 단계">
+    <li class="Catui_step Catui_step-done"><span class="Catui_step-dot"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span><span class="Catui_step-label">장바구니<span class="Catui_clip"> 완료</span></span></li>
+    <li class="Catui_step-line Catui_step-line-done" aria-hidden="true"></li>
+    <li class="Catui_step Catui_step-current" aria-current="step"><span class="Catui_step-dot">2</span><span class="Catui_step-label">결제</span></li>
+    <li class="Catui_step-line" aria-hidden="true"></li>
+    <li class="Catui_step"><span class="Catui_step-dot">3</span><span class="Catui_step-label">확인</span></li>
+  </ol>
+  <div class="Catui_step-panel">결제 정보를 입력합니다.</div>
+</catui-example>
+</section>
+
+<section aria-labelledby="done">
+<h2 id="done">모두 완료</h2>
+<catui-example title="마지막 단계까지 끝난 상태">
+  <ol class="Catui_steps" aria-label="가입 단계">
+    <li class="Catui_step Catui_step-done"><span class="Catui_step-dot"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span><span class="Catui_step-label">정보<span class="Catui_clip"> 완료</span></span></li>
+    <li class="Catui_step-line Catui_step-line-done" aria-hidden="true"></li>
+    <li class="Catui_step Catui_step-done"><span class="Catui_step-dot"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span><span class="Catui_step-label">인증<span class="Catui_clip"> 완료</span></span></li>
+  </ol>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>ol.Catui_steps</code> 안에 <code>.Catui_step</code>과 연결선 <code>.Catui_step-line</code>을 번갈아 둡니다. 상태는 <code>Catui_step-done</code>(체크)·<code>Catui_step-current</code>(번호)·기본(미도달). 단계 내용은 <code>.Catui_step-panel</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>단계 목록은 <code>ol</code>, 현재 단계에 <code>aria-current="step"</code>.</li>
+  <li>완료 단계에만 체크 아이콘, 완료 여부는 숨김 글자로도 알립니다. 연결선은 <code>aria-hidden</code>.</li>
+</ul>
+</section>

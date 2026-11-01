@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>알림·상태 표시 · CSS · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="아이콘·아바타 모서리의 알림 점·숫자, 온라인 상태 점.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html" aria-current="page">CSS</a><a href="../../js/start/introduction.html">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CSS 메뉴</summary><nav aria-label="CSS 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../css/start/introduction.html">소개</a></li><li><a href="../../css/start/install.html">설치와 빌드</a></li><li><a href="../../css/start/namespace.html">이름과 스코프</a></li><li><a href="../../css/start/accessibility.html">접근성 기준</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">기초</p><ul><li><a href="../../css/foundation/color.html">색상</a></li><li><a href="../../css/foundation/surface.html">배경</a></li><li><a href="../../css/foundation/theme.html">다크 모드</a></li><li><a href="../../css/foundation/typography.html">타이포그래피</a></li><li><a href="../../css/foundation/text.html">텍스트·링크</a></li><li><a href="../../css/foundation/spacing.html">간격·반경·그림자</a></li><li><a href="../../css/foundation/icons.html">아이콘</a></li><li><a href="../../css/foundation/media.html">미디어·이미지</a></li><li><a href="../../css/foundation/utilities.html">유틸리티</a></li><li><a href="../../css/foundation/helpers.html">도우미 클래스</a></li><li><a href="../../css/foundation/motion.html">모션</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">레이아웃</p><ul><li><a href="../../css/layout/grid.html">그리드</a></li><li><a href="../../css/layout/flex.html">정렬 도우미</a></li><li><a href="../../css/layout/app-shell.html">관리 셸</a></li><li><a href="../../css/layout/site.html">공개 홈</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">웹 블록</p><ul><li><a href="../../css/blocks/head.html">섹션 머리·공지 띠</a></li><li><a href="../../css/blocks/proof.html">신뢰 요소</a></li><li><a href="../../css/blocks/people.html">팀·프로필</a></li><li><a href="../../css/blocks/process.html">과정·단계</a></li><li><a href="../../css/blocks/gallery.html">갤러리·글 정보</a></li><li><a href="../../css/blocks/subscribe.html">구독 폼</a></li><li><a href="../../css/blocks/floating.html">떠 있는 요소</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">컴포넌트</p><ul><li><a href="../../css/components/button.html">버튼</a></li><li><a href="../../css/components/split-button.html">분할 버튼</a></li><li><a href="../../css/components/form.html">입력 필드</a></li><li><a href="../../css/components/input-group.html">입력 그룹</a></li><li><a href="../../css/components/choice.html">체크·라디오·토글</a></li><li><a href="../../css/components/badge.html">배지·카운트</a></li><li><a href="../../css/components/indicator.html" aria-current="page">알림·상태 표시</a></li><li><a href="../../css/components/avatar.html">아바타</a></li><li><a href="../../css/components/media.html">미디어 객체·임베드</a></li><li><a href="../../css/components/card.html">카드</a></li><li><a href="../../css/components/carousel.html">캐러셀</a></li><li><a href="../../css/components/canvas.html">캔버스</a></li><li><a href="../../css/components/stat.html">지표</a></li><li><a href="../../css/components/progress.html">진행</a></li><li><a href="../../css/components/table.html">표</a></li><li><a href="../../css/components/toolbar.html">도구 모음·작업 바</a></li><li><a href="../../css/components/list.html">목록</a></li><li><a href="../../css/components/setting.html">설정 행</a></li><li><a href="../../css/components/tabs.html">탭·세그먼트</a></li><li><a href="../../css/components/subnav.html">보조 탐색</a></li><li><a href="../../css/components/vnav.html">세로 내비게이션</a></li><li><a href="../../css/components/breadcrumb.html">경로</a></li><li><a href="../../css/components/pagehead.html">페이지 머리</a></li><li><a href="../../css/components/pager.html">페이지</a></li><li><a href="../../css/components/feedback.html">피드백</a></li><li><a href="../../css/components/result.html">결과 화면</a></li><li><a href="../../css/components/callout.html">안내 상자</a></li><li><a href="../../css/components/spinner.html">스피너</a></li><li><a href="../../css/components/code.html">코드</a></li><li><a href="../../css/components/quote.html">인용</a></li><li><a href="../../css/components/chat.html">채팅</a></li><li><a href="../../css/components/modal.html">모달</a></li><li><a href="../../css/components/drawer.html">드로어</a></li><li><a href="../../css/components/dropdown.html">드롭다운</a></li><li><a href="../../css/components/toast.html">토스트</a></li><li><a href="../../css/components/notifs.html">알림 패널</a></li><li><a href="../../css/components/tooltip.html">툴팁·팝오버</a></li><li><a href="../../css/components/mega.html">메가 메뉴</a></li><li><a href="../../css/components/wizard.html">마법사</a></li><li><a href="../../css/components/command.html">명령 팔레트</a></li><li><a href="../../css/components/faq.html">질문(접기)</a></li><li><a href="../../css/components/accordion.html">아코디언</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">고급 입력</p><ul><li><a href="../../css/forms/upload.html">업로드</a></li><li><a href="../../css/forms/range.html">범위</a></li><li><a href="../../css/forms/rating.html">별점</a></li><li><a href="../../css/forms/tags.html">태그</a></li><li><a href="../../css/forms/chips.html">선택 칩</a></li><li><a href="../../css/forms/optcard.html">선택 카드</a></li><li><a href="../../css/forms/swatch.html">색상 견본</a></li><li><a href="../../css/forms/stepper.html">스테퍼</a></li><li><a href="../../css/forms/otp.html">인증 코드</a></li><li><a href="../../css/forms/datepicker.html">날짜</a></li><li><a href="../../css/forms/counter.html">글자 수</a></li><li><a href="../../css/forms/search.html">검색</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">데이터 뷰</p><ul><li><a href="../../css/views/tree.html">트리</a></li><li><a href="../../css/views/calendar.html">달력</a></li><li><a href="../../css/views/gantt.html">간트</a></li><li><a href="../../css/views/kanban.html">칸반</a></li><li><a href="../../css/views/files.html">파일 목록</a></li><li><a href="../../css/views/thread.html">스레드</a></li><li><a href="../../css/views/heatmap.html">히트맵</a></li><li><a href="../../css/views/timeline.html">타임라인</a></li><li><a href="../../css/views/feed-meter.html">피드·미터·작업</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">차트</p><ul><li><a href="../../css/charts/line.html">라인 차트</a></li><li><a href="../../css/charts/donut.html">도넛</a></li><li><a href="../../css/charts/bars.html">막대</a></li><li><a href="../../css/charts/stack.html">누적·세그먼트</a></li><li><a href="../../css/charts/gauge.html">게이지</a></li><li><a href="../../css/charts/funnel.html">퍼널</a></li><li><a href="../../css/charts/sparkline.html">스파크라인</a></li><li><a href="../../css/charts/radar.html">레이더</a></li><li><a href="../../css/charts/prose.html">본문</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CSS · 컴포넌트</p>
+<h1 class="Catui_h1">알림·상태 표시</h1>
+<p class="Catui_lead">아이콘·아바타 모서리의 알림 점·숫자, 온라인 상태 점.</p>
+
+<section aria-labelledby="notify">
+<h2 id="notify">알림 표시</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">점 · 숫자</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_hstack Catui_gap-6">
+    <span class="Catui_indicator"><button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" aria-label="알림 (새 알림 있음)"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-bell"></use></svg></button><span class="Catui_indicator-dot" aria-hidden="true"></span></span>
+    <span class="Catui_indicator"><button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" aria-label="메일, 읽지 않은 메일 3개"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-mail"></use></svg></button><span class="Catui_count" aria-hidden="true">3</span></span>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="점 · 숫자 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_hstack Catui_gap-6&quot;&gt;
+  &lt;span class=&quot;Catui_indicator&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; aria-label=&quot;알림 (새 알림 있음)&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-bell&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;span class=&quot;Catui_indicator-dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;Catui_indicator&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; aria-label=&quot;메일, 읽지 않은 메일 3개&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-mail&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;span class=&quot;Catui_count&quot; aria-hidden=&quot;true&quot;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="status">
+<h2 id="status">온라인 상태</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">아바타 모서리 · 목록 앞 상태 점</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_hstack Catui_gap-6">
+    <span class="Catui_indicator"><span class="Catui_av Catui_av-lg" aria-hidden="true">김</span><span class="Catui_status Catui_status-on" aria-hidden="true"></span></span>
+    <div class="Catui_vstack">
+      <span class="Catui_hstack"><span class="Catui_status Catui_status-on" aria-hidden="true"></span>김하늘 <span class="Catui_help">접속 중</span></span>
+      <span class="Catui_hstack"><span class="Catui_status Catui_status-away" aria-hidden="true"></span>이준 <span class="Catui_help">자리 비움</span></span>
+      <span class="Catui_hstack"><span class="Catui_status Catui_status-busy" aria-hidden="true"></span>박서연 <span class="Catui_help">방해 금지</span></span>
+      <span class="Catui_hstack"><span class="Catui_status" aria-hidden="true"></span>최민 <span class="Catui_help">오프라인</span></span>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="아바타 모서리 · 목록 앞 상태 점 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_hstack Catui_gap-6&quot;&gt;
+  &lt;span class=&quot;Catui_indicator&quot;&gt;&lt;span class=&quot;Catui_av Catui_av-lg&quot; aria-hidden=&quot;true&quot;&gt;김&lt;/span&gt;&lt;span class=&quot;Catui_status Catui_status-on&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;div class=&quot;Catui_vstack&quot;&gt;
+    &lt;span class=&quot;Catui_hstack&quot;&gt;&lt;span class=&quot;Catui_status Catui_status-on&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;김하늘 &lt;span class=&quot;Catui_help&quot;&gt;접속 중&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;Catui_hstack&quot;&gt;&lt;span class=&quot;Catui_status Catui_status-away&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;이준 &lt;span class=&quot;Catui_help&quot;&gt;자리 비움&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;Catui_hstack&quot;&gt;&lt;span class=&quot;Catui_status Catui_status-busy&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;박서연 &lt;span class=&quot;Catui_help&quot;&gt;방해 금지&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;Catui_hstack&quot;&gt;&lt;span class=&quot;Catui_status&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;최민 &lt;span class=&quot;Catui_help&quot;&gt;오프라인&lt;/span&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>대상을 <code>.Catui_indicator</code>로 감싸고 모서리에 <code>.Catui_indicator-dot</code>(점)·<code>.Catui_count</code>(숫자)·<code>.Catui_status</code>(상태)를 둡니다. 상태 색은 <code>Catui_status-on</code>(접속)·<code>-away</code>(자리 비움)·<code>-busy</code>(방해 금지)·기본(오프라인).</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>점·숫자는 장식으로 숨기고, 같은 정보를 버튼 이름에 넣습니다 (예: "메일, 읽지 않은 메일 3개").</li>
+  <li>상태는 색 점과 함께 "접속 중" 같은 글자를 씁니다.</li>
+</ul>
+</section>
+
+<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/indicator.css</span><code>.Catui_indicator</code> <code>.Catui_indicator-dot</code> <code>.Catui_count</code> <code>.Catui_status</code> <code>.Catui_status-on</code> <code>.Catui_status-busy</code> <code>.Catui_status-away</code></li></ul></section>
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/components/badge.html"><span>이전</span>배지·카운트</a><a class="doc-pager-next" href="../../css/components/avatar.html"><span>다음</span>아바타</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#notify">알림 표시</a></li><li><a href="#status">온라인 상태</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

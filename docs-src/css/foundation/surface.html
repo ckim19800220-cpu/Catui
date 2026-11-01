@@ -1,0 +1,66 @@
+<section aria-labelledby="colors">
+<h2 id="colors">면 색 · 상태 연한 배경</h2>
+<catui-example title="surface · muted · page · brand-soft · info/warning/danger-soft">
+  <div class="Catui_grid">
+    <div class="Catui_span-4 Catui_bg-surface Catui_border Catui_rounded-md" style="padding:16px">bg-surface</div>
+    <div class="Catui_span-4 Catui_bg-muted Catui_border Catui_rounded-md" style="padding:16px">bg-muted</div>
+    <div class="Catui_span-4 Catui_bg-page Catui_border Catui_rounded-md" style="padding:16px">bg-page</div>
+    <div class="Catui_span-3 Catui_bg-brand-soft Catui_rounded-md" style="padding:16px">brand-soft</div>
+    <div class="Catui_span-3 Catui_bg-info-soft Catui_rounded-md" style="padding:16px">info-soft</div>
+    <div class="Catui_span-3 Catui_bg-warning-soft Catui_rounded-md" style="padding:16px">warning-soft</div>
+    <div class="Catui_span-3 Catui_bg-danger-soft Catui_rounded-md" style="padding:16px">danger-soft</div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="strong">
+<h2 id="strong">진한 배경 (글자 자동 반전)</h2>
+<catui-example title="bg-brand · bg-dark">
+  <div class="Catui_bg-brand Catui_rounded-lg" style="padding:24px"><p class="Catui_h3">브랜드 영역</p><p class="Catui_lead">도입문·보조 글자도 흰색 계열로 바뀝니다. <a href="doc:css/foundation/text">링크</a>도 밑줄과 함께.</p></div>
+  <div class="Catui_bg-dark Catui_rounded-lg" style="padding:24px"><p class="Catui_h3">어두운 영역</p><p class="Catui_help">푸터·구독 띠처럼 남색 배경을 씁니다.</p><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">버튼은 그대로</button></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="gradient">
+<h2 id="gradient">그라디언트 · 패턴</h2>
+<catui-example title="bg-gradient · bg-gradient-dark · bg-dots · bg-grid">
+  <div class="Catui_grid">
+    <div class="Catui_span-6 Catui_bg-gradient Catui_border Catui_rounded-lg" style="padding:24px;min-height:100px">bg-gradient (히어로 배경)</div>
+    <div class="Catui_span-6 Catui_bg-gradient-dark Catui_rounded-lg" style="padding:24px;min-height:100px">bg-gradient-dark</div>
+    <div class="Catui_span-6 Catui_bg-dots Catui_border Catui_rounded-lg" style="padding:24px;min-height:100px">bg-dots (점 패턴)</div>
+    <div class="Catui_span-6 Catui_bg-grid Catui_border Catui_rounded-lg" style="padding:24px;min-height:100px">bg-grid (격자 패턴)</div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="image">
+<h2 id="image">이미지 배경 + 겹침</h2>
+<catui-example title="bg-image + overlay (글자 대비 확보)">
+  <div class="Catui_bg-image Catui_overlay Catui_rounded-lg Catui_band" style="--Catui_bg-img:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 280'%3E%3Crect width='640' height='280' fill='%23E6F7F3'/%3E%3Cpath d='M0 230 L180 140 L300 200 L460 90 L640 170 V280 H0Z' fill='%2326B99A'/%3E%3C/svg%3E&quot;);padding-inline:24px">
+    <p class="Catui_h1">가을 기획전</p>
+    <p class="Catui_lead">밝은 사진 위에도 흰 글자가 읽히도록 70% 겹침을 깝니다.</p>
+    <a class="Catui_btn Catui_btn-md Catui_btn-primary" href="doc:css/blocks/head">보기</a>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="band">
+<h2 id="band">섹션 띠</h2>
+<catui-example title="band · band-sm (위아래 여백)">
+  <section class="Catui_bg-muted Catui_band-sm Catui_rounded-md" style="padding-inline:24px"><p class="Catui_h3">band-sm</p><p class="Catui_help">위아래 32px</p></section>
+  <section class="Catui_bg-brand-soft Catui_band Catui_rounded-md" style="padding-inline:24px"><p class="Catui_h3">band</p><p class="Catui_help">위아래 56px — 공개 홈 섹션 구분</p></section>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>연한 배경은 <code>Catui_bg-surface/muted/page/brand-soft/info-soft/warning-soft/danger-soft</code>. 진한 배경 <code>Catui_bg-brand</code>·<code>bg-dark</code>·<code>bg-gradient-dark</code>는 글자색을 함께 바꾸고, 안의 도입문·보조 글자·링크도 따라 바뀝니다. 이미지는 <code>style="--Catui_bg-img:url(…)"</code> + <code>.Catui_bg-image</code>, 글자를 올릴 때는 <code>.Catui_overlay</code>를 겹칩니다. 공개 홈 섹션은 <code>.Catui_band</code>로 여백을 맞춥니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>진한 배경 위 글자는 흰색 계열로 바뀌어 대비 AA를 넘습니다. 이미지 위 글자는 반드시 겹침과 함께 씁니다.</li>
+  <li>패턴 배경 위에는 긴 글을 두지 않습니다(읽기 방해).</li>
+</ul>
+</section>

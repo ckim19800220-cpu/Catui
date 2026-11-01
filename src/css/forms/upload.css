@@ -1,0 +1,14 @@
+/* forms/upload.css */
+/* Form advanced — upload zone, range (+ticks), rating, tags, stepper, datepicker, counter, search. */
+.Catui_upz{
+  height:var(--Catui_upload-h);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--Catui_upload-gap);
+  padding:0 var(--Catui_upload-pad);border:var(--Catui_upload-border-w) dashed var(--Catui_upload-border);
+  border-radius:var(--Catui_upload-radius);background:var(--Catui_card-bg);color:var(--Catui_color-text-secondary);
+  cursor:pointer;text-align:center;
+  transition:background var(--Catui_dur-fast) var(--Catui_ease),border-color var(--Catui_dur-fast) var(--Catui_ease);
+}
+.Catui_upz:hover{background:var(--Catui_upload-bg-hover);border-color:var(--Catui_upload-border-active)}
+.Catui_upz .Catui_icon{width:var(--Catui_upload-icon);height:var(--Catui_upload-icon);color:var(--Catui_color-text-tertiary)}
+.Catui_upz-title{font-size:var(--Catui_upload-font);font-weight:600;color:var(--Catui_color-text-primary)}
+.Catui_upz-hint{font-size:var(--Catui_upload-hint-font);color:var(--Catui_color-text-secondary)}
+.Catui_upz:has(input:focus-visible){outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}

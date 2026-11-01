@@ -1,0 +1,11 @@
+/* views/kanban.css */
+.Catui_kanban{display:flex;gap:var(--Catui_kanban-gap);overflow-x:auto;padding-bottom:var(--Catui_space-2)}
+.Catui_kanban-col{width:var(--Catui_kanban-col-w);flex:none;background:var(--Catui_kanban-col-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_kanban-radius);padding:var(--Catui_kanban-pad);display:grid;gap:var(--Catui_kanban-card-gap);align-content:start}
+.Catui_kanban-h{height:var(--Catui_kanban-head-h);font-size:var(--Catui_type-caption-size);font-weight:600;display:flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_kanban-h .Catui_count{margin-left:auto}
+.Catui_kanban-card{background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_kanban-card-radius);box-shadow:var(--Catui_kanban-card-shadow);padding:var(--Catui_kanban-card-pad);display:grid;gap:var(--Catui_space-2)}
+.Catui_kanban-title{font-size:var(--Catui_type-caption-size);font-weight:600}
+.Catui_kanban-tags{display:flex;flex-wrap:wrap;gap:var(--Catui_space-1)}
+.Catui_kanban-tags .Catui_pill{height:var(--Catui_kanban-tag-h);font-size:var(--Catui_kanban-tag-font)}
+.Catui_kanban-meta{display:flex;align-items:center;gap:var(--Catui_space-2);font-size:var(--Catui_kanban-tag-font);color:var(--Catui_color-text-secondary)}
+.Catui_kanban-meta .Catui_av{margin-left:auto}

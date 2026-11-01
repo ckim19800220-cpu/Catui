@@ -1,0 +1,12 @@
+/* components/canvas.css */
+/* Canvas — 반응형 캔버스 틀(비율 상자·테두리·배경), 위에 겹치는 도구 막대·범례, 아래 캡션. 그리기는 catui.js canvas. */
+.Catui_canvas{position:relative;width:100%;aspect-ratio:16 / 9;overflow:hidden;border-radius:var(--Catui_radius-md);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border)}
+.Catui_canvas > canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.Catui_canvas-1x1{aspect-ratio:1 / 1}
+.Catui_canvas-4x3{aspect-ratio:4 / 3}
+.Catui_canvas-21x9{aspect-ratio:21 / 9}
+.Catui_canvas-tools{position:absolute;top:var(--Catui_space-2);right:var(--Catui_space-2);z-index:1;display:flex;gap:var(--Catui_space-1);padding:var(--Catui_space-1);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-sm);box-shadow:var(--Catui_shadow-sm)}
+.Catui_canvas-legend{position:absolute;left:var(--Catui_space-3);top:var(--Catui_space-2);z-index:1}
+.Catui_canvas-empty{position:absolute;inset:0;display:grid;place-items:center;color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size);pointer-events:none}
+.Catui_canvas-cap{margin-top:var(--Catui_space-2);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_canvas-draw > canvas{cursor:crosshair}

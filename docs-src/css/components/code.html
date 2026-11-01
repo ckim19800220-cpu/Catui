@@ -1,0 +1,36 @@
+<section aria-labelledby="inline">
+<h2 id="inline">인라인 코드 · 키 표시</h2>
+<catui-example title="Catui_code · Catui_kbd">
+  <p>버튼은 <code class="Catui_code">.Catui_btn</code>에 변형 클래스를 겹칩니다. 검색은 <kbd class="Catui_kbd">Ctrl</kbd> + <kbd class="Catui_kbd">K</kbd>.</p>
+</catui-example>
+</section>
+
+<section aria-labelledby="block">
+<h2 id="block">코드 블록</h2>
+<catui-example title="제목줄 + 구문 색">
+  <div class="Catui_codeblock">
+    <div class="Catui_codeblock-h"><span>catui.css</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button">복사</button></div>
+    <pre><code><span class="Catui_tk-c">/* 버튼 높이 */</span>
+<span class="Catui_tk-k">--Catui_btn-h-md</span>: <span class="Catui_tk-v">34px</span>;
+<span class="Catui_tk-k">--Catui_btn-radius</span>: <span class="Catui_tk-v">var(--Catui_radius-sm)</span>;</code></pre>
+  </div>
+</catui-example>
+<catui-example title="줄 번호 (Catui_lines)">
+  <div class="Catui_codeblock">
+    <pre><code class="Catui_lines"><span><span class="Catui_tk-k">catui</span>.use([<span class="Catui_tk-v">'layer'</span>], <span class="Catui_tk-k">function</span> (layer) {</span><span>  layer.msg(<span class="Catui_tk-v">'안녕하세요'</span>);   <span class="Catui_tk-c">// 토스트</span></span><span>});</span></code></pre>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>문장 속 코드는 <code>code.Catui_code</code>, 키는 <code>kbd.Catui_kbd</code>. 블록은 <code>.Catui_codeblock</code> &gt; (선택 <code>.Catui_codeblock-h</code>) + <code>pre &gt; code</code>. 구문 색은 <code>Catui_tk-k</code>(키·키워드)·<code>tk-v</code>(값·문자열)·<code>tk-c</code>(주석). 줄 번호는 <code>code.Catui_lines</code> 안에서 줄마다 <code>&lt;span&gt;</code>으로 감쌉니다 — 번호는 복사되지 않습니다. 복사 동작은 스크립트로 붙입니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>코드 블록 배경과 글자 대비는 AA를 넘습니다. 구문 색만으로 의미를 전하지 않습니다.</li>
+  <li>긴 줄은 블록 안에서 가로 스크롤되며 페이지를 넘치지 않습니다.</li>
+</ul>
+</section>

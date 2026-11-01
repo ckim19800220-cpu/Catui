@@ -1,0 +1,38 @@
+<section aria-labelledby="head">
+<h2 id="head">섹션 머리</h2>
+<catui-example title="왼쪽 정렬">
+  <div class="Catui_section-head"><span class="Catui_eyebrow">기능</span><p class="Catui_h1">화면을 한 벌로 관리합니다</p><p class="Catui_lead">관리 화면과 홈이 같은 토큰을 씁니다.</p></div>
+</catui-example>
+<catui-example title="가운데 정렬 (section-head-center)">
+  <div class="Catui_section-head Catui_section-head-center"><span class="Catui_eyebrow">요금</span><p class="Catui_h1">팀 규모에 맞게 고르세요</p><p class="Catui_lead">모든 요금제에 14일 무료 체험이 포함됩니다.</p></div>
+</catui-example>
+</section>
+<section aria-labelledby="announce">
+<h2 id="announce">공지 띠</h2>
+<catui-example title="페이지 맨 위 한 줄 공지">
+  <div class="Catui_announce" role="region" aria-label="공지"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-bell"></use></svg><span>11월 5일 새 버전이 출시됩니다.</span><a href="doc:js/start/introduction">자세히 보기</a></div>
+</catui-example>
+</section>
+<section aria-labelledby="head-more">
+<h2 id="head-more">머리 + 동작 · 공지 띠 변형</h2>
+<catui-example title="오른쪽 동작이 있는 머리 (section-head-row)">
+  <div class="Catui_section-head Catui_section-head-row"><div><span class="Catui_eyebrow">블로그</span><p class="Catui_h1">최근 글</p></div><a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="doc:css/blocks/gallery">전체 보기 <svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-arrow-right"></use></svg></a></div>
+</catui-example>
+<catui-example title="브랜드 · 연한 색 · 닫기">
+  <div class="Catui_announce Catui_announce-brand" role="region" aria-label="공지"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-info"></use></svg><span>정기 점검: 11월 3일 02:00–04:00</span><button class="Catui_announce-close" type="button" aria-label="공지 닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></button></div>
+  <div class="Catui_announce Catui_announce-soft" role="region" aria-label="이벤트 공지"><span>가입하면 첫 달 무료</span><a href="doc:css/layout/site">요금 보기</a></div>
+</catui-example>
+<p><code>.Catui_section-head-row</code>는 제목 묶음과 버튼을 양 끝에 둡니다(767px 이하 세로). 공지 띠 색은 <code>-brand</code>(진한 브랜드)·<code>-soft</code>(연한 브랜드), 닫기는 <code>.Catui_announce-close</code>입니다.</p>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>섹션 맨 위에 <code>.Catui_section-head</code>(<code>.Catui_eyebrow</code> + 제목 + <code>.Catui_lead</code>)를 둡니다. 제목은 문서 구조에 맞는 h2·h3로 쓰고 모양은 <code>.Catui_h1</code>로 맞춥니다. 공지 띠 <code>.Catui_announce</code>는 헤더 위에 한 줄만 둡니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>소제목은 꾸밈 글자이므로 제목 태그로 쓰지 않습니다.</li>
+  <li>공지 띠는 <code>role="region"</code> + 이름으로 찾을 수 있게 하고, 닫기 버튼을 두면 이름을 붙입니다.</li>
+</ul>
+</section>

@@ -1,0 +1,4 @@
+/* forms/counter.css */
+.Catui_counter{text-align:right;font-size:var(--Catui_counter-font);color:var(--Catui_color-text-secondary);font-variant-numeric:tabular-nums}
+.Catui_counter-warn{color:var(--Catui_counter-warn)}
+.Catui_counter-over{color:var(--Catui_counter-over)}

@@ -1,0 +1,37 @@
+<section aria-labelledby="single">
+<h2 id="single">날짜 하나</h2>
+<catui-example title="오늘 · 선택 · 비활성">
+  <div class="Catui_dp">
+    <div class="Catui_dp-head"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" aria-label="이전 달"><svg class="Catui_icon Catui_i16 Catui_pg-prev" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button><span>2026년 10월</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" aria-label="다음 달"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button></div>
+    <div class="Catui_dp-dows" aria-hidden="true"><span class="Catui_dp-dow">월</span><span class="Catui_dp-dow">화</span><span class="Catui_dp-dow">수</span><span class="Catui_dp-dow">목</span><span class="Catui_dp-dow">금</span><span class="Catui_dp-dow">토</span><span class="Catui_dp-dow">일</span></div>
+    <div class="Catui_dp-grid">
+      <span class="Catui_dp-cell Catui_dp-out" aria-hidden="true">31</span><button class="Catui_dp-cell Catui_dp-today" type="button" aria-label="10월 1일, 오늘">1</button><button class="Catui_dp-cell" type="button">2</button><button class="Catui_dp-cell Catui_dp-sel" type="button" aria-pressed="true" aria-label="10월 3일, 선택됨">3</button><button class="Catui_dp-cell" type="button">4</button><button class="Catui_dp-cell" type="button">5</button><button class="Catui_dp-cell Catui_dp-dis" type="button" aria-disabled="true" aria-label="10월 6일, 선택 불가">6</button>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="range">
+<h2 id="range">기간</h2>
+<catui-example title="시작 · 사이 · 끝">
+  <div class="Catui_dp">
+    <p class="Catui_help">11일 – 16일</p>
+    <div class="Catui_dp-grid">
+      <button class="Catui_dp-cell" type="button">10</button><button class="Catui_dp-cell Catui_dp-sel" type="button" aria-pressed="true">11</button><button class="Catui_dp-cell Catui_dp-range" type="button">12</button><button class="Catui_dp-cell Catui_dp-range" type="button">13</button><button class="Catui_dp-cell Catui_dp-range" type="button">14</button><button class="Catui_dp-cell Catui_dp-range" type="button">15</button><button class="Catui_dp-cell Catui_dp-sel" type="button" aria-pressed="true">16</button>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_dp</code> &gt; 월 이동 머리줄 <code>.Catui_dp-head</code>(이전·월·다음) + 요일 <code>.Catui_dp-dows</code> + 격자 <code>.Catui_dp-grid</code>. 칸 상태는 <code>dp-out</code>(다른 달)·<code>dp-today</code>·<code>dp-sel</code>·<code>dp-range</code>·<code>dp-dis</code>. 입력 칸에 붙는 팝업과 키보드 이동은 <a href="doc:js/modules/datepicker">catui.js datePicker</a>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>날짜 칸은 버튼으로 만들고 "10월 3일, 선택됨"처럼 전체 날짜를 이름으로 줍니다.</li>
+  <li>선택 불가 날짜는 <code>aria-disabled</code>, 선택 상태는 <code>aria-pressed</code>.</li>
+</ul>
+</section>

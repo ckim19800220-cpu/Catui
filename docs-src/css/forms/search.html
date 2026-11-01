@@ -1,0 +1,26 @@
+<section aria-labelledby="basic">
+<h2 id="basic">기본 검색</h2>
+<catui-example title="아이콘 + 입력">
+  <form class="Catui_search" role="search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="sr-basic">주문 찾기</label><input class="Catui_input" id="sr-basic" type="search" placeholder="주문 번호"></form>
+</catui-example>
+</section>
+
+<section aria-labelledby="filter">
+<h2 id="filter">필터 메뉴와 함께</h2>
+<catui-example title="검색 + 필터 드롭다운">
+  <form class="Catui_search" role="search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="sr-filter">고객 찾기</label><input class="Catui_input" id="sr-filter" type="search" placeholder="고객 이름"><details class="Catui_dd"><summary class="Catui_btn Catui_btn-md Catui_btn-secondary"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-filter"></use></svg>필터</summary><div class="Catui_dd-menu"><button class="Catui_dd-item" type="button">배송만</button><button class="Catui_dd-item" type="button">대기만</button></div></details></form>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>form.Catui_search</code>의 첫 아이콘(직계 자식)만 입력 왼쪽 안에 놓입니다. 필터 버튼 안 아이콘은 그대로 흐름에 놓입니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>form에 <code>role="search"</code>, 입력에 숨김 label.</li>
+  <li>아이콘은 장식(<code>aria-hidden</code>)이며 입력 왼쪽 여백 안에 놓입니다.</li>
+</ul>
+</section>

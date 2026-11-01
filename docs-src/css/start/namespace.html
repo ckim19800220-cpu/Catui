@@ -1,0 +1,31 @@
+<section aria-labelledby="prefix">
+<h2 id="prefix">접두사</h2>
+<p>공개 클래스·CSS 변수·아이콘 심볼 id는 모두 <code>Catui_</code>로 시작합니다. 호스트 페이지의 <code>.btn</code>이나 <code>--color-brand</code>와 겹치지 않습니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">이름 규칙</caption>
+<thead><tr><th scope="col">종류</th><th scope="col">형식</th><th scope="col">예</th></tr></thead>
+<tbody>
+<tr><td>클래스</td><td><code>Catui_컴포넌트-부분-변형</code></td><td><code>Catui_btn-primary</code></td></tr>
+<tr><td>CSS 변수</td><td><code>--Catui_분류-이름</code></td><td><code>--Catui_color-brand-strong</code></td></tr>
+<tr><td>아이콘 id</td><td><code>Catui_ic-이름</code></td><td><code>Catui_ic-search</code></td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="scope">
+<h2 id="scope">스코프 루트</h2>
+<ul>
+  <li><code>.Catui_app</code> — 관리 화면 (사이드바·탑바 셸)</li>
+  <li><code>.Catui_site</code> — 공개 홈</li>
+  <li><code>.Catui_layer</code> — catui.js가 <code>body</code>에 붙이는 오버레이 루트 (레이어·드롭다운·토스트)</li>
+</ul>
+<p>리셋·타이포는 이 세 루트 안에서만 적용되고, 루트 밖 DOM에는 영향을 주지 않습니다. <code>body</code>나 <code>*</code> 선택자로 전역 스타일을 넣지 마세요.</p>
+</section>
+
+<section aria-labelledby="layers">
+<h2 id="layers">토큰 3층</h2>
+<ul>
+  <li><b>L1</b> 팔레트·타이포·간격·반경·그림자 원본 값</li>
+  <li><b>L2</b> 파생 값 (<code>brand-ghost</code>, <code>focus-ring</code> 등)</li>
+  <li><b>L3</b> 컴포넌트 토큰 (<code>--Catui_btn-h-md</code> 등) — L1·L2를 <code>var()</code>로만 참조</li>
+</ul>
+<p>새 값이 필요하면 견본 명세에 토큰을 먼저 추가하고 <code>src/css/foundation/tokens.css</code>에 옮긴 뒤 컴포넌트에서 참조합니다. 컴포넌트 CSS에 hex 값을 직접 쓰지 않습니다.</p>
+</section>

@@ -1,0 +1,43 @@
+<section aria-labelledby="grid">
+<h2 id="grid">갤러리</h2>
+<catui-example title="넓은 칸·높은 칸 섞기">
+  <div class="Catui_gallery">
+    <a class="Catui_gallery-wide" href="doc:index"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'%3E%3Crect width='320' height='240' fill='%23E6F7F3'/%3E%3Cpath d='M0 200 L90 130 L150 170 L230 90 L320 150 V240 H0Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="녹색 언덕 (넓은 칸)"></a>
+    <a class="Catui_gallery-tall" href="doc:index"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'%3E%3Crect width='320' height='240' fill='%23EAF4FB'/%3E%3Cpath d='M0 200 L90 130 L150 170 L230 90 L320 150 V240 H0Z' fill='%233498DB'/%3E%3C/svg%3E" alt="파란 언덕 (높은 칸)"></a>
+    <a href="doc:index"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'%3E%3Crect width='320' height='240' fill='%23F5EEF8'/%3E%3Cpath d='M0 200 L90 130 L150 170 L230 90 L320 150 V240 H0Z' fill='%239B59B6'/%3E%3C/svg%3E" alt="보라 언덕"></a>
+    <a href="doc:index"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'%3E%3Crect width='320' height='240' fill='%23FEF7E0'/%3E%3Cpath d='M0 200 L90 130 L150 170 L230 90 L320 150 V240 H0Z' fill='%23F1C40F'/%3E%3C/svg%3E" alt="노란 언덕"></a>
+    <a href="doc:index"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'%3E%3Crect width='320' height='240' fill='%23FDECEA'/%3E%3Cpath d='M0 200 L90 130 L150 170 L230 90 L320 150 V240 H0Z' fill='%23E67E22'/%3E%3C/svg%3E" alt="주황 언덕"></a>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="meta">
+<h2 id="meta">글 정보</h2>
+<catui-example title="작성자 · 날짜 · 읽는 시간">
+  <article class="Catui_card" style="max-width:420px"><img class="Catui_card-media" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'%3E%3Crect width='320' height='240' fill='%23E6F7F3'/%3E%3Cpath d='M0 200 L90 130 L150 170 L230 90 L320 150 V240 H0Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="" width="320" height="180"><div class="Catui_card-b Catui_vstack"><p class="Catui_h3">토큰으로 다크 모드 준비하기</p><p class="Catui_meta"><span>김하늘</span><time datetime="2026-10-30">10월 30일</time><span>5분 읽기</span></p></div></article>
+</catui-example>
+</section>
+<section aria-labelledby="gallery-more">
+<h2 id="gallery-more">캡션 겹침 · 작성자 아바타</h2>
+<catui-example title="figure + figcaption (아래 그라디언트)">
+  <div class="Catui_gallery">
+    <figure class="Catui_gallery-wide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'%3E%3Crect width='320' height='240' fill='%23E6F7F3'/%3E%3Cpath d='M0 200 L90 130 L150 170 L230 90 L320 150 V240 H0Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="녹색 언덕"><figcaption>제주 오름, 10월</figcaption></figure>
+    <figure><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'%3E%3Crect width='320' height='240' fill='%23EAF4FB'/%3E%3Cpath d='M0 200 L90 130 L150 170 L230 90 L320 150 V240 H0Z' fill='%233498DB'/%3E%3C/svg%3E" alt="파란 언덕"><figcaption>속초 바다</figcaption></figure>
+  </div>
+</catui-example>
+<catui-example title="글 정보 + 작성자 아바타">
+  <p class="Catui_meta"><span class="Catui_av Catui_av-sm"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88 88'%3E%3Crect width='88' height='88' fill='%2326B99A'/%3E%3Ccircle cx='44' cy='34' r='16' fill='%23ffffff' fill-opacity='.85'/%3E%3Cpath d='M14 88c4-20 16-28 30-28s26 8 30 28z' fill='%23ffffff' fill-opacity='.85'/%3E%3C/svg%3E" alt="" width="24" height="24"></span><span>박서연</span><time datetime="2026-10-28">10월 28일</time><span>3분 읽기</span></p>
+</catui-example>
+<p>캡션은 <code>figure &gt; figcaption</code>이면 그림 아래쪽에 겹쳐 보입니다(흰 글자 + 어두운 그라디언트). 글 정보 맨 앞의 아바타 뒤에는 구분 점이 붙지 않습니다.</p>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_gallery</code>(160px 격자) 안의 링크·figure에 이미지를 넣습니다. 강조 칸은 <code>.Catui_gallery-wide</code>(2칸 폭)·<code>-tall</code>(2칸 높이). 글 정보는 <code>.Catui_meta</code> 안에 항목을 나열하면 사이에 점이 들어갑니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>갤러리 링크마다 이미지 <code>alt</code>가 링크 이름이 됩니다.</li>
+  <li>날짜는 <code>time datetime</code>으로 기계가 읽을 수 있게 합니다. 확대 효과는 모션 줄이기에서 꺼집니다.</li>
+</ul>
+</section>

@@ -1,0 +1,37 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="지표 카드">
+  <div class="Catui_grid"><article class="Catui_card Catui_span-4"><div class="Catui_card-b Catui_stat">
+    <span class="Catui_stat-label">매출</span>
+    <span class="Catui_stat-value">5.4k</span>
+    <span class="Catui_pill Catui_pill-success Catui_delta-up">12%</span>
+    <span class="Catui_spark" aria-hidden="true"><i style="height:8px"></i><i style="height:14px"></i><i style="height:10px"></i><i style="height:18px"></i><i style="height:22px"></i></span>
+  </div></article></div>
+</catui-example>
+<catui-example title="감소 지표 (증감을 글자로)">
+  <div class="Catui_grid"><article class="Catui_card Catui_span-4"><div class="Catui_card-b Catui_stat">
+    <span class="Catui_stat-label">반품</span>
+    <span class="Catui_stat-value">38</span>
+    <span class="Catui_delta-down"><span class="Catui_clip">지난주보다 </span>5% 감소</span>
+  </div></article></div>
+</catui-example>
+<catui-example title="라벨 앞 점 (stat-dot)">
+  <div class="Catui_grid"><article class="Catui_card Catui_span-4"><div class="Catui_card-b Catui_stat">
+    <span class="Catui_stat-label"><i class="Catui_stat-dot" aria-hidden="true"></i> 실시간 접속</span>
+    <span class="Catui_stat-value">214</span>
+  </div></article></div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_stat</code> = <code>Catui_stat-label</code> + <code>Catui_stat-value</code> + 배지 델타 + <code>.Catui_spark</code> 막대.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>수치는 tabular-nums로 자리가 흔들리지 않습니다.</li>
+  <li>증감은 색과 함께 '증가/감소' 문구(숨김 텍스트 가능)를 둡니다.</li>
+  <li>스파크 막대는 장식이므로 <code>aria-hidden</code>.</li>
+</ul>
+</section>

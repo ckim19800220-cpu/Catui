@@ -1,0 +1,42 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="시리즈 1개">
+  <svg class="Catui_radar" viewBox="-12 0 224 200" role="img" aria-label="레이더 5축, 속도 안정 사용 접근 규모">
+    <polygon class="ring" points="100,28 168,74 146,156 54,156 32,74"/>
+    <path class="spoke" d="M100,97.6 L100,28 M100,97.6 L168,74 M100,97.6 L146,156 M100,97.6 L54,156 M100,97.6 L32,74"/>
+    <polygon class="area" points="100,52 148,84 128,140 72,140 56,86"/>
+    <text class="axis" x="100" y="16" text-anchor="middle">속도</text>
+    <text class="axis" x="186" y="74" text-anchor="start">안정</text>
+    <text class="axis" x="156" y="176" text-anchor="middle">사용</text>
+    <text class="axis" x="44" y="176" text-anchor="middle">접근</text>
+    <text class="axis" x="14" y="74" text-anchor="end">규모</text>
+  </svg>
+</catui-example>
+<catui-example title="두 시리즈 비교 + 범례">
+  <div class="Catui_actions">
+    <svg class="Catui_radar" viewBox="-12 0 224 200" role="img" aria-label="올해(실선)와 작년 비교: 속도·안정은 올해가 높고 규모는 작년과 비슷">
+      <polygon class="ring" points="100,28 168,74 146,156 54,156 32,74"/>
+      <path class="spoke" d="M100,97.6 L100,28 M100,97.6 L168,74 M100,97.6 L146,156 M100,97.6 L54,156 M100,97.6 L32,74"/>
+      <polygon class="area-2" points="100,64 136,86 124,130 76,134 62,88"/>
+      <polygon class="area" points="100,40 158,78 130,142 70,138 56,86"/>
+      <text class="axis" x="100" y="16" text-anchor="middle">속도</text>
+      <text class="axis" x="186" y="74" text-anchor="start">안정</text>
+      <text class="axis" x="154" y="176" text-anchor="middle">사용</text>
+      <text class="axis" x="46" y="176" text-anchor="middle">접근</text>
+      <text class="axis" x="14" y="74" text-anchor="end">규모</text>
+    </svg>
+    <ul class="Catui_legend"><li><i class="Catui_s1"></i>올해</li><li><i class="Catui_s2"></i>작년</li></ul>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_radar</code> SVG의 <code>.ring</code>·<code>.spoke</code>·<code>.area(-2)</code>·<code>.axis</code>를 채웁니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li><code>role="img"</code> + 축별 값을 나열한 라벨, 가능하면 표도 함께.</li>
+</ul>
+</section>

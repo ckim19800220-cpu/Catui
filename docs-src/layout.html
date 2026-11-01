@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="{{desc}}">
+<link rel="icon" href="{{assets}}/brand/favicon.ico" sizes="any">
+<link rel="icon" href="{{assets}}/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="{{assets}}/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{assets}}/brand/apple-touch-icon.png">
+<link rel="manifest" href="{{assets}}/brand/site.webmanifest">
+<link rel="stylesheet" href="{{dist}}/catui.min.css">
+<link rel="stylesheet" href="{{assets}}/docs.css">
+{{scripts}}
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="{{home}}"><img class="doc-logo" src="{{assets}}/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류">{{tabs}}</nav>
+  <span class="doc-version">v{{version}}</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="{{shellClass}}">
+{{sidebar}}
+<main class="doc-main" id="doc-main" tabindex="-1">
+{{content}}
+</main>
+{{toc}}
+</div>
+</div>
+<script src="{{assets}}/docs.js"></script>
+</body>
+</html>

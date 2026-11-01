@@ -1,0 +1,65 @@
+<section aria-labelledby="verify">
+<h2 id="verify">선언형 검증과 제출</h2>
+<catui-example title="data-catui-verify + submit(filter)">
+  <form class="Catui_fields" data-catui-form data-catui-filter="fm-signup" novalidate>
+    <div class="Catui_field"><label class="Catui_label" for="fm-email">이메일 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-email" name="email" autocomplete="email" data-catui-verify="required|email" data-catui-reqtext="이메일을 입력해 주세요."></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-phone">휴대전화</label><input class="Catui_input" id="fm-phone" name="phone" autocomplete="tel" data-catui-verify="phone"></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-pw">비밀번호 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-pw" name="password" type="password" autocomplete="new-password" data-catui-verify="required|pass"></div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit" data-catui-submit>가입</button></div>
+  </form>
+  <p class="Catui_help" id="fm-out" aria-live="polite"></p>
+  <script>
+  catui.use(['form'], function (form) {
+    form.verify({ pass: [/^(?=.*\d).{8,}$/, '숫자를 포함해 8자 이상 입력해 주세요.'] });
+    form.on('submit(fm-signup)', function (data) {
+      document.getElementById('fm-out').textContent = '제출: ' + JSON.stringify(data.field);
+      return false;   // 기본 제출 막기
+    });
+  });
+  </script>
+</catui-example>
+<p>제출하면 검증하고, 처음 틀린 칸에 포커스한 뒤 오류를 색 + 문장(<code>aria-invalid</code>, <code>aria-describedby</code>)으로 알립니다. 틀린 칸은 입력할 때마다 다시 검사합니다. 빈 값은 <code>required</code>만 검사합니다.</p>
+</section>
+
+<section aria-labelledby="controls">
+<h2 id="controls">선택 컨트롤 이벤트 · 값</h2>
+<catui-example title="switch · checkbox · select · form.val">
+  <form class="Catui_fields" data-catui-form data-catui-filter="fm-pref" novalidate>
+    <div class="Catui_field"><label class="Catui_label" for="fm-role">역할</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="fm-role" name="role" data-catui-filter="fm-role"><option>편집자</option><option>관리자</option></select></div></div>
+    <div class="Catui_choices">
+      <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="topics" value="주문" data-catui-filter="fm-topic"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span>주문 알림</label>
+      <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="topics" value="배송" data-catui-filter="fm-topic"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span>배송 알림</label>
+      <span class="Catui_choice"><input class="Catui_clip" id="fm-news" type="checkbox" name="news" role="switch" data-catui-filter="fm-news"><label class="Catui_tgl" for="fm-news"></label><label for="fm-news">소식 받기</label></span>
+    </div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="fm-fill">값 채우기</button><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="fm-read">값 읽기</button></div>
+  </form>
+  <p class="Catui_help" id="fm-out2" aria-live="polite"></p>
+  <script>
+  catui.use(['form'], function (form) {
+    var out = function (t) { document.getElementById('fm-out2').textContent = t; };
+    form.on('switch(fm-news)', function (d) { out('소식 받기: ' + (d.checked ? '켬' : '끔')); });
+    form.on('checkbox(fm-topic)', function (d) { out(d.value + ': ' + (d.checked ? '선택' : '해제')); });
+    form.on('select(fm-role)', function (d) { out('역할: ' + d.value); });
+    document.getElementById('fm-fill').addEventListener('click', function () { form.val('fm-pref', { role: '관리자', topics: ['주문', '배송'], news: true }); });
+    document.getElementById('fm-read').addEventListener('click', function () { out(JSON.stringify(form.val('fm-pref'))); });
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">form API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>data-catui-verify="required|email"</code></td><td>내장: required · email · phone · url · number · date</td></tr>
+<tr><td><code>data-catui-reqtext</code></td><td>필수 오류 문구 바꾸기</td></tr>
+<tr><td><code>data-catui-submit</code></td><td>제출 버튼이 여러 개일 때 이 버튼만 처리</td></tr>
+<tr><td><code>form.verify({ 이름: [정규식, 메시지] | fn(value, el) })</code></td><td>규칙 추가 (fn은 오류 문장 또는 '' 반환)</td></tr>
+<tr><td><code>form.on('submit(f)')</code></td><td><code>{ field, form, elem }</code>. false = 기본 제출 막기</td></tr>
+<tr><td><code>form.on('switch|checkbox|radio|select(f)')</code></td><td><code>{ elem, value, checked }</code> — 필터는 컨트롤 또는 상위의 data-catui-filter</td></tr>
+<tr><td><code>form.val(f, [값])</code></td><td>값 읽기/쓰기 (같은 name은 배열)</td></tr>
+<tr><td><code>form.validate(영역)</code> · <code>form.submit(f, [cb])</code></td><td>직접 검증 / 프로그램 제출</td></tr>
+<tr><td><code>form.render(영역)</code> · <code>form.setError(el, 문장)</code></td><td>셀렉트 화살표 보충 / 오류 직접 표시</td></tr>
+</tbody></table></div>
+</section>

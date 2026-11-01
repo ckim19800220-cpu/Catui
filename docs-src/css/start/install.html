@@ -1,0 +1,34 @@
+<section aria-labelledby="files">
+<h2 id="files">배포 파일</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">배포 파일</caption>
+<thead><tr><th scope="col">파일</th><th scope="col">용도</th></tr></thead>
+<tbody>
+<tr><td><code>dist/catui.min.css</code></td><td>압축 스타일 (페이지에는 이 파일을 링크)</td></tr>
+<tr><td><code>dist/catui.css</code></td><td>읽기 쉬운 원본 결합본</td></tr>
+<tr><td><code>dist/icons.svg</code></td><td>Lucide 아이콘 스프라이트 239개 (목록은 <a href="doc:css/foundation/icons">아이콘</a>)</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="link">
+<h2 id="link">페이지에 연결</h2>
+<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+
+&lt;!-- 관리 화면 --&gt;
+&lt;div class="Catui_app"&gt; … &lt;/div&gt;
+
+&lt;!-- 공개 홈 --&gt;
+&lt;div class="Catui_site"&gt; … &lt;/div&gt;
+
+&lt;!-- 아이콘 --&gt;
+&lt;svg class="Catui_icon Catui_i16" aria-hidden="true"&gt;&lt;use href="dist/icons.svg?v=2#Catui_ic-search"&gt;&lt;/use&gt;&lt;/svg&gt;</code></pre>
+<p>리셋과 글꼴은 <code>.Catui_app</code>·<code>.Catui_site</code> 안에서만 적용됩니다. 외부 스프라이트는 <code>file://</code>에서 막히므로 정적 서버(<code>npm run dev</code>)로 여세요.</p>
+</section>
+
+<section aria-labelledby="build">
+<h2 id="build">소스에서 빌드</h2>
+<pre><code>npm install
+npm run build        # CSS·아이콘·JS·문서 전부
+npm run build:css    # CSS와 아이콘만
+npm run dev          # http://127.0.0.1:8766/docs/</code></pre>
+<p>CSS 소스는 <code>src/css/</code>에 컴포넌트마다 한 파일이고, 결합 순서는 <code>src/css/index.json</code>입니다. 새 파일을 만들면 이 목록에 넣어야 빌드가 통과합니다.</p>
+</section>

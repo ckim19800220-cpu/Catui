@@ -1,0 +1,39 @@
+/* components/table.css */
+/* Table — wrap scroll, head/row/zebra/sort, row dropdown. */
+.Catui_table-wrap{width:100%;overflow-x:auto}
+.Catui_tbl{width:100%;border-collapse:collapse;font-size:var(--Catui_table-font)}
+.Catui_tbl caption{text-align:left;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);margin-bottom:var(--Catui_space-2)}
+.Catui_tbl th{
+  height:var(--Catui_table-head-h);text-align:left;padding:0 var(--Catui_table-cell-px);
+  background:var(--Catui_table-head-bg);color:var(--Catui_table-head-fg);
+  font-size:var(--Catui_table-head-font);font-weight:var(--Catui_type-label-weight);
+  letter-spacing:var(--Catui_type-label-ls);text-transform:uppercase;white-space:nowrap;
+  border-bottom:1px solid var(--Catui_table-border);
+}
+.Catui_tbl td{height:var(--Catui_table-row-h);padding:0 var(--Catui_table-cell-px);border-bottom:1px solid var(--Catui_divider-color);vertical-align:middle}
+.Catui_tbl tbody tr:nth-child(even){background:var(--Catui_table-zebra)}
+.Catui_tbl tbody tr:hover{background:var(--Catui_table-row-hover)}
+.Catui_tbl .Catui_num,.Catui_tbl td.num{text-align:right;font-variant-numeric:tabular-nums}
+.Catui_sort{color:var(--Catui_color-text-primary);white-space:nowrap}
+.Catui_sort .Catui_icon{display:inline-block;width:var(--Catui_icon-12);height:var(--Catui_icon-12);vertical-align:middle;margin-left:var(--Catui_space-1)}
+/* 변형: 촘촘 · 테두리 · 머리 고정 · 선택 행 */
+.Catui_tbl-compact td{height:var(--Catui_control-h-md)}
+.Catui_tbl-compact th{height:var(--Catui_control-h-md)}
+.Catui_tbl-bordered{border:1px solid var(--Catui_table-border)}
+.Catui_tbl-bordered :is(th,td){border:1px solid var(--Catui_table-border)}
+.Catui_table-scroll{max-height:320px;overflow:auto;border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md)}
+.Catui_tbl-sticky thead th{position:sticky;top:0;z-index:1}
+.Catui_tbl tbody tr[aria-selected="true"]{background:var(--Catui_color-brand-soft)}
+/* 좁은 화면 카드형: 767px 이하에서 행을 카드로 쌓고 td의 data-label을 왼쪽 라벨로 보인다 */
+@media (max-width:767px){
+  .Catui_tbl-stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  .Catui_tbl-stack,.Catui_tbl-stack tbody,.Catui_tbl-stack tr,.Catui_tbl-stack td{display:block;width:100%}
+  .Catui_tbl-stack tbody tr{margin-bottom:var(--Catui_space-3);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);background:var(--Catui_card-bg)}
+  .Catui_tbl-stack tbody tr:nth-child(even){background:var(--Catui_card-bg)}
+  .Catui_tbl-stack td{height:auto;display:flex;justify-content:space-between;gap:var(--Catui_space-3);padding:var(--Catui_space-2) var(--Catui_space-3);text-align:right}
+  .Catui_tbl-stack td::before{content:attr(data-label);font-weight:600;color:var(--Catui_color-text-secondary);text-align:left}
+  .Catui_tbl-stack tr td:last-child{border-bottom:0}
+}
+.Catui_tbl tbody tr[aria-selected="true"] td:first-child{box-shadow:inset 3px 0 0 var(--Catui_color-brand-strong)}
+/* catui.js table: 표와 페이저 사이 간격 */
+[data-catui-table-pager]:not(:empty){margin-top:var(--Catui_space-3)}

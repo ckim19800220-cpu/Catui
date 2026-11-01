@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>드로어 · CSS · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="오른쪽에서 여는 320px 패널.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html" aria-current="page">CSS</a><a href="../../js/start/introduction.html">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CSS 메뉴</summary><nav aria-label="CSS 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../css/start/introduction.html">소개</a></li><li><a href="../../css/start/install.html">설치와 빌드</a></li><li><a href="../../css/start/namespace.html">이름과 스코프</a></li><li><a href="../../css/start/accessibility.html">접근성 기준</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">기초</p><ul><li><a href="../../css/foundation/color.html">색상</a></li><li><a href="../../css/foundation/surface.html">배경</a></li><li><a href="../../css/foundation/theme.html">다크 모드</a></li><li><a href="../../css/foundation/typography.html">타이포그래피</a></li><li><a href="../../css/foundation/text.html">텍스트·링크</a></li><li><a href="../../css/foundation/spacing.html">간격·반경·그림자</a></li><li><a href="../../css/foundation/icons.html">아이콘</a></li><li><a href="../../css/foundation/media.html">미디어·이미지</a></li><li><a href="../../css/foundation/utilities.html">유틸리티</a></li><li><a href="../../css/foundation/helpers.html">도우미 클래스</a></li><li><a href="../../css/foundation/motion.html">모션</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">레이아웃</p><ul><li><a href="../../css/layout/grid.html">그리드</a></li><li><a href="../../css/layout/flex.html">정렬 도우미</a></li><li><a href="../../css/layout/app-shell.html">관리 셸</a></li><li><a href="../../css/layout/site.html">공개 홈</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">웹 블록</p><ul><li><a href="../../css/blocks/head.html">섹션 머리·공지 띠</a></li><li><a href="../../css/blocks/proof.html">신뢰 요소</a></li><li><a href="../../css/blocks/people.html">팀·프로필</a></li><li><a href="../../css/blocks/process.html">과정·단계</a></li><li><a href="../../css/blocks/gallery.html">갤러리·글 정보</a></li><li><a href="../../css/blocks/subscribe.html">구독 폼</a></li><li><a href="../../css/blocks/floating.html">떠 있는 요소</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">컴포넌트</p><ul><li><a href="../../css/components/button.html">버튼</a></li><li><a href="../../css/components/split-button.html">분할 버튼</a></li><li><a href="../../css/components/form.html">입력 필드</a></li><li><a href="../../css/components/input-group.html">입력 그룹</a></li><li><a href="../../css/components/choice.html">체크·라디오·토글</a></li><li><a href="../../css/components/badge.html">배지·카운트</a></li><li><a href="../../css/components/indicator.html">알림·상태 표시</a></li><li><a href="../../css/components/avatar.html">아바타</a></li><li><a href="../../css/components/media.html">미디어 객체·임베드</a></li><li><a href="../../css/components/card.html">카드</a></li><li><a href="../../css/components/carousel.html">캐러셀</a></li><li><a href="../../css/components/canvas.html">캔버스</a></li><li><a href="../../css/components/stat.html">지표</a></li><li><a href="../../css/components/progress.html">진행</a></li><li><a href="../../css/components/table.html">표</a></li><li><a href="../../css/components/toolbar.html">도구 모음·작업 바</a></li><li><a href="../../css/components/list.html">목록</a></li><li><a href="../../css/components/setting.html">설정 행</a></li><li><a href="../../css/components/tabs.html">탭·세그먼트</a></li><li><a href="../../css/components/subnav.html">보조 탐색</a></li><li><a href="../../css/components/vnav.html">세로 내비게이션</a></li><li><a href="../../css/components/breadcrumb.html">경로</a></li><li><a href="../../css/components/pagehead.html">페이지 머리</a></li><li><a href="../../css/components/pager.html">페이지</a></li><li><a href="../../css/components/feedback.html">피드백</a></li><li><a href="../../css/components/result.html">결과 화면</a></li><li><a href="../../css/components/callout.html">안내 상자</a></li><li><a href="../../css/components/spinner.html">스피너</a></li><li><a href="../../css/components/code.html">코드</a></li><li><a href="../../css/components/quote.html">인용</a></li><li><a href="../../css/components/chat.html">채팅</a></li><li><a href="../../css/components/modal.html">모달</a></li><li><a href="../../css/components/drawer.html" aria-current="page">드로어</a></li><li><a href="../../css/components/dropdown.html">드롭다운</a></li><li><a href="../../css/components/toast.html">토스트</a></li><li><a href="../../css/components/notifs.html">알림 패널</a></li><li><a href="../../css/components/tooltip.html">툴팁·팝오버</a></li><li><a href="../../css/components/mega.html">메가 메뉴</a></li><li><a href="../../css/components/wizard.html">마법사</a></li><li><a href="../../css/components/command.html">명령 팔레트</a></li><li><a href="../../css/components/faq.html">질문(접기)</a></li><li><a href="../../css/components/accordion.html">아코디언</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">고급 입력</p><ul><li><a href="../../css/forms/upload.html">업로드</a></li><li><a href="../../css/forms/range.html">범위</a></li><li><a href="../../css/forms/rating.html">별점</a></li><li><a href="../../css/forms/tags.html">태그</a></li><li><a href="../../css/forms/chips.html">선택 칩</a></li><li><a href="../../css/forms/optcard.html">선택 카드</a></li><li><a href="../../css/forms/swatch.html">색상 견본</a></li><li><a href="../../css/forms/stepper.html">스테퍼</a></li><li><a href="../../css/forms/otp.html">인증 코드</a></li><li><a href="../../css/forms/datepicker.html">날짜</a></li><li><a href="../../css/forms/counter.html">글자 수</a></li><li><a href="../../css/forms/search.html">검색</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">데이터 뷰</p><ul><li><a href="../../css/views/tree.html">트리</a></li><li><a href="../../css/views/calendar.html">달력</a></li><li><a href="../../css/views/gantt.html">간트</a></li><li><a href="../../css/views/kanban.html">칸반</a></li><li><a href="../../css/views/files.html">파일 목록</a></li><li><a href="../../css/views/thread.html">스레드</a></li><li><a href="../../css/views/heatmap.html">히트맵</a></li><li><a href="../../css/views/timeline.html">타임라인</a></li><li><a href="../../css/views/feed-meter.html">피드·미터·작업</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">차트</p><ul><li><a href="../../css/charts/line.html">라인 차트</a></li><li><a href="../../css/charts/donut.html">도넛</a></li><li><a href="../../css/charts/bars.html">막대</a></li><li><a href="../../css/charts/stack.html">누적·세그먼트</a></li><li><a href="../../css/charts/gauge.html">게이지</a></li><li><a href="../../css/charts/funnel.html">퍼널</a></li><li><a href="../../css/charts/sparkline.html">스파크라인</a></li><li><a href="../../css/charts/radar.html">레이더</a></li><li><a href="../../css/charts/prose.html">본문</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CSS · 컴포넌트</p>
+<h1 class="Catui_h1">드로어</h1>
+<p class="Catui_lead">오른쪽에서 여는 320px 패널.</p>
+<ul class="doc-rules" aria-label="견본 계약"><li><span class="Catui_pill Catui_pill-success">MUST</span> 폭 320, 우측 고정, 반경 0</li><li><span class="Catui_pill Catui_pill-info">SHOULD</span> 전이는 transform만</li><li><span class="Catui_pill Catui_pill-danger">NEVER</span> 스크림을 중첩하지 않는다</li></ul>
+<section aria-labelledby="filter">
+<h2 id="filter">필터 드로어</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">오른쪽 320px 패널</figcaption>
+<div class="doc-example-preview">
+  <div>
+    <input class="Catui_clip Catui_drawer-toggle" type="checkbox" id="dr-filter" aria-label="필터 열기">
+    <label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="dr-filter"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-filter"></use></svg>필터</label>
+    <div class="Catui_scrim"><label for="dr-filter"><span class="Catui_clip">닫기</span></label></div>
+    <aside class="Catui_drawer" role="dialog" aria-modal="true" aria-labelledby="dr-filter-t">
+      <header class="Catui_drawer-h"><span id="dr-filter-t">필터</span><label class="Catui_close" for="dr-filter" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-x"></use></svg></label></header>
+      <div class="Catui_drawer-b"><div class="Catui_fields">
+        <div class="Catui_field"><label class="Catui_label" for="dr-status">상태</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="dr-status"><option>전체</option><option>배송</option><option>처리</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+        <div class="Catui_field"><label class="Catui_label" for="dr-from">시작일</label><input class="Catui_input" id="dr-from" type="date"></div>
+      </div></div>
+    </aside>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="오른쪽 320px 패널 코드 복사">복사</button><pre><code>&lt;div&gt;
+  &lt;input class=&quot;Catui_clip Catui_drawer-toggle&quot; type=&quot;checkbox&quot; id=&quot;dr-filter&quot; aria-label=&quot;필터 열기&quot;&gt;
+  &lt;label class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; for=&quot;dr-filter&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-filter&quot;&gt;&lt;/use&gt;&lt;/svg&gt;필터&lt;/label&gt;
+  &lt;div class=&quot;Catui_scrim&quot;&gt;&lt;label for=&quot;dr-filter&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;닫기&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+  &lt;aside class=&quot;Catui_drawer&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;dr-filter-t&quot;&gt;
+    &lt;header class=&quot;Catui_drawer-h&quot;&gt;&lt;span id=&quot;dr-filter-t&quot;&gt;필터&lt;/span&gt;&lt;label class=&quot;Catui_close&quot; for=&quot;dr-filter&quot; aria-label=&quot;닫기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-x&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/label&gt;&lt;/header&gt;
+    &lt;div class=&quot;Catui_drawer-b&quot;&gt;&lt;div class=&quot;Catui_fields&quot;&gt;
+      &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dr-status&quot;&gt;상태&lt;/label&gt;&lt;div class=&quot;Catui_select-wrap&quot;&gt;&lt;select class=&quot;Catui_input Catui_select&quot; id=&quot;dr-status&quot;&gt;&lt;option&gt;전체&lt;/option&gt;&lt;option&gt;배송&lt;/option&gt;&lt;option&gt;처리&lt;/option&gt;&lt;/select&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-chevron-down&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dr-from&quot;&gt;시작일&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dr-from&quot; type=&quot;date&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;&lt;/div&gt;
+  &lt;/aside&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="detail">
+<h2 id="detail">상세 보기 드로어</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">목록에서 항목 상세</figcaption>
+<div class="doc-example-preview">
+  <div>
+    <input class="Catui_clip Catui_drawer-toggle" type="checkbox" id="dr-detail" aria-label="주문 상세 열기">
+    <label class="Catui_btn Catui_btn-md Catui_btn-ghost" for="dr-detail">주문 1003 상세</label>
+    <div class="Catui_scrim"><label for="dr-detail"><span class="Catui_clip">닫기</span></label></div>
+    <aside class="Catui_drawer" role="dialog" aria-modal="true" aria-labelledby="dr-detail-t">
+      <header class="Catui_drawer-h"><span id="dr-detail-t">주문 1003</span><label class="Catui_close" for="dr-detail" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-x"></use></svg></label></header>
+      <div class="Catui_drawer-b"><p>고객 박서연 · 42,000원</p><span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>대기</span></div>
+    </aside>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="목록에서 항목 상세 코드 복사">복사</button><pre><code>&lt;div&gt;
+  &lt;input class=&quot;Catui_clip Catui_drawer-toggle&quot; type=&quot;checkbox&quot; id=&quot;dr-detail&quot; aria-label=&quot;주문 상세 열기&quot;&gt;
+  &lt;label class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost&quot; for=&quot;dr-detail&quot;&gt;주문 1003 상세&lt;/label&gt;
+  &lt;div class=&quot;Catui_scrim&quot;&gt;&lt;label for=&quot;dr-detail&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;닫기&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+  &lt;aside class=&quot;Catui_drawer&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;dr-detail-t&quot;&gt;
+    &lt;header class=&quot;Catui_drawer-h&quot;&gt;&lt;span id=&quot;dr-detail-t&quot;&gt;주문 1003&lt;/span&gt;&lt;label class=&quot;Catui_close&quot; for=&quot;dr-detail&quot; aria-label=&quot;닫기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-x&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/label&gt;&lt;/header&gt;
+    &lt;div class=&quot;Catui_drawer-b&quot;&gt;&lt;p&gt;고객 박서연 · 42,000원&lt;/p&gt;&lt;span class=&quot;Catui_pill Catui_pill-warning&quot;&gt;&lt;i class=&quot;Catui_dot&quot;&gt;&lt;/i&gt;대기&lt;/span&gt;&lt;/div&gt;
+  &lt;/aside&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="sides">
+<h2 id="sides">왼쪽 · 아래 드로어</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">drawer-left · drawer-bottom</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_hstack">
+    <div>
+      <input class="Catui_clip Catui_drawer-toggle" type="checkbox" id="dr-left" aria-label="메뉴 열기">
+      <label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="dr-left">왼쪽 메뉴</label>
+      <div class="Catui_scrim"><label for="dr-left"><span class="Catui_clip">닫기</span></label></div>
+      <aside class="Catui_drawer Catui_drawer-left" role="dialog" aria-modal="true" aria-labelledby="dr-left-t"><header class="Catui_drawer-h"><span id="dr-left-t">메뉴</span><label class="Catui_close" for="dr-left" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-x"></use></svg></label></header><div class="Catui_drawer-b"><p>왼쪽에서 여는 내비게이션입니다.</p></div></aside>
+    </div>
+    <div>
+      <input class="Catui_clip Catui_drawer-toggle" type="checkbox" id="dr-bottom" aria-label="공유 열기">
+      <label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="dr-bottom">아래 시트</label>
+      <div class="Catui_scrim"><label for="dr-bottom"><span class="Catui_clip">닫기</span></label></div>
+      <aside class="Catui_drawer Catui_drawer-bottom" role="dialog" aria-modal="true" aria-labelledby="dr-bottom-t"><header class="Catui_drawer-h"><span id="dr-bottom-t">공유</span><label class="Catui_close" for="dr-bottom" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-x"></use></svg></label></header><div class="Catui_drawer-b"><p>모바일에서 아래에서 올라오는 시트입니다. 높이는 화면의 70%까지.</p></div></aside>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="drawer-left · drawer-bottom 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_hstack&quot;&gt;
+  &lt;div&gt;
+    &lt;input class=&quot;Catui_clip Catui_drawer-toggle&quot; type=&quot;checkbox&quot; id=&quot;dr-left&quot; aria-label=&quot;메뉴 열기&quot;&gt;
+    &lt;label class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; for=&quot;dr-left&quot;&gt;왼쪽 메뉴&lt;/label&gt;
+    &lt;div class=&quot;Catui_scrim&quot;&gt;&lt;label for=&quot;dr-left&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;닫기&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+    &lt;aside class=&quot;Catui_drawer Catui_drawer-left&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;dr-left-t&quot;&gt;&lt;header class=&quot;Catui_drawer-h&quot;&gt;&lt;span id=&quot;dr-left-t&quot;&gt;메뉴&lt;/span&gt;&lt;label class=&quot;Catui_close&quot; for=&quot;dr-left&quot; aria-label=&quot;닫기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-x&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/label&gt;&lt;/header&gt;&lt;div class=&quot;Catui_drawer-b&quot;&gt;&lt;p&gt;왼쪽에서 여는 내비게이션입니다.&lt;/p&gt;&lt;/div&gt;&lt;/aside&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input class=&quot;Catui_clip Catui_drawer-toggle&quot; type=&quot;checkbox&quot; id=&quot;dr-bottom&quot; aria-label=&quot;공유 열기&quot;&gt;
+    &lt;label class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; for=&quot;dr-bottom&quot;&gt;아래 시트&lt;/label&gt;
+    &lt;div class=&quot;Catui_scrim&quot;&gt;&lt;label for=&quot;dr-bottom&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;닫기&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;
+    &lt;aside class=&quot;Catui_drawer Catui_drawer-bottom&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;dr-bottom-t&quot;&gt;&lt;header class=&quot;Catui_drawer-h&quot;&gt;&lt;span id=&quot;dr-bottom-t&quot;&gt;공유&lt;/span&gt;&lt;label class=&quot;Catui_close&quot; for=&quot;dr-bottom&quot; aria-label=&quot;닫기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-x&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/label&gt;&lt;/header&gt;&lt;div class=&quot;Catui_drawer-b&quot;&gt;&lt;p&gt;모바일에서 아래에서 올라오는 시트입니다. 높이는 화면의 70%까지.&lt;/p&gt;&lt;/div&gt;&lt;/aside&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>모달과 같은 체크박스 구조에서 <code>.Catui_drawer-toggle</code> + <code>aside.Catui_drawer</code>를 씁니다. 폭 320px, 오른쪽 고정, 반경 0. 스크립트로 열려면 <a href="../../js/modules/layer.html">layer.open({ type: 'drawer' })</a>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>CSS만으로는 Esc·포커스 가두기가 안 됩니다. catui.js가 같은 마크업에 붙이고, <code>layer.open({ type: 'drawer' })</code>는 dialog로 기본 제공합니다.</li>
+  <li><code>role="dialog"</code> + <code>aria-modal</code> + 제목 연결, 닫기 버튼 생략 금지. 스크림을 겹치지 않습니다.</li>
+</ul>
+</section>
+
+<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/drawer.css</span><code>.Catui_drawer-toggle</code> <code>.Catui_drawer</code> <code>.Catui_drawer-left</code> <code>.Catui_drawer-bottom</code></li></ul></section>
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/components/modal.html"><span>이전</span>모달</a><a class="doc-pager-next" href="../../css/components/dropdown.html"><span>다음</span>드롭다운</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#filter">필터 드로어</a></li><li><a href="#detail">상세 보기 드로어</a></li><li><a href="#sides">왼쪽 · 아래 드로어</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

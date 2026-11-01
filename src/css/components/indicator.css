@@ -1,0 +1,10 @@
+/* components/indicator.css */
+/* Indicator — 아이콘·아바타 모서리의 알림 점/숫자, 온라인 상태 점. */
+.Catui_indicator{position:relative;display:inline-flex}
+.Catui_indicator-dot{position:absolute;top:-2px;right:-2px;width:var(--Catui_space-2);height:var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_badge-danger-fg);box-shadow:0 0 0 2px var(--Catui_card-bg)}
+.Catui_indicator > .Catui_count{position:absolute;top:-6px;right:-8px;box-shadow:0 0 0 2px var(--Catui_card-bg)}
+.Catui_status{width:var(--Catui_space-2);height:var(--Catui_space-2);border-radius:var(--Catui_radius-pill);display:inline-block;flex:none;background:var(--Catui_color-neutral-300)}
+.Catui_status-on{background:var(--Catui_color-brand)}
+.Catui_status-busy{background:var(--Catui_badge-danger-fg)}
+.Catui_status-away{background:var(--Catui_color-amber)}
+.Catui_indicator > .Catui_status{position:absolute;right:0;bottom:0;box-shadow:0 0 0 2px var(--Catui_card-bg)}

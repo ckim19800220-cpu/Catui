@@ -1,0 +1,71 @@
+<section aria-labelledby="basic">
+<h2 id="basic">데이터 표</h2>
+<catui-example title="정렬 · 선택 · 도구 · 페이지">
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="tb-check">선택 확인</button><span class="Catui_help" id="tb-out" aria-live="polite"></span></div>
+  <div id="tb-orders" data-catui-filter="tb-orders"></div>
+  <script>
+  catui.use(['table', 'layer'], function (table, layer) {
+    var KIND = { '배송': 'success', '처리': 'info', '대기': 'warning', '취소': 'danger' };
+    var names = ['김하늘', '이준', '박서연', '최민', '정수아', '강도현', '윤지호', '한소리', '임태윤', '신예진', '오준혁', '배가영'];
+    var rows = names.map(function (n, i) { return { id: String(1001 + i), customer: n, amount: 30000 + ((i * 37) % 19) * 9000, status: ['배송', '처리', '대기', '취소'][i % 4] }; });
+    table.render({
+      elem: '#tb-orders', id: 'tb-orders', caption: '최근 주문', page: true, limit: 5, labelField: 'customer', data: rows,
+      cols: [
+        { type: 'checkbox', width: 48 }, { type: 'numbers', width: 48 },
+        { field: 'id', title: '번호', sort: true },
+        { field: 'customer', title: '고객', sort: true },
+        { field: 'amount', title: '금액', sort: true, align: 'right', templet: function (d) { return d.amount.toLocaleString('ko-KR'); } },
+        { field: 'status', title: '상태', templet: function (d) { return catui.html`<span class="Catui_pill Catui_pill-${KIND[d.status]}"><i class="Catui_dot"></i>${d.status}</span>`; } },
+        { title: '동작', toolbar: [{ event: 'del', text: '삭제', icon: 'trash-2' }] },
+      ],
+    });
+    table.on('tool(tb-orders)', function (obj) {
+      layer.confirm(obj.data.customer + ' 주문을 삭제할까요?', { danger: true, okText: '삭제' }, function (i) { obj.del(); layer.close(i); });
+    });
+    document.getElementById('tb-check').addEventListener('click', function () {
+      var s = table.checkStatus('tb-orders');
+      document.getElementById('tb-out').textContent = '선택 ' + s.data.length + '건' + (s.isAll ? ' (이 쪽 전체)' : '');
+    });
+  });
+  </script>
+</catui-example>
+<p>정렬은 오름 → 내림 → 해제(<code>aria-sort</code>), 일부만 선택하면 머리 체크가 indeterminate가 됩니다. templet이 돌려준 일반 문자열은 escape되고, 마크업은 <code>catui.html``</code>로 돌려줍니다.</p>
+</section>
+
+<section aria-labelledby="remote">
+<h2 id="remote">원격 데이터</h2>
+<pre><code>table.render({
+  elem: '#t', id: 't', url: '/api/orders', method: 'GET', where: { status: '배송' }, page: true,
+  parseData: function (res) { return { code: res.ok ? 0 : 1, msg: res.message, data: res.items, count: res.total }; },
+  cols: [ … ],
+});
+// 요청: ?page=1&amp;limit=10&amp;field=amount&amp;order=asc&amp;status=배송
+table.on('sort(t)', function (obj) { return true; });   // false면 기본 정렬 생략</code></pre>
+<p>불러오는 동안 스켈레톤과 <code>aria-busy</code>, 실패하면 오류 배너를 보이고, 새 요청이 오면 이전 요청은 취소합니다.</p>
+</section>
+
+<section aria-labelledby="static">
+<h2 id="static">정적 표 향상</h2>
+<catui-example title="data-catui-table + th[data-catui-sort]">
+  <div class="Catui_table-wrap">
+  <table class="Catui_tbl" data-catui-table data-catui-filter="tb-static">
+    <caption>도시 인구</caption>
+    <thead><tr><th scope="col" data-catui-sort="text">도시</th><th scope="col" data-catui-sort="number">인구(만)</th><th scope="col">권역</th></tr></thead>
+    <tbody><tr><td>부산</td><td class="Catui_num">330</td><td>영남</td></tr><tr><td>서울</td><td class="Catui_num">940</td><td>수도권</td></tr><tr><td>대전</td><td class="Catui_num">144</td><td>충청</td></tr></tbody>
+  </table></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">옵션 · 이벤트 · 메서드</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">table API</caption>
+<thead><tr><th scope="col">이름</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>cols[]</code></td><td><code>field · title · sort · width · align('right') · type('checkbox'|'numbers') · templet(row, i) · toolbar[{event, text, icon, danger}]</code></td></tr>
+<tr><td><code>data</code> / <code>url · method · where · headers · parseData</code></td><td>로컬 / 원격</td></tr>
+<tr><td><code>page · limit · caption · initSort · text.none · labelField</code></td><td>페이지·캡션·초기 정렬·빈 문구·도구 버튼 이름에 쓸 필드</td></tr>
+<tr><td><code>on('tool(f)')</code></td><td><code>{ event, data, index, tr, del(), update(fields) }</code></td></tr>
+<tr><td><code>on('sort(f)')</code> · <code>on('checkbox(f)')</code> · <code>on('row(f)')</code> · <code>on('done(f)')</code></td><td>정렬 / 선택 / 행 클릭 / 원격 로드 완료</td></tr>
+<tr><td><code>checkStatus(id)</code> · <code>getData(id)</code> · <code>reload(id, opts)</code> · <code>destroy(id)</code></td><td>선택 상태 / 현재 행 / 다시 그리기 / 정리</td></tr>
+</tbody></table></div>
+</section>

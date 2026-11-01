@@ -1,0 +1,32 @@
+<section aria-labelledby="enter">
+<h2 id="enter">진입 애니메이션</h2>
+<catui-example title="anim-fade · anim-up · anim-scale + delay-1~3">
+  <div class="Catui_grid">
+    <article class="Catui_card Catui_span-3 Catui_anim-fade"><div class="Catui_card-b">anim-fade</div></article>
+    <article class="Catui_card Catui_span-3 Catui_anim-up Catui_delay-1"><div class="Catui_card-b">anim-up · delay-1</div></article>
+    <article class="Catui_card Catui_span-3 Catui_anim-up Catui_delay-2"><div class="Catui_card-b">anim-up · delay-2</div></article>
+    <article class="Catui_card Catui_span-3 Catui_anim-scale Catui_delay-3"><div class="Catui_card-b">anim-scale · delay-3</div></article>
+  </div>
+</catui-example>
+<p>새로고침하면 다시 재생됩니다. 목록 카드에 지연을 차례로 주면 순서대로 나타납니다.</p>
+</section>
+
+<section aria-labelledby="hover">
+<h2 id="hover">전환 · 들어 올리기</h2>
+<catui-example title="transition · hover-lift">
+  <div class="Catui_grid"><a class="Catui_card Catui_span-4 Catui_transition Catui_hover-lift" href="doc:css/components/card"><div class="Catui_card-b">마우스를 올려 보세요</div></a></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>시간은 <code>--Catui_dur-fast</code>(120ms)의 배수, 곡선은 <code>--Catui_ease</code>입니다. 진입은 <code>Catui_anim-fade/up/scale</code>, 지연은 <code>Catui_delay-1/2/3</code>, 색·그림자 전환은 <code>Catui_transition</code>, 링크 카드 강조는 <code>Catui_hover-lift</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li><code>prefers-reduced-motion: reduce</code>에서는 진입 애니메이션과 들어 올리기를 모두 끕니다.</li>
+  <li>정보를 움직임으로만 전하지 않습니다. 애니메이션은 꾸밈입니다.</li>
+</ul>
+</section>

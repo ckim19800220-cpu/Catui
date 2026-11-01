@@ -1,0 +1,41 @@
+<section aria-labelledby="addon">
+<h2 id="addon">덧붙임</h2>
+<catui-example title="앞 글자 · 뒤 글자 · 아이콘">
+  <div class="Catui_fields">
+    <div class="Catui_field"><label class="Catui_label" for="ig-price">가격</label><div class="Catui_igroup"><span class="Catui_igroup-addon">₩</span><input class="Catui_input" id="ig-price" inputmode="numeric" value="42,000"><span class="Catui_igroup-addon">원</span></div></div>
+    <div class="Catui_field"><label class="Catui_label" for="ig-domain">도메인</label><div class="Catui_igroup"><span class="Catui_igroup-addon">https://</span><input class="Catui_input" id="ig-domain" value="catui"><span class="Catui_igroup-addon">.dev</span></div></div>
+    <div class="Catui_field"><label class="Catui_label" for="ig-mail">이메일</label><div class="Catui_igroup"><span class="Catui_igroup-addon"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-mail"></use></svg></span><input class="Catui_input" id="ig-mail" type="email" autocomplete="email"></div></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="button">
+<h2 id="button">버튼과 함께</h2>
+<catui-example title="입력 + 버튼">
+  <div class="Catui_field"><label class="Catui_label" for="ig-coupon">쿠폰</label><div class="Catui_igroup"><input class="Catui_input" id="ig-coupon" placeholder="쿠폰 번호"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">적용</button></div></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="sizes">
+<h2 id="sizes">입력 크기</h2>
+<catui-example title="sm 28 · 기본 34 · lg 40">
+  <div class="Catui_fields">
+    <div class="Catui_field"><label class="Catui_label" for="ig-sm">작게</label><input class="Catui_input Catui_input-sm" id="ig-sm"></div>
+    <div class="Catui_field"><label class="Catui_label" for="ig-md">기본</label><input class="Catui_input" id="ig-md"></div>
+    <div class="Catui_field"><label class="Catui_label" for="ig-lg">크게</label><input class="Catui_input Catui_input-lg" id="ig-lg"></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_igroup</code> 안에 <code>.Catui_igroup-addon</code>·<code>.Catui_input</code>·<code>.Catui_btn</code>을 순서대로 둡니다. 맞닿는 면은 둥근 모서리를 지우고 테두리를 1px 겹칩니다. 버튼 크기는 입력 크기와 맞춥니다(기본 = md).</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>덧붙임 글자(₩·원)는 라벨을 대신하지 않습니다 — 입력마다 <code>label</code>이 필요합니다.</li>
+  <li>포커스된 입력의 링이 옆 요소에 가리지 않도록 위로 올라옵니다.</li>
+</ul>
+</section>

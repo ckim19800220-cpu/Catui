@@ -1,0 +1,10 @@
+/* forms/stepper.css */
+.Catui_stepper{display:inline-flex;align-items:center}
+.Catui_stepper .Catui_icon{width:var(--Catui_step-btn);height:var(--Catui_step-btn)}
+.Catui_stepper button{
+  width:var(--Catui_step-w);height:var(--Catui_step-h);border:1px solid var(--Catui_input-border);
+  background:var(--Catui_card-bg);display:inline-flex;align-items:center;justify-content:center;
+}
+.Catui_stepper button:first-child{border-radius:var(--Catui_step-radius) 0 0 var(--Catui_step-radius)}
+.Catui_stepper button:last-child{border-radius:0 var(--Catui_step-radius) var(--Catui_step-radius) 0}
+.Catui_stepper output{min-width:var(--Catui_step-w);height:var(--Catui_step-h);display:inline-flex;align-items:center;justify-content:center;border-top:1px solid var(--Catui_input-border);border-bottom:1px solid var(--Catui_input-border);font-size:var(--Catui_step-font);line-height:1;font-variant-numeric:tabular-nums}

@@ -1,0 +1,40 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="프로젝트 일정">
+  <div class="Catui_gantt-scroll"><div class="Catui_gantt" role="img" aria-label="9월 일정">
+    <div class="Catui_gantt-head"><span>일정</span><div class="Catui_gantt-scale"><span>1주</span><span>2주</span><span>3주</span><span>4주</span><span>5주</span><span>6주</span></div></div>
+    <div class="Catui_gantt-row"><span>조사</span><div class="Catui_gantt-track"><i class="Catui_gantt-bar" style="left:2%;width:26%"></i><i class="Catui_gantt-today" style="left:52%"></i></div></div>
+    <div class="Catui_gantt-row"><span>설계</span><div class="Catui_gantt-track"><i class="Catui_gantt-bar Catui_gantt-bar-2" style="left:20%;width:32%"></i></div></div>
+    <div class="Catui_gantt-row"><span>개발</span><div class="Catui_gantt-track"><i class="Catui_gantt-bar Catui_gantt-bar-3" style="left:42%;width:30%"></i></div></div>
+    <div class="Catui_gantt-row"><span>검수</span><div class="Catui_gantt-track"><i class="Catui_gantt-bar Catui_gantt-bar-4" style="left:66%;width:20%"></i><i class="Catui_gantt-mile" style="left:64%"></i></div></div>
+    <div class="Catui_gantt-row"><span>출시</span><div class="Catui_gantt-track"><i class="Catui_gantt-bar Catui_gantt-bar-5" style="left:80%;width:18%"></i></div></div>
+  </div></div>
+</catui-example>
+<catui-example title="작은 일정 · 마일스톤 · 오늘선">
+  <div class="Catui_gantt-scroll"><div class="Catui_gantt" role="img" aria-label="10월 일정: 설계 1~2주, 개발 2~5주, 출시 마일스톤 6주차, 오늘은 3주차">
+    <div class="Catui_gantt-head"><span>작업</span><div class="Catui_gantt-scale"><span>1주</span><span>2주</span><span>3주</span><span>4주</span><span>5주</span><span>6주</span></div></div>
+    <div class="Catui_gantt-row"><span>설계</span><div class="Catui_gantt-track"><i class="Catui_gantt-bar" style="left:0;width:33.3%"></i><i class="Catui_gantt-today" style="left:41%"></i></div></div>
+    <div class="Catui_gantt-row"><span>개발</span><div class="Catui_gantt-track"><i class="Catui_gantt-bar Catui_gantt-bar-2" style="left:16.7%;width:66.6%"></i><i class="Catui_gantt-today" style="left:41%"></i></div></div>
+    <div class="Catui_gantt-row"><span>출시</span><div class="Catui_gantt-track"><i class="Catui_gantt-mile" style="left:calc(91.6% - 6px)"></i><i class="Catui_gantt-today" style="left:41%"></i></div></div>
+  </div></div>
+</catui-example>
+<catui-example title="의존선 (앞 작업이 끝나야 시작)">
+  <div class="Catui_gantt-scroll"><div class="Catui_gantt" role="img" aria-label="디자인 1~2주가 끝난 뒤 개발 3~5주 시작">
+    <div class="Catui_gantt-head"><span>작업</span><div class="Catui_gantt-scale"><span>1주</span><span>2주</span><span>3주</span><span>4주</span><span>5주</span><span>6주</span></div></div>
+    <div class="Catui_gantt-row"><span>디자인</span><div class="Catui_gantt-track"><i class="Catui_gantt-bar" style="left:0;width:33.3%"></i><i class="Catui_gantt-dep" style="left:33.3%"></i></div></div>
+    <div class="Catui_gantt-row"><span>개발</span><div class="Catui_gantt-track"><i class="Catui_gantt-dep" style="left:33.3%"></i><i class="Catui_gantt-bar Catui_gantt-bar-2" style="left:33.3%;width:50%"></i></div></div>
+  </div></div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_gantt</code> > 행 <code>Catui_gantt-row</code> + 트랙 <code>Catui_gantt-track</code> 안 <code>Catui_gantt-bar(-2~5)</code>·<code>Catui_gantt-mile</code>·<code>Catui_gantt-today</code>·<code>Catui_gantt-dep</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>시각 차트는 <code>role="img"</code> + 일정 요약 <code>aria-label</code>, 같은 내용을 표로도 제공하는 것을 권장합니다.</li>
+  <li>마일스톤은 다이아, 오늘선은 위험색 1px.</li>
+</ul>
+</section>

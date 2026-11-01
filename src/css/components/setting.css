@@ -1,0 +1,12 @@
+/* components/setting.css */
+/* Setting row — 설정 화면 한 줄: 라벨·설명 왼쪽, 스위치·버튼·선택 오른쪽. 묶음은 카드처럼. */
+.Catui_settings{display:grid;background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_setting{display:flex;align-items:center;gap:var(--Catui_space-4);padding:var(--Catui_space-4);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_setting:last-child{border-bottom:0}
+.Catui_setting-main{flex:1;min-width:0;display:grid;gap:2px}
+.Catui_setting-title{font-weight:600}
+.Catui_setting-text{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_setting-control{flex:none;display:flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_setting-control .Catui_select-wrap{min-width:140px}
+.Catui_setting-danger .Catui_setting-title{color:var(--Catui_badge-danger-fg)}
+@media (max-width:767px){.Catui_setting{flex-wrap:wrap}.Catui_setting-control{width:100%}}

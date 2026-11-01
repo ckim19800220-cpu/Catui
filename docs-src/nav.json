@@ -1,0 +1,1392 @@
+{
+  "desc": "Catui — 한국어 관리 화면·공개 홈을 위한 CSS 키트와 의존성 없는 UI 프레임워크 catui.js 문서",
+  "sections": [
+    {
+      "id": "css",
+      "title": "CSS",
+      "groups": [
+        {
+          "title": "시작",
+          "pages": [
+            {
+              "path": "css/start/introduction",
+              "title": "소개",
+              "desc": "Catui CSS의 특징과 문서 구성."
+            },
+            {
+              "path": "css/start/install",
+              "title": "설치와 빌드",
+              "desc": "배포 파일 연결, 스코프 루트, 소스에서 빌드하기."
+            },
+            {
+              "path": "css/start/namespace",
+              "title": "이름과 스코프",
+              "desc": "Catui_ 접두사, 스코프 루트, 토큰 3층 규칙.",
+              "css": [
+                "foundation/reset.css"
+              ]
+            },
+            {
+              "path": "css/start/accessibility",
+              "title": "접근성 기준",
+              "desc": "대비·포커스·목표 크기·모션 기준과 실측값.",
+              "css": [
+                "foundation/interaction.css"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "기초",
+          "pages": [
+            {
+              "path": "css/foundation/color",
+              "title": "색상",
+              "desc": "팔레트·상태·차트 시리즈 토큰."
+            },
+            {
+              "path": "css/foundation/surface",
+              "title": "배경",
+              "desc": "면 색, 상태 배경, 진한 영역(글자 반전), 그라디언트, 패턴, 이미지 겹침, 섹션 띠.",
+              "css": [
+                "foundation/surface.css"
+              ]
+            },
+            {
+              "path": "css/foundation/theme",
+              "title": "다크 모드",
+              "desc": "data-catui-theme=\"dark\" 한 줄로 바꾸는 다크 테마와 대비 실측.",
+              "css": [
+                "foundation/theme-dark.css"
+              ]
+            },
+            {
+              "path": "css/foundation/typography",
+              "title": "타이포그래피",
+              "desc": "제목·본문·지표 단계와 글꼴 토큰.",
+              "css": [
+                "foundation/typography.css"
+              ]
+            },
+            {
+              "path": "css/foundation/text",
+              "title": "텍스트·링크",
+              "desc": "본문 링크, AA 의미 색, 말줄임·줄 수 제한.",
+              "css": [
+                "foundation/text.css"
+              ]
+            },
+            {
+              "path": "css/foundation/spacing",
+              "title": "간격·반경·그림자",
+              "desc": "4px 배수 간격, 반경, 그림자, 컨트롤 높이 토큰."
+            },
+            {
+              "path": "css/foundation/icons",
+              "title": "아이콘",
+              "desc": "Lucide 스프라이트 사용법과 목록."
+            },
+            {
+              "path": "css/foundation/media",
+              "title": "미디어·이미지",
+              "desc": "이미지·영상 반응형 리셋, 이미지 모양, 비율 상자, 그림 캡션.",
+              "css": [
+                "foundation/media.css"
+              ]
+            },
+            {
+              "path": "css/foundation/utilities",
+              "title": "유틸리티",
+              "desc": "숨김·건너뛰기·숫자·정렬 도우미.",
+              "css": [
+                "foundation/utilities.css"
+              ]
+            },
+            {
+              "path": "css/foundation/helpers",
+              "title": "도우미 클래스",
+              "desc": "테두리·모서리·그림자·글자·크기·넘침·고정·반응형 숨김·인쇄.",
+              "css": [
+                "foundation/helpers.css"
+              ]
+            },
+            {
+              "path": "css/foundation/motion",
+              "title": "모션",
+              "desc": "진입 애니메이션·지연·전환·들어 올리기 (모션 줄이기 대응).",
+              "css": [
+                "foundation/motion.css"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "레이아웃",
+          "pages": [
+            {
+              "path": "css/layout/grid",
+              "title": "그리드",
+              "desc": "12열 그리드와 반응형 규칙.",
+              "css": [
+                "layout/grid.css"
+              ]
+            },
+            {
+              "path": "css/layout/flex",
+              "title": "정렬 도우미",
+              "desc": "가로·세로 묶음, 밀어내기, 가운데, 줄바꿈.",
+              "css": [
+                "layout/flex.css"
+              ]
+            },
+            {
+              "path": "css/layout/app-shell",
+              "title": "관리 셸",
+              "desc": "사이드바 200px·탑바 56px·본문으로 이루어진 관리 화면 골격입니다. 991px 이하에서 사이드바가 56px 레일로 접힙니다.",
+              "css": [
+                "layout/app-shell.css"
+              ]
+            },
+            {
+              "path": "css/layout/site",
+              "title": "공개 홈",
+              "desc": "공개 홈의 헤더·히어로·섹션·기능·요금·안내·푸터 구성입니다. 루트는 .Catui_site입니다.",
+              "css": [
+                "layout/site.css"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "웹 블록",
+          "pages": [
+            {
+              "path": "css/blocks/head",
+              "title": "섹션 머리·공지 띠",
+              "desc": "소제목(eyebrow)·제목·설명 묶음과 페이지 맨 위 공지 띠.",
+              "css": [
+                "blocks/head.css"
+              ]
+            },
+            {
+              "path": "css/blocks/proof",
+              "title": "신뢰 요소",
+              "desc": "고객 로고 띠, 큰 숫자 띠, 고객 후기 카드.",
+              "css": [
+                "blocks/proof.css"
+              ]
+            },
+            {
+              "path": "css/blocks/people",
+              "title": "팀·프로필",
+              "desc": "사진·이름·역할·소개·링크가 있는 팀 소개 카드.",
+              "css": [
+                "blocks/people.css"
+              ]
+            },
+            {
+              "path": "css/blocks/process",
+              "title": "과정·단계",
+              "desc": "번호 원과 연결선이 있는 \"이용 방법\" 단계.",
+              "css": [
+                "blocks/process.css"
+              ]
+            },
+            {
+              "path": "css/blocks/gallery",
+              "title": "갤러리·글 정보",
+              "desc": "강조 칸이 있는 이미지 격자와 글 정보 줄.",
+              "css": [
+                "blocks/gallery.css"
+              ]
+            },
+            {
+              "path": "css/blocks/subscribe",
+              "title": "구독 폼",
+              "desc": "이메일 구독 한 줄 폼과 안내 문구.",
+              "css": [
+                "blocks/subscribe.css"
+              ]
+            },
+            {
+              "path": "css/blocks/floating",
+              "title": "떠 있는 요소",
+              "desc": "맨 위로 버튼, 쿠키 동의 띠.",
+              "css": [
+                "blocks/floating.css"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "컴포넌트",
+          "pages": [
+            {
+              "path": "css/components/button",
+              "title": "버튼",
+              "desc": "주요·보조·고스트·위험 4가지 변형과 sm 28 / md 34 / lg 40 세 높이.",
+              "css": [
+                "components/button.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "높이는 sm/md/lg 3단만"
+                ],
+                [
+                  "SHOULD",
+                  "한 화면에 primary는 1개"
+                ],
+                [
+                  "NEVER",
+                  "비활성을 opacity로 대체하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/split-button",
+              "title": "분할 버튼",
+              "desc": "주 동작과 보조 메뉴를 같은 색·높이로 붙인 버튼입니다.",
+              "css": [
+                "components/split-button.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "분할선 1px · 양쪽 동일 variant·높이"
+                ],
+                [
+                  "SHOULD",
+                  "메뉴는 우측 정렬, 화살표는 180° 회전"
+                ],
+                [
+                  "NEVER",
+                  "주 동작과 메뉴의 색 위계를 뒤집지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/form",
+              "title": "입력 필드",
+              "desc": "라벨·입력·선택·여러 줄·도움말·오류·잠김 상태.",
+              "css": [
+                "components/form.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "포커스는 테두리 + 3px 링"
+                ],
+                [
+                  "SHOULD",
+                  "라벨은 위, 헬프는 아래 — placeholder를 라벨로 쓰지 않는다"
+                ],
+                [
+                  "NEVER",
+                  "에러를 색만으로 전달하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/input-group",
+              "title": "입력 그룹",
+              "desc": "입력 앞뒤 덧붙임(글자·아이콘·버튼)과 입력 크기.",
+              "css": [
+                "components/input-group.css"
+              ]
+            },
+            {
+              "path": "css/components/choice",
+              "title": "체크·라디오·토글",
+              "desc": "실제 input은 .Catui_clip으로 숨기고 .Catui_cbx·.Catui_radio·.Catui_tgl이 그립니다.",
+              "css": [
+                "components/choice.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "체크·라디오 16px, 토글 34×20"
+                ],
+                [
+                  "SHOULD",
+                  "라벨과 같은 행, 간격 8px"
+                ],
+                [
+                  "NEVER",
+                  "on 색을 L1에서 직참조하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/badge",
+              "title": "배지·카운트",
+              "desc": "상태 pill(soft·solid), 사각 badge, 카운트, 점.",
+              "css": [
+                "components/badge.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "상태 pill은 soft 배경 + 실색 텍스트"
+                ],
+                [
+                  "SHOULD",
+                  "카운터는 brand 실색, 높이 18px"
+                ],
+                [
+                  "NEVER",
+                  "pill 안에 pill을 중첩하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/indicator",
+              "title": "알림·상태 표시",
+              "desc": "아이콘·아바타 모서리의 알림 점·숫자, 온라인 상태 점.",
+              "css": [
+                "components/indicator.css"
+              ]
+            },
+            {
+              "path": "css/components/avatar",
+              "title": "아바타",
+              "desc": "48/40/32/24/18 다섯 크기와 겹친 스택.",
+              "css": [
+                "components/avatar.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "크기는 48/40/32/24/18 5단만"
+                ],
+                [
+                  "SHOULD",
+                  "스택은 겹침 -8px, 흰 2px 테두리"
+                ],
+                [
+                  "NEVER",
+                  "이니셜 색을 임의 지정하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/media",
+              "title": "미디어 객체·임베드",
+              "desc": "그림 + 본문 가로 배치, 16:9 영상·지도 임베드.",
+              "css": [
+                "components/media.css"
+              ]
+            },
+            {
+              "path": "css/components/card",
+              "title": "카드",
+              "desc": "머리·본문·꼬리로 된 면. 링크 카드는 호버 그림자가 붙습니다.",
+              "css": [
+                "components/card.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "헤더 52px · 푸터 44px 고정"
+                ],
+                [
+                  "SHOULD",
+                  "패딩 20 · 반경 8 · shadow-xs 기본"
+                ],
+                [
+                  "NEVER",
+                  "카드 안에 md 이상 그림자를 중첩하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/carousel",
+              "title": "캐러셀",
+              "desc": "스크롤 스냅 슬라이드와 점 탐색 (스크립트 없이 동작).",
+              "css": [
+                "components/carousel.css"
+              ]
+            },
+            {
+              "path": "css/components/canvas",
+              "title": "캔버스",
+              "desc": "반응형 캔버스 틀, 도구 막대·범례·캡션.",
+              "css": [
+                "components/canvas.css"
+              ]
+            },
+            {
+              "path": "css/components/stat",
+              "title": "지표",
+              "desc": "라벨·수치·증감·스파크 막대로 된 지표 카드.",
+              "css": [
+                "components/stat.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "수치는 metric-lg + tabular-nums"
+                ],
+                [
+                  "SHOULD",
+                  "스파크바 4px, 마지막 막대만 실색"
+                ],
+                [
+                  "NEVER",
+                  "라벨에 긴 설명을 넣지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/progress",
+              "title": "진행",
+              "desc": "6색 구간을 bar-1 → bar-6 순서로 쓰는 진행 막대.",
+              "css": [
+                "components/progress.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "트랙 높이 6px"
+                ],
+                [
+                  "SHOULD",
+                  "6색은 bar-1 → bar-6 순서"
+                ],
+                [
+                  "NEVER",
+                  "그라디언트나 새 색을 추가하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/table",
+              "title": "표",
+              "desc": "헤더 40px·행 46px, 지브라, 정렬 표시, 행 메뉴.",
+              "css": [
+                "components/table.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "헤더 40px · 행 46px"
+                ],
+                [
+                  "SHOULD",
+                  "지브라, 상태는 pill로만"
+                ],
+                [
+                  "NEVER",
+                  "정렬 화살표를 비활성 열에 붙이지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/toolbar",
+              "title": "도구 모음·작업 바",
+              "desc": "표 위 도구 모음, 일괄 작업 바, 폼 하단 고정 저장 바.",
+              "css": [
+                "components/toolbar.css"
+              ]
+            },
+            {
+              "path": "css/components/list",
+              "title": "목록",
+              "desc": "리스트 그룹, 키-값 정의 목록, 체크 목록.",
+              "css": [
+                "components/list.css"
+              ]
+            },
+            {
+              "path": "css/components/setting",
+              "title": "설정 행",
+              "desc": "라벨·설명 왼쪽, 스위치·선택·버튼 오른쪽인 설정 줄.",
+              "css": [
+                "components/setting.css"
+              ]
+            },
+            {
+              "path": "css/components/tabs",
+              "title": "탭·세그먼트",
+              "desc": "native radio로 전환하는 탭과 세그먼트. 스크립트 없이 동작합니다.",
+              "css": [
+                "components/tabs.css",
+                "components/segment.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "활성 탭은 색 + 2px indicator 쌍"
+                ],
+                [
+                  "SHOULD",
+                  "전환은 native radio"
+                ],
+                [
+                  "NEVER",
+                  "색 변화만으로 활성을 나타내지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/subnav",
+              "title": "보조 탐색",
+              "desc": "화면 안의 필(pill) 탭과 밑줄 탭 링크.",
+              "css": [
+                "components/subnav.css"
+              ]
+            },
+            {
+              "path": "css/components/vnav",
+              "title": "세로 내비게이션",
+              "desc": "그룹 제목·아이콘·카운트·하위 메뉴가 있는 세로 메뉴.",
+              "css": [
+                "components/vnav.css"
+              ]
+            },
+            {
+              "path": "css/components/breadcrumb",
+              "title": "경로",
+              "desc": "현재 항목만 굵게, 4단 이상이면 가운데를 …로 접습니다.",
+              "css": [
+                "components/breadcrumb.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "현재 항목만 current + 600"
+                ],
+                [
+                  "SHOULD",
+                  "4단 이상이면 중간을 …로 접는다"
+                ],
+                [
+                  "NEVER",
+                  "구분선을 텍스트보다 어둡게 하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/pagehead",
+              "title": "페이지 머리",
+              "desc": "뒤로·제목·상태·설명·동작·보조 탐색이 있는 화면 머리.",
+              "css": [
+                "components/pagehead.css"
+              ]
+            },
+            {
+              "path": "css/components/pager",
+              "title": "페이지",
+              "desc": "이전·번호·다음 버튼으로 된 페이지 이동.",
+              "css": [
+                "components/pager.css"
+              ]
+            },
+            {
+              "path": "css/components/feedback",
+              "title": "피드백",
+              "desc": "배너 3종, 빈 상태, 스켈레톤, 구분선.",
+              "css": [
+                "components/feedback.css"
+              ]
+            },
+            {
+              "path": "css/components/result",
+              "title": "결과 화면",
+              "desc": "완료·실패·404·권한 없음 같은 결과 화면.",
+              "css": [
+                "components/result.css"
+              ]
+            },
+            {
+              "path": "css/components/callout",
+              "title": "안내 상자",
+              "desc": "본문 속 참고·팁·주의·위험 상자.",
+              "css": [
+                "components/callout.css"
+              ]
+            },
+            {
+              "path": "css/components/spinner",
+              "title": "스피너",
+              "desc": "짧은 대기 상태를 보이는 회전 표시.",
+              "css": [
+                "components/spinner.css"
+              ]
+            },
+            {
+              "path": "css/components/code",
+              "title": "코드",
+              "desc": "인라인 코드, 코드 블록(제목줄·줄 번호·구문 색), 키 표시.",
+              "css": [
+                "components/code.css"
+              ]
+            },
+            {
+              "path": "css/components/quote",
+              "title": "인용",
+              "desc": "출처가 있는 인용과 강조 인용.",
+              "css": [
+                "components/quote.css"
+              ]
+            },
+            {
+              "path": "css/components/chat",
+              "title": "채팅",
+              "desc": "상대·나 말풍선, 날짜 구분, 입력 줄.",
+              "css": [
+                "components/chat.css"
+              ]
+            },
+            {
+              "path": "css/components/modal",
+              "title": "모달",
+              "desc": "숨긴 체크박스로 여는 CSS 모달. 너비 400·560·720 세 단계.",
+              "css": [
+                "components/modal.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "폭은 400·560·720 3단만"
+                ],
+                [
+                  "SHOULD",
+                  "푸터 버튼 우측 정렬, 파괴적 행동은 danger"
+                ],
+                [
+                  "NEVER",
+                  "닫기 버튼(24)을 생략하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/drawer",
+              "title": "드로어",
+              "desc": "오른쪽에서 여는 320px 패널.",
+              "css": [
+                "components/drawer.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "폭 320, 우측 고정, 반경 0"
+                ],
+                [
+                  "SHOULD",
+                  "전이는 transform만"
+                ],
+                [
+                  "NEVER",
+                  "스크림을 중첩하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/dropdown",
+              "title": "드롭다운",
+              "desc": "details/summary로 여는 메뉴. 위험 항목은 구분선 아래 맨 끝.",
+              "css": [
+                "components/dropdown.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "항목 높이 32px"
+                ],
+                [
+                  "SHOULD",
+                  "danger 항목은 구분선으로 분리해 맨 아래"
+                ],
+                [
+                  "NEVER",
+                  "summary 안에 버튼·링크를 중첩하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/toast",
+              "title": "토스트",
+              "desc": "왼쪽 3px 액센트와 상태 아이콘이 짝인 알림.",
+              "css": [
+                "components/toast.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "좌측 3px 액센트 + 상태색 아이콘"
+                ],
+                [
+                  "SHOULD",
+                  "폭 340, 간격 8, 본문 2줄까지"
+                ],
+                [
+                  "NEVER",
+                  "색만으로 상태를 구분하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/notifs",
+              "title": "알림 패널",
+              "desc": "머리·읽지 않음 표시·시간·꼬리가 있는 알림 목록.",
+              "css": [
+                "components/notifs.css"
+              ]
+            },
+            {
+              "path": "css/components/tooltip",
+              "title": "툴팁·팝오버",
+              "desc": "툴팁은 순수 힌트, 버튼·링크가 필요하면 팝오버.",
+              "css": [
+                "components/tooltip.css"
+              ],
+              "rules": [
+                [
+                  "SHOULD",
+                  "navy-900 배경 · 11px · 순수 힌트만"
+                ],
+                [
+                  "NEVER",
+                  "툴팁 안에 버튼·링크를 넣지 않는다 — 필요하면 팝오버"
+                ],
+                [
+                  "MUST",
+                  "화살표 7px + popover-shadow"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/mega",
+              "title": "메가 메뉴",
+              "desc": "4열 패널, 열마다 항목 5개 이하.",
+              "css": [
+                "components/mega.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "4열 · 열 간격 24 · 항목 30px"
+                ],
+                [
+                  "SHOULD",
+                  "열 헤더는 10px uppercase"
+                ],
+                [
+                  "NEVER",
+                  "항목 6개 이상으로 스크롤을 만들지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/wizard",
+              "title": "마법사",
+              "desc": "완료·현재·미도달 세 상태의 단계 표시.",
+              "css": [
+                "components/wizard.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "완료 brand · 현재 primary · 미도달 neutral 3색"
+                ],
+                [
+                  "NEVER",
+                  "현재·미도달 단계에 체크 아이콘을 두지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/command",
+              "title": "명령 팔레트",
+              "desc": "그룹별 명령 목록과 키 힌트.",
+              "css": [
+                "components/command.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "행 높이 36px, 그룹 라벨 10px uppercase"
+                ],
+                [
+                  "SHOULD",
+                  "kbd 힌트 우측, 하단 힌트 고정"
+                ],
+                [
+                  "NEVER",
+                  "선택 행을 2개 이상 동시에 표시하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/components/faq",
+              "title": "질문(접기)",
+              "desc": "details로 접는 질문·답 목록.",
+              "css": [
+                "components/faq.css"
+              ]
+            },
+            {
+              "path": "css/components/accordion",
+              "title": "아코디언",
+              "desc": "테두리로 묶인 펼침 목록과 카드형 펼침 상자.",
+              "css": [
+                "components/accordion.css"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "고급 입력",
+          "pages": [
+            {
+              "path": "css/forms/upload",
+              "title": "업로드",
+              "desc": "label이 숨긴 file input을 감싸는 끌어 놓기 영역.",
+              "css": [
+                "forms/upload.css"
+              ]
+            },
+            {
+              "path": "css/forms/range",
+              "title": "범위",
+              "desc": "트랙·썸을 토큰으로 그린 range와 눈금.",
+              "css": [
+                "forms/range.css"
+              ]
+            },
+            {
+              "path": "css/forms/rating",
+              "title": "별점",
+              "desc": "radio 그룹으로 만든 별점.",
+              "css": [
+                "forms/rating.css"
+              ]
+            },
+            {
+              "path": "css/forms/tags",
+              "title": "태그",
+              "desc": "닫기 버튼이 있는 태그와 한계 표시.",
+              "css": [
+                "forms/tags.css"
+              ]
+            },
+            {
+              "path": "css/forms/chips",
+              "title": "선택 칩",
+              "desc": "checkbox·radio로 만든 필터 칩.",
+              "css": [
+                "forms/chips.css"
+              ]
+            },
+            {
+              "path": "css/forms/optcard",
+              "title": "선택 카드",
+              "desc": "radio·checkbox로 고르는 카드(요금제·배송 방법).",
+              "css": [
+                "forms/optcard.css"
+              ]
+            },
+            {
+              "path": "css/forms/swatch",
+              "title": "색상 견본",
+              "desc": "radio로 고르는 색상 견본(상품 색상·테마).",
+              "css": [
+                "forms/swatch.css"
+              ]
+            },
+            {
+              "path": "css/forms/stepper",
+              "title": "스테퍼",
+              "desc": "버튼 + output + 버튼으로 된 수량 조절.",
+              "css": [
+                "forms/stepper.css"
+              ]
+            },
+            {
+              "path": "css/forms/otp",
+              "title": "인증 코드",
+              "desc": "한 글자씩 입력하는 인증 코드 칸.",
+              "css": [
+                "forms/otp.css"
+              ]
+            },
+            {
+              "path": "css/forms/datepicker",
+              "title": "날짜",
+              "desc": "요일·날짜 격자와 오늘·기간·선택·비활성 상태.",
+              "css": [
+                "forms/datepicker.css"
+              ]
+            },
+            {
+              "path": "css/forms/counter",
+              "title": "글자 수",
+              "desc": "기본·경고·초과 세 상태의 글자 수 표시.",
+              "css": [
+                "forms/counter.css"
+              ]
+            },
+            {
+              "path": "css/forms/search",
+              "title": "검색",
+              "desc": "아이콘·입력·필터 메뉴로 된 검색 줄.",
+              "css": [
+                "forms/search.css"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "데이터 뷰",
+          "pages": [
+            {
+              "path": "css/views/tree",
+              "title": "트리",
+              "desc": "details로 접는 계층 목록.",
+              "css": [
+                "views/tree.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "들여쓰기 20 + 1px 가이드선"
+                ],
+                [
+                  "SHOULD",
+                  "접힘은 native details, 선택 행은 brand-soft"
+                ],
+                [
+                  "NEVER",
+                  "아이콘 없이 들여쓰기만으로 계층을 표현하지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/views/calendar",
+              "title": "달력",
+              "desc": "월간 격자, 오늘·주말·다른 달·일정 칩.",
+              "css": [
+                "views/calendar.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "오늘은 원형 + inverse, 다른 달 날짜는 tertiary"
+                ],
+                [
+                  "SHOULD",
+                  "이벤트 칩 하루 최대 2개, 주말은 muted"
+                ],
+                [
+                  "NEVER",
+                  "셀을 1px divider 외 장식으로 나누지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/views/gantt",
+              "title": "간트",
+              "desc": "기간 막대·마일스톤·의존선·오늘선.",
+              "css": [
+                "views/gantt.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "바는 series 5색 순서, 높이 20"
+                ],
+                [
+                  "SHOULD",
+                  "의존선 1px, 오늘선 danger 1px"
+                ],
+                [
+                  "NEVER",
+                  "마일스톤을 바 모양으로 그리지 않는다 — 다이아 10px"
+                ]
+              ]
+            },
+            {
+              "path": "css/views/kanban",
+              "title": "칸반",
+              "desc": "열과 카드(태그·제목·체크 메타·아바타).",
+              "css": [
+                "views/kanban.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "열 폭 240 · 간격 16"
+                ],
+                [
+                  "SHOULD",
+                  "카드는 태그·제목·체크 메타·아바타 4요소"
+                ],
+                [
+                  "NEVER",
+                  "열 배경과 카드 배경을 같게 두지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/views/files",
+              "title": "파일 목록",
+              "desc": "아이콘 타일·이름·메타·액션 3개 이하.",
+              "css": [
+                "views/files.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "행 높이 48 · 아이콘 타일 32"
+                ],
+                [
+                  "SHOULD",
+                  "메타는 용량·수정일·작성자 순"
+                ],
+                [
+                  "NEVER",
+                  "액션 아이콘 3개 초과 — 나머지는 더 보기 메뉴"
+                ]
+              ]
+            },
+            {
+              "path": "css/views/thread",
+              "title": "스레드",
+              "desc": "깊이 가이드가 있는 댓글과 리액션.",
+              "css": [
+                "views/thread.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "깊이 가이드 2px + 들여쓰기 28"
+                ],
+                [
+                  "SHOULD",
+                  "이름 13/600 + 시각 11 같은 baseline"
+                ],
+                [
+                  "NEVER",
+                  "리액션 칩에 아이콘 없는 숫자만 두지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/views/heatmap",
+              "title": "히트맵",
+              "desc": "brand 단일 색조 5단계 농도.",
+              "css": [
+                "views/heatmap.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "농도는 heat-1..5, 0은 neutral-100"
+                ],
+                [
+                  "SHOULD",
+                  "범례는 적음 → 많음 순"
+                ],
+                [
+                  "NEVER",
+                  "단계마다 다른 색상 금지 — brand 단일 색조"
+                ]
+              ]
+            },
+            {
+              "path": "css/views/timeline",
+              "title": "타임라인",
+              "desc": "단일 색 도트와 상태 pill로 된 활동 기록.",
+              "css": [
+                "views/timeline.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "선 2px, 도트 10px brand"
+                ],
+                [
+                  "SHOULD",
+                  "우측 상태는 pill로만"
+                ],
+                [
+                  "NEVER",
+                  "도트 색을 상태별로 바꾸지 않는다"
+                ]
+              ]
+            },
+            {
+              "path": "css/views/feed-meter",
+              "title": "피드·미터·작업",
+              "desc": "연결선 피드, 한 줄 용량 미터, 우선순위 점이 있는 작업 행.",
+              "css": [
+                "views/feed.css",
+                "views/meter.css",
+                "views/task.css"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "차트",
+          "pages": [
+            {
+              "path": "css/charts/line",
+              "title": "라인 차트",
+              "desc": "SVG 영역·선·보조선·축과 범례.",
+              "css": [
+                "charts/line.css",
+                "charts/legend.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "선 1.5, 색은 series 토큰만"
+                ],
+                [
+                  "SHOULD",
+                  "면적은 brand 12%, grid는 divider"
+                ],
+                [
+                  "NEVER",
+                  "한 차트에 5색 초과 시리즈 금지"
+                ]
+              ]
+            },
+            {
+              "path": "css/charts/donut",
+              "title": "도넛",
+              "desc": "지름 132·구멍 78, seg-1 → seg-5 순서, 중앙엔 총합만.",
+              "css": [
+                "charts/donut.css",
+                "charts/legend.css"
+              ],
+              "rules": [
+                [
+                  "MUST",
+                  "지름 132 · hole 78"
+                ],
+                [
+                  "SHOULD",
+                  "seg-1 → seg-5 순서, 중앙엔 총합만"
+                ],
+                [
+                  "NEVER",
+                  "세그먼트 사이 간격·외곽선 금지"
+                ]
+              ]
+            },
+            {
+              "path": "css/charts/bars",
+              "title": "막대",
+              "desc": "라벨·트랙·값으로 된 가로 막대.",
+              "css": [
+                "charts/bars.css"
+              ]
+            },
+            {
+              "path": "css/charts/stack",
+              "title": "누적·세그먼트",
+              "desc": "비율 누적 막대와 점 단위 세그먼트.",
+              "css": [
+                "charts/stack.css"
+              ]
+            },
+            {
+              "path": "css/charts/gauge",
+              "title": "게이지",
+              "desc": "270° 원형 게이지, 좋음·주의·위험.",
+              "css": [
+                "charts/gauge.css"
+              ]
+            },
+            {
+              "path": "css/charts/funnel",
+              "title": "퍼널",
+              "desc": "단계별 막대와 감소 표시.",
+              "css": [
+                "charts/funnel.css"
+              ]
+            },
+            {
+              "path": "css/charts/sparkline",
+              "title": "스파크라인",
+              "desc": "작은 선 그래프 + 수치 + 증감.",
+              "css": [
+                "charts/sparkline.css"
+              ]
+            },
+            {
+              "path": "css/charts/radar",
+              "title": "레이더",
+              "desc": "링·스포크·영역·축 라벨로 된 5축 레이더.",
+              "css": [
+                "charts/radar.css"
+              ]
+            },
+            {
+              "path": "css/charts/prose",
+              "title": "본문",
+              "desc": "제목·인용·코드·표·mark가 토큰으로 맞춰지는 글 영역.",
+              "css": [
+                "charts/prose.css"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "js",
+      "title": "catui.js",
+      "groups": [
+        {
+          "title": "시작",
+          "pages": [
+            {
+              "path": "js/start/introduction",
+              "title": "소개",
+              "desc": "catui.js의 특징과 첫 예제."
+            },
+            {
+              "path": "js/start/install",
+              "title": "설치",
+              "desc": "전역 스크립트·ES 모듈·전역 설정."
+            },
+            {
+              "path": "js/start/concepts",
+              "title": "핵심 개념",
+              "desc": "use · render/reload/destroy · 이벤트(필터) · 선언형 속성."
+            },
+            {
+              "path": "js/start/security",
+              "title": "보안과 정리",
+              "desc": "자동 escape, html``·raw, 해제와 정리."
+            }
+          ]
+        },
+        {
+          "title": "코어",
+          "pages": [
+            {
+              "path": "js/core/base",
+              "title": "기본 API",
+              "desc": "use · config · extend · define · init · destroy."
+            },
+            {
+              "path": "js/core/component",
+              "title": "컴포넌트 빌더",
+              "desc": "catui.component로 내장 모듈과 같은 인터페이스 만들기."
+            },
+            {
+              "path": "js/core/events",
+              "title": "이벤트",
+              "desc": "'이벤트(필터)' 문법, 해제, 모듈 밖에서 쓰기."
+            },
+            {
+              "path": "js/core/dom",
+              "title": "DOM과 템플릿",
+              "desc": "html · raw · escape · mount · $."
+            },
+            {
+              "path": "js/core/helpers",
+              "title": "저장소·주소·환경",
+              "desc": "data · sessionData · url · device · hint."
+            }
+          ]
+        },
+        {
+          "title": "모듈",
+          "pages": [
+            {
+              "path": "js/modules/layer",
+              "title": "layer 팝업",
+              "desc": "메시지·확인·입력·자유 레이어·드로어·로딩."
+            },
+            {
+              "path": "js/modules/form",
+              "title": "form 폼",
+              "desc": "선언형 검증·제출 이벤트·선택 컨트롤·값."
+            },
+            {
+              "path": "js/modules/table",
+              "title": "table 표",
+              "desc": "정렬·선택·도구·페이지·원격 데이터·정적 표 향상."
+            },
+            {
+              "path": "js/modules/laypage",
+              "title": "laypage 페이지",
+              "desc": "번호 묶음과 이동 콜백."
+            },
+            {
+              "path": "js/modules/tabs",
+              "title": "tabs 탭",
+              "desc": "radio 탭 이벤트와 추가·닫기·전환."
+            },
+            {
+              "path": "js/modules/dropdown",
+              "title": "dropdown 메뉴",
+              "desc": "키보드·바깥 클릭·위로 뒤집기 메뉴."
+            },
+            {
+              "path": "js/modules/datepicker",
+              "title": "datePicker 날짜",
+              "desc": "날짜·기간 선택과 키보드 이동."
+            },
+            {
+              "path": "js/modules/upload",
+              "title": "upload 업로드",
+              "desc": "끌어 놓기·검사·진행률·목록."
+            },
+            {
+              "path": "js/modules/slider",
+              "title": "slider 슬라이더",
+              "desc": "네이티브 range 기반 슬라이더."
+            },
+            {
+              "path": "js/modules/rate",
+              "title": "rate 별점",
+              "desc": "radio 별점과 읽기 전용."
+            },
+            {
+              "path": "js/modules/tree",
+              "title": "tree 트리",
+              "desc": "펼침·선택·체크 전파·키보드."
+            },
+            {
+              "path": "js/modules/collapse",
+              "title": "collapse 접기",
+              "desc": "아코디언과 이벤트."
+            },
+            {
+              "path": "js/modules/canvas",
+              "title": "canvas 캔버스",
+              "desc": "고해상도·반응형 캔버스, 토큰 색, 애니메이션, 정리."
+            },
+            {
+              "path": "js/modules/util",
+              "title": "util 도구",
+              "desc": "날짜 서식·상대 시간·카운트다운·디바운스."
+            }
+          ]
+        },
+        {
+          "title": "참고",
+          "pages": [
+            {
+              "path": "js/reference/attributes",
+              "title": "선언형 속성",
+              "desc": "data-catui-* 전체 목록."
+            },
+            {
+              "path": "js/reference/events",
+              "title": "이벤트 색인",
+              "desc": "모듈별 이벤트와 데이터."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

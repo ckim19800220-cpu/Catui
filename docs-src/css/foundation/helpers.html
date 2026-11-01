@@ -1,0 +1,61 @@
+<section aria-labelledby="border">
+<h2 id="border">테두리 · 모서리 · 그림자</h2>
+<catui-example title="border · rounded-* · shadow-*">
+  <div class="Catui_hstack Catui_wrap-row Catui_gap-4">
+    <div class="Catui_border Catui_rounded-0" style="padding:16px">border · rounded-0</div>
+    <div class="Catui_border Catui_rounded-sm" style="padding:16px">rounded-sm</div>
+    <div class="Catui_border-brand Catui_rounded-md" style="padding:16px">border-brand · rounded-md</div>
+    <div class="Catui_bg-surface Catui_rounded-lg Catui_shadow-sm" style="padding:16px">rounded-lg · shadow-sm</div>
+    <div class="Catui_bg-surface Catui_rounded-pill Catui_shadow-md" style="padding:16px 24px">rounded-pill · shadow-md</div>
+  </div>
+  <div class="Catui_hstack Catui_gap-4">
+    <div class="Catui_bg-surface Catui_shadow-xs" style="padding:16px">shadow-xs</div>
+    <div class="Catui_bg-surface Catui_shadow-lg" style="padding:16px">shadow-lg</div>
+    <article class="Catui_card Catui_shadow-0 Catui_border-0"><div class="Catui_card-b">카드 · shadow-0 · border-0</div></article>
+  </div>
+  <div class="Catui_border-top" style="padding-top:8px">border-top</div>
+  <div class="Catui_border-bottom" style="padding-bottom:8px">border-bottom</div>
+</catui-example>
+</section>
+
+<section aria-labelledby="text">
+<h2 id="text">글자 정렬 · 굵기 · 크기 · 줄바꿈</h2>
+<catui-example title="text-* · fw-* · fs-* · nowrap · break">
+  <p class="Catui_text-left">text-left</p>
+  <p class="Catui_text-center">text-center</p>
+  <p class="Catui_text-right">text-right</p>
+  <p><span class="Catui_fw-normal">fw-normal</span> · <span class="Catui_fw-semibold">fw-semibold</span> · <span class="Catui_fw-bold">fw-bold</span></p>
+  <p><span class="Catui_fs-caption">fs-caption 12</span> · <span class="Catui_fs-body">fs-body 13</span> · <span class="Catui_fs-lg">fs-lg 15</span></p>
+  <p class="Catui_nowrap Catui_scroll-x" style="max-width:240px">nowrap: 줄바꿈하지 않는 긴 문장은 가로로 스크롤됩니다.</p>
+  <p class="Catui_break" style="max-width:200px">break: https://catui.dev/docs/css/foundation/helpers.html#긴주소</p>
+</catui-example>
+</section>
+
+<section aria-labelledby="size">
+<h2 id="size">크기 · 표시 · 위치 · 넘침</h2>
+<catui-example title="w-full · h-full · max-prose · mx-auto · block · inline-block · relative · sticky · overflow-*">
+  <button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_w-full" type="button">w-full 버튼</button>
+  <p class="Catui_max-prose Catui_mx-auto Catui_text-center Catui_bg-muted Catui_rounded-md" style="padding:8px">max-prose + mx-auto: 읽기 좋은 폭으로 가운데</p>
+  <div class="Catui_hstack"><span class="Catui_block Catui_bg-brand-soft" style="padding:4px 8px">block</span><span class="Catui_inline-block Catui_bg-info-soft" style="padding:4px 8px">inline-block</span></div>
+  <div class="Catui_overflow-auto Catui_border Catui_rounded-md Catui_relative" style="max-height:120px" tabindex="0" role="region" aria-label="고정 머리 예시">
+    <p class="Catui_sticky Catui_bg-surface Catui_border-bottom Catui_fw-semibold" style="padding:8px">sticky 머리 (스크롤해 보세요)</p>
+    <p style="padding:8px">1번째 줄</p><p style="padding:8px">2번째 줄</p><p style="padding:8px">3번째 줄</p><p style="padding:8px">4번째 줄</p>
+  </div>
+  <div class="Catui_overflow-hidden Catui_rounded-lg Catui_border" style="height:60px"><div class="Catui_h-full Catui_bg-gradient" style="padding:8px">overflow-hidden + h-full</div></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="responsive">
+<h2 id="responsive">반응형 숨김 · 인쇄</h2>
+<catui-example title="hide-md · hide-sm · only-sm · no-print · print-only">
+  <p><span class="Catui_pill Catui_pill-info Catui_hide-md">991px 넘으면 보임 (hide-md)</span></p>
+  <p><span class="Catui_pill Catui_pill-success Catui_hide-sm">767px 넘으면 보임 (hide-sm)</span> <span class="Catui_pill Catui_pill-warning Catui_only-sm">767px 이하에서만 보임 (only-sm)</span></p>
+  <p><button class="Catui_btn Catui_btn-sm Catui_btn-secondary Catui_no-print" type="button">인쇄할 때 숨는 버튼 (no-print)</button><span class="Catui_print-only">인쇄물에만 나오는 문구 (print-only)</span></p>
+</catui-example>
+<p>창 폭을 줄이거나 인쇄 미리보기로 확인하세요. 숨김은 <code>display:none</code>이라 스크린리더에서도 사라집니다 — 내용 자체를 숨길 때만 쓰고, 화면에서만 감출 글자는 <code>.Catui_clip</code>을 씁니다.</p>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>도우미 클래스는 결합 순서 맨 끝(<code>src/css/index.json</code>)에 있어 컴포넌트 스타일을 덮어씁니다. 값은 모두 토큰이므로 새 색·크기를 만들지 않습니다. 같은 조합을 여러 곳에서 반복하면 도우미 대신 컴포넌트 클래스로 묶는 것이 관리하기 쉽습니다.</p>
+</section>

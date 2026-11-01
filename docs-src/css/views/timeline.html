@@ -1,0 +1,29 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="상태별 활동 기록">
+  <div class="Catui_atl">
+    <div class="Catui_atl-item"><span class="Catui_av Catui_av-sm">김</span><div class="Catui_atl-main"><b>김하늘</b> 님이 릴리스를 배포했습니다 <span class="Catui_help">9월 14일</span></div><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>완료</span></div>
+    <div class="Catui_atl-item"><span class="Catui_av Catui_av-sm">이</span><div class="Catui_atl-main"><b>이준</b> 님이 결제를 검토 중입니다 <span class="Catui_help">9월 13일</span></div><span class="Catui_pill Catui_pill-info"><i class="Catui_dot"></i>처리</span></div>
+    <div class="Catui_atl-item"><span class="Catui_av Catui_av-sm">박</span><div class="Catui_atl-main"><b>결제</b> 점검이 예정되어 있습니다 <span class="Catui_help">9월 13일</span></div><span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>대기</span></div>
+    <div class="Catui_atl-item"><span class="Catui_av Catui_av-sm">최</span><div class="Catui_atl-main"><b>최민</b> 님이 초안을 취소했습니다 <span class="Catui_help">9월 12일</span></div><span class="Catui_pill Catui_pill-danger"><i class="Catui_dot"></i>취소</span></div>
+  </div>
+</catui-example>
+<catui-example title="목록 의미를 준 짧은 기록">
+  <div class="Catui_atl" role="list" aria-label="주문 1003 기록">
+    <div class="Catui_atl-item" role="listitem"><span class="Catui_av Catui_av-sm" aria-hidden="true">박</span><div class="Catui_atl-main"><b>박서연</b> 님이 주문했습니다 <span class="Catui_help">10월 30일 09:12</span></div><span class="Catui_pill Catui_pill-neutral"><i class="Catui_dot"></i>접수</span></div>
+    <div class="Catui_atl-item" role="listitem"><span class="Catui_av Catui_av-sm" aria-hidden="true">관</span><div class="Catui_atl-main"><b>관리자</b>가 결제를 확인했습니다 <span class="Catui_help">10월 30일 10:40</span></div><span class="Catui_pill Catui_pill-info"><i class="Catui_dot"></i>처리</span></div>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_atl</code> > <code>.Catui_atl-item</code> + <code>.Catui_atl-main</code>. 선과 점은 ::before/::after.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>목록 의미(<code>role="list"</code>/listitem)로 순서를 전합니다.</li>
+  <li>상태는 pill(점 + 글자)로, 도트 색으로 구분하지 않습니다.</li>
+</ul>
+</section>

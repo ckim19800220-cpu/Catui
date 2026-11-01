@@ -1,0 +1,21 @@
+/* components/progress.css */
+/* Progress — stacked bar rows, 6 series colors. */
+.Catui_prog-row{display:grid;gap:var(--Catui_space-2)}
+.Catui_prog-label{display:flex;justify-content:space-between;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_prog{height:var(--Catui_progress-h-md);border-radius:var(--Catui_progress-radius);background:var(--Catui_progress-track);overflow:hidden;display:flex}
+.Catui_prog-sm{height:var(--Catui_progress-h-sm)}
+.Catui_prog-lg{height:var(--Catui_progress-h-lg)}
+.Catui_pc1,.Catui_pc2,.Catui_pc3,.Catui_pc4,.Catui_pc5,.Catui_pc6{display:block;height:100%}
+.Catui_pc1{background:var(--Catui_progress-bar-1)}
+.Catui_pc2{background:var(--Catui_progress-bar-2)}
+.Catui_pc3{background:var(--Catui_progress-bar-3)}
+.Catui_pc4{background:var(--Catui_progress-bar-4)}
+.Catui_pc5{background:var(--Catui_progress-bar-5)}
+.Catui_pc6{background:var(--Catui_progress-bar-6)}
+/* 원형 진행 (값은 --Catui_ring-val: 0~100) */
+.Catui_ring{--Catui_ring-val:0;width:var(--Catui_control-h-lg);height:var(--Catui_control-h-lg);border-radius:var(--Catui_radius-pill);display:inline-grid;place-items:center;flex:none;position:relative;background:conic-gradient(var(--Catui_color-brand-strong) calc(var(--Catui_ring-val) * 1%),var(--Catui_color-neutral-100) 0);line-height:1}
+.Catui_ring::before{content:"";position:absolute;inset:4px;border-radius:inherit;background:var(--Catui_card-bg)}
+.Catui_ring > span{position:relative;font-size:var(--Catui_type-label-size);font-weight:700;font-variant-numeric:tabular-nums}
+.Catui_ring-lg{width:72px;height:72px}
+.Catui_ring-lg::before{inset:7px}
+.Catui_ring-lg > span{font-size:var(--Catui_type-body-size)}

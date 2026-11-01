@@ -1,0 +1,23 @@
+<section aria-labelledby="data">
+<h2 id="data">저장소 — data · sessionData</h2>
+<pre><code>catui.data('settings', { key: 'theme', value: 'light' });   // 쓰기
+catui.data('settings').theme;                                // 읽기
+catui.data('settings', { key: 'theme', remove: true });      // 키 삭제
+catui.data('settings', null);                                // 표 삭제
+catui.sessionData(…)                                         // 같은 사용법, sessionStorage</code></pre>
+</section>
+
+<section aria-labelledby="url">
+<h2 id="url">주소 — url</h2>
+<pre><code>catui.url('https://a.com/docs/x.html?a=1#/user/set?id=3');
+// { pathname: ['docs','x.html'], search: { a: '1' },
+//   hash: { path: ['user','set'], search: { id: '3' }, href: '/user/set?id=3' } }</code></pre>
+</section>
+
+<section aria-labelledby="device">
+<h2 id="device">환경 — device · hint</h2>
+<pre><code>catui.device();          // { os, android, ios, mobile }
+catui.device('MYAPP');   // UA에 MYAPP 표식이 있으면 { …, MYAPP: true }
+catui.hint.error('설정이 잘못되었습니다');        // [Catui warn]: …
+catui.hint.errorOnce('한 번만 알립니다', 'error');</code></pre>
+</section>

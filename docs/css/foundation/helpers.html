@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>도우미 클래스 · CSS · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="테두리·모서리·그림자·글자·크기·넘침·고정·반응형 숨김·인쇄.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html" aria-current="page">CSS</a><a href="../../js/start/introduction.html">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CSS 메뉴</summary><nav aria-label="CSS 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../css/start/introduction.html">소개</a></li><li><a href="../../css/start/install.html">설치와 빌드</a></li><li><a href="../../css/start/namespace.html">이름과 스코프</a></li><li><a href="../../css/start/accessibility.html">접근성 기준</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">기초</p><ul><li><a href="../../css/foundation/color.html">색상</a></li><li><a href="../../css/foundation/surface.html">배경</a></li><li><a href="../../css/foundation/theme.html">다크 모드</a></li><li><a href="../../css/foundation/typography.html">타이포그래피</a></li><li><a href="../../css/foundation/text.html">텍스트·링크</a></li><li><a href="../../css/foundation/spacing.html">간격·반경·그림자</a></li><li><a href="../../css/foundation/icons.html">아이콘</a></li><li><a href="../../css/foundation/media.html">미디어·이미지</a></li><li><a href="../../css/foundation/utilities.html">유틸리티</a></li><li><a href="../../css/foundation/helpers.html" aria-current="page">도우미 클래스</a></li><li><a href="../../css/foundation/motion.html">모션</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">레이아웃</p><ul><li><a href="../../css/layout/grid.html">그리드</a></li><li><a href="../../css/layout/flex.html">정렬 도우미</a></li><li><a href="../../css/layout/app-shell.html">관리 셸</a></li><li><a href="../../css/layout/site.html">공개 홈</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">웹 블록</p><ul><li><a href="../../css/blocks/head.html">섹션 머리·공지 띠</a></li><li><a href="../../css/blocks/proof.html">신뢰 요소</a></li><li><a href="../../css/blocks/people.html">팀·프로필</a></li><li><a href="../../css/blocks/process.html">과정·단계</a></li><li><a href="../../css/blocks/gallery.html">갤러리·글 정보</a></li><li><a href="../../css/blocks/subscribe.html">구독 폼</a></li><li><a href="../../css/blocks/floating.html">떠 있는 요소</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">컴포넌트</p><ul><li><a href="../../css/components/button.html">버튼</a></li><li><a href="../../css/components/split-button.html">분할 버튼</a></li><li><a href="../../css/components/form.html">입력 필드</a></li><li><a href="../../css/components/input-group.html">입력 그룹</a></li><li><a href="../../css/components/choice.html">체크·라디오·토글</a></li><li><a href="../../css/components/badge.html">배지·카운트</a></li><li><a href="../../css/components/indicator.html">알림·상태 표시</a></li><li><a href="../../css/components/avatar.html">아바타</a></li><li><a href="../../css/components/media.html">미디어 객체·임베드</a></li><li><a href="../../css/components/card.html">카드</a></li><li><a href="../../css/components/carousel.html">캐러셀</a></li><li><a href="../../css/components/canvas.html">캔버스</a></li><li><a href="../../css/components/stat.html">지표</a></li><li><a href="../../css/components/progress.html">진행</a></li><li><a href="../../css/components/table.html">표</a></li><li><a href="../../css/components/toolbar.html">도구 모음·작업 바</a></li><li><a href="../../css/components/list.html">목록</a></li><li><a href="../../css/components/setting.html">설정 행</a></li><li><a href="../../css/components/tabs.html">탭·세그먼트</a></li><li><a href="../../css/components/subnav.html">보조 탐색</a></li><li><a href="../../css/components/vnav.html">세로 내비게이션</a></li><li><a href="../../css/components/breadcrumb.html">경로</a></li><li><a href="../../css/components/pagehead.html">페이지 머리</a></li><li><a href="../../css/components/pager.html">페이지</a></li><li><a href="../../css/components/feedback.html">피드백</a></li><li><a href="../../css/components/result.html">결과 화면</a></li><li><a href="../../css/components/callout.html">안내 상자</a></li><li><a href="../../css/components/spinner.html">스피너</a></li><li><a href="../../css/components/code.html">코드</a></li><li><a href="../../css/components/quote.html">인용</a></li><li><a href="../../css/components/chat.html">채팅</a></li><li><a href="../../css/components/modal.html">모달</a></li><li><a href="../../css/components/drawer.html">드로어</a></li><li><a href="../../css/components/dropdown.html">드롭다운</a></li><li><a href="../../css/components/toast.html">토스트</a></li><li><a href="../../css/components/notifs.html">알림 패널</a></li><li><a href="../../css/components/tooltip.html">툴팁·팝오버</a></li><li><a href="../../css/components/mega.html">메가 메뉴</a></li><li><a href="../../css/components/wizard.html">마법사</a></li><li><a href="../../css/components/command.html">명령 팔레트</a></li><li><a href="../../css/components/faq.html">질문(접기)</a></li><li><a href="../../css/components/accordion.html">아코디언</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">고급 입력</p><ul><li><a href="../../css/forms/upload.html">업로드</a></li><li><a href="../../css/forms/range.html">범위</a></li><li><a href="../../css/forms/rating.html">별점</a></li><li><a href="../../css/forms/tags.html">태그</a></li><li><a href="../../css/forms/chips.html">선택 칩</a></li><li><a href="../../css/forms/optcard.html">선택 카드</a></li><li><a href="../../css/forms/swatch.html">색상 견본</a></li><li><a href="../../css/forms/stepper.html">스테퍼</a></li><li><a href="../../css/forms/otp.html">인증 코드</a></li><li><a href="../../css/forms/datepicker.html">날짜</a></li><li><a href="../../css/forms/counter.html">글자 수</a></li><li><a href="../../css/forms/search.html">검색</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">데이터 뷰</p><ul><li><a href="../../css/views/tree.html">트리</a></li><li><a href="../../css/views/calendar.html">달력</a></li><li><a href="../../css/views/gantt.html">간트</a></li><li><a href="../../css/views/kanban.html">칸반</a></li><li><a href="../../css/views/files.html">파일 목록</a></li><li><a href="../../css/views/thread.html">스레드</a></li><li><a href="../../css/views/heatmap.html">히트맵</a></li><li><a href="../../css/views/timeline.html">타임라인</a></li><li><a href="../../css/views/feed-meter.html">피드·미터·작업</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">차트</p><ul><li><a href="../../css/charts/line.html">라인 차트</a></li><li><a href="../../css/charts/donut.html">도넛</a></li><li><a href="../../css/charts/bars.html">막대</a></li><li><a href="../../css/charts/stack.html">누적·세그먼트</a></li><li><a href="../../css/charts/gauge.html">게이지</a></li><li><a href="../../css/charts/funnel.html">퍼널</a></li><li><a href="../../css/charts/sparkline.html">스파크라인</a></li><li><a href="../../css/charts/radar.html">레이더</a></li><li><a href="../../css/charts/prose.html">본문</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CSS · 기초</p>
+<h1 class="Catui_h1">도우미 클래스</h1>
+<p class="Catui_lead">테두리·모서리·그림자·글자·크기·넘침·고정·반응형 숨김·인쇄.</p>
+
+<section aria-labelledby="border">
+<h2 id="border">테두리 · 모서리 · 그림자</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">border · rounded-* · shadow-*</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_hstack Catui_wrap-row Catui_gap-4">
+    <div class="Catui_border Catui_rounded-0" style="padding:16px">border · rounded-0</div>
+    <div class="Catui_border Catui_rounded-sm" style="padding:16px">rounded-sm</div>
+    <div class="Catui_border-brand Catui_rounded-md" style="padding:16px">border-brand · rounded-md</div>
+    <div class="Catui_bg-surface Catui_rounded-lg Catui_shadow-sm" style="padding:16px">rounded-lg · shadow-sm</div>
+    <div class="Catui_bg-surface Catui_rounded-pill Catui_shadow-md" style="padding:16px 24px">rounded-pill · shadow-md</div>
+  </div>
+  <div class="Catui_hstack Catui_gap-4">
+    <div class="Catui_bg-surface Catui_shadow-xs" style="padding:16px">shadow-xs</div>
+    <div class="Catui_bg-surface Catui_shadow-lg" style="padding:16px">shadow-lg</div>
+    <article class="Catui_card Catui_shadow-0 Catui_border-0"><div class="Catui_card-b">카드 · shadow-0 · border-0</div></article>
+  </div>
+  <div class="Catui_border-top" style="padding-top:8px">border-top</div>
+  <div class="Catui_border-bottom" style="padding-bottom:8px">border-bottom</div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="border · rounded-* · shadow-* 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_hstack Catui_wrap-row Catui_gap-4&quot;&gt;
+  &lt;div class=&quot;Catui_border Catui_rounded-0&quot; style=&quot;padding:16px&quot;&gt;border · rounded-0&lt;/div&gt;
+  &lt;div class=&quot;Catui_border Catui_rounded-sm&quot; style=&quot;padding:16px&quot;&gt;rounded-sm&lt;/div&gt;
+  &lt;div class=&quot;Catui_border-brand Catui_rounded-md&quot; style=&quot;padding:16px&quot;&gt;border-brand · rounded-md&lt;/div&gt;
+  &lt;div class=&quot;Catui_bg-surface Catui_rounded-lg Catui_shadow-sm&quot; style=&quot;padding:16px&quot;&gt;rounded-lg · shadow-sm&lt;/div&gt;
+  &lt;div class=&quot;Catui_bg-surface Catui_rounded-pill Catui_shadow-md&quot; style=&quot;padding:16px 24px&quot;&gt;rounded-pill · shadow-md&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;Catui_hstack Catui_gap-4&quot;&gt;
+  &lt;div class=&quot;Catui_bg-surface Catui_shadow-xs&quot; style=&quot;padding:16px&quot;&gt;shadow-xs&lt;/div&gt;
+  &lt;div class=&quot;Catui_bg-surface Catui_shadow-lg&quot; style=&quot;padding:16px&quot;&gt;shadow-lg&lt;/div&gt;
+  &lt;article class=&quot;Catui_card Catui_shadow-0 Catui_border-0&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;카드 · shadow-0 · border-0&lt;/div&gt;&lt;/article&gt;
+&lt;/div&gt;
+&lt;div class=&quot;Catui_border-top&quot; style=&quot;padding-top:8px&quot;&gt;border-top&lt;/div&gt;
+&lt;div class=&quot;Catui_border-bottom&quot; style=&quot;padding-bottom:8px&quot;&gt;border-bottom&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="text">
+<h2 id="text">글자 정렬 · 굵기 · 크기 · 줄바꿈</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">text-* · fw-* · fs-* · nowrap · break</figcaption>
+<div class="doc-example-preview">
+  <p class="Catui_text-left">text-left</p>
+  <p class="Catui_text-center">text-center</p>
+  <p class="Catui_text-right">text-right</p>
+  <p><span class="Catui_fw-normal">fw-normal</span> · <span class="Catui_fw-semibold">fw-semibold</span> · <span class="Catui_fw-bold">fw-bold</span></p>
+  <p><span class="Catui_fs-caption">fs-caption 12</span> · <span class="Catui_fs-body">fs-body 13</span> · <span class="Catui_fs-lg">fs-lg 15</span></p>
+  <p class="Catui_nowrap Catui_scroll-x" style="max-width:240px">nowrap: 줄바꿈하지 않는 긴 문장은 가로로 스크롤됩니다.</p>
+  <p class="Catui_break" style="max-width:200px">break: https://catui.dev/docs/css/foundation/helpers.html#긴주소</p>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="text-* · fw-* · fs-* · nowrap · break 코드 복사">복사</button><pre><code>&lt;p class=&quot;Catui_text-left&quot;&gt;text-left&lt;/p&gt;
+&lt;p class=&quot;Catui_text-center&quot;&gt;text-center&lt;/p&gt;
+&lt;p class=&quot;Catui_text-right&quot;&gt;text-right&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;Catui_fw-normal&quot;&gt;fw-normal&lt;/span&gt; · &lt;span class=&quot;Catui_fw-semibold&quot;&gt;fw-semibold&lt;/span&gt; · &lt;span class=&quot;Catui_fw-bold&quot;&gt;fw-bold&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;Catui_fs-caption&quot;&gt;fs-caption 12&lt;/span&gt; · &lt;span class=&quot;Catui_fs-body&quot;&gt;fs-body 13&lt;/span&gt; · &lt;span class=&quot;Catui_fs-lg&quot;&gt;fs-lg 15&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;Catui_nowrap Catui_scroll-x&quot; style=&quot;max-width:240px&quot;&gt;nowrap: 줄바꿈하지 않는 긴 문장은 가로로 스크롤됩니다.&lt;/p&gt;
+&lt;p class=&quot;Catui_break&quot; style=&quot;max-width:200px&quot;&gt;break: https://catui.dev/docs/css/foundation/helpers.html#긴주소&lt;/p&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="size">
+<h2 id="size">크기 · 표시 · 위치 · 넘침</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">w-full · h-full · max-prose · mx-auto · block · inline-block · relative · sticky · overflow-*</figcaption>
+<div class="doc-example-preview">
+  <button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_w-full" type="button">w-full 버튼</button>
+  <p class="Catui_max-prose Catui_mx-auto Catui_text-center Catui_bg-muted Catui_rounded-md" style="padding:8px">max-prose + mx-auto: 읽기 좋은 폭으로 가운데</p>
+  <div class="Catui_hstack"><span class="Catui_block Catui_bg-brand-soft" style="padding:4px 8px">block</span><span class="Catui_inline-block Catui_bg-info-soft" style="padding:4px 8px">inline-block</span></div>
+  <div class="Catui_overflow-auto Catui_border Catui_rounded-md Catui_relative" style="max-height:120px" tabindex="0" role="region" aria-label="고정 머리 예시">
+    <p class="Catui_sticky Catui_bg-surface Catui_border-bottom Catui_fw-semibold" style="padding:8px">sticky 머리 (스크롤해 보세요)</p>
+    <p style="padding:8px">1번째 줄</p><p style="padding:8px">2번째 줄</p><p style="padding:8px">3번째 줄</p><p style="padding:8px">4번째 줄</p>
+  </div>
+  <div class="Catui_overflow-hidden Catui_rounded-lg Catui_border" style="height:60px"><div class="Catui_h-full Catui_bg-gradient" style="padding:8px">overflow-hidden + h-full</div></div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="w-full · h-full · max-prose · mx-auto · block · inline-block · relative · sticky · overflow-* 코드 복사">복사</button><pre><code>&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary Catui_w-full&quot; type=&quot;button&quot;&gt;w-full 버튼&lt;/button&gt;
+&lt;p class=&quot;Catui_max-prose Catui_mx-auto Catui_text-center Catui_bg-muted Catui_rounded-md&quot; style=&quot;padding:8px&quot;&gt;max-prose + mx-auto: 읽기 좋은 폭으로 가운데&lt;/p&gt;
+&lt;div class=&quot;Catui_hstack&quot;&gt;&lt;span class=&quot;Catui_block Catui_bg-brand-soft&quot; style=&quot;padding:4px 8px&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;Catui_inline-block Catui_bg-info-soft&quot; style=&quot;padding:4px 8px&quot;&gt;inline-block&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;Catui_overflow-auto Catui_border Catui_rounded-md Catui_relative&quot; style=&quot;max-height:120px&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;고정 머리 예시&quot;&gt;
+  &lt;p class=&quot;Catui_sticky Catui_bg-surface Catui_border-bottom Catui_fw-semibold&quot; style=&quot;padding:8px&quot;&gt;sticky 머리 (스크롤해 보세요)&lt;/p&gt;
+  &lt;p style=&quot;padding:8px&quot;&gt;1번째 줄&lt;/p&gt;&lt;p style=&quot;padding:8px&quot;&gt;2번째 줄&lt;/p&gt;&lt;p style=&quot;padding:8px&quot;&gt;3번째 줄&lt;/p&gt;&lt;p style=&quot;padding:8px&quot;&gt;4번째 줄&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;Catui_overflow-hidden Catui_rounded-lg Catui_border&quot; style=&quot;height:60px&quot;&gt;&lt;div class=&quot;Catui_h-full Catui_bg-gradient&quot; style=&quot;padding:8px&quot;&gt;overflow-hidden + h-full&lt;/div&gt;&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="responsive">
+<h2 id="responsive">반응형 숨김 · 인쇄</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">hide-md · hide-sm · only-sm · no-print · print-only</figcaption>
+<div class="doc-example-preview">
+  <p><span class="Catui_pill Catui_pill-info Catui_hide-md">991px 넘으면 보임 (hide-md)</span></p>
+  <p><span class="Catui_pill Catui_pill-success Catui_hide-sm">767px 넘으면 보임 (hide-sm)</span> <span class="Catui_pill Catui_pill-warning Catui_only-sm">767px 이하에서만 보임 (only-sm)</span></p>
+  <p><button class="Catui_btn Catui_btn-sm Catui_btn-secondary Catui_no-print" type="button">인쇄할 때 숨는 버튼 (no-print)</button><span class="Catui_print-only">인쇄물에만 나오는 문구 (print-only)</span></p>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="hide-md · hide-sm · only-sm · no-print · print-only 코드 복사">복사</button><pre><code>&lt;p&gt;&lt;span class=&quot;Catui_pill Catui_pill-info Catui_hide-md&quot;&gt;991px 넘으면 보임 (hide-md)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;Catui_pill Catui_pill-success Catui_hide-sm&quot;&gt;767px 넘으면 보임 (hide-sm)&lt;/span&gt; &lt;span class=&quot;Catui_pill Catui_pill-warning Catui_only-sm&quot;&gt;767px 이하에서만 보임 (only-sm)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-secondary Catui_no-print&quot; type=&quot;button&quot;&gt;인쇄할 때 숨는 버튼 (no-print)&lt;/button&gt;&lt;span class=&quot;Catui_print-only&quot;&gt;인쇄물에만 나오는 문구 (print-only)&lt;/span&gt;&lt;/p&gt;</code></pre></details>
+</figure>
+<p>창 폭을 줄이거나 인쇄 미리보기로 확인하세요. 숨김은 <code>display:none</code>이라 스크린리더에서도 사라집니다 — 내용 자체를 숨길 때만 쓰고, 화면에서만 감출 글자는 <code>.Catui_clip</code>을 씁니다.</p>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>도우미 클래스는 결합 순서 맨 끝(<code>src/css/index.json</code>)에 있어 컴포넌트 스타일을 덮어씁니다. 값은 모두 토큰이므로 새 색·크기를 만들지 않습니다. 같은 조합을 여러 곳에서 반복하면 도우미 대신 컴포넌트 클래스로 묶는 것이 관리하기 쉽습니다.</p>
+</section>
+
+<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/foundation/helpers.css</span><code>.Catui_border</code> <code>.Catui_border-top</code> <code>.Catui_border-bottom</code> <code>.Catui_border-brand</code> <code>.Catui_border-0</code> <code>.Catui_rounded-0</code> <code>.Catui_rounded-sm</code> <code>.Catui_rounded-md</code> <code>.Catui_rounded-lg</code> <code>.Catui_rounded-pill</code> <code>.Catui_shadow-0</code> <code>.Catui_shadow-xs</code> <code>.Catui_shadow-sm</code> <code>.Catui_shadow-md</code> <code>.Catui_shadow-lg</code> <code>.Catui_text-left</code> <code>.Catui_text-center</code> <code>.Catui_text-right</code> <code>.Catui_fw-normal</code> <code>.Catui_fw-semibold</code> <code>.Catui_fw-bold</code> <code>.Catui_fs-caption</code> <code>.Catui_fs-body</code> <code>.Catui_fs-lg</code> <code>.Catui_nowrap</code> <code>.Catui_break</code> <code>.Catui_w-full</code> <code>.Catui_h-full</code> <code>.Catui_max-prose</code> <code>.Catui_mx-auto</code> <code>.Catui_block</code> <code>.Catui_inline-block</code> <code>.Catui_overflow-auto</code> <code>.Catui_overflow-hidden</code> <code>.Catui_scroll-x</code> <code>.Catui_sticky</code> <code>.Catui_relative</code> <code>.Catui_only-sm</code> <code>.Catui_hide-md</code> <code>.Catui_hide-sm</code> <code>.Catui_print-only</code> <code>.Catui_no-print</code> <code>.Catui_app</code> <code>.Catui_site</code> <code>.Catui_card</code> <code>.Catui_tbl</code></li></ul></section>
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/foundation/utilities.html"><span>이전</span>유틸리티</a><a class="doc-pager-next" href="../../css/foundation/motion.html"><span>다음</span>모션</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#border">테두리 · 모서리 · 그림자</a></li><li><a href="#text">글자 정렬 · 굵기 · 크기 · 줄바꿈</a></li><li><a href="#size">크기 · 표시 · 위치 · 넘침</a></li><li><a href="#responsive">반응형 숨김 · 인쇄</a></li><li><a href="#usage">사용법</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

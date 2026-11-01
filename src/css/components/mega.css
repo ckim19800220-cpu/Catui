@@ -1,0 +1,18 @@
+/* components/mega.css */
+.Catui_mega{position:relative;display:inline-block}
+.Catui_mega summary{list-style:none;cursor:pointer}
+.Catui_mega summary::-webkit-details-marker{display:none}
+.Catui_mega-panel{
+  width:min(var(--Catui_mega-w),calc(100vw - var(--Catui_space-8)));
+  display:grid;grid-template-columns:repeat(var(--Catui_mega-cols),minmax(0,1fr));gap:var(--Catui_mega-col-gap);
+  padding:var(--Catui_mega-pad);background:var(--Catui_card-bg);
+  border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);box-shadow:var(--Catui_shadow-md);
+}
+.Catui_mega-h{font-size:var(--Catui_type-micro-size);letter-spacing:var(--Catui_type-micro-ls);text-transform:uppercase;color:var(--Catui_color-text-secondary);margin-bottom:var(--Catui_space-2)}
+.Catui_mega-item{height:var(--Catui_mega-item-h);display:flex;align-items:center;line-height:1}
+@media (max-width:991px){
+  .Catui_mega-panel{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:767px){
+  .Catui_mega-panel{grid-template-columns:minmax(0,1fr)}
+}

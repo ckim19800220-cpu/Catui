@@ -1,0 +1,26 @@
+<section aria-labelledby="basic">
+<h2 id="basic">페이지 이동</h2>
+<catui-example title="laypage.render">
+  <nav id="lp-demo"></nav>
+  <p class="Catui_help" id="lp-out" aria-live="polite"></p>
+  <script>
+  catui.use(['laypage'], function (laypage) {
+    laypage.render({ elem: '#lp-demo', count: 230, limit: 10, groups: 5,
+      jump: function (obj, first) { document.getElementById('lp-out').textContent = (first ? '처음 ' : '') + obj.curr + ' / ' + obj.pages + '쪽'; } });
+  });
+  </script>
+</catui-example>
+<p>현재 쪽을 가운데 둔 번호 묶음과 처음·끝 쪽, 사이가 비면 …을 보입니다. 처음 렌더할 때 <code>jump</code>가 <code>first === true</code>로 한 번 호출됩니다.</p>
+</section>
+
+<section aria-labelledby="options">
+<h2 id="options">옵션</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">laypage 옵션</caption>
+<thead><tr><th scope="col">옵션</th><th scope="col">기본값</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>count</code> · <code>limit</code> · <code>curr</code></td><td>0 · 10 · 1</td><td>전체 개수 · 쪽당 개수 · 현재 쪽</td></tr>
+<tr><td><code>groups</code></td><td>5</td><td>번호 버튼 개수</td></tr>
+<tr><td><code>jump(obj, first)</code></td><td>—</td><td><code>{ curr, limit, count, pages }</code> · 이벤트 <code>jump(f)</code></td></tr>
+<tr><td><code>label</code> · <code>alwaysShow</code></td><td>'페이지' · false</td><td>nav 이름 · 한 쪽이어도 표시</td></tr>
+</tbody></table></div>
+</section>

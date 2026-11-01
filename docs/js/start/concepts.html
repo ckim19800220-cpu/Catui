@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>핵심 개념 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="use · render/reload/destroy · 이벤트(필터) · 선언형 속성.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html" aria-current="page">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/util.html">util 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 시작</p>
+<h1 class="Catui_h1">핵심 개념</h1>
+<p class="Catui_lead">use · render/reload/destroy · 이벤트(필터) · 선언형 속성.</p>
+
+<section aria-labelledby="use">
+<h2 id="use">모듈 받기 — catui.use</h2>
+<pre><code>catui.use(['layer', 'table'], function (layer, table) { … });   // 인자 순서 = 배열 순서
+catui.use('form').then(function ([form]) { … });                 // Promise도 돌려줌
+catui.layer.msg('바로 써도 됩니다');                               // 전역에서는 catui.모듈로 직접 접근 가능</code></pre>
+</section>
+
+<section aria-labelledby="render">
+<h2 id="render">렌더형 모듈 — render · reload · destroy</h2>
+<p>table·laypage·tabs·dropdown·datePicker·upload·slider·rate·tree·collapse·canvas는 같은 인터페이스를 가집니다.</p>
+<pre><code>var inst = table.render({ elem: '#orders', id: 'orders', … });   // 인스턴스
+table.reload('orders', { data: newRows });                        // 옵션 합쳐 다시 그리기
+table.getThis('orders');                                          // 인스턴스 찾기
+table.destroy('orders');                                          // 리스너·요청까지 정리</code></pre>
+<p>같은 대상에 다시 <code>render</code>하면 이전 인스턴스는 자동으로 정리됩니다.</p>
+</section>
+
+<section aria-labelledby="events">
+<h2 id="events">이벤트 — 모듈.on('이벤트(필터)')</h2>
+<p>필터는 요소의 <code>data-catui-filter</code> 값(또는 <code>id</code>)입니다. 필터를 빼면 그 이벤트 전체를 받습니다.</p>
+<figure class="doc-example">
+<figcaption class="doc-example-title">필터로 이벤트 받기</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_tabs" data-catui-filter="concept-tabs">
+    <input class="Catui_clip" type="radio" name="concept-tab" id="concept-a" checked><label class="Catui_tab" for="concept-a">개요</label><div class="Catui_panel"><p>개요 내용</p></div>
+    <input class="Catui_clip" type="radio" name="concept-tab" id="concept-b"><label class="Catui_tab" for="concept-b">분석</label><div class="Catui_panel"><p>분석 내용</p></div>
+  </div>
+  <p class="Catui_help" id="concept-out" aria-live="polite">탭을 바꿔 보세요.</p>
+  <script>
+  catui.use(['tabs'], function (tabs) {
+    var off = tabs.on('tab(concept-tabs)', function (obj) {
+      document.getElementById('concept-out').textContent = obj.index + '번 탭: ' + obj.title;
+    });
+    // off();  — 필요 없어지면 해제
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="필터로 이벤트 받기 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_tabs&quot; data-catui-filter=&quot;concept-tabs&quot;&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;concept-tab&quot; id=&quot;concept-a&quot; checked&gt;&lt;label class=&quot;Catui_tab&quot; for=&quot;concept-a&quot;&gt;개요&lt;/label&gt;&lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;개요 내용&lt;/p&gt;&lt;/div&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;concept-tab&quot; id=&quot;concept-b&quot;&gt;&lt;label class=&quot;Catui_tab&quot; for=&quot;concept-b&quot;&gt;분석&lt;/label&gt;&lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;분석 내용&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;concept-out&quot; aria-live=&quot;polite&quot;&gt;탭을 바꿔 보세요.&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;tabs&#39;], function (tabs) {
+  var off = tabs.on(&#39;tab(concept-tabs)&#39;, function (obj) {
+    document.getElementById(&#39;concept-out&#39;).textContent = obj.index + &#39;번 탭: &#39; + obj.title;
+  });
+  // off();  — 필요 없어지면 해제
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="declarative">
+<h2 id="declarative">선언형 속성</h2>
+<p>스크립트 없이 마크업만으로 동작하는 기능은 <code>data-catui-*</code> 속성으로 켭니다. 새로 그린 영역은 <code>catui.init(영역)</code>으로 다시 준비합니다. 목록은 <a href="../../js/reference/attributes.html">선언형 속성</a>에 있습니다.</p>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/start/install.html"><span>이전</span>설치</a><a class="doc-pager-next" href="../../js/start/security.html"><span>다음</span>보안과 정리</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#use">모듈 받기 — catui.use</a></li><li><a href="#render">렌더형 모듈 — render · reload · destroy</a></li><li><a href="#events">이벤트 — 모듈.on('이벤트(필터)')</a></li><li><a href="#declarative">선언형 속성</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

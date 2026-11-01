@@ -1,0 +1,12 @@
+/* blocks/people.css */
+/* Profile card — 팀 소개 카드(사진·이름·역할·소개·링크). */
+.Catui_profile{display:grid;align-content:start;justify-items:center;gap:var(--Catui_space-2);padding:var(--Catui_space-6);text-align:center;background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_profile-photo{width:88px;height:88px;border-radius:var(--Catui_radius-pill);object-fit:cover;background:var(--Catui_color-neutral-100);margin-bottom:var(--Catui_space-2)}
+.Catui_profile-name{font-weight:600;font-size:var(--Catui_type-h3-size)}
+.Catui_profile-role{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-brand-strong);font-weight:600}
+.Catui_profile-bio{color:var(--Catui_color-text-secondary)}
+.Catui_profile-links{display:flex;gap:var(--Catui_space-1);margin-top:var(--Catui_space-2)}
+/* 가로 프로필 (사진 왼쪽) */
+.Catui_profile-row{grid-template-columns:auto minmax(0,1fr);justify-items:start;text-align:left;column-gap:var(--Catui_space-4);row-gap:2px;align-content:center}
+.Catui_profile-row .Catui_profile-photo{grid-row:1 / span 4;width:64px;height:64px;margin:0}
+.Catui_profile-row .Catui_profile-links{margin-top:0}

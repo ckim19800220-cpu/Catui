@@ -1,0 +1,22 @@
+<section aria-labelledby="basic">
+<h2 id="basic">설정 묶음</h2>
+<catui-example title="스위치 · 선택 · 버튼 · 위험 동작">
+  <div class="Catui_settings">
+    <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="st-mail-t">이메일 알림</span><span class="Catui_setting-text" id="st-mail-d">주문·배송 상태가 바뀌면 메일을 보냅니다.</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="st-mail" type="checkbox" role="switch" checked aria-labelledby="st-mail-t" aria-describedby="st-mail-d"><label class="Catui_tgl" for="st-mail"></label></span></div></div>
+    <div class="Catui_setting"><div class="Catui_setting-main"><label class="Catui_setting-title" for="st-lang">언어</label><span class="Catui_setting-text">화면에 표시할 언어</span></div><div class="Catui_setting-control"><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="st-lang"><option>한국어</option><option>English</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div></div>
+    <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title">비밀번호</span><span class="Catui_setting-text">3개월 전에 바꿨습니다.</span></div><div class="Catui_setting-control"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button">변경</button></div></div>
+    <div class="Catui_setting Catui_setting-danger"><div class="Catui_setting-main"><span class="Catui_setting-title">계정 삭제</span><span class="Catui_setting-text">모든 데이터가 지워지며 되돌릴 수 없습니다.</span></div><div class="Catui_setting-control"><button class="Catui_btn Catui_btn-sm Catui_btn-danger" type="button">삭제</button></div></div>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_settings</code> 안에 <code>.Catui_setting</code>(<code>-main</code>: <code>-title</code> + <code>-text</code> / <code>-control</code>: 스위치·선택·버튼). 되돌릴 수 없는 동작은 <code>.Catui_setting-danger</code>로 맨 아래에 둡니다. 767px 이하에서 컨트롤은 아래 줄로 내려갑니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>스위치는 제목·설명과 <code>aria-labelledby</code>·<code>aria-describedby</code>로 연결합니다. 선택 상자는 제목을 <code>label for</code>로.</li>
+  <li>위험 동작은 색과 함께 설명 문장으로 결과를 알립니다.</li>
+</ul>
+</section>

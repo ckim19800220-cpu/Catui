@@ -1,0 +1,19 @@
+/* components/stat.css */
+/* Stat — label, metric value, delta pill, spark bars. */
+.Catui_stat{display:grid;gap:var(--Catui_space-2);justify-items:start}
+.Catui_stat .Catui_pill{height:var(--Catui_pill-h-sm)}
+.Catui_stat-label{
+  display:inline-flex;align-items:center;gap:var(--Catui_space-2);
+  font-size:var(--Catui_stat-label-size);font-weight:var(--Catui_type-label-weight);
+  letter-spacing:var(--Catui_type-label-ls);text-transform:uppercase;color:var(--Catui_color-text-secondary);
+}
+.Catui_stat-dot{width:var(--Catui_stat-dot);height:var(--Catui_stat-dot);border-radius:var(--Catui_radius-pill);flex:none;background:var(--Catui_stat-dot-color);display:inline-block}
+.Catui_stat-value{
+  font-size:var(--Catui_stat-value-size);font-weight:var(--Catui_type-metric-lg-weight);
+  line-height:var(--Catui_type-metric-lg-lh);color:var(--Catui_stat-value-color);font-variant-numeric:tabular-nums;
+}
+.Catui_spark{display:flex;align-items:flex-end;gap:var(--Catui_space-1);height:var(--Catui_stat-spark-h)}
+.Catui_spark i{width:var(--Catui_stat-spark-bar-w);border-radius:1px;background:var(--Catui_stat-spark-bar);display:block}
+.Catui_spark i:last-child{background:var(--Catui_stat-spark-bar-active)}
+.Catui_delta-up{color:var(--Catui_stat-delta-up)}
+.Catui_delta-down{color:var(--Catui_stat-delta-down)}

@@ -1,0 +1,27 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="기본">
+  <div class="Catui_splitbtn">
+    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">저장</button>
+    <details class="Catui_dd">
+      <summary class="Catui_btn Catui_btn-md Catui_btn-primary" aria-label="다른 저장"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></summary>
+      <div class="Catui_dd-menu Catui_dd-sm"><button class="Catui_dd-item" type="button">초안으로 저장</button></div>
+    </details>
+  </div>
+</catui-example>
+<catui-example title="보조 변형 · 작은 크기">
+  <div class="Catui_splitbtn"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button">내보내기</button><details class="Catui_dd"><summary class="Catui_btn Catui_btn-sm Catui_btn-secondary" aria-label="다른 내보내기 형식"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></summary><div class="Catui_dd-menu Catui_dd-sm"><button class="Catui_dd-item" type="button">CSV</button><button class="Catui_dd-item" type="button">PDF</button></div></details></div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_splitbtn</code> — 주 동작 버튼과 <code>.Catui_dd</code> 화살표를 붙인 묶음.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>화살표만 있는 메뉴 버튼(summary)에 <code>aria-label</code>(예: "다른 저장 방식").</li>
+  <li>주 동작과 메뉴는 같은 variant·높이로 위계를 맞춥니다.</li>
+</ul>
+</section>

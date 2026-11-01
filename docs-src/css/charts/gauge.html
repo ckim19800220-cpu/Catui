@@ -1,0 +1,21 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="상태 3종">
+  <div class="Catui_actions"><div class="Catui_gauge Catui_gauge-good" role="img" aria-label="72퍼센트, 좋음"><div class="Catui_gauge-value"><b>72%</b><span>좋음</span></div></div><div class="Catui_gauge Catui_gauge-warn" role="img" aria-label="45퍼센트, 주의"><div class="Catui_gauge-value"><b>45%</b><span>주의</span></div></div><div class="Catui_gauge Catui_gauge-bad" role="img" aria-label="18퍼센트, 위험"><div class="Catui_gauge-value"><b>18%</b><span>위험</span></div></div></div>
+</catui-example>
+<catui-example title="값 직접 지정 (--Catui_g-deg = 값 × 2.7deg)">
+  <div class="Catui_actions"><div class="Catui_gauge Catui_gauge-good" style="--Catui_g-deg:243deg" role="img" aria-label="가동률 90퍼센트, 좋음"><div class="Catui_gauge-value"><b>90%</b><span>가동률</span></div></div><p class="Catui_help">270° 호에서 90% = 243deg. 판정 색은 good/warn/bad 클래스로, 각도만 덮어씁니다.</p></div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_gauge-good/warn/bad</code>가 conic-gradient로 그립니다. 중앙 수치는 <code>.Catui_gauge-value</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li><code>role="img"</code> + "72퍼센트, 좋음"처럼 수치와 판정을 함께.</li>
+  <li>판정은 색과 글자(좋음·주의·위험)를 같이 씁니다.</li>
+</ul>
+</section>

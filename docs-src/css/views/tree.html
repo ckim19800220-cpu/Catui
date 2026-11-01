@@ -1,0 +1,48 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="펼친 폴더와 선택 항목">
+  <div class="Catui_tree">
+    <div class="Catui_tree-row"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-folder"></use></svg>문서</div>
+    <div class="Catui_tree-kids">
+      <details open>
+        <summary><svg class="Catui_icon Catui_tree-toggle" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-folder"></use></svg>청구</summary>
+        <div class="Catui_tree-kids">
+          <div class="Catui_tree-row Catui_tree-on" aria-current="true"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-text"></use></svg>청구서</div>
+        </div>
+      </details>
+    </div>
+  </div>
+</catui-example>
+<catui-example title="접힌 폴더 · 여러 단계">
+  <div class="Catui_tree" aria-label="프로젝트 파일">
+    <details open>
+      <summary><svg class="Catui_icon Catui_tree-toggle" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-folder"></use></svg>src</summary>
+      <div class="Catui_tree-kids">
+        <details>
+          <summary><svg class="Catui_icon Catui_tree-toggle" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-folder"></use></svg>css (접힘)</summary>
+          <div class="Catui_tree-kids"><div class="Catui_tree-row"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-text"></use></svg>tokens.css</div></div>
+        </details>
+        <details open>
+          <summary><svg class="Catui_icon Catui_tree-toggle" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-folder"></use></svg>js</summary>
+          <div class="Catui_tree-kids">
+            <div class="Catui_tree-row"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-text"></use></svg>index.js</div>
+            <div class="Catui_tree-row"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-text"></use></svg>bundle.json</div>
+          </div>
+        </details>
+      </div>
+    </details>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_tree</code> + <code>.Catui_tree-kids</code> 들여쓰기, 접기는 <code>&lt;details&gt;</code> + <code>.Catui_tree-toggle</code> 화살표, 선택은 <code>.Catui_tree-on</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>접기는 details/summary, 각 항목에 아이콘으로 계층을 함께 보입니다.</li>
+  <li>선택 항목은 <code>aria-current</code>. 키보드 이동·체크 전파는 catui.js tree.</li>
+</ul>
+</section>

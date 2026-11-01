@@ -1,0 +1,11 @@
+/* blocks/subscribe.css */
+/* Subscribe — 이메일 구독 한 줄 폼(767px 이하 세로)과 안내 문구. */
+.Catui_subscribe{display:flex;gap:var(--Catui_space-2);width:100%;max-width:440px}
+.Catui_subscribe .Catui_input{flex:1;min-width:0}
+.Catui_subscribe .Catui_btn{flex:none}
+.Catui_subscribe-note{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);margin-top:var(--Catui_space-2)}
+@media (max-width:767px){.Catui_subscribe{flex-direction:column}}
+/* 구독 띠(브랜드 배경) · 완료 상태 */
+.Catui_subscribe-band{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-4);padding:var(--Catui_space-7);border-radius:var(--Catui_radius-lg);background:var(--Catui_sidebar-bg);color:var(--Catui_sidebar-fg)}
+.Catui_subscribe-band .Catui_subscribe-note{color:var(--Catui_sidebar-fg-muted)}
+.Catui_subscribe-done{display:flex;align-items:center;gap:var(--Catui_space-2);color:var(--Catui_badge-success-fg);font-weight:600}

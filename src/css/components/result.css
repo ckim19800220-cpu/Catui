@@ -1,0 +1,12 @@
+/* components/result.css */
+/* Result — 작업 결과·오류 화면(큰 아이콘·제목·설명·동작). 완료·실패·404·권한 없음. */
+.Catui_result{display:grid;justify-items:center;gap:var(--Catui_space-3);max-width:480px;margin-inline:auto;padding:var(--Catui_space-9) var(--Catui_space-4);text-align:center}
+.Catui_result-icon{width:64px;height:64px;display:grid;place-items:center;border-radius:var(--Catui_radius-pill);background:var(--Catui_color-neutral-100);color:var(--Catui_color-text-secondary)}
+.Catui_result-icon .Catui_icon{width:32px;height:32px}
+.Catui_result-success .Catui_result-icon{background:var(--Catui_badge-success-bg);color:var(--Catui_badge-success-fg)}
+.Catui_result-danger .Catui_result-icon{background:var(--Catui_badge-danger-bg);color:var(--Catui_badge-danger-fg)}
+.Catui_result-warning .Catui_result-icon{background:var(--Catui_badge-warning-bg);color:var(--Catui_badge-warning-fg)}
+.Catui_result-code{font-size:calc(var(--Catui_type-display-size) * 2);font-weight:700;line-height:1;color:var(--Catui_color-brand-strong);font-variant-numeric:tabular-nums}
+.Catui_result-title{font-size:var(--Catui_type-h2-size);font-weight:var(--Catui_type-h2-weight);line-height:var(--Catui_type-h2-lh)}
+.Catui_result-text{color:var(--Catui_color-text-secondary)}
+.Catui_result .Catui_actions{justify-content:center;margin-top:var(--Catui_space-2)}

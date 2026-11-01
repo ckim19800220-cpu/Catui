@@ -1,0 +1,18 @@
+/* blocks/process.css */
+/* Process — 번호 원 + 연결선이 있는 "이용 방법" 단계 (767px 이하 세로). */
+.Catui_process{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--Catui_grid-gap);counter-reset:Catui_step;list-style:none;padding:0;margin:0}
+.Catui_process > li{position:relative;display:grid;gap:var(--Catui_space-2);counter-increment:Catui_step}
+.Catui_process > li::before{content:counter(Catui_step);width:var(--Catui_control-h-lg);height:var(--Catui_control-h-lg);display:grid;place-items:center;border-radius:var(--Catui_radius-pill);background:var(--Catui_color-brand-fill);color:var(--Catui_color-text-inverse);font-weight:700;position:relative;z-index:1;line-height:1}
+.Catui_process > li:not(:last-child)::after{content:"";position:absolute;top:calc(var(--Catui_control-h-lg) / 2);left:var(--Catui_control-h-lg);right:calc(-1 * var(--Catui_grid-gap));border-top:1px dashed var(--Catui_color-neutral-300)}
+.Catui_process-title{font-weight:600}
+.Catui_process-text{color:var(--Catui_color-text-secondary)}
+@media (max-width:767px){
+  .Catui_process > li{grid-template-columns:var(--Catui_control-h-lg) minmax(0,1fr);column-gap:var(--Catui_space-3)}
+  .Catui_process > li::before{grid-row:1 / span 2}
+  .Catui_process > li:not(:last-child)::after{display:none}
+}
+/* 세로 단계 (연결선이 아래로) */
+.Catui_process-v{grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-5)}
+.Catui_process-v > li{grid-template-columns:var(--Catui_control-h-lg) minmax(0,1fr);column-gap:var(--Catui_space-3)}
+.Catui_process-v > li::before{grid-row:1 / span 2}
+.Catui_process-v > li:not(:last-child)::after{top:var(--Catui_control-h-lg);bottom:calc(-1 * var(--Catui_space-5));left:calc(var(--Catui_control-h-lg) / 2);right:auto;border-top:0;border-left:1px dashed var(--Catui_color-neutral-300);display:block}

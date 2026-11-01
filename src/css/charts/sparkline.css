@@ -1,0 +1,10 @@
+/* charts/sparkline.css */
+.Catui_sparkline{width:var(--Catui_spark-w);height:var(--Catui_spark-h);flex:none}
+.Catui_sparkline path{fill:none;stroke:var(--Catui_chart-series-1);stroke-width:var(--Catui_spark-line-w)}
+.Catui_spk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-3)}
+.Catui_spk{display:flex;align-items:center;gap:var(--Catui_space-2);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-sm);padding:var(--Catui_space-2);background:var(--Catui_card-bg)}
+.Catui_spk b{font-variant-numeric:tabular-nums}
+.Catui_spk .Catui_pill{height:var(--Catui_pill-h-sm);margin-left:auto}
+/* 추세별 선 색: 감소는 위험색, 보합은 중립색 */
+.Catui_spk-down .Catui_sparkline path{stroke:var(--Catui_badge-danger-fg)}
+.Catui_spk-flat .Catui_sparkline path{stroke:var(--Catui_color-neutral-500)}

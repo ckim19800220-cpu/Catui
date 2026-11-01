@@ -1,0 +1,26 @@
+<section aria-labelledby="basic">
+<h2 id="basic">아코디언</h2>
+<catui-example title="data-catui-collapse · accordion">
+  <div data-catui-collapse="accordion" data-catui-filter="cl-faq">
+    <details class="Catui_faq" open><summary>설치가 필요한가요? <svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></summary><p>스타일시트와 스크립트를 한 줄씩 링크합니다.</p></details>
+    <details class="Catui_faq"><summary>스크립트 없이도 되나요? <svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></summary><p>예. 접기는 브라우저 기본 동작이고, 하나만 열기와 이벤트만 스크립트가 더합니다.</p></details>
+  </div>
+  <p class="Catui_help" id="cl-out" aria-live="polite"></p>
+  <script>
+  catui.use(['collapse'], function (collapse) {
+    collapse.on('collapse(cl-faq)', function (o) { document.getElementById('cl-out').textContent = (o.index + 1) + '번 ' + (o.open ? '열림' : '닫힘'); });
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">collapse API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>collapse.render({ elem, accordion, data: [{ title, content, open }] })</code></td><td>마크업 생성 (content 문자열은 글자, html``은 마크업)</td></tr>
+<tr><td><code>collapse.open(f, i)</code> · <code>collapse.close(f, [i])</code></td><td>열기 / 닫기(생략하면 전부)</td></tr>
+<tr><td><code>on('collapse(f)')</code></td><td><code>{ index, title, open, elem }</code></td></tr>
+</tbody></table></div>
+</section>

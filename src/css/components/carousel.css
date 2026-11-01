@@ -1,0 +1,13 @@
+/* components/carousel.css */
+/* Carousel — 스크롤 스냅 슬라이드. 이전·다음·점은 #슬라이드id 링크로 스크립트 없이 이동. */
+.Catui_carousel{position:relative;display:grid;gap:var(--Catui_space-3)}
+.Catui_carousel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;gap:var(--Catui_space-3);border-radius:var(--Catui_radius-md);scrollbar-width:none}
+.Catui_carousel-track::-webkit-scrollbar{display:none}
+.Catui_carousel-slide{flex:0 0 100%;scroll-snap-align:start;position:relative;border-radius:var(--Catui_radius-md);overflow:hidden;background:var(--Catui_color-neutral-100)}
+.Catui_carousel-slide > img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_carousel-peek .Catui_carousel-slide{flex-basis:80%}
+.Catui_carousel-nav{display:flex;align-items:center;justify-content:center;gap:var(--Catui_space-2)}
+.Catui_carousel-dot{width:var(--Catui_space-2);height:var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-neutral-300)}
+.Catui_carousel-dot[aria-current="true"]{background:var(--Catui_color-brand-strong);width:var(--Catui_space-5)}
+.Catui_carousel-dot:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.Catui_carousel-track{scroll-behavior:auto}}

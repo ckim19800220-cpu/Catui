@@ -1,0 +1,30 @@
+<section aria-labelledby="hero" class="doc-home">
+<p class="doc-eyebrow">Catui 문서</p>
+<h1 class="Catui_display">한국어 화면을 위한 UI 키트</h1>
+<p class="Catui_lead">CSS만으로 동작하는 컴포넌트 키트와, 스크립트 한 줄로 쓰는 의존성 없는 프레임워크 catui.js. 견본 명세의 토큰을 그대로 쓰고 접근성 기준(WCAG AA)을 지킵니다.</p>
+<div class="Catui_actions">
+  <a class="Catui_btn Catui_btn-lg Catui_btn-primary" href="doc:css/start/introduction">CSS 문서</a>
+  <a class="Catui_btn Catui_btn-lg Catui_btn-secondary" href="doc:js/start/introduction">catui.js 문서</a>
+</div>
+</section>
+
+<section aria-labelledby="sections">
+<h2 id="sections">문서 분류</h2>
+<div class="doc-cards">
+  <a href="doc:css/start/introduction"><b>CSS · 시작</b><span>소개 · 설치 · 이름 규칙 · 접근성</span></a>
+  <a href="doc:css/foundation/color"><b>CSS · 기초</b><span>색상 · 타이포 · 간격 · 아이콘 · 유틸리티</span></a>
+  <a href="doc:css/components/button"><b>CSS · 컴포넌트</b><span>버튼·폼·표·모달 등 23종</span></a>
+  <a href="doc:css/views/tree"><b>CSS · 데이터 뷰·차트</b><span>트리·달력·간트·칸반·차트</span></a>
+  <a href="doc:js/start/concepts"><b>catui.js · 개념</b><span>use · 이벤트(필터) · 선언형 속성</span></a>
+  <a href="doc:js/modules/layer"><b>catui.js · 모듈</b><span>layer·form·table 등 13개</span></a>
+</div>
+</section>
+
+<section aria-labelledby="quick">
+<h2 id="quick">빠른 시작</h2>
+<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+&lt;script src="dist/catui.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+catui.use(['layer'], function (layer) { layer.msg('안녕하세요'); });
+&lt;/script&gt;</code></pre>
+</section>

@@ -1,0 +1,33 @@
+<section aria-labelledby="input">
+<h2 id="input">입력</h2>
+<catui-example title="radio 별점">
+  <fieldset><legend class="Catui_label">만족도</legend>
+  <div class="Catui_rating">
+    <input class="Catui_clip" type="radio" name="rt" id="rt-1"><label for="rt-1" aria-label="1점"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></label>
+    <input class="Catui_clip" type="radio" name="rt" id="rt-2"><label for="rt-2" aria-label="2점"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></label>
+    <input class="Catui_clip" type="radio" name="rt" id="rt-3"><label for="rt-3" aria-label="3점"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></label>
+    <input class="Catui_clip" type="radio" name="rt" id="rt-4" checked><label for="rt-4" aria-label="4점"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></label>
+    <input class="Catui_clip" type="radio" name="rt" id="rt-5"><label for="rt-5" aria-label="5점"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></label>
+  </div></fieldset>
+</catui-example>
+</section>
+
+<section aria-labelledby="readonly">
+<h2 id="readonly">읽기 전용</h2>
+<catui-example title="점수 표시만">
+  <span class="Catui_rating" role="img" aria-label="5점 중 4점"><span style="color:var(--Catui_rating-on)"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></span><span style="color:var(--Catui_rating-on)"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></span><span style="color:var(--Catui_rating-on)"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></span><span style="color:var(--Catui_rating-on)"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></span><span style="color:var(--Catui_rating-off)"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></span></span>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_rating</code> 안에 <code>input.Catui_clip</code> + 별 <code>label</code>을 1점부터 차례로 둡니다. 선택한 별까지 켜집니다. 문구 표시·지우기·읽기 전용 생성은 <a href="doc:js/modules/rate">catui.js rate</a>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>fieldset + legend로 묶고, 각 별 label에 "n점" 이름을 줍니다.</li>
+  <li>radio 그룹이라 화살표 키로 고릅니다. 읽기 전용은 <code>role="img"</code>로 점수만 읽힙니다.</li>
+</ul>
+</section>

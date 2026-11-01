@@ -1,0 +1,12 @@
+/* views/task.css */
+.Catui_task{height:var(--Catui_task-h);display:flex;align-items:center;gap:var(--Catui_space-3);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_task .Catui_cbx{width:var(--Catui_task-check);height:var(--Catui_task-check)}
+.Catui_task .Catui_help{margin-left:auto}
+.Catui_task-done{color:var(--Catui_task-done-fg);text-decoration:line-through}
+.Catui_pri{width:var(--Catui_space-2);height:var(--Catui_space-2);border-radius:var(--Catui_radius-pill);flex:none}
+.Catui_pri-high{background:var(--Catui_task-priority-high)}
+.Catui_pri-mid{background:var(--Catui_task-priority-mid)}
+.Catui_pri-low{background:var(--Catui_task-priority-low)}
+.Catui_task input:checked + .Catui_cbx{background:var(--Catui_check-bg-on);border-color:var(--Catui_check-bg-on)}
+.Catui_task input:checked + .Catui_cbx .Catui_icon{visibility:visible}
+.Catui_task input:focus-visible + .Catui_cbx{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}

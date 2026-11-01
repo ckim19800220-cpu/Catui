@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>진행 · CSS · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="6색 구간을 bar-1 → bar-6 순서로 쓰는 진행 막대.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html" aria-current="page">CSS</a><a href="../../js/start/introduction.html">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CSS 메뉴</summary><nav aria-label="CSS 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../css/start/introduction.html">소개</a></li><li><a href="../../css/start/install.html">설치와 빌드</a></li><li><a href="../../css/start/namespace.html">이름과 스코프</a></li><li><a href="../../css/start/accessibility.html">접근성 기준</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">기초</p><ul><li><a href="../../css/foundation/color.html">색상</a></li><li><a href="../../css/foundation/surface.html">배경</a></li><li><a href="../../css/foundation/theme.html">다크 모드</a></li><li><a href="../../css/foundation/typography.html">타이포그래피</a></li><li><a href="../../css/foundation/text.html">텍스트·링크</a></li><li><a href="../../css/foundation/spacing.html">간격·반경·그림자</a></li><li><a href="../../css/foundation/icons.html">아이콘</a></li><li><a href="../../css/foundation/media.html">미디어·이미지</a></li><li><a href="../../css/foundation/utilities.html">유틸리티</a></li><li><a href="../../css/foundation/helpers.html">도우미 클래스</a></li><li><a href="../../css/foundation/motion.html">모션</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">레이아웃</p><ul><li><a href="../../css/layout/grid.html">그리드</a></li><li><a href="../../css/layout/flex.html">정렬 도우미</a></li><li><a href="../../css/layout/app-shell.html">관리 셸</a></li><li><a href="../../css/layout/site.html">공개 홈</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">웹 블록</p><ul><li><a href="../../css/blocks/head.html">섹션 머리·공지 띠</a></li><li><a href="../../css/blocks/proof.html">신뢰 요소</a></li><li><a href="../../css/blocks/people.html">팀·프로필</a></li><li><a href="../../css/blocks/process.html">과정·단계</a></li><li><a href="../../css/blocks/gallery.html">갤러리·글 정보</a></li><li><a href="../../css/blocks/subscribe.html">구독 폼</a></li><li><a href="../../css/blocks/floating.html">떠 있는 요소</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">컴포넌트</p><ul><li><a href="../../css/components/button.html">버튼</a></li><li><a href="../../css/components/split-button.html">분할 버튼</a></li><li><a href="../../css/components/form.html">입력 필드</a></li><li><a href="../../css/components/input-group.html">입력 그룹</a></li><li><a href="../../css/components/choice.html">체크·라디오·토글</a></li><li><a href="../../css/components/badge.html">배지·카운트</a></li><li><a href="../../css/components/indicator.html">알림·상태 표시</a></li><li><a href="../../css/components/avatar.html">아바타</a></li><li><a href="../../css/components/media.html">미디어 객체·임베드</a></li><li><a href="../../css/components/card.html">카드</a></li><li><a href="../../css/components/carousel.html">캐러셀</a></li><li><a href="../../css/components/canvas.html">캔버스</a></li><li><a href="../../css/components/stat.html">지표</a></li><li><a href="../../css/components/progress.html" aria-current="page">진행</a></li><li><a href="../../css/components/table.html">표</a></li><li><a href="../../css/components/toolbar.html">도구 모음·작업 바</a></li><li><a href="../../css/components/list.html">목록</a></li><li><a href="../../css/components/setting.html">설정 행</a></li><li><a href="../../css/components/tabs.html">탭·세그먼트</a></li><li><a href="../../css/components/subnav.html">보조 탐색</a></li><li><a href="../../css/components/vnav.html">세로 내비게이션</a></li><li><a href="../../css/components/breadcrumb.html">경로</a></li><li><a href="../../css/components/pagehead.html">페이지 머리</a></li><li><a href="../../css/components/pager.html">페이지</a></li><li><a href="../../css/components/feedback.html">피드백</a></li><li><a href="../../css/components/result.html">결과 화면</a></li><li><a href="../../css/components/callout.html">안내 상자</a></li><li><a href="../../css/components/spinner.html">스피너</a></li><li><a href="../../css/components/code.html">코드</a></li><li><a href="../../css/components/quote.html">인용</a></li><li><a href="../../css/components/chat.html">채팅</a></li><li><a href="../../css/components/modal.html">모달</a></li><li><a href="../../css/components/drawer.html">드로어</a></li><li><a href="../../css/components/dropdown.html">드롭다운</a></li><li><a href="../../css/components/toast.html">토스트</a></li><li><a href="../../css/components/notifs.html">알림 패널</a></li><li><a href="../../css/components/tooltip.html">툴팁·팝오버</a></li><li><a href="../../css/components/mega.html">메가 메뉴</a></li><li><a href="../../css/components/wizard.html">마법사</a></li><li><a href="../../css/components/command.html">명령 팔레트</a></li><li><a href="../../css/components/faq.html">질문(접기)</a></li><li><a href="../../css/components/accordion.html">아코디언</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">고급 입력</p><ul><li><a href="../../css/forms/upload.html">업로드</a></li><li><a href="../../css/forms/range.html">범위</a></li><li><a href="../../css/forms/rating.html">별점</a></li><li><a href="../../css/forms/tags.html">태그</a></li><li><a href="../../css/forms/chips.html">선택 칩</a></li><li><a href="../../css/forms/optcard.html">선택 카드</a></li><li><a href="../../css/forms/swatch.html">색상 견본</a></li><li><a href="../../css/forms/stepper.html">스테퍼</a></li><li><a href="../../css/forms/otp.html">인증 코드</a></li><li><a href="../../css/forms/datepicker.html">날짜</a></li><li><a href="../../css/forms/counter.html">글자 수</a></li><li><a href="../../css/forms/search.html">검색</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">데이터 뷰</p><ul><li><a href="../../css/views/tree.html">트리</a></li><li><a href="../../css/views/calendar.html">달력</a></li><li><a href="../../css/views/gantt.html">간트</a></li><li><a href="../../css/views/kanban.html">칸반</a></li><li><a href="../../css/views/files.html">파일 목록</a></li><li><a href="../../css/views/thread.html">스레드</a></li><li><a href="../../css/views/heatmap.html">히트맵</a></li><li><a href="../../css/views/timeline.html">타임라인</a></li><li><a href="../../css/views/feed-meter.html">피드·미터·작업</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">차트</p><ul><li><a href="../../css/charts/line.html">라인 차트</a></li><li><a href="../../css/charts/donut.html">도넛</a></li><li><a href="../../css/charts/bars.html">막대</a></li><li><a href="../../css/charts/stack.html">누적·세그먼트</a></li><li><a href="../../css/charts/gauge.html">게이지</a></li><li><a href="../../css/charts/funnel.html">퍼널</a></li><li><a href="../../css/charts/sparkline.html">스파크라인</a></li><li><a href="../../css/charts/radar.html">레이더</a></li><li><a href="../../css/charts/prose.html">본문</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CSS · 컴포넌트</p>
+<h1 class="Catui_h1">진행</h1>
+<p class="Catui_lead">6색 구간을 bar-1 → bar-6 순서로 쓰는 진행 막대.</p>
+<ul class="doc-rules" aria-label="견본 계약"><li><span class="Catui_pill Catui_pill-success">MUST</span> 트랙 높이 6px</li><li><span class="Catui_pill Catui_pill-info">SHOULD</span> 6색은 bar-1 → bar-6 순서</li><li><span class="Catui_pill Catui_pill-danger">NEVER</span> 그라디언트나 새 색을 추가하지 않는다</li></ul>
+<section aria-labelledby="single">
+<h2 id="single">단일 진행</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">라벨 + 퍼센트 + 막대</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_prog-row">
+    <div class="Catui_prog-label"><span>업로드</span><span class="Catui_num">42%</span></div>
+    <div class="Catui_prog" role="progressbar" aria-label="업로드" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"><i class="Catui_pc1" style="width:42%"></i></div>
+  </div>
+  <div class="Catui_prog-row">
+    <div class="Catui_prog-label"><span>작게 (prog-sm)</span><span class="Catui_num">75%</span></div>
+    <div class="Catui_prog Catui_prog-sm" role="img" aria-label="75퍼센트"><i class="Catui_pc2" style="width:75%"></i></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="라벨 + 퍼센트 + 막대 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_prog-row&quot;&gt;
+  &lt;div class=&quot;Catui_prog-label&quot;&gt;&lt;span&gt;업로드&lt;/span&gt;&lt;span class=&quot;Catui_num&quot;&gt;42%&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_prog&quot; role=&quot;progressbar&quot; aria-label=&quot;업로드&quot; aria-valuenow=&quot;42&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot;&gt;&lt;i class=&quot;Catui_pc1&quot; style=&quot;width:42%&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;Catui_prog-row&quot;&gt;
+  &lt;div class=&quot;Catui_prog-label&quot;&gt;&lt;span&gt;작게 (prog-sm)&lt;/span&gt;&lt;span class=&quot;Catui_num&quot;&gt;75%&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_prog Catui_prog-sm&quot; role=&quot;img&quot; aria-label=&quot;75퍼센트&quot;&gt;&lt;i class=&quot;Catui_pc2&quot; style=&quot;width:75%&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="segments">
+<h2 id="segments">구간 진행</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">6색 구간 (pc1 → pc6)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_prog-row">
+    <div class="Catui_prog-label"><span>완료</span><span class="Catui_num">64%</span></div>
+    <div class="Catui_prog" role="img" aria-label="완료 64퍼센트, 6개 구간"><i class="Catui_pc1" style="width:28%"></i><i class="Catui_pc2" style="width:12%"></i><i class="Catui_pc3" style="width:8%"></i><i class="Catui_pc4" style="width:6%"></i><i class="Catui_pc5" style="width:6%"></i><i class="Catui_pc6" style="width:4%"></i></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="6색 구간 (pc1 → pc6) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_prog-row&quot;&gt;
+  &lt;div class=&quot;Catui_prog-label&quot;&gt;&lt;span&gt;완료&lt;/span&gt;&lt;span class=&quot;Catui_num&quot;&gt;64%&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_prog&quot; role=&quot;img&quot; aria-label=&quot;완료 64퍼센트, 6개 구간&quot;&gt;&lt;i class=&quot;Catui_pc1&quot; style=&quot;width:28%&quot;&gt;&lt;/i&gt;&lt;i class=&quot;Catui_pc2&quot; style=&quot;width:12%&quot;&gt;&lt;/i&gt;&lt;i class=&quot;Catui_pc3&quot; style=&quot;width:8%&quot;&gt;&lt;/i&gt;&lt;i class=&quot;Catui_pc4&quot; style=&quot;width:6%&quot;&gt;&lt;/i&gt;&lt;i class=&quot;Catui_pc5&quot; style=&quot;width:6%&quot;&gt;&lt;/i&gt;&lt;i class=&quot;Catui_pc6&quot; style=&quot;width:4%&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">크기 (prog-sm · 기본 · prog-lg)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_prog Catui_prog-sm" role="img" aria-label="작게 40퍼센트"><i class="Catui_pc1" style="width:40%"></i></div>
+  <div class="Catui_prog" role="img" aria-label="기본 60퍼센트"><i class="Catui_pc1" style="width:60%"></i></div>
+  <div class="Catui_prog Catui_prog-lg" role="img" aria-label="크게 80퍼센트"><i class="Catui_pc1" style="width:80%"></i></div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="크기 (prog-sm · 기본 · prog-lg) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_prog Catui_prog-sm&quot; role=&quot;img&quot; aria-label=&quot;작게 40퍼센트&quot;&gt;&lt;i class=&quot;Catui_pc1&quot; style=&quot;width:40%&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;div class=&quot;Catui_prog&quot; role=&quot;img&quot; aria-label=&quot;기본 60퍼센트&quot;&gt;&lt;i class=&quot;Catui_pc1&quot; style=&quot;width:60%&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;div class=&quot;Catui_prog Catui_prog-lg&quot; role=&quot;img&quot; aria-label=&quot;크게 80퍼센트&quot;&gt;&lt;i class=&quot;Catui_pc1&quot; style=&quot;width:80%&quot;&gt;&lt;/i&gt;&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="ring">
+<h2 id="ring">원형 진행</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">--Catui_ring-val로 값 지정</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_hstack Catui_gap-4">
+    <span class="Catui_ring" style="--Catui_ring-val:25" role="progressbar" aria-label="업로드" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span>25</span></span>
+    <span class="Catui_ring" style="--Catui_ring-val:70" role="img" aria-label="70퍼센트"><span>70</span></span>
+    <span class="Catui_ring Catui_ring-lg" style="--Catui_ring-val:92" role="img" aria-label="프로필 완성도 92퍼센트"><span>92%</span></span>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="--Catui_ring-val로 값 지정 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_hstack Catui_gap-4&quot;&gt;
+  &lt;span class=&quot;Catui_ring&quot; style=&quot;--Catui_ring-val:25&quot; role=&quot;progressbar&quot; aria-label=&quot;업로드&quot; aria-valuenow=&quot;25&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot;&gt;&lt;span&gt;25&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;Catui_ring&quot; style=&quot;--Catui_ring-val:70&quot; role=&quot;img&quot; aria-label=&quot;70퍼센트&quot;&gt;&lt;span&gt;70&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;Catui_ring Catui_ring-lg&quot; style=&quot;--Catui_ring-val:92&quot; role=&quot;img&quot; aria-label=&quot;프로필 완성도 92퍼센트&quot;&gt;&lt;span&gt;92%&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_prog</code> 트랙(6px) 안에 <code>&lt;i class="Catui_pc1~6"&gt;</code>를 너비로 넣습니다. 색은 pc1부터 순서대로 쓰고, 그라디언트나 새 색을 만들지 않습니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>값이 바뀌는 진행은 <code>role="progressbar"</code> + <code>aria-valuenow/min/max</code>, 고정 표시는 <code>role="img"</code> + <code>aria-label</code>.</li>
+  <li>퍼센트 글자를 막대 옆에 함께 보입니다.</li>
+</ul>
+</section>
+
+<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/progress.css</span><code>.Catui_prog-row</code> <code>.Catui_prog-label</code> <code>.Catui_prog</code> <code>.Catui_prog-sm</code> <code>.Catui_prog-lg</code> <code>.Catui_pc1</code> <code>.Catui_pc2</code> <code>.Catui_pc3</code> <code>.Catui_pc4</code> <code>.Catui_pc5</code> <code>.Catui_pc6</code> <code>.Catui_ring</code> <code>.Catui_ring-lg</code></li></ul></section>
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/components/stat.html"><span>이전</span>지표</a><a class="doc-pager-next" href="../../css/components/table.html"><span>다음</span>표</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#single">단일 진행</a></li><li><a href="#segments">구간 진행</a></li><li><a href="#ring">원형 진행</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

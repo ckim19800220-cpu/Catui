@@ -1,0 +1,25 @@
+<section aria-labelledby="panel">
+<h2 id="panel">알림 패널</h2>
+<catui-example title="읽지 않은 알림 2건">
+  <section class="Catui_notifs" aria-labelledby="nf-t">
+    <div class="Catui_notifs-h"><span id="nf-t">알림</span><span class="Catui_count" aria-label="읽지 않음 2건">2</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button">모두 읽음</button></div>
+    <ul class="Catui_notifs-list">
+      <li class="Catui_notif Catui_notif-unread"><span class="Catui_av Catui_av-sm" aria-hidden="true">김</span><div class="Catui_notif-body"><p><b>김하늘</b>님이 견적서에 댓글을 남겼습니다<span class="Catui_clip"> (읽지 않음)</span></p><span class="Catui_notif-time">5분 전</span></div></li>
+      <li class="Catui_notif Catui_notif-unread"><span class="Catui_file-ico Catui_file-ico-5" aria-hidden="true"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-alert-circle"></use></svg></span><div class="Catui_notif-body"><p>결제 1건이 실패했습니다<span class="Catui_clip"> (읽지 않음)</span></p><span class="Catui_notif-time">1시간 전</span></div></li>
+      <li class="Catui_notif"><span class="Catui_av Catui_av-sm" aria-hidden="true">이</span><div class="Catui_notif-body"><p><b>이준</b>님이 주문 1002를 처리했습니다</p><span class="Catui_notif-time">어제</span></div></li>
+    </ul>
+    <a class="Catui_notifs-f" href="doc:css/components/list">전체 알림 보기</a>
+  </section>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_notifs</code> = 머리 <code>-h</code> + 목록 <code>-list</code>(높이 320px 넘으면 스크롤) + 꼬리 <code>-f</code>. 항목 <code>.Catui_notif</code>, 읽지 않은 항목은 <code>.Catui_notif-unread</code>(왼쪽 점·연한 배경). 상단바 종 버튼의 <a href="doc:css/components/dropdown">드롭다운</a> 안에 넣어 씁니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>읽지 않음은 점·배경과 함께 숨김 글자로 알립니다.</li>
+  <li>종 버튼 이름에 개수를 넣습니다 (<a href="doc:css/components/indicator">알림·상태 표시</a>).</li>
+</ul>
+</section>

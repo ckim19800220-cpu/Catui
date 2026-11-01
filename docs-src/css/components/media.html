@@ -1,0 +1,40 @@
+<section aria-labelledby="object">
+<h2 id="object">미디어 객체</h2>
+<catui-example title="그림 + 제목 + 설명 + 오른쪽 동작">
+  <div class="Catui_media">
+    <div class="Catui_media-fig"><img class="Catui_img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2326B99A'/%3E%3Cpath d='M0 50l20-18 14 12 10-8 20 14v14H0z' fill='#0E7A63'/%3E%3C/svg%3E" alt="" width="64" height="64"></div>
+    <div class="Catui_media-body"><p class="Catui_media-title">봄 시즌 기획전</p><p class="Catui_media-text">3월 한 달간 신상품 120종을 소개합니다.</p></div>
+    <div class="Catui_media-side"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button">보기</button></div>
+  </div>
+</catui-example>
+<catui-example title="가운데 정렬 · 아이콘 그림">
+  <div class="Catui_media Catui_media-center">
+    <div class="Catui_media-fig"><span class="Catui_file-ico"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-text"></use></svg></span></div>
+    <div class="Catui_media-body"><p class="Catui_media-title Catui_truncate">2026년 하반기 고객 만족도 조사 결과 보고서.pdf</p></div>
+    <span class="Catui_media-side Catui_help">1.4MB</span>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="embed">
+<h2 id="embed">임베드 (영상·지도)</h2>
+<catui-example title="16:9 iframe (내용이 상자를 꽉 채움)">
+  <div class="Catui_embed" style="max-width:480px"><iframe title="임베드 예시 화면" srcdoc="&lt;body style='margin:0;display:grid;place-items:center;height:100vh;background:#243444;color:#fff;font:14px sans-serif'&gt;영상·지도 iframe 자리&lt;/body&gt;" loading="lazy"></iframe></div>
+</catui-example>
+<catui-example title="4:3 임베드 (embed-4x3)">
+  <div class="Catui_embed Catui_embed-4x3" style="max-width:320px"><iframe title="4:3 임베드 예시 화면" srcdoc="&lt;body style='margin:0;display:grid;place-items:center;height:100vh;background:#E6F7F3;color:#0E7A63;font:14px sans-serif'&gt;지도 iframe 자리 (4:3)&lt;/body&gt;" loading="lazy"></iframe></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_media</code> = <code>media-fig</code>(그림) + <code>media-body</code>(<code>media-title</code>·<code>media-text</code>) + 선택 <code>media-side</code>. 본문이 길어도 그림 폭은 줄지 않습니다. 임베드는 <code>.Catui_embed</code>(16:9, <code>-4x3</code>) 안에 <code>iframe·video</code>를 넣습니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>iframe에는 내용을 알 수 있는 <code>title</code>을 줍니다.</li>
+  <li>제목이 옆에 있으면 그림은 장식(<code>alt=""</code>)으로 둡니다.</li>
+</ul>
+</section>

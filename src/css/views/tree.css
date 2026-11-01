@@ -1,0 +1,13 @@
+/* views/tree.css */
+/* Data views — tree, calendar, gantt, kanban, files, thread, heatmap, timeline, task, meter, feed. */
+.Catui_tree-row,.Catui_tree summary{
+  height:var(--Catui_tree-row-h);display:flex;align-items:center;gap:var(--Catui_space-2);
+  padding:0 var(--Catui_space-2);border-radius:var(--Catui_radius-xs);
+  font-size:var(--Catui_tree-font);line-height:1;list-style:none;cursor:pointer;
+}
+.Catui_tree summary::-webkit-details-marker{display:none}
+.Catui_tree-kids{margin-left:var(--Catui_tree-indent);border-left:var(--Catui_tree-guide-w) solid var(--Catui_tree-guide);padding-left:var(--Catui_space-1)}
+.Catui_tree-on{background:var(--Catui_tree-bg-selected);color:var(--Catui_tree-fg-selected);font-weight:600}
+.Catui_tree .Catui_icon{width:var(--Catui_tree-icon);height:var(--Catui_tree-icon);flex:none}
+.Catui_tree .Catui_tree-toggle{width:var(--Catui_tree-toggle);height:var(--Catui_tree-toggle);color:var(--Catui_color-text-tertiary);transition:transform var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_tree details[open] > summary .Catui_tree-toggle{transform:rotate(90deg)}

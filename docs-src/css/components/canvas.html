@@ -1,0 +1,38 @@
+<section aria-labelledby="frame">
+<h2 id="frame">캔버스 틀</h2>
+<catui-example title="비율 상자 + 도구 막대 + 범례 + 캡션">
+  <figure class="Catui_figure">
+    <div class="Catui_canvas">
+      <canvas role="img" aria-label="빈 캔버스 예시">그래프를 보려면 캔버스를 지원하는 브라우저가 필요합니다.</canvas>
+      <ul class="Catui_legend Catui_legend-row Catui_canvas-legend"><li><i class="Catui_s1"></i>매출</li><li><i class="Catui_s2"></i>목표</li></ul>
+      <div class="Catui_canvas-tools"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="이미지로 받기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-download"></use></svg></button></div>
+      <p class="Catui_canvas-empty">그리기는 catui.js canvas가 맡습니다</p>
+    </div>
+    <figcaption class="Catui_canvas-cap">그림 1. 캔버스 틀만 표시한 예시입니다.</figcaption>
+  </figure>
+</catui-example>
+</section>
+
+<section aria-labelledby="ratio">
+<h2 id="ratio">비율</h2>
+<catui-example title="canvas-1x1 · canvas-4x3 · canvas-21x9">
+  <div class="Catui_grid">
+    <div class="Catui_span-3"><div class="Catui_canvas Catui_canvas-1x1 Catui_bg-grid"><canvas aria-label="1:1 빈 캔버스" role="img"></canvas></div></div>
+    <div class="Catui_span-4"><div class="Catui_canvas Catui_canvas-4x3 Catui_bg-dots"><canvas aria-label="4:3 빈 캔버스" role="img"></canvas></div></div>
+    <div class="Catui_span-5"><div class="Catui_canvas Catui_canvas-21x9"><canvas aria-label="21:9 빈 캔버스" role="img"></canvas></div></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_canvas</code>(기본 16:9, <code>-1x1/4x3/21x9</code>) 안의 <code>canvas</code>는 상자를 꽉 채웁니다. 도구 막대 <code>.Catui_canvas-tools</code>(오른쪽 위), 범례 <code>.Catui_canvas-legend</code>(왼쪽 위), 빈 상태 <code>.Catui_canvas-empty</code>, 아래 캡션 <code>.Catui_canvas-cap</code>. 그리는 쪽에서 <code>.Catui_canvas-draw</code>를 붙이면 커서가 십자로 바뀝니다. 고해상도 보정·다시 그리기·토큰 색은 <a href="doc:js/modules/canvas">catui.js canvas</a>가 처리합니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>캔버스는 그림이므로 <code>role="img"</code> + 내용을 요약한 <code>aria-label</code>을 주고, 숫자가 중요하면 표도 함께 제공합니다.</li>
+  <li><code>&lt;canvas&gt;</code> 안의 글자는 캔버스를 못 그리는 환경에서 보이는 대체 문구입니다.</li>
+</ul>
+</section>

@@ -1,0 +1,8 @@
+/* charts/line.css */
+/* Chart — area chart svg parts, legend, donut. */
+.Catui_chart{height:var(--Catui_chart-h);width:100%}
+.Catui_chart .grid{stroke:var(--Catui_chart-grid);stroke-width:1}
+.Catui_chart .series{fill:none;stroke:var(--Catui_chart-series-1);stroke-width:var(--Catui_chart-line-w)}
+.Catui_chart .series-2{fill:none;stroke:var(--Catui_chart-series-2);stroke-width:1;stroke-dasharray:5 4}
+.Catui_chart .area{fill:var(--Catui_chart-area-fill);stroke:none}
+.Catui_chart .axis{fill:var(--Catui_chart-axis);font-size:var(--Catui_type-label-size)}

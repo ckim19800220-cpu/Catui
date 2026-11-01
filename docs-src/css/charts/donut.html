@@ -1,0 +1,28 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="5조각 기본">
+  <div class="Catui_hstack Catui_gap-6">
+  <div class="Catui_donut" role="img" aria-label="합계 5,400: 모바일 45%, 데스크톱 25%, 태블릿 12%, TV 10%, 기타 8%"><div class="Catui_donut-hole"><b title="5,400">5.4k</b><span class="Catui_donut-label">합계</span></div></div>
+    <ul class="Catui_legend" style="min-width:200px"><li><i class="Catui_s1"></i>모바일<b>45%</b></li><li><i class="Catui_s2"></i>데스크톱<b>25%</b></li><li><i class="Catui_s3"></i>태블릿<b>12%</b></li><li><i class="Catui_s4"></i>TV<b>10%</b></li><li><i class="Catui_s5"></i>기타<b>8%</b></li></ul>
+  </div>
+</catui-example>
+<catui-example title="비율 직접 지정 (2조각)">
+  <div class="Catui_actions">
+    <div class="Catui_donut" style="background:conic-gradient(var(--Catui_donut-seg-1) 0 70%,var(--Catui_donut-seg-2) 70% 100%)" role="img" aria-label="응답 120건: 만족 70%, 불만족 30%"><div class="Catui_donut-hole"><b>120</b><span class="Catui_donut-label">응답</span></div></div>
+    <ul class="Catui_legend"><li><i class="Catui_s1"></i>만족<b>70%</b></li><li><i class="Catui_s2"></i>불만족<b>30%</b></li></ul>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_donut</code>(지름 132) 안에 <code>.Catui_donut-hole</code>(구멍 78)에 총합과 <code>.Catui_donut-label</code>을 둡니다. 조각 비율은 기본 45·25·12·10·8%이며, 다르면 <code>background</code>의 conic-gradient만 덮어씁니다(색은 <code>--Catui_donut-seg-1~5</code>). 범례 <code>.Catui_legend</code>는 도넛 옆에 두고 퍼센트를 글자로 함께 씁니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li><code>role="img"</code> + 항목별 비율을 담은 라벨, 범례에 퍼센트 글자.</li>
+  <li>중앙에는 총합만.</li>
+</ul>
+</section>

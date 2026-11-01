@@ -1,0 +1,32 @@
+<section aria-labelledby="basic">
+<h2 id="basic">날짜 · 기간</h2>
+<catui-example title="datePicker.render · data-catui-date">
+  <div class="Catui_grid">
+    <div class="Catui_span-3 Catui_field"><label class="Catui_label" for="dp-one">배송일 (일요일 제외)</label><input class="Catui_input" id="dp-one"></div>
+    <div class="Catui_span-6 Catui_field"><label class="Catui_label" for="dp-range">기간</label><input class="Catui_input" id="dp-range"></div>
+    <div class="Catui_span-3 Catui_field"><label class="Catui_label" for="dp-mark">마크업만으로</label><input class="Catui_input" id="dp-mark" data-catui-date data-catui-min="2026-01-01" data-catui-max="2026-12-31"></div>
+  </div>
+  <p class="Catui_help" id="dp-out" aria-live="polite"></p>
+  <script>
+  catui.use(['datePicker'], function (datePicker) {
+    datePicker.render({ elem: '#dp-one', min: '2026-01-01', disabled: function (d) { return d.getDay() === 0; } });
+    datePicker.render({ elem: '#dp-range', range: true });
+    datePicker.on('done', function (o) { document.getElementById('dp-out').textContent = o.elem.id + ': ' + (o.value || '지움'); });
+  });
+  </script>
+</catui-example>
+<p>입력 칸을 누르거나 ↓ 키로 엽니다. 달력에서 ↑↓←→(하루·한 주), PageUp/PageDown(한 달), Home/End(주의 처음·끝), Enter(선택), Esc(닫기). 범위 밖 날짜는 고를 수 없습니다.</p>
+</section>
+
+<section aria-labelledby="options">
+<h2 id="options">옵션</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">datePicker 옵션</caption>
+<thead><tr><th scope="col">옵션</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>range</code> · <code>separator</code></td><td>기간 선택 · 구분자(기본 ' ~ ')</td></tr>
+<tr><td><code>min</code> · <code>max</code> · <code>disabled(date)</code></td><td>'YYYY-MM-DD' 범위 · 막을 날짜</td></tr>
+<tr><td><code>value</code> · <code>weekStart</code></td><td>초기값 · 주 시작(1=월)</td></tr>
+<tr><td><code>done(value, date)</code></td><td>선택 콜백 · 이벤트 <code>done(f)</code></td></tr>
+<tr><td><code>data-catui-date</code>(<code>="range"</code>) · <code>data-catui-min/max</code></td><td>선언형</td></tr>
+</tbody></table></div>
+</section>

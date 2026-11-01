@@ -1,0 +1,30 @@
+<section aria-labelledby="html">
+<h2 id="html">html · raw · escape</h2>
+<pre><code>catui.html`&lt;p&gt;${name}&lt;/p&gt;`          // { __raw } — 값은 escape
+catui.html`&lt;ul&gt;${rows.map(r =&gt; catui.html`&lt;li&gt;${r}&lt;/li&gt;`)}&lt;/ul&gt;`   // 배열 이어 붙이기
+catui.raw('&lt;b&gt;신뢰 마크업&lt;/b&gt;')      // escape 없이
+catui.escape('&lt;b&gt;')                    // '&amp;lt;b&amp;gt;'
+catui.mount(el, catui.html`…`)          // html``은 마크업으로, 문자열은 글자로</code></pre>
+</section>
+
+<section aria-labelledby="query">
+<h2 id="query">$ — DOM 도우미</h2>
+<catui-example title="위임 이벤트와 클래스">
+  <div class="Catui_actions" id="dom-box">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-n="1">하나</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-n="2">둘</button>
+  </div>
+  <p class="Catui_help" id="dom-out" aria-live="polite"></p>
+  <script>
+  catui.use([], function () {
+    var $ = catui.$;
+    $('#dom-box').on('click', '[data-n]', function (e, btn) {
+      $('#dom-box [data-n]').removeClass('Catui_btn-primary').addClass('Catui_btn-secondary');
+      $(btn).removeClass('Catui_btn-secondary').addClass('Catui_btn-primary');
+      $('#dom-out').text(btn.dataset.n + '번 선택');
+    });
+  });
+  </script>
+</catui-example>
+<p>메서드: <code>find · each · attr · addClass · removeClass · toggleClass · hasClass · text · html · on(type, [selector], fn)</code>. <code>on</code>은 해제 함수를, <code>html()</code>은 html``만 마크업으로 넣습니다. 요소 하나는 <code>catui.el(선택자)</code>.</p>
+</section>

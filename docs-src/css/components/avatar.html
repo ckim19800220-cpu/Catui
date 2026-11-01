@@ -1,0 +1,36 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="크기와 스택">
+  <div class="Catui_actions">
+    <span class="Catui_av Catui_av-xl">김</span>
+    <span class="Catui_av Catui_av-lg">이</span>
+    <span class="Catui_av Catui_av-md">박</span>
+    <span class="Catui_av Catui_av-sm">최</span>
+    <span class="Catui_av Catui_av-xs">정</span>
+  </div>
+  <div class="Catui_av-stack"><span class="Catui_av Catui_av-md">김</span><span class="Catui_av Catui_av-md">이</span><span class="Catui_av Catui_av-md">박</span><span class="Catui_av Catui_av-md">+9</span></div>
+</catui-example>
+<catui-example title="이름과 함께 · 참여자 묶음 라벨">
+  <p class="Catui_line"><span class="Catui_av Catui_av-sm" aria-hidden="true">김</span>김하늘 <span class="Catui_help">관리자</span></p>
+  <div class="Catui_av-stack" role="img" aria-label="참여자 4명: 김하늘, 이준, 박서연 외 1명"><span class="Catui_av Catui_av-sm">김</span><span class="Catui_av Catui_av-sm">이</span><span class="Catui_av Catui_av-sm">박</span><span class="Catui_av Catui_av-sm">+1</span></div>
+</catui-example>
+<catui-example title="사진 아바타 (img가 원형으로 채워짐)">
+  <div class="Catui_actions">
+    <span class="Catui_av Catui_av-xl"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%233498DB'/%3E%3Ccircle cx='24' cy='19' r='9' fill='%23ffffff' fill-opacity='.85'/%3E%3Cpath d='M8 48c2-11 9-16 16-16s14 5 16 16z' fill='%23ffffff' fill-opacity='.85'/%3E%3C/svg%3E" alt="김하늘" width="48" height="48"></span>
+    <span class="Catui_av Catui_av-md"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%239B59B6'/%3E%3Ccircle cx='24' cy='19' r='9' fill='%23ffffff' fill-opacity='.85'/%3E%3Cpath d='M8 48c2-11 9-16 16-16s14 5 16 16z' fill='%23ffffff' fill-opacity='.85'/%3E%3C/svg%3E" alt="이준" width="32" height="32"></span>
+    <div class="Catui_av-stack" role="img" aria-label="참여자 3명: 김하늘, 이준, 박서연"><span class="Catui_av Catui_av-sm"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%233498DB'/%3E%3Ccircle cx='24' cy='19' r='9' fill='%23ffffff' fill-opacity='.85'/%3E%3Cpath d='M8 48c2-11 9-16 16-16s14 5 16 16z' fill='%23ffffff' fill-opacity='.85'/%3E%3C/svg%3E" alt="" width="24" height="24"></span><span class="Catui_av Catui_av-sm"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%239B59B6'/%3E%3Ccircle cx='24' cy='19' r='9' fill='%23ffffff' fill-opacity='.85'/%3E%3Cpath d='M8 48c2-11 9-16 16-16s14 5 16 16z' fill='%23ffffff' fill-opacity='.85'/%3E%3C/svg%3E" alt="" width="24" height="24"></span><span class="Catui_av Catui_av-sm">박</span></div>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>크기 <code>.Catui_av-xl</code>~<code>.Catui_av-xs</code>, 겹침 목록은 <code>.Catui_av-stack</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>이니셜 아바타가 정보라면 <code>aria-label</code>로 이름을, 장식이면 <code>aria-hidden</code>.</li>
+  <li>스택은 묶음 전체에 "참여자 n명"처럼 하나의 라벨을 줍니다.</li>
+</ul>
+</section>

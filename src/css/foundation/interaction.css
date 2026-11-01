@@ -1,0 +1,28 @@
+/* foundation/interaction.css */
+/* Interaction — 눌림(:active) 피드백, 호버 전환 일괄, 작은 대상의 누르는 영역 확장, 고대비(forced-colors) 대응.
+   컴포넌트 뒤·도우미 앞에 결합한다. 모션 줄이기는 reset.css가 transition을 끈다. */
+
+/* 눌림: 배경을 한 단계 진하게, 버튼은 1px 내려앉음 */
+.Catui_btn:active:not(:disabled){transform:translateY(1px)}
+.Catui_btn-primary:active:not(:disabled){background:var(--Catui_color-brand-fill-hover)}
+.Catui_btn-secondary:active:not(:disabled),.Catui_btn-ghost:active:not(:disabled){background:var(--Catui_color-neutral-100)}
+:is(.Catui_pg,.Catui_dd-item,a.Catui_list-item,button.Catui_list-item,.Catui_pills a,.Catui_pills button,.Catui_react,.Catui_tag button,.Catui_vnav a):active{background:var(--Catui_color-neutral-100)}
+input:not(:disabled) + .Catui_chip:active,input:not(:disabled) + .Catui_optcard:active{transform:scale(.98)}
+
+/* 호버 전환 (색·배경·테두리·그림자) */
+:is(.Catui_link,.Catui_pagehead-back,.Catui_totop,a.Catui_card,.Catui_tbl tbody tr,.Catui_list-item,.Catui_subnav a,.Catui_vnav a,.Catui_dd-item,.Catui_cal-cell,.Catui_chip,.Catui_dp-cell,.Catui_pg,.Catui_pills a,.Catui_pills button,.Catui_react,.Catui_optcard,.Catui_swatch){transition:background var(--Catui_dur-fast) var(--Catui_ease),color var(--Catui_dur-fast) var(--Catui_ease),border-color var(--Catui_dur-fast) var(--Catui_ease),box-shadow var(--Catui_dur-fast) var(--Catui_ease),transform var(--Catui_dur-fast) var(--Catui_ease)}
+
+/* 작은 대상: 보이는 크기는 그대로, 누르는 영역만 28px 이상으로 */
+.Catui_carousel-dot{position:relative}
+.Catui_carousel-dot::before{content:"";position:absolute;inset:calc((var(--Catui_control-h-sm) - var(--Catui_space-2)) / -2)}
+
+/* 고대비 모드: 배경색으로만 그린 상태를 테두리·시스템 색으로 보이게 */
+@media (forced-colors:active){
+  .Catui_cbx,.Catui_radio,.Catui_tgl,.Catui_tgl-alt,.Catui_swatch,.Catui_chip,.Catui_optcard{border:1px solid CanvasText;forced-color-adjust:none}
+  .Catui_choice input:checked + .Catui_cbx,.Catui_choice input:checked + .Catui_tgl,input:checked + .Catui_chip,input:checked + .Catui_optcard{background:Highlight;border-color:Highlight}
+  .Catui_choice input:checked + .Catui_radio::after,.Catui_tgl::after{background:CanvasText}
+  :is(.Catui_pill,.Catui_badge,.Catui_count,.Catui_status,.Catui_dot,.Catui_carousel-dot){border:1px solid CanvasText}
+  .Catui_prog > i,.Catui_meter > i,.Catui_bar-fill,.Catui_heat-grid i[class]{background:Highlight;forced-color-adjust:none}
+  :is(.Catui_tab,.Catui_subnav a)[aria-current],input:checked + .Catui_tab{border-bottom-color:Highlight}
+  :focus-visible{outline-color:Highlight}
+}

@@ -1,0 +1,32 @@
+<section aria-labelledby="basic">
+<h2 id="basic">12열 그리드</h2>
+<catui-example title="span으로 너비 정하기">
+  <div class="Catui_grid">
+    <div class="Catui_span-8"><article class="Catui_card"><div class="Catui_card-b">span-8</div></article></div>
+    <div class="Catui_span-4"><article class="Catui_card"><div class="Catui_card-b">span-4</div></article></div>
+    <div class="Catui_span-3"><article class="Catui_card"><div class="Catui_card-b">span-3</div></article></div>
+    <div class="Catui_span-3"><article class="Catui_card"><div class="Catui_card-b">span-3</div></article></div>
+    <div class="Catui_span-6"><article class="Catui_card"><div class="Catui_card-b">span-6</div></article></div>
+  </div>
+</catui-example>
+<catui-example title="span-1 ~ span-12 전체 · grid-3">
+  <div class="Catui_grid">
+    <div class="Catui_span-1"><article class="Catui_card"><div class="Catui_card-b">1</div></article></div><div class="Catui_span-11"><article class="Catui_card"><div class="Catui_card-b">span-11</div></article></div>
+    <div class="Catui_span-2"><article class="Catui_card"><div class="Catui_card-b">2</div></article></div><div class="Catui_span-10"><article class="Catui_card"><div class="Catui_card-b">span-10</div></article></div>
+    <div class="Catui_span-5"><article class="Catui_card"><div class="Catui_card-b">span-5</div></article></div><div class="Catui_span-7"><article class="Catui_card"><div class="Catui_card-b">span-7</div></article></div>
+    <div class="Catui_span-9"><article class="Catui_card"><div class="Catui_card-b">span-9</div></article></div><div class="Catui_span-3"><article class="Catui_card"><div class="Catui_card-b">3</div></article></div>
+    <div class="Catui_span-12"><article class="Catui_card"><div class="Catui_card-b">span-12</div></article></div>
+  </div>
+  <div class="Catui_grid-3"><article class="Catui_card"><div class="Catui_card-b">grid-3</div></article><article class="Catui_card"><div class="Catui_card-b">grid-3</div></article><article class="Catui_card"><div class="Catui_card-b">grid-3</div></article></div>
+</catui-example>
+<p>칸 사이는 <code>--Catui_grid-gap</code>(20px)만 둡니다. 3열 카드는 <code>.Catui_grid-3</code> 한 클래스로도 됩니다.</p>
+</section>
+
+<section aria-labelledby="responsive">
+<h2 id="responsive">반응형</h2>
+<ul>
+  <li><b>1199px 이하</b> — 8열, span-8 이상은 전폭, span-8 옆의 span-4도 전폭</li>
+  <li><b>991px 이하</b> — 4열, 모든 span 전폭 (사이드바는 레일로)</li>
+  <li><b>767px 이하</b> — 1열</li>
+</ul>
+</section>

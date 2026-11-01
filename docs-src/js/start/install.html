@@ -1,0 +1,29 @@
+<section aria-labelledby="global">
+<h2 id="global">전역 스크립트</h2>
+<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+&lt;script src="dist/catui.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+catui.use(['layer', 'form'], function (layer, form) {
+  layer.msg('준비되었습니다');
+});
+&lt;/script&gt;</code></pre>
+<p><code>catui.use</code>의 콜백은 문서가 준비된 뒤 실행되므로 스크립트를 <code>&lt;head&gt;</code>에 두어도 됩니다. 아이콘 스프라이트는 스크립트와 같은 폴더의 <code>icons.svg</code>를 자동으로 찾습니다.</p>
+</section>
+
+<section aria-labelledby="esm">
+<h2 id="esm">ES 모듈</h2>
+<pre><code>&lt;script type="module"&gt;
+  import catui, { layer, table, html } from './dist/catui.esm.js';
+  layer.msg('ESM으로 불러왔습니다');
+&lt;/script&gt;</code></pre>
+<p>ESM은 전역 <code>window.catui</code>를 만들지 않습니다. 소스(<code>src/js/index.js</code>)는 빌드 없이도 바로 import할 수 있습니다.</p>
+</section>
+
+<section aria-labelledby="config">
+<h2 id="config">전역 설정</h2>
+<pre><code>catui.config({
+  icons: '/static/icons.svg?v=2',   // 아이콘 스프라이트 경로를 바꿀 때
+  autoInit: false,                  // data-catui-* 자동 연결을 끌 때 (스크립트 직후 호출)
+});</code></pre>
+<p>ES 모듈과 아이콘은 <code>file://</code>에서 막힙니다. 정적 서버(<code>npm run dev</code>)로 여세요.</p>
+</section>

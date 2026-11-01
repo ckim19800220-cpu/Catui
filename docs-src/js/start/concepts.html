@@ -1,0 +1,41 @@
+<section aria-labelledby="use">
+<h2 id="use">모듈 받기 — catui.use</h2>
+<pre><code>catui.use(['layer', 'table'], function (layer, table) { … });   // 인자 순서 = 배열 순서
+catui.use('form').then(function ([form]) { … });                 // Promise도 돌려줌
+catui.layer.msg('바로 써도 됩니다');                               // 전역에서는 catui.모듈로 직접 접근 가능</code></pre>
+</section>
+
+<section aria-labelledby="render">
+<h2 id="render">렌더형 모듈 — render · reload · destroy</h2>
+<p>table·laypage·tabs·dropdown·datePicker·upload·slider·rate·tree·collapse·canvas는 같은 인터페이스를 가집니다.</p>
+<pre><code>var inst = table.render({ elem: '#orders', id: 'orders', … });   // 인스턴스
+table.reload('orders', { data: newRows });                        // 옵션 합쳐 다시 그리기
+table.getThis('orders');                                          // 인스턴스 찾기
+table.destroy('orders');                                          // 리스너·요청까지 정리</code></pre>
+<p>같은 대상에 다시 <code>render</code>하면 이전 인스턴스는 자동으로 정리됩니다.</p>
+</section>
+
+<section aria-labelledby="events">
+<h2 id="events">이벤트 — 모듈.on('이벤트(필터)')</h2>
+<p>필터는 요소의 <code>data-catui-filter</code> 값(또는 <code>id</code>)입니다. 필터를 빼면 그 이벤트 전체를 받습니다.</p>
+<catui-example title="필터로 이벤트 받기">
+  <div class="Catui_tabs" data-catui-filter="concept-tabs">
+    <input class="Catui_clip" type="radio" name="concept-tab" id="concept-a" checked><label class="Catui_tab" for="concept-a">개요</label><div class="Catui_panel"><p>개요 내용</p></div>
+    <input class="Catui_clip" type="radio" name="concept-tab" id="concept-b"><label class="Catui_tab" for="concept-b">분석</label><div class="Catui_panel"><p>분석 내용</p></div>
+  </div>
+  <p class="Catui_help" id="concept-out" aria-live="polite">탭을 바꿔 보세요.</p>
+  <script>
+  catui.use(['tabs'], function (tabs) {
+    var off = tabs.on('tab(concept-tabs)', function (obj) {
+      document.getElementById('concept-out').textContent = obj.index + '번 탭: ' + obj.title;
+    });
+    // off();  — 필요 없어지면 해제
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="declarative">
+<h2 id="declarative">선언형 속성</h2>
+<p>스크립트 없이 마크업만으로 동작하는 기능은 <code>data-catui-*</code> 속성으로 켭니다. 새로 그린 영역은 <code>catui.init(영역)</code>으로 다시 준비합니다. 목록은 <a href="doc:js/reference/attributes">선언형 속성</a>에 있습니다.</p>
+</section>

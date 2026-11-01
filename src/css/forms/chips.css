@@ -1,0 +1,10 @@
+/* forms/chips.css */
+/* Chips — checkbox/radio로 만든 선택 칩(필터). 실제 input은 .Catui_clip. */
+.Catui_chips{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2);border:0;padding:0;margin:0}
+.Catui_chip{display:inline-flex;align-items:center;gap:var(--Catui_space-1);height:var(--Catui_control-h-sm);padding:0 var(--Catui_space-3);border:1px solid var(--Catui_btn-secondary-border);border-radius:var(--Catui_radius-pill);background:var(--Catui_card-bg);font-size:var(--Catui_type-caption-size);line-height:1;cursor:pointer}
+.Catui_chip:hover{border-color:var(--Catui_btn-secondary-border-hover)}
+.Catui_chip .Catui_icon{display:none}
+input:checked + .Catui_chip{background:var(--Catui_badge-success-bg);color:var(--Catui_badge-success-fg);border-color:var(--Catui_btn-primary-bg);font-weight:600}
+input:checked + .Catui_chip .Catui_icon{display:block}
+input:focus-visible + .Catui_chip{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+input:disabled + .Catui_chip{opacity:1;color:var(--Catui_color-text-tertiary);background:var(--Catui_input-disabled-bg);cursor:not-allowed}

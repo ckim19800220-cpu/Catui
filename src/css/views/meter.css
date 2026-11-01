@@ -1,0 +1,3 @@
+/* views/meter.css */
+.Catui_meter{height:var(--Catui_meter-h);background:var(--Catui_meter-track);border-radius:var(--Catui_meter-radius);overflow:hidden}
+.Catui_meter i{display:block;height:100%;background:var(--Catui_meter-fill)}

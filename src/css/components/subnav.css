@@ -1,0 +1,11 @@
+/* components/subnav.css */
+/* Sub navigation — 화면 안 보조 탐색: 필(pill) 탭, 밑줄 탭 링크. 현재 항목은 aria-current="page". */
+.Catui_pills{display:flex;flex-wrap:wrap;gap:var(--Catui_space-1)}
+.Catui_pills a,.Catui_pills button{display:inline-flex;align-items:center;gap:var(--Catui_space-1);height:var(--Catui_control-h-sm);padding:0 var(--Catui_space-3);border-radius:var(--Catui_radius-pill);border:0;background:transparent;color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size);font-weight:600;line-height:1;cursor:pointer}
+.Catui_pills a:hover,.Catui_pills button:hover{background:var(--Catui_color-neutral-100);color:var(--Catui_color-text-primary)}
+.Catui_pills [aria-current="page"],.Catui_pills [aria-pressed="true"]{background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong)}
+.Catui_pills :focus-visible,.Catui_subnav :focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_subnav{display:flex;gap:var(--Catui_space-6);border-bottom:1px solid var(--Catui_tab-border);overflow-x:auto;scrollbar-width:thin}
+.Catui_subnav a{display:inline-flex;align-items:center;gap:var(--Catui_space-1);height:var(--Catui_tab-h);color:var(--Catui_tab-fg);border-bottom:var(--Catui_tab-indicator-w) solid transparent;margin-bottom:-1px;white-space:nowrap;line-height:1}
+.Catui_subnav a:hover{color:var(--Catui_color-text-primary)}
+.Catui_subnav a[aria-current="page"]{color:var(--Catui_tab-active-fg);border-bottom-color:var(--Catui_tab-indicator);font-weight:600}

@@ -1,0 +1,27 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="답글이 있는 스레드">
+  <div class="Catui_thread">
+    <article class="Catui_thread-item"><span class="Catui_av Catui_av-md">김</span><div class="Catui_thread-main"><p><span class="Catui_thread-name">김하늘</span><span class="Catui_thread-time">9월 12일</span></p><p class="Catui_thread-body">오버레이 초안을 올렸습니다. 스크림 농도만 확인해 주세요.</p><div class="Catui_reacts"><button class="Catui_react Catui_react-on" type="button" aria-pressed="true" aria-label="확인 3명"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>3</button><button class="Catui_react" type="button" aria-pressed="false" aria-label="별 1명"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg>1</button></div>
+      <div class="Catui_thread-kids"><article class="Catui_thread-item"><span class="Catui_av Catui_av-md">이</span><div class="Catui_thread-main"><p><span class="Catui_thread-name">이준</span><span class="Catui_thread-time">9월 13일</span></p><p class="Catui_thread-body">대비는 충분합니다. 그대로 진행합니다.</p><div class="Catui_reacts"><button class="Catui_react" type="button" aria-pressed="false" aria-label="확인 2명"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>2</button></div></div></article></div>
+    </div></article>
+  </div>
+</catui-example>
+<catui-example title="단일 댓글 (반응 없음)">
+  <div class="Catui_thread">
+    <article class="Catui_thread-item"><span class="Catui_av Catui_av-md" aria-hidden="true">박</span><div class="Catui_thread-main"><p><span class="Catui_thread-name">박서연</span><span class="Catui_thread-time">10월 30일</span></p><p class="Catui_thread-body">배송지 변경을 요청했습니다.</p></div></article>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_thread-item</code> + 답글은 <code>.Catui_thread-kids</code> 가이드선, 반응은 <code>.Catui_react(-on)</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>리액션 버튼은 <code>aria-pressed</code>로 눌림 상태를, 아이콘과 숫자를 함께.</li>
+  <li>답글 들여쓰기는 깊이 가이드 선과 함께 보입니다.</li>
+</ul>
+</section>

@@ -1,0 +1,27 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="지표 6개 격자">
+  <div class="Catui_spk-grid">
+    <div class="Catui_spk"><svg class="Catui_sparkline" viewBox="0 0 80 24" aria-hidden="true"><path d="M0 18 L16 12 L32 16 L48 6 L64 10 L80 4"/></svg><b>128</b><span class="Catui_pill Catui_pill-success">12%</span></div>
+    <div class="Catui_spk Catui_spk-down"><svg class="Catui_sparkline" viewBox="0 0 80 24" aria-hidden="true"><path d="M0 8 L16 14 L32 10 L48 16 L64 12 L80 18"/></svg><b>86</b><span class="Catui_pill Catui_pill-danger">3%</span></div>
+    <div class="Catui_spk"><svg class="Catui_sparkline" viewBox="0 0 80 24" aria-hidden="true"><path d="M0 16 L16 16 L32 8 L48 12 L64 6 L80 10"/></svg><b>64</b><span class="Catui_pill Catui_pill-info">4%</span></div>
+    <div class="Catui_spk"><svg class="Catui_sparkline" viewBox="0 0 80 24" aria-hidden="true"><path d="M0 12 L16 8 L32 14 L48 10 L64 16 L80 6"/></svg><b>42</b><span class="Catui_pill Catui_pill-warning">주의</span></div>
+    <div class="Catui_spk"><svg class="Catui_sparkline" viewBox="0 0 80 24" aria-hidden="true"><path d="M0 20 L16 14 L32 18 L48 8 L64 12 L80 4"/></svg><b title="2,100">2.1k</b><span class="Catui_pill Catui_pill-success">8%</span></div>
+    <div class="Catui_spk Catui_spk-flat"><svg class="Catui_sparkline" viewBox="0 0 80 24" aria-hidden="true"><path d="M0 6 L16 10 L32 8 L48 14 L64 18 L80 16"/></svg><b>6</b><span class="Catui_pill Catui_pill-neutral">유지</span></div>
+  </div>
+</catui-example>
+<catui-example title="단일 지표 (라벨 + 증감 문구)">
+  <div class="Catui_spk" style="max-width:320px"><span class="Catui_help">방문</span><svg class="Catui_sparkline" viewBox="0 0 80 24" aria-hidden="true"><path d="M0 18 L16 12 L32 16 L48 6 L64 10 L80 4"/></svg><b>1,280</b><span class="Catui_pill Catui_pill-success"><span class="Catui_clip">지난주보다 </span>12% 증가</span></div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_spk-grid</code> > <code>.Catui_spk</code>, 선은 SVG <code>.Catui_sparkline</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>선 그래프는 장식(<code>aria-hidden</code>), 수치와 증감 pill이 정보를 담습니다.</li>
+</ul>
+</section>

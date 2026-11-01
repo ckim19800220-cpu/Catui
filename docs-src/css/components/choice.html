@@ -1,0 +1,37 @@
+<section aria-labelledby="checkbox">
+<h2 id="checkbox">체크박스 · 라디오</h2>
+<catui-example title="fieldset으로 묶기">
+  <fieldset class="Catui_choices"><legend class="Catui_label">알림</legend>
+    <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="ch-n" checked><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span>주문 알림</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="ch-n"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span>배송 알림</label>
+  </fieldset>
+  <fieldset class="Catui_choices"><legend class="Catui_label">요약 주기</legend>
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="ch-c" checked><span class="Catui_radio"></span>매일</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="ch-c"><span class="Catui_radio"></span>매주</label>
+  </fieldset>
+</catui-example>
+</section>
+
+<section aria-labelledby="toggle">
+<h2 id="toggle">토글</h2>
+<catui-example title="기본 · 큰 토글">
+  <div class="Catui_choices">
+    <span class="Catui_choice"><input class="Catui_clip" id="ch-2fa" type="checkbox" role="switch" checked><label class="Catui_tgl" for="ch-2fa"></label><label for="ch-2fa">2단계 인증</label></span>
+    <span class="Catui_choice"><input class="Catui_clip" id="ch-pub" type="checkbox" role="switch"><label class="Catui_tgl Catui_tgl-alt" for="ch-pub"></label><label for="ch-pub">공개 프로필</label></span>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>실제 input은 <code>.Catui_clip</code>으로 숨기고 바로 뒤의 <code>.Catui_cbx</code>·<code>.Catui_radio</code>·<code>.Catui_tgl</code>이 상태를 그립니다. 묶음은 <code>fieldset.Catui_choices</code> + <code>legend</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>input을 <code>display:none</code>으로 숨기지 않습니다 — 키보드·스크린리더가 닿아야 합니다.</li>
+  <li>토글은 <code>role="switch"</code>로 켬/끔이 읽히게 합니다.</li>
+  <li>체크·라디오 16px, 토글 34×20, 라벨 전체가 누르는 영역입니다.</li>
+</ul>
+</section>

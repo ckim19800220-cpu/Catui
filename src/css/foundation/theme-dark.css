@@ -1,0 +1,24 @@
+/* foundation/theme-dark.css */
+/* Dark theme — <html data-catui-theme="dark">. 원본 색 토큰(L1·L2)과 hex로 고정된 상태 글자색만 다시 정의하면
+   컴포넌트 토큰(L3)은 같은 :root에서 다시 계산되어 전체에 반영된다. 대비는 AA 실측(문서 참고). */
+:root[data-catui-theme="dark"]{
+  color-scheme:dark;
+  --Catui_color-page-bg:#111A24; --Catui_color-surface:#17222E; --Catui_color-surface-muted:#1C2835;
+  --Catui_color-border:#2A3846; --Catui_color-divider:#233140;
+  --Catui_color-text-primary:#E6EBF0; --Catui_color-text-secondary:#A7B3BF; --Catui_color-text-tertiary:#6F7E8C;
+  --Catui_color-neutral-100:#223140; --Catui_color-neutral-300:#3A4A5A; --Catui_color-neutral-500:#7D8B99; --Catui_color-neutral-700:#C3CDD6;
+  /* 글자용 브랜드는 밝게, 흰 글자를 올리는 채움은 그대로(5.27:1) */
+  --Catui_color-brand-strong:#4FD1B0; --Catui_color-brand-stronger:#6EE0C2; --Catui_color-brand-soft:#133A33;
+  --Catui_color-brand-fill:#0E7A63; --Catui_color-brand-fill-hover:#0B6B57;
+  --Catui_color-info-soft:#13293A; --Catui_color-amber-soft:#332B12; --Catui_color-danger-soft:#3A1C1C; --Catui_color-purple-soft:#2C1F36;
+  --Catui_color-navy-900:#0D161E; --Catui_color-navy-800:#142029; --Catui_color-navy-700:#1E2D3A;
+  --Catui_color-code-bg:#0B121A;
+  --Catui_badge-info-fg:#7CC0EE; --Catui_badge-warning-fg:#F2C46B; --Catui_badge-danger-fg:#F28B82;
+  --Catui_banner-info-fg:#7CC0EE; --Catui_banner-warn-fg:#F2C46B; --Catui_banner-danger-fg:#F28B82;
+  --Catui_shadow-xs:0 1px 1px rgba(0,0,0,.3);
+  --Catui_shadow-sm:0 1px 2px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.25);
+  --Catui_shadow-md:0 4px 12px rgba(0,0,0,.4);
+  --Catui_shadow-lg:0 12px 32px rgba(0,0,0,.5);
+}
+/* 상태 글자색을 배경으로 쓰는 solid 표식은 다크에서 어두운 글자로 뒤집는다 */
+:root[data-catui-theme="dark"] :is(.Catui_pill-solid-info,.Catui_pill-solid-warning,.Catui_pill-solid-danger,.Catui_pill-solid-neutral){color:var(--Catui_color-page-bg)}

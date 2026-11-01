@@ -1,0 +1,34 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="피드">
+  <div class="Catui_feed">
+    <div class="Catui_feed-item"><p><b>김하늘</b>이 견적서를 올렸습니다</p><span class="Catui_feed-time">2시간 전</span></div>
+    <div class="Catui_feed-item"><p><b>이준</b>이 주문 1002를 처리했습니다</p><span class="Catui_feed-time">어제</span></div>
+    <div class="Catui_feed-item"><p>시스템 백업이 끝났습니다</p><span class="Catui_feed-time">2일 전</span></div>
+  </div>
+</catui-example>
+<catui-example title="미터">
+  <div class="Catui_prog-label"><span>저장 공간</span><span class="Catui_num">68%</span></div>
+  <div class="Catui_meter" role="img" aria-label="저장 공간 68퍼센트 사용"><i style="width:68%"></i></div>
+</catui-example>
+<catui-example title="작업 행 (우선순위 점 · 완료)">
+  <div role="list" aria-label="오늘 할 일">
+    <label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri Catui_pri-high" aria-hidden="true"></i><span>결제 오류 확인<span class="Catui_clip"> (높음)</span></span><span class="Catui_help">오늘</span></label>
+    <label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri Catui_pri-mid" aria-hidden="true"></i><span>견적서 검토<span class="Catui_clip"> (보통)</span></span><span class="Catui_help">내일</span></label>
+    <label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox" checked><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri Catui_pri-low" aria-hidden="true"></i><span class="Catui_task-done">주간 보고 작성<span class="Catui_clip"> (낮음)</span></span><span class="Catui_help">완료</span></label>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_feed</code>는 점과 연결선이 있는 활동 로그(<code>feed-item</code>·<code>feed-time</code>), <code>.Catui_meter</code>는 한 줄 용량 바. 작업 행은 <code>label.Catui_task</code>(체크 + 우선순위 점 <code>.Catui_pri-high/mid/low</code> + 제목 + 오른쪽 날짜), 완료 제목은 <code>.Catui_task-done</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>미터는 <code>role="img"</code> + "저장 공간 68퍼센트 사용" 같은 라벨.</li>
+  <li>피드 시간은 글자로 함께 씁니다.</li>
+  <li>우선순위 점은 장식이므로 숨기고, 우선순위를 숨김 글자로 함께 둡니다.</li>
+</ul>
+</section>

@@ -1,0 +1,22 @@
+<section aria-labelledby="list">
+<h2 id="list">속성 목록</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">선언형 속성</caption>
+<thead><tr><th scope="col">속성</th><th scope="col">붙이는 곳</th><th scope="col">동작</th></tr></thead>
+<tbody>
+<tr><td><code>data-catui-filter="이름"</code></td><td>폼·탭·표·버튼·컨트롤</td><td><code>모듈.on('이벤트(이름)')</code>의 필터</td></tr>
+<tr><td><code>data-catui-form</code></td><td><code>&lt;form&gt;</code></td><td>제출 시 검증 + <code>submit(필터)</code></td></tr>
+<tr><td><code>data-catui-verify="required|email"</code></td><td>입력 칸</td><td>검증 규칙 (<code>|</code>로 여러 개)</td></tr>
+<tr><td><code>data-catui-reqtext="문장"</code></td><td>입력 칸</td><td>필수 오류 문구</td></tr>
+<tr><td><code>data-catui-submit</code></td><td>제출 버튼</td><td>이 버튼으로 제출할 때만 처리</td></tr>
+<tr><td><code>data-catui-table</code> + <code>th[data-catui-sort="number|text"]</code></td><td>정적 표</td><td>열 정렬</td></tr>
+<tr><td><code>data-catui-date</code>(<code>="range"</code>) · <code>data-catui-min/max</code></td><td>입력 칸</td><td>날짜·기간 선택기</td></tr>
+<tr><td><code>data-catui-collapse</code>(<code>="accordion"</code>)</td><td><code>details.Catui_faq</code> 묶음</td><td>하나만 열기 + <code>collapse(필터)</code></td></tr>
+<tr><td><code>input.Catui_range[data-catui-filter]</code></td><td>마크업 range</td><td><code>slider.on('change(필터)')</code></td></tr>
+<tr><td><code>.Catui_rating[data-catui-filter]</code></td><td>마크업 별점</td><td><code>rate.on('choose(필터)')</code></td></tr>
+<tr><td><code>details.Catui_dd</code> · <code>.Catui_mega</code></td><td>마크업 메뉴</td><td>하나만 열기·바깥 클릭·Esc 닫기 (자동)</td></tr>
+<tr><td><code>.Catui_modal-toggle</code> · <code>.Catui_drawer-toggle</code></td><td>CSS 체크박스 모달</td><td>포커스 이동·Tab 가두기·Esc·복귀 (자동)</td></tr>
+<tr><td><code>.Catui_select-wrap</code></td><td>셀렉트</td><td>화살표 아이콘이 없으면 보충</td></tr>
+<tr><td><code>data-catui-theme="dark"</code></td><td><code>&lt;html&gt;</code></td><td>다크 테마 (CSS만으로 동작, <a href="doc:css/foundation/theme">다크 모드</a>). canvas는 바뀌면 다시 그림</td></tr>
+</tbody></table></div>
+<p>동적으로 넣은 영역은 <code>catui.init(영역)</code>을 호출하면 같은 준비를 합니다.</p>
+</section>

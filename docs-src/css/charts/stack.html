@@ -1,0 +1,23 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="기기별 비율">
+  <div class="Catui_stack" role="img" aria-label="기기별 비율: 모바일 45%, 데스크톱 25%, 태블릿 12%, TV 10%, 기타 8%"><i style="width:45%"></i><i style="width:25%"></i><i style="width:12%"></i><i style="width:10%"></i><i style="width:8%"></i></div>
+  <ul class="Catui_legend Catui_legend-row"><li><i class="Catui_s1"></i>모바일</li><li><i class="Catui_s2"></i>데스크톱</li><li><i class="Catui_s3"></i>태블릿</li><li><i class="Catui_s4"></i>TV</li><li><i class="Catui_s5"></i>기타</li></ul>
+</catui-example>
+<catui-example title="점 단위 세그먼트 (10칸 중 6칸)">
+  <p class="Catui_prog-label"><span>이번 달 목표</span><span class="Catui_num">6/10</span></p>
+  <div class="Catui_segbar" role="img" aria-label="목표 10건 중 6건 달성"><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i></i><i></i><i></i><i></i></div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_stack</code>에 <code>&lt;i&gt;</code> 조각을 최대 5개까지. 점 단위 세그먼트는 <code>.Catui_segbar</code> + <code>i.Catui_seg-on</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li><code>role="img"</code> + 항목별 비율 라벨, 범례를 함께.</li>
+  <li>5개를 넘는 항목은 '기타'로 묶습니다.</li>
+</ul>
+</section>

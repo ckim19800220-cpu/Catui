@@ -1,0 +1,13 @@
+/* forms/optcard.css */
+/* Option card — radio·checkbox로 고르는 카드(요금제·배송 방법). 실제 input은 .Catui_clip. */
+.Catui_optcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--Catui_space-3);border:0;padding:0;margin:0}
+.Catui_optcard{position:relative;display:grid;gap:var(--Catui_space-1);padding:var(--Catui_space-4);padding-right:var(--Catui_space-8);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);cursor:pointer;transition:border-color var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_optcard:hover{border-color:var(--Catui_btn-secondary-border-hover)}
+.Catui_optcard::after{content:"";position:absolute;top:var(--Catui_space-4);right:var(--Catui_space-4);width:var(--Catui_check-size);height:var(--Catui_check-size);border-radius:var(--Catui_radius-pill);border:1px solid var(--Catui_input-border);background:var(--Catui_card-bg)}
+.Catui_optcard-title{font-weight:600}
+.Catui_optcard-text{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_optcard-price{margin-top:var(--Catui_space-2);font-weight:700;font-variant-numeric:tabular-nums}
+input:checked + .Catui_optcard{border-color:var(--Catui_color-brand-strong);box-shadow:0 0 0 1px var(--Catui_color-brand-strong);background:color-mix(in srgb,var(--Catui_color-brand-soft) 40%,var(--Catui_card-bg))}
+input:checked + .Catui_optcard::after{border:5px solid var(--Catui_color-brand-strong)}
+input:focus-visible + .Catui_optcard{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+input:disabled + .Catui_optcard{cursor:not-allowed;color:var(--Catui_color-text-tertiary);background:var(--Catui_input-disabled-bg)}

@@ -1,0 +1,7 @@
+/* charts/radar.css */
+.Catui_radar{width:var(--Catui_radar-size);height:var(--Catui_radar-size);flex:none}
+.Catui_radar .ring{fill:none;stroke:var(--Catui_radar-ring)}
+.Catui_radar .area{fill:var(--Catui_radar-fill-1);stroke:var(--Catui_chart-series-1)}
+.Catui_radar .area-2{fill:var(--Catui_radar-fill-2);stroke:var(--Catui_chart-series-2)}
+.Catui_radar .spoke{fill:none;stroke:var(--Catui_radar-axis)}
+.Catui_radar .axis{fill:var(--Catui_chart-axis);font-size:var(--Catui_radar-label-font)}

@@ -1,0 +1,8 @@
+/* components/faq.css */
+.Catui_faq{border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_faq summary{
+  height:var(--Catui_control-h-lg);display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;font-weight:600;list-style:none;
+}
+.Catui_faq summary::-webkit-details-marker{display:none}
+.Catui_faq p{padding-bottom:var(--Catui_space-4);color:var(--Catui_color-text-secondary);max-width:var(--Catui_prose-measure)}

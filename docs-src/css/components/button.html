@@ -1,0 +1,72 @@
+<section aria-labelledby="variants">
+<h2 id="variants">변형</h2>
+<catui-example title="primary · secondary · ghost · danger">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">저장</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">취소</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button">더 보기</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button">삭제</button>
+  </div>
+</catui-example>
+<p>한 화면에 primary는 하나만 둡니다. 나머지 동작은 secondary·ghost, 되돌릴 수 없는 동작은 danger입니다.</p>
+</section>
+
+<section aria-labelledby="sizes">
+<h2 id="sizes">크기</h2>
+<catui-example title="sm 28 · md 34 · lg 40">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button">작게</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">보통</button>
+    <button class="Catui_btn Catui_btn-lg Catui_btn-secondary" type="button">크게</button>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="icons">
+<h2 id="icons">아이콘과 상태</h2>
+<catui-example title="아이콘 버튼 · 아이콘만 · 비활성">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-plus"></use></svg>추가</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" disabled aria-describedby="btn-why">저장</button>
+    <a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="doc:css/components/form">링크 버튼</a>
+  </div>
+  <p class="Catui_help" id="btn-why">바뀐 내용이 없어 저장할 수 없습니다.</p>
+</catui-example>
+</section>
+
+<section aria-labelledby="group">
+<h2 id="group">아이콘 버튼 · 전폭 · 버튼 그룹</h2>
+<catui-example title="btn-icon (정사각)">
+  <div class="Catui_hstack">
+    <button class="Catui_btn Catui_btn-sm Catui_btn-secondary Catui_btn-icon" type="button" aria-label="수정"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-pen-line"></use></svg></button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_btn-icon" type="button" aria-label="필터"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-filter"></use></svg></button>
+    <button class="Catui_btn Catui_btn-lg Catui_btn-primary Catui_btn-icon" type="button" aria-label="추가"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-plus"></use></svg></button>
+  </div>
+</catui-example>
+<catui-example title="btn-block (전폭)">
+  <div style="max-width:320px"><button class="Catui_btn Catui_btn-lg Catui_btn-primary Catui_btn-block" type="button">로그인</button></div>
+</catui-example>
+<catui-example title="버튼 그룹 (토글 aria-pressed)">
+  <div class="Catui_btngroup" role="group" aria-label="보기 방식">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" aria-pressed="true">목록</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" aria-pressed="false">카드</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" aria-pressed="false">달력</button>
+  </div>
+</catui-example>
+<p><code>.Catui_btn-icon</code>은 크기 클래스와 함께 쓰면 높이와 같은 폭의 정사각이 됩니다(아이콘만 있으면 <code>aria-label</code> 필수). <code>.Catui_btngroup</code>은 맞닿은 모서리를 지우고, 선택 상태는 <code>aria-pressed="true"</code>로 표시합니다.</p>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_btn</code>에 변형 <code>Catui_btn-primary/secondary/ghost/danger</code>와 크기 <code>Catui_btn-sm/md/lg</code>를 겹칩니다. 페이지 이동은 <code>&lt;a&gt;</code>, 동작은 <code>&lt;button type="button"&gt;</code>을 씁니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>아이콘만 있는 버튼에는 <code>aria-label</code>, 아이콘 svg에는 <code>aria-hidden="true"</code>.</li>
+  <li>비활성은 <code>disabled</code>(또는 <code>aria-disabled="true"</code>)로 표시하고, 왜 쓸 수 없는지 문장으로 연결합니다. 투명도로 흉내 내지 않습니다.</li>
+  <li>흰 글자 / primary 대비 5.27:1, danger 5.44:1 (AA 통과).</li>
+</ul>
+</section>

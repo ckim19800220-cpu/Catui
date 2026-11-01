@@ -1,0 +1,18 @@
+/* blocks/gallery.css */
+/* Gallery & post meta — 이미지 격자(크게 강조 칸), 글 정보 줄(작성자·날짜·읽는 시간). */
+.Catui_gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));grid-auto-rows:160px;grid-auto-flow:dense;gap:var(--Catui_space-3)}
+.Catui_gallery > *{overflow:hidden;border-radius:var(--Catui_radius-md);background:var(--Catui_color-neutral-100);margin:0}
+.Catui_gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_gallery a:hover img,.Catui_gallery a:focus-visible img{transform:scale(1.03)}
+.Catui_gallery a:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_gallery-wide{grid-column:span 2}
+.Catui_gallery-tall{grid-row:span 2}
+.Catui_meta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-1) var(--Catui_space-3);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_meta > * + *::before{content:"\00b7";margin-right:var(--Catui_space-3);color:var(--Catui_color-neutral-300)}
+@media (prefers-reduced-motion:reduce){.Catui_gallery img{transition:none}}
+@media (max-width:767px){.Catui_gallery-wide{grid-column:auto}}
+/* 캡션 겹침 · 글 정보에 작성자 아바타 */
+.Catui_gallery figure{position:relative}
+.Catui_gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:var(--Catui_space-5) var(--Catui_space-3) var(--Catui_space-2);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-inverse);background:linear-gradient(to top,color-mix(in srgb,var(--Catui_sidebar-bg) 85%,transparent),transparent)}
+.Catui_meta .Catui_av{margin-right:calc(-1 * var(--Catui_space-1))}
+.Catui_meta > .Catui_av + *::before{content:none}

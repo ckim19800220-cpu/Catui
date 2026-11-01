@@ -1,0 +1,65 @@
+<section aria-labelledby="group">
+<h2 id="group">리스트 그룹</h2>
+<catui-example title="아이콘 · 오른쪽 값">
+  <ul class="Catui_list" aria-label="저장 공간">
+    <li class="Catui_list-item"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-text"></use></svg>문서<span class="Catui_list-meta">1.2GB</span></li>
+    <li class="Catui_list-item"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-files"></use></svg>사진<span class="Catui_list-meta">8.4GB</span></li>
+    <li class="Catui_list-item"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-inbox"></use></svg>메일<span class="Catui_list-meta">640MB</span></li>
+  </ul>
+</catui-example>
+<catui-example title="링크 행 · 현재 항목">
+  <nav class="Catui_list" aria-label="설정 메뉴">
+    <a class="Catui_list-item" href="doc:css/components/form" aria-current="page"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-user"></use></svg>프로필<svg class="Catui_icon Catui_i16 Catui_list-meta" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></a>
+    <a class="Catui_list-item" href="doc:css/components/choice"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-bell"></use></svg>알림<svg class="Catui_icon Catui_i16 Catui_list-meta" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></a>
+    <a class="Catui_list-item" href="doc:css/components/table"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-settings"></use></svg>보안<svg class="Catui_icon Catui_i16 Catui_list-meta" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></a>
+  </nav>
+</catui-example>
+</section>
+
+<section aria-labelledby="flush">
+<h2 id="flush">테두리 없는 목록</h2>
+<catui-example title="카드 안에 넣을 때 (list-flush)">
+  <article class="Catui_card" style="max-width:400px"><header class="Catui_card-h">최근 활동</header>
+    <ul class="Catui_list Catui_list-flush">
+      <li class="Catui_list-item">견적서를 올렸습니다<span class="Catui_list-meta">2시간 전</span></li>
+      <li class="Catui_list-item">주문 1002를 처리했습니다<span class="Catui_list-meta">어제</span></li>
+    </ul>
+  </article>
+</catui-example>
+</section>
+
+<section aria-labelledby="dl">
+<h2 id="dl">정의 목록 (키-값)</h2>
+<catui-example title="Catui_dl (767px 이하 1열)">
+  <dl class="Catui_dl">
+    <dt>주문 번호</dt><dd>1003</dd>
+    <dt>고객</dt><dd>박서연</dd>
+    <dt>배송지</dt><dd>서울시 중구 예시로 10, 3층</dd>
+    <dt>상태</dt><dd><span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>대기</span></dd>
+  </dl>
+</catui-example>
+</section>
+
+<section aria-labelledby="check">
+<h2 id="check">체크 목록</h2>
+<catui-example title="요금제 기능 목록">
+  <ul class="Catui_checklist">
+    <li><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>사용자 무제한</li>
+    <li><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>저장 공간 100GB</li>
+    <li><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>우선 지원</li>
+  </ul>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_list</code> 안에 <code>.Catui_list-item</code>(40px 이상), 오른쪽 값은 <code>.Catui_list-meta</code>. 행 전체가 링크·버튼이면 <code>a/button.Catui_list-item</code>, 현재 항목은 <code>aria-current</code>. 테두리 없이 쓰려면 <code>.Catui_list-flush</code>. 키-값은 <code>dl.Catui_dl</code>, 기능 목록은 <code>ul.Catui_checklist</code>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>목록은 <code>ul/ol/nav</code>로 만들어 항목 수가 읽히게 하고, 묶음에 <code>aria-label</code>.</li>
+  <li>링크 행에는 키보드 포커스 링이 안쪽에 그려집니다.</li>
+</ul>
+</section>

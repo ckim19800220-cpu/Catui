@@ -1,0 +1,33 @@
+/* foundation/surface.css */
+/* Background — 면 색, 상태 연한 배경, 브랜드·어두운 영역(글자 자동 반전), 그라디언트, 패턴, 이미지 + 겹침, 섹션 띠. */
+.Catui_bg-surface{background:var(--Catui_color-surface)}
+.Catui_bg-muted{background:var(--Catui_color-surface-muted)}
+.Catui_bg-page{background:var(--Catui_color-page-bg)}
+.Catui_bg-brand-soft{background:var(--Catui_color-brand-soft)}
+.Catui_bg-info-soft{background:var(--Catui_banner-info-bg)}
+.Catui_bg-warning-soft{background:var(--Catui_banner-warn-bg)}
+.Catui_bg-danger-soft{background:var(--Catui_banner-danger-bg)}
+
+/* 진한 배경: 글자·링크·아이콘을 흰색 계열로 바꾼다 (대비 AA) */
+.Catui_bg-brand{background:var(--Catui_color-brand-fill);color:var(--Catui_color-text-inverse)}
+.Catui_bg-dark{background:var(--Catui_sidebar-bg);color:var(--Catui_sidebar-fg)}
+:is(.Catui_bg-brand,.Catui_bg-dark,.Catui_overlay) :is(.Catui_lead,.Catui_help,.Catui_text-muted){color:inherit;opacity:.85}
+:is(.Catui_bg-brand,.Catui_bg-dark,.Catui_overlay) a:not(.Catui_btn){color:inherit;text-decoration:underline;text-underline-offset:3px}
+:is(.Catui_bg-brand,.Catui_bg-dark,.Catui_overlay) :focus-visible{outline-color:currentColor}
+
+/* 그라디언트 · 패턴 (모두 토큰 색) */
+.Catui_bg-gradient{background:linear-gradient(135deg,var(--Catui_color-brand-soft) 0%,var(--Catui_color-surface) 60%)}
+.Catui_bg-gradient-dark{background:linear-gradient(135deg,var(--Catui_sidebar-bg) 0%,var(--Catui_color-brand-strong) 100%);color:var(--Catui_color-text-inverse)}
+.Catui_bg-dots{background-color:var(--Catui_color-surface);background-image:radial-gradient(var(--Catui_color-neutral-300) 1px,transparent 1px);background-size:16px 16px}
+.Catui_bg-grid{background-color:var(--Catui_color-surface);background-image:linear-gradient(var(--Catui_color-neutral-100) 1px,transparent 1px),linear-gradient(90deg,var(--Catui_color-neutral-100) 1px,transparent 1px);background-size:24px 24px}
+
+/* 이미지 배경: style="--Catui_bg-img:url(…)" + 겹침으로 글자 대비 확보 */
+.Catui_bg-image{background-color:var(--Catui_sidebar-bg);background-image:var(--Catui_bg-img,none);background-size:cover;background-position:center;background-repeat:no-repeat}
+.Catui_overlay{position:relative;isolation:isolate;color:var(--Catui_color-text-inverse)}
+.Catui_overlay::before{content:"";position:absolute;inset:0;z-index:-1;background:color-mix(in srgb,var(--Catui_sidebar-bg) 70%,transparent);border-radius:inherit}
+
+/* 섹션 띠: 화면 폭 배경 + 위아래 여백 */
+.Catui_band{padding-block:var(--Catui_space-9)}
+.Catui_band-sm{padding-block:var(--Catui_space-6)}
+/* 연한 색 배경 안의 보조 글자는 한 단계 진하게 (secondary가 4.5:1에 못 미침) */
+:is(.Catui_bg-brand-soft,.Catui_bg-info-soft,.Catui_bg-warning-soft,.Catui_bg-danger-soft) :is(.Catui_help,.Catui_text-muted){color:var(--Catui_color-neutral-700)}

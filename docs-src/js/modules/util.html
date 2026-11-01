@@ -1,0 +1,29 @@
+<section aria-labelledby="demo">
+<h2 id="demo">도구</h2>
+<catui-example title="toDateString · timeAgo · countdown">
+  <p id="ut-out" aria-live="polite"></p>
+  <script>
+  catui.use(['util'], function (util) {
+    var started = Date.now();
+    util.countdown({ date: started + 10000, ready: function (t) {
+      document.getElementById('ut-out').textContent = util.toDateString(Date.now(), 'yyyy-MM-dd HH:mm:ss') +
+        ' · 연 시각: ' + util.timeAgo(started) + ' · 남은 ' + t.s + '초';
+    } });
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">util API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>toDateString(time, 'yyyy-MM-dd HH:mm:ss')</code></td><td>날짜 서식</td></tr>
+<tr><td><code>timeAgo(time, onlyDate)</code></td><td>'방금' · 'n분 전' · 'n시간 전' · 'n일 전' · 30일 넘으면 날짜</td></tr>
+<tr><td><code>countdown({ date, now, ready(t), clear() })</code></td><td><code>t.d · t.h · t.m · t.s</code>, 반환값 <code>.clear()</code></td></tr>
+<tr><td><code>debounce(fn, ms)</code> · <code>throttle(fn, ms)</code></td><td>반환 함수에 <code>.cancel()</code></td></tr>
+<tr><td><code>copy(text)</code></td><td>클립보드 복사 → Promise&lt;boolean&gt;</td></tr>
+<tr><td><code>escape · html · raw</code></td><td><a href="doc:js/core/dom">html · raw · escape</a>와 같음</td></tr>
+</tbody></table></div>
+</section>

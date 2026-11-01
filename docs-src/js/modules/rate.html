@@ -1,0 +1,27 @@
+<section aria-labelledby="basic">
+<h2 id="basic">별점</h2>
+<catui-example title="rate.render · 읽기 전용">
+  <div class="Catui_vstack Catui_gap-4"><div id="rt-score"></div><div id="rt-avg"></div></div>
+  <p class="Catui_help" id="rt-out" aria-live="polite"></p>
+  <script>
+  catui.use(['rate'], function (rate) {
+    rate.render({ elem: '#rt-score', label: '만족도', value: 3, text: true, clearable: true,
+      choose: function (v) { document.getElementById('rt-out').textContent = '별점: ' + v; } });
+    rate.render({ elem: '#rt-avg', label: '평균', value: 4, readonly: true });
+  });
+  </script>
+</catui-example>
+<p>radio 그룹이라 화살표 키로 고릅니다. 읽기 전용은 <code>role="img"</code>로 "5점 중 4점"만 읽힙니다.</p>
+</section>
+
+<section aria-labelledby="options">
+<h2 id="options">옵션</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">rate 옵션</caption>
+<thead><tr><th scope="col">옵션</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>label · length · value · readonly</code></td><td>기본 값 (length 기본 5)</td></tr>
+<tr><td><code>text · texts[] · clearable</code></td><td>점수 문구 표시 · 문구 목록 · 지우기 버튼</td></tr>
+<tr><td><code>choose(v)</code></td><td>콜백 · 이벤트 <code>choose(f)</code> (마크업 <code>.Catui_rating[data-catui-filter]</code>도)</td></tr>
+<tr><td><code>inst.setValue(v)</code></td><td>값 바꾸기</td></tr>
+</tbody></table></div>
+</section>

@@ -1,0 +1,36 @@
+<section aria-labelledby="basic">
+<h2 id="basic">태그 목록</h2>
+<catui-example title="닫기 버튼이 있는 태그">
+  <div class="Catui_tags">
+    <span class="Catui_tag">디자인 <button type="button" aria-label="디자인 태그 제거"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></button></span>
+    <span class="Catui_tag">개발 <button type="button" aria-label="개발 태그 제거"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></button></span>
+    <span class="Catui_tag">읽기 전용</span>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="limit">
+<h2 id="limit">입력과 한계</h2>
+<catui-example title="입력 칸 + 최대 개수 표시">
+  <div class="Catui_field"><label class="Catui_label" for="tg-in">태그</label>
+    <div class="Catui_tags">
+      <span class="Catui_tag">주문 <button type="button" aria-label="주문 태그 제거"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></button></span>
+      <span class="Catui_tag Catui_tag-limit">최대 5개</span>
+    </div>
+    <input class="Catui_input" id="tg-in" placeholder="입력 후 Enter" aria-describedby="tg-help"><p class="Catui_help" id="tg-help">1/5개 — Enter로 추가합니다.</p>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_tags</code> 안에 <code>.Catui_tag</code>(필요하면 닫기 버튼). 한계 표시는 <code>.Catui_tag-limit</code>. 추가·삭제·중복 검사는 스크립트로 붙입니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>각 태그의 닫기 버튼에 "○○ 태그 제거" 이름을 줍니다.</li>
+  <li>개수 한계는 색이 아니라 글자로 알립니다.</li>
+</ul>
+</section>

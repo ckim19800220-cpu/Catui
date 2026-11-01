@@ -1,0 +1,12 @@
+/* components/drawer.css */
+.Catui_drawer-toggle:checked ~ .Catui_drawer{display:block}
+.Catui_drawer{
+  position:fixed;z-index:50;top:0;right:0;bottom:0;width:min(var(--Catui_drawer-w),100%);
+  background:var(--Catui_modal-bg);box-shadow:var(--Catui_drawer-shadow);border-radius:var(--Catui_drawer-radius);
+  transform:translateX(0);transition:transform var(--Catui_dur-fast) var(--Catui_ease);
+}
+dialog.Catui_drawer{inset:0 0 0 auto;height:auto;max-height:none;border:0}
+dialog.Catui_drawer[open]{display:block}
+/* 왼쪽 · 아래에서 여는 변형 */
+.Catui_drawer-left{right:auto;left:0}
+.Catui_drawer-bottom{top:auto;left:0;right:0;width:100%;max-height:70vh;border-radius:var(--Catui_radius-lg) var(--Catui_radius-lg) 0 0}

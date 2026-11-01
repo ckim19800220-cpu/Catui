@@ -1,0 +1,32 @@
+/* components/badge.css */
+/* Badge — pill (round), badge (square), count, dot. Status fg uses AA shades. */
+.Catui_pill{
+  display:inline-flex;align-items:center;gap:6px;height:var(--Catui_pill-h-md);padding:0 var(--Catui_pill-px);
+  border-radius:var(--Catui_pill-radius);font-size:var(--Catui_pill-font);font-weight:600;line-height:1;white-space:nowrap;
+}
+.Catui_dot{width:var(--Catui_pill-dot);height:var(--Catui_pill-dot);border-radius:var(--Catui_radius-pill);background:currentColor;flex:none}
+.Catui_pill-success{background:var(--Catui_badge-success-bg);color:var(--Catui_badge-success-fg)}
+.Catui_pill-info{background:var(--Catui_badge-info-bg);color:var(--Catui_badge-info-fg)}
+.Catui_pill-warning{background:var(--Catui_badge-warning-bg);color:var(--Catui_badge-warning-fg)}
+.Catui_pill-danger{background:var(--Catui_badge-danger-bg);color:var(--Catui_badge-danger-fg)}
+.Catui_pill-neutral{background:var(--Catui_badge-neutral-bg);color:var(--Catui_badge-neutral-fg)}
+.Catui_pill-solid-success{background:var(--Catui_btn-primary-bg);color:var(--Catui_btn-primary-fg)}
+.Catui_pill-solid-info{background:var(--Catui_banner-info-fg);color:var(--Catui_color-text-inverse)}
+.Catui_pill-solid-warning{background:var(--Catui_banner-warn-fg);color:var(--Catui_color-text-inverse)}
+.Catui_pill-solid-danger{background:var(--Catui_badge-danger-fg);color:var(--Catui_color-text-inverse)}
+.Catui_pill-solid-neutral{background:var(--Catui_badge-neutral-fg);color:var(--Catui_color-text-inverse)}
+.Catui_badge{
+  display:inline-flex;align-items:center;height:22px;padding:0 var(--Catui_space-2);
+  border-radius:var(--Catui_badge-radius);font-size:var(--Catui_badge-font);font-weight:600;line-height:1;white-space:nowrap;
+}
+.Catui_badge-success{background:var(--Catui_badge-success-bg);color:var(--Catui_badge-success-fg)}
+.Catui_badge-info{background:var(--Catui_badge-info-bg);color:var(--Catui_badge-info-fg)}
+.Catui_badge-warning{background:var(--Catui_badge-warning-bg);color:var(--Catui_badge-warning-fg)}
+.Catui_badge-danger{background:var(--Catui_badge-danger-bg);color:var(--Catui_badge-danger-fg)}
+.Catui_badge-neutral{background:var(--Catui_badge-neutral-bg);color:var(--Catui_badge-neutral-fg)}
+.Catui_count{
+  min-width:var(--Catui_count-h);height:var(--Catui_count-h);padding:0 var(--Catui_count-px);
+  border-radius:var(--Catui_count-radius);background:var(--Catui_count-bg);color:var(--Catui_count-fg);
+  font-size:var(--Catui_count-font);font-weight:600;line-height:1;display:inline-flex;align-items:center;justify-content:center;
+  font-variant-numeric:tabular-nums;
+}

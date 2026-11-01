@@ -1,0 +1,27 @@
+<section aria-labelledby="basic">
+<h2 id="basic">4열 메가 메뉴</h2>
+<catui-example title="열 제목 + 링크 (열당 5개 이하)">
+  <details class="Catui_mega" open>
+    <summary class="Catui_btn Catui_btn-md Catui_btn-ghost">제품</summary>
+    <div class="Catui_mega-panel">
+      <div><p class="Catui_mega-h">시작</p><a class="Catui_mega-item" href="doc:css/start/introduction">소개</a><a class="Catui_mega-item" href="doc:css/start/install">설치</a></div>
+      <div><p class="Catui_mega-h">컴포넌트</p><a class="Catui_mega-item" href="doc:css/components/button">버튼</a><a class="Catui_mega-item" href="doc:css/components/table">표</a></div>
+      <div><p class="Catui_mega-h">데이터</p><a class="Catui_mega-item" href="doc:css/views/calendar">달력</a><a class="Catui_mega-item" href="doc:css/charts/line">차트</a></div>
+      <div><p class="Catui_mega-h">안내</p><p class="Catui_mega-item">한 줄 안내입니다.</p></div>
+    </div>
+  </details>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>details.Catui_mega</code> &gt; <code>summary</code> + <code>.Catui_mega-panel</code>(4열, 991px 이하 2열, 767px 이하 1열). 열 제목 <code>.Catui_mega-h</code>, 항목 <code>.Catui_mega-item</code>. 열마다 항목은 5개 이하로 두어 스크롤이 생기지 않게 합니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>열 제목은 목록 위의 글자(p)로, 항목은 링크로 둡니다.</li>
+  <li>catui.js가 있으면 바깥 클릭·Esc로 닫히고 summary로 포커스가 돌아갑니다.</li>
+</ul>
+</section>

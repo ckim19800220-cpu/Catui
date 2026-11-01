@@ -1,0 +1,4 @@
+/* forms/search.css */
+.Catui_search{display:flex;align-items:center;gap:var(--Catui_space-2);position:relative}
+.Catui_search > .Catui_icon{position:absolute;left:var(--Catui_space-3);color:var(--Catui_icon-color);pointer-events:none}
+.Catui_search .Catui_input{height:var(--Catui_search-h);border-radius:var(--Catui_search-radius);padding-left:var(--Catui_space-7)}

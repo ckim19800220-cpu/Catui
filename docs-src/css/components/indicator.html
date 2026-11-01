@@ -1,0 +1,37 @@
+<section aria-labelledby="notify">
+<h2 id="notify">알림 표시</h2>
+<catui-example title="점 · 숫자">
+  <div class="Catui_hstack Catui_gap-6">
+    <span class="Catui_indicator"><button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" aria-label="알림 (새 알림 있음)"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-bell"></use></svg></button><span class="Catui_indicator-dot" aria-hidden="true"></span></span>
+    <span class="Catui_indicator"><button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" aria-label="메일, 읽지 않은 메일 3개"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-mail"></use></svg></button><span class="Catui_count" aria-hidden="true">3</span></span>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="status">
+<h2 id="status">온라인 상태</h2>
+<catui-example title="아바타 모서리 · 목록 앞 상태 점">
+  <div class="Catui_hstack Catui_gap-6">
+    <span class="Catui_indicator"><span class="Catui_av Catui_av-lg" aria-hidden="true">김</span><span class="Catui_status Catui_status-on" aria-hidden="true"></span></span>
+    <div class="Catui_vstack">
+      <span class="Catui_hstack"><span class="Catui_status Catui_status-on" aria-hidden="true"></span>김하늘 <span class="Catui_help">접속 중</span></span>
+      <span class="Catui_hstack"><span class="Catui_status Catui_status-away" aria-hidden="true"></span>이준 <span class="Catui_help">자리 비움</span></span>
+      <span class="Catui_hstack"><span class="Catui_status Catui_status-busy" aria-hidden="true"></span>박서연 <span class="Catui_help">방해 금지</span></span>
+      <span class="Catui_hstack"><span class="Catui_status" aria-hidden="true"></span>최민 <span class="Catui_help">오프라인</span></span>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>대상을 <code>.Catui_indicator</code>로 감싸고 모서리에 <code>.Catui_indicator-dot</code>(점)·<code>.Catui_count</code>(숫자)·<code>.Catui_status</code>(상태)를 둡니다. 상태 색은 <code>Catui_status-on</code>(접속)·<code>-away</code>(자리 비움)·<code>-busy</code>(방해 금지)·기본(오프라인).</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>점·숫자는 장식으로 숨기고, 같은 정보를 버튼 이름에 넣습니다 (예: "메일, 읽지 않은 메일 3개").</li>
+  <li>상태는 색 점과 함께 "접속 중" 같은 글자를 씁니다.</li>
+</ul>
+</section>

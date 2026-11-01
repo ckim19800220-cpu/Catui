@@ -1,0 +1,19 @@
+/* components/code.css */
+/* Code — 독립 인라인 코드, 코드 블록(제목줄·줄 번호·구문 색). 키 표시 .Catui_kbd는 command.css. */
+.Catui_code{font-family:var(--Catui_font-mono);font-size:.92em;background:var(--Catui_prose-code-bg);color:var(--Catui_prose-code-fg);border-radius:var(--Catui_radius-xs);padding:1px 4px}
+
+.Catui_codeblock{border-radius:var(--Catui_radius-md);overflow:hidden;background:var(--Catui_color-code-bg);color:var(--Catui_color-code-text)}
+.Catui_codeblock-h{height:var(--Catui_control-h-md);display:flex;align-items:center;gap:var(--Catui_space-2);padding:0 var(--Catui_space-4);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-code-comment);border-bottom:1px solid color-mix(in srgb, var(--Catui_color-code-text) 14%, transparent);line-height:1}
+.Catui_codeblock-h .Catui_btn{margin-left:auto;color:var(--Catui_color-code-text)}
+.Catui_codeblock pre{margin:0;padding:var(--Catui_space-4);overflow-x:auto;font-family:var(--Catui_font-mono);font-size:var(--Catui_type-caption-size);line-height:1.6;tab-size:2}
+.Catui_codeblock code{font-family:inherit}
+
+/* 줄 번호: <code class="Catui_lines"> 안의 각 줄을 <span>으로 감싼다 (번호는 선택·복사에서 빠짐) */
+.Catui_lines{display:grid;counter-reset:Catui_ln}
+.Catui_lines > span{counter-increment:Catui_ln;white-space:pre}
+.Catui_lines > span::before{content:counter(Catui_ln);display:inline-block;width:2.5em;margin-right:var(--Catui_space-3);text-align:right;color:var(--Catui_color-code-comment);user-select:none}
+
+/* 구문 색: 키워드 · 값/문자열 · 주석 */
+.Catui_tk-k{color:var(--Catui_color-code-key)}
+.Catui_tk-v{color:var(--Catui_color-code-val)}
+.Catui_tk-c{color:var(--Catui_color-code-comment);font-style:italic}

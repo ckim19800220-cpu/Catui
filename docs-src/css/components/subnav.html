@@ -1,0 +1,24 @@
+<section aria-labelledby="pills">
+<h2 id="pills">필 탭</h2>
+<catui-example title="링크 (aria-current) · 버튼 토글 (aria-pressed)">
+  <nav class="Catui_pills" aria-label="주문 상태"><a href="doc:css/components/table" aria-current="page">전체 <span class="Catui_count" aria-label="128건">128</span></a><a href="doc:css/components/table">배송</a><a href="doc:css/components/table">처리</a><a href="doc:css/components/table">대기</a></nav>
+  <div class="Catui_pills" role="group" aria-label="기간"><button type="button" aria-pressed="false">오늘</button><button type="button" aria-pressed="true">이번 주</button><button type="button" aria-pressed="false">이번 달</button></div>
+</catui-example>
+</section>
+<section aria-labelledby="underline">
+<h2 id="underline">밑줄 탭 링크</h2>
+<catui-example title="페이지 이동형 탭 (넘치면 가로 스크롤)">
+  <nav class="Catui_subnav" aria-label="설정"><a href="doc:css/components/form" aria-current="page"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-user"></use></svg>프로필</a><a href="doc:css/components/choice"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-bell"></use></svg>알림</a><a href="doc:css/components/table"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-settings"></use></svg>보안</a><a href="doc:css/components/list"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-files"></use></svg>결제</a></nav>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>같은 화면 안에서 내용을 바꾸는 탭은 <a href="doc:css/components/tabs">탭</a>(radio), 다른 주소로 이동하는 탭은 <code>nav.Catui_subnav</code>(밑줄)·<code>nav.Catui_pills</code>(필)를 씁니다. 현재 항목은 <code>aria-current="page"</code>, 필터처럼 누르면 켜지는 버튼은 <code>aria-pressed</code>.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>링크 묶음은 <code>nav</code> + <code>aria-label</code>, 현재 위치는 <code>aria-current</code>.</li>
+  <li>선택은 배경·글자색·굵기를 함께 바꿔 색만으로 구분하지 않습니다.</li>
+</ul>
+</section>

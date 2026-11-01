@@ -1,0 +1,45 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="4열 보드">
+  <div class="Catui_kanban">
+    <section class="Catui_kanban-col"><h3 class="Catui_kanban-h">할 일<span class="Catui_count">2</span></h3>
+      <article class="Catui_kanban-card"><div class="Catui_kanban-tags"><span class="Catui_pill Catui_pill-neutral">조사</span></div><span class="Catui_kanban-title">인터뷰 정리</span><div class="Catui_kanban-meta"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>2/4<span class="Catui_av Catui_av-sm">김</span></div></article>
+      <article class="Catui_kanban-card"><div class="Catui_kanban-tags"><span class="Catui_pill Catui_pill-neutral">설계</span></div><span class="Catui_kanban-title">토큰 초안</span><div class="Catui_kanban-meta"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>1/3<span class="Catui_av Catui_av-sm">이</span></div></article>
+    </section>
+    <section class="Catui_kanban-col"><h3 class="Catui_kanban-h">진행<span class="Catui_count">2</span></h3>
+      <article class="Catui_kanban-card"><div class="Catui_kanban-tags"><span class="Catui_pill Catui_pill-info">화면</span></div><span class="Catui_kanban-title">달력 정리</span><div class="Catui_kanban-meta"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>3/5<span class="Catui_av Catui_av-sm">박</span></div></article>
+      <article class="Catui_kanban-card"><div class="Catui_kanban-tags"><span class="Catui_pill Catui_pill-info">화면</span></div><span class="Catui_kanban-title">간트 막대</span><div class="Catui_kanban-meta"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>2/4<span class="Catui_av Catui_av-sm">최</span></div></article>
+    </section>
+    <section class="Catui_kanban-col"><h3 class="Catui_kanban-h">검토<span class="Catui_count">1</span></h3>
+      <article class="Catui_kanban-card"><div class="Catui_kanban-tags"><span class="Catui_pill Catui_pill-warning">대기</span></div><span class="Catui_kanban-title">포커스 점검</span><div class="Catui_kanban-meta"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>4/4<span class="Catui_av Catui_av-sm">김</span></div></article>
+    </section>
+    <section class="Catui_kanban-col"><h3 class="Catui_kanban-h">완료<span class="Catui_count">1</span></h3>
+      <article class="Catui_kanban-card"><div class="Catui_kanban-tags"><span class="Catui_pill Catui_pill-success">완료</span></div><span class="Catui_kanban-title">트리 접힘</span><div class="Catui_kanban-meta"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>3/3<span class="Catui_av Catui_av-sm">이</span></div></article>
+    </section>
+  </div>
+</catui-example>
+<catui-example title="이동 버튼(키보드 대안) · 빈 열">
+  <div class="Catui_kanban">
+    <section class="Catui_kanban-col" aria-labelledby="kb-todo"><h3 class="Catui_kanban-h" id="kb-todo">할 일<span class="Catui_count" aria-label="카드 1개">1</span></h3>
+      <article class="Catui_kanban-card"><span class="Catui_kanban-title">결제 오류 확인</span>
+        <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" aria-label="결제 오류 확인을 진행으로 이동">진행으로 <svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-arrow-right"></use></svg></button></div>
+      </article>
+    </section>
+    <section class="Catui_kanban-col" aria-labelledby="kb-doing"><h3 class="Catui_kanban-h" id="kb-doing">진행<span class="Catui_count" aria-label="카드 0개">0</span></h3>
+      <div class="Catui_empty"><p class="Catui_empty-text">카드가 없습니다</p></div>
+    </section>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_kanban</code> > 열 <code>Catui_kanban-col</code> > 카드 <code>Catui_kanban-card</code>(<code>kanban-h/tags/title/meta</code>). 열 폭은 고정, 가로로 넘치면 보드가 스크롤됩니다. 빈 열에는 <code>.Catui_empty</code>를 두고, 카드 이동은 드래그와 함께 버튼으로도 제공합니다(동작은 스크립트).</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>열 제목은 h3, 개수 카운트에 라벨.</li>
+  <li>드래그만으로 옮기게 하지 않습니다 — 버튼 등 키보드 대안을 둡니다.</li>
+</ul>
+</section>

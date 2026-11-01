@@ -1,0 +1,52 @@
+<section aria-labelledby="tabs">
+<h2 id="tabs">탭</h2>
+<catui-example title="radio로 전환하는 탭">
+  <div class="Catui_tabs">
+    <input class="Catui_clip" type="radio" name="tb-demo" id="tb-a" checked>
+    <label class="Catui_tab" for="tb-a">개요</label>
+    <div class="Catui_panel"><p>개요 내용입니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tb-demo" id="tb-b">
+    <label class="Catui_tab" for="tb-b">분석</label>
+    <div class="Catui_panel"><p>분석 내용입니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tb-demo" id="tb-c">
+    <label class="Catui_tab" for="tb-c">설정</label>
+    <div class="Catui_panel"><p>설정 내용입니다.</p></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="segment">
+<h2 id="segment">세그먼트</h2>
+<catui-example title="기간 고르기">
+  <div class="Catui_segment" role="radiogroup" aria-label="기간">
+    <input class="Catui_clip" type="radio" name="sg-demo" id="sg-d" checked><label for="sg-d">일간</label>
+    <input class="Catui_clip" type="radio" name="sg-demo" id="sg-w"><label for="sg-w">주간</label>
+    <input class="Catui_clip" type="radio" name="sg-demo" id="sg-m"><label for="sg-m">월간</label>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="vertical">
+<h2 id="vertical">세로 탭</h2>
+<catui-example title="tabs-v (767px 이하 가로 탭)">
+  <div class="Catui_tabs Catui_tabs-v">
+    <input class="Catui_clip" type="radio" name="tv-demo" id="tv-a" checked><label class="Catui_tab" for="tv-a">프로필</label><div class="Catui_panel"><p>이름·사진·소개를 바꿉니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tv-demo" id="tv-b"><label class="Catui_tab" for="tv-b">알림</label><div class="Catui_panel"><p>받을 알림을 고릅니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tv-demo" id="tv-c"><label class="Catui_tab" for="tv-c">보안</label><div class="Catui_panel"><p>비밀번호와 2단계 인증.</p></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>탭은 <code>input[type=radio].Catui_clip</code> → <code>label.Catui_tab</code> → <code>.Catui_panel</code> 순서를 반복합니다. 같은 <code>name</code>끼리 묶이고 <code>:checked</code> 형제 셀렉터로 패널을 보입니다. 세그먼트는 패널 없이 값만 고를 때 씁니다. 이벤트·추가·삭제는 <a href="doc:js/modules/tabs">catui.js tabs</a>.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>radio 그룹이라 Tab으로 들어가 화살표 키로 이동합니다(스크립트 불필요).</li>
+  <li>활성 탭은 색과 2px 밑줄을 함께 표시합니다 — 색만으로 구분하지 않습니다.</li>
+  <li>세그먼트 묶음에 <code>role="radiogroup"</code> + <code>aria-label</code>.</li>
+</ul>
+</section>

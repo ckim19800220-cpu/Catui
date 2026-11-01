@@ -1,0 +1,19 @@
+<section aria-labelledby="syntax">
+<h2 id="syntax">문법</h2>
+<pre><code>모듈.on('이벤트(필터)', fn)   // 필터가 같은 요소에서 난 이벤트만
+모듈.on('이벤트', fn)         // 필터 상관없이 전부
+var off = 모듈.on(…);  off(); // 해제
+모듈.off('이벤트(필터)');     // 그 이름의 등록 전부 해제</code></pre>
+<p>콜백의 <code>this</code>는 이벤트가 난 요소입니다. 콜백이 <code>false</code>를 돌려주면 기본 동작을 막습니다(예: form 제출, table 기본 정렬).</p>
+</section>
+
+<section aria-labelledby="global">
+<h2 id="global">모듈 밖에서</h2>
+<pre><code>catui.onevent('form', 'submit(login)', fn);              // 모듈 이름으로 등록
+catui.event('form', 'submit', 'login', { field: {} });   // 직접 발생</code></pre>
+</section>
+
+<section aria-labelledby="list">
+<h2 id="list">이벤트 목록</h2>
+<p>모듈별 이벤트는 <a href="doc:js/reference/events">이벤트 색인</a>에 모아 두었습니다.</p>
+</section>

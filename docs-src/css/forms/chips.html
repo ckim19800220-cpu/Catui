@@ -1,0 +1,35 @@
+<section aria-labelledby="multi">
+<h2 id="multi">여러 개 선택 (checkbox)</h2>
+<catui-example title="필터 칩">
+  <fieldset class="Catui_chips"><legend class="Catui_clip">상태 필터</legend>
+    <input class="Catui_clip" type="checkbox" id="ch-ship" checked><label class="Catui_chip" for="ch-ship"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>배송</label>
+    <input class="Catui_clip" type="checkbox" id="ch-proc"><label class="Catui_chip" for="ch-proc"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>처리</label>
+    <input class="Catui_clip" type="checkbox" id="ch-wait" checked><label class="Catui_chip" for="ch-wait"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>대기</label>
+    <input class="Catui_clip" type="checkbox" id="ch-cancel" disabled><label class="Catui_chip" for="ch-cancel"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>취소 (없음)</label>
+  </fieldset>
+</catui-example>
+</section>
+
+<section aria-labelledby="single">
+<h2 id="single">하나만 선택 (radio)</h2>
+<catui-example title="기간 칩">
+  <fieldset class="Catui_chips"><legend class="Catui_clip">기간</legend>
+    <input class="Catui_clip" type="radio" name="ch-period" id="ch-7"><label class="Catui_chip" for="ch-7">7일</label>
+    <input class="Catui_clip" type="radio" name="ch-period" id="ch-30" checked><label class="Catui_chip" for="ch-30">30일</label>
+    <input class="Catui_clip" type="radio" name="ch-period" id="ch-90"><label class="Catui_chip" for="ch-90">90일</label>
+  </fieldset>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>fieldset.Catui_chips</code> 안에 <code>input.Catui_clip</code> + <code>label.Catui_chip</code>를 짝으로 둡니다. 체크 아이콘은 선택됐을 때만 보입니다. 지울 수 있는 값 목록은 <a href="doc:css/forms/tags">태그</a>, 한 줄 값 고르기는 <a href="doc:css/components/tabs">세그먼트</a>를 씁니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>실제 checkbox·radio라 Tab·Space·화살표 키가 그대로 동작합니다. 묶음 이름은 <code>legend</code>.</li>
+  <li>선택은 색·굵기·체크 아이콘을 함께 바꿔 색만으로 구분하지 않습니다.</li>
+</ul>
+</section>

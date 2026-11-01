@@ -1,0 +1,13 @@
+/* charts/donut.css */
+.Catui_donut{
+  width:var(--Catui_donut-size);height:var(--Catui_donut-size);border-radius:var(--Catui_radius-pill);
+  display:grid;place-items:center;position:relative;flex:none;
+  background:conic-gradient(var(--Catui_donut-seg-1) 0 45%,var(--Catui_donut-seg-2) 45% 70%,var(--Catui_donut-seg-3) 70% 82%,var(--Catui_donut-seg-4) 82% 92%,var(--Catui_donut-seg-5) 92% 100%);
+}
+.Catui_donut-hole{
+  width:var(--Catui_donut-hole);height:var(--Catui_donut-hole);border-radius:var(--Catui_radius-pill);
+  background:var(--Catui_card-bg);display:grid;place-items:center;text-align:center;
+  font-size:var(--Catui_donut-center-size);font-weight:var(--Catui_type-metric-lg-weight);color:var(--Catui_donut-center-color);
+  font-variant-numeric:tabular-nums;
+}
+.Catui_donut-label{display:block;font-size:var(--Catui_donut-label-size);font-weight:600;letter-spacing:var(--Catui_type-label-ls);text-transform:uppercase;color:var(--Catui_color-text-secondary)}

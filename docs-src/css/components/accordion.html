@@ -1,0 +1,33 @@
+<section aria-labelledby="basic">
+<h2 id="basic">아코디언</h2>
+<catui-example title="details 묶음 (화살표 회전)">
+  <div class="Catui_accordion">
+    <details open><summary>배송은 얼마나 걸리나요?</summary><div class="Catui_accordion-body"><p>평일 오후 2시 전 주문은 당일 출고, 보통 1~2일 걸립니다.</p></div></details>
+    <details><summary>교환·반품은 어떻게 하나요?</summary><div class="Catui_accordion-body"><p>받은 날부터 7일 안에 주문 상세에서 신청합니다.</p></div></details>
+    <details><summary>영수증을 다시 받을 수 있나요?</summary><div class="Catui_accordion-body"><p>주문 상세 → 영수증 받기에서 PDF로 내려받습니다.</p></div></details>
+  </div>
+</catui-example>
+<catui-example title="하나만 열기 (catui.js collapse)">
+  <div class="Catui_accordion" data-catui-collapse="accordion" data-catui-filter="acc-demo">
+    <details open><summary>계정</summary><div class="Catui_accordion-body"><p>이름·이메일·비밀번호.</p></div></details>
+    <details><summary>결제</summary><div class="Catui_accordion-body"><p>카드와 청구지 주소.</p></div></details>
+  </div>
+</catui-example>
+</section>
+<section aria-labelledby="card">
+<h2 id="card">카드형 펼침 상자</h2>
+<catui-example title="Catui_details (단독)">
+  <details class="Catui_details"><summary><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-info"></use></svg>고급 설정</summary><div class="Catui_details-body"><p>캐시 시간, 재시도 횟수 등 자주 바꾸지 않는 설정입니다.</p></div></details>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_accordion</code> 안에 <code>details &gt; summary + .Catui_accordion-body</code>를 쌓습니다. 화살표는 CSS가 그리고 열리면 뒤집힙니다. 하나만 열리게 하려면 catui.js가 있는 페이지에서 <code>data-catui-collapse="accordion"</code>(<a href="doc:js/modules/collapse">collapse</a>). 단독 상자는 <code>details.Catui_details</code>. 간단한 질문 목록은 <a href="doc:css/components/faq">질문(접기)</a>.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>네이티브 details/summary라 Enter·Space로 열고 닫히며, 열림 상태가 읽힙니다.</li>
+  <li>summary 안에 버튼·링크를 넣지 않습니다.</li>
+</ul>
+</section>

@@ -1,0 +1,5 @@
+/* components/breadcrumb.css */
+.Catui_crumb{display:flex;align-items:center;gap:var(--Catui_breadcrumb-gap);font-size:var(--Catui_breadcrumb-font);min-width:0}
+.Catui_crumb a{color:var(--Catui_breadcrumb-fg)}
+.Catui_crumb [aria-current="page"]{color:var(--Catui_breadcrumb-current);font-weight:600}
+.Catui_crumb-sep{color:var(--Catui_breadcrumb-sep)}

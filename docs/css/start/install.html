@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설치와 빌드 · CSS · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="배포 파일 연결, 스코프 루트, 소스에서 빌드하기.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html" aria-current="page">CSS</a><a href="../../js/start/introduction.html">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CSS 메뉴</summary><nav aria-label="CSS 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../css/start/introduction.html">소개</a></li><li><a href="../../css/start/install.html" aria-current="page">설치와 빌드</a></li><li><a href="../../css/start/namespace.html">이름과 스코프</a></li><li><a href="../../css/start/accessibility.html">접근성 기준</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">기초</p><ul><li><a href="../../css/foundation/color.html">색상</a></li><li><a href="../../css/foundation/surface.html">배경</a></li><li><a href="../../css/foundation/theme.html">다크 모드</a></li><li><a href="../../css/foundation/typography.html">타이포그래피</a></li><li><a href="../../css/foundation/text.html">텍스트·링크</a></li><li><a href="../../css/foundation/spacing.html">간격·반경·그림자</a></li><li><a href="../../css/foundation/icons.html">아이콘</a></li><li><a href="../../css/foundation/media.html">미디어·이미지</a></li><li><a href="../../css/foundation/utilities.html">유틸리티</a></li><li><a href="../../css/foundation/helpers.html">도우미 클래스</a></li><li><a href="../../css/foundation/motion.html">모션</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">레이아웃</p><ul><li><a href="../../css/layout/grid.html">그리드</a></li><li><a href="../../css/layout/flex.html">정렬 도우미</a></li><li><a href="../../css/layout/app-shell.html">관리 셸</a></li><li><a href="../../css/layout/site.html">공개 홈</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">웹 블록</p><ul><li><a href="../../css/blocks/head.html">섹션 머리·공지 띠</a></li><li><a href="../../css/blocks/proof.html">신뢰 요소</a></li><li><a href="../../css/blocks/people.html">팀·프로필</a></li><li><a href="../../css/blocks/process.html">과정·단계</a></li><li><a href="../../css/blocks/gallery.html">갤러리·글 정보</a></li><li><a href="../../css/blocks/subscribe.html">구독 폼</a></li><li><a href="../../css/blocks/floating.html">떠 있는 요소</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">컴포넌트</p><ul><li><a href="../../css/components/button.html">버튼</a></li><li><a href="../../css/components/split-button.html">분할 버튼</a></li><li><a href="../../css/components/form.html">입력 필드</a></li><li><a href="../../css/components/input-group.html">입력 그룹</a></li><li><a href="../../css/components/choice.html">체크·라디오·토글</a></li><li><a href="../../css/components/badge.html">배지·카운트</a></li><li><a href="../../css/components/indicator.html">알림·상태 표시</a></li><li><a href="../../css/components/avatar.html">아바타</a></li><li><a href="../../css/components/media.html">미디어 객체·임베드</a></li><li><a href="../../css/components/card.html">카드</a></li><li><a href="../../css/components/carousel.html">캐러셀</a></li><li><a href="../../css/components/canvas.html">캔버스</a></li><li><a href="../../css/components/stat.html">지표</a></li><li><a href="../../css/components/progress.html">진행</a></li><li><a href="../../css/components/table.html">표</a></li><li><a href="../../css/components/toolbar.html">도구 모음·작업 바</a></li><li><a href="../../css/components/list.html">목록</a></li><li><a href="../../css/components/setting.html">설정 행</a></li><li><a href="../../css/components/tabs.html">탭·세그먼트</a></li><li><a href="../../css/components/subnav.html">보조 탐색</a></li><li><a href="../../css/components/vnav.html">세로 내비게이션</a></li><li><a href="../../css/components/breadcrumb.html">경로</a></li><li><a href="../../css/components/pagehead.html">페이지 머리</a></li><li><a href="../../css/components/pager.html">페이지</a></li><li><a href="../../css/components/feedback.html">피드백</a></li><li><a href="../../css/components/result.html">결과 화면</a></li><li><a href="../../css/components/callout.html">안내 상자</a></li><li><a href="../../css/components/spinner.html">스피너</a></li><li><a href="../../css/components/code.html">코드</a></li><li><a href="../../css/components/quote.html">인용</a></li><li><a href="../../css/components/chat.html">채팅</a></li><li><a href="../../css/components/modal.html">모달</a></li><li><a href="../../css/components/drawer.html">드로어</a></li><li><a href="../../css/components/dropdown.html">드롭다운</a></li><li><a href="../../css/components/toast.html">토스트</a></li><li><a href="../../css/components/notifs.html">알림 패널</a></li><li><a href="../../css/components/tooltip.html">툴팁·팝오버</a></li><li><a href="../../css/components/mega.html">메가 메뉴</a></li><li><a href="../../css/components/wizard.html">마법사</a></li><li><a href="../../css/components/command.html">명령 팔레트</a></li><li><a href="../../css/components/faq.html">질문(접기)</a></li><li><a href="../../css/components/accordion.html">아코디언</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">고급 입력</p><ul><li><a href="../../css/forms/upload.html">업로드</a></li><li><a href="../../css/forms/range.html">범위</a></li><li><a href="../../css/forms/rating.html">별점</a></li><li><a href="../../css/forms/tags.html">태그</a></li><li><a href="../../css/forms/chips.html">선택 칩</a></li><li><a href="../../css/forms/optcard.html">선택 카드</a></li><li><a href="../../css/forms/swatch.html">색상 견본</a></li><li><a href="../../css/forms/stepper.html">스테퍼</a></li><li><a href="../../css/forms/otp.html">인증 코드</a></li><li><a href="../../css/forms/datepicker.html">날짜</a></li><li><a href="../../css/forms/counter.html">글자 수</a></li><li><a href="../../css/forms/search.html">검색</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">데이터 뷰</p><ul><li><a href="../../css/views/tree.html">트리</a></li><li><a href="../../css/views/calendar.html">달력</a></li><li><a href="../../css/views/gantt.html">간트</a></li><li><a href="../../css/views/kanban.html">칸반</a></li><li><a href="../../css/views/files.html">파일 목록</a></li><li><a href="../../css/views/thread.html">스레드</a></li><li><a href="../../css/views/heatmap.html">히트맵</a></li><li><a href="../../css/views/timeline.html">타임라인</a></li><li><a href="../../css/views/feed-meter.html">피드·미터·작업</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">차트</p><ul><li><a href="../../css/charts/line.html">라인 차트</a></li><li><a href="../../css/charts/donut.html">도넛</a></li><li><a href="../../css/charts/bars.html">막대</a></li><li><a href="../../css/charts/stack.html">누적·세그먼트</a></li><li><a href="../../css/charts/gauge.html">게이지</a></li><li><a href="../../css/charts/funnel.html">퍼널</a></li><li><a href="../../css/charts/sparkline.html">스파크라인</a></li><li><a href="../../css/charts/radar.html">레이더</a></li><li><a href="../../css/charts/prose.html">본문</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CSS · 시작</p>
+<h1 class="Catui_h1">설치와 빌드</h1>
+<p class="Catui_lead">배포 파일 연결, 스코프 루트, 소스에서 빌드하기.</p>
+
+<section aria-labelledby="files">
+<h2 id="files">배포 파일</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">배포 파일</caption>
+<thead><tr><th scope="col">파일</th><th scope="col">용도</th></tr></thead>
+<tbody>
+<tr><td><code>dist/catui.min.css</code></td><td>압축 스타일 (페이지에는 이 파일을 링크)</td></tr>
+<tr><td><code>dist/catui.css</code></td><td>읽기 쉬운 원본 결합본</td></tr>
+<tr><td><code>dist/icons.svg</code></td><td>Lucide 아이콘 스프라이트 239개 (목록은 <a href="../../css/foundation/icons.html">아이콘</a>)</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="link">
+<h2 id="link">페이지에 연결</h2>
+<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+
+&lt;!-- 관리 화면 --&gt;
+&lt;div class="Catui_app"&gt; … &lt;/div&gt;
+
+&lt;!-- 공개 홈 --&gt;
+&lt;div class="Catui_site"&gt; … &lt;/div&gt;
+
+&lt;!-- 아이콘 --&gt;
+&lt;svg class="Catui_icon Catui_i16" aria-hidden="true"&gt;&lt;use href="dist/icons.svg?v=2#Catui_ic-search"&gt;&lt;/use&gt;&lt;/svg&gt;</code></pre>
+<p>리셋과 글꼴은 <code>.Catui_app</code>·<code>.Catui_site</code> 안에서만 적용됩니다. 외부 스프라이트는 <code>file://</code>에서 막히므로 정적 서버(<code>npm run dev</code>)로 여세요.</p>
+</section>
+
+<section aria-labelledby="build">
+<h2 id="build">소스에서 빌드</h2>
+<pre><code>npm install
+npm run build        # CSS·아이콘·JS·문서 전부
+npm run build:css    # CSS와 아이콘만
+npm run dev          # http://127.0.0.1:8766/docs/</code></pre>
+<p>CSS 소스는 <code>src/css/</code>에 컴포넌트마다 한 파일이고, 결합 순서는 <code>src/css/index.json</code>입니다. 새 파일을 만들면 이 목록에 넣어야 빌드가 통과합니다.</p>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/start/introduction.html"><span>이전</span>소개</a><a class="doc-pager-next" href="../../css/start/namespace.html"><span>다음</span>이름과 스코프</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#files">배포 파일</a></li><li><a href="#link">페이지에 연결</a></li><li><a href="#build">소스에서 빌드</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

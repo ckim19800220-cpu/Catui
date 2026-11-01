@@ -1,0 +1,23 @@
+<section aria-labelledby="states">
+<h2 id="states">결과 상태</h2>
+<catui-example title="완료 (result-success)">
+  <div class="Catui_result Catui_result-success" role="status"><span class="Catui_result-icon"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span><p class="Catui_result-title">주문이 완료되었습니다</p><p class="Catui_result-text">주문 번호 1003 · 확인 메일을 보냈습니다.</p><div class="Catui_actions"><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="doc:css/components/table">주문 보기</a><a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="doc:index">계속 쇼핑</a></div></div>
+</catui-example>
+<catui-example title="실패 · 권한 없음">
+  <div class="Catui_grid"><div class="Catui_span-6"><div class="Catui_result Catui_result-danger" role="alert"><span class="Catui_result-icon"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-alert-circle"></use></svg></span><p class="Catui_result-title">결제에 실패했습니다</p><p class="Catui_result-text">카드 한도를 확인하고 다시 시도해 주세요.</p><div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">다시 시도</button></div></div></div><div class="Catui_span-6"><div class="Catui_result Catui_result-warning"><span class="Catui_result-icon"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-alert-triangle"></use></svg></span><p class="Catui_result-title">접근 권한이 없습니다</p><p class="Catui_result-text">관리자에게 권한을 요청하세요.</p></div></div></div>
+</catui-example>
+<catui-example title="404 (result-code)">
+  <div class="Catui_result"><p class="Catui_result-code" aria-hidden="true">404</p><p class="Catui_result-title">페이지를 찾을 수 없습니다</p><p class="Catui_result-text">주소가 바뀌었거나 삭제된 페이지입니다.</p><div class="Catui_actions"><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="doc:index">홈으로</a></div></div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_result</code> = 아이콘 원 <code>-icon</code>(또는 큰 숫자 <code>-code</code>) + <code>-title</code> + <code>-text</code> + 버튼. 색은 <code>-success</code>·<code>-danger</code>·<code>-warning</code>. 목록이 비었을 때는 <a href="doc:css/components/feedback">빈 상태</a>가 맞습니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>완료는 <code>role="status"</code>, 실패는 <code>role="alert"</code>로 바로 알립니다.</li>
+  <li>다음 행동(버튼)을 항상 하나 이상 둡니다. 404 숫자는 장식이라 숨기고 제목에 뜻을 씁니다.</li>
+</ul>
+</section>

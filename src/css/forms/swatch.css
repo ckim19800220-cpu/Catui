@@ -1,0 +1,9 @@
+/* forms/swatch.css */
+/* Swatch — 색상 견본 선택(radio). 색은 --Catui_swatch로 넘기고 이름은 숨김 라벨로. */
+.Catui_swatches{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2);border:0;padding:0;margin:0}
+.Catui_swatch{--Catui_swatch:var(--Catui_color-neutral-300);width:var(--Catui_control-h-sm);height:var(--Catui_control-h-sm);border-radius:var(--Catui_radius-pill);background:var(--Catui_swatch);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--Catui_color-text-primary) 15%,transparent);cursor:pointer;position:relative}
+input:checked + .Catui_swatch{box-shadow:0 0 0 2px var(--Catui_card-bg),0 0 0 4px var(--Catui_color-brand-strong)}
+input:focus-visible + .Catui_swatch{outline:2px solid var(--Catui_color-focus-ring);outline-offset:4px}
+input:disabled + .Catui_swatch{cursor:not-allowed;opacity:1;background:repeating-linear-gradient(135deg,var(--Catui_swatch) 0 4px,var(--Catui_card-bg) 4px 6px)}
+.Catui_swatch-lg{width:var(--Catui_control-h-lg);height:var(--Catui_control-h-lg)}
+.Catui_swatch-value{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}

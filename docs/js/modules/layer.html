@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>layer 팝업 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="메시지·확인·입력·자유 레이어·드로어·로딩.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html" aria-current="page">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/util.html">util 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 모듈</p>
+<h1 class="Catui_h1">layer 팝업</h1>
+<p class="Catui_lead">메시지·확인·입력·자유 레이어·드로어·로딩.</p>
+
+<section aria-labelledby="msg">
+<h2 id="msg">메시지</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">layer.msg — 토스트</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions" id="ly-msg">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="success">완료</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="info">안내</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="warn">주의</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="danger">실패</button>
+  </div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    catui.$('#ly-msg').on('click', '[data-icon]', function (e, b) {
+      layer.msg(b.textContent + ' 메시지', { icon: b.dataset.icon, body: '3초 뒤 사라집니다. 마우스를 올리면 멈춥니다.' });
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="layer.msg — 토스트 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot; id=&quot;ly-msg&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-icon=&quot;success&quot;&gt;완료&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-icon=&quot;info&quot;&gt;안내&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-icon=&quot;warn&quot;&gt;주의&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-icon=&quot;danger&quot;&gt;실패&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  catui.$(&#39;#ly-msg&#39;).on(&#39;click&#39;, &#39;[data-icon]&#39;, function (e, b) {
+    layer.msg(b.textContent + &#39; 메시지&#39;, { icon: b.dataset.icon, body: &#39;3초 뒤 사라집니다. 마우스를 올리면 멈춥니다.&#39; });
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>옵션: <code>icon</code>(success·info·warn·danger), <code>body</code>, <code>time</code>(ms, 0이면 수동), <code>max</code>(동시에 보일 개수, 기본 3). 영역은 <code>aria-live="polite"</code>로 읽힙니다.</p>
+</section>
+
+<section aria-labelledby="dialog">
+<h2 id="dialog">확인·입력·알림</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">confirm · prompt · alert</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions" id="ly-dlg">
+    <button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button" data-k="confirm">삭제</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="prompt">이름 바꾸기</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="alert">알림</button>
+  </div>
+  <p class="Catui_help" id="ly-out" aria-live="polite"></p>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var out = function (t) { document.getElementById('ly-out').textContent = t; };
+    catui.$('#ly-dlg').on('click', '[data-k]', function (e, b) {
+      var k = b.dataset.k;
+      if (k === 'confirm') layer.confirm('주문을 삭제할까요? 되돌릴 수 없습니다.', { danger: true, okText: '삭제' },
+        function (index) { layer.close(index); out('삭제했습니다'); }, function () { out('취소했습니다'); });
+      if (k === 'prompt') layer.prompt({ title: '이름 바꾸기', value: '견적서.pdf' }, function (value, index) { layer.close(index); out('새 이름: ' + value); });
+      if (k === 'alert') layer.alert('점검은 내일 새벽입니다.');
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="confirm · prompt · alert 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot; id=&quot;ly-dlg&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-danger&quot; type=&quot;button&quot; data-k=&quot;confirm&quot;&gt;삭제&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-k=&quot;prompt&quot;&gt;이름 바꾸기&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-k=&quot;alert&quot;&gt;알림&lt;/button&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;ly-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  var out = function (t) { document.getElementById(&#39;ly-out&#39;).textContent = t; };
+  catui.$(&#39;#ly-dlg&#39;).on(&#39;click&#39;, &#39;[data-k]&#39;, function (e, b) {
+    var k = b.dataset.k;
+    if (k === &#39;confirm&#39;) layer.confirm(&#39;주문을 삭제할까요? 되돌릴 수 없습니다.&#39;, { danger: true, okText: &#39;삭제&#39; },
+      function (index) { layer.close(index); out(&#39;삭제했습니다&#39;); }, function () { out(&#39;취소했습니다&#39;); });
+    if (k === &#39;prompt&#39;) layer.prompt({ title: &#39;이름 바꾸기&#39;, value: &#39;견적서.pdf&#39; }, function (value, index) { layer.close(index); out(&#39;새 이름: &#39; + value); });
+    if (k === &#39;alert&#39;) layer.alert(&#39;점검은 내일 새벽입니다.&#39;);
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>네이티브 <code>&lt;dialog&gt;</code>라 Esc 닫기·포커스 가두기·닫힌 뒤 포커스 복귀가 기본입니다. <code>yes</code> 콜백에서는 <code>layer.close(index)</code>로 직접 닫고(layui와 같음), <code>false</code>를 돌려주면 열린 채 둡니다.</p>
+</section>
+
+<section aria-labelledby="open">
+<h2 id="open">자유 레이어 · 드로어 · 로딩</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">open · drawer · load</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions" id="ly-open">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="open">상세 보기</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="drawer">필터</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="load">불러오기</button>
+  </div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    catui.$('#ly-open').on('click', '[data-k]', function (e, b) {
+      var k = b.dataset.k;
+      if (k === 'open') layer.open({ title: '주문 1003', area: 'lg', btn: ['저장', '취소'],
+        content: catui.html`<p>고객 <b>${'박서연'}</b> · 금액 42,000원</p>`,
+        yes: function (index) { layer.close(index); layer.msg('저장했습니다', { icon: 'success' }); } });
+      if (k === 'drawer') layer.open({ type: 'drawer', title: '필터', btn: ['적용'],
+        content: catui.html`<div class="Catui_field"><label class="Catui_label" for="ly-q">고객</label><input class="Catui_input" id="ly-q"></div>`,
+        yes: function (index, dlg) { layer.msg('고객: ' + (dlg.querySelector('#ly-q').value || '전체')); layer.close(index); } });
+      if (k === 'load') { var i = layer.load('불러오는 중…'); setTimeout(function () { layer.close(i); }, 1200); }
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="open · drawer · load 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot; id=&quot;ly-open&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-k=&quot;open&quot;&gt;상세 보기&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-k=&quot;drawer&quot;&gt;필터&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-k=&quot;load&quot;&gt;불러오기&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  catui.$(&#39;#ly-open&#39;).on(&#39;click&#39;, &#39;[data-k]&#39;, function (e, b) {
+    var k = b.dataset.k;
+    if (k === &#39;open&#39;) layer.open({ title: &#39;주문 1003&#39;, area: &#39;lg&#39;, btn: [&#39;저장&#39;, &#39;취소&#39;],
+      content: catui.html`&lt;p&gt;고객 &lt;b&gt;${&#39;박서연&#39;}&lt;/b&gt; · 금액 42,000원&lt;/p&gt;`,
+      yes: function (index) { layer.close(index); layer.msg(&#39;저장했습니다&#39;, { icon: &#39;success&#39; }); } });
+    if (k === &#39;drawer&#39;) layer.open({ type: &#39;drawer&#39;, title: &#39;필터&#39;, btn: [&#39;적용&#39;],
+      content: catui.html`&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;ly-q&quot;&gt;고객&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;ly-q&quot;&gt;&lt;/div&gt;`,
+      yes: function (index, dlg) { layer.msg(&#39;고객: &#39; + (dlg.querySelector(&#39;#ly-q&#39;).value || &#39;전체&#39;)); layer.close(index); } });
+    if (k === &#39;load&#39;) { var i = layer.load(&#39;불러오는 중…&#39;); setTimeout(function () { layer.close(i); }, 1200); }
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="options">
+<h2 id="options">open 옵션</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">layer.open 옵션</caption>
+<thead><tr><th scope="col">옵션</th><th scope="col">기본값</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>type</code></td><td>'dialog'</td><td>'dialog' 또는 'drawer'</td></tr>
+<tr><td><code>title</code> · <code>content</code></td><td>''</td><td>내용: 문자열(글자) · html`` · Element</td></tr>
+<tr><td><code>area</code></td><td>'md'</td><td>'sm' 400 · 'md' 560 · 'lg' 720</td></tr>
+<tr><td><code>btn</code></td><td>[]</td><td>버튼 글자 배열. 첫 버튼이 주 버튼(<code>danger: true</code>면 위험색)</td></tr>
+<tr><td><code>yes(index, dlg)</code> · <code>btn2</code> · <code>cancel</code></td><td>—</td><td>버튼·닫기 콜백. false를 돌려주면 유지</td></tr>
+<tr><td><code>success(dlg, index)</code> · <code>end(index)</code></td><td>—</td><td>열린 뒤 / 닫힌 뒤</td></tr>
+<tr><td><code>shadeClose</code> · <code>closeBtn</code></td><td>true</td><td>바깥 클릭으로 닫기 / 닫기 버튼</td></tr>
+</tbody></table></div>
+<p>함수: <code>msg · alert · confirm · prompt · open · load · close(index) · closeAll(type) · closeLast(type) · title(index, 글자) · getNode(index)</code></p>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/core/helpers.html"><span>이전</span>저장소·주소·환경</a><a class="doc-pager-next" href="../../js/modules/form.html"><span>다음</span>form 폼</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#msg">메시지</a></li><li><a href="#dialog">확인·입력·알림</a></li><li><a href="#open">자유 레이어 · 드로어 · 로딩</a></li><li><a href="#options">open 옵션</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

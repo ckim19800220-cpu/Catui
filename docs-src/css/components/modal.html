@@ -1,0 +1,65 @@
+<section aria-labelledby="confirm">
+<h2 id="confirm">확인 모달</h2>
+<catui-example title="파괴적 동작 확인 (sm 400)">
+  <div>
+    <input class="Catui_clip Catui_modal-toggle" type="checkbox" id="mo-del" aria-label="주문 삭제 대화상자 열기">
+    <label class="Catui_btn Catui_btn-md Catui_btn-danger" for="mo-del">주문 삭제</label>
+    <div class="Catui_scrim"><label for="mo-del"><span class="Catui_clip">닫기</span></label></div>
+    <div class="Catui_modal Catui_modal-sm" role="dialog" aria-modal="true" aria-labelledby="mo-del-t">
+      <header class="Catui_modal-h"><span id="mo-del-t">주문을 삭제할까요?</span><label class="Catui_close" for="mo-del" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></label></header>
+      <div class="Catui_modal-b"><p>삭제하면 되돌릴 수 없습니다.</p></div>
+      <footer class="Catui_modal-f"><label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="mo-del">취소</label><button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button">삭제</button></footer>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="sizes">
+<h2 id="sizes">너비</h2>
+<catui-example title="md 560 · lg 720">
+  <div class="Catui_actions">
+    <div>
+      <input class="Catui_clip Catui_modal-toggle" type="checkbox" id="mo-md" aria-label="보통 너비 대화상자 열기">
+      <label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="mo-md">보통 너비</label>
+      <div class="Catui_scrim"><label for="mo-md"><span class="Catui_clip">닫기</span></label></div>
+      <div class="Catui_modal Catui_modal-md" role="dialog" aria-modal="true" aria-labelledby="mo-md-t">
+        <header class="Catui_modal-h"><span id="mo-md-t">주문 수정</span><label class="Catui_close" for="mo-md" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></label></header>
+        <div class="Catui_modal-b"><p>너비는 560px입니다.</p></div>
+        <footer class="Catui_modal-f"><label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="mo-md">취소</label><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">저장</button></footer>
+      </div>
+    </div>
+    <div>
+      <input class="Catui_clip Catui_modal-toggle" type="checkbox" id="mo-lg" aria-label="넓은 너비 대화상자 열기">
+      <label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="mo-lg">넓은 너비</label>
+      <div class="Catui_scrim"><label for="mo-lg"><span class="Catui_clip">닫기</span></label></div>
+      <div class="Catui_modal Catui_modal-lg" role="dialog" aria-modal="true" aria-labelledby="mo-lg-t">
+        <header class="Catui_modal-h"><span id="mo-lg-t">주문 상세</span><label class="Catui_close" for="mo-lg" aria-label="닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></label></header>
+        <div class="Catui_modal-b"><p>너비는 720px입니다.</p></div>
+        <footer class="Catui_modal-f"><label class="Catui_btn Catui_btn-md Catui_btn-secondary" for="mo-lg">닫기</label></footer>
+      </div>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="loading">
+<h2 id="loading">로딩 레이어 내용</h2>
+<catui-example title="layer.load()가 그리는 모양 (정적 표시)">
+  <article class="Catui_card" style="max-width:400px"><div class="Catui_layer-load" role="status"><span class="Catui_spin" aria-hidden="true"></span><span>불러오는 중…</span></div></article>
+</catui-example>
+<p><code>.Catui_layer-load</code>는 <a href="doc:js/modules/layer">layer.load()</a>가 작은 모달(sm) 안에 넣는 스피너 + 문구 줄입니다. 위 예제는 모양만 보이려고 카드 안에 둔 것입니다.</p>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p>숨긴 <code>input.Catui_modal-toggle</code> 바로 뒤에 여는 label, <code>.Catui_scrim</code>, <code>.Catui_modal</code>을 둡니다. 체크되면 스크림과 모달이 보입니다. 너비는 <code>Catui_modal-sm/md/lg</code> 세 단계만 씁니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>CSS만으로는 Esc 닫기·포커스 가두기가 안 됩니다. <a href="doc:js/start/introduction">catui.js</a>를 불러오면 같은 마크업에 포커스 이동·Tab 가두기·Esc·포커스 복귀가 자동으로 붙고, <a href="doc:js/modules/layer">layer.open</a>은 네이티브 dialog로 이를 기본 제공합니다.</li>
+  <li><code>role="dialog"</code> + <code>aria-modal="true"</code> + 제목 <code>aria-labelledby</code>, 닫기 버튼(24px)은 생략하지 않습니다.</li>
+  <li>푸터 버튼은 오른쪽 정렬, 파괴적 행동은 danger.</li>
+</ul>
+</section>

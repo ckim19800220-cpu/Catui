@@ -1,0 +1,24 @@
+<section aria-labelledby="stack">
+<h2 id="stack">가로·세로 묶음</h2>
+<catui-example title="hstack · vstack · 간격">
+  <div class="Catui_hstack"><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>배송</span><span class="Catui_help">가로 묶음 (gap 8)</span></div>
+  <div class="Catui_vstack Catui_gap-1"><b>세로 묶음</b><span class="Catui_help">gap-1 (4px)</span></div>
+  <div class="Catui_hstack Catui_gap-4"><span>gap-4</span><span>16px</span><span>간격</span></div>
+  <div class="Catui_hstack Catui_gap-6"><span>gap-6</span><span>24px</span><span>간격</span></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="push">
+<h2 id="push">밀어내기 · 양 끝 · 가운데 · 줄바꿈</h2>
+<catui-example title="spacer · between · center · wrap-row">
+  <div class="Catui_hstack"><b>주문 목록</b><span class="Catui_spacer"></span><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button">내보내기</button><button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button">새 주문</button></div>
+  <div class="Catui_hstack Catui_between"><span>왼쪽</span><span>오른쪽</span></div>
+  <div class="Catui_center" style="height:80px;border:1px dashed var(--Catui_card-border);border-radius:var(--Catui_radius-md)">가운데</div>
+  <div class="Catui_hstack Catui_wrap-row Catui_gap-3" style="max-width:280px"><span class="Catui_tag">디자인</span><span class="Catui_tag">개발</span><span class="Catui_tag">문서</span><span class="Catui_tag">테스트</span><span class="Catui_tag">배포</span></div>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_hstack</code>(가로, 세로 가운데)·<code>.Catui_vstack</code>(세로)는 기본 간격 8px, <code>Catui_gap-1/3/4/6</code>으로 바꿉니다. <code>.Catui_spacer</code>는 남는 공간을 채워 뒤 요소를 끝으로 밀고, <code>.Catui_between</code>은 양 끝 정렬, <code>.Catui_center</code>는 가로·세로 가운데, <code>.Catui_wrap-row</code>는 줄바꿈입니다. 페이지 큰 틀은 <a href="doc:css/layout/grid">그리드</a>를 씁니다.</p>
+</section>

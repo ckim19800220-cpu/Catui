@@ -1,0 +1,18 @@
+/* components/avatar.css */
+/* Avatar — sizes xs~xl, stack overlap. */
+.Catui_av{
+  border-radius:var(--Catui_avatar-radius);background:var(--Catui_avatar-bg);color:var(--Catui_avatar-fg);
+  display:inline-flex;align-items:center;justify-content:center;font-weight:600;flex:none;
+  box-shadow:0 0 0 2px var(--Catui_avatar-border);
+}
+.Catui_av-xl{width:var(--Catui_avatar-xl);height:var(--Catui_avatar-xl);font-size:14px}
+.Catui_av-lg{width:var(--Catui_avatar-lg);height:var(--Catui_avatar-lg);font-size:13px}
+.Catui_av-md{width:var(--Catui_avatar-md);height:var(--Catui_avatar-md);font-size:12px}
+.Catui_av-sm{width:var(--Catui_avatar-sm);height:var(--Catui_avatar-sm);font-size:10px}
+.Catui_av-xs{width:var(--Catui_avatar-xs);height:var(--Catui_avatar-xs);font-size:8px}
+/* 사진 아바타: 안의 img가 원형으로 잘려 꽉 찬다 (alt는 이름, 장식이면 alt="") */
+.Catui_av{overflow:hidden}
+.Catui_av > img{width:100%;height:100%;max-width:none;object-fit:cover;border-radius:inherit;display:block}
+.Catui_av-stack{display:flex;align-items:center}
+.Catui_av-stack .Catui_av{margin-left:var(--Catui_avatar-stack-overlap)}
+.Catui_av-stack .Catui_av:first-child{margin-left:0}

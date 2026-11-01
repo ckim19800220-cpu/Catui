@@ -1,0 +1,18 @@
+<section aria-labelledby="examples">
+<h2 id="examples">예제</h2>
+<catui-example title="짧은 경로 · 긴 경로 접기">
+  <nav class="Catui_crumb" aria-label="경로"><a href="doc:index">홈</a><span class="Catui_crumb-sep">/</span><span>문서</span><span class="Catui_crumb-sep">/</span><span aria-current="page">상세</span></nav>
+  <nav class="Catui_crumb" aria-label="접힌 경로"><a href="doc:index">홈</a><span class="Catui_crumb-sep">/</span><span>…</span><span class="Catui_crumb-sep">/</span><a href="doc:index">주문</a><span class="Catui_crumb-sep">/</span><span aria-current="page">상세</span></nav>
+</catui-example>
+<catui-example title="현재 위치만 표시 (2단계)">
+  <nav class="Catui_crumb" aria-label="현재 위치 (2단계)"><a href="doc:index">홈</a><span class="Catui_crumb-sep" aria-hidden="true">/</span><span aria-current="page">설정</span></nav>
+</catui-example>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li><code>nav aria-label="현재 위치"</code>, 현재 항목은 링크가 아닌 <code>aria-current="page"</code>.</li>
+  <li>구분선은 장식이므로 스크린리더에서 숨겨도 됩니다(<code>aria-hidden</code>).</li>
+</ul>
+</section>

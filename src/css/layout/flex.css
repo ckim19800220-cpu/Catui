@@ -1,0 +1,12 @@
+/* layout/flex.css */
+/* Flex 정렬 도우미 — 가로·세로 묶음, 밀어내기, 가운데, 줄바꿈. 간격은 4px 배수 토큰. */
+.Catui_hstack{display:flex;align-items:center;gap:var(--Catui_space-2);min-width:0}
+.Catui_vstack{display:flex;flex-direction:column;gap:var(--Catui_space-2);min-width:0}
+.Catui_wrap-row{flex-wrap:wrap}
+.Catui_gap-1{gap:var(--Catui_space-1)}
+.Catui_gap-3{gap:var(--Catui_space-3)}
+.Catui_gap-4{gap:var(--Catui_space-4)}
+.Catui_gap-6{gap:var(--Catui_space-6)}
+.Catui_spacer{flex:1}
+.Catui_center{display:flex;align-items:center;justify-content:center}
+.Catui_between{justify-content:space-between}

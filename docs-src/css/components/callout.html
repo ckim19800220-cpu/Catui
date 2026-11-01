@@ -1,0 +1,19 @@
+<section aria-labelledby="kinds">
+<h2 id="kinds">4종</h2>
+<catui-example title="참고 · 팁 · 주의 · 위험">
+  <div class="Catui_callout" role="note"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-info"></use></svg><p class="Catui_callout-title">참고</p><p>토큰 값은 assets/spec/design_m.html이 원본입니다.</p></div>
+  <div class="Catui_callout Catui_callout-tip" role="note"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg><p class="Catui_callout-title">팁</p><p>예제의 코드 블록에서 바로 복사할 수 있습니다.</p></div>
+  <div class="Catui_callout Catui_callout-warn" role="note"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-alert-triangle"></use></svg><p class="Catui_callout-title">주의</p><p>dist 폴더는 빌드할 때 덮어써집니다. 원본은 src를 고치세요.</p></div>
+  <div class="Catui_callout Catui_callout-danger" role="note"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-alert-circle"></use></svg><p class="Catui_callout-title">위험</p><p>외부 값을 catui.raw()로 감싸면 스크립트 주입이 생길 수 있습니다.</p></div>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>.Catui_callout</code> = 아이콘 + <code>.Catui_callout-title</code> + 내용. 색은 기본(참고)·<code>-tip</code>·<code>-warn</code>·<code>-danger</code>. 화면 위쪽에 잠깐 알리는 상태 메시지는 <a href="doc:css/components/feedback">배너</a>, 사라지는 알림은 <a href="doc:css/components/toast">토스트</a>를 씁니다.</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>본문 속 보조 정보이므로 <code>role="note"</code>. 종류는 색과 함께 제목 글자(참고·주의 등)로 알립니다.</li>
+</ul>
+</section>

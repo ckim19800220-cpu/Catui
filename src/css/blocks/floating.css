@@ -1,0 +1,9 @@
+/* blocks/floating.css */
+/* Floating — 맨 위로 버튼, 쿠키 동의 띠 (둘 다 화면 고정). */
+.Catui_totop{position:fixed;right:var(--Catui_space-6);bottom:var(--Catui_space-6);z-index:30;width:var(--Catui_control-h-lg);height:var(--Catui_control-h-lg);display:grid;place-items:center;border-radius:var(--Catui_radius-pill);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);box-shadow:var(--Catui_shadow-md);color:var(--Catui_color-text-primary);line-height:1}
+.Catui_totop:hover{color:var(--Catui_color-brand-strong)}
+.Catui_totop:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_totop .Catui_icon{transform:rotate(-90deg)}
+.Catui_cookie{position:fixed;left:var(--Catui_space-4);right:var(--Catui_space-4);bottom:var(--Catui_space-4);z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-3) var(--Catui_space-4);max-width:720px;margin-inline:auto;padding:var(--Catui_space-4) var(--Catui_space-5);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-lg);box-shadow:var(--Catui_shadow-lg)}
+.Catui_cookie p{flex:1;min-width:220px;margin:0}
+.Catui_cookie-actions{display:flex;gap:var(--Catui_space-2);flex:none}

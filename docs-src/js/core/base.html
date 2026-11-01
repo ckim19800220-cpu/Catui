@@ -1,0 +1,29 @@
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">기본 API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>catui.use(mods, fn)</code></td><td>문서 준비 후 모듈을 인자로 넘겨 콜백. Promise도 돌려줌. 없는 모듈은 경고</td></tr>
+<tr><td><code>catui.config(options)</code></td><td><code>icons</code>(스프라이트 경로), <code>autoInit</code>(자동 연결), <code>debug</code></td></tr>
+<tr><td><code>catui.extend({ 이름: 모듈 })</code></td><td>사용자 모듈 추가 → <code>catui.use('이름')</code>, <code>catui.이름</code></td></tr>
+<tr><td><code>catui.define(이름, [의존], 팩토리)</code></td><td>의존 모듈을 받아 만드는 정의형 추가</td></tr>
+<tr><td><code>catui.init(영역)</code></td><td>새로 그린 영역의 <code>data-catui-*</code> 준비(셀렉트 화살표·정적 표·날짜 입력 등)</td></tr>
+<tr><td><code>catui.destroy()</code></td><td>전역 위임 해제 + 레이어 모두 닫기 (테스트·SPA 정리용)</td></tr>
+<tr><td><code>catui.version</code> · <code>catui.cache</code></td><td>버전, 현재 설정·모듈 목록</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="extend">
+<h2 id="extend">사용자 모듈</h2>
+<catui-example title="define으로 모듈 만들기">
+  <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="base-greet">인사 모듈 호출</button>
+  <script>
+  catui.define('greet', ['layer'], function (layer) {
+    return { hello: function (name) { layer.msg(name + '님, 안녕하세요', { icon: 'info' }); } };
+  });
+  catui.use(['greet'], function (greet) {
+    document.getElementById('base-greet').addEventListener('click', function () { greet.hello('관리자'); });
+  });
+  </script>
+</catui-example>
+</section>

@@ -1,0 +1,12 @@
+/* components/vnav.css */
+/* Vertical nav — 설정·문서 화면의 세로 내비게이션(그룹 제목·아이콘·카운트·하위 메뉴). */
+.Catui_vnav{display:grid;gap:var(--Catui_space-4);width:100%;max-width:240px}
+.Catui_vnav-group{display:grid;gap:2px}
+.Catui_vnav-title{padding:0 var(--Catui_space-3);margin-bottom:var(--Catui_space-1);font-size:var(--Catui_type-label-size);font-weight:600;letter-spacing:var(--Catui_type-label-ls);text-transform:uppercase;color:var(--Catui_color-text-secondary)}
+.Catui_vnav a{display:flex;align-items:center;gap:var(--Catui_space-2);min-height:var(--Catui_control-h-md);padding:0 var(--Catui_space-3);border-radius:var(--Catui_radius-sm);color:var(--Catui_color-text-secondary);line-height:1.2}
+.Catui_vnav a > .Catui_count,.Catui_vnav a > .Catui_badge{margin-left:auto}
+.Catui_vnav a:hover{background:var(--Catui_color-brand-ghost);color:var(--Catui_color-text-primary)}
+.Catui_vnav a[aria-current="page"]{background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong);font-weight:600}
+.Catui_vnav a:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+.Catui_vnav-sub{display:grid;gap:2px;margin-left:var(--Catui_space-5);padding-left:var(--Catui_space-2);border-left:1px solid var(--Catui_divider-color)}
+.Catui_vnav-sub a{min-height:var(--Catui_control-h-sm);font-size:var(--Catui_type-caption-size)}

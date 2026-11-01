@@ -1,0 +1,21 @@
+/* foundation/text.css */
+/* Text — 본문 링크, 의미 색(AA 통과 색만), 말줄임·줄 수 제한. */
+.Catui_link{color:var(--Catui_color-brand-strong);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;border-radius:var(--Catui_radius-xs)}
+.Catui_link:hover{color:var(--Catui_color-brand-stronger);text-decoration-thickness:2px}
+.Catui_link:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_link-quiet{color:inherit;text-decoration-color:var(--Catui_color-border)}
+.Catui_link-quiet:hover{color:var(--Catui_color-brand-strong);text-decoration-color:currentColor}
+.Catui_link-ext::after{content:"\2197";margin-left:2px;font-size:.85em}
+.Catui_prose a:not([class]){color:var(--Catui_color-brand-strong);text-decoration:underline;text-underline-offset:3px}
+
+/* 의미 색은 텍스트 대비 AA를 넘는 값만 쓴다 (tertiary 2.5:1은 힌트·비활성 전용) */
+.Catui_text-muted{color:var(--Catui_color-text-secondary)}
+.Catui_text-success{color:var(--Catui_badge-success-fg)}
+.Catui_text-info{color:var(--Catui_badge-info-fg)}
+.Catui_text-warning{color:var(--Catui_badge-warning-fg)}
+.Catui_text-danger{color:var(--Catui_badge-danger-fg)}
+
+.Catui_truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.Catui_clamp-2,.Catui_clamp-3{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+.Catui_clamp-2{-webkit-line-clamp:2;line-clamp:2}
+.Catui_clamp-3{-webkit-line-clamp:3;line-clamp:3}

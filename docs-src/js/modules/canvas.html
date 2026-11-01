@@ -1,0 +1,90 @@
+<section aria-labelledby="chart">
+<h2 id="chart">토큰 색으로 그리는 차트</h2>
+<catui-example title="canvas.render + token() (다크 모드로 바꾸면 다시 그림)">
+  <div id="cv-chart"></div>
+  <script>
+  catui.use(['canvas'], function (canvas) {
+    var data = [32, 41, 38, 52, 49, 63, 58, 71, 69, 84];
+    canvas.render({ elem: '#cv-chart', ratio: '16/7', label: '10주 매출 추이: 32에서 84로 꾸준히 증가',
+      draw: function (ctx, s) {
+        var pad = 24, max = 100, step = (s.width - pad * 2) / (data.length - 1);
+        var x = function (i) { return pad + i * step; }, y = function (v) { return s.height - pad - (v / max) * (s.height - pad * 2); };
+        ctx.strokeStyle = s.token('--Catui_chart-grid'); ctx.lineWidth = 1;
+        [25, 50, 75].forEach(function (v) { ctx.beginPath(); ctx.moveTo(pad, y(v)); ctx.lineTo(s.width - pad, y(v)); ctx.stroke(); });
+        ctx.beginPath(); data.forEach(function (v, i) { i ? ctx.lineTo(x(i), y(v)) : ctx.moveTo(x(i), y(v)); });
+        ctx.lineTo(x(data.length - 1), s.height - pad); ctx.lineTo(x(0), s.height - pad); ctx.closePath();
+        ctx.fillStyle = s.token('--Catui_chart-area-fill'); ctx.fill();
+        ctx.beginPath(); data.forEach(function (v, i) { i ? ctx.lineTo(x(i), y(v)) : ctx.moveTo(x(i), y(v)); });
+        ctx.strokeStyle = s.token('--Catui_chart-series-1'); ctx.lineWidth = 2; ctx.stroke();
+        ctx.fillStyle = s.token('--Catui_color-text-secondary'); ctx.font = s.font(11);
+        ctx.fillText('1주', pad, s.height - 6); ctx.fillText('10주', s.width - pad - 22, s.height - 6);
+      } });
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="animate">
+<h2 id="animate">애니메이션</h2>
+<catui-example title="animate: true (모션 줄이기·백그라운드 탭에서는 멈춤)">
+  <div id="cv-wave"></div>
+  <script>
+  catui.use(['canvas'], function (canvas) {
+    canvas.render({ elem: '#cv-wave', ratio: '21/9', label: '흐르는 물결 장식', animate: true,
+      draw: function (ctx, s) {
+        var colors = ['--Catui_chart-series-1', '--Catui_chart-series-2', '--Catui_chart-series-3'];
+        colors.forEach(function (tk, k) {
+          ctx.beginPath();
+          for (var px = 0; px <= s.width; px += 4) {
+            var py = s.height / 2 + Math.sin(px / 60 + s.time * (1 + k * 0.3) + k) * (18 + k * 8);
+            px ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+          }
+          ctx.strokeStyle = s.token(tk); ctx.globalAlpha = 0.8; ctx.lineWidth = 2; ctx.stroke(); ctx.globalAlpha = 1;
+        });
+      } });
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="draw">
+<h2 id="draw">그리기 패드</h2>
+<catui-example title="포인터 이벤트 + 지우기 + 이미지로 받기">
+  <div class="Catui_canvas-draw" id="cv-pad"><div class="Catui_canvas-tools"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="cv-clear">지우기</button><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" id="cv-save" aria-label="PNG로 받기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-download"></use></svg></button></div></div>
+  <p class="Catui_help" id="cv-out" aria-live="polite">마우스·펜·손가락으로 그려 보세요.</p>
+  <script>
+  catui.use(['canvas'], function (canvas) {
+    var lines = [], cur = null;
+    var pad = canvas.render({ elem: '#cv-pad', id: 'pad', ratio: '16/9', label: '서명 그리기 영역',
+      draw: function (ctx, s) {
+        ctx.strokeStyle = s.token('--Catui_color-text-primary'); ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        lines.forEach(function (l) { ctx.beginPath(); l.forEach(function (p, i) { i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }); ctx.stroke(); });
+      } });
+    var cv = pad.canvas;
+    var at = function (e) { var r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    cv.addEventListener('pointerdown', function (e) { cv.setPointerCapture(e.pointerId); cur = [at(e)]; lines.push(cur); });
+    cv.addEventListener('pointermove', function (e) { if (cur) { cur.push(at(e)); pad.redraw(); } });
+    cv.addEventListener('pointerup', function () { cur = null; document.getElementById('cv-out').textContent = '선 ' + lines.length + '개'; });
+    document.getElementById('cv-clear').addEventListener('click', function () { lines = []; pad.redraw(); document.getElementById('cv-out').textContent = '지웠습니다'; });
+    document.getElementById('cv-save').addEventListener('click', function () {
+      pad.toBlob(function (blob) { var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'drawing.png'; a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000); });
+    });
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">옵션 · 메서드</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">canvas API</caption>
+<thead><tr><th scope="col">이름</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>ratio</code> · <code>label</code></td><td>비율('16/9' 등, 빈 값이면 CSS 높이) · 그림 요약(<code>aria-label</code>)</td></tr>
+<tr><td><code>draw(ctx, s)</code></td><td><code>s = { width, height, dpr, time, token, font, reduced }</code> — 좌표는 CSS 픽셀, <code>token('--Catui_…')</code>로 현재 테마 색, <code>font(크기, 굵기)</code>로 페이지 글꼴</td></tr>
+<tr><td><code>animate</code> · <code>maxDpr</code></td><td>매 프레임 그리기(모션 줄이기·숨은 탭에서 정지) · 선명도 상한(기본 2)</td></tr>
+<tr><td><code>inst.redraw()</code> · <code>canvas.redraw(id)</code></td><td>다시 그리기 (데이터가 바뀌었을 때)</td></tr>
+<tr><td><code>inst.canvas</code> · <code>inst.ctx</code> · <code>inst.toBlob(cb, type)</code></td><td>요소·컨텍스트 · 이미지 파일로</td></tr>
+<tr><td><code>destroy</code></td><td>ResizeObserver·MutationObserver·rAF·이벤트를 모두 정리</td></tr>
+</tbody></table></div>
+<p>크기가 바뀌면(창 크기·사이드바 접기) 자동으로 해상도를 맞춰 다시 그리고, <code>&lt;html data-catui-theme&gt;</code>가 바뀌면 토큰 색으로 다시 그립니다.</p>
+</section>

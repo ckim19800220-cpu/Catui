@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>slider 슬라이더 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="네이티브 range 기반 슬라이더.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html" aria-current="page">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/util.html">util 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 모듈</p>
+<h1 class="Catui_h1">slider 슬라이더</h1>
+<p class="Catui_lead">네이티브 range 기반 슬라이더.</p>
+
+<section aria-labelledby="basic">
+<h2 id="basic">슬라이더</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">slider.render · 마크업 range</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_grid">
+    <div class="Catui_span-6" id="sl-vol"></div>
+    <div class="Catui_span-6 Catui_field"><label class="Catui_label" for="sl-level">단계 (마크업)</label><input class="Catui_range" id="sl-level" type="range" min="0" max="10" value="3" data-catui-filter="sl-level"></div>
+  </div>
+  <p class="Catui_help" id="sl-out" aria-live="polite"></p>
+  <script>
+  catui.use(['slider'], function (slider) {
+    var out = function (t) { document.getElementById('sl-out').textContent = t; };
+    slider.render({ elem: '#sl-vol', id: 'vol', label: '음량', min: 0, max: 100, step: 10, value: 40, ticks: true,
+      setTips: function (v) { return v === 0 ? '음소거' : v + '%'; }, change: function (v) { out('음량: ' + v); } });
+    slider.on('change(sl-level)', function (o) { out('단계: ' + o.value); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="slider.render · 마크업 range 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_grid&quot;&gt;
+  &lt;div class=&quot;Catui_span-6&quot; id=&quot;sl-vol&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_span-6 Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;sl-level&quot;&gt;단계 (마크업)&lt;/label&gt;&lt;input class=&quot;Catui_range&quot; id=&quot;sl-level&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;10&quot; value=&quot;3&quot; data-catui-filter=&quot;sl-level&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;sl-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;slider&#39;], function (slider) {
+  var out = function (t) { document.getElementById(&#39;sl-out&#39;).textContent = t; };
+  slider.render({ elem: &#39;#sl-vol&#39;, id: &#39;vol&#39;, label: &#39;음량&#39;, min: 0, max: 100, step: 10, value: 40, ticks: true,
+    setTips: function (v) { return v === 0 ? &#39;음소거&#39; : v + &#39;%&#39;; }, change: function (v) { out(&#39;음량: &#39; + v); } });
+  slider.on(&#39;change(sl-level)&#39;, function (o) { out(&#39;단계: &#39; + o.value); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>네이티브 range를 만들어 키보드·스크린리더 지원을 그대로 씁니다. <code>setTips</code>는 표시와 <code>aria-valuetext</code>에 함께 쓰입니다.</p>
+</section>
+
+<section aria-labelledby="options">
+<h2 id="options">옵션</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">slider 옵션</caption>
+<thead><tr><th scope="col">옵션</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>label · min · max · step · value · disabled</code></td><td>기본 값</td></tr>
+<tr><td><code>ticks · scale · tips · setTips(v)</code></td><td>눈금 · 양 끝 표시 · 현재값 · 표시 글자</td></tr>
+<tr><td><code>input(v)</code> · <code>change(v)</code></td><td>콜백 · 이벤트 <code>input(f)</code>·<code>change(f)</code></td></tr>
+<tr><td><code>slider.setValue(id, v)</code> · <code>inst.getValue()</code></td><td>값 바꾸기·읽기</td></tr>
+</tbody></table></div>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/upload.html"><span>이전</span>upload 업로드</a><a class="doc-pager-next" href="../../js/modules/rate.html"><span>다음</span>rate 별점</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">슬라이더</a></li><li><a href="#options">옵션</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

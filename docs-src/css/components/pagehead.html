@@ -1,0 +1,27 @@
+<section aria-labelledby="basic">
+<h2 id="basic">페이지 머리</h2>
+<catui-example title="상세 화면 머리">
+  <header class="Catui_pagehead">
+    <a class="Catui_pagehead-back" href="doc:css/components/table"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg>주문 목록</a>
+    <div class="Catui_pagehead-row"><span class="Catui_pagehead-title">주문 1003</span><span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>대기</span><div class="Catui_pagehead-actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-download"></use></svg>영수증</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">출고 처리</button></div></div>
+    <p class="Catui_pagehead-text">박서연 · 10월 31일 09:12 주문 · 42,000원</p>
+  </header>
+</catui-example>
+<catui-example title="보조 탐색 포함">
+  <header class="Catui_pagehead">
+    <div class="Catui_pagehead-row"><span class="Catui_pagehead-title">설정</span></div>
+    <nav class="Catui_subnav" aria-label="설정 메뉴"><a href="doc:css/components/form" aria-current="page">프로필</a><a href="doc:css/components/choice">알림</a><a href="doc:css/components/table">보안</a></nav>
+  </header>
+</catui-example>
+</section>
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>header.Catui_pagehead</code> 안에 뒤로 링크 <code>-back</code>, 제목 줄 <code>-row</code>(<code>-title</code> + 상태 pill + 오른쪽 <code>-actions</code>), 설명 <code>-text</code>, 필요하면 <a href="doc:css/components/subnav">밑줄 탭</a>을 둡니다. 제목은 실제 페이지에서 <code>h1</code>로 씁니다(예제는 문서 h1과 겹치지 않게 span).</p>
+</section>
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>화면 제목은 페이지에 하나뿐인 <code>h1</code>로, 뒤로 링크 글자는 돌아갈 화면 이름으로 씁니다.</li>
+  <li>767px 이하에서 동작 버튼은 제목 아래 줄로 내려갑니다.</li>
+</ul>
+</section>

@@ -1,0 +1,29 @@
+/* foundation/reset.css */
+/* Scoped reset. Host pages outside .Catui_app / .Catui_site are untouched.
+   .Catui_layer = catui.js가 body에 붙이는 오버레이 루트(레이어·드롭다운·토스트). 배경·높이 없이 타이포·리셋만 받는다. */
+.Catui_app,.Catui_app *,.Catui_app *::before,.Catui_app *::after,
+.Catui_site,.Catui_site *,.Catui_site *::before,.Catui_site *::after,
+.Catui_layer,.Catui_layer *,.Catui_layer *::before,.Catui_layer *::after{box-sizing:border-box}
+.Catui_app,.Catui_site,.Catui_layer{
+  font-family:var(--Catui_font-ui);
+  font-size:var(--Catui_type-body-size);
+  font-weight:var(--Catui_type-body-weight);
+  line-height:var(--Catui_type-body-lh);
+  color:var(--Catui_color-text-primary);
+  word-break:keep-all;
+}
+.Catui_app,.Catui_site{margin:0;min-height:100vh;background:var(--Catui_color-page-bg)}
+.Catui_app :where(h1,h2,h3,h4,p,ul,ol,figure,blockquote),
+.Catui_site :where(h1,h2,h3,h4,p,ul,ol,figure,blockquote),
+.Catui_layer :where(h1,h2,h3,h4,p,ul,ol,figure,blockquote){margin:0;padding:0}
+.Catui_app :where(ul,ol),.Catui_site :where(ul,ol),.Catui_layer :where(ul,ol){list-style:none}
+.Catui_app :where(a),.Catui_site :where(a),.Catui_layer :where(a){color:inherit;text-decoration:none}
+.Catui_app :where(button,input,select,textarea),
+.Catui_site :where(button,input,select,textarea),
+.Catui_layer :where(button,input,select,textarea){font:inherit;color:inherit}
+.Catui_app :where(svg),.Catui_site :where(svg),.Catui_layer :where(svg){display:block}
+.Catui_app :where(button),.Catui_site :where(button),.Catui_layer :where(button){background:none;border:0;padding:0}
+.Catui_app :where(b,strong),.Catui_site :where(b,strong),.Catui_layer :where(b,strong){font-weight:var(--Catui_type-body-strong-weight)}
+@media (prefers-reduced-motion:reduce){
+  .Catui_app *,.Catui_site *,.Catui_layer *{transition:none !important}
+}

@@ -1,0 +1,12 @@
+/* charts/legend.css */
+.Catui_legend{display:grid;gap:var(--Catui_space-1);width:100%;margin:0;padding:0;list-style:none}
+.Catui_legend li{display:flex;align-items:center;gap:var(--Catui_space-2);font-size:var(--Catui_type-label-size);color:var(--Catui_color-text-secondary)}
+.Catui_legend i{width:var(--Catui_feed-dot);height:var(--Catui_feed-dot);border-radius:var(--Catui_radius-xs);flex:none}
+.Catui_legend b{margin-left:auto;font-weight:400;font-variant-numeric:tabular-nums}
+.Catui_legend-row{display:flex;flex-wrap:wrap;width:auto;gap:var(--Catui_space-3)}
+.Catui_legend-row b{margin-left:0}
+.Catui_s1{background:var(--Catui_chart-series-1)}
+.Catui_s2{background:var(--Catui_chart-series-2)}
+.Catui_s3{background:var(--Catui_chart-series-3)}
+.Catui_s4{background:var(--Catui_chart-series-4)}
+.Catui_s5{background:var(--Catui_chart-series-5)}

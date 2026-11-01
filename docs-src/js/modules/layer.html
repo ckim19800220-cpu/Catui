@@ -1,0 +1,85 @@
+<section aria-labelledby="msg">
+<h2 id="msg">메시지</h2>
+<catui-example title="layer.msg — 토스트">
+  <div class="Catui_actions" id="ly-msg">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="success">완료</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="info">안내</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="warn">주의</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-icon="danger">실패</button>
+  </div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    catui.$('#ly-msg').on('click', '[data-icon]', function (e, b) {
+      layer.msg(b.textContent + ' 메시지', { icon: b.dataset.icon, body: '3초 뒤 사라집니다. 마우스를 올리면 멈춥니다.' });
+    });
+  });
+  </script>
+</catui-example>
+<p>옵션: <code>icon</code>(success·info·warn·danger), <code>body</code>, <code>time</code>(ms, 0이면 수동), <code>max</code>(동시에 보일 개수, 기본 3). 영역은 <code>aria-live="polite"</code>로 읽힙니다.</p>
+</section>
+
+<section aria-labelledby="dialog">
+<h2 id="dialog">확인·입력·알림</h2>
+<catui-example title="confirm · prompt · alert">
+  <div class="Catui_actions" id="ly-dlg">
+    <button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button" data-k="confirm">삭제</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="prompt">이름 바꾸기</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="alert">알림</button>
+  </div>
+  <p class="Catui_help" id="ly-out" aria-live="polite"></p>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var out = function (t) { document.getElementById('ly-out').textContent = t; };
+    catui.$('#ly-dlg').on('click', '[data-k]', function (e, b) {
+      var k = b.dataset.k;
+      if (k === 'confirm') layer.confirm('주문을 삭제할까요? 되돌릴 수 없습니다.', { danger: true, okText: '삭제' },
+        function (index) { layer.close(index); out('삭제했습니다'); }, function () { out('취소했습니다'); });
+      if (k === 'prompt') layer.prompt({ title: '이름 바꾸기', value: '견적서.pdf' }, function (value, index) { layer.close(index); out('새 이름: ' + value); });
+      if (k === 'alert') layer.alert('점검은 내일 새벽입니다.');
+    });
+  });
+  </script>
+</catui-example>
+<p>네이티브 <code>&lt;dialog&gt;</code>라 Esc 닫기·포커스 가두기·닫힌 뒤 포커스 복귀가 기본입니다. <code>yes</code> 콜백에서는 <code>layer.close(index)</code>로 직접 닫고(layui와 같음), <code>false</code>를 돌려주면 열린 채 둡니다.</p>
+</section>
+
+<section aria-labelledby="open">
+<h2 id="open">자유 레이어 · 드로어 · 로딩</h2>
+<catui-example title="open · drawer · load">
+  <div class="Catui_actions" id="ly-open">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="open">상세 보기</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="drawer">필터</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-k="load">불러오기</button>
+  </div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    catui.$('#ly-open').on('click', '[data-k]', function (e, b) {
+      var k = b.dataset.k;
+      if (k === 'open') layer.open({ title: '주문 1003', area: 'lg', btn: ['저장', '취소'],
+        content: catui.html`<p>고객 <b>${'박서연'}</b> · 금액 42,000원</p>`,
+        yes: function (index) { layer.close(index); layer.msg('저장했습니다', { icon: 'success' }); } });
+      if (k === 'drawer') layer.open({ type: 'drawer', title: '필터', btn: ['적용'],
+        content: catui.html`<div class="Catui_field"><label class="Catui_label" for="ly-q">고객</label><input class="Catui_input" id="ly-q"></div>`,
+        yes: function (index, dlg) { layer.msg('고객: ' + (dlg.querySelector('#ly-q').value || '전체')); layer.close(index); } });
+      if (k === 'load') { var i = layer.load('불러오는 중…'); setTimeout(function () { layer.close(i); }, 1200); }
+    });
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="options">
+<h2 id="options">open 옵션</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">layer.open 옵션</caption>
+<thead><tr><th scope="col">옵션</th><th scope="col">기본값</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>type</code></td><td>'dialog'</td><td>'dialog' 또는 'drawer'</td></tr>
+<tr><td><code>title</code> · <code>content</code></td><td>''</td><td>내용: 문자열(글자) · html`` · Element</td></tr>
+<tr><td><code>area</code></td><td>'md'</td><td>'sm' 400 · 'md' 560 · 'lg' 720</td></tr>
+<tr><td><code>btn</code></td><td>[]</td><td>버튼 글자 배열. 첫 버튼이 주 버튼(<code>danger: true</code>면 위험색)</td></tr>
+<tr><td><code>yes(index, dlg)</code> · <code>btn2</code> · <code>cancel</code></td><td>—</td><td>버튼·닫기 콜백. false를 돌려주면 유지</td></tr>
+<tr><td><code>success(dlg, index)</code> · <code>end(index)</code></td><td>—</td><td>열린 뒤 / 닫힌 뒤</td></tr>
+<tr><td><code>shadeClose</code> · <code>closeBtn</code></td><td>true</td><td>바깥 클릭으로 닫기 / 닫기 버튼</td></tr>
+</tbody></table></div>
+<p>함수: <code>msg · alert · confirm · prompt · open · load · close(index) · closeAll(type) · closeLast(type) · title(index, 글자) · getNode(index)</code></p>
+</section>

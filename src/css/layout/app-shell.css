@@ -1,0 +1,73 @@
+/* layout/app-shell.css */
+/* App shell — .Catui_app sidebar rail, topbar, breadcrumb, content grid. */
+.Catui_app{display:flex;align-items:stretch}
+.Catui_side{
+  width:var(--Catui_sidebar-w);flex:0 0 var(--Catui_sidebar-w);
+  background:var(--Catui_sidebar-bg);color:var(--Catui_sidebar-fg);
+  display:flex;flex-direction:column;min-height:100vh;
+}
+.Catui_brand{
+  height:var(--Catui_topbar-h);display:flex;align-items:center;gap:var(--Catui_space-3);
+  padding:0 var(--Catui_sidebar-pad);font-weight:600;
+}
+.Catui_logo{
+  width:var(--Catui_space-6);height:var(--Catui_space-6);border-radius:var(--Catui_radius-xs);
+  background:var(--Catui_btn-primary-bg);color:var(--Catui_btn-primary-fg);
+  display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex:none;
+}
+.Catui_menu{flex:1;min-height:0;overflow:auto;padding:var(--Catui_space-2) 0}
+.Catui_group{
+  font-size:var(--Catui_sidebar-head-font);font-weight:var(--Catui_type-micro-weight);line-height:var(--Catui_type-micro-lh);
+  letter-spacing:var(--Catui_type-micro-ls);text-transform:uppercase;
+  color:var(--Catui_sidebar-fg-muted);
+  padding:var(--Catui_space-4) var(--Catui_sidebar-pad) var(--Catui_space-2);
+}
+.Catui_item{
+  height:var(--Catui_sidebar-item-h);display:flex;align-items:center;gap:var(--Catui_space-3);
+  padding:0 var(--Catui_sidebar-pad);font-size:var(--Catui_sidebar-font);line-height:1;
+  color:var(--Catui_sidebar-fg);position:relative;white-space:nowrap;
+  transition:background var(--Catui_dur-fast) var(--Catui_ease);
+}
+.Catui_item:hover{background:var(--Catui_sidebar-hover-bg)}
+.Catui_item-active,.Catui_item[aria-current="page"]{
+  background:var(--Catui_sidebar-active-bg);color:var(--Catui_sidebar-active-fg);font-weight:600;
+}
+.Catui_item .Catui_icon{width:var(--Catui_sidebar-icon);height:var(--Catui_sidebar-icon);color:var(--Catui_sidebar-fg-muted)}
+.Catui_item-active .Catui_icon,.Catui_item[aria-current="page"] .Catui_icon{color:var(--Catui_sidebar-active-fg)}
+.Catui_item-active::before,.Catui_item[aria-current="page"]::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:var(--Catui_sidebar-active-bar-w);
+  background:var(--Catui_sidebar-active-bar);
+}
+.Catui_nest{padding-left:var(--Catui_space-5)}
+.Catui_nest .Catui_item{color:var(--Catui_sidebar-fg-muted)}
+.Catui_side details{color:inherit}
+.Catui_side summary{list-style:none;cursor:pointer}
+.Catui_side summary::-webkit-details-marker{display:none}
+.Catui_side .Catui_count{margin-left:auto}
+.Catui_user{
+  height:var(--Catui_topbar-h);display:flex;align-items:center;gap:var(--Catui_space-3);
+  padding:0 var(--Catui_sidebar-pad);border-top:1px solid var(--Catui_sidebar-active-bg);
+}
+.Catui_user-txt{display:flex;flex-direction:column;min-width:0}
+.Catui_user-txt span{font-size:var(--Catui_type-caption-size);color:var(--Catui_sidebar-fg-muted)}
+.Catui_main{flex:1;min-width:0;display:flex;flex-direction:column}
+.Catui_topbar{
+  height:var(--Catui_topbar-h);flex:none;display:flex;align-items:center;gap:var(--Catui_space-4);
+  padding:0 var(--Catui_topbar-pad);background:var(--Catui_topbar-bg);color:var(--Catui_topbar-fg);
+  border-bottom:1px solid var(--Catui_topbar-border);position:sticky;top:0;z-index:30;
+}
+.Catui_topbar-search{flex:1;max-width:320px;display:flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_content{padding:var(--Catui_content-pad);display:flex;flex-direction:column;gap:var(--Catui_grid-gap)}
+.Catui_top-actions{margin-left:auto;display:flex;align-items:center;gap:var(--Catui_space-3)}
+.Catui_top-actions .Catui_icon{width:var(--Catui_topbar-icon);height:var(--Catui_topbar-icon)}
+@media (max-width:991px){
+  .Catui_side{width:var(--Catui_sidebar-rail-w);flex-basis:var(--Catui_sidebar-rail-w)}
+  .Catui_brand b,.Catui_group,.Catui_item-label,.Catui_user-txt,.Catui_side .Catui_count{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .Catui_item{justify-content:center;padding:0}
+  .Catui_nest{padding-left:0}
+  .Catui_user{justify-content:center;padding:0}
+}
+@media (max-width:767px){
+  .Catui_topbar{flex-wrap:wrap;height:auto;min-height:var(--Catui_topbar-h);padding-block:var(--Catui_space-2)}
+  .Catui_topbar-search{order:3;flex-basis:100%;max-width:none}
+}

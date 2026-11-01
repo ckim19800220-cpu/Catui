@@ -1,0 +1,58 @@
+<section aria-labelledby="basic">
+<h2 id="basic">기본 메뉴</h2>
+<catui-example title="아이콘 · 구분선 · 위험 항목">
+  <details class="Catui_dd" open>
+    <summary class="Catui_btn Catui_btn-md Catui_btn-secondary">작업 <svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></summary>
+    <div class="Catui_dd-menu">
+      <button class="Catui_dd-item" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-pen-line"></use></svg>수정</button>
+      <button class="Catui_dd-item" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-files"></use></svg>복제</button>
+      <div class="Catui_dd-sep"></div>
+      <button class="Catui_dd-item Catui_dd-danger" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-trash-2"></use></svg>삭제</button>
+    </div>
+  </details>
+</catui-example>
+</section>
+
+<section aria-labelledby="group">
+<h2 id="group">그룹 · 비활성 · 너비</h2>
+<catui-example title="그룹 라벨과 비활성 항목 (dd-lg)">
+  <details class="Catui_dd" open>
+    <summary class="Catui_btn Catui_btn-md Catui_btn-ghost">보기</summary>
+    <div class="Catui_dd-menu Catui_dd-lg">
+      <p class="Catui_dd-group">정렬</p>
+      <button class="Catui_dd-item" type="button">최신순</button>
+      <button class="Catui_dd-item" type="button">금액순</button>
+      <p class="Catui_dd-group">내보내기</p>
+      <button class="Catui_dd-item" type="button">CSV</button>
+      <button class="Catui_dd-item" type="button" disabled>PDF (준비 중)</button>
+    </div>
+  </details>
+</catui-example>
+</section>
+
+<section aria-labelledby="float">
+<h2 id="float">떠 있는 메뉴 (dd-float)</h2>
+<catui-example title="dropdown.render()가 만드는 메뉴 (정적 표시)">
+  <div class="Catui_dd-menu Catui_dd-float" role="menu" aria-label="작업" style="position:static">
+    <p class="Catui_dd-group">편집</p>
+    <button class="Catui_dd-item" type="button" role="menuitem"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-pen-line"></use></svg>수정</button>
+    <div class="Catui_dd-sep" role="separator"></div>
+    <button class="Catui_dd-item Catui_dd-danger" type="button" role="menuitem"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-trash-2"></use></svg>삭제</button>
+  </div>
+</catui-example>
+<p><code>.Catui_dd-float</code>는 <a href="doc:js/modules/dropdown">dropdown.render()</a>·<a href="doc:js/modules/datepicker">datePicker</a>가 <code>body &gt; .Catui_layer</code>에 붙이는 화면 고정(<code>position:fixed</code>, z-index 60) 메뉴입니다. 위치는 스크립트가 버튼 아래(공간이 없으면 위)로 계산합니다. 예제는 모양만 보이려고 <code>position:static</code>으로 두었습니다.</p>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>details.Catui_dd</code> &gt; <code>summary</code>(버튼) + <code>.Catui_dd-menu</code> &gt; <code>.Catui_dd-item</code>. 구분선 <code>.Catui_dd-sep</code>, 그룹 라벨 <code>.Catui_dd-group</code>, 너비 <code>.Catui_dd-sm/lg</code>. 메뉴는 흐름 안에 있으므로 겹쳐 띄우려면 감싼 요소에 위치를 주거나 <a href="doc:js/modules/dropdown">catui.js dropdown</a>을 씁니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li>summary 안에 버튼·링크를 넣지 않습니다.</li>
+  <li>catui.js가 있으면 바깥 클릭·Esc로 닫히고 summary로 포커스가 돌아갑니다. 키보드 메뉴(↑↓)가 필요하면 <code>dropdown.render</code>.</li>
+  <li>위험 항목은 구분선 아래 맨 끝, 비활성 항목은 <code>disabled</code>와 이유를 글자로.</li>
+</ul>
+</section>

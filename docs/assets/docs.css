@@ -1,0 +1,103 @@
+/* 문서 사이트 전용 레이아웃 (라이브러리 catui.css에는 들어가지 않음). 값은 Catui 토큰만 쓴다. */
+.doc-top{position:sticky;top:0;z-index:30}
+.doc-top-inner{width:100%;padding-inline:var(--Catui_content-pad);display:flex;align-items:center;gap:var(--Catui_space-6)}
+.doc-brand{display:inline-flex;align-items:center;flex:none}
+.doc-brand:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px;border-radius:var(--Catui_radius-xs)}
+.doc-logo{display:block;height:28px;width:auto}
+:root[data-catui-theme="dark"] .doc-logo{filter:invert(1) brightness(1.1)}
+.doc-tabs{display:flex;gap:var(--Catui_space-1);height:100%}
+.doc-tabs a{display:inline-flex;align-items:center;height:var(--Catui_topbar-h);padding:0 var(--Catui_space-3);color:var(--Catui_color-text-secondary);font-weight:600;border-bottom:2px solid transparent}
+.doc-tabs a[aria-current="page"]{color:var(--Catui_color-brand-strong);border-bottom-color:var(--Catui_color-brand-strong)}
+.doc-theme[aria-pressed="true"]{color:var(--Catui_color-brand-strong);background:var(--Catui_color-brand-soft)}
+/* 라이트에서는 달(다크로 바꾸기), 다크에서는 해(라이트로 바꾸기) */
+.doc-theme .doc-theme-sun,.doc-theme[aria-pressed="true"] .doc-theme-moon{display:none}
+.doc-theme[aria-pressed="true"] .doc-theme-sun{display:block}
+.doc-version{margin-left:auto;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+
+/* 본문은 화면 전체 너비를 쓴다 (사이드바 · 본문 · 목차) */
+.doc-shell{display:grid;grid-template-columns:240px minmax(0,1fr) 200px;gap:var(--Catui_space-8);width:100%;padding:var(--Catui_space-6) var(--Catui_content-pad) var(--Catui_space-10)}
+.doc-shell-home{grid-template-columns:minmax(0,1fr)}
+.doc-main{min-width:0;outline:none}
+.doc-main > section{margin-top:var(--Catui_space-8)}
+.doc-main > section > h2{font-size:var(--Catui_type-h2-size);font-weight:var(--Catui_type-h2-weight);line-height:var(--Catui_type-h2-lh);margin-bottom:var(--Catui_space-3);scroll-margin-top:calc(var(--Catui_topbar-h) + var(--Catui_space-4))}
+.doc-main > section > h3{font-size:var(--Catui_type-h3-size);font-weight:var(--Catui_type-h3-weight);margin:var(--Catui_space-5) 0 var(--Catui_space-2)}
+.doc-main > section > p,.doc-main > section > ul:not([class]),.doc-main > section > ol{margin-bottom:var(--Catui_space-3);color:var(--Catui_color-text-secondary)}
+.doc-main .Catui_lead{max-width:none}
+.doc-main > section > ul:not([class]),.doc-main > section > ol{padding-left:var(--Catui_space-5);list-style:disc}
+.doc-main :not(pre) > code:not(.doc-example-preview code){font-family:var(--Catui_font-mono);font-size:.92em;background:var(--Catui_prose-code-bg);color:var(--Catui_prose-code-fg);border-radius:var(--Catui_radius-xs);padding:1px 4px}
+.doc-main > section > pre,.doc-example-code pre{margin:0;padding:var(--Catui_space-4);overflow:auto;background:var(--Catui_color-code-bg);color:var(--Catui_color-code-text);border-radius:var(--Catui_radius-md);font-family:var(--Catui_font-mono);font-size:var(--Catui_type-caption-size);line-height:1.6;tab-size:2}
+.doc-main > section > pre{margin-bottom:var(--Catui_space-4)}
+.doc-eyebrow{font-size:var(--Catui_type-label-size);font-weight:600;letter-spacing:var(--Catui_type-label-ls);text-transform:uppercase;color:var(--Catui_color-text-secondary);margin-bottom:var(--Catui_space-2)}
+.doc-main > .Catui_h1{margin-bottom:var(--Catui_space-2)}
+.doc-main > .Catui_lead{margin-bottom:var(--Catui_space-4)}
+.doc-rules{display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-4);background:var(--Catui_color-surface-muted);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md)}
+.doc-rules li{display:flex;align-items:center;gap:var(--Catui_space-2);font-size:var(--Catui_type-caption-size)}
+
+/* 사이드바 */
+.doc-side{position:sticky;top:calc(var(--Catui_topbar-h) + var(--Catui_space-6));align-self:start;max-height:calc(100vh - var(--Catui_topbar-h) - var(--Catui_space-8));overflow:auto}
+.doc-side > summary{display:none}
+.doc-side-group{margin-bottom:var(--Catui_space-5)}
+.doc-side-title{font-size:var(--Catui_type-label-size);font-weight:600;letter-spacing:var(--Catui_type-label-ls);text-transform:uppercase;color:var(--Catui_color-text-secondary);margin-bottom:var(--Catui_space-2)}
+.doc-side a,.doc-toc a{display:block;padding:var(--Catui_space-1) var(--Catui_space-3);border-radius:var(--Catui_radius-xs);color:var(--Catui_color-text-secondary);border-left:2px solid transparent}
+.doc-side a:hover,.doc-toc a:hover{color:var(--Catui_color-text-primary);background:var(--Catui_color-brand-ghost)}
+.doc-side a[aria-current="page"]{color:var(--Catui_color-brand-strong);background:var(--Catui_color-brand-soft);font-weight:600}
+.doc-toc{position:sticky;top:calc(var(--Catui_topbar-h) + var(--Catui_space-6));align-self:start;font-size:var(--Catui_type-caption-size)}
+.doc-toc a.is-active{color:var(--Catui_color-brand-strong);border-left-color:var(--Catui_color-brand-strong)}
+.doc-side a:focus-visible,.doc-toc a:focus-visible,.doc-tabs a:focus-visible,.doc-pager a:focus-visible,.doc-copy:focus-visible,.doc-example-code > summary:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+
+/* 예제 블록 */
+.doc-example{margin:0 0 var(--Catui_space-5);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);background:var(--Catui_card-bg);overflow:hidden}
+.doc-example-title{padding:var(--Catui_space-2) var(--Catui_space-4);font-size:var(--Catui_type-caption-size);font-weight:600;color:var(--Catui_color-text-secondary);border-bottom:1px solid var(--Catui_divider-color)}
+.doc-example-preview{padding:var(--Catui_space-5);display:grid;gap:var(--Catui_space-3);background:var(--Catui_color-page-bg)}
+/* 미리보기 바로 아래 버튼·드롭다운은 그리드에 늘어나지 않고 원래 크기 (전폭은 Catui_btn-block) */
+.doc-example-preview > :is(.Catui_btn:not(.Catui_btn-block),details.Catui_dd){justify-self:start}
+/* 미리보기는 화면보다 좁으므로, 화면 폭 기준인 메가 패널을 미리보기 폭에 맞춘다(라이브러리 동작은 그대로) */
+.doc-example-preview .Catui_mega{display:block}
+.doc-example-preview .Catui_mega-panel{width:auto;max-width:var(--Catui_mega-w)}
+.doc-example-code{border-top:1px solid var(--Catui_divider-color);position:relative}
+.doc-example-code > summary{padding:var(--Catui_space-2) var(--Catui_space-4);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);cursor:pointer}
+.doc-example-code pre{border-radius:0}
+.doc-copy{position:absolute;right:var(--Catui_space-3);top:var(--Catui_space-1);height:var(--Catui_control-h-sm);padding:0 var(--Catui_space-3);border:1px solid var(--Catui_btn-secondary-border);border-radius:var(--Catui_btn-radius);background:var(--Catui_card-bg);font-size:var(--Catui_type-caption-size);cursor:pointer}
+.doc-example-code:not([open]) .doc-copy{display:none}
+
+/* 표·목록 */
+.doc-table-wrap{overflow-x:auto;margin-bottom:var(--Catui_space-4);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md)}
+.doc-swatch{display:inline-block;width:28px;height:18px;border-radius:var(--Catui_radius-xs);border:1px solid var(--Catui_card-border);vertical-align:middle}
+.doc-classes{display:grid;gap:var(--Catui_space-3)}
+.doc-classes li{display:flex;flex-wrap:wrap;gap:var(--Catui_space-1) var(--Catui_space-2);align-items:center}
+.doc-src{width:100%;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.doc-icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--Catui_space-2)}
+.doc-icons li{display:flex;align-items:center;gap:var(--Catui_space-2);padding:var(--Catui_space-2);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-sm);background:var(--Catui_card-bg);font-size:var(--Catui_type-caption-size)}
+.doc-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--Catui_grid-gap);margin-bottom:var(--Catui_space-6)}
+.doc-cards a{display:block;padding:var(--Catui_space-5);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);background:var(--Catui_card-bg)}
+.doc-cards a:hover{border-color:var(--Catui_btn-secondary-border-hover)}
+.doc-cards b{display:block;margin-bottom:var(--Catui_space-1)}
+.doc-cards span{color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size)}
+
+/* 이전·다음 */
+.doc-pager{display:flex;justify-content:space-between;gap:var(--Catui_space-4);margin-top:var(--Catui_space-9);padding-top:var(--Catui_space-5);border-top:1px solid var(--Catui_divider-color)}
+.doc-pager a{display:grid;gap:2px;padding:var(--Catui_space-3) var(--Catui_space-4);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);font-weight:600;min-width:180px}
+.doc-pager a span{font-size:var(--Catui_type-caption-size);font-weight:400;color:var(--Catui_color-text-secondary)}
+.doc-pager-next{text-align:right;margin-left:auto}
+
+@media (max-width:1199px){
+  .doc-shell{grid-template-columns:220px minmax(0,1fr)}
+  .doc-toc{display:none}
+}
+@media (max-width:991px){
+  .doc-shell{grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-4)}
+  .doc-side{position:static;max-height:none;border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);background:var(--Catui_card-bg)}
+  .doc-side > summary{display:flex;align-items:center;height:var(--Catui_control-h-lg);padding:0 var(--Catui_space-4);font-weight:600;cursor:pointer}
+  .doc-side > nav{padding:0 var(--Catui_space-4) var(--Catui_space-2)}
+  .doc-version{display:none}
+}
+@media (max-width:767px){
+  .doc-top-inner{gap:var(--Catui_space-3)}
+  .doc-pager{flex-direction:column}
+}
+/* 문서 본문 링크: 예제(미리보기) 밖 문단·목록·표의 클래스 없는 링크를 Catui_link와 같은 모양으로 */
+.doc-main :is(section > p, section > ul, section > ol, .doc-table-wrap, .doc-lead) a:not([class]){color:var(--Catui_color-brand-strong);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.doc-main :is(section > p, section > ul, section > ol, .doc-table-wrap, .doc-lead) a:not([class]):hover{color:var(--Catui_color-brand-stronger);text-decoration-thickness:2px}
+.doc-main :is(section > p, section > ul, section > ol, .doc-table-wrap) a:not([class]):focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px;border-radius:var(--Catui_radius-xs)}
+.doc-icons-search{display:grid;gap:var(--Catui_space-2);max-width:420px;margin-bottom:var(--Catui_space-3)}
+.doc-icons li[hidden]{display:none}

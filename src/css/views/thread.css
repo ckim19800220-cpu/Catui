@@ -1,0 +1,12 @@
+/* views/thread.css */
+.Catui_thread{display:grid;gap:var(--Catui_thread-gap)}
+.Catui_thread-item{display:flex;gap:var(--Catui_space-3);align-items:flex-start}
+.Catui_thread-item > .Catui_av{width:var(--Catui_thread-avatar);height:var(--Catui_thread-avatar);flex:none}
+.Catui_thread-main{flex:1;min-width:0}
+.Catui_thread-kids{margin-left:var(--Catui_thread-indent);border-left:var(--Catui_thread-depth-guide-w) solid var(--Catui_thread-depth-guide);padding-left:var(--Catui_space-3);margin-top:var(--Catui_thread-gap);display:grid;gap:var(--Catui_thread-gap)}
+.Catui_thread-name{font-size:var(--Catui_thread-body-fs);font-weight:600}
+.Catui_thread-time{font-size:var(--Catui_thread-meta-fs);color:var(--Catui_color-text-secondary);margin-left:var(--Catui_space-2)}
+.Catui_thread-body{margin-top:2px;color:var(--Catui_color-text-secondary)}
+.Catui_reacts{display:flex;gap:var(--Catui_thread-reaction-gap);margin-top:var(--Catui_space-2)}
+.Catui_react{height:var(--Catui_thread-reaction-h);padding:0 var(--Catui_thread-reaction-px);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-pill);background:var(--Catui_card-bg);display:inline-flex;align-items:center;gap:var(--Catui_space-1);font-size:var(--Catui_thread-meta-fs);line-height:1;color:var(--Catui_color-text-secondary)}
+.Catui_react-on{border-color:var(--Catui_btn-primary-bg);background:var(--Catui_badge-success-bg);color:var(--Catui_badge-success-fg)}

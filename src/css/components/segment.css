@@ -1,0 +1,8 @@
+/* components/segment.css */
+.Catui_segment{display:inline-flex;background:var(--Catui_segment-bg);border-radius:var(--Catui_segment-radius);padding:2px;gap:2px}
+.Catui_segment label{
+  height:var(--Catui_segment-h);padding:0 var(--Catui_segment-px);border-radius:var(--Catui_segment-radius);
+  display:inline-flex;align-items:center;font-size:var(--Catui_segment-font);line-height:1;color:var(--Catui_segment-fg);cursor:pointer;
+}
+.Catui_segment input:checked + label{background:var(--Catui_segment-active-bg);color:var(--Catui_segment-active-fg);box-shadow:var(--Catui_shadow-xs)}
+.Catui_segment input:focus-visible + label{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
