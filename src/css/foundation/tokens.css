@@ -145,9 +145,9 @@
 
   --Catui_overlay-scrim:color-mix(in srgb, var(--Catui_color-navy-900) 48%, transparent);
   --Catui_modal-w-sm:400px; --Catui_modal-w-md:560px; --Catui_modal-w-lg:720px;
-  --Catui_modal-pad:var(--Catui_space-6); --Catui_modal-gap:var(--Catui_space-3); --Catui_modal-radius:var(--Catui_radius-lg);
+  --Catui_modal-pad:var(--Catui_space-5); --Catui_modal-gap:var(--Catui_space-3); --Catui_modal-radius:var(--Catui_radius-lg);
   --Catui_modal-bg:var(--Catui_color-surface); --Catui_modal-border:var(--Catui_color-border); --Catui_modal-shadow:var(--Catui_shadow-lg);
-  --Catui_modal-header-h:56px; --Catui_modal-footer-h:64px; --Catui_modal-footer-bg:var(--Catui_color-surface-muted);
+  --Catui_modal-header-h:48px; --Catui_modal-footer-h:56px; --Catui_modal-footer-bg:var(--Catui_color-surface-muted);
   --Catui_modal-title-font:15px; --Catui_modal-title-weight:600; --Catui_modal-close:24px;
   --Catui_drawer-w:320px; --Catui_drawer-radius:0; --Catui_drawer-shadow:var(--Catui_shadow-lg);
   --Catui_dropdown-w-sm:160px; --Catui_dropdown-w-md:220px; --Catui_dropdown-w-lg:280px;

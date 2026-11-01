@@ -115,7 +115,7 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
       .replace(/\{\{sidebar\}\}/g, home ? "" : `<details class="doc-side" open><summary>${esc(page.section.title)} 메뉴</summary><nav aria-label="${esc(page.section.title)} 문서">${sidebar(page)}</nav></details>`)
       .replace(/\{\{content\}\}/g, home ? bodyHtml : `${head(page)}\n${bodyHtml}\n${classTable(page)}\n${pager}`)
       .replace(/\{\{toc\}\}/g, toc && !home ? `<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul>${toc}${page.css?.length ? '<li><a href="#classes">클래스</a></li>' : ""}</ul></aside>` : "")
-      .replace(/\{\{scripts\}\}/g, (home ? false : page.section.id === "js" || page.js) ? `<script src="${distRel(page.path)}/catui.js"></script>` : "")
+      .replace(/\{\{scripts\}\}/g, (home || page.section.id === "js" || page.js) ? `<script src="${distRel(page.path)}/catui.js"></script>` : "")
       .replace(/\{\{dist\}\}/g, distRel(page.path));
     return out;
   }
@@ -137,7 +137,17 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
   }
   const homeSrc = path.join(P.docsSrc, "index.html");
   const homePage = { path: "index", title: "Catui 문서", desc: nav.desc, section: nav.sections[0], group: { title: "" } };
-  outputs.push(["index", render(homePage, transform(read(homeSrc), homePage), { home: true })]);
+  // 홈 수치·분류 카드는 빌드 결과에서 자동 계산 (하드코딩 금지)
+  const tokenCount = (read(path.join(P.css, "foundation/tokens.css")).match(/^\s*--Catui_[\w-]+\s*:|;\s*--Catui_[\w-]+\s*:/gm) || []).length;
+  const allPages = nav.sections.flatMap((s) => s.groups.flatMap((g) => g.pages));
+  const jsMods = (nav.sections.find((s) => s.id === "js")?.groups.find((g) => g.title === "모듈")?.pages || []).length;
+  const stats = { pages: allPages.length + 1, classes: css.defined.size, files: Object.keys(css.byFile || {}).length, icons: icons.names.length, tokens: tokenCount, modules: jsMods };
+  const groupCards = nav.sections.map((s) => s.groups.map((g) => {
+    const first = g.pages[0];
+    return `<a class="doc-hcat" href="doc:${first.path}"><span class="doc-hcat-k">${esc(s.title)}</span><b>${esc(g.title)}</b><span class="doc-hcat-n">${g.pages.length}쪽</span><span class="doc-hcat-d">${g.pages.slice(0, 4).map((p) => esc(p.title)).join(" · ")}${g.pages.length > 4 ? " …" : ""}</span></a>`;
+  }).join("")).join("");
+  let homeHtml = read(homeSrc).replace(/\{\{stat:(\w+)\}\}/g, (m, k) => (stats[k] != null ? stats[k].toLocaleString("ko-KR") : m)).replace("{{home-groups}}", groupCards);
+  outputs.push(["index", render(homePage, transform(homeHtml, homePage), { home: true })]);
 
   // 출력 검사: 클래스 정의, id 중복, label for, 로컬 링크, 아이콘 심볼
   const iconSet = new Set(icons.names);

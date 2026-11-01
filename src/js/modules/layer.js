@@ -180,7 +180,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
     dlg.showModal();
     if (size === "full") setMax(false);
     // 첫 포커스: Tab으로 갈 수 있는 요소만 (탭 목록의 비선택 탭처럼 tabindex="-1"인 것은 제외)
-    const reach = `:is(${FOCUSABLE}):not([tabindex="-1"])`;
+    const reach = `:is(${FOCUSABLE}):not([tabindex="-1"]):not([readonly])`;
     const first = dlg.querySelector(`[data-catui-layer="body"] ${reach}`) || dlg.querySelector('[data-catui-btn="0"]') || dlg.querySelector(reach);
     first?.focus();
     if (o.time > 0) timer = setTimeout(() => close("time"), o.time);
@@ -341,7 +341,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
     const wrap = document.createElement("div");
     const list = document.createElement("div");
     const vertical = !!options.vertical;
-    list.className = vertical ? "Catui_layer-tabs Catui_layer-tabs-v" : "Catui_layer-tabs";
+    list.className = vertical ? "Catui_layer-tabs Catui_layer-tabs-v" : options.card ? "Catui_layer-tabs Catui_layer-tabs-card" : "Catui_layer-tabs";
     list.setAttribute("role", "tablist"); list.setAttribute("aria-label", options.title || "탭");
     if (vertical) { list.setAttribute("aria-orientation", "vertical"); wrap.className = "Catui_layer-vtabs"; }
     wrap.appendChild(list);
@@ -370,6 +370,174 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
     });
     sel(options.start || 0);
     return open({ area: "lg", ...options, content: wrap, kind: "tab" });
+  }
+
+  // 양식 대화상자: fields로 입력 칸을 만들고 검사한 뒤 값 객체를 돌려줌(Promise, 취소는 null).
+  //   submit(values, index)가 false를 돌려주거나 오류를 던지면 열린 채 유지(저장 중에는 버튼이 바쁨 상태)
+  //   type: text·email·password·number·tel·url·date·time·textarea·select·radio·checkbox(options 있으면 여러 개)·switch
+  //   field: { name, label, type, required, placeholder, value, options, help, min, max, minlength, maxlength, pattern, autocomplete, cols(1~12), rows, validate(v, values) → 오류 문구, messages }
+  // 내용을 바꾸지 않고 뒤에 덧붙임 (mount는 교체)
+  const append = (node, markup) => { if (isRaw(markup)) node.insertAdjacentHTML("beforeend", markup.__raw); else node.append(String(markup ?? "")); return node; };
+  const FORM_MSG = { valueMissing: "필수 항목입니다.", typeMismatch: "형식이 올바르지 않습니다.", patternMismatch: "형식이 올바르지 않습니다.", tooShort: "너무 짧습니다.", tooLong: "너무 깁니다.", rangeUnderflow: "값이 너무 작습니다.", rangeOverflow: "값이 너무 큽니다.", badInput: "숫자를 입력해 주세요." };
+  function form(options = {}) {
+    return new Promise((resolve) => {
+      const fid = `catui-form-${seq + 1}`, fields = options.fields || [];
+      const opts = (fl) => (fl.options || []).map((o) => (typeof o === "object" ? o : { value: o, label: o }));
+      const kindOf = (fl) => {
+        const t = fl.type || "text";
+        return t === "radio" || (t === "checkbox" && fl.options) ? "group" : t === "checkbox" || t === "switch" ? "single" : t;
+      };
+      const reqMark = () => html` <span class="Catui_req" aria-hidden="true">*</span>`;
+      const control = (fl, id) => {
+        const t = fl.type || "text", k = kindOf(fl), req = !!fl.required;
+        const a = (el) => {
+          const attrs = { id, name: fl.name, placeholder: fl.placeholder, min: fl.min, max: fl.max, minlength: fl.minlength, maxlength: fl.maxlength, pattern: fl.pattern, autocomplete: fl.autocomplete };
+          Object.entries(attrs).forEach(([n, v]) => { if (v != null && v !== "") el.setAttribute(n, v); });
+          if (req) el.required = true;
+          if (fl.readonly) el.readOnly = true;
+          if (fl.disabled) el.disabled = true;
+          return el;
+        };
+        if (t === "textarea") { const x = a(document.createElement("textarea")); x.className = "Catui_input"; x.rows = fl.rows || 4; x.value = fl.value ?? ""; return x; }
+        if (t === "select") {
+          const w = document.createElement("div"); w.className = "Catui_select-wrap";
+          const x = a(document.createElement("select")); x.className = "Catui_input Catui_select";
+          if (fl.placeholder) x.add(new Option(fl.placeholder, ""));
+          opts(fl).forEach((o) => x.add(new Option(o.label, o.value)));
+          x.value = fl.value != null ? String(fl.value) : "";
+          w.appendChild(x); append(w, icon("chevron-down", 16)); return w;
+        }
+        if (k === "group") {
+          const fs = document.createElement("fieldset"); fs.className = "Catui_choices";
+          const lg = document.createElement("legend"); lg.className = "Catui_label"; lg.textContent = fl.label;
+          if (req) append(lg, reqMark());
+          fs.appendChild(lg);
+          const val = [].concat(fl.value ?? []).map(String);
+          opts(fl).forEach((o, n) => {
+            const iid = `${id}-${n}`;
+            append(fs, html`<span class="Catui_choice"><input class="Catui_clip" type="${t}" id="${iid}" name="${fl.name}" value="${o.value}"><label class="${t === "radio" ? "Catui_radio" : "Catui_cbx"}" for="${iid}">${t === "radio" ? "" : icon("check", 12)}</label><label for="${iid}">${o.label}</label></span>`);
+            fs.querySelector(`#${iid}`).checked = val.includes(String(o.value));
+          });
+          return fs;
+        }
+        if (k === "single") {
+          const w = document.createElement("span"); w.className = "Catui_choice";
+          append(w, html`<input class="Catui_clip" type="checkbox" id="${id}" name="${fl.name}"><label class="${t === "switch" ? "Catui_tgl" : "Catui_cbx"}" for="${id}">${t === "switch" ? "" : icon("check", 12)}</label><label for="${id}">${fl.label}</label>`);
+          const x = w.querySelector("input"); x.checked = !!fl.value; x.required = req;
+          if (t === "switch") x.setAttribute("role", "switch");
+          if (req) append(w.lastElementChild, reqMark());
+          return w;
+        }
+        const x = a(document.createElement("input")); x.className = "Catui_input"; x.type = t; if (fl.value != null) x.value = fl.value; return x;
+      };
+
+      const horizontal = options.layout === "horizontal";
+      const el = document.createElement("form");
+      el.className = horizontal ? "Catui_layer-form Catui_layer-form-h" : "Catui_layer-form"; el.noValidate = true; el.id = fid;
+      if (options.labelWidth) el.style.setProperty("--Catui_form-label-w", typeof options.labelWidth === "number" ? `${options.labelWidth}px` : options.labelWidth);
+      const sum = document.createElement("div");
+      sum.className = "Catui_banner Catui_banner-danger"; sum.setAttribute("role", "alert"); sum.tabIndex = -1; sum.hidden = true;
+      el.appendChild(sum);
+      fields.forEach((fl, i) => {
+        const id = `${fid}-${fl.name || i}`, k = kindOf(fl);
+        const box = document.createElement("div");
+        box.className = "Catui_field"; box.style.setProperty("--Catui_span", String(Math.min(12, Math.max(1, fl.cols || 12)))); box.dataset.name = fl.name;
+        const top = fl.type === "textarea" ? " Catui_label-top" : "";
+        if (k !== "group" && k !== "single") append(box, html`<label class="Catui_label${top}" for="${id}">${fl.label}${fl.required ? reqMark() : ""}</label>`);
+        // 가로 배치의 묶음 칸: 보이는 라벨은 왼쪽 열에, legend는 화면 리더용으로
+        if (horizontal && k === "group") append(box, html`<span class="Catui_label Catui_label-top" aria-hidden="true">${fl.label}${fl.required ? reqMark() : ""}</span>`);
+        let ctl = control(fl, id);
+        if (horizontal && k === "group") ctl.querySelector("legend").className = "Catui_clip";
+        // 입력 옆 아이콘 버튼 (예: 비밀번호 새로 만들기). onClick(입력 요소, 현재 값들)
+        if (fl.addon && k !== "group" && k !== "single") {
+          const g = document.createElement("div"); g.className = "Catui_igroup";
+          g.appendChild(ctl);
+          append(g, html`<button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_btn-icon" type="button" aria-label="${fl.addon.label || "실행"}" title="${fl.addon.label || ""}">${icon(fl.addon.icon || "refresh-cw", 16)}</button>`);
+          const input = ctl.matches?.("input,select,textarea") ? ctl : ctl.querySelector("input,select,textarea");
+          g.lastElementChild.addEventListener("click", () => { fl.addon.onClick?.(input, read()); input.dispatchEvent(new Event("input", { bubbles: true })); });
+          ctl = g;
+        }
+        box.appendChild(ctl);
+        if (fl.help) append(box, html`<p class="Catui_help" id="${id}-h">${fl.help}</p>`);
+        append(box, html`<p class="Catui_error" id="${id}-e" hidden></p>`);
+        el.appendChild(box);
+      });
+
+      const read = () => Object.fromEntries(fields.filter((fl) => fl.name).map((fl) => {
+        const t = fl.type || "text", ins = [...el.querySelectorAll(`[name="${fl.name}"]`)];
+        if (t === "checkbox" && fl.options) return [fl.name, ins.filter((x) => x.checked).map((x) => x.value)];
+        if (t === "checkbox" || t === "switch") return [fl.name, !!ins[0]?.checked];
+        if (t === "radio") return [fl.name, ins.find((x) => x.checked)?.value ?? ""];
+        if (t === "number") return [fl.name, ins[0].value === "" ? null : Number(ins[0].value)];
+        return [fl.name, ins[0]?.value ?? ""];
+      }));
+      const check = () => {
+        const values = read(), bad = [];
+        fields.forEach((fl) => {
+          const box = el.querySelector(`[data-name="${fl.name}"]`);
+          if (!box) return;
+          const ins = [...box.querySelectorAll("input,select,textarea")], err = box.querySelector(".Catui_error"), k = kindOf(fl);
+          let m = "";
+          if (fl.required && k === "group" && !(fl.type === "radio" ? values[fl.name] : values[fl.name].length)) m = fl.type === "radio" ? "하나를 고르세요." : "하나 이상 고르세요.";
+          else if (k !== "group") {
+            const inv = ins.find((x) => !x.checkValidity());
+            if (inv) { const key = Object.keys(FORM_MSG).find((n) => inv.validity[n]); m = fl.messages?.[key] || FORM_MSG[key] || "값을 확인해 주세요."; }
+            // 브라우저는 스크립트·자동 완성으로 채운 값에는 tooShort를 표시하지 않으므로 길이는 직접 검사
+            const len = String(values[fl.name] ?? "").length;
+            if (!m && len && fl.minlength && len < fl.minlength) m = fl.messages?.tooShort || `${fl.minlength}자 이상 입력해 주세요.`;
+            if (!m && fl.maxlength && len > fl.maxlength) m = fl.messages?.tooLong || `${fl.maxlength}자 이하로 입력해 주세요.`;
+          }
+          if (!m && fl.validate) m = fl.validate(values[fl.name], values) || "";
+          err.textContent = m; err.hidden = !m;
+          ins.forEach((x) => x.setAttribute("aria-invalid", String(!!m)));
+          const target = k === "group" ? box.querySelector("fieldset") : ins[0];
+          const desc = [fl.help ? err.id.replace(/-e$/, "-h") : "", m ? err.id : ""].filter(Boolean).join(" ");
+          if (desc) target.setAttribute("aria-describedby", desc); else target.removeAttribute("aria-describedby");
+          if (m) bad.push({ label: fl.label, focus: k === "group" ? target.querySelector("input") : ins[0] });
+        });
+        sum.hidden = !bad.length;
+        sum.textContent = bad.length ? `입력을 확인해 주세요 (${bad.length}건): ${bad.map((b) => b.label).join(", ")}` : "";
+        bad[0]?.focus.focus();
+        return bad.length ? null : values;
+      };
+      // 처음 값이 있는 칸에서도 help만 설명으로 연결
+      fields.forEach((fl, i) => {
+        if (!fl.help) return;
+        const id = `${fid}-${fl.name || i}`, box = el.querySelector(`[data-name="${fl.name}"]`);
+        (kindOf(fl) === "group" ? box.querySelector("fieldset") : box.querySelector("input,select,textarea"))?.setAttribute("aria-describedby", `${id}-h`);
+      });
+
+      let settled = false;
+      const finish = (v) => { if (!settled) { settled = true; resolve(v); } };
+      const index = open({
+        title: options.title || "입력", area: options.area || "md", btn: [options.okText || "확인", options.cancelText || "취소"], ...options,
+        content: el, kind: "form",
+        end(i, reason) { finish(null); options.end?.(i, reason); },
+        yes() { el.requestSubmit(); return false; },
+      });
+      const ok = getNode(index).querySelector('[data-catui-btn="0"]');
+      // 제출 버튼이 폼 밖(꼬리)에 있으므로 한 줄 입력 칸의 Enter는 직접 제출
+      el.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.isComposing && e.target.matches("input:not([type=checkbox]):not([type=radio])")) { e.preventDefault(); el.requestSubmit(); }
+      });
+      el.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (ok.disabled) return;
+        const values = check();
+        if (!values) return;
+        if (options.submit) {
+          const label = ok.textContent;
+          ok.disabled = true; ok.setAttribute("aria-busy", "true");
+          ok.textContent = ""; mount(ok, html`<span class="Catui_spin" aria-hidden="true"></span>${label}`);
+          let r;
+          try { r = await options.submit(values, index); }
+          catch (err) { r = false; sum.hidden = false; sum.textContent = err?.message || "저장하지 못했습니다. 다시 시도해 주세요."; sum.focus(); }
+          ok.disabled = false; ok.removeAttribute("aria-busy"); ok.textContent = label;
+          if (r === false) return;
+        }
+        finish(values); close(index);
+      });
+    });
   }
 
   // Promise로 받기
@@ -404,5 +572,5 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
   // 열린 레이어 목록 (type 별)
   const list = (type) => [...opened.entries()].filter(([, v]) => !type || v.type === type).map(([i, v]) => ({ index: i, type: v.type, node: v.node }));
 
-  return { msg, open, alert, confirm, prompt, load, progress, tips, photos, tab, ask, input, close, closeAll, closeLast, title, getNode, setContent, style, full, restore, list, get count() { return opened.size; } };
+  return { msg, open, alert, confirm, prompt, load, progress, tips, photos, tab, form, ask, input, close, closeAll, closeLast, title, getNode, setContent, style, full, restore, list, get count() { return opened.size; } };
 })();

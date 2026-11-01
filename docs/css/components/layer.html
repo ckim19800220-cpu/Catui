@@ -117,6 +117,80 @@
 </figure>
 </section>
 
+<section aria-labelledby="vtabs">
+<h2 id="vtabs">세로 탭 대화상자</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">Catui_layer-vtabs · layer-tabs-v · layer-vtabs-panels (767px 이하 가로 탭)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_modal" role="dialog" aria-label="세로 탭 예시" style="display:flex;position:static;transform:none;width:100%">
+    <header class="Catui_modal-h"><span>설정</span></header>
+    <div class="Catui_modal-b">
+      <div class="Catui_layer-vtabs">
+        <div class="Catui_layer-tabs Catui_layer-tabs-v" role="tablist" aria-orientation="vertical" aria-label="설정"><button type="button" role="tab" aria-selected="false" tabindex="-1">일반</button><button type="button" role="tab" aria-selected="true">알림</button><button type="button" role="tab" aria-selected="false" tabindex="-1">보안</button><button type="button" role="tab" aria-selected="false" tabindex="-1">결제</button></div>
+        <div class="Catui_layer-vtabs-panels"><div role="tabpanel"><p class="Catui_h3">알림</p><p class="Catui_help">받을 알림을 고릅니다.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="Catui_layer-vtabs · layer-tabs-v · layer-vtabs-panels (767px 이하 가로 탭) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_modal&quot; role=&quot;dialog&quot; aria-label=&quot;세로 탭 예시&quot; style=&quot;display:flex;position:static;transform:none;width:100%&quot;&gt;
+  &lt;header class=&quot;Catui_modal-h&quot;&gt;&lt;span&gt;설정&lt;/span&gt;&lt;/header&gt;
+  &lt;div class=&quot;Catui_modal-b&quot;&gt;
+    &lt;div class=&quot;Catui_layer-vtabs&quot;&gt;
+      &lt;div class=&quot;Catui_layer-tabs Catui_layer-tabs-v&quot; role=&quot;tablist&quot; aria-orientation=&quot;vertical&quot; aria-label=&quot;설정&quot;&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot; tabindex=&quot;-1&quot;&gt;일반&lt;/button&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;알림&lt;/button&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot; tabindex=&quot;-1&quot;&gt;보안&lt;/button&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot; tabindex=&quot;-1&quot;&gt;결제&lt;/button&gt;&lt;/div&gt;
+      &lt;div class=&quot;Catui_layer-vtabs-panels&quot;&gt;&lt;div role=&quot;tabpanel&quot;&gt;&lt;p class=&quot;Catui_h3&quot;&gt;알림&lt;/p&gt;&lt;p class=&quot;Catui_help&quot;&gt;받을 알림을 고릅니다.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="lform">
+<h2 id="lform">양식 대화상자 배치</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">Catui_layer-form (대화상자 안 12열, 칸마다 --Catui_span, 767px 이하·드로어는 1열)</figcaption>
+<div class="doc-example-preview">
+  <form class="Catui_layer-form" aria-label="배치 예시" onsubmit="return false">
+    <div class="Catui_field" style="--Catui_span:6"><label class="Catui_label" for="lfx-a">이름</label><input class="Catui_input" id="lfx-a"></div>
+    <div class="Catui_field" style="--Catui_span:6"><label class="Catui_label" for="lfx-b">휴대폰</label><input class="Catui_input" id="lfx-b" type="tel"></div>
+    <div class="Catui_field" style="--Catui_span:4"><label class="Catui_label" for="lfx-c">우편번호</label><input class="Catui_input" id="lfx-c"></div>
+    <div class="Catui_field" style="--Catui_span:8"><label class="Catui_label" for="lfx-d">주소</label><input class="Catui_input" id="lfx-d"></div>
+  </form>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="Catui_layer-form (대화상자 안 12열, 칸마다 --Catui_span, 767px 이하·드로어는 1열) 코드 복사">복사</button><pre><code>&lt;form class=&quot;Catui_layer-form&quot; aria-label=&quot;배치 예시&quot; onsubmit=&quot;return false&quot;&gt;
+  &lt;div class=&quot;Catui_field&quot; style=&quot;--Catui_span:6&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;lfx-a&quot;&gt;이름&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;lfx-a&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot; style=&quot;--Catui_span:6&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;lfx-b&quot;&gt;휴대폰&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;lfx-b&quot; type=&quot;tel&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot; style=&quot;--Catui_span:4&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;lfx-c&quot;&gt;우편번호&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;lfx-c&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot; style=&quot;--Catui_span:8&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;lfx-d&quot;&gt;주소&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;lfx-d&quot;&gt;&lt;/div&gt;
+&lt;/form&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="hform">
+<h2 id="hform">가로 양식 · 카드형 탭</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">Catui_layer-form-h (라벨 왼쪽·오른쪽 정렬, label-top은 여러 줄 칸) · 입력 옆 아이콘 버튼</figcaption>
+<div class="doc-example-preview">
+  <form class="Catui_layer-form Catui_layer-form-h" aria-label="가로 양식 예시" onsubmit="return false" style="max-width:520px">
+    <div class="Catui_field"><label class="Catui_label" for="hf-a">사용자 이름</label><input class="Catui_input" id="hf-a" value="wardenmirr" readonly></div>
+    <div class="Catui_field"><label class="Catui_label" for="hf-b">비밀번호 <span class="Catui_req" aria-hidden="true">*</span></label><div class="Catui_igroup"><input class="Catui_input" id="hf-b" value="rA2G3Zjeees6DnDe"><button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_btn-icon" type="button" aria-label="새로 만들기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-refresh-cw"></use></svg></button></div></div>
+    <div class="Catui_field"><label class="Catui_label Catui_label-top" for="hf-c">메모</label><textarea class="Catui_input" id="hf-c" rows="3"></textarea></div>
+  </form>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="Catui_layer-form-h (라벨 왼쪽·오른쪽 정렬, label-top은 여러 줄 칸) · 입력 옆 아이콘 버튼 코드 복사">복사</button><pre><code>&lt;form class=&quot;Catui_layer-form Catui_layer-form-h&quot; aria-label=&quot;가로 양식 예시&quot; onsubmit=&quot;return false&quot; style=&quot;max-width:520px&quot;&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;hf-a&quot;&gt;사용자 이름&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;hf-a&quot; value=&quot;wardenmirr&quot; readonly&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;hf-b&quot;&gt;비밀번호 &lt;span class=&quot;Catui_req&quot; aria-hidden=&quot;true&quot;&gt;*&lt;/span&gt;&lt;/label&gt;&lt;div class=&quot;Catui_igroup&quot;&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;hf-b&quot; value=&quot;rA2G3Zjeees6DnDe&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary Catui_btn-icon&quot; type=&quot;button&quot; aria-label=&quot;새로 만들기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-refresh-cw&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label Catui_label-top&quot; for=&quot;hf-c&quot;&gt;메모&lt;/label&gt;&lt;textarea class=&quot;Catui_input&quot; id=&quot;hf-c&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;
+&lt;/form&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">Catui_layer-tabs-card (테두리 카드형 탭)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_layer-tabs Catui_layer-tabs-card" role="tablist" aria-label="백업"><button type="button" role="tab" aria-selected="true">일반 백업</button><button type="button" role="tab" aria-selected="false" tabindex="-1">증분 백업</button></div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="Catui_layer-tabs-card (테두리 카드형 탭) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_layer-tabs Catui_layer-tabs-card&quot; role=&quot;tablist&quot; aria-label=&quot;백업&quot;&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;true&quot;&gt;일반 백업&lt;/button&gt;&lt;button type=&quot;button&quot; role=&quot;tab&quot; aria-selected=&quot;false&quot; tabindex=&quot;-1&quot;&gt;증분 백업&lt;/button&gt;&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
 <section aria-labelledby="toast">
 <h2 id="toast">토스트 위치 · 동작 · 남은 시간</h2>
 <figure class="doc-example">
@@ -150,10 +224,10 @@
 </ul>
 </section>
 
-<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/layer.css</span><code>.Catui_modal-xl</code> <code>.Catui_modal-full</code> <code>.Catui_layer-max</code> <code>.Catui_modal-b</code> <code>.Catui_layer-tools</code> <code>.Catui_modal-h</code> <code>.Catui_layer-move</code> <code>.Catui_layer-resize</code> <code>.Catui_drawer</code> <code>.Catui_drawer-left</code> <code>.Catui_drawer-bottom</code> <code>.Catui_layer-tip</code> <code>.Catui_layer-photos</code> <code>.Catui_close</code> <code>.Catui_layer-photo</code> <code>.Catui_layer-nav</code> <code>.Catui_icon</code> <code>.Catui_layer-tabs</code> <code>.Catui_layer-frame</code> <code>.Catui_toasts-tr</code> <code>.Catui_toasts-tc</code> <code>.Catui_toasts-bc</code> <code>.Catui_toast</code> <code>.Catui_toast-action</code> <code>.Catui_toast-bar</code></li></ul></section>
+<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/layer.css</span><code>.Catui_modal-xl</code> <code>.Catui_modal-full</code> <code>.Catui_layer-max</code> <code>.Catui_modal-b</code> <code>.Catui_layer-tools</code> <code>.Catui_modal-h</code> <code>.Catui_layer-move</code> <code>.Catui_layer-resize</code> <code>.Catui_drawer</code> <code>.Catui_drawer-left</code> <code>.Catui_drawer-bottom</code> <code>.Catui_layer-tip</code> <code>.Catui_layer-photos</code> <code>.Catui_close</code> <code>.Catui_layer-photo</code> <code>.Catui_layer-nav</code> <code>.Catui_icon</code> <code>.Catui_layer-tabs</code> <code>.Catui_layer-vtabs</code> <code>.Catui_layer-tabs-v</code> <code>.Catui_layer-vtabs-panels</code> <code>.Catui_layer-tabs-card</code> <code>.Catui_layer-form-h</code> <code>.Catui_field</code> <code>.Catui_label</code> <code>.Catui_label-top</code> <code>.Catui_input</code> <code>.Catui_layer-frame</code> <code>.Catui_toasts-tr</code> <code>.Catui_toasts-tc</code> <code>.Catui_toasts-bc</code> <code>.Catui_toast</code> <code>.Catui_toast-action</code> <code>.Catui_toast-bar</code> <code>.Catui_layer-form</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/components/drawer.html"><span>이전</span>드로어</a><a class="doc-pager-next" href="../../css/components/dropdown.html"><span>다음</span>드롭다운</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#sizes">크기 · 머리 도구</a></li><li><a href="#special">말풍선 · 사진 · 탭 · iframe</a></li><li><a href="#toast">토스트 위치 · 동작 · 남은 시간</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#sizes">크기 · 머리 도구</a></li><li><a href="#special">말풍선 · 사진 · 탭 · iframe</a></li><li><a href="#vtabs">세로 탭 대화상자</a></li><li><a href="#lform">양식 대화상자 배치</a></li><li><a href="#hform">가로 양식 · 카드형 탭</a></li><li><a href="#toast">토스트 위치 · 동작 · 남은 시간</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 </div>
 <script src="../../assets/docs.js"></script>

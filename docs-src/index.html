@@ -1,30 +1,122 @@
-<section aria-labelledby="hero" class="doc-home">
-<p class="doc-eyebrow">Catui 문서</p>
-<h1 class="Catui_display">한국어 화면을 위한 UI 키트</h1>
-<p class="Catui_lead">CSS만으로 동작하는 컴포넌트 키트와, 스크립트 한 줄로 쓰는 의존성 없는 프레임워크 catui.js. 견본 명세의 토큰을 그대로 쓰고 접근성 기준(WCAG AA)을 지킵니다.</p>
-<div class="Catui_actions">
-  <a class="Catui_btn Catui_btn-lg Catui_btn-primary" href="doc:css/start/introduction">CSS 문서</a>
-  <a class="Catui_btn Catui_btn-lg Catui_btn-secondary" href="doc:js/start/introduction">catui.js 문서</a>
-</div>
+<section class="doc-hx" aria-labelledby="hx-title">
+  <div class="doc-hx-copy">
+    <p class="doc-hx-badges"><span class="doc-mono">v1.0.0</span><span class="doc-mono">의존성 0</span><span class="doc-mono">WCAG AA</span><span class="doc-mono">다크 모드</span></p>
+    <h1 class="doc-hx-title" id="hx-title">한국어 화면을 위한<br><span data-catui-fx="gradient">토큰 기반 UI 키트</span></h1>
+    <p class="doc-hx-lead">CSS만으로 동작하는 컴포넌트 {{stat:files}}개 파일과, 스크립트 한 줄로 쓰는 의존성 없는 프레임워크 <b>catui.js</b>. 견본 명세의 토큰을 그대로 쓰고, 모든 조합을 빌드가 검사합니다.</p>
+    <div class="Catui_actions doc-hx-cta">
+      <a class="Catui_btn Catui_btn-lg Catui_btn-primary" href="doc:css/start/introduction" data-catui-fx="magnet">시작하기<svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-arrow-right"></use></svg></a>
+      <a class="Catui_btn Catui_btn-lg Catui_btn-secondary" href="doc:js/start/introduction">catui.js 문서</a>
+    </div>
+    <div class="doc-install" role="group" aria-label="설치">
+      <div class="doc-install-tabs" role="tablist" aria-label="설치 방법">
+        <button type="button" role="tab" aria-selected="true" aria-controls="ins-a" id="ins-ta">CDN 태그</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="ins-b" id="ins-tb" tabindex="-1">ES 모듈</button>
+      </div>
+      <div class="doc-install-row" role="tabpanel" id="ins-a" aria-labelledby="ins-ta"><code id="ins-code-a">&lt;link rel=&quot;stylesheet&quot; href=&quot;dist/catui.min.css&quot;&gt;&lt;script src=&quot;dist/catui.js&quot;&gt;&lt;/script&gt;</code><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-copy-btn" type="button" data-copy="ins-code-a" aria-label="설치 코드 복사"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-copy"></use></svg></button></div>
+      <div class="doc-install-row" role="tabpanel" id="ins-b" aria-labelledby="ins-tb" hidden><code id="ins-code-b">import { layer, table } from './dist/catui.esm.js';</code><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-copy-btn" type="button" data-copy="ins-code-b" aria-label="ES 모듈 코드 복사"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-copy"></use></svg></button></div>
+    </div>
+  </div>
+
+  <div class="doc-hx-window" aria-label="Catui로 만든 화면 미리보기" role="img">
+    <div class="doc-win-bar" aria-hidden="true"><i></i><i></i><i></i><span>admin.catui.dev</span></div>
+    <div class="doc-win-body" aria-hidden="true">
+      <div class="Catui_hstack Catui_between"><b class="Catui_h3">오늘 주문</b><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>실시간</span></div>
+      <div class="doc-win-stats">
+        <div class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">매출</span><span class="Catui_stat-value"><span data-catui-fx="count" data-catui-to="5480">0</span>만</span><span class="Catui_delta-up">12%</span></div></div>
+        <div class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">주문</span><span class="Catui_stat-value"><span data-catui-fx="count" data-catui-to="1284">0</span></span><span class="Catui_delta-up">8%</span></div></div>
+      </div>
+      <svg class="Catui_chart doc-win-chart" viewBox="0 0 320 90" preserveAspectRatio="none"><path class="area" d="M0 70 L40 60 L80 64 L120 40 L160 46 L200 28 L240 34 L280 18 L320 22 V90 H0Z"/><path class="series" d="M0 70 L40 60 L80 64 L120 40 L160 46 L200 28 L240 34 L280 18 L320 22"/></svg>
+      <div class="Catui_hstack"><span class="Catui_btn Catui_btn-sm Catui_btn-primary">새 주문</span><span class="Catui_btn Catui_btn-sm Catui_btn-secondary">내보내기</span><span class="Catui_spacer"></span><span class="Catui_pill Catui_pill-neutral">3명 접속 중</span></div>
+    </div>
+  </div>
 </section>
 
-<section aria-labelledby="sections">
-<h2 id="sections">문서 분류</h2>
-<div class="doc-cards">
-  <a href="doc:css/start/introduction"><b>CSS · 시작</b><span>소개 · 설치 · 이름 규칙 · 접근성</span></a>
-  <a href="doc:css/foundation/color"><b>CSS · 기초</b><span>색상 · 타이포 · 간격 · 아이콘 · 유틸리티</span></a>
-  <a href="doc:css/components/button"><b>CSS · 컴포넌트</b><span>버튼·폼·표·모달 등 23종</span></a>
-  <a href="doc:css/views/tree"><b>CSS · 데이터 뷰·차트</b><span>트리·달력·간트·칸반·차트</span></a>
-  <a href="doc:js/start/concepts"><b>catui.js · 개념</b><span>use · 이벤트(필터) · 선언형 속성</span></a>
-  <a href="doc:js/modules/layer"><b>catui.js · 모듈</b><span>layer·form·table 등 13개</span></a>
-</div>
+<section class="doc-hstats" aria-labelledby="hs-title">
+  <h2 class="Catui_clip" id="hs-title">숫자로 보는 Catui</h2>
+  <dl>
+    <div><dt>CSS 클래스</dt><dd>{{stat:classes}}</dd></div>
+    <div><dt>디자인 토큰</dt><dd>{{stat:tokens}}</dd></div>
+    <div><dt>catui.js 모듈</dt><dd>{{stat:modules}}</dd></div>
+    <div><dt>아이콘</dt><dd>{{stat:icons}}</dd></div>
+    <div><dt>문서</dt><dd>{{stat:pages}}쪽</dd></div>
+  </dl>
 </section>
 
-<section aria-labelledby="quick">
-<h2 id="quick">빠른 시작</h2>
-<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
-&lt;script src="dist/catui.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-catui.use(['layer'], function (layer) { layer.msg('안녕하세요'); });
-&lt;/script&gt;</code></pre>
+<section class="doc-hsec" aria-labelledby="hf-title">
+  <p class="doc-hsec-k">FEATURES</p>
+  <h2 class="doc-hsec-t" id="hf-title">명세에서 화면까지, 한 벌의 규칙</h2>
+  <div class="doc-bento">
+    <article class="doc-bx doc-bx-wide" data-catui-fx="spotlight">
+      <p class="doc-bx-k">토큰</p><h3>견본 명세 1:1 미러</h3>
+      <p>색·간격·반경·그림자·타이포가 모두 <code>--Catui_*</code> 변수입니다. 컴포넌트는 토큰만 참조합니다.</p>
+      <div class="doc-swatches" aria-hidden="true"><i style="background:var(--Catui_color-brand)"></i><i style="background:var(--Catui_color-brand-strong)"></i><i style="background:var(--Catui_color-info)"></i><i style="background:var(--Catui_color-purple)"></i><i style="background:var(--Catui_color-amber)"></i><i style="background:var(--Catui_color-danger)"></i><i style="background:var(--Catui_color-navy-800)"></i><i style="background:var(--Catui_color-neutral-300)"></i></div>
+    </article>
+    <article class="doc-bx" data-catui-fx="spotlight">
+      <p class="doc-bx-k">접근성</p><h3>대비 AA 실측</h3>
+      <p>글자 대비를 렌더링 화면에서 재고, 포커스·키보드·모션 줄이기를 기본으로 지킵니다.</p>
+      <p class="doc-contrast" aria-hidden="true"><span>Aa</span><b>5.27 : 1</b><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>AA 통과</span></p>
+    </article>
+    <article class="doc-bx" data-catui-fx="spotlight">
+      <p class="doc-bx-k">다크 모드</p><h3>속성 한 줄</h3>
+      <p><code>data-catui-theme="dark"</code>만 주면 모든 컴포넌트가 따라옵니다.</p>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="hx-theme"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-moon"></use></svg>테마 바꿔 보기</button>
+    </article>
+    <article class="doc-bx" data-catui-fx="spotlight">
+      <p class="doc-bx-k">CSS 우선</p><h3>스크립트 없이 동작</h3>
+      <p>모달·탭·드롭다운·아코디언이 HTML과 CSS만으로 열리고, catui.js는 접근성과 데이터를 더합니다.</p>
+    </article>
+    <article class="doc-bx" data-catui-fx="spotlight">
+      <p class="doc-bx-k">효과</p><h3><span data-catui-fx="shiny">움직임은 꾸밈만</span></h3>
+      <p>fx 38종은 서로 충돌하지 않게 레이어를 나누고, 모션 줄이기에서 모두 멈춥니다.</p>
+    </article>
+    <article class="doc-bx doc-bx-wide doc-bx-code" data-catui-fx="spotlight">
+      <p class="doc-bx-k">빌드 검사</p><h3>깨진 것은 배포되지 않습니다</h3>
+      <pre aria-label="빌드 결과 예시"><code><span class="doc-c-ok">✓</span> css {{stat:files}} files · {{stat:classes}} classes
+<span class="doc-c-ok">✓</span> 예제 없는 클래스 0 · 깨진 링크 0 · 중복 id 0
+<span class="doc-c-ok">✓</span> icons {{stat:icons}} · docs {{stat:pages}} pages
+<span class="doc-c-dim">build ok</span></code></pre>
+    </article>
+  </div>
 </section>
+
+<section class="doc-hsec" aria-labelledby="hq-title">
+  <p class="doc-hsec-k">QUICK START</p>
+  <h2 class="doc-hsec-t" id="hq-title">세 단계로 첫 화면</h2>
+  <ol class="doc-steps">
+    <li><span class="doc-step-n" aria-hidden="true">01</span><b>불러오기</b><pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+&lt;script src="dist/catui.js"&gt;&lt;/script&gt;</code></pre></li>
+    <li><span class="doc-step-n" aria-hidden="true">02</span><b>마크업</b><pre><code>&lt;button class="Catui_btn Catui_btn-md Catui_btn-primary"
+        id="hello"&gt;저장&lt;/button&gt;</code></pre></li>
+    <li><span class="doc-step-n" aria-hidden="true">03</span><b>동작</b><pre><code>catui.use(['layer'], (layer) =&gt;
+  hello.onclick = () =&gt; layer.msg('저장했습니다'));</code></pre>
+      <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="hx-try">결과 보기</button></li>
+  </ol>
+</section>
+
+<section class="doc-hsec" aria-labelledby="hc-title">
+  <p class="doc-hsec-k">DOCS</p>
+  <h2 class="doc-hsec-t" id="hc-title">문서 둘러보기</h2>
+  <div class="doc-hcats">{{home-groups}}</div>
+</section>
+
+<script>
+(function () {
+  // 설치 탭
+  var tabs = [].slice.call(document.querySelectorAll('.doc-install-tabs [role="tab"]'));
+  var pick = function (t, focus) { tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; }); if (focus) t.focus(); };
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { pick(t); });
+    t.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); pick(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true); } });
+  });
+  document.getElementById('hx-theme').addEventListener('click', function () { document.querySelector('.doc-theme') && document.querySelector('.doc-theme').click(); });
+  if (window.catui) catui.use(['layer'], function (layer) {
+    document.getElementById('hx-try').addEventListener('click', function () { layer.msg('저장했습니다', { icon: 'success', progress: true }); });
+    [].slice.call(document.querySelectorAll('[data-copy]')).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var t = document.getElementById(b.dataset.copy).textContent;
+        (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { layer.tips('복사했습니다', b, { side: 'top', time: 1500 }); }, function () { layer.tips('복사하지 못했습니다', b, { side: 'top', time: 1500 }); });
+      });
+    });
+  });
+})();
+</script>

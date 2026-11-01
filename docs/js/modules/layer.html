@@ -363,6 +363,281 @@ catui.use([&#39;layer&#39;], function (layer) {
 </figure>
 </section>
 
+<section aria-labelledby="vtab">
+<h2 id="vtab">세로 탭 대화상자</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">tab({ vertical: true }) — ↑↓·Home·End로 이동</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ly-vtab">세로 탭 설정</button></div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    document.getElementById('ly-vtab').addEventListener('click', function () {
+      layer.tab({ title: '설정', vertical: true, btn: ['저장', '취소'], tabs: [
+        { title: '일반', content: '이름·언어·시간대를 바꿉니다.' },
+        { title: '알림', content: '메일·푸시로 받을 알림을 고릅니다.' },
+        { title: '보안', content: '비밀번호와 2단계 인증.' },
+        { title: '결제', content: '카드와 청구지 주소.' },
+        { title: '고급', content: '데이터 내보내기와 계정 삭제.' } ] });
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="tab({ vertical: true }) — ↑↓·Home·End로 이동 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ly-vtab&quot;&gt;세로 탭 설정&lt;/button&gt;&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  document.getElementById(&#39;ly-vtab&#39;).addEventListener(&#39;click&#39;, function () {
+    layer.tab({ title: &#39;설정&#39;, vertical: true, btn: [&#39;저장&#39;, &#39;취소&#39;], tabs: [
+      { title: &#39;일반&#39;, content: &#39;이름·언어·시간대를 바꿉니다.&#39; },
+      { title: &#39;알림&#39;, content: &#39;메일·푸시로 받을 알림을 고릅니다.&#39; },
+      { title: &#39;보안&#39;, content: &#39;비밀번호와 2단계 인증.&#39; },
+      { title: &#39;결제&#39;, content: &#39;카드와 청구지 주소.&#39; },
+      { title: &#39;고급&#39;, content: &#39;데이터 내보내기와 계정 삭제.&#39; } ] });
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="forms">
+<h2 id="forms">자주 쓰는 양식 (layer.form)</h2>
+<p><code>await layer.form({ title, fields, submit })</code>로 양식 대화상자를 만듭니다. 필수·형식·길이·범위 검사와 직접 검사(<code>validate</code>)를 하고, 오류는 칸 아래와 위쪽 요약에 함께 보이며 첫 오류 칸으로 포커스가 갑니다. 확인하면 값 객체, 취소하면 <code>null</code>을 돌려줍니다.</p>
+<figure class="doc-example">
+<figcaption class="doc-example-title">로그인 · 회원 가입 · 비밀번호 변경 · 배송지 · 문의 · 일정 추가 · 검색 필터</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="lf-login">로그인</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lf-signup">회원 가입</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lf-pw">비밀번호 변경</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lf-addr">배송지</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lf-contact">문의하기</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lf-event">일정 추가</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lf-filter">검색 필터</button>
+  </div>
+  <p class="Catui_help" id="lf-out" aria-live="polite">제출한 값이 여기에 나옵니다.</p>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var on = function (id, fn) { document.getElementById(id).addEventListener('click', fn); };
+    var show = function (v) { document.getElementById('lf-out').textContent = v ? '제출: ' + JSON.stringify(v) : '취소했습니다'; };
+    var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+    on('lf-login', async function () {
+      show(await layer.form({ title: '로그인', area: 'sm', okText: '로그인', fields: [
+        { name: 'email', label: '이메일', type: 'email', required: true, autocomplete: 'email', placeholder: 'name@company.com' },
+        { name: 'password', label: '비밀번호', type: 'password', required: true, autocomplete: 'current-password' },
+        { name: 'remember', label: '로그인 상태 유지', type: 'checkbox' } ],
+        submit: async function (v) { await wait(600); if (v.password !== '1234') throw new Error('이메일 또는 비밀번호가 맞지 않습니다. (예시 비밀번호: 1234)'); } }));
+    });
+    on('lf-signup', async function () {
+      show(await layer.form({ title: '회원 가입', okText: '가입', fields: [
+        { name: 'name', label: '이름', required: true, cols: 6, autocomplete: 'name' },
+        { name: 'phone', label: '휴대폰', type: 'tel', cols: 6, placeholder: '010-0000-0000', pattern: '01[0-9]-?[0-9]{3,4}-?[0-9]{4}', messages: { patternMismatch: '010-0000-0000 형식으로 입력하세요.' } },
+        { name: 'email', label: '이메일', type: 'email', required: true, autocomplete: 'email' },
+        { name: 'password', label: '비밀번호', type: 'password', required: true, minlength: 8, help: '8자 이상, 영문과 숫자를 섞어 주세요.', autocomplete: 'new-password',
+          validate: function (v) { return /[a-zA-Z]/.test(v) && /[0-9]/.test(v) ? '' : '영문과 숫자를 모두 넣어 주세요.'; } },
+        { name: 'password2', label: '비밀번호 확인', type: 'password', required: true, autocomplete: 'new-password', validate: function (v, all) { return v === all.password ? '' : '비밀번호가 서로 다릅니다.'; } },
+        { name: 'agree', label: '이용약관과 개인정보 처리방침에 동의합니다', type: 'checkbox', required: true },
+        { name: 'marketing', label: '마케팅 소식 받기 (선택)', type: 'switch' } ] }));
+    });
+    on('lf-pw', async function () {
+      show(await layer.form({ title: '비밀번호 변경', area: 'sm', okText: '변경', fields: [
+        { name: 'current', label: '현재 비밀번호', type: 'password', required: true, autocomplete: 'current-password' },
+        { name: 'next', label: '새 비밀번호', type: 'password', required: true, minlength: 8, help: '8자 이상', autocomplete: 'new-password', validate: function (v, all) { return v && v === all.current ? '현재 비밀번호와 달라야 합니다.' : ''; } },
+        { name: 'next2', label: '새 비밀번호 확인', type: 'password', required: true, autocomplete: 'new-password', validate: function (v, all) { return v === all.next ? '' : '새 비밀번호가 서로 다릅니다.'; } } ] }));
+    });
+    on('lf-addr', async function () {
+      show(await layer.form({ title: '배송지', okText: '저장', fields: [
+        { name: 'recipient', label: '받는 분', required: true, cols: 6, autocomplete: 'name' },
+        { name: 'phone', label: '연락처', type: 'tel', required: true, cols: 6, autocomplete: 'tel' },
+        { name: 'zip', label: '우편번호', required: true, cols: 4, pattern: '[0-9]{5}', placeholder: '5자리', messages: { patternMismatch: '숫자 5자리로 입력하세요.' }, autocomplete: 'postal-code' },
+        { name: 'addr1', label: '주소', required: true, cols: 8, autocomplete: 'address-line1' },
+        { name: 'addr2', label: '상세 주소', placeholder: '동·호수', autocomplete: 'address-line2' },
+        { name: 'memo', label: '배송 요청', type: 'select', placeholder: '선택 안 함', options: ['문 앞에 놓아 주세요', '경비실에 맡겨 주세요', '배송 전 연락 주세요'] },
+        { name: 'default', label: '기본 배송지로 저장', type: 'switch', value: true } ] }));
+    });
+    on('lf-contact', async function () {
+      show(await layer.form({ title: '문의하기', okText: '보내기', fields: [
+        { name: 'type', label: '문의 종류', type: 'radio', required: true, options: [{ value: 'order', label: '주문' }, { value: 'pay', label: '결제' }, { value: 'etc', label: '기타' }] },
+        { name: 'title', label: '제목', required: true, maxlength: 60 },
+        { name: 'body', label: '내용', type: 'textarea', required: true, minlength: 10, rows: 5, help: '10자 이상 적어 주세요.' },
+        { name: 'reply', label: '답변 받을 방법', type: 'checkbox', options: [{ value: 'mail', label: '메일' }, { value: 'sms', label: '문자' }], value: ['mail'] } ],
+        submit: async function () { await wait(700); } }));
+    });
+    on('lf-event', async function () {
+      show(await layer.form({ title: '일정 추가', okText: '추가', fields: [
+        { name: 'title', label: '일정 이름', required: true },
+        { name: 'date', label: '날짜', type: 'date', required: true, cols: 6 },
+        { name: 'time', label: '시간', type: 'time', cols: 6 },
+        { name: 'people', label: '참석 인원', type: 'number', min: 1, max: 50, value: 2, cols: 6 },
+        { name: 'room', label: '장소', type: 'select', cols: 6, options: ['3층 회의실', '5층 회의실', '온라인'] },
+        { name: 'allday', label: '하루 종일', type: 'switch' } ] }));
+    });
+    on('lf-filter', async function () {
+      show(await layer.form({ title: '검색 필터', type: 'drawer', okText: '적용', cancelText: '초기화', fields: [
+        { name: 'q', label: '검색어', type: 'search', placeholder: '고객·주문 번호' },
+        { name: 'status', label: '상태', type: 'checkbox', options: [{ value: 'ship', label: '배송' }, { value: 'proc', label: '처리' }, { value: 'wait', label: '대기' }], value: ['ship', 'proc'] },
+        { name: 'from', label: '시작일', type: 'date', cols: 6 },
+        { name: 'to', label: '종료일', type: 'date', cols: 6, validate: function (v, all) { return v && all.from && v < all.from ? '종료일이 시작일보다 빠릅니다.' : ''; } },
+        { name: 'min', label: '최소 금액', type: 'number', min: 0, cols: 6 },
+        { name: 'sort', label: '정렬', type: 'select', cols: 6, options: [{ value: 'new', label: '최신순' }, { value: 'amount', label: '금액순' }] } ] }));
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="로그인 · 회원 가입 · 비밀번호 변경 · 배송지 · 문의 · 일정 추가 · 검색 필터 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;button&quot; id=&quot;lf-login&quot;&gt;로그인&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lf-signup&quot;&gt;회원 가입&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lf-pw&quot;&gt;비밀번호 변경&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lf-addr&quot;&gt;배송지&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lf-contact&quot;&gt;문의하기&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lf-event&quot;&gt;일정 추가&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lf-filter&quot;&gt;검색 필터&lt;/button&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;lf-out&quot; aria-live=&quot;polite&quot;&gt;제출한 값이 여기에 나옵니다.&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  var on = function (id, fn) { document.getElementById(id).addEventListener(&#39;click&#39;, fn); };
+  var show = function (v) { document.getElementById(&#39;lf-out&#39;).textContent = v ? &#39;제출: &#39; + JSON.stringify(v) : &#39;취소했습니다&#39;; };
+  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+  on(&#39;lf-login&#39;, async function () {
+    show(await layer.form({ title: &#39;로그인&#39;, area: &#39;sm&#39;, okText: &#39;로그인&#39;, fields: [
+      { name: &#39;email&#39;, label: &#39;이메일&#39;, type: &#39;email&#39;, required: true, autocomplete: &#39;email&#39;, placeholder: &#39;name@company.com&#39; },
+      { name: &#39;password&#39;, label: &#39;비밀번호&#39;, type: &#39;password&#39;, required: true, autocomplete: &#39;current-password&#39; },
+      { name: &#39;remember&#39;, label: &#39;로그인 상태 유지&#39;, type: &#39;checkbox&#39; } ],
+      submit: async function (v) { await wait(600); if (v.password !== &#39;1234&#39;) throw new Error(&#39;이메일 또는 비밀번호가 맞지 않습니다. (예시 비밀번호: 1234)&#39;); } }));
+  });
+  on(&#39;lf-signup&#39;, async function () {
+    show(await layer.form({ title: &#39;회원 가입&#39;, okText: &#39;가입&#39;, fields: [
+      { name: &#39;name&#39;, label: &#39;이름&#39;, required: true, cols: 6, autocomplete: &#39;name&#39; },
+      { name: &#39;phone&#39;, label: &#39;휴대폰&#39;, type: &#39;tel&#39;, cols: 6, placeholder: &#39;010-0000-0000&#39;, pattern: &#39;01[0-9]-?[0-9]{3,4}-?[0-9]{4}&#39;, messages: { patternMismatch: &#39;010-0000-0000 형식으로 입력하세요.&#39; } },
+      { name: &#39;email&#39;, label: &#39;이메일&#39;, type: &#39;email&#39;, required: true, autocomplete: &#39;email&#39; },
+      { name: &#39;password&#39;, label: &#39;비밀번호&#39;, type: &#39;password&#39;, required: true, minlength: 8, help: &#39;8자 이상, 영문과 숫자를 섞어 주세요.&#39;, autocomplete: &#39;new-password&#39;,
+        validate: function (v) { return /[a-zA-Z]/.test(v) &amp;&amp; /[0-9]/.test(v) ? &#39;&#39; : &#39;영문과 숫자를 모두 넣어 주세요.&#39;; } },
+      { name: &#39;password2&#39;, label: &#39;비밀번호 확인&#39;, type: &#39;password&#39;, required: true, autocomplete: &#39;new-password&#39;, validate: function (v, all) { return v === all.password ? &#39;&#39; : &#39;비밀번호가 서로 다릅니다.&#39;; } },
+      { name: &#39;agree&#39;, label: &#39;이용약관과 개인정보 처리방침에 동의합니다&#39;, type: &#39;checkbox&#39;, required: true },
+      { name: &#39;marketing&#39;, label: &#39;마케팅 소식 받기 (선택)&#39;, type: &#39;switch&#39; } ] }));
+  });
+  on(&#39;lf-pw&#39;, async function () {
+    show(await layer.form({ title: &#39;비밀번호 변경&#39;, area: &#39;sm&#39;, okText: &#39;변경&#39;, fields: [
+      { name: &#39;current&#39;, label: &#39;현재 비밀번호&#39;, type: &#39;password&#39;, required: true, autocomplete: &#39;current-password&#39; },
+      { name: &#39;next&#39;, label: &#39;새 비밀번호&#39;, type: &#39;password&#39;, required: true, minlength: 8, help: &#39;8자 이상&#39;, autocomplete: &#39;new-password&#39;, validate: function (v, all) { return v &amp;&amp; v === all.current ? &#39;현재 비밀번호와 달라야 합니다.&#39; : &#39;&#39;; } },
+      { name: &#39;next2&#39;, label: &#39;새 비밀번호 확인&#39;, type: &#39;password&#39;, required: true, autocomplete: &#39;new-password&#39;, validate: function (v, all) { return v === all.next ? &#39;&#39; : &#39;새 비밀번호가 서로 다릅니다.&#39;; } } ] }));
+  });
+  on(&#39;lf-addr&#39;, async function () {
+    show(await layer.form({ title: &#39;배송지&#39;, okText: &#39;저장&#39;, fields: [
+      { name: &#39;recipient&#39;, label: &#39;받는 분&#39;, required: true, cols: 6, autocomplete: &#39;name&#39; },
+      { name: &#39;phone&#39;, label: &#39;연락처&#39;, type: &#39;tel&#39;, required: true, cols: 6, autocomplete: &#39;tel&#39; },
+      { name: &#39;zip&#39;, label: &#39;우편번호&#39;, required: true, cols: 4, pattern: &#39;[0-9]{5}&#39;, placeholder: &#39;5자리&#39;, messages: { patternMismatch: &#39;숫자 5자리로 입력하세요.&#39; }, autocomplete: &#39;postal-code&#39; },
+      { name: &#39;addr1&#39;, label: &#39;주소&#39;, required: true, cols: 8, autocomplete: &#39;address-line1&#39; },
+      { name: &#39;addr2&#39;, label: &#39;상세 주소&#39;, placeholder: &#39;동·호수&#39;, autocomplete: &#39;address-line2&#39; },
+      { name: &#39;memo&#39;, label: &#39;배송 요청&#39;, type: &#39;select&#39;, placeholder: &#39;선택 안 함&#39;, options: [&#39;문 앞에 놓아 주세요&#39;, &#39;경비실에 맡겨 주세요&#39;, &#39;배송 전 연락 주세요&#39;] },
+      { name: &#39;default&#39;, label: &#39;기본 배송지로 저장&#39;, type: &#39;switch&#39;, value: true } ] }));
+  });
+  on(&#39;lf-contact&#39;, async function () {
+    show(await layer.form({ title: &#39;문의하기&#39;, okText: &#39;보내기&#39;, fields: [
+      { name: &#39;type&#39;, label: &#39;문의 종류&#39;, type: &#39;radio&#39;, required: true, options: [{ value: &#39;order&#39;, label: &#39;주문&#39; }, { value: &#39;pay&#39;, label: &#39;결제&#39; }, { value: &#39;etc&#39;, label: &#39;기타&#39; }] },
+      { name: &#39;title&#39;, label: &#39;제목&#39;, required: true, maxlength: 60 },
+      { name: &#39;body&#39;, label: &#39;내용&#39;, type: &#39;textarea&#39;, required: true, minlength: 10, rows: 5, help: &#39;10자 이상 적어 주세요.&#39; },
+      { name: &#39;reply&#39;, label: &#39;답변 받을 방법&#39;, type: &#39;checkbox&#39;, options: [{ value: &#39;mail&#39;, label: &#39;메일&#39; }, { value: &#39;sms&#39;, label: &#39;문자&#39; }], value: [&#39;mail&#39;] } ],
+      submit: async function () { await wait(700); } }));
+  });
+  on(&#39;lf-event&#39;, async function () {
+    show(await layer.form({ title: &#39;일정 추가&#39;, okText: &#39;추가&#39;, fields: [
+      { name: &#39;title&#39;, label: &#39;일정 이름&#39;, required: true },
+      { name: &#39;date&#39;, label: &#39;날짜&#39;, type: &#39;date&#39;, required: true, cols: 6 },
+      { name: &#39;time&#39;, label: &#39;시간&#39;, type: &#39;time&#39;, cols: 6 },
+      { name: &#39;people&#39;, label: &#39;참석 인원&#39;, type: &#39;number&#39;, min: 1, max: 50, value: 2, cols: 6 },
+      { name: &#39;room&#39;, label: &#39;장소&#39;, type: &#39;select&#39;, cols: 6, options: [&#39;3층 회의실&#39;, &#39;5층 회의실&#39;, &#39;온라인&#39;] },
+      { name: &#39;allday&#39;, label: &#39;하루 종일&#39;, type: &#39;switch&#39; } ] }));
+  });
+  on(&#39;lf-filter&#39;, async function () {
+    show(await layer.form({ title: &#39;검색 필터&#39;, type: &#39;drawer&#39;, okText: &#39;적용&#39;, cancelText: &#39;초기화&#39;, fields: [
+      { name: &#39;q&#39;, label: &#39;검색어&#39;, type: &#39;search&#39;, placeholder: &#39;고객·주문 번호&#39; },
+      { name: &#39;status&#39;, label: &#39;상태&#39;, type: &#39;checkbox&#39;, options: [{ value: &#39;ship&#39;, label: &#39;배송&#39; }, { value: &#39;proc&#39;, label: &#39;처리&#39; }, { value: &#39;wait&#39;, label: &#39;대기&#39; }], value: [&#39;ship&#39;, &#39;proc&#39;] },
+      { name: &#39;from&#39;, label: &#39;시작일&#39;, type: &#39;date&#39;, cols: 6 },
+      { name: &#39;to&#39;, label: &#39;종료일&#39;, type: &#39;date&#39;, cols: 6, validate: function (v, all) { return v &amp;&amp; all.from &amp;&amp; v &lt; all.from ? &#39;종료일이 시작일보다 빠릅니다.&#39; : &#39;&#39;; } },
+      { name: &#39;min&#39;, label: &#39;최소 금액&#39;, type: &#39;number&#39;, min: 0, cols: 6 },
+      { name: &#39;sort&#39;, label: &#39;정렬&#39;, type: &#39;select&#39;, cols: 6, options: [{ value: &#39;new&#39;, label: &#39;최신순&#39; }, { value: &#39;amount&#39;, label: &#39;금액순&#39; }] } ] }));
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="clean">
+<h2 id="clean">관리 화면형 대화상자</h2>
+<p>회색 머리·꼬리 띠, 회색 옆 패널의 세로 탭, 라벨이 왼쪽인 가로 양식, 테두리 카드형 탭으로 관리 화면에 맞춘 구성입니다.</p>
+<figure class="doc-example">
+<figcaption class="doc-example-title">세로 탭 + 표 · 가로 양식 + 새로 만들기 버튼 · 카드형 탭 + 도구 모음·표·페이지</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lc-nginx">서버 상태 (세로 탭)</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lc-pw">비밀번호 설정 (가로 양식)</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lc-backup">백업 목록 (카드형 탭)</button>
+  </div>
+  <p class="Catui_help" id="lc-out" aria-live="polite"></p>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var on = function (id, fn) { document.getElementById(id).addEventListener('click', fn); };
+    var h = catui.html, raw = catui.raw;
+    var rows = [['활성 연결', '23'], ['총 연결 수', '2,303,130'], ['총 요청 수', '6,968,061'], ['읽는 중', '0'], ['쓰는 중', '1'], ['대기 중', '22'], ['작업 프로세스', '24'], ['CPU 사용률', '0.01'], ['메모리 사용량', '2,063MB']];
+    var stat = h`<table class="Catui_tbl Catui_tbl-compact Catui_tbl-bordered"><caption class="Catui_clip">부하 상태</caption><thead><tr><th scope="col">항목</th><th scope="col" class="Catui_num">현재 값</th></tr></thead><tbody>${rows.map(function (r) { return h`<tr><td>${r[0]}</td><td class="Catui_num">${r[1]}</td></tr>`; })}</tbody></table>`;
+    on('lc-nginx', function () {
+      layer.tab({ title: 'Nginx', vertical: true, area: 'lg', start: 3, tabs: [
+        { title: '서비스', content: '시작·중지·다시 시작' }, { title: '설정 파일', content: 'nginx.conf 편집' }, { title: '버전 전환', content: '1.24 / 1.26' },
+        { title: '부하 상태', content: stat }, { title: '성능 조정', content: '작업 프로세스 수, 연결 제한' }, { title: '오류 로그', content: '최근 오류 100줄' } ] });
+    });
+    var gen = function () { var c = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789', a = new Uint32Array(16); crypto.getRandomValues(a); return Array.from(a, function (n) { return c[n % c.length]; }).join(''); };
+    on('lc-pw', async function () {
+      var v = await layer.form({ title: '데이터베이스 [wardenmirr] 비밀번호 설정', layout: 'horizontal', area: 'sm', fields: [
+        { name: 'user', label: '사용자 이름', value: 'wardenmirr', readonly: true },
+        { name: 'password', label: '비밀번호', required: true, minlength: 8, value: gen(), addon: { icon: 'refresh-cw', label: '새로 만들기', onClick: function (input) { input.value = gen(); } } } ] });
+      document.getElementById('lc-out').textContent = v ? '새 비밀번호를 설정했습니다' : '취소했습니다';
+    });
+    var files = [['demo_20260428_151943.tar.gz', '5.66 MB', '2026-04-28 15:19'], ['demo_20260427_175319.tar.gz', '5.66 MB', '2026-04-27 17:53'], ['demo_20260423_114623.tar.gz', '5.58 MB', '2026-04-23 11:46']];
+    var list = h`<div class="Catui_toolbar"><button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button">사이트 백업</button><div class="Catui_toolbar-end"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary Catui_btn-icon" type="button" aria-label="새로 고침">${raw('<svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-refresh-cw"></use></svg>')}</button></div></div>
+<div class="Catui_table-wrap"><table class="Catui_tbl Catui_tbl-compact"><caption class="Catui_clip">백업 파일</caption><thead><tr><th scope="col">파일 이름</th><th scope="col">위치</th><th scope="col" class="Catui_num">크기</th><th scope="col">백업 시각</th><th scope="col" class="Catui_num">동작</th></tr></thead><tbody>${files.map(function (r) { return h`<tr><td>${r[0]}</td><td>로컬</td><td class="Catui_num">${r[1]}</td><td>${r[2]}</td><td class="Catui_num"><a class="Catui_link" href="#">받기</a> · <a class="Catui_link" href="#">삭제</a></td></tr>`; })}</tbody></table></div>
+<div class="Catui_hstack Catui_between" style="margin-top:12px"><span class="Catui_help">모두 3건</span><nav class="Catui_pager" aria-label="페이지"><a href="#" aria-current="page">1</a></nav></div>`;
+    on('lc-backup', function () {
+      layer.tab({ title: '사이트 백업 [demo.catui.dev]', card: true, area: 'xl', tabs: [{ title: '일반 백업', content: list }, { title: '증분 백업', content: '증분 백업 일정이 없습니다.' }] });
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="세로 탭 + 표 · 가로 양식 + 새로 만들기 버튼 · 카드형 탭 + 도구 모음·표·페이지 코드 복사">복사</button><pre><code>  &lt;div class=&quot;Catui_actions&quot;&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lc-nginx&quot;&gt;서버 상태 (세로 탭)&lt;/button&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lc-pw&quot;&gt;비밀번호 설정 (가로 양식)&lt;/button&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lc-backup&quot;&gt;백업 목록 (카드형 탭)&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;Catui_help&quot; id=&quot;lc-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+  &lt;script&gt;
+  catui.use([&#39;layer&#39;], function (layer) {
+    var on = function (id, fn) { document.getElementById(id).addEventListener(&#39;click&#39;, fn); };
+    var h = catui.html, raw = catui.raw;
+    var rows = [[&#39;활성 연결&#39;, &#39;23&#39;], [&#39;총 연결 수&#39;, &#39;2,303,130&#39;], [&#39;총 요청 수&#39;, &#39;6,968,061&#39;], [&#39;읽는 중&#39;, &#39;0&#39;], [&#39;쓰는 중&#39;, &#39;1&#39;], [&#39;대기 중&#39;, &#39;22&#39;], [&#39;작업 프로세스&#39;, &#39;24&#39;], [&#39;CPU 사용률&#39;, &#39;0.01&#39;], [&#39;메모리 사용량&#39;, &#39;2,063MB&#39;]];
+    var stat = h`&lt;table class=&quot;Catui_tbl Catui_tbl-compact Catui_tbl-bordered&quot;&gt;&lt;caption class=&quot;Catui_clip&quot;&gt;부하 상태&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;항목&lt;/th&gt;&lt;th scope=&quot;col&quot; class=&quot;Catui_num&quot;&gt;현재 값&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;${rows.map(function (r) { return h`&lt;tr&gt;&lt;td&gt;${r[0]}&lt;/td&gt;&lt;td class=&quot;Catui_num&quot;&gt;${r[1]}&lt;/td&gt;&lt;/tr&gt;`; })}&lt;/tbody&gt;&lt;/table&gt;`;
+    on(&#39;lc-nginx&#39;, function () {
+      layer.tab({ title: &#39;Nginx&#39;, vertical: true, area: &#39;lg&#39;, start: 3, tabs: [
+        { title: &#39;서비스&#39;, content: &#39;시작·중지·다시 시작&#39; }, { title: &#39;설정 파일&#39;, content: &#39;nginx.conf 편집&#39; }, { title: &#39;버전 전환&#39;, content: &#39;1.24 / 1.26&#39; },
+        { title: &#39;부하 상태&#39;, content: stat }, { title: &#39;성능 조정&#39;, content: &#39;작업 프로세스 수, 연결 제한&#39; }, { title: &#39;오류 로그&#39;, content: &#39;최근 오류 100줄&#39; } ] });
+    });
+    var gen = function () { var c = &#39;ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789&#39;, a = new Uint32Array(16); crypto.getRandomValues(a); return Array.from(a, function (n) { return c[n % c.length]; }).join(&#39;&#39;); };
+    on(&#39;lc-pw&#39;, async function () {
+      var v = await layer.form({ title: &#39;데이터베이스 [wardenmirr] 비밀번호 설정&#39;, layout: &#39;horizontal&#39;, area: &#39;sm&#39;, fields: [
+        { name: &#39;user&#39;, label: &#39;사용자 이름&#39;, value: &#39;wardenmirr&#39;, readonly: true },
+        { name: &#39;password&#39;, label: &#39;비밀번호&#39;, required: true, minlength: 8, value: gen(), addon: { icon: &#39;refresh-cw&#39;, label: &#39;새로 만들기&#39;, onClick: function (input) { input.value = gen(); } } } ] });
+      document.getElementById(&#39;lc-out&#39;).textContent = v ? &#39;새 비밀번호를 설정했습니다&#39; : &#39;취소했습니다&#39;;
+    });
+    var files = [[&#39;demo_20260428_151943.tar.gz&#39;, &#39;5.66 MB&#39;, &#39;2026-04-28 15:19&#39;], [&#39;demo_20260427_175319.tar.gz&#39;, &#39;5.66 MB&#39;, &#39;2026-04-27 17:53&#39;], [&#39;demo_20260423_114623.tar.gz&#39;, &#39;5.58 MB&#39;, &#39;2026-04-23 11:46&#39;]];
+    var list = h`&lt;div class=&quot;Catui_toolbar&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-primary&quot; type=&quot;button&quot;&gt;사이트 백업&lt;/button&gt;&lt;div class=&quot;Catui_toolbar-end&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-secondary Catui_btn-icon&quot; type=&quot;button&quot; aria-label=&quot;새로 고침&quot;&gt;${raw(&#39;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-refresh-cw&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&#39;)}&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;Catui_table-wrap&quot;&gt;&lt;table class=&quot;Catui_tbl Catui_tbl-compact&quot;&gt;&lt;caption class=&quot;Catui_clip&quot;&gt;백업 파일&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;파일 이름&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;위치&lt;/th&gt;&lt;th scope=&quot;col&quot; class=&quot;Catui_num&quot;&gt;크기&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;백업 시각&lt;/th&gt;&lt;th scope=&quot;col&quot; class=&quot;Catui_num&quot;&gt;동작&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;${files.map(function (r) { return h`&lt;tr&gt;&lt;td&gt;${r[0]}&lt;/td&gt;&lt;td&gt;로컬&lt;/td&gt;&lt;td class=&quot;Catui_num&quot;&gt;${r[1]}&lt;/td&gt;&lt;td&gt;${r[2]}&lt;/td&gt;&lt;td class=&quot;Catui_num&quot;&gt;&lt;a class=&quot;Catui_link&quot; href=&quot;#&quot;&gt;받기&lt;/a&gt; · &lt;a class=&quot;Catui_link&quot; href=&quot;#&quot;&gt;삭제&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;`; })}&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;div class=&quot;Catui_hstack Catui_between&quot; style=&quot;margin-top:12px&quot;&gt;&lt;span class=&quot;Catui_help&quot;&gt;모두 3건&lt;/span&gt;&lt;nav class=&quot;Catui_pager&quot; aria-label=&quot;페이지&quot;&gt;&lt;a href=&quot;#&quot; aria-current=&quot;page&quot;&gt;1&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;`;
+    on(&#39;lc-backup&#39;, function () {
+      layer.tab({ title: &#39;사이트 백업 [demo.catui.dev]&#39;, card: true, area: &#39;xl&#39;, tabs: [{ title: &#39;일반 백업&#39;, content: list }, { title: &#39;증분 백업&#39;, content: &#39;증분 백업 일정이 없습니다.&#39; }] });
+    });
+  });
+  &lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
 <section aria-labelledby="options">
 <h2 id="options">open 옵션</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">layer.open 옵션</caption>
@@ -383,13 +658,13 @@ catui.use([&#39;layer&#39;], function (layer) {
 <tr><td><code>msg: position</code> · <code>action</code> · <code>progress</code></td><td>'br'</td><td>'tr'·'tc'·'bc'·'br' / { text, onClick } 동작 버튼(5초) / 남은 시간 막대</td></tr>
 <tr><td><code>shadeClose</code> · <code>closeBtn</code></td><td>true</td><td>바깥 클릭으로 닫기 / 닫기 버튼</td></tr>
 </tbody></table></div>
-<p>함수: <code>msg · alert · confirm · prompt · open · load · progress(index, %) · tips(내용, 대상, { side, time }) · photos({ items, start, change }) · tab({ tabs, start, change }) · ask(내용) → Promise&lt;boolean&gt; · input(옵션) → Promise&lt;값|null&gt; · close(index) · closeAll(type) · closeLast(type) · title(index, 글자) · setContent(index, 내용) · style(index, { width, height }) · full(index) · restore(index) · getNode(index) · list(type) · count</code>. type은 'msg'·'dialog'·'drawer'·'iframe'·'load'·'tips'·'photos'·'tab'.</p>
+<p>함수: <code>msg · alert · confirm · prompt · open · load · progress(index, %) · tips(내용, 대상, { side, time }) · photos({ items, start, change }) · tab({ tabs, start, change, vertical, card }) · form({ title, fields, submit, okText, layout: 'horizontal', labelWidth }) → Promise&lt;값|null&gt; (field: readonly·disabled·addon:{ icon, label, onClick }) · ask(내용) → Promise&lt;boolean&gt; · input(옵션) → Promise&lt;값|null&gt; · close(index) · closeAll(type) · closeLast(type) · title(index, 글자) · setContent(index, 내용) · style(index, { width, height }) · full(index) · restore(index) · getNode(index) · list(type) · count</code>. type은 'msg'·'dialog'·'drawer'·'iframe'·'load'·'tips'·'photos'·'tab'·'form'.</p>
 </section>
 
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/core/helpers.html"><span>이전</span>저장소·주소·환경</a><a class="doc-pager-next" href="../../js/modules/form.html"><span>다음</span>form 폼</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#msg">메시지</a></li><li><a href="#dialog">확인·입력·알림</a></li><li><a href="#open">자유 레이어 · 드로어 · 로딩</a></li><li><a href="#window">창 기능 · 크기</a></li><li><a href="#special">말풍선 · 사진 보기 · 탭</a></li><li><a href="#promise">Promise · 진행률 · 내용 바꾸기</a></li><li><a href="#toast2">토스트 위치 · 동작 버튼</a></li><li><a href="#options">open 옵션</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#msg">메시지</a></li><li><a href="#dialog">확인·입력·알림</a></li><li><a href="#open">자유 레이어 · 드로어 · 로딩</a></li><li><a href="#window">창 기능 · 크기</a></li><li><a href="#special">말풍선 · 사진 보기 · 탭</a></li><li><a href="#promise">Promise · 진행률 · 내용 바꾸기</a></li><li><a href="#toast2">토스트 위치 · 동작 버튼</a></li><li><a href="#vtab">세로 탭 대화상자</a></li><li><a href="#forms">자주 쓰는 양식 (layer.form)</a></li><li><a href="#clean">관리 화면형 대화상자</a></li><li><a href="#options">open 옵션</a></li></ul></aside>
 </div>
 </div>
 <script src="../../assets/docs.js"></script>

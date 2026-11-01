@@ -43,6 +43,47 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="vtabs">
+<h2 id="vtabs">세로 탭 대화상자</h2>
+<catui-example title="Catui_layer-vtabs · layer-tabs-v · layer-vtabs-panels (767px 이하 가로 탭)">
+  <div class="Catui_modal" role="dialog" aria-label="세로 탭 예시" style="display:flex;position:static;transform:none;width:100%">
+    <header class="Catui_modal-h"><span>설정</span></header>
+    <div class="Catui_modal-b">
+      <div class="Catui_layer-vtabs">
+        <div class="Catui_layer-tabs Catui_layer-tabs-v" role="tablist" aria-orientation="vertical" aria-label="설정"><button type="button" role="tab" aria-selected="false" tabindex="-1">일반</button><button type="button" role="tab" aria-selected="true">알림</button><button type="button" role="tab" aria-selected="false" tabindex="-1">보안</button><button type="button" role="tab" aria-selected="false" tabindex="-1">결제</button></div>
+        <div class="Catui_layer-vtabs-panels"><div role="tabpanel"><p class="Catui_h3">알림</p><p class="Catui_help">받을 알림을 고릅니다.</p></div></div>
+      </div>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="lform">
+<h2 id="lform">양식 대화상자 배치</h2>
+<catui-example title="Catui_layer-form (대화상자 안 12열, 칸마다 --Catui_span, 767px 이하·드로어는 1열)">
+  <form class="Catui_layer-form" aria-label="배치 예시" onsubmit="return false">
+    <div class="Catui_field" style="--Catui_span:6"><label class="Catui_label" for="lfx-a">이름</label><input class="Catui_input" id="lfx-a"></div>
+    <div class="Catui_field" style="--Catui_span:6"><label class="Catui_label" for="lfx-b">휴대폰</label><input class="Catui_input" id="lfx-b" type="tel"></div>
+    <div class="Catui_field" style="--Catui_span:4"><label class="Catui_label" for="lfx-c">우편번호</label><input class="Catui_input" id="lfx-c"></div>
+    <div class="Catui_field" style="--Catui_span:8"><label class="Catui_label" for="lfx-d">주소</label><input class="Catui_input" id="lfx-d"></div>
+  </form>
+</catui-example>
+</section>
+
+<section aria-labelledby="hform">
+<h2 id="hform">가로 양식 · 카드형 탭</h2>
+<catui-example title="Catui_layer-form-h (라벨 왼쪽·오른쪽 정렬, label-top은 여러 줄 칸) · 입력 옆 아이콘 버튼">
+  <form class="Catui_layer-form Catui_layer-form-h" aria-label="가로 양식 예시" onsubmit="return false" style="max-width:520px">
+    <div class="Catui_field"><label class="Catui_label" for="hf-a">사용자 이름</label><input class="Catui_input" id="hf-a" value="wardenmirr" readonly></div>
+    <div class="Catui_field"><label class="Catui_label" for="hf-b">비밀번호 <span class="Catui_req" aria-hidden="true">*</span></label><div class="Catui_igroup"><input class="Catui_input" id="hf-b" value="rA2G3Zjeees6DnDe"><button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_btn-icon" type="button" aria-label="새로 만들기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-refresh-cw"></use></svg></button></div></div>
+    <div class="Catui_field"><label class="Catui_label Catui_label-top" for="hf-c">메모</label><textarea class="Catui_input" id="hf-c" rows="3"></textarea></div>
+  </form>
+</catui-example>
+<catui-example title="Catui_layer-tabs-card (테두리 카드형 탭)">
+  <div class="Catui_layer-tabs Catui_layer-tabs-card" role="tablist" aria-label="백업"><button type="button" role="tab" aria-selected="true">일반 백업</button><button type="button" role="tab" aria-selected="false" tabindex="-1">증분 백업</button></div>
+</catui-example>
+</section>
+
 <section aria-labelledby="toast">
 <h2 id="toast">토스트 위치 · 동작 · 남은 시간</h2>
 <catui-example title="Catui_toasts-tr · -tc · -bc (기본은 오른쪽 아래) · toast-action · toast-bar">

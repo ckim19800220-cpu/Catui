@@ -30,6 +30,11 @@
   padding:0 var(--Catui_modal-pad);background:var(--Catui_modal-footer-bg);
   border-radius:0 0 var(--Catui_modal-radius) var(--Catui_modal-radius);
 }
+/* 머리·꼬리 띠: 연한 면 + 구분선 (대화상자 둘레와 맞춘 둥근 모서리) */
+.Catui_modal > .Catui_modal-h{background:var(--Catui_modal-footer-bg);border-bottom:1px solid var(--Catui_divider-color);border-radius:var(--Catui_modal-radius) var(--Catui_modal-radius) 0 0;font-weight:600}
+.Catui_modal > .Catui_modal-f{border-top:1px solid var(--Catui_divider-color)}
+.Catui_modal-h .Catui_close{color:var(--Catui_color-text-secondary);border-radius:var(--Catui_radius-xs)}
+.Catui_modal-h .Catui_close:hover{color:var(--Catui_color-text-primary);background:var(--Catui_color-neutral-100)}
 .Catui_close{width:var(--Catui_modal-close);height:var(--Catui_modal-close);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
 /* JS 상태 — catui.js layer/dropdown이 체크박스 없이 여는 오버레이. 네이티브 <dialog>로 Esc·포커스 가두기를 얻는다. */
 dialog.Catui_modal,dialog.Catui_drawer{padding:0;margin:0;max-width:none;color:inherit;overflow:visible}

@@ -41,6 +41,38 @@ dialog.Catui_layer-photos .Catui_close{color:inherit}
 .Catui_layer-tabs button[aria-selected="true"]{color:var(--Catui_tab-active-fg);border-bottom-color:var(--Catui_tab-indicator);font-weight:600}
 .Catui_layer-tabs button:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
 
+/* 세로 탭 대화상자: 왼쪽 탭 목록 + 오른쪽 패널 (767px 이하 가로 탭으로) */
+/* 회색 옆 패널에 탭을 쌓고, 선택한 탭은 내용과 같은 면 색으로 이어 붙인다 */
+.Catui_layer-vtabs{display:grid;grid-template-columns:148px minmax(0,1fr);min-height:320px;margin:calc(var(--Catui_modal-pad) * -1)}
+.Catui_layer-tabs.Catui_layer-tabs-v{flex-direction:column;gap:0;margin:0;padding:var(--Catui_space-2) 0;box-shadow:none;background:var(--Catui_color-neutral-100);overflow:visible auto;border-radius:0 0 0 var(--Catui_modal-radius)}
+.Catui_layer-tabs-v button{height:var(--Catui_control-h-lg);padding:0 var(--Catui_space-6);text-align:left;border-bottom:0;border-radius:0;color:var(--Catui_color-text-secondary)}
+.Catui_layer-tabs-v button:hover{color:var(--Catui_color-brand-strong)}
+.Catui_layer-tabs-v button[aria-selected="true"]{background:var(--Catui_modal-bg);color:var(--Catui_color-text-primary);font-weight:600}
+.Catui_layer-vtabs-panels{padding:var(--Catui_modal-pad);min-width:0}
+@media (max-width:767px){
+  .Catui_layer-vtabs{grid-template-columns:minmax(0,1fr)}
+  .Catui_layer-tabs.Catui_layer-tabs-v{flex-direction:row;overflow:auto hidden;padding:0;border-radius:0}
+  .Catui_layer-tabs-v button{padding:0 var(--Catui_space-4);flex:none}
+}
+
+/* 카드형 가로 탭: 테두리로 둘러싼 탭, 선택한 탭은 아래 선과 이어짐 */
+.Catui_layer-tabs.Catui_layer-tabs-card{gap:0;margin:0 0 var(--Catui_space-4);padding:0;box-shadow:inset 0 -1px 0 var(--Catui_card-border)}
+.Catui_layer-tabs-card button{height:var(--Catui_control-h-lg);padding:0 var(--Catui_space-5);border:1px solid transparent;border-bottom:0;border-radius:var(--Catui_radius-sm) var(--Catui_radius-sm) 0 0;color:var(--Catui_color-text-secondary)}
+.Catui_layer-tabs-card button:hover{color:var(--Catui_color-brand-strong)}
+.Catui_layer-tabs-card button[aria-selected="true"]{border-color:var(--Catui_card-border);background:var(--Catui_modal-bg);color:var(--Catui_color-brand-strong);box-shadow:0 1px 0 var(--Catui_modal-bg)}
+
+/* 가로 양식: 라벨 왼쪽(오른쪽 정렬) + 입력 오른쪽, 도움말·오류는 입력 아래 */
+.Catui_layer-form-h > .Catui_field{display:grid;grid-template-columns:var(--Catui_form-label-w,96px) minmax(0,1fr);column-gap:var(--Catui_space-4);row-gap:var(--Catui_space-1);align-items:center}
+.Catui_layer-form-h > .Catui_field > .Catui_label{text-align:right;margin:0}
+.Catui_layer-form-h > .Catui_field > :not(.Catui_label){grid-column:2}
+.Catui_layer-form-h > .Catui_field > .Catui_label-top{align-self:start;padding-top:var(--Catui_space-2)}
+@media (max-width:767px){
+  .Catui_layer-form-h > .Catui_field{grid-template-columns:minmax(0,1fr)}
+  .Catui_layer-form-h > .Catui_field > .Catui_label{text-align:left}
+  .Catui_layer-form-h > .Catui_field > :not(.Catui_label){grid-column:1}
+}
+.Catui_input[readonly]{background:var(--Catui_color-surface-muted);color:var(--Catui_color-text-secondary)}
+
 /* iframe: 본문 여백 없이 꽉 채움 */
 .Catui_layer-frame{display:block;width:100%;height:min(70vh,640px);border:0}
 dialog.Catui_modal-full .Catui_layer-frame,dialog.Catui_layer-max .Catui_layer-frame{height:100%}
@@ -56,3 +88,10 @@ dialog.Catui_modal-full .Catui_layer-frame,dialog.Catui_layer-max .Catui_layer-f
 @keyframes Catui_toast-bar{to{transform:scaleX(0)}}
 @media (prefers-reduced-motion:reduce){.Catui_toast-bar{animation:none;display:none}}
 @media (max-width:767px){dialog.Catui_modal-xl{width:calc(100% - var(--Catui_space-4) * 2)}}
+/* 양식 대화상자: 창 폭이 아니라 대화상자 안에서 12열 (칸마다 --Catui_span), 좁은 창·드로어는 1열 */
+.Catui_layer-form{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--Catui_space-4) var(--Catui_space-3)}
+.Catui_layer-form > *{grid-column:span var(--Catui_span,12)}
+.Catui_layer-form > [role="alert"]{grid-column:1 / -1}
+.Catui_drawer .Catui_layer-form > *{grid-column:1 / -1}
+@media (max-width:767px){.Catui_layer-form > *{grid-column:1 / -1}}
+.Catui_layer-form > [hidden]{display:none}
