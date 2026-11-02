@@ -3,6 +3,14 @@
   "version": "2.0.0",
   "license": "MIT",
   "author": "imcatDevs <imcat@imcat.dev>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ckim19800220-cpu/Catui_design.git"
+  },
+  "homepage": "https://github.com/ckim19800220-cpu/Catui_design#readme",
+  "bugs": {
+    "url": "https://github.com/ckim19800220-cpu/Catui_design/issues"
+  },
   "description": "한국어 관리 화면·공개 홈을 위한 CSS 키트와 의존성 없는 UI 프레임워크 catui.js",
   "keywords": [
     "ui",

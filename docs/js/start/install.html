@@ -31,6 +31,19 @@
 <h1 class="Catui_h1">설치</h1>
 <p class="Catui_lead">전역 스크립트·ES 모듈·전역 설정.</p>
 
+<section aria-labelledby="npm">
+<h2 id="npm">npm · CDN</h2>
+<pre><code>npm install @imcat-ckim/catui
+
+import catui, { layer } from '@imcat-ckim/catui';      // ESM + TypeScript 타입
+import '@imcat-ckim/catui/css';
+
+&lt;!-- CDN (아이콘 icons.svg는 같은 폴더에서 자동으로 찾음) --&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@imcat-ckim/catui@2/dist/catui.min.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@imcat-ckim/catui@2/dist/catui.min.js"&gt;&lt;/script&gt;</code></pre>
+<p>이름 정리: 제품 이름 <b>Catui</b>, npm 패키지 <code>@imcat-ckim/catui</code>, 전역 객체 <code>window.catui</code>, 파일 <code>catui.*</code>, CSS 클래스 <code>Catui_</code>.</p>
+</section>
+
 <section aria-labelledby="global">
 <h2 id="global">전역 스크립트</h2>
 <pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
@@ -64,7 +77,7 @@ catui.use(['layer', 'form'], function (layer, form) {
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/start/introduction.html"><span>이전</span>소개</a><a class="doc-pager-next" href="../../js/start/concepts.html"><span>다음</span>핵심 개념</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#global">전역 스크립트</a></li><li><a href="#esm">ES 모듈</a></li><li><a href="#config">전역 설정</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#npm">npm · CDN</a></li><li><a href="#global">전역 스크립트</a></li><li><a href="#esm">ES 모듈</a></li><li><a href="#config">전역 설정</a></li></ul></aside>
 </div>
 </div>
 <script src="../../assets/docs.js"></script>
