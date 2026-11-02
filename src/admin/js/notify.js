@@ -17,7 +17,7 @@ admin.notify = {
     pop.hidden = true;
     pop.setAttribute("aria-labelledby", "adm-notify-t");
     pop.tabIndex = -1;
-    document.body.appendChild(pop);
+    root.appendChild(pop);   // 셸 루트 안에 둬야 Catui 기본 글꼴·크기·목록 리셋이 적용된다 (body에 두면 브라우저 기본 16px)
     this.pop = pop;
     btn.setAttribute("aria-haspopup", "dialog");
     btn.setAttribute("aria-controls", pop.id);

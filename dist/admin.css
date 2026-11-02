@@ -19,7 +19,14 @@
 /* admin/shell.css */
 /* 관리 셸 확장 — layout/app-shell.css(.Catui_app·side·topbar·menu·item·nest)를 그대로 쓰고,
    그룹형 하위 메뉴 · 접힘(레일) · 991px 이하 서랍 · 상단 바 동작 · 바닥글만 더한다. 모든 규칙은 .Catui_adm 아래. */
+/* 템플릿 <body>: Catui 리셋은 루트 클래스 안에서만 적용되므로 브라우저 기본 여백(8px)을 여기서 없앤다 */
+.Catui_adm-body{margin:0;background:var(--Catui_color-surface-muted)}
 .Catui_adm{min-height:100vh;background:var(--Catui_adm-bg)}
+/* 사이드바 메뉴 스크롤: 얇게, 사이드바 색에 맞춰 */
+.Catui_adm .Catui_menu{scrollbar-width:thin;scrollbar-color:var(--Catui_sidebar-hover-bg) transparent}
+.Catui_adm .Catui_menu::-webkit-scrollbar{width:var(--Catui_space-2)}
+.Catui_adm .Catui_menu::-webkit-scrollbar-thumb{background:var(--Catui_sidebar-hover-bg);border-radius:var(--Catui_radius-pill)}
+.Catui_adm .Catui_menu::-webkit-scrollbar-track{background:transparent}
 .Catui_adm-blank{min-height:100vh;background:var(--Catui_color-surface-muted)}
 /* 관리 화면 안에서는 hidden이 컴포넌트의 display(flex·grid)보다 항상 이긴다 (일괄 작업 바·요약 등) */
 .Catui_adm [hidden],.Catui_adm-blank [hidden]{display:none !important}
