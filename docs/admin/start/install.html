@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설치 · CatuiAdmin · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="admin.css · catadmin.js 로드 순서, npm · CDN.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../../dist/admin.css">
+<script src="../../../dist/catui.js"></script>
+<script src="../../../dist/catadmin.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html" aria-current="page">CatuiAdmin</a></nav>
+  <span class="doc-version">v2.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CatuiAdmin 메뉴</summary><nav aria-label="CatuiAdmin 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../admin/start/introduction.html">소개 · 화면 지도</a></li><li><a href="../../admin/start/install.html" aria-current="page">설치</a></li><li><a href="../../admin/start/structure.html">구조 · 새 화면 만들기</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../../admin/modules.html">catadmin.js API</a></li><li><a href="../../admin/css.html">admin.css 클래스</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CatuiAdmin · 시작</p>
+<h1 class="Catui_h1">설치</h1>
+<p class="Catui_lead">admin.css · catadmin.js 로드 순서, npm · CDN.</p>
+
+<section aria-labelledby="files">
+<h2 id="files">배포 파일</h2>
+<p>CatuiAdmin은 <code>@imcat-ckim/catui</code> 패키지 안에 함께 들어 있습니다. 본체 다음에 불러옵니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl">
+<caption class="Catui_clip">CatuiAdmin 파일</caption>
+<thead><tr><th scope="col">파일</th><th scope="col">내용</th></tr></thead>
+<tbody>
+<tr><td><code>dist/admin.min.css</code> (<code>admin.css</code>)</td><td>관리 화면 확장 스타일 — catui.min.css 다음</td></tr>
+<tr><td><code>dist/catadmin.min.js</code> (+ <code>.map</code>)</td><td>전역 <code>catui.admin</code> — catui.js 다음 (순서가 틀리면 콘솔에 안내)</td></tr>
+<tr><td><code>dist/catadmin.esm.js</code> · <code>catadmin.esm.min.js</code></td><td>ES 모듈 (<code>./catui.esm.js</code>를 가져옴)</td></tr>
+<tr><td><code>dist/catadmin.d.ts</code></td><td>TypeScript 타입</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="global">
+<h2 id="global">전역 스크립트</h2>
+<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+&lt;link rel="stylesheet" href="dist/admin.min.css"&gt;
+…
+&lt;script src="dist/catui.min.js"&gt;&lt;/script&gt;
+&lt;script src="dist/catadmin.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+catui.use(function () {
+  catui.admin.on('theme', function (d) { console.log('테마', d.value); });
+});
+&lt;/script&gt;</code></pre>
+<p>문서가 준비되면 <code>[data-catui-adm]</code> 셸을 찾아 자동으로 연결합니다 (<code>catui.config({ autoInit: false })</code>면 <code>catui.admin.init()</code>을 직접 부르세요).</p>
+</section>
+
+<section aria-labelledby="npm">
+<h2 id="npm">npm · ES 모듈</h2>
+<pre><code>npm install @imcat-ckim/catui
+
+import catui from '@imcat-ckim/catui';
+import admin from '@imcat-ckim/catui/admin';     // catui.admin 등록 + 자동 초기화
+import '@imcat-ckim/catui/css';
+import '@imcat-ckim/catui/admin.css';</code></pre>
+</section>
+
+<section aria-labelledby="tpl">
+<h2 id="tpl">템플릿으로 시작</h2>
+<ol>
+  <li><a href="../../admin/start/introduction.html#map">화면 지도</a>에서 가까운 화면을 고릅니다.</li>
+  <li>저장소의 <code>templates/admin/pages/화면.html</code>을 복사하고 머리 주석(제목·경로)과 본문을 바꿉니다.</li>
+  <li><code>npm run build</code> — 사이드바·상단 바·바닥글을 붙여 <code>docs/admin/templates/</code>에 만들고 검사합니다.</li>
+</ol>
+<p>빌드를 쓰지 않는다면 만들어진 <code>docs/admin/templates/*.html</code>을 그대로 서버 템플릿으로 옮겨 쓰면 됩니다.</p>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../admin/start/introduction.html"><span>이전</span>소개 · 화면 지도</a><a class="doc-pager-next" href="../../admin/start/structure.html"><span>다음</span>구조 · 새 화면 만들기</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#files">배포 파일</a></li><li><a href="#global">전역 스크립트</a></li><li><a href="#npm">npm · ES 모듈</a></li><li><a href="#tpl">템플릿으로 시작</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+/* admin/commerce.css */
+/* 커머스·프로젝트 화면 — 상품 격자·상세 갤러리·가격·주문 요약·청구서(인쇄)·요금표·프로젝트 카드 */
+
+/* 이미지 자리표시자: 토큰 색 + 가운데 아이콘 (다크 모드에서도 맞음). 실서비스는 <img>로 바꾼다 */
+.Catui_adm-ph{display:grid;place-items:center;aspect-ratio:4 / 3;background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong)}
+.Catui_adm-ph .Catui_icon{width:var(--Catui_space-8);height:var(--Catui_space-8);opacity:.7}
+.Catui_adm-ph-2{background:var(--Catui_color-info-soft);color:var(--Catui_color-info)}
+.Catui_adm-ph-3{background:var(--Catui_color-purple-soft);color:var(--Catui_color-purple)}
+.Catui_adm-ph-4{background:var(--Catui_color-amber-soft);color:var(--Catui_color-amber)}
+
+/* 상품 격자 */
+.Catui_adm-products{display:grid;gap:var(--Catui_adm-gap);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 3.4),1fr))}
+.Catui_adm-product{overflow:hidden;transition:box-shadow var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_adm-product:hover,.Catui_adm-product:focus-within{box-shadow:var(--Catui_shadow-md)}
+.Catui_adm-product .Catui_card-b{display:grid;gap:var(--Catui_space-1)}
+.Catui_adm-product a{color:inherit;font-weight:600}
+.Catui_adm-product a:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+
+/* 가격: 할인 전 가격은 줄 긋고, 할인율은 색+숫자로 */
+.Catui_adm-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--Catui_space-2);font-variant-numeric:tabular-nums}
+.Catui_adm-price b{font-size:var(--Catui_type-h3-size)}
+.Catui_adm-price s{color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size)}
+.Catui_adm-price em{font-style:normal;font-weight:700;color:var(--Catui_color-danger)}
+.Catui_adm-price-lg b{font-size:var(--Catui_type-h1-size)}
+
+/* 상품 상세: 갤러리 + 정보 */
+.Catui_adm-pdp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--Catui_space-8);align-items:start}
+@media (max-width:991px){.Catui_adm-pdp{grid-template-columns:minmax(0,1fr)}}
+.Catui_adm-gallery{display:grid;gap:var(--Catui_space-3)}
+.Catui_adm-gallery > .Catui_adm-ph{border-radius:var(--Catui_radius-lg);aspect-ratio:1 / 1}
+.Catui_adm-gallery-thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--Catui_space-2)}
+.Catui_adm-gallery-thumbs button{padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-md);overflow:hidden;background:none;cursor:pointer}
+.Catui_adm-gallery-thumbs button[aria-pressed="true"]{border-color:var(--Catui_color-brand-strong)}
+.Catui_adm-gallery-thumbs button:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_adm-gallery-thumbs .Catui_adm-ph{aspect-ratio:1 / 1}
+
+/* 요약 행 (주문·청구 금액) */
+.Catui_adm-sum{display:grid;gap:var(--Catui_space-2)}
+.Catui_adm-sum > div{display:flex;justify-content:space-between;gap:var(--Catui_space-3);font-variant-numeric:tabular-nums}
+.Catui_adm-sum-total{padding-top:var(--Catui_space-2);border-top:1px solid var(--Catui_color-border);font-weight:700;font-size:var(--Catui_type-h3-size)}
+
+/* 청구서: 종이 한 장처럼, 인쇄 시 셸 없이 그 장만 */
+.Catui_adm-invoice{max-width:calc(var(--Catui_space-10) * 13);margin-inline:auto;padding:var(--Catui_space-8);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);box-shadow:var(--Catui_shadow-sm)}
+.Catui_adm-invoice-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--Catui_space-4);padding-bottom:var(--Catui_space-5);margin-bottom:var(--Catui_space-5);border-bottom:2px solid var(--Catui_color-text-primary)}
+.Catui_adm-invoice-parties{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-5);margin-bottom:var(--Catui_space-5)}
+.Catui_adm-invoice .Catui_adm-sum{max-width:calc(var(--Catui_space-10) * 5);margin-left:auto;margin-top:var(--Catui_space-5)}
+@media (max-width:767px){.Catui_adm-invoice{padding:var(--Catui_space-5)}.Catui_adm-invoice-parties{grid-template-columns:minmax(0,1fr)}}
+@media print{
+  .Catui_adm-noprint{display:none}
+  .Catui_adm-invoice{max-width:none;border:0;box-shadow:none;padding:0}
+}
+
+/* 요금표 */
+.Catui_adm-plans{display:grid;gap:var(--Catui_adm-gap);grid-template-columns:repeat(auto-fit,minmax(calc(var(--Catui_space-10) * 4),1fr));align-items:stretch}
+.Catui_adm-plan .Catui_card-b{display:flex;flex-direction:column;gap:var(--Catui_space-4);height:100%}
+.Catui_adm-plan ul{display:grid;gap:var(--Catui_space-2);margin:0;padding:0;list-style:none;flex:1}
+.Catui_adm-plan li{display:flex;gap:var(--Catui_space-2);align-items:flex-start}
+.Catui_adm-plan li .Catui_icon{color:var(--Catui_color-brand-strong);flex:none;margin-top:2px}
+.Catui_adm-plan li[aria-disabled="true"]{color:var(--Catui_color-text-secondary)}
+.Catui_adm-plan li[aria-disabled="true"] .Catui_icon{color:var(--Catui_color-text-secondary)}
+.Catui_adm-plan-badge{align-self:flex-start}
+
+/* 프로젝트 카드 */
+.Catui_adm-projects{display:grid;gap:var(--Catui_adm-gap);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 4.4),1fr))}
+.Catui_adm-project .Catui_card-b{display:grid;gap:var(--Catui_space-3)}
+.Catui_adm-project-h{display:flex;align-items:center;gap:var(--Catui_space-3)}
+.Catui_adm-project-h a{color:inherit;font-weight:700}
+.Catui_adm-project-f{display:flex;align-items:center;justify-content:space-between;gap:var(--Catui_space-3)}

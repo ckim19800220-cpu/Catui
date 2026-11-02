@@ -1,0 +1,55 @@
+<!-- title: 채팅 | crumb: 앱 / 채팅 -->
+<h1 class="Catui_clip">채팅</h1>
+<div class="Catui_adm-split" id="ct-split">
+  <section class="Catui_adm-pane" aria-labelledby="ct-list-t">
+    <div class="Catui_adm-pane-h"><h2 id="ct-list-t">상담 <span class="Catui_count" aria-label="읽지 않음 3건">3</span></h2></div>
+    <div class="Catui_adm-pane-f"><div class="Catui_search">{{icon:search}}<label class="Catui_clip" for="ct-q">대화 찾기</label><input class="Catui_input" id="ct-q" type="search" placeholder="이름·내용"></div></div>
+    <div class="Catui_adm-pane-b" style="padding:0"><ul class="Catui_adm-rows" id="ct-rooms"></ul></div>
+  </section>
+  <section class="Catui_adm-pane" aria-labelledby="ct-room-t">
+    <div class="Catui_adm-pane-h">
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon Catui_adm-back" type="button" data-catui-adm-back aria-label="대화 목록으로">{{icon:chevron-left}}</button>
+      <span class="Catui_av Catui_av-sm" aria-hidden="true" id="ct-room-av">박</span>
+      <h2 id="ct-room-t">박서연</h2><span class="Catui_status Catui_status-on" aria-hidden="true"></span><span class="Catui_help" id="ct-room-st">온라인</span>
+      <div class="Catui_actions" style="margin-left:auto"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="주문 정보 보기">{{icon:receipt}}</button></div>
+    </div>
+    <div class="Catui_adm-chat" id="ct-log"><div class="Catui_chat" role="log" aria-label="대화 기록" aria-live="polite"></div></div>
+    <div class="Catui_adm-pane-f">
+      <form class="Catui_chat-input" id="ct-form" aria-label="메시지 보내기"><label class="Catui_clip" for="ct-msg">메시지</label><input class="Catui_input" id="ct-msg" placeholder="메시지 입력 후 Enter" autocomplete="off"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">{{icon:send}}보내기</button></form>
+    </div>
+  </section>
+</div>
+<script>
+catui.use(function () {
+  var rooms = [
+    { id: 'r1', name: '박서연', last: '배송지를 바꿀 수 있을까요?', time: '09:12', unread: 2, online: true, msgs: [['박서연', '안녕하세요, 주문 #1044 문의드려요.', '09:10'], ['박서연', '배송지를 바꿀 수 있을까요?', '09:12']] },
+    { id: 'r2', name: '이준', last: '환불 처리됐나요?', time: '08:47', unread: 1, online: false, msgs: [['이준', '어제 반품 보냈습니다.', '08:40'], ['', '확인 후 오늘 안에 환불해 드리겠습니다.', '08:45'], ['이준', '환불 처리됐나요?', '08:47']] },
+    { id: 'r3', name: '최민', last: '감사합니다!', time: '어제', unread: 0, online: true, msgs: [['최민', '쿠폰이 적용이 안 돼요', '어제'], ['', '쿠폰 번호를 다시 발급해 드렸습니다.', '어제'], ['최민', '감사합니다!', '어제']] },
+    { id: 'r4', name: '정수아', last: '재입고 알림 신청할게요', time: '10/31', unread: 0, online: false, msgs: [['정수아', '재입고 알림 신청할게요', '10/31']] },
+  ];
+  var split = catui.admin.split('#ct-split'), list = document.getElementById('ct-rooms'), cur = rooms[0];
+  var chat = catui.admin.chat({ log: '#ct-log', form: '#ct-form', me: '김관리' });
+  var drawList = function () {
+    var t = document.getElementById('ct-q').value.trim();
+    catui.mount(list, catui.html`${rooms.filter(function (r) { return !t || r.name.indexOf(t) > -1 || r.last.indexOf(t) > -1; }).map(function (r) {
+      return catui.html`<li><button class="Catui_adm-row${r.unread ? ' Catui_adm-row-unread' : ''}" type="button" data-room="${r.id}" aria-current="${r === cur}"><span class="Catui_av Catui_av-md" aria-hidden="true">${r.name.slice(0, 1)}</span><span class="Catui_adm-row-title">${r.name}${r.unread ? catui.html`<span class="Catui_clip"> 읽지 않음 ${r.unread}건</span>` : ''}</span><span class="Catui_adm-row-time">${r.time}</span><span class="Catui_adm-row-sub">${r.last}</span></button></li>`; })}`);
+  };
+  var open = function (r) {
+    cur = r; r.unread = 0;
+    document.getElementById('ct-room-t').textContent = r.name; document.getElementById('ct-room-av').textContent = r.name.slice(0, 1);
+    document.getElementById('ct-room-st').textContent = r.online ? '온라인' : '자리 비움';
+    var log = document.querySelector('#ct-log .Catui_chat');
+    catui.mount(log, catui.html`<span class="Catui_chat-day">11월 2일</span>`);
+    r.msgs.forEach(function (m) { var el = chat.add(m[1], m[0] || undefined); el.querySelector('time').textContent = m[2]; });
+    drawList();
+  };
+  list.addEventListener('click', function (e) { var b = e.target.closest('[data-room]'); if (!b) return; open(rooms.find(function (r) { return r.id === b.dataset.room; })); split.show('detail'); document.getElementById('ct-msg').focus(); });
+  document.getElementById('ct-q').addEventListener('input', drawList);
+  // 데모: 보내면 1.2초 뒤 상대가 답장
+  catui.admin.on('chat', function (d) {
+    cur.msgs.push(['', d.text, '']); cur.last = d.text; cur.time = catui.util.toDateString(new Date(), 'HH:mm'); drawList();
+    var r = cur; setTimeout(function () { if (cur === r) { chat.add('네, 확인했습니다. 감사합니다!', r.name); r.msgs.push([r.name, '네, 확인했습니다. 감사합니다!', '']); } }, 1200);
+  });
+  open(cur);
+});
+</script>

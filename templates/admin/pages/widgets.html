@@ -1,0 +1,32 @@
+<!-- title: 위젯 | crumb: UI / 위젯 -->
+<div class="Catui_adm-head"><div><h1 class="Catui_h1">위젯</h1><p>대시보드에 끼워 넣는 카드 묶음 — 선언형 속성만으로 숫자·차트·시간이 움직입니다</p></div></div>
+<section class="Catui_adm-stats" aria-label="지표 위젯">
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:users:18}}</span><span class="Catui_stat-label">회원</span><span class="Catui_stat-value" data-catui-adm-count>48,210</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 2.1%<span class="Catui_clip"> 증가</span></span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:shopping-cart:18}}</span><span class="Catui_stat-label">장바구니</span><span class="Catui_stat-value" data-catui-adm-count>1,932</span><div class="Catui_adm-chart Catui_sparkline" data-catui-adm-chart="spark" data-catui-adm-label="장바구니 추이" data-catui-adm-data='{"series":[{"data":[12,14,13,17,16,19,21]}]}'></div></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:star:18}}</span><span class="Catui_stat-label">평균 별점</span><span class="Catui_stat-value" data-catui-adm-count>4.7</span><span class="Catui_adm-stat-sub">리뷰 2,418개</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:clock:18}}</span><span class="Catui_stat-label">평균 응답</span><span class="Catui_stat-value" data-catui-adm-count>12분</span><span class="Catui_adm-stat-sub">상담 기준</span></div></article>
+</section>
+<div class="Catui_grid">
+  <article class="Catui_card Catui_span-4"><header class="Catui_card-h">목표</header><div class="Catui_card-b Catui_vstack Catui_gap-3">
+    <div class="Catui_adm-kpi"><b data-catui-adm-count>87%</b><span class="Catui_help">11월 매출 목표</span></div>
+    <div class="Catui_meter" role="img" aria-label="87퍼센트"><i style="width:87%"></i></div>
+    <p class="Catui_segbar" role="img" aria-label="신규 입점 10곳 중 6곳"><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i></i><i></i><i></i><i></i></p>
+  </div></article>
+  <article class="Catui_card Catui_span-4"><header class="Catui_card-h">실시간 활동</header><div class="Catui_card-b"><div class="Catui_feed Catui_adm-feed">
+    <div class="Catui_feed-item"><span class="Catui_av Catui_av-sm" aria-hidden="true">한</span><p>한소리 님 주문</p><time class="Catui_feed-time" data-catui-adm-ago="2026-11-02T10:05:00+09:00">방금</time></div>
+    <div class="Catui_feed-item"><span class="Catui_av Catui_av-sm" aria-hidden="true">오</span><p>오세린 님 리뷰 ★5</p><time class="Catui_feed-time" data-catui-adm-ago="2026-11-02T09:58:00+09:00">방금</time></div>
+    <div class="Catui_feed-item"><span class="Catui_av Catui_av-sm" aria-hidden="true">임</span><p>임도윤 님 가입</p><time class="Catui_feed-time" data-catui-adm-ago="2026-11-02T09:31:00+09:00">방금</time></div>
+  </div></div></article>
+  <article class="Catui_card Catui_span-4"><header class="Catui_card-h">채널 비율</header><div class="Catui_card-b">
+    <div class="Catui_adm-chart Catui_adm-chart-sm" data-catui-adm-chart="donut" data-catui-adm-label="채널 비율" data-catui-adm-data='{"labels":["자사몰","오픈마켓","오프라인"],"data":[61,30,9]}'></div>
+  </div></article>
+</div>
+<article class="Catui_card"><header class="Catui_card-h">선언형 속성</header><div class="Catui_card-b Catui_adm-flush"><table class="Catui_tbl Catui_tbl-compact">
+  <caption class="Catui_clip">CatuiAdmin 위젯 속성</caption>
+  <thead><tr><th scope="col">속성</th><th scope="col">하는 일</th></tr></thead>
+  <tbody>
+    <tr><td><code>data-catui-adm-count</code></td><td>화면에 보이면 0부터 그 값까지 세어 올라감 (쉼표·소수·단위 유지, 모션 줄이기면 생략)</td></tr>
+    <tr><td><code>data-catui-adm-chart="area|line|bar|donut|spark"</code> + <code>data-catui-adm-data</code></td><td>캔버스 차트 — 토큰 색, 다크 전환 시 다시 그림, 화면 낭독기 요약</td></tr>
+    <tr><td><code>data-catui-adm-ago="ISO 날짜"</code></td><td>"5분 전" 형식, 1분마다 갱신</td></tr>
+    <tr><td><code>data-catui-adm-pref="키"</code></td><td>체크·스위치 값을 기억</td></tr>
+  </tbody></table></div></article>

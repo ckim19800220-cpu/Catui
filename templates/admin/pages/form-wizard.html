@@ -1,0 +1,58 @@
+<!-- title: 단계 | crumb: 폼 / 단계 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">입점 신청</h1><p>단계마다 검사하고, 마지막에 입력한 내용을 확인합니다</p></div>
+</div>
+
+<article class="Catui_card">
+  <div class="Catui_card-b Catui_vstack Catui_gap-6">
+    <div id="wz-steps"></div>
+    <form id="wz-form" data-catui-filter="wz-form" novalidate>
+      <div id="wz-panels">
+        <div class="Catui_step-panel"><div class="Catui_adm-cols">
+          <div class="Catui_field"><label class="Catui_label" for="wz-co">상호 <span class="Catui_req">필수</span></label><input class="Catui_input" id="wz-co" name="company" data-catui-verify="required"></div>
+          <div class="Catui_field"><label class="Catui_label" for="wz-biz">사업자 번호 <span class="Catui_req">필수</span></label><input class="Catui_input" id="wz-biz" name="biz" inputmode="numeric" placeholder="000-00-00000" data-catui-verify="required|len:12"></div>
+          <div class="Catui_field"><label class="Catui_label" for="wz-ceo">대표자 <span class="Catui_req">필수</span></label><input class="Catui_input" id="wz-ceo" name="ceo" data-catui-verify="required"></div>
+          <div class="Catui_field"><label class="Catui_label" for="wz-mail">연락 이메일 <span class="Catui_req">필수</span></label><input class="Catui_input" id="wz-mail" name="email" type="email" data-catui-verify="required|email"></div>
+        </div></div>
+        <div class="Catui_step-panel"><div class="Catui_vstack Catui_gap-4">
+          <fieldset class="Catui_optcards"><legend class="Catui_label">요금제</legend>
+            <input class="Catui_clip" type="radio" name="plan" id="wz-p1" value="기본" checked><label class="Catui_optcard" for="wz-p1"><span class="Catui_optcard-title">기본</span><span class="Catui_optcard-text">수수료 10% · 상품 100개</span><span class="Catui_optcard-price">무료</span></label>
+            <input class="Catui_clip" type="radio" name="plan" id="wz-p2" value="성장"><label class="Catui_optcard" for="wz-p2"><span class="Catui_optcard-title">성장</span><span class="Catui_optcard-text">수수료 7% · 상품 무제한</span><span class="Catui_optcard-price">월 49,000원</span></label>
+          </fieldset>
+          <div class="Catui_field"><label class="Catui_label" for="wz-cat">주 판매 분류</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="wz-cat" name="category"><option>전자기기</option><option>생활</option><option>패션</option><option>식품</option></select>{{icon:chevron-down}}</div></div>
+        </div></div>
+        <div class="Catui_step-panel"><div class="Catui_vstack Catui_gap-4">
+          <div class="Catui_field"><label class="Catui_label" for="wz-bank">정산 은행 <span class="Catui_req">필수</span></label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="wz-bank" name="bank" data-catui-verify="required"><option value="">선택</option><option>국민</option><option>신한</option><option>우리</option><option>하나</option></select>{{icon:chevron-down}}</div></div>
+          <div class="Catui_field"><label class="Catui_label" for="wz-acc">계좌 번호 <span class="Catui_req">필수</span></label><input class="Catui_input" id="wz-acc" name="account" inputmode="numeric" data-catui-verify="required|int"></div>
+        </div></div>
+        <div class="Catui_step-panel">
+          <h2 class="Catui_h3">입력 확인</h2>
+          <dl class="Catui_dl" id="wz-review"></dl>
+          <label class="Catui_choice"><input class="Catui_clip" type="checkbox" id="wz-agree"><span class="Catui_cbx">{{icon:check:12}}</span>입점 약관에 동의합니다</label>
+        </div>
+      </div>
+    </form>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="wz-prev">이전</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="wz-next">다음</button></div>
+  </div>
+</article>
+<script>
+catui.use(['page', 'form', 'layer'], function (page, form, layer) {
+  var panels = document.getElementById('wz-panels').children, next = document.getElementById('wz-next');
+  var LABEL = { company: '상호', biz: '사업자 번호', ceo: '대표자', email: '이메일', plan: '요금제', category: '분류', bank: '은행', account: '계좌' };
+  var w = page.steps.render({ elem: '#wz-steps', data: ['사업자 정보', '요금제', '정산 계좌', '확인'], panels: '#wz-panels',
+    before: function (from, to) { return to < from || form.validate(panels[from]); },
+    change: function (i) {
+      next.textContent = i === 3 ? '신청하기' : '다음';
+      if (i === 3) {
+        var v = form.val('wz-form'), dl = document.getElementById('wz-review'); dl.replaceChildren();
+        Object.keys(LABEL).forEach(function (k) { var dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = LABEL[k]; dd.textContent = v[k] || '—'; dl.append(dt, dd); });
+      }
+    } });
+  document.getElementById('wz-prev').addEventListener('click', function () { w.prev(); });
+  next.addEventListener('click', function () {
+    if (w.getIndex() < 3) { w.next(); return; }
+    if (!document.getElementById('wz-agree').checked) { layer.msg('약관에 동의해 주세요', { icon: 'warn' }); return; }
+    layer.alert('입점 신청을 받았습니다. 영업일 기준 2일 안에 메일로 결과를 알려 드립니다.', { title: '신청 완료' });
+  });
+});
+</script>

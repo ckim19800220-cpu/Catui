@@ -1,0 +1,23 @@
+<section aria-labelledby="rules">
+<h2 id="rules">규칙</h2>
+<ul>
+  <li>클래스는 <code>Catui_adm-*</code>, 토큰은 <code>--Catui_adm-*</code>(본체 토큰을 참조만). 새 색 값은 만들지 않습니다.</li>
+  <li>본체 클래스를 덮어쓰지 않습니다 — 본체 클래스에 스타일을 더할 때는 항상 <code>.Catui_adm …</code> 아래로 한정합니다. 그래서 admin.css를 불러와도 관리 화면 밖은 바뀌지 않습니다.</li>
+  <li>반응형 기준은 본체와 같습니다: 1199 · 991 · 767 · 479px.</li>
+</ul>
+</section>
+
+<section aria-labelledby="tokens">
+<h2 id="tokens">토큰</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl">
+<caption class="Catui_clip">admin 토큰</caption>
+<thead><tr><th scope="col">토큰</th><th scope="col">기본값</th></tr></thead>
+<tbody>
+<tr><td><code>--Catui_adm-bg</code></td><td><code>--Catui_color-surface-muted</code> (본문 배경)</td></tr>
+<tr><td><code>--Catui_adm-side-w</code> · <code>--Catui_adm-rail-w</code></td><td>사이드바 폭 · 접힌 폭</td></tr>
+<tr><td><code>--Catui_adm-gap</code> · <code>--Catui_adm-pad</code></td><td>카드 간격 · 본문 여백</td></tr>
+<tr><td><code>--Catui_adm-chart-h</code></td><td>차트 높이 (<code>Catui_adm-chart-lg</code> 1.5배 · <code>-sm</code> 0.7배)</td></tr>
+<tr><td><code>--Catui_adm-dur</code> · <code>--Catui_adm-drawer-shadow</code> · <code>--Catui_adm-scrim</code></td><td>전환 시간 · 서랍 그림자 · 가림막</td></tr>
+</tbody></table></div>
+<p>예: 사이드바를 넓히려면 <code>.Catui_adm{--Catui_adm-side-w:260px}</code>.</p>
+</section>

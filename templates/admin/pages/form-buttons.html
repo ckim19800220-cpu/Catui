@@ -1,0 +1,83 @@
+<!-- title: 버튼 | crumb: 폼 / 버튼 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">버튼</h1><p>종류 · 크기 · 아이콘 · 상태 · 묶음 — 위험한 동작은 빨강과 확인 창을 함께 씁니다</p></div>
+</div>
+
+<div class="Catui_adm-showcase">
+  <article class="Catui_card"><header class="Catui_card-h">종류</header><div class="Catui_card-b">
+    <div class="Catui_adm-demo">
+      <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">저장</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">취소</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button">더 보기</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button" id="fb-del">삭제</button>
+    </div>
+    <p class="Catui_help">한 화면에 주 버튼(초록)은 하나만 둡니다.</p>
+  </div></article>
+
+  <article class="Catui_card"><header class="Catui_card-h">크기</header><div class="Catui_card-b">
+    <div class="Catui_adm-demo">
+      <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button">작게</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">보통</button>
+      <button class="Catui_btn Catui_btn-lg Catui_btn-secondary" type="button">크게</button>
+    </div>
+  </div></article>
+
+  <article class="Catui_card"><header class="Catui_card-h">아이콘</header><div class="Catui_card-b">
+    <div class="Catui_adm-demo">
+      <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">{{icon:plus}}새 주문</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">{{icon:download}}내려받기</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" aria-label="수정">{{icon:pen-line}}</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" aria-label="공유">{{icon:share}}</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" aria-label="삭제">{{icon:trash-2}}</button>
+    </div>
+    <p class="Catui_help">아이콘만 있는 버튼은 aria-label로 이름을 줍니다.</p>
+  </div></article>
+
+  <article class="Catui_card"><header class="Catui_card-h">상태</header><div class="Catui_card-b">
+    <div class="Catui_adm-demo">
+      <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="fb-load">보내기</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" disabled>비활성</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" aria-pressed="true" id="fb-toggle">{{icon:star}}즐겨찾기 켬</button>
+    </div>
+    <p class="Catui_help">"보내기"를 누르면 2초간 바쁨(aria-busy) 상태가 됩니다.</p>
+  </div></article>
+
+  <article class="Catui_card"><header class="Catui_card-h">분할 버튼 · 묶음</header><div class="Catui_card-b">
+    <div class="Catui_adm-demo">
+      <div class="Catui_splitbtn">
+        <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">저장</button>
+        <details class="Catui_dd"><summary class="Catui_btn Catui_btn-md Catui_btn-primary" aria-label="다른 저장 방법">{{icon:chevron-down}}</summary>
+          <div class="Catui_dd-menu Catui_dd-sm"><button class="Catui_dd-item" type="button">초안으로 저장</button><button class="Catui_dd-item" type="button">저장 후 새로 만들기</button></div></details>
+      </div>
+    </div>
+    <div class="Catui_adm-demo">
+      <div class="Catui_segment" role="radiogroup" aria-label="보기 방식">
+        <input class="Catui_clip" type="radio" name="fb-view" id="fb-v1" checked><label for="fb-v1">목록</label>
+        <input class="Catui_clip" type="radio" name="fb-view" id="fb-v2"><label for="fb-v2">카드</label>
+        <input class="Catui_clip" type="radio" name="fb-view" id="fb-v3"><label for="fb-v3">달력</label>
+      </div>
+    </div>
+  </div></article>
+
+  <article class="Catui_card"><header class="Catui_card-h">도구 막대</header><div class="Catui_card-b">
+    <div class="Catui_toolbar" role="toolbar" aria-label="주문 도구">
+      <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button">{{icon:filter}}필터</button>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button">{{icon:arrow-up-down}}정렬</button>
+      <div class="Catui_toolbar-end"><button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button">{{icon:plus}}추가</button></div>
+    </div>
+  </div></article>
+</div>
+<script>
+catui.use(['layer'], function (layer) {
+  document.getElementById('fb-del').addEventListener('click', function () {
+    layer.confirm('주문 #1046을 삭제할까요? 되돌릴 수 없습니다.', { title: '주문 삭제', okText: '삭제', danger: true }, function (i) { layer.close(i); layer.msg('삭제했습니다', { icon: 'success' }); });
+  });
+  var b = document.getElementById('fb-load');
+  b.addEventListener('click', function () {
+    b.disabled = true; b.setAttribute('aria-busy', 'true'); b.textContent = '보내는 중…';
+    setTimeout(function () { b.disabled = false; b.removeAttribute('aria-busy'); b.textContent = '보내기'; layer.msg('보냈습니다', { icon: 'success' }); }, 2000);
+  });
+  var t = document.getElementById('fb-toggle');
+  t.addEventListener('click', function () { var on = t.getAttribute('aria-pressed') !== 'true'; t.setAttribute('aria-pressed', String(on)); t.lastChild.textContent = on ? '즐겨찾기 켬' : '즐겨찾기 끔'; });
+});
+</script>

@@ -1,0 +1,58 @@
+<!-- title: 시스템 상태 | crumb: 대시보드 / 시스템 상태 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">시스템 상태</h1><p>모든 서비스 정상 · 마지막 확인 <time data-catui-adm-ago="2026-11-02T10:00:00+09:00">방금</time></p></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">{{icon:refresh-cw}}다시 확인</button></div>
+</div>
+
+<section class="Catui_adm-stats" aria-label="서버 자원">
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:cpu:18}}</span><span class="Catui_stat-label">CPU</span><span class="Catui_stat-value" data-catui-adm-count>42%</span><span class="Catui_adm-stat-sub">8코어 · 평균</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:memory:18}}</span><span class="Catui_stat-label">메모리</span><span class="Catui_stat-value" data-catui-adm-count>68%</span><span class="Catui_adm-stat-sub">21.8GB / 32GB</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:hard-drive:18}}</span><span class="Catui_stat-label">디스크</span><span class="Catui_stat-value" data-catui-adm-count>71%</span><span class="Catui_adm-stat-sub">355GB / 500GB</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:activity:18}}</span><span class="Catui_stat-label">평균 응답</span><span class="Catui_stat-value" data-catui-adm-count>182ms</span><span class="Catui_adm-stat-sub">p95 410ms</span></div></article>
+</section>
+
+<div class="Catui_grid">
+  <article class="Catui_card Catui_span-8">
+    <header class="Catui_card-h">응답 시간 <span class="Catui_adm-card-meta">최근 1시간 · ms</span></header>
+    <div class="Catui_card-b">
+      <div class="Catui_adm-chart Catui_adm-chart-lg" data-catui-adm-chart="line" data-catui-adm-label="최근 1시간 응답 시간"
+        data-catui-adm-data='{"labels":["09:00","09:05","09:10","09:15","09:20","09:25","09:30","09:35","09:40","09:45","09:50","09:55"],"series":[{"name":"평균","data":[170,176,181,169,190,212,198,185,178,183,180,182]},{"name":"p95","data":[380,395,402,370,450,520,470,430,405,415,408,410]}]}'></div>
+      <ul class="Catui_legend Catui_legend-row Catui_adm-legend"><li><i class="Catui_s1"></i>평균</li><li><i class="Catui_s2"></i>p95</li></ul>
+    </div>
+  </article>
+  <article class="Catui_card Catui_span-4">
+    <header class="Catui_card-h">서비스</header>
+    <div class="Catui_card-b">
+      <div class="Catui_adm-health">
+        <div class="Catui_adm-health-row"><span><i class="Catui_status Catui_status-on" aria-hidden="true"></i>웹 서버</span><span class="Catui_pill Catui_pill-success">정상</span></div>
+        <div class="Catui_adm-health-row"><span><i class="Catui_status Catui_status-on" aria-hidden="true"></i>API</span><span class="Catui_pill Catui_pill-success">정상</span></div>
+        <div class="Catui_adm-health-row"><span><i class="Catui_status Catui_status-on" aria-hidden="true"></i>데이터베이스</span><span class="Catui_pill Catui_pill-success">정상</span></div>
+        <div class="Catui_adm-health-row"><span><i class="Catui_status Catui_status-away" aria-hidden="true"></i>메일 발송</span><span class="Catui_pill Catui_pill-warning">지연 (대기 42건)</span></div>
+        <div class="Catui_adm-health-row"><span><i class="Catui_status Catui_status-on" aria-hidden="true"></i>파일 저장소</span><span class="Catui_pill Catui_pill-success">정상</span></div>
+        <div class="Catui_adm-health-row"><span><i class="Catui_status Catui_status-busy" aria-hidden="true"></i>검색 색인</span><span class="Catui_pill Catui_pill-danger">재색인 중</span></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="Catui_card Catui_span-6">
+    <header class="Catui_card-h">최근 장애·점검</header>
+    <div class="Catui_card-b">
+      <div class="Catui_feed Catui_adm-feed">
+        <div class="Catui_feed-item"><span class="Catui_pill Catui_pill-danger">장애</span><p>검색 색인 지연 — 재색인 시작</p><time class="Catui_feed-time" data-catui-adm-ago="2026-11-02T09:12:00+09:00">오늘</time></div>
+        <div class="Catui_feed-item"><span class="Catui_pill Catui_pill-warning">주의</span><p>메일 발송 대기열 증가</p><time class="Catui_feed-time" data-catui-adm-ago="2026-11-02T08:40:00+09:00">오늘</time></div>
+        <div class="Catui_feed-item"><span class="Catui_pill Catui_pill-info">점검</span><p>DB 정기 점검 완료 (12분)</p><time class="Catui_feed-time" data-catui-adm-ago="2026-10-30T02:00:00+09:00">3일 전</time></div>
+      </div>
+    </div>
+  </article>
+  <article class="Catui_card Catui_span-6">
+    <header class="Catui_card-h">가동률 <span class="Catui_adm-card-meta">최근 30일</span></header>
+    <div class="Catui_card-b Catui_vstack Catui_gap-3">
+      <div class="Catui_adm-kpi"><b>99.94%</b><span class="Catui_help">목표 99.9% 달성</span></div>
+      <div class="Catui_bars">
+        <div class="Catui_bar"><span class="Catui_bar-label">웹</span><span class="Catui_bar-track"><i class="Catui_bar-fill" style="width:99.98%"></i></span><span class="Catui_bar-value">99.98%</span></div>
+        <div class="Catui_bar"><span class="Catui_bar-label">API</span><span class="Catui_bar-track"><i class="Catui_bar-fill" style="width:99.95%"></i></span><span class="Catui_bar-value">99.95%</span></div>
+        <div class="Catui_bar"><span class="Catui_bar-label">검색</span><span class="Catui_bar-track"><i class="Catui_bar-fill Catui_bar-fill-4" style="width:99.71%"></i></span><span class="Catui_bar-value">99.71%</span></div>
+      </div>
+    </div>
+  </article>
+</div>

@@ -1,0 +1,35 @@
+<!-- title: 놀이터 | crumb: UI / 놀이터 -->
+<div class="Catui_adm-head"><div><h1 class="Catui_h1">놀이터</h1><p>옵션을 바꾸면 미리보기와 코드가 바로 바뀝니다 — 복사해서 쓰세요</p></div></div>
+<div class="Catui_grid">
+  <form class="Catui_card Catui_span-4" id="pg-opts" aria-label="버튼 옵션"><header class="Catui_card-h">버튼 옵션</header><div class="Catui_card-b Catui_vstack Catui_gap-4">
+    <div class="Catui_field"><label class="Catui_label" for="pg-text">글자</label><input class="Catui_input" id="pg-text" name="text" value="저장"></div>
+    <fieldset><legend class="Catui_label">종류</legend><div class="Catui_segment" role="radiogroup" aria-label="종류">
+      <input class="Catui_clip" type="radio" name="kind" id="pg-k1" value="primary" checked><label for="pg-k1">주</label><input class="Catui_clip" type="radio" name="kind" id="pg-k2" value="secondary"><label for="pg-k2">보조</label><input class="Catui_clip" type="radio" name="kind" id="pg-k3" value="ghost"><label for="pg-k3">투명</label><input class="Catui_clip" type="radio" name="kind" id="pg-k4" value="danger"><label for="pg-k4">위험</label></div></fieldset>
+    <fieldset><legend class="Catui_label">크기</legend><div class="Catui_segment" role="radiogroup" aria-label="크기">
+      <input class="Catui_clip" type="radio" name="size" id="pg-s1" value="sm"><label for="pg-s1">작게</label><input class="Catui_clip" type="radio" name="size" id="pg-s2" value="md" checked><label for="pg-s2">보통</label><input class="Catui_clip" type="radio" name="size" id="pg-s3" value="lg"><label for="pg-s3">크게</label></div></fieldset>
+    <div class="Catui_field"><label class="Catui_label" for="pg-icon">아이콘</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="pg-icon" name="icon"><option value="">없음</option><option>check</option><option>plus</option><option>download</option><option>trash-2</option><option>send</option></select>{{icon:chevron-down}}</div></div>
+    <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="disabled"><span class="Catui_cbx">{{icon:check:12}}</span>비활성</label>
+  </div></form>
+  <article class="Catui_card Catui_span-8"><header class="Catui_card-h">미리보기</header><div class="Catui_card-b Catui_vstack Catui_gap-4">
+    <div class="Catui_adm-demo" id="pg-preview" style="min-height:calc(var(--Catui_space-10) * 1.5);justify-content:center"></div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="pg-copy">{{icon:copy:16}}코드 복사</button></div>
+    <pre class="Catui_code"><code id="pg-code"></code></pre>
+  </div></article>
+</div>
+<script>
+catui.use(['form', 'util', 'layer'], function (form, util, layer) {
+  var f = document.getElementById('pg-opts'), prev = document.getElementById('pg-preview'), code = document.getElementById('pg-code');
+  var draw = function () {
+    var v = new FormData(f), icon = v.get('icon'), text = String(v.get('text') || '').trim() || '버튼';
+    var cls = 'Catui_btn Catui_btn-' + v.get('size') + ' Catui_btn-' + v.get('kind');
+    var iconHtml = icon ? '<svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="icons.svg#Catui_ic-' + icon + '"></use></svg>' : '';
+    var src = '<button class="' + cls + '" type="button"' + (v.get('disabled') ? ' disabled' : '') + '>' + iconHtml + catui.escape(text) + '</button>';
+    var b = document.createElement('button'); b.type = 'button'; b.className = cls; b.disabled = !!v.get('disabled');
+    catui.mount(b, catui.html`${icon ? catui.icon(icon, 16) : ''}${text}`);
+    prev.replaceChildren(b); code.textContent = src;
+  };
+  f.addEventListener('input', draw); f.addEventListener('change', draw); f.addEventListener('submit', function (e) { e.preventDefault(); });
+  document.getElementById('pg-copy').addEventListener('click', function () { util.copy(code.textContent).then(function (ok) { layer.msg(ok ? '코드를 복사했습니다' : '복사하지 못했습니다', { icon: ok ? 'success' : 'warn', time: 1200 }); }); });
+  draw();
+});
+</script>

@@ -1,0 +1,40 @@
+<!-- title: 요소 | crumb: UI / 요소 -->
+<div class="Catui_adm-head"><div><h1 class="Catui_h1">UI 요소</h1><p>관리 화면에서 자주 쓰는 작은 요소 모음 — 모두 Catui 본체 컴포넌트입니다</p></div></div>
+<div class="Catui_adm-showcase">
+  <article class="Catui_card"><header class="Catui_card-h">뱃지 · 상태</header><div class="Catui_card-b">
+    <div class="Catui_adm-demo"><span class="Catui_badge Catui_badge-success">성공</span><span class="Catui_badge Catui_badge-info">정보</span><span class="Catui_badge Catui_badge-warning">주의</span><span class="Catui_badge Catui_badge-danger">위험</span><span class="Catui_badge Catui_badge-neutral">기본</span></div>
+    <div class="Catui_adm-demo"><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>배송 완료</span><span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>대기</span><span class="Catui_pill Catui_pill-solid-danger">긴급</span></div>
+  </div></article>
+  <article class="Catui_card"><header class="Catui_card-h">알림 띠 · 안내</header><div class="Catui_card-b Catui_vstack Catui_gap-3">
+    <div class="Catui_banner Catui_banner-info">{{icon:info:16}}<span>점검은 내일 새벽 3시입니다.</span></div>
+    <div class="Catui_banner Catui_banner-warn">{{icon:alert-triangle:16}}<span>결제 대기 6건이 있습니다.</span></div>
+    <div class="Catui_callout Catui_callout-tip" role="note">{{icon:check:16}}<p class="Catui_callout-title">팁</p><p>Ctrl+K로 어느 화면이든 바로 갑니다.</p></div>
+  </div></article>
+  <article class="Catui_card"><header class="Catui_card-h">진행 · 로딩</header><div class="Catui_card-b Catui_vstack Catui_gap-3">
+    <div><div class="Catui_prog-label"><span>내보내기</span><span class="Catui_num">62%</span></div><div class="Catui_prog" role="progressbar" aria-label="내보내기" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"><i class="Catui_pc2" style="width:62%"></i></div></div>
+    <div class="Catui_adm-demo"><span class="Catui_spin" role="status" aria-label="불러오는 중"></span><span class="Catui_help">불러오는 중…</span></div>
+    <div class="Catui_adm-demo"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="el-load">로딩 띄우기</button><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="el-toast">토스트</button></div>
+  </div></article>
+  <article class="Catui_card"><header class="Catui_card-h">아바타 · 표시</header><div class="Catui_card-b">
+    <div class="Catui_adm-demo"><span class="Catui_av Catui_av-lg">김</span><span class="Catui_av Catui_av-md">이</span><span class="Catui_av Catui_av-sm">박</span><div class="Catui_av-stack" role="img" aria-label="참여 5명"><span class="Catui_av Catui_av-sm">최</span><span class="Catui_av Catui_av-sm">정</span><span class="Catui_av Catui_av-sm">+3</span></div></div>
+    <div class="Catui_adm-demo"><span class="Catui_line"><i class="Catui_status Catui_status-on" aria-hidden="true"></i>온라인</span><span class="Catui_line"><i class="Catui_status Catui_status-away" aria-hidden="true"></i>자리 비움</span><span class="Catui_line"><i class="Catui_status Catui_status-busy" aria-hidden="true"></i>바쁨</span></div>
+  </div></article>
+  <article class="Catui_card"><header class="Catui_card-h">대화상자</header><div class="Catui_card-b">
+    <div class="Catui_adm-demo"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="el-alert">알림</button><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="el-confirm">확인</button><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="el-drawer">서랍</button><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="el-tips">말풍선</button></div>
+  </div></article>
+  <article class="Catui_card"><header class="Catui_card-h">탭 · 접기</header><div class="Catui_card-b Catui_vstack Catui_gap-3">
+    <div class="Catui_tabs"><input class="Catui_clip" type="radio" name="el-tab" id="el-t1" checked><label class="Catui_tab" for="el-t1">개요</label><div class="Catui_panel"><p>탭은 radio로 동작해 스크립트 없이도 됩니다.</p></div><input class="Catui_clip" type="radio" name="el-tab" id="el-t2"><label class="Catui_tab" for="el-t2">기록</label><div class="Catui_panel"><p>두 번째 탭 내용</p></div></div>
+    <details class="Catui_faq"><summary>접히는 영역</summary><p>details 요소라 키보드·화면 낭독기로 그대로 씁니다.</p></details>
+  </div></article>
+</div>
+<script>
+catui.use(['layer'], function (layer) {
+  var on = function (id, fn) { document.getElementById(id).addEventListener('click', fn); };
+  on('el-load', function () { var i = layer.load('처리하는 중'); setTimeout(function () { layer.close(i); }, 1500); });
+  on('el-toast', function () { layer.msg('저장했습니다', { icon: 'success', action: { text: '되돌리기' } }); });
+  on('el-alert', function () { layer.alert('백업이 끝났습니다.', { title: '알림' }); });
+  on('el-confirm', function () { layer.confirm('이 상품을 숨길까요?', { okText: '숨기기' }, function (i) { layer.close(i); layer.msg('숨겼습니다', { icon: 'success' }); }); });
+  on('el-drawer', function () { layer.open({ type: 'drawer', title: '주문 #1046', content: catui.html`<dl class="Catui_dl"><dt>고객</dt><dd>김하늘</dd><dt>금액</dt><dd>128,000원</dd><dt>상태</dt><dd>배송 완료</dd></dl>` }); });
+  on('el-tips', function () { layer.tips('여기에 짧은 설명이 뜹니다', '#el-tips', { side: 'top' }); });
+});
+</script>

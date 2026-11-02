@@ -1,0 +1,45 @@
+/* admin/widgets.css */
+/* 대시보드 위젯 배치 — 카드·지표·피드·막대·할 일 등 본체 컴포넌트를 조합하고, 배치와 보조 표시만 더한다. */
+.Catui_adm-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--Catui_space-3)}
+.Catui_adm-head h1{margin:0}
+.Catui_adm-head p{margin:var(--Catui_space-1) 0 0;color:var(--Catui_color-text-secondary)}
+
+/* 지표 카드 줄: 카드 수만큼 한 줄(최대 6) → 1199px 이하 3열 → 767px 이하 2열 → 479px 이하 1열 */
+.Catui_adm-stats{display:grid;gap:var(--Catui_adm-gap);grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+@media (max-width:1199px){.Catui_adm-stats{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:767px){.Catui_adm-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:479px){.Catui_adm-stats{grid-template-columns:minmax(0,1fr)}}
+.Catui_adm-stat-sub{display:block;margin-top:var(--Catui_space-1);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_adm-stat-icon{float:right;display:grid;place-items:center;width:var(--Catui_control-h-lg);height:var(--Catui_control-h-lg);border-radius:var(--Catui_radius-md);background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong)}
+
+/* 차트 카드 */
+.Catui_adm-chart{position:relative;height:var(--Catui_adm-chart-h)}
+.Catui_adm-chart-lg{height:calc(var(--Catui_adm-chart-h) * 1.5)}
+.Catui_adm-chart > canvas{display:block;width:100%;height:100%}
+.Catui_adm-chart.Catui_canvas{aspect-ratio:auto;border:0;border-radius:0;background:transparent}
+.Catui_adm-chart.Catui_sparkline{width:var(--Catui_spark-w);height:var(--Catui_spark-h)}
+.Catui_adm-legend{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2) var(--Catui_space-4);margin-top:var(--Catui_space-3)}
+
+/* 카드 머리의 기간 선택 등 */
+.Catui_adm-card-meta{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);font-weight:400}
+
+/* 활동 피드 + 아바타 */
+.Catui_adm-feed .Catui_feed-item{grid-template-columns:auto minmax(0,1fr) auto;align-items:center}
+.Catui_adm-feed .Catui_feed-item::before,.Catui_adm-feed .Catui_feed-item::after{display:none}
+.Catui_adm-feed .Catui_feed-item p{margin:0}
+
+/* 표 카드: 카드 안쪽 여백 없이 꽉 채움 */
+.Catui_adm-flush{padding:0;overflow-x:auto}
+.Catui_adm-flush .Catui_tbl{margin:0}
+
+/* 상태 요약 (시스템 상태) */
+.Catui_adm-health{display:grid;gap:var(--Catui_space-3)}
+.Catui_adm-health-row{display:flex;align-items:center;gap:var(--Catui_space-3);justify-content:space-between}
+.Catui_adm-health-row > span:first-child{display:inline-flex;align-items:center;gap:var(--Catui_space-2)}
+
+/* 큰 숫자 + 보조 (매출 목표 등) */
+.Catui_adm-kpi{display:flex;align-items:baseline;gap:var(--Catui_space-2);flex-wrap:wrap}
+.Catui_adm-kpi b{font-size:var(--Catui_type-display-size);line-height:var(--Catui_type-display-lh);font-variant-numeric:tabular-nums}
+
+/* 빈 상태 */
+.Catui_adm-empty{display:grid;place-items:center;gap:var(--Catui_space-2);padding:var(--Catui_space-8) var(--Catui_space-4);text-align:center;color:var(--Catui_color-text-secondary)}

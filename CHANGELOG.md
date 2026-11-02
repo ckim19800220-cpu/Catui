@@ -2,6 +2,15 @@
 
 이 프로젝트는 [유의적 버전](https://semver.org/lang/ko/)을 따릅니다. 2.x 안에서는 공개 API(`Catui_` 클래스, `catui.*` 함수·옵션, `data-catui-*` 속성, `Catui_ic-*` 아이콘 id)를 깨뜨리지 않습니다.
 
+## 2.1.0 — 미배포
+
+### 추가: CatuiAdmin (관리자 대시보드 확장)
+- `dist/admin.css`(+min) — 관리 셸 확장(접힘·서랍·고정 바닥글), 위젯·화면별 블록. 모든 규칙은 `.Catui_adm` 아래, 토큰만 사용
+- `dist/catadmin.js`(+esm·min·map·d.ts) — `catui.admin`: shell · theme · notify · 명령 팔레트 · widgets(차트·카운트업·상대 시간) · form(변경 감지) · list(필터↔주소) · chat · kanban · auth
+- 템플릿 52종(`docs/admin/templates/`): 대시보드 4 · 폼 6 · 표 2 · 차트 3 · 캘린더 · 지도 · 앱 5 · 커머스 6 · 프로젝트 2 · UI 7 · 관리 5 · 레이아웃 4 · 인증·오류 6
+- 문서 상단 **CatuiAdmin** 탭, `exports`에 `./admin` · `./admin.css`
+- 빌드 검사: 본체 클래스 재정의·hex 색·없는 토큰·템플릿 링크·id·label·h1·안 쓰인 클래스
+
 ## 2.0.0 — 2026-11-02
 
 전면 개편판 (MIT). 패키지 이름 `@imcat-ckim/catui`. 1.x(2026-03 이전 배포)와 API가 달라 메이저 버전을 올렸습니다.

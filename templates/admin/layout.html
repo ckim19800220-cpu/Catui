@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}} · CatuiAdmin</title>
+<link rel="icon" href="{{dist}}/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="{{dist}}/catui.min.css">
+<link rel="stylesheet" href="{{dist}}/admin.min.css">
+<!-- 깜빡임 방지: 저장된 테마를 그리기 전에 적용 (CSP로 인라인 스크립트를 막는다면 지워도 됩니다 — catadmin.js가 곧바로 적용) -->
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:admin")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body>
+<a class="Catui_skip" href="#adm-main">본문으로 이동</a>
+<div class="Catui_app Catui_adm" data-catui-adm data-page="{{page}}"{{rootattrs}}>
+  <aside class="Catui_side" id="adm-side" aria-label="주 메뉴">
+    <a class="Catui_brand" href="index.html"><span class="Catui_logo">C</span><b>CatuiAdmin</b></a>
+    <nav class="Catui_menu" aria-label="관리 메뉴">{{sidebar}}</nav>
+    <div class="Catui_user"><span class="Catui_av Catui_av-md" aria-hidden="true">김</span><span class="Catui_user-txt"><b>김관리</b><span>최고 관리자</span></span></div>
+  </aside>
+  <div class="Catui_adm-scrim" hidden></div>
+  <div class="Catui_main">
+    <header class="Catui_topbar Catui_adm-top">
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-adm-toggle aria-controls="adm-side" aria-expanded="true" aria-label="메뉴 접기">{{icon:menu:18}}</button>
+      <nav class="Catui_crumb" aria-label="현재 위치">{{crumb}}</nav>
+      <div class="Catui_top-actions">
+        <button class="Catui_btn Catui_btn-sm Catui_btn-secondary Catui_adm-search" type="button" data-catui-adm-cmd aria-label="화면·명령 검색 (Ctrl+K)">{{icon:search:16}}<span>검색</span><span class="Catui_kbd">Ctrl K</span></button>
+        <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-adm-theme aria-label="어두운 화면으로">{{icon:moon:18}}</button>
+        <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon Catui_adm-icon-btn" type="button" data-catui-adm-notify="notifications.html" aria-label="알림">{{icon:bell:18}}</button>
+        <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-adm-user aria-label="사용자 메뉴: 김관리"><span class="Catui_av Catui_av-sm" aria-hidden="true">김</span>{{icon:chevron-down:16}}</button>
+      </div>
+    </header>
+    <main class="Catui_content Catui_adm-content" id="adm-main" tabindex="-1">
+{{content}}
+    </main>
+    <footer class="Catui_adm-foot"><span>© 2026 CatuiAdmin · Catui {{version}}</span><span>MIT License</span></footer>
+  </div>
+</div>
+<script type="application/json" id="adm-cmd-data">{{cmd}}</script>
+<script type="application/json" id="adm-user-data">[{"title":"내 프로필","icon":"user","href":"index.html"},{"title":"설정","icon":"settings","href":"index.html"},{"type":"-"},{"title":"로그아웃","icon":"log-out","href":"index.html"}]</script>
+<script type="application/json" id="adm-notify-data">[
+  {"who":"김하늘","text":"주문 #1042에 댓글을 남겼습니다","time":"2026-11-02T09:40:00+09:00","unread":true},
+  {"icon":"alert-triangle","tone":5,"text":"결제 1건이 실패했습니다","time":"2026-11-02T08:15:00+09:00","unread":true},
+  {"icon":"server","tone":3,"text":"새벽 3시 백업이 끝났습니다","time":"2026-11-02T03:02:00+09:00","unread":true},
+  {"who":"이준","text":"재고 보고서를 올렸습니다","time":"2026-11-01T17:20:00+09:00"}
+]</script>
+<script src="{{dist}}/catui.min.js"></script>
+<script src="{{dist}}/catadmin.min.js"></script>
+{{scripts}}
+</body>
+</html>

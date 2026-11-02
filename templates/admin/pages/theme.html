@@ -1,0 +1,37 @@
+<!-- title: 테마 | crumb: UI / 테마 -->
+<div class="Catui_adm-head"><div><h1 class="Catui_h1">테마</h1><p>토큰 하나만 바꿔도 모든 화면이 따라갑니다 — 이 화면에서 바꾼 값은 미리보기용(새로 고치면 원래대로)</p></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-catui-adm-theme>{{icon:moon:18}}</button><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="th-reset">원래대로</button></div></div>
+<div class="Catui_grid">
+  <article class="Catui_card Catui_span-5"><header class="Catui_card-h">브랜드 색</header><div class="Catui_card-b Catui_vstack Catui_gap-4">
+    <fieldset class="Catui_swatches" id="th-brand"><legend class="Catui_label">주 색상 <span class="Catui_swatch-value" id="th-brand-v">· 초록 (기본)</span></legend>
+      <input class="Catui_clip" type="radio" name="th-b" id="th-b1" value="" data-name="초록 (기본)" checked><label class="Catui_swatch Catui_swatch-lg" for="th-b1" style="--Catui_swatch:var(--Catui_color-brand)"><span class="Catui_clip">초록</span></label>
+      <input class="Catui_clip" type="radio" name="th-b" id="th-b2" value="info" data-name="파랑"><label class="Catui_swatch Catui_swatch-lg" for="th-b2" style="--Catui_swatch:var(--Catui_color-info)"><span class="Catui_clip">파랑</span></label>
+      <input class="Catui_clip" type="radio" name="th-b" id="th-b3" value="purple" data-name="보라"><label class="Catui_swatch Catui_swatch-lg" for="th-b3" style="--Catui_swatch:var(--Catui_color-purple)"><span class="Catui_clip">보라</span></label>
+    </fieldset>
+    <div class="Catui_field"><label class="Catui_label" for="th-radius">모서리 <output for="th-radius" class="Catui_num" id="th-radius-v">기본</output></label><input class="Catui_range" id="th-radius" type="range" min="0" max="3" step="1" value="1" aria-valuetext="기본"></div>
+    <p class="Catui_help">실제 적용은 CSS에서 <code>:root{--Catui_color-brand-fill:…}</code>처럼 토큰을 덮어씁니다. 대비(AA)를 지키는 색만 쓰세요.</p>
+  </div></article>
+  <article class="Catui_card Catui_span-7"><header class="Catui_card-h">미리보기</header><div class="Catui_card-b Catui_vstack Catui_gap-4" id="th-preview">
+    <div class="Catui_adm-demo"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">주 버튼</button><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button">보조</button><a href="theme.html">본문 링크</a><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>상태</span></div>
+    <div><div class="Catui_prog-label"><span>진행</span><span class="Catui_num">70%</span></div><div class="Catui_meter" role="img" aria-label="70퍼센트"><i style="width:70%"></i></div></div>
+    <div class="Catui_field"><label class="Catui_label" for="th-in">입력</label><input class="Catui_input" id="th-in" value="포커스해 보세요"></div>
+    <span class="Catui_choice"><input class="Catui_clip" id="th-sw" type="checkbox" role="switch" checked><label class="Catui_tgl" for="th-sw"></label><label for="th-sw">스위치</label></span>
+  </div></article>
+</div>
+<script>
+catui.use(function () {
+  var root = document.documentElement;
+  var RAD = [['0', '각짐'], ['', '기본'], ['10px', '둥글게'], ['16px', '아주 둥글게']];
+  document.getElementById('th-brand').addEventListener('change', function (e) {
+    var v = e.target.value;
+    ['--Catui_color-brand-fill', '--Catui_btn-primary-bg', '--Catui_color-brand-strong', '--Catui_color-brand'].forEach(function (k) { if (v) root.style.setProperty(k, 'var(--Catui_color-' + v + ')'); else root.style.removeProperty(k); });
+    document.getElementById('th-brand-v').textContent = '· ' + e.target.dataset.name;
+  });
+  var r = document.getElementById('th-radius');
+  r.addEventListener('input', function () {
+    var x = RAD[r.value]; ['--Catui_radius-md', '--Catui_card-radius', '--Catui_radius-sm'].forEach(function (k) { if (x[0]) root.style.setProperty(k, x[0]); else root.style.removeProperty(k); });
+    document.getElementById('th-radius-v').textContent = x[1]; r.setAttribute('aria-valuetext', x[1]);
+  });
+  document.getElementById('th-reset').addEventListener('click', function () { root.removeAttribute('style'); document.getElementById('th-b1').checked = true; document.getElementById('th-brand-v').textContent = '· 초록 (기본)'; r.value = 1; r.dispatchEvent(new Event('input')); });
+});
+</script>

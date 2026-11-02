@@ -1,0 +1,51 @@
+/* admin/pages.css */
+/* 화면별 배치 — 폼 구역·고정 저장 바·보기 모음·미리보기 격자·지도·캘린더. 내용은 본체 컴포넌트 그대로. */
+
+/* 폼 구역: 왼쪽 설명 · 오른쪽 입력 카드 (991px 이하 위아래) */
+.Catui_adm-section{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--Catui_adm-gap);align-items:start}
+.Catui_adm-section + .Catui_adm-section{padding-top:var(--Catui_adm-gap);border-top:1px solid var(--Catui_color-border)}
+.Catui_adm-section-desc h2{margin:0 0 var(--Catui_space-1);font-size:var(--Catui_type-h3-size);line-height:var(--Catui_type-h3-lh)}
+.Catui_adm-section-desc p{margin:0;color:var(--Catui_color-text-secondary)}
+@media (max-width:991px){.Catui_adm-section{grid-template-columns:minmax(0,1fr)}}
+
+/* 입력 2열 (767px 이하 1열). .Catui_adm-wide는 두 칸 차지 */
+.Catui_adm-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-4) var(--Catui_adm-gap)}
+.Catui_adm-wide{grid-column:1 / -1}
+@media (max-width:767px){.Catui_adm-cols{grid-template-columns:minmax(0,1fr)}}
+
+/* 고정 저장 바 — 폼 맨 아래에 붙어 스크롤해도 보임 */
+.Catui_adm-savebar{position:sticky;bottom:0;z-index:15;display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-3);padding:var(--Catui_space-3) var(--Catui_space-4);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);box-shadow:var(--Catui_shadow-md)}
+.Catui_adm-savebar .Catui_actions{margin-left:auto}
+.Catui_adm-savenote{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+[data-catui-adm-dirty] .Catui_adm-savenote{color:var(--Catui_badge-warning-fg);font-weight:600}
+[data-catui-adm-dirty] .Catui_adm-savenote::before{content:"● ";color:var(--Catui_color-amber)}
+
+/* 보기 모음(버튼·요소 화면): 폭에 맞춰 카드 격자 */
+.Catui_adm-showcase{display:grid;gap:var(--Catui_adm-gap);grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 5)),1fr));align-items:start}
+.Catui_adm-demo{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2)}
+.Catui_adm-demo + .Catui_adm-demo{margin-top:var(--Catui_space-3)}
+
+/* 미리보기 격자 (업로드 사진·미디어) */
+.Catui_adm-thumbs{display:grid;gap:var(--Catui_space-3);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 2),1fr))}
+.Catui_adm-thumb{position:relative;margin:0;aspect-ratio:1 / 1;border-radius:var(--Catui_radius-md);overflow:hidden;background:var(--Catui_color-surface-muted);border:1px solid var(--Catui_card-border)}
+.Catui_adm-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_adm-thumb button{position:absolute;top:var(--Catui_space-1);right:var(--Catui_space-1)}
+
+/* 차트 카드 크기 변형 */
+.Catui_adm-chart-sm{height:calc(var(--Catui_adm-chart-h) * 0.7)}
+
+/* 지도: 외부 지도 API 없이 그리는 틀 (실서비스는 이 칸에 지도 SDK를 붙인다) */
+.Catui_adm-map-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--Catui_adm-gap);align-items:start}
+@media (max-width:991px){.Catui_adm-map-layout{grid-template-columns:minmax(0,1fr)}}
+.Catui_adm-map{position:relative;aspect-ratio:4 / 3;border-radius:var(--Catui_radius-md);overflow:hidden;background-color:var(--Catui_color-info-soft);background-image:linear-gradient(var(--Catui_chart-grid) 1px,transparent 1px),linear-gradient(90deg,var(--Catui_chart-grid) 1px,transparent 1px);background-size:calc(var(--Catui_space-10)) calc(var(--Catui_space-10))}
+.Catui_adm-map > svg{position:absolute;inset:0;width:100%;height:100%}
+.Catui_adm-map-land{fill:var(--Catui_card-bg);stroke:var(--Catui_color-border);stroke-width:1.5}
+.Catui_adm-pin{position:absolute;transform:translate(-50%,-100%);display:inline-flex;align-items:center;gap:var(--Catui_space-1);padding:2px var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_btn-primary-bg);color:var(--Catui_btn-primary-fg);border:0;font-size:var(--Catui_type-caption-size);font-weight:600;cursor:pointer;box-shadow:var(--Catui_shadow-sm);white-space:nowrap}
+.Catui_adm-pin[aria-pressed="true"]{background:var(--Catui_color-amber);color:var(--Catui_color-text-primary);z-index:2}
+.Catui_adm-pin:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+
+/* 캘린더 화면: 달력 + 옆 패널 */
+.Catui_adm-cal{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:var(--Catui_adm-gap);align-items:start}
+@media (max-width:1199px){.Catui_adm-cal{grid-template-columns:minmax(0,1fr)}}
+.Catui_adm-cal .Catui_cal-cell{cursor:pointer}
+.Catui_adm-cal .Catui_cal-cell:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}

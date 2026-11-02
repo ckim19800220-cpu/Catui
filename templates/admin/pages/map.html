@@ -1,0 +1,56 @@
+<!-- title: 지도 | crumb: 지도 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">매장 지도</h1><p>외부 지도 없이 그린 틀입니다 — 실서비스는 지도 칸에 지도 SDK를 붙이고 같은 목록·핀 동작을 씁니다</p></div>
+</div>
+
+<div class="Catui_adm-map-layout">
+  <article class="Catui_card"><div class="Catui_card-b">
+    <div class="Catui_adm-map" id="mp-map" role="group" aria-label="매장 위치 지도 (핀을 누르면 목록에서 강조)">
+      <svg viewBox="0 0 400 300" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+        <path class="Catui_adm-map-land" d="M196 18 C232 22 252 40 262 62 C272 86 290 98 296 122 C302 148 290 170 296 196 C302 222 282 244 258 258 C236 270 214 282 190 276 C166 270 156 252 140 240 C124 228 120 206 128 186 C136 166 126 150 132 128 C138 106 150 92 158 72 C166 50 172 26 196 18 Z"/>
+        <path class="Catui_adm-map-land" d="M150 286 C162 282 176 284 182 290 C176 296 160 298 150 294 Z"/>
+      </svg>
+    </div>
+  </div></article>
+  <article class="Catui_card">
+    <header class="Catui_card-h">매장 <span class="Catui_adm-card-meta">6곳</span></header>
+    <div class="Catui_card-b Catui_vstack Catui_gap-3">
+      <div class="Catui_search">{{icon:search}}<label class="Catui_clip" for="mp-q">매장 찾기</label><input class="Catui_input" id="mp-q" type="search" placeholder="매장 이름·지역"></div>
+      <ul class="Catui_list Catui_list-flush" id="mp-list"></ul>
+    </div>
+  </article>
+</div>
+<script>
+catui.use(['util'], function (util) {
+  var stores = [
+    { id: 's1', name: '강남 직영점', area: '서울', x: 47, y: 30, sales: 1820 }, { id: 's2', name: '판교 쇼룸', area: '경기', x: 50, y: 34, sales: 940 },
+    { id: 's3', name: '대전 센터', area: '대전', x: 49, y: 52, sales: 610 }, { id: 's4', name: '대구 동성로점', area: '대구', x: 63, y: 60, sales: 720 },
+    { id: 's5', name: '광주 충장점', area: '광주', x: 40, y: 74, sales: 480 }, { id: 's6', name: '부산 서면점', area: '부산', x: 68, y: 76, sales: 1150 },
+  ];
+  var map = document.getElementById('mp-map'), list = document.getElementById('mp-list'), q = document.getElementById('mp-q'), cur = null;
+  stores.forEach(function (s) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'Catui_adm-pin'; b.dataset.id = s.id; b.style.left = s.x + '%'; b.style.top = s.y + '%';
+    b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', s.name + ', 이번 달 매출 ' + util.number(s.sales) + '만원');
+    catui.mount(b, catui.html`${catui.icon('map-pin', 12)}${s.area}`);
+    map.appendChild(b);
+  });
+  var select = function (id, from) {
+    cur = cur === id ? null : id;
+    map.querySelectorAll('.Catui_adm-pin').forEach(function (p) { p.setAttribute('aria-pressed', String(p.dataset.id === cur)); });
+    list.querySelectorAll('[data-id]').forEach(function (li) { li.setAttribute('aria-current', String(li.dataset.id === cur)); li.style.background = li.dataset.id === cur ? 'var(--Catui_color-brand-soft)' : ''; });
+    if (cur && from === 'pin') list.querySelector('[data-id="' + cur + '"]')?.scrollIntoView({ block: 'nearest' });
+  };
+  var drawList = function () {
+    var t = q.value.trim();
+    var shown = stores.filter(function (s) { return !t || s.name.indexOf(t) > -1 || s.area.indexOf(t) > -1; });
+    catui.mount(list, shown.length ? catui.html`${shown.map(function (s) { return catui.html`<li class="Catui_list-item" data-id="${s.id}"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-id="${s.id}">${catui.icon('map-pin', 16)}${s.name}</button><span class="Catui_list-meta">${s.area} · ${util.number(s.sales)}만원</span></li>`; })}` : catui.html`<li class="Catui_adm-empty">맞는 매장이 없습니다.</li>`);
+    map.querySelectorAll('.Catui_adm-pin').forEach(function (p) { p.hidden = !shown.some(function (s) { return s.id === p.dataset.id; }); });
+    if (cur) { var c = cur; cur = null; select(c, "list"); }
+  };
+  map.addEventListener('click', function (e) { var p = e.target.closest('.Catui_adm-pin'); if (p) select(p.dataset.id, 'pin'); });
+  list.addEventListener('click', function (e) { var b = e.target.closest('button[data-id]'); if (b) select(b.dataset.id, 'list'); });
+  q.addEventListener('input', drawList);
+  drawList();
+});
+</script>

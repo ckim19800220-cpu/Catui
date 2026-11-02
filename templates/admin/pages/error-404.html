@@ -1,0 +1,9 @@
+<!-- title: 404 없는 페이지 | layout: blank -->
+<main class="Catui_adm-error">
+  <div class="Catui_vstack Catui_gap-4">
+    <span class="Catui_adm-error-code" aria-hidden="true">404</span>
+    <div class="Catui_result" role="status"><h1 class="Catui_result-title">페이지를 찾을 수 없습니다</h1><p class="Catui_result-text">주소가 바뀌었거나 지워진 페이지입니다. 주소를 다시 확인해 주세요.</p>
+      <div class="Catui_actions"><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="index.html">{{icon:house:16}}대시보드로</a><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="er-back">이전 페이지</button></div></div>
+  </div>
+</main>
+<script>document.getElementById('er-back').addEventListener('click', function () { history.back(); });</script>

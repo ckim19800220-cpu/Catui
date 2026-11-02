@@ -1,0 +1,16 @@
+/* admin/tokens.css */
+/* CatuiAdmin 토큰 (L3) — 모두 본체 토큰을 참조한다. 새 색·크기 값을 만들지 않는다. */
+.Catui_adm{
+  --Catui_adm-bg:var(--Catui_color-surface-muted);
+  --Catui_adm-side-w:var(--Catui_sidebar-w);
+  --Catui_adm-rail-w:var(--Catui_sidebar-rail-w);
+  --Catui_adm-top-h:var(--Catui_topbar-h);
+  --Catui_adm-gap:var(--Catui_grid-gap);
+  --Catui_adm-pad:var(--Catui_content-pad);
+  --Catui_adm-dur:calc(var(--Catui_dur-fast) * 2);
+  --Catui_adm-ease:var(--Catui_ease);
+  --Catui_adm-drawer-shadow:var(--Catui_shadow-lg);
+  --Catui_adm-scrim:var(--Catui_overlay-scrim);
+  --Catui_adm-chart-h:var(--Catui_chart-h);
+  --Catui_adm-pop-w:calc(var(--Catui_space-10) * 6);
+}

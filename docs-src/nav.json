@@ -1452,6 +1452,27 @@
           ]
         }
       ]
+    },
+    {
+      "id": "admin",
+      "title": "CatuiAdmin",
+      "groups": [
+        {
+          "title": "시작",
+          "pages": [
+            { "path": "admin/start/introduction", "title": "소개 · 화면 지도", "desc": "catui 위에 얹는 관리자 확장과 템플릿 52종." },
+            { "path": "admin/start/install", "title": "설치", "desc": "admin.css · catadmin.js 로드 순서, npm · CDN." },
+            { "path": "admin/start/structure", "title": "구조 · 새 화면 만들기", "desc": "셸 마크업, 메뉴(menu.json), 템플릿 머리 주석, 빌드 검사." }
+          ]
+        },
+        {
+          "title": "확장",
+          "pages": [
+            { "path": "admin/modules", "title": "catadmin.js API", "desc": "shell · theme · notify · widgets · form · list · chat · kanban · auth." },
+            { "path": "admin/css", "title": "admin.css 클래스", "desc": "Catui_adm-* 클래스와 토큰.", "css": ["admin/css/tokens.css", "admin/css/shell.css", "admin/css/widgets.css", "admin/css/pages.css", "admin/css/apps.css", "admin/css/commerce.css", "admin/css/auth.css"] }
+          ]
+        }
+      ]
     }
   ]
 }

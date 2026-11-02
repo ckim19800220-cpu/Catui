@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>구조 · 새 화면 만들기 · CatuiAdmin · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="셸 마크업, 메뉴(menu.json), 템플릿 머리 주석, 빌드 검사.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../../dist/admin.css">
+<script src="../../../dist/catui.js"></script>
+<script src="../../../dist/catadmin.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html" aria-current="page">CatuiAdmin</a></nav>
+  <span class="doc-version">v2.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CatuiAdmin 메뉴</summary><nav aria-label="CatuiAdmin 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../admin/start/introduction.html">소개 · 화면 지도</a></li><li><a href="../../admin/start/install.html">설치</a></li><li><a href="../../admin/start/structure.html" aria-current="page">구조 · 새 화면 만들기</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../../admin/modules.html">catadmin.js API</a></li><li><a href="../../admin/css.html">admin.css 클래스</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CatuiAdmin · 시작</p>
+<h1 class="Catui_h1">구조 · 새 화면 만들기</h1>
+<p class="Catui_lead">셸 마크업, 메뉴(menu.json), 템플릿 머리 주석, 빌드 검사.</p>
+
+<section aria-labelledby="shell">
+<h2 id="shell">셸 마크업</h2>
+<p>본체 <a href="../../css/layout/app-shell.html">관리 셸</a>(<code>.Catui_app</code>) 그대로에 <code>.Catui_adm</code>와 <code>data-catui-adm</code>만 더합니다.</p>
+<pre><code>&lt;div class="Catui_app Catui_adm" data-catui-adm&gt;
+  &lt;aside class="Catui_side" id="adm-side" aria-label="주 메뉴"&gt; … 메뉴 (그룹·하위 메뉴는 details.Catui_nest.Catui_adm-nest) … &lt;/aside&gt;
+  &lt;div class="Catui_adm-scrim" hidden&gt;&lt;/div&gt;                    ← 991px 이하 서랍 가림막
+  &lt;div class="Catui_main"&gt;
+    &lt;header class="Catui_topbar Catui_adm-top"&gt;
+      &lt;button data-catui-adm-toggle aria-controls="adm-side"&gt;   ← 접기(992px↑) · 서랍 열기(991px↓)
+      &lt;nav class="Catui_crumb"&gt; … &lt;/nav&gt;
+      &lt;button data-catui-adm-cmd&gt;  &lt;button data-catui-adm-theme&gt;  &lt;button data-catui-adm-notify="알림 주소"&gt;  &lt;button data-catui-adm-user&gt;
+    &lt;/header&gt;
+    &lt;main class="Catui_content Catui_adm-content" id="adm-main"&gt; … &lt;/main&gt;
+    &lt;footer class="Catui_adm-foot"&gt; … &lt;/footer&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script type="application/json" id="adm-cmd-data"&gt;[{ "group", "title", "href", "icon" }]&lt;/script&gt;     ← 명령 팔레트 화면 목록
+&lt;script type="application/json" id="adm-notify-data"&gt;[{ "who", "text", "time", "unread" }]&lt;/script&gt;  ← 알림
+&lt;script type="application/json" id="adm-user-data"&gt;[{ "title", "href", "icon" } | { "type": "-" }]&lt;/script&gt;  ← 사용자 메뉴</code></pre>
+<p>상태(사이드바 접힘·하위 메뉴·테마·스위치)는 <code>localStorage</code>의 <code>catui:admin</code>에 기억합니다.</p>
+</section>
+
+<section aria-labelledby="pages">
+<h2 id="pages">새 화면 만들기</h2>
+<p><code>templates/admin/pages/이름.html</code> 맨 위에 머리 주석을 두고 본문만 씁니다.</p>
+<pre><code>&lt;!-- title: 재고 현황 | crumb: 커머스 / 재고 | layout: shell | root: data-catui-adm-fixed-foot --&gt;
+&lt;div class="Catui_adm-head"&gt;&lt;div&gt;&lt;h1 class="Catui_h1"&gt;재고 현황&lt;/h1&gt;&lt;/div&gt;&lt;/div&gt;
+…
+&lt;script&gt; catui.use(['table'], function (table) { … }); &lt;/script&gt;   ← catui.js·catadmin.js 뒤로 자동으로 옮겨짐</code></pre>
+<ul>
+  <li><code>layout: blank</code>면 셸 없이(로그인·오류 화면).</li>
+  <li>메뉴는 <code>templates/admin/menu.json</code> — 그룹 › 항목 › 하위 항목. 아직 만들지 않은 화면은 메뉴에 나오지 않습니다.</li>
+  <li><code>{{icon:이름:크기}}</code>로 아이콘을 넣습니다.</li>
+</ul>
+</section>
+
+<section aria-labelledby="checks">
+<h2 id="checks">빌드 검사</h2>
+<p><code>npm run build</code>는 다음 중 하나라도 있으면 실패합니다.</p>
+<ul>
+  <li>admin.css가 본체 클래스를 단독 선택자로 다시 정의(<code>.Catui_side{…}</code>) · 직접 쓴 색(hex) · 없는 토큰</li>
+  <li>템플릿의 정의 안 된 클래스 · 없는 아이콘 · id 중복 · <code>label for</code> 불일치 · 없는 화면 링크 · h1이 한 개가 아님</li>
+  <li>템플릿·catadmin.js 어디에도 쓰이지 않은 admin 클래스</li>
+</ul>
+<p><code>npm test</code>는 템플릿 전체의 콘솔 오류 0건과 셸·폼·목록·채팅·칸반·로그인 동작을 헤드리스 Chrome으로 확인합니다.</p>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../admin/start/install.html"><span>이전</span>설치</a><a class="doc-pager-next" href="../../admin/modules.html"><span>다음</span>catadmin.js API</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#shell">셸 마크업</a></li><li><a href="#pages">새 화면 만들기</a></li><li><a href="#checks">빌드 검사</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

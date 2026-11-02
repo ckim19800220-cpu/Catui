@@ -1,0 +1,44 @@
+<!-- title: 전체 프로젝트 | crumb: 프로젝트 / 전체 프로젝트 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">프로젝트</h1><p>진행 6 · 완료 2</p></div>
+  <div class="Catui_actions">
+    <div class="Catui_segment" role="radiogroup" aria-label="상태 거르기">
+      <input class="Catui_clip" type="radio" name="pj-f" id="pj-f0" value="" checked><label for="pj-f0">전체</label>
+      <input class="Catui_clip" type="radio" name="pj-f" id="pj-f1" value="진행"><label for="pj-f1">진행</label>
+      <input class="Catui_clip" type="radio" name="pj-f" id="pj-f2" value="완료"><label for="pj-f2">완료</label>
+    </div>
+    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="pj-add">{{icon:plus}}새 프로젝트</button>
+  </div>
+</div>
+<div class="Catui_adm-projects" id="pj-grid"></div>
+<script>
+catui.use(['layer'], function (layer) {
+  var list = [
+    { name: '11월 프로모션', desc: '기획전·쿠폰·배너', pct: 64, st: '진행', due: '11월 11일', team: ['김', '이', '박'], tone: 1 },
+    { name: '물류 센터 이전', desc: '판교 → 용인 이전 및 재고 이관', pct: 38, st: '진행', due: '12월 1일', team: ['이', '최'], tone: 2 },
+    { name: '모바일 앱 4.3', desc: '간편결제·찜 목록 개편', pct: 82, st: '진행', due: '11월 20일', team: ['정', '김', '강', '윤'], tone: 3 },
+    { name: '고객센터 챗봇', desc: '자주 묻는 질문 자동 응답', pct: 21, st: '진행', due: '12월 15일', team: ['박'], tone: 4 },
+    { name: '정산 자동화', desc: '결제사 정산 파일 자동 대사', pct: 55, st: '진행', due: '11월 30일', team: ['강', '이'], tone: 2 },
+    { name: '리뷰 개편', desc: '사진 리뷰·도움돼요 버튼', pct: 47, st: '진행', due: '12월 5일', team: ['최', '정'], tone: 1 },
+    { name: '10월 할인전', desc: '종료 · 매출 4,790만원', pct: 100, st: '완료', due: '10월 31일', team: ['김', '박'], tone: 1 },
+    { name: '개인정보 점검', desc: '외부 감사 대응 완료', pct: 100, st: '완료', due: '10월 20일', team: ['강'], tone: 3 },
+  ];
+  var grid = document.getElementById('pj-grid');
+  var draw = function () {
+    var f = document.querySelector('[name=pj-f]:checked').value;
+    catui.mount(grid, catui.html`${list.filter(function (p) { return !f || p.st === f; }).map(function (p) {
+      return catui.html`<article class="Catui_card Catui_adm-project"><div class="Catui_card-b">
+        <div class="Catui_adm-project-h"><span class="Catui_file-ico${[2, 3, 5].indexOf(p.tone) > -1 ? ' Catui_file-ico-' + p.tone : ''}" aria-hidden="true">${catui.icon('briefcase', 16)}</span><a href="project-detail.html">${p.name}</a><span class="Catui_pill Catui_pill-${p.st === '완료' ? 'success' : 'info'}" style="margin-left:auto"><i class="Catui_dot"></i>${p.st}</span></div>
+        <p class="Catui_help">${p.desc}</p>
+        <div><div class="Catui_prog-label"><span>진행률</span><span class="Catui_num">${p.pct}%</span></div><div class="Catui_meter" role="img" aria-label="진행률 ${p.pct}퍼센트"><i style="width:${p.pct}%"></i></div></div>
+        <div class="Catui_adm-project-f"><div class="Catui_av-stack" role="img" aria-label="참여 ${p.team.length}명">${p.team.map(function (t) { return catui.html`<span class="Catui_av Catui_av-sm">${t}</span>`; })}</div><span class="Catui_help">${catui.icon('calendar', 12)} ${p.due}</span></div>
+      </div></article>`; })}`);
+  };
+  document.querySelectorAll('[name=pj-f]').forEach(function (r) { r.addEventListener('change', draw); });
+  document.getElementById('pj-add').addEventListener('click', function () {
+    layer.form({ title: '새 프로젝트', area: 'sm', fields: [{ name: 'name', label: '이름', required: true }, { name: 'desc', label: '설명' }, { name: 'due', label: '마감', type: 'date', required: true }] })
+      .then(function (v) { if (!v) return; list.unshift({ name: v.name, desc: v.desc || '', pct: 0, st: '진행', due: v.due, team: ['김'], tone: 1 }); draw(); layer.msg('만들었습니다', { icon: 'success' }); });
+  });
+  draw();
+});
+</script>

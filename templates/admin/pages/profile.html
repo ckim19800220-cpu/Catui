@@ -1,0 +1,44 @@
+<!-- title: 프로필 | crumb: 관리 / 프로필 -->
+<h1 class="Catui_clip">프로필</h1>
+<article class="Catui_card">
+  <div class="Catui_adm-ph" style="aspect-ratio:auto;height:calc(var(--Catui_space-10) * 2)" aria-hidden="true"></div>
+  <div class="Catui_card-b Catui_adm-project-h" style="flex-wrap:wrap">
+    <span class="Catui_av Catui_av-xl" id="pf-av" aria-hidden="true">김</span>
+    <div><p class="Catui_h2" style="margin:0">김관리</p><p class="Catui_help">최고 관리자 · 운영팀 · 2024년 3월부터</p></div>
+    <div class="Catui_actions" style="margin-left:auto"><label class="Catui_btn Catui_btn-md Catui_btn-secondary">{{icon:image}}사진 바꾸기<input class="Catui_clip" type="file" accept="image/*" id="pf-photo"></label><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="settings.html">{{icon:settings}}설정</a></div>
+  </div>
+</article>
+
+<div class="Catui_grid">
+  <form class="Catui_card Catui_span-8" id="pf-form" data-catui-form data-catui-filter="pf-form" data-catui-adm-form novalidate>
+    <header class="Catui_card-h">기본 정보</header>
+    <div class="Catui_card-b Catui_adm-cols">
+      <div class="Catui_field"><label class="Catui_label" for="pf-name">이름</label><input class="Catui_input" id="pf-name" name="name" value="김관리" autocomplete="name" data-catui-verify="required"></div>
+      <div class="Catui_field"><label class="Catui_label" for="pf-mail">이메일</label><input class="Catui_input" id="pf-mail" name="email" type="email" value="admin@catui.dev" autocomplete="email" data-catui-verify="required|email"></div>
+      <div class="Catui_field"><label class="Catui_label" for="pf-tel">휴대폰</label><input class="Catui_input" id="pf-tel" name="tel" type="tel" value="010-1111-2222" autocomplete="tel" data-catui-verify="tel"></div>
+      <div class="Catui_field"><label class="Catui_label" for="pf-team">팀</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="pf-team" name="team"><option selected>운영팀</option><option>물류팀</option><option>마케팅팀</option></select>{{icon:chevron-down}}</div></div>
+      <div class="Catui_field Catui_adm-wide"><label class="Catui_label" for="pf-bio">소개</label><textarea class="Catui_input" id="pf-bio" name="bio" rows="3" data-catui-counter="160">주문·재고 운영을 맡고 있습니다.</textarea></div>
+    </div>
+    <footer class="Catui_card-f"><div class="Catui_adm-savebar" data-catui-adm-savebar style="position:static;box-shadow:none;border:0;padding:0"><span class="Catui_adm-savenote" data-catui-adm-savenote aria-live="polite">모든 변경 사항이 저장되었습니다</span><div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="reset">되돌리기</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit" data-catui-submit>저장</button></div></div></footer>
+  </form>
+  <article class="Catui_card Catui_span-4">
+    <header class="Catui_card-h">최근 활동</header>
+    <div class="Catui_card-b"><div class="Catui_feed Catui_adm-feed">
+      <div class="Catui_feed-item"><span class="Catui_file-ico" aria-hidden="true">{{icon:log-in:16}}</span><p>로그인 · 서울 · Chrome</p><time class="Catui_feed-time" data-catui-adm-ago="2026-11-02T09:00:00+09:00">오늘</time></div>
+      <div class="Catui_feed-item"><span class="Catui_file-ico Catui_file-ico-2" aria-hidden="true">{{icon:shopping-cart:16}}</span><p>주문 #1042 승인</p><time class="Catui_feed-time" data-catui-adm-ago="2026-11-02T09:40:00+09:00">오늘</time></div>
+      <div class="Catui_feed-item"><span class="Catui_file-ico Catui_file-ico-3" aria-hidden="true">{{icon:user-plus:16}}</span><p>최민 님 초대</p><time class="Catui_feed-time" data-catui-adm-ago="2026-10-31T14:12:00+09:00">2일 전</time></div>
+    </div></div>
+  </article>
+</div>
+<script>
+catui.use(['form', 'layer'], function (form, layer) {
+  form.on('submit(pf-form)', function (d) { setTimeout(function () { catui.admin.form.saved(d.form); layer.msg('저장했습니다', { icon: 'success' }); }, 300); return false; });
+  document.getElementById('pf-photo').addEventListener('change', function (e) {
+    var f = e.target.files[0]; if (!f) return;
+    if (f.size > 2 * 1024 * 1024) { layer.msg('2MB 이하 사진을 골라 주세요', { icon: 'warn' }); return; }
+    var av = document.getElementById('pf-av'), img = document.createElement('img');
+    img.src = URL.createObjectURL(f); img.alt = ''; img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:inherit';
+    av.replaceChildren(img); layer.msg('프로필 사진을 바꿨습니다', { icon: 'success' });
+  });
+});
+</script>

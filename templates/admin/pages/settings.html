@@ -1,0 +1,60 @@
+<!-- title: 설정 | crumb: 관리 / 설정 -->
+<div class="Catui_adm-head"><div><h1 class="Catui_h1">설정</h1><p>바꾼 값은 이 브라우저에 기억됩니다 (예제)</p></div></div>
+<div class="Catui_grid">
+  <nav class="Catui_card Catui_span-3" aria-label="설정 메뉴"><div class="Catui_card-b"><div class="Catui_list" id="st-nav">
+    <a class="Catui_list-item" href="#account">{{icon:user:16}}계정</a>
+    <a class="Catui_list-item" href="#notice">{{icon:bell:16}}알림</a>
+    <a class="Catui_list-item" href="#security">{{icon:shield:16}}보안</a>
+    <a class="Catui_list-item" href="#billing">{{icon:credit-card:16}}결제</a>
+    <a class="Catui_list-item" href="#danger">{{icon:alert-triangle:16}}위험 구역</a>
+  </div></div></nav>
+  <div class="Catui_span-9" id="st-panes">
+    <section class="Catui_card" id="account" aria-labelledby="st-acc-t"><header class="Catui_card-h" id="st-acc-t">계정</header><div class="Catui_card-b Catui_adm-cols">
+      <div class="Catui_field"><label class="Catui_label" for="st-lang">언어</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="st-lang"><option>한국어</option><option>English</option></select>{{icon:chevron-down}}</div></div>
+      <div class="Catui_field"><label class="Catui_label" for="st-tz">시간대</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="st-tz"><option>서울 (UTC+9)</option><option>도쿄 (UTC+9)</option><option>UTC</option></select>{{icon:chevron-down}}</div></div>
+      <fieldset class="Catui_adm-wide"><legend class="Catui_label">화면</legend><div class="Catui_segment" role="radiogroup" aria-label="화면 테마">
+        <input class="Catui_clip" type="radio" name="st-theme" id="st-th1" value="light"><label for="st-th1">밝게</label>
+        <input class="Catui_clip" type="radio" name="st-theme" id="st-th2" value="dark"><label for="st-th2">어둡게</label>
+        <input class="Catui_clip" type="radio" name="st-theme" id="st-th3" value="system"><label for="st-th3">시스템</label></div></fieldset>
+    </div></section>
+    <section class="Catui_card" id="notice" aria-labelledby="st-no-t" hidden><header class="Catui_card-h" id="st-no-t">알림</header><div class="Catui_card-b"><div class="Catui_settings">
+      <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="sn1">새 주문 메일</span><span class="Catui_setting-text">주문이 들어올 때마다</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="sn1c" type="checkbox" role="switch" checked aria-labelledby="sn1" data-catui-adm-pref="s-order"><label class="Catui_tgl" for="sn1c"></label></span></div></div>
+      <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="sn2">주간 요약</span><span class="Catui_setting-text">월요일 오전 9시</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="sn2c" type="checkbox" role="switch" checked aria-labelledby="sn2" data-catui-adm-pref="s-weekly"><label class="Catui_tgl" for="sn2c"></label></span></div></div>
+      <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="sn3">마케팅 소식</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="sn3c" type="checkbox" role="switch" aria-labelledby="sn3" data-catui-adm-pref="s-mkt"><label class="Catui_tgl" for="sn3c"></label></span></div></div>
+    </div></div></section>
+    <section class="Catui_card" id="security" aria-labelledby="st-se-t" hidden><header class="Catui_card-h" id="st-se-t">보안</header><div class="Catui_card-b Catui_vstack Catui_gap-4">
+      <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="ss1">2단계 인증</span><span class="Catui_setting-text">로그인할 때 인증 앱 코드를 함께 묻습니다</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="ss1c" type="checkbox" role="switch" checked aria-labelledby="ss1" data-catui-adm-pref="s-mfa"><label class="Catui_tgl" for="ss1c"></label></span></div></div>
+      <div><p class="Catui_label">로그인한 기기</p><ul class="Catui_list Catui_list-flush"><li class="Catui_list-item">{{icon:monitor:16}}Windows · Chrome · 서울<span class="Catui_list-meta">지금 이 기기</span></li><li class="Catui_list-item">{{icon:smartphone:16}}iPhone · Safari · 서울<span class="Catui_list-meta"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="st-logout">로그아웃</button></span></li></ul></div>
+      <a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="forgot.html" style="justify-self:start">비밀번호 바꾸기</a>
+    </div></section>
+    <section class="Catui_card" id="billing" aria-labelledby="st-bi-t" hidden><header class="Catui_card-h" id="st-bi-t">결제</header><div class="Catui_card-b Catui_vstack Catui_gap-3">
+      <p>현재 요금제 <b>성장</b> · 다음 결제 11월 20일 49,000원</p>
+      <p class="Catui_line">{{icon:credit-card:16}}국민카드 •••• 4821 <span class="Catui_help">만료 08/28</span></p>
+      <div class="Catui_actions"><a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="pricing.html">요금제 바꾸기</a><a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="invoice.html">청구서 보기</a></div>
+    </div></section>
+    <section class="Catui_card" id="danger" aria-labelledby="st-da-t" hidden><header class="Catui_card-h" id="st-da-t">위험 구역</header><div class="Catui_card-b"><div class="Catui_setting Catui_setting-danger"><div class="Catui_setting-main"><span class="Catui_setting-title">상점 닫기</span><span class="Catui_setting-text">모든 상품이 숨겨지고 주문을 받지 않습니다. 30일 안에 되돌릴 수 있습니다.</span></div><div class="Catui_setting-control"><button class="Catui_btn Catui_btn-md Catui_btn-danger" type="button" id="st-close">상점 닫기</button></div></div></div></section>
+  </div>
+</div>
+<script>
+catui.use(['layer'], function (layer) {
+  // 왼쪽 메뉴 ↔ 주소 해시(#security 등): 새로 고침·공유해도 같은 구역
+  var nav = document.getElementById('st-nav'), panes = [].slice.call(document.querySelectorAll('#st-panes > section'));
+  var show = function (id, focus) {
+    if (!panes.some(function (p) { return p.id === id; })) id = 'account';
+    panes.forEach(function (p) { p.hidden = p.id !== id; });
+    nav.querySelectorAll('a').forEach(function (a) { if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    if (focus) { var h = document.getElementById(id).querySelector('.Catui_card-h'); h.tabIndex = -1; h.focus(); }
+  };
+  nav.addEventListener('click', function (e) { var a = e.target.closest('a'); if (!a) return; e.preventDefault(); history.replaceState(null, '', a.getAttribute('href')); show(a.getAttribute('href').slice(1), true); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), false); });
+  show(location.hash.slice(1), false);
+  // 화면 테마 ↔ catui.admin.theme
+  var saved = catui.admin.theme.saved();
+  document.querySelector('[name=st-theme][value="' + saved + '"]').checked = true;
+  document.querySelectorAll('[name=st-theme]').forEach(function (r) { r.addEventListener('change', function () { catui.admin.theme.set(r.value); layer.msg('화면 테마를 바꿨습니다', { time: 1200 }); }); });
+  document.getElementById('st-logout').addEventListener('click', function (e) { e.target.closest('li').remove(); layer.msg('그 기기에서 로그아웃했습니다', { icon: 'success' }); });
+  document.getElementById('st-close').addEventListener('click', function () {
+    layer.prompt({ title: '상점 닫기', placeholder: '확인을 위해 "닫기"를 입력', required: true }, function (v, i) { if (v !== '닫기') { layer.msg('"닫기"를 정확히 입력해 주세요', { icon: 'warn' }); return false; } layer.close(i); layer.msg('상점을 닫았습니다 (예제)', { icon: 'success' }); });
+  });
+});
+</script>

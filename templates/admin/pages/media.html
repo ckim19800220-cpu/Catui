@@ -1,0 +1,26 @@
+<!-- title: 미디어 | crumb: UI / 미디어 -->
+<div class="Catui_adm-head"><div><h1 class="Catui_h1">미디어 보관함</h1><p>사진 8장 · 누르면 크게 보고 ←→로 넘깁니다</p></div>
+  <div class="Catui_actions"><label class="Catui_btn Catui_btn-md Catui_btn-primary">{{icon:upload}}사진 올리기<input class="Catui_clip" type="file" accept="image/*" multiple id="md-up"></label></div></div>
+<div class="Catui_adm-thumbs" id="md-grid" aria-label="사진"></div>
+<script>
+catui.use(['layer'], function (layer) {
+  // 예제 그림: 토큰 색을 읽어 SVG로 만든다 (실서비스는 서버 이미지 주소)
+  var css = getComputedStyle(document.documentElement), tok = function (k) { return css.getPropertyValue(k).trim(); };
+  var COLORS = ['--Catui_color-brand', '--Catui_color-info', '--Catui_color-purple', '--Catui_color-amber'];
+  var svg = function (i, label) {
+    var c = tok(COLORS[i % 4]), s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="' + c + '" opacity=".18"/><circle cx="' + (120 + i * 22) + '" cy="150" r="60" fill="' + c + '" opacity=".6"/><path d="M0 330 L130 220 L230 300 L310 240 L400 300 V400 H0Z" fill="' + c + '"/><text x="24" y="380" font-family="sans-serif" font-size="28" fill="#fff">' + label + '</text></svg>';
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
+  };
+  var items = ['매장 입구', '진열대', '신상품', '포장', '물류 창고', '팀 사진', '행사장', '촬영 현장'].map(function (t, i) { return { src: svg(i, t), alt: t, caption: t }; });
+  var grid = document.getElementById('md-grid');
+  var draw = function () {
+    catui.mount(grid, catui.html`${items.map(function (it, i) { return catui.html`<figure class="Catui_adm-thumb"><button type="button" data-i="${i}" aria-label="${it.alt} 크게 보기" style="all:unset;display:block;width:100%;height:100%;cursor:zoom-in"><img src="${it.src}" alt="${it.alt}"></button></figure>`; })}`);
+  };
+  grid.addEventListener('click', function (e) { var b = e.target.closest('[data-i]'); if (b) layer.photos({ items: items, start: Number(b.dataset.i), title: '미디어' }); });
+  document.getElementById('md-up').addEventListener('change', function (e) {
+    [].slice.call(e.target.files).forEach(function (f) { items.unshift({ src: URL.createObjectURL(f), alt: f.name, caption: f.name }); });
+    e.target.value = ''; draw(); layer.msg('올렸습니다', { icon: 'success' });
+  });
+  draw();
+});
+</script>

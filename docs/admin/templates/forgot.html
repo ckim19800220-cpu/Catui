@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>비밀번호 찾기 · CatuiAdmin</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/admin.min.css">
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:admin")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body>
+<!-- Catui 기본 스타일(리셋·링크·글꼴)은 루트 클래스 안에서만 적용되므로 Catui_site로 감싼다 -->
+<div class="Catui_site Catui_adm-blank">
+<main class="Catui_adm-auth-main" style="min-height:100vh">
+  <div class="Catui_card Catui_adm-auth-card"><div class="Catui_card-b Catui_vstack Catui_gap-4">
+    <p class="Catui_line"><span class="Catui_logo">C</span><b>CatuiAdmin</b></p>
+    <div><h1 class="Catui_h2">비밀번호 찾기</h1><p class="Catui_help" id="fg-desc">가입한 이메일로 인증 코드를 보냅니다.</p></div>
+    <div id="fg-steps"></div>
+    <div id="fg-panels">
+      <div class="Catui_step-panel"><form class="Catui_vstack Catui_gap-3" id="fg-1" novalidate>
+        <div class="Catui_field"><label class="Catui_label" for="fg-mail">이메일</label><input class="Catui_input" id="fg-mail" type="email" autocomplete="email" data-catui-verify="required|email"></div>
+        <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">인증 코드 보내기</button></form></div>
+      <div class="Catui_step-panel">
+        <fieldset class="Catui_otp" id="fg-otp" data-catui-otp data-catui-filter="fg-otp" aria-describedby="fg-otp-h"><legend class="Catui_label">인증 코드 6자리</legend>
+          <input class="Catui_input" inputmode="numeric" aria-label="1번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="2번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="3번째 숫자"><span class="Catui_otp-sep" aria-hidden="true">–</span><input class="Catui_input" inputmode="numeric" aria-label="4번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="5번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="6번째 숫자">
+        </fieldset>
+        <p class="Catui_help" id="fg-otp-h">예제 코드 123456 · 메일이 안 오면 스팸함을 확인하세요</p></div>
+      <div class="Catui_step-panel"><form class="Catui_vstack Catui_gap-3" id="fg-3" novalidate>
+        <div class="Catui_field"><label class="Catui_label" for="fg-pw">새 비밀번호</label><div class="Catui_adm-pw"><input class="Catui_input" id="fg-pw" type="password" autocomplete="new-password" data-catui-verify="required|password"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-adm-pwtoggle aria-label="비밀번호 보기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-eye"></use></svg></button></div>
+          <div class="Catui_adm-strength" data-catui-adm-strength="#fg-pw"><i></i><i></i><i></i><i></i><span></span></div></div>
+        <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">비밀번호 바꾸기</button></form></div>
+    </div>
+    <a class="Catui_link" href="login.html"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-left"></use></svg>로그인으로</a>
+  </div></div>
+</main>
+
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catadmin.min.js"></script>
+<script>
+catui.use(['page', 'form', 'field', 'layer'], function (page, form, field, layer) {
+  var w = page.steps.render({ elem: '#fg-steps', data: ['이메일', '인증', '새 비밀번호'], panels: '#fg-panels' });
+  document.getElementById('fg-1').addEventListener('submit', function (e) { e.preventDefault(); if (form.validate(e.target)) { layer.msg('인증 코드를 보냈습니다', { icon: 'success' }); w.next(); } });
+  field.otp.on('complete(fg-otp)', function (d) { if (d.value === '123456') w.next(); else { layer.msg('코드가 맞지 않습니다', { icon: 'danger' }); field.otp.getThis('fg-otp').clear(); } });
+  document.getElementById('fg-3').addEventListener('submit', function (e) { e.preventDefault(); if (form.validate(e.target)) layer.alert('비밀번호를 바꿨습니다. 새 비밀번호로 로그인해 주세요.', { title: '완료' }, function () { location.href = 'login.html'; }); });
+});
+</script>
+</body>
+</html>

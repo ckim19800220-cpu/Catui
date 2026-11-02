@@ -1,0 +1,61 @@
+{
+  "_": "CatuiAdmin 사이드바. page = templates/admin/pages/<page>.html. 아직 없는 화면은 빌드가 메뉴에서 뺀다.",
+  "groups": [
+    { "title": "일반", "items": [
+      { "id": "dash", "title": "대시보드", "icon": "layout-dashboard", "children": [
+        { "title": "운영", "page": "index" }, { "title": "분석", "page": "analytics" }, { "title": "매출", "page": "sales" }, { "title": "시스템 상태", "page": "health" } ] },
+      { "id": "forms", "title": "폼", "icon": "file-text", "children": [
+        { "title": "기본", "page": "form" }, { "title": "고급 입력", "page": "form-advanced" }, { "title": "버튼", "page": "form-buttons" },
+        { "title": "업로드", "page": "form-upload" }, { "title": "검증", "page": "form-validation" }, { "title": "단계", "page": "form-wizard" } ] },
+      { "id": "tables", "title": "표", "icon": "table", "children": [ { "title": "정적 표", "page": "tables" }, { "title": "동적 표", "page": "tables-dynamic" } ] },
+      { "id": "charts", "title": "차트", "icon": "chart-column", "children": [
+        { "title": "차트 카드", "page": "charts" }, { "title": "차트 갤러리", "page": "chart-gallery" }, { "title": "SVG 차트", "page": "charts-svg" } ] },
+      { "id": "calendar", "title": "캘린더", "icon": "calendar", "page": "calendar" },
+      { "id": "map", "title": "지도", "icon": "map", "page": "map" }
+    ] },
+    { "title": "앱", "items": [
+      { "id": "chat", "title": "채팅", "icon": "message-square", "page": "chat", "badge": "3" },
+      { "id": "inbox", "title": "받은편지함", "icon": "inbox", "page": "inbox" },
+      { "id": "kanban", "title": "칸반", "icon": "kanban", "page": "kanban" },
+      { "id": "files", "title": "파일", "icon": "folder", "page": "files" },
+      { "id": "notifications", "title": "알림", "icon": "bell", "page": "notifications" }
+    ] },
+    { "title": "커머스", "items": [
+      { "id": "shop", "title": "상점", "icon": "store", "page": "shop" },
+      { "id": "product", "title": "상품 상세", "icon": "package", "page": "product" },
+      { "id": "orders", "title": "주문", "icon": "shopping-cart", "children": [ { "title": "전체 주문", "page": "orders" }, { "title": "주문 상세", "page": "order-detail" } ] },
+      { "id": "invoice", "title": "청구서", "icon": "receipt", "page": "invoice" },
+      { "id": "pricing", "title": "요금표", "icon": "tag", "page": "pricing" }
+    ] },
+    { "title": "프로젝트", "items": [
+      { "id": "projects", "title": "전체 프로젝트", "icon": "briefcase", "page": "projects" },
+      { "id": "project-detail", "title": "프로젝트 상세", "icon": "layers", "page": "project-detail" }
+    ] },
+    { "title": "UI", "items": [
+      { "id": "elements", "title": "요소", "icon": "grid", "page": "elements" },
+      { "id": "widgets", "title": "위젯", "icon": "layout-grid", "page": "widgets", "badge": "5" },
+      { "id": "playground", "title": "놀이터", "icon": "sliders-horizontal", "page": "playground" },
+      { "id": "theme", "title": "테마", "icon": "palette", "page": "theme" },
+      { "id": "typography", "title": "타이포그래피", "icon": "type", "page": "typography" },
+      { "id": "icons", "title": "아이콘", "icon": "star", "page": "icons" },
+      { "id": "media", "title": "미디어", "icon": "image", "page": "media" }
+    ] },
+    { "title": "관리", "items": [
+      { "id": "contacts", "title": "연락처", "icon": "contact", "page": "contacts" },
+      { "id": "users", "title": "사용자 관리", "icon": "users", "page": "users" },
+      { "id": "profile", "title": "프로필", "icon": "user", "page": "profile" },
+      { "id": "settings", "title": "설정", "icon": "settings", "page": "settings" },
+      { "id": "faq", "title": "도움말", "icon": "help", "page": "faq" }
+    ] },
+    { "title": "레이아웃", "items": [
+      { "id": "fixed-sidebar", "title": "고정 사이드바", "icon": "panel-left", "page": "fixed-sidebar" },
+      { "id": "fixed-footer", "title": "고정 바닥글", "icon": "layout", "page": "fixed-footer" },
+      { "id": "nested", "title": "중첩 페이지", "icon": "folder-open", "page": "nested" },
+      { "id": "blank", "title": "빈 페이지", "icon": "file", "page": "blank" }
+    ] },
+    { "title": "페이지", "items": [
+      { "id": "auth", "title": "인증", "icon": "lock", "children": [ { "title": "로그인", "page": "login" }, { "title": "회원가입", "page": "register" }, { "title": "비밀번호 찾기", "page": "forgot" } ] },
+      { "id": "errors", "title": "오류", "icon": "alert-triangle", "children": [ { "title": "403 권한 없음", "page": "error-403" }, { "title": "404 없는 페이지", "page": "error-404" }, { "title": "500 서버 오류", "page": "error-500" } ] }
+    ] }
+  ]
+}

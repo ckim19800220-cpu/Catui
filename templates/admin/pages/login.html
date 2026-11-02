@@ -1,0 +1,36 @@
+<!-- title: 로그인 | layout: blank -->
+<div class="Catui_adm-auth">
+  <aside class="Catui_adm-auth-brand" aria-label="소개">
+    <p class="Catui_line"><span class="Catui_logo">C</span><b>CatuiAdmin</b></p>
+    <div><h2>오늘의 주문과 재고를<br>한 화면에서.</h2><p>Catui 위에 만든 한국어 관리자 템플릿 — 접근성 AA · 다크 모드 · 키보드 조작</p></div>
+    <p class="Catui_help">© 2026 CatuiAdmin</p>
+  </aside>
+  <main class="Catui_adm-auth-main">
+    <form class="Catui_adm-auth-card" id="lg-form" data-catui-form data-catui-filter="lg-form" novalidate>
+      <div><h1 class="Catui_h1">로그인</h1><p class="Catui_help">관리자 계정으로 들어갑니다</p></div>
+      <div class="Catui_banner Catui_banner-danger" role="alert" id="lg-err" hidden>{{icon:alert-circle:16}}<span>이메일 또는 비밀번호가 맞지 않습니다. (예제: admin@catui.dev / catui1234)</span></div>
+      <div class="Catui_field"><label class="Catui_label" for="lg-mail">이메일</label><input class="Catui_input" id="lg-mail" name="email" type="email" autocomplete="username" data-catui-verify="required|email" value="admin@catui.dev"></div>
+      <div class="Catui_field"><label class="Catui_label" for="lg-pw">비밀번호</label>
+        <div class="Catui_adm-pw"><input class="Catui_input" id="lg-pw" name="pw" type="password" autocomplete="current-password" data-catui-verify="required" aria-describedby="lg-caps"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-adm-pwtoggle aria-label="비밀번호 보기">{{icon:eye:16}}</button></div>
+        <p class="Catui_adm-caps" id="lg-caps" data-catui-adm-caps="#lg-pw" hidden>{{icon:alert-triangle:12}}Caps Lock이 켜져 있습니다</p></div>
+      <div class="Catui_adm-auth-row">
+        <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="keep"><span class="Catui_cbx">{{icon:check:12}}</span>로그인 상태 유지</label>
+        <a class="Catui_link" href="forgot.html">비밀번호를 잊으셨나요?</a>
+      </div>
+      <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="submit" data-catui-submit>로그인</button>
+      <p class="Catui_adm-auth-alt">또는</p>
+      <button class="Catui_btn Catui_btn-lg Catui_btn-secondary" type="button">{{icon:key:16}}회사 계정(SSO)으로 로그인</button>
+      <p class="Catui_help">계정이 없나요? <a class="Catui_link" href="register.html">가입 신청</a></p>
+    </form>
+  </main>
+</div>
+<script>
+catui.use(['form'], function (form) {
+  form.on('submit(lg-form)', function (d) {
+    var ok = d.field.email === 'admin@catui.dev' && d.field.pw === 'catui1234';
+    document.getElementById('lg-err').hidden = ok;
+    if (ok) location.href = 'index.html'; else document.getElementById('lg-pw').select();
+    return false;
+  });
+});
+</script>

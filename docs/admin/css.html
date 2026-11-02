@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>admin.css 클래스 · CatuiAdmin · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="Catui_adm-* 클래스와 토큰.">
+<link rel="icon" href="../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../dist/catui.min.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<link rel="stylesheet" href="../../dist/admin.css">
+<script src="../../dist/catui.js"></script>
+<script src="../../dist/catadmin.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../index.html"><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html" aria-current="page">CatuiAdmin</a></nav>
+  <span class="doc-version">v2.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CatuiAdmin 메뉴</summary><nav aria-label="CatuiAdmin 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../admin/start/introduction.html">소개 · 화면 지도</a></li><li><a href="../admin/start/install.html">설치</a></li><li><a href="../admin/start/structure.html">구조 · 새 화면 만들기</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../admin/modules.html">catadmin.js API</a></li><li><a href="../admin/css.html" aria-current="page">admin.css 클래스</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CatuiAdmin · 확장</p>
+<h1 class="Catui_h1">admin.css 클래스</h1>
+<p class="Catui_lead">Catui_adm-* 클래스와 토큰.</p>
+
+<section aria-labelledby="rules">
+<h2 id="rules">규칙</h2>
+<ul>
+  <li>클래스는 <code>Catui_adm-*</code>, 토큰은 <code>--Catui_adm-*</code>(본체 토큰을 참조만). 새 색 값은 만들지 않습니다.</li>
+  <li>본체 클래스를 덮어쓰지 않습니다 — 본체 클래스에 스타일을 더할 때는 항상 <code>.Catui_adm …</code> 아래로 한정합니다. 그래서 admin.css를 불러와도 관리 화면 밖은 바뀌지 않습니다.</li>
+  <li>반응형 기준은 본체와 같습니다: 1199 · 991 · 767 · 479px.</li>
+</ul>
+</section>
+
+<section aria-labelledby="tokens">
+<h2 id="tokens">토큰</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl">
+<caption class="Catui_clip">admin 토큰</caption>
+<thead><tr><th scope="col">토큰</th><th scope="col">기본값</th></tr></thead>
+<tbody>
+<tr><td><code>--Catui_adm-bg</code></td><td><code>--Catui_color-surface-muted</code> (본문 배경)</td></tr>
+<tr><td><code>--Catui_adm-side-w</code> · <code>--Catui_adm-rail-w</code></td><td>사이드바 폭 · 접힌 폭</td></tr>
+<tr><td><code>--Catui_adm-gap</code> · <code>--Catui_adm-pad</code></td><td>카드 간격 · 본문 여백</td></tr>
+<tr><td><code>--Catui_adm-chart-h</code></td><td>차트 높이 (<code>Catui_adm-chart-lg</code> 1.5배 · <code>-sm</code> 0.7배)</td></tr>
+<tr><td><code>--Catui_adm-dur</code> · <code>--Catui_adm-drawer-shadow</code> · <code>--Catui_adm-scrim</code></td><td>전환 시간 · 서랍 그림자 · 가림막</td></tr>
+</tbody></table></div>
+<p>예: 사이드바를 넓히려면 <code>.Catui_adm{--Catui_adm-side-w:260px}</code>.</p>
+</section>
+
+<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/admin/css/tokens.css</span></li><li><span class="doc-src">src/admin/css/shell.css</span><code>.Catui_adm-blank</code> <code>.Catui_adm-caret</code> <code>.Catui_adm-content</code> <code>.Catui_adm-foot</code> <code>.Catui_adm-icon-btn</code> <code>.Catui_adm-item-on</code> <code>.Catui_adm-nest</code> <code>.Catui_adm-pop</code> <code>.Catui_adm-scrim</code> <code>.Catui_adm-search</code> <code>.Catui_adm-top</code></li><li><span class="doc-src">src/admin/css/widgets.css</span><code>.Catui_adm-card-meta</code> <code>.Catui_adm-chart</code> <code>.Catui_adm-chart-lg</code> <code>.Catui_adm-empty</code> <code>.Catui_adm-feed</code> <code>.Catui_adm-flush</code> <code>.Catui_adm-head</code> <code>.Catui_adm-health</code> <code>.Catui_adm-health-row</code> <code>.Catui_adm-kpi</code> <code>.Catui_adm-legend</code> <code>.Catui_adm-stat-icon</code> <code>.Catui_adm-stat-sub</code> <code>.Catui_adm-stats</code></li><li><span class="doc-src">src/admin/css/pages.css</span><code>.Catui_adm-cal</code> <code>.Catui_adm-chart-sm</code> <code>.Catui_adm-cols</code> <code>.Catui_adm-demo</code> <code>.Catui_adm-map</code> <code>.Catui_adm-map-land</code> <code>.Catui_adm-map-layout</code> <code>.Catui_adm-pin</code> <code>.Catui_adm-savebar</code> <code>.Catui_adm-savenote</code> <code>.Catui_adm-section</code> <code>.Catui_adm-section-desc</code> <code>.Catui_adm-showcase</code> <code>.Catui_adm-thumb</code> <code>.Catui_adm-thumbs</code> <code>.Catui_adm-wide</code></li><li><span class="doc-src">src/admin/css/apps.css</span><code>.Catui_adm-back</code> <code>.Catui_adm-chat</code> <code>.Catui_adm-drag</code> <code>.Catui_adm-drop</code> <code>.Catui_adm-files-grid</code> <code>.Catui_adm-kanban</code> <code>.Catui_adm-mail-body</code> <code>.Catui_adm-mail-h</code> <code>.Catui_adm-pane</code> <code>.Catui_adm-pane-b</code> <code>.Catui_adm-pane-f</code> <code>.Catui_adm-pane-h</code> <code>.Catui_adm-row</code> <code>.Catui_adm-row-sub</code> <code>.Catui_adm-row-time</code> <code>.Catui_adm-row-title</code> <code>.Catui_adm-row-unread</code> <code>.Catui_adm-rows</code> <code>.Catui_adm-split</code></li><li><span class="doc-src">src/admin/css/commerce.css</span><code>.Catui_adm-gallery</code> <code>.Catui_adm-gallery-thumbs</code> <code>.Catui_adm-invoice</code> <code>.Catui_adm-invoice-h</code> <code>.Catui_adm-invoice-parties</code> <code>.Catui_adm-noprint</code> <code>.Catui_adm-pdp</code> <code>.Catui_adm-ph</code> <code>.Catui_adm-ph-2</code> <code>.Catui_adm-ph-3</code> <code>.Catui_adm-ph-4</code> <code>.Catui_adm-plan</code> <code>.Catui_adm-plan-badge</code> <code>.Catui_adm-plans</code> <code>.Catui_adm-price</code> <code>.Catui_adm-price-lg</code> <code>.Catui_adm-product</code> <code>.Catui_adm-products</code> <code>.Catui_adm-project</code> <code>.Catui_adm-project-f</code> <code>.Catui_adm-project-h</code> <code>.Catui_adm-projects</code> <code>.Catui_adm-sum</code> <code>.Catui_adm-sum-total</code></li><li><span class="doc-src">src/admin/css/auth.css</span><code>.Catui_adm-auth</code> <code>.Catui_adm-auth-alt</code> <code>.Catui_adm-auth-brand</code> <code>.Catui_adm-auth-card</code> <code>.Catui_adm-auth-main</code> <code>.Catui_adm-auth-row</code> <code>.Catui_adm-caps</code> <code>.Catui_adm-error</code> <code>.Catui_adm-error-code</code> <code>.Catui_adm-pw</code> <code>.Catui_adm-strength</code></li></ul></section>
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../admin/modules.html"><span>이전</span>catadmin.js API</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#rules">규칙</a></li><li><a href="#tokens">토큰</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+</div>
+</div>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

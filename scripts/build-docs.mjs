@@ -88,8 +88,9 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
   function classTable(page) {
     if (!page.css?.length) return "";
     const items = page.css.map((f) => {
-      if (!css.byFile[f]) { errors.push(`${page.path}: nav.json css 파일이 index.json에 없습니다 (${f})`); return ""; }
-      return `<li><span class="doc-src">src/css/${esc(f)}</span>${css.byFile[f].map((c) => `<code>.${esc(c)}</code>`).join(" ")}</li>`;
+      const own = f.startsWith("admin/") ? css.adminByFile?.[f] : css.byFile[f];   // admin/css/… = src/admin/css/…
+      if (!own) { errors.push(`${page.path}: nav.json css 파일이 index.json에 없습니다 (${f})`); return ""; }
+      return `<li><span class="doc-src">src/${f.startsWith("admin/") ? "" : "css/"}${esc(f)}</span>${own.map((c) => `<code>.${esc(c)}</code>`).join(" ")}</li>`;
     }).join("");
     return `<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes">${items}</ul></section>`;
   }
@@ -115,7 +116,9 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
       .replace(/\{\{sidebar\}\}/g, home ? "" : `<details class="doc-side" open><summary>${esc(page.section.title)} 메뉴</summary><nav aria-label="${esc(page.section.title)} 문서">${sidebar(page)}</nav></details>`)
       .replace(/\{\{content\}\}/g, home ? bodyHtml : `${head(page)}\n${bodyHtml}\n${classTable(page)}\n${pager}`)
       .replace(/\{\{toc\}\}/g, toc && !home ? `<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul>${toc}${page.css?.length ? '<li><a href="#classes">클래스</a></li>' : ""}</ul></aside>` : "")
-      .replace(/\{\{scripts\}\}/g, (home || page.section.id === "js" || page.js) ? `<script src="${distRel(page.path)}/catui.js"></script>` : "")
+      .replace(/\{\{scripts\}\}/g, page.section.id === "admin" && !home
+        ? `<link rel="stylesheet" href="${distRel(page.path)}/admin.css">\n<script src="${distRel(page.path)}/catui.js"></script>\n<script src="${distRel(page.path)}/catadmin.js"></script>`
+        : (home || page.section.id === "js" || page.js) ? `<script src="${distRel(page.path)}/catui.js"></script>` : "")
       .replace(/\{\{dist\}\}/g, distRel(page.path));
     return out;
   }
@@ -152,6 +155,8 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
   // 출력 검사: 클래스 정의, id 중복, label for, 로컬 링크, 아이콘 심볼
   const iconSet = new Set(icons.names);
   const planned = new Set(outputs.map(([p]) => path.join(P.docs, `${p}.html`)));   // 아직 쓰기 전이므로 생성 예정 목록과 대조
+  // CatuiAdmin 템플릿(templates/admin/pages → docs/admin/templates)은 문서 뒤에 만들어지므로 미리 목록에 넣는다
+  for (const f of walk(path.join(P.docs, "..", "templates/admin/pages"), ".html")) planned.add(path.join(P.docs, "admin/templates", path.basename(f)));
   for (const [p, html] of outputs) {
     const file = path.join(P.docs, `${p}.html`);
     const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
@@ -179,7 +184,8 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
     }
   }
   const SCOPE_ROOTS = new Set(["Catui_app", "Catui_site", "Catui_layer"]);   // 루트 스코프는 예제 대상이 아님
-  const noExample = [...css.defined].filter((c) => !exampleUsed.has(c) && !SCOPE_ROOTS.has(c)).sort();
+  // 예제 검사는 본체 CSS만 — admin.css 클래스는 템플릿 빌드(build-admin.mjs)가 "어느 템플릿에서든 쓰였는지"로 검사
+  const noExample = [...(css.exampleDefined || css.defined)].filter((c) => !exampleUsed.has(c) && !SCOPE_ROOTS.has(c)).sort();
   if (noExample.length) errors.push(`예제가 없는 CSS 클래스 ${noExample.length}개 — docs-src/css 해당 문서에 <catui-example>를 추가하세요: ${noExample.join(" ")}`);
 
   if (errors.length) fail(`문서 검사 실패 ${errors.length}건\n  ${[...new Set(errors)].slice(0, 40).join("\n  ")}`);

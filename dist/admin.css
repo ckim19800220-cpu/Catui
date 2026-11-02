@@ -1,0 +1,348 @@
+/*! CatuiAdmin CSS 2.0.0 | MIT License (c) imcatDevs | catui 위에 로드 */
+/* admin/tokens.css */
+/* CatuiAdmin 토큰 (L3) — 모두 본체 토큰을 참조한다. 새 색·크기 값을 만들지 않는다. */
+.Catui_adm{
+  --Catui_adm-bg:var(--Catui_color-surface-muted);
+  --Catui_adm-side-w:var(--Catui_sidebar-w);
+  --Catui_adm-rail-w:var(--Catui_sidebar-rail-w);
+  --Catui_adm-top-h:var(--Catui_topbar-h);
+  --Catui_adm-gap:var(--Catui_grid-gap);
+  --Catui_adm-pad:var(--Catui_content-pad);
+  --Catui_adm-dur:calc(var(--Catui_dur-fast) * 2);
+  --Catui_adm-ease:var(--Catui_ease);
+  --Catui_adm-drawer-shadow:var(--Catui_shadow-lg);
+  --Catui_adm-scrim:var(--Catui_overlay-scrim);
+  --Catui_adm-chart-h:var(--Catui_chart-h);
+  --Catui_adm-pop-w:calc(var(--Catui_space-10) * 6);
+}
+
+/* admin/shell.css */
+/* 관리 셸 확장 — layout/app-shell.css(.Catui_app·side·topbar·menu·item·nest)를 그대로 쓰고,
+   그룹형 하위 메뉴 · 접힘(레일) · 991px 이하 서랍 · 상단 바 동작 · 바닥글만 더한다. 모든 규칙은 .Catui_adm 아래. */
+.Catui_adm{min-height:100vh;background:var(--Catui_adm-bg)}
+.Catui_adm-blank{min-height:100vh;background:var(--Catui_color-surface-muted)}
+/* 관리 화면 안에서는 hidden이 컴포넌트의 display(flex·grid)보다 항상 이긴다 (일괄 작업 바·요약 등) */
+.Catui_adm [hidden],.Catui_adm-blank [hidden]{display:none !important}
+.Catui_adm .Catui_side{position:sticky;top:0;height:100vh;transition:width var(--Catui_adm-dur) var(--Catui_adm-ease),flex-basis var(--Catui_adm-dur) var(--Catui_adm-ease),transform var(--Catui_adm-dur) var(--Catui_adm-ease)}
+.Catui_adm .Catui_main{min-height:100vh}
+.Catui_adm-content{flex:1}
+.Catui_adm-content:focus{outline:none}
+
+/* 하위 메뉴: 머리는 들여쓰지 않고, 하위 항목만 아이콘 자리만큼 들여쓴다 */
+.Catui_adm-nest{padding-left:0}
+.Catui_adm-nest > .Catui_item{padding-left:calc(var(--Catui_sidebar-pad) + var(--Catui_sidebar-icon) + var(--Catui_space-3))}
+.Catui_adm-nest > summary.Catui_item{padding-left:var(--Catui_sidebar-pad)}
+.Catui_adm-caret{margin-left:auto;transition:transform var(--Catui_adm-dur) var(--Catui_adm-ease)}
+.Catui_adm-nest[open] > summary .Catui_adm-caret{transform:rotate(180deg)}
+.Catui_adm-nest .Catui_count + .Catui_adm-caret{margin-left:var(--Catui_space-2)}
+.Catui_adm-item-on{color:var(--Catui_sidebar-active-fg)}
+.Catui_adm-item-on .Catui_icon{color:var(--Catui_sidebar-active-fg)}
+.Catui_adm .Catui_side :is(.Catui_item,summary):focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+
+/* 상단 바 */
+.Catui_adm-top{gap:var(--Catui_space-3)}
+.Catui_adm-top .Catui_crumb{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.Catui_adm-search{display:inline-flex;align-items:center;gap:var(--Catui_space-2);min-width:calc(var(--Catui_space-10) * 3);justify-content:flex-start;color:var(--Catui_color-text-secondary)}
+.Catui_adm-search .Catui_kbd{margin-left:auto}
+.Catui_adm-icon-btn{position:relative}
+.Catui_adm-icon-btn .Catui_count{position:absolute;top:0;right:0;transform:translate(30%,-20%)}
+
+/* 알림 · 사용자 팝업 (catadmin.js가 위치를 잡는다) */
+.Catui_adm-pop{position:fixed;z-index:70;width:min(var(--Catui_adm-pop-w),calc(100vw - var(--Catui_space-6)));box-shadow:var(--Catui_shadow-lg)}
+.Catui_adm-pop[hidden]{display:none}
+
+/* 바닥글 */
+.Catui_adm-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--Catui_space-2);padding:var(--Catui_space-4) var(--Catui_adm-pad);border-top:1px solid var(--Catui_color-border);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);background:var(--Catui_card-bg)}
+.Catui_adm[data-catui-adm-fixed-foot] .Catui_adm-foot{position:sticky;bottom:0;z-index:20}
+
+/* 서랍 가림막 */
+.Catui_adm-scrim{position:fixed;inset:0;z-index:55;background:var(--Catui_adm-scrim)}
+.Catui_adm-scrim[hidden]{display:none}
+
+/* 접힘(레일) — 992px 이상에서 사용자가 접었을 때 */
+@media (min-width:992px){
+  .Catui_adm[data-catui-adm-collapsed] .Catui_side{width:var(--Catui_adm-rail-w);flex-basis:var(--Catui_adm-rail-w)}
+  .Catui_adm[data-catui-adm-collapsed] .Catui_side :is(.Catui_brand b,.Catui_group,.Catui_item-label,.Catui_user-txt,.Catui_count,.Catui_adm-caret){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .Catui_adm[data-catui-adm-collapsed] .Catui_side :is(.Catui_item,.Catui_user,.Catui_brand){justify-content:center;padding:0}
+  .Catui_adm[data-catui-adm-collapsed] .Catui_adm-nest > a.Catui_item{display:none}
+}
+
+/* 991px 이하: 레일(768~991) 또는 숨김(767 이하) + 펼치면 서랍 */
+@media (max-width:991px){
+  .Catui_adm[data-catui-adm-open] .Catui_side{position:fixed;top:0;bottom:0;left:0;z-index:60;width:var(--Catui_adm-side-w);box-shadow:var(--Catui_adm-drawer-shadow)}
+  .Catui_adm[data-catui-adm-open] .Catui_side :is(.Catui_brand b,.Catui_group,.Catui_item-label,.Catui_user-txt,.Catui_count){position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto}
+  .Catui_adm[data-catui-adm-open] .Catui_side .Catui_group{padding:var(--Catui_space-4) var(--Catui_sidebar-pad) var(--Catui_space-2)}
+  .Catui_adm[data-catui-adm-open] .Catui_side :is(.Catui_item,.Catui_user){justify-content:flex-start;padding:0 var(--Catui_sidebar-pad)}
+  .Catui_adm[data-catui-adm-open] .Catui_side .Catui_adm-nest > a.Catui_item{padding-left:calc(var(--Catui_sidebar-pad) + var(--Catui_sidebar-icon) + var(--Catui_space-3))}
+  .Catui_adm[data-catui-adm-open]{padding-left:var(--Catui_adm-rail-w)}
+  .Catui_adm:not([data-catui-adm-open]) .Catui_adm-nest > a.Catui_item{display:none}
+  .Catui_adm:not([data-catui-adm-open]) .Catui_adm-caret{display:none}
+  .Catui_adm-search > span:not(.Catui_kbd){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .Catui_adm-search{min-width:0}
+  .Catui_adm-search .Catui_kbd{display:none}
+}
+@media (max-width:767px){
+  .Catui_adm .Catui_side{position:fixed;top:0;bottom:0;left:0;z-index:60;width:var(--Catui_adm-side-w);transform:translateX(-100%);visibility:hidden}
+  .Catui_adm[data-catui-adm-open] .Catui_side{transform:none;visibility:visible}
+  .Catui_adm[data-catui-adm-open]{padding-left:0}
+  .Catui_adm-top{flex-wrap:nowrap}
+}
+@media (prefers-reduced-motion:reduce){
+  .Catui_adm .Catui_side,.Catui_adm-caret{transition:none}
+}
+@media print{
+  .Catui_adm .Catui_side,.Catui_adm-top,.Catui_adm-foot,.Catui_adm-scrim{display:none}
+  .Catui_adm{background:none}
+}
+
+/* admin/widgets.css */
+/* 대시보드 위젯 배치 — 카드·지표·피드·막대·할 일 등 본체 컴포넌트를 조합하고, 배치와 보조 표시만 더한다. */
+.Catui_adm-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--Catui_space-3)}
+.Catui_adm-head h1{margin:0}
+.Catui_adm-head p{margin:var(--Catui_space-1) 0 0;color:var(--Catui_color-text-secondary)}
+
+/* 지표 카드 줄: 카드 수만큼 한 줄(최대 6) → 1199px 이하 3열 → 767px 이하 2열 → 479px 이하 1열 */
+.Catui_adm-stats{display:grid;gap:var(--Catui_adm-gap);grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+@media (max-width:1199px){.Catui_adm-stats{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:767px){.Catui_adm-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:479px){.Catui_adm-stats{grid-template-columns:minmax(0,1fr)}}
+.Catui_adm-stat-sub{display:block;margin-top:var(--Catui_space-1);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_adm-stat-icon{float:right;display:grid;place-items:center;width:var(--Catui_control-h-lg);height:var(--Catui_control-h-lg);border-radius:var(--Catui_radius-md);background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong)}
+
+/* 차트 카드 */
+.Catui_adm-chart{position:relative;height:var(--Catui_adm-chart-h)}
+.Catui_adm-chart-lg{height:calc(var(--Catui_adm-chart-h) * 1.5)}
+.Catui_adm-chart > canvas{display:block;width:100%;height:100%}
+.Catui_adm-chart.Catui_canvas{aspect-ratio:auto;border:0;border-radius:0;background:transparent}
+.Catui_adm-chart.Catui_sparkline{width:var(--Catui_spark-w);height:var(--Catui_spark-h)}
+.Catui_adm-legend{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2) var(--Catui_space-4);margin-top:var(--Catui_space-3)}
+
+/* 카드 머리의 기간 선택 등 */
+.Catui_adm-card-meta{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);font-weight:400}
+
+/* 활동 피드 + 아바타 */
+.Catui_adm-feed .Catui_feed-item{grid-template-columns:auto minmax(0,1fr) auto;align-items:center}
+.Catui_adm-feed .Catui_feed-item::before,.Catui_adm-feed .Catui_feed-item::after{display:none}
+.Catui_adm-feed .Catui_feed-item p{margin:0}
+
+/* 표 카드: 카드 안쪽 여백 없이 꽉 채움 */
+.Catui_adm-flush{padding:0;overflow-x:auto}
+.Catui_adm-flush .Catui_tbl{margin:0}
+
+/* 상태 요약 (시스템 상태) */
+.Catui_adm-health{display:grid;gap:var(--Catui_space-3)}
+.Catui_adm-health-row{display:flex;align-items:center;gap:var(--Catui_space-3);justify-content:space-between}
+.Catui_adm-health-row > span:first-child{display:inline-flex;align-items:center;gap:var(--Catui_space-2)}
+
+/* 큰 숫자 + 보조 (매출 목표 등) */
+.Catui_adm-kpi{display:flex;align-items:baseline;gap:var(--Catui_space-2);flex-wrap:wrap}
+.Catui_adm-kpi b{font-size:var(--Catui_type-display-size);line-height:var(--Catui_type-display-lh);font-variant-numeric:tabular-nums}
+
+/* 빈 상태 */
+.Catui_adm-empty{display:grid;place-items:center;gap:var(--Catui_space-2);padding:var(--Catui_space-8) var(--Catui_space-4);text-align:center;color:var(--Catui_color-text-secondary)}
+
+/* admin/pages.css */
+/* 화면별 배치 — 폼 구역·고정 저장 바·보기 모음·미리보기 격자·지도·캘린더. 내용은 본체 컴포넌트 그대로. */
+
+/* 폼 구역: 왼쪽 설명 · 오른쪽 입력 카드 (991px 이하 위아래) */
+.Catui_adm-section{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--Catui_adm-gap);align-items:start}
+.Catui_adm-section + .Catui_adm-section{padding-top:var(--Catui_adm-gap);border-top:1px solid var(--Catui_color-border)}
+.Catui_adm-section-desc h2{margin:0 0 var(--Catui_space-1);font-size:var(--Catui_type-h3-size);line-height:var(--Catui_type-h3-lh)}
+.Catui_adm-section-desc p{margin:0;color:var(--Catui_color-text-secondary)}
+@media (max-width:991px){.Catui_adm-section{grid-template-columns:minmax(0,1fr)}}
+
+/* 입력 2열 (767px 이하 1열). .Catui_adm-wide는 두 칸 차지 */
+.Catui_adm-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-4) var(--Catui_adm-gap)}
+.Catui_adm-wide{grid-column:1 / -1}
+@media (max-width:767px){.Catui_adm-cols{grid-template-columns:minmax(0,1fr)}}
+
+/* 고정 저장 바 — 폼 맨 아래에 붙어 스크롤해도 보임 */
+.Catui_adm-savebar{position:sticky;bottom:0;z-index:15;display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-3);padding:var(--Catui_space-3) var(--Catui_space-4);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);box-shadow:var(--Catui_shadow-md)}
+.Catui_adm-savebar .Catui_actions{margin-left:auto}
+.Catui_adm-savenote{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+[data-catui-adm-dirty] .Catui_adm-savenote{color:var(--Catui_badge-warning-fg);font-weight:600}
+[data-catui-adm-dirty] .Catui_adm-savenote::before{content:"● ";color:var(--Catui_color-amber)}
+
+/* 보기 모음(버튼·요소 화면): 폭에 맞춰 카드 격자 */
+.Catui_adm-showcase{display:grid;gap:var(--Catui_adm-gap);grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 5)),1fr));align-items:start}
+.Catui_adm-demo{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2)}
+.Catui_adm-demo + .Catui_adm-demo{margin-top:var(--Catui_space-3)}
+
+/* 미리보기 격자 (업로드 사진·미디어) */
+.Catui_adm-thumbs{display:grid;gap:var(--Catui_space-3);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 2),1fr))}
+.Catui_adm-thumb{position:relative;margin:0;aspect-ratio:1 / 1;border-radius:var(--Catui_radius-md);overflow:hidden;background:var(--Catui_color-surface-muted);border:1px solid var(--Catui_card-border)}
+.Catui_adm-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_adm-thumb button{position:absolute;top:var(--Catui_space-1);right:var(--Catui_space-1)}
+
+/* 차트 카드 크기 변형 */
+.Catui_adm-chart-sm{height:calc(var(--Catui_adm-chart-h) * 0.7)}
+
+/* 지도: 외부 지도 API 없이 그리는 틀 (실서비스는 이 칸에 지도 SDK를 붙인다) */
+.Catui_adm-map-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--Catui_adm-gap);align-items:start}
+@media (max-width:991px){.Catui_adm-map-layout{grid-template-columns:minmax(0,1fr)}}
+.Catui_adm-map{position:relative;aspect-ratio:4 / 3;border-radius:var(--Catui_radius-md);overflow:hidden;background-color:var(--Catui_color-info-soft);background-image:linear-gradient(var(--Catui_chart-grid) 1px,transparent 1px),linear-gradient(90deg,var(--Catui_chart-grid) 1px,transparent 1px);background-size:calc(var(--Catui_space-10)) calc(var(--Catui_space-10))}
+.Catui_adm-map > svg{position:absolute;inset:0;width:100%;height:100%}
+.Catui_adm-map-land{fill:var(--Catui_card-bg);stroke:var(--Catui_color-border);stroke-width:1.5}
+.Catui_adm-pin{position:absolute;transform:translate(-50%,-100%);display:inline-flex;align-items:center;gap:var(--Catui_space-1);padding:2px var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_btn-primary-bg);color:var(--Catui_btn-primary-fg);border:0;font-size:var(--Catui_type-caption-size);font-weight:600;cursor:pointer;box-shadow:var(--Catui_shadow-sm);white-space:nowrap}
+.Catui_adm-pin[aria-pressed="true"]{background:var(--Catui_color-amber);color:var(--Catui_color-text-primary);z-index:2}
+.Catui_adm-pin:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+
+/* 캘린더 화면: 달력 + 옆 패널 */
+.Catui_adm-cal{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:var(--Catui_adm-gap);align-items:start}
+@media (max-width:1199px){.Catui_adm-cal{grid-template-columns:minmax(0,1fr)}}
+.Catui_adm-cal .Catui_cal-cell{cursor:pointer}
+.Catui_adm-cal .Catui_cal-cell:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+
+/* admin/apps.css */
+/* 앱 화면 — 목록+본문 2단(채팅·받은편지함), 칸반 끌어 옮기기 표시, 파일 격자. 767px 이하는 한 단씩 전환. */
+.Catui_adm-split{display:grid;grid-template-columns:minmax(calc(var(--Catui_space-10) * 4.5),1fr) minmax(0,2.4fr);height:calc(100vh - var(--Catui_adm-top-h) - var(--Catui_adm-pad) * 2 - var(--Catui_space-10) * 1.6);min-height:calc(var(--Catui_space-10) * 7);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);overflow:hidden}
+.Catui_adm-pane{display:flex;flex-direction:column;min-width:0;min-height:0}
+.Catui_adm-pane + .Catui_adm-pane{border-left:1px solid var(--Catui_color-border)}
+.Catui_adm-pane-h{display:flex;align-items:center;gap:var(--Catui_space-3);min-height:var(--Catui_card-header-h);padding:var(--Catui_space-2) var(--Catui_space-4);border-bottom:1px solid var(--Catui_color-border)}
+.Catui_adm-pane-h h2{margin:0;font-size:var(--Catui_type-body-size);font-weight:600}
+.Catui_adm-pane-b{flex:1;min-height:0;overflow:auto;padding:var(--Catui_space-4)}
+.Catui_adm-pane-f{padding:var(--Catui_space-3) var(--Catui_space-4);border-top:1px solid var(--Catui_color-border)}
+.Catui_adm-back{display:none}
+@media (max-width:767px){
+  .Catui_adm-split{grid-template-columns:minmax(0,1fr)}
+  .Catui_adm-split[data-catui-adm-pane="detail"] > .Catui_adm-pane:first-child,.Catui_adm-split:not([data-catui-adm-pane="detail"]) > .Catui_adm-pane:last-child{display:none}
+  .Catui_adm-pane + .Catui_adm-pane{border-left:0}
+  .Catui_adm-back{display:inline-flex}
+}
+
+/* 대화·메일 목록 항목 */
+.Catui_adm-rows{margin:0;padding:0;list-style:none}
+.Catui_adm-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--Catui_space-1) var(--Catui_space-3);align-items:center;width:100%;padding:var(--Catui_space-3) var(--Catui_space-4);border:0;border-bottom:1px solid var(--Catui_color-border);background:transparent;color:inherit;text-align:left;font:inherit;cursor:pointer}
+.Catui_adm-row:hover{background:var(--Catui_color-surface-muted)}
+.Catui_adm-row[aria-current="true"]{background:var(--Catui_color-brand-soft)}
+.Catui_adm-row:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+.Catui_adm-row-title{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.Catui_adm-row-sub{grid-column:2 / -1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_adm-row-time{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);white-space:nowrap}
+.Catui_adm-row-unread .Catui_adm-row-title{font-weight:700}
+.Catui_adm-row-unread .Catui_adm-row-time{color:var(--Catui_color-brand-strong);font-weight:600}
+
+/* 채팅 기록: 아래부터 쌓이고 스크롤 */
+.Catui_adm-chat{flex:1;min-height:0;overflow:auto;padding:var(--Catui_space-4)}
+.Catui_adm-chat .Catui_chat{max-width:none}
+
+/* 메일 읽기 */
+.Catui_adm-mail-h{display:grid;gap:var(--Catui_space-1);padding-bottom:var(--Catui_space-4);margin-bottom:var(--Catui_space-4);border-bottom:1px solid var(--Catui_color-border)}
+.Catui_adm-mail-h h2{margin:0;font-size:var(--Catui_type-h3-size);line-height:var(--Catui_type-h3-lh)}
+.Catui_adm-mail-body{max-width:var(--Catui_prose-measure);line-height:1.75}
+
+/* 칸반: 끌어 옮기기·키보드 이동 표시 */
+.Catui_adm-kanban .Catui_kanban-card{cursor:grab}
+.Catui_adm-kanban .Catui_kanban-card:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_adm-drag{opacity:.5}
+.Catui_adm-drop{outline:2px dashed var(--Catui_color-brand-strong);outline-offset:-4px;background:var(--Catui_color-brand-soft)}
+
+/* 파일 격자 보기 */
+.Catui_adm-files-grid{display:grid;gap:var(--Catui_space-3);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 2.4),1fr))}
+.Catui_adm-files-grid .Catui_file{flex-direction:column;align-items:flex-start;padding:var(--Catui_space-3);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md)}
+.Catui_adm-files-grid .Catui_file-acts{margin-left:0}
+
+/* admin/commerce.css */
+/* 커머스·프로젝트 화면 — 상품 격자·상세 갤러리·가격·주문 요약·청구서(인쇄)·요금표·프로젝트 카드 */
+
+/* 이미지 자리표시자: 토큰 색 + 가운데 아이콘 (다크 모드에서도 맞음). 실서비스는 <img>로 바꾼다 */
+.Catui_adm-ph{display:grid;place-items:center;aspect-ratio:4 / 3;background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong)}
+.Catui_adm-ph .Catui_icon{width:var(--Catui_space-8);height:var(--Catui_space-8);opacity:.7}
+.Catui_adm-ph-2{background:var(--Catui_color-info-soft);color:var(--Catui_color-info)}
+.Catui_adm-ph-3{background:var(--Catui_color-purple-soft);color:var(--Catui_color-purple)}
+.Catui_adm-ph-4{background:var(--Catui_color-amber-soft);color:var(--Catui_color-amber)}
+
+/* 상품 격자 */
+.Catui_adm-products{display:grid;gap:var(--Catui_adm-gap);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 3.4),1fr))}
+.Catui_adm-product{overflow:hidden;transition:box-shadow var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_adm-product:hover,.Catui_adm-product:focus-within{box-shadow:var(--Catui_shadow-md)}
+.Catui_adm-product .Catui_card-b{display:grid;gap:var(--Catui_space-1)}
+.Catui_adm-product a{color:inherit;font-weight:600}
+.Catui_adm-product a:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+
+/* 가격: 할인 전 가격은 줄 긋고, 할인율은 색+숫자로 */
+.Catui_adm-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--Catui_space-2);font-variant-numeric:tabular-nums}
+.Catui_adm-price b{font-size:var(--Catui_type-h3-size)}
+.Catui_adm-price s{color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size)}
+.Catui_adm-price em{font-style:normal;font-weight:700;color:var(--Catui_color-danger)}
+.Catui_adm-price-lg b{font-size:var(--Catui_type-h1-size)}
+
+/* 상품 상세: 갤러리 + 정보 */
+.Catui_adm-pdp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--Catui_space-8);align-items:start}
+@media (max-width:991px){.Catui_adm-pdp{grid-template-columns:minmax(0,1fr)}}
+.Catui_adm-gallery{display:grid;gap:var(--Catui_space-3)}
+.Catui_adm-gallery > .Catui_adm-ph{border-radius:var(--Catui_radius-lg);aspect-ratio:1 / 1}
+.Catui_adm-gallery-thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--Catui_space-2)}
+.Catui_adm-gallery-thumbs button{padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-md);overflow:hidden;background:none;cursor:pointer}
+.Catui_adm-gallery-thumbs button[aria-pressed="true"]{border-color:var(--Catui_color-brand-strong)}
+.Catui_adm-gallery-thumbs button:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_adm-gallery-thumbs .Catui_adm-ph{aspect-ratio:1 / 1}
+
+/* 요약 행 (주문·청구 금액) */
+.Catui_adm-sum{display:grid;gap:var(--Catui_space-2)}
+.Catui_adm-sum > div{display:flex;justify-content:space-between;gap:var(--Catui_space-3);font-variant-numeric:tabular-nums}
+.Catui_adm-sum-total{padding-top:var(--Catui_space-2);border-top:1px solid var(--Catui_color-border);font-weight:700;font-size:var(--Catui_type-h3-size)}
+
+/* 청구서: 종이 한 장처럼, 인쇄 시 셸 없이 그 장만 */
+.Catui_adm-invoice{max-width:calc(var(--Catui_space-10) * 13);margin-inline:auto;padding:var(--Catui_space-8);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);box-shadow:var(--Catui_shadow-sm)}
+.Catui_adm-invoice-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--Catui_space-4);padding-bottom:var(--Catui_space-5);margin-bottom:var(--Catui_space-5);border-bottom:2px solid var(--Catui_color-text-primary)}
+.Catui_adm-invoice-parties{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-5);margin-bottom:var(--Catui_space-5)}
+.Catui_adm-invoice .Catui_adm-sum{max-width:calc(var(--Catui_space-10) * 5);margin-left:auto;margin-top:var(--Catui_space-5)}
+@media (max-width:767px){.Catui_adm-invoice{padding:var(--Catui_space-5)}.Catui_adm-invoice-parties{grid-template-columns:minmax(0,1fr)}}
+@media print{
+  .Catui_adm-noprint{display:none}
+  .Catui_adm-invoice{max-width:none;border:0;box-shadow:none;padding:0}
+}
+
+/* 요금표 */
+.Catui_adm-plans{display:grid;gap:var(--Catui_adm-gap);grid-template-columns:repeat(auto-fit,minmax(calc(var(--Catui_space-10) * 4),1fr));align-items:stretch}
+.Catui_adm-plan .Catui_card-b{display:flex;flex-direction:column;gap:var(--Catui_space-4);height:100%}
+.Catui_adm-plan ul{display:grid;gap:var(--Catui_space-2);margin:0;padding:0;list-style:none;flex:1}
+.Catui_adm-plan li{display:flex;gap:var(--Catui_space-2);align-items:flex-start}
+.Catui_adm-plan li .Catui_icon{color:var(--Catui_color-brand-strong);flex:none;margin-top:2px}
+.Catui_adm-plan li[aria-disabled="true"]{color:var(--Catui_color-text-secondary)}
+.Catui_adm-plan li[aria-disabled="true"] .Catui_icon{color:var(--Catui_color-text-secondary)}
+.Catui_adm-plan-badge{align-self:flex-start}
+
+/* 프로젝트 카드 */
+.Catui_adm-projects{display:grid;gap:var(--Catui_adm-gap);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 4.4),1fr))}
+.Catui_adm-project .Catui_card-b{display:grid;gap:var(--Catui_space-3)}
+.Catui_adm-project-h{display:flex;align-items:center;gap:var(--Catui_space-3)}
+.Catui_adm-project-h a{color:inherit;font-weight:700}
+.Catui_adm-project-f{display:flex;align-items:center;justify-content:space-between;gap:var(--Catui_space-3)}
+
+/* admin/auth.css */
+/* 인증·오류 화면 — 셸 없이 가운데 카드(왼쪽 브랜드 면은 991px 이상에서만), 큰 오류 번호 */
+.Catui_adm-auth{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:100vh}
+.Catui_adm-auth-brand{display:flex;flex-direction:column;justify-content:space-between;gap:var(--Catui_space-6);padding:var(--Catui_space-10);background:var(--Catui_sidebar-bg);color:var(--Catui_sidebar-fg)}
+.Catui_adm-auth-brand h2{margin:0;font-size:var(--Catui_type-h1-size);line-height:var(--Catui_type-h1-lh);color:var(--Catui_color-text-inverse)}
+.Catui_adm-auth-brand p{margin:var(--Catui_space-3) 0 0;color:var(--Catui_sidebar-fg-muted)}
+.Catui_adm-auth-main{display:grid;place-items:center;padding:var(--Catui_space-8) var(--Catui_space-4)}
+.Catui_adm-auth-card{width:min(100%,calc(var(--Catui_space-10) * 6.5));display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-5)}
+.Catui_adm-auth-card .Catui_input{width:100%}
+.Catui_adm-auth-card h1{margin:0}
+.Catui_adm-auth-alt{display:flex;align-items:center;gap:var(--Catui_space-3);color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size)}
+.Catui_adm-auth-alt::before,.Catui_adm-auth-alt::after{content:"";flex:1;height:1px;background:var(--Catui_color-border)}
+.Catui_adm-auth-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-2)}
+@media (max-width:991px){.Catui_adm-auth{grid-template-columns:minmax(0,1fr)}.Catui_adm-auth-brand{display:none}}
+
+/* 비밀번호 칸: 보기 버튼을 칸 안 오른쪽에 */
+.Catui_adm-pw{position:relative}
+.Catui_adm-pw .Catui_input{padding-right:calc(var(--Catui_control-h-md) + var(--Catui_space-1))}
+.Catui_adm-pw > button{position:absolute;top:50%;right:var(--Catui_space-1);transform:translateY(-50%)}
+.Catui_adm-caps{display:flex;align-items:center;gap:var(--Catui_space-1);color:var(--Catui_badge-warning-fg);font-size:var(--Catui_type-caption-size);font-weight:600}
+
+/* 비밀번호 강도: 4칸 + 글자 (색만으로 알리지 않음) */
+.Catui_adm-strength{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;align-items:center;gap:var(--Catui_space-1)}
+.Catui_adm-strength i{height:var(--Catui_space-1);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-border)}
+.Catui_adm-strength[data-level="1"] i:nth-child(-n+1){background:var(--Catui_color-danger)}
+.Catui_adm-strength[data-level="2"] i:nth-child(-n+2){background:var(--Catui_color-amber)}
+.Catui_adm-strength[data-level="3"] i:nth-child(-n+3){background:var(--Catui_color-info)}
+.Catui_adm-strength[data-level="4"] i{background:var(--Catui_color-brand)}
+.Catui_adm-strength span{min-width:calc(var(--Catui_space-10) * 0.9);text-align:right;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+
+/* 오류 화면 */
+.Catui_adm-error{display:grid;place-items:center;min-height:100vh;padding:var(--Catui_space-8) var(--Catui_space-4);text-align:center}
+.Catui_adm-error-code{display:block;font-size:calc(var(--Catui_type-display-size) * 2.2);line-height:1;font-weight:800;letter-spacing:-.04em;color:var(--Catui_color-brand-strong);font-variant-numeric:tabular-nums}
+.Catui_adm-error .Catui_result{max-width:calc(var(--Catui_space-10) * 8);margin-inline:auto}
+

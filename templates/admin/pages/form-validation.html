@@ -1,0 +1,68 @@
+<!-- title: 검증 | crumb: 폼 / 검증 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">입력 검증</h1><p>제출할 때 모든 칸을 검사하고, 고친 칸은 바로 오류가 사라집니다</p></div>
+</div>
+
+<div class="Catui_grid">
+  <article class="Catui_card Catui_span-8">
+    <header class="Catui_card-h">관리자 초대</header>
+    <div class="Catui_card-b">
+      <div class="Catui_callout Catui_callout-danger" role="alert" id="fv-summary" hidden tabindex="-1">{{icon:alert-circle}}<p class="Catui_callout-title">입력을 확인해 주세요</p><ul id="fv-list"></ul></div>
+      <form class="Catui_adm-cols" id="fv-form" data-catui-form data-catui-filter="fv-form" novalidate>
+        <div class="Catui_field"><label class="Catui_label" for="fv-name">이름 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fv-name" name="name" autocomplete="name" data-catui-verify="required|hangul|minlen:2" data-catui-reqtext="이름을 입력해 주세요."></div>
+        <div class="Catui_field"><label class="Catui_label" for="fv-id">아이디 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fv-id" name="uid" autocomplete="username" data-catui-verify="required|id" aria-describedby="fv-id-h"><p class="Catui_help" id="fv-id-h">영문으로 시작, 영문·숫자·_ 4~20자</p></div>
+        <div class="Catui_field"><label class="Catui_label" for="fv-mail">이메일 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fv-mail" name="email" type="email" autocomplete="email" data-catui-verify="required|email"></div>
+        <div class="Catui_field"><label class="Catui_label" for="fv-tel">휴대폰</label><input class="Catui_input" id="fv-tel" name="tel" type="tel" autocomplete="tel" placeholder="010-1234-5678" data-catui-verify="tel"></div>
+        <div class="Catui_field"><label class="Catui_label" for="fv-pw">비밀번호 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fv-pw" name="pw" type="password" autocomplete="new-password" data-catui-verify="required|password" aria-describedby="fv-pw-h"><p class="Catui_help" id="fv-pw-h">8자 이상, 영문과 숫자 포함</p></div>
+        <div class="Catui_field"><label class="Catui_label" for="fv-pw2">비밀번호 확인 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fv-pw2" name="pw2" type="password" autocomplete="new-password" data-catui-verify="required|same:pw"></div>
+        <div class="Catui_field"><label class="Catui_label" for="fv-age">근속 연수</label><input class="Catui_input" id="fv-age" name="years" inputmode="numeric" data-catui-verify="int|min:0|max:50"></div>
+        <div class="Catui_field"><label class="Catui_label" for="fv-role">권한 <span class="Catui_req">필수</span></label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="fv-role" name="role" data-catui-verify="required" data-catui-reqtext="권한을 골라 주세요."><option value="">선택</option><option value="admin">최고 관리자</option><option value="staff">운영자</option><option value="viewer">읽기 전용</option></select>{{icon:chevron-down}}</div></div>
+        <fieldset class="Catui_adm-wide"><legend class="Catui_label">알림 받을 곳 <span class="Catui_req">필수</span></legend>
+          <div class="Catui_choices">
+            <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="notify" value="mail" data-catui-verify="required" data-catui-reqtext="알림 받을 곳을 하나 이상 골라 주세요."><span class="Catui_cbx">{{icon:check:12}}</span>이메일</label>
+            <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="notify" value="sms"><span class="Catui_cbx">{{icon:check:12}}</span>문자</label>
+            <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="notify" value="push"><span class="Catui_cbx">{{icon:check:12}}</span>앱 알림</label>
+          </div></fieldset>
+        <label class="Catui_choice Catui_adm-wide"><input class="Catui_clip" type="checkbox" name="agree" value="y" data-catui-verify="required" data-catui-reqtext="보안 서약에 동의해야 초대할 수 있습니다."><span class="Catui_cbx">{{icon:check:12}}</span>관리자 보안 서약에 동의합니다 <span class="Catui_req">필수</span></label>
+        <div class="Catui_actions Catui_adm-wide"><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="reset">지우기</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit" data-catui-submit>초대 보내기</button></div>
+      </form>
+    </div>
+  </article>
+  <article class="Catui_card Catui_span-4">
+    <header class="Catui_card-h">검증 규칙</header>
+    <div class="Catui_card-b">
+      <ul class="Catui_list Catui_list-flush">
+        <li class="Catui_list-item"><code>required</code> 필수 (체크 묶음은 하나 이상)</li>
+        <li class="Catui_list-item"><code>hangul</code> · <code>minlen:2</code> 한글 2자 이상</li>
+        <li class="Catui_list-item"><code>id</code> 아이디 형식</li>
+        <li class="Catui_list-item"><code>email</code> · <code>tel</code> 형식</li>
+        <li class="Catui_list-item"><code>password</code> 8자·영문·숫자</li>
+        <li class="Catui_list-item"><code>same:pw</code> 같은 값</li>
+        <li class="Catui_list-item"><code>int|min:0|max:50</code> 정수 범위</li>
+      </ul>
+    </div>
+  </article>
+</div>
+<script>
+catui.use(['form', 'layer'], function (form, layer) {
+  var sum = document.getElementById('fv-summary'), list = document.getElementById('fv-list'), f = document.getElementById('fv-form');
+  // 제출 버튼: 검사 실패면 맨 위 요약에 오류 목록(각 칸으로 가는 링크)을 보여 줌
+  f.addEventListener('submit', function () {
+    setTimeout(function () {
+      var errs = [].slice.call(f.querySelectorAll('[aria-invalid="true"]'));
+      list.replaceChildren();
+      errs.forEach(function (el) {
+        var li = document.createElement('li'), a = document.createElement('a');
+        var lab = f.querySelector('label[for="' + el.id + '"]') || el.closest('fieldset')?.querySelector('legend') || el.closest('label');
+        a.href = '#' + (el.id || ''); a.textContent = (lab ? lab.textContent.replace('필수', '').trim() : el.name) + ': ' + (document.getElementById(el.getAttribute('aria-describedby')?.split(' ').find(function (x) { return x.endsWith('-err'); }) || '')?.textContent || '확인 필요');
+        a.addEventListener('click', function (e) { e.preventDefault(); el.focus(); });
+        li.appendChild(a); list.appendChild(li);
+      });
+      sum.hidden = !errs.length;
+      if (errs.length) sum.focus();
+    }, 0);
+  });
+  form.on('submit(fv-form)', function (d) { sum.hidden = true; layer.msg(d.field.email + '로 초대를 보냈습니다', { icon: 'success' }); f.reset(); return false; });
+  f.addEventListener('reset', function () { sum.hidden = true; form.clearError(f); });
+});
+</script>

@@ -1,0 +1,41 @@
+<!-- title: 알림 | crumb: 앱 / 알림 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">알림</h1><p>상단 바의 알림과 같은 목록입니다</p></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="nt-all">{{icon:check}}모두 읽음</button><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="nt-test">{{icon:bell}}테스트 알림 보내기</button></div>
+</div>
+
+<div class="Catui_grid">
+  <section class="Catui_card Catui_span-8" aria-labelledby="nt-t">
+    <header class="Catui_card-h"><span id="nt-t">알림 목록</span>
+      <span class="Catui_card-tools"><span class="Catui_segment" role="radiogroup" aria-label="알림 거르기">
+        <input class="Catui_clip" type="radio" name="nt-f" id="nt-f1" value="all" checked><label for="nt-f1">전체</label>
+        <input class="Catui_clip" type="radio" name="nt-f" id="nt-f2" value="unread"><label for="nt-f2">안 읽음</label>
+      </span></span></header>
+    <div class="Catui_card-b Catui_adm-flush"><ul class="Catui_notifs-list" id="nt-list" style="max-height:none"></ul></div>
+  </section>
+  <aside class="Catui_card Catui_span-4" aria-labelledby="nt-s">
+    <header class="Catui_card-h" id="nt-s">알림 받기</header>
+    <div class="Catui_card-b"><div class="Catui_settings">
+      <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="np-1">새 주문</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="np-1c" type="checkbox" role="switch" checked aria-labelledby="np-1" data-catui-adm-pref="n-order"><label class="Catui_tgl" for="np-1c"></label></span></div></div>
+      <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="np-2">결제 실패</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="np-2c" type="checkbox" role="switch" checked aria-labelledby="np-2" data-catui-adm-pref="n-fail"><label class="Catui_tgl" for="np-2c"></label></span></div></div>
+      <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="np-3">댓글·멘션</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="np-3c" type="checkbox" role="switch" checked aria-labelledby="np-3" data-catui-adm-pref="n-mention"><label class="Catui_tgl" for="np-3c"></label></span></div></div>
+      <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="np-4">시스템 점검</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="np-4c" type="checkbox" role="switch" aria-labelledby="np-4" data-catui-adm-pref="n-system"><label class="Catui_tgl" for="np-4c"></label></span></div></div>
+    </div></div>
+  </aside>
+</div>
+<script>
+// 상단 바 알림(catui.admin.notify)과 같은 자료를 쓴다 — 여기서 읽으면 배지도 줄어든다
+catui.use(function () {
+  var n = catui.admin.notify, list = document.getElementById('nt-list'), filter = 'all';
+  var draw = function () {
+    var items = n.items.filter(function (x) { return filter === 'all' || x.unread; });
+    catui.mount(list, items.length ? catui.html`${items.map(function (x) { return catui.html`<li class="Catui_notif${x.unread ? ' Catui_notif-unread' : ''}"><span class="Catui_file-ico${[2, 3, 5].indexOf(x.tone) > -1 ? ' Catui_file-ico-' + x.tone : ''}" aria-hidden="true">${catui.icon(x.icon || (x.who ? 'user' : 'bell'), 16)}</span><div class="Catui_notif-body"><p>${x.who ? catui.html`<b>${x.who}</b>님이 ` : ''}${x.text}${x.unread ? catui.html`<span class="Catui_clip"> (읽지 않음)</span>` : ''}</p><span class="Catui_notif-time">${n.when(x.time)}</span></div>${x.unread ? catui.html`<button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-read="${x.id}" style="margin-left:auto">읽음</button>` : ''}</li>`; })}` : catui.html`<li class="Catui_adm-empty">알림이 없습니다.</li>`);
+  };
+  list.addEventListener('click', function (e) { var b = e.target.closest('[data-read]'); if (b) { n.markRead(b.dataset.read); draw(); } });
+  document.querySelectorAll('[name=nt-f]').forEach(function (r) { r.addEventListener('change', function () { filter = r.value; draw(); }); });
+  document.getElementById('nt-all').addEventListener('click', function () { n.markAll(); draw(); });
+  document.getElementById('nt-test').addEventListener('click', function () { n.add({ icon: 'shopping-cart', tone: 2, text: '새 주문 #1047이 들어왔습니다' }); draw(); });
+  catui.admin.on('notify', draw);
+  draw();
+});
+</script>

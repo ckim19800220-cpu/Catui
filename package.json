@@ -40,6 +40,12 @@
       "import": "./dist/catui.esm.min.js",
       "default": "./dist/catui.min.js"
     },
+    "./admin": {
+      "types": "./dist/catadmin.d.ts",
+      "import": "./dist/catadmin.esm.js",
+      "default": "./dist/catadmin.js"
+    },
+    "./admin.css": "./dist/admin.min.css",
     "./css": "./dist/catui.min.css",
     "./catui.css": "./dist/catui.css",
     "./catui.min.css": "./dist/catui.min.css",
@@ -59,7 +65,11 @@
     "./dist/catui.js",
     "./dist/catui.min.js",
     "./dist/catui.esm.js",
-    "./dist/catui.esm.min.js"
+    "./dist/catui.esm.min.js",
+    "./dist/catadmin.js",
+    "./dist/catadmin.min.js",
+    "./dist/catadmin.esm.js",
+    "./dist/catadmin.esm.min.js"
   ],
   "browserslist": [
     "chrome >= 111",

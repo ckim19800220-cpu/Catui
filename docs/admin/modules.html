@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>catadmin.js API · CatuiAdmin · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="shell · theme · notify · widgets · form · list · chat · kanban · auth.">
+<link rel="icon" href="../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../dist/catui.min.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<link rel="stylesheet" href="../../dist/admin.css">
+<script src="../../dist/catui.js"></script>
+<script src="../../dist/catadmin.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../index.html"><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html" aria-current="page">CatuiAdmin</a></nav>
+  <span class="doc-version">v2.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CatuiAdmin 메뉴</summary><nav aria-label="CatuiAdmin 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../admin/start/introduction.html">소개 · 화면 지도</a></li><li><a href="../admin/start/install.html">설치</a></li><li><a href="../admin/start/structure.html">구조 · 새 화면 만들기</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../admin/modules.html" aria-current="page">catadmin.js API</a></li><li><a href="../admin/css.html">admin.css 클래스</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CatuiAdmin · 확장</p>
+<h1 class="Catui_h1">catadmin.js API</h1>
+<p class="Catui_lead">shell · theme · notify · widgets · form · list · chat · kanban · auth.</p>
+
+<section aria-labelledby="api">
+<h2 id="api">catui.admin</h2>
+<p><code>catadmin.js</code>가 <code>catui.extend({ admin })</code>로 등록합니다. 셸이 있으면 자동으로 연결되고, 없어도(로그인 화면 등) 테마·위젯·폼 보조는 동작합니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl">
+<caption class="Catui_clip">catui.admin API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>admin.init(scope?)</code> · <code>admin.destroy()</code></td><td>연결 · 모든 리스너·차트·팝업 정리 (SPA 화면 전환 시)</td></tr>
+<tr><td><code>admin.on(이벤트, fn)</code></td><td><code>theme</code> { value } · <code>collapse</code> { collapsed } · <code>drawer</code> { open } · <code>notify</code> { unread } · <code>dirty</code> { form, dirty } · <code>chat</code> { text } · <code>kanban</code> { card, from, to }</td></tr>
+<tr><td><code>admin.store.get(k)</code> · <code>set(k, v)</code> · <code>clear()</code></td><td>기억한 상태 (<code>localStorage</code> "catui:admin")</td></tr>
+<tr><td><code>admin.shell.collapse(bool)</code> · <code>open()</code> · <code>close()</code></td><td>사이드바 접기(992px↑, 기억) · 서랍 열기/닫기(991px↓, Esc·가림막·Tab 가두기·포커스 복귀)</td></tr>
+<tr><td><code>admin.theme.set('light'|'dark'|'system')</code> · <code>get()</code> · <code>saved()</code></td><td>테마 (저장값이 없으면 시스템 설정을 따름) · 버튼 <code>[data-catui-adm-theme]</code></td></tr>
+<tr><td><code>admin.notify.add({ text, who?, icon? })</code> · <code>markRead(id)</code> · <code>markAll()</code> · <code>count()</code></td><td>상단 바 알림 패널·배지 · 데이터 <code>#adm-notify-data</code></td></tr>
+<tr><td><code>admin.widgets.chart(el, { type, labels, series | data, label })</code> · <code>update(el, data)</code></td><td>캔버스 차트 area·line·bar·donut·spark — 토큰 색, 다크 전환 재그림, 화면 낭독기 요약</td></tr>
+<tr><td><code>admin.form.saved(form)</code> · <code>isDirty(form)</code></td><td><code>form[data-catui-adm-form]</code> 변경 감지 · 떠날 때 확인 · 저장 바 <code>[data-catui-adm-savebar]</code></td></tr>
+<tr><td><code>admin.list({ table, form, data, match, bulkbar, change })</code></td><td>필터 폼 ↔ 주소 동기화, 로컬 거르기, 일괄 작업 바 — 반환 <code>{ apply, values, rows, reset }</code></td></tr>
+<tr><td><code>admin.split(el)</code> · <code>admin.chat({ log, form, me })</code> · <code>admin.kanban(el)</code></td><td>목록↔본문 2단(767px↓ 한 단) · 채팅(한글 조합 Enter 무시) · 칸반(끌기 + ←→↑↓)</td></tr>
+<tr><td><code>admin.auth.score(비밀번호)</code></td><td>0~4 강도 — 선언형 <code>[data-catui-adm-pwtoggle]</code> · <code>[data-catui-adm-caps]</code> · <code>[data-catui-adm-strength]</code></td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="decl">
+<h2 id="decl">선언형 속성</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">지표 카운트업 · 상대 시간</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_grid">
+    <article class="Catui_card Catui_span-6"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">주문</span><span class="Catui_stat-value" data-catui-adm-count>1,284</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 4.1%<span class="Catui_clip"> 증가</span></span></div></article>
+    <article class="Catui_card Catui_span-6"><div class="Catui_card-b"><p>마지막 백업 <time data-catui-adm-ago="2026-11-02T03:00:00+09:00">오늘</time></p></div></article>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="지표 카운트업 · 상대 시간 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_grid&quot;&gt;
+  &lt;article class=&quot;Catui_card Catui_span-6&quot;&gt;&lt;div class=&quot;Catui_card-b Catui_stat&quot;&gt;&lt;span class=&quot;Catui_stat-label&quot;&gt;주문&lt;/span&gt;&lt;span class=&quot;Catui_stat-value&quot; data-catui-adm-count&gt;1,284&lt;/span&gt;&lt;span class=&quot;Catui_pill Catui_pill-success Catui_delta-up&quot;&gt;▲ 4.1%&lt;span class=&quot;Catui_clip&quot;&gt; 증가&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;
+  &lt;article class=&quot;Catui_card Catui_span-6&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;&lt;p&gt;마지막 백업 &lt;time data-catui-adm-ago=&quot;2026-11-02T03:00:00+09:00&quot;&gt;오늘&lt;/time&gt;&lt;/p&gt;&lt;/div&gt;&lt;/article&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">차트 (data-catui-adm-chart)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_adm-chart" data-catui-adm-chart="bar" data-catui-adm-label="요일별 주문" data-catui-adm-data='{"labels":["월","화","수","목","금"],"series":[{"name":"주문","data":[182,171,195,188,231]}]}'></div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="차트 (data-catui-adm-chart) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_adm-chart&quot; data-catui-adm-chart=&quot;bar&quot; data-catui-adm-label=&quot;요일별 주문&quot; data-catui-adm-data=&#39;{&quot;labels&quot;:[&quot;월&quot;,&quot;화&quot;,&quot;수&quot;,&quot;목&quot;,&quot;금&quot;],&quot;series&quot;:[{&quot;name&quot;:&quot;주문&quot;,&quot;data&quot;:[182,171,195,188,231]}]}&#39;&gt;&lt;/div&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">비밀번호 보기 · Caps Lock · 강도</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_field"><label class="Catui_label" for="dm-pw">비밀번호</label>
+    <div class="Catui_adm-pw"><input class="Catui_input" id="dm-pw" type="password" autocomplete="new-password"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-adm-pwtoggle aria-label="비밀번호 보기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-eye"></use></svg></button></div>
+    <div class="Catui_adm-strength" data-catui-adm-strength="#dm-pw"><i></i><i></i><i></i><i></i><span></span></div>
+    <p class="Catui_adm-caps" data-catui-adm-caps="#dm-pw" hidden>Caps Lock이 켜져 있습니다</p></div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="비밀번호 보기 · Caps Lock · 강도 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dm-pw&quot;&gt;비밀번호&lt;/label&gt;
+  &lt;div class=&quot;Catui_adm-pw&quot;&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dm-pw&quot; type=&quot;password&quot; autocomplete=&quot;new-password&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; data-catui-adm-pwtoggle aria-label=&quot;비밀번호 보기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-eye&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_adm-strength&quot; data-catui-adm-strength=&quot;#dm-pw&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;p class=&quot;Catui_adm-caps&quot; data-catui-adm-caps=&quot;#dm-pw&quot; hidden&gt;Caps Lock이 켜져 있습니다&lt;/p&gt;&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../admin/start/structure.html"><span>이전</span>구조 · 새 화면 만들기</a><a class="doc-pager-next" href="../admin/css.html"><span>다음</span>admin.css 클래스</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#api">catui.admin</a></li><li><a href="#decl">선언형 속성</a></li></ul></aside>
+</div>
+</div>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

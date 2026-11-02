@@ -1,0 +1,78 @@
+/* admin/shell.css */
+/* 관리 셸 확장 — layout/app-shell.css(.Catui_app·side·topbar·menu·item·nest)를 그대로 쓰고,
+   그룹형 하위 메뉴 · 접힘(레일) · 991px 이하 서랍 · 상단 바 동작 · 바닥글만 더한다. 모든 규칙은 .Catui_adm 아래. */
+.Catui_adm{min-height:100vh;background:var(--Catui_adm-bg)}
+.Catui_adm-blank{min-height:100vh;background:var(--Catui_color-surface-muted)}
+/* 관리 화면 안에서는 hidden이 컴포넌트의 display(flex·grid)보다 항상 이긴다 (일괄 작업 바·요약 등) */
+.Catui_adm [hidden],.Catui_adm-blank [hidden]{display:none !important}
+.Catui_adm .Catui_side{position:sticky;top:0;height:100vh;transition:width var(--Catui_adm-dur) var(--Catui_adm-ease),flex-basis var(--Catui_adm-dur) var(--Catui_adm-ease),transform var(--Catui_adm-dur) var(--Catui_adm-ease)}
+.Catui_adm .Catui_main{min-height:100vh}
+.Catui_adm-content{flex:1}
+.Catui_adm-content:focus{outline:none}
+
+/* 하위 메뉴: 머리는 들여쓰지 않고, 하위 항목만 아이콘 자리만큼 들여쓴다 */
+.Catui_adm-nest{padding-left:0}
+.Catui_adm-nest > .Catui_item{padding-left:calc(var(--Catui_sidebar-pad) + var(--Catui_sidebar-icon) + var(--Catui_space-3))}
+.Catui_adm-nest > summary.Catui_item{padding-left:var(--Catui_sidebar-pad)}
+.Catui_adm-caret{margin-left:auto;transition:transform var(--Catui_adm-dur) var(--Catui_adm-ease)}
+.Catui_adm-nest[open] > summary .Catui_adm-caret{transform:rotate(180deg)}
+.Catui_adm-nest .Catui_count + .Catui_adm-caret{margin-left:var(--Catui_space-2)}
+.Catui_adm-item-on{color:var(--Catui_sidebar-active-fg)}
+.Catui_adm-item-on .Catui_icon{color:var(--Catui_sidebar-active-fg)}
+.Catui_adm .Catui_side :is(.Catui_item,summary):focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+
+/* 상단 바 */
+.Catui_adm-top{gap:var(--Catui_space-3)}
+.Catui_adm-top .Catui_crumb{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.Catui_adm-search{display:inline-flex;align-items:center;gap:var(--Catui_space-2);min-width:calc(var(--Catui_space-10) * 3);justify-content:flex-start;color:var(--Catui_color-text-secondary)}
+.Catui_adm-search .Catui_kbd{margin-left:auto}
+.Catui_adm-icon-btn{position:relative}
+.Catui_adm-icon-btn .Catui_count{position:absolute;top:0;right:0;transform:translate(30%,-20%)}
+
+/* 알림 · 사용자 팝업 (catadmin.js가 위치를 잡는다) */
+.Catui_adm-pop{position:fixed;z-index:70;width:min(var(--Catui_adm-pop-w),calc(100vw - var(--Catui_space-6)));box-shadow:var(--Catui_shadow-lg)}
+.Catui_adm-pop[hidden]{display:none}
+
+/* 바닥글 */
+.Catui_adm-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--Catui_space-2);padding:var(--Catui_space-4) var(--Catui_adm-pad);border-top:1px solid var(--Catui_color-border);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);background:var(--Catui_card-bg)}
+.Catui_adm[data-catui-adm-fixed-foot] .Catui_adm-foot{position:sticky;bottom:0;z-index:20}
+
+/* 서랍 가림막 */
+.Catui_adm-scrim{position:fixed;inset:0;z-index:55;background:var(--Catui_adm-scrim)}
+.Catui_adm-scrim[hidden]{display:none}
+
+/* 접힘(레일) — 992px 이상에서 사용자가 접었을 때 */
+@media (min-width:992px){
+  .Catui_adm[data-catui-adm-collapsed] .Catui_side{width:var(--Catui_adm-rail-w);flex-basis:var(--Catui_adm-rail-w)}
+  .Catui_adm[data-catui-adm-collapsed] .Catui_side :is(.Catui_brand b,.Catui_group,.Catui_item-label,.Catui_user-txt,.Catui_count,.Catui_adm-caret){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .Catui_adm[data-catui-adm-collapsed] .Catui_side :is(.Catui_item,.Catui_user,.Catui_brand){justify-content:center;padding:0}
+  .Catui_adm[data-catui-adm-collapsed] .Catui_adm-nest > a.Catui_item{display:none}
+}
+
+/* 991px 이하: 레일(768~991) 또는 숨김(767 이하) + 펼치면 서랍 */
+@media (max-width:991px){
+  .Catui_adm[data-catui-adm-open] .Catui_side{position:fixed;top:0;bottom:0;left:0;z-index:60;width:var(--Catui_adm-side-w);box-shadow:var(--Catui_adm-drawer-shadow)}
+  .Catui_adm[data-catui-adm-open] .Catui_side :is(.Catui_brand b,.Catui_group,.Catui_item-label,.Catui_user-txt,.Catui_count){position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto}
+  .Catui_adm[data-catui-adm-open] .Catui_side .Catui_group{padding:var(--Catui_space-4) var(--Catui_sidebar-pad) var(--Catui_space-2)}
+  .Catui_adm[data-catui-adm-open] .Catui_side :is(.Catui_item,.Catui_user){justify-content:flex-start;padding:0 var(--Catui_sidebar-pad)}
+  .Catui_adm[data-catui-adm-open] .Catui_side .Catui_adm-nest > a.Catui_item{padding-left:calc(var(--Catui_sidebar-pad) + var(--Catui_sidebar-icon) + var(--Catui_space-3))}
+  .Catui_adm[data-catui-adm-open]{padding-left:var(--Catui_adm-rail-w)}
+  .Catui_adm:not([data-catui-adm-open]) .Catui_adm-nest > a.Catui_item{display:none}
+  .Catui_adm:not([data-catui-adm-open]) .Catui_adm-caret{display:none}
+  .Catui_adm-search > span:not(.Catui_kbd){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .Catui_adm-search{min-width:0}
+  .Catui_adm-search .Catui_kbd{display:none}
+}
+@media (max-width:767px){
+  .Catui_adm .Catui_side{position:fixed;top:0;bottom:0;left:0;z-index:60;width:var(--Catui_adm-side-w);transform:translateX(-100%);visibility:hidden}
+  .Catui_adm[data-catui-adm-open] .Catui_side{transform:none;visibility:visible}
+  .Catui_adm[data-catui-adm-open]{padding-left:0}
+  .Catui_adm-top{flex-wrap:nowrap}
+}
+@media (prefers-reduced-motion:reduce){
+  .Catui_adm .Catui_side,.Catui_adm-caret{transition:none}
+}
+@media print{
+  .Catui_adm .Catui_side,.Catui_adm-top,.Catui_adm-foot,.Catui_adm-scrim{display:none}
+  .Catui_adm{background:none}
+}

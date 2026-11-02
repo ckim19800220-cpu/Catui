@@ -1,0 +1,46 @@
+<section aria-labelledby="shell">
+<h2 id="shell">셸 마크업</h2>
+<p>본체 <a href="doc:css/layout/app-shell">관리 셸</a>(<code>.Catui_app</code>) 그대로에 <code>.Catui_adm</code>와 <code>data-catui-adm</code>만 더합니다.</p>
+<pre><code>&lt;div class="Catui_app Catui_adm" data-catui-adm&gt;
+  &lt;aside class="Catui_side" id="adm-side" aria-label="주 메뉴"&gt; … 메뉴 (그룹·하위 메뉴는 details.Catui_nest.Catui_adm-nest) … &lt;/aside&gt;
+  &lt;div class="Catui_adm-scrim" hidden&gt;&lt;/div&gt;                    ← 991px 이하 서랍 가림막
+  &lt;div class="Catui_main"&gt;
+    &lt;header class="Catui_topbar Catui_adm-top"&gt;
+      &lt;button data-catui-adm-toggle aria-controls="adm-side"&gt;   ← 접기(992px↑) · 서랍 열기(991px↓)
+      &lt;nav class="Catui_crumb"&gt; … &lt;/nav&gt;
+      &lt;button data-catui-adm-cmd&gt;  &lt;button data-catui-adm-theme&gt;  &lt;button data-catui-adm-notify="알림 주소"&gt;  &lt;button data-catui-adm-user&gt;
+    &lt;/header&gt;
+    &lt;main class="Catui_content Catui_adm-content" id="adm-main"&gt; … &lt;/main&gt;
+    &lt;footer class="Catui_adm-foot"&gt; … &lt;/footer&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script type="application/json" id="adm-cmd-data"&gt;[{ "group", "title", "href", "icon" }]&lt;/script&gt;     ← 명령 팔레트 화면 목록
+&lt;script type="application/json" id="adm-notify-data"&gt;[{ "who", "text", "time", "unread" }]&lt;/script&gt;  ← 알림
+&lt;script type="application/json" id="adm-user-data"&gt;[{ "title", "href", "icon" } | { "type": "-" }]&lt;/script&gt;  ← 사용자 메뉴</code></pre>
+<p>상태(사이드바 접힘·하위 메뉴·테마·스위치)는 <code>localStorage</code>의 <code>catui:admin</code>에 기억합니다.</p>
+</section>
+
+<section aria-labelledby="pages">
+<h2 id="pages">새 화면 만들기</h2>
+<p><code>templates/admin/pages/이름.html</code> 맨 위에 머리 주석을 두고 본문만 씁니다.</p>
+<pre><code>&lt;!-- title: 재고 현황 | crumb: 커머스 / 재고 | layout: shell | root: data-catui-adm-fixed-foot --&gt;
+&lt;div class="Catui_adm-head"&gt;&lt;div&gt;&lt;h1 class="Catui_h1"&gt;재고 현황&lt;/h1&gt;&lt;/div&gt;&lt;/div&gt;
+…
+&lt;script&gt; catui.use(['table'], function (table) { … }); &lt;/script&gt;   ← catui.js·catadmin.js 뒤로 자동으로 옮겨짐</code></pre>
+<ul>
+  <li><code>layout: blank</code>면 셸 없이(로그인·오류 화면).</li>
+  <li>메뉴는 <code>templates/admin/menu.json</code> — 그룹 › 항목 › 하위 항목. 아직 만들지 않은 화면은 메뉴에 나오지 않습니다.</li>
+  <li><code>{{icon:이름:크기}}</code>로 아이콘을 넣습니다.</li>
+</ul>
+</section>
+
+<section aria-labelledby="checks">
+<h2 id="checks">빌드 검사</h2>
+<p><code>npm run build</code>는 다음 중 하나라도 있으면 실패합니다.</p>
+<ul>
+  <li>admin.css가 본체 클래스를 단독 선택자로 다시 정의(<code>.Catui_side{…}</code>) · 직접 쓴 색(hex) · 없는 토큰</li>
+  <li>템플릿의 정의 안 된 클래스 · 없는 아이콘 · id 중복 · <code>label for</code> 불일치 · 없는 화면 링크 · h1이 한 개가 아님</li>
+  <li>템플릿·catadmin.js 어디에도 쓰이지 않은 admin 클래스</li>
+</ul>
+<p><code>npm test</code>는 템플릿 전체의 콘솔 오류 0건과 셸·폼·목록·채팅·칸반·로그인 동작을 헤드리스 Chrome으로 확인합니다.</p>
+</section>

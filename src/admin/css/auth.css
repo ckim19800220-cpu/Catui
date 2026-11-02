@@ -1,0 +1,34 @@
+/* admin/auth.css */
+/* 인증·오류 화면 — 셸 없이 가운데 카드(왼쪽 브랜드 면은 991px 이상에서만), 큰 오류 번호 */
+.Catui_adm-auth{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:100vh}
+.Catui_adm-auth-brand{display:flex;flex-direction:column;justify-content:space-between;gap:var(--Catui_space-6);padding:var(--Catui_space-10);background:var(--Catui_sidebar-bg);color:var(--Catui_sidebar-fg)}
+.Catui_adm-auth-brand h2{margin:0;font-size:var(--Catui_type-h1-size);line-height:var(--Catui_type-h1-lh);color:var(--Catui_color-text-inverse)}
+.Catui_adm-auth-brand p{margin:var(--Catui_space-3) 0 0;color:var(--Catui_sidebar-fg-muted)}
+.Catui_adm-auth-main{display:grid;place-items:center;padding:var(--Catui_space-8) var(--Catui_space-4)}
+.Catui_adm-auth-card{width:min(100%,calc(var(--Catui_space-10) * 6.5));display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-5)}
+.Catui_adm-auth-card .Catui_input{width:100%}
+.Catui_adm-auth-card h1{margin:0}
+.Catui_adm-auth-alt{display:flex;align-items:center;gap:var(--Catui_space-3);color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size)}
+.Catui_adm-auth-alt::before,.Catui_adm-auth-alt::after{content:"";flex:1;height:1px;background:var(--Catui_color-border)}
+.Catui_adm-auth-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-2)}
+@media (max-width:991px){.Catui_adm-auth{grid-template-columns:minmax(0,1fr)}.Catui_adm-auth-brand{display:none}}
+
+/* 비밀번호 칸: 보기 버튼을 칸 안 오른쪽에 */
+.Catui_adm-pw{position:relative}
+.Catui_adm-pw .Catui_input{padding-right:calc(var(--Catui_control-h-md) + var(--Catui_space-1))}
+.Catui_adm-pw > button{position:absolute;top:50%;right:var(--Catui_space-1);transform:translateY(-50%)}
+.Catui_adm-caps{display:flex;align-items:center;gap:var(--Catui_space-1);color:var(--Catui_badge-warning-fg);font-size:var(--Catui_type-caption-size);font-weight:600}
+
+/* 비밀번호 강도: 4칸 + 글자 (색만으로 알리지 않음) */
+.Catui_adm-strength{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;align-items:center;gap:var(--Catui_space-1)}
+.Catui_adm-strength i{height:var(--Catui_space-1);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-border)}
+.Catui_adm-strength[data-level="1"] i:nth-child(-n+1){background:var(--Catui_color-danger)}
+.Catui_adm-strength[data-level="2"] i:nth-child(-n+2){background:var(--Catui_color-amber)}
+.Catui_adm-strength[data-level="3"] i:nth-child(-n+3){background:var(--Catui_color-info)}
+.Catui_adm-strength[data-level="4"] i{background:var(--Catui_color-brand)}
+.Catui_adm-strength span{min-width:calc(var(--Catui_space-10) * 0.9);text-align:right;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+
+/* 오류 화면 */
+.Catui_adm-error{display:grid;place-items:center;min-height:100vh;padding:var(--Catui_space-8) var(--Catui_space-4);text-align:center}
+.Catui_adm-error-code{display:block;font-size:calc(var(--Catui_type-display-size) * 2.2);line-height:1;font-weight:800;letter-spacing:-.04em;color:var(--Catui_color-brand-strong);font-variant-numeric:tabular-nums}
+.Catui_adm-error .Catui_result{max-width:calc(var(--Catui_space-10) * 8);margin-inline:auto}

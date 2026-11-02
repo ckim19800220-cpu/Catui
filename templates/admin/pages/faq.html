@@ -1,0 +1,36 @@
+<!-- title: 도움말 | crumb: 관리 / 도움말 -->
+<div class="Catui_adm-head"><div><h1 class="Catui_h1">도움말</h1><p>자주 묻는 질문 · 찾는 답이 없으면 문의를 남겨 주세요</p></div></div>
+<div class="Catui_grid">
+  <section class="Catui_span-8 Catui_vstack Catui_gap-4" aria-label="자주 묻는 질문">
+    <div class="Catui_search">{{icon:search}}<label class="Catui_clip" for="fq-q">질문 찾기</label><input class="Catui_input" id="fq-q" type="search" placeholder="예: 환불, 송장, 권한"></div>
+    <p class="Catui_help" id="fq-n" aria-live="polite"></p>
+    <div class="Catui_vstack Catui_gap-3" id="fq-list">
+      <details class="Catui_faq"><summary>주문을 취소하면 언제 환불되나요?</summary><p>카드는 취소 즉시 승인 취소되며, 카드사에 따라 3~5영업일 뒤 반영됩니다. 간편결제는 보통 당일 환불됩니다.</p></details>
+      <details class="Catui_faq"><summary>송장 번호를 한 번에 여러 개 넣을 수 있나요?</summary><p>주문 목록에서 주문을 고른 뒤 "배송 처리"를 누르고 CSV 파일을 올리면 됩니다.</p></details>
+      <details class="Catui_faq"><summary>관리자 권한은 어떻게 나뉘나요?</summary><p>최고 관리자는 모든 기능, 운영자는 상품·주문, 읽기 전용은 조회만 할 수 있습니다. 사용자 관리에서 바꿉니다.</p></details>
+      <details class="Catui_faq"><summary>2단계 인증을 잃어버린 휴대폰으로 설정했어요</summary><p>최고 관리자에게 2단계 인증 초기화를 요청하세요. 본인 확인 뒤 새로 등록할 수 있습니다.</p></details>
+      <details class="Catui_faq"><summary>다크 모드는 어떻게 켜나요?</summary><p>상단 바의 달 모양 버튼이나 설정 › 계정 › 화면에서 바꿀 수 있습니다. Ctrl+K에서 "다크"를 검색해도 됩니다.</p></details>
+    </div>
+  </section>
+  <aside class="Catui_card Catui_span-4" aria-labelledby="fq-c-t">
+    <header class="Catui_card-h" id="fq-c-t">문의하기</header>
+    <form class="Catui_card-b Catui_vstack Catui_gap-3" id="fq-form" data-catui-form data-catui-filter="fq-form" novalidate>
+      <div class="Catui_field"><label class="Catui_label" for="fq-type">분류</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="fq-type" name="type"><option>주문·배송</option><option>결제·정산</option><option>계정·권한</option><option>기타</option></select>{{icon:chevron-down}}</div></div>
+      <div class="Catui_field"><label class="Catui_label" for="fq-msg">내용</label><textarea class="Catui_input" id="fq-msg" name="msg" rows="5" data-catui-verify="required|minlen:10" data-catui-counter="500"></textarea></div>
+      <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit" data-catui-submit>보내기</button>
+      <p class="Catui_help">평일 9~18시 · 보통 2시간 안에 답장</p>
+    </form>
+  </aside>
+</div>
+<script>
+catui.use(['form', 'layer'], function (form, layer) {
+  var items = [].slice.call(document.querySelectorAll('#fq-list details')), q = document.getElementById('fq-q');
+  var run = function () {
+    var t = q.value.trim(), n = 0;
+    items.forEach(function (d) { var hit = !t || d.textContent.indexOf(t) > -1; d.hidden = !hit; if (hit) n++; d.open = !!t && hit; });
+    document.getElementById('fq-n').textContent = t ? n + '개 질문이 맞습니다' : '';
+  };
+  q.addEventListener('input', run);
+  form.on('submit(fq-form)', function (d) { layer.msg('문의를 받았습니다. 메일로 답장 드립니다.', { icon: 'success' }); d.form.reset(); return false; });
+});
+</script>

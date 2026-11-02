@@ -1,0 +1,47 @@
+<!-- title: 상점 | crumb: 커머스 / 상점 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">상점</h1><p>고객 화면 미리보기 · 상품 12개</p></div>
+  <div class="Catui_actions">
+    <div class="Catui_search">{{icon:search}}<label class="Catui_clip" for="sp-q">상품 찾기</label><input class="Catui_input" id="sp-q" type="search" placeholder="상품 이름"></div>
+    <div class="Catui_select-wrap"><label class="Catui_clip" for="sp-sort">정렬</label><select class="Catui_input Catui_select" id="sp-sort"><option value="pop">인기순</option><option value="low">낮은 가격순</option><option value="high">높은 가격순</option></select>{{icon:chevron-down}}</div>
+  </div>
+</div>
+<fieldset class="Catui_chips" id="sp-cats"><legend class="Catui_clip">분류</legend>
+  <input class="Catui_clip" type="radio" name="sp-cat" id="sp-c0" value="" checked><label class="Catui_chip" for="sp-c0">전체</label>
+  <input class="Catui_clip" type="radio" name="sp-cat" id="sp-c1" value="키보드"><label class="Catui_chip" for="sp-c1">키보드</label>
+  <input class="Catui_clip" type="radio" name="sp-cat" id="sp-c2" value="마우스"><label class="Catui_chip" for="sp-c2">마우스</label>
+  <input class="Catui_clip" type="radio" name="sp-cat" id="sp-c3" value="모니터"><label class="Catui_chip" for="sp-c3">모니터</label>
+  <input class="Catui_clip" type="radio" name="sp-cat" id="sp-c4" value="액세서리"><label class="Catui_chip" for="sp-c4">액세서리</label>
+</fieldset>
+<p class="Catui_help" id="sp-n" aria-live="polite"></p>
+<div class="Catui_adm-products" id="sp-grid"></div>
+<script>
+catui.use(['util', 'layer'], function (util, layer) {
+  var ICON = { 키보드: 'keyboard', 마우스: 'mouse', 모니터: 'monitor', 액세서리: 'usb' }, TONE = { 키보드: '', 마우스: ' Catui_adm-ph-2', 모니터: ' Catui_adm-ph-3', 액세서리: ' Catui_adm-ph-4' };
+  var items = [
+    ['기계식 키보드 K8', '키보드', 189000, 159000, 4.8, 212], ['저소음 키보드 S2', '키보드', 79000, 0, 4.5, 98], ['로우프로파일 키보드', '키보드', 129000, 109000, 4.6, 64],
+    ['무선 마우스 M3', '마우스', 33000, 0, 4.7, 305], ['게이밍 마우스 G9', '마우스', 69000, 59000, 4.4, 77], ['버티컬 마우스', '마우스', 45000, 0, 4.2, 41],
+    ['27인치 QHD 모니터', '모니터', 289000, 240000, 4.6, 48], ['32인치 4K 모니터', '모니터', 459000, 0, 4.7, 22], ['휴대용 모니터 15', '모니터', 199000, 179000, 4.3, 35],
+    ['USB-C 허브 7in1', '액세서리', 42000, 0, 4.5, 174], ['모니터 받침대', '액세서리', 59000, 49000, 4.4, 96], ['노트북 파우치', '액세서리', 31000, 0, 4.6, 120],
+  ].map(function (x, i) { return { id: i, name: x[0], cat: x[1], price: x[2], sale: x[3], rate: x[4], sold: x[5] }; });
+  var grid = document.getElementById('sp-grid');
+  var draw = function () {
+    var q = document.getElementById('sp-q').value.trim(), cat = document.querySelector('[name=sp-cat]:checked').value, sort = document.getElementById('sp-sort').value;
+    var now = function (p) { return p.sale || p.price; };
+    var shown = items.filter(function (p) { return (!cat || p.cat === cat) && (!q || p.name.indexOf(q) > -1); })
+      .sort(function (a, b) { return sort === 'low' ? now(a) - now(b) : sort === 'high' ? now(b) - now(a) : b.sold - a.sold; });
+    document.getElementById('sp-n').textContent = shown.length + '개 상품';
+    catui.mount(grid, shown.length ? catui.html`${shown.map(function (p) {
+      return catui.html`<article class="Catui_card Catui_adm-product"><div class="Catui_adm-ph${TONE[p.cat]}" aria-hidden="true">${catui.icon(ICON[p.cat], 24)}</div><div class="Catui_card-b">
+        <span class="Catui_help">${p.cat}</span><a href="product.html">${p.name}</a>
+        <div class="Catui_adm-price">${p.sale ? catui.html`<em>${Math.round((1 - p.sale / p.price) * 100)}%<span class="Catui_clip"> 할인</span></em><b>${util.number(p.sale)}원</b><s><span class="Catui_clip">원래 가격 </span>${util.number(p.price)}원</s>` : catui.html`<b>${util.number(p.price)}원</b>`}</div>
+        <span class="Catui_help">★ ${p.rate} · ${util.number(p.sold)}개 판매</span>
+        <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-cart="${p.id}">${catui.icon('shopping-cart', 16)}담기</button></div></article>`; })}` : catui.html`<div class="Catui_empty">${catui.icon('search', 16)}<p class="Catui_empty-title">맞는 상품이 없습니다</p></div>`);
+  };
+  grid.addEventListener('click', function (e) { var b = e.target.closest('[data-cart]'); if (b) layer.msg(items[b.dataset.cart].name + '을(를) 장바구니에 담았습니다', { icon: 'success', time: 1500 }); });
+  document.getElementById('sp-q').addEventListener('input', draw);
+  document.getElementById('sp-sort').addEventListener('change', draw);
+  document.getElementById('sp-cats').addEventListener('change', draw);
+  draw();
+});
+</script>

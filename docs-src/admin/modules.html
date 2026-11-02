@@ -1,0 +1,39 @@
+<section aria-labelledby="api">
+<h2 id="api">catui.admin</h2>
+<p><code>catadmin.js</code>가 <code>catui.extend({ admin })</code>로 등록합니다. 셸이 있으면 자동으로 연결되고, 없어도(로그인 화면 등) 테마·위젯·폼 보조는 동작합니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl">
+<caption class="Catui_clip">catui.admin API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>admin.init(scope?)</code> · <code>admin.destroy()</code></td><td>연결 · 모든 리스너·차트·팝업 정리 (SPA 화면 전환 시)</td></tr>
+<tr><td><code>admin.on(이벤트, fn)</code></td><td><code>theme</code> { value } · <code>collapse</code> { collapsed } · <code>drawer</code> { open } · <code>notify</code> { unread } · <code>dirty</code> { form, dirty } · <code>chat</code> { text } · <code>kanban</code> { card, from, to }</td></tr>
+<tr><td><code>admin.store.get(k)</code> · <code>set(k, v)</code> · <code>clear()</code></td><td>기억한 상태 (<code>localStorage</code> "catui:admin")</td></tr>
+<tr><td><code>admin.shell.collapse(bool)</code> · <code>open()</code> · <code>close()</code></td><td>사이드바 접기(992px↑, 기억) · 서랍 열기/닫기(991px↓, Esc·가림막·Tab 가두기·포커스 복귀)</td></tr>
+<tr><td><code>admin.theme.set('light'|'dark'|'system')</code> · <code>get()</code> · <code>saved()</code></td><td>테마 (저장값이 없으면 시스템 설정을 따름) · 버튼 <code>[data-catui-adm-theme]</code></td></tr>
+<tr><td><code>admin.notify.add({ text, who?, icon? })</code> · <code>markRead(id)</code> · <code>markAll()</code> · <code>count()</code></td><td>상단 바 알림 패널·배지 · 데이터 <code>#adm-notify-data</code></td></tr>
+<tr><td><code>admin.widgets.chart(el, { type, labels, series | data, label })</code> · <code>update(el, data)</code></td><td>캔버스 차트 area·line·bar·donut·spark — 토큰 색, 다크 전환 재그림, 화면 낭독기 요약</td></tr>
+<tr><td><code>admin.form.saved(form)</code> · <code>isDirty(form)</code></td><td><code>form[data-catui-adm-form]</code> 변경 감지 · 떠날 때 확인 · 저장 바 <code>[data-catui-adm-savebar]</code></td></tr>
+<tr><td><code>admin.list({ table, form, data, match, bulkbar, change })</code></td><td>필터 폼 ↔ 주소 동기화, 로컬 거르기, 일괄 작업 바 — 반환 <code>{ apply, values, rows, reset }</code></td></tr>
+<tr><td><code>admin.split(el)</code> · <code>admin.chat({ log, form, me })</code> · <code>admin.kanban(el)</code></td><td>목록↔본문 2단(767px↓ 한 단) · 채팅(한글 조합 Enter 무시) · 칸반(끌기 + ←→↑↓)</td></tr>
+<tr><td><code>admin.auth.score(비밀번호)</code></td><td>0~4 강도 — 선언형 <code>[data-catui-adm-pwtoggle]</code> · <code>[data-catui-adm-caps]</code> · <code>[data-catui-adm-strength]</code></td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="decl">
+<h2 id="decl">선언형 속성</h2>
+<catui-example title="지표 카운트업 · 상대 시간">
+  <div class="Catui_grid">
+    <article class="Catui_card Catui_span-6"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">주문</span><span class="Catui_stat-value" data-catui-adm-count>1,284</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 4.1%<span class="Catui_clip"> 증가</span></span></div></article>
+    <article class="Catui_card Catui_span-6"><div class="Catui_card-b"><p>마지막 백업 <time data-catui-adm-ago="2026-11-02T03:00:00+09:00">오늘</time></p></div></article>
+  </div>
+</catui-example>
+<catui-example title="차트 (data-catui-adm-chart)">
+  <div class="Catui_adm-chart" data-catui-adm-chart="bar" data-catui-adm-label="요일별 주문" data-catui-adm-data='{"labels":["월","화","수","목","금"],"series":[{"name":"주문","data":[182,171,195,188,231]}]}'></div>
+</catui-example>
+<catui-example title="비밀번호 보기 · Caps Lock · 강도">
+  <div class="Catui_field"><label class="Catui_label" for="dm-pw">비밀번호</label>
+    <div class="Catui_adm-pw"><input class="Catui_input" id="dm-pw" type="password" autocomplete="new-password"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-adm-pwtoggle aria-label="비밀번호 보기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-eye"></use></svg></button></div>
+    <div class="Catui_adm-strength" data-catui-adm-strength="#dm-pw"><i></i><i></i><i></i><i></i><span></span></div>
+    <p class="Catui_adm-caps" data-catui-adm-caps="#dm-pw" hidden>Caps Lock이 켜져 있습니다</p></div>
+</catui-example>
+</section>

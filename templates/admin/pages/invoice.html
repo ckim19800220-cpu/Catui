@@ -1,0 +1,39 @@
+<!-- title: 청구서 | crumb: 커머스 / 청구서 -->
+<div class="Catui_adm-head Catui_adm-noprint">
+  <div><h1 class="Catui_h1">청구서 INV-2026-1102</h1><p>인쇄하면 메뉴·상단 바 없이 청구서만 나옵니다</p></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="iv-mail">{{icon:mail}}메일 보내기</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="iv-print">{{icon:printer}}인쇄 · PDF</button></div>
+</div>
+
+<article class="Catui_adm-invoice" aria-label="청구서">
+  <div class="Catui_adm-invoice-h">
+    <div><p class="Catui_line"><span class="Catui_logo">C</span><b>CatuiAdmin 상점</b></p><p class="Catui_help">사업자 123-45-67890 · 서울 강남구 테헤란로 1</p></div>
+    <div style="text-align:right"><p class="Catui_h2" style="margin:0">청구서</p><p class="Catui_help">INV-2026-1102 · 발행 2026-11-02 · 지급 기한 2026-11-16</p><span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>미결제</span></div>
+  </div>
+  <div class="Catui_adm-invoice-parties">
+    <div><p class="Catui_label">청구 대상</p><p><b>(주)누리소프트</b><br>담당 박서연 · 경기 성남시 판교역로 10<br>billing@nuri.example</p></div>
+    <div><p class="Catui_label">입금 계좌</p><p>국민은행 123456-01-234567<br>예금주 CatuiAdmin 상점</p></div>
+  </div>
+  <table class="Catui_tbl Catui_tbl-compact">
+    <caption class="Catui_clip">청구 항목</caption>
+    <thead><tr><th scope="col">항목</th><th scope="col" class="Catui_num">수량</th><th scope="col" class="Catui_num">단가</th><th scope="col" class="Catui_num">금액</th></tr></thead>
+    <tbody>
+      <tr><td>기계식 키보드 K8 (법인 단체 구매)</td><td class="Catui_num">20</td><td class="Catui_num">149,000</td><td class="Catui_num">2,980,000</td></tr>
+      <tr><td>무선 마우스 M3</td><td class="Catui_num">20</td><td class="Catui_num">30,000</td><td class="Catui_num">600,000</td></tr>
+      <tr><td>각인 서비스</td><td class="Catui_num">20</td><td class="Catui_num">5,000</td><td class="Catui_num">100,000</td></tr>
+      <tr><td>설치·배송 (판교)</td><td class="Catui_num">1</td><td class="Catui_num">50,000</td><td class="Catui_num">50,000</td></tr>
+    </tbody>
+  </table>
+  <div class="Catui_adm-sum">
+    <div><span>공급가액</span><span>3,390,909원</span></div><div><span>부가세 (10%)</span><span>339,091원</span></div>
+    <div class="Catui_adm-sum-total"><span>합계</span><span>3,730,000원</span></div>
+  </div>
+  <p class="Catui_help" style="margin-top:var(--Catui_space-6)">문의: billing@catui.example · 02-000-0000 — 기한 안에 입금해 주세요.</p>
+</article>
+<script>
+catui.use(['layer'], function (layer) {
+  document.getElementById('iv-print').addEventListener('click', function () { window.print(); });
+  document.getElementById('iv-mail').addEventListener('click', function () {
+    layer.input({ title: '청구서 보내기', value: 'billing@nuri.example', placeholder: '받는 메일' }).then(function (v) { if (v) layer.msg(v + '로 보냈습니다', { icon: 'success' }); });
+  });
+});
+</script>

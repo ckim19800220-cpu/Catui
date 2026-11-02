@@ -1,0 +1,70 @@
+<!-- title: 주문 상세 | crumb: 커머스 / 주문 / 주문 상세 -->
+<header class="Catui_pagehead">
+  <a class="Catui_pagehead-back" href="orders.html">{{icon:chevron-left}}주문 목록</a>
+  <div class="Catui_pagehead-row"><h1 class="Catui_pagehead-title">주문 #1044</h1><span class="Catui_pill Catui_pill-warning" id="odd-st"><i class="Catui_dot"></i>출고 준비</span>
+    <div class="Catui_pagehead-actions">
+      <a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="invoice.html">{{icon:receipt}}청구서</a>
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="odd-more" aria-label="다른 작업">{{icon:more-horizontal}}</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="odd-ship">{{icon:truck}}출고 처리</button>
+    </div></div>
+  <p class="Catui_pagehead-text">박서연 · 2026년 11월 1일 21:04 주문 · 카드 결제</p>
+</header>
+
+<div class="Catui_grid">
+  <article class="Catui_card Catui_span-8">
+    <header class="Catui_card-h">주문 상품</header>
+    <div class="Catui_card-b Catui_adm-flush">
+      <table class="Catui_tbl">
+        <caption class="Catui_clip">주문 상품 2개</caption>
+        <thead><tr><th scope="col">상품</th><th scope="col" class="Catui_num">단가</th><th scope="col" class="Catui_num">수량</th><th scope="col" class="Catui_num">금액</th></tr></thead>
+        <tbody>
+          <tr><td><div class="Catui_media"><div class="Catui_media-fig"><span class="Catui_adm-ph Catui_adm-ph-3" style="width:48px" aria-hidden="true">{{icon:monitor:18}}</span></div><div class="Catui_media-body"><p class="Catui_media-title">모니터 받침대</p><p class="Catui_media-text">원목 · 2단</p></div></div></td><td class="Catui_num">49,000원</td><td class="Catui_num">1</td><td class="Catui_num">49,000원</td></tr>
+          <tr><td><div class="Catui_media"><div class="Catui_media-fig"><span class="Catui_adm-ph Catui_adm-ph-4" style="width:48px" aria-hidden="true">{{icon:usb:18}}</span></div><div class="Catui_media-body"><p class="Catui_media-title">USB-C 케이블 1m</p><p class="Catui_media-text">덤 상품</p></div></div></td><td class="Catui_num">5,000원</td><td class="Catui_num">2</td><td class="Catui_num">10,000원</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="Catui_card-f"><div class="Catui_adm-sum" style="max-width:320px;margin-left:auto">
+      <div><span>상품 금액</span><span>59,000원</span></div><div><span>배송비</span><span>0원</span></div><div><span>쿠폰 할인</span><span>−5,000원</span></div>
+      <div class="Catui_adm-sum-total"><span>결제 금액</span><span>54,000원</span></div>
+    </div></footer>
+  </article>
+  <div class="Catui_span-4 Catui_vstack Catui_gap-4">
+    <article class="Catui_card"><header class="Catui_card-h">고객</header><div class="Catui_card-b Catui_vstack Catui_gap-1">
+      <p class="Catui_line"><span class="Catui_av Catui_av-md" aria-hidden="true">박</span><b>박서연</b> <span class="Catui_badge Catui_badge-info">골드</span></p>
+      <p class="Catui_help">seoyeon@example.com · 010-****-5521 · 주문 14회</p>
+    </div></article>
+    <article class="Catui_card"><header class="Catui_card-h">배송지 <span class="Catui_card-tools"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="odd-addr">수정</button></span></header><div class="Catui_card-b">
+      <p id="odd-addr-t">서울특별시 마포구 월드컵로 12길 34, 501호<br>박서연 · 010-****-5521</p><p class="Catui_help">요청: 문 앞에 두고 연락 주세요</p>
+    </div></article>
+    <article class="Catui_card"><header class="Catui_card-h">처리 기록</header><div class="Catui_card-b">
+      <div class="Catui_atl" id="odd-log">
+        <div class="Catui_atl-item"><span class="Catui_av Catui_av-sm" aria-hidden="true">시</span><div class="Catui_atl-main"><b>결제</b> 완료 <span class="Catui_help">11/1 21:05</span></div><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>완료</span></div>
+        <div class="Catui_atl-item"><span class="Catui_av Catui_av-sm" aria-hidden="true">김</span><div class="Catui_atl-main"><b>김관리</b> 님이 주문을 확인했습니다 <span class="Catui_help">11/2 09:02</span></div><span class="Catui_pill Catui_pill-info"><i class="Catui_dot"></i>확인</span></div>
+      </div>
+    </div></article>
+  </div>
+</div>
+<script>
+catui.use(['layer', 'dropdown'], function (layer, dropdown) {
+  dropdown.render({ elem: '#odd-more', align: 'right', data: [{ id: 'memo', title: '메모 남기기', icon: 'pen-line' }, { id: 'refund', title: '부분 환불', icon: 'rotate-ccw' }, { type: '-' }, { id: 'cancel', title: '주문 취소', icon: 'x', danger: true }],
+    click: function (it) {
+      if (it.id === 'cancel') layer.confirm('주문 #1044를 취소하고 54,000원을 환불할까요?', { danger: true, okText: '주문 취소' }, function (i) { layer.close(i); layer.msg('취소했습니다', { icon: 'success' }); });
+      else if (it.id === 'memo') layer.input({ title: '메모', formType: 'textarea' }).then(function (v) { if (v) layer.msg('메모를 남겼습니다', { icon: 'success' }); });
+      else layer.msg('부분 환불 화면은 결제사 연동 후 엽니다', { icon: 'info' });
+    } });
+  document.getElementById('odd-ship').addEventListener('click', function () {
+    layer.form({ title: '출고 처리', area: 'sm', okText: '출고', fields: [{ name: 'co', label: '택배사', type: 'select', options: ['CJ대한통운', '한진', '롯데', '우체국'] }, { name: 'no', label: '송장 번호', required: true, pattern: '[0-9]{10,13}', help: '숫자 10~13자리' }] })
+      .then(function (v) {
+        if (!v) return;
+        var st = document.getElementById('odd-st'); st.className = 'Catui_pill Catui_pill-info'; catui.mount(st, catui.html`<i class="Catui_dot"></i>배송 중`);
+        var item = document.createElement('div'); item.className = 'Catui_atl-item';
+        catui.mount(item, catui.html`<span class="Catui_av Catui_av-sm" aria-hidden="true">김</span><div class="Catui_atl-main"><b>${v.co}</b> 송장 ${v.no} 등록 <span class="Catui_help">방금</span></div><span class="Catui_pill Catui_pill-info"><i class="Catui_dot"></i>배송</span>`);
+        document.getElementById('odd-log').appendChild(item);
+        document.getElementById('odd-ship').disabled = true; layer.msg('출고 처리했습니다', { icon: 'success' });
+      });
+  });
+  document.getElementById('odd-addr').addEventListener('click', function () {
+    layer.input({ title: '배송지 수정', value: '서울특별시 마포구 월드컵로 12길 34, 501호' }).then(function (v) { if (v) { var t = document.getElementById('odd-addr-t'); t.firstChild.textContent = v; layer.msg('배송지를 바꿨습니다', { icon: 'success' }); } });
+  });
+});
+</script>

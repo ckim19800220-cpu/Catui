@@ -1,0 +1,51 @@
+<!-- title: SVG 차트 | crumb: 차트 / SVG 차트 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">SVG·CSS 차트</h1><p>스크립트 없이 그리는 차트 — 인쇄·메일·서버 렌더링에 알맞습니다</p></div>
+</div>
+
+<div class="Catui_grid">
+  <article class="Catui_card Catui_span-6"><header class="Catui_card-h">선 (SVG)</header><div class="Catui_card-b">
+    <svg class="Catui_chart" viewBox="0 0 320 200" preserveAspectRatio="xMinYMid meet" role="img" aria-label="3월~11월 매출(실선)과 목표(점선): 매출이 목표를 계속 웃돎">
+      <path class="grid" d="M0 40H320M0 90H320M0 140H320"/>
+      <path class="area" d="M0 140 L40 120 L80 100 L120 110 L160 70 L200 80 L240 40 L280 60 L320 50 V180 H0 Z"/>
+      <path class="series" d="M0 140 L40 120 L80 100 L120 110 L160 70 L200 80 L240 40 L280 60 L320 50"/>
+      <path class="series-2" d="M0 150 L40 130 L80 125 L120 120 L160 100 L200 105 L240 80 L280 90 L320 85"/>
+      <g class="axis"><text x="0" y="196">3월</text><text x="80" y="196">5월</text><text x="160" y="196">7월</text><text x="240" y="196">9월</text></g>
+    </svg>
+    <ul class="Catui_legend Catui_legend-row"><li><i class="Catui_s1"></i>매출</li><li><i class="Catui_s2"></i>목표</li></ul></div></article>
+  <article class="Catui_card Catui_span-6"><header class="Catui_card-h">레이더 (SVG)</header><div class="Catui_card-b">
+    <div class="Catui_hstack Catui_gap-4">
+      <svg class="Catui_radar" viewBox="-12 0 224 200" role="img" aria-label="서비스 평가 올해(실선)와 작년: 속도·안정 향상, 규모 비슷">
+        <polygon class="ring" points="100,28 168,74 146,156 54,156 32,74"/>
+        <path class="spoke" d="M100,97.6 L100,28 M100,97.6 L168,74 M100,97.6 L146,156 M100,97.6 L54,156 M100,97.6 L32,74"/>
+        <polygon class="area-2" points="100,64 136,86 124,130 76,134 62,88"/>
+        <polygon class="area" points="100,40 158,78 130,142 70,138 56,86"/>
+        <text class="axis" x="100" y="16" text-anchor="middle">속도</text><text class="axis" x="186" y="74" text-anchor="start">안정</text><text class="axis" x="154" y="176" text-anchor="middle">사용</text><text class="axis" x="46" y="176" text-anchor="middle">접근</text><text class="axis" x="14" y="74" text-anchor="end">규모</text>
+      </svg>
+      <ul class="Catui_legend"><li><i class="Catui_s1"></i>올해</li><li><i class="Catui_s2"></i>작년</li></ul>
+    </div></div></article>
+
+  <article class="Catui_card Catui_span-4"><header class="Catui_card-h">도넛 (CSS)</header><div class="Catui_card-b">
+    <div class="Catui_hstack Catui_gap-4">
+      <div class="Catui_donut" role="img" aria-label="합계 5,400: 모바일 45%, 데스크톱 25%, 태블릿 12%, TV 10%, 기타 8%"><div class="Catui_donut-hole"><b title="5,400">5.4k</b><span class="Catui_donut-label">합계</span></div></div>
+      <ul class="Catui_legend"><li><i class="Catui_s1"></i>모바일<b>45%</b></li><li><i class="Catui_s2"></i>데스크톱<b>25%</b></li><li><i class="Catui_s3"></i>태블릿<b>12%</b></li><li><i class="Catui_s4"></i>TV<b>10%</b></li><li><i class="Catui_s5"></i>기타<b>8%</b></li></ul>
+    </div></div></article>
+  <article class="Catui_card Catui_span-4"><header class="Catui_card-h">계기판 (CSS)</header><div class="Catui_card-b">
+    <div class="Catui_hstack Catui_gap-4">
+      <div class="Catui_gauge Catui_gauge-good" role="img" aria-label="72퍼센트, 좋음"><div class="Catui_gauge-value"><b>72%</b><span>좋음</span></div></div>
+      <div class="Catui_gauge Catui_gauge-bad" role="img" aria-label="18퍼센트, 위험"><div class="Catui_gauge-value"><b>18%</b><span>위험</span></div></div>
+    </div></div></article>
+  <article class="Catui_card Catui_span-4"><header class="Catui_card-h">칸 막대 (CSS)</header><div class="Catui_card-b Catui_vstack Catui_gap-1">
+    <p class="Catui_prog-label"><span>이번 달 목표</span><span class="Catui_num">6/10</span></p>
+    <div class="Catui_segbar" role="img" aria-label="목표 10건 중 6건 달성"><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i class="Catui_seg-on"></i><i></i><i></i><i></i><i></i></div>
+    <p class="Catui_help">신규 입점 목표 10곳 중 6곳</p>
+  </div></article>
+
+  <article class="Catui_card Catui_span-12"><header class="Catui_card-h">가로 막대 (CSS)</header><div class="Catui_card-b">
+    <div class="Catui_bars">
+      <div class="Catui_bar"><span class="Catui_bar-label">이미지</span><span class="Catui_bar-track"><i class="Catui_bar-fill" style="width:70%"></i></span><span class="Catui_bar-value">70</span></div>
+      <div class="Catui_bar"><span class="Catui_bar-label">영상</span><span class="Catui_bar-track"><i class="Catui_bar-fill Catui_bar-fill-2" style="width:40%"></i></span><span class="Catui_bar-value">40</span></div>
+      <div class="Catui_bar"><span class="Catui_bar-label">문서</span><span class="Catui_bar-track"><i class="Catui_bar-fill Catui_bar-fill-3" style="width:24%"></i></span><span class="Catui_bar-value">24</span></div>
+      <div class="Catui_bar"><span class="Catui_bar-label">시스템</span><span class="Catui_bar-track"><i class="Catui_bar-fill Catui_bar-fill-4" style="width:12%"></i></span><span class="Catui_bar-value">12</span></div>
+    </div></div></article>
+</div>

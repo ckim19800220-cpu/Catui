@@ -1,0 +1,76 @@
+<!-- title: 고급 입력 | crumb: 폼 / 고급 입력 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">고급 입력</h1><p>날짜·자동완성·태그·수량·범위·별점·색·선택 카드 — 모두 키보드와 화면 낭독기로 쓸 수 있습니다</p></div>
+</div>
+
+<div class="Catui_grid">
+  <article class="Catui_card Catui_span-6">
+    <header class="Catui_card-h">날짜 · 기간</header>
+    <div class="Catui_card-b Catui_vstack Catui_gap-4">
+      <div class="Catui_field"><label class="Catui_label" for="fa-date">배송 예정일</label><input class="Catui_input" id="fa-date" name="date" data-catui-date data-catui-min="2026-11-02" placeholder="YYYY-MM-DD"></div>
+      <div class="Catui_field"><label class="Catui_label" for="fa-range">조회 기간</label><input class="Catui_input" id="fa-range" name="range" data-catui-date="range" placeholder="시작 ~ 끝"><p class="Catui_help">빠른 선택: 최근 7일 · 30일 · 이번 달 · 지난달</p></div>
+      <div class="Catui_field"><label class="Catui_label" for="fa-time">마감 시각</label><input class="Catui_input" id="fa-time" type="time" value="18:00"></div>
+    </div>
+  </article>
+  <article class="Catui_card Catui_span-6">
+    <header class="Catui_card-h">자동완성 · 태그</header>
+    <div class="Catui_card-b Catui_vstack Catui_gap-4">
+      <div class="Catui_field"><label class="Catui_label" for="fa-ac">담당자</label><input class="Catui_input" id="fa-ac" name="owner" placeholder="이름 일부 (초성 가능)" autocomplete="off"><p class="Catui_help">↑↓로 고르고 Enter</p></div>
+      <div class="Catui_field"><label class="Catui_label" for="fa-tags">검색 키워드</label><input class="Catui_input" id="fa-tags" name="keywords" data-catui-tags="키보드,무선" data-catui-max="8" placeholder="입력 후 Enter 또는 쉼표"></div>
+      <div class="Catui_field"><label class="Catui_label" for="fa-price">가격</label><div class="Catui_igroup"><span class="Catui_igroup-addon">₩</span><input class="Catui_input" id="fa-price" inputmode="numeric" value="42,000"><span class="Catui_igroup-addon">원</span></div></div>
+    </div>
+  </article>
+
+  <article class="Catui_card Catui_span-6">
+    <header class="Catui_card-h">수량 · 범위 · 별점</header>
+    <div class="Catui_card-b Catui_vstack Catui_gap-4">
+      <div class="Catui_field"><span class="Catui_label" id="fa-qty-l">수량</span><div class="Catui_stepper" data-catui-stepper data-catui-min="1" data-catui-max="20" data-catui-value="3" data-catui-name="qty" data-catui-unit="개" aria-labelledby="fa-qty-l"></div></div>
+      <div class="Catui_field"><label class="Catui_label" for="fa-disc">할인율 <output for="fa-disc" class="Catui_num" id="fa-disc-out">15%</output></label><input class="Catui_range" id="fa-disc" type="range" min="0" max="50" step="5" value="15" aria-valuetext="15퍼센트">
+        <div class="Catui_range-scale" aria-hidden="true"><span>0%</span><span>25%</span><span>50%</span></div></div>
+      <fieldset><legend class="Catui_label">우선순위</legend>
+        <div class="Catui_rating">
+          <input class="Catui_clip" type="radio" name="fa-rt" id="fa-rt-1"><label for="fa-rt-1" aria-label="1점">{{icon:star}}</label>
+          <input class="Catui_clip" type="radio" name="fa-rt" id="fa-rt-2"><label for="fa-rt-2" aria-label="2점">{{icon:star}}</label>
+          <input class="Catui_clip" type="radio" name="fa-rt" id="fa-rt-3" checked><label for="fa-rt-3" aria-label="3점">{{icon:star}}</label>
+          <input class="Catui_clip" type="radio" name="fa-rt" id="fa-rt-4"><label for="fa-rt-4" aria-label="4점">{{icon:star}}</label>
+          <input class="Catui_clip" type="radio" name="fa-rt" id="fa-rt-5"><label for="fa-rt-5" aria-label="5점">{{icon:star}}</label>
+        </div></fieldset>
+    </div>
+  </article>
+  <article class="Catui_card Catui_span-6">
+    <header class="Catui_card-h">색 · 필터 칩 · 글자 수</header>
+    <div class="Catui_card-b Catui_vstack Catui_gap-4">
+      <fieldset class="Catui_swatches"><legend class="Catui_label">라벨 색 <span class="Catui_swatch-value" id="fa-sw-v">· 초록</span></legend>
+        <input class="Catui_clip" type="radio" name="fa-sw" id="fa-sw-1" value="초록" checked><label class="Catui_swatch" for="fa-sw-1" style="--Catui_swatch:var(--Catui_color-brand)"><span class="Catui_clip">초록</span></label>
+        <input class="Catui_clip" type="radio" name="fa-sw" id="fa-sw-2" value="파랑"><label class="Catui_swatch" for="fa-sw-2" style="--Catui_swatch:var(--Catui_color-info)"><span class="Catui_clip">파랑</span></label>
+        <input class="Catui_clip" type="radio" name="fa-sw" id="fa-sw-3" value="보라"><label class="Catui_swatch" for="fa-sw-3" style="--Catui_swatch:var(--Catui_color-purple)"><span class="Catui_clip">보라</span></label>
+        <input class="Catui_clip" type="radio" name="fa-sw" id="fa-sw-4" value="노랑"><label class="Catui_swatch" for="fa-sw-4" style="--Catui_swatch:var(--Catui_color-amber)"><span class="Catui_clip">노랑</span></label>
+      </fieldset>
+      <fieldset class="Catui_chips"><legend class="Catui_label">채널</legend>
+        <input class="Catui_clip" type="checkbox" id="fa-ch-1" checked><label class="Catui_chip" for="fa-ch-1">{{icon:check:12}}자사몰</label>
+        <input class="Catui_clip" type="checkbox" id="fa-ch-2" checked><label class="Catui_chip" for="fa-ch-2">{{icon:check:12}}오픈마켓</label>
+        <input class="Catui_clip" type="checkbox" id="fa-ch-3"><label class="Catui_chip" for="fa-ch-3">{{icon:check:12}}오프라인</label>
+      </fieldset>
+      <div class="Catui_field"><label class="Catui_label" for="fa-memo">관리자 메모</label><textarea class="Catui_input" id="fa-memo" rows="3" data-catui-counter="120">고객 요청: 각인 확인 후 발송</textarea></div>
+    </div>
+  </article>
+
+  <article class="Catui_card Catui_span-12">
+    <header class="Catui_card-h">선택 카드</header>
+    <div class="Catui_card-b">
+      <fieldset class="Catui_optcards"><legend class="Catui_label">배송 방식</legend>
+        <input class="Catui_clip" type="radio" name="fa-ship" id="fa-ship-1" checked><label class="Catui_optcard" for="fa-ship-1"><span class="Catui_optcard-title">일반 배송</span><span class="Catui_optcard-text">2~3일 · 5만원 이상 무료</span><span class="Catui_optcard-price">3,000원</span></label>
+        <input class="Catui_clip" type="radio" name="fa-ship" id="fa-ship-2"><label class="Catui_optcard" for="fa-ship-2"><span class="Catui_optcard-title">빠른 배송</span><span class="Catui_optcard-text">내일 도착 · 오후 3시 마감</span><span class="Catui_optcard-price">5,000원</span></label>
+        <input class="Catui_clip" type="radio" name="fa-ship" id="fa-ship-3" disabled><label class="Catui_optcard" for="fa-ship-3"><span class="Catui_optcard-title">당일 배송</span><span class="Catui_optcard-text">서울 일부 지역 (지금은 불가)</span><span class="Catui_optcard-price">8,000원</span></label>
+      </fieldset>
+    </div>
+  </article>
+</div>
+<script>
+catui.use(['autocomplete'], function (autocomplete) {
+  autocomplete.render({ elem: '#fa-ac', data: ['김하늘 (운영)', '이준 (물류)', '박서연 (고객지원)', '최민 (마케팅)', '정수아 (개발)', '강도현 (재무)'] });
+  var r = document.getElementById('fa-disc'), o = document.getElementById('fa-disc-out');
+  r.addEventListener('input', function () { o.textContent = r.value + '%'; r.setAttribute('aria-valuetext', r.value + '퍼센트'); });
+  document.querySelectorAll('[name=fa-sw]').forEach(function (s) { s.addEventListener('change', function () { document.getElementById('fa-sw-v').textContent = '· ' + s.value; }); });
+});
+</script>

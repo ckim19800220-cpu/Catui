@@ -1,0 +1,48 @@
+/* admin/apps.css */
+/* 앱 화면 — 목록+본문 2단(채팅·받은편지함), 칸반 끌어 옮기기 표시, 파일 격자. 767px 이하는 한 단씩 전환. */
+.Catui_adm-split{display:grid;grid-template-columns:minmax(calc(var(--Catui_space-10) * 4.5),1fr) minmax(0,2.4fr);height:calc(100vh - var(--Catui_adm-top-h) - var(--Catui_adm-pad) * 2 - var(--Catui_space-10) * 1.6);min-height:calc(var(--Catui_space-10) * 7);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);overflow:hidden}
+.Catui_adm-pane{display:flex;flex-direction:column;min-width:0;min-height:0}
+.Catui_adm-pane + .Catui_adm-pane{border-left:1px solid var(--Catui_color-border)}
+.Catui_adm-pane-h{display:flex;align-items:center;gap:var(--Catui_space-3);min-height:var(--Catui_card-header-h);padding:var(--Catui_space-2) var(--Catui_space-4);border-bottom:1px solid var(--Catui_color-border)}
+.Catui_adm-pane-h h2{margin:0;font-size:var(--Catui_type-body-size);font-weight:600}
+.Catui_adm-pane-b{flex:1;min-height:0;overflow:auto;padding:var(--Catui_space-4)}
+.Catui_adm-pane-f{padding:var(--Catui_space-3) var(--Catui_space-4);border-top:1px solid var(--Catui_color-border)}
+.Catui_adm-back{display:none}
+@media (max-width:767px){
+  .Catui_adm-split{grid-template-columns:minmax(0,1fr)}
+  .Catui_adm-split[data-catui-adm-pane="detail"] > .Catui_adm-pane:first-child,.Catui_adm-split:not([data-catui-adm-pane="detail"]) > .Catui_adm-pane:last-child{display:none}
+  .Catui_adm-pane + .Catui_adm-pane{border-left:0}
+  .Catui_adm-back{display:inline-flex}
+}
+
+/* 대화·메일 목록 항목 */
+.Catui_adm-rows{margin:0;padding:0;list-style:none}
+.Catui_adm-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--Catui_space-1) var(--Catui_space-3);align-items:center;width:100%;padding:var(--Catui_space-3) var(--Catui_space-4);border:0;border-bottom:1px solid var(--Catui_color-border);background:transparent;color:inherit;text-align:left;font:inherit;cursor:pointer}
+.Catui_adm-row:hover{background:var(--Catui_color-surface-muted)}
+.Catui_adm-row[aria-current="true"]{background:var(--Catui_color-brand-soft)}
+.Catui_adm-row:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+.Catui_adm-row-title{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.Catui_adm-row-sub{grid-column:2 / -1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_adm-row-time{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);white-space:nowrap}
+.Catui_adm-row-unread .Catui_adm-row-title{font-weight:700}
+.Catui_adm-row-unread .Catui_adm-row-time{color:var(--Catui_color-brand-strong);font-weight:600}
+
+/* 채팅 기록: 아래부터 쌓이고 스크롤 */
+.Catui_adm-chat{flex:1;min-height:0;overflow:auto;padding:var(--Catui_space-4)}
+.Catui_adm-chat .Catui_chat{max-width:none}
+
+/* 메일 읽기 */
+.Catui_adm-mail-h{display:grid;gap:var(--Catui_space-1);padding-bottom:var(--Catui_space-4);margin-bottom:var(--Catui_space-4);border-bottom:1px solid var(--Catui_color-border)}
+.Catui_adm-mail-h h2{margin:0;font-size:var(--Catui_type-h3-size);line-height:var(--Catui_type-h3-lh)}
+.Catui_adm-mail-body{max-width:var(--Catui_prose-measure);line-height:1.75}
+
+/* 칸반: 끌어 옮기기·키보드 이동 표시 */
+.Catui_adm-kanban .Catui_kanban-card{cursor:grab}
+.Catui_adm-kanban .Catui_kanban-card:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_adm-drag{opacity:.5}
+.Catui_adm-drop{outline:2px dashed var(--Catui_color-brand-strong);outline-offset:-4px;background:var(--Catui_color-brand-soft)}
+
+/* 파일 격자 보기 */
+.Catui_adm-files-grid{display:grid;gap:var(--Catui_space-3);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 2.4),1fr))}
+.Catui_adm-files-grid .Catui_file{flex-direction:column;align-items:flex-start;padding:var(--Catui_space-3);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md)}
+.Catui_adm-files-grid .Catui_file-acts{margin-left:0}

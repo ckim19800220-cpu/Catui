@@ -70,6 +70,9 @@ for (const s of scenarios) {
   if (!want(s.name)) continue;
   console.log(s.name);
   try {
+    // 화면 크기 지정 시나리오 (예: viewport: [390, 844] 모바일)
+    if (s.viewport) await send("Emulation.setDeviceMetricsOverride", { width: s.viewport[0], height: s.viewport[1], deviceScaleFactor: 1, mobile: s.viewport[0] < 768 });
+    else await send("Emulation.clearDeviceMetricsOverride");
     await open(s.page, s.wait || 1500);
     const got = await evaluate(s.run);
     for (const [label, check] of Object.entries(s.expect)) {

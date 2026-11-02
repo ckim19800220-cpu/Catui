@@ -1,0 +1,40 @@
+<!-- title: 사용자 관리 | crumb: 관리 / 사용자 관리 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">사용자 관리</h1><p>관리자 계정과 권한 · 2단계 인증 사용률 75%</p></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="us-invite">{{icon:user-plus}}초대</button></div>
+</div>
+<article class="Catui_card"><div class="Catui_card-b Catui_vstack Catui_gap-4">
+  <form class="Catui_toolbar" id="us-filter" data-catui-filter="us-filter" role="search" aria-label="사용자 찾기">
+    <div class="Catui_search">{{icon:search}}<label class="Catui_clip" for="us-q">이름·이메일</label><input class="Catui_input" id="us-q" name="q" type="search" placeholder="이름·이메일"></div>
+    <div class="Catui_select-wrap"><label class="Catui_clip" for="us-role">권한</label><select class="Catui_input Catui_select" id="us-role" name="role"><option value="">모든 권한</option><option>최고 관리자</option><option>운영자</option><option>읽기 전용</option></select>{{icon:chevron-down}}</div>
+    <div class="Catui_toolbar-end"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="submit">검색</button></div>
+  </form>
+  <div class="Catui_bulkbar" id="us-bulk" role="region" aria-label="선택한 사용자 작업" hidden><span aria-live="polite" data-catui-adm-count-sel>0건 선택됨</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="us-lock">{{icon:lock}}잠그기</button><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-adm-clear-sel style="margin-left:auto">선택 해제</button></div>
+  <div id="us-table" data-catui-filter="us-table"></div>
+</div></article>
+<script>
+catui.use(['table', 'layer'], function (table, layer) {
+  var R = { '최고 관리자': 'success', '운영자': 'info', '읽기 전용': 'neutral' };
+  var users = [
+    ['김관리', 'admin@catui.dev', '최고 관리자', true, '방금', '활성'], ['김하늘', 'haneul@catui.dev', '최고 관리자', true, '10분 전', '활성'], ['이준', 'jun@catui.dev', '운영자', true, '어제', '활성'],
+    ['박서연', 'seoyeon@catui.dev', '운영자', false, '3일 전', '활성'], ['최민', 'min@catui.dev', '읽기 전용', true, '1주 전', '활성'], ['정수아', 'sua@catui.dev', '운영자', true, '2주 전', '잠김'],
+    ['강도현', 'dohyun@catui.dev', '읽기 전용', false, '한 달 전', '초대 대기'], ['윤지호', 'jiho@catui.dev', '운영자', true, '어제', '활성'],
+  ].map(function (u, i) { return { id: String(i + 1), name: u[0], email: u[1], role: u[2], mfa: u[3], last: u[4], status: u[5] }; });
+  table.render({ elem: '#us-table', id: 'us-table', data: users, page: true, limit: 10, caption: '관리자 목록', labelField: 'name',
+    cols: [{ type: 'checkbox' }, { field: 'name', title: '이름', sort: true, templet: function (u) { return catui.html`<span class="Catui_line"><span class="Catui_av Catui_av-xs" aria-hidden="true">${u.name.slice(0, 1)}</span>${u.name}</span>`; } }, { field: 'email', title: '이메일' },
+      { field: 'role', title: '권한', sort: true, templet: function (u) { return catui.html`<span class="Catui_badge Catui_badge-${R[u.role]}">${u.role}</span>`; } },
+      { field: 'mfa', title: '2단계 인증', templet: function (u) { return u.mfa ? catui.html`${catui.icon('check-circle', 16)} 사용` : catui.html`<span class="Catui_help">${catui.icon('alert-triangle', 16)} 안 씀</span>`; } },
+      { field: 'last', title: '마지막 접속' }, { field: 'status', title: '상태', templet: function (u) { return catui.html`<span class="Catui_pill Catui_pill-${u.status === '활성' ? 'success' : u.status === '잠김' ? 'danger' : 'warning'}"><i class="Catui_dot"></i>${u.status}</span>`; } },
+      { title: '동작', toolbar: [{ event: 'role', text: '권한 변경', icon: 'settings' }] }] });
+  var list = catui.admin.list({ table: 'us-table', form: '#us-filter', data: users, bulkbar: '#us-bulk', match: function (u, v) { var q = String(v.q || '').trim(); return (!q || (u.name + u.email).indexOf(q) > -1) && (!v.role || u.role === v.role); } });
+  table.on('tool(us-table)', function (o) {
+    layer.form({ title: o.data.name + ' 권한', area: 'sm', fields: [{ name: 'role', label: '권한', type: 'radio', options: ['최고 관리자', '운영자', '읽기 전용'], value: o.data.role }] })
+      .then(function (v) { if (v) { o.update({ role: v.role }); layer.msg('권한을 바꿨습니다', { icon: 'success' }); } });
+  });
+  document.getElementById('us-lock').addEventListener('click', function () { var sel = table.checkStatus('us-table').data; sel.forEach(function (u) { u.status = '잠김'; }); table.clearChecked('us-table'); list.apply(); layer.msg(sel.length + '명을 잠갔습니다', { icon: 'success' }); });
+  document.getElementById('us-invite').addEventListener('click', function () {
+    layer.form({ title: '관리자 초대', area: 'sm', okText: '초대 보내기', fields: [{ name: 'email', label: '이메일', type: 'email', required: true }, { name: 'role', label: '권한', type: 'select', options: ['운영자', '읽기 전용', '최고 관리자'] }] })
+      .then(function (v) { if (!v) return; users.push({ id: String(users.length + 1), name: v.email.split('@')[0], email: v.email, role: v.role, mfa: false, last: '—', status: '초대 대기' }); list.apply(); layer.msg('초대를 보냈습니다', { icon: 'success' }); });
+  });
+});
+</script>

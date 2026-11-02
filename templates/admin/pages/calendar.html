@@ -1,0 +1,77 @@
+<!-- title: 캘린더 | crumb: 캘린더 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">캘린더</h1><p>날짜를 눌러 그날 일정을 보고, 새 일정을 추가합니다</p></div>
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" id="cl-prev" aria-label="이전 달">{{icon:chevron-left}}</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="cl-today">오늘</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" id="cl-next" aria-label="다음 달">{{icon:chevron-right}}</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="cl-add">{{icon:plus}}일정 추가</button>
+  </div>
+</div>
+
+<div class="Catui_adm-cal">
+  <article class="Catui_card"><div class="Catui_card-b"><div class="Catui_cal-scroll" id="cl-grid"></div></div></article>
+  <article class="Catui_card">
+    <header class="Catui_card-h" id="cl-day-t">선택한 날</header>
+    <div class="Catui_card-b">
+      <div class="Catui_feed Catui_adm-feed" id="cl-day" aria-live="polite"></div>
+      <ul class="Catui_legend Catui_adm-legend"><li><i class="Catui_s1"></i>업무</li><li><i class="Catui_s2"></i>회의</li><li><i class="Catui_s3"></i>교육</li><li><i class="Catui_s4"></i>점검</li></ul>
+    </div>
+  </article>
+</div>
+<script>
+catui.use(['layer', 'util'], function (layer, util) {
+  var KIND = { 업무: '', 회의: 'Catui_cal-ev-info', 교육: 'Catui_cal-ev-3', 점검: 'Catui_cal-ev-warn' };
+  var events = [
+    { date: '2026-11-02', title: '주간 운영 회의', kind: '회의', time: '10:00' }, { date: '2026-11-02', title: '정산 확정', kind: '업무', time: '16:00' },
+    { date: '2026-11-05', title: '신규 관리자 교육', kind: '교육', time: '14:00' }, { date: '2026-11-11', title: '빼빼로데이 기획전 오픈', kind: '업무', time: '00:00' },
+    { date: '2026-11-13', title: 'DB 정기 점검', kind: '점검', time: '02:00' }, { date: '2026-11-18', title: '분기 실적 회의', kind: '회의', time: '15:00' },
+    { date: '2026-11-25', title: '블랙프라이데이 준비', kind: '업무', time: '09:00' }, { date: '2026-11-25', title: '물류 협력사 미팅', kind: '회의', time: '13:00' },
+    { date: '2026-11-25', title: '배너 교체', kind: '업무', time: '18:00' }, { date: '2026-11-27', title: '보안 교육', kind: '교육', time: '11:00' },
+  ];
+  var today = '2026-11-02', view = new Date(2026, 10, 1), sel = today;
+  var grid = document.getElementById('cl-grid');
+  var key = function (d) { return util.toDateString(d, 'yyyy-MM-dd'); };
+  var draw = function () {
+    var y = view.getFullYear(), m = view.getMonth();
+    var start = new Date(y, m, 1); start.setDate(1 - ((start.getDay() + 6) % 7));   // 월요일 시작
+    var weeks = [];
+    for (var w = 0; w < 6; w++) {
+      var cells = [];
+      for (var i = 0; i < 7; i++) {
+        var d = new Date(start); d.setDate(start.getDate() + w * 7 + i);
+        var k = key(d), evs = events.filter(function (e) { return e.date === k; });
+        var cls = ['Catui_cal-n'].concat(d.getMonth() !== m ? ['Catui_cal-out'] : [], k === today ? ['Catui_cal-today'] : [], k === sel ? ['Catui_cal-sel'] : []).join(' ');
+        cells.push(catui.html`<div class="Catui_cal-cell${i > 4 ? ' Catui_cal-weekend' : ''}" role="gridcell" tabindex="${k === sel ? 0 : -1}" data-day="${k}" aria-selected="${k === sel}" aria-label="${d.getMonth() + 1}월 ${d.getDate()}일${evs.length ? `, 일정 ${evs.length}개` : ''}${k === today ? ', 오늘' : ''}"><span class="${cls}">${d.getDate()}</span>${evs.slice(0, 2).map(function (e) { return catui.html`<span class="Catui_cal-event ${KIND[e.kind]}">${e.title}</span>`; })}${evs.length > 2 ? catui.html`<span class="Catui_help">+${evs.length - 2}</span>` : ''}</div>`);
+      }
+      weeks.push(catui.html`<div class="Catui_cal-week" role="row">${cells}</div>`);
+    }
+    catui.mount(grid, catui.html`<div class="Catui_cal" role="grid" aria-label="${y}년 ${m + 1}월"><div class="Catui_cal-top">${y}년 ${m + 1}월</div><div class="Catui_cal-dows" role="row">${['월', '화', '수', '목', '금', '토', '일'].map(function (x) { return catui.html`<span class="Catui_cal-head" role="columnheader">${x}</span>`; })}</div>${weeks}</div>`);
+    showDay();
+  };
+  var showDay = function () {
+    var d = new Date(sel), evs = events.filter(function (e) { return e.date === sel; }).sort(function (a, b) { return a.time < b.time ? -1 : 1; });
+    document.getElementById('cl-day-t').textContent = (d.getMonth() + 1) + '월 ' + d.getDate() + '일 일정 ' + evs.length + '개';
+    catui.mount(document.getElementById('cl-day'), evs.length ? catui.html`${evs.map(function (e) { return catui.html`<div class="Catui_feed-item"><span class="Catui_pill Catui_pill-neutral">${e.kind}</span><p>${e.title}</p><span class="Catui_feed-time">${e.time}</span></div>`; })}` : catui.html`<p class="Catui_adm-empty">일정이 없습니다.</p>`);
+  };
+  var pick = function (k, focus) { sel = k; var d = new Date(k); if (d.getMonth() !== view.getMonth() || d.getFullYear() !== view.getFullYear()) view = new Date(d.getFullYear(), d.getMonth(), 1); draw(); if (focus) grid.querySelector('[data-day="' + k + '"]')?.focus(); };
+  grid.addEventListener('click', function (e) { var c = e.target.closest('[data-day]'); if (c) pick(c.dataset.day, true); });
+  // 방향키로 날짜 이동 (그리드 패턴)
+  grid.addEventListener('keydown', function (e) {
+    var step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
+    if (e.key === 'Enter') { showDay(); return; }
+    if (!step) return;
+    e.preventDefault(); var d = new Date(sel); d.setDate(d.getDate() + step); pick(key(d), true);
+  });
+  document.getElementById('cl-prev').addEventListener('click', function () { view.setMonth(view.getMonth() - 1); draw(); });
+  document.getElementById('cl-next').addEventListener('click', function () { view.setMonth(view.getMonth() + 1); draw(); });
+  document.getElementById('cl-today').addEventListener('click', function () { pick(today, true); });
+  document.getElementById('cl-add').addEventListener('click', function () {
+    layer.form({ title: '일정 추가', area: 'sm', fields: [
+      { name: 'title', label: '제목', required: true, maxlength: 40 }, { name: 'date', label: '날짜', type: 'date', required: true, value: sel },
+      { name: 'time', label: '시각', type: 'time', value: '10:00' }, { name: 'kind', label: '분류', type: 'select', options: Object.keys(KIND) } ] })
+      .then(function (v) { if (!v) return; events.push(v); pick(v.date, false); layer.msg('일정을 추가했습니다', { icon: 'success' }); });
+  });
+  draw();
+});
+</script>

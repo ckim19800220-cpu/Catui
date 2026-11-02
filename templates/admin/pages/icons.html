@@ -1,0 +1,26 @@
+<!-- title: 아이콘 | crumb: UI / 아이콘 -->
+<div class="Catui_adm-head"><div><h1 class="Catui_h1">아이콘</h1><p>Line 01(CC0) + Catui 원본 — 누르면 사용 코드를 복사합니다</p></div>
+  <div class="Catui_actions"><div class="Catui_search">{{icon:search}}<label class="Catui_clip" for="ic-q">아이콘 찾기</label><input class="Catui_input" id="ic-q" type="search" placeholder="영문 이름 (예: cart, user)"></div></div></div>
+<p class="Catui_help" id="ic-n" aria-live="polite"></p>
+<div class="Catui_adm-thumbs" id="ic-grid" style="grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 1.6),1fr))"></div>
+<script>
+catui.use(['util', 'layer'], function (util, layer) {
+  var grid = document.getElementById('ic-grid'), q = document.getElementById('ic-q'), names = [];
+  // 스프라이트(icons.svg)에서 이름 목록을 읽는다
+  fetch('../../../dist/icons.svg').then(function (r) { return r.text(); }).then(function (t) {
+    names = (t.match(/id="Catui_ic-([a-z0-9-]+)"/g) || []).map(function (s) { return s.slice(13, -1); });
+    draw();
+  });
+  var draw = function () {
+    var t = q.value.trim().toLowerCase(), shown = names.filter(function (n) { return !t || n.indexOf(t) > -1; });
+    document.getElementById('ic-n').textContent = shown.length + '개' + (shown.length > 240 ? ' (처음 240개 표시 · 검색으로 좁히세요)' : '');
+    catui.mount(grid, catui.html`${shown.slice(0, 240).map(function (n) { return catui.html`<button class="Catui_btn Catui_btn-secondary Catui_adm-thumb" type="button" data-icon="${n}" title="${n}" aria-label="${n} 아이콘 코드 복사" style="display:grid;place-items:center;gap:4px;font-size:var(--Catui_type-caption-size)">${catui.icon(n)}<span>${n}</span></button>`; })}`);
+  };
+  q.addEventListener('input', draw);
+  grid.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-icon]'); if (!b) return;
+    var code = '<svg class="Catui_icon" aria-hidden="true"><use href="icons.svg#Catui_ic-' + b.dataset.icon + '"></use></svg>';
+    util.copy(code).then(function (ok) { layer.msg(ok ? b.dataset.icon + ' 코드를 복사했습니다' : '복사하지 못했습니다', { icon: ok ? 'success' : 'warn', time: 1200 }); });
+  });
+});
+</script>

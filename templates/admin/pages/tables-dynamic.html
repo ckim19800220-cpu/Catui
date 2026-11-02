@@ -1,0 +1,66 @@
+<!-- title: 동적 표 | crumb: 표 / 동적 표 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">주문 목록</h1><p>검색·필터 조건이 주소에 남아 새로 고침·공유해도 그대로입니다</p></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="td-csv">{{icon:download}}CSV</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="td-add">{{icon:plus}}주문 추가</button></div>
+</div>
+
+<article class="Catui_card">
+  <div class="Catui_card-b Catui_vstack Catui_gap-4">
+    <form class="Catui_toolbar" id="td-filter" data-catui-filter="td-filter" role="search" aria-label="주문 찾기">
+      <div class="Catui_search">{{icon:search}}<label class="Catui_clip" for="td-q">고객·주문 번호</label><input class="Catui_input" id="td-q" name="q" type="search" placeholder="고객·주문 번호"></div>
+      <div class="Catui_select-wrap"><label class="Catui_clip" for="td-st">상태</label><select class="Catui_input Catui_select" id="td-st" name="status"><option value="">전체 상태</option><option>결제 대기</option><option>배송 중</option><option>배송 완료</option><option>취소</option></select>{{icon:chevron-down}}</div>
+      <fieldset class="Catui_chips"><legend class="Catui_clip">채널</legend>
+        <input class="Catui_clip" type="checkbox" name="ch" value="자사몰" id="td-c1"><label class="Catui_chip" for="td-c1">{{icon:check:12}}자사몰</label>
+        <input class="Catui_clip" type="checkbox" name="ch" value="오픈마켓" id="td-c2"><label class="Catui_chip" for="td-c2">{{icon:check:12}}오픈마켓</label>
+      </fieldset>
+      <div class="Catui_toolbar-end"><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="reset">초기화</button><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="submit">검색</button></div>
+    </form>
+    <div class="Catui_bulkbar" id="td-bulk" role="region" aria-label="선택한 주문 작업" hidden><span aria-live="polite" data-catui-adm-count-sel>0건 선택됨</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="td-ship">배송 처리</button><button class="Catui_btn Catui_btn-sm Catui_btn-danger" type="button" id="td-cancel">{{icon:x}}취소 처리</button><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-adm-clear-sel style="margin-left:auto">선택 해제</button></div>
+    <p class="Catui_help" id="td-sum" aria-live="polite"></p>
+    <div id="td-orders" data-catui-filter="td-orders"></div>
+  </div>
+</article>
+<script>
+catui.use(['table', 'layer', 'util'], function (table, layer, util) {
+  var names = ['김하늘', '이준', '박서연', '최민', '정수아', '강도현', '윤지호', '한소리', '오세린', '임도윤', '서지안', '조하람'];
+  var goods = ['기계식 키보드', '무선 마우스', 'USB-C 허브', '27인치 모니터', '모니터 받침대', '노트북 파우치'];
+  var STATES = ['결제 대기', '배송 중', '배송 완료', '배송 완료', '취소'], KIND = { '결제 대기': 'warning', '배송 중': 'info', '배송 완료': 'success', '취소': 'danger' };
+  var rows = [];
+  for (var i = 0; i < 64; i++) {
+    var d = new Date(2026, 10, 2); d.setHours(d.getHours() - i * 7);
+    rows.push({ id: String(1100 - i), customer: names[i % names.length], item: goods[(i * 5) % goods.length], amount: 20000 + ((i * 7919) % 18) * 9000, status: STATES[(i * 3) % STATES.length], channel: i % 3 ? '자사몰' : '오픈마켓', date: util.toDateString(d, 'yyyy-MM-dd HH:mm') });
+  }
+  table.render({ elem: '#td-orders', id: 'td-orders', data: rows, page: true, limit: 10, caption: '주문 목록', labelField: 'id',
+    cols: [
+      { type: 'checkbox' }, { field: 'id', title: '주문 번호', sort: true }, { field: 'date', title: '주문 시각', sort: true }, { field: 'customer', title: '고객', sort: true },
+      { field: 'item', title: '상품' }, { field: 'channel', title: '채널' },
+      { field: 'amount', title: '금액', sort: true, align: 'right', templet: function (r) { return util.number(r.amount) + '원'; } },
+      { field: 'status', title: '상태', templet: function (r) { return catui.html`<span class="Catui_pill Catui_pill-${KIND[r.status]}"><i class="Catui_dot"></i>${r.status}</span>`; } },
+      { title: '동작', toolbar: [{ event: 'view', text: '보기', icon: 'eye' }, { event: 'del', text: '삭제', icon: 'trash-2' }] },
+    ] });
+  // 필터 ↔ 주소 동기화 + 일괄 작업 바 (catui.admin.list)
+  var list = catui.admin.list({ table: 'td-orders', form: '#td-filter', data: rows, bulkbar: '#td-bulk',
+    match: function (r, v) {
+      var q = String(v.q || '').trim(), ch = [].concat(v.ch || []).filter(Boolean);
+      return (!q || r.customer.indexOf(q) > -1 || r.id.indexOf(q) > -1) && (!v.status || r.status === v.status) && (!ch.length || ch.indexOf(r.channel) > -1);
+    },
+    change: function (shown) { document.getElementById('td-sum').textContent = '전체 ' + rows.length + '건 중 ' + shown.length + '건 · 합계 ' + util.number(shown.reduce(function (a, r) { return a + r.amount; }, 0)) + '원'; } });
+  var bulk = function (status) {
+    var sel = table.checkStatus('td-orders').data;
+    if (!sel.length) return;
+    sel.forEach(function (r) { r.status = status; });
+    table.clearChecked('td-orders'); list.apply(); layer.msg(sel.length + '건을 "' + status + '"(으)로 바꿨습니다', { icon: 'success' });
+  };
+  document.getElementById('td-ship').addEventListener('click', function () { bulk('배송 중'); });
+  document.getElementById('td-cancel').addEventListener('click', function () { layer.confirm('선택한 주문을 취소할까요?', { danger: true, okText: '취소 처리' }, function (i) { layer.close(i); bulk('취소'); }); });
+  table.on('tool(td-orders)', function (o) {
+    if (o.event === 'view') location.href = 'tables-dynamic.html#' + o.data.id;
+    if (o.event === 'del') layer.confirm('주문 #' + o.data.id + '을 삭제할까요?', { danger: true, okText: '삭제' }, function (i) { layer.close(i); rows.splice(rows.indexOf(o.data), 1); list.apply(); layer.msg('삭제했습니다', { icon: 'success' }); });
+  });
+  document.getElementById('td-csv').addEventListener('click', function () { table.exportFile('td-orders', '주문목록.csv', { rows: list.rows() }); });
+  document.getElementById('td-add').addEventListener('click', function () {
+    layer.form({ title: '주문 추가', area: 'sm', fields: [{ name: 'customer', label: '고객', required: true }, { name: 'item', label: '상품', type: 'select', options: goods }, { name: 'amount', label: '금액', type: 'number', required: true, min: 0 }] })
+      .then(function (v) { if (!v) return; rows.unshift({ id: String(Number(rows[0].id) + 1), customer: v.customer, item: v.item, amount: Number(v.amount), status: '결제 대기', channel: '자사몰', date: util.toDateString(new Date(), 'yyyy-MM-dd HH:mm') }); list.apply(); layer.msg('추가했습니다', { icon: 'success' }); });
+  });
+});
+</script>

@@ -268,6 +268,209 @@ export const scenarios = [
     },
   },
   {
+    name: "admin · 셸 (접힘 기억 · 테마 · 알림 · 명령 팔레트 · 차트)",
+    page: "docs/admin/templates/index.html",
+    wait: 1800,
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const root = document.querySelector("[data-catui-adm]"), toggle = root.querySelector("[data-catui-adm-toggle]");
+      catui.admin.store.clear(); root.removeAttribute("data-catui-adm-collapsed");
+      const r = { ready: root.hasAttribute("data-catui-adm-ready"), charts: document.querySelectorAll("[data-catui-adm-chart] canvas").length };
+      toggle.click();
+      r.collapsed = root.hasAttribute("data-catui-adm-collapsed") && catui.admin.store.get("collapsed") === true && toggle.getAttribute("aria-label") === "메뉴 펼치기";
+      await sleep(400);   // 폭 전환 애니메이션이 끝난 뒤 잰다
+      r.sideW = Math.round(root.querySelector(".Catui_side").getBoundingClientRect().width);
+      toggle.click();
+      // 테마
+      document.querySelector("[data-catui-adm-theme]").click();
+      r.dark = document.documentElement.getAttribute("data-catui-theme") === "dark" && catui.admin.store.get("theme") === "dark";
+      document.querySelector("[data-catui-adm-theme]").click();
+      r.light = !document.documentElement.hasAttribute("data-catui-theme");
+      // 알림: 3건 → 하나 읽음 → 2건 → 모두 읽음 → 0
+      const nb = document.querySelector("[data-catui-adm-notify]");
+      r.badge0 = nb.querySelector(".Catui_count")?.textContent;
+      nb.click(); await sleep(50);
+      const pop = document.getElementById("adm-notify-pop");
+      r.popOpen = !pop.hidden && nb.getAttribute("aria-expanded") === "true";
+      pop.querySelector(".Catui_notif-unread").click();
+      r.badge1 = nb.querySelector(".Catui_count")?.textContent;
+      pop.querySelector("[data-catui-adm-readall]").click();
+      r.badge2 = nb.querySelector(".Catui_count")?.hidden;
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+      r.popClosed = pop.hidden && document.activeElement === nb;
+      // 명령 팔레트: Ctrl+K → "ㅂㅅ" → 분석
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true, bubbles: true }));
+      await sleep(50);
+      const dlg = catui.command.getThis("adm-cmd").dialog, q = dlg.querySelector("input");
+      q.value = "ㅂㅅ"; q.dispatchEvent(new Event("input", { bubbles: true }));
+      r.cmd = [...dlg.querySelectorAll("[data-catui-cmd]")].map((x) => x.textContent.trim());
+      catui.command.close("adm-cmd");
+      catui.admin.store.clear();
+      return r;
+    },
+    expect: {
+      "셸 연결 + 차트 그려짐": (r) => r.ready && r.charts >= 2,
+      "사이드바 접힘 + 기억 + 레일 폭": (r) => r.collapsed && r.sideW < 100,
+      "테마 전환·기억": (r) => r.dark && r.light,
+      "알림 배지 3 → 2 → 0": (r) => r.badge0 === "3" && r.popOpen && r.badge1 === "2" && r.badge2 === true,
+      "알림 Esc로 닫고 버튼으로 포커스": (r) => r.popClosed,
+      "명령 팔레트 초성 ㅂㅅ → 분석": (r) => r.cmd.some((t) => t.includes("분석")),
+    },
+  },
+  {
+    name: "admin · 모바일 서랍 (Esc · 포커스 복귀 · 가림막)",
+    page: "docs/admin/templates/analytics.html",
+    viewport: [390, 844],
+    run: async () => {
+      const root = document.querySelector("[data-catui-adm]"), toggle = root.querySelector("[data-catui-adm-toggle]");
+      const side = root.querySelector(".Catui_side"), scrim = root.querySelector(".Catui_adm-scrim");
+      const r = { hidden: getComputedStyle(side).visibility === "hidden" };
+      toggle.focus(); toggle.click();
+      r.open = root.hasAttribute("data-catui-adm-open") && !scrim.hidden && side.contains(document.activeElement) && getComputedStyle(side).visibility === "visible";
+      r.label = toggle.getAttribute("aria-label");
+      r.subOpen = !!side.querySelector('[aria-current="page"]')?.closest("details")?.open;
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+      r.closed = !root.hasAttribute("data-catui-adm-open") && scrim.hidden && document.activeElement === toggle;
+      toggle.click(); scrim.click();
+      r.scrimClose = !root.hasAttribute("data-catui-adm-open");
+      return r;
+    },
+    expect: {
+      "처음엔 숨김": (r) => r.hidden,
+      "열면 가림막 + 메뉴로 포커스": (r) => r.open && r.label === "메뉴 닫기",
+      "현재 화면의 하위 메뉴 펼침": (r) => r.subOpen,
+      "Esc로 닫고 버튼으로 포커스": (r) => r.closed,
+      "가림막 누르면 닫힘": (r) => r.scrimClose,
+    },
+  },
+  {
+    name: "admin · 폼 (변경 감지 · 이탈 확인 · 저장 후 해제)",
+    page: "docs/admin/templates/form.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const f = document.getElementById("fm-product"), note = f.querySelector("[data-catui-adm-savenote]");
+      const r = { clean: !f.hasAttribute("data-catui-adm-dirty") };
+      const name = document.getElementById("fm-name");
+      name.value = "기계식 키보드 K9"; name.dispatchEvent(new Event("input", { bubbles: true }));
+      r.dirty = f.hasAttribute("data-catui-adm-dirty") && note.textContent.includes("저장하지 않은");
+      document.querySelector('.Catui_side a[href="index.html"]').click(); await sleep(200);
+      const dlg = [...document.querySelectorAll("dialog[open]")].pop();
+      r.confirm = !!dlg && dlg.textContent.includes("저장하지 않고") && location.pathname.endsWith("form.html");
+      dlg?.querySelector('[data-catui-btn="1"]')?.click(); await sleep(100);   // 머무르기
+      f.querySelector("[type=submit]").click(); await sleep(800);
+      r.saved = !f.hasAttribute("data-catui-adm-dirty") && note.textContent.includes("저장되었습니다");
+      name.value = ""; name.dispatchEvent(new Event("input", { bubbles: true }));
+      f.querySelector("[type=submit]").click(); await sleep(200);
+      r.invalid = name.getAttribute("aria-invalid") === "true";
+      f.reset(); await sleep(50);   // 다음 시나리오로 넘어갈 때 "떠날까요?" 경고가 뜨지 않게
+      return r;
+    },
+    expect: {
+      "처음엔 변경 없음": (r) => r.clean,
+      "고치면 저장 바에 알림": (r) => r.dirty,
+      "다른 화면으로 가면 확인 창": (r) => r.confirm,
+      "저장하면 변경 없음으로": (r) => r.saved,
+      "필수 칸 비우면 오류": (r) => r.invalid,
+    },
+  },
+  {
+    name: "admin · 동적 표 (필터 ↔ 주소 · 일괄 작업 바)",
+    page: "docs/admin/templates/tables-dynamic.html?status=%EC%B7%A8%EC%86%8C",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const sel = document.getElementById("td-st"), bulk = document.getElementById("td-bulk");
+      const statuses = () => [...document.querySelectorAll("#td-orders tbody tr td:nth-child(8)")].map((t) => t.textContent.trim());
+      const r = { fromUrl: sel.value === "취소" && statuses().every((s) => s === "취소"), bulkHidden: bulk.hidden && getComputedStyle(bulk).display === "none" };
+      sel.value = "배송 중"; sel.dispatchEvent(new Event("change", { bubbles: true })); await sleep(50);
+      r.toUrl = new URLSearchParams(location.search).get("status") === "배송 중" && statuses().every((s) => s === "배송 중");
+      document.querySelector("#td-orders tbody input[type=checkbox]").click(); await sleep(50);
+      r.bulk = !bulk.hidden && bulk.textContent.includes("1건 선택됨");
+      document.getElementById("td-filter").reset(); await sleep(50);
+      r.reset = location.search === "" && sel.value === "";
+      return r;
+    },
+    expect: {
+      "주소 조건으로 시작": (r) => r.fromUrl,
+      "선택 0건이면 일괄 바 숨김": (r) => r.bulkHidden,
+      "조건 바꾸면 주소 갱신": (r) => r.toUrl,
+      "선택하면 일괄 바 + 건수": (r) => r.bulk,
+      "초기화하면 주소도 비움": (r) => r.reset,
+    },
+  },
+  {
+    name: "admin · 검증 요약",
+    page: "docs/admin/templates/form-validation.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      document.querySelector("#fv-form [type=submit]").click(); await sleep(100);
+      const sum = document.getElementById("fv-summary");
+      return { summary: !sum.hidden && document.activeElement === sum, items: sum.querySelectorAll("li").length };
+    },
+    expect: {
+      "제출 실패 시 오류 요약으로 포커스": (r) => r.summary,
+      "오류 항목 목록": (r) => r.items >= 6,
+    },
+  },
+  {
+    name: "admin · 캘린더 (방향키 · 일정 수)",
+    page: "docs/admin/templates/calendar.html",
+    run: async () => {
+      const grid = document.getElementById("cl-grid");
+      grid.querySelector('[data-day="2026-11-02"]').focus();
+      for (let i = 0; i < 3; i++) document.activeElement.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+      return { focus: document.activeElement.dataset.day, title: document.getElementById("cl-day-t").textContent };
+    },
+    expect: { "↓ 3번 → 11월 23일": (r) => r.focus === "2026-11-23", "옆 패널 갱신": (r) => r.title.startsWith("11월 23일") },
+  },
+  {
+    name: "admin · 채팅 (한글 조합 Enter 무시 · 보내기 · 답장)",
+    page: "docs/admin/templates/chat.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const input = document.getElementById("ct-msg"), log = document.querySelector("#ct-log .Catui_chat");
+      const n0 = log.querySelectorAll(".Catui_chat-msg").length;
+      input.value = "안녕하세";
+      const ev = new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true, isComposing: true });
+      input.dispatchEvent(ev);
+      const r = { imeBlocked: ev.defaultPrevented };
+      input.value = "배송지 변경해 드렸습니다";
+      document.getElementById("ct-form").requestSubmit(); await sleep(50);
+      r.sent = log.querySelectorAll(".Catui_chat-me").length >= 1 && input.value === "" && log.lastElementChild.textContent.includes("배송지 변경");
+      await sleep(1400);
+      r.reply = log.querySelectorAll(".Catui_chat-msg").length === n0 + 2;
+      return r;
+    },
+    expect: { "조합 중 Enter는 막음": (r) => r.imeBlocked, "보내기": (r) => r.sent, "데모 답장": (r) => r.reply },
+  },
+  {
+    name: "admin · 칸반 (키보드 열 이동 · 개수 갱신 · 알림)",
+    page: "docs/admin/templates/kanban.html",
+    run: async () => {
+      const cols = [...document.querySelectorAll(".Catui_kanban-col")];
+      const card = cols[2].querySelector(".Catui_kanban-card");
+      card.focus();
+      card.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true, cancelable: true }));
+      const live = document.querySelector("#kb-board + .Catui_clip")?.textContent || "";
+      return { moved: cols[3].contains(card) && document.activeElement === card, counts: cols.map((c) => c.querySelector(".Catui_count").textContent).join(","), empty: cols[3].querySelector("[data-catui-adm-empty]").hidden && !cols[2].querySelector("[data-catui-adm-empty]").hidden, live };
+    },
+    expect: { "→ 로 다음 열": (r) => r.moved, "개수 3,2,0,1": (r) => r.counts === "3,2,0,1", "빈 칸 표시 전환": (r) => r.empty, "화면 낭독기 알림": (r) => r.live.includes("완료") },
+  },
+  {
+    name: "admin · 로그인 (보기 · 강도 · 실패 안내)",
+    page: "docs/admin/templates/register.html",
+    run: async () => {
+      const pw = document.getElementById("rg-pw"), tg = document.querySelector("[data-catui-adm-pwtoggle]"), meter = document.querySelector("[data-catui-adm-strength]");
+      tg.click();
+      const r = { shown: pw.type === "text" && tg.getAttribute("aria-pressed") === "true" };
+      tg.click(); r.hidden = pw.type === "password";
+      pw.value = "abc"; pw.dispatchEvent(new Event("input", { bubbles: true })); r.weak = meter.dataset.level === "1";
+      pw.value = "Catui!2026admin"; pw.dispatchEvent(new Event("input", { bubbles: true })); r.strong = meter.dataset.level === "4" && meter.textContent.includes("강함");
+      r.link = getComputedStyle(document.querySelector("a.Catui_link")).textDecorationLine.includes("underline");
+      return r;
+    },
+    expect: { "비밀번호 보기": (r) => r.shown, "다시 숨기기": (r) => r.hidden, "약함": (r) => r.weak, "강함 + 글자": (r) => r.strong, "링크 스타일": (r) => r.link },
+  },
+  {
     name: "build · 압축본 단독 실행",
     page: "docs/index.html",
     run: async () => {

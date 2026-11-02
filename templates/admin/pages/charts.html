@@ -1,0 +1,72 @@
+<!-- title: 차트 카드 | crumb: 차트 / 차트 카드 -->
+<div class="Catui_adm-head">
+  <div><h1 class="Catui_h1">차트 카드</h1><p>대시보드에 바로 넣는 카드형 차트 — 색은 토큰에서 읽어 다크 모드도 맞습니다</p></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ch-shuffle">{{icon:refresh-cw}}자료 바꾸기</button></div>
+</div>
+
+<section class="Catui_adm-stats" aria-label="작은 추이 차트">
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">신규 가입</span><span class="Catui_stat-value">1,284</span><div class="Catui_adm-chart Catui_sparkline" data-catui-adm-chart="spark" data-catui-adm-label="신규 가입 추이" data-catui-adm-data='{"series":[{"data":[8,11,9,14,13,17,19]}]}'></div></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">문의</span><span class="Catui_stat-value">96</span><div class="Catui_adm-chart Catui_sparkline" data-catui-adm-chart="spark" data-catui-adm-label="문의 추이" data-catui-adm-data='{"series":[{"data":[16,14,15,12,13,10,9]}]}'></div></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">반품</span><span class="Catui_stat-value">23</span><div class="Catui_adm-chart Catui_sparkline" data-catui-adm-chart="spark" data-catui-adm-label="반품 추이" data-catui-adm-data='{"series":[{"data":[3,4,3,5,2,3,3]}]}'></div></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">리뷰</span><span class="Catui_stat-value">412</span><div class="Catui_adm-chart Catui_sparkline" data-catui-adm-chart="spark" data-catui-adm-label="리뷰 추이" data-catui-adm-data='{"series":[{"data":[40,52,48,61,58,70,83]}]}'></div></div></article>
+</section>
+
+<div class="Catui_grid">
+  <article class="Catui_card Catui_span-6">
+    <header class="Catui_card-h">주간 방문 <span class="Catui_adm-card-meta">선</span></header>
+    <div class="Catui_card-b"><div class="Catui_adm-chart" id="ch-line" data-catui-adm-chart="line" data-catui-adm-label="주간 방문" data-catui-adm-data='{"labels":["월","화","수","목","금","토","일"],"series":[{"name":"이번 주","data":[420,480,455,510,620,580,540]},{"name":"지난주","data":[400,430,440,470,560,600,500]}]}'></div>
+      <ul class="Catui_legend Catui_legend-row Catui_adm-legend"><li><i class="Catui_s1"></i>이번 주</li><li><i class="Catui_s2"></i>지난주</li></ul></div>
+  </article>
+  <article class="Catui_card Catui_span-6">
+    <header class="Catui_card-h">월별 주문 <span class="Catui_adm-card-meta">막대</span></header>
+    <div class="Catui_card-b"><div class="Catui_adm-chart" id="ch-bar" data-catui-adm-chart="bar" data-catui-adm-label="월별 주문" data-catui-adm-data='{"labels":["6월","7월","8월","9월","10월","11월"],"series":[{"name":"주문","data":[820,910,880,1020,1180,1284]}]}'></div></div>
+  </article>
+  <article class="Catui_card Catui_span-8">
+    <header class="Catui_card-h">누적 매출 <span class="Catui_adm-card-meta">영역</span></header>
+    <div class="Catui_card-b"><div class="Catui_adm-chart" id="ch-area" data-catui-adm-chart="area" data-catui-adm-label="11월 일별 누적 매출" data-catui-adm-data='{"labels":["1일","5일","10일","15일","20일","25일","30일"],"series":[{"name":"누적","data":[120,610,1480,2320,3150,4020,4820]}]}'></div></div>
+  </article>
+  <article class="Catui_card Catui_span-4">
+    <header class="Catui_card-h">결제 수단 <span class="Catui_adm-card-meta">도넛</span></header>
+    <div class="Catui_card-b"><div class="Catui_adm-chart" id="ch-donut" data-catui-adm-chart="donut" data-catui-adm-label="결제 수단 비율" data-catui-adm-data='{"labels":["카드","간편결제","계좌이체","기타"],"data":[52,33,11,4]}'></div>
+      <ul class="Catui_legend Catui_adm-legend"><li><i class="Catui_s1"></i>카드<b>52%</b></li><li><i class="Catui_s2"></i>간편결제<b>33%</b></li><li><i class="Catui_s3"></i>계좌이체<b>11%</b></li><li><i class="Catui_s4"></i>기타<b>4%</b></li></ul></div>
+  </article>
+
+  <article class="Catui_card Catui_span-4">
+    <header class="Catui_card-h">목표 달성 <span class="Catui_adm-card-meta">계기판</span></header>
+    <div class="Catui_card-b"><div class="Catui_hstack Catui_gap-4">
+      <div class="Catui_gauge Catui_gauge-good" style="--Catui_g-deg:235deg" role="img" aria-label="매출 목표 87퍼센트, 좋음"><div class="Catui_gauge-value"><b>87%</b><span>매출</span></div></div>
+      <div class="Catui_gauge Catui_gauge-warn" style="--Catui_g-deg:162deg" role="img" aria-label="신규 고객 목표 60퍼센트, 주의"><div class="Catui_gauge-value"><b>60%</b><span>신규</span></div></div>
+    </div></div>
+  </article>
+  <article class="Catui_card Catui_span-4">
+    <header class="Catui_card-h">구매 깔때기</header>
+    <div class="Catui_card-b">
+      <div class="Catui_funnel" role="list" aria-label="구매 전환 깔때기">
+        <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">방문</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:100%">31,902</div></div><span class="Catui_funnel-drop"></span></div>
+        <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">상품</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:58%">18,503</div></div><span class="Catui_funnel-drop">−42%</span></div>
+        <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">장바구니</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:15%">4,880</div></div><span class="Catui_funnel-drop">−74%</span></div>
+        <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">결제</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:4%">1,142</div></div><span class="Catui_funnel-drop">−77%</span></div>
+      </div>
+    </div>
+  </article>
+  <article class="Catui_card Catui_span-4">
+    <header class="Catui_card-h">유입 비율 <span class="Catui_adm-card-meta">쌓은 막대</span></header>
+    <div class="Catui_card-b Catui_vstack Catui_gap-3">
+      <div class="Catui_stack" role="img" aria-label="유입 비율: 검색 41%, 직접 27%, 소셜 16%, 광고 10%, 추천 6%"><i style="width:41%"></i><i style="width:27%"></i><i style="width:16%"></i><i style="width:10%"></i><i style="width:6%"></i></div>
+      <ul class="Catui_legend Catui_legend-row"><li><i class="Catui_s1"></i>검색</li><li><i class="Catui_s2"></i>직접</li><li><i class="Catui_s3"></i>소셜</li><li><i class="Catui_s4"></i>광고</li><li><i class="Catui_s5"></i>추천</li></ul>
+    </div>
+  </article>
+</div>
+<script>
+// 자료 바꾸기: catui.admin.widgets.update(차트, 새 자료) — 서버에서 받은 값으로 다시 그리는 방법
+catui.use(function () {
+  var rnd = function (n, base, spread) { return Array.from({ length: n }, function () { return Math.round(base + Math.random() * spread); }); };
+  document.getElementById('ch-shuffle').addEventListener('click', function () {
+    var w = catui.admin.widgets;
+    w.update('#ch-line', { labels: ['월', '화', '수', '목', '금', '토', '일'], series: [{ name: '이번 주', data: rnd(7, 380, 280) }, { name: '지난주', data: rnd(7, 380, 240) }] });
+    w.update('#ch-bar', { labels: ['6월', '7월', '8월', '9월', '10월', '11월'], series: [{ name: '주문', data: rnd(6, 700, 700) }] });
+    var d = rnd(4, 5, 50); w.update('#ch-donut', { labels: ['카드', '간편결제', '계좌이체', '기타'], data: d });
+    catui.layer.msg('새 자료로 다시 그렸습니다', { time: 1200 });
+  });
+});
+</script>
