@@ -3,6 +3,7 @@
 "use strict";
 if (global.catui) console.warn("[Catui warn]: catui가 이미 있습니다. 덮어씁니다.");
 const BASE = (() => { const s = document.currentScript; return s && s.src ? new URL(".", s.src).href : ""; })();
+const VERSION = "1.0.0";
 
 // ── core/html.js ──
 // 안전한 마크업 조립. html`...`의 ${값}은 자동 escape되고, raw()로 감싼 신뢰 마크업만 그대로 들어간다.
@@ -10,12 +11,17 @@ function escape(value) {
   return String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
 
+// 신뢰 마크업 표식은 raw()가 만든 객체에만 붙는다. 서버 JSON의 { "__raw": "..." } 같은 위조 객체는 글자로 escape된다.
+const catuiRawMarks = new WeakSet();
+
 function raw(markup) {
-  return { __raw: String(markup ?? "") };
+  const out = Object.freeze({ __raw: String(markup ?? "") });
+  catuiRawMarks.add(out);
+  return out;
 }
 
 function isRaw(value) {
-  return !!value && typeof value === "object" && typeof value.__raw === "string";
+  return !!value && typeof value === "object" && catuiRawMarks.has(value);
 }
 
 function html(strings, ...values) {
@@ -25,7 +31,7 @@ function html(strings, ...values) {
     if (i >= values.length) return;
     const v = values[i];
     if (v == null || v === false) return;
-    if (Array.isArray(v)) out += v.map((x) => (isRaw(x) ? x.__raw : escape(x))).join("");
+    if (Array.isArray(v)) out += v.flat(Infinity).map((x) => (x == null || x === false ? "" : isRaw(x) ? x.__raw : escape(x))).join("");
     else out += isRaw(v) ? v.__raw : escape(v);
   });
   return raw(out);
@@ -37,7 +43,9 @@ function html(strings, ...values) {
 const catuiSettings = {
   icons: `${BASE}icons.svg?v=2`, // 아이콘 스프라이트 경로
   autoInit: true,                // DOMContentLoaded에 data-catui-* 자동 초기화
-  debug: false,
+  autoDestroy: true,             // DOM에서 빠진 요소의 컴포넌트 인스턴스 자동 정리
+  debug: true,                   // 콘솔 출력: true 경고·오류 / false 오류만(운영) / "silent" 모두 끔
+  csrf: { meta: "csrf-token", header: "X-CSRF-Token" },   // 같은 출처 쓰기 요청에 붙일 CSRF 토큰 (false = 끔)
 };
 
 function getConfig() {
@@ -49,39 +57,66 @@ function config(options) {
   return catuiSettings;
 }
 
+// 콘솔 출력 단계는 config.debug로 조절한다. detail(오류 객체·요소)은 콘솔에서 펼쳐 볼 수 있게 함께 넘긴다.
 const catuiHintSeen = new Set();
+const catuiHintOn = (type) => {
+  const d = catuiSettings.debug;
+  if (d === "silent") return false;
+  return type === "error" || d !== false;
+};
 const hint = {
-  error(msg, type = "warn") {
-    (type === "error" ? console.error : console.warn)(`[Catui ${type}]: ${msg}`);
+  error(msg, type = "warn", ...detail) {
+    if (!catuiHintOn(type)) return;
+    (type === "error" ? console.error : console.warn)(`[Catui ${type}]: ${msg}`, ...detail);
   },
-  errorOnce(msg, type = "warn") {
-    if (catuiHintSeen.has(msg)) return;
+  errorOnce(msg, type = "warn", ...detail) {
+    if (!catuiHintOn(type) || catuiHintSeen.has(msg)) return;
     if (catuiHintSeen.size > 100) catuiHintSeen.clear();
     catuiHintSeen.add(msg);
-    hint.error(msg, type);
+    hint.error(msg, type, ...detail);
   },
 };
 
+// CSRF: <meta name="csrf-token" content="…">의 값을 헤더로. 토큰 유출을 막기 위해
+// 같은 출처(origin)이면서 상태를 바꾸는 요청(GET·HEAD·OPTIONS 제외)에만 붙인다.
+function csrfHeaders(url, method = "GET") {
+  const c = catuiSettings.csrf;
+  if (!c || /^(GET|HEAD|OPTIONS)$/i.test(method)) return {};
+  let same = false;
+  try { same = new URL(url, location.href).origin === location.origin; } catch { same = false; }
+  if (!same) return {};
+  const token = document.querySelector(`meta[name="${CSS.escape(c.meta || "csrf-token")}"]`)?.getAttribute("content");
+  return token ? { [c.header || "X-CSRF-Token"]: token } : {};
+}
+
 // localStorage / sessionStorage 래퍼. data('표') 읽기, data('표', {key, value}) 쓰기,
 // data('표', {key, remove:true}) 삭제, data('표', null) 표 삭제.
-function catuiStore(storage, table, settings) {
+// 저장소를 못 쓰는 환경(사파리 비공개 창·쿠키 차단·용량 초과)에서도 예외를 던지지 않는다.
+function catuiStore(kind, table, settings) {
   if (!table) return {};
+  let storage;
+  try { storage = window[kind]; } catch { storage = null; }
+  if (!storage) { hint.errorOnce(`${kind}를 쓸 수 없는 환경입니다`); return {}; }
   const key = `catui:${table}`;
   let all = {};
   try { all = JSON.parse(storage.getItem(key) || "{}") || {}; } catch { all = {}; }
-  if (settings === null) { storage.removeItem(key); return {}; }
-  if (settings && typeof settings === "object" && "key" in settings) {
-    if (settings.remove) delete all[settings.key];
-    else all[settings.key] = settings.value;
-    storage.setItem(key, JSON.stringify(all));
+  try {
+    if (settings === null) { storage.removeItem(key); return {}; }
+    if (settings && typeof settings === "object" && "key" in settings) {
+      if (settings.remove) delete all[settings.key];
+      else all[settings.key] = settings.value;
+      storage.setItem(key, JSON.stringify(all));
+    }
+  } catch (err) {
+    hint.error(`data('${table}') 저장 실패: ${err?.name || err}`);
   }
   return all;
 }
 function data(table, settings) {
-  return catuiStore(window.localStorage, table, settings);
+  return catuiStore("localStorage", table, settings);
 }
 function sessionData(table, settings) {
-  return catuiStore(window.sessionStorage, table, settings);
+  return catuiStore("sessionStorage", table, settings);
 }
 
 // URL 해석: pathname 배열, search 객체, hash의 path/search
@@ -104,11 +139,14 @@ function url(href = location.href) {
 // 실행 환경 정보. device('MYAPP')처럼 UA 표식도 검사한다.
 function device(key) {
   const ua = navigator.userAgent;
+  // iPhone UA에는 "like Mac OS X"가, iPadOS 13+는 "Macintosh"가 들어 있으므로 ios를 mac보다 먼저 본다
+  const ios = /iphone|ipad|ipod/i.test(ua) || (/macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+  const android = /android/i.test(ua);
   const info = {
-    os: /windows/i.test(ua) ? "windows" : /mac/i.test(ua) ? "mac" : /android/i.test(ua) ? "android" : /iphone|ipad|ios/i.test(ua) ? "ios" : /linux/i.test(ua) ? "linux" : "",
-    android: /android/i.test(ua),
-    ios: /iphone|ipad|ipod/i.test(ua),
-    mobile: /mobile|android|iphone|ipad/i.test(ua),
+    os: /windows/i.test(ua) ? "windows" : android ? "android" : ios ? "ios" : /mac/i.test(ua) ? "mac" : /linux/i.test(ua) ? "linux" : "",
+    android,
+    ios,
+    mobile: /mobile/i.test(ua) || android || ios,
   };
   if (key) info[key] = new RegExp(`${String(key).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "i").test(ua);
   return info;
@@ -126,9 +164,9 @@ class CatuiQuery extends Array {
   }
   addClass(c) { return this.each((el) => el.classList.add(...c.split(/\s+/).filter(Boolean))); }
   removeClass(c) { return this.each((el) => el.classList.remove(...c.split(/\s+/).filter(Boolean))); }
-  toggleClass(c, force) { return this.each((el) => el.classList.toggle(c, force)); }
+  toggleClass(c, force) { return this.each((el) => c.split(/\s+/).filter(Boolean).forEach((x) => el.classList.toggle(x, force))); }
   hasClass(c) { return this.some((el) => el.classList.contains(c)); }
-  text(v) { if (v === undefined) return this[0]?.textContent ?? ""; return this.each((el) => { el.textContent = v; }); }
+  text(v) { if (v === undefined) return this[0]?.textContent ?? ""; return this.each((el) => { el.textContent = v ?? ""; }); }
   // html(): html``/raw() 결과만 마크업으로, 일반 문자열은 글자로 넣는다(XSS 방지)
   html(v) { if (v === undefined) return this[0]?.innerHTML ?? ""; return this.each((el) => mount(el, v)); }
   // on(type, [selector], fn) → 해제 함수 반환
@@ -144,7 +182,8 @@ function $(target, ctx = document) {
   if (!target) return CatuiQuery.from([]);
   if (typeof target === "string") return CatuiQuery.from(ctx.querySelectorAll(target));
   if (target instanceof Element || target === document || target === window) return CatuiQuery.from([target]);
-  if (target.length != null) return CatuiQuery.from(target);
+  // NodeList·배열 등 목록만. 함수도 length가 있으므로 제외하고, 노드가 아닌 항목은 걸러 낸다
+  if (typeof target !== "function" && target.length != null) return CatuiQuery.from(Array.from(target).filter((n) => n instanceof Node || n === window));
   return CatuiQuery.from([]);
 }
 
@@ -156,16 +195,26 @@ function el(target, ctx = document) {
   return target instanceof Element ? target : null;
 }
 
+// 검색 범위: 비우면 document, 문서·조각은 그대로, 나머지는 el() (못 찾으면 null)
+function scopeOf(scope) {
+  if (scope == null || scope === document) return document;
+  if (scope instanceof Document || scope instanceof DocumentFragment) return scope;
+  return el(scope);
+}
+
 function mount(node, markup) {
   if (isRaw(markup)) node.innerHTML = markup.__raw;
   else node.textContent = String(markup ?? "");
   return node;
 }
 
+// 버블링하지 않는 이벤트(focus·blur·mouseenter 등)는 선택자 위임이 되도록 캡처 단계로 듣는다
+const catuiNoBubble = /^(focus|blur|mouseenter|mouseleave|pointerenter|pointerleave|load|error|scroll)$/;
 function delegate(root, type, sel, fn, opts) {
+  if (sel && opts === undefined && catuiNoBubble.test(type)) opts = true;
   const handler = sel ? (e) => {
     const t = e.target instanceof Element ? e.target.closest(sel) : null;
-    if (t && root.contains(t)) fn.call(t, e, t);
+    if (t && (root === window || root.contains(t))) fn.call(t, e, t);
   } : (e) => fn.call(root, e, root);
   root.addEventListener(type, handler, opts);
   return () => root.removeEventListener(type, handler, opts);
@@ -186,17 +235,39 @@ function layerRoot() {
 }
 
 function icon(name, size = 16, cls = "") {
-  return { __raw: `<svg class="Catui_icon Catui_i${size}${cls ? ` ${escape(cls)}` : ""}" aria-hidden="true"><use href="${escape(getConfig().icons)}#Catui_ic-${escape(name)}"></use></svg>` };
+  return raw(`<svg class="Catui_icon Catui_i${size}${cls ? ` ${escape(cls)}` : ""}" aria-hidden="true"><use href="${escape(getConfig().icons)}#Catui_ic-${escape(name)}"></use></svg>`);
+}
+
+// 한글·일본어 IME 조합 판정. Windows IME는 Esc·Enter를 누르면 compositionend를 먼저 보내고
+// isComposing=false인 keydown을 뒤이어 보내므로, 조합이 막 끝난 직후(짧은 시간)도 조합 중으로 본다.
+// <dialog>의 cancel처럼 키 이벤트가 없는 경우는 imeBusy()로 호출한다.
+let catuiComposing = false, catuiCompEnd = -Infinity;
+if (typeof document !== "undefined") {
+  document.addEventListener("compositionstart", () => { catuiComposing = true; }, true);
+  document.addEventListener("compositionend", () => { catuiComposing = false; catuiCompEnd = performance.now(); }, true);
+  // 조합 중 입력칸이 지워지면 compositionend가 오지 않을 수 있다 → 포커스가 빠지면 상태를 풀어 Esc가 영영 막히지 않게
+  document.addEventListener("focusout", () => { catuiComposing = false; }, true);
+}
+function imeBusy(e) {
+  const recent = performance.now() - catuiCompEnd < 150;
+  // 키 이벤트가 있으면 이벤트 자체 정보를 믿고, 없을 때(cancel 등)만 추적 상태를 쓴다
+  return e ? !!(e.isComposing || e.keyCode === 229 || recent) : catuiComposing || recent;
 }
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+const FOCUSABLE = 'a[href]:not([tabindex="-1"]),button:not([disabled]):not([tabindex="-1"]),input:not([disabled]):not([type=hidden]):not([tabindex="-1"]),select:not([disabled]):not([tabindex="-1"]),textarea:not([disabled]):not([tabindex="-1"]),summary:not([tabindex="-1"]),[contenteditable="true"]:not([tabindex="-1"]),[tabindex]:not([tabindex="-1"])';
+
+// 실제로 포커스할 수 있는 요소만 (숨김·inert·닫힌 details 안 제외)
+function focusables(container) {
+  return [...container.querySelectorAll(FOCUSABLE)].filter((n) => !n.closest("[hidden],[inert]") && n.getClientRects().length > 0 && getComputedStyle(n).visibility !== "hidden");
+}
 
 // ── core/events.js ──
 // 이벤트 허브 — layui와 같은 "이벤트(필터)" 문법.
 // form.on('submit(login)', fn) / table.on('tool(orders)', fn) / tabs.on('tab', fn)(필터 없음 = 전체)
 // on()은 해제 함수를 돌려준다(누수 방지).
+
 const catuiHandlers = new Map(); // "모듈:이벤트" → [{ filter, fn }]
 
 function catuiParse(evt) {
@@ -207,6 +278,8 @@ function catuiParse(evt) {
 
 function onEvent(mod, evt, fn) {
   const { name, filter } = catuiParse(evt);
+  // 함수가 아니면 등록하지 않는다 (emit 때마다 TypeError가 나는 것보다 등록 시점에 알리는 편이 찾기 쉽다)
+  if (typeof fn !== "function") { hint.error(`${mod}.on('${evt}')에 함수가 아닌 값을 넘겼습니다`); return () => {}; }
   const key = `${mod}:${name}`;
   if (!catuiHandlers.has(key)) catuiHandlers.set(key, []);
   const entry = { filter, fn };
@@ -215,14 +288,17 @@ function onEvent(mod, evt, fn) {
     const list = catuiHandlers.get(key) || [];
     const i = list.indexOf(entry);
     if (i >= 0) list.splice(i, 1);
+    if (!list.length) catuiHandlers.delete(key);
   };
 }
 
+// off('submit') = 그 이벤트 전부, off('submit(login)') = 그 필터만
 function offEvent(mod, evt) {
   const { name, filter } = catuiParse(evt);
   const key = `${mod}:${name}`;
-  if (filter == null) catuiHandlers.delete(key);
-  else catuiHandlers.set(key, (catuiHandlers.get(key) || []).filter((h) => h.filter !== filter));
+  if (filter == null) { catuiHandlers.delete(key); return; }
+  const rest = (catuiHandlers.get(key) || []).filter((h) => h.filter !== filter);
+  if (rest.length) catuiHandlers.set(key, rest); else catuiHandlers.delete(key);
 }
 
 // 필터가 같은 핸들러 + 필터 없는 핸들러를 호출. 하나라도 false를 돌려주면 false.
@@ -233,7 +309,7 @@ function emit(mod, name, filter, payload, thisArg) {
     try {
       if (h.fn.call(thisArg ?? payload?.elem ?? null, payload) === false) result = false;
     } catch (err) {
-      console.error(`[Catui error]: ${mod}.on('${name}${h.filter ? `(${h.filter})` : ""}') 처리 중 오류`, err);
+      hint.error(`${mod}.on('${name}${h.filter ? `(${h.filter})` : ""}') 처리 중 오류`, "error", err);
     }
   }
   return result;
@@ -253,6 +329,7 @@ function component(def) {
   const name = def.name;
   const defaults = { ...(def.config || {}) };
   const instances = new Map();
+  const byElem = new WeakMap();   // id 없는 대상에 다시 렌더해도 이전 인스턴스를 찾아 정리하기 위함
 
   class Instance {
     constructor(options) {
@@ -268,6 +345,11 @@ function component(def) {
     reload(options = {}) {
       this.teardown();
       this.config = { ...this.config, ...options };
+      if ("elem" in options) {
+        if (byElem.get(this.elem) === this) byElem.delete(this.elem);
+        this.elem = el(this.config.elem);
+        if (this.elem) byElem.set(this.elem, this);
+      }
       def.render(this);
       return this;
     }
@@ -277,7 +359,8 @@ function component(def) {
     destroy() {
       this.teardown();
       def.destroy?.(this);
-      instances.delete(this.id);
+      if (instances.get(this.id) === this) instances.delete(this.id);
+      if (this.elem && byElem.get(this.elem) === this) byElem.delete(this.elem);
     }
   }
 
@@ -285,18 +368,24 @@ function component(def) {
     CONST: { MOD_NAME: name, ...(def.CONST || {}) },
     Class: Instance,
     render(options = {}) {
-      const prev = instances.get(options.id || el(options.elem)?.id);
+      const target = el(options.elem);
+      const prev = instances.get(options.id || target?.id) || (target && byElem.get(target));
       if (prev) prev.destroy();              // 같은 대상에 다시 렌더하면 이전 인스턴스 정리
       const inst = new Instance(options);
       def.beforeRender?.(inst);
-      def.render(inst);
+      try { def.render(inst); } catch (err) { inst.teardown(); throw err; }   // 그리다 실패하면 붙인 리스너 회수
       instances.set(inst.id, inst);
+      if (inst.elem) byElem.set(inst.elem, inst);
       inst.config.done?.call(inst, inst);
       return inst;
     },
     reload(id, options) { const inst = instances.get(id); if (!inst) { hint.error(`${name}: id '${id}' 인스턴스가 없습니다`); return null; } return inst.reload(options); },
     getThis(id) { return instances.get(id) || null; },
     destroy(id) { instances.get(id)?.destroy(); },
+    // 모든 인스턴스 정리 (catui.destroy · SPA 화면 전환용). DOM에서 빠진 대상만 정리하려면 destroyDetached()
+    destroyAll() { [...instances.values()].forEach((i) => i.destroy()); },
+    // keep: true로 렌더한 인스턴스는 잠시 떼었다 다시 붙이는 용도(탭 캐시 등)로 보고 남긴다
+    destroyDetached() { [...instances.values()].forEach((i) => { if (i.elem && !i.elem.isConnected && !i.config.keep) i.destroy(); }); },
     on(evt, fn) { return onEvent(name, evt, fn); },
     off(evt) { offEvent(name, evt); },
     set(options) { Object.assign(defaults, options); return api; },
@@ -313,41 +402,55 @@ function component(def) {
 // CSS 체크박스 모달·드로어(마크업만으로 동작하는 kit 패턴) 향상 — 견본: "스크림·포커스 트랩은 JS 영역".
 // 열리면 패널 첫 요소로 포커스, Tab 가두기, Esc 닫기, 닫히면 토글 체크박스로 포커스 복귀.
 function bindToggleOverlays() {
-  const panelOf = (t) => t.parentElement?.querySelector(".Catui_modal, .Catui_drawer");
+  const TOGGLE = ".Catui_modal-toggle, .Catui_drawer-toggle";
+  const PANEL = ".Catui_modal, .Catui_drawer";
+  // CSS가 `토글:checked ~ 패널` 형제 선택자이므로, 토글 다음 형제 중 첫 패널 / 패널 앞 형제 중 가장 가까운 토글이 짝이다
+  const panelOf = (t) => { for (let n = t.nextElementSibling; n; n = n.nextElementSibling) { if (n.matches(TOGGLE)) return null; if (n.matches(PANEL)) return n; } return null; };
+  const openToggles = () => [...document.querySelectorAll(TOGGLE)].filter((t) => t.checked && panelOf(t));
+  const close = (t) => { t.checked = false; t.dispatchEvent(new Event("change", { bubbles: true })); };
+
   const onChange = (e) => {
     const t = e.target;
-    if (!t.matches?.(".Catui_modal-toggle, .Catui_drawer-toggle")) return;
-    if (t.checked) panelOf(t)?.querySelector(FOCUSABLE)?.focus();  // focus()가 스타일을 동기 재계산하므로 바로 호출
-    else t.focus();
+    if (!t.matches?.(TOGGLE)) return;
+    const panel = panelOf(t);
+    if (t.checked) { if (panel) (focusables(panel)[0] || panel).focus({ preventScroll: true }); }  // focus()가 스타일을 동기 재계산하므로 바로 호출
+    else if (!panel || panel.contains(document.activeElement) || document.activeElement === document.body) t.focus({ preventScroll: true });
   };
   const onKey = (e) => {
-    const panel = e.target.closest?.(".Catui_modal, .Catui_drawer");
-    if (!panel || panel.tagName === "DIALOG") return;   // <dialog>(layer)는 브라우저가 처리
-    const toggle = panel.parentElement?.querySelector(".Catui_modal-toggle, .Catui_drawer-toggle");
-    if (!toggle) return;
+    if (e.key !== "Escape" && e.key !== "Tab") return;
+    if (e.key === "Escape" && imeBusy(e)) return;          // 한글 조합 중(·직후) Esc는 조합 취소일 뿐
+    if (e.target.closest?.("dialog")) return;            // <dialog>(layer)는 브라우저가 처리
+    const open = openToggles();
+    if (!open.length) return;
+    const toggle = open[open.length - 1];                 // 문서 순서상 마지막 = 위에 그려진 패널
+    const panel = panelOf(toggle);
     if (e.key === "Escape") {
-      toggle.checked = false;
-      toggle.dispatchEvent(new Event("change", { bubbles: true }));
+      if (e.defaultPrevented) return;                     // 패널 안 드롭다운·달력이 먼저 Esc를 썼으면 패널은 그대로
+      e.preventDefault();
+      close(toggle);
       return;
     }
-    if (e.key !== "Tab") return;
-    const list = [...panel.querySelectorAll(FOCUSABLE)];
-    if (!list.length) return;
-    const first = list[0], last = list[list.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    const list = focusables(panel);
+    if (!list.length) { e.preventDefault(); return; }
+    const first = list[0], last = list[list.length - 1], active = document.activeElement;
+    if (!panel.contains(active)) { e.preventDefault(); (e.shiftKey ? last : first).focus(); }
+    else if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
   };
   // 닫기 라벨(label.Catui_close / 취소 label)도 키보드로: 포커스 가능하게 + Enter/Space
   const onKeyLabel = (e) => {
     const lab = e.target.closest?.(".Catui_modal label[for], .Catui_drawer label[for]");
-    if (!lab || (e.key !== "Enter" && e.key !== " ")) return;
+    if (!lab || imeBusy(e) || (e.key !== "Enter" && e.key !== " ")) return;
     e.preventDefault();
     lab.click();
   };
-  const prepare = (scope = document) => scope.querySelectorAll(".Catui_modal label[for]:not([tabindex]), .Catui_drawer label[for]:not([tabindex])").forEach((l) => {
-    l.tabIndex = 0;
-    if (!l.matches(".Catui_btn")) l.setAttribute("role", "button");
-  });
+  const prepare = (scope = document) => {
+    scope.querySelectorAll?.(".Catui_modal label[for]:not([tabindex]), .Catui_drawer label[for]:not([tabindex])").forEach((l) => {
+      l.tabIndex = 0;
+      if (!l.matches(".Catui_btn")) l.setAttribute("role", "button");
+    });
+    scope.querySelectorAll?.(PANEL).forEach((p) => { if (!p.hasAttribute("tabindex")) p.tabIndex = -1; });   // 포커스할 요소가 없는 패널도 포커스 받게
+  };
   prepare();
   document.addEventListener("change", onChange);
   document.addEventListener("keydown", onKey);
@@ -515,8 +618,12 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
     dlg.addEventListener("cancel", (e) => {
       e.preventDefault();
       if (o.loading) return;               // 로딩 레이어는 Esc로 닫지 않음
+      if (imeBusy()) return;               // 한글 조합 중(·직후) Esc는 조합만 끝내고 레이어는 유지
       tryCancel();
     });
+    // cancel 이전 단계에서도 막는다: Esc keydown의 기본 동작을 취소하면 브라우저가 cancel/close를 보내지 않는다
+    // (Chrome close-watcher는 cancel만 막으면 반복 Esc에서 강제로 닫을 수 있음)
+    dlg.addEventListener("keydown", (e) => { if (e.key === "Escape" && imeBusy(e)) e.preventDefault(); }, true);
     // 머리를 끌어 옮기기 (최대화 중에는 안 함). 화면 밖으로 나가지 않게 제한
     if (o.move && !isDrawer) {
       const head = dlg.querySelector(".Catui_modal-h");
@@ -645,16 +752,16 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
     const prev = el.getAttribute("aria-describedby");
     el.setAttribute("aria-describedby", [prev, tip.id].filter(Boolean).join(" "));
     let timer = 0;
-    const key = (e) => { if (e.key === "Escape") done(); };
+    const key = (e) => { if (e.key === "Escape" && !imeBusy(e) && !e.defaultPrevented) { e.preventDefault(); done(); } };   // 캡처 단계: 팁만 닫고 아래 모달은 유지
     const outside = (e) => { if (!tip.contains(e.target) && !el.contains(e.target)) done(); };
     const done = () => {
       clearTimeout(timer); tip.remove(); opened.delete(index);
       if (prev) el.setAttribute("aria-describedby", prev); else el.removeAttribute("aria-describedby");
-      document.removeEventListener("keydown", key); document.removeEventListener("pointerdown", outside, true);
+      document.removeEventListener("keydown", key, true); document.removeEventListener("pointerdown", outside, true);
       removeEventListener("resize", place); removeEventListener("scroll", place, true);
       options.end?.(index);
     };
-    document.addEventListener("keydown", key); document.addEventListener("pointerdown", outside, true);
+    document.addEventListener("keydown", key, true); document.addEventListener("pointerdown", outside, true);
     addEventListener("resize", place); addEventListener("scroll", place, true);
     const time = options.time ?? 3000;
     if (time > 0) timer = setTimeout(done, time);
@@ -881,7 +988,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
       const ok = getNode(index).querySelector('[data-catui-btn="0"]');
       // 제출 버튼이 폼 밖(꼬리)에 있으므로 한 줄 입력 칸의 Enter는 직접 제출
       el.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && !e.isComposing && e.target.matches("input:not([type=checkbox]):not([type=radio])")) { e.preventDefault(); el.requestSubmit(); }
+        if (e.key === "Enter" && !imeBusy(e) && e.target.matches("input:not([type=checkbox]):not([type=radio])")) { e.preventDefault(); el.requestSubmit(); }
       });
       el.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -952,30 +1059,57 @@ const form = (() => {
     required: [/[\S]+/, "필수 항목입니다."],
     email: [/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "이메일 형식이 아닙니다. 예: name@company.com"],
     phone: [/^01[016789]-?\d{3,4}-?\d{4}$/, "휴대전화 번호 형식이 아닙니다. 예: 010-1234-5678"],
+    tel: [/^0\d{1,2}-?\d{3,4}-?\d{4}$/, "전화번호 형식이 아닙니다. 예: 02-123-4567"],
+    zip: [/^\d{5}$/, "우편번호는 숫자 5자리입니다."],
     url: [/^https?:\/\/[^\s/$.?#].[^\s]*$/i, "주소 형식이 아닙니다. 예: https://example.com"],
     number: (v) => (v === "" || Number.isFinite(Number(v)) ? "" : "숫자만 입력해 주세요."),
+    int: [/^-?\d+$/, "정수만 입력해 주세요."],
     date: [/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, "날짜 형식이 아닙니다. 예: 2026-10-31"],
+    id: [/^[a-zA-Z][a-zA-Z0-9_]{3,15}$/, "영문으로 시작하는 4~16자 영문·숫자·밑줄입니다."],
+    password: (v) => (/^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(v) ? "" : "영문과 숫자를 포함해 8자 이상 입력해 주세요."),
+    hangul: [/^[가-힣\s]+$/, "한글만 입력해 주세요."],
+    alpha: [/^[A-Za-z]+$/, "영문만 입력해 주세요."],
+    alnum: [/^[A-Za-z0-9]+$/, "영문과 숫자만 입력해 주세요."],
+    // 매개변수 규칙 — "이름:값"으로 쓴다. fn(value, field, arg, root)
+    min: (v, f, n) => (v !== "" && Number.isFinite(Number(v)) && Number(v) >= Number(n) ? "" : `${n} 이상의 숫자를 입력해 주세요.`),
+    max: (v, f, n) => (v !== "" && Number.isFinite(Number(v)) && Number(v) <= Number(n) ? "" : `${n} 이하의 숫자를 입력해 주세요.`),
+    minlen: (v, f, n) => (v.length >= Number(n) ? "" : `${n}자 이상 입력해 주세요.`),
+    maxlen: (v, f, n) => (v.length <= Number(n) ? "" : `${n}자 이하로 입력해 주세요.`),
+    len: (v, f, n) => (v.length === Number(n) ? "" : `${n}자로 입력해 주세요.`),
+    same: (v, f, name, root) => {
+      const other = name ? (root || document).querySelector(`[name="${CSS.escape(name)}"]`) : null;
+      if (!other) return "";
+      return v === other.value ? "" : "값이 서로 다릅니다.";
+    },
   };
 
-  // 사용자 규칙 추가: form.verify({ name: [정규식, '메시지'] | (value, elem) => '오류 메시지' | '' })
+  // 사용자 규칙 추가: form.verify({ name: [정규식, '메시지'] | (value, elem, arg, root) => '오류 메시지' | '' })
   function verify(more) { Object.assign(rules, more || {}); return rules; }
 
   const fieldValue = (f) => (f.type === "checkbox" || f.type === "radio" ? (f.checked ? f.value : "") : f.value);
+  const formRoot = (f) => f.closest("[data-catui-form], [data-catui-filter]") || f.form || document;
 
   function check(field) {
     const spec = field.getAttribute("data-catui-verify");
     if (!spec) return "";
-    const value = fieldValue(field);
-    for (const name of spec.split("|").map((s) => s.trim()).filter(Boolean)) {
+    const root = formRoot(field);
+    let value = fieldValue(field);
+    // 같은 name이 여러 개면 그룹 — required는 하나 이상 선택으로 본다
+    if ((field.type === "checkbox" || field.type === "radio") && field.name) {
+      const group = root.querySelectorAll(`[name="${CSS.escape(field.name)}"]`);
+      if (group.length > 1) value = [...group].some((g) => g.checked) ? field.value || "on" : "";
+    }
+    for (const token of spec.split("|").map((s) => s.trim()).filter(Boolean)) {
+      const [name, arg] = token.split(/:(.+)/).map((s) => s.trim());   // "min:5" → min + "5"
       if (name !== "required" && value === "") continue;       // 빈 값은 required만 검사
       const rule = rules[name];
       if (!rule) { hint.errorOnce(`form: '${name}' 검증 규칙이 없습니다`); continue; }
       let msg = "";
-      if (typeof rule === "function") msg = rule(value, field) || "";
+      if (typeof rule === "function") msg = rule(value, field, arg, root) || "";
       else if (!rule[0].test(value)) msg = rule[1];
       if (msg) {
         if (name === "required" && field.getAttribute("data-catui-reqtext")) return field.getAttribute("data-catui-reqtext");
-        return msg;
+        return field.getAttribute("data-catui-errtext") || msg;
       }
     }
     return "";
@@ -983,7 +1117,7 @@ const form = (() => {
 
   // 오류 표시: aria-invalid + 에러 문장(.Catui_error, 없으면 생성) + aria-describedby 연결
   function showError(field, msg) {
-    if (!field.id) field.id = `catui-f-${Math.random().toString(36).slice(2, 8)}`;
+    if (!field.id) field.id = uid("catui-f");
     const errId = `${field.id}-err`;
     let err = document.getElementById(errId);
     if (!err && msg) {
@@ -1006,9 +1140,18 @@ const form = (() => {
     }
   }
 
+  // 필터 이름으로 폼 찾기 — 같은 필터를 쓰는 컨트롤(select 등)보다 폼·영역을 먼저
+  function findRoot(filter) {
+    const q = `[data-catui-filter="${CSS.escape(String(filter))}"]`;
+    return document.querySelector(`form${q}, [data-catui-form]${q}`) || document.querySelector(q);
+  }
+
+  // 영역: 요소·선택자·document 또는 필터 이름. 대상을 못 찾으면 통과시키지 않는다.
   function validate(scope) {
-    const root = el(scope);
-    if (!root) return true;
+    let root = null;
+    try { root = scopeOf(scope); } catch { /* 선택자가 아닌 필터 이름 */ }
+    if (!root && typeof scope === "string") root = findRoot(scope);
+    if (!root) { hint.error(`form.validate: 영역을 찾을 수 없습니다 (${scope})`); return false; }
     let first = null;
     for (const f of root.querySelectorAll("[data-catui-verify]")) {
       if (f.disabled) continue;
@@ -1022,12 +1165,14 @@ const form = (() => {
 
   // 값 읽기/쓰기. form.val('login') → { name: value }, form.val('login', { name: 'x' })
   function val(filter, values) {
-    const root = document.querySelector(`[data-catui-filter="${CSS.escape(filter)}"]`);
+    const root = findRoot(filter);
     if (!root) { hint.error(`form.val: data-catui-filter="${filter}" 요소가 없습니다`); return {}; }
     if (values) {
       for (const [name, v] of Object.entries(values)) {
         root.querySelectorAll(`[name="${CSS.escape(name)}"]`).forEach((f) => {
-          if (f.type === "checkbox") f.checked = Array.isArray(v) ? v.includes(f.value) : !!v && (v === true || v === f.value || v === "on");
+          if (f.type === "file") return;              // 파일 입력은 보안상 값을 넣을 수 없다(InvalidStateError)
+          if (f.multiple && f.tagName === "SELECT") [...f.options].forEach((o) => { o.selected = [].concat(v).map(String).includes(o.value); });
+          else if (f.type === "checkbox") f.checked = Array.isArray(v) ? v.includes(f.value) : !!v && (v === true || v === f.value || v === "on");
           else if (f.type === "radio") f.checked = f.value === String(v);
           else f.value = v ?? "";
         });
@@ -1051,6 +1196,64 @@ const form = (() => {
     return out;
   }
 
+  // form.reset('login') — 기본값으로 돌리고 남은 오류 표시를 지운다
+  function reset(filter) {
+    const root = findRoot(filter);
+    if (!root) { hint.error(`form.reset: data-catui-filter="${filter}" 요소가 없습니다`); return; }
+    // name="reset"인 칸이 form.reset을 가리는 DOM clobbering을 피해 원형 메서드로 호출
+    if (root instanceof HTMLFormElement) HTMLFormElement.prototype.reset.call(root);
+    else root.querySelectorAll("[name]").forEach((f) => {
+      if (f.type === "checkbox" || f.type === "radio") f.checked = f.defaultChecked;
+      else if (f.tagName === "SELECT") [...f.options].forEach((o) => { o.selected = o.defaultSelected; });
+      else if (f.type !== "file") f.value = f.defaultValue ?? "";
+    });
+    root.querySelectorAll("[data-catui-verify]").forEach((f) => showError(f, ""));
+  }
+
+  // form.serialize('login') → "a=1&b=2" (같은 name은 반복 키)
+  function serialize(filter) {
+    const q = new URLSearchParams();
+    for (const [k, v] of Object.entries(val(filter))) for (const x of [].concat(v)) q.append(k, x);
+    return q.toString();
+  }
+
+  // data-catui-ajax[=url] 폼: 검증·submit 이벤트 통과 뒤 fetch로 보내고 done/fail 이벤트
+  const sending = new WeakSet();   // 보내는 중인 폼 — Enter 연타·버튼 없는 제출도 막는다
+  async function send(f, filter, submitter) {
+    if (sending.has(f)) return;
+    sending.add(f);
+    // f.action은 name="action"인 칸이 가릴 수 있어(DOM clobbering) 속성으로 읽는다
+    const url = f.getAttribute("data-catui-ajax") || f.getAttribute("action") || location.href;
+    const method = (f.getAttribute("method") || "post").toUpperCase();
+    if (submitter) { submitter.disabled = true; submitter.setAttribute("aria-busy", "true"); }
+    f.setAttribute("aria-busy", "true");
+    let data;
+    try { data = submitter?.name ? new FormData(f, submitter) : new FormData(f); } catch { data = new FormData(f); }   // 누른 버튼의 name=value 포함
+    const base = { elem: submitter || null, form: f, field: collect(f) };
+    // 응답이 오지 않으면 버튼이 영영 잠기지 않도록 시간 제한 (data-catui-timeout, ms, 기본 30초, 0 = 없음)
+    const ms = Number(f.getAttribute("data-catui-timeout") ?? 30000);
+    const ctrl = new AbortController();
+    const timer = ms > 0 ? setTimeout(() => ctrl.abort(), ms) : 0;
+    try {
+      let target = url, body = data;
+      if (method === "GET") { target += (target.includes("?") ? "&" : "?") + new URLSearchParams(data); body = null; }
+      const res = await fetch(target, { method, body, signal: ctrl.signal, headers: { Accept: "application/json, text/plain", ...csrfHeaders(target, method) } });
+      const text = await res.text();
+      let parsed = text;
+      if ((res.headers.get("content-type") || "").includes("json") && text) { try { parsed = JSON.parse(text); } catch { /* 글자로 둔다 */ } }
+      if (!res.ok) throw Object.assign(new Error(`요청 실패 (HTTP ${res.status})`), { status: res.status, data: parsed });
+      emit(MOD, "done", filter, { ...base, res: parsed, status: res.status }, submitter || f);
+    } catch (err) {
+      const error = err?.name === "AbortError" ? Object.assign(new Error(`응답 시간이 초과되었습니다 (${ms / 1000}초)`), { timeout: true }) : err;
+      emit(MOD, "fail", filter, { ...base, error }, submitter || f);
+    } finally {
+      clearTimeout(timer);
+      sending.delete(f);
+      f.removeAttribute("aria-busy");
+      if (submitter) { submitter.disabled = false; submitter.removeAttribute("aria-busy"); }
+    }
+  }
+
   // select.Catui_select에 화살표 아이콘이 없으면 붙인다 (견본 규칙)
   function render(scope = document) {
     const root = el(scope) || document;
@@ -1065,11 +1268,13 @@ const form = (() => {
     const onSubmit = (e) => {
       const f = e.target;
       if (!(f instanceof HTMLFormElement) || !f.matches("[data-catui-form]")) return;
+      if (sending.has(f)) { e.preventDefault(); return; }   // Ajax 응답 대기 중 재제출 무시
       if (e.submitter && f.querySelector("[data-catui-submit]") && !e.submitter.matches("[data-catui-submit]")) return;
       if (!validate(f)) { e.preventDefault(); return; }
       const filter = e.submitter?.getAttribute("data-catui-filter") || f.getAttribute("data-catui-filter");
       const ok = emit(MOD, "submit", filter, { elem: e.submitter || null, form: f, field: collect(f) }, e.submitter || f);
-      if (!ok) e.preventDefault();
+      if (!ok) { e.preventDefault(); return; }
+      if (f.hasAttribute("data-catui-ajax")) { e.preventDefault(); send(f, filter, e.submitter || f.querySelector("[data-catui-submit]")); }
     };
     document.addEventListener("submit", onSubmit);
     offs.push(() => document.removeEventListener("submit", onSubmit));
@@ -1077,7 +1282,14 @@ const form = (() => {
     // 한 번 틀린 칸은 입력할 때마다 다시 검사 (고치면 즉시 오류 해제)
     const onInput = (e) => {
       const t = e.target;
-      if (t.matches?.("[data-catui-verify][aria-invalid=true]")) showError(t, check(t));
+      if (!(t instanceof HTMLElement)) return;
+      if (t.matches("[data-catui-verify][aria-invalid=true]")) showError(t, check(t));
+      // same:이름 으로 이 칸을 참조하는 확인 칸도 다시 검사
+      if (t.name) formRoot(t).querySelectorAll(`[data-catui-verify*="same:${CSS.escape(t.name)}"][aria-invalid=true]`).forEach((c) => showError(c, check(c)));
+      if (t.matches("input:not([type=checkbox]):not([type=radio]), textarea") && t.closest("[data-catui-form], [data-catui-filter]")) {
+        const filter = t.getAttribute("data-catui-filter") || t.closest("[data-catui-filter]")?.getAttribute("data-catui-filter");
+        emit(MOD, "input", filter, { elem: t, value: t.value, name: t.name });
+      }
     };
     const onBlur = (e) => {
       const t = e.target;
@@ -1090,7 +1302,10 @@ const form = (() => {
     const onChange = (e) => {
       const t = e.target;
       if (!(t instanceof HTMLElement) || !t.closest("[data-catui-form], [data-catui-filter]")) return;
+      if (t.matches(".Catui_modal-toggle, .Catui_drawer-toggle")) return;   // 폼 안 모달 열기 체크박스는 폼 값이 아니다
       const filter = t.getAttribute("data-catui-filter") || t.closest("[data-catui-filter]")?.getAttribute("data-catui-filter");
+      // 그룹 선택이 바뀌면 같은 name 중 오류 표시된 칸을 다시 검사
+      if ((t.type === "checkbox" || t.type === "radio") && t.name) formRoot(t).querySelectorAll(`[name="${CSS.escape(t.name)}"][data-catui-verify][aria-invalid=true]`).forEach((c) => showError(c, check(c)));
       const base = { elem: t, value: t.value, othis: t };
       if (t.type === "checkbox") emit(MOD, t.getAttribute("role") === "switch" || t.nextElementSibling?.classList.contains("Catui_tgl") ? "switch" : "checkbox", filter, { ...base, checked: t.checked });
       else if (t.type === "radio") emit(MOD, "radio", filter, base);
@@ -1102,18 +1317,21 @@ const form = (() => {
   }
 
   return {
-    verify, validate, val, render, bind, check,
+    verify, validate, val, render, bind, check, reset, serialize,
     on: (evt, fn) => onEvent(MOD, evt, fn),
     off: (evt) => offEvent(MOD, evt),
-    // 프로그램 제출: form.submit('login', cb?) → 검증 후 submit 이벤트 발생
+    // 프로그램 제출: form.submit('login', cb?) → 검증 후 submit 이벤트 발생 (data-catui-ajax 폼은 이어서 전송)
     submit(filter, cb) {
-      const f = document.querySelector(`[data-catui-filter="${CSS.escape(filter)}"]`);
-      if (!f || !validate(f)) return false;
+      const f = findRoot(filter);
+      if (!f) { hint.error(`form.submit: data-catui-filter="${filter}" 요소가 없습니다`); return false; }
+      if (sending.has(f) || !validate(f)) return false;
       const data = { elem: null, form: f, field: collect(f) };
-      if (cb) cb(data); else emit(MOD, "submit", filter, data);
+      if (cb) { cb(data); return true; }
+      if (emit(MOD, "submit", filter, data, f) && f instanceof HTMLFormElement && f.hasAttribute("data-catui-ajax")) send(f, filter, f.querySelector("[data-catui-submit]"));
       return true;
     },
-    setError: showError,
+    setError: (field, msg) => { const t = el(field); if (t) showError(t, msg); },
+    clearError: (field) => { const t = el(field); if (t) showError(t, ""); },
   };
 })();
 
@@ -1279,7 +1497,7 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
         const q = new URLSearchParams({ ...c.where, ...(c.page ? { page: s.curr, limit } : {}), ...(s.sort?.type ? { field: s.sort.field, order: s.sort.type } : {}) });
         const isGet = c.method.toUpperCase() === "GET";
         const res = await fetch(isGet ? `${c.url}${c.url.includes("?") ? "&" : "?"}${q}` : c.url, {
-          method: c.method, signal: ac.signal, headers: { Accept: "application/json", ...(isGet ? {} : { "Content-Type": "application/x-www-form-urlencoded" }), ...c.headers },
+          method: c.method, signal: ac.signal, headers: { Accept: "application/json", ...(isGet ? {} : { "Content-Type": "application/x-www-form-urlencoded" }), ...csrfHeaders(c.url, c.method), ...c.headers },
           body: isGet ? undefined : q,
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1537,7 +1755,7 @@ const dropdown = component({
         else if (e.key === "ArrowUp") { e.preventDefault(); list[(i - 1 + list.length) % list.length]?.focus(); }
         else if (e.key === "Home") { e.preventDefault(); list[0]?.focus(); }
         else if (e.key === "End") { e.preventDefault(); list[list.length - 1]?.focus(); }
-        else if (e.key === "Escape") { e.preventDefault(); close(true); }
+        else if (e.key === "Escape" && !imeBusy(e)) { e.preventDefault(); close(true); }
         else if (e.key === "Tab") close(false);
       };
       const onPick = (e) => {
@@ -1590,9 +1808,10 @@ const dropdown = component({
       if (m && !item.disabled) m.open = false;
     };
     const onKey = (e) => {
-      if (e.key !== "Escape") return;
+      if (e.key !== "Escape" || imeBusy(e)) return;
       const m = e.target.closest?.("details.Catui_dd[open], details.Catui_mega[open]");
       if (!m) return;
+      e.preventDefault();          // 모달 안 메뉴: Esc는 메뉴만 닫는다(바깥 패널은 defaultPrevented로 건너뜀)
       m.open = false;
       m.querySelector("summary")?.focus();
     };
@@ -1790,7 +2009,7 @@ const datePicker = component({
       const onDoc = (e) => { if (!panel.contains(e.target) && e.target !== input) close(false); };
       const onKey = (e) => {
         const t = e.target.closest?.("[data-catui-date]");
-        if (e.key === "Escape") { e.preventDefault(); close(true); return; }
+        if (e.key === "Escape") { if (!imeBusy(e)) { e.preventDefault(); close(true); } return; }
         if (!t) return;
         const step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
         if (step) { e.preventDefault(); const d = new Date(focusD); d.setDate(d.getDate() + step); moveTo(d); return; }
@@ -1818,7 +2037,7 @@ const datePicker = component({
     const onInputClick = () => (panel ? close(false) : open());
     const onInputKey = (e) => {
       if (e.key === "ArrowDown" || (e.key === "Enter" && !panel)) { e.preventDefault(); open(); focusDay(); }
-      else if (e.key === "Escape" && panel) { e.preventDefault(); close(true); }
+      else if (e.key === "Escape" && panel && !imeBusy(e)) { e.preventDefault(); close(true); }
     };
     const onInputChange = (e) => {
       if (!e.isTrusted) return;               // commit()이 보낸 이벤트는 건너뜀
@@ -1842,9 +2061,11 @@ const datePicker = component({
   enhance(scope = document) {
     scope.querySelectorAll("input[data-catui-date]:not([data-catui-ready])").forEach((el) => {
       el.setAttribute("data-catui-ready", "");
-      datePicker.render({ elem: el, range: el.getAttribute("data-catui-date") === "range", min: el.getAttribute("data-catui-min") || "", max: el.getAttribute("data-catui-max") || "" });
+      datePicker.render({ elem: el, auto: true, range: el.getAttribute("data-catui-date") === "range", min: el.getAttribute("data-catui-min") || "", max: el.getAttribute("data-catui-max") || "" });
     });
   },
+  // 자동 렌더한 칸을 destroy하면 표식을 지워 다음 catui.init에서 다시 붙게 한다 (reload에서는 호출되지 않음)
+  destroy(inst) { if (inst.config.auto) inst.elem?.removeAttribute("data-catui-ready"); },
 });
 
 // ── modules/upload.js ──
@@ -1917,7 +2138,7 @@ const upload = component({
       const xhr = (it.xhr = new XMLHttpRequest());
       xhr.open(c.method, c.url);
       xhr.withCredentials = !!c.withCredentials;
-      for (const [k, v] of Object.entries(c.headers || {})) xhr.setRequestHeader(k, v);
+      for (const [k, v] of Object.entries({ ...csrfHeaders(c.url, c.method), ...(c.headers || {}) })) xhr.setRequestHeader(k, v);
       it.status = "uploading"; it.percent = 0; drawList();
       xhr.upload.onprogress = (e) => {
         if (!e.lengthComputable) return;
@@ -2763,7 +2984,7 @@ const fx = (() => {
         if (Math.abs(dx) > 8) { open = open ? dx < aw() / 2 : dx < -aw() / 2; el.classList.toggle("Catui_fx-on", open); }
         x0 = null;
       };
-      const key = (e) => { if (e.key === "Escape") { open = false; el.classList.remove("Catui_fx-on"); front.focus(); } };
+      const key = (e) => { if (e.key === "Escape" && !imeBusy(e)) { open = false; el.classList.remove("Catui_fx-on"); front.focus(); } };
       front.addEventListener("pointerdown", down); front.addEventListener("pointermove", move);
       front.addEventListener("pointerup", up); front.addEventListener("pointercancel", up); el.addEventListener("keydown", key);
       return { close() { open = false; el.classList.remove("Catui_fx-on"); }, destroy() { front.removeEventListener("pointerdown", down); front.removeEventListener("pointermove", move); front.removeEventListener("pointerup", up); front.removeEventListener("pointercancel", up); el.removeEventListener("keydown", key); el.classList.remove("Catui_fx-swipe", "Catui_fx-on"); el.style.removeProperty("--Catui_fx-aw"); } };
@@ -2978,7 +3199,7 @@ const fx = (() => {
       const m = reg.get(el) || new Map(), mine = SLOTS[name] || [];
       if (m.has(name)) return m.get(name).h;
       const clash = [...m].find(([, v]) => v.slots.some((x) => mine.includes(x)));
-      if (clash) { console.warn(`[catui.fx] ${name}과 ${clash[0]}는 같은 요소에서 함께 쓸 수 없어 ${name}을 건너뜁니다 (겹치는 자리: ${mine.filter((x) => clash[1].slots.includes(x)).join(", ")})`, el); return null; }
+      if (clash) { hint.error(`fx: ${name}과 ${clash[0]}는 같은 요소에서 함께 쓸 수 없어 ${name}을 건너뜁니다 (겹치는 자리: ${mine.filter((x) => clash[1].slots.includes(x)).join(", ")})`, "warn", el); return null; }
       const raw = fn(el, o);
       const h = { ...raw, destroy() { raw.destroy(); m.delete(name); } };
       m.set(name, { slots: mine, h }); reg.set(el, m);
@@ -2998,12 +3219,30 @@ const fx = (() => {
 const catuiModules = { layer, form, laypage, table, tabs, dropdown, util, datePicker, upload, slider, rate, tree, collapse, canvas, fx };
 let catuiReady = false;
 let catuiOffs = [];
+let catuiPrepareOverlays = null;
+
+// 자동 정리: DOM에서 노드가 빠지면 다음 틱에 모든 모듈의 destroyDetached() 실행.
+// 다음 틱까지 미루므로 같은 작업 안에서 떼었다 다시 붙인(이동한) 요소는 정리되지 않는다.
+function catuiWatchDetached() {
+  if (typeof MutationObserver === "undefined" || !document.body) return null;
+  let timer = 0;
+  const sweep = () => {
+    timer = 0;
+    Object.values(catuiModules).forEach((m) => { try { m?.destroyDetached?.(); } catch (err) { hint.error("자동 정리 중 오류", "error", err); } });
+  };
+  const mo = new MutationObserver((records) => {
+    if (timer || !records.some((r) => r.removedNodes.length)) return;
+    timer = setTimeout(sweep, 0);
+  });
+  mo.observe(document.body, { childList: true, subtree: true });
+  return () => { mo.disconnect(); clearTimeout(timer); };
+}
 
 const catui = {
-  version: "1.0.0",
+  version: VERSION,
   config,
   get cache() { return { config: getConfig(), modules: Object.keys(catuiModules) }; },
-  $, el, html, raw, escape, mount, icon, hint, data, sessionData, url, device, component,
+  $, el, html, raw, escape, mount, icon, hint, data, sessionData, url, device, component, csrfHeaders,
   ...catuiModules,
 
   // 모듈 불러오기. 모두 한 파일에 들어 있으므로 즉시(문서 준비 후) 콜백한다. Promise도 돌려준다.
@@ -3013,8 +3252,9 @@ const catui = {
     const missing = list.filter((m) => !catuiModules[m]);
     if (missing.length) hint.error(`없는 모듈: ${missing.join(", ")} (catui.extend로 추가할 수 있습니다)`, "error");
     const args = list.map((m) => catuiModules[m]);
-    return new Promise((resolve) => {
-      const run = () => { callback?.apply(catui, args); resolve(args); };
+    return new Promise((resolve, reject) => {
+      // 콜백 오류는 Promise를 거부한다(DOMContentLoaded 뒤 실행돼도 대기 상태로 남지 않게)
+      const run = () => { try { callback?.apply(catui, args); resolve(args); } catch (err) { reject(err); } };
       if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run, { once: true }); else run();
     });
   },
@@ -3023,6 +3263,7 @@ const catui = {
   extend(obj) {
     for (const [name, mod] of Object.entries(obj || {})) {
       if (catuiModules[name]) { hint.error(`이미 있는 모듈 이름입니다: ${name}`); continue; }
+      if (name in catui) { hint.error(`catui의 기본 API 이름은 모듈 이름으로 쓸 수 없습니다: ${name}`, "error"); continue; }
       catuiModules[name] = mod;
       catui[name] = mod;
     }
@@ -3031,32 +3272,41 @@ const catui = {
   // 정의형: catui.define('chart', ['layer'], (layer) => ({ ... }))
   define(name, deps, factory) {
     if (typeof deps === "function") { factory = deps; deps = []; }
+    const missing = deps.filter((d) => !catuiModules[d]);
+    if (missing.length) { hint.error(`define('${name}'): 없는 의존 모듈 ${missing.join(", ")} — 먼저 정의해 주세요`, "error"); return catui; }
     return catui.extend({ [name]: factory(...deps.map((d) => catuiModules[d])) });
   },
 
   // 어느 모듈이든 이벤트: catui.onevent('form', 'submit(login)', fn) / catui.event('form', 'submit', 'login', data)
   onevent: onEvent,
+  offevent: offEvent,
   event: emit,
 
   // data-catui-* 선언형 마크업 연결. 자동 1회 실행되며, 새로 그린 영역은 catui.init(영역)으로 다시 준비한다.
   init(scope = document) {
+    const root = scopeOf(scope);   // 선택자 문자열·요소·document 모두 허용
+    if (!root) { hint.error(`catui.init: 영역을 찾을 수 없습니다 (${scope})`); return catui; }
     if (!catuiReady) {
       catuiReady = true;
-      catuiOffs = [form.bind(), tabs.bind(), table.bindStatic(), dropdown.bindDetails(), slider.bind(), rate.bind(), collapse.bind(), fx.bind()];
+      catuiOffs = [form.bind(), tabs.bind(), table.bindStatic(), dropdown.bindDetails(), slider.bind(), rate.bind(), collapse.bind(), fx.bind()].filter((f) => typeof f === "function");
       const overlays = bindToggleOverlays();
       catuiOffs.push(overlays.off);
-      catui._prepareOverlays = overlays.prepare;
-    } else catui._prepareOverlays?.(scope);
-    form.render(scope);
-    table.enhance(scope);
-    datePicker.enhance(scope);
+      catuiPrepareOverlays = overlays.prepare;
+      if (getConfig().autoDestroy) { const off = catuiWatchDetached(); if (off) catuiOffs.push(off); }
+    }
+    catuiPrepareOverlays?.(root);
+    form.render(root);
+    table.enhance(root);
+    datePicker.enhance(root);
     return catui;
   },
-  // 전역 연결 해제 (테스트·SPA 정리용)
+  // 전역 연결 해제 + 렌더한 인스턴스·열린 레이어 정리 (테스트·SPA 정리용)
   destroy() {
-    catuiOffs.forEach((f) => f());
+    catuiOffs.forEach((f) => { try { f(); } catch { /* 해제 실패 무시 */ } });
     catuiOffs = [];
+    catuiPrepareOverlays = null;
     catuiReady = false;
+    Object.values(catuiModules).forEach((m) => { try { m?.destroyAll?.(); } catch { /* 사용자 모듈 오류 무시 */ } });
     layer.closeAll();
   },
 };

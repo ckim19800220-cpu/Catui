@@ -43,6 +43,7 @@ var off = 모듈.on(…);  off(); // 해제
 <section aria-labelledby="global">
 <h2 id="global">모듈 밖에서</h2>
 <pre><code>catui.onevent('form', 'submit(login)', fn);              // 모듈 이름으로 등록
+catui.offevent('form', 'submit(login)');                 // 해제 (필터 없으면 그 이벤트 전부)
 catui.event('form', 'submit', 'login', { field: {} });   // 직접 발생</code></pre>
 </section>
 

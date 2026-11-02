@@ -3,12 +3,17 @@ export function escape(value) {
   return String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
 
+// 신뢰 마크업 표식은 raw()가 만든 객체에만 붙는다. 서버 JSON의 { "__raw": "..." } 같은 위조 객체는 글자로 escape된다.
+const catuiRawMarks = new WeakSet();
+
 export function raw(markup) {
-  return { __raw: String(markup ?? "") };
+  const out = Object.freeze({ __raw: String(markup ?? "") });
+  catuiRawMarks.add(out);
+  return out;
 }
 
 export function isRaw(value) {
-  return !!value && typeof value === "object" && typeof value.__raw === "string";
+  return !!value && typeof value === "object" && catuiRawMarks.has(value);
 }
 
 export function html(strings, ...values) {
@@ -18,7 +23,7 @@ export function html(strings, ...values) {
     if (i >= values.length) return;
     const v = values[i];
     if (v == null || v === false) return;
-    if (Array.isArray(v)) out += v.map((x) => (isRaw(x) ? x.__raw : escape(x))).join("");
+    if (Array.isArray(v)) out += v.flat(Infinity).map((x) => (x == null || x === false ? "" : isRaw(x) ? x.__raw : escape(x))).join("");
     else out += isRaw(v) ? v.__raw : escape(v);
   });
   return raw(out);

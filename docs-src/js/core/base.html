@@ -4,12 +4,27 @@
 <thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
 <tbody>
 <tr><td><code>catui.use(mods, fn)</code></td><td>문서 준비 후 모듈을 인자로 넘겨 콜백. Promise도 돌려줌. 없는 모듈은 경고</td></tr>
-<tr><td><code>catui.config(options)</code></td><td><code>icons</code>(스프라이트 경로), <code>autoInit</code>(자동 연결), <code>debug</code></td></tr>
+<tr><td><code>catui.config(options)</code></td><td>설정 바꾸기 — 아래 <a href="#config">설정</a> 표</td></tr>
 <tr><td><code>catui.extend({ 이름: 모듈 })</code></td><td>사용자 모듈 추가 → <code>catui.use('이름')</code>, <code>catui.이름</code></td></tr>
 <tr><td><code>catui.define(이름, [의존], 팩토리)</code></td><td>의존 모듈을 받아 만드는 정의형 추가</td></tr>
-<tr><td><code>catui.init(영역)</code></td><td>새로 그린 영역의 <code>data-catui-*</code> 준비(셀렉트 화살표·정적 표·날짜 입력 등)</td></tr>
-<tr><td><code>catui.destroy()</code></td><td>전역 위임 해제 + 레이어 모두 닫기 (테스트·SPA 정리용)</td></tr>
-<tr><td><code>catui.version</code> · <code>catui.cache</code></td><td>버전, 현재 설정·모듈 목록</td></tr>
+<tr><td><code>catui.init(영역)</code></td><td>영역은 요소·선택자·document. 새로 그린 영역의 <code>data-catui-*</code> 준비(셀렉트 화살표·정적 표·날짜 입력 등)</td></tr>
+<tr><td><code>catui.destroy()</code></td><td>전역 위임 해제 + 렌더한 인스턴스 정리(<code>destroyAll</code>) + 레이어 모두 닫기 (테스트·SPA 정리용)</td></tr>
+<tr><td><code>catui.version</code> · <code>catui.cache</code></td><td>버전(빌드가 package.json 값을 넣음, 빌드 안 한 소스는 <code>"dev"</code>), 현재 설정·모듈 목록</td></tr>
+<tr><td><code>catui.csrfHeaders(주소, method)</code></td><td>직접 fetch할 때 붙일 CSRF 헤더 객체 (조건이 안 맞으면 <code>{}</code>)</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="config">
+<h2 id="config">설정</h2>
+<pre><code>catui.config({ debug: false, csrf: { meta: 'csrf-token', header: 'X-CSRF-Token' } });   // 스크립트 바로 다음에</code></pre>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">catui.config 설정</caption>
+<thead><tr><th scope="col">키</th><th scope="col">기본값</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>icons</code></td><td>catui.js 옆 <code>icons.svg</code></td><td>아이콘 스프라이트 경로</td></tr>
+<tr><td><code>autoInit</code></td><td><code>true</code></td><td>문서 준비 시 <code>data-catui-*</code> 자동 연결</td></tr>
+<tr><td><code>debug</code></td><td><code>true</code></td><td>콘솔 출력 — <code>true</code> 경고·오류 / <code>false</code> 오류만(운영 권장) / <code>"silent"</code> 모두 끔</td></tr>
+<tr><td><code>autoDestroy</code></td><td><code>true</code></td><td>DOM에서 빠진 요소의 컴포넌트 인스턴스를 다음 틱에 자동 정리(<code>destroyDetached</code>). 떼었다 다시 붙일 요소는 렌더 옵션 <code>keep: true</code>. 첫 <code>init</code> 전에 설정</td></tr>
+<tr><td><code>csrf</code></td><td><code>{ meta: 'csrf-token', header: 'X-CSRF-Token' }</code></td><td><code>&lt;meta name="csrf-token" content="…"&gt;</code> 값을 form Ajax·table url·upload 요청 헤더로. <strong>같은 출처</strong>이면서 GET·HEAD·OPTIONS가 아닐 때만 붙여 토큰이 외부로 새지 않습니다. 모듈 옵션 <code>headers</code>가 우선. <code>false</code> = 끔</td></tr>
 </tbody></table></div>
 </section>
 

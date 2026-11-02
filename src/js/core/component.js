@@ -10,6 +10,7 @@ export function component(def) {
   const name = def.name;
   const defaults = { ...(def.config || {}) };
   const instances = new Map();
+  const byElem = new WeakMap();   // id 없는 대상에 다시 렌더해도 이전 인스턴스를 찾아 정리하기 위함
 
   class Instance {
     constructor(options) {
@@ -25,6 +26,11 @@ export function component(def) {
     reload(options = {}) {
       this.teardown();
       this.config = { ...this.config, ...options };
+      if ("elem" in options) {
+        if (byElem.get(this.elem) === this) byElem.delete(this.elem);
+        this.elem = el(this.config.elem);
+        if (this.elem) byElem.set(this.elem, this);
+      }
       def.render(this);
       return this;
     }
@@ -34,7 +40,8 @@ export function component(def) {
     destroy() {
       this.teardown();
       def.destroy?.(this);
-      instances.delete(this.id);
+      if (instances.get(this.id) === this) instances.delete(this.id);
+      if (this.elem && byElem.get(this.elem) === this) byElem.delete(this.elem);
     }
   }
 
@@ -42,18 +49,24 @@ export function component(def) {
     CONST: { MOD_NAME: name, ...(def.CONST || {}) },
     Class: Instance,
     render(options = {}) {
-      const prev = instances.get(options.id || el(options.elem)?.id);
+      const target = el(options.elem);
+      const prev = instances.get(options.id || target?.id) || (target && byElem.get(target));
       if (prev) prev.destroy();              // 같은 대상에 다시 렌더하면 이전 인스턴스 정리
       const inst = new Instance(options);
       def.beforeRender?.(inst);
-      def.render(inst);
+      try { def.render(inst); } catch (err) { inst.teardown(); throw err; }   // 그리다 실패하면 붙인 리스너 회수
       instances.set(inst.id, inst);
+      if (inst.elem) byElem.set(inst.elem, inst);
       inst.config.done?.call(inst, inst);
       return inst;
     },
     reload(id, options) { const inst = instances.get(id); if (!inst) { hint.error(`${name}: id '${id}' 인스턴스가 없습니다`); return null; } return inst.reload(options); },
     getThis(id) { return instances.get(id) || null; },
     destroy(id) { instances.get(id)?.destroy(); },
+    // 모든 인스턴스 정리 (catui.destroy · SPA 화면 전환용). DOM에서 빠진 대상만 정리하려면 destroyDetached()
+    destroyAll() { [...instances.values()].forEach((i) => i.destroy()); },
+    // keep: true로 렌더한 인스턴스는 잠시 떼었다 다시 붙이는 용도(탭 캐시 등)로 보고 남긴다
+    destroyDetached() { [...instances.values()].forEach((i) => { if (i.elem && !i.elem.isConnected && !i.config.keep) i.destroy(); }); },
     on(evt, fn) { return onEvent(name, evt, fn); },
     off(evt) { offEvent(name, evt); },
     set(options) { Object.assign(defaults, options); return api; },

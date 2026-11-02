@@ -1435,6 +1435,8 @@ dialog.Catui_modal::backdrop,dialog.Catui_drawer::backdrop{background:var(--Catu
 .Catui_modal-b{overflow:auto}
 .Catui_layer-load{display:flex;align-items:center;gap:var(--Catui_space-3);padding:var(--Catui_modal-pad)}
 .Catui_close:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+/* catui.js가 포커스를 맡기려고 붙인 tabindex=-1 패널 자체에는 테두리를 그리지 않는다(Tab으로는 닿지 않는 컨테이너) */
+.Catui_modal[tabindex="-1"]:focus,.Catui_drawer[tabindex="-1"]:focus{outline:none}
 
 /* components/drawer.css */
 .Catui_drawer-toggle:checked ~ .Catui_drawer{display:block}

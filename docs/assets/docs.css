@@ -12,7 +12,7 @@
 /* 라이트에서는 달(다크로 바꾸기), 다크에서는 해(라이트로 바꾸기) */
 .doc-theme .doc-theme-sun,.doc-theme[aria-pressed="true"] .doc-theme-moon{display:none}
 .doc-theme[aria-pressed="true"] .doc-theme-sun{display:block}
-.doc-version{margin-left:auto;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.doc-version{margin-left:auto;font-family:var(--Catui_font-mono);font-size:var(--Catui_type-label-size);color:var(--Catui_color-text-secondary);padding:2px var(--Catui_space-2);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-surface-muted);font-variant-numeric:tabular-nums}
 
 /* 본문은 화면 전체 너비를 쓴다 (사이드바 · 본문 · 목차) */
 .doc-shell{display:grid;grid-template-columns:240px minmax(0,1fr) 200px;gap:var(--Catui_space-8);width:100%;padding:var(--Catui_space-6) var(--Catui_content-pad) var(--Catui_space-10)}
@@ -33,16 +33,22 @@
 .doc-rules{display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-4);background:var(--Catui_color-surface-muted);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md)}
 .doc-rules li{display:flex;align-items:center;gap:var(--Catui_space-2);font-size:var(--Catui_type-caption-size)}
 
-/* 사이드바 */
-.doc-side{position:sticky;top:calc(var(--Catui_topbar-h) + var(--Catui_space-6));align-self:start;max-height:calc(100vh - var(--Catui_topbar-h) - var(--Catui_space-8));overflow:auto}
+/* 사이드바: 왼쪽 내비 — 그룹 라벨 + 필(pill) 링크, 활성은 소프트 배경 + 굵기 */
+.doc-side{position:sticky;top:calc(var(--Catui_topbar-h) + var(--Catui_space-6));align-self:start;max-height:calc(100vh - var(--Catui_topbar-h) - var(--Catui_space-8));overflow:auto;padding-right:var(--Catui_space-2);scrollbar-width:thin}
 .doc-side > summary{display:none}
-.doc-side-group{margin-bottom:var(--Catui_space-5)}
-.doc-side-title{font-size:var(--Catui_type-label-size);font-weight:600;letter-spacing:var(--Catui_type-label-ls);text-transform:uppercase;color:var(--Catui_color-text-secondary);margin-bottom:var(--Catui_space-2)}
-.doc-side a,.doc-toc a{display:block;padding:var(--Catui_space-1) var(--Catui_space-3);border-radius:var(--Catui_radius-xs);color:var(--Catui_color-text-secondary);border-left:2px solid transparent}
-.doc-side a:hover,.doc-toc a:hover{color:var(--Catui_color-text-primary);background:var(--Catui_color-brand-ghost)}
+.doc-side-group{margin-bottom:var(--Catui_space-6)}
+.doc-side-group:last-child{margin-bottom:0}
+.doc-side-title{font-size:var(--Catui_type-label-size);font-weight:600;letter-spacing:var(--Catui_type-label-ls);text-transform:uppercase;color:var(--Catui_color-text-secondary);margin-bottom:var(--Catui_space-2);padding:0 var(--Catui_space-3)}
+.doc-side ul{list-style:none;padding:0;margin:0;display:grid;gap:1px}
+.doc-side a{display:block;padding:var(--Catui_space-1) var(--Catui_space-3);border-radius:var(--Catui_radius-sm);color:var(--Catui_color-text-secondary);transition:color var(--Catui_dur-fast) var(--Catui_ease),background-color var(--Catui_dur-fast) var(--Catui_ease)}
+.doc-side a:hover{color:var(--Catui_color-text-primary);background:var(--Catui_color-brand-ghost)}
 .doc-side a[aria-current="page"]{color:var(--Catui_color-brand-strong);background:var(--Catui_color-brand-soft);font-weight:600}
-.doc-toc{position:sticky;top:calc(var(--Catui_topbar-h) + var(--Catui_space-6));align-self:start;font-size:var(--Catui_type-caption-size)}
-.doc-toc a.is-active{color:var(--Catui_color-brand-strong);border-left-color:var(--Catui_color-brand-strong)}
+/* 오른쪽 "이 페이지" 목차 — 왼쪽 레일선 위에 활성만 브랜드 바 */
+.doc-toc{position:sticky;top:calc(var(--Catui_topbar-h) + var(--Catui_space-6));align-self:start;max-height:calc(100vh - var(--Catui_topbar-h) - var(--Catui_space-8));overflow:auto;font-size:var(--Catui_type-caption-size);scrollbar-width:thin}
+.doc-toc ul{list-style:none;padding:0;margin:0;border-left:1px solid var(--Catui_divider-color)}
+.doc-toc a{display:block;margin-left:-1px;padding:var(--Catui_space-1) var(--Catui_space-3);color:var(--Catui_color-text-secondary);border-left:2px solid transparent;transition:color var(--Catui_dur-fast) var(--Catui_ease),border-color var(--Catui_dur-fast) var(--Catui_ease)}
+.doc-toc a:hover{color:var(--Catui_color-text-primary)}
+.doc-toc a.is-active{color:var(--Catui_color-brand-strong);border-left-color:var(--Catui_color-brand-strong);font-weight:600}
 .doc-side a:focus-visible,.doc-toc a:focus-visible,.doc-tabs a:focus-visible,.doc-pager a:focus-visible,.doc-copy:focus-visible,.doc-example-code > summary:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
 
 /* 예제 블록 */

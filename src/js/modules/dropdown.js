@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
-import { mount, layerRoot, icon, uid } from "../core/dom.js";
+import { mount, layerRoot, icon, uid, imeBusy } from "../core/dom.js";
 
 // dropdown — 버튼에 붙는 메뉴. 키보드(↑↓·Home·End·Esc·Tab), 바깥 클릭 닫기, 화면 끝에서 위로 뒤집기.
 //   dropdown.render({ elem: '#more', data: [{ id: 'edit', title: '수정', icon: 'pen-line' }, { type: '-' },
@@ -61,7 +61,7 @@ export const dropdown = component({
         else if (e.key === "ArrowUp") { e.preventDefault(); list[(i - 1 + list.length) % list.length]?.focus(); }
         else if (e.key === "Home") { e.preventDefault(); list[0]?.focus(); }
         else if (e.key === "End") { e.preventDefault(); list[list.length - 1]?.focus(); }
-        else if (e.key === "Escape") { e.preventDefault(); close(true); }
+        else if (e.key === "Escape" && !imeBusy(e)) { e.preventDefault(); close(true); }
         else if (e.key === "Tab") close(false);
       };
       const onPick = (e) => {
@@ -114,9 +114,10 @@ export const dropdown = component({
       if (m && !item.disabled) m.open = false;
     };
     const onKey = (e) => {
-      if (e.key !== "Escape") return;
+      if (e.key !== "Escape" || imeBusy(e)) return;
       const m = e.target.closest?.("details.Catui_dd[open], details.Catui_mega[open]");
       if (!m) return;
+      e.preventDefault();          // 모달 안 메뉴: Esc는 메뉴만 닫는다(바깥 패널은 defaultPrevented로 건너뜀)
       m.open = false;
       m.querySelector("summary")?.focus();
     };

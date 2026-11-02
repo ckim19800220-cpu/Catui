@@ -21,18 +21,22 @@ export function buildJs({ defined }) {
     if (left) fail(`번들에 남은 import/export (src/js/${f}): ${left[0].trim()}`);
     body += `\n// ── ${f} ──\n${src}`;
   }
-  const banner = `/*! Catui UI framework ${pkg().version} | 아이콘 Lucide(ISC) */`;
+  const version = pkg().version;
+  const banner = `/*! Catui UI framework ${version} | 아이콘 Lucide(ISC) */`;
+  const VERSION = `const VERSION = ${JSON.stringify(version)};`;   // core/env.js의 VERSION 대체
   const iife = `${banner}
 (function (global) {
 "use strict";
 if (global.catui) console.warn("[Catui warn]: catui가 이미 있습니다. 덮어씁니다.");
 const BASE = (() => { const s = document.currentScript; return s && s.src ? new URL(".", s.src).href : ""; })();
+${VERSION}
 ${body}
 global.catui = catui;
 })(typeof window !== "undefined" ? window : globalThis);
 `;
   const esm = `${banner}
 const BASE = new URL(".", import.meta.url).href;
+${VERSION}
 ${body}
 export { ${exports.join(", ")} };
 export default catui;

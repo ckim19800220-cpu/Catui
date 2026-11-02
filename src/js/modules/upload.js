@@ -1,6 +1,7 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
 import { mount, el, icon, uid } from "../core/dom.js";
+import { csrfHeaders } from "../core/base.js";
 
 // upload — 파일 올리기. 끌어 놓기·선택, 형식·용량·개수 검사(오류는 문장으로), 진행률, 목록, 취소.
 //   upload.render({ elem: '#zone', url: '/api/upload', accept: '.pdf,image/*', size: 10240, number: 5,
@@ -70,7 +71,7 @@ export const upload = component({
       const xhr = (it.xhr = new XMLHttpRequest());
       xhr.open(c.method, c.url);
       xhr.withCredentials = !!c.withCredentials;
-      for (const [k, v] of Object.entries(c.headers || {})) xhr.setRequestHeader(k, v);
+      for (const [k, v] of Object.entries({ ...csrfHeaders(c.url, c.method), ...(c.headers || {}) })) xhr.setRequestHeader(k, v);
       it.status = "uploading"; it.percent = 0; drawList();
       xhr.upload.onprogress = (e) => {
         if (!e.lengthComputable) return;

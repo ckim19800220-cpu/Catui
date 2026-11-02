@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
-import { mount, layerRoot, icon, uid } from "../core/dom.js";
+import { mount, layerRoot, icon, uid, imeBusy } from "../core/dom.js";
 
 // datePicker — 날짜·기간 선택 (layui laydate에 해당).
 //   datePicker.render({ elem: '#d', min: '2026-01-01', max: '2026-12-31', done(value, date) {} })
@@ -117,7 +117,7 @@ export const datePicker = component({
       const onDoc = (e) => { if (!panel.contains(e.target) && e.target !== input) close(false); };
       const onKey = (e) => {
         const t = e.target.closest?.("[data-catui-date]");
-        if (e.key === "Escape") { e.preventDefault(); close(true); return; }
+        if (e.key === "Escape") { if (!imeBusy(e)) { e.preventDefault(); close(true); } return; }
         if (!t) return;
         const step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
         if (step) { e.preventDefault(); const d = new Date(focusD); d.setDate(d.getDate() + step); moveTo(d); return; }
@@ -145,7 +145,7 @@ export const datePicker = component({
     const onInputClick = () => (panel ? close(false) : open());
     const onInputKey = (e) => {
       if (e.key === "ArrowDown" || (e.key === "Enter" && !panel)) { e.preventDefault(); open(); focusDay(); }
-      else if (e.key === "Escape" && panel) { e.preventDefault(); close(true); }
+      else if (e.key === "Escape" && panel && !imeBusy(e)) { e.preventDefault(); close(true); }
     };
     const onInputChange = (e) => {
       if (!e.isTrusted) return;               // commit()이 보낸 이벤트는 건너뜀
@@ -169,7 +169,9 @@ export const datePicker = component({
   enhance(scope = document) {
     scope.querySelectorAll("input[data-catui-date]:not([data-catui-ready])").forEach((el) => {
       el.setAttribute("data-catui-ready", "");
-      datePicker.render({ elem: el, range: el.getAttribute("data-catui-date") === "range", min: el.getAttribute("data-catui-min") || "", max: el.getAttribute("data-catui-max") || "" });
+      datePicker.render({ elem: el, auto: true, range: el.getAttribute("data-catui-date") === "range", min: el.getAttribute("data-catui-min") || "", max: el.getAttribute("data-catui-max") || "" });
     });
   },
+  // 자동 렌더한 칸을 destroy하면 표식을 지워 다음 catui.init에서 다시 붙게 한다 (reload에서는 호출되지 않음)
+  destroy(inst) { if (inst.config.auto) inst.elem?.removeAttribute("data-catui-ready"); },
 });

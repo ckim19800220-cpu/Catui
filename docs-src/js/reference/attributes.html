@@ -7,6 +7,9 @@
 <tr><td><code>data-catui-form</code></td><td><code>&lt;form&gt;</code></td><td>제출 시 검증 + <code>submit(필터)</code></td></tr>
 <tr><td><code>data-catui-verify="required|email"</code></td><td>입력 칸</td><td>검증 규칙 (<code>|</code>로 여러 개)</td></tr>
 <tr><td><code>data-catui-reqtext="문장"</code></td><td>입력 칸</td><td>필수 오류 문구</td></tr>
+<tr><td><code>data-catui-errtext="문장"</code></td><td>입력 칸</td><td>필수 외 오류 문구</td></tr>
+<tr><td><code>data-catui-ajax[="주소"]</code></td><td>폼</td><td>검증 통과 뒤 fetch 제출 → <code>done</code> · <code>fail</code> 이벤트</td></tr>
+<tr><td><code>data-catui-timeout="ms"</code></td><td>폼</td><td>Ajax 시간 제한 (기본 30000, 0 = 없음)</td></tr>
 <tr><td><code>data-catui-submit</code></td><td>제출 버튼</td><td>이 버튼으로 제출할 때만 처리</td></tr>
 <tr><td><code>data-catui-table</code> + <code>th[data-catui-sort="number|text"]</code></td><td>정적 표</td><td>열 정렬</td></tr>
 <tr><td><code>data-catui-date</code>(<code>="range"</code>) · <code>data-catui-min/max</code></td><td>입력 칸</td><td>날짜·기간 선택기</td></tr>

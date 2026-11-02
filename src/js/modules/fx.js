@@ -1,4 +1,5 @@
-import { reducedMotion } from "../core/dom.js";
+import { reducedMotion, imeBusy } from "../core/dom.js";
+import { hint } from "../core/base.js";
 import { canvas } from "./canvas.js";
 
 // fx — 텍스트·스크롤·커서·배경 효과. 각 함수는 { destroy() }를 돌려주고, 모션 줄이기에서는 최종 상태를 바로 보인다.
@@ -416,7 +417,7 @@ export const fx = (() => {
         if (Math.abs(dx) > 8) { open = open ? dx < aw() / 2 : dx < -aw() / 2; el.classList.toggle("Catui_fx-on", open); }
         x0 = null;
       };
-      const key = (e) => { if (e.key === "Escape") { open = false; el.classList.remove("Catui_fx-on"); front.focus(); } };
+      const key = (e) => { if (e.key === "Escape" && !imeBusy(e)) { open = false; el.classList.remove("Catui_fx-on"); front.focus(); } };
       front.addEventListener("pointerdown", down); front.addEventListener("pointermove", move);
       front.addEventListener("pointerup", up); front.addEventListener("pointercancel", up); el.addEventListener("keydown", key);
       return { close() { open = false; el.classList.remove("Catui_fx-on"); }, destroy() { front.removeEventListener("pointerdown", down); front.removeEventListener("pointermove", move); front.removeEventListener("pointerup", up); front.removeEventListener("pointercancel", up); el.removeEventListener("keydown", key); el.classList.remove("Catui_fx-swipe", "Catui_fx-on"); el.style.removeProperty("--Catui_fx-aw"); } };
@@ -631,7 +632,7 @@ export const fx = (() => {
       const m = reg.get(el) || new Map(), mine = SLOTS[name] || [];
       if (m.has(name)) return m.get(name).h;
       const clash = [...m].find(([, v]) => v.slots.some((x) => mine.includes(x)));
-      if (clash) { console.warn(`[catui.fx] ${name}과 ${clash[0]}는 같은 요소에서 함께 쓸 수 없어 ${name}을 건너뜁니다 (겹치는 자리: ${mine.filter((x) => clash[1].slots.includes(x)).join(", ")})`, el); return null; }
+      if (clash) { hint.error(`fx: ${name}과 ${clash[0]}는 같은 요소에서 함께 쓸 수 없어 ${name}을 건너뜁니다 (겹치는 자리: ${mine.filter((x) => clash[1].slots.includes(x)).join(", ")})`, "warn", el); return null; }
       const raw = fn(el, o);
       const h = { ...raw, destroy() { raw.destroy(); m.delete(name); } };
       m.set(name, { slots: mine, h }); reg.set(el, m);

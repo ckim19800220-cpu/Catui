@@ -73,6 +73,94 @@ catui.use([&#39;form&#39;], function (form) {
 <p>제출하면 검증하고, 처음 틀린 칸에 포커스한 뒤 오류를 색 + 문장(<code>aria-invalid</code>, <code>aria-describedby</code>)으로 알립니다. 틀린 칸은 입력할 때마다 다시 검사합니다. 빈 값은 <code>required</code>만 검사합니다.</p>
 </section>
 
+<section aria-labelledby="rules">
+<h2 id="rules">매개변수 규칙 · 확인 칸 · 그룹 필수</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">minlen · same · min/max · 라디오 그룹 required</figcaption>
+<div class="doc-example-preview">
+  <form class="Catui_fields" data-catui-form data-catui-filter="fm-rule" novalidate>
+    <div class="Catui_field"><label class="Catui_label" for="fm-uid">아이디 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-uid" name="uid" autocomplete="username" data-catui-verify="required|id"><p class="Catui_help">영문으로 시작하는 4~16자</p></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-pw1">비밀번호 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-pw1" name="pw" type="password" autocomplete="new-password" data-catui-verify="required|password"></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-pw2">비밀번호 확인 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-pw2" name="pw2" type="password" autocomplete="new-password" data-catui-verify="required|same:pw" data-catui-errtext="비밀번호가 일치하지 않습니다."></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-age">나이</label><input class="Catui_input" id="fm-age" name="age" inputmode="numeric" data-catui-verify="int|min:14|max:120"></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-bio">소개</label><textarea class="Catui_input" id="fm-bio" name="bio" rows="2" aria-describedby="fm-bio-n" data-catui-verify="maxlen:40"></textarea><p class="Catui_counter" id="fm-bio-n" aria-live="polite">0/40</p></div>
+    <div class="Catui_field"><p class="Catui_label">요금제 <span class="Catui_req">필수</span></p>
+      <div class="Catui_choices">
+        <label class="Catui_choice"><input class="Catui_clip" type="radio" name="plan" value="basic" data-catui-verify="required" data-catui-reqtext="요금제를 선택해 주세요."><span class="Catui_radio"></span>기본</label>
+        <label class="Catui_choice"><input class="Catui_clip" type="radio" name="plan" value="pro"><span class="Catui_radio"></span>프로</label>
+      </div>
+    </div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit" data-catui-submit>확인</button><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="fm-reset">초기화</button></div>
+  </form>
+  <p class="Catui_help" id="fm-out3" aria-live="polite"></p>
+  <script>
+  catui.use(['form'], function (form) {
+    form.on('input(fm-rule)', function (d) { if (d.name === 'bio') document.getElementById('fm-bio-n').textContent = d.value.length + '/40'; });
+    form.on('submit(fm-rule)', function () { document.getElementById('fm-out3').textContent = '전송 형식: ' + form.serialize('fm-rule'); return false; });
+    document.getElementById('fm-reset').addEventListener('click', function () { form.reset('fm-rule'); document.getElementById('fm-bio-n').textContent = '0/40'; document.getElementById('fm-out3').textContent = ''; });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="minlen · same · min/max · 라디오 그룹 required 코드 복사">복사</button><pre><code>&lt;form class=&quot;Catui_fields&quot; data-catui-form data-catui-filter=&quot;fm-rule&quot; novalidate&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-uid&quot;&gt;아이디 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-uid&quot; name=&quot;uid&quot; autocomplete=&quot;username&quot; data-catui-verify=&quot;required|id&quot;&gt;&lt;p class=&quot;Catui_help&quot;&gt;영문으로 시작하는 4~16자&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-pw1&quot;&gt;비밀번호 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-pw1&quot; name=&quot;pw&quot; type=&quot;password&quot; autocomplete=&quot;new-password&quot; data-catui-verify=&quot;required|password&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-pw2&quot;&gt;비밀번호 확인 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-pw2&quot; name=&quot;pw2&quot; type=&quot;password&quot; autocomplete=&quot;new-password&quot; data-catui-verify=&quot;required|same:pw&quot; data-catui-errtext=&quot;비밀번호가 일치하지 않습니다.&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-age&quot;&gt;나이&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-age&quot; name=&quot;age&quot; inputmode=&quot;numeric&quot; data-catui-verify=&quot;int|min:14|max:120&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-bio&quot;&gt;소개&lt;/label&gt;&lt;textarea class=&quot;Catui_input&quot; id=&quot;fm-bio&quot; name=&quot;bio&quot; rows=&quot;2&quot; aria-describedby=&quot;fm-bio-n&quot; data-catui-verify=&quot;maxlen:40&quot;&gt;&lt;/textarea&gt;&lt;p class=&quot;Catui_counter&quot; id=&quot;fm-bio-n&quot; aria-live=&quot;polite&quot;&gt;0/40&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;p class=&quot;Catui_label&quot;&gt;요금제 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/p&gt;
+    &lt;div class=&quot;Catui_choices&quot;&gt;
+      &lt;label class=&quot;Catui_choice&quot;&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;plan&quot; value=&quot;basic&quot; data-catui-verify=&quot;required&quot; data-catui-reqtext=&quot;요금제를 선택해 주세요.&quot;&gt;&lt;span class=&quot;Catui_radio&quot;&gt;&lt;/span&gt;기본&lt;/label&gt;
+      &lt;label class=&quot;Catui_choice&quot;&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;plan&quot; value=&quot;pro&quot;&gt;&lt;span class=&quot;Catui_radio&quot;&gt;&lt;/span&gt;프로&lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;submit&quot; data-catui-submit&gt;확인&lt;/button&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost&quot; type=&quot;button&quot; id=&quot;fm-reset&quot;&gt;초기화&lt;/button&gt;&lt;/div&gt;
+&lt;/form&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;fm-out3&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;form&#39;], function (form) {
+  form.on(&#39;input(fm-rule)&#39;, function (d) { if (d.name === &#39;bio&#39;) document.getElementById(&#39;fm-bio-n&#39;).textContent = d.value.length + &#39;/40&#39;; });
+  form.on(&#39;submit(fm-rule)&#39;, function () { document.getElementById(&#39;fm-out3&#39;).textContent = &#39;전송 형식: &#39; + form.serialize(&#39;fm-rule&#39;); return false; });
+  document.getElementById(&#39;fm-reset&#39;).addEventListener(&#39;click&#39;, function () { form.reset(&#39;fm-rule&#39;); document.getElementById(&#39;fm-bio-n&#39;).textContent = &#39;0/40&#39;; document.getElementById(&#39;fm-out3&#39;).textContent = &#39;&#39;; });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>규칙은 <code>이름:값</code>으로 매개변수를 받습니다. <code>same:pw</code>는 원본 칸을 고치면 확인 칸도 다시 검사합니다. 같은 name의 라디오·체크박스는 첫 칸에만 <code>required</code>를 달면 "하나 이상 선택"으로 검사합니다(그룹은 <code>.Catui_field</code>로 감싸 오류 문장 자리를 줍니다).</p>
+</section>
+
+<section aria-labelledby="ajax">
+<h2 id="ajax">Ajax 제출</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-ajax + done · fail</figcaption>
+<div class="doc-example-preview">
+  <form class="Catui_fields" data-catui-form data-catui-filter="fm-ajax" data-catui-ajax="../../../dist/icons.svg" method="get" novalidate>
+    <div class="Catui_field"><label class="Catui_label" for="fm-q">검색어 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-q" name="q" data-catui-verify="required|minlen:2"></div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit" data-catui-submit>보내기</button></div>
+  </form>
+  <p class="Catui_help" id="fm-out4" aria-live="polite"></p>
+  <script>
+  catui.use(['form'], function (form) {
+    var out = function (t) { document.getElementById('fm-out4').textContent = t; };
+    form.on('done(fm-ajax)', function (d) { out('응답 ' + d.status + ' · ' + String(d.res).length + '자 받음'); });
+    form.on('fail(fm-ajax)', function (d) { out('보내지 못했습니다. 잠시 후 다시 시도해 주세요. (' + d.error.message + ')'); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-ajax + done · fail 코드 복사">복사</button><pre><code>&lt;form class=&quot;Catui_fields&quot; data-catui-form data-catui-filter=&quot;fm-ajax&quot; data-catui-ajax=&quot;dist/icons.svg&quot; method=&quot;get&quot; novalidate&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fm-q&quot;&gt;검색어 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;fm-q&quot; name=&quot;q&quot; data-catui-verify=&quot;required|minlen:2&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;submit&quot; data-catui-submit&gt;보내기&lt;/button&gt;&lt;/div&gt;
+&lt;/form&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;fm-out4&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;form&#39;], function (form) {
+  var out = function (t) { document.getElementById(&#39;fm-out4&#39;).textContent = t; };
+  form.on(&#39;done(fm-ajax)&#39;, function (d) { out(&#39;응답 &#39; + d.status + &#39; · &#39; + String(d.res).length + &#39;자 받음&#39;); });
+  form.on(&#39;fail(fm-ajax)&#39;, function (d) { out(&#39;보내지 못했습니다. 잠시 후 다시 시도해 주세요. (&#39; + d.error.message + &#39;)&#39;); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>검증과 <code>submit(f)</code> 이벤트를 통과하면 <code>fetch</code>로 보냅니다(<code>submit</code>에서 false를 돌려주면 보내지 않음). 보내는 동안 제출 버튼은 <code>disabled</code> + <code>aria-busy</code>로 이중 제출을 막습니다. 응답이 JSON이면 객체로, 아니면 글자로 <code>res</code>에 담깁니다.</p>
+</section>
+
 <section aria-labelledby="controls">
 <h2 id="controls">선택 컨트롤 이벤트 · 값</h2>
 <figure class="doc-example">
@@ -127,22 +215,28 @@ catui.use([&#39;form&#39;], function (form) {
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">form API</caption>
 <thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
 <tbody>
-<tr><td><code>data-catui-verify="required|email"</code></td><td>내장: required · email · phone · url · number · date</td></tr>
-<tr><td><code>data-catui-reqtext</code></td><td>필수 오류 문구 바꾸기</td></tr>
+<tr><td><code>data-catui-verify="required|email"</code></td><td>형식: required · email · phone · tel · zip · url · number · int · date · id · password · hangul · alpha · alnum</td></tr>
+<tr><td><code>data-catui-verify="min:1|max:9|minlen:2|maxlen:40|len:6|same:이름"</code></td><td>매개변수 규칙 — 숫자 범위 / 글자 수 / 다른 칸과 같은 값</td></tr>
+<tr><td><code>data-catui-reqtext</code> · <code>data-catui-errtext</code></td><td>필수 오류 문구 / 그 밖의 오류 문구 바꾸기</td></tr>
 <tr><td><code>data-catui-submit</code></td><td>제출 버튼이 여러 개일 때 이 버튼만 처리</td></tr>
-<tr><td><code>form.verify({ 이름: [정규식, 메시지] | fn(value, el) })</code></td><td>규칙 추가 (fn은 오류 문장 또는 '' 반환)</td></tr>
-<tr><td><code>form.on('submit(f)')</code></td><td><code>{ field, form, elem }</code>. false = 기본 제출 막기</td></tr>
+<tr><td><code>data-catui-ajax[="주소"]</code></td><td>fetch로 제출 (주소 없으면 action). <code>method</code> 속성 따름, 기본 POST</td></tr>
+<tr><td><code>data-catui-timeout="30000"</code></td><td>Ajax 시간 제한(ms, 기본 30초, 0 = 없음). 넘기면 <code>fail</code>에 <code>error.timeout = true</code></td></tr>
+<tr><td><code>form.verify({ 이름: [정규식, 메시지] | fn(value, el, arg, root) })</code></td><td>규칙 추가 (fn은 오류 문장 또는 '' 반환, arg는 <code>이름:값</code>의 값)</td></tr>
+<tr><td><code>form.on('submit(f)')</code></td><td><code>{ field, form, elem }</code>. false = 기본 제출(·Ajax) 막기</td></tr>
+<tr><td><code>form.on('done(f)')</code> · <code>form.on('fail(f)')</code></td><td>Ajax 결과 <code>{ res, status, field, form, elem }</code> / <code>{ error, field, form, elem }</code></td></tr>
+<tr><td><code>form.on('input(f)')</code></td><td>글자 입력마다 <code>{ elem, value, name }</code></td></tr>
 <tr><td><code>form.on('switch|checkbox|radio|select(f)')</code></td><td><code>{ elem, value, checked }</code> — 필터는 컨트롤 또는 상위의 data-catui-filter</td></tr>
-<tr><td><code>form.val(f, [값])</code></td><td>값 읽기/쓰기 (같은 name은 배열)</td></tr>
+<tr><td><code>form.val(f, [값])</code> · <code>form.serialize(f)</code></td><td>값 읽기/쓰기 (같은 name은 배열) / 쿼리 문자열</td></tr>
+<tr><td><code>form.reset(f)</code></td><td>기본값으로 되돌리고 오류 표시 지우기</td></tr>
 <tr><td><code>form.validate(영역)</code> · <code>form.submit(f, [cb])</code></td><td>직접 검증 / 프로그램 제출</td></tr>
-<tr><td><code>form.render(영역)</code> · <code>form.setError(el, 문장)</code></td><td>셀렉트 화살표 보충 / 오류 직접 표시</td></tr>
+<tr><td><code>form.render(영역)</code> · <code>form.setError(el, 문장)</code> · <code>form.clearError(el)</code></td><td>셀렉트 화살표 보충 / 오류 직접 표시 / 지우기</td></tr>
 </tbody></table></div>
 </section>
 
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/layer.html"><span>이전</span>layer 팝업</a><a class="doc-pager-next" href="../../js/modules/table.html"><span>다음</span>table 표</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#verify">선언형 검증과 제출</a></li><li><a href="#controls">선택 컨트롤 이벤트 · 값</a></li><li><a href="#api">API</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#verify">선언형 검증과 제출</a></li><li><a href="#rules">매개변수 규칙 · 확인 칸 · 그룹 필수</a></li><li><a href="#ajax">Ajax 제출</a></li><li><a href="#controls">선택 컨트롤 이벤트 · 값</a></li><li><a href="#api">API</a></li></ul></aside>
 </div>
 </div>
 <script src="../../assets/docs.js"></script>

@@ -1,7 +1,8 @@
-import { config, getConfig, hint, data, sessionData, url, device } from "./base.js";
+import { config, getConfig, hint, data, sessionData, url, device, csrfHeaders } from "./base.js";
+import { VERSION } from "./env.js";
 import { html, raw, escape } from "./html.js";
-import { $, el, mount, icon } from "./dom.js";
-import { onEvent, emit } from "./events.js";
+import { $, el, mount, icon, scopeOf } from "./dom.js";
+import { onEvent, offEvent, emit } from "./events.js";
 import { component } from "./component.js";
 import { bindToggleOverlays } from "./init.js";
 import { layer } from "../modules/layer.js";
@@ -26,12 +27,30 @@ import { fx } from "../modules/fx.js";
 const catuiModules = { layer, form, laypage, table, tabs, dropdown, util, datePicker, upload, slider, rate, tree, collapse, canvas, fx };
 let catuiReady = false;
 let catuiOffs = [];
+let catuiPrepareOverlays = null;
+
+// 자동 정리: DOM에서 노드가 빠지면 다음 틱에 모든 모듈의 destroyDetached() 실행.
+// 다음 틱까지 미루므로 같은 작업 안에서 떼었다 다시 붙인(이동한) 요소는 정리되지 않는다.
+function catuiWatchDetached() {
+  if (typeof MutationObserver === "undefined" || !document.body) return null;
+  let timer = 0;
+  const sweep = () => {
+    timer = 0;
+    Object.values(catuiModules).forEach((m) => { try { m?.destroyDetached?.(); } catch (err) { hint.error("자동 정리 중 오류", "error", err); } });
+  };
+  const mo = new MutationObserver((records) => {
+    if (timer || !records.some((r) => r.removedNodes.length)) return;
+    timer = setTimeout(sweep, 0);
+  });
+  mo.observe(document.body, { childList: true, subtree: true });
+  return () => { mo.disconnect(); clearTimeout(timer); };
+}
 
 export const catui = {
-  version: "1.0.0",
+  version: VERSION,
   config,
   get cache() { return { config: getConfig(), modules: Object.keys(catuiModules) }; },
-  $, el, html, raw, escape, mount, icon, hint, data, sessionData, url, device, component,
+  $, el, html, raw, escape, mount, icon, hint, data, sessionData, url, device, component, csrfHeaders,
   ...catuiModules,
 
   // 모듈 불러오기. 모두 한 파일에 들어 있으므로 즉시(문서 준비 후) 콜백한다. Promise도 돌려준다.
@@ -41,8 +60,9 @@ export const catui = {
     const missing = list.filter((m) => !catuiModules[m]);
     if (missing.length) hint.error(`없는 모듈: ${missing.join(", ")} (catui.extend로 추가할 수 있습니다)`, "error");
     const args = list.map((m) => catuiModules[m]);
-    return new Promise((resolve) => {
-      const run = () => { callback?.apply(catui, args); resolve(args); };
+    return new Promise((resolve, reject) => {
+      // 콜백 오류는 Promise를 거부한다(DOMContentLoaded 뒤 실행돼도 대기 상태로 남지 않게)
+      const run = () => { try { callback?.apply(catui, args); resolve(args); } catch (err) { reject(err); } };
       if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run, { once: true }); else run();
     });
   },
@@ -51,6 +71,7 @@ export const catui = {
   extend(obj) {
     for (const [name, mod] of Object.entries(obj || {})) {
       if (catuiModules[name]) { hint.error(`이미 있는 모듈 이름입니다: ${name}`); continue; }
+      if (name in catui) { hint.error(`catui의 기본 API 이름은 모듈 이름으로 쓸 수 없습니다: ${name}`, "error"); continue; }
       catuiModules[name] = mod;
       catui[name] = mod;
     }
@@ -59,32 +80,41 @@ export const catui = {
   // 정의형: catui.define('chart', ['layer'], (layer) => ({ ... }))
   define(name, deps, factory) {
     if (typeof deps === "function") { factory = deps; deps = []; }
+    const missing = deps.filter((d) => !catuiModules[d]);
+    if (missing.length) { hint.error(`define('${name}'): 없는 의존 모듈 ${missing.join(", ")} — 먼저 정의해 주세요`, "error"); return catui; }
     return catui.extend({ [name]: factory(...deps.map((d) => catuiModules[d])) });
   },
 
   // 어느 모듈이든 이벤트: catui.onevent('form', 'submit(login)', fn) / catui.event('form', 'submit', 'login', data)
   onevent: onEvent,
+  offevent: offEvent,
   event: emit,
 
   // data-catui-* 선언형 마크업 연결. 자동 1회 실행되며, 새로 그린 영역은 catui.init(영역)으로 다시 준비한다.
   init(scope = document) {
+    const root = scopeOf(scope);   // 선택자 문자열·요소·document 모두 허용
+    if (!root) { hint.error(`catui.init: 영역을 찾을 수 없습니다 (${scope})`); return catui; }
     if (!catuiReady) {
       catuiReady = true;
-      catuiOffs = [form.bind(), tabs.bind(), table.bindStatic(), dropdown.bindDetails(), slider.bind(), rate.bind(), collapse.bind(), fx.bind()];
+      catuiOffs = [form.bind(), tabs.bind(), table.bindStatic(), dropdown.bindDetails(), slider.bind(), rate.bind(), collapse.bind(), fx.bind()].filter((f) => typeof f === "function");
       const overlays = bindToggleOverlays();
       catuiOffs.push(overlays.off);
-      catui._prepareOverlays = overlays.prepare;
-    } else catui._prepareOverlays?.(scope);
-    form.render(scope);
-    table.enhance(scope);
-    datePicker.enhance(scope);
+      catuiPrepareOverlays = overlays.prepare;
+      if (getConfig().autoDestroy) { const off = catuiWatchDetached(); if (off) catuiOffs.push(off); }
+    }
+    catuiPrepareOverlays?.(root);
+    form.render(root);
+    table.enhance(root);
+    datePicker.enhance(root);
     return catui;
   },
-  // 전역 연결 해제 (테스트·SPA 정리용)
+  // 전역 연결 해제 + 렌더한 인스턴스·열린 레이어 정리 (테스트·SPA 정리용)
   destroy() {
-    catuiOffs.forEach((f) => f());
+    catuiOffs.forEach((f) => { try { f(); } catch { /* 해제 실패 무시 */ } });
     catuiOffs = [];
+    catuiPrepareOverlays = null;
     catuiReady = false;
+    Object.values(catuiModules).forEach((m) => { try { m?.destroyAll?.(); } catch { /* 사용자 모듈 오류 무시 */ } });
     layer.closeAll();
   },
 };

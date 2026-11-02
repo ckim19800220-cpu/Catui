@@ -2,6 +2,7 @@ import { component } from "../core/component.js";
 import { html, raw, isRaw, escape } from "../core/html.js";
 import { mount, icon, uid } from "../core/dom.js";
 import { emit } from "../core/events.js";
+import { csrfHeaders } from "../core/base.js";
 import { laypage } from "./laypage.js";
 
 // table — 데이터 표.
@@ -114,7 +115,7 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
         const q = new URLSearchParams({ ...c.where, ...(c.page ? { page: s.curr, limit } : {}), ...(s.sort?.type ? { field: s.sort.field, order: s.sort.type } : {}) });
         const isGet = c.method.toUpperCase() === "GET";
         const res = await fetch(isGet ? `${c.url}${c.url.includes("?") ? "&" : "?"}${q}` : c.url, {
-          method: c.method, signal: ac.signal, headers: { Accept: "application/json", ...(isGet ? {} : { "Content-Type": "application/x-www-form-urlencoded" }), ...c.headers },
+          method: c.method, signal: ac.signal, headers: { Accept: "application/json", ...(isGet ? {} : { "Content-Type": "application/x-www-form-urlencoded" }), ...csrfHeaders(c.url, c.method), ...c.headers },
           body: isGet ? undefined : q,
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

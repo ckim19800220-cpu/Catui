@@ -1,5 +1,5 @@
 import { html, raw, isRaw } from "../core/html.js";
-import { layerRoot, icon, mount, FOCUSABLE } from "../core/dom.js";
+import { layerRoot, icon, mount, FOCUSABLE, imeBusy } from "../core/dom.js";
 
 // layer — 팝업 레이어. 모든 함수는 레이어 index(숫자)를 돌려주고 layer.close(index)로 닫는다.
 //   layer.msg('저장했습니다', { icon: 'success', position: 'tr', action: { text: '되돌리기', onClick } })
@@ -152,8 +152,12 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
     dlg.addEventListener("cancel", (e) => {
       e.preventDefault();
       if (o.loading) return;               // 로딩 레이어는 Esc로 닫지 않음
+      if (imeBusy()) return;               // 한글 조합 중(·직후) Esc는 조합만 끝내고 레이어는 유지
       tryCancel();
     });
+    // cancel 이전 단계에서도 막는다: Esc keydown의 기본 동작을 취소하면 브라우저가 cancel/close를 보내지 않는다
+    // (Chrome close-watcher는 cancel만 막으면 반복 Esc에서 강제로 닫을 수 있음)
+    dlg.addEventListener("keydown", (e) => { if (e.key === "Escape" && imeBusy(e)) e.preventDefault(); }, true);
     // 머리를 끌어 옮기기 (최대화 중에는 안 함). 화면 밖으로 나가지 않게 제한
     if (o.move && !isDrawer) {
       const head = dlg.querySelector(".Catui_modal-h");
@@ -282,16 +286,16 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
     const prev = el.getAttribute("aria-describedby");
     el.setAttribute("aria-describedby", [prev, tip.id].filter(Boolean).join(" "));
     let timer = 0;
-    const key = (e) => { if (e.key === "Escape") done(); };
+    const key = (e) => { if (e.key === "Escape" && !imeBusy(e) && !e.defaultPrevented) { e.preventDefault(); done(); } };   // 캡처 단계: 팁만 닫고 아래 모달은 유지
     const outside = (e) => { if (!tip.contains(e.target) && !el.contains(e.target)) done(); };
     const done = () => {
       clearTimeout(timer); tip.remove(); opened.delete(index);
       if (prev) el.setAttribute("aria-describedby", prev); else el.removeAttribute("aria-describedby");
-      document.removeEventListener("keydown", key); document.removeEventListener("pointerdown", outside, true);
+      document.removeEventListener("keydown", key, true); document.removeEventListener("pointerdown", outside, true);
       removeEventListener("resize", place); removeEventListener("scroll", place, true);
       options.end?.(index);
     };
-    document.addEventListener("keydown", key); document.addEventListener("pointerdown", outside, true);
+    document.addEventListener("keydown", key, true); document.addEventListener("pointerdown", outside, true);
     addEventListener("resize", place); addEventListener("scroll", place, true);
     const time = options.time ?? 3000;
     if (time > 0) timer = setTimeout(done, time);
@@ -518,7 +522,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
       const ok = getNode(index).querySelector('[data-catui-btn="0"]');
       // 제출 버튼이 폼 밖(꼬리)에 있으므로 한 줄 입력 칸의 Enter는 직접 제출
       el.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && !e.isComposing && e.target.matches("input:not([type=checkbox]):not([type=radio])")) { e.preventDefault(); el.requestSubmit(); }
+        if (e.key === "Enter" && !imeBusy(e) && e.target.matches("input:not([type=checkbox]):not([type=radio])")) { e.preventDefault(); el.requestSubmit(); }
       });
       el.addEventListener("submit", async (e) => {
         e.preventDefault();
