@@ -30,3 +30,7 @@
 /* 날짜 팝업은 메뉴 높이 제한·스크롤 없이 달력 전체를 보인다 */
 .Catui_dd-float:has(> .Catui_dp){max-height:none;overflow:visible}
 .Catui_dd-item[aria-current="true"],.Catui_dd-item:focus-visible{background:var(--Catui_dropdown-item-bg-hover);outline:none}
+/* 자동완성 목록(listbox)의 키보드 선택 항목 — 포커스는 입력 칸에 있고 aria-selected로 표시 */
+.Catui_dd-item[role="option"]{cursor:pointer}
+.Catui_dd-item[role="option"][aria-selected="true"]{background:var(--Catui_dropdown-item-bg-hover);box-shadow:inset 2px 0 0 var(--Catui_color-brand-strong)}
+.Catui_dd-item[role="option"][aria-disabled="true"]{color:var(--Catui_dropdown-item-fg-disabled);cursor:not-allowed}

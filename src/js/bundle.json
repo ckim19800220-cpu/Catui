@@ -4,8 +4,9 @@
     "modules/layer.js", "modules/form.js", "modules/laypage.js", "modules/table.js",
     "modules/tabs.js", "modules/dropdown.js", "modules/util.js",
     "modules/datePicker.js", "modules/upload.js", "modules/slider.js", "modules/rate.js", "modules/tree.js", "modules/collapse.js", "modules/canvas.js", "modules/fx.js",
+    "modules/carousel.js", "modules/field.js", "modules/autocomplete.js", "modules/command.js", "modules/page.js", "modules/site.js",
     "core/catui.js"
   ],
-  "exports": ["catui", "layer", "form", "laypage", "table", "tabs", "dropdown", "util", "datePicker", "upload", "slider", "rate", "tree", "collapse", "canvas", "fx", "html", "raw", "escape", "component", "$"],
+  "exports": ["catui", "layer", "form", "laypage", "table", "tabs", "dropdown", "util", "datePicker", "upload", "slider", "rate", "tree", "collapse", "canvas", "fx", "carousel", "field", "autocomplete", "command", "page", "site", "html", "raw", "escape", "component", "$"],
   "note": "core/env.js와 index.js는 번들에 넣지 않는다(env는 포맷별 헤더로 대체, index는 소스 ESM 진입점)."
 }

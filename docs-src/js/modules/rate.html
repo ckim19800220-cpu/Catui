@@ -22,6 +22,7 @@
 <tr><td><code>label · length · value · readonly</code></td><td>기본 값 (length 기본 5)</td></tr>
 <tr><td><code>text · texts[] · clearable</code></td><td>점수 문구 표시 · 문구 목록 · 지우기 버튼</td></tr>
 <tr><td><code>choose(v)</code></td><td>콜백 · 이벤트 <code>choose(f)</code> (마크업 <code>.Catui_rating[data-catui-filter]</code>도)</td></tr>
-<tr><td><code>inst.setValue(v)</code></td><td>값 바꾸기</td></tr>
+<tr><td><code>inst.setValue(v)</code> · <code>inst.getValue()</code> · <code>rate.setValue(id, v)</code> · <code>rate.getValue(id)</code></td><td>값 바꾸기·읽기 (0~length 범위로 맞춤)</td></tr>
+<tr><td><code>readonly</code> + 소수 값</td><td>3.6처럼 소수면 별은 반올림해 칠하고, 읽는 값은 "5점 중 3.6점"</td></tr>
 </tbody></table></div>
 </section>

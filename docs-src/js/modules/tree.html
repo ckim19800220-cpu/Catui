@@ -1,8 +1,9 @@
 <section aria-labelledby="basic">
 <h2 id="basic">트리</h2>
 <catui-example title="tree.render (체크박스)">
+  <div class="Catui_field"><label class="Catui_label" for="tr-q">트리 검색</label><input class="Catui_input" id="tr-q" type="search" placeholder="예: 청구" autocomplete="off"></div>
   <div id="tr-docs"></div>
-  <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="tr-get">체크 확인</button><span class="Catui_help" id="tr-out" aria-live="polite"></span></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="tr-get">체크 확인</button><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="tr-open">모두 펼치기</button><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="tr-close">모두 접기</button><span class="Catui_help" id="tr-out" aria-live="polite"></span></div>
   <script>
   catui.use(['tree'], function (tree) {
     var out = function (t) { document.getElementById('tr-out').textContent = t; };
@@ -15,6 +16,9 @@
     document.getElementById('tr-get').addEventListener('click', function () {
       out('체크: ' + (tree.getChecked('docs').map(function (n) { return n.title; }).join(', ') || '없음'));
     });
+    document.getElementById('tr-q').addEventListener('input', function (e) { tree.search('docs', e.target.value); });
+    document.getElementById('tr-open').addEventListener('click', function () { tree.expandAll('docs', true); });
+    document.getElementById('tr-close').addEventListener('click', function () { tree.expandAll('docs', false); });
   });
   </script>
 </catui-example>
@@ -30,5 +34,8 @@
 <tr><td><code>showCheckbox · accordion · label · selected</code></td><td>체크박스 · 형제 하나만 펼치기 · 이름 · 처음 선택</td></tr>
 <tr><td><code>click(obj)</code> · <code>oncheck(obj)</code></td><td>콜백 · 이벤트 <code>click(f)</code> · <code>check(f)</code> · <code>spread(f)</code></td></tr>
 <tr><td><code>getChecked(id)</code> · <code>setChecked(id, ids)</code> · <code>getSelected(id)</code></td><td>체크된 잎 / 체크 넣기 / 선택 노드</td></tr>
+<tr><td><code>tree.search(id, 검색어)</code></td><td>제목이 맞는 노드와 그 조상만 보이고 펼침. 빈 문자열이면 전체</td></tr>
+<tr><td><code>tree.expandAll(id, [open])</code> · <code>tree.clearChecked(id)</code></td><td>모두 펼치기(false면 접기) / 체크 모두 해제</td></tr>
+<tr><td>데이터</td><td>넘긴 <code>data</code>는 바꾸지 않습니다(부모 관계는 내부에만 보관) — 그대로 <code>JSON.stringify</code> 가능</td></tr>
 </tbody></table></div>
 </section>

@@ -9,22 +9,28 @@ import { mount, layerRoot, icon, uid, imeBusy } from "../core/dom.js";
 // 또, 마크업의 <details class="Catui_dd"> 메뉴도 자동으로 하나만 열기·바깥 클릭·Esc 닫기가 붙는다(bindDetails).
 export const dropdown = component({
   name: "dropdown",
-  config: { data: [], align: "left", width: "md", label: "", click: null },
+  // trigger: 'click'(기본) | 'contextmenu'(대상 영역 우클릭·Shift+F10·메뉴 키 위치에 열기)
+  // 항목: { id, title, icon, danger, disabled, href, target } — href가 있으면 링크로 이동
+  config: { data: [], align: "left", width: "md", label: "", trigger: "click", click: null },
   render(inst) {
     const c = inst.config;
     const trigger = inst.elem;
     if (!trigger) return;
     const menuId = uid("catui-dd");
-    trigger.setAttribute("aria-haspopup", "menu");
-    trigger.setAttribute("aria-expanded", "false");
-    trigger.setAttribute("aria-controls", menuId);
-    let panel = null, offs = [];
+    const ctx = c.trigger === "contextmenu";
+    if (!ctx) {
+      trigger.setAttribute("aria-haspopup", "menu");
+      trigger.setAttribute("aria-expanded", "false");
+      trigger.setAttribute("aria-controls", menuId);
+    }
+    let panel = null, offs = [], point = null, back = null;
 
-    const items = () => [...panel.querySelectorAll("[role=menuitem]:not([disabled])")];
+    const items = () => [...panel.querySelectorAll("[role=menuitem]:not([disabled]):not([aria-disabled=true])")];
     const place = () => {
-      const r = trigger.getBoundingClientRect();
+      // 우클릭 메뉴는 누른 지점 기준 (0 크기 사각형)
+      const r = point ? { left: point.x, right: point.x, top: point.y, bottom: point.y, width: 0 } : trigger.getBoundingClientRect();
       // 너비 옵션이 없으면 메뉴를 여는 버튼과 같은 너비로 (내용이 더 길면 그만큼 넓어짐)
-      if (!c.width) panel.style.minWidth = `${Math.round(r.width)}px`;
+      if (!c.width && !point) panel.style.minWidth = `${Math.round(r.width)}px`;
       const p = panel.getBoundingClientRect();
       const below = innerHeight - r.bottom, up = below < p.height + 8 && r.top > p.height + 8;
       panel.style.top = `${Math.round(up ? r.top - p.height - 4 : r.bottom + 4)}px`;
@@ -35,11 +41,14 @@ export const dropdown = component({
       if (!panel) return;
       offs.forEach((f) => f()); offs = [];
       panel.remove(); panel = null;
-      trigger.setAttribute("aria-expanded", "false");
-      if (focusTrigger) trigger.focus();
+      if (!ctx) trigger.setAttribute("aria-expanded", "false");
+      if (focusTrigger) (ctx && back?.isConnected ? back : trigger).focus?.();
+      point = null;
     };
-    const open = () => {
+    const open = (at) => {
       if (panel) return;
+      point = at || null;
+      back = document.activeElement;
       panel = document.createElement("div");
       panel.id = menuId;
       panel.className = `Catui_dd-menu Catui_dd-float${c.width === "sm" ? " Catui_dd-sm" : c.width === "lg" ? " Catui_dd-lg" : ""}`;
@@ -49,14 +58,26 @@ export const dropdown = component({
         ? html`<div class="Catui_dd-sep" role="separator"></div>`
         : d.type === "group"
           ? html`<p class="Catui_dd-group" role="presentation">${d.title}</p>`
-          : html`<button class="Catui_dd-item${d.danger ? " Catui_dd-danger" : ""}" type="button" role="menuitem" tabindex="-1" data-catui-i="${i}" ${d.disabled ? "disabled" : ""}>${d.icon ? icon(d.icon, 16) : ""}${d.title}</button>`))}`);
+          : d.href && !d.disabled && catuiSafeHref(d.href)
+            ? html`<a class="Catui_dd-item${d.danger ? " Catui_dd-danger" : ""}" role="menuitem" tabindex="-1" data-catui-i="${i}" href="${catuiSafeHref(d.href)}" ${d.target ? html`target="${d.target}" rel="noopener noreferrer"` : ""}>${d.icon ? icon(d.icon, 16) : ""}${d.title}</a>`
+            : html`<button class="Catui_dd-item${d.danger ? " Catui_dd-danger" : ""}" type="button" role="menuitem" tabindex="-1" data-catui-i="${i}" ${d.disabled ? "disabled" : ""}>${d.icon ? icon(d.icon, 16) : ""}${d.title}</button>`))}`);
       layerRoot().appendChild(panel);
-      trigger.setAttribute("aria-expanded", "true");
+      if (!ctx) trigger.setAttribute("aria-expanded", "true");
       place();
       items()[0]?.focus();
-      const onDoc = (e) => { if (!panel.contains(e.target) && !trigger.contains(e.target)) close(false); };
+      const onDoc = (e) => { if (!panel.contains(e.target) && (ctx || !trigger.contains(e.target))) close(false); };
+      let typed = "", typedAt = 0;
       const onKey = (e) => {
         const list = items(), i = list.indexOf(document.activeElement);
+        // 글자 검색: 글자를 치면 그 글자로 시작하는 다음 항목으로 (0.5초 안에 이어 치면 이어서 검색)
+        if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && e.key !== " " && !imeBusy(e)) {
+          const now = Date.now();
+          typed = now - typedAt < 500 ? typed + e.key.toLowerCase() : e.key.toLowerCase();
+          typedAt = now;
+          const order = [...list.slice(i + 1), ...list.slice(0, i + 1)];
+          (order.find((x) => x.textContent.trim().toLowerCase().startsWith(typed)) || (typed.length > 1 && list[i]))?.focus();
+          return;
+        }
         if (e.key === "ArrowDown") { e.preventDefault(); list[(i + 1) % list.length]?.focus(); }
         else if (e.key === "ArrowUp") { e.preventDefault(); list[(i - 1 + list.length) % list.length]?.focus(); }
         else if (e.key === "Home") { e.preventDefault(); list[0]?.focus(); }
@@ -69,8 +90,9 @@ export const dropdown = component({
         if (!b) return;
         const item = c.data[Number(b.dataset.catuiI)];
         const keep = c.click?.call(inst, item, trigger) === false;
+        if (keep && b.tagName === "A") e.preventDefault();      // false = 링크 이동도 하지 않음
         inst.emit("click", { data: item, elem: trigger });
-        if (!keep) close(true);
+        if (!keep) close(b.tagName !== "A");                     // 링크는 이동하므로 포커스를 되돌리지 않음
       };
       const onMove = () => place();
       document.addEventListener("pointerdown", onDoc, true);
@@ -85,14 +107,33 @@ export const dropdown = component({
       ];
     };
     const onTrigger = () => (panel ? close(true) : open());
-    const onTriggerKey = (e) => { if (e.key === "ArrowDown" && !panel) { e.preventDefault(); open(); } };
-    trigger.addEventListener("click", onTrigger);
+    const onTriggerKey = (e) => {
+      if (ctx) {
+        // 키보드 우클릭: Shift+F10 또는 메뉴 키 → 포커스된 요소 위치에 연다
+        if ((e.key === "F10" && e.shiftKey) || e.key === "ContextMenu") {
+          e.preventDefault();
+          const r = (document.activeElement && trigger.contains(document.activeElement) ? document.activeElement : trigger).getBoundingClientRect();
+          close(false); open({ x: r.left + 8, y: r.top + Math.min(r.height, 24) });
+        }
+        return;
+      }
+      if (e.key === "ArrowDown" && !panel) { e.preventDefault(); open(); }
+    };
+    const onContext = (e) => {
+      if (e.shiftKey && e.button === 2) return;              // Shift+우클릭은 브라우저 기본 메뉴를 남겨 둔다
+      e.preventDefault();
+      if (e.button === -1 || (e.clientX === 0 && e.clientY === 0)) return;   // 키보드 contextmenu는 keydown에서 이미 열었음
+      close(false);
+      open({ x: e.clientX, y: e.clientY });
+    };
+    if (ctx) trigger.addEventListener("contextmenu", onContext); else trigger.addEventListener("click", onTrigger);
     trigger.addEventListener("keydown", onTriggerKey);
-    inst.open = open;
+    inst.open = (at) => open(at);
     inst.close = () => close(false);
     inst.use(() => {
       close(false);
       trigger.removeEventListener("click", onTrigger);
+      trigger.removeEventListener("contextmenu", onContext);
       trigger.removeEventListener("keydown", onTriggerKey);
       ["aria-haspopup", "aria-expanded", "aria-controls"].forEach((a) => trigger.removeAttribute(a));
     });
@@ -131,3 +172,8 @@ export const dropdown = component({
     };
   },
 });
+
+// 메뉴 링크는 같은 사이트 상대 경로·http·https·mailto·tel만 (javascript: 차단)
+function catuiSafeHref(u) {
+  try { const url = new URL(String(u), location.href); return /^(https?|mailto|tel):$/.test(url.protocol) ? String(u) : null; } catch { return null; }
+}

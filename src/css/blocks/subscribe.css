@@ -8,4 +8,5 @@
 /* 구독 띠(브랜드 배경) · 완료 상태 */
 .Catui_subscribe-band{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-4);padding:var(--Catui_space-7);border-radius:var(--Catui_radius-lg);background:var(--Catui_sidebar-bg);color:var(--Catui_sidebar-fg)}
 .Catui_subscribe-band .Catui_subscribe-note{color:var(--Catui_sidebar-fg-muted)}
+.Catui_subscribe[hidden]{display:none}
 .Catui_subscribe-done{display:flex;align-items:center;gap:var(--Catui_space-2);color:var(--Catui_badge-success-fg);font-weight:600}

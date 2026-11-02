@@ -13,6 +13,21 @@
 <p>현재 쪽을 가운데 둔 번호 묶음과 처음·끝 쪽, 사이가 비면 …을 보입니다. 처음 렌더할 때 <code>jump</code>가 <code>first === true</code>로 한 번 호출됩니다.</p>
 </section>
 
+<section aria-labelledby="layout">
+<h2 id="layout">총 건수 · 쪽 크기 · 바로 가기</h2>
+<catui-example title="layout · limits">
+  <nav id="lp-full"></nav>
+  <p class="Catui_help" id="lp-out2" aria-live="polite"></p>
+  <script>
+  catui.use(['laypage'], function (laypage) {
+    laypage.render({ elem: '#lp-full', count: 1234, limit: 20, layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'], limits: [10, 20, 50],
+      jump: function (obj) { document.getElementById('lp-out2').textContent = obj.curr + ' / ' + obj.pages + '쪽 · ' + obj.limit + '개씩'; } });
+  });
+  </script>
+</catui-example>
+<p>쪽 크기를 바꾸면 보던 첫 항목이 들어 있는 쪽으로 옮기고, 바로 가기는 1~끝 쪽 범위로 맞춥니다.</p>
+</section>
+
 <section aria-labelledby="options">
 <h2 id="options">옵션</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">laypage 옵션</caption>
@@ -22,5 +37,7 @@
 <tr><td><code>groups</code></td><td>5</td><td>번호 버튼 개수</td></tr>
 <tr><td><code>jump(obj, first)</code></td><td>—</td><td><code>{ curr, limit, count, pages }</code> · 이벤트 <code>jump(f)</code></td></tr>
 <tr><td><code>label</code> · <code>alwaysShow</code></td><td>'페이지' · false</td><td>nav 이름 · 한 쪽이어도 표시</td></tr>
+<tr><td><code>layout</code></td><td>['prev','page','next']</td><td>고른 순서대로: <code>count</code> 총 건수 · <code>prev</code> · <code>page</code> · <code>next</code> · <code>limit</code> 쪽 크기 고르기 · <code>skip</code> 쪽 번호 입력 후 이동</td></tr>
+<tr><td><code>limits</code></td><td>[10, 20, 50, 100]</td><td><code>limit</code> 고르기 목록. 쪽 크기를 바꾸면 보던 첫 항목이 있는 쪽으로 이동하고 <code>jump</code>의 <code>obj.limit</code>에 새 값</td></tr>
 </tbody></table></div>
 </section>

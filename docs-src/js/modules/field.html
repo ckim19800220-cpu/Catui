@@ -1,0 +1,56 @@
+<section aria-labelledby="tags">
+<h2 id="tags">태그 입력</h2>
+<catui-example title="data-catui-tags (최대 5개 · 중복 거부 · 쉼표 붙여넣기)">
+  <div class="Catui_field"><label class="Catui_label" for="fd-tags">관심 분야</label>
+    <input class="Catui_input" id="fd-tags" name="topics" placeholder="입력 후 Enter 또는 쉼표" data-catui-tags="디자인,개발" data-catui-max="5" aria-describedby="fd-tags-h">
+    <p class="Catui_help" id="fd-tags-h">Enter·쉼표로 추가, 빈 칸에서 Backspace로 마지막 태그를 지웁니다.</p>
+  </div>
+</catui-example>
+<p>한글을 조합하는 중의 Enter는 글자 확정으로만 처리합니다. 폼으로 보낼 값은 같은 <code>name</code>의 숨은 입력에 쉼표로 이어 담습니다. 추가·제거는 화면 낭독기로도 알립니다.</p>
+</section>
+
+<section aria-labelledby="stepper">
+<h2 id="stepper">수량 증감</h2>
+<catui-example title="data-catui-stepper (1~9, 길게 누르면 반복)">
+  <span class="Catui_label" id="fd-qty-l">인원</span>
+  <div class="Catui_stepper" data-catui-stepper data-catui-min="1" data-catui-max="9" data-catui-value="2" data-catui-name="people" data-catui-unit="명" aria-labelledby="fd-qty-l"></div>
+</catui-example>
+<p>경계에서는 해당 버튼이 잠기고 포커스가 반대 버튼으로 옮겨 갑니다. 버튼에 포커스가 있을 때 ↑↓·PageUp/PageDown(10단계)·Home/End도 됩니다.</p>
+</section>
+
+<section aria-labelledby="counter">
+<h2 id="counter">글자 수</h2>
+<catui-example title="data-catui-counter (85%부터 경고, 넘치면 초과 표시)">
+  <div class="Catui_field"><label class="Catui_label" for="fd-bio">소개</label><textarea class="Catui_input" id="fd-bio" rows="3" data-catui-counter="60">안녕하세요.</textarea></div>
+</catui-example>
+<p><code>maxlength</code>가 있으면 그 값을, 없으면 <code>data-catui-counter="최대"</code>를 씁니다. 표시 문구는 경고·초과 구간에 들어설 때만 읽혀 매 글자마다 방해하지 않습니다.</p>
+</section>
+
+<section aria-labelledby="otp">
+<h2 id="otp">인증 코드</h2>
+<catui-example title="data-catui-otp (자동 이동 · 붙여넣기 분배)">
+  <fieldset class="Catui_otp" id="fd-otp" data-catui-otp data-catui-name="code" data-catui-filter="fd-otp" aria-describedby="fd-otp-h"><legend class="Catui_label">인증 코드</legend>
+    <input class="Catui_input" inputmode="numeric" aria-label="1번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="2번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="3번째 숫자"><span class="Catui_otp-sep" aria-hidden="true">–</span><input class="Catui_input" inputmode="numeric" aria-label="4번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="5번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="6번째 숫자">
+  </fieldset>
+  <p class="Catui_help" id="fd-otp-h">문자로 받은 6자리 숫자 — "123456"을 붙여 넣어 보세요.</p>
+  <p class="Catui_help" id="fd-otp-out" aria-live="polite"></p>
+  <script>
+  catui.use(['field'], function (field) {
+    field.otp.on('complete(fd-otp)', function (o) { document.getElementById('fd-otp-out').textContent = '입력 완료: ' + o.value; });
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">field API</caption>
+<thead><tr><th scope="col">컴포넌트</th><th scope="col">옵션 · 메서드 · 이벤트</th></tr></thead>
+<tbody>
+<tr><td><code>field.tags.render({ elem })</code></td><td><code>max · value[] · duplicate(false) · maxLength(30) · separator(',') · name</code> / <code>inst.add(t) · remove(t|i) · getValue() · setValue([])</code> / <code>change(f)</code> <code>{ value }</code></td></tr>
+<tr><td><code>field.stepper.render({ elem })</code></td><td><code>min · max · step · value · name · unit · label</code> / <code>inst.getValue() · setValue(v)</code> / <code>change(f)</code> <code>{ value }</code>. 소수 단계(0.1)도 오차 없이</td></tr>
+<tr><td><code>field.counter.render({ elem })</code></td><td><code>max</code>(없으면 maxlength) · <code>warn</code>(0.85) · <code>target</code>(표시 요소) / <code>inst.refresh()</code></td></tr>
+<tr><td><code>field.otp.render({ elem })</code></td><td><code>pattern</code>(기본 숫자, <code>data-catui-otp="alnum"</code>은 영문·숫자) · <code>name</code> · <code>complete(code)</code> / <code>inst.getValue() · clear() · setError(bool)</code> / <code>complete(f)</code> <code>{ value }</code></td></tr>
+<tr><td>선언형</td><td><code>input[data-catui-tags="초기,값"]</code>(+<code>data-catui-max</code>) · <code>[data-catui-stepper]</code>(+<code>data-catui-min/max/step/value/name/unit</code>) · <code>[data-catui-counter="최대"]</code> · <code>fieldset[data-catui-otp]</code>(+<code>data-catui-name</code>)</td></tr>
+</tbody></table></div>
+</section>

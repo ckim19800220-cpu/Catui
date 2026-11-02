@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>carousel 캐러셀 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="스크롤 스냅 캐러셀에 현재 표시·이전/다음·점·자동 넘김(정지 버튼)·키보드.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html">util 도구</a></li><li><a href="../../js/modules/carousel.html" aria-current="page">carousel 캐러셀</a></li><li><a href="../../js/modules/field.html">field 입력 보강</a></li><li><a href="../../js/modules/autocomplete.html">autocomplete 자동완성</a></li><li><a href="../../js/modules/command.html">command 명령 팔레트</a></li><li><a href="../../js/modules/page.html">page 페이지 도구</a></li><li><a href="../../js/modules/site.html">site 홈페이지 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 모듈</p>
+<h1 class="Catui_h1">carousel 캐러셀</h1>
+<p class="Catui_lead">스크롤 스냅 캐러셀에 현재 표시·이전/다음·점·자동 넘김(정지 버튼)·키보드.</p>
+
+<section aria-labelledby="basic">
+<h2 id="basic">끊김 없는 순환 + 자동 넘김</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-carousel (5초 · 진행 막대 · 장 번호 · 정지 버튼)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_carousel" data-catui-carousel data-catui-autoplay="5000" data-catui-progress data-catui-counter aria-label="이번 주 기획전">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23E6F7F3'/%3E%3Cpath d='M0 200 L180 120 L300 170 L460 80 L640 150 V240 H0Z' fill='%2326B99A'/%3E%3Ctext x='40' y='70' font-size='40' font-family='sans-serif' fill='%230E7A63'%3E1 봄 기획전%3C/text%3E%3C/svg%3E" alt="1 봄 기획전" width="640" height="240"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23EAF4FB'/%3E%3Cpath d='M0 200 L180 120 L300 170 L460 80 L640 150 V240 H0Z' fill='%233498DB'/%3E%3Ctext x='40' y='70' font-size='40' font-family='sans-serif' fill='%231F6FA8'%3E2 여름 준비전%3C/text%3E%3C/svg%3E" alt="2 여름 준비전" width="640" height="240"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23F5EEF8'/%3E%3Cpath d='M0 200 L180 120 L300 170 L460 80 L640 150 V240 H0Z' fill='%239B59B6'/%3E%3Ctext x='40' y='70' font-size='40' font-family='sans-serif' fill='%237D3C98'%3E3 신상품%3C/text%3E%3C/svg%3E" alt="3 신상품" width="640" height="240"></div>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-carousel (5초 · 진행 막대 · 장 번호 · 정지 버튼) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_carousel&quot; data-catui-carousel data-catui-autoplay=&quot;5000&quot; data-catui-progress data-catui-counter aria-label=&quot;이번 주 기획전&quot;&gt;
+  &lt;div class=&quot;Catui_carousel-track&quot;&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 240&#39;%3E%3Crect width=&#39;640&#39; height=&#39;240&#39; fill=&#39;%23E6F7F3&#39;/%3E%3Cpath d=&#39;M0 200 L180 120 L300 170 L460 80 L640 150 V240 H0Z&#39; fill=&#39;%2326B99A&#39;/%3E%3Ctext x=&#39;40&#39; y=&#39;70&#39; font-size=&#39;40&#39; font-family=&#39;sans-serif&#39; fill=&#39;%230E7A63&#39;%3E1 봄 기획전%3C/text%3E%3C/svg%3E&quot; alt=&quot;1 봄 기획전&quot; width=&quot;640&quot; height=&quot;240&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 240&#39;%3E%3Crect width=&#39;640&#39; height=&#39;240&#39; fill=&#39;%23EAF4FB&#39;/%3E%3Cpath d=&#39;M0 200 L180 120 L300 170 L460 80 L640 150 V240 H0Z&#39; fill=&#39;%233498DB&#39;/%3E%3Ctext x=&#39;40&#39; y=&#39;70&#39; font-size=&#39;40&#39; font-family=&#39;sans-serif&#39; fill=&#39;%231F6FA8&#39;%3E2 여름 준비전%3C/text%3E%3C/svg%3E&quot; alt=&quot;2 여름 준비전&quot; width=&quot;640&quot; height=&quot;240&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 240&#39;%3E%3Crect width=&#39;640&#39; height=&#39;240&#39; fill=&#39;%23F5EEF8&#39;/%3E%3Cpath d=&#39;M0 200 L180 120 L300 170 L460 80 L640 150 V240 H0Z&#39; fill=&#39;%239B59B6&#39;/%3E%3Ctext x=&#39;40&#39; y=&#39;70&#39; font-size=&#39;40&#39; font-family=&#39;sans-serif&#39; fill=&#39;%237D3C98&#39;%3E3 신상품%3C/text%3E%3C/svg%3E&quot; alt=&quot;3 신상품&quot; width=&quot;640&quot; height=&quot;240&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>마지막 장에서 다음으로 가면 처음으로 <b>되감지 않고</b> 이어서 1번이 나옵니다(양 끝에 복제 슬라이드를 두고, 복제에 닿으면 같은 그림인 진짜 위치로 순간 이동). 복제는 <code>inert</code>·<code>aria-hidden</code>이라 키보드·화면 낭독기에는 보이지 않습니다. 마우스를 올리거나 포커스가 들어오면 잠시 멈추고, 정지 버튼으로 끄면 다시 켤 때까지 멈춥니다. 모션 줄이기·숨은 탭에서는 넘기지 않습니다. 데스크톱은 마우스로 끌어서도 넘깁니다.</p>
+</section>
+
+<section aria-labelledby="multi">
+<h2 id="multi">여러 장 보기 (반응형)</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-per-view=&amp;quot;1,600:2,900:3&amp;quot;</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_carousel" data-catui-carousel data-catui-per-view="1,600:2,900:3" data-catui-counter aria-label="추천 상품">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect width='320' height='200' fill='%23FEF7E0'/%3E%3Ctext x='24' y='60' font-size='32' font-family='sans-serif' fill='%239A5B0F'%3E상품 A%3C/text%3E%3C/svg%3E" alt="상품 A" width="320" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect width='320' height='200' fill='%23FDECEA'/%3E%3Ctext x='24' y='60' font-size='32' font-family='sans-serif' fill='%23C0392B'%3E상품 B%3C/text%3E%3C/svg%3E" alt="상품 B" width="320" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect width='320' height='200' fill='%23E6F7F3'/%3E%3Ctext x='24' y='60' font-size='32' font-family='sans-serif' fill='%230E7A63'%3E상품 C%3C/text%3E%3C/svg%3E" alt="상품 C" width="320" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect width='320' height='200' fill='%23EAF4FB'/%3E%3Ctext x='24' y='60' font-size='32' font-family='sans-serif' fill='%231F6FA8'%3E상품 D%3C/text%3E%3C/svg%3E" alt="상품 D" width="320" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect width='320' height='200' fill='%23F5EEF8'/%3E%3Ctext x='24' y='60' font-size='32' font-family='sans-serif' fill='%237D3C98'%3E상품 E%3C/text%3E%3C/svg%3E" alt="상품 E" width="320" height="200"></div>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-per-view=&amp;quot;1,600:2,900:3&amp;quot; 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_carousel&quot; data-catui-carousel data-catui-per-view=&quot;1,600:2,900:3&quot; data-catui-counter aria-label=&quot;추천 상품&quot;&gt;
+  &lt;div class=&quot;Catui_carousel-track&quot;&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 320 200&#39;%3E%3Crect width=&#39;320&#39; height=&#39;200&#39; fill=&#39;%23FEF7E0&#39;/%3E%3Ctext x=&#39;24&#39; y=&#39;60&#39; font-size=&#39;32&#39; font-family=&#39;sans-serif&#39; fill=&#39;%239A5B0F&#39;%3E상품 A%3C/text%3E%3C/svg%3E&quot; alt=&quot;상품 A&quot; width=&quot;320&quot; height=&quot;200&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 320 200&#39;%3E%3Crect width=&#39;320&#39; height=&#39;200&#39; fill=&#39;%23FDECEA&#39;/%3E%3Ctext x=&#39;24&#39; y=&#39;60&#39; font-size=&#39;32&#39; font-family=&#39;sans-serif&#39; fill=&#39;%23C0392B&#39;%3E상품 B%3C/text%3E%3C/svg%3E&quot; alt=&quot;상품 B&quot; width=&quot;320&quot; height=&quot;200&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 320 200&#39;%3E%3Crect width=&#39;320&#39; height=&#39;200&#39; fill=&#39;%23E6F7F3&#39;/%3E%3Ctext x=&#39;24&#39; y=&#39;60&#39; font-size=&#39;32&#39; font-family=&#39;sans-serif&#39; fill=&#39;%230E7A63&#39;%3E상품 C%3C/text%3E%3C/svg%3E&quot; alt=&quot;상품 C&quot; width=&quot;320&quot; height=&quot;200&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 320 200&#39;%3E%3Crect width=&#39;320&#39; height=&#39;200&#39; fill=&#39;%23EAF4FB&#39;/%3E%3Ctext x=&#39;24&#39; y=&#39;60&#39; font-size=&#39;32&#39; font-family=&#39;sans-serif&#39; fill=&#39;%231F6FA8&#39;%3E상품 D%3C/text%3E%3C/svg%3E&quot; alt=&quot;상품 D&quot; width=&quot;320&quot; height=&quot;200&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 320 200&#39;%3E%3Crect width=&#39;320&#39; height=&#39;200&#39; fill=&#39;%23F5EEF8&#39;/%3E%3Ctext x=&#39;24&#39; y=&#39;60&#39; font-size=&#39;32&#39; font-family=&#39;sans-serif&#39; fill=&#39;%237D3C98&#39;%3E상품 E%3C/text%3E%3C/svg%3E&quot; alt=&quot;상품 E&quot; width=&quot;320&quot; height=&quot;200&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>폭이 600px 이상이면 2장, 900px 이상이면 3장을 한 번에 보여 주고, 폭이 바뀌면 다시 배치합니다. 순환은 여러 장일 때도 끊김 없이 이어집니다.</p>
+</section>
+
+<section aria-labelledby="fade">
+<h2 id="fade">페이드 전환</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">Catui_carousel-fade (data-catui-effect=&amp;quot;fade&amp;quot;)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_carousel Catui_carousel-fade" data-catui-carousel data-catui-effect="fade" data-catui-autoplay="4000" aria-label="공지 배너">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 160'%3E%3Crect width='640' height='160' fill='%232A3F54'/%3E%3Ctext x='32' y='92' font-size='34' font-family='sans-serif' fill='%23FFFFFF'%3E서버 점검 안내 — 토요일 02:00%3C/text%3E%3C/svg%3E" alt="서버 점검 안내 — 토요일 02:00" width="640" height="160"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 160'%3E%3Crect width='640' height='160' fill='%230E7A63'/%3E%3Ctext x='32' y='92' font-size='34' font-family='sans-serif' fill='%23FFFFFF'%3E새 기능: 명령 팔레트 Ctrl+K%3C/text%3E%3C/svg%3E" alt="새 기능: 명령 팔레트 Ctrl+K" width="640" height="160"></div>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="Catui_carousel-fade (data-catui-effect=&amp;quot;fade&amp;quot;) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_carousel Catui_carousel-fade&quot; data-catui-carousel data-catui-effect=&quot;fade&quot; data-catui-autoplay=&quot;4000&quot; aria-label=&quot;공지 배너&quot;&gt;
+  &lt;div class=&quot;Catui_carousel-track&quot;&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 160&#39;%3E%3Crect width=&#39;640&#39; height=&#39;160&#39; fill=&#39;%232A3F54&#39;/%3E%3Ctext x=&#39;32&#39; y=&#39;92&#39; font-size=&#39;34&#39; font-family=&#39;sans-serif&#39; fill=&#39;%23FFFFFF&#39;%3E서버 점검 안내 — 토요일 02:00%3C/text%3E%3C/svg%3E&quot; alt=&quot;서버 점검 안내 — 토요일 02:00&quot; width=&quot;640&quot; height=&quot;160&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 160&#39;%3E%3Crect width=&#39;640&#39; height=&#39;160&#39; fill=&#39;%230E7A63&#39;/%3E%3Ctext x=&#39;32&#39; y=&#39;92&#39; font-size=&#39;34&#39; font-family=&#39;sans-serif&#39; fill=&#39;%23FFFFFF&#39;%3E새 기능: 명령 팔레트 Ctrl+K%3C/text%3E%3C/svg%3E&quot; alt=&quot;새 기능: 명령 팔레트 Ctrl+K&quot; width=&quot;640&quot; height=&quot;160&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>슬라이드를 한 칸에 겹치고 현재 장만 서서히 보입니다. 손가락·마우스로 좌우로 밀어도 넘어갑니다. 모션 줄이기에서는 전환 없이 바로 바뀝니다.</p>
+</section>
+
+<section aria-labelledby="api-render">
+<h2 id="api-render">스크립트로 만들기</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">carousel.render + change 이벤트 (순환 없음 · 옆 장 엿보기)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_carousel Catui_carousel-peek" id="car-js" data-catui-filter="car-js" aria-label="이용 안내">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 200'%3E%3Crect width='640' height='200' fill='%23FEF7E0'/%3E%3Ctext x='32' y='70' font-size='32' font-family='sans-serif' fill='%239A5B0F'%3E1단계 가입%3C/text%3E%3C/svg%3E" alt="1단계 가입" width="640" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 200'%3E%3Crect width='640' height='200' fill='%23FDECEA'/%3E%3Ctext x='32' y='70' font-size='32' font-family='sans-serif' fill='%23C0392B'%3E2단계 설정%3C/text%3E%3C/svg%3E" alt="2단계 설정" width="640" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 200'%3E%3Crect width='640' height='200' fill='%23E6F7F3'/%3E%3Ctext x='32' y='70' font-size='32' font-family='sans-serif' fill='%230E7A63'%3E3단계 시작%3C/text%3E%3C/svg%3E" alt="3단계 시작" width="640" height="200"></div>
+    </div>
+  </div>
+  <p class="Catui_help" id="car-out" aria-live="polite"></p>
+  <script>
+  catui.use(['carousel'], function (carousel) {
+    carousel.render({ elem: '#car-js', id: 'car-js', loop: false, counter: true });
+    carousel.on('change(car-js)', function (o) { document.getElementById('car-out').textContent = (o.index + 1) + ' / ' + o.total + '번째'; });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="carousel.render + change 이벤트 (순환 없음 · 옆 장 엿보기) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_carousel Catui_carousel-peek&quot; id=&quot;car-js&quot; data-catui-filter=&quot;car-js&quot; aria-label=&quot;이용 안내&quot;&gt;
+  &lt;div class=&quot;Catui_carousel-track&quot;&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 200&#39;%3E%3Crect width=&#39;640&#39; height=&#39;200&#39; fill=&#39;%23FEF7E0&#39;/%3E%3Ctext x=&#39;32&#39; y=&#39;70&#39; font-size=&#39;32&#39; font-family=&#39;sans-serif&#39; fill=&#39;%239A5B0F&#39;%3E1단계 가입%3C/text%3E%3C/svg%3E&quot; alt=&quot;1단계 가입&quot; width=&quot;640&quot; height=&quot;200&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 200&#39;%3E%3Crect width=&#39;640&#39; height=&#39;200&#39; fill=&#39;%23FDECEA&#39;/%3E%3Ctext x=&#39;32&#39; y=&#39;70&#39; font-size=&#39;32&#39; font-family=&#39;sans-serif&#39; fill=&#39;%23C0392B&#39;%3E2단계 설정%3C/text%3E%3C/svg%3E&quot; alt=&quot;2단계 설정&quot; width=&quot;640&quot; height=&quot;200&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 200&#39;%3E%3Crect width=&#39;640&#39; height=&#39;200&#39; fill=&#39;%23E6F7F3&#39;/%3E%3Ctext x=&#39;32&#39; y=&#39;70&#39; font-size=&#39;32&#39; font-family=&#39;sans-serif&#39; fill=&#39;%230E7A63&#39;%3E3단계 시작%3C/text%3E%3C/svg%3E&quot; alt=&quot;3단계 시작&quot; width=&quot;640&quot; height=&quot;200&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;car-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;carousel&#39;], function (carousel) {
+  carousel.render({ elem: &#39;#car-js&#39;, id: &#39;car-js&#39;, loop: false, counter: true });
+  carousel.on(&#39;change(car-js)&#39;, function (o) { document.getElementById(&#39;car-out&#39;).textContent = (o.index + 1) + &#39; / &#39; + o.total + &#39;번째&#39;; });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>순환을 끄면 처음·끝에서 이전·다음 버튼이 잠깁니다.</p>
+</section>
+
+<section aria-labelledby="vertical">
+<h2 id="vertical">세로 방향</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">Catui_carousel-vertical (data-catui-direction=&amp;quot;vertical&amp;quot; · 높이 240 · 휠로 넘기기)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_carousel Catui_carousel-vertical" data-catui-carousel data-catui-direction="vertical" data-catui-height="240" data-catui-wheel data-catui-autoplay="4000" data-catui-counter aria-label="실시간 소식">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23E6F7F3'/%3E%3Ctext x='40' y='130' font-size='36' font-family='sans-serif' fill='%230E7A63'%3E소식 1 · 신규 매장 오픈%3C/text%3E%3C/svg%3E" alt="소식 1 · 신규 매장 오픈" width="640" height="240"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23EAF4FB'/%3E%3Ctext x='40' y='130' font-size='36' font-family='sans-serif' fill='%231F6FA8'%3E소식 2 · 앱 3.0 출시%3C/text%3E%3C/svg%3E" alt="소식 2 · 앱 3.0 출시" width="640" height="240"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23F5EEF8'/%3E%3Ctext x='40' y='130' font-size='36' font-family='sans-serif' fill='%237D3C98'%3E소식 3 · 회원 혜택 확대%3C/text%3E%3C/svg%3E" alt="소식 3 · 회원 혜택 확대" width="640" height="240"></div>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="Catui_carousel-vertical (data-catui-direction=&amp;quot;vertical&amp;quot; · 높이 240 · 휠로 넘기기) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_carousel Catui_carousel-vertical&quot; data-catui-carousel data-catui-direction=&quot;vertical&quot; data-catui-height=&quot;240&quot; data-catui-wheel data-catui-autoplay=&quot;4000&quot; data-catui-counter aria-label=&quot;실시간 소식&quot;&gt;
+  &lt;div class=&quot;Catui_carousel-track&quot;&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 240&#39;%3E%3Crect width=&#39;640&#39; height=&#39;240&#39; fill=&#39;%23E6F7F3&#39;/%3E%3Ctext x=&#39;40&#39; y=&#39;130&#39; font-size=&#39;36&#39; font-family=&#39;sans-serif&#39; fill=&#39;%230E7A63&#39;%3E소식 1 · 신규 매장 오픈%3C/text%3E%3C/svg%3E&quot; alt=&quot;소식 1 · 신규 매장 오픈&quot; width=&quot;640&quot; height=&quot;240&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 240&#39;%3E%3Crect width=&#39;640&#39; height=&#39;240&#39; fill=&#39;%23EAF4FB&#39;/%3E%3Ctext x=&#39;40&#39; y=&#39;130&#39; font-size=&#39;36&#39; font-family=&#39;sans-serif&#39; fill=&#39;%231F6FA8&#39;%3E소식 2 · 앱 3.0 출시%3C/text%3E%3C/svg%3E&quot; alt=&quot;소식 2 · 앱 3.0 출시&quot; width=&quot;640&quot; height=&quot;240&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 240&#39;%3E%3Crect width=&#39;640&#39; height=&#39;240&#39; fill=&#39;%23F5EEF8&#39;/%3E%3Ctext x=&#39;40&#39; y=&#39;130&#39; font-size=&#39;36&#39; font-family=&#39;sans-serif&#39; fill=&#39;%237D3C98&#39;%3E소식 3 · 회원 혜택 확대%3C/text%3E%3C/svg%3E&quot; alt=&quot;소식 3 · 회원 혜택 확대&quot; width=&quot;640&quot; height=&quot;240&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>위아래로 넘기고(↑↓ 키, 마우스 끌기, 손가락), 순환·여러 장·가운데 정렬도 가로와 똑같이 동작합니다. <code>wheel</code>을 켜면 휠 한 번에 한 장씩 넘기고, 순환이 꺼진 상태에서 끝에 닿으면 페이지 스크롤로 넘겨 줍니다.</p>
+</section>
+
+<section aria-labelledby="thumbs">
+<h2 id="thumbs">미리보기(썸네일) · 내용 높이 맞추기</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-thumbs · data-catui-auto-height (상품 사진)</figcaption>
+<div class="doc-example-preview">
+  <!-- catui.js가 Catui_carousel-thumbs 줄과 Catui_carousel-thumb 버튼을 만듭니다 (data-catui-thumb로 작은 그림 지정 가능) -->
+  <div class="Catui_carousel" data-catui-carousel data-catui-thumbs data-catui-dots="false" data-catui-auto-height aria-label="상품 사진">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23FEF7E0'/%3E%3Ccircle cx='320' cy='180' r='110' fill='%23F1C40F'/%3E%3C/svg%3E" alt="정면" width="640" height="360"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23FDECEA'/%3E%3Crect x='220' y='40' width='200' height='160' fill='%23E67E22'/%3E%3C/svg%3E" alt="측면 (낮은 사진)" width="640" height="240"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'%3E%3Crect width='640' height='420' fill='%23E6F7F3'/%3E%3Cpath d='M320 60 L520 360 H120Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="윗면 (높은 사진)" width="640" height="420"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23EAF4FB'/%3E%3Crect x='180' y='90' width='280' height='180' rx='24' fill='%233498DB'/%3E%3C/svg%3E" alt="포장" width="640" height="360"></div>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-thumbs · data-catui-auto-height (상품 사진) 코드 복사">복사</button><pre><code>&lt;!-- catui.js가 Catui_carousel-thumbs 줄과 Catui_carousel-thumb 버튼을 만듭니다 (data-catui-thumb로 작은 그림 지정 가능) --&gt;
+&lt;div class=&quot;Catui_carousel&quot; data-catui-carousel data-catui-thumbs data-catui-dots=&quot;false&quot; data-catui-auto-height aria-label=&quot;상품 사진&quot;&gt;
+  &lt;div class=&quot;Catui_carousel-track&quot;&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 360&#39;%3E%3Crect width=&#39;640&#39; height=&#39;360&#39; fill=&#39;%23FEF7E0&#39;/%3E%3Ccircle cx=&#39;320&#39; cy=&#39;180&#39; r=&#39;110&#39; fill=&#39;%23F1C40F&#39;/%3E%3C/svg%3E&quot; alt=&quot;정면&quot; width=&quot;640&quot; height=&quot;360&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 240&#39;%3E%3Crect width=&#39;640&#39; height=&#39;240&#39; fill=&#39;%23FDECEA&#39;/%3E%3Crect x=&#39;220&#39; y=&#39;40&#39; width=&#39;200&#39; height=&#39;160&#39; fill=&#39;%23E67E22&#39;/%3E%3C/svg%3E&quot; alt=&quot;측면 (낮은 사진)&quot; width=&quot;640&quot; height=&quot;240&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 420&#39;%3E%3Crect width=&#39;640&#39; height=&#39;420&#39; fill=&#39;%23E6F7F3&#39;/%3E%3Cpath d=&#39;M320 60 L520 360 H120Z&#39; fill=&#39;%2326B99A&#39;/%3E%3C/svg%3E&quot; alt=&quot;윗면 (높은 사진)&quot; width=&quot;640&quot; height=&quot;420&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 360&#39;%3E%3Crect width=&#39;640&#39; height=&#39;360&#39; fill=&#39;%23EAF4FB&#39;/%3E%3Crect x=&#39;180&#39; y=&#39;90&#39; width=&#39;280&#39; height=&#39;180&#39; rx=&#39;24&#39; fill=&#39;%233498DB&#39;/%3E%3C/svg%3E&quot; alt=&quot;포장&quot; width=&quot;640&quot; height=&quot;360&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>미리보기는 슬라이드의 첫 이미지(또는 <code>data-catui-thumb</code>)로 만들고, 현재 장을 테두리로 표시하며 자동으로 가운데로 스크롤합니다. <code>autoHeight</code>는 사진마다 높이가 다를 때 트랙 높이를 현재 장에 맞춥니다.</p>
+</section>
+
+<section aria-labelledby="center">
+<h2 id="center">가운데 정렬 · 여러 장씩 이동</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">align: &#39;center&#39; · perView 1.6 느낌(peek) · step</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_carousel Catui_carousel-peek" id="car-center" data-catui-filter="car-center" aria-label="이벤트">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 220'%3E%3Crect width='640' height='220' fill='%23E6F7F3'/%3E%3Ctext x='40' y='120' font-size='40' font-family='sans-serif' fill='%230E7A63'%3E이벤트 A%3C/text%3E%3C/svg%3E" alt="이벤트 A" width="640" height="220"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 220'%3E%3Crect width='640' height='220' fill='%23EAF4FB'/%3E%3Ctext x='40' y='120' font-size='40' font-family='sans-serif' fill='%231F6FA8'%3E이벤트 B%3C/text%3E%3C/svg%3E" alt="이벤트 B" width="640" height="220"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 220'%3E%3Crect width='640' height='220' fill='%23F5EEF8'/%3E%3Ctext x='40' y='120' font-size='40' font-family='sans-serif' fill='%237D3C98'%3E이벤트 C%3C/text%3E%3C/svg%3E" alt="이벤트 C" width="640" height="220"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 220'%3E%3Crect width='640' height='220' fill='%23FEF7E0'/%3E%3Ctext x='40' y='120' font-size='40' font-family='sans-serif' fill='%239A5B0F'%3E이벤트 D%3C/text%3E%3C/svg%3E" alt="이벤트 D" width="640" height="220"></div>
+    </div>
+  </div>
+  <p class="Catui_help" id="car-center-out" aria-live="polite"></p>
+  <script>
+  catui.use(['carousel'], function (carousel) {
+    carousel.render({ elem: '#car-center', id: 'car-center', align: 'center', counter: true,
+      // before가 false면 이동 취소 — 여기서는 기록만
+      before: function (from, to) { document.getElementById('car-center-out').textContent = (from + 1) + ' → ' + (to + 1); } });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="align: &#39;center&#39; · perView 1.6 느낌(peek) · step 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_carousel Catui_carousel-peek&quot; id=&quot;car-center&quot; data-catui-filter=&quot;car-center&quot; aria-label=&quot;이벤트&quot;&gt;
+  &lt;div class=&quot;Catui_carousel-track&quot;&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 220&#39;%3E%3Crect width=&#39;640&#39; height=&#39;220&#39; fill=&#39;%23E6F7F3&#39;/%3E%3Ctext x=&#39;40&#39; y=&#39;120&#39; font-size=&#39;40&#39; font-family=&#39;sans-serif&#39; fill=&#39;%230E7A63&#39;%3E이벤트 A%3C/text%3E%3C/svg%3E&quot; alt=&quot;이벤트 A&quot; width=&quot;640&quot; height=&quot;220&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 220&#39;%3E%3Crect width=&#39;640&#39; height=&#39;220&#39; fill=&#39;%23EAF4FB&#39;/%3E%3Ctext x=&#39;40&#39; y=&#39;120&#39; font-size=&#39;40&#39; font-family=&#39;sans-serif&#39; fill=&#39;%231F6FA8&#39;%3E이벤트 B%3C/text%3E%3C/svg%3E&quot; alt=&quot;이벤트 B&quot; width=&quot;640&quot; height=&quot;220&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 220&#39;%3E%3Crect width=&#39;640&#39; height=&#39;220&#39; fill=&#39;%23F5EEF8&#39;/%3E%3Ctext x=&#39;40&#39; y=&#39;120&#39; font-size=&#39;40&#39; font-family=&#39;sans-serif&#39; fill=&#39;%237D3C98&#39;%3E이벤트 C%3C/text%3E%3C/svg%3E&quot; alt=&quot;이벤트 C&quot; width=&quot;640&quot; height=&quot;220&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_carousel-slide&quot;&gt;&lt;img src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 220&#39;%3E%3Crect width=&#39;640&#39; height=&#39;220&#39; fill=&#39;%23FEF7E0&#39;/%3E%3Ctext x=&#39;40&#39; y=&#39;120&#39; font-size=&#39;40&#39; font-family=&#39;sans-serif&#39; fill=&#39;%239A5B0F&#39;%3E이벤트 D%3C/text%3E%3C/svg%3E&quot; alt=&quot;이벤트 D&quot; width=&quot;640&quot; height=&quot;220&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;car-center-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;carousel&#39;], function (carousel) {
+  carousel.render({ elem: &#39;#car-center&#39;, id: &#39;car-center&#39;, align: &#39;center&#39;, counter: true,
+    // before가 false면 이동 취소 — 여기서는 기록만
+    before: function (from, to) { document.getElementById(&#39;car-center-out&#39;).textContent = (from + 1) + &#39; → &#39; + (to + 1); } });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>현재 장을 가운데 두고 양옆을 살짝 보여 줍니다(순환도 끊김 없음). 여러 장 보기에서 <code>step: 2</code>면 한 번에 두 장씩 넘깁니다.</p>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">옵션 · API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">carousel 옵션</caption>
+<thead><tr><th scope="col">옵션 (선언형 속성)</th><th scope="col">기본</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>direction</code> (<code>data-catui-direction</code>)</td><td>'horizontal'</td><td><code>'vertical'</code>이면 세로 (<code>.Catui_carousel-vertical</code>), 화살표·키보드도 ↑↓</td></tr>
+<tr><td><code>height</code> (<code>data-catui-height</code>)</td><td>세로 320px</td><td>트랙 높이. 숫자는 px, 문자열은 CSS 길이(<code>'50vh'</code>)</td></tr>
+<tr><td><code>effect</code> (<code>data-catui-effect</code>)</td><td>'slide'</td><td><code>'fade'</code>면 겹쳐서 서서히 (<code>.Catui_carousel-fade</code>)</td></tr>
+<tr><td><code>loop</code> (<code>data-catui-loop="false"</code>) · <code>rewind</code> (<code>data-catui-rewind</code>)</td><td>true · false</td><td>끊김 없는 순환 / 순환을 끈 상태에서 끝 → 처음으로 되감기</td></tr>
+<tr><td><code>perView</code> (<code>data-catui-per-view="1,768:2"</code>) · <code>step</code> (<code>data-catui-step</code>)</td><td>1 · 1</td><td>한 화면 장 수(최소 폭별) · 한 번에 넘기는 장 수</td></tr>
+<tr><td><code>gap</code> (<code>data-catui-gap</code>) · <code>align</code> (<code>data-catui-align="center"</code>)</td><td>12px · 'start'</td><td>장 사이 간격 · 현재 장 정렬(가운데면 양옆 엿보기)</td></tr>
+<tr><td><code>autoHeight</code> (<code>data-catui-auto-height</code>)</td><td>false</td><td>가로에서 트랙 높이를 현재 장에 맞춤</td></tr>
+<tr><td><code>autoplay</code> (<code>data-catui-autoplay="ms"</code>)</td><td>0</td><td>자동 넘김 간격. 켜면 정지 버튼이 함께 생김</td></tr>
+<tr><td><code>pauseOnHover</code> (<code>data-catui-pause-on-hover="false"</code>) · <code>reverse</code> (<code>data-catui-reverse</code>) · <code>stopOnInteraction</code> (<code>data-catui-stop-on-interaction</code>)</td><td>true · false · false</td><td>마우스를 올리면 멈춤 / 거꾸로 넘김 / 사용자가 한 번이라도 넘기면 자동 넘김을 끔. 키보드 포커스가 안에 있으면 항상 멈춤</td></tr>
+<tr><td><code>arrows</code> · <code>dots</code> (<code>data-catui-dots="false"</code>) · <code>thumbs</code> (<code>data-catui-thumbs</code>)</td><td>true · true · false</td><td>이전·다음 버튼 / 점 / 미리보기 줄 (<code>.Catui_carousel-thumbs</code>)</td></tr>
+<tr><td><code>counter</code> · <code>progress</code></td><td>false</td><td>"2 / 5" 장 번호 · 자동 넘김 진행 막대</td></tr>
+<tr><td><code>drag</code> · <code>wheel</code> (<code>data-catui-wheel</code>) · <code>keyboard</code></td><td>true · false · true</td><td>마우스 끌기 / 휠 한 번에 한 장 / 방향키·Home·End</td></tr>
+<tr><td><code>index</code> · <code>label</code> · <code>slideLabel</code></td><td>0 · '' · '{n} / {total}'</td><td>처음 장 / 영역 이름 / 슬라이드 이름 틀</td></tr>
+<tr><td><code>before(from, to)</code></td><td>—</td><td>false를 돌려주면 이동 취소</td></tr>
+<tr><td><code>change(index)</code> · <code>on('change(f)')</code></td><td>—</td><td><code>{ index, total, atStart, atEnd }</code> — 버튼·점·키보드·끌기·휠·손가락 모두</td></tr>
+<tr><td><code>inst.go(i, [smooth])</code> · <code>next()</code> · <code>prev()</code> · <code>pause()</code> · <code>play()</code> · <code>isPaused()</code> · <code>getIndex()</code> · <code>getTotal()</code> · <code>update()</code></td><td>—</td><td>직접 조작 · 슬라이드를 넣거나 뺀 뒤 <code>update()</code> · <code>carousel.go(id, i)</code></td></tr>
+</tbody></table></div>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/util.html"><span>이전</span>util 도구</a><a class="doc-pager-next" href="../../js/modules/field.html"><span>다음</span>field 입력 보강</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">끊김 없는 순환 + 자동 넘김</a></li><li><a href="#multi">여러 장 보기 (반응형)</a></li><li><a href="#fade">페이드 전환</a></li><li><a href="#api-render">스크립트로 만들기</a></li><li><a href="#vertical">세로 방향</a></li><li><a href="#thumbs">미리보기(썸네일) · 내용 높이 맞추기</a></li><li><a href="#center">가운데 정렬 · 여러 장씩 이동</a></li><li><a href="#api">옵션 · API</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

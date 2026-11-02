@@ -24,8 +24,15 @@ export const collapse = component({
     });
   },
   destroy(inst) { if (inst.elem) inst.elem.textContent = ""; },
-  open(filter, index) { const d = collapseItems(filter)[index]; if (d) d.open = true; },
+  // index를 빼면 전부 (아코디언은 하나만 열리므로 open(filter)는 첫 패널만)
+  open(filter, index) {
+    const items = collapseItems(filter);
+    if (index != null) { if (items[index]) items[index].open = true; return; }
+    const box = items[0]?.parentElement;
+    (box?.getAttribute("data-catui-collapse") === "accordion" ? items.slice(0, 1) : items).forEach((d) => { d.open = true; });
+  },
   close(filter, index) { collapseItems(filter).forEach((d, i) => { if (index == null || i === index) d.open = false; }); },
+  toggle(filter, index) { const d = collapseItems(filter)[index]; if (d) d.open = !d.open; },
   // 전역 위임: 아코디언(하나만 열기) + collapse(filter) 이벤트
   bind() {
     const onToggle = (e) => {

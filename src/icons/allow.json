@@ -1,5 +1,5 @@
 [
-  "layout-dashboard", "folder", "users", "shopping-cart", "chart-column", "file-text", "calendar", "mail",
+  "layout-dashboard", "folder", "users", "shopping-cart", "chart-column", "file-text", "calendar", "mail", "pause", "play",
   "message-square", "pen-line", "inbox", "bell", "files", "user", "settings", "tag",
   "search", "menu", "chevron-down", "chevron-right", "chevron-up", "check", "x", "plus",
   "minus", "filter", "more-horizontal", "upload", "star", "info", "alert-circle", "alert-triangle",

@@ -1,4 +1,4 @@
-/*! Catui UI 1.0.0 | 토큰은 assets/spec/design_m.html 기준 | 아이콘 Lucide(ISC) */
+/*! Catui UI 1.0.0 | 토큰은 assets/spec/design_m.html 기준 | 아이콘 Line 01(CC0) */
 /* foundation/tokens.css */
 /* Catui UI 1.2 — tokens from assets/design_m.html. L3 values reference L1/L2 only. */
 :root{
@@ -585,6 +585,12 @@
 .Catui_foot-grid ul{display:grid;gap:var(--Catui_space-2)}
 .Catui_foot-copy{margin-top:var(--Catui_space-6);padding-top:var(--Catui_space-4);border-top:1px solid var(--Catui_sidebar-hover-bg);font-size:var(--Catui_type-caption-size);color:var(--Catui_sidebar-fg-muted)}
 .Catui_site :where(section[id]){scroll-margin-top:var(--Catui_topbar-h)}
+/* catui.js site: 스크롤하면 그림자, data-catui-header="hide"면 내릴 때 숨김, 스크롤 스파이 현재 위치 */
+.Catui_site-header[data-catui-header]{transition:translate calc(var(--Catui_dur-fast) * 2) var(--Catui_ease),box-shadow var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_site-header[data-catui-scrolled]{box-shadow:var(--Catui_shadow-sm)}
+.Catui_site-header[data-catui-hidden]{translate:0 -100%}
+.Catui_site-nav a[aria-current="location"]{color:var(--Catui_color-brand-strong);font-weight:600}
+@media (prefers-reduced-motion:reduce){.Catui_site-header[data-catui-header]{transition:none}}
 .Catui_price{border-color:var(--Catui_card-border)}
 .Catui_price-featured{border-color:var(--Catui_btn-primary-bg)}
 @media (max-width:1199px){
@@ -632,12 +638,20 @@
 .Catui_announce-close:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 @media (max-width:767px){.Catui_section-head-row{flex-direction:column;align-items:flex-start}}
 .Catui_section-head:last-child{margin-bottom:0}
+.Catui_announce[hidden]{display:none}
 
 /* blocks/proof.css */
 /* Social proof — 고객 로고 띠, 큰 숫자 띠, 고객 후기 카드. */
 .Catui_logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:var(--Catui_space-6) var(--Catui_space-9)}
 .Catui_logos > *{color:var(--Catui_color-text-secondary);font-weight:700;font-size:var(--Catui_type-h3-size);letter-spacing:-.01em;opacity:1;filter:grayscale(1)}
 .Catui_logos img{height:28px;width:auto}
+/* 로고 흐름 (catui.js site data-catui-marquee): 한 벌을 복제해 절반만큼 흘려 끊김 없이. 간격은 gap 대신 좌우 여백(정확히 절반이 되게) */
+.Catui_logos-marquee{display:block;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,currentColor 8%,currentColor 92%,transparent);mask-image:linear-gradient(to right,transparent,currentColor 8%,currentColor 92%,transparent)}
+.Catui_logos-track{display:flex;align-items:center;width:max-content;animation:Catui_marquee 30s linear infinite}
+.Catui_logos-track > *{flex:none;padding-inline:var(--Catui_space-6);color:var(--Catui_color-text-secondary);font-weight:700;font-size:var(--Catui_type-h3-size);letter-spacing:-.01em;filter:grayscale(1)}
+.Catui_logos-marquee:hover .Catui_logos-track,.Catui_logos-marquee:focus-within .Catui_logos-track{animation-play-state:paused}
+@keyframes Catui_marquee{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.Catui_logos-track{animation:none}}
 .Catui_statband{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:var(--Catui_grid-gap);text-align:center}
 .Catui_statband-value{font-size:var(--Catui_type-display-size);font-weight:var(--Catui_type-display-weight);line-height:var(--Catui_type-display-lh);color:var(--Catui_color-brand-strong);font-variant-numeric:tabular-nums}
 .Catui_statband-label{margin-top:var(--Catui_space-1);color:var(--Catui_color-text-secondary)}
@@ -714,6 +728,7 @@
 /* 구독 띠(브랜드 배경) · 완료 상태 */
 .Catui_subscribe-band{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-4);padding:var(--Catui_space-7);border-radius:var(--Catui_radius-lg);background:var(--Catui_sidebar-bg);color:var(--Catui_sidebar-fg)}
 .Catui_subscribe-band .Catui_subscribe-note{color:var(--Catui_sidebar-fg-muted)}
+.Catui_subscribe[hidden]{display:none}
 .Catui_subscribe-done{display:flex;align-items:center;gap:var(--Catui_space-2);color:var(--Catui_badge-success-fg);font-weight:600}
 
 /* blocks/floating.css */
@@ -725,6 +740,10 @@
 .Catui_cookie{position:fixed;left:var(--Catui_space-4);right:var(--Catui_space-4);bottom:var(--Catui_space-4);z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-3) var(--Catui_space-4);max-width:720px;margin-inline:auto;padding:var(--Catui_space-4) var(--Catui_space-5);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-lg);box-shadow:var(--Catui_shadow-lg)}
 .Catui_cookie p{flex:1;min-width:220px;margin:0}
 .Catui_cookie-actions{display:flex;gap:var(--Catui_space-2);flex:none}
+.Catui_cookie[hidden]{display:none}
+/* 읽기 진행 막대 — catui.js가 --Catui_read(0~1)를 갱신 */
+.Catui_readbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:31;pointer-events:none}
+.Catui_readbar > i{display:block;height:100%;background:var(--Catui_color-brand-fill);transform-origin:0 50%;transform:scaleX(var(--Catui_read,0))}
 
 /* components/faq.css */
 .Catui_faq{border-bottom:1px solid var(--Catui_divider-color)}
@@ -1029,7 +1048,22 @@ a.Catui_card:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outli
 .Catui_carousel-dot{width:var(--Catui_space-2);height:var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-neutral-300)}
 .Catui_carousel-dot[aria-current="true"]{background:var(--Catui_color-brand-strong);width:var(--Catui_space-5)}
 .Catui_carousel-dot:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){.Catui_carousel-track{scroll-behavior:auto}}
+/* 페이드 전환 (catui.js carousel effect:'fade') — 슬라이드를 한 칸에 겹치고 현재(data-catui-active)만 보인다 */
+.Catui_carousel-fade .Catui_carousel-track{display:grid;overflow:hidden;scroll-snap-type:none}
+.Catui_carousel-fade .Catui_carousel-slide{grid-area:1 / 1;opacity:0;visibility:hidden;transition:opacity calc(var(--Catui_dur-fast) * 4) var(--Catui_ease),visibility 0s linear calc(var(--Catui_dur-fast) * 4)}
+.Catui_carousel-fade .Catui_carousel-slide[data-catui-active]{opacity:1;visibility:visible;transition-delay:0s}
+.Catui_carousel-track:active{cursor:grabbing}
+/* 세로 방향 (catui.js direction:'vertical') — 높이는 기본 320px(옵션 height로 변경), 세로 스냅 */
+.Catui_carousel-vertical .Catui_carousel-track{flex-direction:column;overflow-x:hidden;overflow-y:auto;scroll-snap-type:y mandatory;height:calc(var(--Catui_space-10) * 5);overscroll-behavior:contain}
+.Catui_carousel-vertical .Catui_carousel-slide{flex:0 0 100%}
+/* 미리보기(썸네일) 줄 */
+.Catui_carousel-thumbs{display:flex;gap:var(--Catui_space-2);overflow-x:auto;scrollbar-width:thin;padding:2px}
+.Catui_carousel-thumb{flex:none;width:var(--Catui_space-10);height:var(--Catui_control-h-lg);padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-sm);overflow:hidden;background:var(--Catui_color-neutral-100);color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size);cursor:pointer;opacity:.75}
+.Catui_carousel-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_carousel-thumb:hover{opacity:1}
+.Catui_carousel-thumb[aria-current="true"]{border-color:var(--Catui_color-brand-strong);opacity:1}
+.Catui_carousel-thumb:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.Catui_carousel-track{scroll-behavior:auto}.Catui_carousel-fade .Catui_carousel-slide{transition:none}}
 
 /* components/canvas.css */
 /* Canvas — 반응형 캔버스 틀(비율 상자·테두리·배경), 위에 겹치는 도구 막대·범례, 아래 캡션. 그리기는 catui.js canvas. */
@@ -1483,6 +1517,10 @@ dialog.Catui_drawer[open]{display:block}
 /* 날짜 팝업은 메뉴 높이 제한·스크롤 없이 달력 전체를 보인다 */
 .Catui_dd-float:has(> .Catui_dp){max-height:none;overflow:visible}
 .Catui_dd-item[aria-current="true"],.Catui_dd-item:focus-visible{background:var(--Catui_dropdown-item-bg-hover);outline:none}
+/* 자동완성 목록(listbox)의 키보드 선택 항목 — 포커스는 입력 칸에 있고 aria-selected로 표시 */
+.Catui_dd-item[role="option"]{cursor:pointer}
+.Catui_dd-item[role="option"][aria-selected="true"]{background:var(--Catui_dropdown-item-bg-hover);box-shadow:inset 2px 0 0 var(--Catui_color-brand-strong)}
+.Catui_dd-item[role="option"][aria-disabled="true"]{color:var(--Catui_dropdown-item-fg-disabled);cursor:not-allowed}
 
 /* components/toast.css */
 .Catui_toast{
@@ -1621,6 +1659,8 @@ dialog.Catui_modal-full .Catui_layer-frame,dialog.Catui_layer-max .Catui_layer-f
   font-size:var(--Catui_tooltip-font);padding:var(--Catui_tooltip-py) var(--Catui_tooltip-px);
   border-radius:var(--Catui_tooltip-radius);
 }
+/* catui.js data-catui-tip: 오버레이 루트에 화면 고정으로 띄움 (마우스가 가리지 않게 pointer-events 없음) */
+.Catui_layer > .Catui_tooltip{position:fixed;z-index:60;pointer-events:none;max-width:min(280px,calc(100vw - 16px));white-space:normal;word-break:keep-all}
 .Catui_popover{
   width:min(var(--Catui_popover-w),100%);background:var(--Catui_card-bg);
   border-radius:var(--Catui_popover-radius);box-shadow:var(--Catui_popover-shadow);
@@ -1687,6 +1727,12 @@ dialog.Catui_modal-full .Catui_layer-frame,dialog.Catui_layer-max .Catui_layer-f
 }
 .Catui_cmdk-hint{display:flex;gap:var(--Catui_space-4);padding:var(--Catui_space-2) var(--Catui_space-4);border-top:1px solid var(--Catui_divider-color);background:var(--Catui_modal-footer-bg);font-size:var(--Catui_cmdk-hint-font);color:var(--Catui_color-text-secondary)}
 .Catui_cmdk-grp summary::-webkit-details-marker{display:none}
+/* catui.js command: 네이티브 <dialog>로 띄울 때 — 화면 위쪽 가운데, 배경 어둡게 */
+dialog.Catui_cmdk{padding:0;margin:12vh auto auto;color:inherit}
+dialog.Catui_cmdk[open]{display:block}
+dialog.Catui_cmdk::backdrop{background:var(--Catui_overlay-scrim)}
+.Catui_cmdk [role="option"]{cursor:pointer}
+.Catui_cmdk [role="option"][aria-disabled="true"]{color:var(--Catui_color-text-tertiary);cursor:not-allowed}
 .Catui_kbd{
   min-width:var(--Catui_kbd-w);height:var(--Catui_kbd-h);padding:0 var(--Catui_space-1);border:1px solid var(--Catui_kbd-border);
   background:var(--Catui_kbd-bg);color:var(--Catui_kbd-fg);border-radius:var(--Catui_kbd-radius);

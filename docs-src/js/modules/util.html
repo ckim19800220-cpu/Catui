@@ -23,7 +23,10 @@
 <tr><td><code>timeAgo(time, onlyDate)</code></td><td>'방금' · 'n분 전' · 'n시간 전' · 'n일 전' · 30일 넘으면 날짜</td></tr>
 <tr><td><code>countdown({ date, now, ready(t), clear() })</code></td><td><code>t.d · t.h · t.m · t.s</code>, 반환값 <code>.clear()</code></td></tr>
 <tr><td><code>debounce(fn, ms)</code> · <code>throttle(fn, ms)</code></td><td>반환 함수에 <code>.cancel()</code></td></tr>
-<tr><td><code>copy(text)</code></td><td>클립보드 복사 → Promise&lt;boolean&gt;</td></tr>
+<tr><td><code>copy(text)</code></td><td>클립보드 복사 → Promise&lt;boolean&gt;. Clipboard API가 없는 http 환경에서도 대체 방식으로 복사</td></tr>
+<tr><td><code>number(n, [소수 자리])</code></td><td>천 단위 구분: <code>number(1234567.8, 1)</code> → '1,234,567.8'</td></tr>
+<tr><td><code>fileSize(bytes, [소수 자리])</code></td><td>'0B' · '1.5KB' · '5MB' · 'GB' · 'TB'</td></tr>
+<tr><td><code>toDateString</code> 서식 토큰</td><td><code>yyyy yy · MM M · dd d · HH H · hh h(12시간) · mm m · ss s · a(오전/오후) · E(요일)</code>. 영문 글자를 그대로 쓰려면 따옴표: <code>"h:mm 'at' s"</code></td></tr>
 <tr><td><code>escape · html · raw</code></td><td><a href="doc:js/core/dom">html · raw · escape</a>와 같음</td></tr>
 </tbody></table></div>
 </section>

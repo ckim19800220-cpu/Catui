@@ -1,0 +1,147 @@
+<section aria-labelledby="header">
+<h2 id="header">헤더 · 모바일 메뉴 · 현재 위치</h2>
+<catui-example title="data-catui-header · data-catui-spy">
+  <header class="Catui_site-header" data-catui-header="hide" style="position:static">
+    <div class="Catui_wrap">
+      <b>Catui</b>
+      <details class="Catui_site-menu"><summary class="Catui_btn Catui_btn-md Catui_btn-ghost">메뉴</summary>
+        <nav class="Catui_site-nav" aria-label="이 페이지" data-catui-spy><a href="#announce">공지</a><a href="#cookie">쿠키</a><a href="#countdown">카운트다운</a><a href="#billing">요금</a></nav>
+      </details>
+      <nav class="Catui_site-nav" aria-label="이 페이지 (넓은 화면)" data-catui-spy><a href="#announce">공지</a><a href="#cookie">쿠키</a><a href="#countdown">카운트다운</a><a href="#billing">요금</a></nav>
+    </div>
+  </header>
+</catui-example>
+<p>실제 페이지에서는 헤더가 화면 위에 고정됩니다(예제는 <code>position:static</code>). 스크롤하면 그림자가 생기고, <code>data-catui-header="hide"</code>면 내릴 때 숨었다가 올리면 다시 보입니다(메뉴가 열렸거나 헤더 안에 포커스가 있으면 숨지 않음). 좁은 화면의 메뉴는 링크를 누르거나 바깥을 누르거나 Esc로 닫힙니다. <code>data-catui-spy</code> 내비게이션은 지금 보고 있는 섹션 링크에 <code>aria-current="location"</code>을 붙입니다 — 이 문서를 스크롤해 보세요.</p>
+</section>
+
+<section aria-labelledby="announce">
+<h2 id="announce">공지 띠 닫기 기억</h2>
+<catui-example title="data-catui-dismiss · data-catui-days">
+  <div class="Catui_announce Catui_announce-brand" data-catui-dismiss="doc-sale-2026" data-catui-days="7" role="region" aria-label="공지">
+    <span>연말 할인 — 12월 31일까지 연간 요금 20% 할인</span> <a href="#billing">요금 보기</a>
+    <button class="Catui_announce-close" type="button" aria-label="공지 닫기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></button>
+  </div>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="st-ann-reset">공지 다시 보이기 (예제용)</button>
+  <script>
+  catui.use(['site'], function () {
+    document.getElementById('st-ann-reset').addEventListener('click', function () {
+      catui.data('site', { key: 'dismiss:doc-sale-2026', remove: true });
+      document.querySelector('[data-catui-dismiss="doc-sale-2026"]').hidden = false;
+    });
+  });
+  </script>
+</catui-example>
+<p>닫으면 브라우저에 기억해 다음 방문에도 보이지 않습니다. <code>data-catui-days</code>를 주면 그 기간이 지난 뒤 다시 보입니다. 이벤트 <code>site.on('dismiss(키)')</code>.</p>
+</section>
+
+<section aria-labelledby="cookie">
+<h2 id="cookie">쿠키 동의</h2>
+<catui-example title="data-catui-cookie · data-catui-consent">
+  <div class="Catui_cookie" data-catui-cookie style="position:static">
+    <p>더 나은 경험을 위해 쿠키를 씁니다. 필수 쿠키만 허용할 수도 있습니다.</p>
+    <div class="Catui_cookie-actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-catui-consent="necessary">필수만</button><button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button" data-catui-consent="all">모두 허용</button></div>
+  </div>
+  <p class="Catui_help" id="st-consent" aria-live="polite"></p>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="st-consent-reset">쿠키 설정 다시 하기</button>
+  <script>
+  catui.use(['site'], function (site) {
+    var show = function () { var c = site.consent(); document.getElementById('st-consent').textContent = c ? '저장된 선택: ' + c.value : '아직 선택하지 않음'; };
+    site.on('consent', show);
+    document.getElementById('st-consent-reset').addEventListener('click', function () { site.resetConsent(); show(); });
+    show();
+  });
+  </script>
+</catui-example>
+<p>선택을 저장하고 띠를 숨기며, 다음 방문에는 띠가 나오지 않습니다. 분석 스크립트는 <code>site.consent()?.value === 'all'</code>일 때만 불러오거나 <code>catui:consent</code> 창 이벤트를 받아 시작하세요.</p>
+</section>
+
+<section aria-labelledby="countdown">
+<h2 id="countdown">카운트다운</h2>
+<catui-example title="site.countdown · data-catui-countdown">
+  <p class="Catui_lead" id="st-cd">특가 종료까지 <b class="Catui_num" data-catui-unit="d"></b>일 <b class="Catui_num" data-catui-unit="h"></b>:<b class="Catui_num" data-catui-unit="m"></b>:<b class="Catui_num" data-catui-unit="s"></b></p>
+  <p class="Catui_help">선언형: <span class="Catui_num" data-catui-countdown="2027-01-01T00:00:00+09:00" data-catui-done="새해가 밝았습니다"></span> 뒤 새해</p>
+  <script>
+  catui.use(['site'], function (site) {
+    site.countdown.render({ elem: '#st-cd', date: Date.now() + 2 * 86400000 + 5 * 3600000, doneText: '특가가 끝났습니다.' });
+  });
+  </script>
+</catui-example>
+<p>안에 <code>data-catui-unit="d|h|m|s"</code> 칸이 있으면 그 칸만 채우고, 없으면 "2일 05:00:00"처럼 글자로 채웁니다. 숫자는 매초 읽지 않도록 숨기고, 이름은 분 단위로만 바꿉니다. 끝나면 <code>data-catui-done</code> 문구와 <code>end(필터)</code> 이벤트.</p>
+</section>
+
+<section aria-labelledby="billing">
+<h2 id="billing">요금 월간 · 연간 전환</h2>
+<catui-example title="data-catui-billing">
+  <div data-catui-billing data-catui-filter="st-price">
+    <div class="Catui_segment" role="radiogroup" aria-label="결제 주기">
+      <input class="Catui_clip" type="radio" name="st-bill" id="st-bill-m" value="monthly" checked><label for="st-bill-m">월간</label>
+      <input class="Catui_clip" type="radio" name="st-bill" id="st-bill-y" value="yearly"><label for="st-bill-y">연간 (20% 할인)</label>
+    </div>
+    <p class="Catui_lead"><b class="Catui_num" data-catui-monthly="9,900원" data-catui-yearly="7,900원">9,900원</b> / 월 <span class="Catui_help" data-catui-billing-show="yearly" hidden>연 94,800원 한 번에 결제</span></p>
+  </div>
+</catui-example>
+<p>고른 주기에 맞춰 <code>data-catui-monthly</code>·<code>data-catui-yearly</code> 값으로 글자를 바꾸고, <code>data-catui-billing-show</code> 요소를 보이거나 숨깁니다. 이벤트 <code>billing(필터)</code> <code>{ value }</code>.</p>
+</section>
+
+<section aria-labelledby="lightbox">
+<h2 id="lightbox">갤러리 라이트박스</h2>
+<catui-example title="data-catui-lightbox">
+  <div class="Catui_gallery" data-catui-lightbox aria-label="매장 사진">
+    <figure class="Catui_gallery-wide"><a href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect width='1200' height='600' fill='%23E6F7F3'/%3E%3Ccircle cx='300' cy='300' r='160' fill='%2326B99A'/%3E%3C/svg%3E"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23E6F7F3'/%3E%3Ccircle cx='100' cy='100' r='50' fill='%2326B99A'/%3E%3C/svg%3E" alt="매장 입구"></a><figcaption>매장 입구</figcaption></figure>
+    <figure><a href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Crect width='800' height='800' fill='%23EAF4FB'/%3E%3Crect x='200' y='200' width='400' height='400' fill='%233498DB'/%3E%3C/svg%3E"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23EAF4FB'/%3E%3Crect x='50' y='50' width='100' height='100' fill='%233498DB'/%3E%3C/svg%3E" alt="진열대"></a></figure>
+    <figure><a href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Crect width='800' height='800' fill='%23F5EEF8'/%3E%3Cpath d='M400 150 L650 650 H150Z' fill='%239B59B6'/%3E%3C/svg%3E"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23F5EEF8'/%3E%3Cpath d='M100 40 L160 160 H40Z' fill='%239B59B6'/%3E%3C/svg%3E" alt="휴게 공간"></a></figure>
+  </div>
+</catui-example>
+<p>사진을 누르면 <a href="doc:js/modules/layer">layer.photos</a>로 크게 보고 ←→로 넘깁니다. 링크 그대로라 스크립트가 없어도 원본이 열리고, Ctrl·⌘·Shift+클릭은 새 탭 등 브라우저 기본 동작을 따릅니다.</p>
+</section>
+
+<section aria-labelledby="subscribe">
+<h2 id="subscribe">구독 폼</h2>
+<catui-example title="data-catui-subscribe (+ form 모듈 검증·Ajax)">
+  <form class="Catui_subscribe" data-catui-form data-catui-filter="st-sub" data-catui-ajax="{{dist}}/icons.svg" method="get" data-catui-subscribe="구독해 주셔서 감사합니다. 확인 메일을 보냈습니다." novalidate>
+    <label class="Catui_clip" for="st-mail">이메일</label><input class="Catui_input" id="st-mail" name="email" type="email" autocomplete="email" placeholder="name@company.com" data-catui-verify="required|email" data-catui-reqtext="이메일을 입력해 주세요.">
+    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit" data-catui-submit>구독</button>
+  </form>
+  <p class="Catui_subscribe-note">언제든 구독을 해지할 수 있습니다.</p>
+</catui-example>
+<p><a href="doc:js/modules/form">form</a> 모듈이 검증하고 보낸 뒤, 성공하면 폼을 완료 문구(<code>.Catui_subscribe-done</code>)로 바꾸고 그 문구로 포커스를 옮깁니다. 실패하면 토스트로 다시 시도를 안내합니다.</p>
+</section>
+
+<section aria-labelledby="marquee">
+<h2 id="marquee">로고 흐름</h2>
+<catui-example title="data-catui-marquee (정지 버튼 · 호버 시 멈춤)">
+  <!-- catui.js가 Catui_logos-marquee 클래스와 Catui_logos-track(복제 포함)을 붙입니다 -->
+  <div class="Catui_logos" data-catui-marquee="25" aria-label="고객사">
+    <span>한빛상사</span><span>누리소프트</span><span>다온물류</span><span>바른식품</span><span>새봄디자인</span><span>온새미</span>
+  </div>
+</catui-example>
+<p>한 벌을 복제해 끊김 없이 흐르고(복제는 화면 낭독기·키보드 제외), 마우스·포커스가 들어오면 멈춥니다. 5초 넘게 움직이므로 정지 버튼을 함께 둡니다. 모션 줄이기에서는 흐르지 않고 원래 배치 그대로입니다.</p>
+</section>
+
+<section aria-labelledby="readbar">
+<h2 id="readbar">읽기 진행 막대 · 공유</h2>
+<catui-example title="data-catui-readbar · data-catui-share">
+  <div class="Catui_readbar" data-catui-readbar="#doc-main" aria-hidden="true"><i></i></div>
+  <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-catui-share data-catui-share-title="Catui site 모듈"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-share-2"></use></svg>이 문서 공유</button>
+</catui-example>
+<p>이 문서 맨 위의 얇은 막대가 읽은 만큼 찹니다(<code>data-catui-readbar</code>에 본문 선택자, 비우면 문서 전체). 공유 버튼은 휴대폰 등에서는 기기 공유 창을, 지원하지 않으면 주소를 복사하고 알립니다.</p>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">site API</caption>
+<thead><tr><th scope="col">속성 · API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>.Catui_site-header[data-catui-header[="hide"]]</code></td><td>스크롤 그림자(<code>data-catui-scrolled</code>) · hide면 내릴 때 숨김(<code>data-catui-hidden</code>) · 모바일 메뉴 바깥 클릭·링크·Esc로 닫기</td></tr>
+<tr><td><code>[data-catui-spy]</code></td><td>안의 <code>#섹션</code> 링크 중 보고 있는 것에 <code>aria-current="location"</code></td></tr>
+<tr><td><code>.Catui_announce[data-catui-dismiss="키"][data-catui-days]</code></td><td>닫기 기억 · 이벤트 <code>dismiss(키)</code></td></tr>
+<tr><td><code>.Catui_cookie[data-catui-cookie]</code> + <code>[data-catui-consent="all|necessary|…"]</code></td><td><code>site.consent()</code> → <code>{ value, at }</code> | null · <code>site.resetConsent()</code> · 이벤트 <code>consent</code> · 창 이벤트 <code>catui:consent</code></td></tr>
+<tr><td><code>[data-catui-countdown="날짜"][data-catui-done]</code> · <code>site.countdown.render({ elem, date, doneText, end })</code></td><td><code>data-catui-unit="d|h|m|s"</code> 칸 채우기 · 이벤트 <code>end(f)</code></td></tr>
+<tr><td><code>[data-catui-billing]</code> + <code>data-catui-monthly/yearly</code> · <code>data-catui-billing-show</code> · <code>site.billing(영역, 값)</code></td><td>요금 전환 · 이벤트 <code>billing(f)</code></td></tr>
+<tr><td><code>[data-catui-lightbox]</code></td><td>안의 <code>a[href]</code>를 layer.photos로</td></tr>
+<tr><td><code>form[data-catui-subscribe="완료 문구"]</code></td><td>form 모듈 <code>done</code>이면 완료 문구로 교체</td></tr>
+<tr><td><code>.Catui_logos[data-catui-marquee="초"]</code> · <code>site.marquee.render({ elem, seconds })</code></td><td>로고 흐름 + 정지 버튼</td></tr>
+<tr><td><code>.Catui_readbar[data-catui-readbar="선택자"] &gt; i</code></td><td>읽기 진행 (<code>--Catui_read</code> 0~1)</td></tr>
+<tr><td><code>[data-catui-share]</code>(+ <code>-title</code> · <code>-text</code> · <code>-url</code>) · <code>site.share(버튼)</code></td><td>Web Share → 주소 복사 · 이벤트 <code>share</code> <code>{ method, url }</code></td></tr>
+</tbody></table></div>
+</section>

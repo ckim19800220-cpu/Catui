@@ -20,7 +20,7 @@
 <thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
 <tbody>
 <tr><td><code>collapse.render({ elem, accordion, data: [{ title, content, open }] })</code></td><td>마크업 생성 (content 문자열은 글자, html``은 마크업)</td></tr>
-<tr><td><code>collapse.open(f, i)</code> · <code>collapse.close(f, [i])</code></td><td>열기 / 닫기(생략하면 전부)</td></tr>
+<tr><td><code>collapse.open(f, [i])</code> · <code>collapse.close(f, [i])</code> · <code>collapse.toggle(f, i)</code></td><td>열기 / 닫기 / 뒤집기 — i를 빼면 전부(아코디언의 open은 첫 패널만)</td></tr>
 <tr><td><code>on('collapse(f)')</code></td><td><code>{ index, title, open, elem }</code></td></tr>
 </tbody></table></div>
 </section>

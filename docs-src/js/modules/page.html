@@ -1,0 +1,95 @@
+<section aria-labelledby="copy">
+<h2 id="copy">복사 버튼</h2>
+<catui-example title="data-catui-copy (코드 블록 · 대상 · 글자)">
+  <div class="Catui_codeblock">
+    <div class="Catui_codeblock-h"><span>설치</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-copy>복사</button></div>
+    <pre><code>npm install catui</code></pre>
+  </div>
+  <div class="Catui_actions">
+    <label class="Catui_clip" for="pg-link">공유 주소</label><input class="Catui_input" id="pg-link" value="https://example.com/share/8F2K" readonly>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-catui-copy="#pg-link">주소 복사</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" data-catui-copy="CATUI-2026" aria-label="쿠폰 번호 복사" data-catui-tip="쿠폰 번호 복사"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-copy"></use></svg></button>
+  </div>
+</catui-example>
+<p>값을 비우면 가장 가까운 <code>.Catui_codeblock</code>의 코드를, <code>#id</code>면 그 요소(입력은 값)를, 그 밖은 적힌 글자를 복사합니다. 글자 버튼은 잠시 "복사됨"으로 바뀌고, 결과는 화면 낭독기에도 알립니다. http 환경에서도 대체 방식으로 복사합니다.</p>
+</section>
+
+<section aria-labelledby="tip">
+<h2 id="tip">툴팁</h2>
+<catui-example title="data-catui-tip · data-catui-tip-side">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-catui-tip="변경 내용을 저장합니다">저장</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" aria-label="도움말" data-catui-tip="Ctrl+K로 명령 팔레트를 엽니다" data-catui-tip-side="bottom"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-info"></use></svg></button>
+  </div>
+</catui-example>
+<p>마우스는 0.3초 뒤, 키보드 포커스는 바로 보이고 <code>aria-describedby</code>로 연결됩니다. Esc·스크롤·벗어나면 사라집니다. 아이콘 버튼은 툴팁과 별개로 <code>aria-label</code>을 주세요.</p>
+</section>
+
+<section aria-labelledby="lazy">
+<h2 id="lazy">이미지 지연 로딩</h2>
+<catui-example title="img[data-catui-src]">
+  <img data-catui-src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 160'%3E%3Crect width='640' height='160' fill='%23E6F7F3'/%3E%3Ccircle cx='80' cy='80' r='40' fill='%2326B99A'/%3E%3C/svg%3E" alt="지연 로딩된 예시 그림" width="640" height="160" style="background:var(--Catui_color-neutral-100);border-radius:var(--Catui_radius-md)">
+</catui-example>
+<p>화면에서 300px 안으로 들어오면 <code>data-catui-src</code>(·<code>data-catui-srcset</code>, <code>&lt;picture&gt;</code> 안 <code>source</code>, <code>iframe</code>)를 실제 주소로 바꿉니다. 자리가 흔들리지 않게 <code>width·height</code>를 꼭 주세요. 새로 넣은 영역은 <code>catui.init(영역)</code> 또는 <code>page.lazy(영역)</code>.</p>
+</section>
+
+<section aria-labelledby="flow">
+<h2 id="flow">무한 스크롤 · 더 보기</h2>
+<catui-example title="page.flow.render (자동 + 더 보기 버튼)">
+  <ul class="Catui_list" id="pg-flow"></ul>
+  <script>
+  catui.use(['page'], function (page) {
+    page.flow.render({ elem: '#pg-flow', end: '모든 알림을 봤습니다.', done: function (n, next) {
+      setTimeout(function () {
+        var items = []; for (var i = 1; i <= 5; i++) items.push(catui.html`<li class="Catui_list-item">${n}쪽 알림 ${i}</li>`);
+        next(items, n < 3);   // 3쪽까지만
+      }, 500);
+    } });
+  });
+  </script>
+</catui-example>
+<p>목록 끝의 막대가 화면 가까이 오면 다음 쪽을 부르고, 키보드·화면 낭독기 사용자를 위해 "더 보기" 버튼을 항상 둡니다. 불러오는 동안 <code>aria-busy</code>, 실패하면 "다시 시도" 버튼을 보입니다.</p>
+</section>
+
+<section aria-labelledby="steps">
+<h2 id="steps">단계 (wizard)</h2>
+<catui-example title="page.steps.render + before 검사">
+  <div id="pg-steps"></div>
+  <div id="pg-panels">
+    <div class="Catui_step-panel"><div class="Catui_field"><label class="Catui_label" for="pg-name">이름 <span class="Catui_req">필수</span></label><input class="Catui_input" id="pg-name" autocomplete="name"></div></div>
+    <div class="Catui_step-panel"><p>결제 수단을 고르는 단계입니다.</p></div>
+    <div class="Catui_step-panel"><p>모든 단계를 마쳤습니다.</p></div>
+  </div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="pg-prev">이전</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="pg-next">다음</button></div>
+  <script>
+  catui.use(['page', 'form'], function (page, form) {
+    var w = page.steps.render({ elem: '#pg-steps', data: ['정보', '결제', '완료'], panels: '#pg-panels',
+      // 앞으로 갈 때만 검사: 이름이 비었으면 이동하지 않고 오류 표시
+      before: function (from, to) { if (to > from && from === 0) { var el = document.getElementById('pg-name'); if (!el.value.trim()) { form.setError(el, '이름을 입력해 주세요.'); el.focus(); return false; } form.clearError(el); } } });
+    document.getElementById('pg-next').addEventListener('click', function () { w.next(); });
+    document.getElementById('pg-prev').addEventListener('click', function () { w.prev(); });
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="totop">
+<h2 id="totop">맨 위로</h2>
+<pre><code>&lt;a class="Catui_totop" href=&quot;#main&quot; data-catui-totop="400" aria-label="맨 위로"&gt;…&lt;/a&gt;   // 마크업
+page.totop({ offset: 400, target: '#main' });                                     // 없으면 버튼을 만들어 붙임</code></pre>
+<p>400px 넘게 내려가면 보이고, 누르면 부드럽게 올라간 뒤 포커스도 대상(또는 <code>main</code>·<code>h1</code>)으로 옮깁니다. 모션 줄이기에서는 바로 이동합니다.</p>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">page API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>data-catui-copy</code> · <code>page.copy(text)</code></td><td>복사 버튼 / 직접 복사(Promise&lt;boolean&gt;). 버튼은 <code>catui:copy</code> 이벤트(<code>detail: { ok, text }</code>)를 보냄</td></tr>
+<tr><td><code>data-catui-tip</code> · <code>data-catui-tip-side="top|bottom"</code> · <code>page.tip.show(el)</code> · <code>hide()</code></td><td>툴팁</td></tr>
+<tr><td><code>data-catui-src</code> · <code>data-catui-srcset</code> · <code>page.lazy(영역)</code></td><td>지연 로딩</td></tr>
+<tr><td><code>page.flow.render({ elem, done(page, next), auto, margin, more, end })</code></td><td><code>next(항목들, 더있음)</code> — 항목은 html``·Element·배열. <code>inst.load()</code> · <code>inst.reset()</code> · 이벤트 <code>load(f)</code> <code>{ page, more }</code></td></tr>
+<tr><td><code>page.steps.render({ elem, data, current, panels, before(from, to), change })</code></td><td><code>inst.next() · prev() · go(i) · getIndex()</code> (Promise&lt;이동 여부&gt;). before가 false면 이동 안 함. 이벤트 <code>change(f)</code> <code>{ index, from, total }</code></td></tr>
+<tr><td><code>data-catui-totop="px"</code> · <code>data-catui-totop-target</code> · <code>page.totop({ offset, target, label })</code></td><td>맨 위로</td></tr>
+</tbody></table></div>
+</section>

@@ -3,6 +3,13 @@
 .Catui_logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:var(--Catui_space-6) var(--Catui_space-9)}
 .Catui_logos > *{color:var(--Catui_color-text-secondary);font-weight:700;font-size:var(--Catui_type-h3-size);letter-spacing:-.01em;opacity:1;filter:grayscale(1)}
 .Catui_logos img{height:28px;width:auto}
+/* 로고 흐름 (catui.js site data-catui-marquee): 한 벌을 복제해 절반만큼 흘려 끊김 없이. 간격은 gap 대신 좌우 여백(정확히 절반이 되게) */
+.Catui_logos-marquee{display:block;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,currentColor 8%,currentColor 92%,transparent);mask-image:linear-gradient(to right,transparent,currentColor 8%,currentColor 92%,transparent)}
+.Catui_logos-track{display:flex;align-items:center;width:max-content;animation:Catui_marquee 30s linear infinite}
+.Catui_logos-track > *{flex:none;padding-inline:var(--Catui_space-6);color:var(--Catui_color-text-secondary);font-weight:700;font-size:var(--Catui_type-h3-size);letter-spacing:-.01em;filter:grayscale(1)}
+.Catui_logos-marquee:hover .Catui_logos-track,.Catui_logos-marquee:focus-within .Catui_logos-track{animation-play-state:paused}
+@keyframes Catui_marquee{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.Catui_logos-track{animation:none}}
 .Catui_statband{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:var(--Catui_grid-gap);text-align:center}
 .Catui_statband-value{font-size:var(--Catui_type-display-size);font-weight:var(--Catui_type-display-weight);line-height:var(--Catui_type-display-lh);color:var(--Catui_color-brand-strong);font-variant-numeric:tabular-nums}
 .Catui_statband-label{margin-top:var(--Catui_space-1);color:var(--Catui_color-text-secondary)}

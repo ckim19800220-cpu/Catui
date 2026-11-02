@@ -1,0 +1,34 @@
+<section aria-labelledby="basic">
+<h2 id="basic">명령 팔레트</h2>
+<catui-example title="command.render (Ctrl+K / ⌘K)">
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="cmd-open">명령 팔레트 열기 <span class="Catui_kbd">Ctrl</span><span class="Catui_kbd">K</span></button><span class="Catui_help" id="cmd-out" aria-live="polite"></span></div>
+  <script>
+  catui.use(['command', 'layer'], function (command, layer) {
+    var say = function (t) { document.getElementById('cmd-out').textContent = t; };
+    command.render({ id: 'doc-cmd', placeholder: '명령 또는 페이지 (초성도 됩니다: ㄷㅅㅂㄷ)', data: [
+      { group: '이동', title: '대시보드', icon: 'layout-dashboard', kbd: 'G D', keywords: 'home 홈', handler: function () { say('대시보드로 이동'); } },
+      { group: '이동', title: '주문 목록', icon: 'shopping-cart', keywords: 'orders', handler: function () { say('주문 목록으로 이동'); } },
+      { group: '이동', title: '고객', icon: 'users', handler: function () { say('고객으로 이동'); } },
+      { group: '작성', title: '새 주문', icon: 'plus', kbd: 'N', handler: function () { layer.msg('새 주문을 만듭니다', { icon: 'success' }); } },
+      { group: '작성', title: '보고서 내보내기', icon: 'download', disabled: true },
+      { group: '설정', title: '다크 모드 전환', icon: 'moon', keywords: 'theme 테마', handler: function () { document.querySelector('.doc-theme')?.click(); } },
+    ] });
+    document.getElementById('cmd-open').addEventListener('click', function () { command.open('doc-cmd'); });
+  });
+  </script>
+</catui-example>
+<p>어디서든 <span class="Catui_kbd">Ctrl</span>+<span class="Catui_kbd">K</span>(Mac은 ⌘K)로 엽니다. 제목·키워드·그룹으로 찾고, 띄어쓰기는 무시하며, 한글 초성만 쳐도 찾습니다. ↑↓로 고르고(비활성 건너뜀) Enter로 실행, Esc·바깥 클릭으로 닫으면 포커스가 원래 자리로 돌아갑니다.</p>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">옵션 · API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">command 옵션</caption>
+<thead><tr><th scope="col">옵션·API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>data</code></td><td><code>[{ group, title, icon, kbd, keywords, href, handler(item), disabled, hidden }]</code> — handler가 false면 팔레트를 닫지 않음. href는 http·https·상대 경로만</td></tr>
+<tr><td><code>hotkey</code></td><td><code>'mod+k'</code>(기본, Windows Ctrl·Mac ⌘) · 배열 가능 · <code>'/'</code>처럼 한 글자는 입력 중이 아닐 때만 · <code>false</code> = 끔</td></tr>
+<tr><td><code>placeholder</code> · <code>label</code> · <code>empty</code> · <code>limit</code></td><td>검색 칸 안내 · 대화상자 이름 · 결과 없음 문구 · 최대 표시 수(50)</td></tr>
+<tr><td><code>command.open(id)</code> · <code>command.close(id)</code></td><td>열기 / 닫기 (<code>inst.open()</code> · <code>inst.close()</code>)</td></tr>
+<tr><td><code>on('select(f)')</code> · <code>on('open(f)')</code> · <code>on('close(f)')</code></td><td><code>{ item }</code> / 열림 / 닫힘</td></tr>
+</tbody></table></div>
+</section>

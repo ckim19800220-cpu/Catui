@@ -57,7 +57,8 @@ export function component(def) {
       try { def.render(inst); } catch (err) { inst.teardown(); throw err; }   // 그리다 실패하면 붙인 리스너 회수
       instances.set(inst.id, inst);
       if (inst.elem) byElem.set(inst.elem, inst);
-      inst.config.done?.call(inst, inst);
+      // done = 렌더 완료 콜백. 단, done을 자기 의미(날짜 선택·업로드 완료 등)로 쓰는 모듈은 ownDone: true로 건너뛴다
+      if (!def.ownDone) inst.config.done?.call(inst, inst);
       return inst;
     },
     reload(id, options) { const inst = instances.get(id); if (!inst) { hint.error(`${name}: id '${id}' 인스턴스가 없습니다`); return null; } return inst.reload(options); },
@@ -73,7 +74,7 @@ export function component(def) {
     get config() { return { ...defaults }; },
   };
   for (const [k, v] of Object.entries(def)) {
-    if (!["name", "config", "render", "destroy", "beforeRender", "CONST"].includes(k)) api[k] = v;
+    if (!["name", "config", "render", "destroy", "beforeRender", "CONST", "ownDone"].includes(k)) api[k] = v;
   }
   return api;
 }

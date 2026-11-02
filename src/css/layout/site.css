@@ -36,6 +36,12 @@
 .Catui_foot-grid ul{display:grid;gap:var(--Catui_space-2)}
 .Catui_foot-copy{margin-top:var(--Catui_space-6);padding-top:var(--Catui_space-4);border-top:1px solid var(--Catui_sidebar-hover-bg);font-size:var(--Catui_type-caption-size);color:var(--Catui_sidebar-fg-muted)}
 .Catui_site :where(section[id]){scroll-margin-top:var(--Catui_topbar-h)}
+/* catui.js site: 스크롤하면 그림자, data-catui-header="hide"면 내릴 때 숨김, 스크롤 스파이 현재 위치 */
+.Catui_site-header[data-catui-header]{transition:translate calc(var(--Catui_dur-fast) * 2) var(--Catui_ease),box-shadow var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_site-header[data-catui-scrolled]{box-shadow:var(--Catui_shadow-sm)}
+.Catui_site-header[data-catui-hidden]{translate:0 -100%}
+.Catui_site-nav a[aria-current="location"]{color:var(--Catui_color-brand-strong);font-weight:600}
+@media (prefers-reduced-motion:reduce){.Catui_site-header[data-catui-header]{transition:none}}
 .Catui_price{border-color:var(--Catui_card-border)}
 .Catui_price-featured{border-color:var(--Catui_btn-primary-bg)}
 @media (max-width:1199px){

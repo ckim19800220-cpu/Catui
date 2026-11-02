@@ -64,14 +64,15 @@ export const layer = (() => {
       if (!oldest) { box.firstElementChild.remove(); break; }
       close(oldest[0]);
     }
-    let timer = 0;
-    const done = () => { clearTimeout(timer); node.remove(); opened.delete(index); end?.(); };
+    let timer = 0, gone = false;
+    // 한 번만 닫힌다 — 마우스·포커스 재개 타이머가 겹쳐도 end 콜백이 두 번 불리지 않게
+    const done = () => { if (gone) return; gone = true; clearTimeout(timer); node.remove(); opened.delete(index); end?.(); };
     opened.set(index, { type: "msg", node, close: done });
     node.querySelector(".Catui_toast-action")?.addEventListener("click", () => { options.action.onClick?.(index); done(); });
     if (time > 0) {
       timer = setTimeout(done, time);
       // 마우스를 올리거나 키보드 포커스가 들어오면 멈춤 (읽을 시간 확보)
-      const pause = () => clearTimeout(timer), resume = () => { timer = setTimeout(done, 1500); };
+      const pause = () => clearTimeout(timer), resume = () => { clearTimeout(timer); timer = setTimeout(done, 1500); };
       node.addEventListener("mouseenter", pause); node.addEventListener("mouseleave", resume);
       node.addEventListener("focusin", pause); node.addEventListener("focusout", resume);
     }
@@ -217,7 +218,8 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
       content: html`<div class="Catui_field"><label class="Catui_label" for="${fid}">${options.label || options.title || "값"}</label>${field}<p class="Catui_error" id="${fid}-err" hidden>값을 입력해 주세요.</p></div>`,
       success(dlg, index) {
         dlg.querySelector(`#${fid}`).addEventListener("keydown", (e) => {
-          if (e.key === "Enter" && options.formType !== "textarea") { e.preventDefault(); dlg.querySelector('[data-catui-btn="0"]').click(); }
+          // 한글 조합 중 Enter는 글자 확정일 뿐 — 제출하지 않는다
+          if (e.key === "Enter" && !imeBusy(e) && options.formType !== "textarea") { e.preventDefault(); dlg.querySelector('[data-catui-btn="0"]').click(); }
         });
         options.success?.(dlg, index);
       },
@@ -225,7 +227,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
         const input = dlg.querySelector(`#${fid}`), value = input.value;
         const bad = options.required !== false && !value.trim();
         input.setAttribute("aria-invalid", String(bad));
-        input.setAttribute("aria-describedby", bad ? `${fid}-err` : "");
+        if (bad) input.setAttribute("aria-describedby", `${fid}-err`); else input.removeAttribute("aria-describedby");
         dlg.querySelector(`#${fid}-err`).hidden = !bad;
         if (bad) { input.focus(); return false; }
         if (yes) return yes(value, index, dlg);
@@ -330,7 +332,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
         dlg.addEventListener("keydown", (e) => {
           if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
           else if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
-          else if (e.key === "Home") { k = 0; show(); } else if (e.key === "End") { k = items.length - 1; show(); }
+          else if (e.key === "Home") { e.preventDefault(); k = 0; show(); } else if (e.key === "End") { e.preventDefault(); k = items.length - 1; show(); }
         });
         (items.length > 1 ? nextB : dlg.querySelector('[data-catui-layer="close"]'))?.focus();
         options.success?.(dlg, index);
@@ -468,7 +470,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
       });
 
       const read = () => Object.fromEntries(fields.filter((fl) => fl.name).map((fl) => {
-        const t = fl.type || "text", ins = [...el.querySelectorAll(`[name="${fl.name}"]`)];
+        const t = fl.type || "text", ins = [...el.querySelectorAll(`[name="${CSS.escape(fl.name)}"]`)];
         if (t === "checkbox" && fl.options) return [fl.name, ins.filter((x) => x.checked).map((x) => x.value)];
         if (t === "checkbox" || t === "switch") return [fl.name, !!ins[0]?.checked];
         if (t === "radio") return [fl.name, ins.find((x) => x.checked)?.value ?? ""];
@@ -478,7 +480,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
       const check = () => {
         const values = read(), bad = [];
         fields.forEach((fl) => {
-          const box = el.querySelector(`[data-name="${fl.name}"]`);
+          const box = el.querySelector(`[data-name="${CSS.escape(String(fl.name))}"]`);
           if (!box) return;
           const ins = [...box.querySelectorAll("input,select,textarea")], err = box.querySelector(".Catui_error"), k = kindOf(fl);
           let m = "";
@@ -507,7 +509,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
       // 처음 값이 있는 칸에서도 help만 설명으로 연결
       fields.forEach((fl, i) => {
         if (!fl.help) return;
-        const id = `${fid}-${fl.name || i}`, box = el.querySelector(`[data-name="${fl.name}"]`);
+        const id = `${fid}-${fl.name || i}`, box = el.querySelector(`[data-name="${CSS.escape(String(fl.name))}"]`);
         (kindOf(fl) === "group" ? box.querySelector("fieldset") : box.querySelector("input,select,textarea"))?.setAttribute("aria-describedby", `${id}-h`);
       });
 

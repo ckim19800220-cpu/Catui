@@ -1,0 +1,140 @@
+<section aria-labelledby="basic">
+<h2 id="basic">끊김 없는 순환 + 자동 넘김</h2>
+<catui-example title="data-catui-carousel (5초 · 진행 막대 · 장 번호 · 정지 버튼)">
+  <div class="Catui_carousel" data-catui-carousel data-catui-autoplay="5000" data-catui-progress data-catui-counter aria-label="이번 주 기획전">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23E6F7F3'/%3E%3Cpath d='M0 200 L180 120 L300 170 L460 80 L640 150 V240 H0Z' fill='%2326B99A'/%3E%3Ctext x='40' y='70' font-size='40' font-family='sans-serif' fill='%230E7A63'%3E1 봄 기획전%3C/text%3E%3C/svg%3E" alt="1 봄 기획전" width="640" height="240"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23EAF4FB'/%3E%3Cpath d='M0 200 L180 120 L300 170 L460 80 L640 150 V240 H0Z' fill='%233498DB'/%3E%3Ctext x='40' y='70' font-size='40' font-family='sans-serif' fill='%231F6FA8'%3E2 여름 준비전%3C/text%3E%3C/svg%3E" alt="2 여름 준비전" width="640" height="240"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23F5EEF8'/%3E%3Cpath d='M0 200 L180 120 L300 170 L460 80 L640 150 V240 H0Z' fill='%239B59B6'/%3E%3Ctext x='40' y='70' font-size='40' font-family='sans-serif' fill='%237D3C98'%3E3 신상품%3C/text%3E%3C/svg%3E" alt="3 신상품" width="640" height="240"></div>
+    </div>
+  </div>
+</catui-example>
+<p>마지막 장에서 다음으로 가면 처음으로 <b>되감지 않고</b> 이어서 1번이 나옵니다(양 끝에 복제 슬라이드를 두고, 복제에 닿으면 같은 그림인 진짜 위치로 순간 이동). 복제는 <code>inert</code>·<code>aria-hidden</code>이라 키보드·화면 낭독기에는 보이지 않습니다. 마우스를 올리거나 포커스가 들어오면 잠시 멈추고, 정지 버튼으로 끄면 다시 켤 때까지 멈춥니다. 모션 줄이기·숨은 탭에서는 넘기지 않습니다. 데스크톱은 마우스로 끌어서도 넘깁니다.</p>
+</section>
+
+<section aria-labelledby="multi">
+<h2 id="multi">여러 장 보기 (반응형)</h2>
+<catui-example title="data-catui-per-view=&quot;1,600:2,900:3&quot;">
+  <div class="Catui_carousel" data-catui-carousel data-catui-per-view="1,600:2,900:3" data-catui-counter aria-label="추천 상품">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect width='320' height='200' fill='%23FEF7E0'/%3E%3Ctext x='24' y='60' font-size='32' font-family='sans-serif' fill='%239A5B0F'%3E상품 A%3C/text%3E%3C/svg%3E" alt="상품 A" width="320" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect width='320' height='200' fill='%23FDECEA'/%3E%3Ctext x='24' y='60' font-size='32' font-family='sans-serif' fill='%23C0392B'%3E상품 B%3C/text%3E%3C/svg%3E" alt="상품 B" width="320" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect width='320' height='200' fill='%23E6F7F3'/%3E%3Ctext x='24' y='60' font-size='32' font-family='sans-serif' fill='%230E7A63'%3E상품 C%3C/text%3E%3C/svg%3E" alt="상품 C" width="320" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect width='320' height='200' fill='%23EAF4FB'/%3E%3Ctext x='24' y='60' font-size='32' font-family='sans-serif' fill='%231F6FA8'%3E상품 D%3C/text%3E%3C/svg%3E" alt="상품 D" width="320" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Crect width='320' height='200' fill='%23F5EEF8'/%3E%3Ctext x='24' y='60' font-size='32' font-family='sans-serif' fill='%237D3C98'%3E상품 E%3C/text%3E%3C/svg%3E" alt="상품 E" width="320" height="200"></div>
+    </div>
+  </div>
+</catui-example>
+<p>폭이 600px 이상이면 2장, 900px 이상이면 3장을 한 번에 보여 주고, 폭이 바뀌면 다시 배치합니다. 순환은 여러 장일 때도 끊김 없이 이어집니다.</p>
+</section>
+
+<section aria-labelledby="fade">
+<h2 id="fade">페이드 전환</h2>
+<catui-example title="Catui_carousel-fade (data-catui-effect=&quot;fade&quot;)">
+  <div class="Catui_carousel Catui_carousel-fade" data-catui-carousel data-catui-effect="fade" data-catui-autoplay="4000" aria-label="공지 배너">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 160'%3E%3Crect width='640' height='160' fill='%232A3F54'/%3E%3Ctext x='32' y='92' font-size='34' font-family='sans-serif' fill='%23FFFFFF'%3E서버 점검 안내 — 토요일 02:00%3C/text%3E%3C/svg%3E" alt="서버 점검 안내 — 토요일 02:00" width="640" height="160"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 160'%3E%3Crect width='640' height='160' fill='%230E7A63'/%3E%3Ctext x='32' y='92' font-size='34' font-family='sans-serif' fill='%23FFFFFF'%3E새 기능: 명령 팔레트 Ctrl+K%3C/text%3E%3C/svg%3E" alt="새 기능: 명령 팔레트 Ctrl+K" width="640" height="160"></div>
+    </div>
+  </div>
+</catui-example>
+<p>슬라이드를 한 칸에 겹치고 현재 장만 서서히 보입니다. 손가락·마우스로 좌우로 밀어도 넘어갑니다. 모션 줄이기에서는 전환 없이 바로 바뀝니다.</p>
+</section>
+
+<section aria-labelledby="api-render">
+<h2 id="api-render">스크립트로 만들기</h2>
+<catui-example title="carousel.render + change 이벤트 (순환 없음 · 옆 장 엿보기)">
+  <div class="Catui_carousel Catui_carousel-peek" id="car-js" data-catui-filter="car-js" aria-label="이용 안내">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 200'%3E%3Crect width='640' height='200' fill='%23FEF7E0'/%3E%3Ctext x='32' y='70' font-size='32' font-family='sans-serif' fill='%239A5B0F'%3E1단계 가입%3C/text%3E%3C/svg%3E" alt="1단계 가입" width="640" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 200'%3E%3Crect width='640' height='200' fill='%23FDECEA'/%3E%3Ctext x='32' y='70' font-size='32' font-family='sans-serif' fill='%23C0392B'%3E2단계 설정%3C/text%3E%3C/svg%3E" alt="2단계 설정" width="640" height="200"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 200'%3E%3Crect width='640' height='200' fill='%23E6F7F3'/%3E%3Ctext x='32' y='70' font-size='32' font-family='sans-serif' fill='%230E7A63'%3E3단계 시작%3C/text%3E%3C/svg%3E" alt="3단계 시작" width="640" height="200"></div>
+    </div>
+  </div>
+  <p class="Catui_help" id="car-out" aria-live="polite"></p>
+  <script>
+  catui.use(['carousel'], function (carousel) {
+    carousel.render({ elem: '#car-js', id: 'car-js', loop: false, counter: true });
+    carousel.on('change(car-js)', function (o) { document.getElementById('car-out').textContent = (o.index + 1) + ' / ' + o.total + '번째'; });
+  });
+  </script>
+</catui-example>
+<p>순환을 끄면 처음·끝에서 이전·다음 버튼이 잠깁니다.</p>
+</section>
+
+<section aria-labelledby="vertical">
+<h2 id="vertical">세로 방향</h2>
+<catui-example title="Catui_carousel-vertical (data-catui-direction=&quot;vertical&quot; · 높이 240 · 휠로 넘기기)">
+  <div class="Catui_carousel Catui_carousel-vertical" data-catui-carousel data-catui-direction="vertical" data-catui-height="240" data-catui-wheel data-catui-autoplay="4000" data-catui-counter aria-label="실시간 소식">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23E6F7F3'/%3E%3Ctext x='40' y='130' font-size='36' font-family='sans-serif' fill='%230E7A63'%3E소식 1 · 신규 매장 오픈%3C/text%3E%3C/svg%3E" alt="소식 1 · 신규 매장 오픈" width="640" height="240"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23EAF4FB'/%3E%3Ctext x='40' y='130' font-size='36' font-family='sans-serif' fill='%231F6FA8'%3E소식 2 · 앱 3.0 출시%3C/text%3E%3C/svg%3E" alt="소식 2 · 앱 3.0 출시" width="640" height="240"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23F5EEF8'/%3E%3Ctext x='40' y='130' font-size='36' font-family='sans-serif' fill='%237D3C98'%3E소식 3 · 회원 혜택 확대%3C/text%3E%3C/svg%3E" alt="소식 3 · 회원 혜택 확대" width="640" height="240"></div>
+    </div>
+  </div>
+</catui-example>
+<p>위아래로 넘기고(↑↓ 키, 마우스 끌기, 손가락), 순환·여러 장·가운데 정렬도 가로와 똑같이 동작합니다. <code>wheel</code>을 켜면 휠 한 번에 한 장씩 넘기고, 순환이 꺼진 상태에서 끝에 닿으면 페이지 스크롤로 넘겨 줍니다.</p>
+</section>
+
+<section aria-labelledby="thumbs">
+<h2 id="thumbs">미리보기(썸네일) · 내용 높이 맞추기</h2>
+<catui-example title="data-catui-thumbs · data-catui-auto-height (상품 사진)">
+  <!-- catui.js가 Catui_carousel-thumbs 줄과 Catui_carousel-thumb 버튼을 만듭니다 (data-catui-thumb로 작은 그림 지정 가능) -->
+  <div class="Catui_carousel" data-catui-carousel data-catui-thumbs data-catui-dots="false" data-catui-auto-height aria-label="상품 사진">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23FEF7E0'/%3E%3Ccircle cx='320' cy='180' r='110' fill='%23F1C40F'/%3E%3C/svg%3E" alt="정면" width="640" height="360"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Crect width='640' height='240' fill='%23FDECEA'/%3E%3Crect x='220' y='40' width='200' height='160' fill='%23E67E22'/%3E%3C/svg%3E" alt="측면 (낮은 사진)" width="640" height="240"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'%3E%3Crect width='640' height='420' fill='%23E6F7F3'/%3E%3Cpath d='M320 60 L520 360 H120Z' fill='%2326B99A'/%3E%3C/svg%3E" alt="윗면 (높은 사진)" width="640" height="420"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' fill='%23EAF4FB'/%3E%3Crect x='180' y='90' width='280' height='180' rx='24' fill='%233498DB'/%3E%3C/svg%3E" alt="포장" width="640" height="360"></div>
+    </div>
+  </div>
+</catui-example>
+<p>미리보기는 슬라이드의 첫 이미지(또는 <code>data-catui-thumb</code>)로 만들고, 현재 장을 테두리로 표시하며 자동으로 가운데로 스크롤합니다. <code>autoHeight</code>는 사진마다 높이가 다를 때 트랙 높이를 현재 장에 맞춥니다.</p>
+</section>
+
+<section aria-labelledby="center">
+<h2 id="center">가운데 정렬 · 여러 장씩 이동</h2>
+<catui-example title="align: 'center' · perView 1.6 느낌(peek) · step">
+  <div class="Catui_carousel Catui_carousel-peek" id="car-center" data-catui-filter="car-center" aria-label="이벤트">
+    <div class="Catui_carousel-track">
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 220'%3E%3Crect width='640' height='220' fill='%23E6F7F3'/%3E%3Ctext x='40' y='120' font-size='40' font-family='sans-serif' fill='%230E7A63'%3E이벤트 A%3C/text%3E%3C/svg%3E" alt="이벤트 A" width="640" height="220"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 220'%3E%3Crect width='640' height='220' fill='%23EAF4FB'/%3E%3Ctext x='40' y='120' font-size='40' font-family='sans-serif' fill='%231F6FA8'%3E이벤트 B%3C/text%3E%3C/svg%3E" alt="이벤트 B" width="640" height="220"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 220'%3E%3Crect width='640' height='220' fill='%23F5EEF8'/%3E%3Ctext x='40' y='120' font-size='40' font-family='sans-serif' fill='%237D3C98'%3E이벤트 C%3C/text%3E%3C/svg%3E" alt="이벤트 C" width="640" height="220"></div>
+      <div class="Catui_carousel-slide"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 220'%3E%3Crect width='640' height='220' fill='%23FEF7E0'/%3E%3Ctext x='40' y='120' font-size='40' font-family='sans-serif' fill='%239A5B0F'%3E이벤트 D%3C/text%3E%3C/svg%3E" alt="이벤트 D" width="640" height="220"></div>
+    </div>
+  </div>
+  <p class="Catui_help" id="car-center-out" aria-live="polite"></p>
+  <script>
+  catui.use(['carousel'], function (carousel) {
+    carousel.render({ elem: '#car-center', id: 'car-center', align: 'center', counter: true,
+      // before가 false면 이동 취소 — 여기서는 기록만
+      before: function (from, to) { document.getElementById('car-center-out').textContent = (from + 1) + ' → ' + (to + 1); } });
+  });
+  </script>
+</catui-example>
+<p>현재 장을 가운데 두고 양옆을 살짝 보여 줍니다(순환도 끊김 없음). 여러 장 보기에서 <code>step: 2</code>면 한 번에 두 장씩 넘깁니다.</p>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">옵션 · API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">carousel 옵션</caption>
+<thead><tr><th scope="col">옵션 (선언형 속성)</th><th scope="col">기본</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>direction</code> (<code>data-catui-direction</code>)</td><td>'horizontal'</td><td><code>'vertical'</code>이면 세로 (<code>.Catui_carousel-vertical</code>), 화살표·키보드도 ↑↓</td></tr>
+<tr><td><code>height</code> (<code>data-catui-height</code>)</td><td>세로 320px</td><td>트랙 높이. 숫자는 px, 문자열은 CSS 길이(<code>'50vh'</code>)</td></tr>
+<tr><td><code>effect</code> (<code>data-catui-effect</code>)</td><td>'slide'</td><td><code>'fade'</code>면 겹쳐서 서서히 (<code>.Catui_carousel-fade</code>)</td></tr>
+<tr><td><code>loop</code> (<code>data-catui-loop="false"</code>) · <code>rewind</code> (<code>data-catui-rewind</code>)</td><td>true · false</td><td>끊김 없는 순환 / 순환을 끈 상태에서 끝 → 처음으로 되감기</td></tr>
+<tr><td><code>perView</code> (<code>data-catui-per-view="1,768:2"</code>) · <code>step</code> (<code>data-catui-step</code>)</td><td>1 · 1</td><td>한 화면 장 수(최소 폭별) · 한 번에 넘기는 장 수</td></tr>
+<tr><td><code>gap</code> (<code>data-catui-gap</code>) · <code>align</code> (<code>data-catui-align="center"</code>)</td><td>12px · 'start'</td><td>장 사이 간격 · 현재 장 정렬(가운데면 양옆 엿보기)</td></tr>
+<tr><td><code>autoHeight</code> (<code>data-catui-auto-height</code>)</td><td>false</td><td>가로에서 트랙 높이를 현재 장에 맞춤</td></tr>
+<tr><td><code>autoplay</code> (<code>data-catui-autoplay="ms"</code>)</td><td>0</td><td>자동 넘김 간격. 켜면 정지 버튼이 함께 생김</td></tr>
+<tr><td><code>pauseOnHover</code> (<code>data-catui-pause-on-hover="false"</code>) · <code>reverse</code> (<code>data-catui-reverse</code>) · <code>stopOnInteraction</code> (<code>data-catui-stop-on-interaction</code>)</td><td>true · false · false</td><td>마우스를 올리면 멈춤 / 거꾸로 넘김 / 사용자가 한 번이라도 넘기면 자동 넘김을 끔. 키보드 포커스가 안에 있으면 항상 멈춤</td></tr>
+<tr><td><code>arrows</code> · <code>dots</code> (<code>data-catui-dots="false"</code>) · <code>thumbs</code> (<code>data-catui-thumbs</code>)</td><td>true · true · false</td><td>이전·다음 버튼 / 점 / 미리보기 줄 (<code>.Catui_carousel-thumbs</code>)</td></tr>
+<tr><td><code>counter</code> · <code>progress</code></td><td>false</td><td>"2 / 5" 장 번호 · 자동 넘김 진행 막대</td></tr>
+<tr><td><code>drag</code> · <code>wheel</code> (<code>data-catui-wheel</code>) · <code>keyboard</code></td><td>true · false · true</td><td>마우스 끌기 / 휠 한 번에 한 장 / 방향키·Home·End</td></tr>
+<tr><td><code>index</code> · <code>label</code> · <code>slideLabel</code></td><td>0 · '' · '{n} / {total}'</td><td>처음 장 / 영역 이름 / 슬라이드 이름 틀</td></tr>
+<tr><td><code>before(from, to)</code></td><td>—</td><td>false를 돌려주면 이동 취소</td></tr>
+<tr><td><code>change(index)</code> · <code>on('change(f)')</code></td><td>—</td><td><code>{ index, total, atStart, atEnd }</code> — 버튼·점·키보드·끌기·휠·손가락 모두</td></tr>
+<tr><td><code>inst.go(i, [smooth])</code> · <code>next()</code> · <code>prev()</code> · <code>pause()</code> · <code>play()</code> · <code>isPaused()</code> · <code>getIndex()</code> · <code>getTotal()</code> · <code>update()</code></td><td>—</td><td>직접 조작 · 슬라이드를 넣거나 뺀 뒤 <code>update()</code> · <code>carousel.go(id, i)</code></td></tr>
+</tbody></table></div>
+</section>

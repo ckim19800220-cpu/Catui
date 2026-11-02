@@ -7,3 +7,7 @@
 .Catui_cookie{position:fixed;left:var(--Catui_space-4);right:var(--Catui_space-4);bottom:var(--Catui_space-4);z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-3) var(--Catui_space-4);max-width:720px;margin-inline:auto;padding:var(--Catui_space-4) var(--Catui_space-5);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-lg);box-shadow:var(--Catui_shadow-lg)}
 .Catui_cookie p{flex:1;min-width:220px;margin:0}
 .Catui_cookie-actions{display:flex;gap:var(--Catui_space-2);flex:none}
+.Catui_cookie[hidden]{display:none}
+/* 읽기 진행 막대 — catui.js가 --Catui_read(0~1)를 갱신 */
+.Catui_readbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:31;pointer-events:none}
+.Catui_readbar > i{display:block;height:100%;background:var(--Catui_color-brand-fill);transform-origin:0 50%;transform:scaleX(var(--Catui_read,0))}

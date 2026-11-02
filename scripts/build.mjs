@@ -8,7 +8,7 @@ const only = (process.argv.find((a) => a.startsWith("--only=")) || "").slice(7).
 const want = (k) => !only.length || only.includes(k);
 
 const css = buildCss();                       // 클래스 목록은 JS·문서 검사에 필요하므로 항상 실행
-const icons = buildIcons();
+const icons = await buildIcons();
 const js = want("js") ? buildJs(css) : null;
 let docs = null;
 if (want("docs")) {
@@ -16,5 +16,5 @@ if (want("docs")) {
   docs = buildDocs({ css, icons });
 }
 
-console.log(`build ok  css ${bytes(css.css)} (${css.files} files)  min ${bytes(css.min)}  icons ${icons.names.length}` +
-  `${js ? `  js ${bytes(js.iife)}` : ""}${docs ? `  docs ${docs.pages} pages` : ""}`);
+console.log(`build ok  css ${bytes(css.css)} (${css.files} files)  min ${bytes(css.min)}  icons ${icons.names.length}(line01 ${icons.line01.length} · own ${icons.own.length} · lucide ${icons.lucide.length})` +
+  `${js ? `  js ${bytes(js.iife)}  min ${bytes(js.min)}` : ""}${docs ? `  docs ${docs.pages} pages` : ""}`);

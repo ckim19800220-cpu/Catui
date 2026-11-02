@@ -5,9 +5,36 @@
 
 ```html
 <link rel="stylesheet" href="dist/catui.min.css">
-<script src="dist/catui.js"></script>
+<script src="dist/catui.min.js"></script>
 <script>catui.use(['layer'], function (layer) { layer.msg('안녕하세요'); });</script>
 ```
+
+```js
+// ES 모듈 + TypeScript (dist/catui.d.ts 자동 인식)
+import catui, { layer, carousel } from "catui";
+import "catui/css";
+```
+
+## 배포 파일 (`dist/`)
+
+| 파일 | 용도 |
+|------|------|
+| `catui.min.js` (+ `.map`) | 전역 `window.catui`, 압축본 (gzip 약 57KB) |
+| `catui.esm.min.js` (+ `.map`) | ES 모듈 압축본 |
+| `catui.js` · `catui.esm.js` | 압축 전 (디버깅용) |
+| `catui.min.css` · `catui.css` | 스타일 (gzip 약 29KB) |
+| `icons.svg` | 아이콘 스프라이트 (`catui.js`와 같은 폴더에 둔다) |
+| `catui.d.ts` | TypeScript 타입 |
+
+지원 브라우저: Chrome·Edge 111+, Safari 16.4+, Firefox 121+ (`:has` · `color-mix` · `inert` 사용).
+
+## 아이콘 (저작권 표시 불필요)
+
+- `src/icons/line01/` — [Line 01](https://iconsforfree.com) 1,178개 원본, CC0 1.0 (Andreas Dittes). `node scripts/fetch-line01.mjs`로 다시 받기
+- `src/icons/svg/` — Line 01에 없는 Catui 원본(직접 그림)
+- `src/icons/allow.json` — 스프라이트에 넣을 이름, `src/icons/map.json` — 이름이 다를 때 Line 01 파일 대응
+
+빌드 출력 `icons 241(line01 231 · own 10 · lucide 0)`. 제3자 고지 파일이 필요 없습니다.
 
 ## 폴더
 
@@ -15,7 +42,7 @@
 |------|------|
 | `src/css/` | CSS 소스 — `foundation · layout · components · forms · views · charts`, 컴포넌트당 1파일. 결합 순서는 `index.json` |
 | `src/js/` | catui.js 소스(ESM) — `core/ · modules/ · index.js`. 번들 순서는 `bundle.json` |
-| `src/icons/allow.json` | 스프라이트에 넣을 Lucide 아이콘 이름 |
+| `src/icons/` | 아이콘 — `allow.json`(이름) · `map.json`(대응) · `line01/`(CC0 원본) · `svg/`(Catui 원본) |
 | `dist/` | 빌드 결과 — `catui.css · catui.min.css · catui.js · catui.esm.js · icons.svg` (직접 고치지 않음) |
 | `docs-src/` | 문서 원본 — `nav.json`(분류·순서) · `layout.html` · `css/**` · `js/**` 조각 · `assets/` |
 | `docs/` | 빌드된 문서 사이트 (직접 고치지 않음) |
@@ -29,6 +56,8 @@ npm install
 npm run build       # CSS → 아이콘 → JS → 문서 (검사 포함)
 npm run build:css   # CSS·아이콘만
 npm run dev         # 정적 서버 :8766
+npm test            # E2E: 문서 전체 콘솔 오류 0건 + 모듈 시나리오 (시스템 Chrome/Edge 사용, CATUI_CHROME으로 경로 지정)
+npm run check       # 빌드 + 테스트
 ```
 
 ## 기여 규칙 요약

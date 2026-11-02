@@ -20,11 +20,17 @@ import { tree } from "../modules/tree.js";
 import { collapse } from "../modules/collapse.js";
 import { canvas } from "../modules/canvas.js";
 import { fx } from "../modules/fx.js";
+import { carousel } from "../modules/carousel.js";
+import { field } from "../modules/field.js";
+import { autocomplete } from "../modules/autocomplete.js";
+import { command } from "../modules/command.js";
+import { page } from "../modules/page.js";
+import { site } from "../modules/site.js";
 
 // 전역 catui 객체 (layui에 해당).
 //   <script src="ui/dist/catui.js"></script>
 //   catui.use(['layer', 'form'], function (layer, form) { layer.msg('안녕하세요'); });
-const catuiModules = { layer, form, laypage, table, tabs, dropdown, util, datePicker, upload, slider, rate, tree, collapse, canvas, fx };
+const catuiModules = { layer, form, laypage, table, tabs, dropdown, util, datePicker, upload, slider, rate, tree, collapse, canvas, fx, carousel, field, autocomplete, command, page, site };
 let catuiReady = false;
 let catuiOffs = [];
 let catuiPrepareOverlays = null;
@@ -96,16 +102,16 @@ export const catui = {
     if (!root) { hint.error(`catui.init: 영역을 찾을 수 없습니다 (${scope})`); return catui; }
     if (!catuiReady) {
       catuiReady = true;
-      catuiOffs = [form.bind(), tabs.bind(), table.bindStatic(), dropdown.bindDetails(), slider.bind(), rate.bind(), collapse.bind(), fx.bind()].filter((f) => typeof f === "function");
+      catuiOffs = [form.bind(), tabs.bind(), table.bindStatic(), dropdown.bindDetails(), slider.bind(), rate.bind(), collapse.bind(), fx.bind(), page.bind(), site.bind()].filter((f) => typeof f === "function");
       const overlays = bindToggleOverlays();
       catuiOffs.push(overlays.off);
       catuiPrepareOverlays = overlays.prepare;
       if (getConfig().autoDestroy) { const off = catuiWatchDetached(); if (off) catuiOffs.push(off); }
     }
-    catuiPrepareOverlays?.(root);
-    form.render(root);
-    table.enhance(root);
-    datePicker.enhance(root);
+    // 한 모듈의 준비가 실패해도 나머지 모듈은 계속 준비한다 (오류는 콘솔에)
+    const steps = [["overlays", () => catuiPrepareOverlays?.(root)], ["form", () => form.render(root)], ["table", () => table.enhance(root)], ["datePicker", () => datePicker.enhance(root)],
+      ["carousel", () => carousel.enhance(root)], ["field", () => field.enhance(root)], ["page", () => page.enhance(root)], ["site", () => site.enhance(root)]];
+    for (const [name, run] of steps) { try { run(); } catch (err) { hint.error(`catui.init: ${name} 준비 중 오류`, "error", err); } }
     return catui;
   },
   // 전역 연결 해제 + 렌더한 인스턴스·열린 레이어 정리 (테스트·SPA 정리용)

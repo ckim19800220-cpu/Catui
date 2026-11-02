@@ -1,7 +1,7 @@
 <section aria-labelledby="basic">
 <h2 id="basic">데이터 표</h2>
 <catui-example title="정렬 · 선택 · 도구 · 페이지">
-  <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="tb-check">선택 확인</button><span class="Catui_help" id="tb-out" aria-live="polite"></span></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="tb-check">선택 확인</button><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="tb-export">CSV 내보내기</button><span class="Catui_help" id="tb-out" aria-live="polite"></span></div>
   <div id="tb-orders" data-catui-filter="tb-orders"></div>
   <script>
   catui.use(['table', 'layer'], function (table, layer) {
@@ -9,7 +9,7 @@
     var names = ['김하늘', '이준', '박서연', '최민', '정수아', '강도현', '윤지호', '한소리', '임태윤', '신예진', '오준혁', '배가영'];
     var rows = names.map(function (n, i) { return { id: String(1001 + i), customer: n, amount: 30000 + ((i * 37) % 19) * 9000, status: ['배송', '처리', '대기', '취소'][i % 4] }; });
     table.render({
-      elem: '#tb-orders', id: 'tb-orders', caption: '최근 주문', page: true, limit: 5, labelField: 'customer', data: rows,
+      elem: '#tb-orders', id: 'tb-orders', caption: '최근 주문', page: { layout: ['count', 'prev', 'page', 'next', 'limit'], limits: [5, 10] }, limit: 5, labelField: 'customer', data: rows,
       cols: [
         { type: 'checkbox', width: 48 }, { type: 'numbers', width: 48 },
         { field: 'id', title: '번호', sort: true },
@@ -25,6 +25,10 @@
     document.getElementById('tb-check').addEventListener('click', function () {
       var s = table.checkStatus('tb-orders');
       document.getElementById('tb-out').textContent = '선택 ' + s.data.length + '건' + (s.isAll ? ' (이 쪽 전체)' : '');
+    });
+    // 선택한 행이 있으면 그 행만, 없으면 정렬된 전체
+    document.getElementById('tb-export').addEventListener('click', function () {
+      table.exportFile('tb-orders', '주문.csv', { checked: table.checkStatus('tb-orders').data.length > 0 });
     });
   });
   </script>
@@ -66,6 +70,10 @@ table.on('sort(t)', function (obj) { return true; });   // false면 기본 정�
 <tr><td><code>page · limit · caption · initSort · text.none · labelField</code></td><td>페이지·캡션·초기 정렬·빈 문구·도구 버튼 이름에 쓸 필드</td></tr>
 <tr><td><code>on('tool(f)')</code></td><td><code>{ event, data, index, tr, del(), update(fields) }</code></td></tr>
 <tr><td><code>on('sort(f)')</code> · <code>on('checkbox(f)')</code> · <code>on('row(f)')</code> · <code>on('done(f)')</code></td><td>정렬 / 선택 / 행 클릭 / 원격 로드 완료</td></tr>
-<tr><td><code>checkStatus(id)</code> · <code>getData(id)</code> · <code>reload(id, opts)</code> · <code>destroy(id)</code></td><td>선택 상태 / 현재 행 / 다시 그리기 / 정리</td></tr>
+<tr><td><code>checkStatus(id)</code> · <code>getData(id)</code> · <code>reload(id, opts)</code> · <code>destroy(id)</code></td><td>선택 상태 / 현재 행 / 다시 그리기 / 정리. <code>reload</code>로 <code>where</code>가 바뀌면 1쪽부터</td></tr>
+<tr><td><code>exportFile(id, '파일.csv', { checked, rows })</code></td><td>CSV 내보내기 — 로컬은 정렬된 전체, 원격은 현재 쪽. <code>checked: true</code>면 선택한 행만. 체크·동작 열 제외, 엑셀 한글 BOM, 수식 실행 방지(CSV 인젝션)</td></tr>
+<tr><td><code>clearChecked(id)</code></td><td>선택 모두 해제</td></tr>
+<tr><td>열 <code>hide: true</code></td><td>그 열을 표시·내보내기에서 뺌</td></tr>
+<tr><td><code>page: { layout, limits, limit, curr }</code></td><td>페이지 바 설정을 <a href="doc:js/modules/laypage">laypage</a>로 넘김 (예: <code>layout: ['count','prev','page','next','limit']</code>). 고른 쪽 크기는 원격 요청 <code>limit</code>에 반영</td></tr>
 </tbody></table></div>
 </section>

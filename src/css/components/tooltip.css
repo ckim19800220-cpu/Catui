@@ -4,6 +4,8 @@
   font-size:var(--Catui_tooltip-font);padding:var(--Catui_tooltip-py) var(--Catui_tooltip-px);
   border-radius:var(--Catui_tooltip-radius);
 }
+/* catui.js data-catui-tip: 오버레이 루트에 화면 고정으로 띄움 (마우스가 가리지 않게 pointer-events 없음) */
+.Catui_layer > .Catui_tooltip{position:fixed;z-index:60;pointer-events:none;max-width:min(280px,calc(100vw - 16px));white-space:normal;word-break:keep-all}
 .Catui_popover{
   width:min(var(--Catui_popover-w),100%);background:var(--Catui_card-bg);
   border-radius:var(--Catui_popover-radius);box-shadow:var(--Catui_popover-shadow);

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>autocomplete 자동완성 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="로컬·비동기 후보, 키보드 선택, combobox 접근성, 이전 요청 취소.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html">util 도구</a></li><li><a href="../../js/modules/carousel.html">carousel 캐러셀</a></li><li><a href="../../js/modules/field.html">field 입력 보강</a></li><li><a href="../../js/modules/autocomplete.html" aria-current="page">autocomplete 자동완성</a></li><li><a href="../../js/modules/command.html">command 명령 팔레트</a></li><li><a href="../../js/modules/page.html">page 페이지 도구</a></li><li><a href="../../js/modules/site.html">site 홈페이지 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 모듈</p>
+<h1 class="Catui_h1">autocomplete 자동완성</h1>
+<p class="Catui_lead">로컬·비동기 후보, 키보드 선택, combobox 접근성, 이전 요청 취소.</p>
+
+<section aria-labelledby="local">
+<h2 id="local">로컬 목록</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">autocomplete.render (배열)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_field"><label class="Catui_label" for="ac-city">도시</label><input class="Catui_input" id="ac-city" placeholder="예: 부"></div>
+  <p class="Catui_help" id="ac-out" aria-live="polite"></p>
+  <script>
+  catui.use(['autocomplete'], function (autocomplete) {
+    autocomplete.render({ elem: '#ac-city', data: ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '수원', '부천', '청주', '전주'],
+      select: function (it) { document.getElementById('ac-out').textContent = '선택: ' + it.value; } });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="autocomplete.render (배열) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;ac-city&quot;&gt;도시&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;ac-city&quot; placeholder=&quot;예: 부&quot;&gt;&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;ac-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;autocomplete&#39;], function (autocomplete) {
+  autocomplete.render({ elem: &#39;#ac-city&#39;, data: [&#39;서울&#39;, &#39;부산&#39;, &#39;대구&#39;, &#39;인천&#39;, &#39;광주&#39;, &#39;대전&#39;, &#39;울산&#39;, &#39;세종&#39;, &#39;수원&#39;, &#39;부천&#39;, &#39;청주&#39;, &#39;전주&#39;],
+    select: function (it) { document.getElementById(&#39;ac-out&#39;).textContent = &#39;선택: &#39; + it.value; } });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>↑↓로 고르고 Enter로 선택, Esc로 목록만 닫습니다(모달 안에서도 모달은 그대로). 맞는 부분은 굵게 보입니다. 한글은 조합 중에도 후보가 바뀌고, 조합 중 Enter는 선택하지 않습니다.</p>
+</section>
+
+<section aria-labelledby="remote">
+<h2 id="remote">비동기 · 설명 붙은 항목</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">예제 2</figcaption>
+<div class="doc-example-preview"> 항목[]">
+  <div class="Catui_field"><label class="Catui_label" for="ac-user">담당자</label><input class="Catui_input" id="ac-user" placeholder="이름 또는 팀"></div>
+  <script>
+  catui.use(['autocomplete'], function (autocomplete) {
+    var people = [{ value: '김하늘', desc: '디자인팀' }, { value: '이준', desc: '개발팀' }, { value: '박서연', desc: '운영팀' }, { value: '최민', desc: '개발팀' }, { value: '정수아', desc: '영업팀', disabled: true }];
+    autocomplete.render({ elem: '#ac-user', delay: 250, data: function (q) {
+      // 실제로는 fetch(url, { signal }) — 여기서는 0.4초 늦게 답하는 가짜 서버
+      return new Promise(function (ok) { setTimeout(function () { ok(people.filter(function (p) { return (p.value + p.desc).indexOf(q) > -1; })); }, 400); });
+    } });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="예제 2 코드 복사">복사</button><pre><code>항목[]&quot;&gt;
+ &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;ac-user&quot;&gt;담당자&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;ac-user&quot; placeholder=&quot;이름 또는 팀&quot;&gt;&lt;/div&gt;
+ &lt;script&gt;
+ catui.use([&#39;autocomplete&#39;], function (autocomplete) {
+   var people = [{ value: &#39;김하늘&#39;, desc: &#39;디자인팀&#39; }, { value: &#39;이준&#39;, desc: &#39;개발팀&#39; }, { value: &#39;박서연&#39;, desc: &#39;운영팀&#39; }, { value: &#39;최민&#39;, desc: &#39;개발팀&#39; }, { value: &#39;정수아&#39;, desc: &#39;영업팀&#39;, disabled: true }];
+   autocomplete.render({ elem: &#39;#ac-user&#39;, delay: 250, data: function (q) {
+     // 실제로는 fetch(url, { signal }) — 여기서는 0.4초 늦게 답하는 가짜 서버
+     return new Promise(function (ok) { setTimeout(function () { ok(people.filter(function (p) { return (p.value + p.desc).indexOf(q) &gt; -1; })); }, 400); });
+   } });
+ });
+ &lt;/script&gt;</code></pre></details>
+</figure>
+<p>입력이 멈추면(<code>delay</code>) 요청하고, 새 글자를 치면 이전 요청은 <code>signal</code>로 취소하며 늦게 온 결과는 버립니다. 실패하면 목록 안에 다시 시도 안내를 보입니다.</p>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">옵션 · API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">autocomplete 옵션</caption>
+<thead><tr><th scope="col">옵션·API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>data</code></td><td>배열(문자열·<code>{ value, label, desc, disabled }</code>) 또는 <code>(q, signal) =&gt; Promise&lt;항목[]&gt;</code> (<code>{ data: [] }</code> 응답도 됨)</td></tr>
+<tr><td><code>minLength</code> · <code>delay</code> · <code>limit</code></td><td>1 · 150ms(비동기일 때) · 8개</td></tr>
+<tr><td><code>highlight</code> · <code>empty</code> · <code>loadingText</code> · <code>openOnFocus</code></td><td>맞는 부분 굵게 · 결과 없음 문구 · 찾는 중 문구 · 포커스만으로 열기</td></tr>
+<tr><td><code>select(item)</code> · <code>on('select(f)')</code></td><td><code>{ item, value, elem }</code> — 입력에 value를 넣고 input·change 이벤트도 보냄</td></tr>
+<tr><td><code>inst.search(q)</code> · <code>inst.close()</code></td><td>직접 검색 / 닫기</td></tr>
+<tr><td>접근성</td><td>입력 <code>role="combobox"</code> + <code>aria-expanded · aria-controls · aria-activedescendant</code>, 목록 <code>role="listbox"</code> · 항목 <code>role="option"</code> + <code>aria-selected</code></td></tr>
+</tbody></table></div>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/field.html"><span>이전</span>field 입력 보강</a><a class="doc-pager-next" href="../../js/modules/command.html"><span>다음</span>command 명령 팔레트</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#local">로컬 목록</a></li><li><a href="#remote">비동기 · 설명 붙은 항목</a></li><li><a href="#api">옵션 · API</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

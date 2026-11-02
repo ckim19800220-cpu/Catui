@@ -1,0 +1,45 @@
+<section aria-labelledby="local">
+<h2 id="local">로컬 목록</h2>
+<catui-example title="autocomplete.render (배열)">
+  <div class="Catui_field"><label class="Catui_label" for="ac-city">도시</label><input class="Catui_input" id="ac-city" placeholder="예: 부"></div>
+  <p class="Catui_help" id="ac-out" aria-live="polite"></p>
+  <script>
+  catui.use(['autocomplete'], function (autocomplete) {
+    autocomplete.render({ elem: '#ac-city', data: ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '수원', '부천', '청주', '전주'],
+      select: function (it) { document.getElementById('ac-out').textContent = '선택: ' + it.value; } });
+  });
+  </script>
+</catui-example>
+<p>↑↓로 고르고 Enter로 선택, Esc로 목록만 닫습니다(모달 안에서도 모달은 그대로). 맞는 부분은 굵게 보입니다. 한글은 조합 중에도 후보가 바뀌고, 조합 중 Enter는 선택하지 않습니다.</p>
+</section>
+
+<section aria-labelledby="remote">
+<h2 id="remote">비동기 · 설명 붙은 항목</h2>
+<catui-example title="data: async (q, signal) => 항목[]">
+  <div class="Catui_field"><label class="Catui_label" for="ac-user">담당자</label><input class="Catui_input" id="ac-user" placeholder="이름 또는 팀"></div>
+  <script>
+  catui.use(['autocomplete'], function (autocomplete) {
+    var people = [{ value: '김하늘', desc: '디자인팀' }, { value: '이준', desc: '개발팀' }, { value: '박서연', desc: '운영팀' }, { value: '최민', desc: '개발팀' }, { value: '정수아', desc: '영업팀', disabled: true }];
+    autocomplete.render({ elem: '#ac-user', delay: 250, data: function (q) {
+      // 실제로는 fetch(url, { signal }) — 여기서는 0.4초 늦게 답하는 가짜 서버
+      return new Promise(function (ok) { setTimeout(function () { ok(people.filter(function (p) { return (p.value + p.desc).indexOf(q) > -1; })); }, 400); });
+    } });
+  });
+  </script>
+</catui-example>
+<p>입력이 멈추면(<code>delay</code>) 요청하고, 새 글자를 치면 이전 요청은 <code>signal</code>로 취소하며 늦게 온 결과는 버립니다. 실패하면 목록 안에 다시 시도 안내를 보입니다.</p>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">옵션 · API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">autocomplete 옵션</caption>
+<thead><tr><th scope="col">옵션·API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>data</code></td><td>배열(문자열·<code>{ value, label, desc, disabled }</code>) 또는 <code>(q, signal) =&gt; Promise&lt;항목[]&gt;</code> (<code>{ data: [] }</code> 응답도 됨)</td></tr>
+<tr><td><code>minLength</code> · <code>delay</code> · <code>limit</code></td><td>1 · 150ms(비동기일 때) · 8개</td></tr>
+<tr><td><code>highlight</code> · <code>empty</code> · <code>loadingText</code> · <code>openOnFocus</code></td><td>맞는 부분 굵게 · 결과 없음 문구 · 찾는 중 문구 · 포커스만으로 열기</td></tr>
+<tr><td><code>select(item)</code> · <code>on('select(f)')</code></td><td><code>{ item, value, elem }</code> — 입력에 value를 넣고 input·change 이벤트도 보냄</td></tr>
+<tr><td><code>inst.search(q)</code> · <code>inst.close()</code></td><td>직접 검색 / 닫기</td></tr>
+<tr><td>접근성</td><td>입력 <code>role="combobox"</code> + <code>aria-expanded · aria-controls · aria-activedescendant</code>, 목록 <code>role="listbox"</code> · 항목 <code>role="option"</code> + <code>aria-selected</code></td></tr>
+</tbody></table></div>
+</section>

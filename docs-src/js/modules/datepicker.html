@@ -10,7 +10,7 @@
   <script>
   catui.use(['datePicker'], function (datePicker) {
     datePicker.render({ elem: '#dp-one', min: '2026-01-01', disabled: function (d) { return d.getDay() === 0; } });
-    datePicker.render({ elem: '#dp-range', range: true });
+    datePicker.render({ elem: '#dp-range', range: true, shortcuts: true });   // 최근 7일·30일·이번 달·지난 달
     datePicker.on('done', function (o) { document.getElementById('dp-out').textContent = o.elem.id + ': ' + (o.value || '지움'); });
   });
   </script>
@@ -26,6 +26,9 @@
 <tr><td><code>range</code> · <code>separator</code></td><td>기간 선택 · 구분자(기본 ' ~ ')</td></tr>
 <tr><td><code>min</code> · <code>max</code> · <code>disabled(date)</code></td><td>'YYYY-MM-DD' 범위 · 막을 날짜</td></tr>
 <tr><td><code>value</code> · <code>weekStart</code></td><td>초기값 · 주 시작(1=월)</td></tr>
+<tr><td><code>min</code> · <code>max</code></td><td>'YYYY-MM-DD' 문자열 또는 Date 객체</td></tr>
+<tr><td><code>shortcuts</code></td><td><code>true</code>(기간: 최근 7일·최근 30일·이번 달·지난 달) 또는 <code>[{ text, value: () =&gt; Date | [Date, Date] }]</code>. 허용 범위 밖이면 고르지 않음</td></tr>
+<tr><td>키보드</td><td>↑↓←→ 하루·한 주 · PageUp/PageDown 한 달(Shift와 함께면 한 해) · Home/End 주의 처음·끝 · Esc 닫기 · Tab으로 벗어나면 닫힘. 머리의 «» 버튼은 한 해 이동</td></tr>
 <tr><td><code>done(value, date)</code></td><td>선택 콜백 · 이벤트 <code>done(f)</code></td></tr>
 <tr><td><code>data-catui-date</code>(<code>="range"</code>) · <code>data-catui-min/max</code></td><td>선언형</td></tr>
 </tbody></table></div>

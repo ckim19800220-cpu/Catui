@@ -15,7 +15,11 @@ export const rate = component({
     const name = uid("catui-rate");
     const word = (v) => (v ? `${v}점${c.texts[v - 1] ? ` · ${c.texts[v - 1]}` : ""}` : "선택 안 함");
     if (c.readonly) {
-      mount(inst.elem, html`<span class="Catui_rating" role="img" aria-label="${c.label ? `${c.label} ` : ""}${c.length}점 중 ${c.value}점">${Array.from({ length: c.length }, (_, i) => html`<span style="color:var(${i < c.value ? "--Catui_rating-on" : "--Catui_rating-off"})">${icon("star", 16)}</span>`)}</span>`);
+      // 3.6점처럼 소수면 별은 반올림(4개), 읽기 값은 소수 첫째 자리까지 그대로
+      const v = Math.max(0, Math.min(c.length, Number(c.value) || 0)), shown = Math.round(v);
+      inst.value = v;
+      inst.getValue = () => v;
+      mount(inst.elem, html`<span class="Catui_rating" role="img" aria-label="${c.label ? `${c.label} ` : ""}${c.length}점 중 ${Math.round(v * 10) / 10}점">${Array.from({ length: c.length }, (_, i) => html`<span style="color:var(${i < shown ? "--Catui_rating-on" : "--Catui_rating-off"})">${icon("star", 16)}</span>`)}</span>`);
       return;
     }
     mount(inst.elem, html`
@@ -36,10 +40,13 @@ ${c.clearable ? html`<button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type
     const onClick = (e) => { if (e.target.closest("[data-catui-clear]")) set(0, true); };
     inst.elem.addEventListener("change", onChange);
     inst.elem.addEventListener("click", onClick);
-    inst.setValue = (v) => set(Number(v) || 0, false);
+    inst.setValue = (v) => set(Math.max(0, Math.min(c.length, Math.round(Number(v) || 0))), false);
+    inst.getValue = () => inst.value;
     inst.use(() => { inst.elem.removeEventListener("change", onChange); inst.elem.removeEventListener("click", onClick); });
   },
   destroy(inst) { if (inst.elem) inst.elem.textContent = ""; },
+  setValue(id, v) { rate.getThis(id)?.setValue?.(v); },
+  getValue(id) { return rate.getThis(id)?.getValue?.() ?? 0; },
   bind() {
     const onChange = (e) => {
       const r = e.target;

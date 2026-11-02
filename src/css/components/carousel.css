@@ -10,4 +10,19 @@
 .Catui_carousel-dot{width:var(--Catui_space-2);height:var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-neutral-300)}
 .Catui_carousel-dot[aria-current="true"]{background:var(--Catui_color-brand-strong);width:var(--Catui_space-5)}
 .Catui_carousel-dot:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){.Catui_carousel-track{scroll-behavior:auto}}
+/* 페이드 전환 (catui.js carousel effect:'fade') — 슬라이드를 한 칸에 겹치고 현재(data-catui-active)만 보인다 */
+.Catui_carousel-fade .Catui_carousel-track{display:grid;overflow:hidden;scroll-snap-type:none}
+.Catui_carousel-fade .Catui_carousel-slide{grid-area:1 / 1;opacity:0;visibility:hidden;transition:opacity calc(var(--Catui_dur-fast) * 4) var(--Catui_ease),visibility 0s linear calc(var(--Catui_dur-fast) * 4)}
+.Catui_carousel-fade .Catui_carousel-slide[data-catui-active]{opacity:1;visibility:visible;transition-delay:0s}
+.Catui_carousel-track:active{cursor:grabbing}
+/* 세로 방향 (catui.js direction:'vertical') — 높이는 기본 320px(옵션 height로 변경), 세로 스냅 */
+.Catui_carousel-vertical .Catui_carousel-track{flex-direction:column;overflow-x:hidden;overflow-y:auto;scroll-snap-type:y mandatory;height:calc(var(--Catui_space-10) * 5);overscroll-behavior:contain}
+.Catui_carousel-vertical .Catui_carousel-slide{flex:0 0 100%}
+/* 미리보기(썸네일) 줄 */
+.Catui_carousel-thumbs{display:flex;gap:var(--Catui_space-2);overflow-x:auto;scrollbar-width:thin;padding:2px}
+.Catui_carousel-thumb{flex:none;width:var(--Catui_space-10);height:var(--Catui_control-h-lg);padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-sm);overflow:hidden;background:var(--Catui_color-neutral-100);color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size);cursor:pointer;opacity:.75}
+.Catui_carousel-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_carousel-thumb:hover{opacity:1}
+.Catui_carousel-thumb[aria-current="true"]{border-color:var(--Catui_color-brand-strong);opacity:1}
+.Catui_carousel-thumb:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.Catui_carousel-track{scroll-behavior:auto}.Catui_carousel-fade .Catui_carousel-slide{transition:none}}

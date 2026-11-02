@@ -14,7 +14,17 @@
 
 <section aria-labelledby="add">
 <h2 id="add">아이콘 추가</h2>
-<p><code>src/icons/allow.json</code>에 Lucide 이름(케밥 표기)을 넣고 빌드합니다. 없는 이름이면 빌드가 실패합니다. 라이선스: Lucide ISC.</p>
+<p><code>src/icons/allow.json</code>에 이름(케밥 표기)을 넣고 빌드합니다. 빌드는 아래 순서로 원본을 찾고, 없으면 실패합니다.</p>
+<ol>
+  <li><code>src/icons/svg/이름.svg</code> — Catui 원본(직접 그림)</li>
+  <li><code>src/icons/line01/파일.svg</code> — <a href="https://iconsforfree.com">Line 01</a> 1,178개. 이름이 다르면 <code>src/icons/map.json</code>에 대응을 적습니다(예: <code>"x": "close"</code>).</li>
+</ol>
+<p>새 Line 01 아이콘을 받으려면 <code>node scripts/fetch-line01.mjs</code>. 원본은 24×24 선 아이콘이어야 하고, 스크립트·이벤트 속성·외부 참조가 있으면 빌드가 막습니다. 선 굵기는 1.5로 통일합니다.</p>
+</section>
+
+<section aria-labelledby="license">
+<h2 id="license">라이선스</h2>
+<p>Line 01 아이콘은 제작자 Andreas Dittes가 <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>(퍼블릭 도메인)으로 공개한 원본입니다. 상업적 사용·수정·재배포가 자유롭고 <b>저작권 표시가 필요 없습니다</b>. Line 01에 없는 일부는 Catui가 직접 그린 원본입니다. 따라서 배포물에 별도 제3자 고지가 필요 없습니다. (CC0는 "iconsforfree" 이름·로고의 상표권은 주지 않습니다.)</p>
 </section>
 
 <section aria-labelledby="list">

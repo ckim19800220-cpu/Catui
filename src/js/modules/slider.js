@@ -15,11 +15,16 @@ export const slider = component({
     if (!inst.elem) return;
     const id = uid("catui-slider");
     const tip = (v) => (c.setTips ? c.setTips(Number(v)) : String(v));
-    const count = Math.min(21, Math.floor((c.max - c.min) / c.step) + 1);
+    // step 0·음수·min>max면 눈금 계산이 Infinity·NaN이 되므로 바로잡는다
+    const step = Number(c.step) > 0 ? Number(c.step) : 1;
+    if (Number(c.max) < Number(c.min)) [c.min, c.max] = [c.max, c.min];
+    const clamp = (v) => Math.min(Number(c.max), Math.max(Number(c.min), Number(v) || 0));
+    c.value = clamp(c.value);
+    const count = Math.min(21, Math.floor((c.max - c.min) / step) + 1);
     mount(inst.elem, html`
 <div class="Catui_field">
   <label class="Catui_label" for="${id}">${c.label}${c.tips ? html` <output for="${id}" class="Catui_num" data-catui-tip>${tip(c.value)}</output>` : ""}</label>
-  <input class="Catui_range" id="${id}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.value}" aria-valuetext="${tip(c.value)}" ${c.disabled ? "disabled" : ""}>
+  <input class="Catui_range" id="${id}" type="range" min="${c.min}" max="${c.max}" step="${step}" value="${c.value}" aria-valuetext="${tip(c.value)}" ${c.disabled ? "disabled" : ""}>
   ${c.ticks && count > 1 ? html`<div class="Catui_range-ticks" aria-hidden="true">${Array.from({ length: count }, () => html`<i></i>`)}</div>` : ""}
   ${c.scale ? html`<div class="Catui_range-scale" aria-hidden="true"><span>${tip(c.min)}</span><span>${tip(c.max)}</span></div>` : ""}
 </div>`);
@@ -31,12 +36,14 @@ export const slider = component({
     input.addEventListener("input", onInput);
     input.addEventListener("change", onChange);
     inst.input = input;
-    inst.setValue = (v) => { input.value = String(v); sync(); onChange(); };
+    inst.setValue = (v) => { input.value = String(clamp(v)); sync(); onChange(); };
     inst.getValue = () => Number(input.value);
+    inst.setDisabled = (on) => { c.disabled = !!on; input.disabled = c.disabled; };
     inst.use(() => { input.removeEventListener("input", onInput); input.removeEventListener("change", onChange); });
   },
   destroy(inst) { if (inst.elem) inst.elem.textContent = ""; },
   setValue(id, v) { slider.getThis(id)?.setValue(v); },
+  getValue(id) { return slider.getThis(id)?.getValue() ?? null; },
   // 마크업의 range에도 이벤트를 낸다
   bind() {
     const handler = (type) => (e) => {

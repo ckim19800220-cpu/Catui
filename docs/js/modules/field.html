@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>field 입력 보강 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="태그 입력·수량 증감·글자 수·인증 코드 칸 (한글 조합·붙여넣기 대응).">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html">util 도구</a></li><li><a href="../../js/modules/carousel.html">carousel 캐러셀</a></li><li><a href="../../js/modules/field.html" aria-current="page">field 입력 보강</a></li><li><a href="../../js/modules/autocomplete.html">autocomplete 자동완성</a></li><li><a href="../../js/modules/command.html">command 명령 팔레트</a></li><li><a href="../../js/modules/page.html">page 페이지 도구</a></li><li><a href="../../js/modules/site.html">site 홈페이지 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 모듈</p>
+<h1 class="Catui_h1">field 입력 보강</h1>
+<p class="Catui_lead">태그 입력·수량 증감·글자 수·인증 코드 칸 (한글 조합·붙여넣기 대응).</p>
+
+<section aria-labelledby="tags">
+<h2 id="tags">태그 입력</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-tags (최대 5개 · 중복 거부 · 쉼표 붙여넣기)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_field"><label class="Catui_label" for="fd-tags">관심 분야</label>
+    <input class="Catui_input" id="fd-tags" name="topics" placeholder="입력 후 Enter 또는 쉼표" data-catui-tags="디자인,개발" data-catui-max="5" aria-describedby="fd-tags-h">
+    <p class="Catui_help" id="fd-tags-h">Enter·쉼표로 추가, 빈 칸에서 Backspace로 마지막 태그를 지웁니다.</p>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-tags (최대 5개 · 중복 거부 · 쉼표 붙여넣기) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fd-tags&quot;&gt;관심 분야&lt;/label&gt;
+  &lt;input class=&quot;Catui_input&quot; id=&quot;fd-tags&quot; name=&quot;topics&quot; placeholder=&quot;입력 후 Enter 또는 쉼표&quot; data-catui-tags=&quot;디자인,개발&quot; data-catui-max=&quot;5&quot; aria-describedby=&quot;fd-tags-h&quot;&gt;
+  &lt;p class=&quot;Catui_help&quot; id=&quot;fd-tags-h&quot;&gt;Enter·쉼표로 추가, 빈 칸에서 Backspace로 마지막 태그를 지웁니다.&lt;/p&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>한글을 조합하는 중의 Enter는 글자 확정으로만 처리합니다. 폼으로 보낼 값은 같은 <code>name</code>의 숨은 입력에 쉼표로 이어 담습니다. 추가·제거는 화면 낭독기로도 알립니다.</p>
+</section>
+
+<section aria-labelledby="stepper">
+<h2 id="stepper">수량 증감</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-stepper (1~9, 길게 누르면 반복)</figcaption>
+<div class="doc-example-preview">
+  <span class="Catui_label" id="fd-qty-l">인원</span>
+  <div class="Catui_stepper" data-catui-stepper data-catui-min="1" data-catui-max="9" data-catui-value="2" data-catui-name="people" data-catui-unit="명" aria-labelledby="fd-qty-l"></div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-stepper (1~9, 길게 누르면 반복) 코드 복사">복사</button><pre><code>&lt;span class=&quot;Catui_label&quot; id=&quot;fd-qty-l&quot;&gt;인원&lt;/span&gt;
+&lt;div class=&quot;Catui_stepper&quot; data-catui-stepper data-catui-min=&quot;1&quot; data-catui-max=&quot;9&quot; data-catui-value=&quot;2&quot; data-catui-name=&quot;people&quot; data-catui-unit=&quot;명&quot; aria-labelledby=&quot;fd-qty-l&quot;&gt;&lt;/div&gt;</code></pre></details>
+</figure>
+<p>경계에서는 해당 버튼이 잠기고 포커스가 반대 버튼으로 옮겨 갑니다. 버튼에 포커스가 있을 때 ↑↓·PageUp/PageDown(10단계)·Home/End도 됩니다.</p>
+</section>
+
+<section aria-labelledby="counter">
+<h2 id="counter">글자 수</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-counter (85%부터 경고, 넘치면 초과 표시)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_field"><label class="Catui_label" for="fd-bio">소개</label><textarea class="Catui_input" id="fd-bio" rows="3" data-catui-counter="60">안녕하세요.</textarea></div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-counter (85%부터 경고, 넘치면 초과 표시) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;fd-bio&quot;&gt;소개&lt;/label&gt;&lt;textarea class=&quot;Catui_input&quot; id=&quot;fd-bio&quot; rows=&quot;3&quot; data-catui-counter=&quot;60&quot;&gt;안녕하세요.&lt;/textarea&gt;&lt;/div&gt;</code></pre></details>
+</figure>
+<p><code>maxlength</code>가 있으면 그 값을, 없으면 <code>data-catui-counter="최대"</code>를 씁니다. 표시 문구는 경고·초과 구간에 들어설 때만 읽혀 매 글자마다 방해하지 않습니다.</p>
+</section>
+
+<section aria-labelledby="otp">
+<h2 id="otp">인증 코드</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-otp (자동 이동 · 붙여넣기 분배)</figcaption>
+<div class="doc-example-preview">
+  <fieldset class="Catui_otp" id="fd-otp" data-catui-otp data-catui-name="code" data-catui-filter="fd-otp" aria-describedby="fd-otp-h"><legend class="Catui_label">인증 코드</legend>
+    <input class="Catui_input" inputmode="numeric" aria-label="1번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="2번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="3번째 숫자"><span class="Catui_otp-sep" aria-hidden="true">–</span><input class="Catui_input" inputmode="numeric" aria-label="4번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="5번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="6번째 숫자">
+  </fieldset>
+  <p class="Catui_help" id="fd-otp-h">문자로 받은 6자리 숫자 — "123456"을 붙여 넣어 보세요.</p>
+  <p class="Catui_help" id="fd-otp-out" aria-live="polite"></p>
+  <script>
+  catui.use(['field'], function (field) {
+    field.otp.on('complete(fd-otp)', function (o) { document.getElementById('fd-otp-out').textContent = '입력 완료: ' + o.value; });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-otp (자동 이동 · 붙여넣기 분배) 코드 복사">복사</button><pre><code>&lt;fieldset class=&quot;Catui_otp&quot; id=&quot;fd-otp&quot; data-catui-otp data-catui-name=&quot;code&quot; data-catui-filter=&quot;fd-otp&quot; aria-describedby=&quot;fd-otp-h&quot;&gt;&lt;legend class=&quot;Catui_label&quot;&gt;인증 코드&lt;/legend&gt;
+  &lt;input class=&quot;Catui_input&quot; inputmode=&quot;numeric&quot; aria-label=&quot;1번째 숫자&quot;&gt;&lt;input class=&quot;Catui_input&quot; inputmode=&quot;numeric&quot; aria-label=&quot;2번째 숫자&quot;&gt;&lt;input class=&quot;Catui_input&quot; inputmode=&quot;numeric&quot; aria-label=&quot;3번째 숫자&quot;&gt;&lt;span class=&quot;Catui_otp-sep&quot; aria-hidden=&quot;true&quot;&gt;–&lt;/span&gt;&lt;input class=&quot;Catui_input&quot; inputmode=&quot;numeric&quot; aria-label=&quot;4번째 숫자&quot;&gt;&lt;input class=&quot;Catui_input&quot; inputmode=&quot;numeric&quot; aria-label=&quot;5번째 숫자&quot;&gt;&lt;input class=&quot;Catui_input&quot; inputmode=&quot;numeric&quot; aria-label=&quot;6번째 숫자&quot;&gt;
+&lt;/fieldset&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;fd-otp-h&quot;&gt;문자로 받은 6자리 숫자 — &quot;123456&quot;을 붙여 넣어 보세요.&lt;/p&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;fd-otp-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;field&#39;], function (field) {
+  field.otp.on(&#39;complete(fd-otp)&#39;, function (o) { document.getElementById(&#39;fd-otp-out&#39;).textContent = &#39;입력 완료: &#39; + o.value; });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">field API</caption>
+<thead><tr><th scope="col">컴포넌트</th><th scope="col">옵션 · 메서드 · 이벤트</th></tr></thead>
+<tbody>
+<tr><td><code>field.tags.render({ elem })</code></td><td><code>max · value[] · duplicate(false) · maxLength(30) · separator(',') · name</code> / <code>inst.add(t) · remove(t|i) · getValue() · setValue([])</code> / <code>change(f)</code> <code>{ value }</code></td></tr>
+<tr><td><code>field.stepper.render({ elem })</code></td><td><code>min · max · step · value · name · unit · label</code> / <code>inst.getValue() · setValue(v)</code> / <code>change(f)</code> <code>{ value }</code>. 소수 단계(0.1)도 오차 없이</td></tr>
+<tr><td><code>field.counter.render({ elem })</code></td><td><code>max</code>(없으면 maxlength) · <code>warn</code>(0.85) · <code>target</code>(표시 요소) / <code>inst.refresh()</code></td></tr>
+<tr><td><code>field.otp.render({ elem })</code></td><td><code>pattern</code>(기본 숫자, <code>data-catui-otp="alnum"</code>은 영문·숫자) · <code>name</code> · <code>complete(code)</code> / <code>inst.getValue() · clear() · setError(bool)</code> / <code>complete(f)</code> <code>{ value }</code></td></tr>
+<tr><td>선언형</td><td><code>input[data-catui-tags="초기,값"]</code>(+<code>data-catui-max</code>) · <code>[data-catui-stepper]</code>(+<code>data-catui-min/max/step/value/name/unit</code>) · <code>[data-catui-counter="최대"]</code> · <code>fieldset[data-catui-otp]</code>(+<code>data-catui-name</code>)</td></tr>
+</tbody></table></div>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/carousel.html"><span>이전</span>carousel 캐러셀</a><a class="doc-pager-next" href="../../js/modules/autocomplete.html"><span>다음</span>autocomplete 자동완성</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#tags">태그 입력</a></li><li><a href="#stepper">수량 증감</a></li><li><a href="#counter">글자 수</a></li><li><a href="#otp">인증 코드</a></li><li><a href="#api">API</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

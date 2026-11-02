@@ -2,6 +2,7 @@
 // 규칙: import는 한 줄, 모듈 내부 도우미는 IIFE 안에 두거나 catui 접두사로 이름 충돌을 피한다.
 import fs from "node:fs";
 import path from "node:path";
+import { transformSync } from "esbuild";
 import { P, fail, read, readJson, write, walk, pkg } from "./lib.mjs";
 
 export function buildJs({ defined }) {
@@ -22,7 +23,7 @@ export function buildJs({ defined }) {
     body += `\n// ── ${f} ──\n${src}`;
   }
   const version = pkg().version;
-  const banner = `/*! Catui UI framework ${version} | 아이콘 Lucide(ISC) */`;
+  const banner = `/*! Catui UI framework ${version} | 아이콘 Line 01(CC0) */`;
   const VERSION = `const VERSION = ${JSON.stringify(version)};`;   // core/env.js의 VERSION 대체
   const iife = `${banner}
 (function (global) {
@@ -43,6 +44,20 @@ export default catui;
 `;
   write(path.join(P.dist, "catui.js"), iife);
   write(path.join(P.dist, "catui.esm.js"), esm);
+  // 압축본 + 소스맵 (소스맵은 압축 전 dist 파일을 가리킨다). 머리 주석(/*! … */)은 라이선스 표시로 남긴다
+  const minify = (code, file, format) => {
+    const out = transformSync(code, { minify: true, sourcemap: "external", sourcefile: file, target: "es2020", format: format === "esm" ? "esm" : undefined, legalComments: "inline", charset: "utf8" });
+    const name = file.replace(/\.js$/, ".min.js");
+    write(path.join(P.dist, name), `${out.code}//# sourceMappingURL=${name}.map\n`);
+    const map = JSON.parse(out.map); map.file = name; map.sources = [file];
+    write(path.join(P.dist, `${name}.map`), JSON.stringify(map));
+    return out.code;
+  };
+  // 타입 선언 (src/types/catui.d.ts → dist/catui.d.ts)
+  const dts = path.join(P.js, "..", "types", "catui.d.ts");
+  if (fs.existsSync(dts)) write(path.join(P.dist, "catui.d.ts"), read(dts));
+  const min = minify(iife, "catui.js", "iife");
+  minify(esm, "catui.esm.js", "esm");
 
   // JS가 만드는 Catui_ 클래스도 CSS에 있어야 한다 (CSS 변수·템플릿 조각·아이콘 id 제외)
   const missing = new Set();
@@ -52,5 +67,5 @@ export default catui;
     if (!defined.has(m[0])) missing.add(m[0]);
   }
   if (missing.size) fail(`JS가 쓰는데 CSS에 없는 클래스: ${[...missing].join(" ")}`);
-  return { iife, esm };
+  return { iife, esm, min };
 }

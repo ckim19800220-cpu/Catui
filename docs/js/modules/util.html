@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>util 도구 · catui.js · Catui</title>
 <script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
-<meta name="description" content="날짜 서식·상대 시간·카운트다운·디바운스.">
+<meta name="description" content="날짜 서식·상대 시간·카운트다운·디바운스·숫자·용량·복사.">
 <link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
 <link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
 <link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -25,11 +25,11 @@
   <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
 </div></header>
 <div class="doc-shell">
-<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html" aria-current="page">util 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html" aria-current="page">util 도구</a></li><li><a href="../../js/modules/carousel.html">carousel 캐러셀</a></li><li><a href="../../js/modules/field.html">field 입력 보강</a></li><li><a href="../../js/modules/autocomplete.html">autocomplete 자동완성</a></li><li><a href="../../js/modules/command.html">command 명령 팔레트</a></li><li><a href="../../js/modules/page.html">page 페이지 도구</a></li><li><a href="../../js/modules/site.html">site 홈페이지 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
 <main class="doc-main" id="doc-main" tabindex="-1">
 <p class="doc-eyebrow">catui.js · 모듈</p>
 <h1 class="Catui_h1">util 도구</h1>
-<p class="Catui_lead">날짜 서식·상대 시간·카운트다운·디바운스.</p>
+<p class="Catui_lead">날짜 서식·상대 시간·카운트다운·디바운스·숫자·용량·복사.</p>
 
 <section aria-labelledby="demo">
 <h2 id="demo">도구</h2>
@@ -69,13 +69,16 @@ catui.use([&#39;util&#39;], function (util) {
 <tr><td><code>timeAgo(time, onlyDate)</code></td><td>'방금' · 'n분 전' · 'n시간 전' · 'n일 전' · 30일 넘으면 날짜</td></tr>
 <tr><td><code>countdown({ date, now, ready(t), clear() })</code></td><td><code>t.d · t.h · t.m · t.s</code>, 반환값 <code>.clear()</code></td></tr>
 <tr><td><code>debounce(fn, ms)</code> · <code>throttle(fn, ms)</code></td><td>반환 함수에 <code>.cancel()</code></td></tr>
-<tr><td><code>copy(text)</code></td><td>클립보드 복사 → Promise&lt;boolean&gt;</td></tr>
+<tr><td><code>copy(text)</code></td><td>클립보드 복사 → Promise&lt;boolean&gt;. Clipboard API가 없는 http 환경에서도 대체 방식으로 복사</td></tr>
+<tr><td><code>number(n, [소수 자리])</code></td><td>천 단위 구분: <code>number(1234567.8, 1)</code> → '1,234,567.8'</td></tr>
+<tr><td><code>fileSize(bytes, [소수 자리])</code></td><td>'0B' · '1.5KB' · '5MB' · 'GB' · 'TB'</td></tr>
+<tr><td><code>toDateString</code> 서식 토큰</td><td><code>yyyy yy · MM M · dd d · HH H · hh h(12시간) · mm m · ss s · a(오전/오후) · E(요일)</code>. 영문 글자를 그대로 쓰려면 따옴표: <code>"h:mm 'at' s"</code></td></tr>
 <tr><td><code>escape · html · raw</code></td><td><a href="../../js/core/dom.html">html · raw · escape</a>와 같음</td></tr>
 </tbody></table></div>
 </section>
 
 
-<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/fx.html"><span>이전</span>fx 효과</a><a class="doc-pager-next" href="../../js/reference/attributes.html"><span>다음</span>선언형 속성</a></nav>
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/fx.html"><span>이전</span>fx 효과</a><a class="doc-pager-next" href="../../js/modules/carousel.html"><span>다음</span>carousel 캐러셀</a></nav>
 </main>
 <aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#demo">도구</a></li><li><a href="#api">API</a></li></ul></aside>
 </div>

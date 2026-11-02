@@ -2,16 +2,74 @@
   "name": "catui",
   "version": "1.0.0",
   "private": true,
+  "description": "한국어 관리 화면·공개 홈을 위한 CSS 키트와 의존성 없는 UI 프레임워크 catui.js",
+  "keywords": [
+    "ui",
+    "css",
+    "framework",
+    "korean",
+    "admin",
+    "components",
+    "accessibility",
+    "wcag"
+  ],
   "type": "module",
+  "main": "./dist/catui.js",
+  "module": "./dist/catui.esm.js",
+  "types": "./dist/catui.d.ts",
+  "unpkg": "./dist/catui.min.js",
+  "jsdelivr": "./dist/catui.min.js",
+  "style": "./dist/catui.min.css",
+  "exports": {
+    ".": {
+      "types": "./dist/catui.d.ts",
+      "import": "./dist/catui.esm.js",
+      "default": "./dist/catui.js"
+    },
+    "./min": {
+      "types": "./dist/catui.d.ts",
+      "import": "./dist/catui.esm.min.js",
+      "default": "./dist/catui.min.js"
+    },
+    "./css": "./dist/catui.min.css",
+    "./catui.css": "./dist/catui.css",
+    "./catui.min.css": "./dist/catui.min.css",
+    "./icons.svg": "./dist/icons.svg",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css",
+    "./dist/catui.js",
+    "./dist/catui.min.js",
+    "./dist/catui.esm.js",
+    "./dist/catui.esm.min.js"
+  ],
+  "browserslist": [
+    "chrome >= 111",
+    "edge >= 111",
+    "safari >= 16.4",
+    "firefox >= 121"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "node scripts/build.mjs",
     "build:css": "node scripts/build.mjs --only=css",
     "build:js": "node scripts/build.mjs --only=js",
     "build:docs": "node scripts/build.mjs --only=docs",
-    "dev": "node scripts/serve.mjs 8766"
+    "dev": "node scripts/serve.mjs 8766",
+    "test": "node tests/run.mjs",
+    "check": "npm run build && npm test"
   },
   "devDependencies": {
-    "lightningcss": "^1.30.2",
-    "lucide": "^0.545.0"
+    "esbuild": "0.28.2",
+    "lightningcss": "^1.30.2"
   }
 }

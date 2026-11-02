@@ -28,10 +28,18 @@ export const table = component({
     const host = inst.elem;
     if (!host) return;
     // 상태는 reload 사이에 유지 (정렬·쪽·선택)
-    const s = (inst.state ||= { rows: [], count: 0, curr: 1, sort: c.initSort ? { ...c.initSort } : null, checked: new Set(), loading: false, error: "", req: null });
-    if (c.page && typeof c.page === "object" && c.page.curr) s.curr = c.page.curr;
+    const s = (inst.state ||= { rows: [], count: 0, curr: 1, sort: c.initSort ? { ...c.initSort } : null, checked: new Set(), loading: false, error: "", req: null, where: undefined, limit: 0 });
+    if (c.page && typeof c.page === "object" && c.page.curr && s.where === undefined) s.curr = c.page.curr;
+    // 검색 조건(where)이 바뀌면 1쪽부터 — 5쪽을 보다가 결과가 1쪽뿐인 검색을 하면 빈 표가 되는 문제 방지
+    const whereKey = JSON.stringify(c.where || {});
+    if (s.where !== undefined && s.where !== whereKey) { s.curr = 1; s.checked.clear(); }
+    s.where = whereKey;
     if (c.data) s.checked = new Set([...s.checked].filter((r) => c.data.includes(r)));
-    const limit = (typeof c.page === "object" && c.page.limit) || c.limit;
+    // 쪽 크기: 옵션이 바뀌면 따르고, 그 사이 사용자가 고른 크기(limits)는 상태로 유지
+    const baseLimit = Math.max(1, Number((typeof c.page === "object" && c.page.limit) || c.limit) || 10);
+    if (s.baseLimit !== baseLimit) { s.baseLimit = baseLimit; s.limit = baseLimit; }
+    const pageOpt = typeof c.page === "object" ? c.page : {};
+    const cols = c.cols.filter((col) => !col.hide);
     const capId = uid("catui-tbl-cap");
 
     mount(host, html`<div class="Catui_table-wrap" data-catui-table-body></div>${c.page ? html`<div data-catui-table-pager></div>` : ""}`);
@@ -39,7 +47,7 @@ export const table = component({
     const pagerEl = host.querySelector("[data-catui-table-pager]");
 
     const cellValue = (col, row, i) => {
-      if (col.type === "numbers") return String((s.curr - 1) * limit + i + 1);
+      if (col.type === "numbers") return String((c.page ? (s.curr - 1) * s.limit : 0) + i + 1);
       if (col.templet) { const v = col.templet(row, i); return isRaw(v) ? v : escape(v); }
       if (col.toolbar) return html`<div class="Catui_actions">${col.toolbar.map((b) => html`<button class="Catui_btn Catui_btn-sm ${b.danger ? "Catui_btn-danger" : "Catui_btn-ghost"}" type="button" data-catui-event="${b.event}" aria-label="${b.text}${row[c.labelField || "id"] != null ? ` ${row[c.labelField || "id"]}` : ""}">${b.icon ? icon(b.icon, 16) : ""}${b.icon && !b.showText ? "" : b.text}</button>`)}</div>`;
       return escape(row[col.field]);
@@ -47,9 +55,8 @@ export const table = component({
     const asCell = (v) => (isRaw(v) ? v : raw(v));
 
     // 로컬 데이터: 정렬·쪽 나누기를 여기서. 원격: 서버가 처리했다고 보고 그대로.
-    const view = () => {
-      if (c.url) return s.rows;
-      let rows = [...(c.data || [])];
+    const sorted = () => {
+      const rows = [...(c.data || [])];
       if (s.sort?.field && s.sort.type) {
         const f = s.sort.field, dir = s.sort.type === "asc" ? 1 : -1;
         rows.sort((a, b) => {
@@ -59,10 +66,15 @@ export const table = component({
           return cmp * dir;
         });
       }
+      return rows;
+    };
+    const view = () => {
+      if (c.url) return s.rows;
+      const rows = sorted();
       s.count = rows.length;
       // 데이터가 줄어 현재 쪽이 범위를 벗어나면 마지막 쪽으로
-      s.curr = Math.min(Math.max(1, s.curr), Math.max(1, Math.ceil(s.count / limit)));
-      return c.page ? rows.slice((s.curr - 1) * limit, s.curr * limit) : rows;
+      s.curr = Math.min(Math.max(1, s.curr), Math.max(1, Math.ceil(s.count / s.limit)));
+      return c.page ? rows.slice((s.curr - 1) * s.limit, s.curr * s.limit) : rows;
     };
 
     const draw = () => {
@@ -70,11 +82,11 @@ export const table = component({
       inst.rows = rows;
       const allOn = rows.length > 0 && rows.every((r) => s.checked.has(r));
       const someOn = rows.some((r) => s.checked.has(r));
-      const colspan = c.cols.length;
+      const colspan = cols.length;
       mount(body, html`
 <table class="Catui_tbl" ${c.caption ? html`aria-labelledby="${capId}"` : ""} aria-busy="${s.loading}">
 ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
-<thead><tr>${c.cols.map((col) => {
+<thead><tr>${cols.map((col) => {
   const w = col.width ? html` style="width:${typeof col.width === "number" ? `${col.width}px` : col.width}"` : "";
   if (col.type === "checkbox") return html`<th scope="col"${w}><label class="Catui_choice"><input class="Catui_clip" type="checkbox" data-catui-check="all" aria-label="이 쪽 전체 선택" ${allOn ? "checked" : ""}><span class="Catui_cbx">${icon("check", 12)}</span></label></th>`;
   if (col.type === "numbers") return html`<th scope="col" class="Catui_num"${w}><span class="Catui_clip">순번</span>#</th>`;
@@ -88,7 +100,7 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
   : s.loading
     ? html`<tr><td colspan="${colspan}"><div class="Catui_skeleton Catui_skeleton-text"></div><div class="Catui_skeleton Catui_skeleton-text"></div></td></tr>`
     : rows.length
-      ? rows.map((row, i) => html`<tr data-catui-index="${i}">${c.cols.map((col) => (col.type === "checkbox"
+      ? rows.map((row, i) => html`<tr data-catui-index="${i}">${cols.map((col) => (col.type === "checkbox"
           ? html`<td><label class="Catui_choice"><input class="Catui_clip" type="checkbox" data-catui-check="${i}" aria-label="${i + 1}번째 행 선택" ${s.checked.has(row) ? "checked" : ""}><span class="Catui_cbx">${icon("check", 12)}</span></label></td>`
           : html`<td class="${col.align === "right" || col.type === "numbers" ? "Catui_num" : ""}">${asCell(cellValue(col, row, i))}</td>`))}</tr>`)
       : html`<tr><td colspan="${colspan}"><div class="Catui_empty">${icon("inbox", 16)}<p class="Catui_empty-title">${c.text.none}</p></div></td></tr>`}
@@ -98,10 +110,11 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
       if (pagerEl && !s.loading) {
         // 페이지 컴포넌트는 한 번만 만들고 이후엔 reload로 갱신 (정리 함수 누적 방지)
         if (!pager) {
-          pager = laypage.render({ elem: pagerEl, id: `${inst.id}-pager`, count: s.count, limit, curr: s.curr,
-            jump(obj, first) { if (first) return; s.curr = obj.curr; c.url ? load() : draw(); } });
+          // page: { layout, limits } 는 laypage로 그대로 넘긴다 (예: layout: ['count','prev','page','next','limit','skip'])
+          pager = laypage.render({ elem: pagerEl, id: `${inst.id}-pager`, layout: pageOpt.layout, limits: pageOpt.limits, count: s.count, limit: s.limit, curr: s.curr,
+            jump(obj, first) { if (first) return; s.curr = obj.curr; s.limit = obj.limit; c.url ? load() : draw(); } });
           inst.use(() => pager.destroy());
-        } else pager.reload({ count: s.count, curr: s.curr });
+        } else pager.reload({ count: s.count, curr: s.curr, limit: s.limit });
       }
     };
     let pager = null;
@@ -112,7 +125,7 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
       const ac = (s.req = new AbortController());
       s.loading = c.loading; s.error = ""; draw();
       try {
-        const q = new URLSearchParams({ ...c.where, ...(c.page ? { page: s.curr, limit } : {}), ...(s.sort?.type ? { field: s.sort.field, order: s.sort.type } : {}) });
+        const q = new URLSearchParams({ ...c.where, ...(c.page ? { page: s.curr, limit: s.limit } : {}), ...(s.sort?.type ? { field: s.sort.field, order: s.sort.type } : {}) });
         const isGet = c.method.toUpperCase() === "GET";
         const res = await fetch(isGet ? `${c.url}${c.url.includes("?") ? "&" : "?"}${q}` : c.url, {
           method: c.method, signal: ac.signal, headers: { Accept: "application/json", ...(isGet ? {} : { "Content-Type": "application/x-www-form-urlencoded" }), ...csrfHeaders(c.url, c.method), ...c.headers },
@@ -125,6 +138,9 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
         s.rows = json.data || [];
         s.count = Number(json.count ?? s.rows.length);
         s.checked.clear();
+        // 지우기 등으로 전체 건수가 줄어 현재 쪽이 사라졌으면 마지막 쪽을 다시 요청
+        const last = Math.max(1, Math.ceil(s.count / s.limit));
+        if (c.page && !s.rows.length && s.count > 0 && s.curr > last) { s.curr = last; queueMicrotask(load); }
       } catch (err) {
         if (err.name === "AbortError") return;
         s.error = `데이터를 불러오지 못했습니다. ${err.message}`;
@@ -173,6 +189,11 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
       draw();
       body.querySelector(`[data-catui-check="${cb.dataset.catuiCheck}"]`)?.focus();
     };
+    inst.redraw = draw;
+    inst.cellValue = cellValue;
+    inst.cols = cols;
+    // 내보내기용 전체 행: 로컬은 정렬만 적용한 전체, 원격은 지금 받은 쪽
+    inst.allRows = () => (c.url ? s.rows : sorted());
     body.addEventListener("click", onClick);
     body.addEventListener("change", onChange);
     inst.use(() => { body.removeEventListener("click", onClick); body.removeEventListener("change", onChange); s.req?.abort(); });
@@ -188,6 +209,42 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
     return { data, isAll: inst.rows.length > 0 && inst.rows.every((r) => inst.state.checked.has(r)) };
   },
   getData(id) { return table.getThis(id)?.rows || []; },
+  clearChecked(id) {
+    const inst = table.getThis(id);
+    if (!inst) return;
+    inst.state.checked.clear();
+    inst.redraw?.();
+  },
+
+  // CSV 내보내기: table.exportFile('orders', '주문.csv', { checked: true })
+  //   checked: 선택한 행만 / rows: 직접 넘긴 행. 체크·동작 열은 빼고, templet의 마크업은 글자만 남긴다.
+  //   엑셀 한글 깨짐 방지 BOM, =·+·-·@로 시작하는 글자는 수식으로 실행되지 않게 앞에 '를 붙인다(CSV 인젝션 방지).
+  exportFile(id, filename = "table.csv", opts = {}) {
+    const inst = table.getThis(id);
+    if (!inst) return false;
+    const cols = inst.cols.filter((col) => col.type !== "checkbox" && !col.toolbar);
+    const rows = opts.rows || (opts.checked ? [...inst.state.checked] : inst.allRows());
+    const text = (v) => {
+      // template은 내용이 실행·로드되지 않는(inert) 문서 조각이라 마크업에서 글자만 안전하게 뽑을 수 있다
+      const t = document.createElement("template");
+      t.innerHTML = isRaw(v) ? v.__raw : String(v ?? "");   // escape된 글자도 원래 글자로 되돌림
+      return t.content.textContent.replace(/\s+/g, " ").trim();
+    };
+    const cell = (v) => {
+      let s = String(v ?? "");
+      if (/^[=+\-@\t\r]/.test(s) && !/^-?\d+(\.\d+)?$/.test(s)) s = `'${s}`;
+      return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    };
+    const lines = [cols.map((col) => cell(col.type === "numbers" ? col.title || "순번" : col.title ?? col.field ?? "")).join(",")];
+    rows.forEach((row, i) => lines.push(cols.map((col) => cell(col.type === "numbers" ? i + 1 : text(inst.cellValue(col, row, i)))).join(",")));
+    const blob = new Blob([`\uFEFF${lines.join("\r\n")}`], { type: "text/csv;charset=utf-8" });
+    const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: filename });
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    return true;
+  },
 
   // 정적 표 향상: <table data-catui-table data-catui-filter="x"> 안의 <th data-catui-sort="number|text">
   enhance(scope = document) {

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>page 페이지 도구 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="복사 버튼·툴팁·이미지 지연 로딩·무한 스크롤·단계(wizard)·맨 위로.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v1.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html">util 도구</a></li><li><a href="../../js/modules/carousel.html">carousel 캐러셀</a></li><li><a href="../../js/modules/field.html">field 입력 보강</a></li><li><a href="../../js/modules/autocomplete.html">autocomplete 자동완성</a></li><li><a href="../../js/modules/command.html">command 명령 팔레트</a></li><li><a href="../../js/modules/page.html" aria-current="page">page 페이지 도구</a></li><li><a href="../../js/modules/site.html">site 홈페이지 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 모듈</p>
+<h1 class="Catui_h1">page 페이지 도구</h1>
+<p class="Catui_lead">복사 버튼·툴팁·이미지 지연 로딩·무한 스크롤·단계(wizard)·맨 위로.</p>
+
+<section aria-labelledby="copy">
+<h2 id="copy">복사 버튼</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-copy (코드 블록 · 대상 · 글자)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_codeblock">
+    <div class="Catui_codeblock-h"><span>설치</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-copy>복사</button></div>
+    <pre><code>npm install catui</code></pre>
+  </div>
+  <div class="Catui_actions">
+    <label class="Catui_clip" for="pg-link">공유 주소</label><input class="Catui_input" id="pg-link" value="https://example.com/share/8F2K" readonly>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-catui-copy="#pg-link">주소 복사</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" data-catui-copy="CATUI-2026" aria-label="쿠폰 번호 복사" data-catui-tip="쿠폰 번호 복사"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-copy"></use></svg></button>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-copy (코드 블록 · 대상 · 글자) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_codeblock&quot;&gt;
+  &lt;div class=&quot;Catui_codeblock-h&quot;&gt;&lt;span&gt;설치&lt;/span&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost&quot; type=&quot;button&quot; data-catui-copy&gt;복사&lt;/button&gt;&lt;/div&gt;
+  &lt;pre&gt;&lt;code&gt;npm install catui&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;label class=&quot;Catui_clip&quot; for=&quot;pg-link&quot;&gt;공유 주소&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;pg-link&quot; value=&quot;https://example.com/share/8F2K&quot; readonly&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-catui-copy=&quot;#pg-link&quot;&gt;주소 복사&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; data-catui-copy=&quot;CATUI-2026&quot; aria-label=&quot;쿠폰 번호 복사&quot; data-catui-tip=&quot;쿠폰 번호 복사&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-copy&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>값을 비우면 가장 가까운 <code>.Catui_codeblock</code>의 코드를, <code>#id</code>면 그 요소(입력은 값)를, 그 밖은 적힌 글자를 복사합니다. 글자 버튼은 잠시 "복사됨"으로 바뀌고, 결과는 화면 낭독기에도 알립니다. http 환경에서도 대체 방식으로 복사합니다.</p>
+</section>
+
+<section aria-labelledby="tip">
+<h2 id="tip">툴팁</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">data-catui-tip · data-catui-tip-side</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-catui-tip="변경 내용을 저장합니다">저장</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button" aria-label="도움말" data-catui-tip="Ctrl+K로 명령 팔레트를 엽니다" data-catui-tip-side="bottom"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-info"></use></svg></button>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="data-catui-tip · data-catui-tip-side 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; data-catui-tip=&quot;변경 내용을 저장합니다&quot;&gt;저장&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; aria-label=&quot;도움말&quot; data-catui-tip=&quot;Ctrl+K로 명령 팔레트를 엽니다&quot; data-catui-tip-side=&quot;bottom&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-info&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>마우스는 0.3초 뒤, 키보드 포커스는 바로 보이고 <code>aria-describedby</code>로 연결됩니다. Esc·스크롤·벗어나면 사라집니다. 아이콘 버튼은 툴팁과 별개로 <code>aria-label</code>을 주세요.</p>
+</section>
+
+<section aria-labelledby="lazy">
+<h2 id="lazy">이미지 지연 로딩</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">img[data-catui-src]</figcaption>
+<div class="doc-example-preview">
+  <img data-catui-src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 160'%3E%3Crect width='640' height='160' fill='%23E6F7F3'/%3E%3Ccircle cx='80' cy='80' r='40' fill='%2326B99A'/%3E%3C/svg%3E" alt="지연 로딩된 예시 그림" width="640" height="160" style="background:var(--Catui_color-neutral-100);border-radius:var(--Catui_radius-md)">
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="img[data-catui-src] 코드 복사">복사</button><pre><code>&lt;img data-catui-src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 160&#39;%3E%3Crect width=&#39;640&#39; height=&#39;160&#39; fill=&#39;%23E6F7F3&#39;/%3E%3Ccircle cx=&#39;80&#39; cy=&#39;80&#39; r=&#39;40&#39; fill=&#39;%2326B99A&#39;/%3E%3C/svg%3E&quot; alt=&quot;지연 로딩된 예시 그림&quot; width=&quot;640&quot; height=&quot;160&quot; style=&quot;background:var(--Catui_color-neutral-100);border-radius:var(--Catui_radius-md)&quot;&gt;</code></pre></details>
+</figure>
+<p>화면에서 300px 안으로 들어오면 <code>data-catui-src</code>(·<code>data-catui-srcset</code>, <code>&lt;picture&gt;</code> 안 <code>source</code>, <code>iframe</code>)를 실제 주소로 바꿉니다. 자리가 흔들리지 않게 <code>width·height</code>를 꼭 주세요. 새로 넣은 영역은 <code>catui.init(영역)</code> 또는 <code>page.lazy(영역)</code>.</p>
+</section>
+
+<section aria-labelledby="flow">
+<h2 id="flow">무한 스크롤 · 더 보기</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">page.flow.render (자동 + 더 보기 버튼)</figcaption>
+<div class="doc-example-preview">
+  <ul class="Catui_list" id="pg-flow"></ul>
+  <script>
+  catui.use(['page'], function (page) {
+    page.flow.render({ elem: '#pg-flow', end: '모든 알림을 봤습니다.', done: function (n, next) {
+      setTimeout(function () {
+        var items = []; for (var i = 1; i <= 5; i++) items.push(catui.html`<li class="Catui_list-item">${n}쪽 알림 ${i}</li>`);
+        next(items, n < 3);   // 3쪽까지만
+      }, 500);
+    } });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="page.flow.render (자동 + 더 보기 버튼) 코드 복사">복사</button><pre><code>&lt;ul class=&quot;Catui_list&quot; id=&quot;pg-flow&quot;&gt;&lt;/ul&gt;
+&lt;script&gt;
+catui.use([&#39;page&#39;], function (page) {
+  page.flow.render({ elem: &#39;#pg-flow&#39;, end: &#39;모든 알림을 봤습니다.&#39;, done: function (n, next) {
+    setTimeout(function () {
+      var items = []; for (var i = 1; i &lt;= 5; i++) items.push(catui.html`&lt;li class=&quot;Catui_list-item&quot;&gt;${n}쪽 알림 ${i}&lt;/li&gt;`);
+      next(items, n &lt; 3);   // 3쪽까지만
+    }, 500);
+  } });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>목록 끝의 막대가 화면 가까이 오면 다음 쪽을 부르고, 키보드·화면 낭독기 사용자를 위해 "더 보기" 버튼을 항상 둡니다. 불러오는 동안 <code>aria-busy</code>, 실패하면 "다시 시도" 버튼을 보입니다.</p>
+</section>
+
+<section aria-labelledby="steps">
+<h2 id="steps">단계 (wizard)</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">page.steps.render + before 검사</figcaption>
+<div class="doc-example-preview">
+  <div id="pg-steps"></div>
+  <div id="pg-panels">
+    <div class="Catui_step-panel"><div class="Catui_field"><label class="Catui_label" for="pg-name">이름 <span class="Catui_req">필수</span></label><input class="Catui_input" id="pg-name" autocomplete="name"></div></div>
+    <div class="Catui_step-panel"><p>결제 수단을 고르는 단계입니다.</p></div>
+    <div class="Catui_step-panel"><p>모든 단계를 마쳤습니다.</p></div>
+  </div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="pg-prev">이전</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="pg-next">다음</button></div>
+  <script>
+  catui.use(['page', 'form'], function (page, form) {
+    var w = page.steps.render({ elem: '#pg-steps', data: ['정보', '결제', '완료'], panels: '#pg-panels',
+      // 앞으로 갈 때만 검사: 이름이 비었으면 이동하지 않고 오류 표시
+      before: function (from, to) { if (to > from && from === 0) { var el = document.getElementById('pg-name'); if (!el.value.trim()) { form.setError(el, '이름을 입력해 주세요.'); el.focus(); return false; } form.clearError(el); } } });
+    document.getElementById('pg-next').addEventListener('click', function () { w.next(); });
+    document.getElementById('pg-prev').addEventListener('click', function () { w.prev(); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="page.steps.render + before 검사 코드 복사">복사</button><pre><code>&lt;div id=&quot;pg-steps&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;pg-panels&quot;&gt;
+  &lt;div class=&quot;Catui_step-panel&quot;&gt;&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;pg-name&quot;&gt;이름 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;pg-name&quot; autocomplete=&quot;name&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_step-panel&quot;&gt;&lt;p&gt;결제 수단을 고르는 단계입니다.&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_step-panel&quot;&gt;&lt;p&gt;모든 단계를 마쳤습니다.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost&quot; type=&quot;button&quot; id=&quot;pg-prev&quot;&gt;이전&lt;/button&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;button&quot; id=&quot;pg-next&quot;&gt;다음&lt;/button&gt;&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;page&#39;, &#39;form&#39;], function (page, form) {
+  var w = page.steps.render({ elem: &#39;#pg-steps&#39;, data: [&#39;정보&#39;, &#39;결제&#39;, &#39;완료&#39;], panels: &#39;#pg-panels&#39;,
+    // 앞으로 갈 때만 검사: 이름이 비었으면 이동하지 않고 오류 표시
+    before: function (from, to) { if (to &gt; from &amp;&amp; from === 0) { var el = document.getElementById(&#39;pg-name&#39;); if (!el.value.trim()) { form.setError(el, &#39;이름을 입력해 주세요.&#39;); el.focus(); return false; } form.clearError(el); } } });
+  document.getElementById(&#39;pg-next&#39;).addEventListener(&#39;click&#39;, function () { w.next(); });
+  document.getElementById(&#39;pg-prev&#39;).addEventListener(&#39;click&#39;, function () { w.prev(); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="totop">
+<h2 id="totop">맨 위로</h2>
+<pre><code>&lt;a class="Catui_totop" href=&quot;#main&quot; data-catui-totop="400" aria-label="맨 위로"&gt;…&lt;/a&gt;   // 마크업
+page.totop({ offset: 400, target: '#main' });                                     // 없으면 버튼을 만들어 붙임</code></pre>
+<p>400px 넘게 내려가면 보이고, 누르면 부드럽게 올라간 뒤 포커스도 대상(또는 <code>main</code>·<code>h1</code>)으로 옮깁니다. 모션 줄이기에서는 바로 이동합니다.</p>
+</section>
+
+<section aria-labelledby="api">
+<h2 id="api">API</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">page API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
+<tbody>
+<tr><td><code>data-catui-copy</code> · <code>page.copy(text)</code></td><td>복사 버튼 / 직접 복사(Promise&lt;boolean&gt;). 버튼은 <code>catui:copy</code> 이벤트(<code>detail: { ok, text }</code>)를 보냄</td></tr>
+<tr><td><code>data-catui-tip</code> · <code>data-catui-tip-side="top|bottom"</code> · <code>page.tip.show(el)</code> · <code>hide()</code></td><td>툴팁</td></tr>
+<tr><td><code>data-catui-src</code> · <code>data-catui-srcset</code> · <code>page.lazy(영역)</code></td><td>지연 로딩</td></tr>
+<tr><td><code>page.flow.render({ elem, done(page, next), auto, margin, more, end })</code></td><td><code>next(항목들, 더있음)</code> — 항목은 html``·Element·배열. <code>inst.load()</code> · <code>inst.reset()</code> · 이벤트 <code>load(f)</code> <code>{ page, more }</code></td></tr>
+<tr><td><code>page.steps.render({ elem, data, current, panels, before(from, to), change })</code></td><td><code>inst.next() · prev() · go(i) · getIndex()</code> (Promise&lt;이동 여부&gt;). before가 false면 이동 안 함. 이벤트 <code>change(f)</code> <code>{ index, from, total }</code></td></tr>
+<tr><td><code>data-catui-totop="px"</code> · <code>data-catui-totop-target</code> · <code>page.totop({ offset, target, label })</code></td><td>맨 위로</td></tr>
+</tbody></table></div>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/command.html"><span>이전</span>command 명령 팔레트</a><a class="doc-pager-next" href="../../js/modules/site.html"><span>다음</span>site 홈페이지 도구</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#copy">복사 버튼</a></li><li><a href="#tip">툴팁</a></li><li><a href="#lazy">이미지 지연 로딩</a></li><li><a href="#flow">무한 스크롤 · 더 보기</a></li><li><a href="#steps">단계 (wizard)</a></li><li><a href="#totop">맨 위로</a></li><li><a href="#api">API</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

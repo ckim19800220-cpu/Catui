@@ -13,9 +13,13 @@ export const tree = component({
   render(inst) {
     const c = inst.config;
     if (!inst.elem) return;
-    const byId = new Map();
-    const index = (nodes, parent) => nodes.forEach((n) => { n.__parent = parent; byId.set(String(n.id), n); if (n.children) index(n.children, n); });
+    // 부모 관계는 내부 Map에만 둔다. 사용자 데이터에 부모 참조를 넣으면 JSON.stringify(data)가 순환 오류를 낸다
+    const byId = new Map(), parentOf = new Map();
+    const index = (nodes, parent) => nodes.forEach((n) => { parentOf.set(n, parent); byId.set(String(n.id), n); if (n.children) index(n.children, n); });
     index(c.data, null);
+    const kw = () => String(s.keyword || "").trim().toLowerCase();
+    // 검색어가 있으면 제목이 맞는 노드와 그 조상만 보인다
+    const matches = (n) => !kw() || String(n.title ?? "").toLowerCase().includes(kw()) || (n.children || []).some(matches);
     inst.state ||= { checked: new Set(), open: new Set(c.data.flatMap(function walk(n) { return [...(n.spread ? [String(n.id)] : []), ...(n.children || []).flatMap(walk)]; })), selected: c.selected != null ? String(c.selected) : null };
     const s = inst.state;
     const leaves = (n) => (n.children?.length ? n.children.flatMap(leaves) : [n]);
@@ -29,16 +33,19 @@ export const tree = component({
       return html`<label class="Catui_choice" style="gap:6px"><input class="Catui_clip" type="checkbox" data-catui-tcheck="${n.id}" ${st === "on" ? "checked" : ""} ${st === "mixed" ? html`data-catui-mixed` : ""} ${n.disabled ? "disabled" : ""} aria-label="${n.title} 선택"><span class="Catui_cbx">${icon("check", 12)}</span></label>`;
     };
     const node = (n) => {
+      if (!matches(n)) return "";
       const id = String(n.id), on = s.selected === id;
       if (n.children?.length) {
-        return html`<details data-catui-tid="${id}" ${s.open.has(id) ? "open" : ""}><summary data-catui-titem="${id}" class="${on ? "Catui_tree-on" : ""}" ${on ? html`aria-current="true"` : ""}>${icon("chevron-right", 16, "Catui_tree-toggle")}${c.showCheckbox ? cbx(n) : ""}${icon("folder", 16)}<span>${n.title}</span></summary><div class="Catui_tree-kids">${n.children.map(node)}</div></details>`;
+        const open = s.open.has(id) || (!!kw() && n.children.some(matches));   // 검색 중에는 맞는 자식이 있는 폴더를 펼침
+        return html`<details data-catui-tid="${id}" ${open ? "open" : ""}><summary data-catui-titem="${id}" class="${on ? "Catui_tree-on" : ""}" ${on ? html`aria-current="true"` : ""}>${icon("chevron-right", 16, "Catui_tree-toggle")}${c.showCheckbox ? cbx(n) : ""}${icon("folder", 16)}<span>${n.title}</span></summary><div class="Catui_tree-kids">${n.children.map(node)}</div></details>`;
       }
       return html`<div class="Catui_tree-row${on ? " Catui_tree-on" : ""}">${c.showCheckbox ? cbx(n) : ""}<button type="button" data-catui-titem="${id}" ${n.disabled ? "disabled" : ""} ${on ? html`aria-current="true"` : ""} style="flex:1;text-align:left;display:flex;align-items:center;gap:inherit">${icon(n.icon || "file-text", 16)}<span>${n.title}</span></button></div>`;
     };
     const draw = () => {
       inst.elem.classList.add("Catui_tree");
       inst.elem.setAttribute("aria-label", c.label);
-      mount(inst.elem, html`${c.data.map(node)}`);
+      const list = c.data.map(node);
+      mount(inst.elem, list.some(Boolean) ? html`${list}` : html`<p class="Catui_help">${kw() ? "맞는 항목이 없습니다." : "항목이 없습니다."}</p>`);
       inst.elem.querySelectorAll("[data-catui-mixed]").forEach((x) => { x.indeterminate = true; });
     };
     draw();
@@ -50,6 +57,7 @@ export const tree = component({
     const onToggle = (e) => {
       const d = e.target;
       if (!(d instanceof HTMLDetailsElement) || !d.dataset.catuiTid) return;
+      if (kw()) return;   // 검색 결과로 자동 펼친 폴더는 펼침 상태·아코디언에 반영하지 않는다
       const id = d.dataset.catuiTid;
       if (d.open) {
         s.open.add(id);
@@ -89,7 +97,7 @@ export const tree = component({
       else if (e.key === "Home") { e.preventDefault(); list[0]?.focus(); }
       else if (e.key === "End") { e.preventDefault(); list[list.length - 1]?.focus(); }
       else if (e.key === "ArrowRight" && det) { e.preventDefault(); if (!det.open) det.open = true; else det.querySelector(".Catui_tree-kids [data-catui-titem]")?.focus(); }
-      else if (e.key === "ArrowLeft") { e.preventDefault(); if (det?.open) det.open = false; else if (n.__parent) focusItem(String(n.__parent.id)); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); const p = parentOf.get(n); if (det?.open) det.open = false; else if (p) focusItem(String(p.id)); }
     };
     inst.elem.addEventListener("toggle", onToggle, true);
     inst.elem.addEventListener("click", onClick);
@@ -98,6 +106,11 @@ export const tree = component({
     inst.getChecked = () => [...s.checked].map((id) => byId.get(id)).filter(Boolean);
     inst.setChecked = (ids) => { [].concat(ids).forEach((id) => { const n = byId.get(String(id)); if (n) leaves(n).forEach((l) => s.checked.add(String(l.id))); }); draw(); };
     inst.getSelected = () => (s.selected ? byId.get(s.selected) : null);
+    inst.clearChecked = () => { s.checked.clear(); draw(); };
+    // 모두 펼치기·접기 (open=false면 접기)
+    inst.expandAll = (open = true) => { s.open = new Set(open ? [...byId.values()].filter((n) => n.children?.length).map((n) => String(n.id)) : []); draw(); };
+    // 제목 검색: 맞는 노드와 조상만 보이고 펼친다. 빈 문자열이면 전체
+    inst.search = (keyword) => { s.keyword = keyword; draw(); };
     inst.use(() => {
       inst.elem.removeEventListener("toggle", onToggle, true);
       inst.elem.removeEventListener("click", onClick);
@@ -109,4 +122,7 @@ export const tree = component({
   getChecked(id) { return tree.getThis(id)?.getChecked() || []; },
   setChecked(id, ids) { tree.getThis(id)?.setChecked(ids); },
   getSelected(id) { return tree.getThis(id)?.getSelected() || null; },
+  clearChecked(id) { tree.getThis(id)?.clearChecked(); },
+  expandAll(id, open = true) { tree.getThis(id)?.expandAll(open); },
+  search(id, keyword) { tree.getThis(id)?.search(keyword); },
 });

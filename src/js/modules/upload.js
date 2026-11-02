@@ -10,9 +10,11 @@ import { csrfHeaders } from "../core/base.js";
 //   이벤트: upload.on('choose(f)'), 'progress(f)', 'done(f)', 'error(f)', 'remove(f)'
 export const upload = component({
   name: "upload",
+  ownDone: true,   // done(res, file)은 업로드 완료 콜백 — 렌더 완료로 부르지 않음
   config: {
     url: "", method: "POST", field: "file", data: {}, headers: {}, accept: "", size: 0, number: 0,
-    multiple: true, auto: true, list: null, withCredentials: false,
+    multiple: true, auto: true, list: null, withCredentials: false, disabled: false,
+    guard: true,   // 영역 밖에 파일을 잘못 놓았을 때 브라우저가 그 파일을 열며 페이지를 떠나는 것을 막음
   },
   render(inst) {
     const c = inst.config;
@@ -46,20 +48,34 @@ export const upload = component({
         ? f.name.toLowerCase().endsWith(a)
         : a.endsWith("/*") ? f.type.startsWith(a.slice(0, -1)) : f.type === a));
     };
+    const statusText = (it) => ({ ready: "대기", uploading: `올리는 중 ${it.percent}%`, done: "완료", error: it.msg || "실패" }[it.status]);
     const drawList = () => {
       if (!listEl) return;
+      // 다시 그려도 목록 안 포커스(빼기·다시 버튼)를 같은 파일의 같은 버튼으로 되돌린다
+      const act = listEl.contains(document.activeElement) ? document.activeElement : null;
+      const keep = act && (act.hasAttribute("data-catui-remove") ? `[data-catui-remove="${act.getAttribute("data-catui-remove")}"]` : act.hasAttribute("data-catui-retry") ? `[data-catui-remove="${act.getAttribute("data-catui-retry")}"]` : null);
       listEl.classList.add("Catui_files");
       mount(listEl, html`${items.map((it) => html`
 <div class="Catui_file" data-catui-file="${it.id}">
   <span class="Catui_file-ico${it.status === "error" ? " Catui_file-ico-5" : ""}">${icon(it.status === "error" ? "alert-circle" : "file-text", 16)}</span>
   <span class="Catui_file-main"><span class="Catui_file-name">${it.file.name}</span>
-    <span class="Catui_file-meta">${size(it.file.size)} · ${{ ready: "대기", uploading: `올리는 중 ${it.percent}%`, done: "완료", error: it.msg || "실패" }[it.status]}
+    <span class="Catui_file-meta">${size(it.file.size)} · <span data-catui-st>${statusText(it)}</span>
     ${it.status === "uploading" ? html`<span class="Catui_prog Catui_prog-sm" role="progressbar" aria-label="${it.file.name} 올리는 중" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${it.percent}"><i class="Catui_pc2" style="width:${it.percent}%"></i></span>` : ""}</span></span>
   <span class="Catui_file-acts">
     ${it.status === "error" && c.url ? html`<button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-retry="${it.id}">다시</button>` : ""}
     <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-remove="${it.id}" aria-label="${it.file.name} ${it.status === "uploading" ? "올리기 취소" : "빼기"}">${icon("x", 16)}</button>
   </span>
 </div>`)}`);
+      if (act) (keep && listEl.querySelector(keep) || zone).focus?.({ preventScroll: true });
+    };
+    // 진행률은 그 줄만 고친다(전체를 다시 그리면 스크린리더·포커스가 매번 흔들림)
+    const drawProgress = (it) => {
+      const row = listEl?.querySelector(`[data-catui-file="${it.id}"]`);
+      const bar = row?.querySelector('[role="progressbar"]');
+      if (!bar) { drawList(); return; }
+      bar.setAttribute("aria-valuenow", String(it.percent));
+      bar.firstElementChild.style.width = `${it.percent}%`;
+      row.querySelector("[data-catui-st]").textContent = statusText(it);
     };
     const showErr = (msgs) => { err.textContent = msgs.join(" / "); err.hidden = !msgs.length; };
 
@@ -76,7 +92,7 @@ export const upload = component({
       xhr.upload.onprogress = (e) => {
         if (!e.lengthComputable) return;
         it.percent = Math.round((e.loaded / e.total) * 100);
-        drawList();
+        drawProgress(it);
         c.progress?.call(inst, it.percent, it.file);
         inst.emit("progress", { percent: it.percent, file: it.file });
       };
@@ -100,8 +116,11 @@ export const upload = component({
     };
 
     const add = (fileList) => {
+      if (c.disabled) return;
       const bad = [], ok = [];
-      for (const f of fileList) {
+      // 한 파일만 받는 영역에 여러 개를 끌어 놓으면 첫 파일만
+      const list = c.multiple ? [...fileList] : [...fileList].slice(0, 1);
+      for (const f of list) {
         if (!acceptOk(f)) bad.push(`${f.name}: 허용하지 않는 형식입니다`);
         else if (c.size && f.size > c.size * 1024) bad.push(`${f.name}: ${size(f.size)} — ${size(c.size * 1024)}를 넘습니다`);
         else if (c.number && items.length + ok.length >= c.number) bad.push(`${f.name}: 최대 ${c.number}개까지 올릴 수 있습니다`);
@@ -122,11 +141,25 @@ export const upload = component({
 
     const hi = (on) => { zone.style.borderColor = on ? "var(--Catui_upload-border-active)" : ""; zone.style.background = on ? "var(--Catui_upload-bg-hover)" : ""; };
     const onChange = () => { add(input.files); input.value = ""; };
-    const onOver = (e) => { e.preventDefault(); hi(true); };
-    const onLeave = () => hi(false);
-    const onDrop = (e) => { e.preventDefault(); hi(false); add(e.dataTransfer.files); };
-    const onKey = (e) => { if (zone.tagName !== "LABEL" && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); input.click(); } };
-    const onZoneClick = (e) => { if (zone.tagName !== "LABEL" && e.target !== input) input.click(); };
+    // 자식 요소를 지날 때마다 dragleave가 와서 깜빡이므로, 들어온 횟수를 세어 완전히 나갔을 때만 해제
+    let depth = 0;
+    const onEnter = (e) => { e.preventDefault(); if (!c.disabled) { depth += 1; hi(true); } };
+    const onOver = (e) => { e.preventDefault(); if (e.dataTransfer) e.dataTransfer.dropEffect = c.disabled ? "none" : "copy"; };
+    const onLeave = () => { depth = Math.max(0, depth - 1); if (!depth) hi(false); };
+    const onDrop = (e) => { e.preventDefault(); depth = 0; hi(false); add(e.dataTransfer.files); };
+    const onKey = (e) => { if (!c.disabled && zone.tagName !== "LABEL" && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); input.click(); } };
+    const onZoneClick = (e) => { if (!c.disabled && zone.tagName !== "LABEL" && e.target !== input) input.click(); };
+    const hasFiles = (e) => [...(e.dataTransfer?.types || [])].includes("Files");
+    const onWinDrag = (e) => { if (hasFiles(e) && !zone.contains(e.target) && !e.target.closest?.('input[type="file"]')) e.preventDefault(); };
+    const setDisabled = (on) => {
+      c.disabled = !!on;
+      input.disabled = c.disabled;
+      zone.setAttribute("aria-disabled", String(c.disabled));
+      zone.style.background = c.disabled ? "var(--Catui_input-disabled-bg)" : "";
+      zone.style.color = c.disabled ? "var(--Catui_color-text-secondary)" : "";
+      zone.style.cursor = c.disabled ? "not-allowed" : "";
+    };
+    setDisabled(c.disabled);
     const onList = (e) => {
       const rm = e.target.closest("[data-catui-remove]");
       const rt = e.target.closest("[data-catui-retry]");
@@ -141,23 +174,32 @@ export const upload = component({
     };
     if (zone.tagName !== "LABEL" && !zone.hasAttribute("tabindex")) { zone.tabIndex = 0; zone.setAttribute("role", "button"); }
     input.addEventListener("change", onChange);
+    zone.addEventListener("dragenter", onEnter);
     zone.addEventListener("dragover", onOver);
     zone.addEventListener("dragleave", onLeave);
     zone.addEventListener("drop", onDrop);
     zone.addEventListener("keydown", onKey);
     zone.addEventListener("click", onZoneClick);
     listEl?.addEventListener("click", onList);
+    if (c.guard) { addEventListener("dragover", onWinDrag); addEventListener("drop", onWinDrag); }
     inst.upload = () => items.filter((it) => it.status === "ready" || it.status === "error").forEach(send);
     inst.clear = () => { items.splice(0).forEach((it) => it.xhr?.abort()); drawList(); showErr([]); };
+    inst.setDisabled = setDisabled;
     inst.use(() => {
       items.forEach((it) => it.xhr?.abort());
       input.removeEventListener("change", onChange);
+      zone.removeEventListener("dragenter", onEnter);
       zone.removeEventListener("dragover", onOver);
       zone.removeEventListener("dragleave", onLeave);
       zone.removeEventListener("drop", onDrop);
       zone.removeEventListener("keydown", onKey);
       zone.removeEventListener("click", onZoneClick);
       listEl?.removeEventListener("click", onList);
+      removeEventListener("dragover", onWinDrag);
+      removeEventListener("drop", onWinDrag);
+      hi(false);
+      ["aria-disabled"].forEach((a) => zone.removeAttribute(a));
+      zone.style.color = zone.style.cursor = "";
     });
   },
 });
