@@ -104,7 +104,7 @@ catui.use(['util', 'layer', 'dropdown'], function (util, layer) {
   box.addEventListener('click', function (e) {
     var b = e.target.closest('[data-act]'); if (!b) return; var f = files.find(function (x) { return x.id === b.dataset.id; });
     if (b.dataset.act === 'down') layer.msg(f.name + ' 내려받기를 시작합니다', { time: 1200 });
-    else layer.confirm(f.name + '을(를) 지울까요?', { danger: true, okText: '지우기' }, function (i) { layer.close(i); files.splice(files.indexOf(f), 1); draw(); });
+    else layer.confirm(catui.admin.josa(f.name, '을') + ' 지울까요?', { danger: true, okText: '지우기' }, function (i) { layer.close(i); files.splice(files.indexOf(f), 1); draw(); });
   });
   document.getElementById('fl-up').addEventListener('change', function (e) {
     [].slice.call(e.target.files).forEach(function (file, i) { files.unshift({ id: 'n' + Date.now() + i, name: file.name, folder: file.type.startsWith('image/') ? '이미지' : '문서', size: file.size, date: '방금', who: '김', tone: 4 }); });

@@ -85,7 +85,7 @@ catui.use(['util', 'layer'], function (util, layer) {
         <span class="Catui_help">★ ${p.rate} · ${util.number(p.sold)}개 판매</span>
         <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-cart="${p.id}">${catui.icon('shopping-cart', 16)}담기</button></div></article>`; })}` : catui.html`<div class="Catui_empty">${catui.icon('search', 16)}<p class="Catui_empty-title">맞는 상품이 없습니다</p></div>`);
   };
-  grid.addEventListener('click', function (e) { var b = e.target.closest('[data-cart]'); if (b) layer.msg(items[b.dataset.cart].name + '을(를) 장바구니에 담았습니다', { icon: 'success', time: 1500 }); });
+  grid.addEventListener('click', function (e) { var b = e.target.closest('[data-cart]'); if (b) layer.msg(catui.admin.josa(items[b.dataset.cart].name, '을') + ' 장바구니에 담았습니다', { icon: 'success', time: 1500 }); });
   document.getElementById('sp-q').addEventListener('input', draw);
   document.getElementById('sp-sort').addEventListener('change', draw);
   document.getElementById('sp-cats').addEventListener('change', draw);

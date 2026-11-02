@@ -79,6 +79,8 @@ catui.use(['layer', 'util'], function (layer, util) {
   var today = '2026-11-02', view = new Date(2026, 10, 1), sel = today;
   var grid = document.getElementById('cl-grid');
   var key = function (d) { return util.toDateString(d, 'yyyy-MM-dd'); };
+  // 'YYYY-MM-DD'를 그 지역 자정으로 읽는다 (new Date('2026-11-02')는 UTC 자정이라 시간대에 따라 하루가 밀림)
+  var parse = function (k) { var p = k.split('-'); return new Date(+p[0], p[1] - 1, +p[2]); };
   var draw = function () {
     var y = view.getFullYear(), m = view.getMonth();
     var start = new Date(y, m, 1); start.setDate(1 - ((start.getDay() + 6) % 7));   // 월요일 시작
@@ -97,18 +99,18 @@ catui.use(['layer', 'util'], function (layer, util) {
     showDay();
   };
   var showDay = function () {
-    var d = new Date(sel), evs = events.filter(function (e) { return e.date === sel; }).sort(function (a, b) { return a.time < b.time ? -1 : 1; });
+    var d = parse(sel), evs = events.filter(function (e) { return e.date === sel; }).sort(function (a, b) { return a.time < b.time ? -1 : 1; });
     document.getElementById('cl-day-t').textContent = (d.getMonth() + 1) + '월 ' + d.getDate() + '일 일정 ' + evs.length + '개';
     catui.mount(document.getElementById('cl-day'), evs.length ? catui.html`${evs.map(function (e) { return catui.html`<div class="Catui_feed-item"><span class="Catui_pill Catui_pill-neutral">${e.kind}</span><p>${e.title}</p><span class="Catui_feed-time">${e.time}</span></div>`; })}` : catui.html`<p class="Catui_adm-empty">일정이 없습니다.</p>`);
   };
-  var pick = function (k, focus) { sel = k; var d = new Date(k); if (d.getMonth() !== view.getMonth() || d.getFullYear() !== view.getFullYear()) view = new Date(d.getFullYear(), d.getMonth(), 1); draw(); if (focus) grid.querySelector('[data-day="' + k + '"]')?.focus(); };
+  var pick = function (k, focus) { sel = k; var d = parse(k); if (d.getMonth() !== view.getMonth() || d.getFullYear() !== view.getFullYear()) view = new Date(d.getFullYear(), d.getMonth(), 1); draw(); if (focus) grid.querySelector('[data-day="' + k + '"]')?.focus(); };
   grid.addEventListener('click', function (e) { var c = e.target.closest('[data-day]'); if (c) pick(c.dataset.day, true); });
   // 방향키로 날짜 이동 (그리드 패턴)
   grid.addEventListener('keydown', function (e) {
     var step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
     if (e.key === 'Enter') { showDay(); return; }
     if (!step) return;
-    e.preventDefault(); var d = new Date(sel); d.setDate(d.getDate() + step); pick(key(d), true);
+    e.preventDefault(); var d = parse(sel); d.setDate(d.getDate() + step); pick(key(d), true);
   });
   document.getElementById('cl-prev').addEventListener('click', function () { view.setMonth(view.getMonth() - 1); draw(); });
   document.getElementById('cl-next').addEventListener('click', function () { view.setMonth(view.getMonth() + 1); draw(); });

@@ -67,7 +67,7 @@ admin.kanban = function (el) {
   const moved = (card, from, to) => {
     sync();
     const t = card.querySelector(".Catui_kanban-title")?.textContent.trim();
-    live.textContent = from === to ? `${t} 순서를 바꿨습니다` : `${t}을(를) ${colName(to)}(으)로 옮겼습니다`;
+    live.textContent = from === to ? `${t} 순서를 바꿨습니다` : `${admin.josa(t, "을")} ${admin.josa(colName(to), "으로")} 옮겼습니다`;
     admin.emit("kanban", { card, from, to });
   };
   // 끌어 옮기기

@@ -23,8 +23,28 @@ const admJson = (id) => {
 const admFocusables = (box) => [...box.querySelectorAll('a[href],button:not([disabled]),summary,input:not([disabled]):not([type=hidden]),select,textarea,[tabindex]:not([tabindex="-1"])')]
   .filter((n) => n.getClientRects().length && getComputedStyle(n).visibility !== "hidden");
 
+// 받침 판단: 한글은 종성, 숫자는 읽는 소리(영·일·삼·육·칠·팔·십), 영문은 l·m·n·r 끝을 받침으로 본다
+const admBatchim = (word) => {
+  const s = String(word).replace(/[\s)"'\]」』.,!?…]+$/, "");
+  const ch = s.slice(-1);
+  if (!ch) return { has: false, rieul: false };
+  const code = ch.charCodeAt(0) - 0xac00;
+  if (code >= 0 && code <= 11171) { const jong = code % 28; return { has: jong > 0, rieul: jong === 8 }; }
+  if (/\d/.test(ch)) return { has: "0136780".includes(ch), rieul: "178".includes(ch) };
+  if (/[a-z]/i.test(ch)) return { has: /[lmnr]/i.test(ch), rieul: /[lr]/i.test(ch) };
+  return { has: false, rieul: false };
+};
+
 const admin = {
   version: catui.version,
+  /** 조사 붙이기: josa('주문', '을') → '주문을', josa('파일', '로') → '파일로', josa('진행', '으로') → '진행으로' */
+  josa(word, pair) {
+    const b = admBatchim(word);
+    const P = { 을: ["을", "를"], 를: ["을", "를"], 이: ["이", "가"], 가: ["이", "가"], 은: ["은", "는"], 는: ["은", "는"], 과: ["과", "와"], 와: ["과", "와"], 으로: ["으로", "로"], 로: ["으로", "로"] }[pair];
+    if (!P) return `${word}${pair}`;
+    if (P[0] === "으로") return `${word}${b.has && !b.rieul ? "으로" : "로"}`;
+    return `${word}${b.has ? P[0] : P[1]}`;
+  },
   root: null,
   /** 저장된 상태 읽기/쓰기 */
   store: { get: admGet, set: admSet, clear: () => catui.data(ADM_STORE, null) },
@@ -566,7 +586,7 @@ admin.kanban = function (el) {
   const moved = (card, from, to) => {
     sync();
     const t = card.querySelector(".Catui_kanban-title")?.textContent.trim();
-    live.textContent = from === to ? `${t} 순서를 바꿨습니다` : `${t}을(를) ${colName(to)}(으)로 옮겼습니다`;
+    live.textContent = from === to ? `${t} 순서를 바꿨습니다` : `${admin.josa(t, "을")} ${admin.josa(colName(to), "으로")} 옮겼습니다`;
     admin.emit("kanban", { card, from, to });
   };
   // 끌어 옮기기

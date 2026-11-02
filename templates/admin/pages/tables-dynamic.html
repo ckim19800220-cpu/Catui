@@ -49,7 +49,7 @@ catui.use(['table', 'layer', 'util'], function (table, layer, util) {
     var sel = table.checkStatus('td-orders').data;
     if (!sel.length) return;
     sel.forEach(function (r) { r.status = status; });
-    table.clearChecked('td-orders'); list.apply(); layer.msg(sel.length + '건을 "' + status + '"(으)로 바꿨습니다', { icon: 'success' });
+    table.clearChecked('td-orders'); list.apply(); layer.msg(sel.length + '건을 ' + catui.admin.josa('"' + status + '"', '으로') + ' 바꿨습니다', { icon: 'success' });
   };
   document.getElementById('td-ship').addEventListener('click', function () { bulk('배송 중'); });
   document.getElementById('td-cancel').addEventListener('click', function () { layer.confirm('선택한 주문을 취소할까요?', { danger: true, okText: '취소 처리' }, function (i) { layer.close(i); bulk('취소'); }); });
