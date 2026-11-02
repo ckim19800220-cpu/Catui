@@ -4,8 +4,10 @@
 /* 템플릿 <body>: Catui 리셋은 루트 클래스 안에서만 적용되므로 브라우저 기본 여백(8px)을 여기서 없앤다 */
 .Catui_adm-body{margin:0;background:var(--Catui_color-surface-muted)}
 .Catui_adm{min-height:100vh;background:var(--Catui_adm-bg)}
-/* 사이드바 메뉴 스크롤: 얇게, 사이드바 색에 맞춰 */
-.Catui_adm .Catui_menu{scrollbar-width:thin;scrollbar-color:var(--Catui_sidebar-hover-bg) transparent}
+/* 사이드바 메뉴 스크롤: 얇게, 사이드바 색에 맞춰.
+   position:relative — 아이콘만 남는 상태에서 화면에서만 숨긴(absolute) 그룹 제목·라벨이 메뉴 스크롤 안에 갇히게 한다
+   (없으면 바깥 사이드바 기준으로 놓여 문서 높이가 늘고 바닥글 아래에 빈 공간이 생김) */
+.Catui_adm .Catui_menu{position:relative;scrollbar-width:thin;scrollbar-color:var(--Catui_sidebar-hover-bg) transparent}
 .Catui_adm .Catui_menu::-webkit-scrollbar{width:var(--Catui_space-2)}
 .Catui_adm .Catui_menu::-webkit-scrollbar-thumb{background:var(--Catui_sidebar-hover-bg);border-radius:var(--Catui_radius-pill)}
 .Catui_adm .Catui_menu::-webkit-scrollbar-track{background:transparent}
