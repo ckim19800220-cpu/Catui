@@ -23,7 +23,7 @@ export function buildJs({ defined }) {
     body += `\n// ── ${f} ──\n${src}`;
   }
   const version = pkg().version;
-  const banner = `/*! Catui UI framework ${version} | 아이콘 Line 01(CC0) */`;
+  const banner = `/*! Catui UI framework ${version} | MIT License (c) imcatDevs | 아이콘 Line 01(CC0) */`;
   const VERSION = `const VERSION = ${JSON.stringify(version)};`;   // core/env.js의 VERSION 대체
   const iife = `${banner}
 (function (global) {

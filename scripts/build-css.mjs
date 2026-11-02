@@ -11,7 +11,7 @@ export function buildCss() {
   const orphans = walk(P.css, ".css").map((f) => path.relative(P.css, f).replace(/\\/g, "/")).filter((f) => !listed.has(f));
   if (orphans.length) fail(`index.json에 없는 CSS 파일: ${orphans.join(", ")} — 결합 순서에 넣어 주세요`);
 
-  let css = `/*! Catui UI ${pkg().version} | 토큰은 assets/spec/design_m.html 기준 | 아이콘 Line 01(CC0) */\n`;
+  let css = `/*! Catui UI ${pkg().version} | MIT License (c) imcatDevs | 토큰은 assets/spec/design_m.html 기준 | 아이콘 Line 01(CC0) */\n`;
   for (const f of order) css += read(path.join(P.css, f)) + "\n";
 
   const min = transform({ filename: "catui.css", code: Buffer.from(css), minify: true }).code.toString();

@@ -1,5 +1,5 @@
 // Catui (catui.js) 타입 선언 — dist/catui.d.ts로 복사된다.
-// 전역: <script src="catui.js"> → window.catui   /   ESM: import catui, { layer, form } from "catui"
+// 전역: <script src="catui.js"> → window.catui   /   ESM: import catui, { layer, form } from "@imcat-ckim/catui"
 
 export interface Raw { readonly __raw: string }
 export type Markup = string | number | Raw | Element | null | undefined;

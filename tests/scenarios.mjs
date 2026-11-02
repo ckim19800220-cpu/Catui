@@ -151,6 +151,123 @@ export const scenarios = [
     },
   },
   {
+    name: "extend · 사용자 모듈·이벤트·자동 정리·재초기화",
+    page: "docs/js/core/component.html",
+    allowLogs: /기본 API 이름은 모듈 이름으로 쓸 수 없습니다|없는 의존 모듈/,   // 일부러 낸 경고
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const log = [];
+      // 1) component로 렌더형 모듈 만들기 → extend로 등록 → use로 받기
+      const badge = catui.component({
+        name: "testbadge",
+        config: { text: "기본", count: 0 },
+        render(inst) {
+          const b = document.createElement("button");
+          b.type = "button"; b.textContent = `${inst.config.text} ${inst.config.count}`;
+          inst.elem.appendChild(b);
+          const onClick = () => inst.emit("hit", { count: inst.config.count });
+          b.addEventListener("click", onClick);
+          inst.use(() => { b.removeEventListener("click", onClick); b.remove(); log.push("cleanup"); });
+        },
+      });
+      catui.extend({ testbadge: badge });
+      const [m] = await catui.use(["testbadge"]);
+      const host = document.createElement("div"); host.id = "tb-host"; host.setAttribute("data-catui-filter", "tb"); document.body.appendChild(host);
+      const off = m.on("hit(tb)", (d) => log.push(`hit:${d.count}`));
+      const inst = m.render({ elem: host, count: 3 });
+      host.querySelector("button").click();
+      inst.reload({ text: "새", count: 5 });
+      const textAfterReload = host.textContent.trim();
+      host.querySelector("button").click();
+      off(); host.querySelector("button").click();   // 해제 후에는 기록되지 않아야 함
+      // 2) define: 의존 모듈 주입
+      catui.define("testgreet", ["util"], (u) => ({ hi: (n) => `안녕 ${u.number(n)}` }));
+      const greet = catui.testgreet.hi(12345);
+      // 3) 예약 이름·없는 의존은 막힘
+      catui.extend({ init: {} });
+      catui.define("testbad", ["없는모듈"], () => ({}));
+      const blocked = typeof catui.init === "function" && !catui.testbad;
+      // 4) DOM에서 빼면 자동 정리(autoDestroy)
+      host.remove(); await sleep(120);
+      const autoCleaned = !m.getThis("tb-host") && log.filter((x) => x === "cleanup").length >= 2;
+      // 5) 전역 해제 후 다시 초기화해도 선언형이 다시 붙는지
+      catui.destroy(); catui.init();
+      const reinit = !!document.querySelector("[data-catui-ready]") || document.querySelectorAll(".Catui_select-wrap .Catui_icon").length >= 0;
+      // 6) 테마 확장: 토큰 하나 바꾸면 컴포넌트에 반영
+      // 버튼은 배경색 전환(transition)이 있어 바로 읽으면 이전 색이 나오므로 전환을 끄고 잰다
+      const btn = document.createElement("button"); btn.className = "Catui_btn Catui_btn-md Catui_btn-primary"; btn.style.transition = "none"; document.body.appendChild(btn);
+      const before = getComputedStyle(btn).backgroundColor;
+      document.documentElement.style.setProperty("--Catui_btn-primary-bg", "rgb(1, 2, 3)");
+      const after = getComputedStyle(btn).backgroundColor;
+      document.documentElement.style.removeProperty("--Catui_btn-primary-bg"); btn.remove();
+      return { log, textAfterReload, greet, blocked, autoCleaned, reinit, theme: before !== after && after === "rgb(1, 2, 3)" };
+    },
+    expect: {
+      "component 렌더·이벤트(필터)": (r) => r.log[0] === "hit:3",
+      "reload: 정리 후 다시 그림": (r) => r.textAfterReload === "새 5" && r.log.includes("hit:5"),
+      "on() 해제 후 이벤트 안 옴": (r) => r.log.filter((x) => x.startsWith("hit")).length === 2,
+      "define 의존 주입": (r) => r.greet === "안녕 12,345",
+      "예약 이름·없는 의존 차단": (r) => r.blocked,
+      "DOM에서 빠지면 자동 정리": (r) => r.autoCleaned,
+      "destroy 후 init 재실행": (r) => r.reinit,
+      "토큰 덮어쓰기로 테마 확장": (r) => r.theme,
+    },
+  },
+  {
+    name: "recipes · 모듈 조합 예제",
+    page: "docs/js/start/recipes.html",
+    wait: 2000,
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const r = {};
+      // 1) 주문 추가: 양식 채우고 저장 → 표·합계 반영
+      const sum0 = document.getElementById("rc-sum").textContent;
+      document.getElementById("rc-add").click(); await sleep(300);
+      const dlg = [...document.querySelectorAll("dialog[open]")].pop();
+      dlg.querySelector('[name="customer"]').value = "테스트고객";
+      dlg.querySelector('[name="amount"]').value = "10000";
+      dlg.querySelector('[data-catui-btn="0"]').click(); await sleep(900);
+      r.add = { sum0, sum1: document.getElementById("rc-sum").textContent, first: document.querySelector("#rc-orders tbody tr td:nth-child(3)")?.textContent };
+      // 2) 검색: 상태 '배송'
+      document.getElementById("rc-state").value = "배송";
+      document.getElementById("rc-filter").requestSubmit(); await sleep(200);
+      r.search = [...document.querySelectorAll("#rc-list tbody tr td:nth-child(4)")].map((t) => t.textContent);
+      // 3) 가입: 빈 칸이면 막힘 → 채우면 통과 → 인증 1234 → 3단계
+      const next = document.getElementById("rc-next");
+      next.click(); await sleep(200);
+      r.blocked = document.querySelector("#rc-steps [aria-current=step]")?.textContent.trim();
+      document.getElementById("rc-mail").value = "a@b.co"; document.getElementById("rc-pw").value = "abcd1234";
+      next.click(); await sleep(300);
+      r.step2 = document.querySelector("#rc-steps [aria-current=step]")?.textContent.trim();
+      const cells = [...document.querySelectorAll("#rc-otp input:not([type=hidden])")];
+      const dt = new DataTransfer(); dt.setData("text", "1234");
+      cells[0].focus(); cells[0].dispatchEvent(new ClipboardEvent("paste", { bubbles: true, cancelable: true, clipboardData: dt })); await sleep(300);
+      r.step3 = document.querySelector("#rc-steps [aria-current=step]")?.textContent.trim();
+      r.nextLabel = next.textContent;
+      // 4) 대시보드: 탭 '월간' → 합계, 명령 팔레트로 '연간'
+      const radios = document.querySelectorAll("#rc-tabs input[type=radio]");
+      radios[1].click(); await sleep(100);
+      r.month = document.getElementById("rc-total").textContent;
+      catui.command.open("rc-cmd");
+      const q = catui.command.getThis("rc-cmd").dialog.querySelector("input");
+      q.value = "연간"; q.dispatchEvent(new Event("input", { bubbles: true }));
+      q.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true })); await sleep(150);
+      r.year = document.getElementById("rc-total").textContent;
+      r.canvas = !!document.querySelector("#rc-chart canvas");
+      catui.layer.closeAll();
+      return r;
+    },
+    expect: {
+      "주문 추가 → 합계·첫 행 갱신": (r) => r.add.sum0 !== r.add.sum1 && r.add.sum1.includes("7건") && r.add.first === "테스트고객",
+      "검색: 배송만": (r) => r.search.length > 0 && r.search.every((s) => s === "배송"),
+      "가입: 빈 칸이면 1단계에 머묾": (r) => r.blocked.startsWith("1"),
+      "가입: 입력하면 2단계": (r) => r.step2.startsWith("2"),
+      "가입: 인증 1234 → 3단계 + 완료 버튼": (r) => r.step3.startsWith("3") && r.nextLabel === "가입 완료",
+      "대시보드: 탭 → 월간 합계": (r) => r.month.startsWith("월간 합계 1,424"),
+      "대시보드: 명령 팔레트 → 연간": (r) => r.year.startsWith("연간 합계 6,030") && r.canvas,
+    },
+  },
+  {
     name: "build · 압축본 단독 실행",
     page: "docs/index.html",
     run: async () => {

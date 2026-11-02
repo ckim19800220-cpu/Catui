@@ -13,7 +13,7 @@ description: Catui UI 키트(CSS)와 catui.js 프레임워크의 디자인·구�
 | 토큰 | `src/css/foundation/tokens.css` | 명세 `--*` → `--Catui_*` 1:1 미러 |
 | CSS 소스 | `src/css/{foundation,layout,components,forms,views,charts}/` | 컴포넌트당 1파일(61개). 결합 순서 `src/css/index.json` |
 | JS 소스 | `src/js/{core,modules}/` + `index.js` | catui.js(ESM). 번들 순서·exports `src/js/bundle.json` |
-| 아이콘 | `src/icons/allow.json` · `map.json` · `line01/` · `svg/` | 241개 → `dist/icons.svg`. 원본 우선순위: `svg/`(Catui 원본) → `line01/`(iconsforfree.com CC0, 이름이 다르면 map.json). Lucide는 제거됨(쓰면 고지 필요) |
+| 아이콘 | `src/icons/allow.json` · `map.json` · `line01/` · `svg/` | 1,265개(기존 241 이름 + Line 01 전체) → `dist/icons.svg`. 원본 우선순위: `svg/`(Catui 원본) → `line01/`(iconsforfree.com CC0, 이름이 다르면 map.json). Lucide는 제거됨(쓰면 고지 필요) |
 | 결과물 | `dist/` | `catui.css · catui.min.css · catui.js · catui.esm.js · icons.svg` (직접 수정 금지) |
 | 문서 원본 | `docs-src/` | `nav.json`(큰 분류 CSS/catui.js → 작은 분류 → 페이지) · `layout.html` · `css/**`·`js/**` 조각 · `assets/docs.css·docs.js` |
 | 문서 사이트 | `docs/` | 빌드 결과 86쪽 (직접 수정 금지) |

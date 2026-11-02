@@ -1285,6 +1285,11 @@
               "desc": "use · render/reload/destroy · 이벤트(필터) · 선언형 속성."
             },
             {
+              "path": "js/start/recipes",
+              "title": "모듈 조합 예제",
+              "desc": "주문 관리·검색 목록·가입 단계·대시보드 — 여러 모듈을 함께 쓰는 실전 예제."
+            },
+            {
               "path": "js/start/security",
               "title": "보안과 정리",
               "desc": "자동 escape, html``·raw, 해제와 정리."

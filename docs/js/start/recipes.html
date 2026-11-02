@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>모듈 조합 예제 · catui.js · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="주문 관리·검색 목록·가입 단계·대시보드 — 여러 모듈을 함께 쓰는 실전 예제.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../../dist/catui.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a></nav>
+  <span class="doc-version">v2.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/recipes.html" aria-current="page">모듈 조합 예제</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html">util 도구</a></li><li><a href="../../js/modules/carousel.html">carousel 캐러셀</a></li><li><a href="../../js/modules/field.html">field 입력 보강</a></li><li><a href="../../js/modules/autocomplete.html">autocomplete 자동완성</a></li><li><a href="../../js/modules/command.html">command 명령 팔레트</a></li><li><a href="../../js/modules/page.html">page 페이지 도구</a></li><li><a href="../../js/modules/site.html">site 홈페이지 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">catui.js · 시작</p>
+<h1 class="Catui_h1">모듈 조합 예제</h1>
+<p class="Catui_lead">주문 관리·검색 목록·가입 단계·대시보드 — 여러 모듈을 함께 쓰는 실전 예제.</p>
+
+<section aria-labelledby="crud">
+<h2 id="crud">주문 관리 — table + layer.form + confirm + msg</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">추가·수정·삭제 (저장 중 버튼 바쁨 · 합계 갱신 · 되돌리기 토스트)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="rc-add">주문 추가</button><span class="Catui_help Catui_num" id="rc-sum" aria-live="polite"></span></div>
+  <div id="rc-orders" data-catui-filter="rc-orders"></div>
+  <script>
+  catui.use(['table', 'layer', 'util'], function (table, layer, util) {
+    var KIND = { '배송': 'success', '처리': 'info', '대기': 'warning', '취소': 'danger' };
+    var rows = [
+      { id: '1001', customer: '김하늘', amount: 42000, status: '배송' }, { id: '1002', customer: '이준', amount: 18000, status: '처리' },
+      { id: '1003', customer: '박서연', amount: 96000, status: '대기' }, { id: '1004', customer: '최민', amount: 27000, status: '배송' },
+      { id: '1005', customer: '정수아', amount: 55000, status: '취소' }, { id: '1006', customer: '강도현', amount: 31000, status: '처리' },
+    ];
+    var seq = 1007;
+    var sum = function () { document.getElementById('rc-sum').textContent = '합계 ' + util.number(rows.reduce(function (a, r) { return a + r.amount; }, 0)) + '원 · ' + rows.length + '건'; };
+    table.render({
+      elem: '#rc-orders', id: 'rc-orders', data: rows, page: true, limit: 5, labelField: 'customer', caption: '주문',
+      cols: [
+        { type: 'numbers', width: 48 }, { field: 'id', title: '번호', sort: true }, { field: 'customer', title: '고객', sort: true },
+        { field: 'amount', title: '금액', sort: true, align: 'right', templet: function (d) { return util.number(d.amount); } },
+        { field: 'status', title: '상태', templet: function (d) { return catui.html`<span class="Catui_pill Catui_pill-${KIND[d.status]}"><i class="Catui_dot"></i>${d.status}</span>`; } },
+        { title: '동작', toolbar: [{ event: 'edit', text: '수정', icon: 'pen-line' }, { event: 'del', text: '삭제', icon: 'trash-2' }] },
+      ],
+    });
+    // 추가·수정 공용 양식 — submit은 저장 요청을 흉내(0.4초). 실패하면 throw하면 양식이 열린 채 오류를 보인다
+    var edit = function (row) {
+      return layer.form({
+        title: row ? '주문 수정' : '주문 추가', area: 'sm', okText: '저장',
+        fields: [
+          { name: 'customer', label: '고객', required: true, maxlength: 20, value: row ? row.customer : '' },
+          { name: 'amount', label: '금액(원)', type: 'number', required: true, min: 0, value: row ? row.amount : null },
+          { name: 'status', label: '상태', type: 'select', options: ['대기', '처리', '배송', '취소'], value: row ? row.status : '대기' },
+        ],
+        submit: function () { return new Promise(function (ok) { setTimeout(function () { ok(true); }, 400); }); },
+      });
+    };
+    document.getElementById('rc-add').addEventListener('click', function () {
+      edit(null).then(function (v) {
+        if (!v) return;   // 취소
+        rows.unshift({ id: String(seq++), customer: v.customer, amount: v.amount, status: v.status });
+        table.reload('rc-orders', { data: rows }); sum();
+        layer.msg('주문을 추가했습니다', { icon: 'success' });
+      });
+    });
+    table.on('tool(rc-orders)', function (obj) {
+      if (obj.event === 'edit') edit(obj.data).then(function (v) { if (v) { obj.update(v); sum(); layer.msg('수정했습니다', { icon: 'success' }); } });
+      if (obj.event === 'del') {
+        layer.confirm(obj.data.customer + ' 주문을 삭제할까요?', { danger: true, okText: '삭제' }, function (i) {
+          var removed = obj.data, at = rows.indexOf(removed);
+          obj.del(); layer.close(i); sum();
+          layer.msg('삭제했습니다', { icon: 'info', action: { text: '되돌리기', onClick: function () { rows.splice(at, 0, removed); table.reload('rc-orders', { data: rows }); sum(); } } });
+        });
+      }
+    });
+    sum();
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="추가·수정·삭제 (저장 중 버튼 바쁨 · 합계 갱신 · 되돌리기 토스트) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;button&quot; id=&quot;rc-add&quot;&gt;주문 추가&lt;/button&gt;&lt;span class=&quot;Catui_help Catui_num&quot; id=&quot;rc-sum&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div id=&quot;rc-orders&quot; data-catui-filter=&quot;rc-orders&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;table&#39;, &#39;layer&#39;, &#39;util&#39;], function (table, layer, util) {
+  var KIND = { &#39;배송&#39;: &#39;success&#39;, &#39;처리&#39;: &#39;info&#39;, &#39;대기&#39;: &#39;warning&#39;, &#39;취소&#39;: &#39;danger&#39; };
+  var rows = [
+    { id: &#39;1001&#39;, customer: &#39;김하늘&#39;, amount: 42000, status: &#39;배송&#39; }, { id: &#39;1002&#39;, customer: &#39;이준&#39;, amount: 18000, status: &#39;처리&#39; },
+    { id: &#39;1003&#39;, customer: &#39;박서연&#39;, amount: 96000, status: &#39;대기&#39; }, { id: &#39;1004&#39;, customer: &#39;최민&#39;, amount: 27000, status: &#39;배송&#39; },
+    { id: &#39;1005&#39;, customer: &#39;정수아&#39;, amount: 55000, status: &#39;취소&#39; }, { id: &#39;1006&#39;, customer: &#39;강도현&#39;, amount: 31000, status: &#39;처리&#39; },
+  ];
+  var seq = 1007;
+  var sum = function () { document.getElementById(&#39;rc-sum&#39;).textContent = &#39;합계 &#39; + util.number(rows.reduce(function (a, r) { return a + r.amount; }, 0)) + &#39;원 · &#39; + rows.length + &#39;건&#39;; };
+  table.render({
+    elem: &#39;#rc-orders&#39;, id: &#39;rc-orders&#39;, data: rows, page: true, limit: 5, labelField: &#39;customer&#39;, caption: &#39;주문&#39;,
+    cols: [
+      { type: &#39;numbers&#39;, width: 48 }, { field: &#39;id&#39;, title: &#39;번호&#39;, sort: true }, { field: &#39;customer&#39;, title: &#39;고객&#39;, sort: true },
+      { field: &#39;amount&#39;, title: &#39;금액&#39;, sort: true, align: &#39;right&#39;, templet: function (d) { return util.number(d.amount); } },
+      { field: &#39;status&#39;, title: &#39;상태&#39;, templet: function (d) { return catui.html`&lt;span class=&quot;Catui_pill Catui_pill-${KIND[d.status]}&quot;&gt;&lt;i class=&quot;Catui_dot&quot;&gt;&lt;/i&gt;${d.status}&lt;/span&gt;`; } },
+      { title: &#39;동작&#39;, toolbar: [{ event: &#39;edit&#39;, text: &#39;수정&#39;, icon: &#39;pen-line&#39; }, { event: &#39;del&#39;, text: &#39;삭제&#39;, icon: &#39;trash-2&#39; }] },
+    ],
+  });
+  // 추가·수정 공용 양식 — submit은 저장 요청을 흉내(0.4초). 실패하면 throw하면 양식이 열린 채 오류를 보인다
+  var edit = function (row) {
+    return layer.form({
+      title: row ? &#39;주문 수정&#39; : &#39;주문 추가&#39;, area: &#39;sm&#39;, okText: &#39;저장&#39;,
+      fields: [
+        { name: &#39;customer&#39;, label: &#39;고객&#39;, required: true, maxlength: 20, value: row ? row.customer : &#39;&#39; },
+        { name: &#39;amount&#39;, label: &#39;금액(원)&#39;, type: &#39;number&#39;, required: true, min: 0, value: row ? row.amount : null },
+        { name: &#39;status&#39;, label: &#39;상태&#39;, type: &#39;select&#39;, options: [&#39;대기&#39;, &#39;처리&#39;, &#39;배송&#39;, &#39;취소&#39;], value: row ? row.status : &#39;대기&#39; },
+      ],
+      submit: function () { return new Promise(function (ok) { setTimeout(function () { ok(true); }, 400); }); },
+    });
+  };
+  document.getElementById(&#39;rc-add&#39;).addEventListener(&#39;click&#39;, function () {
+    edit(null).then(function (v) {
+      if (!v) return;   // 취소
+      rows.unshift({ id: String(seq++), customer: v.customer, amount: v.amount, status: v.status });
+      table.reload(&#39;rc-orders&#39;, { data: rows }); sum();
+      layer.msg(&#39;주문을 추가했습니다&#39;, { icon: &#39;success&#39; });
+    });
+  });
+  table.on(&#39;tool(rc-orders)&#39;, function (obj) {
+    if (obj.event === &#39;edit&#39;) edit(obj.data).then(function (v) { if (v) { obj.update(v); sum(); layer.msg(&#39;수정했습니다&#39;, { icon: &#39;success&#39; }); } });
+    if (obj.event === &#39;del&#39;) {
+      layer.confirm(obj.data.customer + &#39; 주문을 삭제할까요?&#39;, { danger: true, okText: &#39;삭제&#39; }, function (i) {
+        var removed = obj.data, at = rows.indexOf(removed);
+        obj.del(); layer.close(i); sum();
+        layer.msg(&#39;삭제했습니다&#39;, { icon: &#39;info&#39;, action: { text: &#39;되돌리기&#39;, onClick: function () { rows.splice(at, 0, removed); table.reload(&#39;rc-orders&#39;, { data: rows }); sum(); } } });
+      });
+    }
+  });
+  sum();
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p><a href="../../js/modules/table.html">table</a>의 <code>tool</code> 이벤트로 행 버튼을 받고, <a href="../../js/modules/layer.html">layer.form</a>(Promise)으로 입력을 받아 <code>obj.update()</code>·<code>table.reload()</code>로 반영합니다. 토스트의 <code>action</code>으로 되돌리기를 제공합니다.</p>
+</section>
+
+<section aria-labelledby="search">
+<h2 id="search">검색 조건 → 목록 — autocomplete + datePicker + form + table</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">고객 자동완성 · 기간(빠른 선택) · 상태 → 표 다시 그리기</figcaption>
+<div class="doc-example-preview">
+  <form class="Catui_fields" id="rc-filter" data-catui-filter="rc-filter" role="search" novalidate>
+    <div class="Catui_field"><label class="Catui_label" for="rc-q">고객</label><input class="Catui_input" id="rc-q" name="q" placeholder="이름 일부"></div>
+    <div class="Catui_field"><label class="Catui_label" for="rc-period">기간</label><input class="Catui_input" id="rc-period" name="period"></div>
+    <div class="Catui_field"><label class="Catui_label" for="rc-state">상태</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="rc-state" name="state"><option value="">전체</option><option>배송</option><option>처리</option><option>대기</option></select></div></div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">검색</button><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="rc-reset">초기화</button></div>
+  </form>
+  <div id="rc-list" data-catui-filter="rc-list"></div>
+  <script>
+  catui.use(['autocomplete', 'datePicker', 'form', 'table', 'layer', 'util'], function (autocomplete, datePicker, form, table, layer, util) {
+    var names = ['김하늘', '이준', '박서연', '최민', '정수아', '강도현', '윤지호', '한소리'], states = ['배송', '처리', '대기'];
+    var today = new Date();
+    var all = names.map(function (n, i) { var d = new Date(today); d.setDate(d.getDate() - i * 4); return { customer: n, date: util.toDateString(d, 'yyyy-MM-dd'), amount: 20000 + i * 7000, status: states[i % 3] }; });
+    autocomplete.render({ elem: '#rc-q', data: names });
+    datePicker.render({ elem: '#rc-period', range: true, shortcuts: true });
+    table.render({ elem: '#rc-list', id: 'rc-list', data: all, page: true, limit: 4, caption: '검색 결과',
+      cols: [{ field: 'date', title: '날짜', sort: true }, { field: 'customer', title: '고객' }, { field: 'amount', title: '금액', align: 'right', templet: function (d) { return util.number(d.amount); } }, { field: 'status', title: '상태' }] });
+    var search = function () {
+      var v = form.val('rc-filter'), p = String(v.period || '').split(' ~ ');
+      var list = all.filter(function (r) {
+        return (!v.q || r.customer.indexOf(v.q) > -1) && (!v.state || r.status === v.state) && (!p[1] || (r.date >= p[0] && r.date <= p[1]));
+      });
+      table.reload('rc-list', { data: list });   // 조건이 바뀌면 1쪽부터
+      layer.msg(list.length + '건을 찾았습니다', { icon: list.length ? 'success' : 'warn', time: 1500 });
+    };
+    document.getElementById('rc-filter').addEventListener('submit', function (e) { e.preventDefault(); search(); });
+    document.getElementById('rc-reset').addEventListener('click', function () { form.reset('rc-filter'); table.reload('rc-list', { data: all }); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="고객 자동완성 · 기간(빠른 선택) · 상태 → 표 다시 그리기 코드 복사">복사</button><pre><code>&lt;form class=&quot;Catui_fields&quot; id=&quot;rc-filter&quot; data-catui-filter=&quot;rc-filter&quot; role=&quot;search&quot; novalidate&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;rc-q&quot;&gt;고객&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;rc-q&quot; name=&quot;q&quot; placeholder=&quot;이름 일부&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;rc-period&quot;&gt;기간&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;rc-period&quot; name=&quot;period&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;rc-state&quot;&gt;상태&lt;/label&gt;&lt;div class=&quot;Catui_select-wrap&quot;&gt;&lt;select class=&quot;Catui_input Catui_select&quot; id=&quot;rc-state&quot; name=&quot;state&quot;&gt;&lt;option value=&quot;&quot;&gt;전체&lt;/option&gt;&lt;option&gt;배송&lt;/option&gt;&lt;option&gt;처리&lt;/option&gt;&lt;option&gt;대기&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;submit&quot;&gt;검색&lt;/button&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost&quot; type=&quot;button&quot; id=&quot;rc-reset&quot;&gt;초기화&lt;/button&gt;&lt;/div&gt;
+&lt;/form&gt;
+&lt;div id=&quot;rc-list&quot; data-catui-filter=&quot;rc-list&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;autocomplete&#39;, &#39;datePicker&#39;, &#39;form&#39;, &#39;table&#39;, &#39;layer&#39;, &#39;util&#39;], function (autocomplete, datePicker, form, table, layer, util) {
+  var names = [&#39;김하늘&#39;, &#39;이준&#39;, &#39;박서연&#39;, &#39;최민&#39;, &#39;정수아&#39;, &#39;강도현&#39;, &#39;윤지호&#39;, &#39;한소리&#39;], states = [&#39;배송&#39;, &#39;처리&#39;, &#39;대기&#39;];
+  var today = new Date();
+  var all = names.map(function (n, i) { var d = new Date(today); d.setDate(d.getDate() - i * 4); return { customer: n, date: util.toDateString(d, &#39;yyyy-MM-dd&#39;), amount: 20000 + i * 7000, status: states[i % 3] }; });
+  autocomplete.render({ elem: &#39;#rc-q&#39;, data: names });
+  datePicker.render({ elem: &#39;#rc-period&#39;, range: true, shortcuts: true });
+  table.render({ elem: &#39;#rc-list&#39;, id: &#39;rc-list&#39;, data: all, page: true, limit: 4, caption: &#39;검색 결과&#39;,
+    cols: [{ field: &#39;date&#39;, title: &#39;날짜&#39;, sort: true }, { field: &#39;customer&#39;, title: &#39;고객&#39; }, { field: &#39;amount&#39;, title: &#39;금액&#39;, align: &#39;right&#39;, templet: function (d) { return util.number(d.amount); } }, { field: &#39;status&#39;, title: &#39;상태&#39; }] });
+  var search = function () {
+    var v = form.val(&#39;rc-filter&#39;), p = String(v.period || &#39;&#39;).split(&#39; ~ &#39;);
+    var list = all.filter(function (r) {
+      return (!v.q || r.customer.indexOf(v.q) &gt; -1) &amp;&amp; (!v.state || r.status === v.state) &amp;&amp; (!p[1] || (r.date &gt;= p[0] &amp;&amp; r.date &lt;= p[1]));
+    });
+    table.reload(&#39;rc-list&#39;, { data: list });   // 조건이 바뀌면 1쪽부터
+    layer.msg(list.length + &#39;건을 찾았습니다&#39;, { icon: list.length ? &#39;success&#39; : &#39;warn&#39;, time: 1500 });
+  };
+  document.getElementById(&#39;rc-filter&#39;).addEventListener(&#39;submit&#39;, function (e) { e.preventDefault(); search(); });
+  document.getElementById(&#39;rc-reset&#39;).addEventListener(&#39;click&#39;, function () { form.reset(&#39;rc-filter&#39;); table.reload(&#39;rc-list&#39;, { data: all }); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>입력은 <a href="../../js/modules/autocomplete.html">autocomplete</a>·<a href="../../js/modules/datepicker.html">datePicker</a>가 돕고, 값은 <code>form.val()</code>로 한 번에 읽어 거른 뒤 <code>table.reload()</code>합니다. 원격 데이터라면 <code>table.reload(id, { where: 값 })</code>만 바꾸면 됩니다(1쪽부터 다시 요청).</p>
+</section>
+
+<section aria-labelledby="signup">
+<h2 id="signup">가입 단계 — page.steps + form 검증 + field(otp·tags) + msg</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">단계별 검증 · 인증 코드 완료 시 다음 · 관심사 태그</figcaption>
+<div class="doc-example-preview">
+  <div id="rc-steps"></div>
+  <div id="rc-panels">
+    <div class="Catui_step-panel">
+      <div class="Catui_fields">
+        <div class="Catui_field"><label class="Catui_label" for="rc-mail">이메일 <span class="Catui_req">필수</span></label><input class="Catui_input" id="rc-mail" type="email" autocomplete="email" data-catui-verify="required|email"></div>
+        <div class="Catui_field"><label class="Catui_label" for="rc-pw">비밀번호 <span class="Catui_req">필수</span></label><input class="Catui_input" id="rc-pw" name="rc-pw" type="password" autocomplete="new-password" data-catui-verify="required|password"></div>
+      </div>
+    </div>
+    <div class="Catui_step-panel">
+      <fieldset class="Catui_otp" id="rc-otp" data-catui-otp data-catui-filter="rc-otp" aria-describedby="rc-otp-h"><legend class="Catui_label">인증 코드</legend>
+        <input class="Catui_input" inputmode="numeric" aria-label="1번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="2번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="3번째 숫자"><input class="Catui_input" inputmode="numeric" aria-label="4번째 숫자">
+      </fieldset>
+      <p class="Catui_help" id="rc-otp-h">예제 코드: 1234 — 4자리를 모두 넣으면 다음 단계로 넘어갑니다.</p>
+    </div>
+    <div class="Catui_step-panel">
+      <div class="Catui_field"><label class="Catui_label" for="rc-tags">관심사</label><input class="Catui_input" id="rc-tags" name="interests" data-catui-tags="디자인" data-catui-max="5" placeholder="입력 후 Enter"></div>
+    </div>
+  </div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="rc-prev">이전</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="rc-next">다음</button></div>
+  <script>
+  catui.use(['page', 'form', 'field', 'layer'], function (page, form, field, layer) {
+    var panels = document.getElementById('rc-panels').children, otpOk = false;
+    var w = page.steps.render({ elem: '#rc-steps', data: ['계정', '인증', '관심사'], panels: '#rc-panels',
+      before: function (from, to) {
+        if (to < from) return true;                                   // 뒤로는 검사 없이
+        if (from === 0) return form.validate(panels[0]);              // 이 단계 칸만 검사 (실패하면 첫 오류 칸으로 포커스)
+        if (from === 1 && !otpOk) { layer.msg('인증 코드를 확인해 주세요', { icon: 'warn' }); return false; }
+      },
+      change: function (i) { document.getElementById('rc-next').textContent = i === 2 ? '가입 완료' : '다음'; } });
+    field.otp.on('complete(rc-otp)', function (d) {
+      var inst = field.otp.getThis('rc-otp');
+      if (d.value === '1234') { otpOk = true; w.next(); }
+      else { otpOk = false; inst.setError(true); layer.msg('코드가 맞지 않습니다', { icon: 'danger' }); setTimeout(function () { inst.clear(); }, 600); }
+    });
+    document.getElementById('rc-prev').addEventListener('click', function () { w.prev(); });
+    document.getElementById('rc-next').addEventListener('click', function () {
+      if (w.getIndex() < 2) { w.next(); return; }
+      var tags = field.tags.getThis('rc-tags').getValue();
+      layer.msg('가입을 마쳤습니다', { icon: 'success', body: '관심사: ' + (tags.join(', ') || '없음') });
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="단계별 검증 · 인증 코드 완료 시 다음 · 관심사 태그 코드 복사">복사</button><pre><code>&lt;div id=&quot;rc-steps&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;rc-panels&quot;&gt;
+  &lt;div class=&quot;Catui_step-panel&quot;&gt;
+    &lt;div class=&quot;Catui_fields&quot;&gt;
+      &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;rc-mail&quot;&gt;이메일 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;rc-mail&quot; type=&quot;email&quot; autocomplete=&quot;email&quot; data-catui-verify=&quot;required|email&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;rc-pw&quot;&gt;비밀번호 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;rc-pw&quot; name=&quot;rc-pw&quot; type=&quot;password&quot; autocomplete=&quot;new-password&quot; data-catui-verify=&quot;required|password&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;Catui_step-panel&quot;&gt;
+    &lt;fieldset class=&quot;Catui_otp&quot; id=&quot;rc-otp&quot; data-catui-otp data-catui-filter=&quot;rc-otp&quot; aria-describedby=&quot;rc-otp-h&quot;&gt;&lt;legend class=&quot;Catui_label&quot;&gt;인증 코드&lt;/legend&gt;
+      &lt;input class=&quot;Catui_input&quot; inputmode=&quot;numeric&quot; aria-label=&quot;1번째 숫자&quot;&gt;&lt;input class=&quot;Catui_input&quot; inputmode=&quot;numeric&quot; aria-label=&quot;2번째 숫자&quot;&gt;&lt;input class=&quot;Catui_input&quot; inputmode=&quot;numeric&quot; aria-label=&quot;3번째 숫자&quot;&gt;&lt;input class=&quot;Catui_input&quot; inputmode=&quot;numeric&quot; aria-label=&quot;4번째 숫자&quot;&gt;
+    &lt;/fieldset&gt;
+    &lt;p class=&quot;Catui_help&quot; id=&quot;rc-otp-h&quot;&gt;예제 코드: 1234 — 4자리를 모두 넣으면 다음 단계로 넘어갑니다.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;Catui_step-panel&quot;&gt;
+    &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;rc-tags&quot;&gt;관심사&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;rc-tags&quot; name=&quot;interests&quot; data-catui-tags=&quot;디자인&quot; data-catui-max=&quot;5&quot; placeholder=&quot;입력 후 Enter&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost&quot; type=&quot;button&quot; id=&quot;rc-prev&quot;&gt;이전&lt;/button&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;button&quot; id=&quot;rc-next&quot;&gt;다음&lt;/button&gt;&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;page&#39;, &#39;form&#39;, &#39;field&#39;, &#39;layer&#39;], function (page, form, field, layer) {
+  var panels = document.getElementById(&#39;rc-panels&#39;).children, otpOk = false;
+  var w = page.steps.render({ elem: &#39;#rc-steps&#39;, data: [&#39;계정&#39;, &#39;인증&#39;, &#39;관심사&#39;], panels: &#39;#rc-panels&#39;,
+    before: function (from, to) {
+      if (to &lt; from) return true;                                   // 뒤로는 검사 없이
+      if (from === 0) return form.validate(panels[0]);              // 이 단계 칸만 검사 (실패하면 첫 오류 칸으로 포커스)
+      if (from === 1 &amp;&amp; !otpOk) { layer.msg(&#39;인증 코드를 확인해 주세요&#39;, { icon: &#39;warn&#39; }); return false; }
+    },
+    change: function (i) { document.getElementById(&#39;rc-next&#39;).textContent = i === 2 ? &#39;가입 완료&#39; : &#39;다음&#39;; } });
+  field.otp.on(&#39;complete(rc-otp)&#39;, function (d) {
+    var inst = field.otp.getThis(&#39;rc-otp&#39;);
+    if (d.value === &#39;1234&#39;) { otpOk = true; w.next(); }
+    else { otpOk = false; inst.setError(true); layer.msg(&#39;코드가 맞지 않습니다&#39;, { icon: &#39;danger&#39; }); setTimeout(function () { inst.clear(); }, 600); }
+  });
+  document.getElementById(&#39;rc-prev&#39;).addEventListener(&#39;click&#39;, function () { w.prev(); });
+  document.getElementById(&#39;rc-next&#39;).addEventListener(&#39;click&#39;, function () {
+    if (w.getIndex() &lt; 2) { w.next(); return; }
+    var tags = field.tags.getThis(&#39;rc-tags&#39;).getValue();
+    layer.msg(&#39;가입을 마쳤습니다&#39;, { icon: &#39;success&#39;, body: &#39;관심사: &#39; + (tags.join(&#39;, &#39;) || &#39;없음&#39;) });
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p><a href="../../js/modules/page.html">page.steps</a>의 <code>before</code>에서 <code>form.validate(현재 패널)</code>로 단계마다 검사하고, <a href="../../js/modules/field.html">field.otp</a>의 <code>complete</code> 이벤트로 다음 단계로 넘깁니다. 틀리면 <code>setError()</code>·<code>clear()</code>로 다시 입력받습니다.</p>
+</section>
+
+<section aria-labelledby="dashboard">
+<h2 id="dashboard">대시보드 — tabs + canvas + dropdown + command</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">기간 탭으로 차트 바꾸기 · 메뉴로 내보내기 · 명령 팔레트로 조작</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="rc-more">작업</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="rc-cmd-open">명령 <span class="Catui_kbd">Ctrl</span><span class="Catui_kbd">J</span></button>
+    <span class="Catui_help Catui_num" id="rc-total" aria-live="polite"></span>
+  </div>
+  <div id="rc-tabs"></div>
+  <div id="rc-chart"></div>
+  <script>
+  catui.use(['tabs', 'canvas', 'dropdown', 'command', 'layer', 'util'], function (tabs, canvas, dropdown, command, layer, util) {
+    var SETS = { '주간': [12, 18, 9, 22, 17, 25, 21], '월간': [80, 95, 70, 110, 120, 98, 135, 128, 140, 150, 138, 160], '연간': [900, 1050, 1200, 1380, 1500] };
+    var keys = Object.keys(SETS), cur = keys[0];
+    var total = function () { document.getElementById('rc-total').textContent = cur + ' 합계 ' + util.number(SETS[cur].reduce(function (a, b) { return a + b; }, 0)) + '건'; };
+    tabs.render({ elem: '#rc-tabs', filter: 'rc-tabs', label: '기간', data: keys.map(function (k) { return { title: k, content: '' }; }) });
+    // 막대 차트: 색은 토큰에서 읽어 다크 모드·테마를 그대로 따른다
+    var chart = canvas.render({ elem: '#rc-chart', id: 'rc-chart', ratio: '16/6', label: '기간별 주문 수',
+      draw: function (ctx, s) {
+        var data = SETS[cur], max = Math.max.apply(null, data), pad = 24, w = (s.width - pad * 2) / data.length;
+        ctx.font = s.font(11); ctx.fillStyle = s.token('--Catui_color-text-secondary'); ctx.textAlign = 'center';
+        data.forEach(function (v, i) {
+          var h = (s.height - pad * 2) * v / max, x = pad + i * w + w * 0.15;
+          ctx.fillStyle = s.token(i === data.length - 1 ? '--Catui_color-brand-fill' : '--Catui_color-brand-soft');
+          ctx.fillRect(x, s.height - pad - h, w * 0.7, h);
+          ctx.fillStyle = s.token('--Catui_color-text-secondary'); ctx.fillText(String(v), x + w * 0.35, s.height - pad - h - 4);
+        });
+      } });
+    var show = function (i) { cur = keys[i]; chart.redraw(); document.getElementById('rc-chart').querySelector('canvas').setAttribute('aria-label', cur + ' 주문 수 막대 차트'); total(); };
+    tabs.on('tab(rc-tabs)', function (d) { show(d.index); });
+    var exportCsv = function () {
+      var csv = '\uFEFF구간,주문\r\n' + SETS[cur].map(function (v, i) { return (i + 1) + ',' + v; }).join('\r\n');
+      var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = '주문-' + cur + '.csv'; a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+      layer.msg(cur + ' 자료를 내려받았습니다', { icon: 'success' });
+    };
+    var saveImage = function () { chart.toBlob(function (b) { var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = '차트-' + cur + '.png'; a.click(); }); };
+    dropdown.render({ elem: '#rc-more', data: [{ id: 'csv', title: 'CSV 내보내기', icon: 'download' }, { id: 'png', title: '차트 이미지 저장', icon: 'image' }, { type: '-' }, { id: 'help', title: '도움말', icon: 'info' }],
+      click: function (item) { if (item.id === 'csv') exportCsv(); else if (item.id === 'png') saveImage(); else layer.tips('탭으로 기간을 바꾸고, Ctrl+J로 명령 팔레트를 엽니다.', '#rc-more', { side: 'bottom' }); } });
+    command.render({ id: 'rc-cmd', hotkey: 'mod+j', placeholder: '예: 월간, 내보내기, ㅇㄱ', data: keys.map(function (k, i) { return { group: '기간', title: k + ' 보기', icon: 'calendar', handler: function () { tabs.change('rc-tabs', i); } }; })
+      .concat([{ group: '작업', title: 'CSV 내보내기', icon: 'download', keywords: 'export', handler: exportCsv }, { group: '작업', title: '차트 이미지 저장', icon: 'image', handler: saveImage }]) });
+    document.getElementById('rc-cmd-open').addEventListener('click', function () { command.open('rc-cmd'); });
+    show(0);
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="기간 탭으로 차트 바꾸기 · 메뉴로 내보내기 · 명령 팔레트로 조작 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;rc-more&quot;&gt;작업&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost&quot; type=&quot;button&quot; id=&quot;rc-cmd-open&quot;&gt;명령 &lt;span class=&quot;Catui_kbd&quot;&gt;Ctrl&lt;/span&gt;&lt;span class=&quot;Catui_kbd&quot;&gt;J&lt;/span&gt;&lt;/button&gt;
+  &lt;span class=&quot;Catui_help Catui_num&quot; id=&quot;rc-total&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div id=&quot;rc-tabs&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;rc-chart&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;tabs&#39;, &#39;canvas&#39;, &#39;dropdown&#39;, &#39;command&#39;, &#39;layer&#39;, &#39;util&#39;], function (tabs, canvas, dropdown, command, layer, util) {
+  var SETS = { &#39;주간&#39;: [12, 18, 9, 22, 17, 25, 21], &#39;월간&#39;: [80, 95, 70, 110, 120, 98, 135, 128, 140, 150, 138, 160], &#39;연간&#39;: [900, 1050, 1200, 1380, 1500] };
+  var keys = Object.keys(SETS), cur = keys[0];
+  var total = function () { document.getElementById(&#39;rc-total&#39;).textContent = cur + &#39; 합계 &#39; + util.number(SETS[cur].reduce(function (a, b) { return a + b; }, 0)) + &#39;건&#39;; };
+  tabs.render({ elem: &#39;#rc-tabs&#39;, filter: &#39;rc-tabs&#39;, label: &#39;기간&#39;, data: keys.map(function (k) { return { title: k, content: &#39;&#39; }; }) });
+  // 막대 차트: 색은 토큰에서 읽어 다크 모드·테마를 그대로 따른다
+  var chart = canvas.render({ elem: &#39;#rc-chart&#39;, id: &#39;rc-chart&#39;, ratio: &#39;16/6&#39;, label: &#39;기간별 주문 수&#39;,
+    draw: function (ctx, s) {
+      var data = SETS[cur], max = Math.max.apply(null, data), pad = 24, w = (s.width - pad * 2) / data.length;
+      ctx.font = s.font(11); ctx.fillStyle = s.token(&#39;--Catui_color-text-secondary&#39;); ctx.textAlign = &#39;center&#39;;
+      data.forEach(function (v, i) {
+        var h = (s.height - pad * 2) * v / max, x = pad + i * w + w * 0.15;
+        ctx.fillStyle = s.token(i === data.length - 1 ? &#39;--Catui_color-brand-fill&#39; : &#39;--Catui_color-brand-soft&#39;);
+        ctx.fillRect(x, s.height - pad - h, w * 0.7, h);
+        ctx.fillStyle = s.token(&#39;--Catui_color-text-secondary&#39;); ctx.fillText(String(v), x + w * 0.35, s.height - pad - h - 4);
+      });
+    } });
+  var show = function (i) { cur = keys[i]; chart.redraw(); document.getElementById(&#39;rc-chart&#39;).querySelector(&#39;canvas&#39;).setAttribute(&#39;aria-label&#39;, cur + &#39; 주문 수 막대 차트&#39;); total(); };
+  tabs.on(&#39;tab(rc-tabs)&#39;, function (d) { show(d.index); });
+  var exportCsv = function () {
+    var csv = &#39;\uFEFF구간,주문\r\n&#39; + SETS[cur].map(function (v, i) { return (i + 1) + &#39;,&#39; + v; }).join(&#39;\r\n&#39;);
+    var a = document.createElement(&#39;a&#39;); a.href = URL.createObjectURL(new Blob([csv], { type: &#39;text/csv&#39; })); a.download = &#39;주문-&#39; + cur + &#39;.csv&#39;; a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    layer.msg(cur + &#39; 자료를 내려받았습니다&#39;, { icon: &#39;success&#39; });
+  };
+  var saveImage = function () { chart.toBlob(function (b) { var a = document.createElement(&#39;a&#39;); a.href = URL.createObjectURL(b); a.download = &#39;차트-&#39; + cur + &#39;.png&#39;; a.click(); }); };
+  dropdown.render({ elem: &#39;#rc-more&#39;, data: [{ id: &#39;csv&#39;, title: &#39;CSV 내보내기&#39;, icon: &#39;download&#39; }, { id: &#39;png&#39;, title: &#39;차트 이미지 저장&#39;, icon: &#39;image&#39; }, { type: &#39;-&#39; }, { id: &#39;help&#39;, title: &#39;도움말&#39;, icon: &#39;info&#39; }],
+    click: function (item) { if (item.id === &#39;csv&#39;) exportCsv(); else if (item.id === &#39;png&#39;) saveImage(); else layer.tips(&#39;탭으로 기간을 바꾸고, Ctrl+J로 명령 팔레트를 엽니다.&#39;, &#39;#rc-more&#39;, { side: &#39;bottom&#39; }); } });
+  command.render({ id: &#39;rc-cmd&#39;, hotkey: &#39;mod+j&#39;, placeholder: &#39;예: 월간, 내보내기, ㅇㄱ&#39;, data: keys.map(function (k, i) { return { group: &#39;기간&#39;, title: k + &#39; 보기&#39;, icon: &#39;calendar&#39;, handler: function () { tabs.change(&#39;rc-tabs&#39;, i); } }; })
+    .concat([{ group: &#39;작업&#39;, title: &#39;CSV 내보내기&#39;, icon: &#39;download&#39;, keywords: &#39;export&#39;, handler: exportCsv }, { group: &#39;작업&#39;, title: &#39;차트 이미지 저장&#39;, icon: &#39;image&#39;, handler: saveImage }]) });
+  document.getElementById(&#39;rc-cmd-open&#39;).addEventListener(&#39;click&#39;, function () { command.open(&#39;rc-cmd&#39;); });
+  show(0);
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p><a href="../../js/modules/tabs.html">tabs</a>의 <code>tab</code> 이벤트로 자료를 바꿔 <a href="../../js/modules/canvas.html">canvas</a>를 다시 그립니다. 차트 색은 <code>s.token()</code>으로 토큰을 읽어 다크 모드에서도 맞습니다. <a href="../../js/modules/dropdown.html">dropdown</a>과 <a href="../../js/modules/command.html">command</a>가 같은 동작(<code>exportCsv</code>)을 공유합니다.</p>
+</section>
+
+<section aria-labelledby="tips">
+<h2 id="tips">조합할 때 기억할 것</h2>
+<ul>
+  <li><b>필터 이름을 맞춘다</b> — <code>모듈.on('이벤트(필터)')</code>의 필터는 <code>id</code>·<code>data-catui-filter</code>와 같아야 합니다.</li>
+  <li><b>Promise로 흐름을 잇는다</b> — <code>layer.form</code>·<code>layer.ask</code>·<code>layer.input</code>은 값(취소는 <code>null</code>·<code>false</code>)을 돌려줍니다.</li>
+  <li><b>새로 그린 영역은 <code>catui.init(영역)</code></b> — Ajax로 넣은 마크업의 <code>data-catui-*</code>(날짜·태그·캐러셀…)를 연결합니다. 지운 영역의 인스턴스는 자동 정리됩니다.</li>
+  <li><b>사용자 값은 글자로</b> — 문자열은 항상 escape되고, 마크업은 <code>catui.html``</code>로만 만듭니다.</li>
+</ul>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/start/concepts.html"><span>이전</span>핵심 개념</a><a class="doc-pager-next" href="../../js/start/security.html"><span>다음</span>보안과 정리</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#crud">주문 관리 — table + layer.form + confirm + msg</a></li><li><a href="#search">검색 조건 → 목록 — autocomplete + datePicker + form + table</a></li><li><a href="#signup">가입 단계 — page.steps + form 검증 + field(otp·tags) + msg</a></li><li><a href="#dashboard">대시보드 — tabs + canvas + dropdown + command</a></li><li><a href="#tips">조합할 때 기억할 것</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

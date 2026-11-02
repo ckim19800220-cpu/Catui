@@ -1,7 +1,8 @@
 {
-  "name": "catui",
-  "version": "1.0.0",
-  "private": true,
+  "name": "@imcat-ckim/catui",
+  "version": "2.0.0",
+  "license": "MIT",
+  "author": "imcatDevs <imcat@imcat.dev>",
   "description": "한국어 관리 화면·공개 홈을 위한 CSS 키트와 의존성 없는 UI 프레임워크 catui.js",
   "keywords": [
     "ui",
@@ -41,7 +42,9 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md",
+    "SECURITY.md"
   ],
   "sideEffects": [
     "*.css",

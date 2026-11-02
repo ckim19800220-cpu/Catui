@@ -1,9 +1,9 @@
-/*! Catui UI framework 1.0.0 | 아이콘 Line 01(CC0) */
+/*! Catui UI framework 2.0.0 | MIT License (c) imcatDevs | 아이콘 Line 01(CC0) */
 (function (global) {
 "use strict";
 if (global.catui) console.warn("[Catui warn]: catui가 이미 있습니다. 덮어씁니다.");
 const BASE = (() => { const s = document.currentScript; return s && s.src ? new URL(".", s.src).href : ""; })();
-const VERSION = "1.0.0";
+const VERSION = "2.0.0";
 
 // ── core/html.js ──
 // 안전한 마크업 조립. html`...`의 ${값}은 자동 escape되고, raw()로 감싼 신뢰 마크업만 그대로 들어간다.

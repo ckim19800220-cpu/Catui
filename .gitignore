@@ -1,1 +1,5 @@
 node_modules/
+
+# npm 배포 토큰 (절대 커밋 금지)
+scripts/npmtoken.txt
+*.npmrc.local

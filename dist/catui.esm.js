@@ -1,6 +1,6 @@
-/*! Catui UI framework 1.0.0 | 아이콘 Line 01(CC0) */
+/*! Catui UI framework 2.0.0 | MIT License (c) imcatDevs | 아이콘 Line 01(CC0) */
 const BASE = new URL(".", import.meta.url).href;
-const VERSION = "1.0.0";
+const VERSION = "2.0.0";
 
 // ── core/html.js ──
 // 안전한 마크업 조립. html`...`의 ${값}은 자동 escape되고, raw()로 감싼 신뢰 마크업만 그대로 들어간다.

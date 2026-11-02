@@ -11,8 +11,9 @@
 
 ```js
 // ES 모듈 + TypeScript (dist/catui.d.ts 자동 인식)
-import catui, { layer, carousel } from "catui";
-import "catui/css";
+// npm install @imcat-ckim/catui
+import catui, { layer, carousel } from "@imcat-ckim/catui";
+import "@imcat-ckim/catui/css";
 ```
 
 ## 배포 파일 (`dist/`)
@@ -34,7 +35,7 @@ import "catui/css";
 - `src/icons/svg/` — Line 01에 없는 Catui 원본(직접 그림)
 - `src/icons/allow.json` — 스프라이트에 넣을 이름, `src/icons/map.json` — 이름이 다를 때 Line 01 파일 대응
 
-빌드 출력 `icons 241(line01 231 · own 10 · lucide 0)`. 제3자 고지 파일이 필요 없습니다.
+`allow.json`에는 Line 01 전체가 들어 있어 아무 이름이나 바로 씁니다(`Catui_ic-이름`). 빌드 출력 `icons 1265(line01 1255 · own 10 · lucide 0)`, `icons.svg` gzip 약 42KB. 제3자 고지 파일이 필요 없습니다.
 
 ## 폴더
 
@@ -59,6 +60,10 @@ npm run dev         # 정적 서버 :8766
 npm test            # E2E: 문서 전체 콘솔 오류 0건 + 모듈 시나리오 (시스템 Chrome/Edge 사용, CATUI_CHROME으로 경로 지정)
 npm run check       # 빌드 + 테스트
 ```
+
+## 라이선스
+
+[MIT](LICENSE) © 2026 imcatDevs — 상업적 사용·수정·재배포 자유, 저작권 고지(LICENSE 또는 배포 파일 머리 주석)만 유지하면 됩니다. 아이콘은 Line 01(CC0) + Catui 원본으로 별도 고지가 필요 없습니다. 보안 신고: [SECURITY.md](SECURITY.md) · 변경 이력: [CHANGELOG.md](CHANGELOG.md)
 
 ## 기여 규칙 요약
 
