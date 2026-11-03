@@ -47,14 +47,9 @@
 <script src="../../../dist/catadmin.min.js"></script>
 <script>
 catui.use(['layer', 'util'], function (layer, util) {
-  var people = [
-    { name: '김하늘', role: '구매 담당', co: '누리소프트', mail: 'haneul@nuri.example', tel: '010-1234-5678', tone: 1 },
-    { name: '이준', role: '물류 팀장', co: '다온물류', mail: 'jun@daon.example', tel: '010-2345-6789', tone: 2 },
-    { name: '박서연', role: '마케팅', co: '새봄디자인', mail: 'seoyeon@saebom.example', tel: '010-3456-7890', tone: 3 },
-    { name: '최민', role: '정산 담당', co: '바른결제', mail: 'min@bareun.example', tel: '010-4567-8901', tone: 4 },
-    { name: '정수아', role: 'MD', co: '한빛상사', mail: 'sua@hanbit.example', tel: '010-5678-9012', tone: 1 },
-    { name: '강도현', role: '개발 협력', co: '온새미', mail: 'dohyun@onsaemi.example', tel: '010-6789-0123', tone: 2 },
-  ];
+  // 모의 데이터: data/contacts.json
+  catui.admin.data('contacts').then(function (people) {
+  people = people.slice();
   var grid = document.getElementById('cc-grid');
   var draw = function () {
     var q = document.getElementById('cc-q').value.trim();
@@ -72,6 +67,7 @@ catui.use(['layer', 'util'], function (layer, util) {
       .then(function (v) { if (!v) return; people.unshift({ name: v.name, co: v.co, role: v.role || '', mail: v.mail, tel: v.tel || '', tone: 1 }); draw(); layer.msg('추가했습니다', { icon: 'success' }); });
   });
   draw();
+  });
 });
 </script>
 </body>

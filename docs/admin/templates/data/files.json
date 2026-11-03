@@ -1,0 +1,110 @@
+[
+ {
+  "id": "f0",
+  "name": "11월_정산서.pdf",
+  "folder": "문서",
+  "size": 1468006,
+  "date": "오늘",
+  "who": "김",
+  "tone": 5
+ },
+ {
+  "id": "f1",
+  "name": "계약서_초안.docx",
+  "folder": "문서",
+  "size": 219136,
+  "date": "어제",
+  "who": "이",
+  "tone": 3
+ },
+ {
+  "id": "f2",
+  "name": "회의록_1031.pdf",
+  "folder": "문서",
+  "size": 98304,
+  "date": "10월 31일",
+  "who": "박",
+  "tone": 5
+ },
+ {
+  "id": "f3",
+  "name": "입점_가이드.pdf",
+  "folder": "문서",
+  "size": 2621440,
+  "date": "10월 28일",
+  "who": "김",
+  "tone": 5
+ },
+ {
+  "id": "f4",
+  "name": "개인정보_처리방침.docx",
+  "folder": "문서",
+  "size": 51200,
+  "date": "10월 20일",
+  "who": "정",
+  "tone": 3
+ },
+ {
+  "id": "f5",
+  "name": "배너_A.png",
+  "folder": "이미지",
+  "size": 845824,
+  "date": "오늘",
+  "who": "김",
+  "tone": 2
+ },
+ {
+  "id": "f6",
+  "name": "배너_B.png",
+  "folder": "이미지",
+  "size": 812032,
+  "date": "오늘",
+  "who": "김",
+  "tone": 2
+ },
+ {
+  "id": "f7",
+  "name": "상품컷_K8.jpg",
+  "folder": "이미지",
+  "size": 3355443,
+  "date": "어제",
+  "who": "최",
+  "tone": 2
+ },
+ {
+  "id": "f8",
+  "name": "로고.svg",
+  "folder": "이미지",
+  "size": 8192,
+  "date": "10월 12일",
+  "who": "정",
+  "tone": 2
+ },
+ {
+  "id": "f9",
+  "name": "재고현황_1102.xlsx",
+  "folder": "표",
+  "size": 88064,
+  "date": "오늘",
+  "who": "이",
+  "tone": 1
+ },
+ {
+  "id": "f10",
+  "name": "월별매출.xlsx",
+  "folder": "표",
+  "size": 49152,
+  "date": "11월 1일",
+  "who": "박",
+  "tone": 1
+ },
+ {
+  "id": "f11",
+  "name": "고객목록.csv",
+  "folder": "표",
+  "size": 1258291,
+  "date": "10월 30일",
+  "who": "최",
+  "tone": 1
+ }
+]

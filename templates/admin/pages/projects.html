@@ -13,16 +13,9 @@
 <div class="Catui_adm-projects" id="pj-grid"></div>
 <script>
 catui.use(['layer'], function (layer) {
-  var list = [
-    { name: '11월 프로모션', desc: '기획전·쿠폰·배너', pct: 64, st: '진행', due: '11월 11일', team: ['김', '이', '박'], tone: 1 },
-    { name: '물류 센터 이전', desc: '판교 → 용인 이전 및 재고 이관', pct: 38, st: '진행', due: '12월 1일', team: ['이', '최'], tone: 2 },
-    { name: '모바일 앱 4.3', desc: '간편결제·찜 목록 개편', pct: 82, st: '진행', due: '11월 20일', team: ['정', '김', '강', '윤'], tone: 3 },
-    { name: '고객센터 챗봇', desc: '자주 묻는 질문 자동 응답', pct: 21, st: '진행', due: '12월 15일', team: ['박'], tone: 4 },
-    { name: '정산 자동화', desc: '결제사 정산 파일 자동 대사', pct: 55, st: '진행', due: '11월 30일', team: ['강', '이'], tone: 2 },
-    { name: '리뷰 개편', desc: '사진 리뷰·도움돼요 버튼', pct: 47, st: '진행', due: '12월 5일', team: ['최', '정'], tone: 1 },
-    { name: '10월 할인전', desc: '종료 · 매출 4,790만원', pct: 100, st: '완료', due: '10월 31일', team: ['김', '박'], tone: 1 },
-    { name: '개인정보 점검', desc: '외부 감사 대응 완료', pct: 100, st: '완료', due: '10월 20일', team: ['강'], tone: 3 },
-  ];
+  // 모의 데이터: data/projects.json
+  catui.admin.data('projects').then(function (list) {
+  list = list.slice();
   var grid = document.getElementById('pj-grid');
   var draw = function () {
     var f = document.querySelector('[name=pj-f]:checked').value;
@@ -40,5 +33,6 @@ catui.use(['layer'], function (layer) {
       .then(function (v) { if (!v) return; list.unshift({ name: v.name, desc: v.desc || '', pct: 0, st: '진행', due: v.due, team: ['김'], tone: 1 }); draw(); layer.msg('만들었습니다', { icon: 'success' }); });
   });
   draw();
+  });
 });
 </script>

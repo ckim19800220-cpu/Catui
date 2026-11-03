@@ -33,12 +33,9 @@
 </div>
 <script>
 catui.use(['util', 'layer', 'dropdown'], function (util, layer) {
-  var files = [
-    ['11월_정산서.pdf', '문서', 1468006, '오늘', '김', 5], ['계약서_초안.docx', '문서', 219136, '어제', '이', 3], ['회의록_1031.pdf', '문서', 98304, '10월 31일', '박', 5],
-    ['입점_가이드.pdf', '문서', 2621440, '10월 28일', '김', 5], ['개인정보_처리방침.docx', '문서', 51200, '10월 20일', '정', 3],
-    ['배너_A.png', '이미지', 845824, '오늘', '김', 2], ['배너_B.png', '이미지', 812032, '오늘', '김', 2], ['상품컷_K8.jpg', '이미지', 3355443, '어제', '최', 2], ['로고.svg', '이미지', 8192, '10월 12일', '정', 2],
-    ['재고현황_1102.xlsx', '표', 88064, '오늘', '이', 1], ['월별매출.xlsx', '표', 49152, '11월 1일', '박', 1], ['고객목록.csv', '표', 1258291, '10월 30일', '최', 1],
-  ].map(function (f, i) { return { id: 'f' + i, name: f[0], folder: f[1], size: f[2], date: f[3], who: f[4], tone: f[5] }; });
+  // 모의 데이터: data/files.json
+  catui.admin.data('files').then(function (files) {
+  files = files.slice();
   var ICON = { 문서: 'file-text', 이미지: 'image', 표: 'table' };
   var box = document.getElementById('fl-list'), folder = '';
   var draw = function () {
@@ -64,5 +61,6 @@ catui.use(['util', 'layer', 'dropdown'], function (util, layer) {
     e.target.value = ''; draw(); layer.msg('올렸습니다', { icon: 'success' });
   });
   draw();
+  });
 });
 </script>

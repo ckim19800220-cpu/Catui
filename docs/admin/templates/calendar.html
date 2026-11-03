@@ -63,13 +63,9 @@
 <script>
 catui.use(['layer', 'util'], function (layer, util) {
   var KIND = { 업무: '', 회의: 'Catui_cal-ev-info', 교육: 'Catui_cal-ev-3', 점검: 'Catui_cal-ev-warn' };
-  var events = [
-    { date: '2026-11-02', title: '주간 운영 회의', kind: '회의', time: '10:00' }, { date: '2026-11-02', title: '정산 확정', kind: '업무', time: '16:00' },
-    { date: '2026-11-05', title: '신규 관리자 교육', kind: '교육', time: '14:00' }, { date: '2026-11-11', title: '빼빼로데이 기획전 오픈', kind: '업무', time: '00:00' },
-    { date: '2026-11-13', title: 'DB 정기 점검', kind: '점검', time: '02:00' }, { date: '2026-11-18', title: '분기 실적 회의', kind: '회의', time: '15:00' },
-    { date: '2026-11-25', title: '블랙프라이데이 준비', kind: '업무', time: '09:00' }, { date: '2026-11-25', title: '물류 협력사 미팅', kind: '회의', time: '13:00' },
-    { date: '2026-11-25', title: '배너 교체', kind: '업무', time: '18:00' }, { date: '2026-11-27', title: '보안 교육', kind: '교육', time: '11:00' },
-  ];
+  // 모의 데이터: data/events.json
+  catui.admin.data('events').then(function (events) {
+  events = events.slice();
   var today = '2026-11-02', view = new Date(2026, 10, 1), sel = today;
   var grid = document.getElementById('cl-grid');
   var key = function (d) { return util.toDateString(d, 'yyyy-MM-dd'); };
@@ -116,6 +112,7 @@ catui.use(['layer', 'util'], function (layer, util) {
       .then(function (v) { if (!v) return; events.push(v); pick(v.date, false); layer.msg('일정을 추가했습니다', { icon: 'success' }); });
   });
   draw();
+  });
 });
 </script>
 </body>

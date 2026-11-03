@@ -18,12 +18,9 @@
 <script>
 catui.use(['util', 'layer'], function (util, layer) {
   var ICON = { 키보드: 'keyboard', 마우스: 'mouse', 모니터: 'monitor', 액세서리: 'usb' }, TONE = { 키보드: '', 마우스: ' Catui_adm-ph-2', 모니터: ' Catui_adm-ph-3', 액세서리: ' Catui_adm-ph-4' };
-  var items = [
-    ['기계식 키보드 K8', '키보드', 189000, 159000, 4.8, 212], ['저소음 키보드 S2', '키보드', 79000, 0, 4.5, 98], ['로우프로파일 키보드', '키보드', 129000, 109000, 4.6, 64],
-    ['무선 마우스 M3', '마우스', 33000, 0, 4.7, 305], ['게이밍 마우스 G9', '마우스', 69000, 59000, 4.4, 77], ['버티컬 마우스', '마우스', 45000, 0, 4.2, 41],
-    ['27인치 QHD 모니터', '모니터', 289000, 240000, 4.6, 48], ['32인치 4K 모니터', '모니터', 459000, 0, 4.7, 22], ['휴대용 모니터 15', '모니터', 199000, 179000, 4.3, 35],
-    ['USB-C 허브 7in1', '액세서리', 42000, 0, 4.5, 174], ['모니터 받침대', '액세서리', 59000, 49000, 4.4, 96], ['노트북 파우치', '액세서리', 31000, 0, 4.6, 120],
-  ].map(function (x, i) { return { id: i, name: x[0], cat: x[1], price: x[2], sale: x[3], rate: x[4], sold: x[5] }; });
+  // 모의 데이터: data/products.json
+  catui.admin.data('products').then(function (items) {
+  items = items.slice();
   var grid = document.getElementById('sp-grid');
   var draw = function () {
     var q = document.getElementById('sp-q').value.trim(), cat = document.querySelector('[name=sp-cat]:checked').value, sort = document.getElementById('sp-sort').value;
@@ -43,5 +40,6 @@ catui.use(['util', 'layer'], function (util, layer) {
   document.getElementById('sp-sort').addEventListener('change', draw);
   document.getElementById('sp-cats').addEventListener('change', draw);
   draw();
+  });
 });
 </script>
