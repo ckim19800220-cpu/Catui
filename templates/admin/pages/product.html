@@ -1,7 +1,7 @@
 <!-- title: 상품 상세 | crumb: 커머스 / 상품 상세 -->
 <header class="Catui_pagehead">
   <a class="Catui_pagehead-back" href="shop.html">{{icon:chevron-left}}상점</a>
-  <div class="Catui_pagehead-row"><h1 class="Catui_pagehead-title">기계식 키보드 K8</h1><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>판매 중</span>
+  <div class="Catui_pagehead-row"><h1 class="Catui_pagehead-title" id="pd-name">기계식 키보드 K8</h1><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>판매 중</span>
     <div class="Catui_pagehead-actions"><a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="form.html">{{icon:pen-line}}수정</a></div></div>
 </header>
 
@@ -16,9 +16,9 @@
     </div>
   </div>
   <div class="Catui_vstack Catui_gap-4">
-    <p class="Catui_help">키보드 · KB-K8-BLK</p>
-    <div class="Catui_adm-price Catui_adm-price-lg"><em>16%<span class="Catui_clip"> 할인</span></em><b>159,000원</b><s><span class="Catui_clip">원래 가격 </span>189,000원</s></div>
-    <p class="Catui_line"><span class="Catui_rating" role="img" aria-label="5점 중 4.8점"><span style="color:var(--Catui_rating-on)">{{icon:star}}</span><span style="color:var(--Catui_rating-on)">{{icon:star}}</span><span style="color:var(--Catui_rating-on)">{{icon:star}}</span><span style="color:var(--Catui_rating-on)">{{icon:star}}</span><span style="color:var(--Catui_rating-on)">{{icon:star}}</span></span> 4.8 · 리뷰 412개</p>
+    <p class="Catui_help" id="pd-cat">키보드 · KB-K8-BLK</p>
+    <div class="Catui_adm-price Catui_adm-price-lg"><em><span id="pd-off">16%</span><span class="Catui_clip"> 할인</span></em><b id="pd-sale">159,000원</b><s><span class="Catui_clip">원래 가격 </span><span id="pd-price">189,000원</span></s></div>
+    <p class="Catui_line"><span class="Catui_rating" role="img" aria-label="5점 중 4.8점" id="pd-stars"><span style="color:var(--Catui_rating-on)">{{icon:star}}</span><span style="color:var(--Catui_rating-on)">{{icon:star}}</span><span style="color:var(--Catui_rating-on)">{{icon:star}}</span><span style="color:var(--Catui_rating-on)">{{icon:star}}</span><span style="color:var(--Catui_rating-on)">{{icon:star}}</span></span> <span id="pd-rate">4.8 · 리뷰 412개</span></p>
     <p>저소음 적축, 블루투스·유선 겸용, 한글 각인. 최대 3대 기기를 버튼 하나로 바꿔 씁니다.</p>
     <fieldset class="Catui_swatches"><legend class="Catui_label">색상 <span class="Catui_swatch-value" id="pd-color">· 검정</span></legend>
       <input class="Catui_clip" type="radio" name="pd-c" id="pd-c1" value="검정" checked><label class="Catui_swatch" for="pd-c1" style="--Catui_swatch:var(--Catui_sidebar-bg)"><span class="Catui_clip">검정</span></label>
@@ -36,11 +36,10 @@
 
 <div class="Catui_tabs">
   <input class="Catui_clip" type="radio" name="pd-tab" id="pd-t1" checked><label class="Catui_tab" for="pd-t1">상세 정보</label>
-  <div class="Catui_panel"><dl class="Catui_dl"><dt>스위치</dt><dd>저소음 적축 (45g)</dd><dt>연결</dt><dd>블루투스 5.1 · USB-C 유선</dd><dt>배터리</dt><dd>4,000mAh · 최대 200시간</dd><dt>무게</dt><dd>780g</dd></dl></div>
-  <input class="Catui_clip" type="radio" name="pd-tab" id="pd-t2"><label class="Catui_tab" for="pd-t2">리뷰 412</label>
-  <div class="Catui_panel"><div class="Catui_thread">
-    <article class="Catui_thread-item"><span class="Catui_av Catui_av-md" aria-hidden="true">한</span><div class="Catui_thread-main"><p><span class="Catui_thread-name">한소리</span><span class="Catui_thread-time">10월 30일 · 별점 5</span></p><p class="Catui_thread-body">타건감이 조용해서 사무실에서 쓰기 좋아요.</p></div></article>
-    <article class="Catui_thread-item"><span class="Catui_av Catui_av-md" aria-hidden="true">오</span><div class="Catui_thread-main"><p><span class="Catui_thread-name">오세린</span><span class="Catui_thread-time">10월 27일 · 별점 4</span></p><p class="Catui_thread-body">각인이 선명합니다. 무게가 조금 있어요.</p></div></article>
+  <div class="Catui_panel"><dl class="Catui_dl" data-catui-adm-src="page-product" data-catui-adm-rows="specs"><template><dt data-catui-adm-field="k"></dt><dd data-catui-adm-field="v"></dd></template></dl></div>
+  <input class="Catui_clip" type="radio" name="pd-tab" id="pd-t2"><label class="Catui_tab" for="pd-t2">리뷰 <span data-catui-adm-src="page-product" data-catui-adm-text="reviewCount" data-catui-adm-format="number">412</span></label>
+  <div class="Catui_panel"><div class="Catui_thread" data-catui-adm-src="page-product" data-catui-adm-rows="reviews">
+    <template><article class="Catui_thread-item"><span class="Catui_av Catui_av-md" aria-hidden="true" data-catui-adm-field="who" data-catui-adm-format="initial"></span><div class="Catui_thread-main"><p><span class="Catui_thread-name" data-catui-adm-field="who"></span><span class="Catui_thread-time" data-catui-adm-field="meta"></span></p><p class="Catui_thread-body" data-catui-adm-field="body"></p></div></article></template>
   </div></div>
   <input class="Catui_clip" type="radio" name="pd-tab" id="pd-t3"><label class="Catui_tab" for="pd-t3">재고·판매</label>
   <div class="Catui_panel"><div class="Catui_bars" data-catui-adm-src="page-product" data-catui-adm-rows="bars.product_1"><template><div class="Catui_bar"><span class="Catui_bar-label" data-catui-adm-field="label"></span><span class="Catui_bar-track"><i class="Catui_bar-fill" data-catui-adm-class="Catui_bar-fill-:fill" data-catui-adm-attr="style:width:{pct}%"></i></span><span class="Catui_bar-value" data-catui-adm-field="value"></span></div></template></div></div>
@@ -55,5 +54,15 @@ catui.use(function () {
     catui.mount(main, catui.raw(b.querySelector('.Catui_adm-ph').innerHTML));
   });
   document.querySelectorAll('[name=pd-c]').forEach(function (r) { r.addEventListener('change', function () { document.getElementById('pd-color').textContent = '· ' + r.value; }); });
+});
+</script>
+<script>
+// 리뷰 표시(일자 · 별점)와 머리·가격: 상점(products.json)과 같은 상품 자료를 쓴다
+catui.admin.derive['page-product'] = function (j) { j.reviews.forEach(function (r) { r.meta = r.date + ' · 별점 ' + r.rate; }); return j; };
+Promise.all([catui.admin.data('page-product'), catui.admin.data('products')]).then(function (res) {
+  var page = res[0], p = res[1].find(function (x) { return x.id === page.productId; }), n = catui.util.number, set = function (id, v) { document.getElementById(id).textContent = v; };
+  set('pd-name', p.name); set('pd-cat', p.cat + ' · ' + page.sku); set('pd-sale', n(p.sale || p.price) + '원'); set('pd-price', n(p.price) + '원');
+  set('pd-off', Math.round((1 - (p.sale || p.price) / p.price) * 100) + '%'); set('pd-rate', p.rate + ' · 리뷰 ' + n(page.reviewCount) + '개');
+  document.getElementById('pd-stars').setAttribute('aria-label', '5점 중 ' + p.rate + '점');
 });
 </script>
