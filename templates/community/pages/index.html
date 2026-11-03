@@ -1,0 +1,36 @@
+<!-- title: 홈 | nav: home -->
+<h1 class="Catui_clip">Catui 커뮤니티 홈</h1>
+
+<section aria-labelledby="hm-hot">
+  <div class="Catui_cm-bar"><h2 class="Catui_h3" id="hm-hot">지금 인기글</h2><a class="Catui_link" href="hot.html">인기글 더 보기</a></div>
+  <ol class="Catui_cm-list" id="hm-hot-list" aria-busy="true"></ol>
+</section>
+
+<section aria-labelledby="hm-boards">
+  <h2 class="Catui_h3" id="hm-boards">게시판 최신글</h2>
+  <div class="Catui_cm-boards" id="hm-board-list"></div>
+</section>
+
+<section class="Catui_card" aria-labelledby="hm-trend">
+  <header class="Catui_card-h" id="hm-trend">많이 찾는 검색어</header>
+  <div class="Catui_card-b"><nav class="Catui_cm-cats" id="hm-trends" aria-label="많이 찾는 검색어"></nav></div>
+</section>
+<script>
+// 홈: 인기글 10개(추천−비추천 순) · 게시판별 최신 5개 · 많이 찾는 검색어 — posts.json·boards.json·trends.json
+catui.use(function () {
+  var cm = catui.community;
+  Promise.all([cm.load(), cm.data('trends')]).then(function (res) {
+    var d = res[0], hot = d.posts.filter(function (p) { return p.hot; }).sort(function (a, b) { return b.score - a.score; }).slice(0, 10);
+    var list = document.getElementById('hm-hot-list');
+    catui.mount(list, catui.html`${hot.map(function (p, i) { return cm.row(p, { rank: i + 1 }); })}`);
+    list.removeAttribute('aria-busy');
+    var boards = d.boards.filter(function (b) { return ['free', 'humor', 'info', 'qna', 'hobby', 'local'].indexOf(b.id) > -1; });
+    var href = function (b) { return ({ info: 'board-card.html?b=info', qna: 'qna.html' })[b.id] || 'board.html?b=' + b.id; };
+    catui.mount(document.getElementById('hm-board-list'), catui.html`${boards.map(function (b) {
+      var rows = d.posts.filter(function (p) { return p.board === b.id; }).slice(0, 5);
+      return catui.html`<section class="Catui_card" aria-labelledby="hb-${b.id}"><header class="Catui_card-h"><a id="hb-${b.id}" href="${href(b)}">${b.name}</a><span class="Catui_cm-meta">오늘 ${b.today} · 전체 ${b.count}</span></header><div class="Catui_card-b"><ul class="Catui_cm-list">${rows.map(function (p) { return cm.row(p, { board: false }); })}</ul></div></section>`;
+    })}`);
+    catui.mount(document.getElementById('hm-trends'), catui.html`${res[1].map(function (t, i) { return catui.html`<a href="search.html?q=${encodeURIComponent(t)}"><span class="Catui_num">${i + 1}</span> ${t}</a>`; })}`);
+  });
+});
+</script>

@@ -1,0 +1,48 @@
+/* community/pages.css */
+/* 글쓰기 · 투표 결과 · 프로필 · 쪽지 · 설정 · 순위 · 일정 · 인증 · 오류 */
+.Catui_cm-panel{display:grid;gap:var(--Catui_space-4);padding:var(--Catui_space-5);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_cm-panel h2{margin:0}
+.Catui_cm-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-4);align-items:start}
+.Catui_cm-cols > .Catui_field{align-content:start}
+@media (max-width:767px){.Catui_cm-cols{grid-template-columns:minmax(0,1fr)}.Catui_cm-panel{padding:var(--Catui_space-4)}}
+
+/* 글쓰기 */
+.Catui_cm-toolbar{display:flex;flex-wrap:wrap;gap:var(--Catui_space-1);padding:var(--Catui_space-1);border:1px solid var(--Catui_color-border);border-bottom:0;border-radius:var(--Catui_radius-md) var(--Catui_radius-md) 0 0;background:var(--Catui_color-surface-muted)}
+.Catui_cm-toolbar + .Catui_input{border-top-left-radius:0;border-top-right-radius:0}
+.Catui_cm-preview{min-height:calc(var(--Catui_space-10) * 3);padding:var(--Catui_space-4);border:1px dashed var(--Catui_color-border);border-radius:var(--Catui_radius-md)}
+.Catui_cm-pics{display:grid;gap:var(--Catui_space-2);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 1.6),1fr))}
+.Catui_cm-pic{position:relative;margin:0;aspect-ratio:1 / 1;border-radius:var(--Catui_radius-md);overflow:hidden;background:var(--Catui_color-surface-muted)}
+.Catui_cm-pic img{width:100%;height:100%;object-fit:cover}
+.Catui_cm-pic button{position:absolute;top:var(--Catui_space-1);right:var(--Catui_space-1)}
+.Catui_cm-savebar{position:sticky;bottom:0;z-index:10;display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-3);padding:var(--Catui_space-3) var(--Catui_space-4);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);box-shadow:var(--Catui_shadow-md)}
+.Catui_cm-savebar .Catui_actions{margin-left:auto}
+@media (max-width:767px){.Catui_cm-savebar{bottom:calc(var(--Catui_space-10) + var(--Catui_space-2))}}
+
+/* 투표 결과 */
+.Catui_cm-poll{display:grid;gap:var(--Catui_space-3);padding:var(--Catui_space-4);border:1px solid var(--Catui_color-border);border-radius:var(--Catui_radius-md);max-width:var(--Catui_prose-measure)}
+.Catui_cm-poll .Catui_actions{margin-top:var(--Catui_space-3)}
+.Catui_cm-poll-res{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-3)}
+.Catui_cm-poll-res li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--Catui_space-1) var(--Catui_space-3);align-items:center}
+.Catui_cm-poll-res li:focus{outline:none}
+.Catui_cm-poll-res:focus{outline:2px solid var(--Catui_color-focus-ring);outline-offset:4px;border-radius:var(--Catui_radius-xs)}
+.Catui_cm-poll-lab{display:inline-flex;align-items:center;gap:var(--Catui_space-1);min-width:0}
+.Catui_cm-poll-bar{grid-column:1 / -1;height:var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-surface-muted);overflow:hidden;order:3}
+.Catui_cm-poll-bar i{display:block;height:100%;background:var(--Catui_color-text-secondary);border-radius:inherit}
+.Catui_cm-poll-res li[aria-current="true"] .Catui_cm-poll-bar i{background:var(--Catui_color-brand)}
+
+/* 프로필 */
+.Catui_cm-profile{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-4)}
+.Catui_cm-profile h1{margin:0}
+.Catui_cm-stats{display:flex;flex-wrap:wrap;gap:var(--Catui_space-5);margin:0}
+.Catui_cm-stats div{display:grid}
+.Catui_cm-stats dt{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_cm-stats dd{margin:0;font-weight:800;font-size:var(--Catui_type-h3-size);font-variant-numeric:tabular-nums}
+.Catui_cm-lvbar{display:grid;gap:var(--Catui_space-1);min-width:calc(var(--Catui_space-10) * 4)}
+
+/* 순위 표 */
+.Catui_cm-podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--Catui_space-3)}
+.Catui_cm-podium .Catui_card-b{display:grid;justify-items:center;gap:var(--Catui_space-1);text-align:center}
+@media (max-width:479px){.Catui_cm-podium{grid-template-columns:minmax(0,1fr)}}
+
+/* 오류 */
+.Catui_cm-code{font-size:calc(var(--Catui_type-display-size) * 2);font-weight:800;line-height:1;color:var(--Catui_color-brand-strong);font-variant-numeric:tabular-nums}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-cm-now="2026-11-02T10:00:00+09:00">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>순위 · Catui 커뮤니티</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/community.min.css">
+<!-- 깜빡임 방지: 저장된 테마를 그리기 전에 적용 (CSP로 인라인 스크립트를 막는다면 지워도 됩니다 — catcommunity.js가 곧바로 적용) -->
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:community")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_cm-body">
+<a class="Catui_skip" href="#cm-main">본문으로 이동</a>
+<div class="Catui_site Catui_cm" data-catui-cm data-page="ranking">
+  <header class="Catui_cm-head">
+    <div class="Catui_cm-head-in">
+      <a class="Catui_cm-brand" href="index.html"><span class="Catui_logo">C</span>Catui 커뮤니티</a>
+      <form class="Catui_cm-search" action="search.html" role="search" data-catui-cm-search>
+        <div class="Catui_search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="cm-q">글 검색</label><input class="Catui_input" id="cm-q" name="q" type="search" placeholder="제목·내용·닉네임 검색" autocomplete="off"></div>
+      </form>
+      <div class="Catui_cm-head-acts">
+        <a class="Catui_btn Catui_btn-sm Catui_btn-primary Catui_cm-write-btn" href="write.html"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-pen-line"></use></svg>글쓰기</a>
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon Catui_cm-dot" href="search.html" aria-label="검색"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg></a>
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon Catui_cm-dot" href="notifications.html" aria-label="알림 3개"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-bell"></use></svg><span class="Catui_count" aria-hidden="true">3</span></a>
+        <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-cm-theme aria-label="어두운 화면으로"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg></button>
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost" href="profile.html" aria-label="내 정보: 산책하는고양이"><span class="Catui_av Catui_av-sm" aria-hidden="true">산</span></a>
+      </div>
+    </div>
+    <nav class="Catui_cm-gnb" aria-label="게시판">
+      <div class="Catui_cm-gnb-in"><a class="Catui_cm-gnb-item" href="index.html">홈</a><a class="Catui_cm-gnb-item" href="hot.html" aria-current="page">인기글</a><a class="Catui_cm-gnb-item" href="board.html?b=free">자유</a><a class="Catui_cm-gnb-item" href="board.html?b=humor">유머</a><a class="Catui_cm-gnb-item" href="board-card.html?b=info">정보</a><a class="Catui_cm-gnb-item" href="qna.html">질문</a><a class="Catui_cm-gnb-item" href="board-gallery.html?b=photo">사진</a><a class="Catui_cm-gnb-item" href="hotdeal.html">핫딜</a><a class="Catui_cm-gnb-item" href="board.html?b=hobby">취미</a><a class="Catui_cm-gnb-item" href="board.html?b=local">동네</a><a class="Catui_cm-gnb-item" href="events.html">모임·이벤트</a>
+        <details class="Catui_dd"><summary class="Catui_btn Catui_btn-sm Catui_btn-ghost">더보기<svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></summary><div class="Catui_dd-menu Catui_dd-sm"><a class="Catui_dd-item" href="notice.html">공지</a><a class="Catui_dd-item" href="ranking.html">순위</a><a class="Catui_dd-item" href="post-poll.html">투표 글 예시</a><a class="Catui_dd-item" href="scrap.html">스크랩</a><a class="Catui_dd-item" href="settings.html">설정</a></div></details>
+      </div>
+    </nav>
+  </header>
+  <div class="Catui_cm-wrap">
+    <main class="Catui_cm-main" id="cm-main" tabindex="-1">
+<header class="Catui_cm-board-head"><div><h1 class="Catui_h1">순위</h1><p>활동 점수(글 × 10 + 댓글 × 2 + 받은 추천) 기준 · 게시판은 글 수 기준</p></div></header>
+<div class="Catui_cm-podium" id="rk-top"></div>
+<section class="Catui_cm-panel" aria-labelledby="rk-u"><h2 class="Catui_h3" id="rk-u">회원 순위</h2>
+  <div class="Catui_table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">회원 활동 순위</caption><thead><tr><th scope="col" class="Catui_num">순위</th><th scope="col">닉네임</th><th scope="col" class="Catui_num">레벨</th><th scope="col" class="Catui_num">글</th><th scope="col" class="Catui_num">댓글</th><th scope="col" class="Catui_num">점수</th></tr></thead><tbody id="rk-users"></tbody></table></div>
+</section>
+<section class="Catui_cm-panel" aria-labelledby="rk-b"><h2 class="Catui_h3" id="rk-b">게시판 순위</h2><div class="Catui_bars" id="rk-boards"></div></section>
+
+    </main>
+    <aside class="Catui_cm-aside" aria-label="인기·공지" data-catui-cm-aside></aside>
+  </div>
+  <footer class="Catui_cm-foot"><div class="Catui_cm-foot-in"><span>© 2026 Catui 커뮤니티 · Catui 2.0.0 · MIT License</span><nav aria-label="사이트 정보"><a href="notice.html">공지</a><a href="notice.html#rules">이용 규칙</a><a href="notice.html#privacy">개인정보 처리방침</a></nav></div></footer>
+  <button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_btn-icon Catui_cm-totop" type="button" data-catui-cm-top aria-label="맨 위로" hidden><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-arrow-up"></use></svg></button>
+  <nav class="Catui_cm-tabs" aria-label="빠른 이동"><a class="Catui_cm-tab" href="index.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-home"></use></svg><span>홈</span></a><a class="Catui_cm-tab" href="hot.html" aria-current="page"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-trending-up"></use></svg><span>인기</span></a><a class="Catui_cm-tab" href="write.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-pen-line"></use></svg><span>글쓰기</span></a><a class="Catui_cm-tab" href="notifications.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-bell"></use></svg><span>알림</span></a><a class="Catui_cm-tab" href="profile.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-user"></use></svg><span>내 정보</span></a></nav>
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catcommunity.min.js"></script>
+<script>
+catui.use(['util'], function (util) {
+  var cm = catui.community, n = util.number;
+  cm.load().then(function (d) {
+    var users = d.users.filter(function (u) { return u.id !== 'u16'; }).sort(function (a, b) { return b.score - a.score; });
+    catui.mount(document.getElementById('rk-top'), catui.html`${users.slice(0, 3).map(function (u, i) { return catui.html`<article class="Catui_card"><div class="Catui_card-b"><span class="Catui_cm-rank Catui_cm-rank-top">${i + 1}위</span><span class="Catui_av Catui_av-lg" aria-hidden="true">${u.nick.slice(0, 1)}</span><a href="profile.html?u=${u.id}"><b>${u.nick}</b></a><span class="Catui_cm-meta">레벨 ${u.level} · ${n(u.score)}점</span></div></article>`; })}`);
+    catui.mount(document.getElementById('rk-users'), catui.html`${users.map(function (u, i) { return catui.html`<tr><td class="Catui_num">${i + 1}</td><td><a href="profile.html?u=${u.id}">${u.nick}</a></td><td class="Catui_num">${u.level}</td><td class="Catui_num">${n(u.posts)}</td><td class="Catui_num">${n(u.comments)}</td><td class="Catui_num">${n(u.score)}</td></tr>`; })}`);
+    var boards = d.boards.filter(function (b) { return b.write !== false; }).sort(function (a, b) { return b.count - a.count; }), max = boards[0].count;
+    catui.mount(document.getElementById('rk-boards'), catui.html`${boards.map(function (b) { return catui.html`<div class="Catui_bar"><span class="Catui_bar-label">${b.name}</span><span class="Catui_bar-track"><i class="Catui_bar-fill" style="width:${Math.round(b.count / max * 100)}%"></i></span><span class="Catui_bar-value">${b.count}개</span></div>`; })}`);
+  });
+});
+</script>
+</body>
+</html>

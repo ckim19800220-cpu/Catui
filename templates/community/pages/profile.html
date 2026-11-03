@@ -1,0 +1,30 @@
+<!-- title: 회원 프로필 | nav: me -->
+<section class="Catui_cm-panel" aria-labelledby="pf-name">
+  <div class="Catui_cm-profile">
+    <span class="Catui_av Catui_av-xl" aria-hidden="true" id="pf-av">산</span>
+    <div class="Catui_vstack Catui_gap-1"><h1 class="Catui_h2" id="pf-name">산책하는고양이</h1><p class="Catui_help" id="pf-bio"></p></div>
+    <div class="Catui_actions" style="margin-left:auto"><a class="Catui_btn Catui_btn-sm Catui_btn-secondary" href="messages.html">{{icon:mail:16}}쪽지</a><a class="Catui_btn Catui_btn-sm Catui_btn-ghost" href="settings.html">{{icon:settings:16}}설정</a></div>
+  </div>
+  <dl class="Catui_cm-stats"><div><dt>레벨</dt><dd id="pf-lv">1</dd></div><div><dt>글</dt><dd id="pf-posts">0</dd></div><div><dt>댓글</dt><dd id="pf-cmts">0</dd></div><div><dt>받은 추천</dt><dd id="pf-likes">0</dd></div><div><dt>가입</dt><dd id="pf-joined">-</dd></div></dl>
+  <div class="Catui_cm-lvbar"><div class="Catui_prog-label"><span id="pf-next">다음 레벨까지</span><span class="Catui_num" id="pf-pct">0%</span></div><div class="Catui_meter" role="img" id="pf-meter" aria-label="다음 레벨 진행률"><i id="pf-bar" style="width:0%"></i></div><p class="Catui_help">활동 점수 = 글 × 10 + 댓글 × 2 + 받은 추천</p></div>
+</section>
+<section class="Catui_cm-panel" aria-labelledby="pf-act">
+  <h2 class="Catui_h3" id="pf-act">작성한 글</h2>
+  <ul class="Catui_cm-list" id="pf-list"></ul>
+</section>
+<script>
+// 프로필: ?u=회원 id (없으면 나) — users.json·posts.json, 레벨은 활동 점수 구간에서 계산(catui.community.level)
+catui.use(['util'], function (util) {
+  var cm = catui.community, uid = new URLSearchParams(location.search).get('u') || 'me', CUTS = [0, 300, 1000, 2500, 5000, 8000, 12000, 18000, 26000];
+  cm.load().then(function (d) {
+    var u = d.U[uid] || d.U.me, set = function (i, v) { document.getElementById(i).textContent = v; };
+    document.title = u.nick + ' · Catui 커뮤니티';
+    set('pf-name', u.nick); set('pf-av', u.nick.slice(0, 1)); set('pf-bio', u.bio); set('pf-lv', u.level); set('pf-posts', util.number(u.posts)); set('pf-cmts', util.number(u.comments)); set('pf-likes', util.number(u.likes)); set('pf-joined', u.joined.replace(/-/g, '.'));
+    var next = CUTS[u.level], prev = CUTS[u.level - 1], pct = next ? Math.min(100, Math.round((u.score - prev) / (next - prev) * 100)) : 100;
+    set('pf-next', next ? '레벨 ' + (u.level + 1) + '까지 ' + util.number(next - u.score) + '점' : '최고 레벨'); set('pf-pct', pct + '%');
+    document.getElementById('pf-bar').style.width = pct + '%'; document.getElementById('pf-meter').setAttribute('aria-label', '다음 레벨 진행률 ' + pct + '퍼센트');
+    var mine = d.posts.filter(function (p) { return p.user === u.id; });
+    catui.mount(document.getElementById('pf-list'), mine.length ? catui.html`${mine.slice(0, 15).map(function (p) { return cm.row(p); })}` : cm.empty('아직 쓴 글이 없습니다.'));
+  });
+});
+</script>

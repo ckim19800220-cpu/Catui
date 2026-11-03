@@ -1,0 +1,38 @@
+<!-- title: 설정 | nav: me | aside: none -->
+<header class="Catui_cm-board-head"><div><h1 class="Catui_h1">설정</h1><p>바꾼 값은 이 브라우저에 기억됩니다 (예제)</p></div></header>
+<form class="Catui_cm-panel" id="st-profile" data-catui-form data-catui-filter="st-profile" novalidate aria-labelledby="st-p">
+  <h2 class="Catui_h3" id="st-p">프로필</h2>
+  <div class="Catui_cm-cols">
+    <div class="Catui_field"><label class="Catui_label" for="st-nick">닉네임</label><input class="Catui_input" id="st-nick" name="nick" value="산책하는고양이" maxlength="12" data-catui-verify="required|minlen:2" aria-describedby="st-nick-h"><p class="Catui_help" id="st-nick-h">2~12자 · 30일에 한 번 바꿀 수 있어요</p></div>
+    <div class="Catui_field"><label class="Catui_label" for="st-bio">소개</label><input class="Catui_input" id="st-bio" name="bio" maxlength="60" value="동네 산책과 사진을 좋아합니다."></div>
+  </div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">저장</button></div>
+</form>
+<section class="Catui_cm-panel" aria-labelledby="st-n"><h2 class="Catui_h3" id="st-n">알림 받기</h2>
+  <div class="Catui_settings">
+    <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="sn1">내 글에 댓글</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="sn1c" type="checkbox" role="switch" checked aria-labelledby="sn1" data-pref="n-comment"><label class="Catui_tgl" for="sn1c"></label></span></div></div>
+    <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="sn2">내 글이 인기글에 오름</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="sn2c" type="checkbox" role="switch" checked aria-labelledby="sn2" data-pref="n-hot"><label class="Catui_tgl" for="sn2c"></label></span></div></div>
+    <div class="Catui_setting"><div class="Catui_setting-main"><span class="Catui_setting-title" id="sn3">쪽지</span></div><div class="Catui_setting-control"><span class="Catui_choice"><input class="Catui_clip" id="sn3c" type="checkbox" role="switch" checked aria-labelledby="sn3" data-pref="n-msg"><label class="Catui_tgl" for="sn3c"></label></span></div></div>
+  </div>
+</section>
+<section class="Catui_cm-panel" aria-labelledby="st-v"><h2 class="Catui_h3" id="st-v">보기</h2>
+  <fieldset><legend class="Catui_label">화면</legend><div class="Catui_choices">
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="st-theme" value="light"><span class="Catui_radio"></span>밝게</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="st-theme" value="dark"><span class="Catui_radio"></span>어둡게</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="st-theme" value="system"><span class="Catui_radio"></span>시스템</label>
+  </div></fieldset>
+</section>
+<section class="Catui_cm-panel" aria-labelledby="st-b"><h2 class="Catui_h3" id="st-b">차단한 회원</h2><ul class="Catui_cm-links" id="st-blocked"></ul></section>
+<script>
+catui.use(['form', 'layer'], function (form, layer) {
+  var cm = catui.community;
+  form.on('submit(st-profile)', function (d) { cm.store.set('nick', d.field.nick); layer.msg('저장했습니다', { icon: 'success' }); return false; });
+  document.querySelectorAll('[data-pref]').forEach(function (s) { var v = cm.store.get(s.dataset.pref); if (v != null) s.checked = v; s.addEventListener('change', function () { cm.store.set(s.dataset.pref, s.checked); }); });
+  var saved = cm.theme.saved(); document.querySelector('[name=st-theme][value="' + saved + '"]').checked = true;
+  document.querySelectorAll('[name=st-theme]').forEach(function (r) { r.addEventListener('change', function () { cm.theme.set(r.value); }); });
+  var blocked = cm.store.get('blocked', ['광고봇123', '도배왕']), box = document.getElementById('st-blocked');
+  var draw = function () { catui.mount(box, blocked.length ? catui.html`${blocked.map(function (n) { return catui.html`<li><span>${n}</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-un="${n}">차단 풀기</button></li>`; })}` : catui.html`<li class="Catui_help">차단한 회원이 없습니다.</li>`); };
+  box.addEventListener('click', function (e) { var b = e.target.closest('[data-un]'); if (!b) return; blocked = blocked.filter(function (x) { return x !== b.dataset.un; }); cm.store.set('blocked', blocked); draw(); layer.msg(cm.josa(b.dataset.un, '을') + ' 차단을 풀었습니다', { time: 1200 }); });
+  draw();
+});
+</script>

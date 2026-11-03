@@ -1,0 +1,45 @@
+<!-- title: 검색 | nav: search -->
+<form class="Catui_cm-panel" id="sr-form" role="search" aria-labelledby="sr-t">
+  <h1 class="Catui_h2" id="sr-t">검색</h1>
+  <div class="Catui_cm-cols">
+    <div class="Catui_field"><label class="Catui_label" for="sr-q">검색어</label><div class="Catui_search">{{icon:search}}<input class="Catui_input" id="sr-q" name="q" type="search" placeholder="제목·닉네임" autocomplete="off"></div></div>
+    <div class="Catui_field"><label class="Catui_label" for="sr-b">게시판</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="sr-b" name="b"><option value="">전체</option></select>{{icon:chevron-down}}</div></div>
+  </div>
+  <fieldset><legend class="Catui_label">기간</legend><div class="Catui_choices">
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="d" value="" checked><span class="Catui_radio"></span>전체</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="d" value="1"><span class="Catui_radio"></span>하루</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="d" value="7"><span class="Catui_radio"></span>일주일</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="d" value="30"><span class="Catui_radio"></span>한 달</label>
+  </div></fieldset>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">검색</button></div>
+</form>
+<section aria-labelledby="sr-res"><div class="Catui_cm-bar"><h2 class="Catui_h3" id="sr-res">결과</h2><p class="Catui_help" id="sr-n" aria-live="polite"></p></div><ul class="Catui_cm-list" id="sr-list"></ul></section>
+<script>
+// 검색: 조건은 주소(?q=&b=&d=)에 남는다 — 머리 검색창·많이 찾는 검색어도 같은 주소로 온다
+catui.use(function () {
+  var cm = catui.community, f = document.getElementById('sr-form');
+  cm.load().then(function (d) {
+    var sel = document.getElementById('sr-b');
+    d.boards.forEach(function (b) { sel.appendChild(new Option(b.name, b.id)); });
+    var run = function () {
+      var q = new URLSearchParams(location.search), t = (q.get('q') || '').trim(), b = q.get('b') || '', days = Number(q.get('d') || 0);
+      f.elements.q.value = t; sel.value = b; (f.querySelector('[name=d][value="' + (q.get('d') || '') + '"]') || f.querySelector('[name=d]')).checked = true;
+      var since = days ? cm.now() - days * 864e5 : 0, low = t.toLowerCase();
+      var rows = d.posts.filter(function (p) { return (!b || p.board === b) && (!since || new Date(p.time) > since) && (!t || p.title.toLowerCase().indexOf(low) > -1 || p.author.nick.indexOf(t) > -1); });
+      document.getElementById('sr-n').textContent = t ? cm.josa('"' + t + '"', '으로') + ' 찾은 글 ' + rows.length + '개' : '전체 글 ' + rows.length + '개';
+      var list = document.getElementById('sr-list');
+      catui.mount(list, rows.length ? catui.html`${rows.slice(0, 30).map(function (p) { return cm.row(p); })}` : cm.empty('맞는 글이 없습니다. 검색어를 줄이거나 기간을 넓혀 보세요.'));
+      // 검색어 강조: 글자 노드를 나눠 <mark>로 감싼다 (마크업 주입 없음)
+      if (t) list.querySelectorAll('.Catui_cm-title-t').forEach(function (el) {
+        var s = el.textContent, i = s.toLowerCase().indexOf(low);
+        if (i < 0) return;
+        var m = document.createElement('mark'); m.textContent = s.slice(i, i + t.length);
+        el.replaceChildren(s.slice(0, i), m, s.slice(i + t.length));
+      });
+    };
+    f.addEventListener('submit', function (e) { e.preventDefault(); var fd = new FormData(f), u = new URLSearchParams(); ['q', 'b', 'd'].forEach(function (k) { if (fd.get(k)) u.set(k, String(fd.get(k)).trim()); }); history.pushState(null, '', '?' + u); run(); });
+    window.addEventListener('popstate', run);
+    run();
+  });
+});
+</script>

@@ -1,0 +1,29 @@
+{
+ "gnb": [
+  { "id": "home", "title": "홈", "href": "index.html" },
+  { "id": "hot", "title": "인기글", "href": "hot.html" },
+  { "id": "free", "title": "자유", "href": "board.html?b=free" },
+  { "id": "humor", "title": "유머", "href": "board.html?b=humor" },
+  { "id": "info", "title": "정보", "href": "board-card.html?b=info" },
+  { "id": "qna", "title": "질문", "href": "qna.html" },
+  { "id": "photo", "title": "사진", "href": "board-gallery.html?b=photo" },
+  { "id": "hotdeal", "title": "핫딜", "href": "hotdeal.html" },
+  { "id": "hobby", "title": "취미", "href": "board.html?b=hobby" },
+  { "id": "local", "title": "동네", "href": "board.html?b=local" },
+  { "id": "events", "title": "모임·이벤트", "href": "events.html" }
+ ],
+ "more": [
+  { "title": "공지", "href": "notice.html" },
+  { "title": "순위", "href": "ranking.html" },
+  { "title": "투표 글 예시", "href": "post-poll.html" },
+  { "title": "스크랩", "href": "scrap.html" },
+  { "title": "설정", "href": "settings.html" }
+ ],
+ "tabs": [
+  { "id": "home", "title": "홈", "href": "index.html", "icon": "home" },
+  { "id": "hot", "title": "인기", "href": "hot.html", "icon": "trending-up" },
+  { "id": "write", "title": "글쓰기", "href": "write.html", "icon": "pen-line" },
+  { "id": "noti", "title": "알림", "href": "notifications.html", "icon": "bell" },
+  { "id": "me", "title": "내 정보", "href": "profile.html", "icon": "user" }
+ ]
+}

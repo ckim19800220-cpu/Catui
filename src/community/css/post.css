@@ -1,0 +1,52 @@
+/* community/post.css */
+/* 글 보기 — 머리(게시판·제목·작성자·숫자) · 본문(읽기 폭) · 추천/비추천 · 이전/다음 · 댓글 트리 */
+.Catui_cm-post{background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_cm-post-h{display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-5) var(--Catui_space-5) var(--Catui_space-4);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_cm-post-h h1{margin:0;font-size:var(--Catui_type-h2-size);line-height:var(--Catui_type-h2-lh);word-break:keep-all;overflow-wrap:anywhere}
+.Catui_cm-post-b{padding:var(--Catui_space-6) var(--Catui_space-5)}
+.Catui_cm-prose{max-width:var(--Catui_prose-measure);font-size:var(--Catui_cm-prose-size);line-height:var(--Catui_cm-prose-lh);word-break:keep-all;overflow-wrap:anywhere}
+.Catui_cm-prose p{margin:0 0 1em}
+.Catui_cm-prose blockquote{margin:0 0 1em;padding-left:var(--Catui_space-4);border-left:3px solid var(--Catui_color-border);color:var(--Catui_color-text-secondary)}
+.Catui_cm-prose ul{margin:0 0 1em;padding-left:1.2em}
+.Catui_cm-prose figure{margin:0 0 1em}
+.Catui_cm-prose img{max-width:100%;height:auto;border-radius:var(--Catui_radius-md);display:block}
+.Catui_cm-prose figcaption{margin-top:var(--Catui_space-1);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_cm-tags{display:flex;flex-wrap:wrap;gap:var(--Catui_space-1);margin-top:var(--Catui_space-5)}
+.Catui_cm-post-f{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-3);padding:var(--Catui_space-4) var(--Catui_space-5);border-top:1px solid var(--Catui_divider-color)}
+
+/* 추천 · 비추천: 본문 아래 가운데에 크게 */
+.Catui_cm-vote{display:inline-flex;gap:var(--Catui_space-2);align-items:center}
+.Catui_cm-vote-lg{display:flex;justify-content:center;gap:var(--Catui_space-3);padding:var(--Catui_space-5) 0 0}
+.Catui_cm-vote-lg button{min-width:calc(var(--Catui_space-10) * 1.9);min-height:calc(var(--Catui_space-10) * 0.85);flex-direction:column;gap:2px;border-radius:var(--Catui_radius-lg)}
+.Catui_cm-vote button b{font-variant-numeric:tabular-nums}
+.Catui_cm-vote button[data-dir="up"][aria-pressed="true"]{color:var(--Catui_cm-hot);border-color:var(--Catui_cm-hot);background:var(--Catui_cm-hot-soft)}
+.Catui_cm-vote button[data-dir="down"][aria-pressed="true"]{color:var(--Catui_color-info);border-color:var(--Catui_color-info);background:var(--Catui_color-info-soft)}
+.Catui_cm-score{font-weight:800;font-variant-numeric:tabular-nums}
+
+/* 이전 · 다음 */
+.Catui_cm-adjacent{margin:0;padding:0;list-style:none;background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_cm-adjacent li{display:flex;gap:var(--Catui_space-3);padding:var(--Catui_space-3) var(--Catui_space-4);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_cm-adjacent li:last-child{border-bottom:0}
+.Catui_cm-adjacent span{flex:none;color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size)}
+.Catui_cm-adjacent a{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+
+/* 댓글 */
+.Catui_cm-comments{display:grid;gap:var(--Catui_space-4);padding:var(--Catui_space-5);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_cm-c-top{display:flex;align-items:center;justify-content:space-between;gap:var(--Catui_space-3)}
+.Catui_cm-c-top h2{margin:0}
+.Catui_cm-cs,.Catui_cm-c-kids ul{margin:0;padding:0;list-style:none;display:grid}
+.Catui_cm-cs-best{padding:var(--Catui_space-3);border-radius:var(--Catui_radius-md);background:var(--Catui_cm-hot-soft)}
+.Catui_cm-c{display:grid;gap:var(--Catui_space-1);padding:var(--Catui_space-3) 0;border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_cm-cs-best .Catui_cm-c,.Catui_cm-c:last-child{border-bottom:0}
+.Catui_cm-c-best .Catui_cm-c-body{font-weight:500}
+.Catui_cm-vote-sm button{min-height:auto}
+.Catui_cm-c-head{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2)}
+.Catui_cm-c-head b{display:inline-flex;align-items:center;gap:var(--Catui_space-1)}
+.Catui_cm-c-body{margin:0;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere;line-height:1.7}
+.Catui_cm-c-body:focus{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px;border-radius:var(--Catui_radius-xs)}
+.Catui_cm-c-acts{display:flex;flex-wrap:wrap;gap:var(--Catui_space-1)}
+.Catui_cm-c-more{justify-self:start}
+.Catui_cm-c-kids{padding-left:var(--Catui_space-6);border-left:2px solid var(--Catui_divider-color);margin-left:var(--Catui_space-3)}
+.Catui_cm-c-form{display:grid;gap:var(--Catui_space-2)}
+.Catui_cm-c-form .Catui_actions{justify-content:flex-end}
+@media (max-width:767px){.Catui_cm-post-h,.Catui_cm-post-b,.Catui_cm-post-f,.Catui_cm-comments{padding-inline:var(--Catui_space-4)}.Catui_cm-c-kids{padding-left:var(--Catui_space-3);margin-left:var(--Catui_space-1)}}

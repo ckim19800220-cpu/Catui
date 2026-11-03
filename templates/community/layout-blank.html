@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-cm-now="2026-11-02T10:00:00+09:00">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}} · Catui 커뮤니티</title>
+<link rel="icon" href="{{dist}}/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="{{dist}}/catui.min.css">
+<link rel="stylesheet" href="{{dist}}/community.min.css">
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:community")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_cm-body">
+<!-- Catui 기본 스타일(리셋·링크·글꼴)은 루트 클래스 안에서만 적용되므로 Catui_site로 감싼다 -->
+<div class="Catui_site Catui_cm Catui_cm-blank" data-catui-cm>
+{{content}}
+</div>
+<script src="{{dist}}/catui.min.js"></script>
+<script src="{{dist}}/catcommunity.min.js"></script>
+{{scripts}}
+</body>
+</html>

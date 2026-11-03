@@ -1,0 +1,38 @@
+<!-- title: 쪽지함 | nav: me | aside: none -->
+<header class="Catui_cm-board-head"><div><h1 class="Catui_h1">쪽지함</h1><p id="ms-n">읽지 않은 쪽지 0통</p></div></header>
+<div class="Catui_cm-cols">
+  <section class="Catui_cm-panel" aria-labelledby="ms-l"><h2 class="Catui_h3" id="ms-l">대화</h2><ul class="Catui_cm-links" id="ms-list"></ul></section>
+  <section class="Catui_cm-panel" aria-labelledby="ms-with" aria-live="polite">
+    <h2 class="Catui_h3" id="ms-with">대화를 고르세요</h2>
+    <div class="Catui_chat" role="log" aria-label="쪽지 내용" id="ms-log"></div>
+    <form class="Catui_chat-input" id="ms-form" aria-label="쪽지 보내기"><label class="Catui_clip" for="ms-msg">쪽지</label><input class="Catui_input" id="ms-msg" placeholder="쪽지 입력 후 Enter" autocomplete="off" maxlength="500"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">보내기</button></form>
+  </section>
+</div>
+<script>
+// 쪽지: messages.json — 대화를 고르면 내용 표시·읽음 처리, 보내기는 Enter(한글 조합 중 Enter는 무시)
+catui.use(['util'], function (util) {
+  var cm = catui.community;
+  Promise.all([cm.data('messages'), cm.load()]).then(function (res) {
+    var rooms = res[0], U = res[1].U, cur = null, list = document.getElementById('ms-list'), log = document.getElementById('ms-log');
+    var nick = function (id) { return id === 'me' ? '나' : (U[id] || { nick: '알 수 없음' }).nick; };
+    var drawList = function () {
+      document.getElementById('ms-n').textContent = '읽지 않은 쪽지 ' + rooms.filter(function (r) { return r.unread; }).length + '통';
+      catui.mount(list, catui.html`${rooms.map(function (r) { return catui.html`<li><span class="Catui_av Catui_av-sm" aria-hidden="true">${nick(r.with).slice(0, 1)}</span><a href="#${r.id}" data-room="${r.id}"${cur === r ? catui.html` aria-current="true"` : ""}>${r.unread ? catui.html`<b>${nick(r.with)}</b><span class="Catui_clip"> (읽지 않음)</span>` : nick(r.with)} · ${r.last}</a><time class="Catui_cm-meta" datetime="${r.time}">${cm.ago(r.time)}</time></li>`; })}`);
+    };
+    var open = function (r) {
+      cur = r; r.unread = false;
+      document.getElementById('ms-with').textContent = nick(r.with) + '님과의 쪽지';
+      catui.mount(log, catui.html`${r.msgs.map(function (m) { var me = m.from === 'me'; return catui.html`<div class="Catui_chat-msg${me ? ' Catui_chat-me' : ''}">${me ? '' : catui.html`<span class="Catui_av Catui_av-sm" aria-hidden="true">${nick(m.from).slice(0, 1)}</span>`}<p class="Catui_chat-bubble"><span class="Catui_clip">${nick(m.from)}: </span>${m.text}</p><time class="Catui_chat-time" datetime="${m.time}">${cm.ago(m.time)}</time></div>`; })}`);
+      drawList();
+    };
+    list.addEventListener('click', function (e) { var a = e.target.closest('[data-room]'); if (!a) return; e.preventDefault(); open(rooms.find(function (r) { return r.id === a.dataset.room; })); document.getElementById('ms-msg').focus(); });
+    var input = document.getElementById('ms-msg');
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && (e.isComposing || e.keyCode === 229)) e.preventDefault(); });
+    document.getElementById('ms-form').addEventListener('submit', function (e) {
+      e.preventDefault(); var t = input.value.trim(); if (!t || !cur) return;
+      cur.msgs.push({ from: 'me', text: t, time: cm.now().toISOString() }); cur.last = t; cur.time = cm.now().toISOString(); input.value = ''; open(cur);
+    });
+    drawList(); open(rooms.find(function (r) { return '#' + r.id === location.hash; }) || rooms[0]);
+  });
+});
+</script>

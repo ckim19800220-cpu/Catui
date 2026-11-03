@@ -1,0 +1,29 @@
+<!-- title: 모임·이벤트 | nav: events -->
+<header class="Catui_cm-board-head"><div><h1 class="Catui_h1">모임·이벤트</h1><p>참여 신청은 한 번만 · 정원이 차면 마감</p></div></header>
+<ul class="Catui_cm-cards" id="ev-list" data-catui-cm-src="events" data-catui-cm-rows="">
+  <template><li class="Catui_cm-card"><div class="Catui_cm-bar"><span class="Catui_badge" data-catui-cm-class="Catui_badge-:tone" data-catui-cm-field="kind"></span><span class="Catui_cm-meta" data-catui-cm-field="when"></span></div><b data-catui-cm-field="title"></b><span class="Catui_cm-meta">{{icon:map-pin:12}}<span data-catui-cm-field="place"></span><span data-catui-cm-field="people"></span></span><div class="Catui_actions"><button class="Catui_btn Catui_btn-sm" type="button" data-catui-cm-class="Catui_btn-:btn" data-catui-cm-attr="data-ev:{id};aria-label:{title} {cta}" data-catui-cm-bool="disabled:full" data-catui-cm-field="cta"></button></div></li></template>
+</ul>
+<script>
+// 일정: events.json — 기간·참여 인원·마감은 원자료에서 계산, 신청 여부는 기억
+catui.community.derive.events = function (list) {
+  var cm = catui.community, joined = cm.store.get('events', []), md = function (s) { var p = s.split('-'); return +p[1] + '월 ' + +p[2] + '일'; };
+  list.forEach(function (e) {
+    var mine = joined.indexOf(e.id) > -1, n = e.joined + (mine ? 1 : 0);
+    e.when = e.start === e.end ? md(e.start) : md(e.start) + ' ~ ' + md(e.end);
+    e.people = e.cap ? ' · ' + n + ' / ' + e.cap + '명' : ' · ' + n + '명 참여';
+    e.full = !mine && e.cap && n >= e.cap; e.tone = e.kind === '모임' ? 'info' : 'success';
+    e.btn = mine ? 'secondary' : 'primary'; e.cta = mine ? '신청 취소' : e.full ? '마감' : '참여 신청';
+  });
+  return list;
+};
+catui.use(['layer'], function (layer) {
+  var cm = catui.community, box = document.getElementById('ev-list');
+  box.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-ev]'); if (!b) return;
+    var j = cm.store.get('events', []), on = j.indexOf(b.dataset.ev) < 0;
+    cm.store.set('events', on ? j.concat(b.dataset.ev) : j.filter(function (x) { return x !== b.dataset.ev; }));
+    cm.bind(box.parentElement).then(function () { box.querySelector('[data-ev="' + b.dataset.ev + '"]')?.focus(); });
+    layer.msg(on ? '참여 신청했습니다' : '신청을 취소했습니다', { icon: on ? 'success' : 'info', time: 1200 });
+  });
+});
+</script>

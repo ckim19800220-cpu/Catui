@@ -88,9 +88,10 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
   function classTable(page) {
     if (!page.css?.length) return "";
     const items = page.css.map((f) => {
-      const own = f.startsWith("admin/") ? css.adminByFile?.[f] : css.byFile[f];   // admin/css/… = src/admin/css/…
+      const ext = /^(admin|community)\//.test(f);   // admin/css/… = src/admin/css/…, community/css/… = src/community/css/…
+      const own = ext ? css.adminByFile?.[f] : css.byFile[f];
       if (!own) { errors.push(`${page.path}: nav.json css 파일이 index.json에 없습니다 (${f})`); return ""; }
-      return `<li><span class="doc-src">src/${f.startsWith("admin/") ? "" : "css/"}${esc(f)}</span>${own.map((c) => `<code>.${esc(c)}</code>`).join(" ")}</li>`;
+      return `<li><span class="doc-src">src/${ext ? "" : "css/"}${esc(f)}</span>${own.map((c) => `<code>.${esc(c)}</code>`).join(" ")}</li>`;
     }).join("");
     return `<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes">${items}</ul></section>`;
   }
@@ -116,9 +117,11 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
       .replace(/\{\{sidebar\}\}/g, home ? "" : `<details class="doc-side" open><summary>${esc(page.section.title)} 메뉴</summary><nav aria-label="${esc(page.section.title)} 문서">${sidebar(page)}</nav></details>`)
       .replace(/\{\{content\}\}/g, home ? bodyHtml : `${head(page)}\n${bodyHtml}\n${classTable(page)}\n${pager}`)
       .replace(/\{\{toc\}\}/g, toc && !home ? `<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul>${toc}${page.css?.length ? '<li><a href="#classes">클래스</a></li>' : ""}</ul></aside>` : "")
-      .replace(/\{\{scripts\}\}/g, page.section.id === "admin" && !home
-        ? `<link rel="stylesheet" href="${distRel(page.path)}/admin.css">\n<script src="${distRel(page.path)}/catui.js"></script>\n<script src="${distRel(page.path)}/catadmin.js"></script>`
-        : (home || page.section.id === "js" || page.js) ? `<script src="${distRel(page.path)}/catui.js"></script>` : "")
+      .replace(/\{\{scripts\}\}/g, () => {
+        const d = distRel(page.path), EXT = { admin: ["admin.css", "catadmin.js"], community: ["community.css", "catcommunity.js"] }[page.section.id];
+        if (EXT && !home) return `<link rel="stylesheet" href="${d}/${EXT[0]}">\n<script src="${d}/catui.js"></script>\n<script src="${d}/${EXT[1]}"></script>`;
+        return (home || page.section.id === "js" || page.js) ? `<script src="${d}/catui.js"></script>` : "";
+      })
       .replace(/\{\{dist\}\}/g, distRel(page.path));
     return out;
   }
@@ -156,7 +159,7 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
   const iconSet = new Set(icons.names);
   const planned = new Set(outputs.map(([p]) => path.join(P.docs, `${p}.html`)));   // 아직 쓰기 전이므로 생성 예정 목록과 대조
   // CatuiAdmin 템플릿(templates/admin/pages → docs/admin/templates)은 문서 뒤에 만들어지므로 미리 목록에 넣는다
-  for (const f of walk(path.join(P.docs, "..", "templates/admin/pages"), ".html")) planned.add(path.join(P.docs, "admin/templates", path.basename(f)));
+  for (const ext of ["admin", "community"]) for (const f of walk(path.join(P.docs, "..", `templates/${ext}/pages`), ".html")) planned.add(path.join(P.docs, `${ext}/templates`, path.basename(f)));
   for (const [p, html] of outputs) {
     const file = path.join(P.docs, `${p}.html`);
     const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);

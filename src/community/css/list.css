@@ -1,0 +1,91 @@
+/* community/list.css */
+/* 글 목록 — 한 줄(제목이 주인공, 숫자는 고정폭·오른쪽) · 카드형 · 사진 갤러리형 · 말머리 탭 · 정렬 · 게시판 머리 */
+.Catui_cm-board-head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:var(--Catui_space-3);justify-content:space-between}
+.Catui_cm-board-head h1{margin:0}
+.Catui_cm-board-head p{margin:var(--Catui_space-1) 0 0;color:var(--Catui_color-text-secondary)}
+.Catui_cm-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2);justify-content:space-between}
+
+/* 말머리 탭: 가로 스크롤 칩 */
+.Catui_cm-cats{display:flex;gap:var(--Catui_space-1);overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.Catui_cm-cats::-webkit-scrollbar{display:none}
+.Catui_cm-cats a{flex:none;padding:var(--Catui_space-1) var(--Catui_space-3);border:1px solid var(--Catui_color-border);border-radius:var(--Catui_radius-pill);text-decoration:none;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);background:var(--Catui_card-bg)}
+.Catui_cm-cats a[aria-current="page"]{border-color:var(--Catui_color-brand-strong);color:var(--Catui_color-brand-strong);font-weight:700;background:var(--Catui_color-brand-soft)}
+.Catui_cm-cats a:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+
+/* 정렬: 글자 링크 묶음 (현재 정렬은 굵게 + 밑줄 — 색만으로 알리지 않음) */
+.Catui_cm-sort{display:flex;gap:var(--Catui_space-3);font-size:var(--Catui_type-caption-size)}
+.Catui_cm-sort a{text-decoration:none;color:var(--Catui_color-text-secondary);padding-block:var(--Catui_space-1)}
+.Catui_cm-sort a[aria-current="page"]{color:var(--Catui_color-text-primary);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.Catui_cm-sort a:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+
+/* 한 줄 목록 */
+.Catui_cm-list{margin:0;padding:0;list-style:none;background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);overflow:hidden}
+.Catui_cm-row{display:flex;align-items:center;gap:var(--Catui_space-3);padding:var(--Catui_cm-row-pad) var(--Catui_space-4);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_cm-row:last-child{border-bottom:0}
+.Catui_cm-row:hover{background:var(--Catui_color-surface-muted)}
+.Catui_cm-row-main{flex:1;min-width:0;display:grid;gap:2px}
+.Catui_cm-title{display:flex;align-items:center;gap:var(--Catui_space-1);min-width:0;text-decoration:none;font-weight:600}
+.Catui_cm-title-t{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.Catui_cm-title:hover .Catui_cm-title-t{text-decoration:underline}
+.Catui_cm-title:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px;border-radius:var(--Catui_radius-xs)}
+.Catui_cm-title .Catui_icon{flex:none;color:var(--Catui_color-text-secondary)}
+.Catui_cm-read .Catui_cm-title{color:var(--Catui_cm-read);font-weight:400}
+.Catui_cm-hot .Catui_cm-title-t::before{content:"인기 ";font-size:var(--Catui_type-caption-size);font-weight:800;color:var(--Catui_cm-hot)}
+.Catui_cm-board,.Catui_cm-cat{flex:none;font-size:var(--Catui_type-caption-size);font-weight:600;color:var(--Catui_color-text-secondary)}
+.Catui_cm-cat::before{content:"["}
+.Catui_cm-cat::after{content:"]"}
+.Catui_cm-board::after{content:"·";margin-left:var(--Catui_space-1)}
+.Catui_cm-cmt{flex:none;font-size:var(--Catui_type-caption-size);font-weight:700;color:var(--Catui_color-brand-strong);font-variant-numeric:tabular-nums}
+.Catui_cm-cmt::before{content:"["}
+.Catui_cm-cmt::after{content:"]"}
+.Catui_cm-meta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-1) var(--Catui_space-3);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);font-variant-numeric:tabular-nums}
+.Catui_cm-nick{display:inline-flex;align-items:center;gap:var(--Catui_space-1);color:var(--Catui_color-text-primary)}
+.Catui_cm-up{flex:none;display:inline-flex;align-items:center;justify-content:flex-end;gap:2px;min-width:calc(var(--Catui_space-10) * 0.8);font-size:var(--Catui_type-caption-size);font-weight:700;font-variant-numeric:tabular-nums;color:var(--Catui_color-text-secondary)}
+.Catui_cm-up-hot{color:var(--Catui_cm-hot)}
+.Catui_cm-rank{flex:none;display:inline-grid;place-items:center;min-width:var(--Catui_space-5);font-weight:800;font-variant-numeric:tabular-nums;color:var(--Catui_color-text-secondary)}
+.Catui_cm-rank-top{color:var(--Catui_cm-hot)}
+.Catui_cm-empty{display:grid;justify-items:center;gap:var(--Catui_space-2);padding:var(--Catui_space-10) var(--Catui_space-4);color:var(--Catui_color-text-secondary);text-align:center}
+.Catui_cm-empty p{margin:0}
+
+/* 레벨 배지: 숫자 + 단계별 진하기(색만으로 구분하지 않음) */
+.Catui_cm-lv{display:inline-grid;place-items:center;min-width:18px;height:18px;padding-inline:3px;border-radius:var(--Catui_radius-xs);font-size:11px;font-weight:800;line-height:1;background:var(--Catui_color-surface-muted);color:var(--Catui_color-text-secondary);border:1px solid var(--Catui_color-border)}
+.Catui_cm-lv[data-lv="4"],.Catui_cm-lv[data-lv="5"],.Catui_cm-lv[data-lv="6"]{background:var(--Catui_color-info-soft);color:var(--Catui_color-info);border-color:transparent}
+.Catui_cm-lv[data-lv="7"],.Catui_cm-lv[data-lv="8"],.Catui_cm-lv[data-lv="9"]{background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong);border-color:transparent}
+
+/* 카드형(요약) */
+.Catui_cm-cards{display:grid;gap:var(--Catui_space-3);margin:0;padding:0;list-style:none}
+.Catui_cm-card{display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-4);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_cm-card p{margin:0;color:var(--Catui_color-text-secondary);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* 사진 갤러리형 */
+.Catui_cm-gallery{display:grid;gap:var(--Catui_space-3);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 3),1fr));margin:0;padding:0;list-style:none}
+.Catui_cm-shot{display:grid;gap:var(--Catui_space-1);text-decoration:none}
+.Catui_cm-shot figure{margin:0;aspect-ratio:4 / 3;border-radius:var(--Catui_radius-md);overflow:hidden;background:var(--Catui_color-surface-muted)}
+.Catui_cm-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_cm-shot b{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.Catui_cm-shot:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:3px;border-radius:var(--Catui_radius-md)}
+
+/* 옆줄 순위 · 링크 목록 */
+.Catui_cm-ranks,.Catui_cm-links{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-2)}
+.Catui_cm-ranks li,.Catui_cm-links li{display:flex;align-items:center;gap:var(--Catui_space-2);min-width:0}
+.Catui_cm-ranks a,.Catui_cm-links a{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-decoration:none}
+.Catui_cm-ranks a:hover,.Catui_cm-links a:hover{text-decoration:underline}
+.Catui_cm-tabs-sm .Catui_tab{font-size:var(--Catui_type-caption-size)}
+
+/* 게시판 모음(메인) */
+.Catui_cm-boards{display:grid;gap:var(--Catui_cm-gap);grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:767px){.Catui_cm-boards{grid-template-columns:minmax(0,1fr)}.Catui_cm-row{padding-inline:var(--Catui_space-3)}}
+.Catui_cm-boards .Catui_cm-list{border:0;border-radius:0}
+.Catui_cm-boards .Catui_card-b{padding:0}
+
+/* 핫딜 */
+.Catui_cm-deal{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--Catui_space-3);align-items:center}
+.Catui_cm-deal[data-ended] .Catui_cm-title-t{text-decoration:line-through;color:var(--Catui_color-text-secondary)}
+.Catui_cm-price{font-weight:800;font-variant-numeric:tabular-nums}
+.Catui_cm-ph{display:grid;place-items:center;width:calc(var(--Catui_space-10) * 0.9);aspect-ratio:1 / 1;border-radius:var(--Catui_radius-md);background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong)}
+.Catui_cm-ph[data-tone="2"]{background:var(--Catui_color-info-soft);color:var(--Catui_color-info)}
+.Catui_cm-ph[data-tone="3"]{background:var(--Catui_color-purple-soft);color:var(--Catui_color-purple)}
+.Catui_cm-ph[data-tone="4"]{background:var(--Catui_color-amber-soft);color:var(--Catui_color-amber)}
+
+/* 질문: 해결 표시 */
+.Catui_cm-solved{flex:none}

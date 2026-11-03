@@ -1,0 +1,27 @@
+/* community/motion.css */
+/* 모션 — React Bits 에이전트 스킬(Emil Kowalski 애니메이션 기준)로 고른 곳에만.
+   · 넣은 곳: 누름 피드백(추천·글쓰기 버튼), 추천 수 변화, 답글 펼침, 하단 탭 누름
+   · 일부러 뺀 곳: 목록 등장 스태거(하루 수십 번 보는 목록 — 느려 보임), 머리 검색·키보드 동작, 페이지 전환, 숫자 데이터 장식
+   · 움직이는 속성은 transform·opacity·grid-template-rows만, 모션 줄이기 설정이면 이동 없이 즉시 */
+
+/* 누름 피드백: scale(0.97) 160ms ease-out — 마우스·터치 모두 */
+.Catui_cm-vote button,.Catui_cm-write-btn,.Catui_cm-tab{transition:transform var(--Catui_cm-dur-press) var(--Catui_cm-ease-out)}
+.Catui_cm-vote button:active,.Catui_cm-write-btn:active,.Catui_cm-tab:active{transform:scale(var(--Catui_cm-press))}
+
+/* 추천 수가 바뀔 때: 아래에서 6px 올라오며 나타남 (200ms, 숫자를 바꾼 직후 한 번) */
+@keyframes Catui_cm-bump{from{transform:translateY(6px);opacity:0}to{transform:none;opacity:1}}
+.Catui_cm-bump{display:inline-block;animation:Catui_cm-bump var(--Catui_cm-dur-ui) var(--Catui_cm-ease-out)}
+
+/* 답글 펼침: 높이 0 → 내용 높이 (grid-template-rows 0fr → 1fr, 250ms) — 중간에 다시 눌러도 그 자리에서 되돌아감 */
+.Catui_cm-c-kids{display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;transition:grid-template-rows var(--Catui_cm-dur-expand) var(--Catui_cm-ease-out),opacity var(--Catui_cm-dur-ui) var(--Catui_cm-ease-out),visibility 0s linear var(--Catui_cm-dur-expand)}
+.Catui_cm-c-kids > ul{min-height:0;overflow:hidden}
+.Catui_cm-c-kids[data-open]{grid-template-rows:1fr;opacity:1;visibility:visible;transition:grid-template-rows var(--Catui_cm-dur-expand) var(--Catui_cm-ease-out),opacity var(--Catui_cm-dur-ui) var(--Catui_cm-ease-out),visibility 0s}
+.Catui_cm-c-more .Catui_icon{transition:transform var(--Catui_cm-dur-ui) var(--Catui_cm-ease-out)}
+.Catui_cm-c-more[aria-expanded="true"] .Catui_icon{transform:rotate(-90deg)}
+
+@media (prefers-reduced-motion: reduce){
+  .Catui_cm-vote button,.Catui_cm-write-btn,.Catui_cm-tab,.Catui_cm-c-more .Catui_icon{transition:none}
+  .Catui_cm-vote button:active,.Catui_cm-write-btn:active,.Catui_cm-tab:active{transform:none}
+  .Catui_cm-bump{animation:none}
+  .Catui_cm-c-kids,.Catui_cm-c-kids[data-open]{transition:none}
+}

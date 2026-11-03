@@ -1,0 +1,47 @@
+[
+ {
+  "id": "a1",
+  "kind": "comment",
+  "text": "내 글 「10년 다닌 동네 빵집이…」에 댓글 5개가 달렸습니다",
+  "href": "post.html?id=1201#cm-comments",
+  "time": "2026-11-02T09:48:00+09:00",
+  "unread": true
+ },
+ {
+  "id": "a2",
+  "kind": "hot",
+  "text": "내 글이 인기글에 올랐습니다 (추천 612)",
+  "href": "post.html?id=1201",
+  "time": "2026-11-02T09:10:00+09:00",
+  "unread": true
+ },
+ {
+  "id": "a3",
+  "kind": "reply",
+  "text": "밤하늘별님이 내 댓글에 답글을 달았습니다",
+  "href": "post.html?id=1201#c-c1",
+  "time": "2026-11-02T08:32:00+09:00",
+  "unread": true
+ },
+ {
+  "id": "a4",
+  "kind": "message",
+  "text": "커피두잔님이 쪽지를 보냈습니다",
+  "href": "messages.html",
+  "time": "2026-11-02T05:00:00+09:00"
+ },
+ {
+  "id": "a5",
+  "kind": "notice",
+  "text": "새 공지: 서버 점검 안내 (11월 5일 새벽)",
+  "href": "notice.html#n3",
+  "time": "2026-11-01T12:20:00+09:00"
+ },
+ {
+  "id": "a6",
+  "kind": "level",
+  "text": "레벨 6이 되었습니다 — 사진 게시판 대표 사진을 올릴 수 있어요",
+  "href": "profile.html",
+  "time": "2026-10-30T15:20:00+09:00"
+ }
+]

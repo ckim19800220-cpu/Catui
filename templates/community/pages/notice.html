@@ -1,0 +1,23 @@
+<!-- title: 공지 | aside: none -->
+<header class="Catui_cm-board-head"><div><h1 class="Catui_h1">공지</h1><p>운영 공지와 이용 규칙</p></div></header>
+<div class="Catui_vstack Catui_gap-3" data-catui-cm-src="notices" data-catui-cm-rows="">
+  <template><details class="Catui_faq" data-catui-cm-attr="id:n{id}"><summary><span data-catui-cm-field="title"></span> <span class="Catui_cm-meta" data-catui-cm-field="date"></span></summary><p data-catui-cm-field="body"></p></details></template>
+</div>
+<section class="Catui_cm-panel" id="rules" aria-labelledby="nt-rules">
+  <h2 class="Catui_h3" id="nt-rules">이용 규칙 (요약)</h2>
+  <ul class="Catui_cm-prose"><li>다른 사람을 깎아내리거나 개인 정보를 올리지 않습니다.</li><li>광고·도배·같은 글 반복은 가려집니다.</li><li>퍼온 글은 출처를 남깁니다.</li><li>신고 3회 이상 누적된 글은 운영진 확인 전까지 가려집니다.</li></ul>
+</section>
+<section class="Catui_cm-panel" id="privacy" aria-labelledby="nt-privacy">
+  <h2 class="Catui_h3" id="nt-privacy">개인정보 처리방침 (요약)</h2>
+  <p class="Catui_cm-prose">가입할 때 받은 이메일은 로그인과 알림에만 씁니다. 탈퇴하면 30일 뒤 지웁니다.</p>
+</section>
+<script>
+// 주소의 #n3 처럼 공지 번호가 오면 그 공지를 펼친다 (바인딩이 끝난 뒤)
+catui.use(function () {
+  catui.community.on('data', function (e) {
+    if (e.name !== 'notices' || !location.hash) return;
+    var el = document.getElementById(location.hash.slice(1));
+    if (el && el.tagName === 'DETAILS') { el.open = true; el.querySelector('summary').focus(); }
+  });
+});
+</script>

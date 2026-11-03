@@ -1,0 +1,1 @@
+{ "order": ["community.js", "data.js", "posts.js", "shell.js", "list.js", "vote.js", "comments.js", "editor.js", "widgets.js", "init.js"], "exports": ["community"] }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-cm-now="2026-11-02T10:00:00+09:00">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회원가입 · Catui 커뮤니티</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/community.min.css">
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:community")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_cm-body">
+<!-- Catui 기본 스타일(리셋·링크·글꼴)은 루트 클래스 안에서만 적용되므로 Catui_site로 감싼다 -->
+<div class="Catui_site Catui_cm Catui_cm-blank" data-catui-cm>
+<main class="Catui_card Catui_cm-blank-card"><form class="Catui_card-b Catui_vstack Catui_gap-4" id="rg-form" data-catui-form data-catui-filter="cm-register" novalidate>
+  <a class="Catui_cm-brand" href="index.html"><span class="Catui_logo">C</span>Catui 커뮤니티</a>
+  <div><h1 class="Catui_h2">회원가입</h1><p class="Catui_help">이메일 인증 후 바로 글을 쓸 수 있어요</p></div>
+  <div class="Catui_field"><label class="Catui_label" for="rg-nick">닉네임</label><input class="Catui_input" id="rg-nick" name="nick" maxlength="12" autocomplete="nickname" data-catui-verify="required|minlen:2" aria-describedby="rg-nick-h"><p class="Catui_help" id="rg-nick-h" aria-live="polite">2~12자 · 한글·영문·숫자 · 욕설·광고·운영진 사칭 닉네임은 쓸 수 없어요</p></div>
+  <div class="Catui_field"><label class="Catui_label" for="rg-mail">이메일</label><input class="Catui_input" id="rg-mail" name="email" type="email" autocomplete="email" data-catui-verify="required|email"></div>
+  <div class="Catui_field"><label class="Catui_label" for="rg-pw">비밀번호</label><input class="Catui_input" id="rg-pw" name="pw" type="password" autocomplete="new-password" data-catui-verify="required|password"><p class="Catui_help">8자 이상, 영문과 숫자 포함</p></div>
+  <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="agree" data-catui-verify="required" data-catui-reqtext="이용 규칙에 동의해 주세요."><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>이용 규칙·개인정보 처리방침에 동의합니다</label>
+  <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="submit">가입하기</button>
+  <p class="Catui_help">이미 회원인가요? <a class="Catui_link" href="login.html">로그인</a></p>
+</form></main>
+
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catcommunity.min.js"></script>
+<script>
+// 닉네임 검사: 형식 + 이미 쓰는 닉네임(users.json) + 금지어 — 입력이 멈추면 0.4초 뒤 알려 준다
+catui.use(['form', 'layer'], function (form, layer) {
+  var cm = catui.community, nick = document.getElementById('rg-nick'), help = document.getElementById('rg-nick-h'), BAN = ['운영자', '관리자', '광고'], taken = [], t;
+  cm.data('users').then(function (u) { taken = u.map(function (x) { return x.nick; }); });
+  nick.addEventListener('input', function () {
+    clearTimeout(t); t = setTimeout(function () {
+      var v = nick.value.trim(), msg = '2~12자 · 한글·영문·숫자', bad = false;
+      if (v && !/^[가-힣A-Za-z0-9]{2,12}$/.test(v)) { msg = '한글·영문·숫자 2~12자만 쓸 수 있어요'; bad = true; }
+      else if (BAN.some(function (b) { return v.indexOf(b) > -1; })) { msg = '쓸 수 없는 단어가 들어 있어요'; bad = true; }
+      else if (taken.indexOf(v) > -1) { msg = '이미 쓰는 닉네임이에요'; bad = true; }
+      else if (v) msg = '쓸 수 있는 닉네임이에요';
+      help.textContent = msg; nick.setAttribute('aria-invalid', String(bad));
+    }, 400);
+  });
+  form.on('submit(cm-register)', function (d) { if (nick.getAttribute('aria-invalid') === 'true') { nick.focus(); return false; } layer.alert(d.field.email + '로 인증 메일을 보냈습니다.', { title: '가입 완료' }, function () { location.href = 'login.html'; }); return false; });
+});
+</script>
+</body>
+</html>

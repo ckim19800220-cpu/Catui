@@ -1,0 +1,19 @@
+<!-- title: 순위 | nav: hot -->
+<header class="Catui_cm-board-head"><div><h1 class="Catui_h1">순위</h1><p>활동 점수(글 × 10 + 댓글 × 2 + 받은 추천) 기준 · 게시판은 글 수 기준</p></div></header>
+<div class="Catui_cm-podium" id="rk-top"></div>
+<section class="Catui_cm-panel" aria-labelledby="rk-u"><h2 class="Catui_h3" id="rk-u">회원 순위</h2>
+  <div class="Catui_table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">회원 활동 순위</caption><thead><tr><th scope="col" class="Catui_num">순위</th><th scope="col">닉네임</th><th scope="col" class="Catui_num">레벨</th><th scope="col" class="Catui_num">글</th><th scope="col" class="Catui_num">댓글</th><th scope="col" class="Catui_num">점수</th></tr></thead><tbody id="rk-users"></tbody></table></div>
+</section>
+<section class="Catui_cm-panel" aria-labelledby="rk-b"><h2 class="Catui_h3" id="rk-b">게시판 순위</h2><div class="Catui_bars" id="rk-boards"></div></section>
+<script>
+catui.use(['util'], function (util) {
+  var cm = catui.community, n = util.number;
+  cm.load().then(function (d) {
+    var users = d.users.filter(function (u) { return u.id !== 'u16'; }).sort(function (a, b) { return b.score - a.score; });
+    catui.mount(document.getElementById('rk-top'), catui.html`${users.slice(0, 3).map(function (u, i) { return catui.html`<article class="Catui_card"><div class="Catui_card-b"><span class="Catui_cm-rank Catui_cm-rank-top">${i + 1}위</span><span class="Catui_av Catui_av-lg" aria-hidden="true">${u.nick.slice(0, 1)}</span><a href="profile.html?u=${u.id}"><b>${u.nick}</b></a><span class="Catui_cm-meta">레벨 ${u.level} · ${n(u.score)}점</span></div></article>`; })}`);
+    catui.mount(document.getElementById('rk-users'), catui.html`${users.map(function (u, i) { return catui.html`<tr><td class="Catui_num">${i + 1}</td><td><a href="profile.html?u=${u.id}">${u.nick}</a></td><td class="Catui_num">${u.level}</td><td class="Catui_num">${n(u.posts)}</td><td class="Catui_num">${n(u.comments)}</td><td class="Catui_num">${n(u.score)}</td></tr>`; })}`);
+    var boards = d.boards.filter(function (b) { return b.write !== false; }).sort(function (a, b) { return b.count - a.count; }), max = boards[0].count;
+    catui.mount(document.getElementById('rk-boards'), catui.html`${boards.map(function (b) { return catui.html`<div class="Catui_bar"><span class="Catui_bar-label">${b.name}</span><span class="Catui_bar-track"><i class="Catui_bar-fill" style="width:${Math.round(b.count / max * 100)}%"></i></span><span class="Catui_bar-value">${b.count}개</span></div>`; })}`);
+  });
+});
+</script>

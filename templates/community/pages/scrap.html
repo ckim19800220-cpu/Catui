@@ -1,0 +1,17 @@
+<!-- title: 스크랩 | nav: me -->
+<header class="Catui_cm-board-head"><div><h1 class="Catui_h1">스크랩</h1><p>글 보기의 "스크랩"으로 모은 글 · 이 브라우저에 기억됩니다</p></div></header>
+<ul class="Catui_cm-list" id="sc-list"></ul>
+<section class="Catui_cm-panel" aria-labelledby="sc-fav"><h2 class="Catui_h3" id="sc-fav">즐겨찾는 게시판</h2><ul class="Catui_cm-links" id="sc-boards"></ul></section>
+<script>
+// 스크랩 = store.scraps(글 id 목록) + posts.json, 즐겨찾기 = store.fav — 비어 있으면 인기글 3개를 예시로 넣어 둔다
+catui.use(function () {
+  var cm = catui.community;
+  cm.load().then(function (d) {
+    var ids = cm.store.get('scraps', null);
+    if (!ids) { ids = d.posts.filter(function (p) { return p.hot; }).slice(0, 3).map(function (p) { return p.id; }); cm.store.set('scraps', ids); }
+    var rows = ids.map(function (i) { return d.byId[i]; }).filter(Boolean);
+    catui.mount(document.getElementById('sc-list'), rows.length ? catui.html`${rows.map(function (p) { return cm.row(p); })}` : cm.empty('스크랩한 글이 없습니다.'));
+    catui.mount(document.getElementById('sc-boards'), catui.html`${d.boards.filter(function (b) { return b.write !== false; }).map(function (b) { return catui.html`<li><a href="board.html?b=${b.id}">${b.name}</a><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-cm-fav="${b.id}" aria-pressed="${cm.fav.has(b.id)}">${catui.icon('star', 16)}<span class="Catui_clip">${b.name} 즐겨찾기</span></button></li>`; })}`);
+  });
+});
+</script>

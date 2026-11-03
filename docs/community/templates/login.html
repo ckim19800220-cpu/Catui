@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-cm-now="2026-11-02T10:00:00+09:00">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>로그인 · Catui 커뮤니티</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/community.min.css">
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:community")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_cm-body">
+<!-- Catui 기본 스타일(리셋·링크·글꼴)은 루트 클래스 안에서만 적용되므로 Catui_site로 감싼다 -->
+<div class="Catui_site Catui_cm Catui_cm-blank" data-catui-cm>
+<main class="Catui_card Catui_cm-blank-card"><form class="Catui_card-b Catui_vstack Catui_gap-4" id="lg-form" data-catui-form data-catui-filter="cm-login" novalidate>
+  <a class="Catui_cm-brand" href="index.html"><span class="Catui_logo">C</span>Catui 커뮤니티</a>
+  <div><h1 class="Catui_h2">로그인</h1><p class="Catui_help">글쓰기·추천·댓글은 로그인한 회원만 할 수 있어요</p></div>
+  <div class="Catui_banner Catui_banner-danger" role="alert" id="lg-err" hidden><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-alert-circle"></use></svg><span>이메일 또는 비밀번호가 맞지 않습니다. (예제: cat@catui.dev / catui1234)</span></div>
+  <div class="Catui_field"><label class="Catui_label" for="lg-mail">이메일</label><input class="Catui_input" id="lg-mail" name="email" type="email" autocomplete="username" value="cat@catui.dev" data-catui-verify="required|email"></div>
+  <div class="Catui_field"><label class="Catui_label" for="lg-pw">비밀번호</label><input class="Catui_input" id="lg-pw" name="pw" type="password" autocomplete="current-password" data-catui-verify="required"></div>
+  <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="keep"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>로그인 상태 유지</label>
+  <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="submit">로그인</button>
+  <p class="Catui_help">처음이신가요? <a class="Catui_link" href="register.html">회원가입</a></p>
+</form></main>
+
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catcommunity.min.js"></script>
+<script>
+catui.use(['form'], function (form) {
+  form.on('submit(cm-login)', function (d) { var ok = d.field.email === 'cat@catui.dev' && d.field.pw === 'catui1234'; document.getElementById('lg-err').hidden = ok; if (ok) location.href = 'index.html'; else document.getElementById('lg-pw').select(); return false; });
+});
+</script>
+</body>
+</html>

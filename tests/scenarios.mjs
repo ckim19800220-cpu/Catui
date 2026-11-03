@@ -471,6 +471,63 @@ export const scenarios = [
     expect: { "비밀번호 보기": (r) => r.shown, "다시 숨기기": (r) => r.hidden, "약함": (r) => r.weak, "강함 + 글자": (r) => r.strong, "링크 스타일": (r) => r.link },
   },
   {
+    name: "community · 글 보기 (추천 1회 · 취소 · 답글 펼침 · 댓글 등록)",
+    page: "docs/community/templates/post.html?id=1201",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      localStorage.removeItem("catui:community"); await sleep(1500);
+      const up = document.querySelector('#pv-vote [data-dir="up"]'), n = () => Number(up.querySelector("[data-n]").textContent);
+      const r = { start: n() };
+      up.click(); await sleep(50); r.once = n() === r.start + 1 && up.getAttribute("aria-pressed") === "true";
+      up.click(); await sleep(50); r.undo = n() === r.start && up.getAttribute("aria-pressed") === "false";
+      const more = document.querySelector("[data-catui-cm-replies]");
+      more.click(); await sleep(50);
+      r.expand = more.getAttribute("aria-expanded") === "true" && document.getElementById(more.getAttribute("aria-controls")).hasAttribute("data-open");
+      const box = document.getElementById("cm-comments"), count = () => Number(box.querySelector(".Catui_cm-c-top .Catui_num").textContent);
+      r.total = count();
+      const ta = box.querySelector("form.Catui_cm-c-form:last-of-type textarea");
+      ta.value = "좋은 글 감사합니다";
+      ta.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", ctrlKey: true, bubbles: true, cancelable: true, isComposing: true })); await sleep(50);
+      r.imeSafe = count() === r.total;
+      ta.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", ctrlKey: true, bubbles: true, cancelable: true })); await sleep(100);
+      r.added = count() === r.total + 1;
+      return r;
+    },
+    expect: { "추천 1회": (r) => r.once, "다시 누르면 취소": (r) => r.undo, "답글 펼침": (r) => r.expand, "댓글 수 = 글 데이터": (r) => r.total === 9, "한글 조합 중 Ctrl+Enter 무시": (r) => r.imeSafe, "Ctrl+Enter 등록": (r) => r.added },
+  },
+  {
+    name: "community · 목록 (주소 ↔ 말머리·정렬 · 인기글 규칙)",
+    page: "docs/community/templates/board.html?b=humor",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      await sleep(1200);
+      const cm = catui.community, d = await cm.load();
+      const r = { title: document.querySelector("[data-catui-cm-list] h1").textContent };
+      document.querySelectorAll(".Catui_cm-cats a")[1].click(); await sleep(50);
+      const cat = new URLSearchParams(location.search).get("cat");
+      r.cat = !!cat && [...document.querySelectorAll(".Catui_cm-cat")].every((c) => c.textContent === cat);
+      r.hotRule = d.posts.every((p) => p.hot === (!["공지", "이벤트"].includes(p.cat) && p.up - p.down >= d.B[p.board].hotCut));
+      history.back(); await sleep(150);
+      r.back = !new URLSearchParams(location.search).get("cat");
+      return r;
+    },
+    expect: { "게시판 이름": (r) => r.title === "유머", "말머리 → 주소·목록": (r) => r.cat, "인기글 = 추천−비추천 ≥ 기준": (r) => r.hotRule, "뒤로 가기": (r) => r.back },
+  },
+  {
+    name: "community · 투표 (한 번 · 비율 계산)",
+    page: "docs/community/templates/post-poll.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      localStorage.removeItem("catui:community"); await sleep(1200);
+      const f = document.querySelector("[data-catui-cm-poll]");
+      f.querySelectorAll("input")[1].click(); f.requestSubmit(); await sleep(80);
+      const nums = [...f.querySelectorAll(".Catui_num")].map((x) => x.textContent);
+      const pct = nums.reduce((a, t) => a + Number(t.split("%")[0]), 0);
+      return { done: !f.querySelector("button[type=submit]"), mine: f.querySelector('li[aria-current="true"]')?.textContent.includes("11월 초"), pct };
+    },
+    expect: { "투표 후 결과": (r) => r.done, "내 선택 표시": (r) => r.mine, "비율 합 ≈ 100": (r) => r.pct >= 99 && r.pct <= 101 },
+  },
+  {
     name: "build · 압축본 단독 실행",
     page: "docs/index.html",
     run: async () => {
