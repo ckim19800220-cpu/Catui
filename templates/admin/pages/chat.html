@@ -21,12 +21,9 @@
 </div>
 <script>
 catui.use(function () {
-  var rooms = [
-    { id: 'r1', name: '박서연', last: '배송지를 바꿀 수 있을까요?', time: '09:12', unread: 2, online: true, msgs: [['박서연', '안녕하세요, 주문 #1044 문의드려요.', '09:10'], ['박서연', '배송지를 바꿀 수 있을까요?', '09:12']] },
-    { id: 'r2', name: '이준', last: '환불 처리됐나요?', time: '08:47', unread: 1, online: false, msgs: [['이준', '어제 반품 보냈습니다.', '08:40'], ['', '확인 후 오늘 안에 환불해 드리겠습니다.', '08:45'], ['이준', '환불 처리됐나요?', '08:47']] },
-    { id: 'r3', name: '최민', last: '감사합니다!', time: '어제', unread: 0, online: true, msgs: [['최민', '쿠폰이 적용이 안 돼요', '어제'], ['', '쿠폰 번호를 다시 발급해 드렸습니다.', '어제'], ['최민', '감사합니다!', '어제']] },
-    { id: 'r4', name: '정수아', last: '재입고 알림 신청할게요', time: '10/31', unread: 0, online: false, msgs: [['정수아', '재입고 알림 신청할게요', '10/31']] },
-  ];
+  // 모의 데이터: data/chat-rooms.json
+  catui.admin.data('chat-rooms').then(function (rooms) {
+  rooms = rooms.slice();
   var split = catui.admin.split('#ct-split'), list = document.getElementById('ct-rooms'), cur = rooms[0];
   var chat = catui.admin.chat({ log: '#ct-log', form: '#ct-form', me: '김관리' });
   var drawList = function () {
@@ -51,5 +48,6 @@ catui.use(function () {
     var r = cur; setTimeout(function () { if (cur === r) { chat.add('네, 확인했습니다. 감사합니다!', r.name); r.msgs.push([r.name, '네, 확인했습니다. 감사합니다!', '']); } }, 1200);
   });
   open(cur);
+  });
 });
 </script>

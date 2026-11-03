@@ -22,11 +22,9 @@
 </div>
 <script>
 catui.use(['util'], function (util) {
-  var stores = [
-    { id: 's1', name: '강남 직영점', area: '서울', x: 47, y: 30, sales: 1820 }, { id: 's2', name: '판교 쇼룸', area: '경기', x: 50, y: 34, sales: 940 },
-    { id: 's3', name: '대전 센터', area: '대전', x: 49, y: 52, sales: 610 }, { id: 's4', name: '대구 동성로점', area: '대구', x: 63, y: 60, sales: 720 },
-    { id: 's5', name: '광주 충장점', area: '광주', x: 40, y: 74, sales: 480 }, { id: 's6', name: '부산 서면점', area: '부산', x: 68, y: 76, sales: 1150 },
-  ];
+  // 모의 데이터: data/stores.json
+  catui.admin.data('stores').then(function (stores) {
+  stores = stores.slice();
   var map = document.getElementById('mp-map'), list = document.getElementById('mp-list'), q = document.getElementById('mp-q'), cur = null;
   stores.forEach(function (s) {
     var b = document.createElement('button');
@@ -52,5 +50,6 @@ catui.use(['util'], function (util) {
   list.addEventListener('click', function (e) { var b = e.target.closest('button[data-id]'); if (b) select(b.dataset.id, 'list'); });
   q.addEventListener('input', drawList);
   drawList();
+  });
 });
 </script>
