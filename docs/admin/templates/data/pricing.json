@@ -1,0 +1,95 @@
+{
+ "yearlyDiscount": 20,
+ "plans": [
+  {
+   "id": "시작",
+   "desc": "처음 여는 작은 상점",
+   "monthly": 0,
+   "current": false,
+   "featured": false,
+   "badge": "",
+   "features": [
+    {
+     "text": "상품 100개",
+     "on": true
+    },
+    {
+     "text": "관리자 1명",
+     "on": true
+    },
+    {
+     "text": "기본 통계",
+     "on": true
+    },
+    {
+     "text": "쿠폰·기획전",
+     "on": false
+    },
+    {
+     "text": "API 연동",
+     "on": false
+    }
+   ]
+  },
+  {
+   "id": "성장",
+   "desc": "매출이 늘고 있는 상점",
+   "monthly": 49000,
+   "current": true,
+   "featured": true,
+   "badge": "가장 많이 선택",
+   "features": [
+    {
+     "text": "상품 무제한",
+     "on": true
+    },
+    {
+     "text": "관리자 5명",
+     "on": true
+    },
+    {
+     "text": "고급 통계 · CSV",
+     "on": true
+    },
+    {
+     "text": "쿠폰·기획전",
+     "on": true
+    },
+    {
+     "text": "API 연동",
+     "on": false
+    }
+   ]
+  },
+  {
+   "id": "기업",
+   "desc": "여러 브랜드·창고 운영",
+   "monthly": 149000,
+   "current": false,
+   "featured": false,
+   "badge": "",
+   "features": [
+    {
+     "text": "상품·관리자 무제한",
+     "on": true
+    },
+    {
+     "text": "다중 창고",
+     "on": true
+    },
+    {
+     "text": "API · 웹훅",
+     "on": true
+    },
+    {
+     "text": "전담 매니저",
+     "on": true
+    },
+    {
+     "text": "SSO · 감사 기록",
+     "on": true
+    }
+   ]
+  }
+ ]
+}

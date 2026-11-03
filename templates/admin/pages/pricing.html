@@ -9,39 +9,38 @@
   </div>
 </div>
 
-<div class="Catui_adm-plans">
-  <article class="Catui_card Catui_price Catui_adm-plan"><div class="Catui_card-b">
-    <h2 class="Catui_h3">시작</h2><p class="Catui_help">처음 여는 작은 상점</p>
-    <div class="Catui_adm-price Catui_adm-price-lg"><b data-m="0원" data-y="0원">0원</b><span class="Catui_help">/ 월</span></div>
-    <ul><li>{{icon:check:16}}상품 100개</li><li>{{icon:check:16}}관리자 1명</li><li>{{icon:check:16}}기본 통계</li><li aria-disabled="true">{{icon:x:16}}<span>쿠폰·기획전<span class="Catui_clip"> (포함 안 됨)</span></span></li><li aria-disabled="true">{{icon:x:16}}<span>API 연동<span class="Catui_clip"> (포함 안 됨)</span></span></li></ul>
-    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-plan="시작">현재 요금제</button>
-  </div></article>
-  <article class="Catui_card Catui_price Catui_price-featured Catui_adm-plan"><div class="Catui_card-b">
-    <span class="Catui_pill Catui_pill-solid-success Catui_adm-plan-badge">가장 많이 선택</span>
-    <h2 class="Catui_h3">성장</h2><p class="Catui_help">매출이 늘고 있는 상점</p>
-    <div class="Catui_adm-price Catui_adm-price-lg"><b data-m="49,000원" data-y="39,000원">49,000원</b><span class="Catui_help">/ 월</span></div>
-    <ul><li>{{icon:check:16}}상품 무제한</li><li>{{icon:check:16}}관리자 5명</li><li>{{icon:check:16}}고급 통계 · CSV</li><li>{{icon:check:16}}쿠폰·기획전</li><li aria-disabled="true">{{icon:x:16}}<span>API 연동<span class="Catui_clip"> (포함 안 됨)</span></span></li></ul>
-    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" data-plan="성장">성장으로 바꾸기</button>
-  </div></article>
-  <article class="Catui_card Catui_price Catui_adm-plan"><div class="Catui_card-b">
-    <h2 class="Catui_h3">기업</h2><p class="Catui_help">여러 브랜드·창고 운영</p>
-    <div class="Catui_adm-price Catui_adm-price-lg"><b data-m="149,000원" data-y="119,000원">149,000원</b><span class="Catui_help">/ 월</span></div>
-    <ul><li>{{icon:check:16}}상품·관리자 무제한</li><li>{{icon:check:16}}다중 창고</li><li>{{icon:check:16}}API · 웹훅</li><li>{{icon:check:16}}전담 매니저</li><li>{{icon:check:16}}SSO · 감사 기록</li></ul>
-    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-plan="기업">상담 신청</button>
-  </div></article>
-</div>
+<div class="Catui_adm-plans" data-catui-adm-src="pricing" data-catui-adm-rows="plans"><template><article class="Catui_card Catui_price Catui_adm-plan" data-catui-adm-class="Catui_price-:featuredClass"><div class="Catui_card-b">
+    <span class="Catui_pill Catui_pill-solid-success Catui_adm-plan-badge" data-catui-adm-field="badge" data-catui-adm-bool="hidden:noBadge"></span>
+    <h2 class="Catui_h3" data-catui-adm-field="id"></h2><p class="Catui_help" data-catui-adm-field="desc"></p>
+    <div class="Catui_adm-price Catui_adm-price-lg"><b data-catui-adm-field="priceM" data-catui-adm-attr="data-m:{priceM};data-y:{priceY}"></b><span class="Catui_help">/ 월</span></div>
+    <ul data-catui-adm-rows="features"><template><li data-catui-adm-attr="aria-disabled:{off}"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use data-catui-adm-attr="href:{{dist}}/icons.svg?v=2#Catui_ic-{icon}"></use></svg><span><span data-catui-adm-field="text"></span><span class="Catui_clip" data-catui-adm-field="note"></span></span></li></template></ul>
+    <button class="Catui_btn Catui_btn-md" type="button" data-catui-adm-class="Catui_btn-:btn" data-catui-adm-attr="data-plan:{id}" data-catui-adm-field="cta"></button>
+  </div></article></template></div>
 
 <div class="Catui_vstack Catui_gap-3">
   <details class="Catui_faq"><summary>요금제를 바꾸면 언제 적용되나요?</summary><p>바로 적용되고, 남은 기간은 일할 계산해 다음 청구에서 정산합니다.</p></details>
   <details class="Catui_faq"><summary>연간 결제를 중간에 해지할 수 있나요?</summary><p>가능합니다. 쓰지 않은 달만큼 환불해 드립니다.</p></details>
 </div>
 <script>
+// 요금제 표시값은 pricing.json 원자료에서 계산 (연간 = 월 요금 × (1 − 할인율), 천 원 단위 내림)
+catui.admin.derive.pricing = function (j) {
+  var won = function (n) { return catui.util.number(n) + '원'; };
+  j.plans.forEach(function (p) {
+    p.priceM = won(p.monthly); p.priceY = won(Math.floor(p.monthly * (1 - j.yearlyDiscount / 100) / 1000) * 1000);
+    p.featuredClass = p.featured ? 'featured' : ''; p.noBadge = !p.badge; p.btn = p.featured ? 'primary' : 'secondary';
+    p.cta = p.current ? '현재 요금제' : p.id === '기업' ? '상담 신청' : catui.admin.josa(p.id, '으로') + ' 바꾸기';
+    p.features.forEach(function (f) { f.icon = f.on ? 'check' : 'x'; f.off = String(!f.on); f.note = f.on ? '' : ' (포함 안 됨)'; });
+  });
+  return j;
+};
+</script>
+<script>
 catui.use(['layer'], function (layer) {
   document.querySelectorAll('[name=pr-cycle]').forEach(function (r) { r.addEventListener('change', function () {
     document.querySelectorAll('[data-m]').forEach(function (b) { b.textContent = r.value === 'y' ? b.dataset.y : b.dataset.m; });
   }); });
   document.querySelector('.Catui_adm-plans').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-plan]'); if (!b || b.dataset.plan === '시작') return;
+    var b = e.target.closest('[data-plan]'); if (!b || b.textContent === '현재 요금제') return;
     layer.confirm(b.dataset.plan + ' 요금제로 바꿀까요? 다음 청구일부터 새 요금이 적용됩니다.', { okText: '바꾸기' }, function (i) { layer.close(i); layer.msg(b.dataset.plan + ' 요금제로 바꿨습니다', { icon: 'success' }); });
   });
 });
