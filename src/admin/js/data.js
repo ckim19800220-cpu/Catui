@@ -57,6 +57,11 @@ admin.bind = function (scope = document) {
         frag.querySelectorAll("[data-catui-adm-field]").forEach((el) => { el.textContent = this.format(this.pick(row, el.getAttribute("data-catui-adm-field")), el.getAttribute("data-catui-adm-format")); });
         frag.querySelectorAll("[data-catui-adm-field-data]").forEach((el) => { el.setAttribute("data-catui-adm-data", JSON.stringify(this.pick(row, el.getAttribute("data-catui-adm-field-data")))); });
         frag.querySelectorAll("[data-catui-adm-class]").forEach((el) => { const [pre, key] = el.getAttribute("data-catui-adm-class").split(":"); const v = this.pick(row, key); if (v) el.classList.add(`${pre}${String(v).replace(/[^\w-]/g, "")}`); });
+        // 속성 치환: data-catui-adm-attr="aria-label:{name} 메뉴;title:{email}"
+        frag.querySelectorAll("[data-catui-adm-attr]").forEach((el) => {
+          el.getAttribute("data-catui-adm-attr").split(";").forEach((pair) => { const i = pair.indexOf(":"); if (i > 0) el.setAttribute(pair.slice(0, i).trim(), pair.slice(i + 1).replace(/\{(\w+)\}/g, (_, k) => row[k] ?? "")); });
+          el.removeAttribute("data-catui-adm-attr");
+        });
         frag.querySelectorAll("[data-catui-adm-label]").forEach((el) => { el.setAttribute("data-catui-adm-label", el.getAttribute("data-catui-adm-label").replace(/\{(\w+)\}/g, (_, k) => row[k] ?? "")); });
         list.appendChild(frag);
       });
