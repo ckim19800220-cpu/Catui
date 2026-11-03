@@ -20,7 +20,7 @@
 .Catui_adm-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--Catui_space-2);font-variant-numeric:tabular-nums}
 .Catui_adm-price b{font-size:var(--Catui_type-h3-size)}
 .Catui_adm-price s{color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size)}
-.Catui_adm-price em{font-style:normal;font-weight:700;color:var(--Catui_color-danger)}
+.Catui_adm-price em{font-style:normal;font-weight:700;color:var(--Catui_color-brand-strong)}
 .Catui_adm-price-lg b{font-size:var(--Catui_type-h1-size)}
 
 /* 상품 상세: 갤러리 + 정보 */

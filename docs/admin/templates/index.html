@@ -80,13 +80,7 @@
       <table class="Catui_tbl">
         <caption class="Catui_clip">최근 주문 5건</caption>
         <thead><tr><th scope="col">주문 번호</th><th scope="col">고객</th><th scope="col">상품</th><th scope="col" class="Catui_num">금액</th><th scope="col">상태</th></tr></thead>
-        <tbody>
-          <tr><td>#1046</td><td>김하늘</td><td>무선 키보드 외 1</td><td class="Catui_num">128,000원</td><td><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>배송 완료</span></td></tr>
-          <tr><td>#1045</td><td>이준</td><td>USB-C 허브</td><td class="Catui_num">42,000원</td><td><span class="Catui_pill Catui_pill-info"><i class="Catui_dot"></i>배송 중</span></td></tr>
-          <tr><td>#1044</td><td>박서연</td><td>모니터 받침대</td><td class="Catui_num">59,000원</td><td><span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>결제 대기</span></td></tr>
-          <tr><td>#1043</td><td>최민</td><td>노트북 파우치</td><td class="Catui_num">31,000원</td><td><span class="Catui_pill Catui_pill-danger"><i class="Catui_dot"></i>취소</span></td></tr>
-          <tr><td>#1042</td><td>정수아</td><td>기계식 키보드</td><td class="Catui_num">189,000원</td><td><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>배송 완료</span></td></tr>
-        </tbody>
+        <tbody data-catui-adm-src="dashboard-ops" data-catui-adm-rows="recentOrders"><template><tr><td data-catui-adm-field="id"></td><td data-catui-adm-field="customer"></td><td data-catui-adm-field="item"></td><td class="Catui_num" data-catui-adm-field="amount" data-catui-adm-format="won"></td><td><span class="Catui_pill" data-catui-adm-class="Catui_pill-:tone"><i class="Catui_dot"></i><span data-catui-adm-field="status"></span></span></td></tr></template></tbody>
       </table>
     </div>
   </article>

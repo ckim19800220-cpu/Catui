@@ -127,6 +127,23 @@
 .Catui_adm-chart.Catui_sparkline{width:var(--Catui_spark-w);height:var(--Catui_spark-h)}
 .Catui_adm-legend{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2) var(--Catui_space-4);margin-top:var(--Catui_space-3)}
 
+/* 관리 화면 글자 규칙(taste-skill app): 지표 이름은 문장형(대문자·자간 없이) 12px 이상, 11px 미만 글자 없음 */
+.Catui_adm .Catui_stat-label{text-transform:none;letter-spacing:0;font-size:max(var(--Catui_stat-label-size),var(--Catui_type-caption-size))}
+.Catui_adm-body .Catui_cmdk-hint{font-size:var(--Catui_type-caption-size)}
+.Catui_adm .Catui_tbl th,.Catui_adm .Catui_label,.Catui_adm-blank .Catui_label{text-transform:none;letter-spacing:0}
+/* 아이콘은 색 상자 없이 (taste-skill app: 색은 데이터·상태·주 버튼에만) */
+.Catui_adm .Catui_file-ico{background:transparent;color:var(--Catui_color-text-secondary)}
+/* 좁은 화면에서 코드 블록이 화면 끝을 넘지 않게 */
+.Catui_adm pre{max-width:100%;overflow-x:auto}
+.Catui_adm :is(.Catui_gantt-head,.Catui_gantt-scale) *{font-size:11px}
+/* 11px 미만 글자 없음: 칸반 태그·메타, 작은 아바타 글자 */
+.Catui_adm :is(.Catui_kanban-meta,.Catui_kanban-tags .Catui_pill){font-size:max(11px,var(--Catui_type-caption-size))}
+.Catui_adm .Catui_av-sm{font-size:11px}
+/* 빨강은 오류에만: "필수" 표시는 보조 글자색 (오류 문구·위험 버튼만 위험색) */
+.Catui_adm .Catui_req,.Catui_adm-blank .Catui_req{color:var(--Catui_color-text-secondary)}
+/* 숫자는 고정폭으로 — 표·지표·목록의 자릿수가 세로로 맞는다 */
+.Catui_adm :is(.Catui_tbl,.Catui_stat-value,.Catui_list-meta,.Catui_bar-value,.Catui_adm-sum){font-variant-numeric:tabular-nums}
+
 /* 카드 안의 설정 목록: 카드 테두리와 겹치지 않게 목록 테두리·안쪽 여백을 없앤다. 스위치는 좁은 화면에서도 오른쪽 */
 .Catui_adm .Catui_card-b > .Catui_settings{border:0;border-radius:0;background:transparent}
 .Catui_adm .Catui_card-b > .Catui_settings > .Catui_setting{padding-inline:0}
@@ -291,7 +308,7 @@
 .Catui_adm-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--Catui_space-2);font-variant-numeric:tabular-nums}
 .Catui_adm-price b{font-size:var(--Catui_type-h3-size)}
 .Catui_adm-price s{color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size)}
-.Catui_adm-price em{font-style:normal;font-weight:700;color:var(--Catui_color-danger)}
+.Catui_adm-price em{font-style:normal;font-weight:700;color:var(--Catui_color-brand-strong)}
 .Catui_adm-price-lg b{font-size:var(--Catui_type-h1-size)}
 
 /* 상품 상세: 갤러리 + 정보 */

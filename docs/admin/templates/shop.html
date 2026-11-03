@@ -73,7 +73,7 @@ catui.use(['util', 'layer'], function (util, layer) {
       return catui.html`<article class="Catui_card Catui_adm-product"><div class="Catui_adm-ph${TONE[p.cat]}" aria-hidden="true">${catui.icon(ICON[p.cat], 24)}</div><div class="Catui_card-b">
         <span class="Catui_help">${p.cat}</span><a href="product.html">${p.name}</a>
         <div class="Catui_adm-price">${p.sale ? catui.html`<em>${Math.round((1 - p.sale / p.price) * 100)}%<span class="Catui_clip"> 할인</span></em><b>${util.number(p.sale)}원</b><s><span class="Catui_clip">원래 가격 </span>${util.number(p.price)}원</s>` : catui.html`<b>${util.number(p.price)}원</b>`}</div>
-        <span class="Catui_help">★ ${p.rate} · ${util.number(p.sold)}개 판매</span>
+        <span class="Catui_help">${catui.icon('star', 12)} ${p.rate} · ${util.number(p.sold)}개 판매</span>
         <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-cart="${p.id}">${catui.icon('shopping-cart', 16)}담기</button></div></article>`; })}` : catui.html`<div class="Catui_empty">${catui.icon('search', 16)}<p class="Catui_empty-title">맞는 상품이 없습니다</p></div>`);
   };
   grid.addEventListener('click', function (e) { var b = e.target.closest('[data-cart]'); if (b) layer.msg(catui.admin.josa(items[b.dataset.cart].name, '을') + ' 장바구니에 담았습니다', { icon: 'success', time: 1500 }); });

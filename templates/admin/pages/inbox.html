@@ -38,7 +38,7 @@ catui.use(['layer'], function (layer) {
   var split = catui.admin.split('#ib-split'), list = document.getElementById('ib-list'), cur = mails[0], filter = 'all';
   var draw = function () {
     var shown = mails.filter(function (m) { return filter === 'all' || (filter === 'unread' ? m.unread : m.star); });
-    catui.mount(list, shown.length ? catui.html`${shown.map(function (m) { return catui.html`<li><button class="Catui_adm-row${m.unread ? ' Catui_adm-row-unread' : ''}" type="button" data-mail="${m.id}" aria-current="${m === cur}"><span class="Catui_av Catui_av-sm" aria-hidden="true">${m.from.slice(0, 1)}</span><span class="Catui_adm-row-title">${m.star ? '★ ' : ''}${m.subj}${m.unread ? catui.html`<span class="Catui_clip"> (읽지 않음)</span>` : ''}</span><span class="Catui_adm-row-time">${m.date}</span><span class="Catui_adm-row-sub">${m.from} · ${m.body.split('\n')[0]}</span></button></li>`; })}` : catui.html`<li class="Catui_adm-empty">메일이 없습니다.</li>`);
+    catui.mount(list, shown.length ? catui.html`${shown.map(function (m) { return catui.html`<li><button class="Catui_adm-row${m.unread ? ' Catui_adm-row-unread' : ''}" type="button" data-mail="${m.id}" aria-current="${m === cur}"><span class="Catui_av Catui_av-sm" aria-hidden="true">${m.from.slice(0, 1)}</span><span class="Catui_adm-row-title">${m.star ? catui.html`${catui.icon('star', 12)}<span class="Catui_clip">별표 </span> ` : ''}${m.subj}${m.unread ? catui.html`<span class="Catui_clip"> (읽지 않음)</span>` : ''}</span><span class="Catui_adm-row-time">${m.date}</span><span class="Catui_adm-row-sub">${m.from} · ${m.body.split('\n')[0]}</span></button></li>`; })}` : catui.html`<li class="Catui_adm-empty">메일이 없습니다.</li>`);
   };
   var open = function (m) {
     cur = m; m.unread = false;
