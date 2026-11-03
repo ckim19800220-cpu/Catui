@@ -7,7 +7,7 @@
       <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="odd-more" aria-label="다른 작업">{{icon:more-horizontal}}</button>
       <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="odd-ship">{{icon:truck}}출고 처리</button>
     </div></div>
-  <p class="Catui_pagehead-text" id="odd-meta">박서연 · 2026년 11월 1일 21:04 주문 · 카드 결제</p>
+  <p class="Catui_pagehead-text" id="odd-meta">불러오는 중…</p>
 </header>
 
 <div class="Catui_grid">
@@ -30,17 +30,14 @@
   </article>
   <div class="Catui_span-4 Catui_vstack Catui_gap-4">
     <article class="Catui_card"><header class="Catui_card-h">고객</header><div class="Catui_card-b Catui_vstack Catui_gap-1">
-      <p class="Catui_line"><span class="Catui_av Catui_av-md" aria-hidden="true">박</span><b>박서연</b> <span class="Catui_badge Catui_badge-info">골드</span></p>
-      <p class="Catui_help">se****@naver.com · 010-****-5521 · 주문 14회</p>
+      <p class="Catui_line"><span class="Catui_av Catui_av-md" aria-hidden="true" data-catui-adm-src="order-1044" data-catui-adm-text="customer.name" data-catui-adm-format="initial">박</span><b data-catui-adm-src="order-1044" data-catui-adm-text="customer.name">박서연</b> <span class="Catui_badge Catui_badge-info" data-catui-adm-src="order-1044" data-catui-adm-text="customer.grade">골드</span></p>
+      <p class="Catui_help"><span data-catui-adm-src="order-1044" data-catui-adm-text="customer.email">se****@naver.com</span> · <span data-catui-adm-src="order-1044" data-catui-adm-text="customer.tel">010-****-5521</span> · 주문 <span data-catui-adm-src="order-1044" data-catui-adm-text="customer.orders">14</span>회</p>
     </div></article>
     <article class="Catui_card"><header class="Catui_card-h">배송지 <span class="Catui_card-tools"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="odd-addr">수정</button></span></header><div class="Catui_card-b">
-      <p id="odd-addr-t">서울특별시 마포구 월드컵로 12길 34, 501호<br>박서연 · 010-****-5521</p><p class="Catui_help">요청: 문 앞에 두고 연락 주세요</p>
+      <p id="odd-addr-t"><span id="odd-addr-line" data-catui-adm-src="order-1044" data-catui-adm-text="address.line">서울특별시 마포구 월드컵로 12길 34, 501호</span><br><span data-catui-adm-src="order-1044" data-catui-adm-text="address.receiver">박서연 · 010-****-5521</span></p><p class="Catui_help">요청: <span data-catui-adm-src="order-1044" data-catui-adm-text="address.memo">문 앞에 두고 연락 주세요</span></p>
     </div></article>
     <article class="Catui_card"><header class="Catui_card-h">처리 기록</header><div class="Catui_card-b">
-      <div class="Catui_atl" id="odd-log">
-        <div class="Catui_atl-item"><span class="Catui_av Catui_av-sm" aria-hidden="true">시</span><div class="Catui_atl-main"><b>결제</b> 완료 <span class="Catui_help">11/1 21:05</span></div><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>완료</span></div>
-        <div class="Catui_atl-item"><span class="Catui_av Catui_av-sm" aria-hidden="true">김</span><div class="Catui_atl-main"><b>김관리</b> 님이 주문을 확인했습니다 <span class="Catui_help">11/2 09:02</span></div><span class="Catui_pill Catui_pill-info"><i class="Catui_dot"></i>확인</span></div>
-      </div>
+      <div class="Catui_atl" id="odd-log" data-catui-adm-src="order-1044" data-catui-adm-rows="log"><template><div class="Catui_atl-item"><span class="Catui_av Catui_av-sm" aria-hidden="true" data-catui-adm-field="who" data-catui-adm-format="initial"></span><div class="Catui_atl-main"><b data-catui-adm-field="what"></b><span data-catui-adm-field="text"></span> <span class="Catui_help" data-catui-adm-field="time"></span></div><span class="Catui_pill" data-catui-adm-class="Catui_pill-:tone"><i class="Catui_dot"></i><span data-catui-adm-field="state"></span></span></div></template></div>
     </div></article>
   </div>
 </div>
@@ -71,7 +68,7 @@ catui.use(['layer', 'dropdown', 'util'], function (layer, dropdown, util) {
       });
   });
   document.getElementById('odd-addr').addEventListener('click', function () {
-    layer.input({ title: '배송지 수정', value: '서울특별시 마포구 월드컵로 12길 34, 501호' }).then(function (v) { if (v) { var t = document.getElementById('odd-addr-t'); t.firstChild.textContent = v; layer.msg('배송지를 바꿨습니다', { icon: 'success' }); } });
+    layer.input({ title: '배송지 수정', value: document.getElementById('odd-addr-line').textContent }).then(function (v) { if (v) { document.getElementById('odd-addr-line').textContent = v; layer.msg('배송지를 바꿨습니다', { icon: 'success' }); } });
   });
 });
 </script>

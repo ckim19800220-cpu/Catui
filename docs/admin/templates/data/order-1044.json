@@ -3,12 +3,54 @@
  "status": "출고 준비",
  "placedAt": "2026년 10월 17일 02:00",
  "pay": "카드 결제",
- "customer": { "name": "박서연", "grade": "골드", "email": "se****@naver.com", "tel": "010-****-5521", "orders": 14 },
- "address": { "line": "서울특별시 마포구 월드컵로 12길 34, 501호", "receiver": "박서연 · 010-****-5521", "memo": "문 앞에 두고 연락 주세요" },
+ "customer": {
+  "name": "박서연",
+  "grade": "골드",
+  "email": "se****@naver.com",
+  "tel": "010-****-5521",
+  "orders": 14
+ },
+ "address": {
+  "line": "서울특별시 마포구 월드컵로 12길 34, 501호",
+  "receiver": "박서연 · 010-****-5521",
+  "memo": "문 앞에 두고 연락 주세요"
+ },
  "items": [
-  { "name": "모니터 받침대", "option": "원목 · 2단", "price": 49000, "qty": 1, "icon": "monitor", "tone": 3 },
-  { "name": "USB-C 케이블 1m", "option": "덤 상품", "price": 5000, "qty": 2, "icon": "usb", "tone": 4 }
+  {
+   "name": "모니터 받침대",
+   "option": "원목 · 2단",
+   "price": 49000,
+   "qty": 1,
+   "icon": "monitor",
+   "tone": 3
+  },
+  {
+   "name": "USB-C 케이블 1m",
+   "option": "덤 상품",
+   "price": 5000,
+   "qty": 2,
+   "icon": "usb",
+   "tone": 4
+  }
  ],
  "shipping": 0,
- "coupon": 5000
+ "coupon": 5000,
+ "log": [
+  {
+   "who": "시스템",
+   "what": "결제",
+   "text": " 완료",
+   "time": "10/17 02:01",
+   "state": "완료",
+   "tone": "success"
+  },
+  {
+   "who": "김관리",
+   "what": "김관리",
+   "text": " 님이 주문을 확인했습니다",
+   "time": "10/17 09:02",
+   "state": "확인",
+   "tone": "info"
+  }
+ ]
 }
