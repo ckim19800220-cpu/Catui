@@ -81,10 +81,7 @@
 .Catui_cm-deal{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--Catui_space-3);align-items:center}
 .Catui_cm-deal[data-ended] .Catui_cm-title-t{text-decoration:line-through;color:var(--Catui_color-text-secondary)}
 .Catui_cm-price{font-weight:800;font-variant-numeric:tabular-nums}
-.Catui_cm-ph{display:grid;place-items:center;width:calc(var(--Catui_space-10) * 0.9);aspect-ratio:1 / 1;border-radius:var(--Catui_radius-md);background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong)}
-.Catui_cm-ph[data-tone="2"]{background:var(--Catui_color-info-soft);color:var(--Catui_color-info)}
-.Catui_cm-ph[data-tone="3"]{background:var(--Catui_color-purple-soft);color:var(--Catui_color-purple)}
-.Catui_cm-ph[data-tone="4"]{background:var(--Catui_color-amber-soft);color:var(--Catui_color-amber)}
+.Catui_cm-ph{display:grid;place-items:center;width:calc(var(--Catui_space-10) * 0.9);aspect-ratio:1 / 1;border-radius:var(--Catui_radius-md);background:var(--Catui_color-surface-muted);color:var(--Catui_color-text-secondary)}
 
 /* 질문: 해결 표시 */
 .Catui_cm-solved{flex:none}

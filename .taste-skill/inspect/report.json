@@ -1,6 +1,6 @@
 {
  "url": "http://127.0.0.1:8766/docs/community/templates/write.html",
- "at": "2026-11-03T08:08:28.661Z",
+ "at": "2026-11-03T09:54:27.577Z",
  "allow": [],
  "viewports": [
   {
@@ -9,8 +9,8 @@
    "load": "load",
    "screens": 2,
    "filled": [
-    0.8,
-    0.81
+    0.17,
+    0.18
    ],
    "motion": {
     "elements": 0,
@@ -26,13 +26,13 @@
      "h": 900
     },
     "page": {
-     "height": 1139,
+     "height": 1148,
      "screens": 1.3,
      "words": 80,
      "img": 0,
      "video": 0,
      "canvas": 0,
-     "svg": 19,
+     "svg": 20,
      "sections": 0,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
@@ -55,11 +55,11 @@
      "lines": 1,
      "size": 18,
      "vw": 1.3,
-     "font": "Inter",
+     "font": "Pretendard GOV",
      "weight": 600,
      "tracking": 0,
      "leading": 1.4,
-     "top": 160,
+     "top": 159,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
@@ -70,7 +70,7 @@
      "words": 1,
      "lines": 1,
      "size": 18,
-     "font": "Inter"
+     "font": "Pretendard GOV"
     },
     "headings": [],
     "headingSummary": {
@@ -85,7 +85,7 @@
     "type": {
      "families": [
       {
-       "family": "Inter",
+       "family": "Pretendard GOV",
        "share": 0.97,
        "mono": false
       },
@@ -101,18 +101,20 @@
       11,
       12,
       13,
+      15,
       16,
-      18
+      18,
+      20
      ],
-     "sizeCount": 6,
+     "sizeCount": 8,
      "notLoaded": [],
      "body": null,
      "measureChars": null,
      "max": {
-      "size": 18,
-      "vw": 1.3,
-      "font": "Inter",
-      "text": "글쓰기"
+      "size": 20,
+      "vw": 1.4,
+      "font": "Pretendard GOV",
+      "text": "Catui"
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -128,26 +130,17 @@
     "eyebrows": [],
     "numbered": [],
     "color": {
-     "bodyBg": "#fafbfc",
+     "bodyBg": "#ffffff",
      "bodyBgHsl": {
-      "h": 210,
-      "s": 0.25,
-      "l": 0.98
+      "h": 0,
+      "s": 0,
+      "l": 1
      },
      "dark": false,
      "sectionBgs": [
       {
-       "color": "#fafbfc",
-       "top": 0,
-       "hsl": {
-        "h": 210,
-        "s": 0.25,
-        "l": 0.98
-       }
-      },
-      {
        "color": "#ffffff",
-       "top": 139,
+       "top": 0,
        "hsl": {
         "h": 0,
         "s": 0,
@@ -161,12 +154,16 @@
        "share": 0.67
       },
       {
+       "color": "#dde4ea",
+       "share": 0.12
+      },
+      {
        "color": "#2c3e50",
-       "share": 0.25
+       "share": 0.12
       },
       {
        "color": "#ffffff",
-       "share": 0.05
+       "share": 0.06
       },
       {
        "color": "#0e7a63",
@@ -210,10 +207,8 @@
      "scrims": 0,
      "gradientSamples": [],
      "gradientText": 0,
-     "hairlines": 5,
+     "hairlines": 3,
      "hairlineSamples": [
-      "header.Catui_cm-head 1440px",
-      "nav.Catui_cm-gnb 1440px",
       "div.Catui_panel.Catui_field 1142px",
       "div.Catui_cm-toolbar 1142px",
       "footer.Catui_cm-foot 1440px"
@@ -231,9 +226,9 @@
     },
     "heroMedia": [],
     "nav": {
-     "links": 17,
+     "links": 18,
      "fixed": true,
-     "height": 119,
+     "height": 118,
      "floatingPill": false,
      "blur": false
     },
@@ -244,7 +239,7 @@
      "w": 1440,
      "h": 900
     },
-    "pageH": 1139,
+    "pageH": 1148,
     "margins": {
      "left": 128,
      "right": 149
@@ -254,7 +249,7 @@
       "sel": "div.Catui_tabs",
       "tag": "div",
       "top": 368,
-      "height": 429,
+      "height": 437,
       "words": 18,
       "media": 0,
       "middle": 0,
@@ -272,16 +267,16 @@
      {
       "sel": "div.Catui_field",
       "tag": "div",
-      "top": 813,
+      "top": 822,
       "height": 149,
       "words": 5,
       "media": 0,
-      "middle": 451,
+      "middle": 455,
       "heading": null,
       "left": 149,
-      "right": 678,
+      "right": 683,
       "textLeft": 149,
-      "textRight": 678,
+      "textRight": 683,
       "fullBleed": false,
       "footer": true,
       "hero": false,
@@ -294,7 +289,7 @@
      {
       "text": "글쓰기",
       "size": 18,
-      "top": 160,
+      "top": 159,
       "firstScreen": true
      }
     ],
@@ -324,12 +319,12 @@
      "h": 900
     },
     "dark": false,
-    "ground": "#fafbfc",
+    "ground": "#ffffff",
     "sidebar": null,
     "topbar": null,
     "canvas": {
      "left": 128,
-     "right": 128
+     "right": 142
     },
     "hero": {
      "text": "글쓰기",
@@ -338,11 +333,11 @@
      "lines": 1,
      "size": 18,
      "vw": 1.3,
-     "font": "Inter",
+     "font": "Pretendard GOV",
      "weight": 600,
      "tracking": 0,
      "leading": 1.4,
-     "top": 160,
+     "top": 159,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
@@ -360,11 +355,15 @@
      "count": 3,
      "radii": [
       [
-       8,
-       2
+       6,
+       1
       ],
       [
        0,
+       1
+      ],
+      [
+       8,
        1
       ]
      ],
@@ -391,21 +390,24 @@
     "chartHues": 0,
     "placeholders": [],
     "type": {
-     "under13": 0.63,
+     "under13": 0.62,
      "tiny": 0,
      "tinySamples": [],
      "sizes": [
       11,
       12,
       13,
+      14,
+      15,
       16,
-      18
+      18,
+      20
      ]
     },
     "title": {
      "text": "글쓰기",
      "size": 18,
-     "top": 160
+     "top": 159
     },
     "colourShare": 0.003
    },
@@ -417,8 +419,8 @@
    "load": "load",
    "screens": 2,
    "filled": [
-    0.9,
-    0.97
+    0.24,
+    0.18
    ],
    "motion": {
     "elements": 0,
@@ -434,13 +436,13 @@
      "h": 1024
     },
     "page": {
-     "height": 1139,
+     "height": 1148,
      "screens": 1.1,
      "words": 80,
      "img": 0,
      "video": 0,
      "canvas": 0,
-     "svg": 19,
+     "svg": 20,
      "sections": 0,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
@@ -451,7 +453,7 @@
      "uiPictures": 0,
      "pictureSamples": [],
      "blendText": 0,
-     "sideScrollers": 0,
+     "sideScrollers": 1,
      "brokenImages": [],
      "emoji": [],
      "videosNoPoster": 0
@@ -463,11 +465,11 @@
      "lines": 1,
      "size": 18,
      "vw": 2.3,
-     "font": "Inter",
+     "font": "Pretendard GOV",
      "weight": 600,
      "tracking": 0,
      "leading": 1.4,
-     "top": 160,
+     "top": 159,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
@@ -478,7 +480,7 @@
      "words": 1,
      "lines": 1,
      "size": 18,
-     "font": "Inter"
+     "font": "Pretendard GOV"
     },
     "headings": [],
     "headingSummary": {
@@ -493,7 +495,7 @@
     "type": {
      "families": [
       {
-       "family": "Inter",
+       "family": "Pretendard GOV",
        "share": 0.97,
        "mono": false
       },
@@ -509,18 +511,20 @@
       11,
       12,
       13,
+      15,
       16,
-      18
+      18,
+      20
      ],
-     "sizeCount": 6,
+     "sizeCount": 8,
      "notLoaded": [],
      "body": null,
      "measureChars": null,
      "max": {
-      "size": 18,
-      "vw": 2.3,
-      "font": "Inter",
-      "text": "글쓰기"
+      "size": 20,
+      "vw": 2.6,
+      "font": "Pretendard GOV",
+      "text": "Catui"
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -536,26 +540,17 @@
     "eyebrows": [],
     "numbered": [],
     "color": {
-     "bodyBg": "#fafbfc",
+     "bodyBg": "#ffffff",
      "bodyBgHsl": {
-      "h": 210,
-      "s": 0.25,
-      "l": 0.98
+      "h": 0,
+      "s": 0,
+      "l": 1
      },
      "dark": false,
      "sectionBgs": [
       {
-       "color": "#fafbfc",
-       "top": 0,
-       "hsl": {
-        "h": 210,
-        "s": 0.25,
-        "l": 0.98
-       }
-      },
-      {
        "color": "#ffffff",
-       "top": 139,
+       "top": 0,
        "hsl": {
         "h": 0,
         "s": 0,
@@ -569,12 +564,16 @@
        "share": 0.67
       },
       {
+       "color": "#dde4ea",
+       "share": 0.12
+      },
+      {
        "color": "#2c3e50",
-       "share": 0.25
+       "share": 0.12
       },
       {
        "color": "#ffffff",
-       "share": 0.05
+       "share": 0.06
       },
       {
        "color": "#0e7a63",
@@ -618,10 +617,8 @@
      "scrims": 0,
      "gradientSamples": [],
      "gradientText": 0,
-     "hairlines": 5,
+     "hairlines": 3,
      "hairlineSamples": [
-      "header.Catui_cm-head 768px",
-      "nav.Catui_cm-gnb 768px",
       "div.Catui_panel.Catui_field 694px",
       "div.Catui_cm-toolbar 694px",
       "footer.Catui_cm-foot 768px"
@@ -639,9 +636,9 @@
     },
     "heroMedia": [],
     "nav": {
-     "links": 17,
+     "links": 18,
      "fixed": true,
-     "height": 119,
+     "height": 118,
      "floatingPill": false,
      "blur": false
     },
@@ -652,7 +649,7 @@
      "w": 768,
      "h": 1024
     },
-    "pageH": 1139,
+    "pageH": 1148,
     "margins": {
      "left": 28,
      "right": 37
@@ -662,7 +659,7 @@
       "sel": "div.Catui_tabs",
       "tag": "div",
       "top": 368,
-      "height": 429,
+      "height": 437,
       "words": 18,
       "media": 0,
       "middle": 0,
@@ -680,16 +677,16 @@
      {
       "sel": "div.Catui_field",
       "tag": "div",
-      "top": 813,
+      "top": 822,
       "height": 149,
       "words": 5,
       "media": 0,
-      "middle": 227,
+      "middle": 231,
       "heading": null,
       "left": 37,
-      "right": 342,
+      "right": 347,
       "textLeft": 37,
-      "textRight": 342,
+      "textRight": 347,
       "fullBleed": false,
       "footer": true,
       "hero": false,
@@ -702,7 +699,7 @@
      {
       "text": "글쓰기",
       "size": 18,
-      "top": 160,
+      "top": 159,
       "firstScreen": true
      }
     ],
@@ -727,13 +724,13 @@
      "h": 1024
     },
     "dark": false,
-    "ground": "#fafbfc",
+    "ground": "#ffffff",
     "sidebar": null,
     "topbar": {
      "h": 72
     },
     "canvas": {
-     "left": 28,
+     "left": 16,
      "right": 16
     },
     "hero": {
@@ -743,11 +740,11 @@
      "lines": 1,
      "size": 18,
      "vw": 2.3,
-     "font": "Inter",
+     "font": "Pretendard GOV",
      "weight": 600,
      "tracking": 0,
      "leading": 1.4,
-     "top": 160,
+     "top": 159,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
@@ -765,11 +762,15 @@
      "count": 3,
      "radii": [
       [
-       8,
-       2
+       6,
+       1
       ],
       [
        0,
+       1
+      ],
+      [
+       8,
        1
       ]
      ],
@@ -796,23 +797,26 @@
     "chartHues": 0,
     "placeholders": [],
     "type": {
-     "under13": 0.63,
+     "under13": 0.62,
      "tiny": 0,
      "tinySamples": [],
      "sizes": [
       11,
       12,
       13,
+      14,
+      15,
       16,
-      18
+      18,
+      20
      ]
     },
     "title": {
      "text": "글쓰기",
      "size": 18,
-     "top": 160
+     "top": 159
     },
-    "colourShare": 0.006
+    "colourShare": 0.009
    },
    "consoleErrors": []
   },
@@ -822,8 +826,8 @@
    "load": "load",
    "screens": 2,
    "filled": [
-    0.89,
-    0.94
+    0.23,
+    0.26
    ],
    "motion": {
     "elements": 0,
@@ -839,13 +843,13 @@
      "h": 844
     },
     "page": {
-     "height": 1345,
+     "height": 1355,
      "screens": 1.6,
      "words": 83,
      "img": 0,
      "video": 0,
      "canvas": 0,
-     "svg": 19,
+     "svg": 20,
      "sections": 0,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
@@ -868,11 +872,11 @@
      "lines": 1,
      "size": 18,
      "vw": 4.6,
-     "font": "Inter",
+     "font": "Pretendard GOV",
      "weight": 600,
      "tracking": 0,
      "leading": 1.4,
-     "top": 156,
+     "top": 155,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
@@ -883,7 +887,7 @@
      "words": 1,
      "lines": 1,
      "size": 18,
-     "font": "Inter"
+     "font": "Pretendard GOV"
     },
     "headings": [],
     "headingSummary": {
@@ -898,7 +902,7 @@
     "type": {
      "families": [
       {
-       "family": "Inter",
+       "family": "Pretendard GOV",
        "share": 0.97,
        "mono": false
       },
@@ -914,18 +918,20 @@
       11,
       12,
       13,
+      15,
       16,
-      18
+      18,
+      20
      ],
-     "sizeCount": 6,
+     "sizeCount": 8,
      "notLoaded": [],
      "body": null,
      "measureChars": null,
      "max": {
-      "size": 18,
-      "vw": 4.6,
-      "font": "Inter",
-      "text": "글쓰기"
+      "size": 20,
+      "vw": 5.1,
+      "font": "Pretendard GOV",
+      "text": "Catui"
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -941,26 +947,17 @@
     "eyebrows": [],
     "numbered": [],
     "color": {
-     "bodyBg": "#fafbfc",
+     "bodyBg": "#ffffff",
      "bodyBgHsl": {
-      "h": 210,
-      "s": 0.25,
-      "l": 0.98
+      "h": 0,
+      "s": 0,
+      "l": 1
      },
      "dark": false,
      "sectionBgs": [
       {
-       "color": "#fafbfc",
-       "top": 0,
-       "hsl": {
-        "h": 210,
-        "s": 0.25,
-        "l": 0.98
-       }
-      },
-      {
        "color": "#ffffff",
-       "top": 139,
+       "top": 0,
        "hsl": {
         "h": 0,
         "s": 0,
@@ -971,19 +968,23 @@
      "textColors": [
       {
        "color": "#66727e",
-       "share": 0.64
+       "share": 0.68
+      },
+      {
+       "color": "#dde4ea",
+       "share": 0.12
       },
       {
        "color": "#2c3e50",
-       "share": 0.27
-      },
-      {
-       "color": "#ffffff",
-       "share": 0.05
+       "share": 0.11
       },
       {
        "color": "#0e7a63",
        "share": 0.05
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.04
       }
      ],
      "button": {
@@ -1022,13 +1023,12 @@
      "scrims": 0,
      "gradientSamples": [],
      "gradientText": 0,
-     "hairlines": 6,
+     "hairlines": 4,
      "hairlineSamples": [
-      "header.Catui_cm-head 390px",
-      "nav.Catui_cm-gnb 390px",
       "div.Catui_panel.Catui_field 324px",
       "div.Catui_cm-toolbar 324px",
-      "footer.Catui_cm-foot 390px"
+      "footer.Catui_cm-foot 390px",
+      "nav.Catui_cm-tabs 390px"
      ],
      "outlinedBoxes": 4,
      "dashed": 1,
@@ -1043,9 +1043,9 @@
     },
     "heroMedia": [],
     "nav": {
-     "links": 16,
+     "links": 17,
      "fixed": true,
-     "height": 119,
+     "height": 118,
      "floatingPill": false,
      "blur": false
     },
@@ -1056,16 +1056,16 @@
      "w": 390,
      "h": 844
     },
-    "pageH": 1345,
+    "pageH": 1355,
     "margins": {
      "left": 16,
-     "right": 21
+     "right": 33
     },
     "sections": [
      {
       "sel": "div.Catui_cm-cols",
       "tag": "div",
-      "top": 197,
+      "top": 196,
       "height": 126,
       "words": 2,
       "media": 0,
@@ -1084,8 +1084,8 @@
      {
       "sel": "div.Catui_tabs",
       "tag": "div",
-      "top": 436,
-      "height": 447,
+      "top": 435,
+      "height": 455,
       "words": 18,
       "media": 0,
       "middle": 0,
@@ -1103,16 +1103,16 @@
      {
       "sel": "div.Catui_field",
       "tag": "div",
-      "top": 899,
+      "top": 907,
       "height": 149,
       "words": 5,
       "media": 0,
-      "middle": 42,
+      "middle": 46,
       "heading": null,
       "left": 33,
-      "right": 153,
+      "right": 158,
       "textLeft": 33,
-      "textRight": 153,
+      "textRight": 158,
       "fullBleed": false,
       "footer": true,
       "hero": false,
@@ -1125,7 +1125,7 @@
      {
       "text": "글쓰기",
       "size": 18,
-      "top": 156,
+      "top": 155,
       "firstScreen": true
      }
     ],
@@ -1150,14 +1150,14 @@
      "h": 844
     },
     "dark": false,
-    "ground": "#fafbfc",
+    "ground": "#ffffff",
     "sidebar": null,
     "topbar": {
      "h": 72
     },
     "canvas": {
      "left": 16,
-     "right": -336
+     "right": -290
     },
     "hero": {
      "text": "글쓰기",
@@ -1166,11 +1166,11 @@
      "lines": 1,
      "size": 18,
      "vw": 4.6,
-     "font": "Inter",
+     "font": "Pretendard GOV",
      "weight": 600,
      "tracking": 0,
      "leading": 1.4,
-     "top": 156,
+     "top": 155,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
@@ -1189,7 +1189,11 @@
      "radii": [
       [
        8,
-       3
+       2
+      ],
+      [
+       6,
+       1
       ],
       [
        0,
@@ -1219,21 +1223,24 @@
     "chartHues": 0,
     "placeholders": [],
     "type": {
-     "under13": 0.63,
+     "under13": 0.62,
      "tiny": 0,
      "tinySamples": [],
      "sizes": [
       11,
       12,
       13,
+      14,
+      15,
       16,
-      18
+      18,
+      20
      ]
     },
     "title": {
      "text": "글쓰기",
      "size": 18,
-     "top": 156
+     "top": 155
     },
     "colourShare": 0.009
    },
@@ -1245,7 +1252,7 @@
    "level": "WARN",
    "id": "tiny-text",
    "width": 1440,
-   "message": "63% of the text is under 13px.",
+   "message": "62% of the text is under 13px.",
    "fix": "Data and labels read at 13–14px; keep 11–12px for sublines and axis ticks.",
    "alsoAt": [
     768,
