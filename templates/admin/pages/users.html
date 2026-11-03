@@ -15,11 +15,9 @@
 <script>
 catui.use(['table', 'layer'], function (table, layer) {
   var R = { '최고 관리자': 'success', '운영자': 'info', '읽기 전용': 'neutral' };
-  var users = [
-    ['김관리', 'admin@catui.dev', '최고 관리자', true, '방금', '활성'], ['김하늘', 'haneul@catui.dev', '최고 관리자', true, '10분 전', '활성'], ['이준', 'jun@catui.dev', '운영자', true, '어제', '활성'],
-    ['박서연', 'seoyeon@catui.dev', '운영자', false, '3일 전', '활성'], ['최민', 'min@catui.dev', '읽기 전용', true, '1주 전', '활성'], ['정수아', 'sua@catui.dev', '운영자', true, '2주 전', '잠김'],
-    ['강도현', 'dohyun@catui.dev', '읽기 전용', false, '한 달 전', '초대 대기'], ['윤지호', 'jiho@catui.dev', '운영자', true, '어제', '활성'],
-  ].map(function (u, i) { return { id: String(i + 1), name: u[0], email: u[1], role: u[2], mfa: u[3], last: u[4], status: u[5] }; });
+  // 모의 데이터: data/users.json
+  catui.admin.data('users').then(function (users) {
+  users = users.slice();
   table.render({ elem: '#us-table', id: 'us-table', data: users, page: true, limit: 10, caption: '관리자 목록', labelField: 'name',
     cols: [{ type: 'checkbox' }, { field: 'name', title: '이름', sort: true, templet: function (u) { return catui.html`<span class="Catui_line"><span class="Catui_av Catui_av-xs" aria-hidden="true">${u.name.slice(0, 1)}</span>${u.name}</span>`; } }, { field: 'email', title: '이메일' },
       { field: 'role', title: '권한', sort: true, templet: function (u) { return catui.html`<span class="Catui_badge Catui_badge-${R[u.role]}">${u.role}</span>`; } },
@@ -35,6 +33,7 @@ catui.use(['table', 'layer'], function (table, layer) {
   document.getElementById('us-invite').addEventListener('click', function () {
     layer.form({ title: '관리자 초대', area: 'sm', okText: '초대 보내기', fields: [{ name: 'email', label: '이메일', type: 'email', required: true }, { name: 'role', label: '권한', type: 'select', options: ['운영자', '읽기 전용', '최고 관리자'] }] })
       .then(function (v) { if (!v) return; users.push({ id: String(users.length + 1), name: v.email.split('@')[0], email: v.email, role: v.role, mfa: false, last: '—', status: '초대 대기' }); list.apply(); layer.msg('초대를 보냈습니다', { icon: 'success' }); });
+  });
   });
 });
 </script>
