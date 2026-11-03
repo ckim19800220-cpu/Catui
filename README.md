@@ -73,6 +73,18 @@ catui 위에 얹는 관리자 확장입니다. 본체 다음에 불러옵니다.
 - 소스: `src/admin/`(css·js), 템플릿: `templates/admin/`(menu.json · layout · pages 52종) → `docs/admin/templates/`
 - 문서: 상단 **CatuiAdmin** 탭 (`docs/admin/start/introduction.html`)
 
+## CatuiCommunity (커뮤니티·게시판)
+
+catui 위에 얹는 커뮤니티 확장입니다. CatuiAdmin과 같은 방식으로 불러옵니다.
+
+```html
+<link rel="stylesheet" href="dist/catui.min.css"><link rel="stylesheet" href="dist/community.min.css">
+<script src="dist/catui.min.js"></script><script src="dist/catcommunity.min.js"></script>
+```
+
+- 소스: `src/community/`, 템플릿: `templates/community/`(menu.json · layout · data · pages 22종) → `docs/community/templates/`
+- 문서: 상단 **CatuiCommunity** 탭 (`docs/community/start/introduction.html`)
+
 ## 라이선스
 
 [MIT](LICENSE) © 2026 imcatDevs — 상업적 사용·수정·재배포 자유, 저작권 고지(LICENSE 또는 배포 파일 머리 주석)만 유지하면 됩니다. 아이콘은 Line 01(CC0) + Catui 원본으로 별도 고지가 필요 없습니다. 보안 신고: [SECURITY.md](SECURITY.md) · 변경 이력: [CHANGELOG.md](CHANGELOG.md)

@@ -11,6 +11,13 @@
 - 문서 상단 **CatuiAdmin** 탭, `exports`에 `./admin` · `./admin.css`
 - 빌드 검사: 본체 클래스 재정의·hex 색·없는 토큰·템플릿 링크·id·label·h1·안 쓰인 클래스
 
+### 추가: CatuiCommunity (커뮤니티·게시판 확장)
+- `dist/community.css`(+min) · `dist/catcommunity.js`(+esm·min·map·d.ts) — `catui.community`: 목록(주소 동기화) · 추천/비추천 · 댓글 트리 · 글쓰기(임시 저장·안전 미리보기) · 투표 · 핫딜 남은 시간 · JSON 바인딩
+- 템플릿 22종(`docs/community/templates/`): 홈 · 인기글 · 게시판 6종 · 글 보기 · 투표 · 글쓰기 · 검색 · 프로필 · 쪽지 · 알림 · 스크랩 · 설정 · 순위 · 이벤트 · 로그인 · 가입 · 404
+- JSON 모의 데이터 11종 — 인기글(추천 − 비추천 ≥ 게시판 기준)·레벨·합계·비율은 원자료에서 계산
+- 모션: React Bits 에이전트 스킬(Emil Kowalski 기준)로 고른 곳에만, 모션 줄이기 존중
+- 문서 상단 **CatuiCommunity** 탭, `exports`에 `./community` · `./community.css`
+
 ## 2.0.0 — 2026-11-02
 
 전면 개편판 (MIT). 패키지 이름 `@imcat-ckim/catui`. 1.x(2026-03 이전 배포)와 API가 달라 메이저 버전을 올렸습니다.

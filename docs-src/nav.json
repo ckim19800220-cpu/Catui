@@ -1473,6 +1473,27 @@
           ]
         }
       ]
+    },
+    {
+      "id": "community",
+      "title": "CatuiCommunity",
+      "groups": [
+        {
+          "title": "시작",
+          "pages": [
+            { "path": "community/start/introduction", "title": "소개 · 화면 지도", "desc": "catui 위에 얹는 커뮤니티(게시판) 확장과 템플릿 22종." },
+            { "path": "community/start/install", "title": "설치 · 구조", "desc": "community.css · catcommunity.js 로드, 템플릿·메뉴·JSON 모의 데이터." },
+            { "path": "community/start/motion", "title": "모션 기준", "desc": "어디에 움직임을 넣고 어디서 뺐는지, 수치와 이유." }
+          ]
+        },
+        {
+          "title": "확장",
+          "pages": [
+            { "path": "community/modules", "title": "catcommunity.js API", "desc": "load · row · list · vote · comments · editor · widgets · data/bind." },
+            { "path": "community/css", "title": "community.css 클래스", "desc": "Catui_cm-* 클래스와 토큰.", "css": ["community/css/tokens.css", "community/css/shell.css", "community/css/list.css", "community/css/post.css", "community/css/pages.css", "community/css/motion.css"] }
+          ]
+        }
+      ]
     }
   ]
 }

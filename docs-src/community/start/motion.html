@@ -1,0 +1,40 @@
+<section aria-labelledby="basis">
+<h2 id="basis">기준</h2>
+<p>React Bits 에이전트 스킬(find-animation-opportunities · improve-animations · review-animations · apple-design, 원본 Emil Kowalski MIT)의 규칙을 따랐습니다. React 코드는 가져오지 않고 수치와 원칙만 Catui CSS로 새로 썼습니다.</p>
+<ul>
+  <li>움직임은 <b>이유가 있을 때만</b>: 피드백 · 상태 변화 · 갑작스러운 변화 막기</li>
+  <li><b>자주 보는 곳일수록 덜</b> 움직인다 — 하루 수십 번 보는 목록·키보드 동작은 움직이지 않음</li>
+  <li>들어오고 나가는 것은 ease-out, UI는 300ms 미만, transform·opacity만, 모션 줄이기면 즉시</li>
+</ul>
+</section>
+
+<section aria-labelledby="tokens">
+<h2 id="tokens">토큰</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">모션 토큰</caption>
+<thead><tr><th scope="col">토큰</th><th scope="col">값</th><th scope="col">쓰는 곳</th></tr></thead><tbody>
+<tr><td><code>--Catui_cm-ease-out</code></td><td><code>cubic-bezier(0.23, 1, 0.32, 1)</code></td><td>모든 UI 전환</td></tr>
+<tr><td><code>--Catui_cm-dur-press</code> · <code>--Catui_cm-press</code></td><td>160ms · 0.97</td><td>누름 피드백</td></tr>
+<tr><td><code>--Catui_cm-dur-ui</code></td><td>200ms</td><td>추천 수 변화, 펼침 아이콘</td></tr>
+<tr><td><code>--Catui_cm-dur-expand</code></td><td>250ms</td><td>답글 펼침(높이)</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="where">
+<h2 id="where">넣은 곳 · 뺀 곳</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">모션 적용 목록</caption>
+<thead><tr><th scope="col">곳</th><th scope="col">결정</th><th scope="col">이유</th></tr></thead><tbody>
+<tr><td>추천·비추천, 글쓰기 버튼, 하단 탭</td><td>누를 때 scale(0.97) 160ms</td><td>피드백 — 눌린 것을 손으로 느끼게</td></tr>
+<tr><td>추천 수</td><td>바뀔 때 아래에서 6px 올라오며 200ms</td><td>피드백 — 숫자가 바뀐 것을 알림 (처음 그릴 때는 움직이지 않음)</td></tr>
+<tr><td>답글 펼치기</td><td>높이 0 → 내용 250ms, 다시 누르면 그 자리에서 되돌아감</td><td>상태 변화 — 내용이 갑자기 나타나지 않게</td></tr>
+<tr><td>글 목록 등장</td><td><b>뺌</b></td><td>하루 수십 번 보는 화면 — 스태거가 느려 보임</td></tr>
+<tr><td>검색·키보드 이동·페이지 이동</td><td><b>뺌</b></td><td>키보드·고빈도 동작</td></tr>
+<tr><td>조회수·추천 같은 데이터 숫자</td><td><b>뺌</b>(바뀔 때 제외)</td><td>읽는 데이터는 장식하지 않음</td></tr>
+<tr><td>맨 위로</td><td>부드럽게 스크롤, 모션 줄이기면 즉시</td><td>위치 이동을 보여 줌</td></tr>
+</tbody></table></div>
+<catui-example title="누름 피드백 · 숫자 변화 (추천을 눌러 보세요)">
+  <div class="Catui_cm"><div class="Catui_cm-vote Catui_cm-vote-lg" data-catui-cm-vote="doc:demo" data-up="41" data-down="2">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-dir="up"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-thumbs-up"></use></svg><span>추천</span><b data-n>41</b></button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-dir="down"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-thumbs-down"></use></svg><span>비추천</span><b data-n>2</b></button>
+  </div></div>
+</catui-example>
+</section>

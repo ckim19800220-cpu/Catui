@@ -39,6 +39,7 @@
 .Catui_cm-c{display:grid;gap:var(--Catui_space-1);padding:var(--Catui_space-3) 0;border-bottom:1px solid var(--Catui_divider-color)}
 .Catui_cm-cs-best .Catui_cm-c,.Catui_cm-c:last-child{border-bottom:0}
 .Catui_cm-c-best .Catui_cm-c-body{font-weight:500}
+.Catui_cm-cs-best .Catui_cm-meta{color:var(--Catui_color-text-primary)}   /* 색 배경 위 보조 글자 대비 4.5:1 이상 */
 .Catui_cm-vote-sm button{min-height:auto}
 .Catui_cm-c-head{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2)}
 .Catui_cm-c-head b{display:inline-flex;align-items:center;gap:var(--Catui_space-1)}

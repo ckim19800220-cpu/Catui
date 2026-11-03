@@ -7,8 +7,8 @@
   --Catui_cm-gap:var(--Catui_space-5);
   --Catui_cm-head-h:calc(var(--Catui_space-10) + var(--Catui_space-2));
   --Catui_cm-row-pad:var(--Catui_space-3);
-  --Catui_cm-hot:var(--Catui_color-danger);                     /* 인기·추천 강조: 색 + 숫자 + 아이콘(색만으로 알리지 않음) */
-  --Catui_cm-hot-soft:var(--Catui_color-danger-soft);
+  --Catui_cm-hot:var(--Catui_color-brand-strong);               /* 인기·추천 강조: 좋은 신호이므로 브랜드색(빨강은 오류·위험에만) + 숫자 + 아이콘 */
+  --Catui_cm-hot-soft:var(--Catui_color-brand-soft);
   --Catui_cm-read:var(--Catui_color-text-secondary);
   --Catui_cm-prose-size:17px;
   --Catui_cm-prose-lh:1.8;
@@ -27,6 +27,10 @@
 .Catui_cm{min-height:100vh;display:flex;flex-direction:column;background:var(--Catui_color-surface-muted)}
 .Catui_cm [hidden]{display:none !important}
 .Catui_cm a{color:inherit}
+/* 글자 규칙(taste-skill): 라벨·표 머리는 문장형(대문자·자간 없이), "필수"는 보조색 — 빨강은 오류에만 */
+.Catui_cm :is(.Catui_label,.Catui_tbl th,.Catui_stat-label){text-transform:none;letter-spacing:0}
+.Catui_cm .Catui_req{color:var(--Catui_color-text-secondary)}
+.Catui_cm :is(.Catui_tbl,.Catui_cm-meta,.Catui_cm-up,.Catui_num){font-variant-numeric:tabular-nums}
 
 /* 머리 */
 .Catui_cm-head{position:sticky;top:0;z-index:30;background:var(--Catui_card-bg);border-bottom:1px solid var(--Catui_color-border)}
@@ -214,6 +218,7 @@
 .Catui_cm-c{display:grid;gap:var(--Catui_space-1);padding:var(--Catui_space-3) 0;border-bottom:1px solid var(--Catui_divider-color)}
 .Catui_cm-cs-best .Catui_cm-c,.Catui_cm-c:last-child{border-bottom:0}
 .Catui_cm-c-best .Catui_cm-c-body{font-weight:500}
+.Catui_cm-cs-best .Catui_cm-meta{color:var(--Catui_color-text-primary)}   /* 색 배경 위 보조 글자 대비 4.5:1 이상 */
 .Catui_cm-vote-sm button{min-height:auto}
 .Catui_cm-c-head{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2)}
 .Catui_cm-c-head b{display:inline-flex;align-items:center;gap:var(--Catui_space-1)}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>catcommunity.js API · CatuiCommunity · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="load · row · list · vote · comments · editor · widgets · data/bind.">
+<link rel="icon" href="../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../dist/catui.min.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<link rel="stylesheet" href="../../dist/community.css">
+<script src="../../dist/catui.js"></script>
+<script src="../../dist/catcommunity.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../index.html"><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html" aria-current="page">CatuiCommunity</a></nav>
+  <span class="doc-version">v2.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CatuiCommunity 메뉴</summary><nav aria-label="CatuiCommunity 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../community/start/introduction.html">소개 · 화면 지도</a></li><li><a href="../community/start/install.html">설치 · 구조</a></li><li><a href="../community/start/motion.html">모션 기준</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../community/modules.html" aria-current="page">catcommunity.js API</a></li><li><a href="../community/css.html">community.css 클래스</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CatuiCommunity · 확장</p>
+<h1 class="Catui_h1">catcommunity.js API</h1>
+<p class="Catui_lead">load · row · list · vote · comments · editor · widgets · data/bind.</p>
+
+<section aria-labelledby="api">
+<h2 id="api">catui.community</h2>
+<p><code>catcommunity.js</code>가 <code>catui.extend({ community })</code>로 등록하고, 문서가 준비되면 <code>[data-catui-cm]</code> 루트를 찾아 연결합니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">catui.community API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead><tbody>
+<tr><td><code>init(scope?)</code> · <code>destroy()</code> · <code>ready</code></td><td>연결 · 정리 · 바인딩이 끝나면 풀리는 Promise</td></tr>
+<tr><td><code>on(이벤트, fn)</code></td><td><code>theme</code> · <code>vote</code> { key, dir } · <code>comment</code> { item, parent } · <code>draft</code> · <code>poll</code> { name, choice } · <code>data</code></td></tr>
+<tr><td><code>load()</code></td><td>boards·posts·users를 합쳐 { boards, B, posts, users, U, byId } — 인기글·레벨 계산 포함, 한 번만</td></tr>
+<tr><td><code>row(post, { board, rank })</code> · <code>empty(text)</code> · <code>badge(user)</code></td><td>목록 한 줄 · 빈 목록 · 레벨 배지 마크업 (글자는 모두 이스케이프)</td></tr>
+<tr><td><code>[data-catui-cm-list="list|card|gallery|deal|qna|hot"]</code></td><td>게시판 목록: 주소 ?b=&amp;cat=&amp;sort=&amp;page= ↔ 화면, 뒤로 가기 지원</td></tr>
+<tr><td><code>[data-catui-cm-vote="post:id"]</code> · <code>voteRequest</code></td><td>추천/비추천 한 번(기억)·취소·바꾸기, 낙관적 갱신 후 실패 시 되돌림. 실서비스는 <code>voteRequest = (key, dir) =&gt; fetch(…)</code></td></tr>
+<tr><td><code>[data-catui-cm-comments="파일"]</code></td><td>댓글 트리·베스트·정렬·답글 펼침·쓰기(Ctrl+Enter, 한글 조합 중 무시)·신고</td></tr>
+<tr><td><code>form[data-catui-cm-editor]</code> · <code>md(text)</code></td><td>글쓰기: 말머리 연동·서식 버튼·안전 미리보기·사진 미리보기·임시 저장·떠날 때 확인</td></tr>
+<tr><td><code>form[data-catui-cm-poll]</code> · <code>[data-catui-cm-until]</code> · <code>[data-catui-cm-ago]</code></td><td>투표(한 번·비율 계산) · 핫딜 남은 시간 · 상대 시간 (1분마다)</td></tr>
+<tr><td><code>fav</code> · <code>read</code> · <code>store</code> · <code>josa(단어, '을')</code></td><td>즐겨찾기 게시판 · 읽은 글 · 저장소(localStorage "catui:community") · 조사</td></tr>
+<tr><td><code>data(name)</code> · <code>bind()</code> · <code>derive</code> · <code>format(v, 형식)</code> · <code>ago(iso)</code></td><td>JSON 모의 데이터 (CatuiAdmin과 같은 API)</td></tr>
+</tbody></table></div>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../community/start/motion.html"><span>이전</span>모션 기준</a><a class="doc-pager-next" href="../community/css.html"><span>다음</span>community.css 클래스</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#api">catui.community</a></li></ul></aside>
+</div>
+</div>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

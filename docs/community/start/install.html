@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설치 · 구조 · CatuiCommunity · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="community.css · catcommunity.js 로드, 템플릿·메뉴·JSON 모의 데이터.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../../dist/community.css">
+<script src="../../../dist/catui.js"></script>
+<script src="../../../dist/catcommunity.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html" aria-current="page">CatuiCommunity</a></nav>
+  <span class="doc-version">v2.0.0</span>
+  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+</div></header>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CatuiCommunity 메뉴</summary><nav aria-label="CatuiCommunity 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../community/start/introduction.html">소개 · 화면 지도</a></li><li><a href="../../community/start/install.html" aria-current="page">설치 · 구조</a></li><li><a href="../../community/start/motion.html">모션 기준</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../../community/modules.html">catcommunity.js API</a></li><li><a href="../../community/css.html">community.css 클래스</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<p class="doc-eyebrow">CatuiCommunity · 시작</p>
+<h1 class="Catui_h1">설치 · 구조</h1>
+<p class="Catui_lead">community.css · catcommunity.js 로드, 템플릿·메뉴·JSON 모의 데이터.</p>
+
+<section aria-labelledby="files">
+<h2 id="files">파일 · 불러오기</h2>
+<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+&lt;link rel="stylesheet" href="dist/community.min.css"&gt;
+…
+&lt;script src="dist/catui.min.js"&gt;&lt;/script&gt;
+&lt;script src="dist/catcommunity.min.js"&gt;&lt;/script&gt;      ← catui.js 다음 (순서가 틀리면 콘솔에 안내)
+
+// npm · ES 모듈
+import catui from '@imcat-ckim/catui';
+import community from '@imcat-ckim/catui/community';
+import '@imcat-ckim/catui/css';
+import '@imcat-ckim/catui/community.css';</code></pre>
+<p>배포 파일: <code>community.css</code>(+min) · <code>catcommunity.js</code> · <code>catcommunity.esm.js</code> · <code>*.min.js</code>(+map) · <code>catcommunity.d.ts</code></p>
+</section>
+
+<section aria-labelledby="shell">
+<h2 id="shell">사이트 셸</h2>
+<pre><code>&lt;div class="Catui_site Catui_cm" data-catui-cm&gt;
+  &lt;header class="Catui_cm-head"&gt; 로고 · 검색(form[data-catui-cm-search] → search.html?q=) · 글쓰기 · 알림 · 테마([data-catui-cm-theme]) · 내 정보
+    &lt;nav class="Catui_cm-gnb"&gt; 게시판 메뉴 (767px 이하 가로 스크롤) + 더보기
+  &lt;div class="Catui_cm-wrap"&gt; &lt;main class="Catui_cm-main"&gt; … &lt;/main&gt; &lt;aside class="Catui_cm-aside" data-catui-cm-aside&gt;(인기 순위·즐겨찾기·공지)
+  &lt;footer class="Catui_cm-foot"&gt;
+  &lt;nav class="Catui_cm-tabs"&gt; 767px 이하 하단 탭(홈·인기·글쓰기·알림·내 정보)
+&lt;/div&gt;</code></pre>
+</section>
+
+<section aria-labelledby="tpl">
+<h2 id="tpl">템플릿 · 메뉴</h2>
+<ul>
+  <li><code>templates/community/pages/이름.html</code> — 머리 주석 <code>&lt;!-- title: 핫딜 | nav: hotdeal | aside: none | layout: blank --&gt;</code>. <code>nav</code>는 상단 메뉴·하단 탭에서 현재 위치로 표시할 id, <code>aside: none</code>은 옆줄 없이 넓게.</li>
+  <li><code>templates/community/menu.json</code> — <code>gnb</code>(상단 게시판), <code>more</code>(더보기), <code>tabs</code>(하단 탭). 아직 없는 화면은 메뉴에서 빠집니다.</li>
+  <li><code>npm run build</code> → <code>docs/community/templates/</code>. 검사: 정의 안 된 클래스·없는 아이콘·id 중복·label·화면 링크·h1·안 쓰인 클래스·JSON 문법, CSS의 hex·없는 토큰·본체 클래스 재정의.</li>
+</ul>
+</section>
+
+<section aria-labelledby="data">
+<h2 id="data">JSON 모의 데이터</h2>
+<p><code>templates/community/data/*.json</code> → <code>docs/community/templates/data/</code>. 실서비스는 같은 모양의 API를 만들고 <code>catui.community.dataBase = '/api/'</code>만 바꿉니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">데이터 파일</caption>
+<thead><tr><th scope="col">파일</th><th scope="col">내용 · 쓰는 곳</th></tr></thead><tbody>
+<tr><td><code>boards.json</code></td><td>게시판 id·이름·설명·말머리·인기 기준(hotCut)·종류</td></tr>
+<tr><td><code>posts.json</code></td><td>글 121개 — 홈·인기글·게시판·검색·프로필·스크랩·옆줄이 모두 이 파일을 공유</td></tr>
+<tr><td><code>users.json</code></td><td>회원(닉네임·글·댓글·받은 추천) → 레벨 계산</td></tr>
+<tr><td><code>post-1201.json</code> · <code>comments-1201.json</code></td><td>글 본문 블록 · 댓글 트리 (댓글 수 = 글 데이터 9개)</td></tr>
+<tr><td><code>poll-1301.json</code> · <code>events.json</code></td><td>투표 항목·표 수 · 모임 정원·참여</td></tr>
+<tr><td><code>notices</code> · <code>notifications</code> · <code>messages</code> · <code>trends</code></td><td>공지 · 알림 · 쪽지 · 많이 찾는 검색어</td></tr>
+</tbody></table></div>
+<p>바인딩 속성은 CatuiAdmin과 같고 접두사만 <code>data-catui-cm-</code>입니다(<code>-src · -text · -rows · -field · -attr · -class · -bool</code>, <code>community.derive['이름']</code>). 형식에 <code>compact</code>(1.2만)·<code>ago</code>(3분 전)가 더 있습니다.</p>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../community/start/introduction.html"><span>이전</span>소개 · 화면 지도</a><a class="doc-pager-next" href="../../community/start/motion.html"><span>다음</span>모션 기준</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#files">파일 · 불러오기</a></li><li><a href="#shell">사이트 셸</a></li><li><a href="#tpl">템플릿 · 메뉴</a></li><li><a href="#data">JSON 모의 데이터</a></li></ul></aside>
+</div>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

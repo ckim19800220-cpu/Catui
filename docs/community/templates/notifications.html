@@ -56,10 +56,10 @@ catui.use(function () {
   cm.data('notifications').then(function (items) {
     var read = function () { return cm.store.get('notiRead', []); };
     var draw = function () {
-      var k = location.hash.slice(1), r = read(), shown = items.filter(function (x) { return !k || x.kind === k; });
+      var k = location.hash.slice(1).replace('all', ''), r = read(), shown = items.filter(function (x) { return !k || x.kind === k; });
       var unread = items.filter(function (x) { return x.unread && r.indexOf(x.id) < 0; }).length;
       document.getElementById('nt-n').textContent = '읽지 않은 알림 ' + unread + '개';
-      catui.mount(document.getElementById('nt-tabs'), catui.html`${Object.keys(KIND).map(function (key) { return catui.html`<a href="#${key}"${key === k ? catui.html` aria-current="page"` : ''}>${KIND[key]}</a>`; })}`);
+      catui.mount(document.getElementById('nt-tabs'), catui.html`${Object.keys(KIND).map(function (key) { return catui.html`<a href="#${key || 'all'}"${key === k ? catui.html` aria-current="page"` : ''}>${KIND[key]}</a>`; })}`);
       catui.mount(document.getElementById('nt-list'), shown.length ? catui.html`${shown.map(function (x) { var un = x.unread && r.indexOf(x.id) < 0; return catui.html`<li class="Catui_cm-row${un ? '' : ' Catui_cm-read'}">${catui.icon(ICON[x.kind] || 'bell', 18)}<div class="Catui_cm-row-main"><a class="Catui_cm-title" href="${x.href}" data-id="${x.id}"><span class="Catui_cm-title-t">${x.text}</span>${un ? catui.html`<span class="Catui_badge Catui_badge-success">새 알림</span>` : catui.html`<span class="Catui_clip"> (읽음)</span>`}</a><span class="Catui_cm-meta"><span>${KIND[x.kind]}</span><time datetime="${x.time}">${cm.ago(x.time)}</time></span></div></li>`; })}` : cm.empty('알림이 없습니다.'));
     };
     document.getElementById('nt-list').addEventListener('click', function (e) { var a = e.target.closest('[data-id]'); if (a) cm.store.set('notiRead', read().concat(a.dataset.id)); });

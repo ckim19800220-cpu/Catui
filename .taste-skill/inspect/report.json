@@ -1,15 +1,16 @@
 {
- "url": "http://127.0.0.1:8766/docs/admin/templates/form-buttons.html",
- "at": "2026-11-03T06:48:03.977Z",
+ "url": "http://127.0.0.1:8766/docs/community/templates/write.html",
+ "at": "2026-11-03T08:08:28.661Z",
  "allow": [],
  "viewports": [
   {
    "width": 1440,
    "height": 900,
    "load": "load",
-   "screens": 1,
+   "screens": 2,
    "filled": [
-    0.51
+    0.8,
+    0.81
    ],
    "motion": {
     "elements": 0,
@@ -25,14 +26,14 @@
      "h": 900
     },
     "page": {
-     "height": 900,
-     "screens": 1,
-     "words": 154,
+     "height": 1139,
+     "screens": 1.3,
+     "words": 80,
      "img": 0,
      "video": 0,
      "canvas": 0,
-     "svg": 59,
-     "sections": 1,
+     "svg": 19,
+     "sections": 0,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
      "uiFragments": 0,
@@ -48,27 +49,27 @@
      "videosNoPoster": 0
     },
     "hero": {
-     "text": "버튼",
+     "text": "글쓰기",
      "words": 1,
-     "chars": 2,
+     "chars": 3,
      "lines": 1,
-     "size": 24,
-     "vw": 1.7,
+     "size": 18,
+     "vw": 1.3,
      "font": "Inter",
      "weight": 600,
      "tracking": 0,
-     "leading": 1.3,
-     "top": 80,
+     "leading": 1.4,
+     "top": 160,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
      "position": "left"
     },
     "h1": {
-     "text": "버튼",
+     "text": "글쓰기",
      "words": 1,
      "lines": 1,
-     "size": 24,
+     "size": 18,
      "font": "Inter"
     },
     "headings": [],
@@ -85,12 +86,12 @@
      "families": [
       {
        "family": "Inter",
-       "share": 0.99,
+       "share": 0.97,
        "mono": false
       },
       {
        "family": "Noto Sans SC",
-       "share": 0.01,
+       "share": 0.03,
        "mono": false
       }
      ],
@@ -100,20 +101,18 @@
       11,
       12,
       13,
-      14,
-      15,
       16,
-      24
+      18
      ],
-     "sizeCount": 8,
+     "sizeCount": 6,
      "notLoaded": [],
      "body": null,
      "measureChars": null,
      "max": {
-      "size": 24,
-      "vw": 1.7,
+      "size": 18,
+      "vw": 1.3,
       "font": "Inter",
-      "text": "버튼"
+      "text": "글쓰기"
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -124,7 +123,7 @@
      "microSamples": [],
      "upperShare": 0.05,
      "centerShare": 0.09,
-     "smallText": 4
+     "smallText": 3
     },
     "eyebrows": [],
     "numbered": [],
@@ -145,44 +144,49 @@
         "s": 0.25,
         "l": 0.98
        }
+      },
+      {
+       "color": "#ffffff",
+       "top": 139,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
       }
      ],
      "textColors": [
       {
        "color": "#66727e",
-       "share": 0.33
-      },
-      {
-       "color": "#9facbb",
-       "share": 0.26
-      },
-      {
-       "color": "#dde4ea",
-       "share": 0.21
+       "share": 0.67
       },
       {
        "color": "#2c3e50",
-       "share": 0.12
+       "share": 0.25
       },
       {
        "color": "#ffffff",
+       "share": 0.05
+      },
+      {
+       "color": "#0e7a63",
        "share": 0.04
       }
      ],
      "button": {
-      "bg": "#ffffff",
+      "bg": "#0e7a63",
       "hsl": {
-       "h": 0,
-       "s": 0,
-       "l": 1
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
       },
-      "fg": "#2c3e50"
+      "fg": "#ffffff"
      },
      "lowContrast": []
     },
     "buttons": {
-     "count": 14,
-     "inHero": 14,
+     "count": 4,
+     "inHero": 4,
      "radius": 6,
      "height": 34,
      "withShadow": 0,
@@ -191,56 +195,45 @@
      "upper": 0,
      "heroLabels": [
       "본문으로 이동",
-      "버튼",
-      "검색 Ctrl K",
-      "김",
-      "더 보기"
+      "글쓰기",
+      "지우기",
+      "올리기"
      ]
     },
     "surfaces": {
-     "shadowStatic": 7,
-     "shadowOverlay": 0,
+     "shadowStatic": 1,
+     "shadowOverlay": 1,
      "shadowSamples": [
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px"
+      "div.Catui_dd-menu.Catui_dd-sm → rgba(16, 24, 40, 0.08) 0px 4px 12px 0px"
      ],
      "gradients": 0,
      "scrims": 0,
      "gradientSamples": [],
      "gradientText": 0,
-     "hairlines": 8,
+     "hairlines": 5,
      "hairlineSamples": [
-      "header.Catui_topbar.Catui_adm-top 1240px",
-      "header.Catui_card-h 382px",
-      "header.Catui_card-h 382px",
-      "header.Catui_card-h 382px",
-      "header.Catui_card-h 382px"
+      "header.Catui_cm-head 1440px",
+      "nav.Catui_cm-gnb 1440px",
+      "div.Catui_panel.Catui_field 1142px",
+      "div.Catui_cm-toolbar 1142px",
+      "footer.Catui_cm-foot 1440px"
      ],
-     "outlinedBoxes": 7,
-     "dashed": 0,
+     "outlinedBoxes": 3,
+     "dashed": 1,
      "blurred": 0,
-     "roundedBoxes": 7,
+     "roundedBoxes": 3,
      "boxRadius": 8,
      "squareMedia": 0,
      "roundedMedia": 0,
      "mediaRadius": 0,
      "textShadow": 0,
-     "cardRows": [
-      {
-       "count": 5,
-       "iconTopped": true,
-       "rounded": true,
-       "top": 155
-      }
-     ]
+     "cardRows": []
     },
     "heroMedia": [],
     "nav": {
-     "links": 1,
+     "links": 17,
      "fixed": true,
-     "height": 900,
+     "height": 119,
      "floatingPill": false,
      "blur": false
     },
@@ -251,39 +244,78 @@
      "w": 1440,
      "h": 900
     },
-    "pageH": 900,
+    "pageH": 1139,
     "margins": {
-     "left": 28,
-     "right": 45
+     "left": 128,
+     "right": 149
     },
-    "sections": [],
+    "sections": [
+     {
+      "sel": "div.Catui_tabs",
+      "tag": "div",
+      "top": 368,
+      "height": 429,
+      "words": 18,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 149,
+      "right": 149,
+      "textLeft": 149,
+      "textRight": 149,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.Catui_field",
+      "tag": "div",
+      "top": 813,
+      "height": 149,
+      "words": 5,
+      "media": 0,
+      "middle": 451,
+      "heading": null,
+      "left": 149,
+      "right": 678,
+      "textLeft": 149,
+      "textRight": 678,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
     "gaps": [],
     "h1s": [
      {
-      "text": "버튼",
-      "size": 24,
-      "top": 80,
+      "text": "글쓰기",
+      "size": 18,
+      "top": 160,
       "firstScreen": true
      }
     ],
     "edgeText": [],
     "edges": [
      {
-      "x": 224,
+      "x": 149,
       "n": 1
      }
     ],
     "leftBlocks": 1,
-    "bodySize": 13,
+    "bodySize": 12,
     "stage": false,
     "explains": false,
     "slivers": [],
-    "voidShare": 0.24,
+    "voidShare": 0.1,
     "voidBox": {
-     "x": 120,
-     "y": 600,
-     "w": 1320,
-     "h": 240
+     "x": 360,
+     "y": 360,
+     "w": 1080,
+     "h": 120
     }
    },
    "app": {
@@ -293,31 +325,24 @@
     },
     "dark": false,
     "ground": "#fafbfc",
-    "sidebar": {
-     "w": 200,
-     "tag": "aside",
-     "links": 53,
-     "share": 0.14
-    },
-    "topbar": {
-     "h": 56
-    },
+    "sidebar": null,
+    "topbar": null,
     "canvas": {
-     "left": 21,
-     "right": 24
+     "left": 128,
+     "right": 128
     },
     "hero": {
-     "text": "버튼",
+     "text": "글쓰기",
      "words": 1,
-     "chars": 2,
+     "chars": 3,
      "lines": 1,
-     "size": 24,
-     "vw": 1.7,
+     "size": 18,
+     "vw": 1.3,
      "font": "Inter",
      "weight": 600,
      "tracking": 0,
-     "leading": 1.3,
-     "top": 80,
+     "leading": 1.4,
+     "top": 160,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
@@ -325,35 +350,18 @@
     },
     "charts": 0,
     "layout": {
-     "panels": 7,
-     "firstScreen": 7,
-     "ragged": [
-      {
-       "diff": 42,
-       "top": 155
-      },
-      {
-       "diff": 54,
-       "top": 155
-      },
-      {
-       "diff": 26,
-       "top": 363
-      },
-      {
-       "diff": 38,
-       "top": 363
-      }
-     ],
+     "panels": 1,
+     "firstScreen": 1,
+     "ragged": [],
      "voids": []
     },
     "tiles": 0,
     "panels": {
-     "count": 7,
+     "count": 3,
      "radii": [
       [
        8,
-       6
+       2
       ],
       [
        0,
@@ -363,20 +371,14 @@
      "heavyBorders": 0,
      "borderSamples": [],
      "heavyShadows": 0,
-     "softShadows": 6,
+     "softShadows": 0,
      "shadowSamples": [],
      "glass": 0
     },
     "chips": {
-     "count": 1,
-     "hues": 1,
-     "samples": [
-      {
-       "hue": 167,
-       "size": 34,
-       "radius": "0px"
-      }
-     ]
+     "count": 0,
+     "hues": 0,
+     "samples": []
     },
     "numbers": {
      "cells": 0,
@@ -389,25 +391,23 @@
     "chartHues": 0,
     "placeholders": [],
     "type": {
-     "under13": 0.35,
+     "under13": 0.63,
      "tiny": 0,
      "tinySamples": [],
      "sizes": [
       11,
       12,
       13,
-      14,
-      15,
       16,
-      24
+      18
      ]
     },
     "title": {
-     "text": "버튼",
-     "size": 24,
-     "top": 80
+     "text": "글쓰기",
+     "size": 18,
+     "top": 160
     },
-    "colourShare": 0.01
+    "colourShare": 0.003
    },
    "consoleErrors": []
   },
@@ -415,9 +415,10 @@
    "width": 768,
    "height": 1024,
    "load": "load",
-   "screens": 1,
+   "screens": 2,
    "filled": [
-    0.65
+    0.9,
+    0.97
    ],
    "motion": {
     "elements": 0,
@@ -433,14 +434,14 @@
      "h": 1024
     },
     "page": {
-     "height": 1024,
-     "screens": 1,
-     "words": 145,
+     "height": 1139,
+     "screens": 1.1,
+     "words": 80,
      "img": 0,
      "video": 0,
      "canvas": 0,
-     "svg": 59,
-     "sections": 1,
+     "svg": 19,
+     "sections": 0,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
      "uiFragments": 0,
@@ -456,27 +457,27 @@
      "videosNoPoster": 0
     },
     "hero": {
-     "text": "버튼",
+     "text": "글쓰기",
      "words": 1,
-     "chars": 2,
+     "chars": 3,
      "lines": 1,
-     "size": 24,
-     "vw": 3.1,
+     "size": 18,
+     "vw": 2.3,
      "font": "Inter",
      "weight": 600,
      "tracking": 0,
-     "leading": 1.3,
-     "top": 80,
+     "leading": 1.4,
+     "top": 160,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
      "position": "left"
     },
     "h1": {
-     "text": "버튼",
+     "text": "글쓰기",
      "words": 1,
      "lines": 1,
-     "size": 24,
+     "size": 18,
      "font": "Inter"
     },
     "headings": [],
@@ -493,12 +494,12 @@
      "families": [
       {
        "family": "Inter",
-       "share": 0.98,
+       "share": 0.97,
        "mono": false
       },
       {
        "family": "Noto Sans SC",
-       "share": 0.02,
+       "share": 0.03,
        "mono": false
       }
      ],
@@ -508,20 +509,18 @@
       11,
       12,
       13,
-      14,
-      15,
       16,
-      24
+      18
      ],
-     "sizeCount": 8,
+     "sizeCount": 6,
      "notLoaded": [],
      "body": null,
      "measureChars": null,
      "max": {
-      "size": 24,
-      "vw": 3.1,
+      "size": 18,
+      "vw": 2.3,
       "font": "Inter",
-      "text": "버튼"
+      "text": "글쓰기"
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -530,9 +529,9 @@
      "microLabels": 0,
      "microLabelShare": 0,
      "microSamples": [],
-     "upperShare": 0,
-     "centerShare": 0.16,
-     "smallText": 4
+     "upperShare": 0.05,
+     "centerShare": 0.09,
+     "smallText": 3
     },
     "eyebrows": [],
     "numbered": [],
@@ -553,44 +552,49 @@
         "s": 0.25,
         "l": 0.98
        }
+      },
+      {
+       "color": "#ffffff",
+       "top": 139,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
       }
      ],
      "textColors": [
       {
        "color": "#66727e",
-       "share": 0.63
+       "share": 0.67
       },
       {
        "color": "#2c3e50",
-       "share": 0.24
+       "share": 0.25
       },
       {
        "color": "#ffffff",
-       "share": 0.08
+       "share": 0.05
       },
       {
        "color": "#0e7a63",
-       "share": 0.02
-      },
-      {
-       "color": "#4a5a68",
-       "share": 0.01
+       "share": 0.04
       }
      ],
      "button": {
-      "bg": "#ffffff",
+      "bg": "#0e7a63",
       "hsl": {
-       "h": 0,
-       "s": 0,
-       "l": 1
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
       },
-      "fg": "#2c3e50"
+      "fg": "#ffffff"
      },
      "lowContrast": []
     },
     "buttons": {
-     "count": 12,
-     "inHero": 12,
+     "count": 4,
+     "inHero": 4,
      "radius": 6,
      "height": 34,
      "withShadow": 0,
@@ -599,56 +603,45 @@
      "upper": 0,
      "heroLabels": [
       "본문으로 이동",
-      "김",
-      "더 보기",
-      "크게",
-      "새 주문"
+      "글쓰기",
+      "지우기",
+      "올리기"
      ]
     },
     "surfaces": {
-     "shadowStatic": 7,
-     "shadowOverlay": 0,
+     "shadowStatic": 1,
+     "shadowOverlay": 1,
      "shadowSamples": [
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px"
+      "div.Catui_dd-menu.Catui_dd-sm → rgba(16, 24, 40, 0.08) 0px 4px 12px 0px"
      ],
      "gradients": 0,
      "scrims": 0,
      "gradientSamples": [],
      "gradientText": 0,
-     "hairlines": 8,
+     "hairlines": 5,
      "hairlineSamples": [
-      "header.Catui_topbar.Catui_adm-top 712px",
-      "header.Catui_card-h 320px",
-      "header.Catui_card-h 320px",
-      "header.Catui_card-h 320px",
-      "header.Catui_card-h 320px"
+      "header.Catui_cm-head 768px",
+      "nav.Catui_cm-gnb 768px",
+      "div.Catui_panel.Catui_field 694px",
+      "div.Catui_cm-toolbar 694px",
+      "footer.Catui_cm-foot 768px"
      ],
-     "outlinedBoxes": 7,
-     "dashed": 0,
+     "outlinedBoxes": 3,
+     "dashed": 1,
      "blurred": 0,
-     "roundedBoxes": 7,
+     "roundedBoxes": 3,
      "boxRadius": 8,
      "squareMedia": 0,
      "roundedMedia": 0,
      "mediaRadius": 0,
      "textShadow": 0,
-     "cardRows": [
-      {
-       "count": 5,
-       "iconTopped": true,
-       "rounded": true,
-       "top": 155
-      }
-     ]
+     "cardRows": []
     },
     "heroMedia": [],
     "nav": {
-     "links": 0,
+     "links": 17,
      "fixed": true,
-     "height": 1024,
+     "height": 119,
      "floatingPill": false,
      "blur": false
     },
@@ -659,30 +652,69 @@
      "w": 768,
      "h": 1024
     },
-    "pageH": 1024,
+    "pageH": 1139,
     "margins": {
-     "left": 72,
-     "right": 24
+     "left": 28,
+     "right": 37
     },
-    "sections": [],
+    "sections": [
+     {
+      "sel": "div.Catui_tabs",
+      "tag": "div",
+      "top": 368,
+      "height": 429,
+      "words": 18,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 37,
+      "right": 37,
+      "textLeft": 37,
+      "textRight": 37,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.Catui_field",
+      "tag": "div",
+      "top": 813,
+      "height": 149,
+      "words": 5,
+      "media": 0,
+      "middle": 227,
+      "heading": null,
+      "left": 37,
+      "right": 342,
+      "textLeft": 37,
+      "textRight": 342,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
     "gaps": [],
     "h1s": [
      {
-      "text": "버튼",
-      "size": 24,
-      "top": 80,
+      "text": "글쓰기",
+      "size": 18,
+      "top": 160,
       "firstScreen": true
      }
     ],
     "edgeText": [],
     "edges": [
      {
-      "x": 80,
+      "x": 37,
       "n": 1
      }
     ],
     "leftBlocks": 1,
-    "bodySize": 13,
+    "bodySize": 12,
     "stage": false,
     "explains": false,
     "slivers": [],
@@ -696,31 +728,26 @@
     },
     "dark": false,
     "ground": "#fafbfc",
-    "sidebar": {
-     "w": 56,
-     "tag": "aside",
-     "links": 53,
-     "share": 0.07
-    },
+    "sidebar": null,
     "topbar": {
-     "h": 56
+     "h": 72
     },
     "canvas": {
-     "left": 21,
-     "right": 24
+     "left": 28,
+     "right": 16
     },
     "hero": {
-     "text": "버튼",
+     "text": "글쓰기",
      "words": 1,
-     "chars": 2,
+     "chars": 3,
      "lines": 1,
-     "size": 24,
-     "vw": 3.1,
+     "size": 18,
+     "vw": 2.3,
      "font": "Inter",
      "weight": 600,
      "tracking": 0,
-     "leading": 1.3,
-     "top": 80,
+     "leading": 1.4,
+     "top": 160,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
@@ -728,46 +755,35 @@
     },
     "charts": 0,
     "layout": {
-     "panels": 6,
-     "firstScreen": 6,
-     "ragged": [
-      {
-       "diff": 54,
-       "top": 155
-      },
-      {
-       "diff": 38,
-       "top": 589
-      }
-     ],
+     "panels": 1,
+     "firstScreen": 1,
+     "ragged": [],
      "voids": []
     },
     "tiles": 0,
     "panels": {
-     "count": 6,
+     "count": 3,
      "radii": [
       [
        8,
-       6
+       2
+      ],
+      [
+       0,
+       1
       ]
      ],
      "heavyBorders": 0,
      "borderSamples": [],
      "heavyShadows": 0,
-     "softShadows": 6,
+     "softShadows": 0,
      "shadowSamples": [],
      "glass": 0
     },
     "chips": {
-     "count": 1,
-     "hues": 1,
-     "samples": [
-      {
-       "hue": 167,
-       "size": 34,
-       "radius": "0px"
-      }
-     ]
+     "count": 0,
+     "hues": 0,
+     "samples": []
     },
     "numbers": {
      "cells": 0,
@@ -780,25 +796,23 @@
     "chartHues": 0,
     "placeholders": [],
     "type": {
-     "under13": 0.34,
+     "under13": 0.63,
      "tiny": 0,
      "tinySamples": [],
      "sizes": [
       11,
       12,
       13,
-      14,
-      15,
       16,
-      24
+      18
      ]
     },
     "title": {
-     "text": "버튼",
-     "size": 24,
-     "top": 80
+     "text": "글쓰기",
+     "size": 18,
+     "top": 160
     },
-    "colourShare": 0.018
+    "colourShare": 0.006
    },
    "consoleErrors": []
   },
@@ -808,8 +822,8 @@
    "load": "load",
    "screens": 2,
    "filled": [
-    0.77,
-    0.92
+    0.89,
+    0.94
    ],
    "motion": {
     "elements": 0,
@@ -825,14 +839,14 @@
      "h": 844
     },
     "page": {
-     "height": 1271,
-     "screens": 1.5,
-     "words": 86,
+     "height": 1345,
+     "screens": 1.6,
+     "words": 83,
      "img": 0,
      "video": 0,
      "canvas": 0,
-     "svg": 59,
-     "sections": 1,
+     "svg": 19,
+     "sections": 0,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
      "uiFragments": 0,
@@ -842,61 +856,39 @@
      "uiPictures": 0,
      "pictureSamples": [],
      "blendText": 0,
-     "sideScrollers": 0,
+     "sideScrollers": 1,
      "brokenImages": [],
      "emoji": [],
      "videosNoPoster": 0
     },
     "hero": {
-     "text": "버튼",
+     "text": "글쓰기",
      "words": 1,
-     "chars": 2,
+     "chars": 3,
      "lines": 1,
-     "size": 24,
-     "vw": 6.2,
+     "size": 18,
+     "vw": 4.6,
      "font": "Inter",
      "weight": 600,
      "tracking": 0,
-     "leading": 1.3,
-     "top": 80,
+     "leading": 1.4,
+     "top": 156,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
      "position": "left"
     },
     "h1": {
-     "text": "버튼",
+     "text": "글쓰기",
      "words": 1,
      "lines": 1,
-     "size": 24,
+     "size": 18,
      "font": "Inter"
     },
-    "headings": [
-     {
-      "text": "버튼",
-      "words": 1,
-      "chars": 2,
-      "lines": 1,
-      "size": 24,
-      "vw": 6.2,
-      "font": "Inter",
-      "weight": 600,
-      "tracking": 0,
-      "leading": 1.3,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.88,
-      "top": 80,
-      "tag": "h1",
-      "kind": "heading"
-     }
-    ],
+    "headings": [],
     "headingSummary": {
-     "count": 1,
-     "maxLines": 1,
+     "count": 0,
+     "maxLines": 0,
      "over2Lines": 0,
      "statements": 0,
      "centered": 0,
@@ -907,12 +899,12 @@
      "families": [
       {
        "family": "Inter",
-       "share": 0.98,
+       "share": 0.97,
        "mono": false
       },
       {
        "family": "Noto Sans SC",
-       "share": 0.02,
+       "share": 0.03,
        "mono": false
       }
      ],
@@ -922,20 +914,18 @@
       11,
       12,
       13,
-      14,
-      15,
       16,
-      24
+      18
      ],
-     "sizeCount": 8,
+     "sizeCount": 6,
      "notLoaded": [],
      "body": null,
      "measureChars": null,
      "max": {
-      "size": 24,
-      "vw": 6.2,
+      "size": 18,
+      "vw": 4.6,
       "font": "Inter",
-      "text": "버튼"
+      "text": "글쓰기"
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -944,9 +934,9 @@
      "microLabels": 0,
      "microLabelShare": 0,
      "microSamples": [],
-     "upperShare": 0,
-     "centerShare": 0.16,
-     "smallText": 4
+     "upperShare": 0.05,
+     "centerShare": 0.09,
+     "smallText": 3
     },
     "eyebrows": [],
     "numbered": [],
@@ -967,44 +957,49 @@
         "s": 0.25,
         "l": 0.98
        }
+      },
+      {
+       "color": "#ffffff",
+       "top": 139,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
       }
      ],
      "textColors": [
       {
        "color": "#66727e",
-       "share": 0.63
+       "share": 0.64
       },
       {
        "color": "#2c3e50",
-       "share": 0.24
+       "share": 0.27
       },
       {
        "color": "#ffffff",
-       "share": 0.08
+       "share": 0.05
       },
       {
        "color": "#0e7a63",
-       "share": 0.02
-      },
-      {
-       "color": "#4a5a68",
-       "share": 0.01
+       "share": 0.05
       }
      ],
      "button": {
-      "bg": "#ffffff",
+      "bg": "#0e7a63",
       "hsl": {
-       "h": 0,
-       "s": 0,
-       "l": 1
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
       },
-      "fg": "#2c3e50"
+      "fg": "#ffffff"
      },
      "lowContrast": []
     },
     "buttons": {
-     "count": 12,
-     "inHero": 9,
+     "count": 3,
+     "inHero": 3,
      "radius": 6,
      "height": 34,
      "withShadow": 0,
@@ -1013,56 +1008,44 @@
      "upper": 0,
      "heroLabels": [
       "본문으로 이동",
-      "김",
-      "더 보기",
-      "크게",
-      "새 주문"
+      "지우기",
+      "올리기"
      ]
     },
     "surfaces": {
-     "shadowStatic": 7,
-     "shadowOverlay": 0,
+     "shadowStatic": 1,
+     "shadowOverlay": 1,
      "shadowSamples": [
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
-      "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px"
+      "div.Catui_dd-menu.Catui_dd-sm → rgba(16, 24, 40, 0.08) 0px 4px 12px 0px"
      ],
      "gradients": 0,
      "scrims": 0,
      "gradientSamples": [],
      "gradientText": 0,
-     "hairlines": 8,
+     "hairlines": 6,
      "hairlineSamples": [
-      "header.Catui_topbar.Catui_adm-top 390px",
-      "header.Catui_card-h 340px",
-      "header.Catui_card-h 340px",
-      "header.Catui_card-h 340px",
-      "header.Catui_card-h 340px"
+      "header.Catui_cm-head 390px",
+      "nav.Catui_cm-gnb 390px",
+      "div.Catui_panel.Catui_field 324px",
+      "div.Catui_cm-toolbar 324px",
+      "footer.Catui_cm-foot 390px"
      ],
-     "outlinedBoxes": 7,
-     "dashed": 0,
+     "outlinedBoxes": 4,
+     "dashed": 1,
      "blurred": 0,
-     "roundedBoxes": 7,
+     "roundedBoxes": 4,
      "boxRadius": 8,
      "squareMedia": 0,
      "roundedMedia": 0,
      "mediaRadius": 0,
      "textShadow": 0,
-     "cardRows": [
-      {
-       "count": 5,
-       "iconTopped": true,
-       "rounded": true,
-       "top": 175
-      }
-     ]
+     "cardRows": []
     },
     "heroMedia": [],
     "nav": {
-     "links": 0,
+     "links": 16,
      "fixed": true,
-     "height": 844,
+     "height": 119,
      "floatingPill": false,
      "blur": false
     },
@@ -1073,25 +1056,25 @@
      "w": 390,
      "h": 844
     },
-    "pageH": 1271,
+    "pageH": 1345,
     "margins": {
-     "left": 24,
-     "right": 24
+     "left": 16,
+     "right": 21
     },
     "sections": [
      {
-      "sel": "article.Catui_card",
-      "tag": "article",
-      "top": 175,
-      "height": 146,
-      "words": 12,
+      "sel": "div.Catui_cm-cols",
+      "tag": "div",
+      "top": 197,
+      "height": 126,
+      "words": 2,
       "media": 0,
-      "middle": 1,
+      "middle": 0,
       "heading": null,
-      "left": 45,
-      "right": 64,
-      "textLeft": 45,
-      "textRight": 81,
+      "left": 33,
+      "right": 33,
+      "textLeft": 33,
+      "textRight": 324,
       "fullBleed": false,
       "footer": false,
       "hero": true,
@@ -1099,37 +1082,18 @@
       "pinned": false
      },
      {
-      "sel": "article.Catui_card",
-      "tag": "article",
-      "top": 341,
-      "height": 134,
-      "words": 4,
-      "media": 0,
-      "middle": 8,
-      "heading": null,
-      "left": 45,
-      "right": 149,
-      "textLeft": 45,
-      "textRight": 170,
-      "fullBleed": false,
-      "footer": false,
-      "hero": true,
-      "continues": false,
-      "pinned": false
-     },
-     {
-      "sel": "article.Catui_card",
-      "tag": "article",
-      "top": 495,
-      "height": 188,
-      "words": 10,
+      "sel": "div.Catui_tabs",
+      "tag": "div",
+      "top": 436,
+      "height": 447,
+      "words": 18,
       "media": 0,
       "middle": 0,
       "heading": null,
-      "left": 45,
-      "right": 84,
-      "textLeft": 45,
-      "textRight": 84,
+      "left": 33,
+      "right": 33,
+      "textLeft": 33,
+      "textRight": 33,
       "fullBleed": false,
       "footer": false,
       "hero": false,
@@ -1137,56 +1101,18 @@
       "pinned": false
      },
      {
-      "sel": "article.Catui_card",
-      "tag": "article",
-      "top": 703,
-      "height": 146,
-      "words": 11,
-      "media": 0,
-      "middle": 0,
-      "heading": null,
-      "left": 45,
-      "right": 48,
-      "textLeft": 45,
-      "textRight": 48,
-      "fullBleed": false,
-      "footer": false,
-      "hero": false,
-      "continues": false,
-      "pinned": false
-     },
-     {
-      "sel": "article.Catui_card",
-      "tag": "article",
-      "top": 869,
-      "height": 172,
-      "words": 10,
-      "media": 0,
-      "middle": 0,
-      "heading": null,
-      "left": 45,
-      "right": 100,
-      "textLeft": 45,
-      "textRight": 148,
-      "fullBleed": false,
-      "footer": false,
-      "hero": false,
-      "continues": false,
-      "pinned": false
-     },
-     {
-      "sel": "article.Catui_card",
-      "tag": "article",
-      "top": 1061,
-      "height": 134,
+      "sel": "div.Catui_field",
+      "tag": "div",
+      "top": 899,
+      "height": 149,
       "words": 5,
       "media": 0,
-      "middle": 70,
+      "middle": 42,
       "heading": null,
-      "left": 45,
-      "right": 45,
-      "textLeft": 45,
-      "textRight": 58,
+      "left": 33,
+      "right": 153,
+      "textLeft": 33,
+      "textRight": 153,
       "fullBleed": false,
       "footer": true,
       "hero": false,
@@ -1197,21 +1123,21 @@
     "gaps": [],
     "h1s": [
      {
-      "text": "버튼",
-      "size": 24,
-      "top": 80,
+      "text": "글쓰기",
+      "size": 18,
+      "top": 156,
       "firstScreen": true
      }
     ],
     "edgeText": [],
     "edges": [
      {
-      "x": 24,
+      "x": 33,
       "n": 1
      }
     ],
     "leftBlocks": 1,
-    "bodySize": 13,
+    "bodySize": 12,
     "stage": false,
     "explains": false,
     "slivers": [],
@@ -1227,24 +1153,24 @@
     "ground": "#fafbfc",
     "sidebar": null,
     "topbar": {
-     "h": 56
+     "h": 72
     },
     "canvas": {
-     "left": 21,
-     "right": 24
+     "left": 16,
+     "right": -336
     },
     "hero": {
-     "text": "버튼",
+     "text": "글쓰기",
      "words": 1,
-     "chars": 2,
+     "chars": 3,
      "lines": 1,
-     "size": 24,
-     "vw": 6.2,
+     "size": 18,
+     "vw": 4.6,
      "font": "Inter",
      "weight": 600,
      "tracking": 0,
-     "leading": 1.3,
-     "top": 80,
+     "leading": 1.4,
+     "top": 156,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
@@ -1252,37 +1178,35 @@
     },
     "charts": 0,
     "layout": {
-     "panels": 6,
-     "firstScreen": 4,
+     "panels": 1,
+     "firstScreen": 1,
      "ragged": [],
      "voids": []
     },
     "tiles": 0,
     "panels": {
-     "count": 6,
+     "count": 4,
      "radii": [
       [
        8,
-       6
+       3
+      ],
+      [
+       0,
+       1
       ]
      ],
      "heavyBorders": 0,
      "borderSamples": [],
      "heavyShadows": 0,
-     "softShadows": 6,
+     "softShadows": 1,
      "shadowSamples": [],
      "glass": 0
     },
     "chips": {
-     "count": 1,
-     "hues": 1,
-     "samples": [
-      {
-       "hue": 167,
-       "size": 34,
-       "radius": "0px"
-      }
-     ]
+     "count": 0,
+     "hues": 0,
+     "samples": []
     },
     "numbers": {
      "cells": 0,
@@ -1295,24 +1219,23 @@
     "chartHues": 0,
     "placeholders": [],
     "type": {
-     "under13": 0.54,
+     "under13": 0.63,
      "tiny": 0,
      "tinySamples": [],
      "sizes": [
+      11,
       12,
       13,
-      14,
-      15,
       16,
-      24
+      18
      ]
     },
     "title": {
-     "text": "버튼",
-     "size": 24,
-     "top": 80
+     "text": "글쓰기",
+     "size": 18,
+     "top": 156
     },
-    "colourShare": 0.027
+    "colourShare": 0.009
    },
    "consoleErrors": []
   }
@@ -1320,20 +1243,14 @@
  "findings": [
   {
    "level": "WARN",
-   "id": "ragged-row",
-   "width": 1440,
-   "message": "4 pair(s) of cards in one row end at different heights (by 42px, 54px, 26px).",
-   "fix": "Cards that share a row share a bottom edge: balance them by their content (the same number of rows, a block of similar height beside it), or stack them. In testing, ragged rows were marked down every time.",
-   "alsoAt": [
-    768
-   ]
-  },
-  {
-   "level": "WARN",
    "id": "tiny-text",
-   "width": 390,
-   "message": "54% of the text is under 13px.",
-   "fix": "Data and labels read at 13–14px; keep 11–12px for sublines and axis ticks."
+   "width": 1440,
+   "message": "63% of the text is under 13px.",
+   "fix": "Data and labels read at 13–14px; keep 11–12px for sublines and axis ticks.",
+   "alsoAt": [
+    768,
+    390
+   ]
   }
  ],
  "images": [

@@ -46,6 +46,12 @@
       "default": "./dist/catadmin.js"
     },
     "./admin.css": "./dist/admin.min.css",
+    "./community": {
+      "types": "./dist/catcommunity.d.ts",
+      "import": "./dist/catcommunity.esm.js",
+      "default": "./dist/catcommunity.js"
+    },
+    "./community.css": "./dist/community.min.css",
     "./css": "./dist/catui.min.css",
     "./catui.css": "./dist/catui.css",
     "./catui.min.css": "./dist/catui.min.css",
@@ -69,7 +75,11 @@
     "./dist/catadmin.js",
     "./dist/catadmin.min.js",
     "./dist/catadmin.esm.js",
-    "./dist/catadmin.esm.min.js"
+    "./dist/catadmin.esm.min.js",
+    "./dist/catcommunity.js",
+    "./dist/catcommunity.min.js",
+    "./dist/catcommunity.esm.js",
+    "./dist/catcommunity.esm.min.js"
   ],
   "browserslist": [
     "chrome >= 111",

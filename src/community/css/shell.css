@@ -4,6 +4,10 @@
 .Catui_cm{min-height:100vh;display:flex;flex-direction:column;background:var(--Catui_color-surface-muted)}
 .Catui_cm [hidden]{display:none !important}
 .Catui_cm a{color:inherit}
+/* 글자 규칙(taste-skill): 라벨·표 머리는 문장형(대문자·자간 없이), "필수"는 보조색 — 빨강은 오류에만 */
+.Catui_cm :is(.Catui_label,.Catui_tbl th,.Catui_stat-label){text-transform:none;letter-spacing:0}
+.Catui_cm .Catui_req{color:var(--Catui_color-text-secondary)}
+.Catui_cm :is(.Catui_tbl,.Catui_cm-meta,.Catui_cm-up,.Catui_num){font-variant-numeric:tabular-nums}
 
 /* 머리 */
 .Catui_cm-head{position:sticky;top:0;z-index:30;background:var(--Catui_card-bg);border-bottom:1px solid var(--Catui_color-border)}
