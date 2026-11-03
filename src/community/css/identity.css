@@ -1,59 +1,99 @@
 /* community/identity.css */
-/* 이 커뮤니티의 얼굴 — taste-skill "Give the product a face" · korean-ui-ux(기존 토큰만)
-   · 표시: 말풍선 모노그램(브랜드색) + 머리 위 3px 브랜드 띠
-   · 게시판 색: 게시판마다 고정 색 점(메뉴·목록·카드에 같은 색) — 색 + 이름을 함께
-   · 회원 색: 닉네임마다 고정된 연한 아바타 색(정체성, 데이터 아님)
-   · 고유 요소 "인기 게이지": 추천−비추천이 게시판 인기 기준(hotCut)까지 얼마나 찼는지 — 이 커뮤니티 규칙 그대로
-   · 홈 머리: 지금 뜨는 글 1~3위를 큰 카드로 */
+/* 깔끔한 한국형 화면 — 토스 TDS · 당근 SEED · 범정부 KRDS 공통 원칙을 Catui 토큰으로
+   · 글자: 본문 16px(줄간격 1.6) · 제목 굵기 700 · 보조 글자 13px 회색 — 굵기는 400·500·700만
+   · 색: 글자는 회색 계열, 브랜드색은 주 동작(글쓰기)·현재 위치·인기 숫자에만. 장식 색 점·막대 없음
+   · 면: 회색 바탕 위 흰 면(둥근 16px, 테두리 없이) — 선 대신 여백으로 나눈다
+   · 목록: 행 높이 넉넉하게(터치 44px 이상), 제목 한 줄 + 보조 정보 한 줄, 숫자는 오른쪽 고정폭
+   · 서체: Pretendard(GOV)가 설치돼 있으면 쓰고, 없으면 시스템 고딕 — 외부 글꼴을 내려받지 않는다 */
+.Catui_cm{
+  --Catui_cm-face:"Pretendard GOV","Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  --Catui_cm-surface:var(--Catui_card-bg);
+  --Catui_cm-radius:16px;
+  font-family:var(--Catui_cm-face);
+  font-size:16px;
+  line-height:1.6;
+  letter-spacing:-.01em;
+}
 
-/* 머리 띠 · 표시 */
-.Catui_cm-head{border-top:3px solid var(--Catui_color-brand)}
-.Catui_cm-mark{display:inline-grid;place-items:center;width:32px;height:32px;color:var(--Catui_color-brand)}
+/* 표시: 말풍선 모노그램 */
+.Catui_cm-mark{display:inline-grid;place-items:center;width:30px;height:30px;color:var(--Catui_color-brand)}
 .Catui_cm-mark svg{width:100%;height:100%}
-.Catui_cm-brand b{font-size:var(--Catui_type-h3-size);letter-spacing:-.02em}
-.Catui_cm-brand b span{color:var(--Catui_color-brand-strong)}
+.Catui_cm-brand b{font-size:18px;font-weight:700;letter-spacing:-.03em}
+.Catui_cm-brand b span{font-weight:500;color:var(--Catui_color-text-secondary)}
 
-/* 게시판 색 점: data-tone 1~5 */
-.Catui_cm [data-tone="1"]{--Catui_cm-tone:var(--Catui_color-brand);--Catui_cm-tone-soft:var(--Catui_color-brand-soft)}
-.Catui_cm [data-tone="2"]{--Catui_cm-tone:var(--Catui_color-info);--Catui_cm-tone-soft:var(--Catui_color-info-soft)}
-.Catui_cm [data-tone="3"]{--Catui_cm-tone:var(--Catui_color-purple);--Catui_cm-tone-soft:var(--Catui_color-purple-soft)}
-.Catui_cm [data-tone="4"]{--Catui_cm-tone:var(--Catui_color-amber);--Catui_cm-tone-soft:var(--Catui_color-amber-soft)}
-.Catui_cm [data-tone="5"]{--Catui_cm-tone:var(--Catui_color-danger);--Catui_cm-tone-soft:var(--Catui_color-danger-soft)}
-.Catui_cm-board{display:inline-flex;align-items:center;gap:4px}
-.Catui_cm-board::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--Catui_cm-tone,var(--Catui_color-border))}
-.Catui_cm-gnb-item[data-tone]::before{content:"";width:6px;height:6px;margin-right:6px;border-radius:50%;background:var(--Catui_cm-tone)}
+/* 머리: 흰 면 + 아주 옅은 아래 선, 게시판 메뉴는 글자만(현재 위치 굵게 + 아래 2px) */
+.Catui_cm-head{border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_cm-gnb{border-top:0}
+.Catui_cm-gnb-item{font-size:15px;font-weight:500;padding-inline:12px}
+.Catui_cm-gnb-item[aria-current="page"]{font-weight:700;border-bottom-color:var(--Catui_color-text-primary)}
+.Catui_cm-search .Catui_input{border-radius:var(--Catui_radius-pill);background:var(--Catui_color-surface-muted);border-color:transparent}
+.Catui_cm-search .Catui_input:focus{background:var(--Catui_card-bg);border-color:var(--Catui_color-brand)}
 
-/* 회원 아바타 색 */
-.Catui_cm .Catui_av[data-tone]{background:var(--Catui_cm-tone-soft);color:var(--Catui_color-text-primary);font-weight:800}
+/* 면: 흰 면, 테두리 없이 둥글게 */
+.Catui_cm :is(.Catui_cm-list,.Catui_cm-post,.Catui_cm-comments,.Catui_cm-panel,.Catui_cm-adjacent,.Catui_cm-card,.Catui_cm-board-head,.Catui_card){border:0;border-radius:var(--Catui_cm-radius);background:var(--Catui_cm-surface);box-shadow:none}
+.Catui_cm .Catui_card-h{border-bottom:0;font-size:17px;font-weight:700;padding-bottom:0}
+.Catui_cm-wrap{gap:20px;padding-block:20px}
+.Catui_cm-main{gap:20px}
 
-/* 인기 게이지: 기준까지 찬 비율(넘으면 가득 + "인기") */
-.Catui_cm-lift{display:grid;gap:4px;min-width:calc(var(--Catui_space-10) * 1.3)}
-.Catui_cm-lift-bar{height:6px;border-radius:var(--Catui_radius-pill);background:var(--Catui_color-surface-muted);overflow:hidden}
-.Catui_cm-lift-bar i{display:block;height:100%;border-radius:inherit;background:var(--Catui_color-text-secondary)}
-.Catui_cm-lift[data-hot] .Catui_cm-lift-bar i{background:var(--Catui_cm-hot)}
-.Catui_cm-lift-t{display:inline-flex;align-items:center;justify-content:flex-end;gap:2px;font-size:var(--Catui_type-caption-size);font-weight:800;color:var(--Catui_color-text-secondary);font-variant-numeric:tabular-nums}
-.Catui_cm-lift[data-hot] .Catui_cm-lift-t{color:var(--Catui_cm-hot)}
+/* 섹션 제목 */
+.Catui_cm-sec-t{margin:0;font-size:20px;font-weight:700;letter-spacing:-.02em}
+.Catui_cm-bar .Catui_link{font-size:14px;color:var(--Catui_color-text-secondary);text-decoration:none}
 
-/* 홈 머리: 지금 뜨는 글 1~3위 */
-.Catui_cm-hero{display:grid;gap:var(--Catui_space-3);grid-template-columns:1.4fr 1fr 1fr}
-@media (max-width:991px){.Catui_cm-hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.Catui_cm-hero > :first-child{grid-column:1 / -1}}
-@media (max-width:479px){.Catui_cm-hero{grid-template-columns:minmax(0,1fr)}}
-.Catui_cm-pick{position:relative;display:grid;align-content:start;gap:var(--Catui_space-3);padding:var(--Catui_space-5);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-lg);border-top:4px solid var(--Catui_cm-tone,var(--Catui_color-brand));text-decoration:none;overflow:hidden}
-.Catui_cm-pick:hover{box-shadow:var(--Catui_shadow-md)}
-.Catui_cm-pick:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
-.Catui_cm-pick-n{font-size:calc(var(--Catui_type-display-size) * 1.6);font-weight:900;line-height:.9;letter-spacing:-.04em;color:var(--Catui_cm-tone,var(--Catui_color-brand));font-variant-numeric:tabular-nums}
-.Catui_cm-pick-t{font-size:var(--Catui_type-h3-size);font-weight:800;line-height:1.35;word-break:keep-all;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.Catui_cm-pick:first-child .Catui_cm-pick-t{font-size:var(--Catui_type-h2-size)}
-.Catui_cm-pick .Catui_cm-meta{margin-top:auto}
-.Catui_cm-pick figure{margin:calc(var(--Catui_space-5) * -1) calc(var(--Catui_space-5) * -1) 0;aspect-ratio:16 / 7;overflow:hidden;background:var(--Catui_cm-tone-soft)}
+/* 게시판 머리 */
+.Catui_cm-board-head{padding:24px}
+.Catui_cm-board-head h1{font-size:26px;font-weight:700;letter-spacing:-.03em}
+.Catui_cm-board-head p{font-size:14px}
+
+/* 목록 행 */
+.Catui_cm-row{gap:16px;padding:14px 20px;border-bottom:0;min-height:56px}
+.Catui_cm-row + .Catui_cm-row{box-shadow:inset 0 1px 0 var(--Catui_divider-color)}
+.Catui_cm-row:hover{background:var(--Catui_color-surface-muted)}
+.Catui_cm-title{font-size:16px;font-weight:500;gap:6px}
+.Catui_cm-hot .Catui_cm-title-t{font-weight:700}
+.Catui_cm-meta{font-size:13px;gap:4px 10px}
+.Catui_cm-board,.Catui_cm-cat{font-size:13px;font-weight:500}
+.Catui_cm-board::after{content:none}
+.Catui_cm-cat::before,.Catui_cm-cat::after,.Catui_cm-cmt::before,.Catui_cm-cmt::after{content:none}
+.Catui_cm-cat{padding:1px 6px;border-radius:6px;background:var(--Catui_color-surface-muted)}
+.Catui_cm-cmt{font-size:13px;font-weight:700;color:var(--Catui_color-brand-strong)}
+.Catui_cm-rank{min-width:24px;font-size:16px;font-weight:700;color:var(--Catui_color-text-secondary)}
+.Catui_cm-rank-top{color:var(--Catui_color-text-primary)}
+.Catui_cm-lv{min-width:16px;height:16px;font-size:10.5px;font-weight:700;border:0}
+.Catui_cm .Catui_av[data-tone]{background:var(--Catui_color-surface-muted);color:var(--Catui_color-text-secondary);font-weight:700}
+
+/* 추천 수: 오른쪽 숫자 하나 (인기글은 브랜드색) */
+.Catui_cm-score-n{flex:none;display:grid;justify-items:end;min-width:44px;font-variant-numeric:tabular-nums;line-height:1.2}
+.Catui_cm-score-n b{font-size:15px;font-weight:700;color:var(--Catui_color-text-secondary)}
+.Catui_cm-score-n span{font-size:11px;color:var(--Catui_color-text-secondary)}
+.Catui_cm-hot .Catui_cm-score-n b{color:var(--Catui_color-brand-strong)}
+
+/* 홈 '지금 뜨는 글': 큰 제목 3줄 + 오른쪽 썸네일 (토스형 목록) */
+.Catui_cm-hero{display:grid;gap:0;padding:8px 0;background:var(--Catui_cm-surface);border-radius:var(--Catui_cm-radius)}
+.Catui_cm-pick{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:16px;padding:16px 20px;text-decoration:none}
+.Catui_cm-pick:hover{background:var(--Catui_color-surface-muted)}
+.Catui_cm-pick:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px;border-radius:12px}
+.Catui_cm-pick-n{font-size:20px;font-weight:700;color:var(--Catui_color-brand-strong);font-variant-numeric:tabular-nums;text-align:center}
+.Catui_cm-pick-b{display:grid;gap:6px;min-width:0}
+.Catui_cm-pick-t{font-size:18px;font-weight:700;line-height:1.45;letter-spacing:-.02em;word-break:keep-all;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.Catui_cm-pick figure{margin:0;width:88px;aspect-ratio:1 / 1;border-radius:12px;overflow:hidden;background:var(--Catui_color-surface-muted)}
 .Catui_cm-pick figure img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:479px){.Catui_cm-pick{grid-template-columns:24px minmax(0,1fr) auto;gap:12px;padding:14px 16px}.Catui_cm-pick figure{width:64px}.Catui_cm-pick-t{font-size:16px}}
 
-/* 섹션 제목: 굵게 + 왼쪽 색 막대 */
-.Catui_cm-sec-t{display:flex;align-items:center;gap:var(--Catui_space-2);margin:0;font-size:var(--Catui_type-h3-size);font-weight:800}
-.Catui_cm-sec-t::before{content:"";width:4px;height:1.1em;border-radius:2px;background:var(--Catui_cm-tone,var(--Catui_color-brand))}
+/* 말머리·정렬 */
+.Catui_cm-cats a{padding:6px 14px;font-size:14px;font-weight:500;border:0;background:var(--Catui_cm-surface)}
+.Catui_cm-cats a[aria-current="page"]{background:var(--Catui_color-text-primary);color:var(--Catui_card-bg);font-weight:700}
+.Catui_cm-sort a{font-size:14px}
 
-/* 게시판 머리 띠 */
-.Catui_cm-board-head{padding:var(--Catui_space-5);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-lg);border-left:6px solid var(--Catui_cm-tone,var(--Catui_color-brand))}
-.Catui_cm-board-head h1{font-size:var(--Catui_type-display-size);letter-spacing:-.03em}
-.Catui_cm-pick .Catui_cm-board::after{content:none}
-.Catui_cm-hot .Catui_cm-title-t{font-weight:700}   /* 인기글 줄: 굵게 + 인기 게이지(색만으로 알리지 않음) */
+/* 글 보기 */
+.Catui_cm-post-h{padding:28px 28px 20px;border-bottom:0}
+.Catui_cm-post-h h1{font-size:26px;font-weight:700;line-height:1.4;letter-spacing:-.03em}
+.Catui_cm-post-b{padding:8px 28px 28px}
+.Catui_cm-prose{font-size:17px;line-height:1.75}
+.Catui_cm-post-f{border-top:1px solid var(--Catui_divider-color)}
+.Catui_cm-vote-lg button{border-radius:var(--Catui_radius-pill);min-width:120px;min-height:48px;flex-direction:row;gap:8px}
+.Catui_cm-comments{padding:24px 28px}
+.Catui_cm-cs-best{background:var(--Catui_color-surface-muted)}
+@media (max-width:767px){.Catui_cm-post-h{padding:20px 16px 12px}.Catui_cm-post-b{padding:4px 16px 20px}.Catui_cm-comments{padding:20px 16px}.Catui_cm-row{padding-inline:16px}.Catui_cm-post-h h1{font-size:22px}}
+
+/* 다크 모드: 흰 면이 바탕보다 한 단계 밝게(SEED·KRDS 엘리베이션) */
+:root[data-catui-theme="dark"] .Catui_cm{--Catui_cm-surface:var(--Catui_card-bg)}

@@ -38,7 +38,7 @@
 <h1 class="Catui_clip">Catui 커뮤니티 홈</h1>
 
 <section aria-labelledby="hm-pick">
-  <div class="Catui_cm-bar"><h2 class="Catui_cm-sec-t" id="hm-pick" data-tone="5">지금 뜨는 글</h2><a class="Catui_link" href="hot.html">인기글 전체</a></div>
+  <div class="Catui_cm-bar"><h2 class="Catui_cm-sec-t" id="hm-pick">지금 뜨는 글</h2><a class="Catui_link" href="hot.html">인기글 전체</a></div>
   <div class="Catui_cm-hero" id="hm-hero" aria-busy="true"></div>
 </section>
 
@@ -48,7 +48,7 @@
 </section>
 
 <section aria-labelledby="hm-boards">
-  <h2 class="Catui_cm-sec-t" id="hm-boards" data-tone="2">게시판 최신글</h2>
+  <h2 class="Catui_cm-sec-t" id="hm-boards">게시판 최신글</h2>
   <div class="Catui_cm-boards" id="hm-board-list"></div>
 </section>
 
@@ -74,13 +74,7 @@ catui.use(function () {
     var d = res[0], hot = d.posts.filter(function (p) { return p.hot; }).sort(function (a, b) { return b.score - a.score; }).slice(0, 10);
     var hero = document.getElementById('hm-hero');
     catui.mount(hero, catui.html`${hot.slice(0, 3).map(function (p, i) {
-      return catui.html`<a class="Catui_cm-pick" href="post.html?id=${p.id}" data-tone="${p.boardTone}">
-        ${i === 0 && p.photo ? catui.html`<figure><img src="${cm.thumb({ id: p.id, tone: p.boardTone })}" alt="" width="640" height="280"></figure>` : ''}
-        <span class="Catui_cm-pick-n" aria-hidden="true">${i + 1}</span>
-        <span class="Catui_cm-board" data-tone="${p.boardTone}">${p.boardName}</span>
-        <span class="Catui_cm-pick-t"><span class="Catui_clip">${i + 1}위 </span>${p.title}</span>
-        <span class="Catui_cm-meta"><span class="Catui_cm-nick">${cm.avatar(p.author)}${p.author.nick}</span><span>추천 ${p.score}</span><span>댓글 ${p.comments}</span><time datetime="${p.time}">${cm.ago(p.time)}</time></span>
-      </a>`;
+      return catui.html`<a class="Catui_cm-pick" href="post.html?id=${p.id}"><span class="Catui_cm-pick-n" aria-hidden="true">${i + 1}</span><span class="Catui_cm-pick-b"><span class="Catui_cm-pick-t"><span class="Catui_clip">${i + 1}위 </span>${p.title}</span><span class="Catui_cm-meta"><span>${p.boardName}</span><span>${p.author.nick}</span><span>추천 ${p.score}</span><span>댓글 ${p.comments}</span></span></span>${p.photo ? catui.html`<figure><img src="${cm.thumb({ id: p.id, tone: p.boardTone })}" alt="" width="88" height="88"></figure>` : ""}</a>`;
     })}`);
     hero.removeAttribute('aria-busy');
     catui.mount(document.getElementById('hm-hot-list'), catui.html`${hot.slice(3).map(function (p, i) { return cm.row(p, { rank: i + 4 }); })}`);
