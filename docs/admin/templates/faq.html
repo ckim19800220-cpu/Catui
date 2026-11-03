@@ -36,13 +36,7 @@
   <section class="Catui_span-8 Catui_vstack Catui_gap-4" aria-label="자주 묻는 질문">
     <div class="Catui_search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="fq-q">질문 찾기</label><input class="Catui_input" id="fq-q" type="search" placeholder="예: 환불, 송장, 권한"></div>
     <p class="Catui_help" id="fq-n" aria-live="polite"></p>
-    <div class="Catui_vstack Catui_gap-3" id="fq-list">
-      <details class="Catui_faq"><summary>주문을 취소하면 언제 환불되나요?</summary><p>카드는 취소 즉시 승인 취소되며, 카드사에 따라 3~5영업일 뒤 반영됩니다. 간편결제는 보통 당일 환불됩니다.</p></details>
-      <details class="Catui_faq"><summary>송장 번호를 한 번에 여러 개 넣을 수 있나요?</summary><p>주문 목록에서 주문을 고른 뒤 "배송 처리"를 누르고 CSV 파일을 올리면 됩니다.</p></details>
-      <details class="Catui_faq"><summary>관리자 권한은 어떻게 나뉘나요?</summary><p>최고 관리자는 모든 기능, 운영자는 상품·주문, 읽기 전용은 조회만 할 수 있습니다. 사용자 관리에서 바꿉니다.</p></details>
-      <details class="Catui_faq"><summary>2단계 인증을 잃어버린 휴대폰으로 설정했어요</summary><p>최고 관리자에게 2단계 인증 초기화를 요청하세요. 본인 확인 뒤 새로 등록할 수 있습니다.</p></details>
-      <details class="Catui_faq"><summary>다크 모드는 어떻게 켜나요?</summary><p>상단 바의 달 모양 버튼이나 설정 › 계정 › 화면에서 바꿀 수 있습니다. Ctrl+K에서 "다크"를 검색해도 됩니다.</p></details>
-    </div>
+    <div class="Catui_vstack Catui_gap-3" id="fq-list" data-catui-adm-src="faq" data-catui-adm-rows=""><template><details class="Catui_faq"><summary data-catui-adm-field="q"></summary><p data-catui-adm-field="a"></p></details></template></div>
   </section>
   <aside class="Catui_card Catui_span-4" aria-labelledby="fq-c-t">
     <header class="Catui_card-h" id="fq-c-t">문의하기</header>
@@ -65,9 +59,9 @@
 <script src="../../../dist/catadmin.min.js"></script>
 <script>
 catui.use(['form', 'layer'], function (form, layer) {
-  var items = [].slice.call(document.querySelectorAll('#fq-list details')), q = document.getElementById('fq-q');
+  var q = document.getElementById('fq-q');
   var run = function () {
-    var t = q.value.trim(), n = 0;
+    var t = q.value.trim(), n = 0, items = [].slice.call(document.querySelectorAll('#fq-list details'));   // 목록은 faq.json에서 그려지므로 매번 읽는다
     items.forEach(function (d) { var hit = !t || d.textContent.indexOf(t) > -1; d.hidden = !hit; if (hit) n++; d.open = !!t && hit; });
     document.getElementById('fq-n').textContent = t ? n + '개 질문이 맞습니다' : '';
   };
