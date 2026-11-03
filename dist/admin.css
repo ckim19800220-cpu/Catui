@@ -133,6 +133,10 @@
 .Catui_adm .Catui_tbl th,.Catui_adm .Catui_label,.Catui_adm-blank .Catui_label{text-transform:none;letter-spacing:0}
 /* 아이콘은 색 상자 없이 (taste-skill app: 색은 데이터·상태·주 버튼에만) */
 .Catui_adm .Catui_file-ico{background:transparent;color:var(--Catui_color-text-secondary)}
+/* 분할 버튼 메뉴: 버튼 묶음 왼쪽 끝에 맞춰 펼친다 (화면 왼쪽에 있을 때 메뉴가 화면 밖으로 나가지 않게) */
+.Catui_adm .Catui_splitbtn{position:relative}
+.Catui_adm .Catui_splitbtn > .Catui_dd{position:static}
+.Catui_adm .Catui_splitbtn .Catui_dd-menu{left:0;right:auto}
 /* 좁은 화면에서 코드 블록이 화면 끝을 넘지 않게 */
 .Catui_adm pre{max-width:100%;overflow-x:auto}
 .Catui_adm :is(.Catui_gantt-head,.Catui_gantt-scale) *{font-size:11px}

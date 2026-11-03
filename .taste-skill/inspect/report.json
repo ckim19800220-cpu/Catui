@@ -1,16 +1,15 @@
 {
- "url": "http://127.0.0.1:8766/docs/admin/templates/project-detail.html",
- "at": "2026-11-03T03:53:56.295Z",
+ "url": "http://127.0.0.1:8766/docs/admin/templates/form-buttons.html",
+ "at": "2026-11-03T06:48:03.977Z",
  "allow": [],
  "viewports": [
   {
    "width": 1440,
    "height": 900,
    "load": "load",
-   "screens": 2,
+   "screens": 1,
    "filled": [
-    0.71,
-    0.83
+    0.51
    ],
    "motion": {
     "elements": 0,
@@ -26,14 +25,14 @@
      "h": 900
     },
     "page": {
-     "height": 988,
-     "screens": 1.1,
-     "words": 199,
+     "height": 900,
+     "screens": 1,
+     "words": 154,
      "img": 0,
      "video": 0,
      "canvas": 0,
-     "svg": 55,
-     "sections": 2,
+     "svg": 59,
+     "sections": 1,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
      "uiFragments": 0,
@@ -49,9 +48,9 @@
      "videosNoPoster": 0
     },
     "hero": {
-     "text": "11월 프로모션",
-     "words": 2,
-     "chars": 8,
+     "text": "버튼",
+     "words": 1,
+     "chars": 2,
      "lines": 1,
      "size": 24,
      "vw": 1.7,
@@ -59,15 +58,15 @@
      "weight": 600,
      "tracking": 0,
      "leading": 1.3,
-     "top": 108,
+     "top": 80,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
      "position": "left"
     },
     "h1": {
-     "text": "11월 프로모션",
-     "words": 2,
+     "text": "버튼",
+     "words": 1,
      "lines": 1,
      "size": 24,
      "font": "Inter"
@@ -101,9 +100,9 @@
       11,
       12,
       13,
+      14,
       15,
       16,
-      22,
       24
      ],
      "sizeCount": 8,
@@ -114,7 +113,7 @@
       "size": 24,
       "vw": 1.7,
       "font": "Inter",
-      "text": "11월 프로모션"
+      "text": "버튼"
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -123,9 +122,9 @@
      "microLabels": 0,
      "microLabelShare": 0,
      "microSamples": [],
-     "upperShare": 0.06,
-     "centerShare": 0.02,
-     "smallText": 2
+     "upperShare": 0.05,
+     "centerShare": 0.09,
+     "smallText": 4
     },
     "eyebrows": [],
     "numbered": [],
@@ -151,39 +150,39 @@
      "textColors": [
       {
        "color": "#66727e",
-       "share": 0.3
-      },
-      {
-       "color": "#2c3e50",
-       "share": 0.24
+       "share": 0.33
       },
       {
        "color": "#9facbb",
-       "share": 0.22
+       "share": 0.26
       },
       {
        "color": "#dde4ea",
-       "share": 0.17
+       "share": 0.21
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.12
       },
       {
        "color": "#ffffff",
-       "share": 0.03
+       "share": 0.04
       }
      ],
      "button": {
-      "bg": "#0e7a63",
+      "bg": "#ffffff",
       "hsl": {
-       "h": 167,
-       "s": 0.79,
-       "l": 0.27
+       "h": 0,
+       "s": 0,
+       "l": 1
       },
-      "fg": "#ffffff"
+      "fg": "#2c3e50"
      },
      "lowContrast": []
     },
     "buttons": {
-     "count": 6,
-     "inHero": 6,
+     "count": 14,
+     "inHero": 14,
      "radius": 6,
      "height": 34,
      "withShadow": 0,
@@ -192,14 +191,14 @@
      "upper": 0,
      "heroLabels": [
       "본문으로 이동",
-      "프로젝트 상세",
+      "버튼",
       "검색 Ctrl K",
       "김",
-      "보드"
+      "더 보기"
      ]
     },
     "surfaces": {
-     "shadowStatic": 8,
+     "shadowStatic": 7,
      "shadowOverlay": 0,
      "shadowSamples": [
       "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
@@ -211,18 +210,18 @@
      "scrims": 0,
      "gradientSamples": [],
      "gradientText": 0,
-     "hairlines": 18,
+     "hairlines": 8,
      "hairlineSamples": [
       "header.Catui_topbar.Catui_adm-top 1240px",
-      "header.Catui_pagehead 1192px",
-      "header.Catui_card-h 786px",
-      "div.Catui_gantt-head 744px",
-      "div.Catui_gantt-row 744px"
+      "header.Catui_card-h 382px",
+      "header.Catui_card-h 382px",
+      "header.Catui_card-h 382px",
+      "header.Catui_card-h 382px"
      ],
-     "outlinedBoxes": 9,
+     "outlinedBoxes": 7,
      "dashed": 0,
      "blurred": 0,
-     "roundedBoxes": 9,
+     "roundedBoxes": 7,
      "boxRadius": 8,
      "squareMedia": 0,
      "roundedMedia": 0,
@@ -230,10 +229,10 @@
      "textShadow": 0,
      "cardRows": [
       {
-       "count": 3,
-       "iconTopped": false,
+       "count": 5,
+       "iconTopped": true,
        "rounded": true,
-       "top": 226
+       "top": 155
       }
      ]
     },
@@ -252,61 +251,18 @@
      "w": 1440,
      "h": 900
     },
-    "pageH": 988,
+    "pageH": 900,
     "margins": {
-     "left": 16,
-     "right": 24
+     "left": 28,
+     "right": 45
     },
-    "sections": [
-     {
-      "sel": "section.Catui_adm-stats",
-      "tag": "section",
-      "top": 226,
-      "height": 124,
-      "words": 21,
-      "media": 0,
-      "middle": 259,
-      "heading": {
-       "text": "64%",
-       "size": 22,
-       "tag": "span"
-      },
-      "left": 245,
-      "right": 180,
-      "textLeft": 245,
-      "textRight": 180,
-      "fullBleed": false,
-      "footer": false,
-      "hero": true,
-      "continues": false,
-      "pinned": false
-     },
-     {
-      "sel": "div.Catui_grid",
-      "tag": "div",
-      "top": 370,
-      "height": 542,
-      "words": 70,
-      "media": 0,
-      "middle": 144,
-      "heading": null,
-      "left": 245,
-      "right": 53,
-      "textLeft": 245,
-      "textRight": 53,
-      "fullBleed": false,
-      "footer": true,
-      "hero": true,
-      "continues": false,
-      "pinned": false
-     }
-    ],
+    "sections": [],
     "gaps": [],
     "h1s": [
      {
-      "text": "11월 프로모션",
+      "text": "버튼",
       "size": 24,
-      "top": 108,
+      "top": 80,
       "firstScreen": true
      }
     ],
@@ -318,16 +274,16 @@
      }
     ],
     "leftBlocks": 1,
-    "bodySize": 16,
+    "bodySize": 13,
     "stage": false,
     "explains": false,
     "slivers": [],
-    "voidShare": 0.11,
+    "voidShare": 0.24,
     "voidBox": {
-     "x": 360,
-     "y": 480,
-     "w": 480,
-     "h": 300
+     "x": 120,
+     "y": 600,
+     "w": 1320,
+     "h": 240
     }
    },
    "app": {
@@ -351,9 +307,9 @@
      "right": 24
     },
     "hero": {
-     "text": "11월 프로모션",
-     "words": 2,
-     "chars": 8,
+     "text": "버튼",
+     "words": 1,
+     "chars": 2,
      "lines": 1,
      "size": 24,
      "vw": 1.7,
@@ -361,37 +317,43 @@
      "weight": 600,
      "tracking": 0,
      "leading": 1.3,
-     "top": 108,
+     "top": 80,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
      "position": "left"
     },
-    "charts": 2,
+    "charts": 0,
     "layout": {
-     "panels": 9,
-     "firstScreen": 9,
-     "ragged": [],
-     "voids": [
+     "panels": 7,
+     "firstScreen": 7,
+     "ragged": [
       {
-       "gap": 79,
-       "at": 598,
-       "panel": "팀"
+       "diff": 42,
+       "top": 155
       },
       {
-       "gap": 51,
-       "at": 298,
-       "panel": "진행률"
+       "diff": 54,
+       "top": 155
+      },
+      {
+       "diff": 26,
+       "top": 363
+      },
+      {
+       "diff": 38,
+       "top": 363
       }
-     ]
+     ],
+     "voids": []
     },
     "tiles": 0,
     "panels": {
-     "count": 10,
+     "count": 7,
      "radii": [
       [
        8,
-       9
+       6
       ],
       [
        0,
@@ -401,21 +363,27 @@
      "heavyBorders": 0,
      "borderSamples": [],
      "heavyShadows": 0,
-     "softShadows": 8,
+     "softShadows": 6,
      "shadowSamples": [],
      "glass": 0
     },
     "chips": {
-     "count": 0,
-     "hues": 0,
-     "samples": []
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 34,
+       "radius": "0px"
+      }
+     ]
     },
     "numbers": {
      "cells": 0,
      "leftAligned": 0,
-     "figures": 2,
-     "tabularShare": 1,
-     "kpiMax": 22
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
     },
     "rows": null,
     "chartHues": 0,
@@ -428,16 +396,16 @@
       11,
       12,
       13,
+      14,
       15,
       16,
-      22,
       24
      ]
     },
     "title": {
-     "text": "11월 프로모션",
+     "text": "버튼",
      "size": 24,
-     "top": 108
+     "top": 80
     },
     "colourShare": 0.01
    },
@@ -447,10 +415,9 @@
    "width": 768,
    "height": 1024,
    "load": "load",
-   "screens": 2,
+   "screens": 1,
    "filled": [
-    0.7,
-    0.96
+    0.65
    ],
    "motion": {
     "elements": 0,
@@ -466,14 +433,14 @@
      "h": 1024
     },
     "page": {
-     "height": 1635,
-     "screens": 1.6,
-     "words": 197,
+     "height": 1024,
+     "screens": 1,
+     "words": 145,
      "img": 0,
      "video": 0,
      "canvas": 0,
-     "svg": 55,
-     "sections": 2,
+     "svg": 59,
+     "sections": 1,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
      "uiFragments": 0,
@@ -489,9 +456,9 @@
      "videosNoPoster": 0
     },
     "hero": {
-     "text": "11월 프로모션",
-     "words": 2,
-     "chars": 8,
+     "text": "버튼",
+     "words": 1,
+     "chars": 2,
      "lines": 1,
      "size": 24,
      "vw": 3.1,
@@ -499,15 +466,15 @@
      "weight": 600,
      "tracking": 0,
      "leading": 1.3,
-     "top": 108,
+     "top": 80,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
      "position": "left"
     },
     "h1": {
-     "text": "11월 프로모션",
-     "words": 2,
+     "text": "버튼",
+     "words": 1,
      "lines": 1,
      "size": 24,
      "font": "Inter"
@@ -541,9 +508,9 @@
       11,
       12,
       13,
+      14,
       15,
       16,
-      22,
       24
      ],
      "sizeCount": 8,
@@ -554,7 +521,7 @@
       "size": 24,
       "vw": 3.1,
       "font": "Inter",
-      "text": "11월 프로모션"
+      "text": "버튼"
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -563,9 +530,9 @@
      "microLabels": 0,
      "microLabelShare": 0,
      "microSamples": [],
-     "upperShare": 0.03,
-     "centerShare": 0.01,
-     "smallText": 2
+     "upperShare": 0,
+     "centerShare": 0.16,
+     "smallText": 4
     },
     "eyebrows": [],
     "numbered": [],
@@ -591,39 +558,39 @@
      "textColors": [
       {
        "color": "#66727e",
-       "share": 0.51
+       "share": 0.63
       },
       {
        "color": "#2c3e50",
-       "share": 0.41
+       "share": 0.24
       },
       {
        "color": "#ffffff",
-       "share": 0.03
+       "share": 0.08
       },
       {
        "color": "#0e7a63",
-       "share": 0.03
+       "share": 0.02
       },
       {
-       "color": "#1f6fa8",
+       "color": "#4a5a68",
        "share": 0.01
       }
      ],
      "button": {
-      "bg": "#0e7a63",
+      "bg": "#ffffff",
       "hsl": {
-       "h": 167,
-       "s": 0.79,
-       "l": 0.27
+       "h": 0,
+       "s": 0,
+       "l": 1
       },
-      "fg": "#ffffff"
+      "fg": "#2c3e50"
      },
      "lowContrast": []
     },
     "buttons": {
-     "count": 4,
-     "inHero": 4,
+     "count": 12,
+     "inHero": 12,
      "radius": 6,
      "height": 34,
      "withShadow": 0,
@@ -633,12 +600,13 @@
      "heroLabels": [
       "본문으로 이동",
       "김",
-      "보드",
-      "할 일"
+      "더 보기",
+      "크게",
+      "새 주문"
      ]
     },
     "surfaces": {
-     "shadowStatic": 8,
+     "shadowStatic": 7,
      "shadowOverlay": 0,
      "shadowSamples": [
       "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
@@ -647,21 +615,21 @@
       "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px"
      ],
      "gradients": 0,
-     "scrims": 1,
+     "scrims": 0,
      "gradientSamples": [],
      "gradientText": 0,
-     "hairlines": 18,
+     "hairlines": 8,
      "hairlineSamples": [
       "header.Catui_topbar.Catui_adm-top 712px",
-      "header.Catui_pagehead 664px",
-      "header.Catui_card-h 662px",
-      "div.Catui_gantt-head 620px",
-      "div.Catui_gantt-row 620px"
+      "header.Catui_card-h 320px",
+      "header.Catui_card-h 320px",
+      "header.Catui_card-h 320px",
+      "header.Catui_card-h 320px"
      ],
-     "outlinedBoxes": 9,
+     "outlinedBoxes": 7,
      "dashed": 0,
      "blurred": 0,
-     "roundedBoxes": 9,
+     "roundedBoxes": 7,
      "boxRadius": 8,
      "squareMedia": 0,
      "roundedMedia": 0,
@@ -669,16 +637,10 @@
      "textShadow": 0,
      "cardRows": [
       {
-       "count": 3,
-       "iconTopped": false,
+       "count": 5,
+       "iconTopped": true,
        "rounded": true,
-       "top": 226
-      },
-      {
-       "count": 4,
-       "iconTopped": false,
-       "rounded": true,
-       "top": 515
+       "top": 155
       }
      ]
     },
@@ -697,61 +659,18 @@
      "w": 768,
      "h": 1024
     },
-    "pageH": 1635,
+    "pageH": 1024,
     "margins": {
      "left": 72,
      "right": 24
     },
-    "sections": [
-     {
-      "sel": "section.Catui_adm-stats",
-      "tag": "section",
-      "top": 226,
-      "height": 269,
-      "words": 21,
-      "media": 0,
-      "middle": 161,
-      "heading": {
-       "text": "64%",
-       "size": 22,
-       "tag": "span"
-      },
-      "left": 101,
-      "right": 131,
-      "textLeft": 101,
-      "textRight": 131,
-      "fullBleed": false,
-      "footer": false,
-      "hero": true,
-      "continues": false,
-      "pinned": false
-     },
-     {
-      "sel": "div.Catui_grid",
-      "tag": "div",
-      "top": 515,
-      "height": 1045,
-      "words": 70,
-      "media": 0,
-      "middle": 53,
-      "heading": null,
-      "left": 101,
-      "right": 45,
-      "textLeft": 101,
-      "textRight": 45,
-      "fullBleed": false,
-      "footer": true,
-      "hero": false,
-      "continues": false,
-      "pinned": false
-     }
-    ],
+    "sections": [],
     "gaps": [],
     "h1s": [
      {
-      "text": "11월 프로모션",
+      "text": "버튼",
       "size": 24,
-      "top": 108,
+      "top": 80,
       "firstScreen": true
      }
     ],
@@ -763,7 +682,7 @@
      }
     ],
     "leftBlocks": 1,
-    "bodySize": 16,
+    "bodySize": 13,
     "stage": false,
     "explains": false,
     "slivers": [],
@@ -791,9 +710,9 @@
      "right": 24
     },
     "hero": {
-     "text": "11월 프로모션",
-     "words": 2,
-     "chars": 8,
+     "text": "버튼",
+     "words": 1,
+     "chars": 2,
      "lines": 1,
      "size": 24,
      "vw": 3.1,
@@ -801,76 +720,85 @@
      "weight": 600,
      "tracking": 0,
      "leading": 1.3,
-     "top": 108,
+     "top": 80,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
      "position": "left"
     },
-    "charts": 2,
+    "charts": 0,
     "layout": {
-     "panels": 8,
+     "panels": 6,
      "firstScreen": 6,
-     "ragged": [],
-     "voids": [
+     "ragged": [
       {
-       "gap": 51,
-       "at": 298,
-       "panel": "진행률"
+       "diff": 54,
+       "top": 155
+      },
+      {
+       "diff": 38,
+       "top": 589
       }
-     ]
+     ],
+     "voids": []
     },
     "tiles": 0,
     "panels": {
-     "count": 9,
+     "count": 6,
      "radii": [
       [
        8,
-       9
+       6
       ]
      ],
      "heavyBorders": 0,
      "borderSamples": [],
      "heavyShadows": 0,
-     "softShadows": 8,
+     "softShadows": 6,
      "shadowSamples": [],
      "glass": 0
     },
     "chips": {
-     "count": 0,
-     "hues": 0,
-     "samples": []
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 34,
+       "radius": "0px"
+      }
+     ]
     },
     "numbers": {
      "cells": 0,
      "leftAligned": 0,
-     "figures": 2,
-     "tabularShare": 1,
-     "kpiMax": 22
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
     },
     "rows": null,
     "chartHues": 0,
     "placeholders": [],
     "type": {
-     "under13": 0.35,
+     "under13": 0.34,
      "tiny": 0,
      "tinySamples": [],
      "sizes": [
       11,
       12,
       13,
+      14,
       15,
       16,
-      22,
       24
      ]
     },
     "title": {
-     "text": "11월 프로모션",
+     "text": "버튼",
      "size": 24,
-     "top": 108
+     "top": 80
     },
-    "colourShare": 0.014
+    "colourShare": 0.018
    },
    "consoleErrors": []
   },
@@ -878,11 +806,10 @@
    "width": 390,
    "height": 844,
    "load": "load",
-   "screens": 3,
+   "screens": 2,
    "filled": [
-    0.61,
     0.77,
-    0.93
+    0.92
    ],
    "motion": {
     "elements": 0,
@@ -898,14 +825,14 @@
      "h": 844
     },
     "page": {
-     "height": 2002,
-     "screens": 2.4,
-     "words": 138,
+     "height": 1271,
+     "screens": 1.5,
+     "words": 86,
      "img": 0,
      "video": 0,
      "canvas": 0,
-     "svg": 55,
-     "sections": 2,
+     "svg": 59,
+     "sections": 1,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
      "uiFragments": 0,
@@ -915,15 +842,15 @@
      "uiPictures": 0,
      "pictureSamples": [],
      "blendText": 0,
-     "sideScrollers": 1,
+     "sideScrollers": 0,
      "brokenImages": [],
      "emoji": [],
      "videosNoPoster": 0
     },
     "hero": {
-     "text": "11월 프로모션",
-     "words": 2,
-     "chars": 8,
+     "text": "버튼",
+     "words": 1,
+     "chars": 2,
      "lines": 1,
      "size": 24,
      "vw": 6.2,
@@ -931,24 +858,24 @@
      "weight": 600,
      "tracking": 0,
      "leading": 1.3,
-     "top": 107,
+     "top": 80,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
      "position": "left"
     },
     "h1": {
-     "text": "11월 프로모션",
-     "words": 2,
+     "text": "버튼",
+     "words": 1,
      "lines": 1,
      "size": 24,
      "font": "Inter"
     },
     "headings": [
      {
-      "text": "11월 프로모션",
-      "words": 2,
-      "chars": 8,
+      "text": "버튼",
+      "words": 1,
+      "chars": 2,
       "lines": 1,
       "size": 24,
       "vw": 6.2,
@@ -960,104 +887,20 @@
       "italic": false,
       "mono": false,
       "align": "left",
-      "position": "left",
-      "widthRatio": 0.39,
-      "top": 107,
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 80,
       "tag": "h1",
-      "kind": "heading"
-     },
-     {
-      "text": "64%",
-      "words": 1,
-      "chars": 3,
-      "lines": 1,
-      "size": 22,
-      "vw": 5.6,
-      "font": "Inter",
-      "weight": 700,
-      "tracking": 0,
-      "leading": 1.15,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.11,
-      "top": 317,
-      "tag": "span",
-      "kind": "heading"
-     },
-     {
-      "text": "14 / 22",
-      "words": 3,
-      "chars": 7,
-      "lines": 1,
-      "size": 22,
-      "vw": 5.6,
-      "font": "Inter",
-      "weight": 700,
-      "tracking": 0,
-      "leading": 1.15,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.17,
-      "top": 446,
-      "tag": "span",
-      "kind": "heading"
-     },
-     {
-      "text": "9일",
-      "words": 1,
-      "chars": 2,
-      "lines": 1,
-      "size": 22,
-      "vw": 5.6,
-      "font": "Inter",
-      "weight": 700,
-      "tracking": 0,
-      "leading": 1.15,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.09,
-      "top": 591,
-      "tag": "span",
-      "kind": "heading"
-     },
-     {
-      "text": "72%",
-      "words": 1,
-      "chars": 3,
-      "lines": 1,
-      "size": 22,
-      "vw": 5.6,
-      "font": "Inter",
-      "weight": 700,
-      "tracking": 0,
-      "leading": 1.15,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.11,
-      "top": 735,
-      "tag": "span",
       "kind": "heading"
      }
     ],
     "headingSummary": {
-     "count": 5,
+     "count": 1,
      "maxLines": 1,
      "over2Lines": 0,
      "statements": 0,
      "centered": 0,
-     "medianWords": 1,
+     "medianWords": null,
      "mixedFontHeadings": 0
     },
     "type": {
@@ -1079,9 +922,9 @@
       11,
       12,
       13,
+      14,
       15,
       16,
-      22,
       24
      ],
      "sizeCount": 8,
@@ -1092,7 +935,7 @@
       "size": 24,
       "vw": 6.2,
       "font": "Inter",
-      "text": "11월 프로모션"
+      "text": "버튼"
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -1101,9 +944,9 @@
      "microLabels": 0,
      "microLabelShare": 0,
      "microSamples": [],
-     "upperShare": 0.03,
-     "centerShare": 0.01,
-     "smallText": 2
+     "upperShare": 0,
+     "centerShare": 0.16,
+     "smallText": 4
     },
     "eyebrows": [],
     "numbered": [],
@@ -1124,53 +967,44 @@
         "s": 0.25,
         "l": 0.98
        }
-      },
-      {
-       "color": "#ffffff",
-       "top": 832,
-       "hsl": {
-        "h": 0,
-        "s": 0,
-        "l": 1
-       }
       }
      ],
      "textColors": [
       {
        "color": "#66727e",
-       "share": 0.51
+       "share": 0.63
       },
       {
        "color": "#2c3e50",
-       "share": 0.41
+       "share": 0.24
       },
       {
        "color": "#ffffff",
-       "share": 0.03
+       "share": 0.08
       },
       {
        "color": "#0e7a63",
-       "share": 0.03
+       "share": 0.02
       },
       {
-       "color": "#1f6fa8",
+       "color": "#4a5a68",
        "share": 0.01
       }
      ],
      "button": {
-      "bg": "#0e7a63",
+      "bg": "#ffffff",
       "hsl": {
-       "h": 167,
-       "s": 0.79,
-       "l": 0.27
+       "h": 0,
+       "s": 0,
+       "l": 1
       },
-      "fg": "#ffffff"
+      "fg": "#2c3e50"
      },
      "lowContrast": []
     },
     "buttons": {
-     "count": 5,
-     "inHero": 5,
+     "count": 12,
+     "inHero": 9,
      "radius": 6,
      "height": 34,
      "withShadow": 0,
@@ -1180,12 +1014,13 @@
      "heroLabels": [
       "본문으로 이동",
       "김",
-      "보드",
-      "할 일"
+      "더 보기",
+      "크게",
+      "새 주문"
      ]
     },
     "surfaces": {
-     "shadowStatic": 8,
+     "shadowStatic": 7,
      "shadowOverlay": 0,
      "shadowSamples": [
       "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px",
@@ -1194,21 +1029,21 @@
       "article.Catui_card → rgba(16, 24, 40, 0.04) 0px 1px 1px 0px"
      ],
      "gradients": 0,
-     "scrims": 5,
+     "scrims": 0,
      "gradientSamples": [],
      "gradientText": 0,
-     "hairlines": 18,
+     "hairlines": 8,
      "hairlineSamples": [
       "header.Catui_topbar.Catui_adm-top 390px",
-      "header.Catui_pagehead 342px",
       "header.Catui_card-h 340px",
-      "div.Catui_gantt-head 558px",
-      "div.Catui_gantt-row 558px"
+      "header.Catui_card-h 340px",
+      "header.Catui_card-h 340px",
+      "header.Catui_card-h 340px"
      ],
-     "outlinedBoxes": 9,
+     "outlinedBoxes": 7,
      "dashed": 0,
      "blurred": 0,
-     "roundedBoxes": 9,
+     "roundedBoxes": 7,
      "boxRadius": 8,
      "squareMedia": 0,
      "roundedMedia": 0,
@@ -1216,16 +1051,10 @@
      "textShadow": 0,
      "cardRows": [
       {
-       "count": 3,
-       "iconTopped": false,
+       "count": 5,
+       "iconTopped": true,
        "rounded": true,
-       "top": 399
-      },
-      {
-       "count": 4,
-       "iconTopped": false,
-       "rounded": true,
-       "top": 832
+       "top": 175
       }
      ]
     },
@@ -1244,52 +1073,25 @@
      "w": 390,
      "h": 844
     },
-    "pageH": 2002,
+    "pageH": 1271,
     "margins": {
      "left": 24,
      "right": 24
     },
     "sections": [
      {
-      "sel": "header.Catui_pagehead",
-      "tag": "header",
-      "top": 80,
-      "height": 149,
-      "words": 17,
+      "sel": "article.Catui_card",
+      "tag": "article",
+      "top": 175,
+      "height": 146,
+      "words": 12,
       "media": 0,
-      "middle": 0,
-      "heading": {
-       "text": "11월 프로모션",
-       "size": 24,
-       "tag": "h1"
-      },
-      "left": 24,
-      "right": 115,
-      "textLeft": 24,
-      "textRight": 115,
-      "fullBleed": false,
-      "footer": false,
-      "hero": true,
-      "continues": false,
-      "pinned": false
-     },
-     {
-      "sel": "section.Catui_adm-stats",
-      "tag": "section",
-      "top": 269,
-      "height": 543,
-      "words": 21,
-      "media": 0,
-      "middle": 0,
-      "heading": {
-       "text": "64%",
-       "size": 22,
-       "tag": "span"
-      },
+      "middle": 1,
+      "heading": null,
       "left": 45,
-      "right": 239,
+      "right": 64,
       "textLeft": 45,
-      "textRight": 239,
+      "textRight": 81,
       "fullBleed": false,
       "footer": false,
       "hero": true,
@@ -1297,18 +1099,94 @@
       "pinned": false
      },
      {
-      "sel": "div.Catui_grid",
-      "tag": "div",
-      "top": 832,
-      "height": 1094,
-      "words": 66,
+      "sel": "article.Catui_card",
+      "tag": "article",
+      "top": 341,
+      "height": 134,
+      "words": 4,
+      "media": 0,
+      "middle": 8,
+      "heading": null,
+      "left": 45,
+      "right": 149,
+      "textLeft": 45,
+      "textRight": 170,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card",
+      "tag": "article",
+      "top": 495,
+      "height": 188,
+      "words": 10,
       "media": 0,
       "middle": 0,
       "heading": null,
       "left": 45,
+      "right": 84,
+      "textLeft": 45,
+      "textRight": 84,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card",
+      "tag": "article",
+      "top": 703,
+      "height": 146,
+      "words": 11,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 45,
+      "right": 48,
+      "textLeft": 45,
+      "textRight": 48,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card",
+      "tag": "article",
+      "top": 869,
+      "height": 172,
+      "words": 10,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 45,
+      "right": 100,
+      "textLeft": 45,
+      "textRight": 148,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card",
+      "tag": "article",
+      "top": 1061,
+      "height": 134,
+      "words": 5,
+      "media": 0,
+      "middle": 70,
+      "heading": null,
+      "left": 45,
       "right": 45,
       "textLeft": 45,
-      "textRight": 45,
+      "textRight": 58,
       "fullBleed": false,
       "footer": true,
       "hero": false,
@@ -1319,9 +1197,9 @@
     "gaps": [],
     "h1s": [
      {
-      "text": "11월 프로모션",
+      "text": "버튼",
       "size": 24,
-      "top": 107,
+      "top": 80,
       "firstScreen": true
      }
     ],
@@ -1333,7 +1211,7 @@
      }
     ],
     "leftBlocks": 1,
-    "bodySize": 16,
+    "bodySize": 13,
     "stage": false,
     "explains": false,
     "slivers": [],
@@ -1353,12 +1231,12 @@
     },
     "canvas": {
      "left": 21,
-     "right": -129
+     "right": 24
     },
     "hero": {
-     "text": "11월 프로모션",
-     "words": 2,
-     "chars": 8,
+     "text": "버튼",
+     "words": 1,
+     "chars": 2,
      "lines": 1,
      "size": 24,
      "vw": 6.2,
@@ -1366,70 +1244,75 @@
      "weight": 600,
      "tracking": 0,
      "leading": 1.3,
-     "top": 107,
+     "top": 80,
      "tag": "h1",
      "kind": "heading",
      "align": "left",
      "position": "left"
     },
-    "charts": 2,
+    "charts": 0,
     "layout": {
-     "panels": 8,
+     "panels": 6,
      "firstScreen": 4,
      "ragged": [],
      "voids": []
     },
     "tiles": 0,
     "panels": {
-     "count": 8,
+     "count": 6,
      "radii": [
       [
        8,
-       8
+       6
       ]
      ],
      "heavyBorders": 0,
      "borderSamples": [],
      "heavyShadows": 0,
-     "softShadows": 8,
+     "softShadows": 6,
      "shadowSamples": [],
      "glass": 0
     },
     "chips": {
-     "count": 0,
-     "hues": 0,
-     "samples": []
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 34,
+       "radius": "0px"
+      }
+     ]
     },
     "numbers": {
      "cells": 0,
      "leftAligned": 0,
-     "figures": 2,
-     "tabularShare": 1,
-     "kpiMax": 22
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
     },
     "rows": null,
     "chartHues": 0,
     "placeholders": [],
     "type": {
-     "under13": 0.5,
+     "under13": 0.54,
      "tiny": 0,
      "tinySamples": [],
      "sizes": [
-      11,
       12,
       13,
+      14,
       15,
       16,
-      22,
       24
      ]
     },
     "title": {
-     "text": "11월 프로모션",
+     "text": "버튼",
      "size": 24,
-     "top": 107
+     "top": 80
     },
-    "colourShare": 0.009
+    "colourShare": 0.027
    },
    "consoleErrors": []
   }
@@ -1437,16 +1320,19 @@
  "findings": [
   {
    "level": "WARN",
-   "id": "panel-void",
+   "id": "ragged-row",
    "width": 1440,
-   "message": "2 card(s) hold a blank band inside: 79px in \"팀\", 51px in \"진행률\".",
-   "fix": "A card stretches to its neighbour only when it has content to fill. Keep a legend or a note directly under its chart (only an action or a total may sit at a stretched card's foot), let a short card keep its own height (align-items: start), and let a filtered block shrink to its rows."
+   "message": "4 pair(s) of cards in one row end at different heights (by 42px, 54px, 26px).",
+   "fix": "Cards that share a row share a bottom edge: balance them by their content (the same number of rows, a block of similar height beside it), or stack them. In testing, ragged rows were marked down every time.",
+   "alsoAt": [
+    768
+   ]
   },
   {
    "level": "WARN",
    "id": "tiny-text",
    "width": 390,
-   "message": "50% of the text is under 13px.",
+   "message": "54% of the text is under 13px.",
    "fix": "Data and labels read at 13–14px; keep 11–12px for sublines and axis ticks."
   }
  ],
