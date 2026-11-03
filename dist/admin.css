@@ -193,14 +193,18 @@
 /* 화면별 배치 — 폼 구역·고정 저장 바·보기 모음·미리보기 격자·지도·캘린더. 내용은 본체 컴포넌트 그대로. */
 
 /* 폼 구역: 왼쪽 설명 · 오른쪽 입력 카드 (991px 이하 위아래) */
-.Catui_adm-section{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--Catui_adm-gap);align-items:start}
+/* 설명 칸은 고정 폭(넓은 화면에서 입력 카드가 오른쪽으로 밀려 보이지 않게), 폼 전체는 읽기 좋은 최대 폭 */
+.Catui_adm-section{display:grid;grid-template-columns:minmax(0,calc(var(--Catui_space-10) * 3.75)) minmax(0,1fr);gap:var(--Catui_space-8);align-items:start}
+.Catui_adm form:has(> .Catui_adm-section){max-width:calc(var(--Catui_space-10) * 17)}
 .Catui_adm-section + .Catui_adm-section{padding-top:var(--Catui_adm-gap);border-top:1px solid var(--Catui_color-border)}
 .Catui_adm-section-desc h2{margin:0 0 var(--Catui_space-1);font-size:var(--Catui_type-h3-size);line-height:var(--Catui_type-h3-lh)}
 .Catui_adm-section-desc p{margin:0;color:var(--Catui_color-text-secondary)}
 @media (max-width:991px){.Catui_adm-section{grid-template-columns:minmax(0,1fr)}}
 
 /* 입력 2열 (767px 이하 1열). .Catui_adm-wide는 두 칸 차지 */
-.Catui_adm-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-4) var(--Catui_adm-gap)}
+.Catui_adm-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-4) var(--Catui_adm-gap);align-items:start}
+/* 같은 줄의 옆 칸이 도움말 때문에 높아져도 라벨·입력칸이 위에서부터 맞도록 */
+.Catui_adm-cols > .Catui_field{align-content:start}
 .Catui_adm-wide{grid-column:1 / -1}
 @media (max-width:767px){.Catui_adm-cols{grid-template-columns:minmax(0,1fr)}}
 

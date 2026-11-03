@@ -5,6 +5,8 @@
 .Catui_app fieldset,.Catui_site fieldset{border:0;padding:0;margin:0;min-width:0}
 .Catui_app legend,.Catui_site legend{padding:0;display:block}
 .Catui_app legend.Catui_h3,.Catui_site legend.Catui_h3{margin-bottom:var(--Catui_space-4)}
+/* legend는 flex·grid 배치에서 빠지므로(fieldset의 gap이 적용되지 않음) 입력칸 라벨과 같은 간격을 직접 준다 */
+.Catui_app legend.Catui_label,.Catui_site legend.Catui_label{margin-bottom:var(--Catui_space-2)}
 .Catui_app form:not([class]),
 .Catui_site form:not([class]){display:grid;gap:var(--Catui_space-5)}
 .Catui_app fieldset:not([class]),.Catui_site fieldset:not([class]){display:grid;gap:var(--Catui_space-4)}
