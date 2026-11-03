@@ -36,7 +36,7 @@
   <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-download"></use></svg>CSV</button></div>
 </div>
 
-<div class="Catui_grid">
+<div class="Catui_grid" data-catui-adm-src="dashboard-sales">
   <article class="Catui_card Catui_span-4">
     <header class="Catui_card-h">이번 달 매출</header>
     <div class="Catui_card-b Catui_vstack Catui_gap-3">
@@ -63,15 +63,14 @@
   <article class="Catui_card Catui_span-8">
     <header class="Catui_card-h">월별 매출 <span class="Catui_adm-card-meta">단위 만원</span></header>
     <div class="Catui_card-b">
-      <div class="Catui_adm-chart Catui_adm-chart-lg" data-catui-adm-chart="bar" data-catui-adm-label="2026년 월별 매출과 비용"
-        data-catui-adm-data='{"labels":["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월"],"series":[{"name":"매출","data":[3120,2980,3540,3720,3910,4180,4020,4310,4560,4790,4820]},{"name":"비용","data":[2010,1980,2200,2310,2380,2520,2490,2610,2700,2840,2790]}]}'></div>
+      <div class="Catui_adm-chart Catui_adm-chart-lg" data-catui-adm-chart="bar" data-catui-adm-key="charts.c1" data-catui-adm-label="2026년 월별 매출과 비용" ></div>
       <ul class="Catui_legend Catui_legend-row Catui_adm-legend"><li><i class="Catui_s1"></i>매출</li><li><i class="Catui_s2"></i>비용</li></ul>
     </div>
   </article>
   <article class="Catui_card Catui_span-4">
     <header class="Catui_card-h">분류별 매출</header>
     <div class="Catui_card-b">
-      <div class="Catui_adm-chart" data-catui-adm-chart="donut" data-catui-adm-label="분류별 매출 비율" data-catui-adm-data='{"labels":["키보드","마우스","모니터","액세서리"],"data":[44,21,24,11],"center":"4,820만","caption":"11월"}'></div>
+      <div class="Catui_adm-chart" data-catui-adm-chart="donut" data-catui-adm-key="charts.c2" data-catui-adm-label="분류별 매출 비율" ></div>
       <ul class="Catui_legend Catui_adm-legend"><li><i class="Catui_s1"></i>키보드<b>44%</b></li><li><i class="Catui_s2"></i>마우스<b>21%</b></li><li><i class="Catui_s3"></i>모니터<b>24%</b></li><li><i class="Catui_s4"></i>액세서리<b>11%</b></li></ul>
     </div>
   </article>
