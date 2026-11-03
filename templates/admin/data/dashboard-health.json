@@ -80,5 +80,63 @@
     "value": "99.71%"
    }
   ]
- }
+ },
+ "services": [
+  {
+   "name": "웹 서버",
+   "dot": "on",
+   "tone": "success",
+   "state": "정상"
+  },
+  {
+   "name": "API",
+   "dot": "on",
+   "tone": "success",
+   "state": "정상"
+  },
+  {
+   "name": "데이터베이스",
+   "dot": "on",
+   "tone": "success",
+   "state": "정상"
+  },
+  {
+   "name": "메일 발송",
+   "dot": "away",
+   "tone": "warning",
+   "state": "지연 (대기 42건)"
+  },
+  {
+   "name": "파일 저장소",
+   "dot": "on",
+   "tone": "success",
+   "state": "정상"
+  },
+  {
+   "name": "검색 색인",
+   "dot": "busy",
+   "tone": "danger",
+   "state": "재색인 중"
+  }
+ ],
+ "incidents": [
+  {
+   "tone": "danger",
+   "kind": "장애",
+   "text": "검색 색인 지연 — 재색인 시작",
+   "time": "2026-11-02T09:12:00+09:00"
+  },
+  {
+   "tone": "warning",
+   "kind": "주의",
+   "text": "메일 발송 대기열 증가",
+   "time": "2026-11-02T08:40:00+09:00"
+  },
+  {
+   "tone": "info",
+   "kind": "점검",
+   "text": "DB 정기 점검 완료 (12분)",
+   "time": "2026-10-30T02:00:00+09:00"
+  }
+ ]
 }
