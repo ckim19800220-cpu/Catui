@@ -30,6 +30,7 @@ admin.format = function (v, kind) {
     case "percent": return `${n}%`;
     case "delta": return `${n > 0 ? "▲" : n < 0 ? "▼" : ""} ${Math.abs(n)}%`.trim();
     case "ms": return `${catui.util.number(n)}ms`;
+    case "initial": return String(v).trim().slice(0, 1);   // 아바타 글자
     default: return String(v);
   }
 };

@@ -1,0 +1,24 @@
+{
+ "bars": {
+  "product_1": [
+   {
+    "label": "검정",
+    "fill": "",
+    "pct": 64,
+    "value": "32개"
+   },
+   {
+    "label": "흰색",
+    "fill": "2",
+    "pct": 20,
+    "value": "10개"
+   },
+   {
+    "label": "초록",
+    "fill": "4",
+    "pct": 0,
+    "value": "품절"
+   }
+  ]
+ }
+}

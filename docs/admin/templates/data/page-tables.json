@@ -1,0 +1,65 @@
+{
+ "stock": [
+  {
+   "name": "USB-C 허브",
+   "stock": 3,
+   "state": "품절 임박",
+   "tone": "danger"
+  },
+  {
+   "name": "27인치 모니터",
+   "stock": 12,
+   "state": "부족",
+   "tone": "warning"
+  },
+  {
+   "name": "무선 마우스",
+   "stock": 184,
+   "state": "충분",
+   "tone": "success"
+  },
+  {
+   "name": "기계식 키보드",
+   "stock": 96,
+   "state": "충분",
+   "tone": "success"
+  }
+ ],
+ "weekdays": [
+  {
+   "day": "월",
+   "orders": 182,
+   "revenue": 6840000,
+   "avg": 37582
+  },
+  {
+   "day": "화",
+   "orders": 171,
+   "revenue": 6400000,
+   "avg": 37427
+  },
+  {
+   "day": "수",
+   "orders": 195,
+   "revenue": 7310000,
+   "avg": 37487
+  },
+  {
+   "day": "목",
+   "orders": 188,
+   "revenue": 7020000,
+   "avg": 37340
+  },
+  {
+   "day": "금",
+   "orders": 231,
+   "revenue": 8740000,
+   "avg": 37835
+  }
+ ],
+ "weekdayTotal": {
+  "orders": 967,
+  "revenue": 36310000,
+  "avg": 37549
+ }
+}

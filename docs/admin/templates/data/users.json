@@ -6,7 +6,8 @@
   "role": "최고 관리자",
   "mfa": true,
   "last": "방금",
-  "status": "활성"
+  "status": "활성",
+  "roleTone": "success"
  },
  {
   "id": "2",
@@ -15,7 +16,8 @@
   "role": "최고 관리자",
   "mfa": true,
   "last": "10분 전",
-  "status": "활성"
+  "status": "활성",
+  "roleTone": "success"
  },
  {
   "id": "3",
@@ -24,7 +26,8 @@
   "role": "운영자",
   "mfa": true,
   "last": "어제",
-  "status": "활성"
+  "status": "활성",
+  "roleTone": "info"
  },
  {
   "id": "4",
@@ -33,7 +36,8 @@
   "role": "운영자",
   "mfa": false,
   "last": "3일 전",
-  "status": "활성"
+  "status": "활성",
+  "roleTone": "info"
  },
  {
   "id": "5",
@@ -42,7 +46,8 @@
   "role": "읽기 전용",
   "mfa": true,
   "last": "1주 전",
-  "status": "활성"
+  "status": "활성",
+  "roleTone": "neutral"
  },
  {
   "id": "6",
@@ -51,7 +56,8 @@
   "role": "운영자",
   "mfa": true,
   "last": "2주 전",
-  "status": "잠김"
+  "status": "잠김",
+  "roleTone": "info"
  },
  {
   "id": "7",
@@ -60,7 +66,8 @@
   "role": "읽기 전용",
   "mfa": false,
   "last": "한 달 전",
-  "status": "초대 대기"
+  "status": "초대 대기",
+  "roleTone": "neutral"
  },
  {
   "id": "8",
@@ -69,6 +76,7 @@
   "role": "운영자",
   "mfa": true,
   "last": "어제",
-  "status": "활성"
+  "status": "활성",
+  "roleTone": "info"
  }
 ]

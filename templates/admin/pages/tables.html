@@ -10,12 +10,7 @@
       <table class="Catui_tbl">
         <caption class="Catui_clip">재고 현황 (상태 순)</caption>
         <thead><tr><th scope="col">상품</th><th scope="col" class="Catui_num">재고</th><th scope="col" class="Catui_sort" aria-sort="ascending">상태 {{icon:chevron-up:12}}</th></tr></thead>
-        <tbody>
-          <tr><td>USB-C 허브</td><td class="Catui_num">3</td><td><span class="Catui_pill Catui_pill-danger"><i class="Catui_dot"></i>품절 임박</span></td></tr>
-          <tr><td>27인치 모니터</td><td class="Catui_num">12</td><td><span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>부족</span></td></tr>
-          <tr><td>무선 마우스</td><td class="Catui_num">184</td><td><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>충분</span></td></tr>
-          <tr><td>기계식 키보드</td><td class="Catui_num">96</td><td><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>충분</span></td></tr>
-        </tbody>
+        <tbody data-catui-adm-src="page-tables" data-catui-adm-rows="stock"><template><tr><td data-catui-adm-field="name"></td><td class="Catui_num" data-catui-adm-field="stock" data-catui-adm-format="number"></td><td><span class="Catui_pill" data-catui-adm-class="Catui_pill-:tone"><i class="Catui_dot"></i><span data-catui-adm-field="state"></span></span></td></tr></template></tbody>
       </table></div></div>
   </article>
   <article class="Catui_card Catui_span-6">
@@ -24,14 +19,8 @@
       <table class="Catui_tbl Catui_tbl-compact Catui_tbl-bordered">
         <caption class="Catui_clip">요일별 주문 수</caption>
         <thead><tr><th scope="col">요일</th><th scope="col" class="Catui_num">주문</th><th scope="col" class="Catui_num">매출</th><th scope="col" class="Catui_num">평균</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">월</th><td class="Catui_num">182</td><td class="Catui_num">684만</td><td class="Catui_num">37,582</td></tr>
-          <tr><th scope="row">화</th><td class="Catui_num">171</td><td class="Catui_num">640만</td><td class="Catui_num">37,426</td></tr>
-          <tr><th scope="row">수</th><td class="Catui_num">195</td><td class="Catui_num">731만</td><td class="Catui_num">37,487</td></tr>
-          <tr><th scope="row">목</th><td class="Catui_num">188</td><td class="Catui_num">702만</td><td class="Catui_num">37,340</td></tr>
-          <tr><th scope="row">금</th><td class="Catui_num">231</td><td class="Catui_num">874만</td><td class="Catui_num">37,835</td></tr>
-        </tbody>
-        <tfoot><tr><th scope="row">합계</th><td class="Catui_num">967</td><td class="Catui_num">3,631만</td><td class="Catui_num">37,549</td></tr></tfoot>
+        <tbody data-catui-adm-src="page-tables" data-catui-adm-rows="weekdays"><template><tr><th scope="row" data-catui-adm-field="day"></th><td class="Catui_num" data-catui-adm-field="orders" data-catui-adm-format="number"></td><td class="Catui_num" data-catui-adm-field="revenue" data-catui-adm-format="man"></td><td class="Catui_num" data-catui-adm-field="avg" data-catui-adm-format="number"></td></tr></template></tbody>
+        <tfoot data-catui-adm-src="page-tables"><tr><th scope="row">합계</th><td class="Catui_num" data-catui-adm-text="weekdayTotal.orders" data-catui-adm-format="number"></td><td class="Catui_num" data-catui-adm-text="weekdayTotal.revenue" data-catui-adm-format="man"></td><td class="Catui_num" data-catui-adm-text="weekdayTotal.avg" data-catui-adm-format="number"></td></tr></tfoot>
       </table></div></div>
   </article>
 
@@ -41,15 +30,7 @@
       <table class="Catui_tbl Catui_tbl-stack">
         <caption class="Catui_clip">관리자 목록 — 좁은 화면에서는 카드형으로 바뀝니다</caption>
         <thead><tr><th scope="col"><label class="Catui_choice"><input class="Catui_clip" type="checkbox" aria-label="모두 선택"><span class="Catui_cbx">{{icon:check:12}}</span></label></th><th scope="col">이름</th><th scope="col">이메일</th><th scope="col">권한</th><th scope="col">마지막 접속</th><th scope="col"><span class="Catui_clip">동작</span></th></tr></thead>
-        <tbody>
-          <tr><td data-label="선택"><label class="Catui_choice"><input class="Catui_clip" type="checkbox" aria-label="김하늘 선택"><span class="Catui_cbx">{{icon:check:12}}</span></label></td><td data-label="이름"><span class="Catui_av Catui_av-xs" aria-hidden="true">김</span> 김하늘</td><td data-label="이메일">haneul@catui.dev</td><td data-label="권한"><span class="Catui_badge Catui_badge-success">최고 관리자</span></td><td data-label="마지막 접속">10분 전</td>
-            <td data-label="동작"><details class="Catui_dd"><summary class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" aria-label="김하늘 메뉴">{{icon:more-horizontal}}</summary><div class="Catui_dd-menu Catui_dd-sm"><button class="Catui_dd-item" type="button">권한 변경</button><button class="Catui_dd-item" type="button">비밀번호 초기화</button><div class="Catui_dd-sep"></div><button class="Catui_dd-item Catui_dd-danger" type="button">내보내기(삭제)</button></div></details></td></tr>
-          <tr><td data-label="선택"><label class="Catui_choice"><input class="Catui_clip" type="checkbox" aria-label="이준 선택"><span class="Catui_cbx">{{icon:check:12}}</span></label></td><td data-label="이름"><span class="Catui_av Catui_av-xs" aria-hidden="true">이</span> 이준</td><td data-label="이메일">jun@catui.dev</td><td data-label="권한"><span class="Catui_badge Catui_badge-info">운영자</span></td><td data-label="마지막 접속">어제</td>
-            <td data-label="동작"><details class="Catui_dd"><summary class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" aria-label="이준 메뉴">{{icon:more-horizontal}}</summary><div class="Catui_dd-menu Catui_dd-sm"><button class="Catui_dd-item" type="button">권한 변경</button><button class="Catui_dd-item" type="button">비밀번호 초기화</button></div></details></td></tr>
-          <tr><td data-label="선택"><label class="Catui_choice"><input class="Catui_clip" type="checkbox" aria-label="박서연 선택"><span class="Catui_cbx">{{icon:check:12}}</span></label></td><td data-label="이름"><span class="Catui_av Catui_av-xs" aria-hidden="true">박</span> 박서연</td><td data-label="이메일">seoyeon@catui.dev</td><td data-label="권한"><span class="Catui_badge Catui_badge-neutral">읽기 전용</span></td><td data-label="마지막 접속">3일 전</td>
-            <td data-label="동작"><details class="Catui_dd"><summary class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" aria-label="박서연 메뉴">{{icon:more-horizontal}}</summary><div class="Catui_dd-menu Catui_dd-sm"><button class="Catui_dd-item" type="button">권한 변경</button></div></details></td></tr>
-          <tr><td colspan="6"><div class="Catui_empty">{{icon:inbox}}<p class="Catui_empty-title">더 이상 관리자가 없습니다</p></div></td></tr>
-        </tbody>
+        <tbody data-catui-adm-src="users" data-catui-adm-rows=""><template><tr><td data-label="선택"><label class="Catui_choice"><input class="Catui_clip" type="checkbox" data-catui-adm-attr="aria-label:{name} 선택"><span class="Catui_cbx">{{icon:check:12}}</span></label></td><td data-label="이름"><span class="Catui_av Catui_av-xs" aria-hidden="true" data-catui-adm-field="name" data-catui-adm-format="initial"></span> <span data-catui-adm-field="name"></span></td><td data-label="이메일" data-catui-adm-field="email"></td><td data-label="권한"><span class="Catui_badge" data-catui-adm-class="Catui_badge-:roleTone" data-catui-adm-field="role"></span></td><td data-label="마지막 접속" data-catui-adm-field="last"></td><td data-label="동작"><details class="Catui_dd"><summary class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" data-catui-adm-attr="aria-label:{name} 메뉴">{{icon:more-horizontal}}</summary><div class="Catui_dd-menu Catui_dd-sm"><button class="Catui_dd-item" type="button">권한 변경</button><button class="Catui_dd-item" type="button">비밀번호 초기화</button><div class="Catui_dd-sep"></div><button class="Catui_dd-item Catui_dd-danger" type="button">계정 삭제</button></div></details></td></tr></template></tbody>
       </table></div></div>
   </article>
 </div>

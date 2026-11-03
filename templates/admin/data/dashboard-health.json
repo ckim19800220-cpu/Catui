@@ -58,5 +58,27 @@
   "memory": 68,
   "disk": 71,
   "latencyMs": 182
+ },
+ "bars": {
+  "health_1": [
+   {
+    "label": "웹",
+    "fill": "",
+    "pct": 99.98,
+    "value": "99.98%"
+   },
+   {
+    "label": "API",
+    "fill": "",
+    "pct": 99.95,
+    "value": "99.95%"
+   },
+   {
+    "label": "검색",
+    "fill": "4",
+    "pct": 99.71,
+    "value": "99.71%"
+   }
+  ]
  }
 }

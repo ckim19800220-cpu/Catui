@@ -197,5 +197,77 @@
    "status": "취소",
    "tone": "danger"
   }
- ]
+ ],
+ "bars": {
+  "index_1": [
+   {
+    "label": "서울",
+    "fill": "",
+    "pct": 42,
+    "value": "42%"
+   },
+   {
+    "label": "경기",
+    "fill": "",
+    "pct": 24,
+    "value": "24%"
+   },
+   {
+    "label": "부산",
+    "fill": "",
+    "pct": 11,
+    "value": "11%"
+   },
+   {
+    "label": "대구",
+    "fill": "",
+    "pct": 7,
+    "value": "7%"
+   },
+   {
+    "label": "인천",
+    "fill": "",
+    "pct": 6,
+    "value": "6%"
+   },
+   {
+    "label": "해외",
+    "fill": "2",
+    "pct": 10,
+    "value": "10%"
+   }
+  ],
+  "index_2": [
+   {
+    "label": "v4.2",
+    "fill": "",
+    "pct": 61,
+    "value": "61%"
+   },
+   {
+    "label": "v4.1",
+    "fill": "2",
+    "pct": 22,
+    "value": "22%"
+   },
+   {
+    "label": "v4.0",
+    "fill": "3",
+    "pct": 9,
+    "value": "9%"
+   },
+   {
+    "label": "v3.x",
+    "fill": "4",
+    "pct": 6,
+    "value": "6%"
+   },
+   {
+    "label": "기타",
+    "fill": "5",
+    "pct": 2,
+    "value": "2%"
+   }
+  ]
+ }
 }
