@@ -15,7 +15,7 @@
   <article class="Catui_card Catui_span-6">
     <header class="Catui_card-h">주간 방문 <span class="Catui_adm-card-meta">선</span></header>
     <div class="Catui_card-b"><div class="Catui_adm-chart" id="ch-line" data-catui-adm-chart="line" data-catui-adm-label="주간 방문" data-catui-adm-src="page-charts" data-catui-adm-key="charts.charts_5"></div>
-      <ul class="Catui_legend Catui_legend-row Catui_adm-legend"><li><i class="Catui_s1"></i>이번 주</li><li><i class="Catui_s2"></i>지난주</li></ul></div>
+      <ul class="Catui_legend Catui_legend-row Catui_adm-legend" data-catui-adm-legend aria-label="범례"></ul></div>
   </article>
   <article class="Catui_card Catui_span-6">
     <header class="Catui_card-h">월별 주문 <span class="Catui_adm-card-meta">막대</span></header>
@@ -28,7 +28,7 @@
   <article class="Catui_card Catui_span-4">
     <header class="Catui_card-h">결제 수단 <span class="Catui_adm-card-meta">도넛</span></header>
     <div class="Catui_card-b"><div class="Catui_adm-chart" id="ch-donut" data-catui-adm-chart="donut" data-catui-adm-label="결제 수단 비율" data-catui-adm-src="page-charts" data-catui-adm-key="charts.charts_8"></div>
-      <ul class="Catui_legend Catui_adm-legend"><li><i class="Catui_s1"></i>카드<b>52%</b></li><li><i class="Catui_s2"></i>간편결제<b>33%</b></li><li><i class="Catui_s3"></i>계좌이체<b>11%</b></li><li><i class="Catui_s4"></i>기타<b>4%</b></li></ul></div>
+      <ul class="Catui_legend Catui_adm-legend" data-catui-adm-legend aria-label="범례"></ul></div>
   </article>
 
   <article class="Catui_card Catui_span-4">
@@ -41,11 +41,7 @@
   <article class="Catui_card Catui_span-4">
     <header class="Catui_card-h">구매 깔때기</header>
     <div class="Catui_card-b">
-      <div class="Catui_funnel" role="list" aria-label="구매 전환 깔때기">
-        <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">방문</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:100%">31,902</div></div><span class="Catui_funnel-drop"></span></div>
-        <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">상품</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:58%">18,503</div></div><span class="Catui_funnel-drop">−42%</span></div>
-        <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">장바구니</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:15%">4,880</div></div><span class="Catui_funnel-drop">−74%</span></div>
-        <div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab">결제</span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" style="width:4%">1,142</div></div><span class="Catui_funnel-drop">−77%</span></div>
+      <div class="Catui_funnel" role="list" aria-label="구매 전환 깔때기" data-catui-adm-src="page-charts" data-catui-adm-rows="funnel"><template><div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab" data-catui-adm-field="label"></span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" data-catui-adm-attr="style:width:{width}%" data-catui-adm-field="value" data-catui-adm-format="number"></div></div><span class="Catui_funnel-drop" data-catui-adm-field="drop"></span></div></template>
       </div>
     </div>
   </article>
@@ -57,6 +53,14 @@
     </div>
   </article>
 </div>
+<script>
+// 깔때기 막대 폭(첫 단계 대비)·이탈률(앞 단계 대비)은 원자료에서 계산
+catui.admin.derive['page-charts'] = function (j) {
+  var first = j.funnel[0].value;
+  j.funnel.forEach(function (r, i) { r.width = Math.max(1, Math.round(r.value / first * 100)); r.drop = i ? '−' + Math.round((1 - r.value / j.funnel[i - 1].value) * 100) + '%' : ''; });
+  return j;
+};
+</script>
 <script>
 // 자료 바꾸기: catui.admin.widgets.update(차트, 새 자료) — 서버에서 받은 값으로 다시 그리는 방법
 catui.use(function () {

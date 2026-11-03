@@ -6,6 +6,7 @@
 //     <div data-catui-adm-chart="area" data-catui-adm-key="charts.network">                        차트 자료
 //   점 경로(a.b.0.c)로 JSON 안을 가리킨다. 실패하면 칸은 그대로 두고 콘솔에 한 줄 안내.
 admin.dataBase = "data/";
+admin.derive = {};
 admin._dataCache = new Map();
 admin.data = function (name) {
   const url = /^(https?:)?\//.test(name) || name.endsWith(".json") ? name : `${this.dataBase}${name}.json`;
@@ -36,7 +37,10 @@ admin.format = function (v, kind) {
 };
 admin.bind = function (scope = document) {
   const boxes = [...scope.querySelectorAll("[data-catui-adm-src]")];
-  return Promise.all(boxes.map((box) => this.data(box.getAttribute("data-catui-adm-src")).then((json) => {
+  return Promise.all(boxes.map((box) => this.data(box.getAttribute("data-catui-adm-src")).then((raw) => {
+    // 파생 값: catui.admin.derive['이름'] = (json) => ({ …json, 합계 }) — 비율·합계를 원자료에서 계산해 채운다
+    const fn = this.derive[box.getAttribute("data-catui-adm-src")];
+    const json = fn ? (fn(structuredClone(raw)) ?? raw) : raw;
     const own = (sel) => [...(box.matches(sel) ? [box] : []), ...box.querySelectorAll(sel)];   // 자기 자신에 붙인 바인딩도
     own("[data-catui-adm-text]").forEach((el) => {
       const v = this.pick(json, el.getAttribute("data-catui-adm-text"));

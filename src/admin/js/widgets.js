@@ -88,13 +88,27 @@ admin.widgets = {
     const inst = catui.canvas.render({ elem: el, ratio: "", label: admDescribe(type, opt, label), draw: admDraw(type, opt) });
     inst.admType = type; inst.admLabel = label;
     this.charts.set(el, inst);
+    this.legend(el, type, opt);
     return inst;
+  },
+  // 범례를 차트 자료에서 만든다: 차트 바로 다음 <ul class="Catui_legend" data-catui-adm-legend>
+  //   선·막대·영역 = 계열 이름, 도넛 = 항목 이름 + 비율(합에서 계산, 소수 없이) — 숫자가 차트와 항상 같다
+  legend(el, type, opt) {
+    const ul = el.nextElementSibling;
+    if (!ul?.hasAttribute("data-catui-adm-legend")) return;
+    let items;
+    if (type === "donut") {
+      const sum = (opt.data || []).reduce((a, b) => a + b, 0) || 1;
+      items = (opt.labels || []).map((name, i) => ({ name, value: `${Math.round(((opt.data || [])[i] || 0) / sum * 100)}%` }));
+    } else items = (opt.series || []).map((s) => ({ name: s.name || "" }));
+    catui.mount(ul, catui.html`${items.map((it, i) => catui.html`<li><i class="Catui_s${(i % 5) + 1}"></i>${it.name}${it.value ? catui.html`<b>${it.value}</b>` : ""}</li>`)}`);
   },
   update(elem, data) {
     const el = catui.el(elem), inst = this.charts.get(el);
     if (!inst) return;
     inst.config.draw = admDraw(inst.admType, data);
     inst.redraw();
+    this.legend(el, inst.admType, data);
     el.querySelector("canvas")?.setAttribute("aria-label", admDescribe(inst.admType, data, inst.admLabel));
   },
   count(el) {

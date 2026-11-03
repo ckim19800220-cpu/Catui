@@ -64,6 +64,7 @@ const admin = {
 //     <div data-catui-adm-chart="area" data-catui-adm-key="charts.network">                        차트 자료
 //   점 경로(a.b.0.c)로 JSON 안을 가리킨다. 실패하면 칸은 그대로 두고 콘솔에 한 줄 안내.
 admin.dataBase = "data/";
+admin.derive = {};
 admin._dataCache = new Map();
 admin.data = function (name) {
   const url = /^(https?:)?\//.test(name) || name.endsWith(".json") ? name : `${this.dataBase}${name}.json`;
@@ -94,7 +95,10 @@ admin.format = function (v, kind) {
 };
 admin.bind = function (scope = document) {
   const boxes = [...scope.querySelectorAll("[data-catui-adm-src]")];
-  return Promise.all(boxes.map((box) => this.data(box.getAttribute("data-catui-adm-src")).then((json) => {
+  return Promise.all(boxes.map((box) => this.data(box.getAttribute("data-catui-adm-src")).then((raw) => {
+    // 파생 값: catui.admin.derive['이름'] = (json) => ({ …json, 합계 }) — 비율·합계를 원자료에서 계산해 채운다
+    const fn = this.derive[box.getAttribute("data-catui-adm-src")];
+    const json = fn ? (fn(structuredClone(raw)) ?? raw) : raw;
     const own = (sel) => [...(box.matches(sel) ? [box] : []), ...box.querySelectorAll(sel)];   // 자기 자신에 붙인 바인딩도
     own("[data-catui-adm-text]").forEach((el) => {
       const v = this.pick(json, el.getAttribute("data-catui-adm-text"));
@@ -437,13 +441,27 @@ admin.widgets = {
     const inst = catui.canvas.render({ elem: el, ratio: "", label: admDescribe(type, opt, label), draw: admDraw(type, opt) });
     inst.admType = type; inst.admLabel = label;
     this.charts.set(el, inst);
+    this.legend(el, type, opt);
     return inst;
+  },
+  // 범례를 차트 자료에서 만든다: 차트 바로 다음 <ul class="Catui_legend" data-catui-adm-legend>
+  //   선·막대·영역 = 계열 이름, 도넛 = 항목 이름 + 비율(합에서 계산, 소수 없이) — 숫자가 차트와 항상 같다
+  legend(el, type, opt) {
+    const ul = el.nextElementSibling;
+    if (!ul?.hasAttribute("data-catui-adm-legend")) return;
+    let items;
+    if (type === "donut") {
+      const sum = (opt.data || []).reduce((a, b) => a + b, 0) || 1;
+      items = (opt.labels || []).map((name, i) => ({ name, value: `${Math.round(((opt.data || [])[i] || 0) / sum * 100)}%` }));
+    } else items = (opt.series || []).map((s) => ({ name: s.name || "" }));
+    catui.mount(ul, catui.html`${items.map((it, i) => catui.html`<li><i class="Catui_s${(i % 5) + 1}"></i>${it.name}${it.value ? catui.html`<b>${it.value}</b>` : ""}</li>`)}`);
   },
   update(elem, data) {
     const el = catui.el(elem), inst = this.charts.get(el);
     if (!inst) return;
     inst.config.draw = admDraw(inst.admType, data);
     inst.redraw();
+    this.legend(el, inst.admType, data);
     el.querySelector("canvas")?.setAttribute("aria-label", admDescribe(inst.admType, data, inst.admLabel));
   },
   count(el) {
