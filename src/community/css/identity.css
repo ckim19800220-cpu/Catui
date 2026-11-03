@@ -32,8 +32,10 @@
 .Catui_cm-gnb-row{max-width:var(--Catui_cm-wrap);margin-inline:auto;display:flex;align-items:center;gap:8px;padding-inline:var(--Catui_space-4)}
 .Catui_cm-gnb-row .Catui_cm-gnb-in{flex:1;min-width:0;padding-inline:0;margin:0}
 .Catui_cm-more-menu{position:relative;flex:none}
-.Catui_cm-more-menu > summary{color:var(--Catui_sidebar-fg)}
-.Catui_cm-more-menu > summary:hover,.Catui_cm-more-menu[open] > summary{color:var(--Catui_color-text-inverse);background:transparent}
+.Catui_cm-more-menu > summary{gap:4px;cursor:pointer;user-select:none}
+.Catui_cm-more-menu[open] > summary{color:var(--Catui_color-text-inverse)}
+.Catui_cm-more-menu > summary .Catui_icon{transition:transform var(--Catui_cm-dur-ui) var(--Catui_cm-ease-out)}
+.Catui_cm-more-menu[open] > summary .Catui_icon{transform:rotate(180deg)}
 .Catui_cm-more-menu > .Catui_dd-menu{position:absolute;top:calc(100% + 4px);right:0;z-index:40;min-width:160px}
 
 /* 간격 단위(한 곳에서 관리): 블록 사이 16px · 블록 안 요소 사이 12px · 칩 사이 6px */

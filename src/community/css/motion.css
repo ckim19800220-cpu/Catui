@@ -25,3 +25,5 @@
   .Catui_cm-bump{animation:none}
   .Catui_cm-c-kids,.Catui_cm-c-kids[data-open]{transition:none}
 }
+
+@media (prefers-reduced-motion: reduce){.Catui_cm-more-menu > summary .Catui_icon{transition:none}}

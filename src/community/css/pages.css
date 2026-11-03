@@ -44,5 +44,20 @@
 .Catui_cm-podium .Catui_card-b{display:grid;justify-items:center;gap:var(--Catui_space-1);text-align:center}
 @media (max-width:479px){.Catui_cm-podium{grid-template-columns:minmax(0,1fr)}}
 
+/* 채팅방: 방 목록 + 대화(기록은 상자 안에서만 스크롤) */
+.Catui_cm-chat{display:grid;grid-template-columns:calc(var(--Catui_space-10) * 4.4) minmax(0,1fr);gap:var(--Catui_cm-gap-block,16px);align-items:start}
+.Catui_cm-chat-rooms .Catui_cm-links{padding:6px 0;gap:0}
+.Catui_cm-chat-rooms li{padding:8px 14px}
+.Catui_cm-chat-rooms li:has([aria-current="page"]){background:var(--Catui_color-brand-soft)}
+.Catui_cm-chat-rooms a{display:grid;gap:2px;white-space:normal}
+.Catui_cm-chat-main{display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;height:calc(100vh - var(--Catui_space-10) * 4.8);min-height:calc(var(--Catui_space-10) * 7)}
+.Catui_cm-chat-log{overflow-y:auto;padding:14px;display:grid;align-content:start;gap:10px;background:var(--Catui_color-surface-muted)}
+.Catui_cm-chat-b{display:grid;gap:2px;min-width:0}
+.Catui_cm-chat-nick{font-size:12px;color:var(--Catui_color-text-secondary)}
+.Catui_cm-chat-form{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--Catui_color-border)}
+.Catui_cm-chat-form .Catui_input{flex:1}
+.Catui_cm-chat-rules{margin:0;padding:0 14px 10px}
+@media (max-width:767px){.Catui_cm-chat{grid-template-columns:minmax(0,1fr)}.Catui_cm-chat-rooms ul{display:flex;overflow-x:auto}.Catui_cm-chat-rooms li{flex:none}.Catui_cm-chat-rooms .Catui_cm-meta{display:none}.Catui_cm-chat-main{height:calc(100vh - var(--Catui_space-10) * 6)}}
+
 /* 오류 */
 .Catui_cm-code{font-size:calc(var(--Catui_type-display-size) * 2);font-weight:800;line-height:1;color:var(--Catui_color-brand-strong);font-variant-numeric:tabular-nums}

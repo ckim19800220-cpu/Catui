@@ -59,6 +59,11 @@
    "tone": 4
   },
   {
+   "id": "chat",
+   "title": "채팅",
+   "href": "chat.html"
+  },
+  {
    "id": "events",
    "title": "모임·이벤트",
    "href": "events.html"

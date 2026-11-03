@@ -1,0 +1,52 @@
+<!-- title: 채팅방 | nav: chat | aside: none -->
+<header class="Catui_cm-board-head"><div><h1 class="Catui_h1">채팅방</h1><p>게시판별 공개 대화방 · 지금 <span class="Catui_num" id="ch-total">0</span>명 접속</p></div></header>
+<div class="Catui_cm-chat">
+  <nav class="Catui_card Catui_cm-chat-rooms" aria-label="대화방 목록"><header class="Catui_card-h">대화방</header><ul class="Catui_cm-links" id="ch-rooms"></ul></nav>
+  <section class="Catui_card Catui_cm-chat-main" aria-labelledby="ch-name">
+    <header class="Catui_card-h"><span id="ch-name">광장</span><span class="Catui_cm-meta" id="ch-online"></span><a class="Catui_cm-more" id="ch-board" href="board.html?b=free">게시판</a></header>
+    <div class="Catui_cm-chat-log" id="ch-log" role="log" aria-label="대화 내용" aria-live="polite"></div>
+    <form class="Catui_cm-chat-form" id="ch-form" aria-label="메시지 보내기">
+      <label class="Catui_clip" for="ch-msg">메시지</label>
+      <input class="Catui_input" id="ch-msg" maxlength="200" placeholder="메시지 입력 후 Enter (200자)" autocomplete="off">
+      <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">보내기</button>
+    </form>
+    <p class="Catui_help Catui_cm-chat-rules" id="ch-rules"></p>
+  </section>
+</div>
+<script>
+// 채팅방: chat.json — 방 목록·접속자·대화 기록, 보내기는 Enter(한글 조합 중 Enter 무시), 같은 말 3초 안 반복 막기, 데모 답장
+catui.use(['layer'], function (layer) {
+  var cm = catui.community;
+  Promise.all([cm.data('chat'), cm.load()]).then(function (res) {
+    var data = res[0], U = res[1].U, cur = null, last = { text: '', at: 0 };
+    var log = document.getElementById('ch-log'), input = document.getElementById('ch-msg');
+    var nick = function (id) { return id === 'me' ? (U.me || {}).nick || '나' : (U[id] || { nick: '알 수 없음' }).nick; };
+    document.getElementById('ch-total').textContent = data.rooms.reduce(function (a, r) { return a + r.online; }, 0);
+    document.getElementById('ch-rules').textContent = '대화 규칙: ' + data.rules.join(' · ');
+    var hm = function (iso) { return catui.util.toDateString(new Date(iso), 'HH:mm'); };
+    var msg = function (m) { var me = m.user === 'me'; return catui.html`<div class="Catui_chat-msg${me ? ' Catui_chat-me' : ''}">${me ? '' : cm.avatar({ id: m.user, nick: nick(m.user) })}<div class="Catui_cm-chat-b">${me ? '' : catui.html`<b class="Catui_cm-chat-nick">${nick(m.user)}</b>`}<p class="Catui_chat-bubble"><span class="Catui_clip">${nick(m.user)}: </span>${m.text}</p></div><time class="Catui_chat-time" datetime="${m.time}">${hm(m.time)}</time></div>`; };
+    var drawRooms = function () {
+      catui.mount(document.getElementById('ch-rooms'), catui.html`${data.rooms.map(function (r) { return catui.html`<li><a href="#${r.id}" data-room="${r.id}"${cur === r ? catui.html` aria-current="page"` : ''}><b>${r.name}</b><span class="Catui_cm-meta">${r.desc}</span></a><span class="Catui_badge Catui_badge-neutral" aria-label="접속 ${r.online}명">${r.online}</span></li>`; })}`);
+    };
+    var open = function (r) {
+      cur = r; drawRooms();
+      document.getElementById('ch-name').textContent = r.name;
+      document.getElementById('ch-online').textContent = '접속 ' + r.online + '명';
+      document.getElementById('ch-board').href = 'board.html?b=' + r.board;
+      catui.mount(log, catui.html`<span class="Catui_chat-day">오늘</span>${(data.messages[r.id] || []).map(msg)}`);
+      log.scrollTop = log.scrollHeight;
+    };
+    var add = function (m) { (data.messages[cur.id] = data.messages[cur.id] || []).push(m); var w = document.createElement('div'); catui.mount(w, msg(m)); log.appendChild(w.firstElementChild); log.scrollTop = log.scrollHeight; };
+    document.getElementById('ch-rooms').addEventListener('click', function (e) { var a = e.target.closest('[data-room]'); if (!a) return; e.preventDefault(); history.replaceState(null, '', '#' + a.dataset.room); open(data.rooms.find(function (r) { return r.id === a.dataset.room; })); input.focus(); });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && (e.isComposing || e.keyCode === 229)) e.preventDefault(); });
+    document.getElementById('ch-form').addEventListener('submit', function (e) {
+      e.preventDefault(); var t = input.value.trim(); if (!t) return;
+      if (t === last.text && Date.now() - last.at < 3000) { layer.msg('같은 말은 3초에 한 번만 보낼 수 있어요', { icon: 'warn', time: 1500 }); return; }
+      last = { text: t, at: Date.now() };
+      add({ user: 'me', text: t, time: new Date().toISOString() }); input.value = '';
+      var room = cur; setTimeout(function () { if (cur === room) add({ user: 'u8', text: '오 그렇군요 ㅎㅎ', time: new Date().toISOString() }); }, 1200);
+    });
+    open(data.rooms.find(function (r) { return '#' + r.id === location.hash; }) || data.rooms[0]);
+  });
+});
+</script>
