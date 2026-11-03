@@ -4,7 +4,7 @@
 .Catui_cm{min-height:100vh;display:flex;flex-direction:column;background:var(--Catui_color-surface-muted)}
 .Catui_cm [hidden]{display:none !important}
 /* 글자 링크만 주변 색을 따른다 — 버튼·칩으로 쓰인 링크(a.Catui_btn 등)는 자기 색 유지 (글쓰기 버튼 글자가 안 보이던 문제) */
-.Catui_cm a:not(.Catui_btn):not(.Catui_chip):not(.Catui_pg){color:inherit}
+.Catui_cm a:not(.Catui_btn,.Catui_chip,.Catui_pg,.Catui_cm-gnb-item,.Catui_cm-tab){color:inherit}
 /* 글자 규칙(taste-skill): 라벨·표 머리는 문장형(대문자·자간 없이), "필수"는 보조색 — 빨강은 오류에만 */
 .Catui_cm :is(.Catui_label,.Catui_tbl th,.Catui_stat-label){text-transform:none;letter-spacing:0}
 .Catui_cm .Catui_req{color:var(--Catui_color-text-secondary)}

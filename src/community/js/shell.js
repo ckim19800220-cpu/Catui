@@ -40,7 +40,17 @@ community.shell = {
       const week = d.posts.filter((p) => new Date(p.time) > community.now() - 7 * 864e5).sort((a, b) => b.score - a.score).slice(0, 10);
       const rank = (list) => catui.html`<ol class="Catui_cm-ranks">${list.map((p, i) => catui.html`<li><span class="Catui_cm-rank${i < 3 ? " Catui_cm-rank-top" : ""}">${i + 1}</span><a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}</li>`)}</ol>`;
       const favs = d.boards.filter((b) => community.fav.has(b.id));
+      const me = d.U.me, myPosts = d.posts.filter((p) => p.user === "me").length;
       catui.mount(box, catui.html`
+        <section class="Catui_card" aria-label="내 정보"><div class="Catui_cm-me">
+          <div class="Catui_cm-me-top">${community.avatar(me, "md")}<div><b>${me.nick}</b><div class="Catui_cm-meta">${community.badge(me)}레벨 ${me.level}</div></div><a class="Catui_btn Catui_btn-sm Catui_btn-ghost" href="settings.html" style="margin-left:auto">설정</a></div>
+          <div class="Catui_cm-me-nums"><a href="profile.html"><b>${myPosts}</b>내 글</a><a href="messages.html"><b>1</b>쪽지</a><a href="notifications.html"><b>3</b>알림</a></div>
+          <a class="Catui_btn Catui_btn-md Catui_btn-primary Catui_cm-write-btn" href="write.html">${catui.icon("pen-line", 16)}글쓰기</a>
+        </div></section>`);
+      const rest = document.createElement("div");
+      rest.style.display = "contents";
+      box.appendChild(rest);
+      catui.mount(rest, catui.html`
         <section class="Catui_card" aria-labelledby="cm-aside-rank"><header class="Catui_card-h" id="cm-aside-rank">인기글 순위</header>
           <div class="Catui_card-b"><div class="Catui_tabs Catui_cm-tabs-sm">
             <input class="Catui_clip" type="radio" name="cm-rank" id="cm-rank-1" checked><label class="Catui_tab" for="cm-rank-1">24시간</label><div class="Catui_panel">${rank(live)}</div>

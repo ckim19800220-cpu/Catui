@@ -214,6 +214,28 @@ community.row = function (p, { board = true, rank } = {}) {
     <span class="Catui_cm-score-n" aria-label="${p.hot ? `인기글, ` : ""}추천 ${p.score}"><b>${p.score}</b><span>추천</span></span>
   </li>`;
 };
+// 위젯 한 줄: 제목 [댓글] · 새 글 표시(N, 3시간 이내) · 날짜
+community.isNew = (p) => community.now() - new Date(p.time) < 3 * 36e5;
+community.mini = function (p, { rank } = {}) {
+  const t = new Date(p.time), today = t.toDateString() === this.now().toDateString();
+  return catui.html`<li${this.read.has(p.id) ? catui.html` class="Catui_cm-read"` : ""}>${rank ? catui.html`<span class="Catui_cm-rank">${rank}</span>` : ""}<a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}${this.isNew(p) ? catui.html`<span class="Catui_cm-new" aria-label="새 글">N</span>` : ""}<time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></li>`;
+};
+// 게시판 표 한 줄: 분류 · 제목[댓글] · 글쓴이 · 날짜 · 조회 · 추천
+community.tr = function (p) {
+  const t = new Date(p.time), today = t.toDateString() === this.now().toDateString();
+  return catui.html`<tr class="${[this.read.has(p.id) ? "Catui_cm-read" : "", p.cat === "공지" ? "Catui_cm-tr-notice" : ""].filter(Boolean).join(" ")}">
+    <td class="Catui_cm-td-cat">${p.cat}</td>
+    <td class="Catui_cm-td-t"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}${this.isNew(p) ? catui.html`<span class="Catui_cm-new" aria-label="새 글">N</span>` : ""}</a></td>
+    <td><span class="Catui_cm-nick">${this.badge(p.author)}${p.author.nick}</span></td>
+    <td><time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></td>
+    <td><span class="Catui_clip">조회 </span>${this.format(p.views, "number")}</td>
+    <td class="Catui_cm-td-up"><span class="Catui_clip">추천 </span>${p.hot ? catui.html`<b>${p.score}</b>` : p.score}</td>
+  </tr>`;
+};
+community.table = function (rows) {
+  return catui.html`<table class="Catui_cm-table"><caption class="Catui_clip">글 목록</caption><colgroup><col class="Catui_cm-c-cat"><col><col class="Catui_cm-c-nick"><col class="Catui_cm-c-date"><col class="Catui_cm-c-n"><col class="Catui_cm-c-n"></colgroup>
+    <thead><tr><th scope="col">분류</th><th scope="col">제목</th><th scope="col">글쓴이</th><th scope="col">날짜</th><th scope="col">조회</th><th scope="col">추천</th></tr></thead><tbody>${rows.map((p) => this.tr(p))}</tbody></table>`;
+};
 // 빈 목록
 community.empty = (text) => catui.html`<li class="Catui_cm-empty">${catui.icon("inbox", 24)}<p>${text}</p></li>`;
 
@@ -260,7 +282,17 @@ community.shell = {
       const week = d.posts.filter((p) => new Date(p.time) > community.now() - 7 * 864e5).sort((a, b) => b.score - a.score).slice(0, 10);
       const rank = (list) => catui.html`<ol class="Catui_cm-ranks">${list.map((p, i) => catui.html`<li><span class="Catui_cm-rank${i < 3 ? " Catui_cm-rank-top" : ""}">${i + 1}</span><a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}</li>`)}</ol>`;
       const favs = d.boards.filter((b) => community.fav.has(b.id));
+      const me = d.U.me, myPosts = d.posts.filter((p) => p.user === "me").length;
       catui.mount(box, catui.html`
+        <section class="Catui_card" aria-label="내 정보"><div class="Catui_cm-me">
+          <div class="Catui_cm-me-top">${community.avatar(me, "md")}<div><b>${me.nick}</b><div class="Catui_cm-meta">${community.badge(me)}레벨 ${me.level}</div></div><a class="Catui_btn Catui_btn-sm Catui_btn-ghost" href="settings.html" style="margin-left:auto">설정</a></div>
+          <div class="Catui_cm-me-nums"><a href="profile.html"><b>${myPosts}</b>내 글</a><a href="messages.html"><b>1</b>쪽지</a><a href="notifications.html"><b>3</b>알림</a></div>
+          <a class="Catui_btn Catui_btn-md Catui_btn-primary Catui_cm-write-btn" href="write.html">${catui.icon("pen-line", 16)}글쓰기</a>
+        </div></section>`);
+      const rest = document.createElement("div");
+      rest.style.display = "contents";
+      box.appendChild(rest);
+      catui.mount(rest, catui.html`
         <section class="Catui_card" aria-labelledby="cm-aside-rank"><header class="Catui_card-h" id="cm-aside-rank">인기글 순위</header>
           <div class="Catui_card-b"><div class="Catui_tabs Catui_cm-tabs-sm">
             <input class="Catui_clip" type="radio" name="cm-rank" id="cm-rank-1" checked><label class="Catui_tab" for="cm-rank-1">24시간</label><div class="Catui_panel">${rank(live)}</div>
@@ -302,6 +334,7 @@ community.list = {
           : kind === "gallery" ? catui.html`<ul class="Catui_cm-gallery">${shown.map((p) => catui.html`<li><a class="Catui_cm-shot" href="post.html?id=${p.id}"><figure><img src="${community.thumb(p)}" alt="" loading="lazy" width="320" height="240"></figure><b>${p.title}</b><span class="Catui_cm-meta"><span>${p.author.nick}</span><span>추천 ${p.score}</span>${p.comments ? catui.html`<span>댓글 ${p.comments}</span>` : ""}</span></a></li>`)}</ul>`
           : kind === "card" ? catui.html`<ul class="Catui_cm-cards">${shown.map((p) => catui.html`<li class="Catui_cm-card"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-cat">${p.cat}</span><span class="Catui_cm-title-t">${p.title}</span>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}</a><p>${p.summary}</p><span class="Catui_cm-meta"><span class="Catui_cm-nick">${community.badge(p.author)}${p.author.nick}</span><time datetime="${p.time}">${community.ago(p.time)}</time><span>추천 ${p.score}</span><span>조회 ${community.format(p.views, "compact")}</span></span></li>`)}</ul>`
           : kind === "deal" ? catui.html`<ul class="Catui_cm-list">${shown.map((p, i) => catui.html`<li class="Catui_cm-row Catui_cm-deal" data-catui-cm-deal><span class="Catui_cm-ph" data-tone="${(i % 4) + 1}" aria-hidden="true">${catui.icon("shopping-cart", 20)}</span><div class="Catui_cm-row-main"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-cat">${p.cat}</span><span class="Catui_cm-title-t">${p.title}</span>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}</a><span class="Catui_cm-meta"><b class="Catui_cm-price">${catui.util.number(p.price)}원</b><span>${p.shop}</span><span>배송 ${p.ship}</span><time data-catui-cm-until="${p.until}"></time></span></div><span class="Catui_cm-up${p.hot ? " Catui_cm-up-hot" : ""}" aria-label="추천 ${p.score}">${catui.icon("arrow-up", 12)}${p.score}</span></li>`)}</ul>`
+          : kind === "list" || kind === "hot" ? catui.html`<div class="Catui_cm-list">${community.table(shown)}</div>`
           : catui.html`<ul class="Catui_cm-list">${shown.map((p, i) => kind === "qna" ? this.qnaRow(p) : community.row(p, { board: kind === "hot", rank: kind === "hot" && sort === "hot" && page === 1 && i < 10 ? i + 1 : 0 }))}</ul>`;
         catui.mount(box, catui.html`
           <header class="Catui_cm-board-head" data-tone="${kind === "hot" ? 5 : b?.tone || 1}"><div><h1 class="Catui_h1">${title}</h1><p>${kind === "hot" ? "게시판별 기준 이상 추천받은 글 (추천 − 비추천)" : b?.desc || ""} · 글 <span class="Catui_num">${catui.util.number(rows.length)}</span>개</p></div>
