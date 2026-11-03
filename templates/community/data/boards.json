@@ -10,7 +10,8 @@
    "공지"
   ],
   "hotCut": 40,
-  "type": "list"
+  "type": "list",
+  "tone": 1
  },
  {
   "id": "humor",
@@ -23,7 +24,8 @@
    "공지"
   ],
   "hotCut": 45,
-  "type": "list"
+  "type": "list",
+  "tone": 4
  },
  {
   "id": "info",
@@ -36,7 +38,8 @@
    "건강"
   ],
   "hotCut": 30,
-  "type": "card"
+  "type": "card",
+  "tone": 2
  },
  {
   "id": "qna",
@@ -49,7 +52,8 @@
    "기타"
   ],
   "hotCut": 25,
-  "type": "qna"
+  "type": "qna",
+  "tone": 3
  },
  {
   "id": "photo",
@@ -62,7 +66,8 @@
    "여행"
   ],
   "hotCut": 30,
-  "type": "gallery"
+  "type": "gallery",
+  "tone": 2
  },
  {
   "id": "hotdeal",
@@ -75,7 +80,8 @@
    "의류"
   ],
   "hotCut": 35,
-  "type": "deal"
+  "type": "deal",
+  "tone": 5
  },
  {
   "id": "hobby",
@@ -88,7 +94,8 @@
    "캠핑"
   ],
   "hotCut": 25,
-  "type": "list"
+  "type": "list",
+  "tone": 1
  },
  {
   "id": "local",
@@ -101,7 +108,8 @@
    "기타"
   ],
   "hotCut": 20,
-  "type": "list"
+  "type": "list",
+  "tone": 4
  },
  {
   "id": "notice",
@@ -113,6 +121,7 @@
   ],
   "hotCut": 9999,
   "type": "notice",
-  "write": false
+  "write": false,
+  "tone": 3
  }
 ]

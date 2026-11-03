@@ -30,7 +30,6 @@
 .Catui_cm-title:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px;border-radius:var(--Catui_radius-xs)}
 .Catui_cm-title .Catui_icon{flex:none;color:var(--Catui_color-text-secondary)}
 .Catui_cm-read .Catui_cm-title{color:var(--Catui_cm-read);font-weight:400}
-.Catui_cm-hot .Catui_cm-title-t::before{content:"인기 ";font-size:var(--Catui_type-caption-size);font-weight:800;color:var(--Catui_cm-hot)}
 .Catui_cm-board,.Catui_cm-cat{flex:none;font-size:var(--Catui_type-caption-size);font-weight:600;color:var(--Catui_color-text-secondary)}
 .Catui_cm-cat::before{content:"["}
 .Catui_cm-cat::after{content:"]"}

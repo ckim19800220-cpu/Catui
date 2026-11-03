@@ -72,7 +72,7 @@ community.comments = {
     const kids = c.replies || [];
     const rid = `r-${c.id}${best ? "-b" : ""}`;
     return catui.html`<li class="Catui_cm-c${best ? " Catui_cm-c-best" : ""}" id="${best ? "" : `c-${c.id}`}" data-nick="${u.nick}">
-      <div class="Catui_cm-c-head"><span class="Catui_av Catui_av-sm" aria-hidden="true">${u.nick.slice(0, 1)}</span><b>${community.badge(u)}${u.nick}</b>${best ? catui.html`<span class="Catui_badge Catui_badge-success">베스트</span>` : ""}<time class="Catui_cm-meta" datetime="${c.time}">${community.ago(c.time)}</time></div>
+      <div class="Catui_cm-c-head">${community.avatar({ id: c.user, nick: u.nick })}<b>${community.badge(u)}${u.nick}</b>${best ? catui.html`<span class="Catui_badge Catui_badge-success">베스트</span>` : ""}<time class="Catui_cm-meta" datetime="${c.time}">${community.ago(c.time)}</time></div>
       <p class="Catui_cm-c-body">${c.text}</p>
       <div class="Catui_cm-c-acts">
         <div class="Catui_cm-vote Catui_cm-vote-sm" data-catui-cm-vote="c:${c.id}" data-up="${c.up}" data-down="0"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-dir="up">${catui.icon("thumbs-up", 16)}<b data-n>${c.up}</b></button></div>

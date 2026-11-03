@@ -15,7 +15,7 @@
 <div class="Catui_site Catui_cm" data-catui-cm data-page="index">
   <header class="Catui_cm-head">
     <div class="Catui_cm-head-in">
-      <a class="Catui_cm-brand" href="index.html"><span class="Catui_logo">C</span>Catui 커뮤니티</a>
+      <a class="Catui_cm-brand" href="index.html" aria-label="Catui 커뮤니티 홈"><span class="Catui_cm-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 5h20a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3Z" fill="currentColor"/><path d="M12.5 11.5a4 4 0 1 0 0 5" fill="none" stroke="var(--Catui_card-bg)" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="14" r="1.6" fill="var(--Catui_card-bg)"/><circle cx="24" cy="14" r="1.6" fill="var(--Catui_card-bg)"/></svg></span><b>Catui <span>커뮤니티</span></b></a>
       <form class="Catui_cm-search" action="search.html" role="search" data-catui-cm-search>
         <div class="Catui_search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="cm-q">글 검색</label><input class="Catui_input" id="cm-q" name="q" type="search" placeholder="제목·내용·닉네임 검색" autocomplete="off"></div>
       </form>
@@ -28,7 +28,7 @@
       </div>
     </div>
     <nav class="Catui_cm-gnb" aria-label="게시판">
-      <div class="Catui_cm-gnb-in"><a class="Catui_cm-gnb-item" href="index.html" aria-current="page">홈</a><a class="Catui_cm-gnb-item" href="hot.html">인기글</a><a class="Catui_cm-gnb-item" href="board.html?b=free">자유</a><a class="Catui_cm-gnb-item" href="board.html?b=humor">유머</a><a class="Catui_cm-gnb-item" href="board-card.html?b=info">정보</a><a class="Catui_cm-gnb-item" href="qna.html">질문</a><a class="Catui_cm-gnb-item" href="board-gallery.html?b=photo">사진</a><a class="Catui_cm-gnb-item" href="hotdeal.html">핫딜</a><a class="Catui_cm-gnb-item" href="board.html?b=hobby">취미</a><a class="Catui_cm-gnb-item" href="board.html?b=local">동네</a><a class="Catui_cm-gnb-item" href="events.html">모임·이벤트</a>
+      <div class="Catui_cm-gnb-in"><a class="Catui_cm-gnb-item" href="index.html" aria-current="page">홈</a><a class="Catui_cm-gnb-item" href="hot.html">인기글</a><a class="Catui_cm-gnb-item" href="board.html?b=free" data-tone="1">자유</a><a class="Catui_cm-gnb-item" href="board.html?b=humor" data-tone="4">유머</a><a class="Catui_cm-gnb-item" href="board-card.html?b=info" data-tone="2">정보</a><a class="Catui_cm-gnb-item" href="qna.html" data-tone="3">질문</a><a class="Catui_cm-gnb-item" href="board-gallery.html?b=photo" data-tone="2">사진</a><a class="Catui_cm-gnb-item" href="hotdeal.html" data-tone="5">핫딜</a><a class="Catui_cm-gnb-item" href="board.html?b=hobby" data-tone="1">취미</a><a class="Catui_cm-gnb-item" href="board.html?b=local" data-tone="4">동네</a><a class="Catui_cm-gnb-item" href="events.html">모임·이벤트</a>
         <details class="Catui_dd"><summary class="Catui_btn Catui_btn-sm Catui_btn-ghost">더보기<svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></summary><div class="Catui_dd-menu Catui_dd-sm"><a class="Catui_dd-item" href="notice.html">공지</a><a class="Catui_dd-item" href="ranking.html">순위</a><a class="Catui_dd-item" href="post-poll.html">투표 글 예시</a><a class="Catui_dd-item" href="scrap.html">스크랩</a><a class="Catui_dd-item" href="settings.html">설정</a></div></details>
       </div>
     </nav>
@@ -37,13 +37,18 @@
     <main class="Catui_cm-main" id="cm-main" tabindex="-1">
 <h1 class="Catui_clip">Catui 커뮤니티 홈</h1>
 
+<section aria-labelledby="hm-pick">
+  <div class="Catui_cm-bar"><h2 class="Catui_cm-sec-t" id="hm-pick" data-tone="5">지금 뜨는 글</h2><a class="Catui_link" href="hot.html">인기글 전체</a></div>
+  <div class="Catui_cm-hero" id="hm-hero" aria-busy="true"></div>
+</section>
+
 <section aria-labelledby="hm-hot">
-  <div class="Catui_cm-bar"><h2 class="Catui_h3" id="hm-hot">지금 인기글</h2><a class="Catui_link" href="hot.html">인기글 더 보기</a></div>
-  <ol class="Catui_cm-list" id="hm-hot-list" aria-busy="true"></ol>
+  <h2 class="Catui_cm-sec-t" id="hm-hot">인기글 4~10위</h2>
+  <ol class="Catui_cm-list" id="hm-hot-list" start="4"></ol>
 </section>
 
 <section aria-labelledby="hm-boards">
-  <h2 class="Catui_h3" id="hm-boards">게시판 최신글</h2>
+  <h2 class="Catui_cm-sec-t" id="hm-boards" data-tone="2">게시판 최신글</h2>
   <div class="Catui_cm-boards" id="hm-board-list"></div>
 </section>
 
@@ -62,19 +67,28 @@
 <script src="../../../dist/catui.min.js"></script>
 <script src="../../../dist/catcommunity.min.js"></script>
 <script>
-// 홈: 인기글 10개(추천−비추천 순) · 게시판별 최신 5개 · 많이 찾는 검색어 — posts.json·boards.json·trends.json
+// 홈: 지금 뜨는 글 1~3위(큰 카드) · 4~10위 · 게시판별 최신 5개 · 많이 찾는 검색어 — posts.json·boards.json·trends.json
 catui.use(function () {
   var cm = catui.community;
   Promise.all([cm.load(), cm.data('trends')]).then(function (res) {
     var d = res[0], hot = d.posts.filter(function (p) { return p.hot; }).sort(function (a, b) { return b.score - a.score; }).slice(0, 10);
-    var list = document.getElementById('hm-hot-list');
-    catui.mount(list, catui.html`${hot.map(function (p, i) { return cm.row(p, { rank: i + 1 }); })}`);
-    list.removeAttribute('aria-busy');
+    var hero = document.getElementById('hm-hero');
+    catui.mount(hero, catui.html`${hot.slice(0, 3).map(function (p, i) {
+      return catui.html`<a class="Catui_cm-pick" href="post.html?id=${p.id}" data-tone="${p.boardTone}">
+        ${i === 0 && p.photo ? catui.html`<figure><img src="${cm.thumb({ id: p.id, tone: p.boardTone })}" alt="" width="640" height="280"></figure>` : ''}
+        <span class="Catui_cm-pick-n" aria-hidden="true">${i + 1}</span>
+        <span class="Catui_cm-board" data-tone="${p.boardTone}">${p.boardName}</span>
+        <span class="Catui_cm-pick-t"><span class="Catui_clip">${i + 1}위 </span>${p.title}</span>
+        <span class="Catui_cm-meta"><span class="Catui_cm-nick">${cm.avatar(p.author)}${p.author.nick}</span><span>추천 ${p.score}</span><span>댓글 ${p.comments}</span><time datetime="${p.time}">${cm.ago(p.time)}</time></span>
+      </a>`;
+    })}`);
+    hero.removeAttribute('aria-busy');
+    catui.mount(document.getElementById('hm-hot-list'), catui.html`${hot.slice(3).map(function (p, i) { return cm.row(p, { rank: i + 4 }); })}`);
     var boards = d.boards.filter(function (b) { return ['free', 'humor', 'info', 'qna', 'hobby', 'local'].indexOf(b.id) > -1; });
     var href = function (b) { return ({ info: 'board-card.html?b=info', qna: 'qna.html' })[b.id] || 'board.html?b=' + b.id; };
     catui.mount(document.getElementById('hm-board-list'), catui.html`${boards.map(function (b) {
       var rows = d.posts.filter(function (p) { return p.board === b.id; }).slice(0, 5);
-      return catui.html`<section class="Catui_card" aria-labelledby="hb-${b.id}"><header class="Catui_card-h"><a id="hb-${b.id}" href="${href(b)}">${b.name}</a><span class="Catui_cm-meta">오늘 ${b.today} · 전체 ${b.count}</span></header><div class="Catui_card-b"><ul class="Catui_cm-list">${rows.map(function (p) { return cm.row(p, { board: false }); })}</ul></div></section>`;
+      return catui.html`<section class="Catui_card" aria-labelledby="hb-${b.id}" data-tone="${b.tone}"><header class="Catui_card-h"><a class="Catui_cm-sec-t" id="hb-${b.id}" href="${href(b)}">${b.name}</a><span class="Catui_cm-meta">오늘 ${b.today} · 전체 ${b.count}</span></header><div class="Catui_card-b"><ul class="Catui_cm-list">${rows.map(function (p) { return cm.row(p, { board: false }); })}</ul></div></section>`;
     })}`);
     catui.mount(document.getElementById('hm-trends'), catui.html`${res[1].map(function (t, i) { return catui.html`<a href="search.html?q=${encodeURIComponent(t)}"><span class="Catui_num">${i + 1}</span> ${t}</a>`; })}`);
   });

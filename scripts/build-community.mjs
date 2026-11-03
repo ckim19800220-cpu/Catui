@@ -130,7 +130,7 @@ export function buildCommunityTemplates({ defined, icons, communityByFile = {} }
   const pageOf = (href) => href.split(/[?#]/)[0].replace(/\.html$/, "");
   const live = (list) => (list || []).filter((x) => exists.has(pageOf(x.href || `${x.page}.html`)));
   // 상단 게시판 메뉴: 현재 화면(nav: 머리 주석)과 같은 항목에 aria-current
-  const gnb = (nav) => live(menu.gnb).map((it) => `<a class="Catui_cm-gnb-item" href="${esc(it.href)}"${it.id === nav ? ' aria-current="page"' : ""}>${esc(it.title)}</a>`).join("");
+  const gnb = (nav) => live(menu.gnb).map((it) => `<a class="Catui_cm-gnb-item" href="${esc(it.href)}"${it.tone ? ` data-tone="${Number(it.tone)}"` : ""}${it.id === nav ? ' aria-current="page"' : ""}>${esc(it.title)}</a>`).join("");
   const more = () => live(menu.more).map((it) => `<a class="Catui_dd-item" href="${esc(it.href)}">${esc(it.title)}</a>`).join("");
   const tabs = (nav) => live(menu.tabs).map((it) => `<a class="Catui_cm-tab" href="${esc(it.href)}"${it.id === nav ? ' aria-current="page"' : ""}>${ico(it.icon, 20)}<span>${esc(it.title)}</span></a>`).join("");
 
