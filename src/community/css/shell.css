@@ -28,7 +28,6 @@
 .Catui_cm-gnb-item:hover{color:var(--Catui_color-text-primary)}
 .Catui_cm-gnb-item[aria-current="page"]{color:var(--Catui_color-text-primary);border-bottom-color:var(--Catui_color-brand-strong)}
 .Catui_cm-gnb-item:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
-.Catui_cm-gnb .Catui_dd{margin-left:auto;flex:none}
 
 /* 2단: 본문 + 옆줄(991px 이하에서는 본문 아래로) */
 .Catui_cm-wrap{flex:1;width:100%;max-width:var(--Catui_cm-wrap);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr) var(--Catui_cm-aside-w);gap:var(--Catui_cm-gap);padding:var(--Catui_cm-gap) var(--Catui_space-4);align-items:start}

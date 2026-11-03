@@ -51,7 +51,6 @@
 .Catui_cm-gnb-item:hover{color:var(--Catui_color-text-primary)}
 .Catui_cm-gnb-item[aria-current="page"]{color:var(--Catui_color-text-primary);border-bottom-color:var(--Catui_color-brand-strong)}
 .Catui_cm-gnb-item:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
-.Catui_cm-gnb .Catui_dd{margin-left:auto;flex:none}
 
 /* 2단: 본문 + 옆줄(991px 이하에서는 본문 아래로) */
 .Catui_cm-wrap{flex:1;width:100%;max-width:var(--Catui_cm-wrap);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr) var(--Catui_cm-aside-w);gap:var(--Catui_cm-gap);padding:var(--Catui_cm-gap) var(--Catui_space-4);align-items:start}
@@ -310,7 +309,23 @@
 .Catui_cm .Catui_cm-gnb-item{color:var(--Catui_sidebar-fg);font-size:15px;font-weight:700;min-height:46px;padding-inline:14px;border-bottom:3px solid transparent}
 .Catui_cm .Catui_cm-gnb-item:hover{color:var(--Catui_color-text-inverse)}
 .Catui_cm .Catui_cm-gnb-item[aria-current="page"]{color:var(--Catui_color-text-inverse);border-bottom-color:var(--Catui_color-brand)}
-.Catui_cm-gnb .Catui_dd > summary{color:var(--Catui_sidebar-fg)}
+/* 더보기: 가로 스크롤 영역 밖에 두고, 메뉴는 막대 위에 떠서 열린다(막대 높이 그대로) */
+.Catui_cm-gnb-row{max-width:var(--Catui_cm-wrap);margin-inline:auto;display:flex;align-items:center;gap:8px;padding-inline:var(--Catui_space-4)}
+.Catui_cm-gnb-row .Catui_cm-gnb-in{flex:1;min-width:0;padding-inline:0;margin:0}
+.Catui_cm-more-menu{position:relative;flex:none}
+.Catui_cm-more-menu > summary{color:var(--Catui_sidebar-fg)}
+.Catui_cm-more-menu > summary:hover,.Catui_cm-more-menu[open] > summary{color:var(--Catui_color-text-inverse);background:transparent}
+.Catui_cm-more-menu > .Catui_dd-menu{position:absolute;top:calc(100% + 4px);right:0;z-index:40;min-width:160px}
+
+/* 간격 단위(한 곳에서 관리): 블록 사이 16px · 블록 안 요소 사이 12px · 칩 사이 6px */
+.Catui_cm{--Catui_cm-gap-block:16px;--Catui_cm-gap-in:12px;--Catui_cm-gap-chip:6px}
+.Catui_cm [data-catui-cm-list]{display:grid;gap:var(--Catui_cm-gap-in)}
+.Catui_cm-main{gap:var(--Catui_cm-gap-block)}
+.Catui_cm-bar{gap:var(--Catui_cm-gap-in)}
+.Catui_cm-cats{gap:var(--Catui_cm-gap-chip)}
+.Catui_cm-sort{gap:var(--Catui_cm-gap-in)}
+.Catui_cm .Catui_pager{justify-content:center;gap:var(--Catui_cm-gap-chip);padding-top:4px}
+.Catui_cm-board-head .Catui_actions{gap:8px}
 .Catui_cm-search .Catui_input{border:2px solid var(--Catui_color-brand);border-radius:var(--Catui_cm-radius)}
 
 /* 배치 */
