@@ -8,7 +8,7 @@
   <article class="Catui_card Catui_span-4">
     <header class="Catui_card-h">이번 달 매출</header>
     <div class="Catui_card-b Catui_vstack Catui_gap-3">
-      <div class="Catui_adm-kpi"><b data-catui-adm-count>4,820만원</b><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 12.6%<span class="Catui_clip"> 증가</span></span></div>
+      <div class="Catui_adm-kpi"><b data-catui-adm-count data-catui-adm-src="dashboard-sales" data-catui-adm-text="kpi.revenue" data-catui-adm-format="man">4,820만원</b><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 12.6%<span class="Catui_clip"> 증가</span></span></div>
       <div><div class="Catui_prog-label"><span>목표 달성</span><span class="Catui_num">87%</span></div><div class="Catui_meter" role="img" aria-label="목표 87퍼센트 달성"><i style="width:87%"></i></div></div>
       <p class="Catui_help">남은 680만원 · 하루 평균 24만원 필요</p>
     </div>
@@ -16,14 +16,14 @@
   <article class="Catui_card Catui_span-4">
     <header class="Catui_card-h">평균 주문 금액</header>
     <div class="Catui_card-b Catui_vstack Catui_gap-3">
-      <div class="Catui_adm-kpi"><b data-catui-adm-count>37,540원</b><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 2.2%<span class="Catui_clip"> 증가</span></span></div>
+      <div class="Catui_adm-kpi"><b data-catui-adm-count data-catui-adm-src="dashboard-sales" data-catui-adm-text="kpi.avgOrder" data-catui-adm-format="won">37,540원</b><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 2.2%<span class="Catui_clip"> 증가</span></span></div>
       <div class="Catui_adm-chart Catui_sparkline" data-catui-adm-chart="spark" data-catui-adm-label="평균 주문 금액 추이" data-catui-adm-data='{"series":[{"data":[34,35,35,36,35,37,38]}]}'></div>
     </div>
   </article>
   <article class="Catui_card Catui_span-4">
     <header class="Catui_card-h">환불</header>
     <div class="Catui_card-b Catui_vstack Catui_gap-3">
-      <div class="Catui_adm-kpi"><b data-catui-adm-count>186만원</b><span class="Catui_pill Catui_pill-danger Catui_delta-down">▲ 0.6%p<span class="Catui_clip"> 증가(나쁨)</span></span></div>
+      <div class="Catui_adm-kpi"><b data-catui-adm-count data-catui-adm-src="dashboard-sales" data-catui-adm-text="kpi.refunds" data-catui-adm-format="man">186만원</b><span class="Catui_pill Catui_pill-danger Catui_delta-down">▲ 0.6%p<span class="Catui_clip"> 증가(나쁨)</span></span></div>
       <p class="Catui_help">23건 · 주원인 "단순 변심" 48%</p>
     </div>
   </article>
@@ -49,13 +49,7 @@
       <table class="Catui_tbl">
         <caption class="Catui_clip">많이 팔린 상품 5개</caption>
         <thead><tr><th scope="col">순위</th><th scope="col">상품</th><th scope="col">분류</th><th scope="col" class="Catui_num">판매</th><th scope="col" class="Catui_num">매출</th><th scope="col">재고</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>기계식 키보드 K8</td><td>키보드</td><td class="Catui_num">212</td><td class="Catui_num">4,006만원</td><td><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>충분</span></td></tr>
-          <tr><td>2</td><td>27인치 QHD 모니터</td><td>모니터</td><td class="Catui_num">48</td><td class="Catui_num">1,152만원</td><td><span class="Catui_pill Catui_pill-warning"><i class="Catui_dot"></i>12개 남음</span></td></tr>
-          <tr><td>3</td><td>무선 마우스 M3</td><td>마우스</td><td class="Catui_num">305</td><td class="Catui_num">1,007만원</td><td><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>충분</span></td></tr>
-          <tr><td>4</td><td>USB-C 허브 7in1</td><td>액세서리</td><td class="Catui_num">174</td><td class="Catui_num">731만원</td><td><span class="Catui_pill Catui_pill-danger"><i class="Catui_dot"></i>품절 임박</span></td></tr>
-          <tr><td>5</td><td>모니터 받침대</td><td>액세서리</td><td class="Catui_num">96</td><td class="Catui_num">566만원</td><td><span class="Catui_pill Catui_pill-success"><i class="Catui_dot"></i>충분</span></td></tr>
-        </tbody>
+        <tbody data-catui-adm-src="dashboard-sales" data-catui-adm-rows="topProducts"><template><tr><td data-catui-adm-field="rank"></td><td data-catui-adm-field="name"></td><td data-catui-adm-field="category"></td><td class="Catui_num" data-catui-adm-field="sold" data-catui-adm-format="number"></td><td class="Catui_num" data-catui-adm-field="revenue" data-catui-adm-format="man"></td><td><span class="Catui_pill" data-catui-adm-class="Catui_pill-:stockTone"><i class="Catui_dot"></i><span data-catui-adm-field="stock"></span></span></td></tr></template></tbody>
       </table>
     </div>
   </article>

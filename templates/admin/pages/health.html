@@ -5,10 +5,10 @@
 </div>
 
 <section class="Catui_adm-stats" aria-label="서버 자원">
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:cpu:18}}</span><span class="Catui_stat-label">CPU</span><span class="Catui_stat-value" data-catui-adm-count>42%</span><span class="Catui_adm-stat-sub">8코어 · 평균</span></div></article>
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:memory:18}}</span><span class="Catui_stat-label">메모리</span><span class="Catui_stat-value" data-catui-adm-count>68%</span><span class="Catui_adm-stat-sub">21.8GB / 32GB</span></div></article>
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:hard-drive:18}}</span><span class="Catui_stat-label">디스크</span><span class="Catui_stat-value" data-catui-adm-count>71%</span><span class="Catui_adm-stat-sub">355GB / 500GB</span></div></article>
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:activity:18}}</span><span class="Catui_stat-label">평균 응답</span><span class="Catui_stat-value" data-catui-adm-count>182ms</span><span class="Catui_adm-stat-sub">p95 410ms</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:cpu:18}}</span><span class="Catui_stat-label">CPU</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-health" data-catui-adm-text="kpi.cpu" data-catui-adm-format="percent">42%</span><span class="Catui_adm-stat-sub">8코어 · 평균</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:memory:18}}</span><span class="Catui_stat-label">메모리</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-health" data-catui-adm-text="kpi.memory" data-catui-adm-format="percent">68%</span><span class="Catui_adm-stat-sub">21.8GB / 32GB</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:hard-drive:18}}</span><span class="Catui_stat-label">디스크</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-health" data-catui-adm-text="kpi.disk" data-catui-adm-format="percent">71%</span><span class="Catui_adm-stat-sub">355GB / 500GB</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:activity:18}}</span><span class="Catui_stat-label">평균 응답</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-health" data-catui-adm-text="kpi.latencyMs" data-catui-adm-format="ms">182ms</span><span class="Catui_adm-stat-sub">p95 410ms</span></div></article>
 </section>
 
 <div class="Catui_grid" data-catui-adm-src="dashboard-health">

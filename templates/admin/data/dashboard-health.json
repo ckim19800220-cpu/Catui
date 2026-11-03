@@ -52,5 +52,11 @@
     }
    ]
   }
+ },
+ "kpi": {
+  "cpu": 42,
+  "memory": 68,
+  "disk": 71,
+  "latencyMs": 182
  }
 }

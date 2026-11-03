@@ -84,19 +84,37 @@ admin.format = function (v, kind) {
     case "man": return `${catui.util.number(Math.round(n / 10000))}만원`;
     case "percent": return `${n}%`;
     case "delta": return `${n > 0 ? "▲" : n < 0 ? "▼" : ""} ${Math.abs(n)}%`.trim();
+    case "ms": return `${catui.util.number(n)}ms`;
     default: return String(v);
   }
 };
 admin.bind = function (scope = document) {
   const boxes = [...scope.querySelectorAll("[data-catui-adm-src]")];
   return Promise.all(boxes.map((box) => this.data(box.getAttribute("data-catui-adm-src")).then((json) => {
-    box.querySelectorAll("[data-catui-adm-text]").forEach((el) => {
+    const own = (sel) => [...(box.matches(sel) ? [box] : []), ...box.querySelectorAll(sel)];   // 자기 자신에 붙인 바인딩도
+    own("[data-catui-adm-text]").forEach((el) => {
       const v = this.pick(json, el.getAttribute("data-catui-adm-text"));
       if (v !== undefined) el.textContent = this.format(v, el.getAttribute("data-catui-adm-format"));
     });
-    box.querySelectorAll("[data-catui-adm-chart][data-catui-adm-key]").forEach((el) => {
+    own("[data-catui-adm-chart][data-catui-adm-key]").forEach((el) => {
       const d = this.pick(json, el.getAttribute("data-catui-adm-key"));
       if (d) el.setAttribute("data-catui-adm-data", JSON.stringify(d));
+    });
+    // 행 바인딩: <tbody data-catui-adm-rows="topPages"><template><tr>…</tr></template></tbody>
+    //   [data-catui-adm-field="name" data-catui-adm-format?]  글자 · [data-catui-adm-field-data="trend"] 차트 자료
+    //   [data-catui-adm-class="Catui_pill-:tone"]  행 값으로 클래스 붙이기 (글자만 넣으므로 마크업 주입 없음)
+    own("[data-catui-adm-rows]").forEach((list) => {
+      const tpl = list.querySelector("template"), rows = this.pick(json, list.getAttribute("data-catui-adm-rows"));
+      if (!tpl || !Array.isArray(rows)) return;
+      [...list.children].forEach((c) => { if (c !== tpl) c.remove(); });
+      rows.forEach((row) => {
+        const frag = tpl.content.cloneNode(true);
+        frag.querySelectorAll("[data-catui-adm-field]").forEach((el) => { el.textContent = this.format(this.pick(row, el.getAttribute("data-catui-adm-field")), el.getAttribute("data-catui-adm-format")); });
+        frag.querySelectorAll("[data-catui-adm-field-data]").forEach((el) => { el.setAttribute("data-catui-adm-data", JSON.stringify(this.pick(row, el.getAttribute("data-catui-adm-field-data")))); });
+        frag.querySelectorAll("[data-catui-adm-class]").forEach((el) => { const [pre, key] = el.getAttribute("data-catui-adm-class").split(":"); const v = this.pick(row, key); if (v) el.classList.add(`${pre}${String(v).replace(/[^\w-]/g, "")}`); });
+        frag.querySelectorAll("[data-catui-adm-label]").forEach((el) => { el.setAttribute("data-catui-adm-label", el.getAttribute("data-catui-adm-label").replace(/\{(\w+)\}/g, (_, k) => row[k] ?? "")); });
+        list.appendChild(frag);
+      });
     });
     box.setAttribute("data-catui-adm-bound", "");
     admin.emit("data", { name: box.getAttribute("data-catui-adm-src"), data: json, box });

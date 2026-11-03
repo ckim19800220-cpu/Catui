@@ -121,7 +121,7 @@ export function buildAdminTemplates({ defined, icons, adminByFile = {} }) {
   const out = path.join(P.docs, "admin/templates");
   const dist = "../../../dist";
   const errors = [];
-  const used = new Set(Object.values(layouts).flatMap((l) => [...l.matchAll(/class="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/))));
+  const used = new Set(Object.values(layouts).flatMap((l) => [...l.matchAll(/(?<![w-])class="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/))));
   const titles = {};
   for (const f of files) titles[f] = meta(read(path.join(pagesDir, `${f}.html`)), f).title;
 
@@ -163,7 +163,7 @@ export function buildAdminTemplates({ defined, icons, adminByFile = {} }) {
       .replace(/\{\{dist\}\}/g, dist);
     // 검사: 정의 안 된 클래스 · 없는 아이콘 · id 중복 · label for · 템플릿 링크
     const noScript = html.replace(/<script[\s\S]*?<\/script>/g, "");
-    for (const m of noScript.matchAll(/class="([^"]+)"/g)) for (const c of m[1].split(/\s+/)) if (c.startsWith("Catui_") && !defined.has(c)) errors.push(`${f}: 정의 안 된 클래스 ${c}`);
+    for (const m of noScript.matchAll(/(?<![w-])class="([^"]+)"/g)) for (const c of m[1].split(/\s+/)) if (c.startsWith("Catui_") && !defined.has(c)) errors.push(`${f}: 정의 안 된 클래스 ${c}`);
     for (const m of html.matchAll(/#Catui_ic-([a-z0-9-]+)/g)) if (!icons.includes(m[1])) errors.push(`${f}: 없는 아이콘 ${m[1]}`);
     const ids = [...noScript.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
     const dupIds = ids.filter((x, i) => ids.indexOf(x) !== i);
@@ -171,7 +171,7 @@ export function buildAdminTemplates({ defined, icons, adminByFile = {} }) {
     for (const m of noScript.matchAll(/<label[^>]*\sfor="([^"]+)"/g)) if (!ids.includes(m[1])) errors.push(`${f}: label for="${m[1]}" 대상 없음`);
     for (const m of noScript.matchAll(/href="([a-z0-9_-]+)\.html(#[^"]*)?"/g)) if (!exists.has(m[1])) errors.push(`${f}: 없는 템플릿 링크 ${m[1]}.html`);
     if ((noScript.match(/<h1[\s>]/g) || []).length !== 1) errors.push(`${f}: h1은 한 개여야 합니다`);
-    for (const m of html.matchAll(/class="([^"]+)"/g)) for (const c of m[1].split(/\s+/)) used.add(c);
+    for (const m of html.matchAll(/(?<![w-])class="([^"]+)"/g)) for (const c of m[1].split(/\s+/)) used.add(c);
     for (const m of html.matchAll(/Catui_adm-[A-Za-z0-9_-]*[A-Za-z0-9_]/g)) used.add(m[0]);   // 템플릿 스크립트가 붙이는 클래스
     write(path.join(out, `${f}.html`), html);
   }

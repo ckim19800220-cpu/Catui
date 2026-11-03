@@ -54,5 +54,113 @@
    ],
    "caption": "유입"
   }
- }
+ },
+ "kpi": {
+  "visitors": 31902,
+  "pageviews": 86410,
+  "bounceRate": 38.2,
+  "goals": 1142
+ },
+ "topPages": [
+  {
+   "path": "/",
+   "views": 18240,
+   "avgTime": "1:12",
+   "trend": {
+    "series": [
+     {
+      "data": [
+       12,
+       15,
+       14,
+       18,
+       17,
+       21,
+       20
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "/products",
+   "views": 11906,
+   "avgTime": "2:48",
+   "trend": {
+    "series": [
+     {
+      "data": [
+       9,
+       10,
+       12,
+       11,
+       13,
+       12,
+       14
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "/products/keyboard",
+   "views": 6412,
+   "avgTime": "3:05",
+   "trend": {
+    "series": [
+     {
+      "data": [
+       4,
+       6,
+       5,
+       7,
+       9,
+       8,
+       10
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "/cart",
+   "views": 4880,
+   "avgTime": "1:40",
+   "trend": {
+    "series": [
+     {
+      "data": [
+       7,
+       6,
+       6,
+       5,
+       6,
+       5,
+       4
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "/events/november",
+   "views": 3207,
+   "avgTime": "0:58",
+   "trend": {
+    "series": [
+     {
+      "data": [
+       1,
+       2,
+       4,
+       6,
+       8,
+       9,
+       11
+      ]
+     }
+    ]
+   }
+  }
+ ]
 }

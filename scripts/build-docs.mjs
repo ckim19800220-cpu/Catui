@@ -164,7 +164,7 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
     if (dup.length) errors.push(`${p}: 같은 id ${[...new Set(dup)].join(", ")}`);
     const idSet = new Set(ids);
     for (const m of html.matchAll(/<label[^>]*\sfor="([^"]+)"/g)) if (!idSet.has(m[1])) errors.push(`${p}: label for="${m[1]}"에 맞는 id가 없습니다`);
-    for (const m of html.matchAll(/class="([^"]*)"/g)) for (const t of m[1].split(/\s+/)) {
+    for (const m of html.matchAll(/(?<![w-])class="([^"]*)"/g)) for (const t of m[1].split(/\s+/)) {
       if (/^Catui_[A-Za-z0-9_-]+$/.test(t) && !css.defined.has(t)) errors.push(`${p}: CSS에 없는 클래스 .${t}`);
     }
     for (const m of html.matchAll(/#Catui_ic-([a-z0-9-]+)/g)) if (!iconSet.has(m[1])) errors.push(`${p}: 스프라이트에 없는 아이콘 ${m[1]}`);

@@ -65,5 +65,57 @@
    "center": "4,820만",
    "caption": "11월"
   }
- }
+ },
+ "kpi": {
+  "revenue": 48200000,
+  "avgOrder": 37540,
+  "refunds": 1860000
+ },
+ "topProducts": [
+  {
+   "rank": 1,
+   "name": "기계식 키보드 K8",
+   "category": "키보드",
+   "sold": 212,
+   "revenue": 40060000,
+   "stock": "충분",
+   "stockTone": "success"
+  },
+  {
+   "rank": 2,
+   "name": "27인치 QHD 모니터",
+   "category": "모니터",
+   "sold": 48,
+   "revenue": 11520000,
+   "stock": "12개 남음",
+   "stockTone": "warning"
+  },
+  {
+   "rank": 3,
+   "name": "무선 마우스 M3",
+   "category": "마우스",
+   "sold": 305,
+   "revenue": 10070000,
+   "stock": "충분",
+   "stockTone": "success"
+  },
+  {
+   "rank": 4,
+   "name": "USB-C 허브 7in1",
+   "category": "액세서리",
+   "sold": 174,
+   "revenue": 7310000,
+   "stock": "품절 임박",
+   "stockTone": "danger"
+  },
+  {
+   "rank": 5,
+   "name": "모니터 받침대",
+   "category": "액세서리",
+   "sold": 96,
+   "revenue": 5660000,
+   "stock": "충분",
+   "stockTone": "success"
+  }
+ ]
 }
