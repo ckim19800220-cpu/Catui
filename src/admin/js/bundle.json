@@ -1,4 +1,4 @@
 {
-  "order": ["admin.js", "shell.js", "theme.js", "notify.js", "topbar.js", "widgets.js", "formpage.js", "listpage.js", "apps.js", "auth.js", "init.js"],
+  "order": ["admin.js", "data.js", "shell.js", "theme.js", "notify.js", "topbar.js", "widgets.js", "formpage.js", "listpage.js", "apps.js", "auth.js", "init.js"],
   "exports": ["admin"]
 }

@@ -9,9 +9,14 @@ admin.init = function (scope = document) {
       try { this[part].init(root); } catch (err) { catui.hint.error(`CatuiAdmin: ${part} 연결 실패`, "error", err); }
     }
   }
-  for (const part of ["widgets", "form", "auth"]) {
-    try { this[part].init(root || document); } catch (err) { catui.hint.error(`CatuiAdmin: ${part} 연결 실패`, "error", err); }
-  }
+  // JSON 모의 데이터([data-catui-adm-src])를 먼저 채운 뒤 위젯(차트·카운트업)을 연결한다
+  const scope2 = root || document;
+  this.ready = this.bind(scope2).then(() => {
+    for (const part of ["widgets", "form", "auth"]) {
+      try { this[part].init(scope2); } catch (err) { catui.hint.error(`CatuiAdmin: ${part} 연결 실패`, "error", err); }
+    }
+    return this;
+  });
   return this;
 };
 // 모든 리스너·차트·팝업 정리 (SPA에서 화면을 바꿀 때)

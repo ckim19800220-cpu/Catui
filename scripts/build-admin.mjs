@@ -179,6 +179,12 @@ export function buildAdminTemplates({ defined, icons, adminByFile = {} }) {
   const jsSrc = walk(path.join(A.src, "js"), ".js").map(read).join("\n");
   const unused = Object.values(adminByFile).flat().filter((c) => !used.has(c) && !jsSrc.includes(c));
   if (unused.length) errors.push(`템플릿·catadmin.js 어디에도 쓰이지 않은 admin 클래스: ${[...new Set(unused)].join(" ")}`);
+  // JSON 모의 데이터: templates/admin/data/*.json → docs/admin/templates/data/ (문법 검사 후 복사)
+  for (const f of walk(path.join(A.tpl, "data"), ".json")) {
+    const name = path.basename(f);
+    try { JSON.parse(read(f)); } catch (e) { errors.push(`data/${name}: JSON 문법 오류 — ${e.message}`); continue; }
+    write(path.join(out, "data", name), read(f));
+  }
   if (errors.length) fail(`admin 템플릿 검사 실패\n  ${errors.join("\n  ")}`);
   return { pages: files.length, titles };
 }
