@@ -10,21 +10,21 @@
 <!-- 이 화면의 질문: "오늘 무엇부터 처리해야 하나" — 쌓인 일을 첫 줄에, 처리 화면으로 바로 -->
 <div class="Catui_banner Catui_banner-warn" role="status">{{icon:alert-triangle:16}}<span><b>오늘 처리할 일</b> · 출고 준비 12건(오후 3시 택배 마감) · 결제 실패 1건 · 재고 부족 상품 1개(USB-C 허브 3개 남음)</span><a class="Catui_btn Catui_btn-sm Catui_btn-secondary" href="orders.html" style="margin-left:auto">주문 보기</a></div>
 
-<section class="Catui_adm-stats" aria-label="주요 지표">
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">전체 사용자</span><span class="Catui_stat-value" data-catui-adm-count>12,480</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 8.2%<span class="Catui_clip"> 증가</span></span><span class="Catui_adm-stat-sub">지난주 대비</span></div></article>
+<section class="Catui_adm-stats" aria-label="주요 지표" data-catui-adm-src="dashboard-ops">
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">전체 사용자</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-text="kpi.users.value" data-catui-adm-format="number">12,480</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 8.2%<span class="Catui_clip"> 증가</span></span><span class="Catui_adm-stat-sub">지난주 대비</span></div></article>
   <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">평균 체류 시간</span><span class="Catui_stat-value">3분 42초</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 4.1%<span class="Catui_clip"> 증가</span></span><span class="Catui_adm-stat-sub">세션당</span></div></article>
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">주문</span><span class="Catui_stat-value" data-catui-adm-count>1,284</span><span class="Catui_pill Catui_pill-danger Catui_delta-down">▼ 2.3%<span class="Catui_clip"> 감소</span></span><span class="Catui_adm-stat-sub">취소 18건 포함</span></div></article>
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">매출</span><span class="Catui_stat-value" data-catui-adm-count>4,820만원</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 12.6%<span class="Catui_clip"> 증가</span></span><span class="Catui_adm-stat-sub">목표의 87%</span></div></article>
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">구매 전환율</span><span class="Catui_stat-value" data-catui-adm-count>3.6%</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 0.4%p<span class="Catui_clip"> 증가</span></span><span class="Catui_adm-stat-sub">방문 → 결제</span></div></article>
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">페이지뷰</span><span class="Catui_stat-value" data-catui-adm-count>86,410</span><span class="Catui_pill Catui_pill-neutral">0.0%<span class="Catui_clip"> 변화 없음</span></span><span class="Catui_adm-stat-sub">순방문 31,902</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">주문</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-text="kpi.orders.value" data-catui-adm-format="number">1,284</span><span class="Catui_pill Catui_pill-danger Catui_delta-down">▼ 2.3%<span class="Catui_clip"> 감소</span></span><span class="Catui_adm-stat-sub">취소 18건 포함</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">매출</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-text="kpi.revenue.value" data-catui-adm-format="man">4,820만원</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 12.6%<span class="Catui_clip"> 증가</span></span><span class="Catui_adm-stat-sub">목표의 87%</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">구매 전환율</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-text="kpi.conversion.value" data-catui-adm-format="percent">3.6%</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 0.4%p<span class="Catui_clip"> 증가</span></span><span class="Catui_adm-stat-sub">방문 → 결제</span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">페이지뷰</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-text="kpi.pageviews.value" data-catui-adm-format="number">86,410</span><span class="Catui_pill Catui_pill-neutral">0.0%<span class="Catui_clip"> 변화 없음</span></span><span class="Catui_adm-stat-sub">순방문 31,902</span></div></article>
 </section>
 
-<div class="Catui_grid">
+<div class="Catui_grid" data-catui-adm-src="dashboard-ops">
   <article class="Catui_card Catui_span-8">
     <header class="Catui_card-h">네트워크 활동 <span class="Catui_adm-card-meta">요청 수 · 시간대별</span>
       <span class="Catui_card-tools"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="새로 고침">{{icon:refresh-cw}}</button></span></header>
     <div class="Catui_card-b">
-      <div class="Catui_adm-chart Catui_adm-chart-lg" data-catui-adm-chart="area" data-catui-adm-label="최근 24시간 네트워크 요청 수"
+      <div class="Catui_adm-chart Catui_adm-chart-lg" data-catui-adm-chart="area" data-catui-adm-key="charts.network" data-catui-adm-label="최근 24시간 네트워크 요청 수"
         data-catui-adm-data='{"labels":["00시","02시","04시","06시","08시","10시","12시","14시","16시","18시","20시","22시"],"series":[{"name":"요청","data":[1200,980,760,820,2100,3400,3900,3650,4200,3800,2900,1800]},{"name":"오류","data":[40,32,20,22,60,110,140,120,160,130,90,50]}]}'></div>
       <ul class="Catui_legend Catui_legend-row Catui_adm-legend"><li><i class="Catui_s1"></i>요청</li><li><i class="Catui_s2"></i>오류</li></ul>
     </div>
@@ -72,7 +72,7 @@
   <article class="Catui_card Catui_span-4">
     <header class="Catui_card-h">기기별 방문</header>
     <div class="Catui_card-b">
-      <div class="Catui_adm-chart" data-catui-adm-chart="donut" data-catui-adm-label="기기별 방문 비율" data-catui-adm-data='{"labels":["모바일","데스크톱","태블릿","기타"],"data":[58,31,8,3],"caption":"방문"}'></div>
+      <div class="Catui_adm-chart" data-catui-adm-chart="donut" data-catui-adm-key="charts.devices" data-catui-adm-label="기기별 방문 비율" data-catui-adm-data='{"labels":["모바일","데스크톱","태블릿","기타"],"data":[58,31,8,3],"caption":"방문"}'></div>
       <ul class="Catui_legend Catui_adm-legend"><li><i class="Catui_s1"></i>모바일<b>58%</b></li><li><i class="Catui_s2"></i>데스크톱<b>31%</b></li><li><i class="Catui_s3"></i>태블릿<b>8%</b></li><li><i class="Catui_s4"></i>기타<b>3%</b></li></ul>
     </div>
   </article>
