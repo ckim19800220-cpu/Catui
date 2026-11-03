@@ -44,7 +44,23 @@ catui.admin.data('orders').then(function (rows) { … });   // data/orders.json 
   &lt;b data-catui-adm-text="kpi.users.value" data-catui-adm-format="number"&gt;12,480&lt;/b&gt;
   &lt;div data-catui-adm-chart="area" data-catui-adm-key="charts.network"&gt;&lt;/div&gt;
 &lt;/section&gt;</code></pre>
-<p>형식: <code>number</code> · <code>won</code> · <code>man</code>(만원) · <code>percent</code> · <code>delta</code>(▲▼). 파일: notifications · orders · users · contacts · products · projects · files · events · chat-rooms · mails · stores · dashboard-ops·analytics·sales·health.</p>
+<p>목록·표는 행 바인딩으로 그립니다. 값은 글자로만 넣으므로 데이터가 마크업으로 끼어들지 않습니다.</p>
+<pre><code>&lt;tbody data-catui-adm-src="dashboard-sales" data-catui-adm-rows="topProducts"&gt;
+  &lt;template&gt;&lt;tr&gt;
+    &lt;td data-catui-adm-field="name"&gt;&lt;/td&gt;                               ← 글자
+    &lt;td data-catui-adm-field="revenue" data-catui-adm-format="man"&gt;&lt;/td&gt;  ← 형식
+    &lt;td&gt;&lt;span class="Catui_pill" data-catui-adm-class="Catui_pill-:tone"&gt;…  ← 값으로 클래스
+    &lt;i data-catui-adm-attr="style:width:{pct}%;aria-label:{name}"&gt;       ← 속성 치환
+    &lt;input type="checkbox" data-catui-adm-bool="checked:done"&gt;          ← 참·거짓 속성
+    &lt;ul data-catui-adm-rows="features"&gt;&lt;template&gt;…&lt;/template&gt;&lt;/ul&gt;      ← 행 안의 하위 목록
+  &lt;/tr&gt;&lt;/template&gt;
+&lt;/tbody&gt;
+
+// 합계·비율은 원자료에서 계산 (바인딩 전에 호출)
+catui.admin.derive['page-charts'] = function (j) { … return j; };
+
+&lt;div data-catui-adm-chart="donut" …&gt;&lt;/div&gt;&lt;ul class="Catui_legend" data-catui-adm-legend&gt;&lt;/ul&gt;   ← 범례를 차트 자료에서</code></pre>
+<p>형식: <code>number</code> · <code>won</code> · <code>man</code>(만원) · <code>percent</code> · <code>delta</code>(▲▼) · <code>ms</code> · <code>initial</code>(첫 글자). 파일: 대시보드(dashboard-ops·analytics·sales·health) · 주문(orders · order-1044 · invoice-1102) · 상품(products · page-product · pricing) · 사람(users · contacts) · 앱(notifications · chat-rooms · mails · kanban · files · events · stores · projects · project-promo · faq) · 화면별(page-*).</p>
 </section>
 
 <section aria-labelledby="checks">

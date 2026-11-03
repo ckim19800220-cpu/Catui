@@ -60,7 +60,7 @@
       <a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="forgot.html" style="justify-self:start">비밀번호 바꾸기</a>
     </div></section>
     <section class="Catui_card" id="billing" aria-labelledby="st-bi-t" hidden><header class="Catui_card-h" id="st-bi-t">결제</header><div class="Catui_card-b Catui_vstack Catui_gap-3">
-      <p>현재 요금제 <b>성장</b> · 다음 결제 11월 20일 49,000원</p>
+      <p id="st-plan">현재 요금제 <b>성장</b> · 다음 결제 11월 20일 49,000원</p>
       <p class="Catui_line"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-credit-card"></use></svg>국민카드 •••• 4821 <span class="Catui_help">만료 08/28</span></p>
       <div class="Catui_actions"><a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="pricing.html">요금제 바꾸기</a><a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="invoice.html">청구서 보기</a></div>
     </div></section>
@@ -97,6 +97,14 @@ catui.use(['layer'], function (layer) {
   document.getElementById('st-close').addEventListener('click', function () {
     layer.prompt({ title: '상점 닫기', placeholder: '확인을 위해 "닫기"를 입력', required: true }, function (v, i) { if (v !== '닫기') { layer.msg('"닫기"를 정확히 입력해 주세요', { icon: 'warn' }); return false; } layer.close(i); layer.msg('상점을 닫았습니다 (예제)', { icon: 'success' }); });
   });
+});
+</script>
+<script>
+// 결제 정보는 요금표와 같은 pricing.json에서 (현재 요금제 · 월 요금 · 다음 결제일)
+catui.admin.data('pricing').then(function (j) {
+  var p = j.plans.find(function (x) { return x.current; }), d = j.nextBilling.split('-');
+  var el = document.getElementById('st-plan'), b = document.createElement('b'); b.textContent = p.id;
+  el.replaceChildren('현재 요금제 ', b, ' · 다음 결제 ' + (+d[1]) + '월 ' + (+d[2]) + '일 ' + catui.util.number(p.monthly) + '원');
 });
 </script>
 </body>
