@@ -1,0 +1,14 @@
+{
+ "no": "INV-2026-1102",
+ "issued": "2026-11-02",
+ "due": "2026-11-16",
+ "status": "미결제",
+ "vatIncluded": true,
+ "client": { "name": "(주)누리소프트", "contact": "박서연", "address": "경기 성남시 판교역로 10", "email": "billing@nuri.example" },
+ "items": [
+  { "name": "기계식 키보드 K8 (법인 단체 구매)", "qty": 20, "price": 149000 },
+  { "name": "무선 마우스 M3", "qty": 20, "price": 30000 },
+  { "name": "각인 서비스", "qty": 20, "price": 5000 },
+  { "name": "설치·배송 (판교)", "qty": 1, "price": 50000 }
+ ]
+}

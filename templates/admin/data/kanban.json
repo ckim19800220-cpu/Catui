@@ -1,0 +1,18 @@
+{
+ "board": "11월 프로모션 보드",
+ "columns": [
+  { "id": "todo", "title": "할 일", "cards": [
+   { "title": "배너 시안 3종", "tag": "디자인", "tone": "neutral", "done": 1, "total": 3, "due": "11월 4일", "who": "김" },
+   { "title": "메일 발송 대상 추출", "tag": "마케팅", "tone": "warning", "done": 0, "total": 2, "due": "11월 6일", "who": "최" },
+   { "title": "쿠폰 조건 확정", "tag": "운영", "tone": "neutral", "done": 0, "total": 1, "due": "11월 7일", "who": "이" }
+  ] },
+  { "id": "doing", "title": "진행", "cards": [
+   { "title": "기획전 페이지", "tag": "개발", "tone": "info", "done": 3, "total": 5, "due": "11월 8일", "who": "정" },
+   { "title": "재고 연동 점검", "tag": "개발", "tone": "info", "done": 2, "total": 4, "due": "11월 9일", "who": "이" }
+  ] },
+  { "id": "review", "title": "검토", "cards": [
+   { "title": "광고 문구 검수", "tag": "마케팅", "tone": "warning", "done": 2, "total": 2, "due": "11월 5일", "who": "박" }
+  ] },
+  { "id": "done", "title": "완료", "cards": [] }
+ ]
+}

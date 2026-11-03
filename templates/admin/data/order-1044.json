@@ -1,0 +1,14 @@
+{
+ "id": "1044",
+ "status": "출고 준비",
+ "placedAt": "2026년 10월 17일 02:00",
+ "pay": "카드 결제",
+ "customer": { "name": "박서연", "grade": "골드", "email": "seoyeon@example.com", "tel": "010-****-5521", "orders": 14 },
+ "address": { "line": "서울특별시 마포구 월드컵로 12길 34, 501호", "receiver": "박서연 · 010-****-5521", "memo": "문 앞에 두고 연락 주세요" },
+ "items": [
+  { "name": "모니터 받침대", "option": "원목 · 2단", "price": 49000, "qty": 1, "icon": "monitor", "tone": 3 },
+  { "name": "USB-C 케이블 1m", "option": "덤 상품", "price": 5000, "qty": 2, "icon": "usb", "tone": 4 }
+ ],
+ "shipping": 0,
+ "coupon": 5000
+}

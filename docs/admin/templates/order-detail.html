@@ -39,7 +39,7 @@
       <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="odd-more" aria-label="다른 작업"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-more-horizontal"></use></svg></button>
       <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="odd-ship"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-truck"></use></svg>출고 처리</button>
     </div></div>
-  <p class="Catui_pagehead-text">박서연 · 2026년 11월 1일 21:04 주문 · 카드 결제</p>
+  <p class="Catui_pagehead-text" id="odd-meta">박서연 · 2026년 11월 1일 21:04 주문 · 카드 결제</p>
 </header>
 
 <div class="Catui_grid">
@@ -49,13 +49,13 @@
       <table class="Catui_tbl">
         <caption class="Catui_clip">주문 상품 2개</caption>
         <thead><tr><th scope="col">상품</th><th scope="col" class="Catui_num">단가</th><th scope="col" class="Catui_num">수량</th><th scope="col" class="Catui_num">금액</th></tr></thead>
-        <tbody>
+        <tbody id="odd-items">
           <tr><td><div class="Catui_media"><div class="Catui_media-fig"><span class="Catui_adm-ph Catui_adm-ph-3" style="width:48px" aria-hidden="true"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-monitor"></use></svg></span></div><div class="Catui_media-body"><p class="Catui_media-title">모니터 받침대</p><p class="Catui_media-text">원목 · 2단</p></div></div></td><td class="Catui_num">49,000원</td><td class="Catui_num">1</td><td class="Catui_num">49,000원</td></tr>
           <tr><td><div class="Catui_media"><div class="Catui_media-fig"><span class="Catui_adm-ph Catui_adm-ph-4" style="width:48px" aria-hidden="true"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-usb"></use></svg></span></div><div class="Catui_media-body"><p class="Catui_media-title">USB-C 케이블 1m</p><p class="Catui_media-text">덤 상품</p></div></div></td><td class="Catui_num">5,000원</td><td class="Catui_num">2</td><td class="Catui_num">10,000원</td></tr>
         </tbody>
       </table>
     </div>
-    <footer class="Catui_card-f"><div class="Catui_adm-sum" style="max-width:320px;margin-left:auto">
+    <footer class="Catui_card-f"><div class="Catui_adm-sum" id="odd-sum" style="max-width:320px;margin-left:auto">
       <div><span>상품 금액</span><span>59,000원</span></div><div><span>배송비</span><span>0원</span></div><div><span>쿠폰 할인</span><span>−5,000원</span></div>
       <div class="Catui_adm-sum-total"><span>결제 금액</span><span>54,000원</span></div>
     </div></footer>
@@ -86,7 +86,14 @@
 <script src="../../../dist/catui.min.js"></script>
 <script src="../../../dist/catadmin.min.js"></script>
 <script>
-catui.use(['layer', 'dropdown'], function (layer, dropdown) {
+catui.use(['layer', 'dropdown', 'util'], function (layer, dropdown, util) {
+  // 모의 데이터: data/order-1044.json — 금액 합계는 품목에서 계산
+  catui.admin.data('order-1044').then(function (o) {
+    var won = function (n) { return util.number(n) + '원'; }, sub = o.items.reduce(function (a, it) { return a + it.price * it.qty; }, 0);
+    document.getElementById('odd-meta').textContent = o.customer.name + ' · ' + o.placedAt + ' 주문 · ' + o.pay;
+    catui.mount(document.getElementById('odd-items'), catui.html`${o.items.map(function (it) { return catui.html`<tr><td><div class="Catui_media"><div class="Catui_media-fig"><span class="Catui_adm-ph${[2, 3, 4].indexOf(it.tone) > -1 ? ' Catui_adm-ph-' + it.tone : ''}" style="width:48px" aria-hidden="true">${catui.icon(it.icon, 18)}</span></div><div class="Catui_media-body"><p class="Catui_media-title">${it.name}</p><p class="Catui_media-text">${it.option}</p></div></div></td><td class="Catui_num">${won(it.price)}</td><td class="Catui_num">${it.qty}</td><td class="Catui_num">${won(it.price * it.qty)}</td></tr>`; })}`);
+    catui.mount(document.getElementById('odd-sum'), catui.html`<div><span>상품 금액</span><span>${won(sub)}</span></div><div><span>배송비</span><span>${won(o.shipping)}</span></div><div><span>쿠폰 할인</span><span>−${won(o.coupon)}</span></div><div class="Catui_adm-sum-total"><span>결제 금액</span><span>${won(sub + o.shipping - o.coupon)}</span></div>`);
+  });
   dropdown.render({ elem: '#odd-more', align: 'right', data: [{ id: 'memo', title: '메모 남기기', icon: 'pen-line' }, { id: 'refund', title: '부분 환불', icon: 'rotate-ccw' }, { type: '-' }, { id: 'cancel', title: '주문 취소', icon: 'x', danger: true }],
     click: function (it) {
       if (it.id === 'cancel') layer.confirm('주문 #1044를 취소하고 54,000원을 환불할까요?', { danger: true, okText: '주문 취소' }, function (i) { layer.close(i); layer.msg('취소했습니다', { icon: 'success' }); });

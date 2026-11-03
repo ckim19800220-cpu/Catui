@@ -16,21 +16,28 @@
   <table class="Catui_tbl Catui_tbl-compact">
     <caption class="Catui_clip">청구 항목</caption>
     <thead><tr><th scope="col">항목</th><th scope="col" class="Catui_num">수량</th><th scope="col" class="Catui_num">단가</th><th scope="col" class="Catui_num">금액</th></tr></thead>
-    <tbody>
+    <tbody id="iv-items">
       <tr><td>기계식 키보드 K8 (법인 단체 구매)</td><td class="Catui_num">20</td><td class="Catui_num">149,000</td><td class="Catui_num">2,980,000</td></tr>
       <tr><td>무선 마우스 M3</td><td class="Catui_num">20</td><td class="Catui_num">30,000</td><td class="Catui_num">600,000</td></tr>
       <tr><td>각인 서비스</td><td class="Catui_num">20</td><td class="Catui_num">5,000</td><td class="Catui_num">100,000</td></tr>
       <tr><td>설치·배송 (판교)</td><td class="Catui_num">1</td><td class="Catui_num">50,000</td><td class="Catui_num">50,000</td></tr>
     </tbody>
   </table>
-  <div class="Catui_adm-sum">
+  <div class="Catui_adm-sum" id="iv-sum">
     <div><span>공급가액</span><span>3,390,909원</span></div><div><span>부가세 (10%)</span><span>339,091원</span></div>
     <div class="Catui_adm-sum-total"><span>합계</span><span>3,730,000원</span></div>
   </div>
   <p class="Catui_help" style="margin-top:var(--Catui_space-6)">문의: billing@catui.example · 02-000-0000 — 기한 안에 입금해 주세요.</p>
 </article>
 <script>
-catui.use(['layer'], function (layer) {
+catui.use(['layer', 'util'], function (layer, util) {
+  // 모의 데이터: data/invoice-1102.json — 합계·공급가액·부가세(10%, 부가세 포함가 기준)는 항목에서 계산
+  catui.admin.data('invoice-1102').then(function (iv) {
+    var n = util.number, total = iv.items.reduce(function (a, it) { return a + it.qty * it.price; }, 0);
+    var supply = iv.vatIncluded ? Math.round(total / 1.1) : total, vat = iv.vatIncluded ? total - supply : Math.round(total * 0.1);
+    catui.mount(document.getElementById('iv-items'), catui.html`${iv.items.map(function (it) { return catui.html`<tr><td>${it.name}</td><td class="Catui_num">${n(it.qty)}</td><td class="Catui_num">${n(it.price)}</td><td class="Catui_num">${n(it.qty * it.price)}</td></tr>`; })}`);
+    catui.mount(document.getElementById('iv-sum'), catui.html`<div><span>공급가액</span><span>${n(supply)}원</span></div><div><span>부가세 (10%)</span><span>${n(vat)}원</span></div><div class="Catui_adm-sum-total"><span>합계</span><span>${n(supply + vat)}원</span></div>`);
+  });
   document.getElementById('iv-print').addEventListener('click', function () { window.print(); });
   document.getElementById('iv-mail').addEventListener('click', function () {
     layer.input({ title: '청구서 보내기', value: 'billing@nuri.example', placeholder: '받는 메일' }).then(function (v) { if (v) layer.msg(v + '로 보냈습니다', { icon: 'success' }); });

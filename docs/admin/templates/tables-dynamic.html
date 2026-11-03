@@ -40,7 +40,7 @@
   <div class="Catui_card-b Catui_vstack Catui_gap-4">
     <form class="Catui_toolbar" id="td-filter" data-catui-filter="td-filter" role="search" aria-label="주문 찾기">
       <div class="Catui_search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="td-q">고객·주문 번호</label><input class="Catui_input" id="td-q" name="q" type="search" placeholder="고객·주문 번호"></div>
-      <div class="Catui_select-wrap"><label class="Catui_clip" for="td-st">상태</label><select class="Catui_input Catui_select" id="td-st" name="status"><option value="">전체 상태</option><option>결제 대기</option><option>배송 중</option><option>배송 완료</option><option>취소</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div>
+      <div class="Catui_select-wrap"><label class="Catui_clip" for="td-st">상태</label><select class="Catui_input Catui_select" id="td-st" name="status"><option value="">전체 상태</option><option>결제 대기</option><option>출고 준비</option><option>배송 중</option><option>배송 완료</option><option>취소</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div>
       <fieldset class="Catui_chips"><legend class="Catui_clip">채널</legend>
         <input class="Catui_clip" type="checkbox" name="ch" value="자사몰" id="td-c1"><label class="Catui_chip" for="td-c1"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg>자사몰</label>
         <input class="Catui_clip" type="checkbox" name="ch" value="오픈마켓" id="td-c2"><label class="Catui_chip" for="td-c2"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg>오픈마켓</label>
@@ -64,7 +64,7 @@
 <script>
 catui.use(['table', 'layer', 'util'], function (table, layer, util) {
   var goods = ['기계식 키보드', '무선 마우스', 'USB-C 허브', '27인치 모니터', '모니터 받침대', '노트북 파우치'];
-  var KIND = { '결제 대기': 'warning', '배송 중': 'info', '배송 완료': 'success', '취소': 'danger' };
+  var KIND = { '결제 대기': 'warning', '출고 준비': 'neutral', '배송 중': 'info', '배송 완료': 'success', '취소': 'danger' };
   // 모의 데이터: data/orders.json (실서비스는 같은 모양의 API)
   catui.admin.data('orders').then(function (rows) {
   rows = rows.slice();
