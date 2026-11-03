@@ -35,12 +35,12 @@
   <div><h1 class="Catui_h1">운영 대시보드</h1><p>2026년 11월 2일 기준 · 최근 7일</p></div>
   <div class="Catui_actions">
     <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-download"></use></svg>보고서 내려받기</button>
-    <a class="Catui_btn Catui_btn-md Catui_btn-primary" href="orders.html"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-truck"></use></svg>출고 처리 12건</a>
+    <a class="Catui_btn Catui_btn-md Catui_btn-primary" href="orders.html"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-truck"></use></svg>출고 처리 <span data-adm-ship>12</span>건</a>
   </div>
 </div>
 
 <!-- 이 화면의 질문: "오늘 무엇부터 처리해야 하나" — 쌓인 일을 첫 줄에, 처리 화면으로 바로 -->
-<div class="Catui_banner Catui_banner-warn" role="status"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-alert-triangle"></use></svg><span><b>오늘 처리할 일</b> · 출고 준비 12건(오후 3시 택배 마감) · 결제 실패 1건 · 재고 부족 상품 1개(USB-C 허브 3개 남음)</span><a class="Catui_btn Catui_btn-sm Catui_btn-secondary" href="orders.html" style="margin-left:auto">주문 보기</a></div>
+<div class="Catui_banner Catui_banner-warn" role="status"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-alert-triangle"></use></svg><span><b>오늘 처리할 일</b> · 출고 준비 <span data-adm-ship>12</span>건(오후 3시 택배 마감) · 결제 대기 <span data-adm-wait>6</span>건 · 결제 실패 1건 · 재고 부족 상품 1개(USB-C 허브 3개 남음)</span><a class="Catui_btn Catui_btn-sm Catui_btn-secondary" href="orders.html" style="margin-left:auto">주문 보기</a></div>
 
 <section class="Catui_adm-stats" aria-label="주요 지표" data-catui-adm-src="dashboard-ops">
   <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_stat-label">전체 사용자</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-text="kpi.users.value" data-catui-adm-format="number">12,480</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 8.2%<span class="Catui_clip"> 증가</span></span><span class="Catui_adm-stat-sub">지난주 대비</span></div></article>
@@ -125,6 +125,7 @@
     </div>
   </article>
 </div>
+
     </main>
     <footer class="Catui_adm-foot"><span>© 2026 CatuiAdmin · Catui 2.0.0</span><span>MIT License</span></footer>
   </div>
@@ -133,6 +134,13 @@
 <script type="application/json" id="adm-user-data">[{"title":"내 프로필","icon":"user","href":"index.html"},{"title":"설정","icon":"settings","href":"index.html"},{"type":"-"},{"title":"로그아웃","icon":"log-out","href":"index.html"}]</script>
 <script src="../../../dist/catui.min.js"></script>
 <script src="../../../dist/catadmin.min.js"></script>
-
+<script>
+// 처리할 주문 건수는 주문 데이터(orders.json)에서 센다 — 주문 목록 화면과 항상 같은 숫자
+catui.admin.data('orders').then(function (rows) {
+  var count = function (st) { return rows.filter(function (r) { return r.status === st; }).length; };
+  document.querySelectorAll('[data-adm-ship]').forEach(function (el) { el.textContent = count('출고 준비'); });
+  document.querySelectorAll('[data-adm-wait]').forEach(function (el) { el.textContent = count('결제 대기'); });
+});
+</script>
 </body>
 </html>

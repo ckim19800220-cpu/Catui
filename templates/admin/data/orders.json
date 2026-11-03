@@ -34,7 +34,7 @@
   "customer": "최민",
   "item": "27인치 모니터",
   "amount": 480000,
-  "status": "취소",
+  "status": "출고 준비",
   "channel": "오픈마켓",
   "date": "2026-11-01 13:00",
   "qty": 2
@@ -134,7 +134,7 @@
   "customer": "이준",
   "item": "노트북 파우치",
   "amount": 62000,
-  "status": "취소",
+  "status": "출고 준비",
   "channel": "자사몰",
   "date": "2026-10-29 15:00",
   "qty": 2
@@ -234,7 +234,7 @@
   "customer": "조하람",
   "item": "무선 마우스",
   "amount": 66000,
-  "status": "취소",
+  "status": "출고 준비",
   "channel": "자사몰",
   "date": "2026-10-26 17:00",
   "qty": 2

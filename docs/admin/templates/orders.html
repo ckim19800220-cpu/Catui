@@ -64,10 +64,10 @@
 <script src="../../../dist/catadmin.min.js"></script>
 <script>
 catui.use(['table', 'util'], function (table, util) {
-  var names = ['김하늘', '이준', '박서연', '최민', '정수아', '강도현', '윤지호', '한소리'], ST = ['결제 대기', '출고 준비', '배송 중', '배송 완료'], K = { '결제 대기': 'warning', '출고 준비': 'neutral', '배송 중': 'info', '배송 완료': 'success' };
-  // 모의 데이터: data/orders.json (동적 표와 같은 주문) — 결제 대기는 출고 준비 전 단계로 표시
+  var names = ['김하늘', '이준', '박서연', '최민', '정수아', '강도현', '윤지호', '한소리'], ST = ['결제 대기', '출고 준비', '배송 중', '배송 완료'], K = { '결제 대기': 'warning', '출고 준비': 'neutral', '배송 중': 'info', '배송 완료': 'success', '취소': 'danger' };
+  // 모의 데이터: data/orders.json (동적 표와 같은 주문) 
   catui.admin.data('orders').then(function (all) {
-  var rows = all.slice(0, 30).map(function (r, i) { return { id: r.id, customer: r.customer, qty: 1 + (i % 3), amount: r.amount, status: r.status === '취소' ? '출고 준비' : r.status, pay: i % 3 ? '카드' : '간편결제', date: r.date.slice(5, 10).replace('-', '/') }; });
+  var rows = all.map(function (r, i) { return { id: r.id, customer: r.customer, qty: r.qty, amount: r.amount, status: r.status, pay: i % 3 ? '카드' : '간편결제', date: r.date.slice(5, 10).replace('-', '/') }; });
   // 상태별 건수는 표에 나오는 주문에서 계산 (숫자가 표와 항상 맞게)
   document.querySelectorAll('[data-od-count]').forEach(function (el) { el.textContent = rows.filter(function (r) { return r.status === el.dataset.odCount; }).length; });
   table.render({ elem: '#od-table', id: 'od-table', data: rows, page: true, limit: 8, caption: '주문 목록',
