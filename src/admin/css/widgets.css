@@ -10,7 +10,8 @@
 @media (max-width:767px){.Catui_adm-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:479px){.Catui_adm-stats{grid-template-columns:minmax(0,1fr)}}
 .Catui_adm-stat-sub{display:block;margin-top:var(--Catui_space-1);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
-.Catui_adm-stat-icon{float:right;display:grid;place-items:center;width:var(--Catui_control-h-lg);height:var(--Catui_control-h-lg);border-radius:var(--Catui_radius-md);background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong)}
+/* 지표 아이콘: 색 상자 없이 작은 회색 기호로만 (지표는 숫자가 주인공 — 색은 데이터와 좋고 나쁨에만) */
+.Catui_adm-stat-icon{float:right;display:inline-flex;color:var(--Catui_color-text-secondary);opacity:.8}
 
 /* 차트 카드 */
 .Catui_adm-chart{position:relative;height:var(--Catui_adm-chart-h)}

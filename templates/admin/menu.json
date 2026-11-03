@@ -33,7 +33,7 @@
     ] },
     { "title": "UI", "items": [
       { "id": "elements", "title": "요소", "icon": "grid", "page": "elements" },
-      { "id": "widgets", "title": "위젯", "icon": "layout-grid", "page": "widgets", "badge": "5" },
+      { "id": "widgets", "title": "위젯", "icon": "layout-grid", "page": "widgets" },
       { "id": "playground", "title": "놀이터", "icon": "sliders-horizontal", "page": "playground" },
       { "id": "theme", "title": "테마", "icon": "palette", "page": "theme" },
       { "id": "typography", "title": "타이포그래피", "icon": "type", "page": "typography" },

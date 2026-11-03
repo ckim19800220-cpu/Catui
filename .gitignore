@@ -3,3 +3,8 @@ node_modules/
 # npm 배포 토큰 (절대 커밋 금지)
 scripts/npmtoken.txt
 *.npmrc.local
+
+# 외부 에이전트 스킬 (npx skills add로 설치, 저장소에 넣지 않음)
+.agents/
+.claude/
+skills-lock.json
