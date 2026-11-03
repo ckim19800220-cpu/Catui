@@ -63,14 +63,11 @@
 <script src="../../../dist/catadmin.min.js"></script>
 <script>
 catui.use(['table', 'layer', 'util'], function (table, layer, util) {
-  var names = ['김하늘', '이준', '박서연', '최민', '정수아', '강도현', '윤지호', '한소리', '오세린', '임도윤', '서지안', '조하람'];
   var goods = ['기계식 키보드', '무선 마우스', 'USB-C 허브', '27인치 모니터', '모니터 받침대', '노트북 파우치'];
-  var STATES = ['결제 대기', '배송 중', '배송 완료', '배송 완료', '취소'], KIND = { '결제 대기': 'warning', '배송 중': 'info', '배송 완료': 'success', '취소': 'danger' };
-  var rows = [];
-  for (var i = 0; i < 64; i++) {
-    var d = new Date(2026, 10, 2); d.setHours(d.getHours() - i * 7);
-    rows.push({ id: String(1100 - i), customer: names[i % names.length], item: goods[(i * 5) % goods.length], amount: 20000 + ((i * 7919) % 18) * 9000, status: STATES[(i * 3) % STATES.length], channel: i % 3 ? '자사몰' : '오픈마켓', date: util.toDateString(d, 'yyyy-MM-dd HH:mm') });
-  }
+  var KIND = { '결제 대기': 'warning', '배송 중': 'info', '배송 완료': 'success', '취소': 'danger' };
+  // 모의 데이터: data/orders.json (실서비스는 같은 모양의 API)
+  catui.admin.data('orders').then(function (rows) {
+  rows = rows.slice();
   table.render({ elem: '#td-orders', id: 'td-orders', data: rows, page: true, limit: 10, caption: '주문 목록', labelField: 'id',
     cols: [
       { type: 'checkbox' }, { field: 'id', title: '주문 번호', sort: true }, { field: 'date', title: '주문 시각', sort: true }, { field: 'customer', title: '고객', sort: true },
@@ -102,6 +99,7 @@ catui.use(['table', 'layer', 'util'], function (table, layer, util) {
   document.getElementById('td-add').addEventListener('click', function () {
     layer.form({ title: '주문 추가', area: 'sm', fields: [{ name: 'customer', label: '고객', required: true }, { name: 'item', label: '상품', type: 'select', options: goods }, { name: 'amount', label: '금액', type: 'number', required: true, min: 0 }] })
       .then(function (v) { if (!v) return; rows.unshift({ id: String(Number(rows[0].id) + 1), customer: v.customer, item: v.item, amount: Number(v.amount), status: '결제 대기', channel: '자사몰', date: util.toDateString(new Date(), 'yyyy-MM-dd HH:mm') }); list.apply(); layer.msg('추가했습니다', { icon: 'success' }); });
+  });
   });
 });
 </script>
