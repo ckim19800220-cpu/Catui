@@ -301,5 +301,72 @@
    "text": "님이 새 관리자로 초대되었습니다",
    "time": "2026-10-31T14:12:00+09:00"
   }
- ]
+ ],
+ "storage": {
+  "totalGB": 500,
+  "usedGB": 340,
+  "freeGB": 160,
+  "summary": "500GB 중 340GB",
+  "items": [
+   {
+    "label": "이미지",
+    "pct": 48
+   },
+   {
+    "label": "동영상",
+    "pct": 12
+   },
+   {
+    "label": "문서",
+    "pct": 5
+   },
+   {
+    "label": "백업",
+    "pct": 3
+   }
+  ]
+ },
+ "tasks": [
+  {
+   "id": "task-1",
+   "done": false,
+   "priority": "high",
+   "priorityLabel": "높음",
+   "title": "결제 오류 원인 확인",
+   "due": "오늘"
+  },
+  {
+   "id": "task-2",
+   "done": false,
+   "priority": "mid",
+   "priorityLabel": "보통",
+   "title": "11월 프로모션 배너 검토",
+   "due": "내일"
+  },
+  {
+   "id": "task-3",
+   "done": false,
+   "priority": "mid",
+   "priorityLabel": "보통",
+   "title": "재고 부족 상품 발주",
+   "due": "11월 5일"
+  },
+  {
+   "id": "task-4",
+   "done": true,
+   "priority": "low",
+   "priorityLabel": "낮음",
+   "title": "관리자 권한 정리",
+   "due": "완료"
+  },
+  {
+   "id": "task-5",
+   "done": true,
+   "priority": "low",
+   "priorityLabel": "낮음",
+   "title": "10월 정산 확정",
+   "due": "완료"
+  }
+ ],
+ "tasksSummary": "5개 중 2개 완료"
 }

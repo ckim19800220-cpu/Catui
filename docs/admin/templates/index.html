@@ -79,13 +79,10 @@
     </div>
   </article>
   <article class="Catui_card Catui_span-4">
-    <header class="Catui_card-h">저장 공간 <span class="Catui_adm-card-meta">500GB 중 340GB</span></header>
+    <header class="Catui_card-h">저장 공간 <span class="Catui_adm-card-meta" data-catui-adm-src="dashboard-ops" data-catui-adm-text="storage.summary">500GB 중 340GB</span></header>
     <div class="Catui_card-b Catui_vstack Catui_gap-3">
-      <div><div class="Catui_prog-label"><span>이미지</span><span class="Catui_num">48%</span></div><div class="Catui_meter" role="img" aria-label="이미지 48퍼센트"><i style="width:48%"></i></div></div>
-      <div><div class="Catui_prog-label"><span>동영상</span><span class="Catui_num">12%</span></div><div class="Catui_meter" role="img" aria-label="동영상 12퍼센트"><i style="width:12%"></i></div></div>
-      <div><div class="Catui_prog-label"><span>문서</span><span class="Catui_num">5%</span></div><div class="Catui_meter" role="img" aria-label="문서 5퍼센트"><i style="width:5%"></i></div></div>
-      <div><div class="Catui_prog-label"><span>백업</span><span class="Catui_num">3%</span></div><div class="Catui_meter" role="img" aria-label="백업 3퍼센트"><i style="width:3%"></i></div></div>
-      <p class="Catui_help">남은 공간 160GB · 약 4개월 사용 가능</p>
+      <div class="Catui_vstack Catui_gap-3" data-catui-adm-src="dashboard-ops" data-catui-adm-rows="storage.items"><template><div><div class="Catui_prog-label"><span data-catui-adm-field="label"></span><span class="Catui_num" data-catui-adm-field="pct" data-catui-adm-format="percent"></span></div><div class="Catui_meter" role="img" data-catui-adm-attr="aria-label:{label} {pct}퍼센트"><i data-catui-adm-attr="style:width:{pct}%"></i></div></div></template></div>
+      <p class="Catui_help">남은 공간 <span data-catui-adm-src="dashboard-ops" data-catui-adm-text="storage.freeGB">160</span>GB · 약 4개월 사용 가능</p>
     </div>
   </article>
 
@@ -103,14 +100,9 @@
     </div>
   </article>
   <article class="Catui_card Catui_span-4">
-    <header class="Catui_card-h">할 일 <span class="Catui_adm-card-meta">5개 중 2개 완료</span></header>
+    <header class="Catui_card-h">할 일 <span class="Catui_adm-card-meta" data-catui-adm-src="dashboard-ops" data-catui-adm-text="tasksSummary">5개 중 2개 완료</span></header>
     <div class="Catui_card-b">
-      <div role="list" aria-label="할 일">
-        <label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox" data-catui-adm-pref="task-1"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri Catui_pri-high" aria-hidden="true"></i><span>결제 오류 원인 확인<span class="Catui_clip"> (높음)</span></span><span class="Catui_help">오늘</span></label>
-        <label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox" data-catui-adm-pref="task-2"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri Catui_pri-mid" aria-hidden="true"></i><span>11월 프로모션 배너 검토<span class="Catui_clip"> (보통)</span></span><span class="Catui_help">내일</span></label>
-        <label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox" data-catui-adm-pref="task-3"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri Catui_pri-mid" aria-hidden="true"></i><span>재고 부족 상품 발주<span class="Catui_clip"> (보통)</span></span><span class="Catui_help">11월 5일</span></label>
-        <label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox" checked data-catui-adm-pref="task-4"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri Catui_pri-low" aria-hidden="true"></i><span>관리자 권한 정리<span class="Catui_clip"> (낮음)</span></span><span class="Catui_help">완료</span></label>
-        <label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox" checked data-catui-adm-pref="task-5"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri Catui_pri-low" aria-hidden="true"></i><span>10월 정산 확정<span class="Catui_clip"> (낮음)</span></span><span class="Catui_help">완료</span></label>
+      <div role="list" aria-label="할 일" data-catui-adm-src="dashboard-ops" data-catui-adm-rows="tasks"><template><label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox" data-catui-adm-attr="data-catui-adm-pref:{id}" data-catui-adm-bool="checked:done"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri" data-catui-adm-class="Catui_pri-:priority" aria-hidden="true"></i><span><span data-catui-adm-field="title"></span><span class="Catui_clip"> (우선순위 <span data-catui-adm-field="priorityLabel"></span>)</span></span><span class="Catui_help" data-catui-adm-field="due"></span></label></template>
       </div>
     </div>
   </article>

@@ -121,6 +121,11 @@ admin.bind = function (scope = document) {
           el.getAttribute("data-catui-adm-attr").split(";").forEach((pair) => { const i = pair.indexOf(":"); if (i > 0) el.setAttribute(pair.slice(0, i).trim(), pair.slice(i + 1).replace(/\{(\w+)\}/g, (_, k) => row[k] ?? "")); });
           el.removeAttribute("data-catui-adm-attr");
         });
+        // 참·거짓 속성: data-catui-adm-bool="checked:done"
+        frag.querySelectorAll("[data-catui-adm-bool]").forEach((el) => {
+          el.getAttribute("data-catui-adm-bool").split(";").forEach((pair) => { const [a, k] = pair.split(":"); if (a && k) el.toggleAttribute(a.trim(), !!this.pick(row, k.trim())); });
+          el.removeAttribute("data-catui-adm-bool");
+        });
         frag.querySelectorAll("[data-catui-adm-label]").forEach((el) => { el.setAttribute("data-catui-adm-label", el.getAttribute("data-catui-adm-label").replace(/\{(\w+)\}/g, (_, k) => row[k] ?? "")); });
         list.appendChild(frag);
       });
