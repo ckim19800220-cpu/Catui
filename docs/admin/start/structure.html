@@ -69,6 +69,19 @@
 </ul>
 </section>
 
+<section aria-labelledby="data">
+<h2 id="data">JSON 모의 데이터</h2>
+<p>템플릿의 샘플 값은 <code>templates/admin/data/*.json</code>에 있고, 빌드가 문법을 검사해 <code>docs/admin/templates/data/</code>로 복사합니다. 화면은 이 파일을 읽어 그립니다 — 실서비스는 같은 모양의 API로 바꾸면 됩니다.</p>
+<pre><code>catui.admin.dataBase = '/api/';                 // 기본은 화면 옆 data/
+catui.admin.data('orders').then(function (rows) { … });   // data/orders.json (한 번만 읽고 캐시)
+
+&lt;section data-catui-adm-src="dashboard-ops"&gt;   ← 선언형: 이 영역의 값을 JSON에서 채움
+  &lt;b data-catui-adm-text="kpi.users.value" data-catui-adm-format="number"&gt;12,480&lt;/b&gt;
+  &lt;div data-catui-adm-chart="area" data-catui-adm-key="charts.network"&gt;&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+<p>형식: <code>number</code> · <code>won</code> · <code>man</code>(만원) · <code>percent</code> · <code>delta</code>(▲▼). 파일: notifications · orders · users · contacts · products · projects · files · events · chat-rooms · mails · stores · dashboard-ops·analytics·sales·health.</p>
+</section>
+
 <section aria-labelledby="checks">
 <h2 id="checks">빌드 검사</h2>
 <p><code>npm run build</code>는 다음 중 하나라도 있으면 실패합니다.</p>
@@ -83,7 +96,7 @@
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../admin/start/install.html"><span>이전</span>설치</a><a class="doc-pager-next" href="../../admin/modules.html"><span>다음</span>catadmin.js API</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#shell">셸 마크업</a></li><li><a href="#pages">새 화면 만들기</a></li><li><a href="#checks">빌드 검사</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#shell">셸 마크업</a></li><li><a href="#pages">새 화면 만들기</a></li><li><a href="#data">JSON 모의 데이터</a></li><li><a href="#checks">빌드 검사</a></li></ul></aside>
 </div>
 </div>
 <script src="../../assets/docs.js"></script>
