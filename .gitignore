@@ -8,3 +8,4 @@ scripts/npmtoken.txt
 .agents/
 .claude/
 skills-lock.json
+.devin/
