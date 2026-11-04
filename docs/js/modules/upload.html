@@ -66,7 +66,7 @@ catui.use([&#39;upload&#39;], function (upload) {
 <tr><td><code>before(file)</code> · <code>choose(files)</code> · <code>progress(%, file)</code> · <code>done(res, file)</code> · <code>error(msg, file)</code></td><td>콜백 — 같은 이름 이벤트 + <code>remove(f)</code></td></tr>
 <tr><td><code>inst.upload()</code> · <code>inst.clear()</code> · <code>inst.files</code></td><td>수동 업로드 / 비우기 / 목록</td></tr>
 <tr><td><code>disabled</code> · <code>inst.setDisabled(bool)</code></td><td>비활성 (선택·끌어 놓기·키보드 모두 막음)</td></tr>
-<tr><td><code>guard</code></td><td>true — 영역 밖에 파일을 잘못 놓아도 브라우저가 파일을 열며 페이지를 떠나지 않게 막음</td></tr>
+<tr><td><code>guard</code></td><td>true — 영역 밖에 파일을 잘못 놓아도 브라우저가 파일을 열어 페이지를 떠나지 못하게 막음</td></tr>
 <tr><td>CSRF</td><td><code>catui.config({ csrf })</code> 설정대로 같은 출처 요청에 토큰 헤더를 붙임 (<code>headers</code>가 우선)</td></tr>
 </tbody></table></div>
 </section>

@@ -87,6 +87,9 @@ export interface LayerFormField {
   type?: "text" | "email" | "password" | "number" | "tel" | "url" | "date" | "time" | "textarea" | "select" | "radio" | "checkbox" | "switch";
   required?: boolean; placeholder?: string; value?: unknown; options?: Array<string | { value: string; label: string }>;
   help?: string; min?: number; max?: number; minlength?: number; maxlength?: number; pattern?: string; cols?: number; rows?: number;
+  readonly?: boolean; disabled?: boolean; autocomplete?: string;
+  addon?: { icon?: string; label?: string; onClick?: (input: HTMLInputElement, value: unknown) => void };
+  messages?: Partial<Record<"valueMissing" | "typeMismatch" | "patternMismatch" | "rangeUnderflow" | "rangeOverflow" | "stepMismatch" | "tooShort" | "tooLong" | "badInput", string>>;
   validate?: (value: unknown, values: Record<string, unknown>) => string | void;
 }
 export interface Layer {
@@ -102,7 +105,7 @@ export interface Layer {
   tab(options: LayerOpenOptions & { tabs: Array<{ title: string; content: Markup }>; vertical?: boolean; card?: boolean; start?: number }): number;
   form(options: LayerOpenOptions & { fields: LayerFormField[]; layout?: "vertical" | "horizontal"; okText?: string; submit?: (values: Record<string, unknown>, index: number) => unknown }): Promise<Record<string, unknown> | null>;
   ask(content: Markup, options?: LayerOpenOptions): Promise<boolean>;
-  input(options?: LayerOpenOptions): Promise<string | null>;
+  input(options?: LayerOpenOptions & { formType?: "text" | "password" | "textarea"; value?: string; maxlength?: number; placeholder?: string; required?: boolean }): Promise<string | null>;
   close(index: number): void; closeAll(type?: string): void; closeLast(type?: string): void;
   title(index: number, text: string): void; getNode(index: number): HTMLElement | null; setContent(index: number, content: Markup): void;
   style(index: number, css: Record<string, string | number>): void; full(index: number): void; restore(index: number): void;
@@ -152,6 +155,23 @@ export interface CarouselInstance extends Instance<CarouselOptions> {
 
 export type GenericComponent = ComponentApi<Record<string, any>> & Record<string, any>;
 
+// 모듈별 인스턴스 메서드 (옵션은 문서 표 참고 — 여기서는 느슨하게 둔다)
+type Opts = Record<string, any>;
+export interface DropdownInstance extends Instance<Opts> { open(at?: { x: number; y: number }): void; close(): void }
+export interface DatePickerInstance extends Instance<Opts> { open(): void; close(): void }
+export interface UploadFile { id: string; file: File; status: "ready" | "uploading" | "done" | "error"; percent: number; res?: unknown; msg?: string }
+export interface UploadInstance extends Instance<Opts> { files: UploadFile[]; upload(): void; clear(): void; setDisabled(on: boolean): void }
+export interface SliderInstance extends Instance<Opts> { input: HTMLInputElement; getValue(): number; setValue(v: number): void; setDisabled(on: boolean): void }
+export interface RateInstance extends Instance<Opts> { value: number; getValue(): number; setValue?(v: number): void }
+export interface TreeInstance extends Instance<Opts> {
+  getChecked(): any[]; setChecked(ids: string | number | Array<string | number>): void; getSelected(): any | null;
+  clearChecked(): void; expandAll(open?: boolean): void; search(keyword: string): void;
+}
+export interface CanvasInstance extends Instance<Opts> { canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D; redraw(): void; toBlob(cb: BlobCallback, type?: string): void }
+export interface AutocompleteInstance extends Instance<Opts> { search(q?: string): void; close(): void }
+export interface CommandInstance extends Instance<Opts> { dialog: HTMLDialogElement; open(): void; close(): void }
+type Bindable = { bind(): Off };
+
 export interface Field {
   tags: GenericComponent; stepper: GenericComponent; counter: GenericComponent; otp: GenericComponent;
   enhance(scope?: Element | Document): void; destroyAll(): void; destroyDetached(): void;
@@ -199,12 +219,20 @@ export interface Catui {
   component<C = Record<string, any>>(def: { name: string; config?: C; ownDone?: boolean; render(inst: Instance<C>): void; destroy?(inst: Instance<C>): void; beforeRender?(inst: Instance<C>): void; [k: string]: unknown }): ComponentApi<C> & Record<string, any>;
 
   layer: Layer; form: Form; util: Util;
-  laypage: GenericComponent; table: GenericComponent & { checkStatus(id: string): { data: any[]; isAll: boolean }; getData(id: string): any[]; clearChecked(id: string): void; exportFile(id: string, filename?: string, opts?: { checked?: boolean; rows?: any[] }): boolean };
-  tabs: GenericComponent; dropdown: GenericComponent; datePicker: GenericComponent; upload: GenericComponent;
-  slider: GenericComponent; rate: GenericComponent; tree: GenericComponent; collapse: GenericComponent; canvas: GenericComponent;
-  fx: Record<string, any>;
+  laypage: GenericComponent;
+  table: GenericComponent & Bindable & { checkStatus(id: string): { data: any[]; isAll: boolean }; getData(id: string): any[]; clearChecked(id: string): void; exportFile(id: string, filename?: string, opts?: { checked?: boolean; rows?: any[] }): boolean; enhance(scope?: Element | Document): void };
+  tabs: ComponentApi<Opts> & Bindable & { change(filter: string, index: number): void; add(filter: string, item?: { title?: string; content?: Markup; id?: string; change?: boolean }): number; close(filter: string, index: number): void };
+  dropdown: ComponentApi<Opts, DropdownInstance> & Bindable & { close(id: string): void };
+  datePicker: ComponentApi<Opts, DatePickerInstance> & { enhance(scope?: Element | Document): void };
+  upload: ComponentApi<Opts, UploadInstance>;
+  slider: ComponentApi<Opts, SliderInstance> & Bindable & { setValue(id: string, v: number): void; getValue(id: string): number | null };
+  rate: ComponentApi<Opts, RateInstance> & Bindable & { setValue(id: string, v: number): void; getValue(id: string): number };
+  tree: ComponentApi<Opts, TreeInstance> & { getChecked(id: string): any[]; setChecked(id: string, ids: string | number | Array<string | number>): void; getSelected(id: string): any | null; clearChecked(id: string): void; expandAll(id: string, open?: boolean): void; search(id: string, keyword: string): void };
+  collapse: ComponentApi<Opts> & Bindable & { open(filter: string, index?: number): void; close(filter: string, index?: number): void; toggle(filter: string, index: number): void };
+  canvas: ComponentApi<Opts, CanvasInstance> & { redraw(id: string): void };
+  fx: Record<string, any> & { bind(scope?: Target | Document): () => void; enhance(scope?: Target | Document): void; destroyDetached(): void; destroyAll(): void };
   carousel: ComponentApi<CarouselOptions, CarouselInstance> & { go(id: string, i: number): void; enhance(scope?: Element | Document): void };
-  autocomplete: GenericComponent; command: GenericComponent & { open(id: string): void; close(id: string): void };
+  autocomplete: ComponentApi<Opts, AutocompleteInstance>; command: ComponentApi<Opts, CommandInstance> & { open(id: string): void; close(id: string): void };
   field: Field; page: Page; site: Site;
   [module: string]: any;
 }

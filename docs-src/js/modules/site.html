@@ -59,14 +59,14 @@
 <h2 id="countdown">카운트다운</h2>
 <catui-example title="site.countdown · data-catui-countdown">
   <p class="Catui_lead" id="st-cd">특가 종료까지 <b class="Catui_num" data-catui-unit="d"></b>일 <b class="Catui_num" data-catui-unit="h"></b>:<b class="Catui_num" data-catui-unit="m"></b>:<b class="Catui_num" data-catui-unit="s"></b></p>
-  <p class="Catui_help">선언형: <span class="Catui_num" data-catui-countdown="2027-01-01T00:00:00+09:00" data-catui-done="새해가 밝았습니다"></span> 뒤 새해</p>
+  <p class="Catui_help">선언형: <span class="Catui_num" data-catui-countdown="2027-01-01T00:00:00+09:00" data-catui-done="새해가 밝았습니다"></span> 후 새해</p>
   <script>
   catui.use(['site'], function (site) {
     site.countdown.render({ elem: '#st-cd', date: Date.now() + 2 * 86400000 + 5 * 3600000, doneText: '특가가 끝났습니다.' });
   });
   </script>
 </catui-example>
-<p>안에 <code>data-catui-unit="d|h|m|s"</code> 칸이 있으면 그 칸만 채우고, 없으면 "2일 05:00:00"처럼 글자로 채웁니다. 숫자는 매초 읽지 않도록 숨기고, 이름은 분 단위로만 바꿉니다. 끝나면 <code>data-catui-done</code> 문구와 <code>end(필터)</code> 이벤트.</p>
+<p>안에 <code>data-catui-unit="d|h|m|s"</code> 칸이 있으면 그 칸만 채우고, 없으면 "2일 05:00:00"처럼 글자로 채웁니다. 숫자는 매초 읽지 않도록 숨기고, 화면 낭독용 이름은 분 단위로만 바꿉니다. 끝나면 <code>data-catui-done</code> 문구와 <code>end(필터)</code> 이벤트.</p>
 </section>
 
 <section aria-labelledby="billing">

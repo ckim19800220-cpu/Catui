@@ -104,7 +104,7 @@ export const tree = component({
     inst.elem.addEventListener("change", onChange);
     inst.elem.addEventListener("keydown", onKey);
     inst.getChecked = () => [...s.checked].map((id) => byId.get(id)).filter(Boolean);
-    inst.setChecked = (ids) => { [].concat(ids).forEach((id) => { const n = byId.get(String(id)); if (n) leaves(n).forEach((l) => s.checked.add(String(l.id))); }); draw(); };
+    inst.setChecked = (ids) => { [].concat(ids).forEach((id) => { const n = byId.get(String(id)); if (n) leaves(n).filter((l) => l === n || !l.disabled).forEach((l) => s.checked.add(String(l.id))); }); draw(); };   // 부모를 고르면 사용자 클릭처럼 비활성 자식은 빼고, 비활성 잎을 직접 지정하면 그대로
     inst.getSelected = () => (s.selected ? byId.get(s.selected) : null);
     inst.clearChecked = () => { s.checked.clear(); draw(); };
     // 모두 펼치기·접기 (open=false면 접기)

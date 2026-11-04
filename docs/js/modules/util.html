@@ -42,7 +42,7 @@
     var started = Date.now();
     util.countdown({ date: started + 10000, ready: function (t) {
       document.getElementById('ut-out').textContent = util.toDateString(Date.now(), 'yyyy-MM-dd HH:mm:ss') +
-        ' · 연 시각: ' + util.timeAgo(started) + ' · 남은 ' + t.s + '초';
+        ' · 시작: ' + util.timeAgo(started) + ' · 남은 ' + t.s + '초';
     } });
   });
   </script>
@@ -53,7 +53,7 @@ catui.use([&#39;util&#39;], function (util) {
   var started = Date.now();
   util.countdown({ date: started + 10000, ready: function (t) {
     document.getElementById(&#39;ut-out&#39;).textContent = util.toDateString(Date.now(), &#39;yyyy-MM-dd HH:mm:ss&#39;) +
-      &#39; · 연 시각: &#39; + util.timeAgo(started) + &#39; · 남은 &#39; + t.s + &#39;초&#39;;
+      &#39; · 시작: &#39; + util.timeAgo(started) + &#39; · 남은 &#39; + t.s + &#39;초&#39;;
   } });
 });
 &lt;/script&gt;</code></pre></details>

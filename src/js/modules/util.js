@@ -4,7 +4,16 @@ import { hint } from "../core/base.js";
 // util — 자주 쓰는 도구.
 export const util = (() => {
   const pad = (n, w = 2) => String(n).padStart(w, "0");
-  const toDate = (t) => (t instanceof Date ? t : new Date(typeof t === "string" && /^\d+$/.test(t) ? Number(t) : t));
+  // 'YYYY-MM-DD'만 있는 문자열은 new Date()가 UTC 자정으로 읽어 시간대만큼 밀리므로 현지 자정으로 만든다
+  const toDate = (t) => {
+    if (t instanceof Date) return t;
+    if (typeof t === "string") {
+      const d = /^(\d{4})-(\d{2})-(\d{2})$/.exec(t.trim());
+      if (d) return new Date(+d[1], +d[2] - 1, +d[3]);
+      if (/^\d+$/.test(t)) return new Date(Number(t));
+    }
+    return new Date(t);
+  };
   const DOW = ["일", "월", "화", "수", "목", "금", "토"];
 
   // util.toDateString(Date.now(), 'yyyy-MM-dd HH:mm:ss')

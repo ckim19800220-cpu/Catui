@@ -32,7 +32,7 @@ catui.use(['form', 'layer'], function (form, layer) {
   document.querySelectorAll('[name=st-theme]').forEach(function (r) { r.addEventListener('change', function () { cm.theme.set(r.value); }); });
   var blocked = cm.store.get('blocked', ['광고봇123', '도배왕']), box = document.getElementById('st-blocked');
   var draw = function () { catui.mount(box, blocked.length ? catui.html`${blocked.map(function (n) { return catui.html`<li><span>${n}</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-un="${n}">차단 풀기</button></li>`; })}` : catui.html`<li class="Catui_help">차단한 회원이 없습니다.</li>`); };
-  box.addEventListener('click', function (e) { var b = e.target.closest('[data-un]'); if (!b) return; blocked = blocked.filter(function (x) { return x !== b.dataset.un; }); cm.store.set('blocked', blocked); draw(); layer.msg(cm.josa(b.dataset.un, '을') + ' 차단을 풀었습니다', { time: 1200 }); });
+  box.addEventListener('click', function (e) { var b = e.target.closest('[data-un]'); if (!b) return; blocked = blocked.filter(function (x) { return x !== b.dataset.un; }); cm.store.set('blocked', blocked); draw(); layer.msg(b.dataset.un + ' 님의 차단을 풀었습니다', { time: 1200 }); });
   draw();
 });
 </script>

@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
-import { mount, icon, reducedMotion } from "../core/dom.js";
+import { mount, icon, reducedMotion, within } from "../core/dom.js";
 import { hint } from "../core/base.js";
 
 // carousel — CSS 스크롤 스냅 캐러셀(.Catui_carousel)에 이동·순환·자동 넘김·여러 장·가로/세로·끌기·페이드·미리보기를 붙인다.
@@ -46,10 +46,16 @@ export const carousel = component({
     const real = [...track.children].filter((s) => s.classList.contains("Catui_carousel-slide") && !s.hasAttribute("data-catui-clone"));
     const N = real.length;
     if (!N) return;
+    // 바꾸기 전 속성을 기억해 두었다가 해제할 때 그대로 돌려놓는다(덮어쓴 aria-label 포함)
+    const keep = (node, names) => { const was = names.map((n) => [n, node.getAttribute(n)]); return () => was.forEach(([n, v]) => (v == null ? node.removeAttribute(n) : node.setAttribute(n, v))); };
+    const restores = [keep(root, ["role", "aria-roledescription", "aria-label"]), keep(track, ["aria-live", "tabindex", "aria-orientation"]),
+      ...real.map((s) => keep(s, ["role", "aria-roledescription", "aria-label"]))];
 
     root.setAttribute("role", root.getAttribute("role") || "region");
     root.setAttribute("aria-roledescription", "캐러셀");
     if (c.label) root.setAttribute("aria-label", c.label);
+    // 마크업에 처음부터 있던 클래스는 해제할 때 남긴다
+    const hadFade = root.classList.contains("Catui_carousel-fade"), hadV = root.classList.contains("Catui_carousel-vertical");
     if (fade) root.classList.add("Catui_carousel-fade");
     if (V) { root.classList.add("Catui_carousel-vertical"); track.setAttribute("aria-orientation", "vertical"); }
     if (c.height) track.style.height = catuiLen(c.height);
@@ -62,7 +68,7 @@ export const carousel = component({
       s.style.scrollSnapAlign = center ? "center" : "";
     });
 
-    const auto = Number(c.autoplay) > 0 && !reducedMotion();
+    const auto = Number(c.autoplay) > 0 && N > 1 && !reducedMotion();
     let P = 1, K = 0, index = 0;               // P 한 화면 장 수 · K 앞뒤 복제 수 · index 진짜 슬라이드 번호
     const loopOn = () => !fade && c.loop && N > (center ? 1 : P);
     const maxIndex = () => (loopOn() || center || fade ? N - 1 : Math.max(0, N - P));
@@ -119,6 +125,8 @@ export const carousel = component({
       n.setAttribute("aria-hidden", "true");
       n.inert = true;                                   // 복제는 키보드·화면 낭독기에서 빠진다
       n.removeAttribute("id"); n.querySelectorAll("[id]").forEach((x) => x.removeAttribute("id"));
+      // 원본에 붙은 fx 표식은 복사되지 않으므로, 다음 catui.init이 숨은 복제에 효과를 또 붙이지 않게 속성을 뗀다
+      n.removeAttribute("data-catui-fx"); n.querySelectorAll("[data-catui-fx]").forEach((x) => x.removeAttribute("data-catui-fx"));
       return n;
     };
     const drawDots = () => {
@@ -168,11 +176,21 @@ export const carousel = component({
     };
 
     // user: 사용자가 직접 넘겼는지 (stopOnInteraction·before 검사용)
-    const go = (i, smooth = true, user = false) => {
+    let pending = 0;   // 비동기 before를 기다리는 동안 들어온 이동은 이전 결과를 무시한다
+    const go = (i, smooth = true, user = false, checked = false) => {
       if (!fade && !loopOn() && c.rewind) { if (i > maxIndex()) i = 0; else if (i < 0) i = maxIndex(); }   // 끝에서 처음으로 되감기
       const wrap = (x) => ((x % N) + N) % N;
       const to = fade ? (c.loop || c.rewind ? wrap(i) : Math.min(Math.max(0, i), N - 1)) : loopOn() ? wrap(i) : Math.min(Math.max(0, i), maxIndex());
-      if (to !== index && c.before && c.before.call(inst, index, to) === false) return;   // before가 false면 이동 취소
+      // before가 false(또는 false로 끝나는 Promise)면 이동 취소 — page.steps의 before와 같은 규칙
+      if (!checked && to !== index && c.before) {
+        const ok = c.before.call(inst, index, to);
+        if (ok === false) return;
+        if (ok && typeof ok.then === "function") {
+          const my = ++pending;
+          ok.then((v) => { if (my === pending && v !== false && !inst.dead) go(i, smooth, user, true); }, (err) => hint.error("carousel: before 처리 중 오류", "error", err));
+          return;
+        }
+      }
       if (user && auto && c.stopOnInteraction && !paused) setPaused(true);
       const prev = index;
       if (fade) { index = to; changed(prev); return; }
@@ -240,7 +258,8 @@ export const carousel = component({
 
     // ── 자동 넘김 ──
     let timer = 0, paused = !auto, hold = false, focusHold = false;
-    const running = () => !paused && !hold && !focusHold && !document.hidden;
+    // auto가 꺼진 인스턴스에서 play()를 불러도 0ms 간격 타이머가 생기지 않게 auto를 함께 본다
+    const running = () => auto && !paused && !hold && !focusHold && !document.hidden;
     function restartBar() {
       if (!bar) return;
       bar.style.transition = "none"; bar.style.width = "0%";
@@ -250,9 +269,9 @@ export const carousel = component({
     }
     const tick = () => { clearInterval(timer); timer = 0; if (running()) timer = setInterval(() => go(index + (c.reverse ? -step : step)), Number(c.autoplay)); restartBar(); };
     function setPaused(on) {
-      paused = on;
-      if (playBtn) { mount(playBtn, icon(on ? "play" : "pause", 16)); playBtn.setAttribute("aria-label", on ? "자동 넘김 시작" : "자동 넘김 정지"); }
-      track.setAttribute("aria-live", on ? "polite" : "off");
+      paused = on || !auto;   // 자동 넘김이 없으면 늘 멈춤 — aria-live도 "polite"로 유지(처음 값과 같게)
+      if (playBtn) { mount(playBtn, icon(paused ? "play" : "pause", 16)); playBtn.setAttribute("aria-label", paused ? "자동 넘김 시작" : "자동 넘김 정지"); }
+      track.setAttribute("aria-live", paused ? "polite" : "off");
       tick();
     }
     const onEnter = () => { if (c.pauseOnHover) { hold = true; tick(); } };
@@ -279,7 +298,12 @@ export const carousel = component({
       else if (e.key === "End") { e.preventDefault(); go(maxIndex(), true, true); }
     };
     let lastW = 0, lastH = 0;
-    const ro = new ResizeObserver(() => { const w = root.clientWidth, h = track.clientHeight; if (Math.abs(w - lastW) < 1 && Math.abs(h - lastH) < 1) return; lastW = w; lastH = h; layout(); });
+    // 가로 캐러셀은 높이만 바뀐 경우(autoHeight 전환 중 등) 다시 배치하지 않는다 — 배치가 진행 중인 스크롤을 끊고 튀게 만든다
+    const ro = new ResizeObserver(() => {
+      const w = root.clientWidth, h = track.clientHeight, dw = Math.abs(w - lastW) >= 1, dh = Math.abs(h - lastH) >= 1;
+      lastW = w; lastH = h;
+      if (dw || (V && dh)) layout();
+    });
 
     root.addEventListener("click", onClick);
     track.addEventListener("click", onClickCapture, true);
@@ -305,7 +329,7 @@ export const carousel = component({
     track.addEventListener("load", onImg, true);
     tick();
 
-    inst.go = (i, smooth = true) => go(Number(i), smooth);
+    inst.go = (i, smooth = true) => { if (Number.isFinite(Number(i))) go(Number(i), smooth); };
     inst.next = () => go(index + step);
     inst.prev = () => go(index - step);
     inst.pause = () => setPaused(true);
@@ -334,18 +358,20 @@ export const carousel = component({
       document.removeEventListener("visibilitychange", onVis);
       track.querySelectorAll(":scope > [data-catui-clone]").forEach((n) => n.remove());
       real.forEach((s) => { s.style.flexBasis = ""; s.style.scrollSnapAlign = ""; s.removeAttribute("data-catui-active"); });
-      ["height", "gap", "alignItems", "transition"].forEach((k) => { track.style[k] = ""; });
-      track.removeAttribute("aria-orientation");
+      ["height", "gap", "alignItems", "transition", "scrollSnapType", "scrollBehavior"].forEach((k) => { track.style[k] = ""; });   // 끌기 도중 해제돼도 스냅이 꺼진 채 남지 않게
+      dragging = false;
+      restores.forEach((f) => f());
       if (madeNav) nav.remove(); else added.forEach((n) => n.remove());
       if (madeNav) added.filter((n) => !nav.contains(n)).forEach((n) => n.remove());
-      root.classList.remove("Catui_carousel-fade", "Catui_carousel-vertical");
+      if (!hadFade) root.classList.remove("Catui_carousel-fade");
+      if (!hadV) root.classList.remove("Catui_carousel-vertical");
     });
   },
   go(id, i) { carousel.getThis(id)?.go(i); },
   // 선언형: [data-catui-carousel] + data-catui-direction · autoplay · loop · rewind · per-view · step · gap · align · height
   //         · effect · thumbs · counter · progress · auto-height · wheel · reverse · stop-on-interaction · pause-on-hover="false"
   enhance(scope = document) {
-    scope.querySelectorAll(".Catui_carousel[data-catui-carousel]:not([data-catui-ready])").forEach((el) => {
+    within(scope, ".Catui_carousel[data-catui-carousel]:not([data-catui-ready])").forEach((el) => {
       el.setAttribute("data-catui-ready", "");
       const a = (k) => el.getAttribute(`data-catui-${k}`);
       const has = (k) => el.hasAttribute(`data-catui-${k}`) && a(k) !== "false";

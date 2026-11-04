@@ -7,7 +7,7 @@
     var started = Date.now();
     util.countdown({ date: started + 10000, ready: function (t) {
       document.getElementById('ut-out').textContent = util.toDateString(Date.now(), 'yyyy-MM-dd HH:mm:ss') +
-        ' · 연 시각: ' + util.timeAgo(started) + ' · 남은 ' + t.s + '초';
+        ' · 시작: ' + util.timeAgo(started) + ' · 남은 ' + t.s + '초';
     } });
   });
   </script>

@@ -528,6 +528,169 @@ export const scenarios = [
     expect: { "투표 후 결과": (r) => r.done, "내 선택 표시": (r) => r.mine, "비율 합 ≈ 100": (r) => r.pct >= 99 && r.pct <= 101 },
   },
   {
+    name: "fx · 새 영역 init · 자동 정리 · 이중 해제 · 빈 값",
+    page: "docs/js/modules/fx.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const box = document.createElement("div");
+      box.innerHTML = '<p data-catui-fx="shiny" id="t-fx1">새 영역</p><p id="t-fx2"></p><p id="t-fx3"></p>';
+      document.querySelector("main").appendChild(box);
+      catui.init(box);
+      const enhanced = document.getElementById("t-fx1").classList.contains("Catui_fx-shiny");
+      const errs = []; const onErr = (e) => errs.push(String(e.message)); window.addEventListener("error", onErr);
+      const f = catui.fx.focus("#t-fx2"), t = catui.fx.type("#t-fx3");   // 빈 요소: 예외·타이머 없이 통과
+      const h = catui.fx.shiny("#t-fx3"); h.destroy(); h.destroy();
+      const again = catui.fx.shiny("#t-fx3"); const stale = h; stale.destroy();
+      const keep = document.getElementById("t-fx3").classList.contains("Catui_fx-shiny");
+      await sleep(1300); window.removeEventListener("error", onErr);
+      box.remove(); await sleep(50);
+      const swept = !box.querySelector("#t-fx1").catuiFx && !box.querySelector("#t-fx1").classList.contains("Catui_fx-shiny");
+      again.destroy(); f.destroy(); t.destroy();
+      return { enhanced, errs, keep, swept };
+    },
+    expect: {
+      "catui.init(영역)이 data-catui-fx 연결": (r) => r.enhanced,
+      "빈 focus·type이 예외 없음": (r) => r.errs.length === 0,
+      "옛 핸들 destroy가 새 효과를 지우지 않음": (r) => r.keep,
+      "DOM에서 빠지면 효과 자동 정리": (r) => r.swept,
+    },
+  },
+  {
+    name: "carousel · 자동 넘김 꺼진 상태에서 play()·go(NaN)",
+    page: "docs/js/modules/carousel.html",
+    wait: 1200,
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const root = [...document.querySelectorAll(".Catui_carousel")].find((r) => !r.querySelector('[data-catui-car="play"]'));
+      const inst = catui.carousel.getThis(root.id) || catui.carousel.render({ elem: root });
+      const before = inst.getIndex();
+      inst.play(); inst.go("abc"); await sleep(400);
+      return { idx: inst.getIndex(), before, paused: inst.isPaused() };
+    },
+    expect: { "play()가 0ms 타이머로 넘기지 않음": (r) => r.idx === r.before && r.paused, "go(NaN) 무시": (r) => Number.isInteger(r.idx) },
+  },
+  {
+    name: "util · 날짜만 있는 문자열은 현지 자정",
+    page: "docs/js/modules/util.html",
+    run: async () => ({ d: catui.util.toDateString("2026-03-01", "yyyy-MM-dd HH:mm") }),
+    expect: { "'2026-03-01' → 2026-03-01 00:00": (r) => r.d === "2026-03-01 00:00" },
+  },
+  {
+    name: "모달 안 플로팅 패널 (inert 아님 · 위치 일치)",
+    page: "docs/js/modules/datepicker.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const box = document.createElement("div");
+      box.innerHTML = '<label class="Catui_label" for="t-dp">날짜</label><input class="Catui_input" id="t-dp">';
+      const idx = catui.layer.open({ title: "모달", content: box });
+      const input = box.querySelector("#t-dp");
+      const dp = catui.datePicker.render({ elem: input });
+      dp.open(); await sleep(50);
+      const panel = document.getElementById(input.getAttribute("aria-controls")) || [...document.querySelectorAll(".Catui_dd-float")].pop();
+      const r = panel.getBoundingClientRect(), ir = input.getBoundingClientRect();
+      const hit = document.elementFromPoint(r.left + r.width / 2, r.top + Math.min(40, r.height / 2));
+      const wantL = Math.min(Math.max(8, ir.left), innerWidth - r.width - 8);
+      const below = Math.abs(r.top - (ir.bottom + 4)) < 2, above = Math.abs(r.top - (ir.top - r.height - 4)) < 2;
+      const res = { inDialog: !!panel.closest("dialog[open]"), clickable: !!hit && panel.contains(hit), aligned: Math.abs(r.left - wantL) < 2 && (below || above) };
+      dp.destroy(); catui.layer.close(idx);
+      return res;
+    },
+    expect: { "패널이 열린 dialog 안": (r) => r.inDialog, "패널을 실제로 누를 수 있음": (r) => r.clickable, "입력 칸 바로 아래에 놓임": (r) => r.aligned },
+  },
+  {
+    name: "core · reload id 변경·해제 뒤 이벤트·필터 공백",
+    page: "docs/js/core/dom.html",
+    run: async () => {
+      const c = catui.component({ name: "tcomp", render(inst) { inst.elem.textContent = inst.config.text || ""; } });
+      const host = document.createElement("div"); document.body.appendChild(host);
+      const inst = c.render({ elem: host, id: "a1", text: "x" });
+      inst.reload({ id: "b2" });
+      const moved = c.getThis("b2") === inst && c.getThis("a1") === null;
+      let got = 0; const off = c.on("ping( b2 )", () => { got++; });
+      inst.emit("ping", {}); inst.destroy(); inst.emit("ping", {}); off();
+      host.remove();
+      return { moved, got };
+    },
+    expect: { "reload({id})로 찾기 키 갱신": (r) => r.moved, "필터 공백 무시 + 해제 뒤 이벤트 없음": (r) => r.got === 1 },
+  },
+  {
+    name: "field · 인증 코드 complete 한 번만",
+    page: "docs/js/modules/field.html",
+    run: async () => {
+      const box = document.createElement("div");
+      box.innerHTML = "<input><input><input>";
+      document.querySelector("main").appendChild(box);
+      let n = 0; const inst = catui.field.otp.render({ elem: box, complete: () => { n++; } });
+      const cells = [...box.querySelectorAll("input")];
+      const type = (x, v) => { x.value = v; x.dispatchEvent(new Event("input", { bubbles: true })); };
+      type(cells[0], "1"); type(cells[1], "2"); type(cells[2], "3");
+      type(cells[2], "3");   // 같은 코드 다시
+      type(cells[2], "4");   // 바뀐 코드
+      const r = { n, inputmode: cells[0].getAttribute("inputmode") };
+      inst.destroy(); r.restored = !cells[0].hasAttribute("inputmode") && !cells[0].hasAttribute("maxlength"); box.remove();
+      return r;
+    },
+    expect: { "같은 코드로 다시 안 나감, 바뀌면 나감": (r) => r.n === 2, "숫자 자판": (r) => r.inputmode === "numeric", "해제하면 속성 원복": (r) => r.restored },
+  },
+  {
+    name: "command · 초성+완성 글자 혼합",
+    page: "docs/js/modules/command.html",
+    run: async () => {
+      catui.command.open("doc-cmd");
+      const dlg = catui.command.getThis("doc-cmd").dialog, q = dlg.querySelector("input");
+      const find = (v) => { q.value = v; q.dispatchEvent(new Event("input", { bubbles: true })); return [...dlg.querySelectorAll("[data-catui-cmd]")].map((r) => r.textContent.trim()); };
+      const r = { a: find("대ㅅ"), b: find("ㄷ시"), none: find("ㅋㅋㅋㅋㅋ") };
+      catui.command.close("doc-cmd");
+      return r;
+    },
+    expect: {
+      "대ㅅ → 대시보드": (r) => r.a.some((t) => t.startsWith("대시보드")),
+      "ㄷ시 → 대시보드": (r) => r.b.some((t) => t.startsWith("대시보드")),
+      "엉뚱한 초성은 없음": (r) => r.none.length === 0,
+    },
+  },
+  {
+    name: "core · init(요소 자신) · autoDestroy 실행 중 전환",
+    page: "docs/js/modules/datepicker.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const inp = Object.assign(document.createElement("input"), { className: "Catui_input" });
+      inp.setAttribute("data-catui-date", "");
+      document.querySelector("main").appendChild(inp);
+      catui.init(inp);
+      const self = inp.hasAttribute("data-catui-ready");
+      const c = catui.component({ name: "tauto", render() {} });
+      const mk = (id) => { const h = document.createElement("div"); document.body.appendChild(h); c.render({ elem: h, id }); return h; };
+      catui.config({ autoDestroy: false });
+      mk("k1").remove(); await sleep(60);
+      const kept = !!c.getThis("k1");
+      catui.config({ autoDestroy: true });
+      mk("k2").remove(); await sleep(60);
+      const swept = !c.getThis("k2");
+      c.destroyAll(); inp.remove();
+      return { self, kept, swept };
+    },
+    expect: { "init(요소)가 요소 자신도 준비": (r) => r.self, "autoDestroy 끄면 남김": (r) => r.kept, "다시 켜면 정리": (r) => r.swept },
+  },
+  {
+    name: "carousel · 비동기 before",
+    page: "docs/js/modules/carousel.html",
+    wait: 1200,
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const root = [...document.querySelectorAll(".Catui_carousel")].find((r) => !r.querySelector('[data-catui-car="play"]'));
+      let allow = false;
+      const inst = catui.carousel.render({ elem: root, loop: false, before: () => new Promise((res) => setTimeout(() => res(allow), 30)) });
+      const i0 = inst.getIndex();
+      inst.next(); await sleep(120);
+      const blocked = inst.getIndex() === i0;
+      allow = true; inst.next(); await sleep(120);
+      const moved = inst.getIndex() !== i0;
+      return { blocked, moved };
+    },
+    expect: { "Promise<false>면 이동 안 함": (r) => r.blocked, "Promise<true>면 이동": (r) => r.moved },
+  },
+  {
     name: "build · 압축본 단독 실행",
     page: "docs/index.html",
     run: async () => {

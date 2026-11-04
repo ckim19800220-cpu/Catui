@@ -1,13 +1,14 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
 import { mount, layerRoot, icon, uid, imeBusy } from "../core/dom.js";
+import { hint } from "../core/base.js";
 
 // command — 명령 팔레트 (Ctrl/⌘+K). .Catui_cmdk를 네이티브 <dialog>에 띄운다.
 //   command.render({ id: 'cmd', hotkey: 'mod+k', placeholder: '명령 또는 페이지 검색',
 //     data: [{ group: '이동', title: '대시보드', icon: 'layout-dashboard', kbd: 'G D', keywords: 'home', href: '/dash' },
 //            { group: '작성', title: '새 주문', icon: 'plus', handler(item) { … } }] })
 //   command.open('cmd') / command.close('cmd') · 이벤트 command.on('select(cmd)', ({ item }) => {})
-// 검색: 제목·키워드 포함, 띄어쓰기 무시, 한글 초성(ㄷㅅㅂㄷ → 대시보드).
+// 검색: 제목·키워드 포함, 띄어쓰기 무시, 한글 초성(ㄷㅅㅂㄷ · 대ㅅ · ㄷ시 → 대시보드).
 const CATUI_CHO = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
 const catuiChosung = (s) => [...s].map((ch) => { const k = ch.charCodeAt(0) - 0xac00; return k >= 0 && k < 11172 ? CATUI_CHO[Math.floor(k / 588)] : ch; }).join("");
 const catuiSafeLink = (u) => { try { const url = new URL(String(u), location.href); return /^https?:$/.test(url.protocol) ? url.href : null; } catch { return null; } };
@@ -31,7 +32,12 @@ export const command = component({
       const hay = `${it.title} ${it.keywords || ""} ${it.group || ""}`.toLowerCase();
       const flat = hay.replace(/\s+/g, ""), qq = q.toLowerCase().replace(/\s+/g, "");
       if (flat.includes(qq)) return true;
-      return /^[ㄱ-ㅎ]+$/.test(qq) && catuiChosung(flat).includes(qq);   // 초성만 친 경우
+      // 초성 검색: 자음은 그 자리 글자의 초성과, 나머지는 글자 그대로 맞춘다 — 'ㄷㅅㅂㄷ'뿐 아니라 '대ㅅ'(입력 중)·'ㄷ시'도 찾는다
+      const qa = [...qq];
+      if (!qa.some((ch) => /[ㄱ-ㅎ]/.test(ch))) return false;
+      const fa = [...flat], ca = [...catuiChosung(flat)];
+      for (let s = 0; s + qa.length <= fa.length; s++) if (qa.every((ch, k) => fa[s + k] === ch || (/[ㄱ-ㅎ]/.test(ch) && ca[s + k] === ch))) return true;
+      return false;
     };
     const draw = () => {
       const q = input.value.trim();
@@ -61,12 +67,17 @@ export const command = component({
     const run = (i) => {
       const it = shown[i];
       if (!it || it.disabled) return;
-      const keep = it.handler?.call(inst, it) === false;
+      let r;
+      try { r = it.handler?.call(inst, it); } catch (err) { r = false; hint.error("command: 항목 실행 중 오류", "error", err); }   // 실패하면 팔레트를 닫지 않는다
       inst.emit("select", { item: it });
-      if (keep) return;
-      close();
-      const href = it.href && catuiSafeLink(it.href);
-      if (href) location.assign(href);
+      const finish = (v) => {
+        if (v === false) return;   // false(또는 false로 끝나는 Promise)면 열린 채 둔다 — steps.before와 같은 규칙
+        close();
+        const href = it.href && catuiSafeLink(it.href);
+        if (href) location.assign(href);
+      };
+      if (r && typeof r.then === "function") r.then(finish, (err) => hint.error("command: 항목 실행 중 오류", "error", err));
+      else finish(r);
     };
     const open = () => {
       if (dlg.open) return;
@@ -101,7 +112,7 @@ export const command = component({
       for (const parts of keys) {
         const key = parts[parts.length - 1], mods = parts.slice(0, -1);
         const want = { ctrl: mods.includes("ctrl") || (mods.includes("mod") && !isMac), meta: mods.includes("meta") || (mods.includes("mod") && isMac), shift: mods.includes("shift"), alt: mods.includes("alt") };
-        if (e.key.toLowerCase() !== key || e.ctrlKey !== want.ctrl || e.metaKey !== want.meta || e.altKey !== want.alt || (want.shift && !e.shiftKey)) continue;
+        if (e.key.toLowerCase() !== key || e.ctrlKey !== want.ctrl || e.metaKey !== want.meta || e.altKey !== want.alt || (want.shift ? !e.shiftKey : e.shiftKey && /^[a-z]$/.test(key))) continue;   // mod+k가 Ctrl+Shift+K에도 열리지 않게(글자 키만 — '?'처럼 Shift로 만드는 키는 e.key가 이미 다르다)
         if (!mods.length && typing) continue;
         e.preventDefault();
         open();

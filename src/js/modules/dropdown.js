@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
-import { mount, layerRoot, icon, uid, imeBusy } from "../core/dom.js";
+import { mount, floatRoot, placeFixed, icon, uid, imeBusy } from "../core/dom.js";
 
 // dropdown — 버튼에 붙는 메뉴. 키보드(↑↓·Home·End·Esc·Tab), 바깥 클릭 닫기, 화면 끝에서 위로 뒤집기.
 //   dropdown.render({ elem: '#more', data: [{ id: 'edit', title: '수정', icon: 'pen-line' }, { type: '-' },
@@ -30,12 +30,12 @@ export const dropdown = component({
       // 우클릭 메뉴는 누른 지점 기준 (0 크기 사각형)
       const r = point ? { left: point.x, right: point.x, top: point.y, bottom: point.y, width: 0 } : trigger.getBoundingClientRect();
       // 너비 옵션이 없으면 메뉴를 여는 버튼과 같은 너비로 (내용이 더 길면 그만큼 넓어짐)
-      if (!c.width && !point) panel.style.minWidth = `${Math.round(r.width)}px`;
+      // 기본값이 "md"라 !c.width는 늘 거짓이었다 — 기본 너비일 때 적용
+      if ((!c.width || c.width === "md") && !point) panel.style.minWidth = `${Math.round(r.width)}px`;
       const p = panel.getBoundingClientRect();
       const below = innerHeight - r.bottom, up = below < p.height + 8 && r.top > p.height + 8;
-      panel.style.top = `${Math.round(up ? r.top - p.height - 4 : r.bottom + 4)}px`;
       const left = c.align === "right" ? r.right - p.width : r.left;
-      panel.style.left = `${Math.round(Math.min(Math.max(8, left), innerWidth - p.width - 8))}px`;
+      placeFixed(panel, Math.min(Math.max(8, left), innerWidth - p.width - 8), up ? r.top - p.height - 4 : r.bottom + 4);
     };
     const close = (focusTrigger) => {
       if (!panel) return;
@@ -46,7 +46,8 @@ export const dropdown = component({
       point = null;
     };
     const open = (at) => {
-      if (panel) return;
+      if (panel?.isConnected) return;
+      if (panel) close(false);   // 패널이 바깥에서 지워졌으면 리스너를 걷고 새로 연다
       point = at || null;
       back = document.activeElement;
       panel = document.createElement("div");
@@ -61,7 +62,7 @@ export const dropdown = component({
           : d.href && !d.disabled && catuiSafeHref(d.href)
             ? html`<a class="Catui_dd-item${d.danger ? " Catui_dd-danger" : ""}" role="menuitem" tabindex="-1" data-catui-i="${i}" href="${catuiSafeHref(d.href)}" ${d.target ? html`target="${d.target}" rel="noopener noreferrer"` : ""}>${d.icon ? icon(d.icon, 16) : ""}${d.title}</a>`
             : html`<button class="Catui_dd-item${d.danger ? " Catui_dd-danger" : ""}" type="button" role="menuitem" tabindex="-1" data-catui-i="${i}" ${d.disabled ? "disabled" : ""}>${d.icon ? icon(d.icon, 16) : ""}${d.title}</button>`))}`);
-      layerRoot().appendChild(panel);
+      floatRoot(trigger).appendChild(panel);
       if (!ctx) trigger.setAttribute("aria-expanded", "true");
       place();
       items()[0]?.focus();
@@ -171,6 +172,8 @@ export const dropdown = component({
       document.removeEventListener("keydown", onKey);
     };
   },
+  // 다른 모듈과 같은 이름의 전역 위임 진입점 (bindDetails는 호환용으로 유지)
+  bind() { return dropdown.bindDetails(); },
 });
 
 // 메뉴 링크는 같은 사이트 상대 경로·http·https·mailto·tel만 (javascript: 차단)

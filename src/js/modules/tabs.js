@@ -62,7 +62,8 @@ export const tabs = component({
 });
 
 function catuiTabsFind(filter) {
-  const box = document.querySelector(`.Catui_tabs[data-catui-filter="${CSS.escape(filter)}"]`) || document.getElementById(filter)?.querySelector(".Catui_tabs");
+  const byId = document.getElementById(filter);   // id를 가진 요소 자신이 .Catui_tabs일 수도 있다
+  const box = document.querySelector(`.Catui_tabs[data-catui-filter="${CSS.escape(filter)}"]`) || (byId?.matches(".Catui_tabs") ? byId : byId?.querySelector(".Catui_tabs"));
   if (!box) hint.error(`tabs: data-catui-filter="${filter}" 탭이 없습니다`);
   return box;
 }

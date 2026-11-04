@@ -22,7 +22,7 @@
         { title: '동작', toolbar: [{ event: 'edit', text: '수정', icon: 'pen-line' }, { event: 'del', text: '삭제', icon: 'trash-2' }] },
       ],
     });
-    // 추가·수정 공용 양식 — submit은 저장 요청을 흉내(0.4초). 실패하면 throw하면 양식이 열린 채 오류를 보인다
+    // 추가·수정 공용 양식 — submit은 저장 요청을 흉내(0.4초). 실패(throw)하면 양식이 열린 채 오류를 보인다
     var edit = function (row) {
       return layer.form({
         title: row ? '주문 수정' : '주문 추가', area: 'sm', okText: '저장',

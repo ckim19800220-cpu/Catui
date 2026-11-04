@@ -26,8 +26,9 @@ export const form = (() => {
     alpha: [/^[A-Za-z]+$/, "영문만 입력해 주세요."],
     alnum: [/^[A-Za-z0-9]+$/, "영문과 숫자만 입력해 주세요."],
     // 매개변수 규칙 — "이름:값"으로 쓴다. fn(value, field, arg, root)
-    min: (v, f, n) => (v !== "" && Number.isFinite(Number(v)) && Number(v) >= Number(n) ? "" : `${n} 이상의 숫자를 입력해 주세요.`),
-    max: (v, f, n) => (v !== "" && Number.isFinite(Number(v)) && Number(v) <= Number(n) ? "" : `${n} 이하의 숫자를 입력해 주세요.`),
+    // 기준값을 빠뜨리면("min") 항상 실패하며 "undefined 이상"이 나오므로, 알리고 통과시킨다
+    min: (v, f, n) => (n == null || n === "" ? (hint.errorOnce('form: "min:값"처럼 기준값이 필요합니다'), "") : v !== "" && Number.isFinite(Number(v)) && Number(v) >= Number(n) ? "" : `${n} 이상의 숫자를 입력해 주세요.`),
+    max: (v, f, n) => (n == null || n === "" ? (hint.errorOnce('form: "max:값"처럼 기준값이 필요합니다'), "") : v !== "" && Number.isFinite(Number(v)) && Number(v) <= Number(n) ? "" : `${n} 이하의 숫자를 입력해 주세요.`),
     minlen: (v, f, n) => (v.length >= Number(n) ? "" : `${n}자 이상 입력해 주세요.`),
     maxlen: (v, f, n) => (v.length <= Number(n) ? "" : `${n}자 이하로 입력해 주세요.`),
     len: (v, f, n) => (v.length === Number(n) ? "" : `${n}자로 입력해 주세요.`),
@@ -108,7 +109,9 @@ export const form = (() => {
     if (!root && typeof scope === "string") root = findRoot(scope);
     if (!root) { hint.error(`form.validate: 영역을 찾을 수 없습니다 (${scope})`); return false; }
     let first = null;
-    for (const f of root.querySelectorAll("[data-catui-verify]")) {
+    const fields = [...root.querySelectorAll("[data-catui-verify]")];
+    if (root.matches?.("[data-catui-verify]")) fields.unshift(root);   // 칸 하나를 넘겨도 검사
+    for (const f of fields) {
       if (f.disabled) continue;
       const msg = check(f);
       showError(f, msg);
@@ -180,6 +183,7 @@ export const form = (() => {
     // f.action은 name="action"인 칸이 가릴 수 있어(DOM clobbering) 속성으로 읽는다
     const url = f.getAttribute("data-catui-ajax") || f.getAttribute("action") || location.href;
     const method = (f.getAttribute("method") || "post").toUpperCase();
+    const wasDisabled = !!submitter?.disabled;   // 원래 잠겨 있던 버튼은 끝나도 잠근 채로
     if (submitter) { submitter.disabled = true; submitter.setAttribute("aria-busy", "true"); }
     f.setAttribute("aria-busy", "true");
     let data;
@@ -205,7 +209,7 @@ export const form = (() => {
       clearTimeout(timer);
       sending.delete(f);
       f.removeAttribute("aria-busy");
-      if (submitter) { submitter.disabled = false; submitter.removeAttribute("aria-busy"); }
+      if (submitter) { submitter.disabled = wasDisabled; submitter.removeAttribute("aria-busy"); }
     }
   }
 

@@ -39,14 +39,17 @@ export function bindToggleOverlays() {
     else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
   };
   // 닫기 라벨(label.Catui_close / 취소 label)도 키보드로: 포커스 가능하게 + Enter/Space
+  // 닫기 라벨 = 모달·드로어 토글 체크박스를 가리키는 label만. 패널 안 폼의 일반 label(입력 칸 이름)은 건드리지 않는다
+  const isCloser = (l) => { const t = l.htmlFor && document.getElementById(l.htmlFor); return !!t?.matches?.(TOGGLE); };
   const onKeyLabel = (e) => {
     const lab = e.target.closest?.(".Catui_modal label[for], .Catui_drawer label[for]");
-    if (!lab || imeBusy(e) || (e.key !== "Enter" && e.key !== " ")) return;
+    if (!lab || !isCloser(lab) || imeBusy(e) || (e.key !== "Enter" && e.key !== " ")) return;
     e.preventDefault();
     lab.click();
   };
   const prepare = (scope = document) => {
     scope.querySelectorAll?.(".Catui_modal label[for]:not([tabindex]), .Catui_drawer label[for]:not([tabindex])").forEach((l) => {
+      if (!isCloser(l)) return;
       l.tabIndex = 0;
       if (!l.matches(".Catui_btn")) l.setAttribute("role", "button");
     });

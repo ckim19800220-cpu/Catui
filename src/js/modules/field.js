@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
-import { mount, icon, uid, el, imeBusy } from "../core/dom.js";
+import { mount, icon, uid, el, imeBusy, within } from "../core/dom.js";
 import { hint } from "../core/base.js";
 
 // field — 입력 보강 묶음. 각각 render/reload/destroy/on을 갖는 컴포넌트다.
@@ -28,7 +28,18 @@ const catuiFieldTags = component({
     const c = inst.config;
     const input = inst.elem;
     if (!(input instanceof HTMLInputElement)) return;
-    const list = (inst.list = [...new Set([].concat(c.value || []).map((t) => String(t).trim()).filter(Boolean))]);
+    // 처음 값·setValue도 add()와 같은 규칙으로: 앞뒤 공백 제거·길이 제한·대소문자 무시 중복 제거·최대 개수
+    const norm = (v) => {
+      const out = [];
+      for (const w of [].concat(v || []).map((t) => String(t).trim().slice(0, c.maxLength)).filter(Boolean)) {
+        if (c.max && out.length >= c.max) break;
+        if (!c.duplicate && out.some((t) => t.toLowerCase() === w.toLowerCase())) continue;
+        out.push(w);
+      }
+      return out;
+    };
+    const list = (inst.list = norm(c.value));
+    const ph0 = input.placeholder;   // 처음부터 최대 개수면 draw가 바로 덮어쓰므로 먼저 기억
     // 폼 값: 원래 name은 숨은 input으로 옮기고(쉼표로 이은 값) 입력 칸은 이름 없이 둔다
     const name = c.name || input.name;
     const hidden = name ? Object.assign(document.createElement("input"), { type: "hidden", name }) : null;
@@ -44,7 +55,7 @@ const catuiFieldTags = component({
     const draw = () => {
       mount(box, html`${list.map((t, i) => html`<span class="Catui_tag" role="listitem">${t} <button type="button" data-catui-tag-del="${i}" aria-label="${t} 태그 제거">${icon("x", 12)}</button></span>`)}${c.max ? html`<span class="Catui_tag Catui_tag-limit" role="listitem">${limitText()}</span>` : ""}`);
       if (hidden) hidden.value = list.join(c.separator);
-      input.placeholder = c.max && list.length >= c.max ? `최대 ${c.max}개` : (inst.placeholder ?? (inst.placeholder = input.placeholder));
+      input.placeholder = c.max && list.length >= c.max ? `최대 ${c.max}개` : ph0;
     };
     const changed = (msg) => { draw(); live.textContent = msg; c.change?.call(inst, [...list]); inst.emit("change", { value: [...list], elem: input }); };
     const add = (raw) => {
@@ -91,16 +102,17 @@ const catuiFieldTags = component({
     box.addEventListener("click", onBox);
     draw();
     inst.add = (t) => add(t);
-    inst.remove = (t) => { const i = typeof t === "number" ? t : list.indexOf(String(t)); if (i >= 0) remove(i, false); };
+    // 추가할 때 대소문자를 무시하고 중복을 막으므로 지울 때도 같은 기준으로 찾는다
+    inst.remove = (t) => { const i = typeof t === "number" ? t : list.findIndex((x) => x.toLowerCase() === String(t).toLowerCase()); if (i >= 0) remove(i, false); };
     inst.getValue = () => [...list];
-    inst.setValue = (v) => { list.splice(0, list.length, ...new Set([].concat(v || []).map(String).filter(Boolean))); draw(); };
+    inst.setValue = (v) => { list.splice(0, list.length, ...norm(v)); draw(); };
     inst.use(() => {
       input.removeEventListener("keydown", onKey);
       input.removeEventListener("paste", onPaste);
       input.removeEventListener("blur", onBlur);
       box.remove(); live.remove(); hidden?.remove();
       if (name) input.name = name;
-      if (inst.placeholder != null) input.placeholder = inst.placeholder;
+      input.placeholder = ph0;
     });
   },
   destroy(inst) { if (inst.config.auto) inst.elem?.removeAttribute("data-catui-ready"); },
@@ -114,6 +126,8 @@ const catuiFieldStepper = component({
     const c = inst.config;
     const host = inst.elem;
     if (!host) return;
+    // 해제할 때 되돌릴 원래 상태(클래스·role·aria-label)
+    const hadCls = host.classList.contains("Catui_stepper"), role0 = host.getAttribute("role"), label0 = host.getAttribute("aria-label");
     host.classList.add("Catui_stepper");
     host.setAttribute("role", "group");
     if (c.label && !host.hasAttribute("aria-labelledby")) host.setAttribute("aria-label", c.label);
@@ -169,6 +183,7 @@ const catuiFieldStepper = component({
     host.addEventListener("pointerdown", onDown);
     host.addEventListener("pointerup", stop);
     host.addEventListener("pointerleave", stop);
+    host.addEventListener("pointercancel", stop);   // 터치 중 스크롤 등으로 취소돼도 반복 증감이 멈추게
     host.addEventListener("click", onClick);
     host.addEventListener("keydown", onKey);
     draw();
@@ -179,9 +194,14 @@ const catuiFieldStepper = component({
       host.removeEventListener("pointerdown", onDown);
       host.removeEventListener("pointerup", stop);
       host.removeEventListener("pointerleave", stop);
+      host.removeEventListener("pointercancel", stop);
       host.removeEventListener("click", onClick);
       host.removeEventListener("keydown", onKey);
       hidden?.remove();
+      if (made) host.textContent = "";   // 직접 만든 버튼·출력은 걷어 낸다(마크업에 있던 것은 그대로)
+      if (!hadCls) host.classList.remove("Catui_stepper");
+      if (role0 == null) host.removeAttribute("role"); else host.setAttribute("role", role0);
+      if (label0 == null) host.removeAttribute("aria-label"); else host.setAttribute("aria-label", label0);
     });
   },
   destroy(inst) { if (inst.config.auto) inst.elem?.removeAttribute("data-catui-ready"); },
@@ -238,17 +258,25 @@ const catuiFieldOtp = component({
     const cells = [...box.querySelectorAll("input")];
     if (!cells.length) return;
     const ok = new RegExp(`^${c.pattern}$`);
+    const hidden = c.name ? Object.assign(document.createElement("input"), { type: "hidden", name: c.name }) : null;
+    // 바꾸기 전 칸 속성을 기억 — 해제 때 되돌린다. 숨은 값으로 보낼 때는 칸의 name을 떼어 같은 값이 두 번 제출되지 않게
+    const ATTRS = ["maxlength", "autocomplete", "aria-label", "inputmode", "name"];
+    const saved = cells.map((x) => ATTRS.map((a) => [a, x.getAttribute(a)]));
     cells.forEach((x, i) => {
       x.maxLength = 1;
       x.autocomplete = i === 0 ? "one-time-code" : "off";
       if (!x.getAttribute("aria-label")) x.setAttribute("aria-label", `${i + 1}번째 글자`);
+      if (c.pattern === "\\d" && !x.hasAttribute("inputmode")) x.setAttribute("inputmode", "numeric");   // 휴대폰에서 숫자 자판
+      if (hidden) x.removeAttribute("name");
     });
-    const hidden = c.name ? Object.assign(document.createElement("input"), { type: "hidden", name: c.name }) : null;
     if (hidden) box.appendChild(hidden);
     const code = () => cells.map((x) => x.value).join("");
+    let sent = "";   // 완성된 같은 코드로 complete가 거듭 나가지 않게(서버 검증 중복 방지)
     const sync = () => {
       if (hidden) hidden.value = code();
-      if (code().length === cells.length) { c.complete?.call(inst, code()); inst.emit("complete", { value: code(), elem: box }); }
+      const v = code();
+      if (v.length === cells.length) { if (v !== sent) { sent = v; c.complete?.call(inst, v); inst.emit("complete", { value: v, elem: box }); } }
+      else sent = "";
     };
     // 여러 글자(붙여넣기·휴대폰 코드 자동 채움)를 지금 칸부터 나눠 담는다
     const spread = (from, text) => {
@@ -265,12 +293,12 @@ const catuiFieldOtp = component({
       if (x.value.length > 1) { const v = x.value; x.value = ""; spread(i, v); return; }
       if (x.value && !ok.test(x.value)) { x.value = ""; return; }
       if (x.value) { cells[i + 1]?.focus(); cells[i + 1]?.select?.(); sync(); }
-      else if (hidden) hidden.value = code();
+      else sync();
     };
     const onKey = (e) => {
       const i = cells.indexOf(e.target);
       if (i < 0) return;
-      if (e.key === "Backspace" && !e.target.value && i > 0) { e.preventDefault(); cells[i - 1].value = ""; cells[i - 1].focus(); if (hidden) hidden.value = code(); }
+      if (e.key === "Backspace" && !e.target.value && i > 0) { e.preventDefault(); cells[i - 1].value = ""; cells[i - 1].focus(); sync(); }
       else if (e.key === "ArrowLeft" && i > 0) { e.preventDefault(); cells[i - 1].focus(); }
       else if (e.key === "ArrowRight" && i < cells.length - 1) { e.preventDefault(); cells[i + 1].focus(); }
     };
@@ -281,7 +309,7 @@ const catuiFieldOtp = component({
     box.addEventListener("paste", onPaste);
     box.addEventListener("focusin", onFocus);
     inst.getValue = code;
-    inst.clear = () => { cells.forEach((x) => { x.value = ""; x.removeAttribute("aria-invalid"); }); cells[0].focus(); if (hidden) hidden.value = ""; };
+    inst.clear = () => { cells.forEach((x) => { x.value = ""; x.removeAttribute("aria-invalid"); }); cells[0].focus(); sent = ""; if (hidden) hidden.value = ""; };
     // 서버에서 틀렸다고 하면: 칸을 오류로 표시하고 첫 칸부터 다시
     inst.setError = (on = true) => { cells.forEach((x) => (on ? x.setAttribute("aria-invalid", "true") : x.removeAttribute("aria-invalid"))); if (on) cells[0].focus(); };
     inst.use(() => {
@@ -290,6 +318,7 @@ const catuiFieldOtp = component({
       box.removeEventListener("paste", onPaste);
       box.removeEventListener("focusin", onFocus);
       hidden?.remove();
+      cells.forEach((x, i) => saved[i].forEach(([a, v]) => (v == null ? x.removeAttribute(a) : x.setAttribute(a, v))));
     });
   },
   destroy(inst) { if (inst.config.auto) inst.elem?.removeAttribute("data-catui-ready"); },
@@ -304,7 +333,7 @@ export const field = {
   // 선언형 마크업 준비 (catui.init에서 호출)
   enhance(scope = document) {
     // 한 요소가 실패해도 나머지(다른 칸·다른 종류)는 계속 연결한다
-    const each = (sel, fn) => scope.querySelectorAll(`${sel}:not([data-catui-ready])`).forEach((n) => {
+    const each = (sel, fn) => within(scope, `${sel}:not([data-catui-ready])`).forEach((n) => {
       n.setAttribute("data-catui-ready", "");
       try { fn(n); } catch (err) { n.removeAttribute("data-catui-ready"); hint.error(`field: ${sel} 연결 실패`, "error", err, n); }
     });

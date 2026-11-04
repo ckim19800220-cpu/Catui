@@ -34,6 +34,13 @@ const catuiModules = { layer, form, laypage, table, tabs, dropdown, util, datePi
 let catuiReady = false;
 let catuiOffs = [];
 let catuiPrepareOverlays = null;
+let catuiWatchOff = null;
+// autoDestroy 설정과 감시 상태를 맞춘다 — init 뒤에 catui.config({ autoDestroy })로 바꿔도 켜고 끌 수 있게
+function catuiSyncWatch() {
+  const want = !!getConfig().autoDestroy && catuiReady;
+  if (want && !catuiWatchOff) catuiWatchOff = catuiWatchDetached();
+  else if (!want && catuiWatchOff) { catuiWatchOff(); catuiWatchOff = null; }
+}
 
 // 자동 정리: DOM에서 노드가 빠지면 다음 틱에 모든 모듈의 destroyDetached() 실행.
 // 다음 틱까지 미루므로 같은 작업 안에서 떼었다 다시 붙인(이동한) 요소는 정리되지 않는다.
@@ -54,7 +61,7 @@ function catuiWatchDetached() {
 
 export const catui = {
   version: VERSION,
-  config,
+  config(options) { const r = config(options); if (options && "autoDestroy" in options) catuiSyncWatch(); return r; },
   get cache() { return { config: getConfig(), modules: Object.keys(catuiModules) }; },
   $, el, html, raw, escape, mount, icon, hint, data, sessionData, url, device, component, csrfHeaders,
   ...catuiModules,
@@ -102,14 +109,14 @@ export const catui = {
     if (!root) { hint.error(`catui.init: 영역을 찾을 수 없습니다 (${scope})`); return catui; }
     if (!catuiReady) {
       catuiReady = true;
-      catuiOffs = [form.bind(), tabs.bind(), table.bindStatic(), dropdown.bindDetails(), slider.bind(), rate.bind(), collapse.bind(), fx.bind(), page.bind(), site.bind()].filter((f) => typeof f === "function");
+      catuiOffs = [form.bind(), tabs.bind(), table.bind(), dropdown.bind(), slider.bind(), rate.bind(), collapse.bind(), page.bind(), site.bind()].filter((f) => typeof f === "function");
       const overlays = bindToggleOverlays();
       catuiOffs.push(overlays.off);
       catuiPrepareOverlays = overlays.prepare;
-      if (getConfig().autoDestroy) { const off = catuiWatchDetached(); if (off) catuiOffs.push(off); }
+      catuiSyncWatch();
     }
     // 한 모듈의 준비가 실패해도 나머지 모듈은 계속 준비한다 (오류는 콘솔에)
-    const steps = [["overlays", () => catuiPrepareOverlays?.(root)], ["form", () => form.render(root)], ["table", () => table.enhance(root)], ["datePicker", () => datePicker.enhance(root)],
+    const steps = [["overlays", () => catuiPrepareOverlays?.(root)], ["fx", () => fx.enhance(root)], ["form", () => form.render(root)], ["table", () => table.enhance(root)], ["datePicker", () => datePicker.enhance(root)],
       ["carousel", () => carousel.enhance(root)], ["field", () => field.enhance(root)], ["page", () => page.enhance(root)], ["site", () => site.enhance(root)]];
     for (const [name, run] of steps) { try { run(); } catch (err) { hint.error(`catui.init: ${name} 준비 중 오류`, "error", err); } }
     return catui;
@@ -120,6 +127,7 @@ export const catui = {
     catuiOffs = [];
     catuiPrepareOverlays = null;
     catuiReady = false;
+    catuiSyncWatch();   // 감시도 끈다
     Object.values(catuiModules).forEach((m) => { try { m?.destroyAll?.(); } catch { /* 사용자 모듈 오류 무시 */ } });
     layer.closeAll();
   },

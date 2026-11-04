@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>catcommunity.js API · CatuiCommunity · Catui</title>
 <script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
-<meta name="description" content="load · row · list · vote · comments · editor · widgets · data/bind.">
+<meta name="description" content="load · data/bind · vote · comments · draft · fav · poll.">
 <link rel="icon" href="../assets/brand/favicon.ico" sizes="any">
 <link rel="icon" href="../assets/brand/favo.svg" type="image/svg+xml">
 <link rel="icon" href="../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -31,7 +31,7 @@
 <main class="doc-main" id="doc-main" tabindex="-1">
 <p class="doc-eyebrow">CatuiCommunity · 확장</p>
 <h1 class="Catui_h1">catcommunity.js API</h1>
-<p class="Catui_lead">load · row · list · vote · comments · editor · widgets · data/bind.</p>
+<p class="Catui_lead">load · data/bind · vote · comments · draft · fav · poll.</p>
 
 <section aria-labelledby="api">
 <h2 id="api">catui.community</h2>
@@ -40,7 +40,7 @@
 <thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead><tbody>
 <tr><td><code>init(scope?)</code> · <code>destroy()</code> · <code>ready</code></td><td>연결 · 정리 · 바인딩이 끝나면 풀리는 Promise</td></tr>
 <tr><td><code>on(이벤트, fn)</code></td><td><code>theme</code> · <code>vote</code> { key, dir } · <code>comment</code> { item, parent } · <code>draft</code> · <code>poll</code> { name, choice } · <code>data</code></td></tr>
-<tr><td><code>load()</code></td><td>boards·posts·users를 합쳐 { boards, B, posts, users, U, byId } — 인기글·레벨 계산 포함, 한 번만</td></tr>
+<tr><td><code>load()</code></td><td>boards·posts·users를 합쳐 { boards, B, posts, users, U, byId } — 인기 글·레벨 계산 포함, 한 번만</td></tr>
 <tr><td><code>row(post, { board, rank })</code> · <code>empty(text)</code> · <code>badge(user)</code></td><td>목록 한 줄 · 빈 목록 · 레벨 배지 마크업 (글자는 모두 이스케이프)</td></tr>
 <tr><td><code>[data-catui-cm-list="list|card|gallery|deal|qna|hot"]</code></td><td>게시판 목록: 주소 ?b=&amp;cat=&amp;sort=&amp;page= ↔ 화면, 뒤로 가기 지원</td></tr>
 <tr><td><code>[data-catui-cm-vote="post:id"]</code> · <code>voteRequest</code></td><td>추천/비추천 한 번(기억)·취소·바꾸기, 낙관적 갱신 후 실패 시 되돌림. 실서비스는 <code>voteRequest = (key, dir) =&gt; fetch(…)</code></td></tr>

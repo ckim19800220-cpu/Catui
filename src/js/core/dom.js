@@ -49,6 +49,13 @@ export function scopeOf(scope) {
   return el(scope);
 }
 
+// 영역 안에서 선택자에 맞는 요소들 — 영역 요소 자신이 맞아도 포함한다(catui.init(요소)·모듈.enhance(요소) 공통)
+export function within(scope, sel) {
+  const list = [...(scope?.querySelectorAll?.(sel) || [])];
+  if (scope instanceof Element && scope.matches(sel)) list.unshift(scope);
+  return list;
+}
+
 export function mount(node, markup) {
   if (isRaw(markup)) node.innerHTML = markup.__raw;
   else node.textContent = String(markup ?? "");
@@ -79,6 +86,21 @@ export function layerRoot() {
     document.body.appendChild(root);
   }
   return root;
+}
+
+// 띄우는 패널(달력·자동완성·메뉴·툴팁)의 부모. 열린 모달 <dialog> 안에서 띄우면 그 dialog 안에 붙인다 —
+// showModal()은 dialog 밖을 모두 inert로 만들어 body > .Catui_layer에 붙이면 보여도 클릭·포커스가 안 된다
+export function floatRoot(anchor) {
+  return anchor?.closest?.("dialog[open]") || layerRoot();
+}
+
+// position:fixed 요소를 화면 좌표 (x, y)에 둔다. transform이 있는 조상(가운데 정렬한 dialog 등) 안에서는
+// fixed의 기준이 화면이 아니라 그 조상이 되므로, 실제로 놓인 위치와의 차이만큼 되돌려 맞춘다
+export function placeFixed(node, x, y) {
+  const L = Math.round(x), T = Math.round(y);
+  node.style.left = `${L}px`; node.style.top = `${T}px`;
+  const r = node.getBoundingClientRect(), dx = Math.round(r.left - L), dy = Math.round(r.top - T);
+  if (dx || dy) { node.style.left = `${L - dx}px`; node.style.top = `${T - dy}px`; }
 }
 
 export function icon(name, size = 16, cls = "") {

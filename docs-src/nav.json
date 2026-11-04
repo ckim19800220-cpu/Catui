@@ -29,7 +29,7 @@
             {
               "path": "css/start/accessibility",
               "title": "접근성 기준",
-              "desc": "대비·포커스·목표 크기·모션 기준과 실측값.",
+              "desc": "대비·포커스·대상 크기·모션 기준과 실측값.",
               "css": [
                 "foundation/interaction.css"
               ]
@@ -634,7 +634,7 @@
             {
               "path": "css/components/code",
               "title": "코드",
-              "desc": "인라인 코드, 코드 블록(제목줄·줄 번호·구문 색), 키 표시.",
+              "desc": "인라인 코드, 코드 블록(제목 줄·줄 번호·구문 색), 키 표시.",
               "css": [
                 "components/code.css"
               ]
@@ -732,14 +732,14 @@
             {
               "path": "css/components/toast",
               "title": "토스트",
-              "desc": "왼쪽 3px 액센트와 상태 아이콘이 짝인 알림.",
+              "desc": "왼쪽 3px 악센트와 상태 아이콘이 짝인 알림.",
               "css": [
                 "components/toast.css"
               ],
               "rules": [
                 [
                   "MUST",
-                  "좌측 3px 액센트 + 상태색 아이콘"
+                  "좌측 3px 악센트 + 상태색 아이콘"
                 ],
                 [
                   "SHOULD",
@@ -1461,7 +1461,7 @@
           "title": "시작",
           "pages": [
             { "path": "admin/start/introduction", "title": "소개 · 화면 지도", "desc": "catui 위에 얹는 관리자 확장과 템플릿 52종." },
-            { "path": "admin/start/install", "title": "설치", "desc": "admin.css · catadmin.js 로드 순서, npm · CDN." },
+            { "path": "admin/start/install", "title": "설치", "desc": "admin.css · catadmin.js 로드 순서, npm · ES 모듈, 템플릿으로 시작하기." },
             { "path": "admin/start/structure", "title": "구조 · 새 화면 만들기", "desc": "셸 마크업, 메뉴(menu.json), 템플릿 머리 주석, 빌드 검사." }
           ]
         },
@@ -1489,7 +1489,7 @@
         {
           "title": "확장",
           "pages": [
-            { "path": "community/modules", "title": "catcommunity.js API", "desc": "load · row · list · vote · comments · editor · widgets · data/bind." },
+            { "path": "community/modules", "title": "catcommunity.js API", "desc": "load · data/bind · vote · comments · draft · fav · poll." },
             { "path": "community/css", "title": "community.css 클래스", "desc": "Catui_cm-* 클래스와 토큰.", "css": ["community/css/tokens.css", "community/css/shell.css", "community/css/list.css", "community/css/post.css", "community/css/pages.css", "community/css/motion.css"] }
           ]
         }

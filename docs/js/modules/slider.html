@@ -64,7 +64,7 @@ catui.use([&#39;slider&#39;], function (slider) {
 });
 &lt;/script&gt;</code></pre></details>
 </figure>
-<p>네이티브 range를 만들어 키보드·스크린리더 지원을 그대로 씁니다. <code>setTips</code>는 표시와 <code>aria-valuetext</code>에 함께 쓰입니다.</p>
+<p>네이티브 range를 만들어 키보드·화면 낭독기 지원을 그대로 씁니다. <code>setTips</code>는 표시와 <code>aria-valuetext</code>에 함께 쓰입니다.</p>
 </section>
 
 <section aria-labelledby="options">
@@ -72,7 +72,7 @@ catui.use([&#39;slider&#39;], function (slider) {
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">slider 옵션</caption>
 <thead><tr><th scope="col">옵션</th><th scope="col">설명</th></tr></thead>
 <tbody>
-<tr><td><code>label · min · max · step · value · disabled</code></td><td>기본 값</td></tr>
+<tr><td><code>label · min · max · step · value · disabled</code></td><td>이름 · 범위 · 단계 · 초깃값 · 비활성</td></tr>
 <tr><td><code>ticks · scale · tips · setTips(v)</code></td><td>눈금 · 양 끝 표시 · 현재값 · 표시 글자</td></tr>
 <tr><td><code>input(v)</code> · <code>change(v)</code></td><td>콜백 · 이벤트 <code>input(f)</code>·<code>change(f)</code></td></tr>
 <tr><td><code>slider.setValue(id, v)</code> · <code>slider.getValue(id)</code> · <code>inst.getValue()</code></td><td>값 바꾸기·읽기 (min~max 범위로 맞춤)</td></tr>

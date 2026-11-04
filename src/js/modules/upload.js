@@ -53,7 +53,7 @@ export const upload = component({
       if (!listEl) return;
       // 다시 그려도 목록 안 포커스(빼기·다시 버튼)를 같은 파일의 같은 버튼으로 되돌린다
       const act = listEl.contains(document.activeElement) ? document.activeElement : null;
-      const keep = act && (act.hasAttribute("data-catui-remove") ? `[data-catui-remove="${act.getAttribute("data-catui-remove")}"]` : act.hasAttribute("data-catui-retry") ? `[data-catui-remove="${act.getAttribute("data-catui-retry")}"]` : null);
+      const keep = act && (act.hasAttribute("data-catui-remove") ? `[data-catui-remove="${act.getAttribute("data-catui-remove")}"]` : act.hasAttribute("data-catui-retry") ? `[data-catui-retry="${act.getAttribute("data-catui-retry")}"]` : null);
       listEl.classList.add("Catui_files");
       mount(listEl, html`${items.map((it) => html`
 <div class="Catui_file" data-catui-file="${it.id}">
@@ -121,14 +121,15 @@ export const upload = component({
       // 한 파일만 받는 영역에 여러 개를 끌어 놓으면 첫 파일만
       const list = c.multiple ? [...fileList] : [...fileList].slice(0, 1);
       for (const f of list) {
-        if (!acceptOk(f)) bad.push(`${f.name}: 허용하지 않는 형식입니다`);
-        else if (c.size && f.size > c.size * 1024) bad.push(`${f.name}: ${size(f.size)} — ${size(c.size * 1024)}를 넘습니다`);
-        else if (c.number && items.length + ok.length >= c.number) bad.push(`${f.name}: 최대 ${c.number}개까지 올릴 수 있습니다`);
+        if (!acceptOk(f)) bad.push({ file: f, msg: `${f.name}: 허용하지 않는 형식입니다` });
+        else if (c.size && f.size > c.size * 1024) bad.push({ file: f, msg: `${f.name}: ${size(f.size)} — ${size(c.size * 1024)}를 넘습니다` });
+        else if (c.number && items.length + ok.length >= c.number) bad.push({ file: f, msg: `${f.name}: 최대 ${c.number}개까지 올릴 수 있습니다` });
         else if (c.before?.call(inst, f) === false) continue;
         else ok.push(f);
       }
-      showErr(bad);
-      if (bad.length) bad.forEach((m) => inst.emit("error", { msg: m }));
+      showErr(bad.map((b) => b.msg));
+      // 전송 실패와 같은 계약: error(msg, file) 콜백 + error 이벤트 { msg, file }
+      bad.forEach(({ file, msg }) => { c.error?.call(inst, msg, file); inst.emit("error", { msg, file }); });
       if (!ok.length) return;
       if (!c.multiple) items.splice(0).forEach((it) => it.xhr?.abort());
       const added = ok.map((file) => ({ id: uid("f"), file, status: "ready", percent: 0, xhr: null }));
@@ -199,7 +200,7 @@ export const upload = component({
       removeEventListener("drop", onWinDrag);
       hi(false);
       ["aria-disabled"].forEach((a) => zone.removeAttribute(a));
-      zone.style.color = zone.style.cursor = "";
+      zone.style.color = zone.style.cursor = zone.style.background = zone.style.borderColor = "";   // setDisabled가 바꾼 배경까지
     });
   },
 });

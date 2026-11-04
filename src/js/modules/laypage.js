@@ -56,8 +56,9 @@ export const laypage = component({
       c.curr = next;
       draw();
       box.querySelector(focusSel || `[data-catui-page="${c.curr}"][aria-current]`)?.focus();
-      c.jump?.call(inst, info(), false);
-      inst.emit("jump", { curr: c.curr, limit: lim() });
+      const data = info();   // 콜백과 이벤트가 같은 { curr, limit, count, pages }를 받는다(문서 계약)
+      c.jump?.call(inst, data, false);
+      inst.emit("jump", data);
     };
     const onClick = (e) => {
       const b = e.target.closest("[data-catui-page]");

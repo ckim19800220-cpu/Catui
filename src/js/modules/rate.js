@@ -22,6 +22,7 @@ export const rate = component({
       mount(inst.elem, html`<span class="Catui_rating" role="img" aria-label="${c.label ? `${c.label} ` : ""}${c.length}점 중 ${Math.round(v * 10) / 10}점">${Array.from({ length: c.length }, (_, i) => html`<span style="color:var(${i < shown ? "--Catui_rating-on" : "--Catui_rating-off"})">${icon("star", 16)}</span>`)}</span>`);
       return;
     }
+    c.value = Math.max(0, Math.min(c.length, Math.round(Number(c.value) || 0)));   // setValue와 같은 범위(0~length)로
     mount(inst.elem, html`
 <fieldset style="border:0;padding:0;margin:0">${c.label ? html`<legend class="Catui_label">${c.label}</legend>` : ""}
 <div class="Catui_rating">${Array.from({ length: c.length }, (_, i) => html`<input class="Catui_clip" type="radio" name="${name}" id="${name}-${i + 1}" value="${i + 1}" ${i + 1 === c.value ? "checked" : ""}><label for="${name}-${i + 1}" aria-label="${word(i + 1)}">${icon("star", 16)}</label>`)}</div>

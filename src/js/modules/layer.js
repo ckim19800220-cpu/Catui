@@ -1,5 +1,5 @@
 import { html, raw, isRaw } from "../core/html.js";
-import { layerRoot, icon, mount, FOCUSABLE, imeBusy } from "../core/dom.js";
+import { layerRoot, floatRoot, placeFixed, icon, mount, FOCUSABLE, imeBusy } from "../core/dom.js";
 
 // layer — 팝업 레이어. 모든 함수는 레이어 index(숫자)를 돌려주고 layer.close(index)로 닫는다.
 //   layer.msg('저장했습니다', { icon: 'success', position: 'tr', action: { text: '되돌리기', onClick } })
@@ -255,7 +255,8 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
     if (!p) return;
     const v = Math.max(0, Math.min(100, Math.round(pct)));
     p.setAttribute("aria-valuenow", String(v));
-    p.querySelector("i").style.width = `${v}%`;
+    const bar = p.querySelector("i");
+    if (bar) bar.style.width = `${v}%`;
     const label = n.querySelector(".Catui_layer-load span:last-child");
     if (label) label.textContent = `${n.getAttribute("aria-label")} ${v}%`;
   }
@@ -270,7 +271,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
     tip.id = `catui-tip-${index}`;
     tip.setAttribute("role", "tooltip");
     fill(tip, content);
-    layerRoot().appendChild(tip);
+    floatRoot(el).appendChild(tip);
     const place = () => {
       const r = el.getBoundingClientRect(), t = tip.getBoundingClientRect(), g = 8;
       let side = options.side || "top";
@@ -281,8 +282,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
         left: [r.left - t.width - g, r.top + r.height / 2 - t.height / 2], right: [r.right + g, r.top + r.height / 2 - t.height / 2],
       }[side];
       tip.dataset.side = side;
-      tip.style.left = `${Math.round(Math.min(innerWidth - t.width - 8, Math.max(8, pos[0])))}px`;
-      tip.style.top = `${Math.round(Math.max(8, pos[1]))}px`;
+      placeFixed(tip, Math.min(innerWidth - t.width - 8, Math.max(8, pos[0])), Math.max(8, pos[1]));
     };
     place();
     const prev = el.getAttribute("aria-describedby");
@@ -290,9 +290,14 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
     let timer = 0;
     const key = (e) => { if (e.key === "Escape" && !imeBusy(e) && !e.defaultPrevented) { e.preventDefault(); done(); } };   // 캡처 단계: 팁만 닫고 아래 모달은 유지
     const outside = (e) => { if (!tip.contains(e.target) && !el.contains(e.target)) done(); };
+    let gone = false;
     const done = () => {
+      if (gone) return;   // 시간 만료와 바깥 클릭·Esc가 겹쳐도 end는 한 번만
+      gone = true;
       clearTimeout(timer); tip.remove(); opened.delete(index);
-      if (prev) el.setAttribute("aria-describedby", prev); else el.removeAttribute("aria-describedby");
+      // 자기 id만 뺀다 — 그 사이 다른 팁이 붙인 id를 되살리거나 지우지 않게
+      const ids = (el.getAttribute("aria-describedby") || "").split(/\s+/).filter((x) => x && x !== tip.id);
+      if (ids.length) el.setAttribute("aria-describedby", ids.join(" ")); else el.removeAttribute("aria-describedby");
       document.removeEventListener("keydown", key, true); document.removeEventListener("pointerdown", outside, true);
       removeEventListener("resize", place); removeEventListener("scroll", place, true);
       options.end?.(index);
@@ -372,9 +377,9 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
       const n = list.children.length, i = [...list.children].indexOf(document.activeElement);
       const next = vertical ? "ArrowDown" : "ArrowRight", prev = vertical ? "ArrowUp" : "ArrowLeft";
       const to = { [next]: (i + 1) % n, [prev]: (i - 1 + n) % n, Home: 0, End: n - 1 }[e.key];
-      if (to != null) { e.preventDefault(); sel(to, true); }
+      if (to != null && n) { e.preventDefault(); sel(to, true); }
     });
-    sel(options.start || 0);
+    sel(Math.min(Math.max(0, Math.floor(Number(options.start)) || 0), Math.max(0, tabs.length - 1)));   // 범위 밖 start면 모든 패널이 숨은 채 열리지 않게
     return open({ area: "lg", ...options, content: wrap, kind: "tab" });
   }
 
@@ -422,7 +427,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
           opts(fl).forEach((o, n) => {
             const iid = `${id}-${n}`;
             append(fs, html`<span class="Catui_choice"><input class="Catui_clip" type="${t}" id="${iid}" name="${fl.name}" value="${o.value}"><label class="${t === "radio" ? "Catui_radio" : "Catui_cbx"}" for="${iid}">${t === "radio" ? "" : icon("check", 12)}</label><label for="${iid}">${o.label}</label></span>`);
-            fs.querySelector(`#${iid}`).checked = val.includes(String(o.value));
+            fs.querySelector(`#${CSS.escape(iid)}`).checked = val.includes(String(o.value));   // name에 '.'·':'가 있어도 선택자가 깨지지 않게
           });
           return fs;
         }
@@ -521,7 +526,8 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
         end(i, reason) { finish(null); options.end?.(i, reason); },
         yes() { el.requestSubmit(); return false; },
       });
-      const ok = getNode(index).querySelector('[data-catui-btn="0"]');
+      const ok = getNode(index)?.querySelector('[data-catui-btn="0"]');
+      if (!ok) return;   // success 콜백 안에서 바로 닫은 경우 — end가 이미 null로 끝냈다
       // 제출 버튼이 폼 밖(꼬리)에 있으므로 한 줄 입력 칸의 Enter는 직접 제출
       el.addEventListener("keydown", (e) => {
         if (e.key === "Enter" && !imeBusy(e) && e.target.matches("input:not([type=checkbox]):not([type=radio])")) { e.preventDefault(); el.requestSubmit(); }

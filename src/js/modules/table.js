@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html, raw, isRaw, escape } from "../core/html.js";
-import { mount, icon, uid } from "../core/dom.js";
+import { mount, icon, uid, within } from "../core/dom.js";
 import { emit } from "../core/events.js";
 import { csrfHeaders } from "../core/base.js";
 import { laypage } from "./laypage.js";
@@ -61,8 +61,10 @@ export const table = component({
         const f = s.sort.field, dir = s.sort.type === "asc" ? 1 : -1;
         rows.sort((a, b) => {
           const x = a[f], y = b[f];
+          // Number(null)·Number(" ")는 0이라 빈 값이 숫자 0과 섞인다 — 비어 있으면 숫자로 보지 않는다
+          const blank = (v) => v == null || String(v).trim() === "";
           const nx = Number(x), ny = Number(y);
-          const cmp = Number.isFinite(nx) && Number.isFinite(ny) && x !== "" && y !== "" ? nx - ny : String(x ?? "").localeCompare(String(y ?? ""), "ko");
+          const cmp = Number.isFinite(nx) && Number.isFinite(ny) && !blank(x) && !blank(y) ? nx - ny : String(x ?? "").localeCompare(String(y ?? ""), "ko");
           return cmp * dir;
         });
       }
@@ -123,6 +125,7 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
       if (!c.url) { draw(); return; }
       s.req?.abort();
       const ac = (s.req = new AbortController());
+      let retry = false;
       s.loading = c.loading; s.error = ""; draw();
       try {
         const q = new URLSearchParams({ ...c.where, ...(c.page ? { page: s.curr, limit: s.limit } : {}), ...(s.sort?.type ? { field: s.sort.field, order: s.sort.type } : {}) });
@@ -140,12 +143,13 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
         s.checked.clear();
         // 지우기 등으로 전체 건수가 줄어 현재 쪽이 사라졌으면 마지막 쪽을 다시 요청
         const last = Math.max(1, Math.ceil(s.count / s.limit));
-        if (c.page && !s.rows.length && s.count > 0 && s.curr > last) { s.curr = last; queueMicrotask(load); }
+        if (c.page && !s.rows.length && s.count > 0 && s.curr > last) { s.curr = last; retry = true; queueMicrotask(load); }
       } catch (err) {
         if (err.name === "AbortError") return;
         s.error = `데이터를 불러오지 못했습니다. ${err.message}`;
       } finally {
-        if (s.req === ac) { s.req = null; s.loading = false; draw(); inst.emit("done", { data: s.rows, count: s.count }); }
+        // 마지막 쪽을 다시 요청하는 중이면 빈 결과로 done을 먼저 내지 않는다
+        if (s.req === ac && !retry) { s.req = null; s.loading = false; draw(); inst.emit("done", { data: s.rows, count: s.count }); }
       }
     };
 
@@ -248,7 +252,7 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
 
   // 정적 표 향상: <table data-catui-table data-catui-filter="x"> 안의 <th data-catui-sort="number|text">
   enhance(scope = document) {
-    scope.querySelectorAll("table[data-catui-table]:not([data-catui-ready])").forEach((t) => {
+    within(scope, "table[data-catui-table]:not([data-catui-ready])").forEach((t) => {
       t.setAttribute("data-catui-ready", "");
       t.querySelectorAll("th[data-catui-sort]").forEach((th) => {
         if (th.querySelector("button")) return;
@@ -275,12 +279,15 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
       th.classList.add("Catui_sort");
       b.insertAdjacentHTML("beforeend", icon(type === "ascending" ? "chevron-up" : "chevron-down", 12).__raw);
       const num = th.getAttribute("data-catui-sort") === "number";
-      const key = (tr) => { const v = tr.children[col]?.textContent.trim() ?? ""; return num ? Number(v.replace(/[^\d.-]/g, "")) : v; };
-      const rows = [...tbody.rows].sort((a, b2) => { const x = key(a), y = key(b2); return (num ? x - y : String(x).localeCompare(String(y), "ko")) * (type === "ascending" ? 1 : -1); });
+      // 빈 칸·'—' 같은 숫자 아닌 값은 NaN이 되어 x - y가 정렬을 깨뜨리므로 맨 앞(-∞)으로 모은다
+      const key = (tr) => { const v = tr.children[col]?.textContent.trim() ?? ""; if (!num) return v; const n = parseFloat(v.replace(/[^\d.-]/g, "")); return Number.isNaN(n) ? -Infinity : n; };
+      const rows = [...tbody.rows].sort((a, b2) => { const x = key(a), y = key(b2); return (num ? (x > y) - (x < y) : String(x).localeCompare(String(y), "ko")) * (type === "ascending" ? 1 : -1); });
       rows.forEach((r) => tbody.appendChild(r));
       emit("table", "sort", t.getAttribute("data-catui-filter"), { field: th.textContent.trim(), type: type === "ascending" ? "asc" : "desc", elem: t });
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
   },
+  // 다른 모듈과 같은 이름의 전역 위임 진입점 (bindStatic은 호환용으로 유지)
+  bind() { return table.bindStatic(); },
 });

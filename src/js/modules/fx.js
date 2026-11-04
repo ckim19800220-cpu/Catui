@@ -1,4 +1,4 @@
-import { reducedMotion, imeBusy } from "../core/dom.js";
+import { reducedMotion, imeBusy, within } from "../core/dom.js";
 import { hint } from "../core/base.js";
 import { canvas } from "./canvas.js";
 
@@ -15,7 +15,8 @@ export const fx = (() => {
   const list = (target) => (typeof target === "string" ? [...document.querySelectorAll(target)] : target instanceof Element ? [target] : [...(target || [])]);
   const many = (target, one) => {
     const hs = list(target).map(one).filter(Boolean);
-    return hs.length === 1 ? hs[0] : { destroy() { hs.forEach((h) => h.destroy()); } };
+    // 건너뛴 효과(빈 요소·마우스 아님·마크업 부족)는 null — guard가 자리를 차지하지 않아 나중에 다시 적용할 수 있다
+    return hs.length === 1 ? hs[0] : hs.length ? { destroy() { hs.forEach((h) => h.destroy()); } } : null;
   };
   // 화면에 들어올 때 한 번(또는 매번) fn 실행
   const onView = (el, fn, once = true) => {
@@ -38,8 +39,7 @@ export const fx = (() => {
       el.classList.add("Catui_fx-reveal");
       if (o.y != null) el.style.setProperty("--Catui_fx-y", `${o.y}px`);
       if (o.delay) el.style.setProperty("--Catui_fx-delay", `${o.delay}ms`);
-      if (reducedMotion()) { el.classList.add("Catui_fx-in"); return { destroy() { el.classList.remove("Catui_fx-reveal", "Catui_fx-in"); } }; }
-      const off = onView(el, (v) => el.classList.toggle("Catui_fx-in", v), o.once !== false);
+      const off = reducedMotion() ? (el.classList.add("Catui_fx-in"), () => {}) : onView(el, (v) => el.classList.toggle("Catui_fx-in", v), o.once !== false);
       return { destroy() { off(); el.classList.remove("Catui_fx-reveal", "Catui_fx-in"); el.style.removeProperty("--Catui_fx-y"); el.style.removeProperty("--Catui_fx-delay"); } };
     });
   }
@@ -71,8 +71,9 @@ export const fx = (() => {
   function count(target, o = {}) {
     return many(target, (el) => {
       const orig = el.textContent;
-      const to = Number(o.to ?? el.dataset.catuiTo ?? (orig.replace(/[^\d.-]/g, "") || 0));
-      const from = Number(o.from ?? 0), dur = o.duration ?? 1200, dec = o.decimals ?? (String(to).split(".")[1]?.length || 0);
+      const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);   // 숫자가 아닌 값이 NaN으로 화면·aria에 나오지 않게
+      const to = num(o.to ?? el.dataset.catuiTo ?? (orig.replace(/[^\d.-]/g, "") || 0));
+      const from = num(o.from ?? 0), dur = o.duration ?? 1200, dec = o.decimals ?? (String(to).split(".")[1]?.length || 0);
       const fmt = (v) => v.toLocaleString("ko-KR", { minimumFractionDigits: dec, maximumFractionDigits: dec });
       el.style.fontVariantNumeric = "tabular-nums";
       el.setAttribute("aria-label", (o.prefix || "") + fmt(to) + (o.suffix || ""));
@@ -97,6 +98,7 @@ export const fx = (() => {
     return many(target, (el) => {
       const orig = el.innerHTML;
       const words = o.words || (el.dataset.catuiWords || el.textContent).split("|").map((s) => s.trim()).filter(Boolean);
+      if (!words.length) return null;   // 쓸 단어가 없으면 타이머를 돌리지 않는다
       const speed = o.speed ?? 70, pause = o.pause ?? 1400, loop = o.loop !== false;
       el.textContent = "";
       const sr = document.createElement("span"); sr.className = "Catui_clip"; sr.textContent = words.join(", ");
@@ -126,6 +128,7 @@ export const fx = (() => {
       el.setAttribute("aria-label", text);
       let raf = 0, done = 0;
       const run = () => {
+        cancelAnimationFrame(raf);   // 진행 중 다시 들어오면(hover) 이전 루프를 끊어 중복 rAF가 남지 않게
         if (reducedMotion()) { el.textContent = text; return; }
         const t0 = performance.now();
         const step = (t) => {
@@ -266,6 +269,7 @@ export const fx = (() => {
     return many(target, (el) => {
       const orig = el.innerHTML;
       const words = o.words || (el.dataset.catuiWords || el.textContent).split("|").map((s) => s.trim()).filter(Boolean);
+      if (!words.length) return null;
       el.textContent = "";
       el.setAttribute("aria-label", words.join(", "));
       el.classList.add("Catui_fx-rotate");
@@ -313,7 +317,10 @@ export const fx = (() => {
       const copy = document.createElement("div");
       copy.style.display = "contents";
       copy.setAttribute("aria-hidden", "true");
-      [...track.children].forEach((c) => { const k = c.cloneNode(true); k.querySelectorAll("a,button,input,[tabindex]").forEach((f) => f.setAttribute("tabindex", "-1")); if (k.matches("a,button")) k.setAttribute("tabindex", "-1"); copy.appendChild(k); });
+      copy.inert = true;   // 복제본은 탭·화면 낭독기에서 통째로 제외
+      const FOC = "a,button,input,select,textarea,[tabindex]";
+      // 복제본: 포커스 제외 + id 중복 제거 + fx 속성 제거(다음 init이 숨은 복제에 효과를 붙이지 않게)
+      [...track.children].forEach((c) => { const k = c.cloneNode(true); k.querySelectorAll(FOC).forEach((f) => f.setAttribute("tabindex", "-1")); if (k.matches(FOC)) k.setAttribute("tabindex", "-1"); [k, ...k.querySelectorAll("[id],[data-catui-fx]")].forEach((x) => { x.removeAttribute("id"); x.removeAttribute("data-catui-fx"); }); copy.appendChild(k); });
       track.appendChild(copy);
       el.classList.add("Catui_fx-marquee");
       el.appendChild(track);
@@ -381,22 +388,22 @@ export const fx = (() => {
       el.classList.add("Catui_fx-hold");
       const hint = document.createElement("span"); hint.className = "Catui_clip"; hint.textContent = " (길게 눌러 실행)";
       el.appendChild(hint);
-      let t0 = 0, timer = 0, fired = false;
+      let t0 = 0, timer = 0, reset = 0, fired = false;
       const set = (p) => el.style.setProperty("--Catui_fx-p", p.toFixed(3));
       const stop = () => { clearTimeout(timer); timer = 0; if (!fired) set(0); };
       const tick = () => {
         const p = Math.min(1, (performance.now() - t0) / dur);
         set(p);
-        if (p >= 1) { fired = true; timer = 0; emitFx(el, "hold", {}); o.onHold?.call(el); setTimeout(() => { fired = false; set(0); }, 400); }
+        if (p >= 1) { fired = true; timer = 0; emitFx(el, "hold", {}); o.onHold?.call(el); reset = setTimeout(() => { fired = false; set(0); }, 400); }
         else timer = setTimeout(tick, 16);
       };
-      const start = (e) => { if (timer || el.disabled || (e.type === "keydown" && e.key !== " " && e.key !== "Enter") || e.repeat) return; if (e.type === "keydown") e.preventDefault(); t0 = performance.now(); fired = false; tick(); };
+      const start = (e) => { if (timer || el.disabled || (e.type === "keydown" && e.key !== " " && e.key !== "Enter") || e.repeat) return; if (e.type === "keydown") e.preventDefault(); clearTimeout(reset); t0 = performance.now(); fired = false; tick(); };
       const keyup = (e) => { if (e.key === " " || e.key === "Enter") stop(); };
       const block = (e) => { e.preventDefault(); e.stopImmediatePropagation(); };
       el.addEventListener("pointerdown", start); el.addEventListener("keydown", start);
       ["pointerup", "pointerleave", "pointercancel", "blur"].forEach((n) => el.addEventListener(n, stop));
       el.addEventListener("keyup", keyup); el.addEventListener("click", block, true);
-      return { destroy() { stop(); hint.remove(); el.classList.remove("Catui_fx-hold"); el.style.removeProperty("--Catui_fx-p"); el.removeEventListener("pointerdown", start); el.removeEventListener("keydown", start); ["pointerup", "pointerleave", "pointercancel", "blur"].forEach((n) => el.removeEventListener(n, stop)); el.removeEventListener("keyup", keyup); el.removeEventListener("click", block, true); } };
+      return { destroy() { stop(); clearTimeout(reset); hint.remove(); el.classList.remove("Catui_fx-hold"); el.style.removeProperty("--Catui_fx-p"); el.removeEventListener("pointerdown", start); el.removeEventListener("keydown", start); ["pointerup", "pointerleave", "pointercancel", "blur"].forEach((n) => el.removeEventListener(n, stop)); el.removeEventListener("keyup", keyup); el.removeEventListener("click", block, true); } };
     });
   }
 
@@ -452,7 +459,9 @@ export const fx = (() => {
     return many(target, (el) => {
       el.classList.add("Catui_fx-ind");
       const cur = () => el.querySelector('[aria-current="page"],[aria-pressed="true"],[aria-selected="true"],input:checked + label');
+      let alive = true;   // 클릭 뒤 예약한 rAF·타이머가 해제 뒤에 변수를 다시 쓰지 않게
       const place = () => {
+        if (!alive) return;
         const c = cur(); if (!c) return el.style.setProperty("--Catui_fx-iw", "0px");
         const r = el.getBoundingClientRect(), b = c.getBoundingClientRect();
         el.style.setProperty("--Catui_fx-ix", `${b.left - r.left + el.scrollLeft}px`); el.style.setProperty("--Catui_fx-iy", `${b.top - r.top}px`);
@@ -469,15 +478,16 @@ export const fx = (() => {
       window.addEventListener("resize", place);
       const ro = typeof ResizeObserver === "function" ? new ResizeObserver(place) : null; ro?.observe(el);
       place();
-      return { update: place, destroy() { el.removeEventListener("click", click); el.removeEventListener("change", place); window.removeEventListener("resize", place); ro?.disconnect(); el.classList.remove("Catui_fx-ind"); ["ix", "iy", "iw", "ih"].forEach((k) => el.style.removeProperty(`--Catui_fx-${k}`)); } };
+      return { update: place, destroy() { alive = false; el.removeEventListener("click", click); el.removeEventListener("change", place); window.removeEventListener("resize", place); ro?.disconnect(); el.classList.remove("Catui_fx-ind"); ["ix", "iy", "iw", "ih"].forEach((k) => el.style.removeProperty(`--Catui_fx-${k}`)); } };
     });
   }
 
   // 뒤집기: [data-catui-flip] 버튼으로 앞뒤 전환. 보이지 않는 면은 inert
   function flip(target) {
     return many(target, (el) => {
-      el.classList.add("Catui_fx-flip");
       const front = el.querySelector(".Catui_fx-flip-front"), back = el.querySelector(".Catui_fx-flip-back");
+      if (!front || !back) { hint.error("fx.flip: .Catui_fx-flip-front와 .Catui_fx-flip-back이 모두 있어야 합니다", "warn", el); return null; }
+      el.classList.add("Catui_fx-flip");
       const sync = () => { const on = el.classList.contains("Catui_fx-flipped"); front.inert = on; back.inert = !on; el.querySelectorAll("[data-catui-flip]").forEach((b) => b.setAttribute("aria-pressed", String(on))); };
       const click = (e) => { const b = e.target.closest("[data-catui-flip]"); if (!b || !el.contains(b)) return; el.classList.toggle("Catui_fx-flipped"); sync(); (el.classList.contains("Catui_fx-flipped") ? back : front).querySelector("[data-catui-flip],button,a")?.focus(); emitFx(el, "flip", { flipped: el.classList.contains("Catui_fx-flipped") }); };
       el.addEventListener("click", click); sync();
@@ -535,7 +545,8 @@ export const fx = (() => {
   // 초점 글자: 단어를 차례로 또렷하게
   function focus(target, o = {}) {
     return many(target, (el) => {
-      const text = el.textContent.trim(), words = text.split(/\s+/);
+      const text = el.textContent.trim(), words = text.split(/\s+/).filter(Boolean);
+      if (!words.length) return null;   // 빈 요소면 spans가 비어 interval에서 예외가 난다
       el.setAttribute("aria-label", text); el.textContent = "";
       el.classList.add("Catui_fx-focus");
       const spans = words.map((w, i) => { const s = document.createElement("span"); s.setAttribute("aria-hidden", "true"); s.textContent = w; el.appendChild(s); if (i < words.length - 1) el.appendChild(document.createTextNode(" ")); return s; });
@@ -608,17 +619,26 @@ export const fx = (() => {
 
   const effects = { reveal, split, count, type, scramble, tilt, spotlight, magnet, spark, particles, shiny, gradient, rotate, glitch, border, glare, ripple, marquee, dock, aurora, waves,
     hold, swipe, list: listFx, indicator, flip, check, pulse, press, circle, velocity, focus, stroke, edge, noise, dotgrid, ripplegrid, cursor };
-  // data-catui-fx="이름[ 이름…]" 선언형 연결. 돌려준 함수로 모두 해제
+  // data-catui-fx="이름[ 이름…]" 선언형 연결. 돌려준 함수로 이번에 연결한 것만 해제
+  const unbind = (el) => { el.catuiFx?.forEach((h) => h.destroy()); delete el.catuiFx; };
+  // 함수 옵션을 data-catui-이름으로도 (숫자·true/false는 값으로 바꿈). words·duration·radius·cursor는 각 효과가 직접 읽는다
+  const FX_OPTS = ["speed", "pause", "loop", "interval", "hover", "once", "y", "max", "strength", "count", "link", "lines", "amplitude", "scale", "gap", "reach", "stagger", "decimals", "from", "prefix", "suffix", "chars"];
+  const optsOf = (el) => {
+    const o = { by: el.dataset.catuiBy, to: el.dataset.catuiTo, delay: Number(el.dataset.catuiDelay) || 0 };
+    for (const k of FX_OPTS) {
+      const v = el.dataset[`catui${k[0].toUpperCase()}${k.slice(1)}`];
+      if (v != null) o[k] = v === "true" ? true : v === "false" ? false : v !== "" && Number.isFinite(Number(v)) ? Number(v) : v;
+    }
+    return o;
+  };
   function bind(scope = document) {
-    const hs = [];
-    scope.querySelectorAll?.("[data-catui-fx]").forEach((el) => {
-      if (el.catuiFx) return;
-      el.catuiFx = el.dataset.catuiFx.split(/\s+/).filter((n) => effects[n]).map((n) => api[n](el, {
-        by: el.dataset.catuiBy, to: el.dataset.catuiTo, delay: Number(el.dataset.catuiDelay) || 0,
-      }));
-      hs.push(...el.catuiFx);
+    const mine = within(scope, "[data-catui-fx]").filter((el) => {
+      if (el.catuiFx) return false;
+      const o = optsOf(el);
+      el.catuiFx = el.dataset.catuiFx.split(/\s+/).filter((n) => effects[n]).map((n) => api[n](el, o));
+      return true;
     });
-    return () => hs.forEach((h) => h.destroy());
+    return () => mine.forEach(unbind);
   }
   const SLOTS = {
     split: ["text"], count: ["text"], type: ["text"], scramble: ["text"], rotate: ["text"], focus: ["text"],
@@ -627,6 +647,7 @@ export const fx = (() => {
     particles: ["bg"], waves: ["bg"], dotgrid: ["bg"], ripplegrid: ["bg"], ripple: ["click"], spark: ["click"],
   };
   const reg = new WeakMap();
+  const live = new Set();   // 살아 있는 효과 { el, h } — 자동 정리(destroyDetached)·destroyAll용
   const guard = (name, fn) => (target, o) => {
     const hs = list(target).map((el) => {
       const m = reg.get(el) || new Map(), mine = SLOTS[name] || [];
@@ -634,12 +655,23 @@ export const fx = (() => {
       const clash = [...m].find(([, v]) => v.slots.some((x) => mine.includes(x)));
       if (clash) { hint.error(`fx: ${name}과 ${clash[0]}는 같은 요소에서 함께 쓸 수 없어 ${name}을 건너뜁니다 (겹치는 자리: ${mine.filter((x) => clash[1].slots.includes(x)).join(", ")})`, "warn", el); return null; }
       const raw = fn(el, o);
-      const h = { ...raw, destroy() { raw.destroy(); m.delete(name); } };
-      m.set(name, { slots: mine, h }); reg.set(el, m);
+      if (!raw) return null;
+      let dead = false;
+      // 두 번 불려도 한 번만 해제하고, 같은 효과를 다시 붙인 뒤 옛 핸들이 새 등록을 지우지 않게 한다
+      const h = { ...raw, destroy() { if (dead) return; dead = true; raw.destroy(); if (m.get(name)?.h === h) m.delete(name); live.delete(entry); } };
+      const entry = { el, h };
+      m.set(name, { slots: mine, h }); reg.set(el, m); live.add(entry);
       return h;
     }).filter(Boolean);
     return hs.length === 1 ? hs[0] : { destroy() { hs.forEach((h) => h.destroy()); } };
   };
   const api = Object.fromEntries(Object.entries(effects).map(([k, f]) => [k, guard(k, f)]));
-  return { ...api, bind };
+  // 다른 모듈과 같은 정리 계약: DOM에서 빠진 요소의 효과(창 스크롤·resize 리스너, 타이머, body에 붙인 커서)를 회수
+  const sweep = (pick) => [...live].forEach(({ el, h }) => { if (pick(el)) { h.destroy(); delete el.catuiFx; } });
+  return {
+    ...api, bind,
+    enhance: (scope = document) => { bind(scope); },
+    destroyDetached: () => sweep((el) => !el.isConnected),
+    destroyAll: () => sweep(() => true),
+  };
 })();

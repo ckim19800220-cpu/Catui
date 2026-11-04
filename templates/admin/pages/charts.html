@@ -1,6 +1,6 @@
 <!-- title: 차트 카드 | crumb: 차트 / 차트 카드 -->
 <div class="Catui_adm-head">
-  <div><h1 class="Catui_h1">차트 카드</h1><p>대시보드에 바로 넣는 카드형 차트 — 색은 토큰에서 읽어 다크 모드도 맞습니다</p></div>
+  <div><h1 class="Catui_h1">차트 카드</h1><p>대시보드에 바로 넣는 카드형 차트 — 색을 토큰에서 읽으므로 다크 모드에도 맞게 표시됩니다</p></div>
   <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ch-shuffle">{{icon:refresh-cw}}자료 바꾸기</button></div>
 </div>
 
@@ -39,9 +39,9 @@
     </div></div>
   </article>
   <article class="Catui_card Catui_span-4">
-    <header class="Catui_card-h">구매 깔때기</header>
+    <header class="Catui_card-h">구매 퍼널</header>
     <div class="Catui_card-b">
-      <div class="Catui_funnel" role="list" aria-label="구매 전환 깔때기" data-catui-adm-src="page-charts" data-catui-adm-rows="funnel"><template><div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab" data-catui-adm-field="label"></span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" data-catui-adm-attr="style:width:{width}%" data-catui-adm-field="value" data-catui-adm-format="number"></div></div><span class="Catui_funnel-drop" data-catui-adm-field="drop"></span></div></template>
+      <div class="Catui_funnel" role="list" aria-label="구매 전환 퍼널" data-catui-adm-src="page-charts" data-catui-adm-rows="funnel"><template><div class="Catui_funnel-row" role="listitem"><span class="Catui_funnel-lab" data-catui-adm-field="label"></span><div class="Catui_funnel-track"><div class="Catui_funnel-bar" data-catui-adm-attr="style:width:{width}%" data-catui-adm-field="value" data-catui-adm-format="number"></div></div><span class="Catui_funnel-drop" data-catui-adm-field="drop"></span></div></template>
       </div>
     </div>
   </article>
@@ -54,7 +54,7 @@
   </article>
 </div>
 <script>
-// 깔때기 막대 폭(첫 단계 대비)·이탈률(앞 단계 대비)은 원자료에서 계산
+// 퍼널 막대 폭(첫 단계 대비)·이탈률(앞 단계 대비)은 원자료에서 계산
 catui.admin.derive['page-charts'] = function (j) {
   var first = j.funnel[0].value;
   j.funnel.forEach(function (r, i) { r.width = Math.max(1, Math.round(r.value / first * 100)); r.drop = i ? '−' + Math.round((1 - r.value / j.funnel[i - 1].value) * 100) + '%' : ''; });

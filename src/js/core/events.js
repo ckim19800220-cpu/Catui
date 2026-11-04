@@ -8,7 +8,7 @@ const catuiHandlers = new Map(); // "모듈:이벤트" → [{ filter, fn }]
 function catuiParse(evt) {
   const m = /^([\w-]+)(?:\(([^)]*)\))?$/.exec(String(evt).trim());
   if (!m) throw new Error(`잘못된 이벤트 이름: ${evt}`);
-  return { name: m[1], filter: m[2] ?? null };
+  return { name: m[1], filter: m[2]?.trim() ?? null };   // 'submit( login )'도 'login'으로
 }
 
 export function onEvent(mod, evt, fn) {

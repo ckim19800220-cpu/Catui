@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
-import { mount, icon, uid, el, imeBusy, reducedMotion } from "../core/dom.js";
+import { mount, icon, uid, el, imeBusy, reducedMotion, within } from "../core/dom.js";
 import { hint, data } from "../core/base.js";
 import { emit, onEvent } from "../core/events.js";
 import { util } from "./util.js";
@@ -74,7 +74,7 @@ const catuiSiteMarquee = component({
     track.className = "Catui_logos-track";
     items.forEach((n) => track.appendChild(n));
     // 끝없이 흐르도록 한 벌을 복제 (복제는 화면 낭독기·키보드에서 제외)
-    items.forEach((n) => { const k = n.cloneNode(true); k.setAttribute("aria-hidden", "true"); k.inert = true; k.querySelectorAll?.("[id]").forEach((x) => x.removeAttribute("id")); k.removeAttribute("id"); track.appendChild(k); });
+    items.forEach((n) => { const k = n.cloneNode(true); k.setAttribute("aria-hidden", "true"); k.inert = true; k.querySelectorAll?.("[id]").forEach((x) => x.removeAttribute("id")); k.removeAttribute("id"); k.removeAttribute?.("data-catui-fx"); k.querySelectorAll?.("[data-catui-fx]").forEach((x) => x.removeAttribute("data-catui-fx")); track.appendChild(k); });
     track.style.animationDuration = `${Math.max(5, Number(c.seconds) || 30)}s`;
     box.appendChild(track);
     // 5초 넘게 움직이는 내용에는 멈춤 수단이 있어야 한다 (WCAG 2.2.2)
@@ -111,7 +111,11 @@ const catuiConsent = () => catuiSiteGet("consent") || null;
 
 // ── 요금 월/연 전환 ──
 const catuiBilling = (box, value) => {
+  // 프로그램으로 바꿔도 라디오가 표시와 어긋나지 않게
+  const r = box.querySelector(`input[type=radio][value="${CSS.escape(String(value))}"]`);
+  if (r && !r.checked) r.checked = true;
   box.querySelectorAll("[data-catui-monthly], [data-catui-yearly]").forEach((n) => {
+    if (!n.hasAttribute("aria-live")) n.setAttribute("aria-live", "polite");   // 바뀐 가격을 화면 낭독기에도 알린다
     const v = n.getAttribute(`data-catui-${value}`);
     if (v != null) n.textContent = v;
   });
@@ -197,7 +201,7 @@ export const site = {
   on: (evt, fn) => onEvent(MOD, evt, fn),
 
   enhance(scope = document) {
-    const each = (sel, fn) => scope.querySelectorAll(`${sel}:not([data-catui-ready])`).forEach((n) => {
+    const each = (sel, fn) => within(scope, `${sel}:not([data-catui-ready])`).forEach((n) => {
       n.setAttribute("data-catui-ready", "");
       try { fn(n); } catch (err) { n.removeAttribute("data-catui-ready"); hint.error(`site: ${sel} 연결 실패`, "error", err, n); }
     });
@@ -225,7 +229,10 @@ export const site = {
         const key = bar.getAttribute("data-catui-dismiss");
         if (key) { catuiSiteSet(`dismiss:${key}`, Date.now()); emit(MOD, "dismiss", key, { elem: bar }); }
         // 포커스가 사라진 버튼에 남지 않게 다음 요소(본문)로
-        (document.querySelector("main, [role=main]") || document.body).focus?.({ preventScroll: true });
+        // main에 tabindex가 없으면 focus()가 무시되므로 프로그램 포커스만 받게 -1을 준다
+        const main = document.querySelector("main, [role=main]");
+        if (main && !main.hasAttribute("tabindex")) main.tabIndex = -1;
+        (main || document.body).focus?.({ preventScroll: true });
         return;
       }
       // 쿠키 동의

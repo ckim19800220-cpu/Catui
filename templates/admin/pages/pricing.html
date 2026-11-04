@@ -41,7 +41,7 @@ catui.use(['layer'], function (layer) {
   }); });
   document.querySelector('.Catui_adm-plans').addEventListener('click', function (e) {
     var b = e.target.closest('[data-plan]'); if (!b || b.textContent === '현재 요금제') return;
-    layer.confirm(b.dataset.plan + ' 요금제로 바꿀까요? 다음 청구일부터 새 요금이 적용됩니다.', { okText: '바꾸기' }, function (i) { layer.close(i); layer.msg(b.dataset.plan + ' 요금제로 바꿨습니다', { icon: 'success' }); });
+    layer.confirm(b.dataset.plan + ' 요금제로 바꿀까요? 바로 적용되며, 남은 기간은 일할 계산해 다음 청구에서 정산합니다.', { okText: '바꾸기' }, function (i) { layer.close(i); layer.msg(b.dataset.plan + ' 요금제로 바꿨습니다', { icon: 'success' }); });
   });
 });
 </script>

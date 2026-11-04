@@ -70,7 +70,7 @@ catui.use(['table', 'layer'], function (table, layer) {
     layer.form({ title: o.data.name + ' 권한', area: 'sm', fields: [{ name: 'role', label: '권한', type: 'radio', options: ['최고 관리자', '운영자', '읽기 전용'], value: o.data.role }] })
       .then(function (v) { if (v) { o.update({ role: v.role }); layer.msg('권한을 바꿨습니다', { icon: 'success' }); } });
   });
-  document.getElementById('us-lock').addEventListener('click', function () { var sel = table.checkStatus('us-table').data; sel.forEach(function (u) { u.status = '잠김'; }); table.clearChecked('us-table'); list.apply(); layer.msg(sel.length + '명을 잠갔습니다', { icon: 'success' }); });
+  document.getElementById('us-lock').addEventListener('click', function () { var sel = table.checkStatus('us-table').data; sel.forEach(function (u) { u.status = '잠김'; }); table.clearChecked('us-table'); list.apply(); layer.msg(sel.length + '개 계정을 잠갔습니다', { icon: 'success' }); });
   document.getElementById('us-invite').addEventListener('click', function () {
     layer.form({ title: '관리자 초대', area: 'sm', okText: '초대 보내기', fields: [{ name: 'email', label: '이메일', type: 'email', required: true }, { name: 'role', label: '권한', type: 'select', options: ['운영자', '읽기 전용', '최고 관리자'] }] })
       .then(function (v) { if (!v) return; users.push({ id: String(users.length + 1), name: v.email.split('@')[0], email: v.email, role: v.role, mfa: false, last: '—', status: '초대 대기' }); list.apply(); layer.msg('초대를 보냈습니다', { icon: 'success' }); });

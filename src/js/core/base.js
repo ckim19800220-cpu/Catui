@@ -46,7 +46,9 @@ export function csrfHeaders(url, method = "GET") {
   let same = false;
   try { same = new URL(url, location.href).origin === location.origin; } catch { same = false; }
   if (!same) return {};
-  const token = document.querySelector(`meta[name="${CSS.escape(c.meta || "csrf-token")}"]`)?.getAttribute("content");
+  // CSS.escape가 없는 구형 WebView에서도 예외 없이 — meta 이름을 선택자 대신 직접 비교
+  const want = c.meta || "csrf-token";
+  const token = [...document.getElementsByTagName("meta")].find((m) => m.getAttribute("name") === want)?.getAttribute("content");
   return token ? { [c.header || "X-CSRF-Token"]: token } : {};
 }
 
@@ -70,6 +72,8 @@ function catuiStore(kind, table, settings) {
     }
   } catch (err) {
     hint.error(`data('${table}') 저장 실패: ${err?.name || err}`);
+    // 저장하지 못한 값을 돌려주면 호출자가 저장된 줄 안다 — 실제 저장된 상태를 다시 읽어 돌려준다
+    try { return JSON.parse(storage.getItem(key) || "{}") || {}; } catch { return {}; }
   }
   return all;
 }

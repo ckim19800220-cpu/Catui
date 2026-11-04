@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
-import { mount, layerRoot, icon, uid, imeBusy } from "../core/dom.js";
+import { mount, floatRoot, placeFixed, icon, uid, imeBusy, within } from "../core/dom.js";
 
 // datePicker — 날짜·기간 선택 (layui laydate에 해당).
 //   datePicker.render({ elem: '#d', min: '2026-01-01', max: '2026-12-31', done(value, date) {} })
@@ -95,8 +95,7 @@ export const datePicker = component({
     const place = () => {
       const r = input.getBoundingClientRect(), p = panel.getBoundingClientRect();
       const up = innerHeight - r.bottom < p.height + 8 && r.top > p.height + 8;
-      panel.style.top = `${Math.round(up ? r.top - p.height - 4 : r.bottom + 4)}px`;
-      panel.style.left = `${Math.round(Math.min(Math.max(8, r.left), innerWidth - p.width - 8))}px`;
+      placeFixed(panel, Math.min(Math.max(8, r.left), innerWidth - p.width - 8), up ? r.top - p.height - 4 : r.bottom + 4);
     };
     const close = (focusInput) => {
       if (!panel) return;
@@ -108,6 +107,7 @@ export const datePicker = component({
     const commit = () => {
       const value = c.range ? (from && to ? `${fmt(from)}${c.separator}${fmt(to)}` : "") : (from ? fmt(from) : "");
       input.value = value;
+      input.removeAttribute("aria-invalid");   // 달력에서 고른 값은 유효 — 직접 입력 때 남은 오류 표시를 푼다(onInputChange는 합성 이벤트를 건너뜀)
       input.dispatchEvent(new Event("input", { bubbles: true }));
       input.dispatchEvent(new Event("change", { bubbles: true }));
       const date = c.range ? [from, to] : from;
@@ -130,7 +130,7 @@ export const datePicker = component({
       panel.className = "Catui_dd-menu Catui_dd-float";
       panel.setAttribute("role", "dialog");
       panel.setAttribute("aria-label", c.range ? "기간 선택" : "날짜 선택");
-      layerRoot().appendChild(panel);
+      floatRoot(input).appendChild(panel);
       input.setAttribute("aria-expanded", "true");
       draw(); place();
       const onDoc = (e) => { if (!panel.contains(e.target) && e.target !== input) close(false); };
@@ -176,7 +176,7 @@ export const datePicker = component({
     // 입력 칸: 클릭·↓키로 열고, 직접 친 값은 형식·범위를 확인
     const onInputClick = () => (panel ? close(false) : open());
     const onInputKey = (e) => {
-      if (e.key === "ArrowDown" || (e.key === "Enter" && !panel)) { e.preventDefault(); open(); focusDay(); }
+      if (e.key === "ArrowDown" || (e.key === "Enter" && !panel && !imeBusy(e))) { e.preventDefault(); open(); focusDay(); }
       else if (e.key === "Escape" && panel && !imeBusy(e)) { e.preventDefault(); close(true); }
     };
     const onInputChange = (e) => {
@@ -199,7 +199,7 @@ export const datePicker = component({
   },
   // 선언형: <input data-catui-date> 자동 렌더
   enhance(scope = document) {
-    scope.querySelectorAll("input[data-catui-date]:not([data-catui-ready])").forEach((el) => {
+    within(scope, "input[data-catui-date]:not([data-catui-ready])").forEach((el) => {
       el.setAttribute("data-catui-ready", "");
       datePicker.render({ elem: el, auto: true, range: el.getAttribute("data-catui-date") === "range", min: el.getAttribute("data-catui-min") || "", max: el.getAttribute("data-catui-max") || "" });
     });

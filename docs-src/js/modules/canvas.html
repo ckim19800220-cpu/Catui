@@ -83,7 +83,7 @@
 <tr><td><code>draw(ctx, s)</code></td><td><code>s = { width, height, dpr, time, token, font, reduced }</code> — 좌표는 CSS 픽셀, <code>token('--Catui_…')</code>로 현재 테마 색, <code>font(크기, 굵기)</code>로 페이지 글꼴</td></tr>
 <tr><td><code>animate</code> · <code>maxDpr</code></td><td>매 프레임 그리기(모션 줄이기·숨은 탭에서 정지) · 선명도 상한(기본 2)</td></tr>
 <tr><td><code>inst.redraw()</code> · <code>canvas.redraw(id)</code></td><td>다시 그리기 (데이터가 바뀌었을 때)</td></tr>
-<tr><td><code>inst.canvas</code> · <code>inst.ctx</code> · <code>inst.toBlob(cb, type)</code></td><td>요소·컨텍스트 · 이미지 파일로</td></tr>
+<tr><td><code>inst.canvas</code> · <code>inst.ctx</code> · <code>inst.toBlob(cb, type)</code></td><td>요소·컨텍스트 · 이미지 파일로 내보내기</td></tr>
 <tr><td><code>destroy</code></td><td>ResizeObserver·MutationObserver·rAF·이벤트를 모두 정리</td></tr>
 </tbody></table></div>
 <p>크기가 바뀌면(창 크기·사이드바 접기) 자동으로 해상도를 맞춰 다시 그리고, <code>&lt;html data-catui-theme&gt;</code>가 바뀌면 토큰 색으로 다시 그립니다.</p>

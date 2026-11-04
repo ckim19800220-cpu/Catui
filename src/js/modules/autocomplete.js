@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
-import { mount, layerRoot, uid, imeBusy } from "../core/dom.js";
+import { mount, floatRoot, placeFixed, uid, imeBusy } from "../core/dom.js";
 import { hint } from "../core/base.js";
 
 // autocomplete — 입력 자동완성 (WAI-ARIA combobox + listbox).
@@ -36,8 +36,7 @@ export const autocomplete = component({
       panel.style.minWidth = `${Math.round(r.width)}px`;
       const p = panel.getBoundingClientRect();
       const up = innerHeight - r.bottom < p.height + 8 && r.top > p.height + 8;
-      panel.style.top = `${Math.round(up ? r.top - p.height - 4 : r.bottom + 4)}px`;
-      panel.style.left = `${Math.round(Math.min(Math.max(8, r.left), innerWidth - p.width - 8))}px`;
+      placeFixed(panel, Math.min(Math.max(8, r.left), innerWidth - p.width - 8), up ? r.top - p.height - 4 : r.bottom + 4);
     };
     const onMove = () => panel && place();
     const ensure = () => {
@@ -49,7 +48,7 @@ export const autocomplete = component({
       panel.setAttribute("aria-label", `${input.labels?.[0]?.textContent.trim() || "추천"} 목록`);
       panel.style.maxHeight = "min(320px, 50vh)";
       panel.style.overflowY = "auto";
-      layerRoot().appendChild(panel);
+      floatRoot(input).appendChild(panel);
       // 목록을 누를 때 입력 칸이 포커스를 잃어 목록이 닫히지 않게
       panel.addEventListener("pointerdown", (e) => e.preventDefault());
       panel.addEventListener("click", onPick);
@@ -107,14 +106,16 @@ export const autocomplete = component({
           show(q, (c.data || []).filter((it) => { const n = norm(it); return `${n.label} ${n.value} ${n.desc || ""}`.toLowerCase().includes(ql); }));
           return;
         }
-        ctrl = new AbortController();
+        const mine = (ctrl = new AbortController());
         show(q, [], c.loadingText);
+        // 새 검색이 시작됐거나 목록이 닫혔으면(close가 ctrl을 비움) 늦게 온 결과로 목록을 다시 열지 않는다
+        const stale = () => my !== seq || ctrl !== mine;
         try {
-          const res = await c.data(q, ctrl.signal);
-          if (my !== seq) return;            // 그 사이 새 검색이 시작됐으면 버림
+          const res = await c.data(q, mine.signal);
+          if (stale()) return;
           show(q, Array.isArray(res) ? res : res?.data || []);
         } catch (err) {
-          if (err?.name === "AbortError" || my !== seq) return;
+          if (err?.name === "AbortError" || stale()) return;
           hint.error("autocomplete: 후보를 불러오지 못했습니다", "error", err);
           show(q, [], "후보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.");
         }

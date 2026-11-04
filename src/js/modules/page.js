@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html, isRaw } from "../core/html.js";
-import { mount, layerRoot, icon, uid, el, imeBusy, reducedMotion } from "../core/dom.js";
+import { mount, layerRoot, floatRoot, placeFixed, icon, uid, el, imeBusy, reducedMotion, within } from "../core/dom.js";
 import { hint } from "../core/base.js";
 import { util } from "./util.js";
 
@@ -31,7 +31,7 @@ const catuiPageSteps = component({
       panels().forEach((p, i) => { p.hidden = i !== cur; if (!p.hasAttribute("tabindex")) p.tabIndex = -1; });
     };
     const go = async (to) => {
-      to = Math.min(Math.max(0, Number(to)), c.data.length - 1);
+      to = Math.min(Math.max(0, Number(to) || 0), c.data.length - 1);
       if (to === cur) return false;
       // before(from, to)가 false(또는 false로 끝나는 Promise)면 이동하지 않는다 — 입력 검사에 사용
       if (c.before && (await c.before.call(inst, cur, to)) === false) return false;
@@ -88,6 +88,7 @@ const catuiPageFlow = component({
     const load = () => {
       if (busy || ended) return;
       busy = true;
+      io?.observe(bar);   // 실패로 멈춘 자동 감시를 다시 켠다(이미 감시 중이면 무해)
       page += 1;
       box.setAttribute("aria-busy", "true");
       status("loading");
@@ -105,11 +106,11 @@ const catuiPageFlow = component({
         if (ended) io?.disconnect();
         inst.emit("load", { page: my, more: !ended });
       };
+      // 실패하면 "다시 시도" 버튼으로만 재요청한다 — 감시를 멈춰 막대가 다시 보일 때 저절로 반복 요청하지 않게
+      const fail = (err) => { if (answered) return; answered = true; busy = false; page -= 1; box.setAttribute("aria-busy", "false"); io?.unobserve(bar); status("error"); hint.error("flow: 불러오기 실패", "error", err); };
       try {
-        const r = c.done.call(inst, my, next);
-        // done이 Promise를 돌려주다 실패하면 다시 시도할 수 있게
-        r?.catch?.((err) => { if (answered) return; answered = true; busy = false; page -= 1; box.setAttribute("aria-busy", "false"); status("error"); hint.error("flow: 불러오기 실패", "error", err); });
-      } catch (err) { answered = true; busy = false; page -= 1; box.setAttribute("aria-busy", "false"); status("error"); hint.error("flow: 불러오기 실패", "error", err); }
+        c.done.call(inst, my, next)?.catch?.(fail);
+      } catch (err) { fail(err); }
     };
     const onClick = (e) => { if (e.target.closest("[data-catui-flow]")) load(); };
     bar.addEventListener("click", onClick);
@@ -135,7 +136,7 @@ const catuiLoadNow = (n) => {
   n.removeAttribute("data-catui-src"); n.removeAttribute("data-catui-srcset");
 };
 function catuiLazy(scope = document) {
-  const nodes = scope.querySelectorAll("img[data-catui-src], img[data-catui-srcset], iframe[data-catui-src], source[data-catui-srcset]");
+  const nodes = within(scope, "img[data-catui-src], img[data-catui-srcset], iframe[data-catui-src], source[data-catui-srcset]");
   if (!nodes.length) return;
   if (typeof IntersectionObserver === "undefined") { nodes.forEach(catuiLoadNow); return; }
   catuiLazyIO ||= new IntersectionObserver((ents) => ents.forEach((x) => {
@@ -227,7 +228,7 @@ function catuiTipShow(target) {
   catuiTip.id = uid("catui-tip");
   catuiTip.setAttribute("role", "tooltip");
   catuiTip.textContent = text;
-  layerRoot().appendChild(catuiTip);
+  floatRoot(target).appendChild(catuiTip);
   catuiTipFor = target;
   target.setAttribute("aria-describedby", [target.getAttribute("aria-describedby"), catuiTip.id].filter(Boolean).join(" "));
   const r = target.getBoundingClientRect(), t = catuiTip.getBoundingClientRect(), g = 6;
@@ -235,8 +236,7 @@ function catuiTipShow(target) {
   if (side === "top" && r.top - t.height - g < 0) side = "bottom";
   else if (side === "bottom" && r.bottom + t.height + g > innerHeight) side = "top";
   const top = side === "top" ? r.top - t.height - g : r.bottom + g;
-  catuiTip.style.left = `${Math.round(Math.min(innerWidth - t.width - 8, Math.max(8, r.left + r.width / 2 - t.width / 2)))}px`;
-  catuiTip.style.top = `${Math.round(Math.max(8, top))}px`;
+  placeFixed(catuiTip, Math.min(innerWidth - t.width - 8, Math.max(8, r.left + r.width / 2 - t.width / 2)), Math.max(8, top));
 }
 
 const catuiPageParts = [catuiPageSteps, catuiPageFlow];
@@ -260,7 +260,8 @@ export const page = {
     const onOver = (e) => { const t = tipOf(e.target); if (!t || t === catuiTipFor) return; clearTimeout(catuiTipTimer); catuiTipTimer = setTimeout(() => catuiTipShow(t), 300); };
     const onOut = (e) => { const t = tipOf(e.target); if (t && !t.contains(e.relatedTarget)) { clearTimeout(catuiTipTimer); if (catuiTipFor === t && document.activeElement !== t) catuiTipHide(); } };
     const onFocusIn = (e) => { const t = tipOf(e.target); if (t) catuiTipShow(t); };
-    const onFocusOut = (e) => { if (tipOf(e.target) === catuiTipFor) catuiTipHide(); };
+    // 같은 대상 안에서 자식끼리 포커스가 옮겨 가면 숨겼다 다시 띄우지 않는다(깜빡임 방지)
+    const onFocusOut = (e) => { const t = tipOf(e.target); if (t && t === catuiTipFor && !t.contains(e.relatedTarget)) catuiTipHide(); };
     const onKey = (e) => { if (e.key === "Escape" && catuiTip && !imeBusy(e)) { catuiTipHide(); } };   // 툴팁만 닫고 기본 동작은 막지 않음
     let raf = 0;
     const onScroll = () => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; catuiTotopSync(); if (catuiTip) catuiTipHide(); }); };
