@@ -8,6 +8,7 @@
 // 페이지 머리(h1·설명·견본 계약)와 "클래스" 표·목차·이전/다음·사이드바는 빌드가 만든다.
 import fs from "node:fs";
 import path from "node:path";
+import zlib from "node:zlib";
 import { P, ROOT, fail, read, readJson, write, walk, rel, pkg } from "./lib.mjs";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -42,6 +43,30 @@ export function buildDocs({ css, icons }) {
     return `${"../".repeat(depth)}${target}`;
   };
   const distRel = (fromPath) => `${"../".repeat(fromPath.split("/").length)}dist`;   // docs/ 한 단계 위
+
+  // 문서에 쓰는 수치는 소스·빌드 결과에서 계산한다(하드코딩 금지). {{stat:이름}}으로 어느 조각에서나 쓴다
+  const tokenCount = (tokensSrc.match(/^\s*--Catui_[\w-]+\s*:|;\s*--Catui_[\w-]+\s*:/gm) || []).length;
+  const allPages = nav.sections.flatMap((s) => s.groups.flatMap((g) => g.pages));
+  const jsModPages = nav.sections.find((s) => s.id === "js")?.groups.find((g) => g.title === "모듈")?.pages || [];
+  const tplCount = (dir) => { try { return fs.readdirSync(path.join(ROOT, "templates", dir, "pages")).filter((f) => f.endsWith(".html")).length; } catch { return 0; } };
+  // 배포 파일 gzip 크기(KB, 소수 한 자리). 문서만 다시 빌드할 때는 이전 빌드의 dist를 읽는다
+  const gz = (f) => { try { return (zlib.gzipSync(fs.readFileSync(path.join(P.dist, f))).length / 1024).toFixed(1); } catch { return "—"; } };
+  const stats = {
+    pages: allPages.length + 1, classes: css.defined.size, files: Object.keys(css.byFile || {}).length, icons: icons.names.length, tokens: tokenCount,
+    modules: jsModPages.length, version, adminTpl: tplCount("admin"), cmTpl: tplCount("community"),
+    cmPosts: (() => { try { const j = readJson(path.join(ROOT, "templates/community/data/posts.json")); return (Array.isArray(j) ? j : j.posts || j.data || []).length; } catch { return 0; } })(),
+    jsGz: gz("catui.min.js"), cssGz: gz("catui.min.css"), adminJsGz: gz("catadmin.min.js"), adminCssGz: gz("admin.min.css"), cmJsGz: gz("catcommunity.min.js"), cmCssGz: gz("community.min.css"),
+  };
+  // catui.js 모듈 색인: nav.json "모듈" 묶음에서 자동 생성 ("layer 팝업" → 이름 + 한글 이름, desc는 설명)
+  const jsModules = `<div class="doc-mods">${jsModPages.map((p) => {
+    const [name, ...ko] = p.title.split(" ");
+    return `<a class="doc-mod" href="doc:${p.path}"><code>${esc(name)}</code><b>${esc(ko.join(" "))}</b><span>${esc(p.desc || "")}</span></a>`;
+  }).join("")}</div>`;
+  // nav.json 설명(desc) 같은 글자 값용 — 이스케이프는 쓰는 쪽(esc)에서
+  const statText = (s) => String(s ?? "").replace(/\{\{stat:(\w+)\}\}/g, (m, k) => (stats[k] != null ? String(typeof stats[k] === "number" ? stats[k].toLocaleString("ko-KR") : stats[k]) : m));
+  const fill = (html, where) => html
+    .replace(/\{\{stat:(\w+)\}\}/g, (m, k) => { if (stats[k] == null) { errors.push(`${where}: 없는 수치 {{stat:${k}}}`); return m; } return typeof stats[k] === "number" ? stats[k].toLocaleString("ko-KR") : esc(stats[k]); })
+    .replace(/\{\{js-modules\}\}/g, jsModules);
 
   function transform(html, page) {
     let n = 0;
@@ -79,10 +104,15 @@ export function buildDocs({ css, icons }) {
 
   function head(page) {
     const rules = (page.rules || []).map(([k, t]) => `<li><span class="Catui_pill ${k === "MUST" ? "Catui_pill-success" : k === "NEVER" ? "Catui_pill-danger" : "Catui_pill-info"}">${esc(k)}</span> ${esc(t)}</li>`).join("");
-    return `<p class="doc-eyebrow">${esc(page.section.title)} · ${esc(page.group.title)}</p>
+    // 기술 문서형 머리: 경로(분류 / 묶음 / 쪽) · 제목 · 설명 · 소스 파일 · 견본 계약
+    const srcs = (page.css || []).map((f) => `<code>src/${/^(admin|community)\//.test(f) ? "" : "css/"}${esc(f)}</code>`).join("");
+    return `<header class="doc-head">
+<p class="doc-crumb"><span>${esc(page.section.title)}</span><span>${esc(page.group.title)}</span><span>${esc(page.title)}</span></p>
 <h1 class="Catui_h1">${esc(page.title)}</h1>
-${page.desc ? `<p class="Catui_lead">${esc(page.desc)}</p>` : ""}
-${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}`;
+${page.desc ? `<p class="Catui_lead">${esc(statText(page.desc))}</p>` : ""}
+${srcs ? `<p class="doc-head-src"><span>소스</span>${srcs}</p>` : ""}
+${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
+</header>`;
   }
 
   function classTable(page) {
@@ -108,7 +138,7 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
     }).join("");
     const out = layout
       .replace(/\{\{title\}\}/g, esc(home ? "Catui 문서" : `${page.title} · ${page.section.title} · Catui`))
-      .replace(/\{\{desc\}\}/g, esc(page.desc || nav.desc || ""))
+      .replace(/\{\{desc\}\}/g, esc(statText(page.desc || nav.desc || "")))
       .replace(/\{\{home\}\}/g, relTo(page.path, "index.html"))
       .replace(/\{\{assets\}\}/g, relTo(page.path, "assets"))
       .replace(/\{\{tabs\}\}/g, tabs)
@@ -138,21 +168,17 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
     const prose = frag.replace(/<catui-example[\s\S]*?<\/catui-example>/g, "");   // 예제 미리보기 안 제목은 제외
     if (/<h1[\s>]/.test(frag)) errors.push(`${page.path}: 조각에 h1을 쓰지 마세요(빌드가 만듭니다, 예제 안이면 h2 이하로)`);
     for (const m of prose.matchAll(/<h2(?![^>]*\sid=)[^>]*>/g)) errors.push(`${page.path}: id 없는 h2 — 목차 앵커에 필요합니다 (${m[0]})`);
-    const html = render(page, transform(frag, page));
+    const html = render(page, transform(fill(frag, page.path), page));
     outputs.push([page.path, html]);
   }
   const homeSrc = path.join(P.docsSrc, "index.html");
   const homePage = { path: "index", title: "Catui 문서", desc: nav.desc, section: nav.sections[0], group: { title: "" } };
-  // 홈 수치·분류 카드는 빌드 결과에서 자동 계산 (하드코딩 금지)
-  const tokenCount = (read(path.join(P.css, "foundation/tokens.css")).match(/^\s*--Catui_[\w-]+\s*:|;\s*--Catui_[\w-]+\s*:/gm) || []).length;
-  const allPages = nav.sections.flatMap((s) => s.groups.flatMap((g) => g.pages));
-  const jsMods = (nav.sections.find((s) => s.id === "js")?.groups.find((g) => g.title === "모듈")?.pages || []).length;
-  const stats = { pages: allPages.length + 1, classes: css.defined.size, files: Object.keys(css.byFile || {}).length, icons: icons.names.length, tokens: tokenCount, modules: jsMods };
+  // 홈 분류 카드는 nav.json에서 자동 생성 (수치는 위의 stats)
   const groupCards = nav.sections.map((s) => s.groups.map((g) => {
     const first = g.pages[0];
     return `<a class="doc-hcat" href="doc:${first.path}"><span class="doc-hcat-k">${esc(s.title)}</span><b>${esc(g.title)}</b><span class="doc-hcat-n">${g.pages.length}쪽</span><span class="doc-hcat-d">${g.pages.slice(0, 4).map((p) => esc(p.title)).join(" · ")}${g.pages.length > 4 ? " …" : ""}</span></a>`;
   }).join("")).join("");
-  let homeHtml = read(homeSrc).replace(/\{\{stat:(\w+)\}\}/g, (m, k) => (stats[k] != null ? stats[k].toLocaleString("ko-KR") : m)).replace("{{home-groups}}", groupCards);
+  let homeHtml = fill(read(homeSrc), "index").replace("{{home-groups}}", groupCards);
   outputs.push(["index", render(homePage, transform(homeHtml, homePage), { home: true })]);
 
   // 출력 검사: 클래스 정의, id 중복, label for, 로컬 링크, 아이콘 심볼

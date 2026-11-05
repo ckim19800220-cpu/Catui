@@ -660,6 +660,7 @@ export const scenarios = [
       catui.init(inp);
       const self = inp.hasAttribute("data-catui-ready");
       const c = catui.component({ name: "tauto", render() {} });
+      catui.extend({ tauto: c });   // 자동 정리는 등록된 모듈만 훑는다
       const mk = (id) => { const h = document.createElement("div"); document.body.appendChild(h); c.render({ elem: h, id }); return h; };
       catui.config({ autoDestroy: false });
       mk("k1").remove(); await sleep(60);

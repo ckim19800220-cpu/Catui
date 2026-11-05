@@ -1,37 +1,62 @@
 <section aria-labelledby="what">
 <h2 id="what">CatuiAdmin은</h2>
 <p>Catui(CSS 키트 + catui.js) 위에 얹는 <b>관리자 대시보드 확장</b>입니다. 본체 컴포넌트를 그대로 쓰고, 관리 화면에 필요한 것만 더합니다.</p>
-<div class="Catui_grid">
-  <article class="Catui_card Catui_span-4"><div class="Catui_card-b"><p class="Catui_h3">admin.css</p><p class="Catui_help">관리 셸 확장(접힘·서랍·고정), 위젯 배치, 화면별 블록 — 모든 규칙은 <code>.Catui_adm</code> 아래, 토큰만 사용</p></div></article>
-  <article class="Catui_card Catui_span-4"><div class="Catui_card-b"><p class="Catui_h3">catadmin.js</p><p class="Catui_help"><code>catui.admin</code> — 사이드바·테마·알림·명령 팔레트·위젯·폼 변경 감지·목록 주소 동기화·채팅·칸반·로그인 보조</p></div></article>
-  <article class="Catui_card Catui_span-4"><div class="Catui_card-b"><p class="Catui_h3">템플릿 52종</p><p class="Catui_help">복사해서 쓰는 전체 화면 HTML — 같은 셸·메뉴를 공유하고, 빌드가 링크·클래스·접근성을 검사</p></div></article>
+<dl class="doc-spec" aria-label="CatuiAdmin 사양">
+  <div><dt>템플릿</dt><dd>{{stat:adminTpl}}</dd></div>
+  <div><dt>화면 분류</dt><dd>11</dd></div>
+  <div><dt>CSS · gzip</dt><dd>{{stat:adminCssGz}}<small>KB</small></dd></div>
+  <div><dt>JS · gzip</dt><dd>{{stat:adminJsGz}}<small>KB</small></dd></div>
+</dl>
+<div class="doc-files">
+  <article><p class="doc-file-n"><code>admin.css</code></p><p>관리 셸 확장(접힘·서랍·고정), 위젯 배치, 화면별 블록 — 모든 규칙은 <code>.Catui_adm</code> 아래, 토큰만 사용</p></article>
+  <article><p class="doc-file-n"><code>catadmin.js</code></p><p><code>catui.admin</code> — 사이드바·테마·알림·명령 팔레트·위젯·폼 변경 감지·목록 주소 동기화·채팅·칸반·로그인 보조</p></article>
+  <article><p class="doc-file-n"><code>templates/admin/</code></p><p>복사해서 쓰는 전체 화면 HTML {{stat:adminTpl}}종 — 같은 셸·메뉴를 공유하고, 빌드가 링크·클래스·접근성을 검사</p></article>
 </div>
 <p class="Catui_help">화면 구성은 Gentelella v4 대시보드를 참고했고, 코드·문구·이미지는 Catui 토큰·컴포넌트로 새로 작성했습니다 (MIT).</p>
+</section>
+
+<section aria-labelledby="layers">
+<h2 id="layers">구성 계층</h2>
+<ol class="doc-stack" aria-label="CatuiAdmin 구성 계층 (위가 확장)">
+  <li class="is-current" aria-current="true"><code>admin.css · catadmin.js</code><span>관리 셸 · 위젯 · 화면별 보조</span><em>이 문서</em></li>
+  <li><code>catui.js</code><span>접근성 · 데이터 · 선언형 속성 · 오버레이</span></li>
+  <li><code>catui.css</code><span>토큰 · 리셋 · 컴포넌트</span></li>
+</ol>
 </section>
 
 <section aria-labelledby="map">
 <h2 id="map">화면 지도</h2>
 <p>각 화면은 새 창에서 전체 화면으로 열립니다. 메뉴·검색(Ctrl+K)으로 화면 사이를 이동할 수 있습니다.</p>
-<div class="doc-table-wrap"><table class="Catui_tbl">
-<caption class="Catui_clip">CatuiAdmin 템플릿 목록</caption>
-<thead><tr><th scope="col">분류</th><th scope="col">화면</th></tr></thead>
-<tbody>
-<tr><th scope="row">대시보드</th><td><a href="../templates/index.html" target="_blank" rel="noopener">운영</a> · <a href="../templates/analytics.html" target="_blank" rel="noopener">분석</a> · <a href="../templates/sales.html" target="_blank" rel="noopener">매출</a> · <a href="../templates/health.html" target="_blank" rel="noopener">시스템 상태</a></td></tr>
-<tr><th scope="row">폼</th><td><a href="../templates/form.html" target="_blank" rel="noopener">기본</a> · <a href="../templates/form-advanced.html" target="_blank" rel="noopener">고급 입력</a> · <a href="../templates/form-buttons.html" target="_blank" rel="noopener">버튼</a> · <a href="../templates/form-upload.html" target="_blank" rel="noopener">업로드</a> · <a href="../templates/form-validation.html" target="_blank" rel="noopener">검증</a> · <a href="../templates/form-wizard.html" target="_blank" rel="noopener">단계</a></td></tr>
-<tr><th scope="row">표 · 차트</th><td><a href="../templates/tables.html" target="_blank" rel="noopener">정적 표</a> · <a href="../templates/tables-dynamic.html" target="_blank" rel="noopener">동적 표</a> · <a href="../templates/charts.html" target="_blank" rel="noopener">차트 카드</a> · <a href="../templates/chart-gallery.html" target="_blank" rel="noopener">차트 갤러리</a> · <a href="../templates/charts-svg.html" target="_blank" rel="noopener">SVG 차트</a></td></tr>
-<tr><th scope="row">일정 · 지도</th><td><a href="../templates/calendar.html" target="_blank" rel="noopener">캘린더</a> · <a href="../templates/map.html" target="_blank" rel="noopener">지도</a></td></tr>
-<tr><th scope="row">앱</th><td><a href="../templates/chat.html" target="_blank" rel="noopener">채팅</a> · <a href="../templates/inbox.html" target="_blank" rel="noopener">받은 편지함</a> · <a href="../templates/kanban.html" target="_blank" rel="noopener">칸반</a> · <a href="../templates/files.html" target="_blank" rel="noopener">파일</a> · <a href="../templates/notifications.html" target="_blank" rel="noopener">알림</a></td></tr>
-<tr><th scope="row">커머스</th><td><a href="../templates/shop.html" target="_blank" rel="noopener">상점</a> · <a href="../templates/product.html" target="_blank" rel="noopener">상품 상세</a> · <a href="../templates/orders.html" target="_blank" rel="noopener">전체 주문</a> · <a href="../templates/order-detail.html" target="_blank" rel="noopener">주문 상세</a> · <a href="../templates/invoice.html" target="_blank" rel="noopener">청구서</a> · <a href="../templates/pricing.html" target="_blank" rel="noopener">요금표</a></td></tr>
-<tr><th scope="row">프로젝트</th><td><a href="../templates/projects.html" target="_blank" rel="noopener">전체</a> · <a href="../templates/project-detail.html" target="_blank" rel="noopener">상세</a></td></tr>
-<tr><th scope="row">UI</th><td><a href="../templates/elements.html" target="_blank" rel="noopener">요소</a> · <a href="../templates/widgets.html" target="_blank" rel="noopener">위젯</a> · <a href="../templates/playground.html" target="_blank" rel="noopener">놀이터</a> · <a href="../templates/theme.html" target="_blank" rel="noopener">테마</a> · <a href="../templates/typography.html" target="_blank" rel="noopener">타이포그래피</a> · <a href="../templates/icons.html" target="_blank" rel="noopener">아이콘</a> · <a href="../templates/media.html" target="_blank" rel="noopener">미디어</a></td></tr>
-<tr><th scope="row">관리</th><td><a href="../templates/contacts.html" target="_blank" rel="noopener">연락처</a> · <a href="../templates/users.html" target="_blank" rel="noopener">사용자 관리</a> · <a href="../templates/profile.html" target="_blank" rel="noopener">프로필</a> · <a href="../templates/settings.html" target="_blank" rel="noopener">설정</a> · <a href="../templates/faq.html" target="_blank" rel="noopener">도움말</a></td></tr>
-<tr><th scope="row">레이아웃</th><td><a href="../templates/fixed-sidebar.html" target="_blank" rel="noopener">고정 사이드바</a> · <a href="../templates/fixed-footer.html" target="_blank" rel="noopener">고정 바닥글</a> · <a href="../templates/nested.html" target="_blank" rel="noopener">중첩 페이지</a> · <a href="../templates/blank.html" target="_blank" rel="noopener">빈 페이지</a></td></tr>
-<tr><th scope="row">인증 · 오류</th><td><a href="../templates/login.html" target="_blank" rel="noopener">로그인</a> · <a href="../templates/register.html" target="_blank" rel="noopener">회원 가입</a> · <a href="../templates/forgot.html" target="_blank" rel="noopener">비밀번호 찾기</a> · <a href="../templates/error-403.html" target="_blank" rel="noopener">403</a> · <a href="../templates/error-404.html" target="_blank" rel="noopener">404</a> · <a href="../templates/error-500.html" target="_blank" rel="noopener">500</a></td></tr>
-</tbody></table></div>
+<div class="doc-map">
+  <article class="doc-map-g"><h3>대시보드<span class="doc-map-n">4<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/index.html" target="_blank" rel="noopener">운영</a></li><li><a href="../templates/analytics.html" target="_blank" rel="noopener">분석</a></li><li><a href="../templates/sales.html" target="_blank" rel="noopener">매출</a></li><li><a href="../templates/health.html" target="_blank" rel="noopener">시스템 상태</a></li></ul></article>
+  <article class="doc-map-g"><h3>폼<span class="doc-map-n">6<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/form.html" target="_blank" rel="noopener">기본</a></li><li><a href="../templates/form-advanced.html" target="_blank" rel="noopener">고급 입력</a></li><li><a href="../templates/form-buttons.html" target="_blank" rel="noopener">버튼</a></li><li><a href="../templates/form-upload.html" target="_blank" rel="noopener">업로드</a></li><li><a href="../templates/form-validation.html" target="_blank" rel="noopener">검증</a></li><li><a href="../templates/form-wizard.html" target="_blank" rel="noopener">단계</a></li></ul></article>
+  <article class="doc-map-g"><h3>표 · 차트<span class="doc-map-n">5<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/tables.html" target="_blank" rel="noopener">정적 표</a></li><li><a href="../templates/tables-dynamic.html" target="_blank" rel="noopener">동적 표</a></li><li><a href="../templates/charts.html" target="_blank" rel="noopener">차트 카드</a></li><li><a href="../templates/chart-gallery.html" target="_blank" rel="noopener">차트 갤러리</a></li><li><a href="../templates/charts-svg.html" target="_blank" rel="noopener">SVG 차트</a></li></ul></article>
+  <article class="doc-map-g"><h3>일정 · 지도<span class="doc-map-n">2<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/calendar.html" target="_blank" rel="noopener">캘린더</a></li><li><a href="../templates/map.html" target="_blank" rel="noopener">지도</a></li></ul></article>
+  <article class="doc-map-g"><h3>앱<span class="doc-map-n">5<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/chat.html" target="_blank" rel="noopener">채팅</a></li><li><a href="../templates/inbox.html" target="_blank" rel="noopener">받은 편지함</a></li><li><a href="../templates/kanban.html" target="_blank" rel="noopener">칸반</a></li><li><a href="../templates/files.html" target="_blank" rel="noopener">파일</a></li><li><a href="../templates/notifications.html" target="_blank" rel="noopener">알림</a></li></ul></article>
+  <article class="doc-map-g"><h3>커머스<span class="doc-map-n">6<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/shop.html" target="_blank" rel="noopener">상점</a></li><li><a href="../templates/product.html" target="_blank" rel="noopener">상품 상세</a></li><li><a href="../templates/orders.html" target="_blank" rel="noopener">전체 주문</a></li><li><a href="../templates/order-detail.html" target="_blank" rel="noopener">주문 상세</a></li><li><a href="../templates/invoice.html" target="_blank" rel="noopener">청구서</a></li><li><a href="../templates/pricing.html" target="_blank" rel="noopener">요금표</a></li></ul></article>
+  <article class="doc-map-g"><h3>프로젝트<span class="doc-map-n">2<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/projects.html" target="_blank" rel="noopener">전체</a></li><li><a href="../templates/project-detail.html" target="_blank" rel="noopener">상세</a></li></ul></article>
+  <article class="doc-map-g"><h3>UI<span class="doc-map-n">7<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/elements.html" target="_blank" rel="noopener">요소</a></li><li><a href="../templates/widgets.html" target="_blank" rel="noopener">위젯</a></li><li><a href="../templates/playground.html" target="_blank" rel="noopener">놀이터</a></li><li><a href="../templates/theme.html" target="_blank" rel="noopener">테마</a></li><li><a href="../templates/typography.html" target="_blank" rel="noopener">타이포그래피</a></li><li><a href="../templates/icons.html" target="_blank" rel="noopener">아이콘</a></li><li><a href="../templates/media.html" target="_blank" rel="noopener">미디어</a></li></ul></article>
+  <article class="doc-map-g"><h3>관리<span class="doc-map-n">5<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/contacts.html" target="_blank" rel="noopener">연락처</a></li><li><a href="../templates/users.html" target="_blank" rel="noopener">사용자 관리</a></li><li><a href="../templates/profile.html" target="_blank" rel="noopener">프로필</a></li><li><a href="../templates/settings.html" target="_blank" rel="noopener">설정</a></li><li><a href="../templates/faq.html" target="_blank" rel="noopener">도움말</a></li></ul></article>
+  <article class="doc-map-g"><h3>레이아웃<span class="doc-map-n">4<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/fixed-sidebar.html" target="_blank" rel="noopener">고정 사이드바</a></li><li><a href="../templates/fixed-footer.html" target="_blank" rel="noopener">고정 바닥글</a></li><li><a href="../templates/nested.html" target="_blank" rel="noopener">중첩 페이지</a></li><li><a href="../templates/blank.html" target="_blank" rel="noopener">빈 페이지</a></li></ul></article>
+  <article class="doc-map-g"><h3>인증 · 오류<span class="doc-map-n">6<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/login.html" target="_blank" rel="noopener">로그인</a></li><li><a href="../templates/register.html" target="_blank" rel="noopener">회원 가입</a></li><li><a href="../templates/forgot.html" target="_blank" rel="noopener">비밀번호 찾기</a></li><li><a href="../templates/error-403.html" target="_blank" rel="noopener">403</a></li><li><a href="../templates/error-404.html" target="_blank" rel="noopener">404</a></li><li><a href="../templates/error-500.html" target="_blank" rel="noopener">500</a></li></ul></article>
+</div>
 </section>
 
 <section aria-labelledby="preview">
 <h2 id="preview">미리보기</h2>
-<p>운영 대시보드를 축소해 보여 줍니다. <a href="../templates/index.html" target="_blank" rel="noopener">새 창에서 전체 화면으로 열기</a></p>
-<iframe src="../templates/index.html" title="운영 대시보드 미리보기" loading="lazy" style="width:100%;height:640px;border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);background:var(--Catui_card-bg)"></iframe>
+<figure class="doc-frame">
+  <figcaption class="doc-frame-bar"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><code>templates/index.html</code><a href="../templates/index.html" target="_blank" rel="noopener">새 창에서 열기</a></figcaption>
+  <iframe src="../templates/index.html" title="운영 대시보드 미리보기" loading="lazy"></iframe>
+</figure>
 </section>

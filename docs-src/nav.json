@@ -1460,7 +1460,7 @@
         {
           "title": "시작",
           "pages": [
-            { "path": "admin/start/introduction", "title": "소개 · 화면 지도", "desc": "catui 위에 얹는 관리자 확장과 템플릿 52종." },
+            { "path": "admin/start/introduction", "title": "소개 · 화면 지도", "desc": "catui 위에 얹는 관리자 확장과 템플릿 {{stat:adminTpl}}종." },
             { "path": "admin/start/install", "title": "설치", "desc": "admin.css · catadmin.js 로드 순서, npm · ES 모듈, 템플릿으로 시작하기." },
             { "path": "admin/start/structure", "title": "구조 · 새 화면 만들기", "desc": "셸 마크업, 메뉴(menu.json), 템플릿 머리 주석, 빌드 검사." }
           ]
@@ -1481,7 +1481,7 @@
         {
           "title": "시작",
           "pages": [
-            { "path": "community/start/introduction", "title": "소개 · 화면 지도", "desc": "catui 위에 얹는 커뮤니티(게시판) 확장과 템플릿 22종." },
+            { "path": "community/start/introduction", "title": "소개 · 화면 지도", "desc": "catui 위에 얹는 커뮤니티(게시판) 확장과 템플릿 {{stat:cmTpl}}종." },
             { "path": "community/start/install", "title": "설치 · 구조", "desc": "community.css · catcommunity.js 로드, 템플릿·메뉴·JSON 모의 데이터." },
             { "path": "community/start/motion", "title": "모션 기준", "desc": "어디에 움직임을 넣고 어디서 뺐는지, 수치와 이유." }
           ]
