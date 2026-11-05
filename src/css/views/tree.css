@@ -11,3 +11,8 @@
 .Catui_tree .Catui_icon{width:var(--Catui_tree-icon);height:var(--Catui_tree-icon);flex:none}
 .Catui_tree .Catui_tree-toggle{width:var(--Catui_tree-toggle);height:var(--Catui_tree-toggle);color:var(--Catui_color-text-tertiary);transition:transform var(--Catui_dur-fast) var(--Catui_ease)}
 .Catui_tree details[open] > summary .Catui_tree-toggle{transform:rotate(90deg)}
+/* tree.render(WAI-ARIA): 포커스는 treeitem이 받지만 링은 그 행에만(자식 묶음까지 감싸지 않게) */
+.Catui_tree [role="treeitem"]{outline:none}
+.Catui_tree [role="treeitem"]:focus-visible > .Catui_tree-row{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+.Catui_tree [aria-expanded="true"] > .Catui_tree-row .Catui_tree-toggle{transform:rotate(90deg)}
+.Catui_tree [aria-disabled="true"] > .Catui_tree-row{color:var(--Catui_btn-disabled-fg);cursor:default}

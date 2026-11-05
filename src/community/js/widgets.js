@@ -7,6 +7,7 @@ community.widgets = {
   tick(scope = document) {
     scope.querySelectorAll("[data-catui-cm-until]").forEach((t) => {
       const left = new Date(t.getAttribute("data-catui-cm-until")) - community.now();
+      if (Number.isNaN(left)) return;   // 잘못된 날짜면 원래 글자를 둔다("NaN분 남음" 방지)
       const h = Math.floor(left / 36e5), m = Math.floor((left % 36e5) / 6e4);
       t.textContent = left <= 0 ? "종료" : h >= 24 ? `${Math.floor(h / 24)}일 남음` : h ? `${h}시간 ${m}분 남음` : `${m}분 남음`;
       t.closest("[data-catui-cm-deal]")?.toggleAttribute("data-ended", left <= 0);

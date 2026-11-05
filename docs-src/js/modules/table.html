@@ -65,7 +65,7 @@ table.on('sort(t)', function (obj) { return true; });   // false면 기본 정�
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">table API</caption>
 <thead><tr><th scope="col">이름</th><th scope="col">설명</th></tr></thead>
 <tbody>
-<tr><td><code>cols[]</code></td><td><code>field · title · sort · width · align('right') · type('checkbox'|'numbers') · templet(row, i) · toolbar[{event, text, icon, danger}]</code></td></tr>
+<tr><td><code>cols[]</code></td><td><code>field · title · sort · width · align('right') · type('checkbox'|'numbers') · templet(row, i) · toolbar[{event, text, icon, danger, showText}]</code></td></tr>
 <tr><td><code>data</code> / <code>url · method · where · headers · parseData</code></td><td>로컬 / 원격</td></tr>
 <tr><td><code>page · limit · caption · initSort · text.none · labelField</code></td><td>페이지·캡션·초기 정렬·빈 문구·도구 버튼 이름에 쓸 필드</td></tr>
 <tr><td><code>on('tool(f)')</code></td><td><code>{ event, data, index, tr, del(), update(fields) }</code></td></tr>
@@ -73,6 +73,7 @@ table.on('sort(t)', function (obj) { return true; });   // false면 기본 정�
 <tr><td><code>checkStatus(id)</code> · <code>getData(id)</code> · <code>reload(id, opts)</code> · <code>destroy(id)</code></td><td>선택 상태 / 현재 행 데이터 / 다시 그리기 / 정리. <code>reload</code>로 <code>where</code>가 바뀌면 1쪽부터. 원격(<code>url</code>) 표는 새로 불러올 때마다(쪽 이동·정렬 포함) 선택이 비워짐</td></tr>
 <tr><td><code>exportFile(id, '파일.csv', { checked, rows })</code></td><td>CSV 내보내기 — 로컬은 정렬된 전체, 원격은 현재 쪽. <code>checked: true</code>면 선택한 행만. 체크·동작 열 제외, 엑셀 한글 BOM, 수식 실행 방지(CSV 인젝션)</td></tr>
 <tr><td><code>clearChecked(id)</code></td><td>선택 모두 해제</td></tr>
+<tr><td><code>table.bind()</code></td><td>정적 표(<code>table[data-catui-table]</code>)의 <code>th[data-catui-sort]</code> 정렬 버튼을 전역 위임으로 연결(<code>="number"</code>면 숫자 정렬, 이벤트 <code>sort</code>). <code>catui.init</code>이 자동으로 부르며 해제 함수를 돌려줍니다. 옛 이름 <code>bindStatic()</code>도 동작</td></tr>
 <tr><td>열 <code>hide: true</code></td><td>그 열을 표시·내보내기에서 뺌</td></tr>
 <tr><td><code>page: { layout, limits, limit, curr }</code></td><td>페이지 바 설정을 <a href="doc:js/modules/laypage">laypage</a>로 넘김 (예: <code>layout: ['count','prev','page','next','limit']</code>). 고른 쪽 크기는 원격 요청 <code>limit</code>에 반영</td></tr>
 </tbody></table></div>

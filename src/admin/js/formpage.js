@@ -26,7 +26,7 @@ admin.form = {
       admin._on(f, "change", check);
       admin._on(f, "reset", () => setTimeout(() => this.saved(f), 0));
     });
-    if (!this.forms.size) return;
+    if (!this.forms.size || !admin._once(document, "dirty")) return;   // 나가기 확인 창이 두 번 뜨지 않게
     const anyDirty = () => [...this.forms.keys()].some((f) => f.isConnected && this.isDirty(f));
     // 새로 고침·창 닫기: 브라우저 기본 확인 창
     admin._on(window, "beforeunload", (e) => { if (anyDirty()) { e.preventDefault(); e.returnValue = ""; } });

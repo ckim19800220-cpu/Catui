@@ -18,7 +18,26 @@
   });
   </script>
 </catui-example>
-<p>CSS만으로 동작하는 radio 탭 구조를 그대로 씁니다. 화살표 키 이동은 radio 그룹 기본 동작입니다.</p>
+<p>마크업으로 쓴 radio 탭(CSS만으로 동작)에도 같은 API가 붙습니다. 화살표 키 이동은 radio 그룹 기본 동작입니다.</p>
+</section>
+
+<section aria-labelledby="render">
+<h2 id="render">tabs.render (WAI-ARIA 탭)</h2>
+<catui-example title="tablist · tab · tabpanel">
+  <div id="tb-rd"></div>
+  <p class="Catui_help" id="tb-rd-out" aria-live="polite"></p>
+  <script>
+  catui.use(['tabs'], function (tabs) {
+    tabs.render({ elem: '#tb-rd', filter: 'tb-rd', label: '주문 정보', data: [
+      { title: '요약', content: '주문 3건 · 결제 완료' },
+      { title: '배송', content: '내일 도착 예정' },
+      { title: '기록', content: '11월 2일 주문 접수' }
+    ] });
+    tabs.on('tab(tb-rd)', function (o) { document.getElementById('tb-rd-out').textContent = o.title + ' 탭'; });
+  });
+  </script>
+</catui-example>
+<p><code>tabs.render</code>는 <code>[role=tablist] &gt; button[role=tab]</code>과 <code>[role=tabpanel]</code>로 그립니다. 탭 묶음이 Tab 정지점 하나이고, ←→(세로 탭 <code>vertical: true</code>는 ↑↓)·Home·End로 옮기면 바로 그 탭이 열립니다. 패널은 Tab으로 들어갈 수 있습니다. 화면 낭독기가 묶음 이름을 읽도록 <code>label</code>을 꼭 주세요.</p>
 </section>
 
 <section aria-labelledby="api">
@@ -26,7 +45,7 @@
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">tabs API</caption>
 <thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
 <tbody>
-<tr><td><code>tabs.render({ elem, data: [{ title, content, id }], index, label })</code></td><td>마크업 생성</td></tr>
+<tr><td><code>tabs.render({ elem, data: [{ title, content, id }], index, label, vertical })</code></td><td>WAI-ARIA 탭 생성 (<code>label</code> 필수, 범위 밖 <code>index</code>는 처음·마지막으로)</td></tr>
 <tr><td><code>tabs.add(f, { title, content, change })</code> · <code>close(f, i)</code> · <code>change(f, i)</code></td><td>추가 / 닫기 / 전환</td></tr>
 <tr><td><code>on('tab(f)')</code> · <code>on('close(f)')</code></td><td><code>{ index, title, elem }</code></td></tr>
 </tbody></table></div>

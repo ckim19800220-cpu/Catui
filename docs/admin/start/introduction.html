@@ -20,12 +20,19 @@
 <body>
 <a class="Catui_skip" href="#doc-main">본문으로 이동</a>
 <div class="Catui_site">
-<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+<header class="Catui_site-header doc-top">
+<div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
   <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html" aria-current="page">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
-  <span class="doc-version">v2.0.0</span>
-  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
-</div></header>
+  <div class="doc-top-end">
+    <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
+    <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+    <a class="Catui_btn Catui_btn-sm Catui_btn-primary doc-cta" href="../../css/start/introduction.html">시작하기</a>
+  </div>
+</div>
+</header>
+<dialog class="doc-search" aria-label="문서 검색" data-index="../../assets/search-index.js" data-home="../../index.html"><div class="doc-search-box"><label class="Catui_clip" for="doc-search-q">문서 검색</label><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><input id="doc-search-q" type="search" placeholder="페이지·설명 검색" autocomplete="off" aria-describedby="doc-search-count"><kbd>Esc</kbd></div><p class="doc-search-count" id="doc-search-count" aria-live="polite"></p><ul id="doc-search-list" aria-label="검색 결과"></ul></dialog>
 <div class="doc-shell">
 <details class="doc-side" open><summary>CatuiAdmin 메뉴</summary><nav aria-label="CatuiAdmin 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../admin/start/introduction.html" aria-current="page">소개 · 화면 지도</a></li><li><a href="../../admin/start/install.html">설치</a></li><li><a href="../../admin/start/structure.html">구조 · 새 화면 만들기</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../../admin/modules.html">catadmin.js API</a></li><li><a href="../../admin/css.html">admin.css 클래스</a></li></ul></div></nav></details>
 <main class="doc-main" id="doc-main" tabindex="-1">
@@ -43,12 +50,12 @@
   <div><dt>템플릿</dt><dd>52</dd></div>
   <div><dt>화면 분류</dt><dd>11</dd></div>
   <div><dt>CSS · gzip</dt><dd>4.6<small>KB</small></dd></div>
-  <div><dt>JS · gzip</dt><dd>10.5<small>KB</small></dd></div>
+  <div><dt>JS · gzip</dt><dd>10.6<small>KB</small></dd></div>
 </dl>
 <div class="doc-files">
-  <article><p class="doc-file-n"><code>admin.css</code></p><p>관리 셸 확장(접힘·서랍·고정), 위젯 배치, 화면별 블록 — 모든 규칙은 <code>.Catui_adm</code> 아래, 토큰만 사용</p></article>
-  <article><p class="doc-file-n"><code>catadmin.js</code></p><p><code>catui.admin</code> — 사이드바·테마·알림·명령 팔레트·위젯·폼 변경 감지·목록 주소 동기화·채팅·칸반·로그인 보조</p></article>
-  <article><p class="doc-file-n"><code>templates/admin/</code></p><p>복사해서 쓰는 전체 화면 HTML 52종 — 같은 셸·메뉴를 공유하고, 빌드가 링크·클래스·접근성을 검사</p></article>
+  <article><span class="doc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i16"><use href="../../../dist/icons.svg?v=2#Catui_ic-file-code"></use></svg></span><p class="doc-file-n"><code>admin.css</code></p><p>관리 셸 확장(접힘·서랍·고정), 위젯 배치, 화면별 블록 — 모든 규칙은 <code>.Catui_adm</code> 아래, 토큰만 사용</p></article>
+  <article><span class="doc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i16"><use href="../../../dist/icons.svg?v=2#Catui_ic-file-code"></use></svg></span><p class="doc-file-n"><code>catadmin.js</code></p><p><code>catui.admin</code> — 사이드바·테마·알림·명령 팔레트·위젯·폼 변경 감지·목록 주소 동기화·채팅·칸반·로그인 보조</p></article>
+  <article><span class="doc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i16"><use href="../../../dist/icons.svg?v=2#Catui_ic-file-code"></use></svg></span><p class="doc-file-n"><code>templates/admin/</code></p><p>복사해서 쓰는 전체 화면 HTML 52종 — 같은 셸·메뉴를 공유하고, 빌드가 링크·클래스·접근성을 검사</p></article>
 </div>
 <p class="Catui_help">화면 구성은 Gentelella v4 대시보드를 참고했고, 코드·문구·이미지는 Catui 토큰·컴포넌트로 새로 작성했습니다 (MIT).</p>
 </section>
@@ -104,6 +111,10 @@
 </main>
 <aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#what">CatuiAdmin은</a></li><li><a href="#layers">구성 계층</a></li><li><a href="#map">화면 지도</a></li><li><a href="#preview">미리보기</a></li></ul></aside>
 </div>
+<footer class="doc-foot"><div class="doc-foot-inner">
+  <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+</div></footer>
 </div>
 <script src="../../assets/docs.js"></script>
 </body>

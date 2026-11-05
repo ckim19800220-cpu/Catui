@@ -18,12 +18,19 @@
 <body>
 <a class="Catui_skip" href="#doc-main">본문으로 이동</a>
 <div class="Catui_site">
-<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+<header class="Catui_site-header doc-top">
+<div class="doc-top-inner">
   <a class="doc-brand" href="{{home}}"><img class="doc-logo" src="{{assets}}/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
   <nav class="doc-tabs" aria-label="문서 분류">{{tabs}}</nav>
-  <span class="doc-version">v{{version}}</span>
-  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
-</div></header>
+  <div class="doc-top-end">
+    <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
+    <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+    <a class="Catui_btn Catui_btn-sm Catui_btn-primary doc-cta" href="{{rel:css/start/introduction.html}}">시작하기</a>
+  </div>
+</div>
+</header>
+<dialog class="doc-search" aria-label="문서 검색" data-index="{{assets}}/search-index.js" data-home="{{home}}"><div class="doc-search-box"><label class="Catui_clip" for="doc-search-q">문서 검색</label><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-search"></use></svg><input id="doc-search-q" type="search" placeholder="페이지·설명 검색" autocomplete="off" aria-describedby="doc-search-count"><kbd>Esc</kbd></div><p class="doc-search-count" id="doc-search-count" aria-live="polite"></p><ul id="doc-search-list" aria-label="검색 결과"></ul></dialog>
 <div class="{{shellClass}}">
 {{sidebar}}
 <main class="doc-main" id="doc-main" tabindex="-1">
@@ -31,6 +38,10 @@
 </main>
 {{toc}}
 </div>
+<footer class="doc-foot"><div class="doc-foot-inner">
+  <div><img class="doc-logo" src="{{assets}}/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v{{version}} · MIT</p></div>
+  <nav aria-label="바닥글 문서 분류">{{tabs-foot}}</nav>
+</div></footer>
 </div>
 <script src="{{assets}}/docs.js"></script>
 </body>

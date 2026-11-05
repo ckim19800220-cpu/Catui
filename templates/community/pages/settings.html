@@ -28,7 +28,7 @@ catui.use(['form', 'layer'], function (form, layer) {
   var cm = catui.community;
   form.on('submit(st-profile)', function (d) { cm.store.set('nick', d.field.nick); layer.msg('저장했습니다', { icon: 'success' }); return false; });
   document.querySelectorAll('[data-pref]').forEach(function (s) { var v = cm.store.get(s.dataset.pref); if (v != null) s.checked = v; s.addEventListener('change', function () { cm.store.set(s.dataset.pref, s.checked); }); });
-  var saved = cm.theme.saved(); document.querySelector('[name=st-theme][value="' + saved + '"]').checked = true;
+  var saved = cm.theme.saved(), stOn = document.querySelector('[name=st-theme][value="' + saved + '"]'); if (stOn) stOn.checked = true;
   document.querySelectorAll('[name=st-theme]').forEach(function (r) { r.addEventListener('change', function () { cm.theme.set(r.value); }); });
   var blocked = cm.store.get('blocked', ['광고봇123', '도배왕']), box = document.getElementById('st-blocked');
   var draw = function () { catui.mount(box, blocked.length ? catui.html`${blocked.map(function (n) { return catui.html`<li><span>${n}</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-un="${n}">차단 풀기</button></li>`; })}` : catui.html`<li class="Catui_help">차단한 회원이 없습니다.</li>`); };

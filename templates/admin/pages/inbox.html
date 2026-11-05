@@ -50,9 +50,12 @@ catui.use(['layer'], function (layer) {
   };
   list.addEventListener('click', function (e) { var b = e.target.closest('[data-mail]'); if (!b) return; open(mails.find(function (m) { return m.id === Number(b.dataset.mail); })); split.show('detail'); });
   document.querySelectorAll('[name=ib-f]').forEach(function (r) { r.addEventListener('change', function () { filter = r.value; draw(); }); });
-  document.getElementById('ib-star').addEventListener('click', function () { cur.star = !cur.star; open(cur); });
+  document.getElementById('ib-star').addEventListener('click', function () { if (!cur) return; cur.star = !cur.star; open(cur); });
   document.getElementById('ib-del').addEventListener('click', function () {
-    var m = cur, i = mails.indexOf(m); mails.splice(i, 1); open(mails[Math.min(i, mails.length - 1)] || mails[0]); split.show('list');
+    var m = cur, i = mails.indexOf(m); if (!m || i < 0) return; mails.splice(i, 1);
+    var next = mails[Math.min(i, mails.length - 1)];
+    if (next) open(next); else { cur = null; ['ib-subj', 'ib-from', 'ib-av', 'ib-date'].forEach(function (id) { document.getElementById(id).textContent = ''; }); document.getElementById('ib-body').replaceChildren(); draw(); }   // 마지막 메일을 지우면 본문 칸을 비운다
+    split.show('list');
     layer.msg('메일을 지웠습니다', { icon: 'info', action: { text: '되돌리기', onClick: function () { mails.splice(i, 0, m); open(m); } } });
   });
   var compose = function (to, subj) {

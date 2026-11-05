@@ -72,7 +72,44 @@
 .Catui_fx-edge{position:relative}
 .Catui_fx-edge::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--Catui_fx-edge,64px);pointer-events:none;background:linear-gradient(transparent,var(--Catui_color-page-bg));-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);-webkit-mask:linear-gradient(transparent,#000);mask:linear-gradient(transparent,#000)}
 .Catui_fx-noise{position:relative;isolation:isolate}
-.Catui_fx-noise::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.Catui_fx-noise::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:Catui_fx-grain .6s steps(4) infinite}
+/* 그레인 떨림: 무늬를 4단계로 옮겨 필름 질감처럼(요소 밖으로 넘치지 않게 위치만 바꾼다) */
+@keyframes Catui_fx-grain{0%{background-position:0 0}25%{background-position:-37px 21px}50%{background-position:23px -41px}75%{background-position:-11px -17px}100%{background-position:0 0}}
+
+/* 출발판 글자: 칸마다 글자가 넘어감(fx.flap) */
+.Catui_fx-flaps{display:inline-flex;flex-wrap:wrap;gap:2px;perspective:400px}
+.Catui_fx-flap{display:inline-grid;place-items:center;min-width:1.1ch;padding:.05em .14em;border-radius:var(--Catui_radius-xs);background:var(--Catui_color-surface-muted);box-shadow:inset 0 -1px 0 var(--Catui_card-border),inset 0 0 0 1px var(--Catui_card-border);font-family:var(--Catui_font-mono);font-variant-numeric:tabular-nums;line-height:1.25;transform-origin:50% 0}
+.Catui_fx-flap[data-gap]{min-width:.5ch;background:none;box-shadow:none}
+.Catui_fx-flap-tick{animation:Catui_fx-flap 90ms var(--Catui_ease)}
+@keyframes Catui_fx-flap{from{transform:rotateX(-70deg);opacity:.6}}
+/* 스크롤 따라 떠오르기: 단어별 진행 --p = (전체 진행 × (단어 수 + 3)) − 순번, 0~1 (fx.rise가 --Catui_fx-k 갱신) */
+.Catui_fx-rise > span{--p:clamp(0,calc(var(--Catui_fx-k,1) * (var(--n,1) + 3) - var(--i,0)),1);display:inline-block;opacity:calc(.12 + var(--p) * .88);translate:0 calc((1 - var(--p)) * .5em);filter:blur(calc((1 - var(--p)) * 3px))}
+
+/* 궤도: 테두리를 따라 도는 점(fx.orbit이 SVG를 레이어에 그림) */
+.Catui_fx-layer.Catui_fx-orbit{overflow:visible}
+.Catui_fx-orbit svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.Catui_fx-orbit rect{fill:none;stroke:none}
+.Catui_fx-orbit circle{fill:var(--Catui_color-brand);filter:drop-shadow(0 0 4px color-mix(in srgb,var(--Catui_color-brand) 70%,transparent))}
+/* 점묘 덮개: 반점 무늬가 덮였다가 마우스·포커스에 걷힘 */
+.Catui_fx-halftone{background-image:radial-gradient(color-mix(in srgb,var(--Catui_color-brand) 45%,transparent) 32%,transparent 34%);background-size:10px 10px;background-position:center;transition:opacity calc(var(--Catui_dur-fast) * 3) var(--Catui_ease),background-size calc(var(--Catui_dur-fast) * 3) var(--Catui_ease)}
+.Catui_fx-host:is(:hover,:focus-within) > .Catui_fx-layer.Catui_fx-halftone{opacity:0;background-size:22px 22px}
+
+/* 깊이 진입: 단어가 아래쪽을 축으로 뒤에서 세워지듯(fx.depth가 --i·fx-in을 붙임) */
+.Catui_fx-depth{perspective:700px}
+.Catui_fx-depth > span{display:inline-block;opacity:0;transform:rotateX(-75deg) translateZ(-24px);transform-origin:50% 100%;transition:transform calc(var(--Catui_dur-fast) * 5) var(--Catui_ease),opacity calc(var(--Catui_dur-fast) * 5) var(--Catui_ease);transition-delay:calc(var(--i,0) * var(--Catui_fx-stagger,70ms))}
+.Catui_fx-depth.Catui_fx-in > span{opacity:1;transform:none}
+/* 메아리 글자: 복제가 겹겹이 퍼지며 사라짐 */
+.Catui_fx-echo{position:relative;display:inline-block}
+.Catui_fx-echo-copy{position:absolute;inset:0;pointer-events:none;opacity:0;color:var(--Catui_color-brand);white-space:nowrap}
+.Catui_fx-echo:is(:hover,:focus-visible,:focus-within) > .Catui_fx-echo-copy{animation:Catui_fx-echo calc(var(--Catui_dur-fast) * 7) var(--Catui_ease) calc(var(--i) * 90ms) both}
+@keyframes Catui_fx-echo{0%{opacity:.5;transform:none}100%{opacity:0;transform:scale(calc(1.15 + var(--i) * .12))}}
+/* 방전 테두리: 빛 조각 둘이 서로 다른 빠르기로 테두리를 달림(fx.zap이 SVG를 그림) */
+.Catui_fx-layer.Catui_fx-zap{overflow:visible}
+.Catui_fx-zap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.Catui_fx-zap rect{fill:none;stroke:var(--Catui_color-brand);stroke-width:1.5;stroke-linecap:round}
+.Catui_fx-zap-a{stroke-dasharray:8 17;filter:drop-shadow(0 0 3px var(--Catui_color-brand));animation:Catui_fx-zap 2.4s linear infinite}
+.Catui_fx-zap-b{stroke-dasharray:1.5 31;opacity:.8;animation:Catui_fx-zap 1.1s steps(6) infinite reverse}
+@keyframes Catui_fx-zap{to{stroke-dashoffset:-100}}
 
 /* 커스텀 커서: 요소 위에서만 따라다니는 빛(기본) · 고리(data-type="ring") */
 .Catui_fx-cursor{position:fixed;z-index:70;left:0;top:0;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:var(--Catui_radius-pill);pointer-events:none;opacity:0;transform:translate(var(--Catui_fx-cx,0px),var(--Catui_fx-cy,0px));transition:opacity calc(var(--Catui_dur-fast) * 2) var(--Catui_ease);background:radial-gradient(circle,color-mix(in srgb,var(--Catui_color-brand) 28%,transparent),transparent 65%)}
@@ -89,4 +126,13 @@
   .Catui_fx-flipped .Catui_fx-flip-back{visibility:visible}
   .Catui_fx-press :is(.Catui_btn,.Catui_tgl,.Catui_radio,.Catui_cbx,.Catui_chip):active,.Catui_fx-press input:active + *{scale:none}
   .Catui_fx-cursor{display:none}
+  .Catui_fx-noise::after,.Catui_fx-flap-tick{animation:none}
+  .Catui_fx-rise > span{opacity:1;translate:none;filter:none}
+  .Catui_fx-halftone{transition:none}
+  .Catui_fx-depth > span{opacity:1;transform:none;transition:none}
+  .Catui_fx-echo-copy,.Catui_fx-zap rect{animation:none}
+  .Catui_fx-echo-copy{display:none}
 }
+
+/* 페이지 일시정지 (<html data-catui-paused>, fx.pause()) — CSS로 도는 효과도 함께 멈춘다. JS 효과는 공용 티커가 멈춘다 */
+:root[data-catui-paused]:not([data-catui-paused="false"]) :is([class*="Catui_fx-"],[class*="Catui_fx-"] *,[class*="Catui_fx-"]::before,[class*="Catui_fx-"]::after){animation-play-state:paused}

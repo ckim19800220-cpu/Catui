@@ -18,12 +18,19 @@
 <body>
 <a class="Catui_skip" href="#doc-main">본문으로 이동</a>
 <div class="Catui_site">
-<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+<header class="Catui_site-header doc-top">
+<div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
   <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
-  <span class="doc-version">v2.0.0</span>
-  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
-</div></header>
+  <div class="doc-top-end">
+    <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
+    <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+    <a class="Catui_btn Catui_btn-sm Catui_btn-primary doc-cta" href="../../css/start/introduction.html">시작하기</a>
+  </div>
+</div>
+</header>
+<dialog class="doc-search" aria-label="문서 검색" data-index="../../assets/search-index.js" data-home="../../index.html"><div class="doc-search-box"><label class="Catui_clip" for="doc-search-q">문서 검색</label><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><input id="doc-search-q" type="search" placeholder="페이지·설명 검색" autocomplete="off" aria-describedby="doc-search-count"><kbd>Esc</kbd></div><p class="doc-search-count" id="doc-search-count" aria-live="polite"></p><ul id="doc-search-list" aria-label="검색 결과"></ul></dialog>
 <div class="doc-shell">
 <details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/recipes.html">모듈 조합 예제</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html" aria-current="page">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html">util 도구</a></li><li><a href="../../js/modules/carousel.html">carousel 캐러셀</a></li><li><a href="../../js/modules/field.html">field 입력 보강</a></li><li><a href="../../js/modules/autocomplete.html">autocomplete 자동완성</a></li><li><a href="../../js/modules/command.html">command 명령 팔레트</a></li><li><a href="../../js/modules/page.html">page 페이지 도구</a></li><li><a href="../../js/modules/site.html">site 홈페이지 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
 <main class="doc-main" id="doc-main" tabindex="-1">
@@ -232,7 +239,8 @@ catui.use([&#39;form&#39;], function (form) {
 <tr><td><code>form.val(f, [값])</code> · <code>form.serialize(f)</code></td><td>값 읽기/쓰기 (같은 name은 배열) / 쿼리 문자열</td></tr>
 <tr><td><code>form.reset(f)</code></td><td>기본값으로 되돌리고 오류 표시 지우기</td></tr>
 <tr><td><code>form.validate(영역)</code> · <code>form.submit(f, [cb])</code></td><td>직접 검증 / 프로그램 제출</td></tr>
-<tr><td><code>form.render(영역)</code> · <code>form.setError(el, 문장)</code> · <code>form.clearError(el)</code></td><td>셀렉트 화살표 보충 / 오류 직접 표시 / 지우기</td></tr>
+<tr><td><code>form.render(영역)</code> · <code>form.setError(el, 문장)</code> · <code>form.clearError(el)</code></td><td>셀렉트 화살표 보충 / 오류 직접 표시 / 지우기 (<code>clearError</code>는 칸 하나를 받습니다 — 폼 전체는 <code>form.reset(f)</code>)</td></tr>
+<tr><td>한글 입력</td><td>글자 칸에서 조합을 끝내는 Enter(확정 직후 150ms 포함)로는 폼이 제출되지 않습니다. 모든 폼에 자동 적용</td></tr>
 </tbody></table></div>
 </section>
 
@@ -241,6 +249,10 @@ catui.use([&#39;form&#39;], function (form) {
 </main>
 <aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#verify">선언형 검증과 제출</a></li><li><a href="#rules">매개변수 규칙 · 확인 칸 · 그룹 필수</a></li><li><a href="#ajax">Ajax 제출</a></li><li><a href="#controls">선택 컨트롤 이벤트 · 값</a></li><li><a href="#api">API</a></li></ul></aside>
 </div>
+<footer class="doc-foot"><div class="doc-foot-inner">
+  <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+</div></footer>
 </div>
 <script src="../../assets/docs.js"></script>
 </body>

@@ -30,30 +30,34 @@ community.tone = (id) => (String(id).split("").reduce((a, c) => a + c.charCodeAt
 community.avatar = (u, size = "sm") => catui.html`<span class="Catui_av Catui_av-${size}" data-tone="${community.tone(u.id || u.nick)}" aria-hidden="true">${String(u.nick).slice(0, 1)}</span>`;
 // 회원 레벨 배지
 community.badge = (u) => catui.html`<span class="Catui_cm-lv" data-lv="${Math.min(u.level, 9)}" title="레벨 ${u.level}"><span class="Catui_clip">레벨 </span>${u.level}</span>`;
+// 숫자 표시의 읽을 이름: 역할 없는 span의 aria-label은 화면 낭독기가 무시하므로 숨김 글자로 앞뒤를 붙인다
+const cmCmt = (n, word = "댓글") => catui.html`<span class="Catui_cm-cmt"><span class="Catui_clip"> ${word} </span>${n}<span class="Catui_clip">개</span></span>`;
+const cmNew = () => catui.html`<span class="Catui_cm-new"><span aria-hidden="true">N</span><span class="Catui_clip"> 새 글</span></span>`;
+const cmUp = (score, hot) => catui.html`<span class="Catui_cm-up${hot ? " Catui_cm-up-hot" : ""}"><span class="Catui_clip">추천 </span>${catui.icon("arrow-up", 12)}${score}</span>`;
 // 목록 한 줄: <li> — 제목(말머리·사진·댓글 수) · 작성자 · 시간 · 추천 · 조회
 community.row = function (p, { board = true, rank } = {}) {
   const read = this.read.has(p.id);
   return catui.html`<li class="Catui_cm-row${read ? " Catui_cm-read" : ""}${p.hot ? " Catui_cm-hot" : ""}">
-    ${rank ? catui.html`<span class="Catui_cm-rank" aria-label="${rank}위">${rank}</span>` : ""}
+    ${rank ? catui.html`<span class="Catui_cm-rank">${rank}<span class="Catui_clip">위</span></span>` : ""}
     <div class="Catui_cm-row-main">
-      <a class="Catui_cm-title" href="post.html?id=${p.id}">${board ? catui.html`<span class="Catui_cm-board" data-tone="${p.boardTone}">${p.boardName}</span>` : ""}${p.cat ? catui.html`<span class="Catui_cm-cat">${p.cat}</span>` : ""}<span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}${read ? catui.html`<span class="Catui_clip"> (읽음)</span>` : ""}</a>
+      <a class="Catui_cm-title" href="post.html?id=${p.id}">${board ? catui.html`<span class="Catui_cm-board" data-tone="${p.boardTone}">${p.boardName}</span>` : ""}${p.cat ? catui.html`<span class="Catui_cm-cat">${p.cat}</span>` : ""}<span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? cmCmt(p.comments) : ""}${read ? catui.html`<span class="Catui_clip"> (읽음)</span>` : ""}</a>
       <span class="Catui_cm-meta"><span class="Catui_cm-nick">${this.avatar(p.author)}${this.badge(p.author)}${p.author.nick}</span><time datetime="${p.time}">${this.ago(p.time)}</time><span>조회 ${this.format(p.views, "compact")}</span></span>
     </div>
-    <span class="Catui_cm-score-n" aria-label="${p.hot ? `인기글, ` : ""}추천 ${p.score}"><b>${p.score}</b><span>추천</span></span>
+    <span class="Catui_cm-score-n">${p.hot ? catui.html`<i class="Catui_clip">인기 글, </i>` : ""}<b>${p.score}</b><span>추천</span></span>
   </li>`;
 };
 // 위젯 한 줄: 제목 [댓글] · 새 글 표시(N, 3시간 이내) · 날짜
 community.isNew = (p) => community.now() - new Date(p.time) < 3 * 36e5;
 community.mini = function (p, { rank } = {}) {
   const t = new Date(p.time), today = t.toDateString() === this.now().toDateString();
-  return catui.html`<li${this.read.has(p.id) ? catui.html` class="Catui_cm-read"` : ""}>${rank ? catui.html`<span class="Catui_cm-rank">${rank}</span>` : ""}<a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}${this.isNew(p) ? catui.html`<span class="Catui_cm-new" aria-label="새 글">N</span>` : ""}<time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></li>`;
+  return catui.html`<li${this.read.has(p.id) ? catui.html` class="Catui_cm-read"` : ""}>${rank ? catui.html`<span class="Catui_cm-rank">${rank}</span>` : ""}<a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}<time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></li>`;
 };
 // 게시판 표 한 줄: 분류 · 제목[댓글] · 글쓴이 · 날짜 · 조회 · 추천
 community.tr = function (p) {
   const t = new Date(p.time), today = t.toDateString() === this.now().toDateString();
   return catui.html`<tr class="${[this.read.has(p.id) ? "Catui_cm-read" : "", p.cat === "공지" ? "Catui_cm-tr-notice" : ""].filter(Boolean).join(" ")}">
     <td class="Catui_cm-td-cat">${p.cat}</td>
-    <td class="Catui_cm-td-t"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}${this.isNew(p) ? catui.html`<span class="Catui_cm-new" aria-label="새 글">N</span>` : ""}</a></td>
+    <td class="Catui_cm-td-t"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}</a></td>
     <td><span class="Catui_cm-nick">${this.badge(p.author)}${p.author.nick}</span></td>
     <td><time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></td>
     <td><span class="Catui_clip">조회 </span>${this.format(p.views, "number")}</td>

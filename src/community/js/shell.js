@@ -12,7 +12,7 @@ community.shell = {
   init(root) {
     root.querySelectorAll("[data-catui-cm-search]").forEach((f) => community._on(f, "submit", (e) => {
       const q = f.querySelector("input[name=q]");
-      if (!q.value.trim()) { e.preventDefault(); q.focus(); }
+      if (q && !q.value.trim()) { e.preventDefault(); q.focus(); }
     }));
     const top = root.querySelector("[data-catui-cm-top]");
     if (top) {
@@ -38,7 +38,7 @@ community.shell = {
       const day = community.now() - 864e5;
       const live = d.posts.filter((p) => new Date(p.time) > day).sort((a, b) => b.score - a.score).slice(0, 10);
       const week = d.posts.filter((p) => new Date(p.time) > community.now() - 7 * 864e5).sort((a, b) => b.score - a.score).slice(0, 10);
-      const rank = (list) => catui.html`<ol class="Catui_cm-ranks">${list.map((p, i) => catui.html`<li><span class="Catui_cm-rank${i < 3 ? " Catui_cm-rank-top" : ""}">${i + 1}</span><a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}</li>`)}</ol>`;
+      const rank = (list) => catui.html`<ol class="Catui_cm-ranks">${list.map((p, i) => catui.html`<li><span class="Catui_cm-rank${i < 3 ? " Catui_cm-rank-top" : ""}">${i + 1}</span><a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? cmCmt(p.comments) : ""}</li>`)}</ol>`;
       const favs = d.boards.filter((b) => community.fav.has(b.id));
       const me = d.U.me, myPosts = d.posts.filter((p) => p.user === "me").length;
       catui.mount(box, catui.html`

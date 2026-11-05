@@ -55,7 +55,8 @@ export default catui;
   };
   // 타입 선언 (src/types/catui.d.ts → dist/catui.d.ts)
   const dts = path.join(P.js, "..", "types", "catui.d.ts");
-  if (fs.existsSync(dts)) write(path.join(P.dist, "catui.d.ts"), read(dts));
+  if (!fs.existsSync(dts)) fail("타입 선언이 없습니다: src/types/catui.d.ts (package.json types가 가리킴)");
+  write(path.join(P.dist, "catui.d.ts"), read(dts));
   const min = minify(iife, "catui.js", "iife");
   minify(esm, "catui.esm.js", "esm");
 

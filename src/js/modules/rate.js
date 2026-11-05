@@ -13,12 +13,15 @@ export const rate = component({
     const c = inst.config;
     if (!inst.elem) return;
     const name = uid("catui-rate");
+    // 별 개수는 1 이상 정수(5.5·NaN이면 별 수와 최대 점수가 어긋난다)
+    c.length = Math.floor(Number(c.length)) >= 1 ? Math.floor(Number(c.length)) : 5;
     const word = (v) => (v ? `${v}점${c.texts[v - 1] ? ` · ${c.texts[v - 1]}` : ""}` : "선택 안 함");
     if (c.readonly) {
       // 3.6점처럼 소수면 별은 반올림(4개), 읽기 값은 소수 첫째 자리까지 그대로
       const v = Math.max(0, Math.min(c.length, Number(c.value) || 0)), shown = Math.round(v);
       inst.value = v;
       inst.getValue = () => v;
+      inst.setValue = (nv) => { inst.reload({ value: nv }); };   // 읽기 전용도 값 바꾸기는 다시 그려서
       mount(inst.elem, html`<span class="Catui_rating" role="img" aria-label="${c.label ? `${c.label} ` : ""}${c.length}점 중 ${Math.round(v * 10) / 10}점">${Array.from({ length: c.length }, (_, i) => html`<span style="color:var(${i < shown ? "--Catui_rating-on" : "--Catui_rating-off"})">${icon("star", 16)}</span>`)}</span>`);
       return;
     }

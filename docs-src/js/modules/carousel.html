@@ -121,7 +121,7 @@
 <thead><tr><th scope="col">옵션 (선언형 속성)</th><th scope="col">기본</th><th scope="col">설명</th></tr></thead>
 <tbody>
 <tr><td><code>direction</code> (<code>data-catui-direction</code>)</td><td>'horizontal'</td><td><code>'vertical'</code>이면 세로 (<code>.Catui_carousel-vertical</code>), 화살표·키보드도 ↑↓</td></tr>
-<tr><td><code>height</code> (<code>data-catui-height</code>)</td><td>세로 320px</td><td>트랙 높이. 숫자는 px, 문자열은 CSS 길이(<code>'50vh'</code>)</td></tr>
+<tr><td><code>height</code> (<code>data-catui-height</code>)</td><td>— (세로는 CSS 기본 320px)</td><td>트랙 높이. 숫자는 px, 문자열은 CSS 길이(<code>'50vh'</code>)</td></tr>
 <tr><td><code>effect</code> (<code>data-catui-effect</code>)</td><td>'slide'</td><td><code>'fade'</code>면 겹쳐서 서서히 (<code>.Catui_carousel-fade</code>)</td></tr>
 <tr><td><code>loop</code> (<code>data-catui-loop="false"</code>) · <code>rewind</code> (<code>data-catui-rewind</code>)</td><td>true · false</td><td>끊김 없는 순환 / 순환을 끈 상태에서 끝 → 처음으로 되감기</td></tr>
 <tr><td><code>perView</code> (<code>data-catui-per-view="1,768:2"</code>) · <code>step</code> (<code>data-catui-step</code>)</td><td>1 · 1</td><td>한 화면 장 수(최소 폭별) · 한 번에 넘기는 장 수</td></tr>
@@ -133,7 +133,7 @@
 <tr><td><code>counter</code> · <code>progress</code></td><td>false</td><td>"2 / 5" 장 번호 · 자동 넘김 진행 막대</td></tr>
 <tr><td><code>drag</code> · <code>wheel</code> (<code>data-catui-wheel</code>) · <code>keyboard</code></td><td>true · false · true</td><td>마우스 끌기 / 휠 한 번에 한 장 / 방향키·Home·End</td></tr>
 <tr><td><code>index</code> · <code>label</code> · <code>slideLabel</code></td><td>0 · '' · '{n} / {total}'</td><td>처음 장 / 영역 이름 / 슬라이드 이름 틀</td></tr>
-<tr><td><code>before(from, to)</code></td><td>—</td><td>false를 돌려주면 이동 취소</td></tr>
+<tr><td><code>before(from, to)</code></td><td>—</td><td><code>false</code> 또는 <code>false</code>로 끝나는 Promise를 돌려주면 이동 취소. 기다리는 사이 다른 이동이 오면 이전 결과는 무시</td></tr>
 <tr><td><code>change(index)</code> · <code>on('change(f)')</code></td><td>—</td><td><code>{ index, total, atStart, atEnd }</code> — 버튼·점·키보드·끌기·휠·손가락 어느 방법으로 넘겨도 발생</td></tr>
 <tr><td><code>inst.go(i, [smooth])</code> · <code>next()</code> · <code>prev()</code> · <code>pause()</code> · <code>play()</code> · <code>isPaused()</code> · <code>getIndex()</code> · <code>getTotal()</code> · <code>update()</code></td><td>—</td><td>직접 조작 · 슬라이드를 넣거나 뺀 뒤 <code>update()</code> · <code>carousel.go(id, i)</code></td></tr>
 </tbody></table></div>

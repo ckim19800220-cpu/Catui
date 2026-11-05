@@ -46,5 +46,5 @@ import '@imcat-ckim/catui/community.css';</code></pre>
 <tr><td><code>poll-1301.json</code> · <code>events.json</code></td><td>투표 항목·표 수 · 모임 정원·참여</td></tr>
 <tr><td><code>notices</code> · <code>notifications</code> · <code>messages</code> · <code>trends</code></td><td>공지 · 알림 · 쪽지 · 많이 찾는 검색어</td></tr>
 </tbody></table></div>
-<p>바인딩 속성은 CatuiAdmin과 같고 접두사만 <code>data-catui-cm-</code>입니다(<code>-src · -text · -rows · -field · -attr · -class · -bool</code>, <code>community.derive['이름']</code>). 형식에 <code>compact</code>(1.2만)·<code>ago</code>(3분 전)가 더 있습니다.</p>
+<p>바인딩 속성은 CatuiAdmin과 같고 접두사만 <code>data-catui-cm-</code>입니다(<code>-src · -text · -format · -rows · -field · -field-data · -label · -attr · -class · -bool</code>, <code>community.derive['이름']</code>). 형식에 <code>compact</code>(1.2만)·<code>ago</code>(3분 전)가 더 있습니다. <code>[data-catui-cm-chart][data-catui-cm-key="경로"]</code>는 자료를 <code>data-catui-cm-data</code>에 JSON으로 채우기만 합니다 — CatuiCommunity에는 차트를 그리는 기능이 없으므로 <code>data</code> 이벤트에서 <code>catui.canvas</code> 등으로 직접 그립니다.</p>
 </section>

@@ -18,12 +18,19 @@
 <body>
 <a class="Catui_skip" href="#doc-main">본문으로 이동</a>
 <div class="Catui_site">
-<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+<header class="Catui_site-header doc-top">
+<div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
   <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
-  <span class="doc-version">v2.0.0</span>
-  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
-</div></header>
+  <div class="doc-top-end">
+    <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
+    <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+    <a class="Catui_btn Catui_btn-sm Catui_btn-primary doc-cta" href="../../css/start/introduction.html">시작하기</a>
+  </div>
+</div>
+</header>
+<dialog class="doc-search" aria-label="문서 검색" data-index="../../assets/search-index.js" data-home="../../index.html"><div class="doc-search-box"><label class="Catui_clip" for="doc-search-q">문서 검색</label><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><input id="doc-search-q" type="search" placeholder="페이지·설명 검색" autocomplete="off" aria-describedby="doc-search-count"><kbd>Esc</kbd></div><p class="doc-search-count" id="doc-search-count" aria-live="polite"></p><ul id="doc-search-list" aria-label="검색 결과"></ul></dialog>
 <div class="doc-shell">
 <details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/recipes.html">모듈 조합 예제</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html">util 도구</a></li><li><a href="../../js/modules/carousel.html" aria-current="page">carousel 캐러셀</a></li><li><a href="../../js/modules/field.html">field 입력 보강</a></li><li><a href="../../js/modules/autocomplete.html">autocomplete 자동완성</a></li><li><a href="../../js/modules/command.html">command 명령 팔레트</a></li><li><a href="../../js/modules/page.html">page 페이지 도구</a></li><li><a href="../../js/modules/site.html">site 홈페이지 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
 <main class="doc-main" id="doc-main" tabindex="-1">
@@ -246,7 +253,7 @@ catui.use([&#39;carousel&#39;], function (carousel) {
 <thead><tr><th scope="col">옵션 (선언형 속성)</th><th scope="col">기본</th><th scope="col">설명</th></tr></thead>
 <tbody>
 <tr><td><code>direction</code> (<code>data-catui-direction</code>)</td><td>'horizontal'</td><td><code>'vertical'</code>이면 세로 (<code>.Catui_carousel-vertical</code>), 화살표·키보드도 ↑↓</td></tr>
-<tr><td><code>height</code> (<code>data-catui-height</code>)</td><td>세로 320px</td><td>트랙 높이. 숫자는 px, 문자열은 CSS 길이(<code>'50vh'</code>)</td></tr>
+<tr><td><code>height</code> (<code>data-catui-height</code>)</td><td>— (세로는 CSS 기본 320px)</td><td>트랙 높이. 숫자는 px, 문자열은 CSS 길이(<code>'50vh'</code>)</td></tr>
 <tr><td><code>effect</code> (<code>data-catui-effect</code>)</td><td>'slide'</td><td><code>'fade'</code>면 겹쳐서 서서히 (<code>.Catui_carousel-fade</code>)</td></tr>
 <tr><td><code>loop</code> (<code>data-catui-loop="false"</code>) · <code>rewind</code> (<code>data-catui-rewind</code>)</td><td>true · false</td><td>끊김 없는 순환 / 순환을 끈 상태에서 끝 → 처음으로 되감기</td></tr>
 <tr><td><code>perView</code> (<code>data-catui-per-view="1,768:2"</code>) · <code>step</code> (<code>data-catui-step</code>)</td><td>1 · 1</td><td>한 화면 장 수(최소 폭별) · 한 번에 넘기는 장 수</td></tr>
@@ -258,7 +265,7 @@ catui.use([&#39;carousel&#39;], function (carousel) {
 <tr><td><code>counter</code> · <code>progress</code></td><td>false</td><td>"2 / 5" 장 번호 · 자동 넘김 진행 막대</td></tr>
 <tr><td><code>drag</code> · <code>wheel</code> (<code>data-catui-wheel</code>) · <code>keyboard</code></td><td>true · false · true</td><td>마우스 끌기 / 휠 한 번에 한 장 / 방향키·Home·End</td></tr>
 <tr><td><code>index</code> · <code>label</code> · <code>slideLabel</code></td><td>0 · '' · '{n} / {total}'</td><td>처음 장 / 영역 이름 / 슬라이드 이름 틀</td></tr>
-<tr><td><code>before(from, to)</code></td><td>—</td><td>false를 돌려주면 이동 취소</td></tr>
+<tr><td><code>before(from, to)</code></td><td>—</td><td><code>false</code> 또는 <code>false</code>로 끝나는 Promise를 돌려주면 이동 취소. 기다리는 사이 다른 이동이 오면 이전 결과는 무시</td></tr>
 <tr><td><code>change(index)</code> · <code>on('change(f)')</code></td><td>—</td><td><code>{ index, total, atStart, atEnd }</code> — 버튼·점·키보드·끌기·휠·손가락 어느 방법으로 넘겨도 발생</td></tr>
 <tr><td><code>inst.go(i, [smooth])</code> · <code>next()</code> · <code>prev()</code> · <code>pause()</code> · <code>play()</code> · <code>isPaused()</code> · <code>getIndex()</code> · <code>getTotal()</code> · <code>update()</code></td><td>—</td><td>직접 조작 · 슬라이드를 넣거나 뺀 뒤 <code>update()</code> · <code>carousel.go(id, i)</code></td></tr>
 </tbody></table></div>
@@ -269,6 +276,10 @@ catui.use([&#39;carousel&#39;], function (carousel) {
 </main>
 <aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">끊김 없는 순환 + 자동 넘김</a></li><li><a href="#multi">여러 장 보기 (반응형)</a></li><li><a href="#fade">페이드 전환</a></li><li><a href="#api-render">스크립트로 만들기</a></li><li><a href="#vertical">세로 방향</a></li><li><a href="#thumbs">미리보기(썸네일) · 내용 높이 맞추기</a></li><li><a href="#center">가운데 정렬 · 여러 장씩 이동</a></li><li><a href="#api">옵션 · API</a></li></ul></aside>
 </div>
+<footer class="doc-foot"><div class="doc-foot-inner">
+  <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+</div></footer>
 </div>
 <script src="../../assets/docs.js"></script>
 </body>

@@ -16,7 +16,7 @@ catui.use(function () {
       catui.mount(document.getElementById('nt-tabs'), catui.html`${Object.keys(KIND).map(function (key) { return catui.html`<a href="#${key || 'all'}"${key === k ? catui.html` aria-current="page"` : ''}>${KIND[key]}</a>`; })}`);
       catui.mount(document.getElementById('nt-list'), shown.length ? catui.html`${shown.map(function (x) { var un = x.unread && r.indexOf(x.id) < 0; return catui.html`<li class="Catui_cm-row${un ? '' : ' Catui_cm-read'}">${catui.icon(ICON[x.kind] || 'bell', 18)}<div class="Catui_cm-row-main"><a class="Catui_cm-title" href="${x.href}" data-id="${x.id}"><span class="Catui_cm-title-t">${x.text}</span>${un ? catui.html`<span class="Catui_badge Catui_badge-success">새 알림</span>` : catui.html`<span class="Catui_clip"> (읽음)</span>`}</a><span class="Catui_cm-meta"><span>${KIND[x.kind]}</span><time datetime="${x.time}">${cm.ago(x.time)}</time></span></div></li>`; })}` : cm.empty('알림이 없습니다.'));
     };
-    document.getElementById('nt-list').addEventListener('click', function (e) { var a = e.target.closest('[data-id]'); if (a) cm.store.set('notiRead', read().concat(a.dataset.id)); });
+    document.getElementById('nt-list').addEventListener('click', function (e) { var a = e.target.closest('[data-id]'); if (!a) return; var r = read(); if (r.indexOf(a.dataset.id) < 0) cm.store.set('notiRead', r.concat(a.dataset.id)); });
     document.getElementById('nt-all').addEventListener('click', function () { cm.store.set('notiRead', items.map(function (x) { return x.id; })); draw(); catui.layer.msg('모두 읽음으로 바꿨습니다', { time: 1200 }); });
     window.addEventListener('hashchange', draw);
     draw();

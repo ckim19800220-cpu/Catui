@@ -50,7 +50,7 @@
 .Catui_cm-search .Catui_input{border:2px solid var(--Catui_color-brand);border-radius:var(--Catui_cm-radius)}
 
 /* 배치 */
-.Catui_cm-wrap{gap:20px;padding-block:20px;grid-template-columns:minmax(0,1fr) calc(var(--Catui_space-10) * 4.6)}
+.Catui_cm-wrap{padding-block:var(--Catui_cm-gap)}   /* 열 폭은 shell.css 토큰으로만 — 여기서 정하면 991px 이하 1열 규칙을 덮는다 */
 .Catui_cm-main{gap:16px}
 
 /* 상자(위젯) */
@@ -136,5 +136,4 @@
 /* 글 보기 */
 .Catui_cm-post-h{border-bottom:1px solid var(--Catui_cm-line);background:var(--Catui_cm-soft)}
 .Catui_cm-post-h h1{font-size:22px;font-weight:800}
-.Catui_cm-prose{font-size:16px;line-height:1.8}
 .Catui_cm-vote-lg button{border-radius:var(--Catui_cm-radius);min-width:110px;min-height:56px}

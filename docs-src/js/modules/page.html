@@ -88,7 +88,7 @@ page.totop({ offset: 400, target: '#main' });                                   
 <tr><td><code>data-catui-copy</code> · <code>page.copy(text)</code></td><td>복사 버튼 / 직접 복사(Promise&lt;boolean&gt;). 버튼은 <code>catui:copy</code> 이벤트(<code>detail: { ok, text }</code>)를 보냄</td></tr>
 <tr><td><code>data-catui-tip</code> · <code>data-catui-tip-side="top|bottom"</code> · <code>page.tip.show(el)</code> · <code>hide()</code></td><td>툴팁</td></tr>
 <tr><td><code>data-catui-src</code> · <code>data-catui-srcset</code> · <code>page.lazy(영역)</code></td><td>지연 로딩</td></tr>
-<tr><td><code>page.flow.render({ elem, done(page, next), auto, margin, more, end })</code></td><td><code>next(항목들, 더있음)</code> — 항목은 html``·Element·배열. <code>inst.load()</code> · <code>inst.reset()</code> · 이벤트 <code>load(f)</code> <code>{ page, more }</code></td></tr>
+<tr><td><code>page.flow.render({ elem, done(page, next), auto, margin, more, end, loadingText })</code></td><td><code>next(항목들, 더있음)</code> — 항목은 html``·Element·배열. <code>inst.load()</code> · <code>inst.reset()</code> · 이벤트 <code>load(f)</code> <code>{ page, more }</code></td></tr>
 <tr><td><code>page.steps.render({ elem, data, current, panels, before(from, to), change })</code></td><td><code>inst.next() · prev() · go(i) · getIndex()</code> (Promise&lt;이동 여부&gt;). before가 false면 이동 안 함. 이벤트 <code>change(f)</code> <code>{ index, from, total }</code></td></tr>
 <tr><td><code>data-catui-totop="px"</code> · <code>data-catui-totop-target</code> · <code>page.totop({ offset, target, label })</code></td><td>맨 위로</td></tr>
 </tbody></table></div>

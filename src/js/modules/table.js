@@ -210,7 +210,8 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
     const inst = table.getThis(id);
     if (!inst) return { data: [], isAll: false };
     const data = [...inst.state.checked];
-    return { data, isAll: inst.rows.length > 0 && inst.rows.every((r) => inst.state.checked.has(r)) };
+    const rows = inst.rows || [];   // 첫 draw 전에 불려도 안전하게
+    return { data, isAll: rows.length > 0 && rows.every((r) => inst.state.checked.has(r)) };
   },
   getData(id) { return table.getThis(id)?.rows || []; },
   clearChecked(id) {

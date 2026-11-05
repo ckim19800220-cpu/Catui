@@ -8,6 +8,62 @@
     setTimeout(() => { btn.textContent = "복사"; }, 1500);
   });
 
+  // 문서 검색 (Ctrl/⌘+K 또는 머리의 검색 버튼): 빌드가 넣은 색인(제목·분류·설명)에서 찾아 링크로 보인다
+  const dlg = document.querySelector(".doc-search"), sbtn = document.querySelector(".doc-search-btn");
+  if (dlg && sbtn) {
+    let idx = [], loading = null;
+    const q = dlg.querySelector("input"), list = dlg.querySelector("#doc-search-list"), count = dlg.querySelector("#doc-search-count");
+    // 색인(assets/search-index.js)은 처음 열 때 한 번만 불러온다. file://에서도 되도록 fetch 대신 script
+    const load = () => loading ||= new Promise((done) => {
+      const root = (dlg.dataset.home || "index.html").replace(/index\.html$/, "");
+      const s = document.createElement("script");
+      s.src = dlg.dataset.index;
+      s.onload = () => { idx = (window.catuiDocIndex || []).map((p) => ({ ...p, u: root + p.u })); done(); };
+      s.onerror = () => { count.textContent = "검색 색인을 불러오지 못했습니다."; loading = null; done(); };
+      document.head.appendChild(s);
+    });
+    const norm = (s) => s.toLowerCase().replace(/\s+/g, "");
+    const draw = () => {
+      const v = norm(q.value);
+      const hits = (v ? idx.filter((p) => norm(`${p.t}${p.s}${p.d}`).includes(v)) : idx.slice(0, 8)).slice(0, 20);
+      list.textContent = "";
+      hits.forEach((p) => {
+        const li = document.createElement("li"), a = document.createElement("a"), b = document.createElement("b"), s = document.createElement("span");
+        a.href = p.u; b.textContent = p.t; s.textContent = `${p.s}${p.d ? ` — ${p.d}` : ""}`;
+        a.append(b, s); li.appendChild(a); list.appendChild(li);
+      });
+      if (!idx.length && loading) { count.textContent = "색인을 불러오는 중…"; return; }
+      if (v && !hits.length) { const li = document.createElement("li"); li.className = "doc-search-empty"; li.textContent = `'${q.value.trim()}'에 맞는 문서가 없습니다. 다른 낱말로 찾아 보세요.`; list.appendChild(li); }
+      count.textContent = v ? `${hits.length}개 찾음` : "자주 찾는 문서";
+    };
+    const open = () => {
+      if (dlg.open) return;
+      if (!idx.length) load().then(() => { if (dlg.open) draw(); });
+      q.value = ""; draw(); dlg.showModal(); sbtn.setAttribute("aria-expanded", "true"); q.focus();
+    };
+    sbtn.setAttribute("aria-expanded", "false");
+    dlg.addEventListener("close", () => sbtn.setAttribute("aria-expanded", "false"));
+    sbtn.addEventListener("click", open);
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });   // 바깥(스크림) 누르면 닫기
+    q.addEventListener("input", draw);
+    q.addEventListener("keydown", (e) => {
+      if (e.isComposing || e.keyCode === 229) return;   // 한글 조합 중 Enter·↓는 글자 확정
+      if (e.key === "ArrowDown") { e.preventDefault(); list.querySelector("a")?.focus(); }
+      else if (e.key === "Enter") { const a = list.querySelector("a"); if (a) { e.preventDefault(); location.href = a.href; } }
+    });
+    list.addEventListener("keydown", (e) => {
+      const links = [...list.querySelectorAll("a")], i = links.indexOf(document.activeElement);
+      if (e.key === "ArrowDown") { e.preventDefault(); links[Math.min(links.length - 1, i + 1)]?.focus(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); (i <= 0 ? q : links[i - 1]).focus(); }
+    });
+    document.addEventListener("keydown", (e) => {
+      // 문서 안에 명령 팔레트 예제(.Catui_cmdk)가 있는 쪽에서는 그 예제가 Ctrl+K를 쓴다
+      if (e.key.toLowerCase() !== "k" || !(e.ctrlKey || e.metaKey) || e.shiftKey || e.altKey || e.isComposing || document.querySelector(".Catui_cmdk")) return;
+      e.preventDefault();
+      open();
+    });
+  }
+
   // 다크 모드 전환 (선택은 localStorage에 저장, 깜빡임 방지는 head의 인라인 스크립트)
   const themeBtn = document.querySelector(".doc-theme");
   if (themeBtn) {
@@ -28,7 +84,7 @@
 
   // 아이콘 목록 검색 (이름 일부로 거르기)
   const iconList = document.querySelector(".doc-icons");
-  if (iconList) {
+  if (iconList?.querySelector("use")) {
     const items = [...iconList.children];
     const box = document.createElement("div");
     box.className = "doc-icons-search";

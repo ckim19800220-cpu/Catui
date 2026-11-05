@@ -23,7 +23,7 @@
 <tr><td><code>icons</code></td><td>catui.js 옆 <code>icons.svg</code></td><td>아이콘 스프라이트 경로</td></tr>
 <tr><td><code>autoInit</code></td><td><code>true</code></td><td>문서 준비 시 <code>data-catui-*</code> 자동 연결</td></tr>
 <tr><td><code>debug</code></td><td><code>true</code></td><td>콘솔 출력 — <code>true</code> 경고·오류 / <code>false</code> 오류만(운영 권장) / <code>"silent"</code> 모두 끔</td></tr>
-<tr><td><code>autoDestroy</code></td><td><code>true</code></td><td>DOM에서 빠진 요소의 컴포넌트 인스턴스를 다음 틱에 자동 정리(<code>destroyDetached</code>). 떼었다 다시 붙일 요소는 렌더 옵션 <code>keep: true</code>. 첫 <code>init</code> 전에 설정</td></tr>
+<tr><td><code>autoDestroy</code></td><td><code>true</code></td><td>DOM에서 빠진 요소의 컴포넌트 인스턴스를 다음 틱에 자동 정리(<code>destroyDetached</code>). 떼었다 다시 붙일 요소는 렌더 옵션 <code>keep: true</code>. <code>init</code> 뒤에 바꿔도 바로 반영</td></tr>
 <tr><td><code>csrf</code></td><td><code>{ meta: 'csrf-token', header: 'X-CSRF-Token' }</code></td><td><code>&lt;meta name="csrf-token" content="…"&gt;</code> 값을 form Ajax·table url·upload 요청 헤더로. <strong>같은 출처</strong>이면서 GET·HEAD·OPTIONS가 아닐 때만 붙여 토큰이 외부로 새지 않게 합니다. 모듈 옵션 <code>headers</code>가 우선. <code>false</code> = 끔</td></tr>
 </tbody></table></div>
 </section>

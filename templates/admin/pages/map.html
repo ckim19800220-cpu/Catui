@@ -44,7 +44,8 @@ catui.use(['util'], function (util) {
     var shown = stores.filter(function (s) { return !t || s.name.indexOf(t) > -1 || s.area.indexOf(t) > -1; });
     catui.mount(list, shown.length ? catui.html`${shown.map(function (s) { return catui.html`<li class="Catui_list-item" data-id="${s.id}"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-id="${s.id}">${catui.icon('map-pin', 16)}${s.name}</button><span class="Catui_list-meta">${s.area} · ${util.number(s.sales)}만원</span></li>`; })}` : catui.html`<li class="Catui_adm-empty">맞는 매장이 없습니다.</li>`);
     map.querySelectorAll('.Catui_adm-pin').forEach(function (p) { p.hidden = !shown.some(function (s) { return s.id === p.dataset.id; }); });
-    if (cur) { var c = cur; cur = null; select(c, "list"); }
+    // 걸러져 안 보이게 된 매장은 선택을 푼다(같은 id로 select하면 해제됨), 보이면 다시 표시
+    if (cur) { if (shown.some(function (s) { return s.id === cur; })) { var c = cur; cur = null; select(c, 'list'); } else select(cur, 'list'); }
   };
   map.addEventListener('click', function (e) { var p = e.target.closest('.Catui_adm-pin'); if (p) select(p.dataset.id, 'pin'); });
   list.addEventListener('click', function (e) { var b = e.target.closest('button[data-id]'); if (b) select(b.dataset.id, 'list'); });

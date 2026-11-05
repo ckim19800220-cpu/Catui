@@ -19,13 +19,15 @@
       </div>
       <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="submit" data-catui-submit>로그인</button>
       <p class="Catui_adm-auth-alt">또는</p>
-      <button class="Catui_btn Catui_btn-lg Catui_btn-secondary" type="button">{{icon:key:16}}회사 계정(SSO)으로 로그인</button>
+      <button class="Catui_btn Catui_btn-lg Catui_btn-secondary" type="button" id="lg-sso">{{icon:key:16}}회사 계정(SSO)으로 로그인</button>
       <p class="Catui_help">계정이 없나요? <a class="Catui_link" href="register.html">가입 신청</a></p>
     </form>
   </main>
 </div>
 <script>
-catui.use(['form'], function (form) {
+catui.use(['form', 'layer'], function (form, layer) {
+  // 템플릿에는 SSO 서버가 없으므로 눌렀을 때 안내만(무반응 버튼 방지)
+  document.getElementById('lg-sso').addEventListener('click', function () { layer.msg('SSO는 실서비스에서 회사 인증 서버와 연결하면 열립니다', { icon: 'info' }); });
   form.on('submit(lg-form)', function (d) {
     var ok = d.field.email === 'admin@catui.dev' && d.field.pw === 'catui1234';
     document.getElementById('lg-err').hidden = ok;

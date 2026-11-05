@@ -22,6 +22,8 @@ admin.init = function (scope = document) {
 // 모든 리스너·차트·팝업 정리 (SPA에서 화면을 바꿀 때)
 admin.destroy = function () {
   this._offs.splice(0).forEach((off) => { try { off(); } catch {} });
+  this._seen = new WeakMap();
+  this.ready = undefined;
   this.widgets.destroy();
   this.form.destroy();
   this.root?.removeAttribute("data-catui-adm-ready");

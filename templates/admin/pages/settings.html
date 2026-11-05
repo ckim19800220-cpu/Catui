@@ -50,7 +50,7 @@ catui.use(['layer'], function (layer) {
   show(location.hash.slice(1), false);
   // 화면 테마 ↔ catui.admin.theme
   var saved = catui.admin.theme.saved();
-  document.querySelector('[name=st-theme][value="' + saved + '"]').checked = true;
+  var stOn = document.querySelector('[name=st-theme][value="' + saved + '"]'); if (stOn) stOn.checked = true;   // 예상 밖 저장값이면 건너뜀
   document.querySelectorAll('[name=st-theme]').forEach(function (r) { r.addEventListener('change', function () { catui.admin.theme.set(r.value); layer.msg('화면 테마를 바꿨습니다', { time: 1200 }); }); });
   document.getElementById('st-logout').addEventListener('click', function (e) { e.target.closest('li').remove(); layer.msg('그 기기에서 로그아웃했습니다', { icon: 'success' }); });
   document.getElementById('st-close').addEventListener('click', function () {

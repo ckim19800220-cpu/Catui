@@ -64,7 +64,7 @@ admin.shell = {
     admin._on(scrim, "click", () => close());
     admin._on(document, "keydown", (e) => {
       if (!isOpen()) return;
-      if (e.key === "Escape" && !e.isComposing) { e.preventDefault(); close(); return; }
+      if (e.key === "Escape" && !catui.imeBusy(e)) { e.preventDefault(); close(); return; }
       if (e.key !== "Tab") return;
       const f = admFocusables(side);
       if (!f.length) return;

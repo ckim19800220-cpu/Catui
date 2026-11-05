@@ -31,6 +31,33 @@ export interface CatuiCommunity {
   bind(scope?: Element | Document): Promise<unknown[]>;
   format(v: unknown, kind?: "number" | "won" | "man" | "percent" | "delta" | "ms" | "initial" | "compact" | "ago"): string;
   ago(iso: string): string;
+  /** 모듈 이벤트 발사 — 핸들러가 false를 돌려주면 false */
+  emit(evt: CmEvent | string, payload?: any): boolean;
+  /** 현재 주소의 검색 매개변수 */
+  query(): URLSearchParams;
+  /** 모의 데이터 "지금" — <html data-catui-cm-now> 값 (없으면 undefined = 실제 시각) */
+  fixedNow?: string;
+  now(): Date;
+  /** 점 경로("a.b.0.c")로 값 꺼내기 */
+  pick(obj: any, path: string): any;
+  /** 회원 색 톤 1~5 (아이디로 고정) */
+  tone(id: string | number): number;
+  avatar(u: { id?: string; nick: string }, size?: "sm" | "md" | "lg"): unknown;
+  badge(u: CmUser): unknown;
+  /** 3시간 이내 글이면 true */
+  isNew(p: { time: string }): boolean;
+  mini(p: any, opt?: { rank?: number }): unknown;
+  tr(p: any): unknown;
+  table(rows: any[]): unknown;
+  /** 사진 주소: p.thumb이 없으면 토큰 색 SVG 자리표시 */
+  thumb(p: { id: string | number; thumb?: string; tone?: number }): string;
+  vote: { get(key: string): "up" | "down" | ""; set(key: string, dir: "up" | "down" | ""): void; paint(box: HTMLElement): void; paintAll(scope: ParentNode): void; init(root: HTMLElement): void };
+  /** 아래는 init()이 부르는 부품 — mount(box)로 새로 넣은 상자를 직접 연결할 수 있다 */
+  shell: { init(root: HTMLElement): void; aside(root: HTMLElement): void };
+  list: { init(root: HTMLElement): void; mount(box: HTMLElement): void; qnaRow(p: any): unknown };
+  comments: { init(root: HTMLElement): void; mount(box: HTMLElement): void; form(label: string, parent?: string): HTMLFormElement; item(c: any, users: Record<string, CmUser>, opt?: { best?: boolean }): unknown; draw(box: HTMLElement, state: any): void };
+  widgets: { tick(scope?: Element | Document): void; init(root: HTMLElement): void; poll(f: HTMLFormElement): void };
+  editor: { init(root: HTMLElement): void };
 }
 
 export declare const community: CatuiCommunity;

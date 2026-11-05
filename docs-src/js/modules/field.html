@@ -47,7 +47,7 @@
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">field API</caption>
 <thead><tr><th scope="col">컴포넌트</th><th scope="col">옵션 · 메서드 · 이벤트</th></tr></thead>
 <tbody>
-<tr><td><code>field.tags.render({ elem })</code></td><td><code>max · value[] · duplicate(false) · maxLength(30) · separator(',') · name</code> / <code>inst.add(t) · remove(t|i) · getValue() · setValue([])</code> / <code>change(f)</code> <code>{ value }</code></td></tr>
+<tr><td><code>field.tags.render({ elem })</code></td><td><code>max · value[] · duplicate(false) · maxLength(30) · separator(',') · name · label</code>(목록 이름) / <code>inst.add(t) · remove(t|i) · getValue() · setValue([])</code> / <code>change(f)</code> <code>{ value }</code></td></tr>
 <tr><td><code>field.stepper.render({ elem })</code></td><td><code>min · max · step · value · name · unit · label</code> / <code>inst.getValue() · setValue(v)</code> / <code>change(f)</code> <code>{ value }</code>. 소수 단계(0.1)도 오차 없이</td></tr>
 <tr><td><code>field.counter.render({ elem })</code></td><td><code>max</code>(없으면 maxlength) · <code>warn</code>(0.85) · <code>target</code>(표시 요소) / <code>inst.refresh()</code></td></tr>
 <tr><td><code>field.otp.render({ elem })</code></td><td><code>pattern</code>(기본 숫자, <code>data-catui-otp="alnum"</code>은 영문·숫자) · <code>name</code> · <code>complete(code)</code> / <code>inst.getValue() · clear() · setError(bool)</code> / <code>complete(f)</code> <code>{ value }</code></td></tr>

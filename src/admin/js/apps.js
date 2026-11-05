@@ -29,7 +29,7 @@ admin.chat = function ({ log, form, me = "나" }) {
   };
   const input = f.querySelector("input, textarea");
   // 한글 조합 중 Enter(확정용)는 보내지 않는다 — Safari는 keyCode 229
-  admin._on(input, "keydown", (e) => { if (e.key === "Enter" && (e.isComposing || e.keyCode === 229)) e.preventDefault(); });
+  admin._on(input, "keydown", (e) => { if (e.key === "Enter" && catui.imeBusy(e)) e.preventDefault(); });
   admin._on(f, "submit", (e) => {
     e.preventDefault();
     const text = input.value.trim();

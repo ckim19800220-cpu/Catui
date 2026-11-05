@@ -1,7 +1,7 @@
 <section aria-labelledby="examples">
 <h2 id="examples">예제</h2>
 <catui-example title="월간 달력">
-  <div class="Catui_cal-scroll"><div class="Catui_cal" role="grid" aria-label="2026년 9월">
+  <div class="Catui_cal-scroll"><div class="Catui_cal" role="group" aria-label="2026년 9월">
     <div class="Catui_cal-top">2026년 9월</div>
     <div class="Catui_cal-dows"><div class="Catui_cal-head">월</div><div class="Catui_cal-head">화</div><div class="Catui_cal-head">수</div><div class="Catui_cal-head">목</div><div class="Catui_cal-head">금</div><div class="Catui_cal-head">토</div><div class="Catui_cal-head">일</div></div>
     <div class="Catui_cal-week">
@@ -23,9 +23,9 @@
       <div class="Catui_cal-cell Catui_cal-weekend"><span class="Catui_cal-n">13</span></div>
     </div>
     <div class="Catui_cal-week">
-      <div class="Catui_cal-cell"><span class="Catui_cal-n Catui_cal-today">14</span><span class="Catui_cal-event">검토</span><span class="Catui_cal-event Catui_cal-ev-3">회의</span></div>
+      <div class="Catui_cal-cell"><span class="Catui_cal-n Catui_cal-today">14<span class="Catui_clip">일, 오늘</span></span><span class="Catui_cal-event">검토</span><span class="Catui_cal-event Catui_cal-ev-3">회의</span></div>
       <div class="Catui_cal-cell"><span class="Catui_cal-n">15</span></div>
-      <div class="Catui_cal-cell"><span class="Catui_cal-n Catui_cal-sel">16</span></div>
+      <div class="Catui_cal-cell"><span class="Catui_cal-n Catui_cal-sel">16<span class="Catui_clip">일, 선택됨</span></span></div>
       <div class="Catui_cal-cell"><span class="Catui_cal-n">17</span><span class="Catui_cal-event Catui_cal-ev-info">배포</span></div>
       <div class="Catui_cal-cell"><span class="Catui_cal-n">18</span></div>
       <div class="Catui_cal-cell Catui_cal-weekend"><span class="Catui_cal-n">19</span></div>
@@ -52,16 +52,16 @@
   </div></div>
 </catui-example>
 <catui-example title="한 주 · 일정 색 · +n 넘침 · 선택일">
-  <div class="Catui_cal" role="grid" aria-label="2026년 10월 넷째 주">
+  <div class="Catui_cal" role="group" aria-label="2026년 10월 넷째 주">
     <div class="Catui_cal-top">10월 26일 – 11월 1일</div>
     <div class="Catui_cal-dows" aria-hidden="true"><span class="Catui_cal-head">월</span><span class="Catui_cal-head">화</span><span class="Catui_cal-head">수</span><span class="Catui_cal-head">목</span><span class="Catui_cal-head">금</span><span class="Catui_cal-head">토</span><span class="Catui_cal-head">일</span></div>
     <div class="Catui_cal-week">
       <div class="Catui_cal-cell"><span class="Catui_cal-n">26</span><span class="Catui_cal-event">배포</span></div>
       <div class="Catui_cal-cell"><span class="Catui_cal-n">27</span><span class="Catui_cal-event Catui_cal-ev-info">회의</span><span class="Catui_cal-event Catui_cal-ev-warn">결제 점검</span><span class="Catui_help">+2</span></div>
       <div class="Catui_cal-cell"><span class="Catui_cal-n">28</span></div>
-      <div class="Catui_cal-cell"><span class="Catui_cal-n Catui_cal-sel" aria-label="29일, 선택됨">29</span><span class="Catui_cal-event Catui_cal-ev-3">교육</span></div>
+      <div class="Catui_cal-cell"><span class="Catui_cal-n Catui_cal-sel">29<span class="Catui_clip">일, 선택됨</span></span><span class="Catui_cal-event Catui_cal-ev-3">교육</span></div>
       <div class="Catui_cal-cell"><span class="Catui_cal-n">30</span></div>
-      <div class="Catui_cal-cell Catui_cal-weekend"><span class="Catui_cal-n Catui_cal-today" aria-label="31일, 오늘">31</span></div>
+      <div class="Catui_cal-cell Catui_cal-weekend"><span class="Catui_cal-n Catui_cal-today">31<span class="Catui_clip">일, 오늘</span></span></div>
       <div class="Catui_cal-cell Catui_cal-weekend"><span class="Catui_cal-n Catui_cal-out">1</span></div>
     </div>
   </div>
@@ -75,7 +75,8 @@
 <section aria-labelledby="a11y">
 <h2 id="a11y">접근성</h2>
 <ul>
-  <li>달력 전체에 <code>aria-label="2026년 9월"</code>, 오늘은 색과 함께 숨김 글자로도 알립니다.</li>
+  <li>보기 전용 달력은 <code>role="group"</code>과 <code>aria-label="2026년 9월"</code>로 묶습니다. 화살표로 날짜를 옮기는 달력이 아니므로 <code>role="grid"</code>를 쓰지 않습니다.</li>
+  <li>오늘·선택일은 색과 함께 숨김 글자(<code>Catui_clip</code>)로도 알립니다.</li>
   <li>일정 칩은 하루 2개까지, 나머지는 "+n".</li>
 </ul>
 </section>

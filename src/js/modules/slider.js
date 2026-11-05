@@ -2,6 +2,7 @@ import { component } from "../core/component.js";
 import { html } from "../core/html.js";
 import { mount, uid } from "../core/dom.js";
 import { emit } from "../core/events.js";
+import { hint } from "../core/base.js";
 
 // slider — 슬라이더. 네이티브 <input type=range class=Catui_range>를 만들어 키보드·스크린리더 지원을 그대로 쓴다.
 //   slider.render({ elem: '#vol', label: '음량', min: 0, max: 100, step: 10, value: 50, ticks: true,
@@ -17,9 +18,16 @@ export const slider = component({
     const tip = (v) => (c.setTips ? c.setTips(Number(v)) : String(v));
     // step 0·음수·min>max면 눈금 계산이 Infinity·NaN이 되므로 바로잡는다
     const step = Number(c.step) > 0 ? Number(c.step) : 1;
-    if (Number(c.max) < Number(c.min)) [c.min, c.max] = [c.max, c.min];
-    const clamp = (v) => Math.min(Number(c.max), Math.max(Number(c.min), Number(v) || 0));
+    c.min = Number.isFinite(Number(c.min)) ? Number(c.min) : 0;
+    c.max = Number.isFinite(Number(c.max)) ? Number(c.max) : 100;
+    if (c.max < c.min) [c.min, c.max] = [c.max, c.min];
+    // 범위 안으로 + step 눈금에 맞춤(브라우저 range가 값을 눈금으로 옮기므로 표시·aria도 같은 값이어야 한다)
+    const clamp = (v) => {
+      const x = Math.min(c.max, Math.max(c.min, Number(v) || 0));
+      return Math.min(c.max, +(c.min + Math.round((x - c.min) / step) * step).toFixed(10));
+    };
     c.value = clamp(c.value);
+    if (!c.label) hint.error("slider: label이 없어 화면 낭독기가 슬라이더 이름을 읽지 못합니다", "warn", inst.elem);
     const count = Math.min(21, Math.floor((c.max - c.min) / step) + 1);
     mount(inst.elem, html`
 <div class="Catui_field">

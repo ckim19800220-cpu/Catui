@@ -4,7 +4,7 @@
 catui.html`&lt;ul&gt;${rows.map(r =&gt; catui.html`&lt;li&gt;${r}&lt;/li&gt;`)}&lt;/ul&gt;`   // 배열 이어 붙이기
 catui.raw('&lt;b&gt;신뢰 마크업&lt;/b&gt;')      // escape 없이
 catui.escape('&lt;b&gt;')                    // '&amp;lt;b&amp;gt;'
-catui.mount(el, catui.html`…`)          // html``은 마크업으로, 문자열은 글자로</code></pre>
+catui.mount(el, catui.html`…`)          // html``은 마크업으로, 문자열은 글자로, Element·배열도 받음</code></pre>
 </section>
 
 <section aria-labelledby="query">

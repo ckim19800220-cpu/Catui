@@ -22,6 +22,25 @@ export interface CatuiAdmin {
   chat(opt: { log: Target; form: Target; me?: string }): { add(text: string, who?: string): HTMLElement; scroll(): void } | null;
   kanban(el: Target): { add(col: Target, card: HTMLElement): void; sync(): void } | null;
   auth: { score(password: string): 0 | 1 | 2 | 3 | 4 };
+  /** init()이 채우는 데이터 연결 완료 Promise. destroy() 뒤에는 undefined */
+  ready?: Promise<CatuiAdmin>;
+  /** 조사 붙이기: josa('주문','을') → '주문을', josa('진행','으로') → '진행으로' */
+  josa(word: string, pair: "을" | "를" | "이" | "가" | "은" | "는" | "과" | "와" | "으로" | "로"): string;
+  /** 모듈 이벤트 발사 — 핸들러가 false를 돌려주면 false */
+  emit(evt: AdmEvent | string, payload?: any): boolean;
+  /** JSON 모의 데이터 주소 앞부분 (기본 "data/") */
+  dataBase: string;
+  /** 파생 값: derive['이름'] = (json) => 가공한 값 */
+  derive: Record<string, (json: any) => any>;
+  /** 이름으로 JSON을 한 번 읽어 캐시. 실패하면 캐시에서 지우고 거부 */
+  data<T = any>(name: string): Promise<T>;
+  /** 점 경로("a.b.0.c")로 값 꺼내기 */
+  pick(obj: any, path: string): any;
+  format(v: unknown, kind?: "number" | "won" | "man" | "percent" | "delta" | "ms" | "initial"): string;
+  /** scope 안 [data-catui-adm-src] 상자에 데이터를 채운다 */
+  bind(scope?: Element | Document): Promise<unknown[]>;
+  /** 상단 바 연결 — init()이 부른다 [내부 부품] */
+  topbar: { init(root: HTMLElement): void };
 }
 
 export declare const admin: CatuiAdmin;

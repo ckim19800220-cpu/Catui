@@ -22,7 +22,7 @@
   });
   </script>
 </catui-example>
-<p>접힘은 네이티브 <code>&lt;details&gt;</code>. 체크하면 자식에 전파되고, 일부만 체크된 부모는 indeterminate가 됩니다. 키보드: ↑↓ 이동, → 펼치기, ← 접기·부모로, Home/End.</p>
+<p><code>tree.render</code>는 WAI-ARIA 트리 패턴(<code>role="tree"</code> · <code>treeitem</code> · <code>group</code>, <code>aria-expanded</code>·<code>aria-selected</code>·<code>aria-level</code>)으로 그립니다. 트리 전체가 Tab 정지점 하나이고, 안에서는 키보드로 움직입니다: ↑↓ 이동, → 펼치기·첫 자식으로, ← 접기·부모로, Home/End, Enter 선택, Space 체크(체크박스가 없으면 선택). 체크하면 자식에 전파되고, 일부만 체크된 부모는 <code>aria-checked="mixed"</code>(화면에는 indeterminate)가 됩니다. 막힌 항목(<code>disabled</code>)은 포커스는 받지만 선택·체크되지 않습니다. 스크립트 없이 쓰는 <code>&lt;details&gt;</code> 트리는 <a href="doc:css/views/tree">CSS 트리</a>.</p>
 </section>
 
 <section aria-labelledby="options">

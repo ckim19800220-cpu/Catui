@@ -6,6 +6,7 @@
 //   · 숫자가 바뀌면 짧게 위로 밀려 들어옴(피드백, 200ms) — 모션 줄이기면 즉시
 community.voteRequest = () => Promise.resolve(true);   // 실서비스: (id, dir) => fetch('/api/vote', …)
 community.vote = {
+  _seq: {},
   get: (key) => cmGet("votes", {})[key] || "",
   set(key, dir) { const v = cmGet("votes", {}); if (dir) v[key] = dir; else delete v[key]; cmSet("votes", v); },
   paint(box) {
@@ -35,11 +36,14 @@ community.vote = {
       const box = b.closest("[data-catui-cm-vote]"), key = box.dataset.catuiCmVote, before = this.get(key);
       const dir = before === b.dataset.dir ? "" : b.dataset.dir;
       this.set(key, dir); this.paint(box);
+      // 연달아 누르면 마지막 요청만 결과를 반영한다(먼저 보낸 요청이 늦게 실패해도 최신 선택을 되돌리지 않음)
+      const seq = (this._seq[key] = (this._seq[key] || 0) + 1);
       community.voteRequest(key, dir).then((ok) => {
         if (!ok) throw new Error("vote");
+        if (seq !== this._seq[key]) return;
         community.emit("vote", { key, dir });
         if (dir) catui.layer.msg(dir === "up" ? "추천했습니다" : "비추천했습니다", { time: 1000 });
-      }).catch(() => { this.set(key, before); this.paint(box); catui.layer.msg("반영하지 못했습니다. 다시 시도해 주세요", { icon: "warn" }); });
+      }).catch(() => { if (seq !== this._seq[key]) return; this.set(key, before); this.paint(box); catui.layer.msg("반영하지 못했습니다. 다시 시도해 주세요", { icon: "warn" }); });
     });
   },
 };

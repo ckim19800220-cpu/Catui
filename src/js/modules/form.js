@@ -1,5 +1,5 @@
 import { emit, onEvent, offEvent } from "../core/events.js";
-import { el, icon, uid, scopeOf } from "../core/dom.js";
+import { el, icon, uid, scopeOf, imeBusy } from "../core/dom.js";
 import { hint, csrfHeaders } from "../core/base.js";
 
 // form — 선언형 폼 검증·제출 이벤트. 마크업만으로 동작한다:
@@ -237,6 +237,15 @@ export const form = (() => {
     };
     document.addEventListener("submit", onSubmit);
     offs.push(() => document.removeEventListener("submit", onSubmit));
+
+    // 한글 조합을 끝내는 Enter(일부 브라우저는 조합 직후 Enter를 따로 보냄)가 폼을 암묵 제출하지 않게
+    const onEnter = (e) => {
+      if (e.key !== "Enter" || !imeBusy(e)) return;
+      const t = e.target;
+      if (t instanceof HTMLInputElement && t.form && !/^(button|submit|reset|checkbox|radio|file)$/.test(t.type)) e.preventDefault();
+    };
+    document.addEventListener("keydown", onEnter);
+    offs.push(() => document.removeEventListener("keydown", onEnter));
 
     // 한 번 틀린 칸은 입력할 때마다 다시 검사 (고치면 즉시 오류 해제)
     const onInput = (e) => {

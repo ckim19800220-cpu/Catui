@@ -102,6 +102,7 @@ function catuiStore(kind, table, settings) {
   try {
     if (settings === null) { storage.removeItem(key); return {}; }
     if (settings && typeof settings === "object" && "key" in settings) {
+      if (settings.key === "__proto__") { hint.error(`data('${table}'): '__proto__'는 키로 쓸 수 없습니다`); return all; }
       if (settings.remove) delete all[settings.key];
       else all[settings.key] = settings.value;
       storage.setItem(key, JSON.stringify(all));
@@ -125,7 +126,8 @@ function url(href = location.href) {
   const u = new URL(href, location.href);
   const search = Object.fromEntries(u.searchParams);
   const h = u.hash.replace(/^#/, "");
-  const [hPath, hQuery = ""] = h.split("?");
+  // 첫 '?'에서만 나눈다(#/p?x=1?y=2의 뒷부분을 버리지 않게). 같은 키가 여럿이면 마지막 값
+  const qi = h.indexOf("?"), hPath = qi < 0 ? h : h.slice(0, qi), hQuery = qi < 0 ? "" : h.slice(qi + 1);
   return {
     pathname: u.pathname.split("/").filter(Boolean),
     search,
@@ -212,6 +214,15 @@ function within(scope, sel) {
 
 function mount(node, markup) {
   if (isRaw(markup)) node.innerHTML = markup.__raw;
+  else if (typeof Node !== "undefined" && markup instanceof Node) node.replaceChildren(markup);
+  else if (Array.isArray(markup)) {
+    // 배열: 노드는 그대로, html``은 마크업으로, 나머지는 글자로 (null·false는 건너뜀)
+    node.replaceChildren(...markup.flat(Infinity).filter((m) => m != null && m !== false).map((m) => {
+      if (m instanceof Node) return m;
+      if (!isRaw(m)) return document.createTextNode(String(m));
+      const t = document.createElement("template"); t.innerHTML = m.__raw; return t.content;
+    }));
+  }
   else node.textContent = String(markup ?? "");
   return node;
 }
@@ -278,6 +289,42 @@ function imeBusy(e) {
 }
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// 페이지 전체 움직임 일시정지: <html data-catui-paused> (fx.pause()/resume()이 켜고 끈다)
+const pagePaused = () => { const v = document.documentElement.getAttribute("data-catui-paused"); return v != null && v !== "false"; };
+
+// 공용 프레임 티커 — 반복 갱신을 requestAnimationFrame 하나로 모은다. fn(dt, now), dt는 ms(최대 64).
+// 요소를 넘기면 화면 밖(여유 120px)에서는 부르지 않고, 탭이 숨으면 루프를 멈추고, 페이지 일시정지 중에는 건너뛴다.
+const catuiTasks = new Set(), catuiSuspend = new WeakMap();
+let catuiRaf = 0, catuiLast = 0, catuiSuspendIO = null;
+function catuiLoop(now) {
+  const dt = Math.min(64, now - catuiLast);
+  catuiLast = now;
+  if (!pagePaused()) for (const t of [...catuiTasks]) if (t.on) { try { t.fn(dt, now); } catch (err) { console.error("[Catui error]: frame 처리 중 오류", err); } }
+  catuiRaf = catuiTasks.size && !document.hidden ? requestAnimationFrame(catuiLoop) : 0;
+}
+function catuiFrameStart() {
+  if (catuiRaf || !catuiTasks.size || document.hidden) return;
+  catuiLast = performance.now();
+  catuiRaf = requestAnimationFrame(catuiLoop);
+}
+if (typeof document !== "undefined") document.addEventListener("visibilitychange", () => { if (document.hidden) { cancelAnimationFrame(catuiRaf); catuiRaf = 0; } else catuiFrameStart(); });
+function frame(fn, el) {
+  const t = { fn, on: true };
+  catuiTasks.add(t);
+  if (el && typeof IntersectionObserver === "function") {
+    catuiSuspendIO ||= new IntersectionObserver((es) => es.forEach((e) => catuiSuspend.get(e.target)?.forEach((x) => { x.on = e.isIntersecting; })), { rootMargin: "120px" });
+    let set = catuiSuspend.get(el);
+    if (!set) { set = new Set(); catuiSuspend.set(el, set); catuiSuspendIO.observe(el); }
+    set.add(t);
+  }
+  catuiFrameStart();
+  return () => {
+    catuiTasks.delete(t);
+    const set = el && catuiSuspend.get(el);
+    if (set) { set.delete(t); if (!set.size) { catuiSuspend.delete(el); catuiSuspendIO.unobserve(el); } }
+  };
+}
 
 const FOCUSABLE = 'a[href]:not([tabindex="-1"]),button:not([disabled]):not([tabindex="-1"]),input:not([disabled]):not([type=hidden]):not([tabindex="-1"]),select:not([disabled]):not([tabindex="-1"]),textarea:not([disabled]):not([tabindex="-1"]),summary:not([tabindex="-1"]),[contenteditable="true"]:not([tabindex="-1"]),[tabindex]:not([tabindex="-1"])';
 
@@ -745,7 +792,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
   // 로딩. options.progress: true면 진행률 막대(layer.progress(index, 0~100)로 갱신)
   function load(text = "불러오는 중…", options = {}) {
     if (typeof text === "object") { options = text; text = options.text || "불러오는 중…"; }
-    const bar = options.progress ? `<div class="Catui_prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="${""}"><i class="Catui_pc1" style="width:0%"></i></div>` : "";
+    const bar = options.progress ? `<div class="Catui_prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="진행률"><i class="Catui_pc1" style="width:0%"></i></div>` : "";
     return open({ area: "sm", closeBtn: false, shadeClose: false, loading: true, label: text, ...options,
       content: raw(`<div class="Catui_layer-load" role="status"><span class="Catui_spin" aria-hidden="true"></span><span></span></div>${bar ? `<div style="padding:0 var(--Catui_modal-pad) var(--Catui_modal-pad)">${bar}</div>` : ""}`),
       success(dlg, index) {
@@ -995,7 +1042,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
           if (!box) return;
           const ins = [...box.querySelectorAll("input,select,textarea")], err = box.querySelector(".Catui_error"), k = kindOf(fl);
           let m = "";
-          if (fl.required && k === "group" && !(fl.type === "radio" ? values[fl.name] : values[fl.name].length)) m = fl.type === "radio" ? "하나를 고르세요." : "하나 이상 고르세요.";
+          if (fl.required && k === "group" && !(fl.type === "radio" ? values[fl.name] : (values[fl.name] ?? []).length)) m = fl.type === "radio" ? "하나를 고르세요." : "하나 이상 고르세요.";
           else if (k !== "group") {
             const inv = ins.find((x) => !x.checkValidity());
             if (inv) { const key = Object.keys(FORM_MSG).find((n) => inv.validity[n]); m = fl.messages?.[key] || FORM_MSG[key] || "값을 확인해 주세요."; }
@@ -1331,6 +1378,15 @@ const form = (() => {
     document.addEventListener("submit", onSubmit);
     offs.push(() => document.removeEventListener("submit", onSubmit));
 
+    // 한글 조합을 끝내는 Enter(일부 브라우저는 조합 직후 Enter를 따로 보냄)가 폼을 암묵 제출하지 않게
+    const onEnter = (e) => {
+      if (e.key !== "Enter" || !imeBusy(e)) return;
+      const t = e.target;
+      if (t instanceof HTMLInputElement && t.form && !/^(button|submit|reset|checkbox|radio|file)$/.test(t.type)) e.preventDefault();
+    };
+    document.addEventListener("keydown", onEnter);
+    offs.push(() => document.removeEventListener("keydown", onEnter));
+
     // 한 번 틀린 칸은 입력할 때마다 다시 검사 (고치면 즉시 오류 해제)
     const onInput = (e) => {
       const t = e.target;
@@ -1408,7 +1464,7 @@ const laypage = component({
     const info = () => ({ curr: c.curr, limit: lim(), count: c.count, pages: pages() });
     const draw = () => {
       const total = pages();
-      c.curr = Math.min(Math.max(1, Number(c.curr) || 1), total);
+      c.curr = Math.min(Math.max(1, Math.floor(Number(c.curr)) || 1), total);   // 소수(1.5)면 현재 쪽 표시·이전/다음 번호가 깨진다
       // 현재 쪽을 가운데 두는 번호 묶음 + 처음/끝, 사이가 비면 …
       const groups = Math.max(1, Number(c.groups) || 5);
       const half = Math.floor(groups / 2);
@@ -1437,9 +1493,10 @@ const laypage = component({
       };
       mount(box, hide ? html`` : html`${parts.filter((p) => part[p]).map((p) => part[p]())}`);
     };
-    const go = (n, focusSel) => {
+    // force: 쪽 크기를 바꿔 같은 쪽 번호라도 내용이 달라질 때만. 이동 칸에 지금 쪽을 넣고 Enter는 jump를 다시 내지 않는다
+    const go = (n, focusSel, force) => {
       const next = Math.min(Math.max(1, Math.floor(Number(n)) || 1), pages());
-      if (next === c.curr && !focusSel) return;
+      if (next === c.curr && !force) { if (focusSel) box.querySelector(focusSel)?.focus(); return; }
       c.curr = next;
       draw();
       box.querySelector(focusSel || `[data-catui-page="${c.curr}"][aria-current]`)?.focus();
@@ -1459,7 +1516,7 @@ const laypage = component({
       const first = (c.curr - 1) * lim();
       c.limit = Number(e.target.value);
       c.curr = Math.floor(first / lim()) + 1;
-      go(c.curr, "[data-catui-limit]");
+      go(c.curr, "[data-catui-limit]", true);
     };
     draw();
     box.addEventListener("click", onClick);
@@ -1468,7 +1525,14 @@ const laypage = component({
     inst.use(() => { box.removeEventListener("click", onClick); box.removeEventListener("keydown", onKey); box.removeEventListener("change", onChange); });
     c.jump?.call(inst, info(), true);
   },
-  destroy(inst) { if (inst.elem) inst.elem.textContent = ""; },
+  destroy(inst) {
+    const box = inst.elem;
+    if (!box) return;
+    box.textContent = "";
+    box.classList.remove("Catui_pager");
+    box.removeAttribute("aria-label");
+    if (box.tagName !== "NAV") box.removeAttribute("role");
+  },
 });
 
 // ── modules/table.js ──
@@ -1678,7 +1742,8 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
     const inst = table.getThis(id);
     if (!inst) return { data: [], isAll: false };
     const data = [...inst.state.checked];
-    return { data, isAll: inst.rows.length > 0 && inst.rows.every((r) => inst.state.checked.has(r)) };
+    const rows = inst.rows || [];   // 첫 draw 전에 불려도 안전하게
+    return { data, isAll: rows.length > 0 && rows.every((r) => inst.state.checked.has(r)) };
   },
   getData(id) { return table.getThis(id)?.rows || []; },
   clearChecked(id) {
@@ -1762,23 +1827,42 @@ ${c.caption ? html`<caption id="${capId}">${c.caption}</caption>` : ""}
 
 // ── modules/tabs.js ──
 
-// tabs — 탭. CSS만으로도 동작하는 radio 구조(.Catui_tabs)를 그대로 쓰고, JS는 이벤트·추가·삭제·전환을 더한다.
-//   마크업: <div class="Catui_tabs" data-catui-filter="doc"> <input type=radio> <label class="Catui_tab"> <div class="Catui_panel"> ...
+// tabs — 탭. 두 가지 마크업을 같은 API로 다룬다.
+//   1) CSS만으로 동작하는 radio 구조(정적 마크업): <div class="Catui_tabs" data-catui-filter="doc"> <input type=radio> <label class="Catui_tab"> <div class="Catui_panel"> ...
+//   2) tabs.render가 그리는 WAI-ARIA 탭: [role=tablist] > button[role=tab] + [role=tabpanel] — ←→(세로는 ↑↓)·Home·End, 로빙 tabindex
 //   tabs.on('tab(doc)', ({ index, title }) => {})
-//   tabs.render({ elem: '#box', data: [{ title: '개요', content: '...' }], index: 0 })
+//   tabs.render({ elem: '#box', data: [{ title: '개요', content: '...' }], index: 0, label: '문서', vertical })
 //   tabs.change('doc', 1) / tabs.add('doc', { title, content, change: true }) / tabs.close('doc', 0)
 const tabs = component({
   name: "tabs",
-  config: { data: [], index: 0, label: "" },
+  config: { data: [], index: 0, label: "", vertical: false },
   render(inst) {
     const c = inst.config;
     if (!inst.elem) return;
-    const name = uid("catui-tabs");
-    mount(inst.elem, html`<div class="Catui_tabs" data-catui-filter="${inst.filter}" ${c.label ? html`role="group" aria-label="${c.label}"` : ""}></div>`);
+    if (!c.label) hint.error("tabs: label이 없어 화면 낭독기가 탭 묶음 이름을 읽지 못합니다", "warn", inst.elem);
+    mount(inst.elem, html`<div class="Catui_tabs${c.vertical ? " Catui_tabs-v" : ""}" data-catui-filter="${inst.filter}" data-catui-aria><div role="tablist" ${c.label ? html`aria-label="${c.label}"` : ""} ${c.vertical ? html`aria-orientation="vertical"` : ""}></div></div>`);
     const box = inst.elem.firstElementChild;
-    box.dataset.catuiName = name;
+    box.dataset.catuiName = uid("catui-tabs");
     c.data.forEach((item) => catuiTabsAppend(box, item));
-    catuiTabsSelect(box, c.index, false);
+    // 범위 밖·NaN index면 아무 탭도 선택되지 않으므로 0~마지막으로 맞춘다
+    catuiTabsSelect(box, Math.min(Math.max(0, Math.floor(Number(c.index)) || 0), Math.max(0, c.data.length - 1)), false);
+    const list = box.firstElementChild;
+    const onClick = (e) => { const t = e.target.closest('[role="tab"]'); if (t) catuiTabsSelect(box, catuiTabsItems(box).indexOf(t), true); };
+    const onKey = (e) => {
+      const t = e.target.closest('[role="tab"]');
+      if (!t) return;
+      const items = catuiTabsItems(box), i = items.indexOf(t), n = items.length;
+      const v = list.getAttribute("aria-orientation") === "vertical";
+      const k = { [v ? "ArrowDown" : "ArrowRight"]: i + 1, [v ? "ArrowUp" : "ArrowLeft"]: i - 1, Home: 0, End: n - 1 }[e.key];
+      if (k === undefined) return;
+      e.preventDefault();
+      const to = (k + n) % n;
+      catuiTabsSelect(box, to, true);   // 자동 활성화: 포커스가 옮겨진 탭을 바로 연다
+      items[to].focus();
+    };
+    list.addEventListener("click", onClick);
+    list.addEventListener("keydown", onKey);
+    inst.use(() => { list.removeEventListener("click", onClick); list.removeEventListener("keydown", onKey); });
   },
   destroy(inst) { if (inst.elem) inst.elem.textContent = ""; },
 
@@ -1787,31 +1871,35 @@ const tabs = component({
     const box = catuiTabsFind(filter);
     if (!box) return -1;
     catuiTabsAppend(box, item);
-    const i = box.querySelectorAll(":scope > input[type=radio]").length - 1;
+    const i = catuiTabsItems(box).length - 1;
     if (item.change !== false) catuiTabsSelect(box, i, true);
+    else if (box.hasAttribute("data-catui-aria")) catuiTabsSelect(box, catuiTabsCurrent(box), false);   // 새 탭·패널의 tabindex·hidden 맞춤
     return i;
   },
   close(filter, index) {
     const box = catuiTabsFind(filter);
     if (!box) return;
-    const inputs = [...box.querySelectorAll(":scope > input[type=radio]")];
-    const input = inputs[index];
-    if (!input) return;
-    const wasOn = input.checked;
-    const label = box.querySelector(`:scope > label[for="${CSS.escape(input.id)}"]`);
-    const panel = label?.nextElementSibling?.classList.contains("Catui_panel") ? label.nextElementSibling : null;
-    [input, label, panel].forEach((n) => n?.remove());
-    emit("tabs", "close", box.getAttribute("data-catui-filter"), { index, elem: box });
-    if (wasOn && inputs.length > 1) catuiTabsSelect(box, Math.max(0, index - 1), true);
+    const items = catuiTabsItems(box), tab = items[index];
+    if (!tab) return;
+    const aria = box.hasAttribute("data-catui-aria");
+    const wasOn = aria ? tab.getAttribute("aria-selected") === "true" : tab.checked;
+    const label = aria ? tab : box.querySelector(`:scope > label[for="${CSS.escape(tab.id)}"]`);
+    const panel = aria ? document.getElementById(tab.getAttribute("aria-controls"))
+      : label?.nextElementSibling?.classList.contains("Catui_panel") ? label.nextElementSibling : null;
+    const title = label?.textContent.trim() ?? "";   // 지우기 전에 — 문서 계약 { index, title, elem }
+    const hadFocus = aria && tab.contains(document.activeElement);
+    [tab, aria ? null : label, panel].forEach((n) => n?.remove());
+    emit("tabs", "close", box.getAttribute("data-catui-filter"), { index, title, elem: box });
+    if (wasOn && items.length > 1) catuiTabsSelect(box, Math.max(0, index - 1), true);
+    if (hadFocus) catuiTabsItems(box)[Math.max(0, index - 1)]?.focus();   // 지운 탭에 있던 포커스를 이웃 탭으로
   },
-  // 전역 위임: radio가 바뀌면 tab(filter) 이벤트
+  // 전역 위임: 정적 radio 탭이 바뀌면 tab(filter) 이벤트 (ARIA 탭은 render가 직접 낸다)
   bind() {
     const onChange = (e) => {
       const r = e.target;
       if (!(r instanceof HTMLInputElement) || r.type !== "radio" || !r.parentElement?.classList.contains("Catui_tabs")) return;
       const box = r.parentElement;
-      const inputs = [...box.querySelectorAll(":scope > input[type=radio]")];
-      const index = inputs.indexOf(r);
+      const index = catuiTabsItems(box).indexOf(r);
       emit("tabs", "tab", box.getAttribute("data-catui-filter"), { index, title: box.querySelector(`:scope > label[for="${CSS.escape(r.id)}"]`)?.textContent.trim() ?? "", elem: box });
     };
     document.addEventListener("change", onChange);
@@ -1826,23 +1914,59 @@ function catuiTabsFind(filter) {
   return box;
 }
 
+// 탭 목록: ARIA 모드는 button[role=tab], radio 모드는 input
+function catuiTabsItems(box) {
+  return [...box.querySelectorAll(box.hasAttribute("data-catui-aria") ? ':scope > [role="tablist"] > [role="tab"]' : ":scope > input[type=radio]")];
+}
+function catuiTabsCurrent(box) {
+  return Math.max(0, catuiTabsItems(box).findIndex((t) => t.getAttribute("aria-selected") === "true" || t.checked));
+}
+
 function catuiTabsAppend(box, item) {
+  const aria = box.hasAttribute("data-catui-aria");
   const name = box.dataset.catuiName || box.querySelector(":scope > input[type=radio]")?.name || (box.dataset.catuiName = uid("catui-tabs"));
-  const id = item.id || uid(`${name}-t`);
-  const input = Object.assign(document.createElement("input"), { className: "Catui_clip", type: "radio", name, id });
-  const label = Object.assign(document.createElement("label"), { className: "Catui_tab", htmlFor: id, textContent: item.title ?? "" });
+  // 이미 쓰인 id면 label[for]·aria-controls가 엉뚱한 요소를 가리키므로 새 id로
+  if (item.id && document.getElementById(item.id)) hint.error(`tabs: id '${item.id}'가 이미 있어 새 id를 씁니다`, "warn");
+  const id = item.id && !document.getElementById(item.id) ? item.id : uid(`${name}-t`);
   const panel = Object.assign(document.createElement("div"), { className: "Catui_panel" });
   if (item.content instanceof Element) panel.appendChild(item.content);
   else if (isRaw(item.content)) mount(panel, item.content);
   else panel.appendChild(Object.assign(document.createElement("p"), { textContent: String(item.content ?? "") }));
+  if (aria) {
+    const tab = Object.assign(document.createElement("button"), { type: "button", className: "Catui_tab", id, textContent: item.title ?? "" });
+    tab.setAttribute("role", "tab");
+    tab.setAttribute("aria-selected", "false");
+    tab.setAttribute("aria-controls", `${id}-p`);
+    tab.tabIndex = -1;
+    Object.assign(panel, { id: `${id}-p`, hidden: true, tabIndex: 0 });   // 패널에 포커스할 것이 없어도 Tab으로 내용에 닿게
+    panel.setAttribute("role", "tabpanel");
+    panel.setAttribute("aria-labelledby", id);
+    box.querySelector(':scope > [role="tablist"]').appendChild(tab);
+    box.appendChild(panel);
+    return;
+  }
+  const input = Object.assign(document.createElement("input"), { className: "Catui_clip", type: "radio", name, id });
+  const label = Object.assign(document.createElement("label"), { className: "Catui_tab", htmlFor: id, textContent: item.title ?? "" });
   box.append(input, label, panel);
 }
 
 function catuiTabsSelect(box, index, fire) {
-  const r = box.querySelectorAll(":scope > input[type=radio]")[index];
-  if (!r) return;
-  r.checked = true;
-  if (fire) r.dispatchEvent(new Event("change", { bubbles: true }));
+  const items = catuiTabsItems(box), t = items[index];
+  if (!t) return;
+  if (!box.hasAttribute("data-catui-aria")) {
+    t.checked = true;
+    if (fire) t.dispatchEvent(new Event("change", { bubbles: true }));
+    return;
+  }
+  const was = t.getAttribute("aria-selected") === "true";
+  items.forEach((x) => {
+    const on = x === t;
+    x.setAttribute("aria-selected", String(on));
+    x.tabIndex = on ? 0 : -1;
+    const p = document.getElementById(x.getAttribute("aria-controls"));
+    if (p) p.hidden = !on;
+  });
+  if (fire && !was) emit("tabs", "tab", box.getAttribute("data-catui-filter"), { index, title: t.textContent.trim(), elem: box });
 }
 
 // ── modules/dropdown.js ──
@@ -2077,7 +2201,8 @@ const util = (() => {
     const tick = () => {
       const left = Math.max(0, end - (Date.now() - offset));
       const t = { d: Math.floor(left / 86400000), h: Math.floor(left / 3600000) % 24, m: Math.floor(left / 60000) % 60, s: Math.floor(left / 1000) % 60, left };
-      ready?.(t);
+      // 콜백이 예외를 던지면 호출자가 해제 함수를 받지 못하므로 타이머를 먼저 멈추고 다시 던진다
+      try { ready?.(t); } catch (err) { clearInterval(timer); timer = 0; throw err; }
       if (left <= 0) { clearInterval(timer); timer = 0; clear?.(); }
     };
     timer = setInterval(tick, 1000);
@@ -2121,10 +2246,13 @@ const util = (() => {
   }
 
   // util.number(1234567.8, 1) → '1,234,567.8' (한국어 천 단위 구분)
+  // 소수 자리는 0~20 정수로(음수·100 초과는 Intl·toFixed가 RangeError)
+  const digits = (d, fallback) => (Number.isFinite(Number(d)) ? Math.min(20, Math.max(0, Math.floor(Number(d)))) : fallback);
   function number(n, decimals) {
     const v = Number(n);
     if (!Number.isFinite(v)) return "";
-    return v.toLocaleString("ko-KR", decimals == null ? undefined : { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    const d = decimals == null ? null : digits(decimals, null);
+    return v.toLocaleString("ko-KR", d == null ? undefined : { minimumFractionDigits: d, maximumFractionDigits: d });
   }
 
   // util.fileSize(1536) → '1.5KB' · 'B·KB·MB·GB·TB'
@@ -2133,7 +2261,7 @@ const util = (() => {
     if (!Number.isFinite(v) || v < 0) return "";
     const units = ["B", "KB", "MB", "GB", "TB"];
     const i = v === 0 ? 0 : Math.min(units.length - 1, Math.floor(Math.log(v) / Math.log(1024)));
-    return `${Number((v / 1024 ** i).toFixed(i ? decimals : 0))}${units[i]}`;
+    return `${Number((v / 1024 ** i).toFixed(i ? digits(decimals, 1) : 0))}${units[i]}`;
   }
 
   return { toDateString, timeAgo, countdown, debounce, throttle, copy, number, fileSize, escape, html, raw };
@@ -2368,11 +2496,12 @@ const upload = component({
     if (!zone) return;
     // 입력 찾기 또는 만들기 (zone이 label.Catui_upz면 안의 input 사용)
     let input = zone.querySelector('input[type="file"]');
+    const made = !input;   // 직접 만든 input은 해제할 때 지운다
     if (!input) {
       input = Object.assign(document.createElement("input"), { type: "file", className: "Catui_clip" });
       zone.appendChild(input);
     }
-    if (c.accept) input.accept = c.accept;
+    input.accept = c.accept || "";   // reload로 accept를 빼면 이전 제한도 풀린다
     input.multiple = !!c.multiple;
     if (!input.id) input.id = uid("catui-up");
     const listEl = el(c.list);
@@ -2384,13 +2513,16 @@ const upload = component({
       zone.insertAdjacentElement("afterend", err);
       inst.use(() => err.remove());
     }
-    input.setAttribute("aria-describedby", [input.getAttribute("aria-describedby"), errId].filter(Boolean).join(" "));
+    // 다시 렌더해도 같은 오류 id가 쌓이지 않게(기존 설명 id는 유지)
+    const prevDesc = input.getAttribute("aria-describedby");
+    input.setAttribute("aria-describedby", [...new Set([...(prevDesc || "").split(/\s+/).filter(Boolean), errId])].join(" "));
+    const maxKB = Number(c.size) > 0 ? Number(c.size) : 0, maxN = Number(c.number) > 0 ? Math.floor(Number(c.number)) : 0;   // 0·음수·NaN = 제한 없음
 
     const items = (inst.files = []);          // { id, file, status: 'ready'|'uploading'|'done'|'error', percent, xhr, res }
-    const size = (b) => (b >= 1048576 ? `${(b / 1048576).toFixed(1).replace(/\.0$/, "")}MB` : `${Math.max(1, Math.round(b / 1024))}KB`);
+    const size = (b) => (b >= 1048576 ? `${(b / 1048576).toFixed(1).replace(/\.0$/, "")}MB` : b < 1024 ? `${b}B` : `${Math.round(b / 1024)}KB`);
     const acceptOk = (f) => {
       if (!c.accept) return true;
-      return c.accept.split(",").map((s) => s.trim().toLowerCase()).filter(Boolean).some((a) => (a.startsWith(".")
+      return c.accept.split(",").map((s) => s.trim().toLowerCase()).filter(Boolean).some((a) => (a === "*/*" || a === "*" ? true : a.startsWith(".")
         ? f.name.toLowerCase().endsWith(a)
         : a.endsWith("/*") ? f.type.startsWith(a.slice(0, -1)) : f.type === a));
     };
@@ -2468,8 +2600,8 @@ const upload = component({
       const list = c.multiple ? [...fileList] : [...fileList].slice(0, 1);
       for (const f of list) {
         if (!acceptOk(f)) bad.push({ file: f, msg: `${f.name}: 허용하지 않는 형식입니다` });
-        else if (c.size && f.size > c.size * 1024) bad.push({ file: f, msg: `${f.name}: ${size(f.size)} — ${size(c.size * 1024)}를 넘습니다` });
-        else if (c.number && items.length + ok.length >= c.number) bad.push({ file: f, msg: `${f.name}: 최대 ${c.number}개까지 올릴 수 있습니다` });
+        else if (maxKB && f.size > maxKB * 1024) bad.push({ file: f, msg: `${f.name}: ${size(f.size)} — ${size(maxKB * 1024)}를 넘습니다` });
+        else if (maxN && items.length + ok.length >= maxN) bad.push({ file: f, msg: `${f.name}: 최대 ${maxN}개까지 올릴 수 있습니다` });
         else if (c.before?.call(inst, f) === false) continue;
         else ok.push(f);
       }
@@ -2519,7 +2651,8 @@ const upload = component({
       inst.emit("remove", { file: it.file });
       zone.focus?.();
     };
-    if (zone.tagName !== "LABEL" && !zone.hasAttribute("tabindex")) { zone.tabIndex = 0; zone.setAttribute("role", "button"); }
+    const madeBtn = zone.tagName !== "LABEL" && !zone.hasAttribute("tabindex");
+    if (madeBtn) { zone.tabIndex = 0; zone.setAttribute("role", "button"); }
     input.addEventListener("change", onChange);
     zone.addEventListener("dragenter", onEnter);
     zone.addEventListener("dragover", onOver);
@@ -2547,6 +2680,12 @@ const upload = component({
       hi(false);
       ["aria-disabled"].forEach((a) => zone.removeAttribute(a));
       zone.style.color = zone.style.cursor = zone.style.background = zone.style.borderColor = "";   // setDisabled가 바꾼 배경까지
+      // 렌더가 더한 것 되돌리기: 만든 input·버튼 역할·오류 설명 id·목록
+      if (madeBtn) { zone.removeAttribute("tabindex"); zone.removeAttribute("role"); }
+      if (prevDesc) input.setAttribute("aria-describedby", prevDesc); else input.removeAttribute("aria-describedby");
+      input.disabled = false;
+      if (made) input.remove();
+      if (listEl) listEl.textContent = "";
     });
   },
 });
@@ -2567,9 +2706,16 @@ const slider = component({
     const tip = (v) => (c.setTips ? c.setTips(Number(v)) : String(v));
     // step 0·음수·min>max면 눈금 계산이 Infinity·NaN이 되므로 바로잡는다
     const step = Number(c.step) > 0 ? Number(c.step) : 1;
-    if (Number(c.max) < Number(c.min)) [c.min, c.max] = [c.max, c.min];
-    const clamp = (v) => Math.min(Number(c.max), Math.max(Number(c.min), Number(v) || 0));
+    c.min = Number.isFinite(Number(c.min)) ? Number(c.min) : 0;
+    c.max = Number.isFinite(Number(c.max)) ? Number(c.max) : 100;
+    if (c.max < c.min) [c.min, c.max] = [c.max, c.min];
+    // 범위 안으로 + step 눈금에 맞춤(브라우저 range가 값을 눈금으로 옮기므로 표시·aria도 같은 값이어야 한다)
+    const clamp = (v) => {
+      const x = Math.min(c.max, Math.max(c.min, Number(v) || 0));
+      return Math.min(c.max, +(c.min + Math.round((x - c.min) / step) * step).toFixed(10));
+    };
     c.value = clamp(c.value);
+    if (!c.label) hint.error("slider: label이 없어 화면 낭독기가 슬라이더 이름을 읽지 못합니다", "warn", inst.elem);
     const count = Math.min(21, Math.floor((c.max - c.min) / step) + 1);
     mount(inst.elem, html`
 <div class="Catui_field">
@@ -2620,12 +2766,15 @@ const rate = component({
     const c = inst.config;
     if (!inst.elem) return;
     const name = uid("catui-rate");
+    // 별 개수는 1 이상 정수(5.5·NaN이면 별 수와 최대 점수가 어긋난다)
+    c.length = Math.floor(Number(c.length)) >= 1 ? Math.floor(Number(c.length)) : 5;
     const word = (v) => (v ? `${v}점${c.texts[v - 1] ? ` · ${c.texts[v - 1]}` : ""}` : "선택 안 함");
     if (c.readonly) {
       // 3.6점처럼 소수면 별은 반올림(4개), 읽기 값은 소수 첫째 자리까지 그대로
       const v = Math.max(0, Math.min(c.length, Number(c.value) || 0)), shown = Math.round(v);
       inst.value = v;
       inst.getValue = () => v;
+      inst.setValue = (nv) => { inst.reload({ value: nv }); };   // 읽기 전용도 값 바꾸기는 다시 그려서
       mount(inst.elem, html`<span class="Catui_rating" role="img" aria-label="${c.label ? `${c.label} ` : ""}${c.length}점 중 ${Math.round(v * 10) / 10}점">${Array.from({ length: c.length }, (_, i) => html`<span style="color:var(${i < shown ? "--Catui_rating-on" : "--Catui_rating-off"})">${icon("star", 16)}</span>`)}</span>`);
       return;
     }
@@ -2669,11 +2818,13 @@ ${c.clearable ? html`<button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type
 
 // ── modules/tree.js ──
 
-// tree — 트리. 접힘은 네이티브 <details>, 선택 행은 brand-soft, 체크박스는 부모·자식 상태가 전파된다(일부 선택 = indeterminate).
+// tree — 트리. WAI-ARIA tree 패턴: [role=tree] > [role=treeitem](aria-expanded·aria-selected·aria-level) > [role=group]
+//   선택 행은 brand-soft, 체크박스는 부모·자식 상태가 전파된다(일부 선택 = aria-checked="mixed").
 //   tree.render({ elem: '#tree', id: 'docs', data: [{ id, title, children: [...], spread: true, disabled }],
 //                 showCheckbox: true, accordion: false, click(obj) {}, oncheck(obj) {} })
 //   tree.getChecked('docs') → 체크된 잎 노드 배열 / tree.setChecked('docs', [id...]) / tree.getSelected('docs')
-// 키보드: ↑↓ 보이는 항목 이동, → 펼치기, ← 접기·부모로, Home/End.
+// 키보드(로빙 tabindex — 트리에 Tab 한 번): ↑↓ 보이는 항목 이동, → 펼치기·첫 자식, ← 접기·부모로, Home/End,
+//   Enter 선택, Space 체크(체크박스가 없으면 선택). CSS만 쓰는 <details> 트리 마크업은 그대로 쓸 수 있다.
 const tree = component({
   name: "tree",
   config: { data: [], showCheckbox: false, accordion: false, label: "트리", selected: null, click: null, oncheck: null },
@@ -2682,91 +2833,125 @@ const tree = component({
     if (!inst.elem) return;
     // 부모 관계는 내부 Map에만 둔다. 사용자 데이터에 부모 참조를 넣으면 JSON.stringify(data)가 순환 오류를 낸다
     const byId = new Map(), parentOf = new Map();
-    const index = (nodes, parent) => nodes.forEach((n) => { parentOf.set(n, parent); byId.set(String(n.id), n); if (n.children) index(n.children, n); });
+    const index = (nodes, parent) => nodes.forEach((n) => {
+      // 같은 id가 둘이면 선택·체크가 엉뚱한 노드를 가리킨다 — 알리고 첫 노드를 유지
+      if (byId.has(String(n.id))) hint.error(`tree: 같은 id(${n.id})가 여러 번 있습니다`, "warn", n);
+      else byId.set(String(n.id), n);
+      parentOf.set(n, parent);
+      if (n.children) index(n.children, n);
+    });
     index(c.data, null);
     const kw = () => String(s.keyword || "").trim().toLowerCase();
     // 검색어가 있으면 제목이 맞는 노드와 그 조상만 보인다
     const matches = (n) => !kw() || String(n.title ?? "").toLowerCase().includes(kw()) || (n.children || []).some(matches);
     inst.state ||= { checked: new Set(), open: new Set(c.data.flatMap(function walk(n) { return [...(n.spread ? [String(n.id)] : []), ...(n.children || []).flatMap(walk)]; })), selected: c.selected != null ? String(c.selected) : null };
     const s = inst.state;
+    let focusId = null;   // 다시 그린 뒤에도 같은 항목이 탭 정지점·포커스를 갖도록
     const leaves = (n) => (n.children?.length ? n.children.flatMap(leaves) : [n]);
     const stateOf = (n) => {
       const ls = leaves(n).filter((l) => !l.disabled);
       const on = ls.filter((l) => s.checked.has(String(l.id))).length;
       return on === 0 ? "off" : on === ls.length ? "on" : "mixed";
     };
-    const cbx = (n) => {
-      const st = stateOf(n);
-      return html`<label class="Catui_choice" style="gap:6px"><input class="Catui_clip" type="checkbox" data-catui-tcheck="${n.id}" ${st === "on" ? "checked" : ""} ${st === "mixed" ? html`data-catui-mixed` : ""} ${n.disabled ? "disabled" : ""} aria-label="${n.title} 선택"><span class="Catui_cbx">${icon("check", 12)}</span></label>`;
-    };
-    const node = (n) => {
+    const isOpen = (n) => s.open.has(String(n.id)) || (!!kw() && n.children.some(matches));   // 검색 중에는 맞는 자식이 있는 폴더를 펼침
+    // 체크박스는 모양과 마우스용. 상태는 treeitem의 aria-checked로 읽히고, 키보드는 Space로 바꾼다(트리 안 중첩 컨트롤 금지)
+    const cbx = (n, st) => html`<label class="Catui_choice" style="gap:6px" aria-hidden="true"><input class="Catui_clip" type="checkbox" tabindex="-1" data-catui-tcheck="${n.id}" ${st === "on" ? "checked" : ""} ${st === "mixed" ? html`data-catui-mixed` : ""} ${n.disabled ? "disabled" : ""}><span class="Catui_cbx">${icon("check", 12)}</span></label>`;
+    const node = (n, level) => {
       if (!matches(n)) return "";
-      const id = String(n.id), on = s.selected === id;
-      if (n.children?.length) {
-        const open = s.open.has(id) || (!!kw() && n.children.some(matches));   // 검색 중에는 맞는 자식이 있는 폴더를 펼침
-        return html`<details data-catui-tid="${id}" ${open ? "open" : ""}><summary data-catui-titem="${id}" class="${on ? "Catui_tree-on" : ""}" ${on ? html`aria-current="true"` : ""}>${icon("chevron-right", 16, "Catui_tree-toggle")}${c.showCheckbox ? cbx(n) : ""}${icon("folder", 16)}<span>${n.title}</span></summary><div class="Catui_tree-kids">${n.children.map(node)}</div></details>`;
-      }
-      return html`<div class="Catui_tree-row${on ? " Catui_tree-on" : ""}">${c.showCheckbox ? cbx(n) : ""}<button type="button" data-catui-titem="${id}" ${n.disabled ? "disabled" : ""} ${on ? html`aria-current="true"` : ""} style="flex:1;text-align:left;display:flex;align-items:center;gap:inherit">${icon(n.icon || "file-text", 16)}<span>${n.title}</span></button></div>`;
+      const id = String(n.id), on = s.selected === id, parent = !!n.children?.length, open = parent && isOpen(n);
+      const st = c.showCheckbox ? stateOf(n) : null;
+      return html`<div role="treeitem" data-catui-titem="${id}" aria-level="${level}" aria-selected="${on}" tabindex="-1"
+        ${parent ? html`aria-expanded="${open}"` : ""} ${n.disabled ? html`aria-disabled="true"` : ""} ${st ? html`aria-checked="${st === "on" ? "true" : st === "mixed" ? "mixed" : "false"}"` : ""}><div class="Catui_tree-row${on ? " Catui_tree-on" : ""}">${parent ? icon("chevron-right", 16, "Catui_tree-toggle") : ""}${st ? cbx(n, st) : ""}${icon(parent ? "folder" : n.icon || "file-text", 16)}<span>${n.title}</span></div>${parent ? html`<div role="group" class="Catui_tree-kids" ${open ? "" : "hidden"}>${n.children.map((k) => node(k, level + 1))}</div>` : ""}</div>`;
+    };
+    const items = () => [...inst.elem.querySelectorAll('[role="treeitem"]')];
+    // 보이는 항목: 접힌 묶음(hidden) 안이 아닌 것
+    const visible = () => items().filter((x) => !x.parentElement.closest('[role="group"][hidden]'));
+    const itemOf = (id) => inst.elem.querySelector(`[data-catui-titem="${CSS.escape(String(id))}"]`);
+    const rove = (el, focus) => {
+      if (!el) return;
+      items().forEach((x) => { x.tabIndex = x === el ? 0 : -1; });
+      focusId = el.dataset.catuiTitem;
+      if (focus) el.focus();
     };
     const draw = () => {
+      const hadFocus = inst.elem.contains(document.activeElement);
       inst.elem.classList.add("Catui_tree");
+      inst.elem.setAttribute("role", "tree");
       inst.elem.setAttribute("aria-label", c.label);
-      const list = c.data.map(node);
-      mount(inst.elem, list.some(Boolean) ? html`${list}` : html`<p class="Catui_help">${kw() ? "맞는 항목이 없습니다." : "항목이 없습니다."}</p>`);
+      const list = c.data.map((n) => node(n, 1));
+      mount(inst.elem, list.some(Boolean) ? html`${list}` : html`<p class="Catui_help" role="presentation">${kw() ? "맞는 항목이 없습니다." : "항목이 없습니다."}</p>`);
       inst.elem.querySelectorAll("[data-catui-mixed]").forEach((x) => { x.indeterminate = true; });
+      const vis = visible();
+      const keep = (focusId && vis.find((x) => x.dataset.catuiTitem === focusId)) || (s.selected && vis.find((x) => x.dataset.catuiTitem === s.selected)) || vis[0];
+      rove(keep, hadFocus);
     };
     draw();
 
-    // 실제로 보이는 항목만. 최신 브라우저는 접힌 details 내용을 content-visibility로 숨기므로 checkVisibility()로 판정
-    const shown = (x) => (x.checkVisibility ? x.checkVisibility() : x.getClientRects().length > 0);
-    const visible = () => [...inst.elem.querySelectorAll("[data-catui-titem]")].filter(shown);
-    const focusItem = (id) => inst.elem.querySelector(`[data-catui-titem="${CSS.escape(id)}"]`)?.focus();
-    const onToggle = (e) => {
-      const d = e.target;
-      if (!(d instanceof HTMLDetailsElement) || !d.dataset.catuiTid) return;
-      if (kw()) return;   // 검색 결과로 자동 펼친 폴더는 펼침 상태·아코디언에 반영하지 않는다
-      const id = d.dataset.catuiTid;
-      if (d.open) {
+    const toggle = (el, open) => {
+      const id = el.dataset.catuiTitem, n = byId.get(id);
+      if (!n?.children?.length || kw()) return;   // 검색 중 자동 펼침은 상태에 반영하지 않는다
+      const on = open ?? !s.open.has(id);
+      if (on === s.open.has(id)) return;
+      if (on) {
         s.open.add(id);
-        if (c.accordion) [...d.parentElement.children].forEach((sib) => { if (sib !== d && sib.tagName === "DETAILS" && sib.open) sib.open = false; });
+        if (c.accordion) (parentOf.get(n)?.children || c.data).forEach((sib) => { if (sib !== n) s.open.delete(String(sib.id)); });
       } else s.open.delete(id);
-      inst.emit("spread", { data: byId.get(id), open: d.open });
+      focusId = id;
+      draw();
+      itemOf(id)?.focus();
+      inst.emit("spread", { data: n, open: on });
+    };
+    const select = (el) => {
+      const id = el.dataset.catuiTitem, n = byId.get(id);
+      if (!n || n.disabled) return;   // 막힌 항목은 펼치기만 되고 선택되지 않는다
+      s.selected = id;
+      items().forEach((x) => { const on = x === el; x.setAttribute("aria-selected", String(on)); x.firstElementChild.classList.toggle("Catui_tree-on", on); });
+      rove(el, false);
+      c.click?.call(inst, { data: n, elem: el });
+      inst.emit("click", { data: n, elem: el });
+    };
+    const check = (n, on) => {
+      leaves(n).filter((l) => !l.disabled).forEach((l) => (on ? s.checked.add(String(l.id)) : s.checked.delete(String(l.id))));
+      focusId = String(n.id);
+      draw();
+      itemOf(n.id)?.focus();
+      c.oncheck?.call(inst, { data: n, checked: on });
+      inst.emit("check", { data: n, checked: on });
     };
     const onClick = (e) => {
       if (e.target.closest("label.Catui_choice")) return;      // 체크박스 클릭은 change에서
-      const item = e.target.closest("[data-catui-titem]");
-      if (!item || item.disabled) return;
-      const id = item.dataset.catuiTitem, n = byId.get(id);
-      s.selected = id;
-      inst.elem.querySelectorAll(".Catui_tree-on").forEach((x) => { x.classList.remove("Catui_tree-on"); x.removeAttribute("aria-current"); });
-      (item.tagName === "SUMMARY" ? item : item.parentElement).classList.add("Catui_tree-on");
-      item.setAttribute("aria-current", "true");
-      c.click?.call(inst, { data: n, elem: item });
-      inst.emit("click", { data: n, elem: item });
+      const el = e.target.closest('[role="treeitem"]');
+      if (!el || !inst.elem.contains(el)) return;
+      e.stopPropagation();   // 중첩 treeitem에서 부모까지 처리되지 않게
+      rove(el, true);
+      if (el.hasAttribute("aria-expanded")) toggle(el);
+      select(itemOf(el.dataset.catuiTitem) || el);
     };
     const onChange = (e) => {
       const cb = e.target.closest("[data-catui-tcheck]");
       if (!cb) return;
       const n = byId.get(cb.dataset.catuiTcheck);
-      leaves(n).filter((l) => !l.disabled).forEach((l) => (cb.checked ? s.checked.add(String(l.id)) : s.checked.delete(String(l.id))));
-      draw();
-      inst.elem.querySelector(`[data-catui-tcheck="${CSS.escape(String(n.id))}"]`)?.focus();
-      c.oncheck?.call(inst, { data: n, checked: cb.checked });
-      inst.emit("check", { data: n, checked: cb.checked });
+      if (n) check(n, cb.checked);
     };
     const onKey = (e) => {
-      const item = e.target.closest?.("[data-catui-titem]");
-      if (!item) return;
-      const list = visible(), i = list.indexOf(item), id = item.dataset.catuiTitem, n = byId.get(id);
-      const det = item.tagName === "SUMMARY" ? item.parentElement : null;
-      if (e.key === "ArrowDown") { e.preventDefault(); list[i + 1]?.focus(); }
-      else if (e.key === "ArrowUp") { e.preventDefault(); list[i - 1]?.focus(); }
-      else if (e.key === "Home") { e.preventDefault(); list[0]?.focus(); }
-      else if (e.key === "End") { e.preventDefault(); list[list.length - 1]?.focus(); }
-      else if (e.key === "ArrowRight" && det) { e.preventDefault(); if (!det.open) det.open = true; else det.querySelector(".Catui_tree-kids [data-catui-titem]")?.focus(); }
-      else if (e.key === "ArrowLeft") { e.preventDefault(); const p = parentOf.get(n); if (det?.open) det.open = false; else if (p) focusItem(String(p.id)); }
+      const el = e.target.closest?.('[role="treeitem"]');
+      if (!el || e.target !== el) return;   // 항목 자신에 포커스가 있을 때만
+      const list = visible(), i = list.indexOf(el), n = byId.get(el.dataset.catuiTitem);
+      const exp = el.getAttribute("aria-expanded");
+      const go = (x) => { if (x) { e.preventDefault(); rove(x, true); } };
+      if (e.key === "ArrowDown") go(list[i + 1]);
+      else if (e.key === "ArrowUp") go(list[i - 1]);
+      else if (e.key === "Home") go(list[0]);
+      else if (e.key === "End") go(list[list.length - 1]);
+      else if (e.key === "ArrowRight") { e.preventDefault(); if (exp === "false") toggle(el, true); else if (exp === "true") go(el.querySelector('[role="group"] > [role="treeitem"]')); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); const p = parentOf.get(n); if (exp === "true") toggle(el, false); else if (p) go(itemOf(p.id)); }
+      else if (e.key === "Enter") { e.preventDefault(); select(el); }
+      else if (e.key === " ") {
+        e.preventDefault();
+        if (c.showCheckbox && n && !n.disabled) check(n, el.getAttribute("aria-checked") !== "true");
+        else select(el);
+      }
     };
-    inst.elem.addEventListener("toggle", onToggle, true);
     inst.elem.addEventListener("click", onClick);
     inst.elem.addEventListener("change", onChange);
     inst.elem.addEventListener("keydown", onKey);
@@ -2779,13 +2964,18 @@ const tree = component({
     // 제목 검색: 맞는 노드와 조상만 보이고 펼친다. 빈 문자열이면 전체
     inst.search = (keyword) => { s.keyword = keyword; draw(); };
     inst.use(() => {
-      inst.elem.removeEventListener("toggle", onToggle, true);
       inst.elem.removeEventListener("click", onClick);
       inst.elem.removeEventListener("change", onChange);
       inst.elem.removeEventListener("keydown", onKey);
     });
   },
-  destroy(inst) { if (inst.elem) inst.elem.textContent = ""; },
+  destroy(inst) {
+    const el = inst.elem;
+    if (!el) return;
+    el.textContent = "";
+    el.classList.remove("Catui_tree");
+    ["role", "aria-label"].forEach((a) => el.removeAttribute(a));
+  },
   getChecked(id) { return tree.getThis(id)?.getChecked() || []; },
   setChecked(id, ids) { tree.getThis(id)?.setChecked(ids); },
   getSelected(id) { return tree.getThis(id)?.getSelected() || null; },
@@ -2856,8 +3046,8 @@ function collapseItems(filter) {
 // canvas — 반응형·고해상도(DPR) 캔버스.
 //   canvas.render({ elem: '#c', ratio: '16/9', label: '매출 추이', draw(ctx, s) { … }, animate: false })
 //   draw(ctx, { width, height, dpr, time, token, font, reduced }) — 좌표는 CSS 픽셀, token('--Catui_color-brand')로 토큰 색.
-// 크기 변화(ResizeObserver)·테마 전환(data-catui-theme) 때 다시 그리고, animate면 rAF로 그리되
-// 모션 줄이기·백그라운드 탭에서는 멈춘다. destroy 시 관찰자·rAF를 모두 정리한다.
+// 크기 변화(ResizeObserver)·테마 전환(data-catui-theme) 때 다시 그리고, animate면 공용 프레임 티커로 그리되
+// 모션 줄이기·백그라운드 탭·화면 밖·페이지 일시정지에서는 멈춘다. destroy 시 관찰자·구독을 모두 정리한다.
 const canvas = component({
   name: "canvas",
   config: { ratio: "16/9", label: "", draw: null, animate: false, maxDpr: 2 },
@@ -2876,13 +3066,13 @@ const canvas = component({
     const token = (name) => getComputedStyle(host).getPropertyValue(name).trim();
     // 페이지와 같은 글꼴로 캔버스 글자를 그리기 위한 font 문자열 (예: s.font(11), s.font(13, 600))
     const font = (size = 12, weight = 400) => `${weight} ${size}px ${getComputedStyle(host).fontFamily}`;
-    const start = performance.now();
-    let w = 1, h = 1, dpr = 1, raf = 0;
+    // time = 실제로 그린 시간의 합(초). 화면 밖·숨은 탭·페이지 일시정지 동안은 늘지 않아 다시 보일 때 튀지 않는다
+    let w = 1, h = 1, dpr = 1, elapsed = 0, stopLoop = null;
 
-    const paint = (t = performance.now()) => {
+    const paint = () => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
-      c.draw?.call(inst, ctx, { width: w, height: h, dpr, time: (t - start) / 1000, token, font, reduced: reduce.matches });
+      c.draw?.call(inst, ctx, { width: w, height: h, dpr, time: elapsed / 1000, token, font, reduced: reduce.matches });
     };
     const resize = () => {
       // 테두리를 뺀 안쪽 크기 = canvas가 채우는 영역
@@ -2893,20 +3083,18 @@ const canvas = component({
       cv.height = Math.round(h * dpr);
       paint();
     };
-    const loop = (t) => { paint(t); raf = requestAnimationFrame(loop); };
+    // 공용 프레임 티커(core/dom.js frame): 화면 밖(여유 120px)·숨은 탭·<html data-catui-paused>에서 자동으로 쉰다
     const startLoop = () => {
-      cancelAnimationFrame(raf);
-      raf = 0;
-      if (c.animate && !reduce.matches && !document.hidden) raf = requestAnimationFrame(loop);
+      stopLoop?.();
+      stopLoop = null;
+      if (c.animate && !reduce.matches) stopLoop = frame((dt) => { elapsed += dt; paint(); }, host);
       else paint();
     };
-    const onVis = () => (document.hidden ? cancelAnimationFrame(raf) : startLoop());
 
     const ro = new ResizeObserver(resize);
     ro.observe(host);
     const mo = new MutationObserver(() => paint());
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-catui-theme"] });
-    document.addEventListener("visibilitychange", onVis);
     reduce.addEventListener?.("change", startLoop);
     resize();
     startLoop();
@@ -2916,10 +3104,9 @@ const canvas = component({
     inst.redraw = () => paint();
     inst.toBlob = (cb, type = "image/png") => cv.toBlob(cb, type);
     inst.use(() => {
-      cancelAnimationFrame(raf);
+      stopLoop?.();
       ro.disconnect();
       mo.disconnect();
-      document.removeEventListener("visibilitychange", onVis);
       reduce.removeEventListener?.("change", startLoop);
       host.style.aspectRatio = "";
     });
@@ -2937,7 +3124,11 @@ const canvas = component({
 //   fx.shiny · fx.gradient · fx.rotate(el, { words, interval }) · fx.glitch · fx.border · fx.glare · fx.ripple · fx.marquee(el, { speed }) · fx.dock(el, { scale, radius })
 //   fx.hold(el, { duration, onHold }) · fx.swipe(row) · fx.list(ul) · fx.indicator(nav) · fx.flip(card) · fx.check(svg) · fx.pulse(btn) · fx.press(영역)
 //   fx.circle(el, { radius }) · fx.velocity(el) · fx.focus(el) · fx.stroke · fx.edge · fx.noise · fx.dotgrid(el) · fx.ripplegrid(el) · fx.cursor(el, { type })
-//   fx.bind(scope) — data-catui-fx="이름 이름…" (위 38종)
+//   fx.flap(el, { chars, stagger, speed }) · fx.rise(el, { distance }) · fx.mesh(el, { cols, rows, reach }) · fx.orbit(el, { count, speed }) · fx.halftone
+//   fx.depth(el, { stagger, once }) · fx.echo(el, { count }) · fx.zap
+//   fx.bind(scope) — data-catui-fx="이름 이름…" (위 46종)
+//   fx.replay(el, [이름]) · fx.pause() · fx.resume() · fx.paused() · fx.register(이름, fn, { slots }) · fx.unregister(이름) · fx.names()
+//   반복 갱신은 core/dom.js의 공용 프레임 티커(frame)로 돌아 화면 밖·숨은 탭·<html data-catui-paused>에서 쉰다
 const fx = (() => {
   const list = (target) => (typeof target === "string" ? [...document.querySelectorAll(target)] : target instanceof Element ? [target] : [...(target || [])]);
   const many = (target, one) => {
@@ -2954,10 +3145,14 @@ const fx = (() => {
     io.observe(el);
     return () => io.disconnect();
   };
+  // pointermove는 passive로 받고 프레임마다 마지막 이벤트 한 번만 처리(빠른 마우스에서 레이아웃 계산 폭주 방지)
   const pointer = (el, move, leave) => {
-    el.addEventListener("pointermove", move);
-    el.addEventListener("pointerleave", leave);
-    return () => { el.removeEventListener("pointermove", move); el.removeEventListener("pointerleave", leave); };
+    let last = null, raf = 0;
+    const onMove = (e) => { last = e; if (!raf) raf = requestAnimationFrame(() => { raf = 0; if (last) move(last); }); };
+    const onLeave = (e) => { cancelAnimationFrame(raf); raf = 0; last = null; leave(e); };
+    el.addEventListener("pointermove", onMove, { passive: true });
+    el.addEventListener("pointerleave", onLeave);
+    return () => { cancelAnimationFrame(raf); el.removeEventListener("pointermove", onMove); el.removeEventListener("pointerleave", onLeave); };
   };
   const finePointer = () => matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -3186,7 +3381,9 @@ const fx = (() => {
     el.classList.add("Catui_fx-host");
     if (getComputedStyle(el).position === "static") el.classList.add("Catui_fx-host-rel");
     back ? el.prepend(ly) : el.appendChild(ly);
-    return () => { ly.remove(); if (!el.querySelector(":scope > .Catui_fx-layer")) el.classList.remove("Catui_fx-host", "Catui_fx-host-rel"); };
+    const off = () => { ly.remove(); if (!el.querySelector(":scope > .Catui_fx-layer")) el.classList.remove("Catui_fx-host", "Catui_fx-host-rel"); };
+    off.node = ly;   // 레이어 안에 그림을 넣는 효과(orbit)용
+    return off;
   };
   const layered = (name, back) => (target) => many(target, (el) => { const off = addLayer(el, name, back); return { destroy: off }; });
   const shiny = cls("Catui_fx-shiny"), gradient = cls("Catui_fx-gradient"), border = layered("Catui_fx-border"), glare = layered("Catui_fx-glare"), aurora = layered("Catui_fx-aurora", true);
@@ -3201,9 +3398,11 @@ const fx = (() => {
       el.setAttribute("aria-label", words.join(", "));
       el.classList.add("Catui_fx-rotate");
       words.forEach((w) => { const s = document.createElement("span"); s.setAttribute("aria-hidden", "true"); s.textContent = w; el.appendChild(s); });
-      let k = 0;
-      const timer = reducedMotion() ? 0 : setInterval(() => { k = (k + 1) % words.length; el.style.setProperty("--Catui_fx-k", String(k)); }, o.interval ?? 2200);
-      return { destroy() { clearInterval(timer); el.innerHTML = orig; el.classList.remove("Catui_fx-rotate"); el.removeAttribute("aria-label"); el.style.removeProperty("--Catui_fx-k"); } };
+      // 공용 티커: 화면 밖·숨은 탭·페이지 일시정지에서는 바꾸지 않는다
+      let k = 0, acc = 0;
+      const every = o.interval ?? 2200;
+      const off = reducedMotion() ? () => {} : frame((dt) => { acc += dt; if (acc < every) return; acc = 0; k = (k + 1) % words.length; el.style.setProperty("--Catui_fx-k", String(k)); }, el);
+      return { destroy() { off(); el.innerHTML = orig; el.classList.remove("Catui_fx-rotate"); el.removeAttribute("aria-label"); el.style.removeProperty("--Catui_fx-k"); } };
     });
   }
 
@@ -3315,16 +3514,17 @@ const fx = (() => {
       el.classList.add("Catui_fx-hold");
       const hint = document.createElement("span"); hint.className = "Catui_clip"; hint.textContent = " (길게 눌러 실행)";
       el.appendChild(hint);
-      let t0 = 0, timer = 0, reset = 0, fired = false;
+      // timer = 공용 티커 해제 함수(누르는 동안만 구독). 16ms setTimeout 체인 대신 프레임마다 진행률 갱신
+      let t0 = 0, timer = null, reset = 0, fired = false;
       const set = (p) => el.style.setProperty("--Catui_fx-p", p.toFixed(3));
-      const stop = () => { clearTimeout(timer); timer = 0; if (!fired) set(0); };
+      const halt = () => { timer?.(); timer = null; };
+      const stop = () => { halt(); if (!fired) set(0); };
       const tick = () => {
         const p = Math.min(1, (performance.now() - t0) / dur);
         set(p);
-        if (p >= 1) { fired = true; timer = 0; emitFx(el, "hold", {}); o.onHold?.call(el); reset = setTimeout(() => { fired = false; set(0); }, 400); }
-        else timer = setTimeout(tick, 16);
+        if (p >= 1) { fired = true; halt(); emitFx(el, "hold", {}); o.onHold?.call(el); reset = setTimeout(() => { fired = false; set(0); }, 400); }
       };
-      const start = (e) => { if (timer || el.disabled || (e.type === "keydown" && e.key !== " " && e.key !== "Enter") || e.repeat) return; if (e.type === "keydown") e.preventDefault(); clearTimeout(reset); t0 = performance.now(); fired = false; tick(); };
+      const start = (e) => { if (timer || el.disabled || (e.type === "keydown" && (e.key !== " " && e.key !== "Enter" || imeBusy(e))) || e.repeat) return; if (e.type === "keydown") e.preventDefault(); clearTimeout(reset); t0 = performance.now(); fired = false; tick(); if (!fired) timer = frame(tick); };
       const keyup = (e) => { if (e.key === " " || e.key === "Enter") stop(); };
       const block = (e) => { e.preventDefault(); e.stopImmediatePropagation(); };
       el.addEventListener("pointerdown", start); el.addEventListener("keydown", start);
@@ -3461,11 +3661,12 @@ const fx = (() => {
     return many(target, (el) => {
       const m = marquee(el, o);
       const anim = () => el.querySelector(".Catui_fx-track")?.getAnimations?.()[0];
-      let last = scrollY, boost = 0, timer = 0;
+      let last = scrollY, boost = 0;
       const onScroll = () => { boost = Math.min(6, boost + Math.abs(scrollY - last) / 40); last = scrollY; };
-      const tick = () => { boost *= 0.9; const a = anim(); if (a && !reducedMotion()) a.playbackRate = 1 + boost; timer = setTimeout(tick, 50); };
-      addEventListener("scroll", onScroll, { passive: true }); tick();
-      return { destroy() { clearTimeout(timer); removeEventListener("scroll", onScroll); m.destroy(); } };
+      // 50ms 폴링 대신 공용 티커(프레임 시간 기준 감쇠: 50ms마다 0.9배와 같은 속도), 화면 밖에서는 쉰다
+      const off = frame((dt) => { boost *= 0.9 ** (dt / 50); const a = anim(); if (a && !reducedMotion()) a.playbackRate = 1 + boost; }, el);
+      addEventListener("scroll", onScroll, { passive: true });
+      return { destroy() { off(); removeEventListener("scroll", onScroll); m.destroy(); } };
     });
   }
 
@@ -3477,10 +3678,11 @@ const fx = (() => {
       el.setAttribute("aria-label", text); el.textContent = "";
       el.classList.add("Catui_fx-focus");
       const spans = words.map((w, i) => { const s = document.createElement("span"); s.setAttribute("aria-hidden", "true"); s.textContent = w; el.appendChild(s); if (i < words.length - 1) el.appendChild(document.createTextNode(" ")); return s; });
-      let k = 0; spans[0]?.classList.add("Catui_fx-on");
-      const timer = reducedMotion() ? 0 : setInterval(() => { spans[k].classList.remove("Catui_fx-on"); k = (k + 1) % spans.length; spans[k].classList.add("Catui_fx-on"); }, o.interval ?? 1100);
+      let k = 0, acc = 0; spans[0]?.classList.add("Catui_fx-on");
+      const every = o.interval ?? 1100;
+      const off = reducedMotion() ? () => {} : frame((dt) => { acc += dt; if (acc < every) return; acc = 0; spans[k].classList.remove("Catui_fx-on"); k = (k + 1) % spans.length; spans[k].classList.add("Catui_fx-on"); }, el);
       if (reducedMotion()) spans.forEach((s) => s.classList.add("Catui_fx-on"));
-      return { destroy() { clearInterval(timer); el.textContent = text; el.removeAttribute("aria-label"); el.classList.remove("Catui_fx-focus"); } };
+      return { destroy() { off(); el.textContent = text; el.removeAttribute("aria-label"); el.classList.remove("Catui_fx-focus"); } };
     });
   }
 
@@ -3544,12 +3746,172 @@ const fx = (() => {
     });
   }
 
-  const effects = { reveal, split, count, type, scramble, tilt, spotlight, magnet, spark, particles, shiny, gradient, rotate, glitch, border, glare, ripple, marquee, dock, aurora, waves,
+  // 출발판 글자: 칸마다 글자가 넘어가다가 왼쪽부터 차례로 원래 글자에 멈춘다. 화면 낭독기는 원문 한 번
+  function flap(target, o = {}) {
+    return many(target, (el) => {
+      const text = el.textContent.trim();
+      if (!text) return null;
+      const pool = String(o.chars || "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), stagger = o.stagger ?? 70, step = o.speed ?? 60;
+      const label = el.getAttribute("aria-label");
+      el.setAttribute("aria-label", text); el.textContent = "";
+      el.classList.add("Catui_fx-flaps");
+      const cells = [...text].map((ch, i) => {
+        const s = document.createElement("span");
+        s.className = "Catui_fx-flap"; s.setAttribute("aria-hidden", "true"); s.textContent = ch;
+        if (/\s/.test(ch)) s.setAttribute("data-gap", "");
+        el.appendChild(s);
+        return { s, ch, at: 300 + i * stagger, gap: /\s/.test(ch) };
+      });
+      let off = () => {}, stopView = () => {};
+      const run = () => {
+        off();
+        let t = 0, acc = 0;
+        cells.forEach((c) => { if (!c.gap) c.s.textContent = pool[(Math.random() * pool.length) | 0]; });
+        off = frame((dt) => {
+          t += dt; acc += dt;
+          if (acc < step) return;
+          acc = 0;
+          let busy = false;
+          cells.forEach((c) => {
+            if (c.gap || c.s.textContent === c.ch && t >= c.at) return;
+            if (t >= c.at) c.s.textContent = c.ch; else { c.s.textContent = pool[(Math.random() * pool.length) | 0]; busy = true; }
+            c.s.classList.remove("Catui_fx-flap-tick"); void c.s.offsetWidth; c.s.classList.add("Catui_fx-flap-tick");
+          });
+          if (!busy && t >= cells[cells.length - 1].at) { off(); off = () => {}; }
+        }, el);
+      };
+      if (!reducedMotion()) stopView = onView(el, run);
+      return {
+        replay() { if (!reducedMotion()) run(); },
+        destroy() { off(); stopView(); el.textContent = text; el.classList.remove("Catui_fx-flaps"); if (label == null) el.removeAttribute("aria-label"); else el.setAttribute("aria-label", label); },
+      };
+    });
+  }
+
+  // 스크롤 따라 떠오르기: 요소가 화면 아래에서 올라오는 만큼(--Catui_fx-k 0→1) 단어가 차례로 또렷하게 떠오른다
+  function rise(target, o = {}) {
+    return many(target, (el) => {
+      const text = el.textContent.trim(), words = text.split(/\s+/).filter(Boolean);
+      if (!words.length) return null;
+      const label = el.getAttribute("aria-label");
+      el.setAttribute("aria-label", text); el.textContent = "";
+      el.classList.add("Catui_fx-rise");
+      el.style.setProperty("--n", String(words.length));
+      words.forEach((w, i) => { const s = document.createElement("span"); s.setAttribute("aria-hidden", "true"); s.style.setProperty("--i", String(i)); s.textContent = w; el.appendChild(s); if (i < words.length - 1) el.appendChild(document.createTextNode(" ")); });
+      const span = o.distance ?? 0.6;   // 화면 높이의 몇 배를 지나는 동안 다 떠오를지
+      let k = -1;
+      const set = (v) => { if (Math.abs(v - k) < 0.002) return; k = v; el.style.setProperty("--Catui_fx-k", v.toFixed(3)); };
+      // 화면 밖에서는 티커가 쉬므로 스크롤할 때만 계산된다
+      const off = reducedMotion() ? (set(1), () => {}) : frame(() => { const r = el.getBoundingClientRect(); set(Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight * span)))); }, el);
+      return { destroy() { off(); el.textContent = text; el.classList.remove("Catui_fx-rise"); ["--n", "--Catui_fx-k"].forEach((p) => el.style.removeProperty(p)); if (label == null) el.removeAttribute("aria-label"); else el.setAttribute("aria-label", label); } };
+    });
+  }
+
+  // 탄성 격자: 격자 점이 커서에 밀렸다가 용수철처럼 제자리로 돌아온다(캔버스 배경). 모션 줄이기면 반듯한 격자만
+  function mesh(target, o = {}) {
+    return many(target, (el) => {
+      const cols = o.cols ?? 14, rows = o.rows ?? 8, reach = o.reach ?? 90;
+      let pts = null, W = 0, H = 0, last = 0, mx = -999, my = -999;
+      return bgCanvas(el, (ctx, s) => {
+        if (!pts || s.width !== W || s.height !== H) {
+          W = s.width; H = s.height; pts = [];
+          for (let j = 0; j <= rows; j++) for (let i = 0; i <= cols; i++) { const x = (i * W) / cols, y = (j * H) / rows; pts.push({ x0: x, y0: y, x, y, vx: 0, vy: 0 }); }
+        }
+        const dt = Math.min(0.05, Math.max(0, s.time - last)); last = s.time;
+        if (!s.reduced && dt) for (const p of pts) {
+          const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy);
+          if (d < reach) { const f = (1 - d / reach) * 2400 * dt; p.vx += (dx / (d || 1)) * f; p.vy += (dy / (d || 1)) * f; }
+          p.vx += ((p.x0 - p.x) * 120 - p.vx * 12) * dt; p.vy += ((p.y0 - p.y) * 120 - p.vy * 12) * dt;
+          p.x += p.vx * dt; p.y += p.vy * dt;
+        }
+        ctx.strokeStyle = s.token("--Catui_color-brand"); ctx.globalAlpha = 0.28; ctx.lineWidth = 1;
+        const at = (i, j) => pts[j * (cols + 1) + i];
+        for (let j = 0; j <= rows; j++) { ctx.beginPath(); for (let i = 0; i <= cols; i++) { const p = at(i, j); i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); } ctx.stroke(); }
+        for (let i = 0; i <= cols; i++) { ctx.beginPath(); for (let j = 0; j <= rows; j++) { const p = at(i, j); j ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); } ctx.stroke(); }
+        ctx.globalAlpha = 1;
+      }, () => pointer(el, (e) => { const r = el.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; }, () => { mx = my = -999; }));
+    });
+  }
+
+  // 궤도: 점 몇 개가 요소 테두리(모서리 둥글기 포함)를 따라 돈다. SVG 레이어에 그리며 화면 밖·일시정지에서는 쉰다
+  function orbit(target, o = {}) {
+    return many(target, (el) => {
+      const n = Math.max(1, o.count ?? 3), period = (o.speed ?? 8) * 1000;
+      const off = addLayer(el, "Catui_fx-orbit"), ly = off.node, NS = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(NS, "svg"), rect = document.createElementNS(NS, "rect");
+      svg.appendChild(rect);
+      const dots = Array.from({ length: n }, () => { const c = document.createElementNS(NS, "circle"); c.setAttribute("r", "2.5"); svg.appendChild(c); return c; });
+      ly.appendChild(svg);
+      let len = 0, t = 0;
+      const fit = () => {
+        const w = el.clientWidth, h = el.clientHeight, rr = Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0, w / 2, h / 2);
+        svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+        Object.entries({ x: 1, y: 1, width: Math.max(0, w - 2), height: Math.max(0, h - 2), rx: rr, ry: rr }).forEach(([k, v]) => rect.setAttribute(k, String(v)));
+        len = rect.getTotalLength?.() || 0;
+        place();
+      };
+      const place = () => { if (!len) return; dots.forEach((c, i) => { const p = rect.getPointAtLength((((t / period) + i / n) % 1) * len); c.setAttribute("cx", p.x.toFixed(1)); c.setAttribute("cy", p.y.toFixed(1)); }); };
+      const ro = typeof ResizeObserver === "function" ? new ResizeObserver(fit) : null; ro?.observe(el);
+      fit();
+      const stop = reducedMotion() ? () => {} : frame((dt) => { t += dt; place(); }, el);
+      return { destroy() { stop(); ro?.disconnect(); off(); } };
+    });
+  }
+
+  // 점묘 덮개: 내용 위에 반점 무늬가 덮였다가 마우스를 올리거나 안으로 포커스가 들어오면 걷힌다(CSS 레이어)
+  const halftone = layered("Catui_fx-halftone");
+
+  // 깊이 진입: 화면에 들어오면 단어가 뒤에서 앞으로 세워지듯 나타난다(CSS 3D). 화면 낭독기는 원문 한 번
+  function depth(target, o = {}) {
+    return many(target, (el) => {
+      const text = el.textContent.trim(), words = text.split(/\s+/).filter(Boolean);
+      if (!words.length) return null;
+      const label = el.getAttribute("aria-label");
+      el.setAttribute("aria-label", text); el.textContent = "";
+      el.classList.add("Catui_fx-depth");
+      if (o.stagger != null) el.style.setProperty("--Catui_fx-stagger", `${o.stagger}ms`);
+      words.forEach((w, i) => { const s = document.createElement("span"); s.setAttribute("aria-hidden", "true"); s.style.setProperty("--i", String(i)); s.textContent = w; el.appendChild(s); if (i < words.length - 1) el.appendChild(document.createTextNode(" ")); });
+      const off = reducedMotion() ? (el.classList.add("Catui_fx-in"), () => {}) : onView(el, () => el.classList.add("Catui_fx-in"), o.once !== false);
+      return { destroy() { off(); el.textContent = text; el.classList.remove("Catui_fx-depth", "Catui_fx-in"); el.style.removeProperty("--Catui_fx-stagger"); if (label == null) el.removeAttribute("aria-label"); else el.setAttribute("aria-label", label); } };
+    });
+  }
+
+  // 메아리 글자: 마우스를 올리거나 포커스하면 같은 글자가 몇 겹 퍼지며 사라진다(복제는 aria-hidden, CSS로 움직임)
+  function echo(target, o = {}) {
+    return many(target, (el) => {
+      const text = el.textContent.trim();
+      if (!text) return null;
+      const n = Math.min(6, Math.max(1, o.count ?? 3));
+      el.classList.add("Catui_fx-echo");
+      const copies = Array.from({ length: n }, (_, i) => { const s = document.createElement("span"); s.className = "Catui_fx-echo-copy"; s.setAttribute("aria-hidden", "true"); s.style.setProperty("--i", String(i)); s.textContent = text; el.appendChild(s); return s; });
+      return { destroy() { copies.forEach((s) => s.remove()); el.classList.remove("Catui_fx-echo"); } };
+    });
+  }
+
+  // 방전 테두리: 짧은 빛 조각이 테두리를 따라 달리고 가끔 튄다(SVG 레이어 + CSS 애니메이션). 모션 줄이기면 멈춘 점선
+  function zap(target) {
+    return many(target, (el) => {
+      const off = addLayer(el, "Catui_fx-zap"), NS = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(NS, "svg");
+      const rects = ["Catui_fx-zap-a", "Catui_fx-zap-b"].map((c) => { const r = document.createElementNS(NS, "rect"); r.setAttribute("class", c); r.setAttribute("pathLength", "100"); svg.appendChild(r); return r; });
+      off.node.appendChild(svg);
+      const fit = () => {
+        const w = el.clientWidth, h = el.clientHeight, rr = Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0, w / 2, h / 2);
+        svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+        rects.forEach((r) => Object.entries({ x: 0.75, y: 0.75, width: Math.max(0, w - 1.5), height: Math.max(0, h - 1.5), rx: rr, ry: rr }).forEach(([k, v]) => r.setAttribute(k, String(v))));
+      };
+      const ro = typeof ResizeObserver === "function" ? new ResizeObserver(fit) : null; ro?.observe(el);
+      fit();
+      return { destroy() { ro?.disconnect(); off(); } };
+    });
+  }
+
+  const effects = { flap, rise, mesh, orbit, halftone, depth, echo, zap, reveal, split, count, type, scramble, tilt, spotlight, magnet, spark, particles, shiny, gradient, rotate, glitch, border, glare, ripple, marquee, dock, aurora, waves,
     hold, swipe, list: listFx, indicator, flip, check, pulse, press, circle, velocity, focus, stroke, edge, noise, dotgrid, ripplegrid, cursor };
   // data-catui-fx="이름[ 이름…]" 선언형 연결. 돌려준 함수로 이번에 연결한 것만 해제
-  const unbind = (el) => { el.catuiFx?.forEach((h) => h.destroy()); delete el.catuiFx; };
+  const unbind = (el) => { el.catuiFx?.forEach((h) => h?.destroy?.()); delete el.catuiFx; };
   // 함수 옵션을 data-catui-이름으로도 (숫자·true/false는 값으로 바꿈). words·duration·radius·cursor는 각 효과가 직접 읽는다
-  const FX_OPTS = ["speed", "pause", "loop", "interval", "hover", "once", "y", "max", "strength", "count", "link", "lines", "amplitude", "scale", "gap", "reach", "stagger", "decimals", "from", "prefix", "suffix", "chars"];
+  const FX_OPTS = ["speed", "pause", "loop", "interval", "hover", "once", "y", "max", "strength", "count", "link", "lines", "amplitude", "scale", "gap", "reach", "stagger", "decimals", "from", "prefix", "suffix", "chars", "distance", "cols", "rows"];
   const optsOf = (el) => {
     const o = { by: el.dataset.catuiBy, to: el.dataset.catuiTo, delay: Number(el.dataset.catuiDelay) || 0 };
     for (const k of FX_OPTS) {
@@ -3562,45 +3924,98 @@ const fx = (() => {
     const mine = within(scope, "[data-catui-fx]").filter((el) => {
       if (el.catuiFx) return false;
       const o = optsOf(el);
-      el.catuiFx = el.dataset.catuiFx.split(/\s+/).filter((n) => effects[n]).map((n) => api[n](el, o));
+      el.catuiFx = el.dataset.catuiFx.split(/\s+/).filter((n) => effects[n]).map((n) => api[n](el, o)).filter(Boolean);   // 충돌로 건너뛴 효과(null)는 넣지 않는다
       return true;
     });
     return () => mine.forEach(unbind);
   }
   const SLOTS = {
-    split: ["text"], count: ["text"], type: ["text"], scramble: ["text"], rotate: ["text"], focus: ["text"],
+    split: ["text"], count: ["text"], type: ["text"], scramble: ["text"], rotate: ["text"], focus: ["text"], flap: ["text"], rise: ["text"], depth: ["text"], echo: ["text"],
     circle: ["text", "anim"], glitch: ["text", "after"], shiny: ["fill", "anim"], gradient: ["fill", "anim"], stroke: ["fill"],
     pulse: ["anim"], hold: ["after", "click"], indicator: ["after"], marquee: ["children"], velocity: ["children"],
-    particles: ["bg"], waves: ["bg"], dotgrid: ["bg"], ripplegrid: ["bg"], ripple: ["click"], spark: ["click"],
+    particles: ["bg"], waves: ["bg"], dotgrid: ["bg"], ripplegrid: ["bg"], mesh: ["bg"], ripple: ["click"], spark: ["click"],
   };
   const reg = new WeakMap();
-  const live = new Set();   // 살아 있는 효과 { el, h } — 자동 정리(destroyDetached)·destroyAll용
+  const live = new Set();   // 살아 있는 효과 { el, name, h } — 자동 정리(destroyDetached)·destroyAll·replay용
   const guard = (name, fn) => (target, o) => {
     const hs = list(target).map((el) => {
       const m = reg.get(el) || new Map(), mine = SLOTS[name] || [];
       if (m.has(name)) return m.get(name).h;
       const clash = [...m].find(([, v]) => v.slots.some((x) => mine.includes(x)));
-      if (clash) { hint.error(`fx: ${name}과 ${clash[0]}는 같은 요소에서 함께 쓸 수 없어 ${name}을 건너뜁니다 (겹치는 자리: ${mine.filter((x) => clash[1].slots.includes(x)).join(", ")})`, "warn", el); return null; }
-      const raw = fn(el, o);
-      if (!raw) return null;
+      if (clash) {
+        const slots = mine.filter((x) => clash[1].slots.includes(x));
+        hint.error(`fx: ${name}과 ${clash[0]}는 같은 요소에서 함께 쓸 수 없어 ${name}을 건너뜁니다 (겹치는 자리: ${slots.join(", ")})`, "warn", el);
+        emitFx(el, "fx-conflict", { effect: name, with: clash[0], slots });   // 화면에서도 알릴 수 있게(문서 놀이터 등)
+        return null;
+      }
+      let cur = fn(el, o);
+      if (!cur) return null;
       let dead = false;
-      // 두 번 불려도 한 번만 해제하고, 같은 효과를 다시 붙인 뒤 옛 핸들이 새 등록을 지우지 않게 한다
-      const h = { ...raw, destroy() { if (dead) return; dead = true; raw.destroy(); if (m.get(name)?.h === h) m.delete(name); live.delete(entry); } };
-      const entry = { el, h };
+      // 핸들은 그대로 두고 안쪽 구현(cur)만 바꿀 수 있게: replay가 다시 적용해도 이전에 받은 핸들이 계속 유효하다
+      const h = {
+        destroy() { if (dead) return; dead = true; cur.destroy(); if (m.get(name)?.h === h) m.delete(name); live.delete(entry); },
+        // 다시 실행: 효과가 replay를 가지면 그것을, 아니면 해제 후 같은 옵션으로 다시 적용(진입 효과·CSS 애니메이션 처음부터)
+        replay() {
+          if (dead) return;
+          if (typeof cur.replay === "function") { cur.replay(); return; }
+          cur.destroy(); void el.offsetWidth;
+          cur = fn(el, o) || { destroy() {} };
+        },
+      };
+      Object.keys(cur).forEach((k) => { if (!(k in h) && typeof cur[k] === "function") h[k] = (...a) => cur[k]?.(...a); });   // update·toggle·close 등
+      const entry = { el, name, h };
       m.set(name, { slots: mine, h }); reg.set(el, m); live.add(entry);
       return h;
     }).filter(Boolean);
-    return hs.length === 1 ? hs[0] : { destroy() { hs.forEach((h) => h.destroy()); } };
+    return hs.length === 1 ? hs[0] : { destroy() { hs.forEach((h) => h.destroy()); }, replay() { hs.forEach((h) => h.replay()); } };
   };
   const api = Object.fromEntries(Object.entries(effects).map(([k, f]) => [k, guard(k, f)]));
+  const builtin = new Set(Object.keys(api));
   // 다른 모듈과 같은 정리 계약: DOM에서 빠진 요소의 효과(창 스크롤·resize 리스너, 타이머, body에 붙인 커서)를 회수
   const sweep = (pick) => [...live].forEach(({ el, h }) => { if (pick(el)) { h.destroy(); delete el.catuiFx; } });
-  return {
-    ...api, bind,
+
+  // 사용자 효과 등록: fx.register('이름', (el, o, kit) => ({ destroy() {…} }) | null, { slots: ['text'] })
+  //   kit = { frame, onView, pointer, reduced } — 공용 티커(화면 밖·일시정지 자동)·진입 감지·스로틀된 포인터
+  //   등록하면 fx.이름(el, o)과 data-catui-fx="이름" 둘 다 쓸 수 있고, 내장 효과와 같은 자리(slots) 충돌 검사를 받는다
+  const kit = { frame, onView, pointer, get reduced() { return reducedMotion(); } };
+  const out = {};
+  function register(name, fn, opts = {}) {
+    if (typeof name !== "string" || !/^[a-z][\w-]*$/.test(name) || typeof fn !== "function") { hint.error(`fx.register: 이름(영소문자로 시작)과 함수가 필요합니다 (${name})`, "error"); return false; }
+    if (api[name] || name in out) { hint.error(`fx.register: '${name}'은 이미 있는 이름입니다`, "error"); return false; }
+    effects[name] = (target, o = {}) => many(target, (el) => fn(el, o, kit) || null);
+    SLOTS[name] = [].concat(opts.slots || []);
+    api[name] = out[name] = guard(name, effects[name]);
+    // 등록보다 먼저 선언된 data-catui-fx="… 이름"도 바로 연결 — 이미 다른 효과로 연결된 요소에는 이 효과만 더한다
+    within(document, "[data-catui-fx]").forEach((el) => {
+      if (!el.catuiFx || !el.dataset.catuiFx.split(/\s+/).includes(name)) return;
+      const h = api[name](el, optsOf(el));
+      if (h) el.catuiFx.push(h);
+    });
+    bind(document);
+    return true;
+  }
+  // 사용자 효과 해제: 그 효과만 걷어 낸다(같은 요소의 다른 효과는 그대로). 내장 효과는 해제할 수 없다
+  function unregister(name) {
+    if (!api[name] || builtin.has(name)) return false;
+    [...live].forEach((e) => { if (e.name === name) e.h.destroy(); });
+    delete effects[name]; delete SLOTS[name]; delete api[name]; delete out[name];
+    return true;
+  }
+  // 다시 실행: 대상 요소에 붙은 효과(또는 이름을 준 효과만)를 처음부터
+  const replay = (target, name) => list(target).forEach((el) => reg.get(el)?.forEach((v, n) => { if (!name || n === name) v.h.replay(); }));
+  return Object.assign(out, api, {
+    bind,
     enhance: (scope = document) => { bind(scope); },
     destroyDetached: () => sweep((el) => !el.isConnected),
     destroyAll: () => sweep(() => true),
-  };
+    replay, register, unregister,
+    names: () => Object.keys(api),   // 'list'는 차례 등장 효과 이름이라 목록 API는 names
+    list: api.list,
+    // 페이지 전체 움직임 일시정지/재개: 공용 티커·캔버스·CSS 애니메이션이 함께 멈춘다(<html data-catui-paused>)
+    pause: () => document.documentElement.setAttribute("data-catui-paused", ""),
+    resume: () => document.documentElement.removeAttribute("data-catui-paused"),
+    paused: pagePaused,
+  });
 })();
 
 // ── modules/carousel.js ──
@@ -4360,6 +4775,7 @@ const autocomplete = component({
     input.setAttribute("aria-autocomplete", "list");
     input.setAttribute("aria-expanded", "false");
     input.setAttribute("aria-controls", listId);
+    const prevAuto = input.getAttribute("autocomplete");   // 해제할 때 원래 값으로
     input.autocomplete = "off";
     let panel = null, items = [], active = -1, timer = 0, ctrl = null, seq = 0;
 
@@ -4420,6 +4836,7 @@ const autocomplete = component({
           : html`<p class="Catui_dd-group" role="presentation" aria-live="polite">${c.empty}</p>`);
       input.setAttribute("aria-expanded", "true");
       active = -1;
+      input.removeAttribute("aria-activedescendant");   // 이전 후보는 지워졌으므로 가리키던 id도 비운다
       place();
     };
     const pick = (i) => {
@@ -4461,10 +4878,16 @@ const autocomplete = component({
       timer = setTimeout(run, typeof c.data === "function" ? c.delay : 0);
     };
     const onInput = (e) => { if (e.isTrusted === false && !panel) return; search(input.value.trim()); };
+    // 고를 수 없는(disabled) 후보는 건너뛴다
+    const step = (dir) => {
+      const n = items.length, base = active < 0 && dir < 0 ? n : active;   // 아무것도 없을 때 ↑는 마지막 후보부터
+      for (let k = 1; k <= n; k++) { const i = (((base + dir * k) % n) + n) % n; if (!items[i].disabled) { setActive(i); return; } }
+    };
     const onKey = (e) => {
       const n = items.length;
-      if (e.key === "ArrowDown") { e.preventDefault(); if (!panel) { search(input.value.trim()); return; } if (n) setActive((active + 1) % n); }
-      else if (e.key === "ArrowUp") { e.preventDefault(); if (n) setActive((active - 1 + n) % n); }
+      if ((e.key === "ArrowDown" || e.key === "ArrowUp") && imeBusy(e)) return;   // 한글 조합 중 ↑↓는 조합 확정에 쓴다
+      if (e.key === "ArrowDown") { e.preventDefault(); if (!panel) { search(input.value.trim()); return; } if (n) step(1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); if (n) step(-1); }
       else if (e.key === "Enter" && panel && active >= 0 && !imeBusy(e)) { e.preventDefault(); pick(active); }
       else if (e.key === "Escape" && panel && !imeBusy(e)) { e.preventDefault(); e.stopPropagation(); close(); }   // 모달 안이면 목록만 닫힘
       else if (e.key === "Tab") close();
@@ -4484,6 +4907,7 @@ const autocomplete = component({
       input.removeEventListener("focus", onFocus);
       input.removeEventListener("blur", onBlur);
       ["role", "aria-autocomplete", "aria-expanded", "aria-controls", "aria-activedescendant"].forEach((a) => input.removeAttribute(a));
+      if (prevAuto == null) input.removeAttribute("autocomplete"); else input.setAttribute("autocomplete", prevAuto);
     });
   },
 });
@@ -5255,6 +5679,7 @@ const catui = {
   config(options) { const r = config(options); if (options && "autoDestroy" in options) catuiSyncWatch(); return r; },
   get cache() { return { config: getConfig(), modules: Object.keys(catuiModules) }; },
   $, el, html, raw, escape, mount, icon, hint, data, sessionData, url, device, component, csrfHeaders,
+  imeBusy,   // 한글 조합 중(확정 직후 150ms 포함)인 키 입력인지 — 확장(admin·community)도 같은 기준을 쓰게
   ...catuiModules,
 
   // 모듈 불러오기. 모두 한 파일에 들어 있으므로 즉시(문서 준비 후) 콜백한다. Promise도 돌려준다.

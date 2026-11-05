@@ -21,6 +21,8 @@ community.editor = {
     const f = root.querySelector("form[data-catui-cm-editor]");
     if (!f) return;
     const $ = (n) => f.elements[n], note = f.querySelector("[data-catui-cm-saved]");
+    const miss = ["board", "cat", "title", "body"].filter((n) => !$(n));
+    if (miss.length) { catui.hint.error(`CatuiCommunity: 글쓰기 폼에 ${miss.join(", ")} 칸이 없습니다`, "error", f); return; }
     const snapshot = () => JSON.stringify({ board: $("board").value, cat: $("cat").value, title: $("title").value, body: $("body").value });
     let base = snapshot(), timer;
     community.data("boards").then((boards) => {

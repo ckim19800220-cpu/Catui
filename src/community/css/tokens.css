@@ -2,14 +2,14 @@
 /* CatuiCommunity 토큰 — 본체 토큰을 참조만 한다(새 색 값 없음). 모션 값은 Emil Kowalski 애니메이션 기준(React Bits 스킬). */
 .Catui_cm{
   --Catui_cm-wrap:calc(var(--Catui_space-10) * 19);            /* 본문+옆줄 최대 폭 ≈ 1216px */
-  --Catui_cm-aside-w:calc(var(--Catui_space-10) * 5);           /* 옆줄 320px */
+  --Catui_cm-aside-w:calc(var(--Catui_space-10) * 4.6);         /* 옆줄 ≈ 294px */
   --Catui_cm-gap:var(--Catui_space-5);
   --Catui_cm-head-h:calc(var(--Catui_space-10) + var(--Catui_space-2));
   --Catui_cm-row-pad:var(--Catui_space-3);
   --Catui_cm-hot:var(--Catui_color-brand-strong);               /* 인기·추천 강조: 좋은 신호이므로 브랜드색(빨강은 오류·위험에만) + 숫자 + 아이콘 */
   --Catui_cm-hot-soft:var(--Catui_color-brand-soft);
   --Catui_cm-read:var(--Catui_color-text-secondary);
-  --Catui_cm-prose-size:17px;
+  --Catui_cm-prose-size:16px;
   --Catui_cm-prose-lh:1.8;
   /* 모션: 화면에 들어오고 나가는 것은 ease-out, 화면 안에서 움직이는 것은 ease-in-out. UI는 300ms 미만 */
   --Catui_cm-ease-out:cubic-bezier(0.23, 1, 0.32, 1);

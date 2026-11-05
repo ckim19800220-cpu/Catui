@@ -239,7 +239,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
   // 로딩. options.progress: true면 진행률 막대(layer.progress(index, 0~100)로 갱신)
   function load(text = "불러오는 중…", options = {}) {
     if (typeof text === "object") { options = text; text = options.text || "불러오는 중…"; }
-    const bar = options.progress ? `<div class="Catui_prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="${""}"><i class="Catui_pc1" style="width:0%"></i></div>` : "";
+    const bar = options.progress ? `<div class="Catui_prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="진행률"><i class="Catui_pc1" style="width:0%"></i></div>` : "";
     return open({ area: "sm", closeBtn: false, shadeClose: false, loading: true, label: text, ...options,
       content: raw(`<div class="Catui_layer-load" role="status"><span class="Catui_spin" aria-hidden="true"></span><span></span></div>${bar ? `<div style="padding:0 var(--Catui_modal-pad) var(--Catui_modal-pad)">${bar}</div>` : ""}`),
       success(dlg, index) {
@@ -489,7 +489,7 @@ ${o.btn.length ? html`<footer class="Catui_modal-f">${[...o.btn].reverse().map((
           if (!box) return;
           const ins = [...box.querySelectorAll("input,select,textarea")], err = box.querySelector(".Catui_error"), k = kindOf(fl);
           let m = "";
-          if (fl.required && k === "group" && !(fl.type === "radio" ? values[fl.name] : values[fl.name].length)) m = fl.type === "radio" ? "하나를 고르세요." : "하나 이상 고르세요.";
+          if (fl.required && k === "group" && !(fl.type === "radio" ? values[fl.name] : (values[fl.name] ?? []).length)) m = fl.type === "radio" ? "하나를 고르세요." : "하나 이상 고르세요.";
           else if (k !== "group") {
             const inv = ins.find((x) => !x.checkValidity());
             if (inv) { const key = Object.keys(FORM_MSG).find((n) => inv.validity[n]); m = fl.messages?.[key] || FORM_MSG[key] || "값을 확인해 주세요."; }

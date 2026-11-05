@@ -2,7 +2,7 @@
 .Catui_files{display:grid}
 .Catui_file{min-height:var(--Catui_file-row-h);display:flex;align-items:center;gap:var(--Catui_space-3);border-bottom:1px solid var(--Catui_divider-color)}
 .Catui_file:last-child{border-bottom:0}
-.Catui_file-ico{width:var(--Catui_file-icon);height:var(--Catui_file-icon);border-radius:var(--Catui_file-icon-radius);background:var(--Catui_chart-series-1);color:var(--Catui_color-text-inverse);display:grid;place-items:center;flex:none}
+.Catui_file-ico{width:var(--Catui_file-icon);height:var(--Catui_file-icon);border-radius:var(--Catui_file-icon-radius);background:var(--Catui_color-brand-fill);color:var(--Catui_color-text-inverse);display:grid;place-items:center;flex:none}
 .Catui_file-ico-2{background:var(--Catui_chart-series-2)}
 .Catui_file-ico-3{background:var(--Catui_chart-series-3)}
 .Catui_file-ico-5{background:var(--Catui_badge-danger-fg)}

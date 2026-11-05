@@ -26,7 +26,7 @@ catui.use(['layer'], function (layer) {
     var hm = function (iso) { return catui.util.toDateString(new Date(iso), 'HH:mm'); };
     var msg = function (m) { var me = m.user === 'me'; return catui.html`<div class="Catui_chat-msg${me ? ' Catui_chat-me' : ''}">${me ? '' : cm.avatar({ id: m.user, nick: nick(m.user) })}<div class="Catui_cm-chat-b">${me ? '' : catui.html`<b class="Catui_cm-chat-nick">${nick(m.user)}</b>`}<p class="Catui_chat-bubble"><span class="Catui_clip">${nick(m.user)}: </span>${m.text}</p></div><time class="Catui_chat-time" datetime="${m.time}">${hm(m.time)}</time></div>`; };
     var drawRooms = function () {
-      catui.mount(document.getElementById('ch-rooms'), catui.html`${data.rooms.map(function (r) { return catui.html`<li><a href="#${r.id}" data-room="${r.id}"${cur === r ? catui.html` aria-current="page"` : ''}><b>${r.name}</b><span class="Catui_cm-meta">${r.desc}</span></a><span class="Catui_badge Catui_badge-neutral" aria-label="접속 ${r.online}명">${r.online}</span></li>`; })}`);
+      catui.mount(document.getElementById('ch-rooms'), catui.html`${data.rooms.map(function (r) { return catui.html`<li><a href="#${r.id}" data-room="${r.id}"${cur === r ? catui.html` aria-current="page"` : ''}><b>${r.name}</b><span class="Catui_cm-meta">${r.desc}</span></a><span class="Catui_badge Catui_badge-neutral"><span class="Catui_clip">접속 </span>${r.online}<span class="Catui_clip">명</span></span></li>`; })}`);
     };
     var open = function (r) {
       cur = r; drawRooms();

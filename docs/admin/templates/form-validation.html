@@ -104,7 +104,8 @@ catui.use(['form', 'layer'], function (form, layer) {
     }, 0);
   });
   form.on('submit(fv-form)', function (d) { sum.hidden = true; layer.msg(d.field.email + '로 초대를 보냈습니다', { icon: 'success' }); f.reset(); return false; });
-  f.addEventListener('reset', function () { sum.hidden = true; form.clearError(f); });
+  // clearError는 칸 하나를 받는다 — 칸마다 지워야 aria-invalid·오류 문구가 함께 사라진다
+  f.addEventListener('reset', function () { sum.hidden = true; [].forEach.call(f.querySelectorAll('[data-catui-verify]'), function (x) { form.clearError(x); }); });
 });
 </script>
 </body>

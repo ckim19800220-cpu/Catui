@@ -34,7 +34,7 @@ community.comments = {
         }
       });
       community._on(box, "keydown", (e) => {
-        if (e.key !== "Enter" || !(e.ctrlKey || e.metaKey) || e.isComposing || e.keyCode === 229) return;
+        if (e.key !== "Enter" || !(e.ctrlKey || e.metaKey) || catui.imeBusy(e)) return;
         const f = e.target.closest("form.Catui_cm-c-form");
         if (f) { e.preventDefault(); f.requestSubmit(); }
       });

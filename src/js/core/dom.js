@@ -58,6 +58,15 @@ export function within(scope, sel) {
 
 export function mount(node, markup) {
   if (isRaw(markup)) node.innerHTML = markup.__raw;
+  else if (typeof Node !== "undefined" && markup instanceof Node) node.replaceChildren(markup);
+  else if (Array.isArray(markup)) {
+    // 배열: 노드는 그대로, html``은 마크업으로, 나머지는 글자로 (null·false는 건너뜀)
+    node.replaceChildren(...markup.flat(Infinity).filter((m) => m != null && m !== false).map((m) => {
+      if (m instanceof Node) return m;
+      if (!isRaw(m)) return document.createTextNode(String(m));
+      const t = document.createElement("template"); t.innerHTML = m.__raw; return t.content;
+    }));
+  }
   else node.textContent = String(markup ?? "");
   return node;
 }
@@ -124,6 +133,42 @@ export function imeBusy(e) {
 }
 
 export const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// 페이지 전체 움직임 일시정지: <html data-catui-paused> (fx.pause()/resume()이 켜고 끈다)
+export const pagePaused = () => { const v = document.documentElement.getAttribute("data-catui-paused"); return v != null && v !== "false"; };
+
+// 공용 프레임 티커 — 반복 갱신을 requestAnimationFrame 하나로 모은다. fn(dt, now), dt는 ms(최대 64).
+// 요소를 넘기면 화면 밖(여유 120px)에서는 부르지 않고, 탭이 숨으면 루프를 멈추고, 페이지 일시정지 중에는 건너뛴다.
+const catuiTasks = new Set(), catuiSuspend = new WeakMap();
+let catuiRaf = 0, catuiLast = 0, catuiSuspendIO = null;
+function catuiLoop(now) {
+  const dt = Math.min(64, now - catuiLast);
+  catuiLast = now;
+  if (!pagePaused()) for (const t of [...catuiTasks]) if (t.on) { try { t.fn(dt, now); } catch (err) { console.error("[Catui error]: frame 처리 중 오류", err); } }
+  catuiRaf = catuiTasks.size && !document.hidden ? requestAnimationFrame(catuiLoop) : 0;
+}
+function catuiFrameStart() {
+  if (catuiRaf || !catuiTasks.size || document.hidden) return;
+  catuiLast = performance.now();
+  catuiRaf = requestAnimationFrame(catuiLoop);
+}
+if (typeof document !== "undefined") document.addEventListener("visibilitychange", () => { if (document.hidden) { cancelAnimationFrame(catuiRaf); catuiRaf = 0; } else catuiFrameStart(); });
+export function frame(fn, el) {
+  const t = { fn, on: true };
+  catuiTasks.add(t);
+  if (el && typeof IntersectionObserver === "function") {
+    catuiSuspendIO ||= new IntersectionObserver((es) => es.forEach((e) => catuiSuspend.get(e.target)?.forEach((x) => { x.on = e.isIntersecting; })), { rootMargin: "120px" });
+    let set = catuiSuspend.get(el);
+    if (!set) { set = new Set(); catuiSuspend.set(el, set); catuiSuspendIO.observe(el); }
+    set.add(t);
+  }
+  catuiFrameStart();
+  return () => {
+    catuiTasks.delete(t);
+    const set = el && catuiSuspend.get(el);
+    if (set) { set.delete(t); if (!set.size) { catuiSuspend.delete(el); catuiSuspendIO.unobserve(el); } }
+  };
+}
 
 export const FOCUSABLE = 'a[href]:not([tabindex="-1"]),button:not([disabled]):not([tabindex="-1"]),input:not([disabled]):not([type=hidden]):not([tabindex="-1"]),select:not([disabled]):not([tabindex="-1"]),textarea:not([disabled]):not([tabindex="-1"]),summary:not([tabindex="-1"]),[contenteditable="true"]:not([tabindex="-1"]),[tabindex]:not([tabindex="-1"])';
 

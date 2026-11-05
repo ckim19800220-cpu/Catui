@@ -17,7 +17,7 @@
 
 /* 그라디언트 · 패턴 (모두 토큰 색) */
 .Catui_bg-gradient{background:linear-gradient(135deg,var(--Catui_color-brand-soft) 0%,var(--Catui_color-surface) 60%)}
-.Catui_bg-gradient-dark{background:linear-gradient(135deg,var(--Catui_sidebar-bg) 0%,var(--Catui_color-brand-strong) 100%);color:var(--Catui_color-text-inverse)}
+.Catui_bg-gradient-dark{background:linear-gradient(135deg,var(--Catui_sidebar-bg) 0%,var(--Catui_color-brand-fill) 100%);color:var(--Catui_color-text-inverse)}
 .Catui_bg-dots{background-color:var(--Catui_color-surface);background-image:radial-gradient(var(--Catui_color-neutral-300) 1px,transparent 1px);background-size:16px 16px}
 .Catui_bg-grid{background-color:var(--Catui_color-surface);background-image:linear-gradient(var(--Catui_color-neutral-100) 1px,transparent 1px),linear-gradient(90deg,var(--Catui_color-neutral-100) 1px,transparent 1px);background-size:24px 24px}
 

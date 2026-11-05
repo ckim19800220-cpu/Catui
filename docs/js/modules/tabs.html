@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>tabs 탭 · catui.js · Catui</title>
 <script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
-<meta name="description" content="radio 탭 이벤트와 추가·닫기·전환.">
+<meta name="description" content="WAI-ARIA 탭 생성, radio 탭 이벤트, 추가·닫기·전환.">
 <link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
 <link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
 <link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -18,19 +18,26 @@
 <body>
 <a class="Catui_skip" href="#doc-main">본문으로 이동</a>
 <div class="Catui_site">
-<header class="Catui_site-header doc-top"><div class="doc-top-inner">
+<header class="Catui_site-header doc-top">
+<div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
   <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
-  <span class="doc-version">v2.0.0</span>
-  <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
-</div></header>
+  <div class="doc-top-end">
+    <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
+    <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+    <a class="Catui_btn Catui_btn-sm Catui_btn-primary doc-cta" href="../../css/start/introduction.html">시작하기</a>
+  </div>
+</div>
+</header>
+<dialog class="doc-search" aria-label="문서 검색" data-index="../../assets/search-index.js" data-home="../../index.html"><div class="doc-search-box"><label class="Catui_clip" for="doc-search-q">문서 검색</label><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><input id="doc-search-q" type="search" placeholder="페이지·설명 검색" autocomplete="off" aria-describedby="doc-search-count"><kbd>Esc</kbd></div><p class="doc-search-count" id="doc-search-count" aria-live="polite"></p><ul id="doc-search-list" aria-label="검색 결과"></ul></dialog>
 <div class="doc-shell">
 <details class="doc-side" open><summary>catui.js 메뉴</summary><nav aria-label="catui.js 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../js/start/introduction.html">소개</a></li><li><a href="../../js/start/install.html">설치</a></li><li><a href="../../js/start/concepts.html">핵심 개념</a></li><li><a href="../../js/start/recipes.html">모듈 조합 예제</a></li><li><a href="../../js/start/security.html">보안과 정리</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">코어</p><ul><li><a href="../../js/core/base.html">기본 API</a></li><li><a href="../../js/core/component.html">컴포넌트 빌더</a></li><li><a href="../../js/core/events.html">이벤트</a></li><li><a href="../../js/core/dom.html">DOM과 템플릿</a></li><li><a href="../../js/core/helpers.html">저장소·주소·환경</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">모듈</p><ul><li><a href="../../js/modules/layer.html">layer 팝업</a></li><li><a href="../../js/modules/form.html">form 폼</a></li><li><a href="../../js/modules/table.html">table 표</a></li><li><a href="../../js/modules/laypage.html">laypage 페이지</a></li><li><a href="../../js/modules/tabs.html" aria-current="page">tabs 탭</a></li><li><a href="../../js/modules/dropdown.html">dropdown 메뉴</a></li><li><a href="../../js/modules/datepicker.html">datePicker 날짜</a></li><li><a href="../../js/modules/upload.html">upload 업로드</a></li><li><a href="../../js/modules/slider.html">slider 슬라이더</a></li><li><a href="../../js/modules/rate.html">rate 별점</a></li><li><a href="../../js/modules/tree.html">tree 트리</a></li><li><a href="../../js/modules/collapse.html">collapse 접기</a></li><li><a href="../../js/modules/canvas.html">canvas 캔버스</a></li><li><a href="../../js/modules/fx.html">fx 효과</a></li><li><a href="../../js/modules/util.html">util 도구</a></li><li><a href="../../js/modules/carousel.html">carousel 캐러셀</a></li><li><a href="../../js/modules/field.html">field 입력 보강</a></li><li><a href="../../js/modules/autocomplete.html">autocomplete 자동완성</a></li><li><a href="../../js/modules/command.html">command 명령 팔레트</a></li><li><a href="../../js/modules/page.html">page 페이지 도구</a></li><li><a href="../../js/modules/site.html">site 홈페이지 도구</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">참고</p><ul><li><a href="../../js/reference/attributes.html">선언형 속성</a></li><li><a href="../../js/reference/events.html">이벤트 색인</a></li></ul></div></nav></details>
 <main class="doc-main" id="doc-main" tabindex="-1">
 <header class="doc-head">
 <p class="doc-crumb"><span>catui.js</span><span>모듈</span><span>tabs 탭</span></p>
 <h1 class="Catui_h1">tabs 탭</h1>
-<p class="Catui_lead">radio 탭 이벤트와 추가·닫기·전환.</p>
+<p class="Catui_lead">WAI-ARIA 탭 생성, radio 탭 이벤트, 추가·닫기·전환.</p>
 
 
 </header>
@@ -73,7 +80,41 @@ catui.use([&#39;tabs&#39;], function (tabs) {
 });
 &lt;/script&gt;</code></pre></details>
 </figure>
-<p>CSS만으로 동작하는 radio 탭 구조를 그대로 씁니다. 화살표 키 이동은 radio 그룹 기본 동작입니다.</p>
+<p>마크업으로 쓴 radio 탭(CSS만으로 동작)에도 같은 API가 붙습니다. 화살표 키 이동은 radio 그룹 기본 동작입니다.</p>
+</section>
+
+<section aria-labelledby="render">
+<h2 id="render">tabs.render (WAI-ARIA 탭)</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">tablist · tab · tabpanel</figcaption>
+<div class="doc-example-preview">
+  <div id="tb-rd"></div>
+  <p class="Catui_help" id="tb-rd-out" aria-live="polite"></p>
+  <script>
+  catui.use(['tabs'], function (tabs) {
+    tabs.render({ elem: '#tb-rd', filter: 'tb-rd', label: '주문 정보', data: [
+      { title: '요약', content: '주문 3건 · 결제 완료' },
+      { title: '배송', content: '내일 도착 예정' },
+      { title: '기록', content: '11월 2일 주문 접수' }
+    ] });
+    tabs.on('tab(tb-rd)', function (o) { document.getElementById('tb-rd-out').textContent = o.title + ' 탭'; });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="tablist · tab · tabpanel 코드 복사">복사</button><pre><code>&lt;div id=&quot;tb-rd&quot;&gt;&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;tb-rd-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;tabs&#39;], function (tabs) {
+  tabs.render({ elem: &#39;#tb-rd&#39;, filter: &#39;tb-rd&#39;, label: &#39;주문 정보&#39;, data: [
+    { title: &#39;요약&#39;, content: &#39;주문 3건 · 결제 완료&#39; },
+    { title: &#39;배송&#39;, content: &#39;내일 도착 예정&#39; },
+    { title: &#39;기록&#39;, content: &#39;11월 2일 주문 접수&#39; }
+  ] });
+  tabs.on(&#39;tab(tb-rd)&#39;, function (o) { document.getElementById(&#39;tb-rd-out&#39;).textContent = o.title + &#39; 탭&#39;; });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p><code>tabs.render</code>는 <code>[role=tablist] &gt; button[role=tab]</code>과 <code>[role=tabpanel]</code>로 그립니다. 탭 묶음이 Tab 정지점 하나이고, ←→(세로 탭 <code>vertical: true</code>는 ↑↓)·Home·End로 옮기면 바로 그 탭이 열립니다. 패널은 Tab으로 들어갈 수 있습니다. 화면 낭독기가 묶음 이름을 읽도록 <code>label</code>을 꼭 주세요.</p>
 </section>
 
 <section aria-labelledby="api">
@@ -81,7 +122,7 @@ catui.use([&#39;tabs&#39;], function (tabs) {
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">tabs API</caption>
 <thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead>
 <tbody>
-<tr><td><code>tabs.render({ elem, data: [{ title, content, id }], index, label })</code></td><td>마크업 생성</td></tr>
+<tr><td><code>tabs.render({ elem, data: [{ title, content, id }], index, label, vertical })</code></td><td>WAI-ARIA 탭 생성 (<code>label</code> 필수, 범위 밖 <code>index</code>는 처음·마지막으로)</td></tr>
 <tr><td><code>tabs.add(f, { title, content, change })</code> · <code>close(f, i)</code> · <code>change(f, i)</code></td><td>추가 / 닫기 / 전환</td></tr>
 <tr><td><code>on('tab(f)')</code> · <code>on('close(f)')</code></td><td><code>{ index, title, elem }</code></td></tr>
 </tbody></table></div>
@@ -90,8 +131,12 @@ catui.use([&#39;tabs&#39;], function (tabs) {
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/laypage.html"><span>이전</span>laypage 페이지</a><a class="doc-pager-next" href="../../js/modules/dropdown.html"><span>다음</span>dropdown 메뉴</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">탭 이벤트와 추가·닫기</a></li><li><a href="#api">API</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">탭 이벤트와 추가·닫기</a></li><li><a href="#render">tabs.render (WAI-ARIA 탭)</a></li><li><a href="#api">API</a></li></ul></aside>
 </div>
+<footer class="doc-foot"><div class="doc-foot-inner">
+  <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+</div></footer>
 </div>
 <script src="../../assets/docs.js"></script>
 </body>

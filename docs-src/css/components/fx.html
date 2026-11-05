@@ -30,7 +30,7 @@
   <div class="Catui_vstack Catui_gap-3">
     <p class="Catui_h1"><span class="Catui_fx-shiny">빛이 지나가는 글자</span></p>
     <p class="Catui_h1"><span class="Catui_fx-gradient">흐르는 그라디언트 글자</span></p>
-    <p class="Catui_h2">지금 <span class="Catui_fx-rotate" style="--Catui_fx-k:1" aria-label="디자인, 개발, 배포"><span aria-hidden="true">디자인</span><span aria-hidden="true">개발</span><span aria-hidden="true">배포</span></span> 중</p>
+    <p class="Catui_h2">지금 <span class="Catui_fx-rotate" style="--Catui_fx-k:1"><span class="Catui_clip">디자인, 개발, 배포</span><span aria-hidden="true">디자인</span><span aria-hidden="true">개발</span><span aria-hidden="true">배포</span></span> 중</p>
     <p class="Catui_h2"><span class="Catui_fx-glitch" data-text="SYSTEM ERROR">SYSTEM ERROR</span></p>
   </div>
 </catui-example>
@@ -45,6 +45,25 @@
   <div class="Catui_fx-marquee"><div class="Catui_fx-track"><span class="Catui_tag">디자인</span><span class="Catui_tag">토큰</span><span class="Catui_tag">접근성</span><span class="Catui_tag">다크 모드</span><span class="Catui_tag">캔버스</span><div style="display:contents" aria-hidden="true"><span class="Catui_tag">디자인</span><span class="Catui_tag">토큰</span><span class="Catui_tag">접근성</span><span class="Catui_tag">다크 모드</span><span class="Catui_tag">캔버스</span></div></div></div>
   <div><nav class="Catui_fx-dock" aria-label="빠른 이동"><a class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" href="doc:index" aria-label="홈"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-house"></use></svg></a><a class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" href="doc:css/components/table" aria-label="표" style="--Catui_fx-s:1.3"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-table"></use></svg></a><a class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" href="doc:css/charts/line" aria-label="차트"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chart-line"></use></svg></a></nav></div>
   <div class="Catui_fx-aurora Catui_rounded-lg Catui_border" style="padding:40px 24px;text-align:center"><p class="Catui_h2">오로라 배경</p></div>
+</catui-example>
+<catui-example title="orbit · halftone (레이어)">
+  <div class="Catui_grid">
+    <article class="Catui_card Catui_span-6 Catui_fx-host Catui_fx-host-rel"><div class="Catui_card-b">테두리를 도는 점 (fx.orbit이 SVG를 그림)</div><span class="Catui_fx-layer Catui_fx-layer-front Catui_fx-orbit" aria-hidden="true"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><rect x="1" y="1" width="98" height="38"/><circle cx="1" cy="20" r="2.5"/><circle cx="60" cy="1" r="2.5"/></svg></span></article>
+    <a class="Catui_card Catui_span-6 Catui_fx-host Catui_fx-host-rel" href="doc:css/components/card"><div class="Catui_card-b">반점 덮개 — 마우스를 올리거나 포커스하면 걷힘</div><span class="Catui_fx-layer Catui_fx-layer-front Catui_fx-halftone" aria-hidden="true"></span></a>
+  </div>
+</catui-example>
+<catui-example title="depth · echo · zap">
+  <div class="Catui_grid">
+    <p class="Catui_h2 Catui_span-4 Catui_fx-depth Catui_fx-in" aria-label="깊이 진입"><span aria-hidden="true" style="--i:0">깊이</span> <span aria-hidden="true" style="--i:1">진입</span></p>
+    <p class="Catui_span-4"><a class="Catui_h2 Catui_fx-echo" href="doc:css/components/fx">메아리<span class="Catui_fx-echo-copy" aria-hidden="true" style="--i:0">메아리</span><span class="Catui_fx-echo-copy" aria-hidden="true" style="--i:1">메아리</span></a></p>
+    <article class="Catui_card Catui_span-4 Catui_fx-host Catui_fx-host-rel"><div class="Catui_card-b">방전 테두리 (fx.zap이 SVG를 그림)</div><span class="Catui_fx-layer Catui_fx-layer-front Catui_fx-zap" aria-hidden="true"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><rect class="Catui_fx-zap-a" x=".75" y=".75" width="98.5" height="38.5" pathLength="100"/><rect class="Catui_fx-zap-b" x=".75" y=".75" width="98.5" height="38.5" pathLength="100"/></svg></span></article>
+  </div>
+</catui-example>
+<catui-example title="flap · rise (멈춘 상태)">
+  <div class="Catui_vstack Catui_gap-4">
+    <p class="Catui_h2 Catui_fx-flaps" aria-label="GATE 12"><span class="Catui_fx-flap" aria-hidden="true">G</span><span class="Catui_fx-flap" aria-hidden="true">A</span><span class="Catui_fx-flap Catui_fx-flap-tick" aria-hidden="true">T</span><span class="Catui_fx-flap" aria-hidden="true">E</span><span class="Catui_fx-flap" aria-hidden="true" data-gap> </span><span class="Catui_fx-flap" aria-hidden="true">1</span><span class="Catui_fx-flap" aria-hidden="true">2</span></p>
+    <p class="Catui_h2 Catui_fx-rise" aria-label="스크롤하면 단어가 떠오릅니다" style="--Catui_fx-k:.45;--n:4"><span aria-hidden="true" style="--i:0">스크롤하면</span> <span aria-hidden="true" style="--i:1">단어가</span> <span aria-hidden="true" style="--i:2">떠오릅</span> <span aria-hidden="true" style="--i:3">니다</span></p>
+  </div>
 </catui-example>
 </section>
 
@@ -70,7 +89,7 @@
 </catui-example>
 <catui-example title="circle · focus · stroke · edge · noise · cursor">
   <div class="Catui_grid">
-    <div class="Catui_span-3 Catui_center"><span class="Catui_fx-circle" style="--Catui_fx-r:48px;animation:none" aria-label="CATUI DESIGN • "><span aria-hidden="true" style="--a:0deg">C</span><span aria-hidden="true" style="--a:30deg">A</span><span aria-hidden="true" style="--a:60deg">T</span><span aria-hidden="true" style="--a:90deg">U</span><span aria-hidden="true" style="--a:120deg">I</span><span aria-hidden="true" style="--a:150deg">•</span><span aria-hidden="true" style="--a:180deg">D</span><span aria-hidden="true" style="--a:210deg">E</span><span aria-hidden="true" style="--a:240deg">S</span><span aria-hidden="true" style="--a:270deg">I</span><span aria-hidden="true" style="--a:300deg">G</span><span aria-hidden="true" style="--a:330deg">N</span></span></div>
+    <div class="Catui_span-3 Catui_center"><span class="Catui_fx-circle" style="--Catui_fx-r:48px;animation:none"><span class="Catui_clip">CATUI DESIGN</span><span aria-hidden="true" style="--a:0deg">C</span><span aria-hidden="true" style="--a:30deg">A</span><span aria-hidden="true" style="--a:60deg">T</span><span aria-hidden="true" style="--a:90deg">U</span><span aria-hidden="true" style="--a:120deg">I</span><span aria-hidden="true" style="--a:150deg">•</span><span aria-hidden="true" style="--a:180deg">D</span><span aria-hidden="true" style="--a:210deg">E</span><span aria-hidden="true" style="--a:240deg">S</span><span aria-hidden="true" style="--a:270deg">I</span><span aria-hidden="true" style="--a:300deg">G</span><span aria-hidden="true" style="--a:330deg">N</span></span></div>
     <div class="Catui_span-9 Catui_vstack Catui_gap-3">
       <p class="Catui_h2 Catui_fx-focus" aria-label="한 단어씩 또렷하게"><span aria-hidden="true">한</span> <span class="Catui_fx-on" aria-hidden="true">단어씩</span> <span aria-hidden="true">또렷하게</span></p>
       <p class="Catui_display Catui_fx-stroke">OUTLINE</p>

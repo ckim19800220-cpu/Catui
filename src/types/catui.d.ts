@@ -171,6 +171,13 @@ export interface CanvasInstance extends Instance<Opts> { canvas: HTMLCanvasEleme
 export interface AutocompleteInstance extends Instance<Opts> { search(q?: string): void; close(): void }
 export interface CommandInstance extends Instance<Opts> { dialog: HTMLDialogElement; open(): void; close(): void }
 type Bindable = { bind(): Off };
+/** fx.register 효과 함수가 받는 도구: frame(fn(dt,now), el) = 공용 티커(화면 밖·숨은 탭·일시정지에서 쉼) */
+export interface FxKit {
+  frame(fn: (dt: number, now: number) => void, el?: Element): () => void;
+  onView(el: Element, fn: (visible: boolean) => void, once?: boolean): () => void;
+  pointer(el: Element, move: (e: PointerEvent) => void, leave: (e: PointerEvent) => void): () => void;
+  readonly reduced: boolean;
+}
 
 export interface Field {
   tags: GenericComponent; stepper: GenericComponent; counter: GenericComponent; otp: GenericComponent;
@@ -208,7 +215,7 @@ export interface Catui {
   html(strings: TemplateStringsArray, ...values: unknown[]): Raw;
   raw(markup: string): Raw;
   escape(value: unknown): string;
-  mount(node: Element, markup: Markup): Element;
+  mount(node: Element, markup: Markup | Node | Array<Markup | Node | null | false>): Element;
   icon(name: string, size?: 12 | 16 | 18 | 20 | 24, cls?: string): Raw;
   hint: { error(msg: string, type?: "warn" | "error", ...detail: unknown[]): void; errorOnce(msg: string, type?: "warn" | "error", ...detail: unknown[]): void };
   data(table: string, settings?: { key: string; value?: unknown; remove?: boolean } | null): Record<string, any>;
@@ -216,6 +223,8 @@ export interface Catui {
   url(href?: string): { pathname: string[]; search: Record<string, string>; hash: { path: string[]; search: Record<string, string>; href: string } };
   device(key?: string): { os: string; android: boolean; ios: boolean; mobile: boolean; [k: string]: unknown };
   csrfHeaders(url: string, method?: string): Record<string, string>;
+  /** 한글 조합 중(확정 직후 150ms 포함)인 키 입력이면 true — Enter·Esc 처리 전에 확인 */
+  imeBusy(e?: KeyboardEvent | Event): boolean;
   component<C = Record<string, any>>(def: { name: string; config?: C; ownDone?: boolean; render(inst: Instance<C>): void; destroy?(inst: Instance<C>): void; beforeRender?(inst: Instance<C>): void; [k: string]: unknown }): ComponentApi<C> & Record<string, any>;
 
   layer: Layer; form: Form; util: Util;
@@ -230,7 +239,12 @@ export interface Catui {
   tree: ComponentApi<Opts, TreeInstance> & { getChecked(id: string): any[]; setChecked(id: string, ids: string | number | Array<string | number>): void; getSelected(id: string): any | null; clearChecked(id: string): void; expandAll(id: string, open?: boolean): void; search(id: string, keyword: string): void };
   collapse: ComponentApi<Opts> & Bindable & { open(filter: string, index?: number): void; close(filter: string, index?: number): void; toggle(filter: string, index: number): void };
   canvas: ComponentApi<Opts, CanvasInstance> & { redraw(id: string): void };
-  fx: Record<string, any> & { bind(scope?: Target | Document): () => void; enhance(scope?: Target | Document): void; destroyDetached(): void; destroyAll(): void };
+  fx: Record<string, any> & {
+    bind(scope?: Target | Document): () => void; enhance(scope?: Target | Document): void; destroyDetached(): void; destroyAll(): void;
+    replay(target: Target, name?: string): void; pause(): void; resume(): void; paused(): boolean; names(): string[];
+    register(name: string, fn: (el: Element, o: Record<string, any>, kit: FxKit) => { destroy(): void; replay?(): void } | null, opts?: { slots?: string[] }): boolean;
+    unregister(name: string): boolean;
+  };
   carousel: ComponentApi<CarouselOptions, CarouselInstance> & { go(id: string, i: number): void; enhance(scope?: Element | Document): void };
   autocomplete: ComponentApi<Opts, AutocompleteInstance>; command: ComponentApi<Opts, CommandInstance> & { open(id: string): void; close(id: string): void };
   field: Field; page: Page; site: Site;

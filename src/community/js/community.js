@@ -31,12 +31,15 @@ export const community = {
     return `${word}${b.has ? P[0] : P[1]}`;
   },
   store: { get: cmGet, set: cmSet, clear: () => catui.data(CM_STORE, null) },
-  /** 이벤트: 'theme' · 'vote' { id, dir, up, down } · 'comment' · 'draft' · 'poll' · 'data' */
+  /** 이벤트: 'theme' · 'vote' { key, dir } · 'comment' · 'draft' · 'poll' · 'data' */
   on: (evt, fn) => catui.onevent("community", evt, fn),
   emit: (evt, payload) => catui.event("community", evt, null, payload),
   query: cmQuery,
   _offs: [],
-  _on(target, type, fn, opt) { if (!target) return; target.addEventListener(type, fn, opt); this._offs.push(() => target.removeEventListener(type, fn, opt)); },
+  // destroy 뒤에 늦게 도착한 응답(.then 안의 연결)은 등록하지 않는다 — 해제 목록이 이미 비워져 새는 것을 막음
+  _on(target, type, fn, opt) { if (!target || this._dead) return; target.addEventListener(type, fn, opt); this._offs.push(() => target.removeEventListener(type, fn, opt)); },
+  _seen: new WeakMap(),
+  _once(target, key) { let s = this._seen.get(target); if (!s) this._seen.set(target, (s = new Set())); if (s.has(key)) return false; s.add(key); return true; },
 };
 
 // ── 테마: 관리 화면과 같은 규칙(저장값 없으면 시스템) ──
@@ -56,6 +59,7 @@ community.theme = {
   set(v) { cmSet("theme", v); this.apply(v); community.emit("theme", { value: this.get(), saved: v }); },
   init() {
     this.apply(this.saved());
+    if (!community._once(document, "theme")) return;   // 재호출 시 클릭이 두 번 처리돼 토글이 상쇄되지 않게
     const mq = matchMedia("(prefers-color-scheme: dark)");
     community._on(mq, "change", () => { if (this.saved() === "system") this.apply("system"); });
     community._on(document, "click", (e) => { if (e.target.closest("[data-catui-cm-theme]")) this.set(this.get() === "dark" ? "light" : "dark"); });

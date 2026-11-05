@@ -20,6 +20,7 @@ admin.theme = {
   },
   init() {
     this.apply(this.saved());
+    if (!admin._once(document, "theme")) return;   // 재호출 시 클릭이 두 번 처리돼 토글이 상쇄되지 않게
     const mq = matchMedia("(prefers-color-scheme: dark)");
     admin._on(mq, "change", () => { if (this.saved() === "system") this.apply("system"); });
     admin._on(document, "click", (e) => { if (e.target.closest("[data-catui-adm-theme]")) this.set(this.get() === "dark" ? "light" : "dark"); });

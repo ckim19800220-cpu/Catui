@@ -21,7 +21,7 @@ catui.use(['layer'], function (layer) {
         if (!v) return;
         var card = document.createElement('article'); card.className = 'Catui_kanban-card';
         catui.mount(card, catui.html`<div class="Catui_kanban-tags"><span class="Catui_pill Catui_pill-neutral">${v.tag}</span></div><span class="Catui_kanban-title">${v.title}</span><div class="Catui_kanban-meta">${catui.icon('check', 12)}0/1<span class="Catui_av Catui_av-sm">${v.who}</span></div>`);
-        var col = document.querySelector('#kb-c1').parentElement; col.insertBefore(card, col.querySelector('[data-catui-adm-empty]'));
+        var col = document.querySelector('#kb-c1')?.parentElement; if (!col || !board) return;   // 보드 데이터가 오기 전이면 무시
         board.add(col, card); col.insertBefore(card, col.querySelector('[data-catui-adm-empty]')); card.focus();
       });
   });

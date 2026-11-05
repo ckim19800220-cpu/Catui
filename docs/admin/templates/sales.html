@@ -33,7 +33,7 @@
     <main class="Catui_content Catui_adm-content" id="adm-main" tabindex="-1">
 <div class="Catui_adm-head">
   <div><h1 class="Catui_h1">매출</h1><p>2026년 11월 · 월 목표 5,500만원</p></div>
-  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-download"></use></svg>CSV</button></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="sl-csv"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-download"></use></svg>CSV</button></div>
 </div>
 
 <div class="Catui_grid" data-catui-adm-src="dashboard-sales">
@@ -78,7 +78,7 @@
   <article class="Catui_card Catui_span-12">
     <header class="Catui_card-h">많이 팔린 상품</header>
     <div class="Catui_card-b Catui_adm-flush">
-      <table class="Catui_tbl">
+      <table class="Catui_tbl" id="sl-top">
         <caption class="Catui_clip">많이 팔린 상품 5개</caption>
         <thead><tr><th scope="col">순위</th><th scope="col">상품</th><th scope="col">분류</th><th scope="col" class="Catui_num">판매</th><th scope="col" class="Catui_num">매출</th><th scope="col">재고</th></tr></thead>
         <tbody data-catui-adm-src="dashboard-sales" data-catui-adm-rows="topProducts"><template><tr><td data-catui-adm-field="rank"></td><td data-catui-adm-field="name"></td><td data-catui-adm-field="category"></td><td class="Catui_num" data-catui-adm-field="sold" data-catui-adm-format="number"></td><td class="Catui_num" data-catui-adm-field="revenue" data-catui-adm-format="man"></td><td><span class="Catui_pill" data-catui-adm-class="Catui_pill-:stockTone"><i class="Catui_dot"></i><span data-catui-adm-field="stock"></span></span></td></tr></template></tbody>
@@ -86,6 +86,7 @@
     </div>
   </article>
 </div>
+
     </main>
     <footer class="Catui_adm-foot"><span>© 2026 CatuiAdmin · Catui 2.0.0</span><span>MIT License</span></footer>
   </div>
@@ -94,6 +95,20 @@
 <script type="application/json" id="adm-user-data">[{"title":"내 프로필","icon":"user","href":"index.html"},{"title":"설정","icon":"settings","href":"index.html"},{"type":"-"},{"title":"로그아웃","icon":"log-out","href":"index.html"}]</script>
 <script src="../../../dist/catui.min.js"></script>
 <script src="../../../dist/catadmin.min.js"></script>
-
+<script>
+// CSV: 화면의 "많이 팔린 상품" 표를 그대로 내보낸다 — 엑셀 한글용 BOM, =+-@로 시작하는 칸은 수식으로 실행되지 않게 '를 붙인다
+catui.use(['layer'], function (layer) {
+  document.getElementById('sl-csv').addEventListener('click', function () {
+    var rows = [].map.call(document.getElementById('sl-top').rows, function (r) {
+      return [].map.call(r.cells, function (c) { var v = c.textContent.trim(); if (/^[=+\-@]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; }).join(',');
+    });
+    if (rows.length < 2) { layer.msg('아직 내보낼 행이 없습니다', { icon: 'info' }); return; }
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['\ufeff' + rows.join('\r\n')], { type: 'text/csv;charset=utf-8' }));
+    a.download = '매출-많이팔린상품.csv'; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  });
+});
+</script>
 </body>
 </html>

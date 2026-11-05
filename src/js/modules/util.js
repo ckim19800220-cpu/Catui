@@ -50,7 +50,8 @@ export const util = (() => {
     const tick = () => {
       const left = Math.max(0, end - (Date.now() - offset));
       const t = { d: Math.floor(left / 86400000), h: Math.floor(left / 3600000) % 24, m: Math.floor(left / 60000) % 60, s: Math.floor(left / 1000) % 60, left };
-      ready?.(t);
+      // 콜백이 예외를 던지면 호출자가 해제 함수를 받지 못하므로 타이머를 먼저 멈추고 다시 던진다
+      try { ready?.(t); } catch (err) { clearInterval(timer); timer = 0; throw err; }
       if (left <= 0) { clearInterval(timer); timer = 0; clear?.(); }
     };
     timer = setInterval(tick, 1000);
@@ -94,10 +95,13 @@ export const util = (() => {
   }
 
   // util.number(1234567.8, 1) → '1,234,567.8' (한국어 천 단위 구분)
+  // 소수 자리는 0~20 정수로(음수·100 초과는 Intl·toFixed가 RangeError)
+  const digits = (d, fallback) => (Number.isFinite(Number(d)) ? Math.min(20, Math.max(0, Math.floor(Number(d)))) : fallback);
   function number(n, decimals) {
     const v = Number(n);
     if (!Number.isFinite(v)) return "";
-    return v.toLocaleString("ko-KR", decimals == null ? undefined : { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    const d = decimals == null ? null : digits(decimals, null);
+    return v.toLocaleString("ko-KR", d == null ? undefined : { minimumFractionDigits: d, maximumFractionDigits: d });
   }
 
   // util.fileSize(1536) → '1.5KB' · 'B·KB·MB·GB·TB'
@@ -106,7 +110,7 @@ export const util = (() => {
     if (!Number.isFinite(v) || v < 0) return "";
     const units = ["B", "KB", "MB", "GB", "TB"];
     const i = v === 0 ? 0 : Math.min(units.length - 1, Math.floor(Math.log(v) / Math.log(1024)));
-    return `${Number((v / 1024 ** i).toFixed(i ? decimals : 0))}${units[i]}`;
+    return `${Number((v / 1024 ** i).toFixed(i ? digits(decimals, 1) : 0))}${units[i]}`;
   }
 
   return { toDateString, timeAgo, countdown, debounce, throttle, copy, number, fileSize, escape, html, raw };

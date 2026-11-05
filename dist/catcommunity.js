@@ -38,12 +38,15 @@ const community = {
     return `${word}${b.has ? P[0] : P[1]}`;
   },
   store: { get: cmGet, set: cmSet, clear: () => catui.data(CM_STORE, null) },
-  /** 이벤트: 'theme' · 'vote' { id, dir, up, down } · 'comment' · 'draft' · 'poll' · 'data' */
+  /** 이벤트: 'theme' · 'vote' { key, dir } · 'comment' · 'draft' · 'poll' · 'data' */
   on: (evt, fn) => catui.onevent("community", evt, fn),
   emit: (evt, payload) => catui.event("community", evt, null, payload),
   query: cmQuery,
   _offs: [],
-  _on(target, type, fn, opt) { if (!target) return; target.addEventListener(type, fn, opt); this._offs.push(() => target.removeEventListener(type, fn, opt)); },
+  // destroy 뒤에 늦게 도착한 응답(.then 안의 연결)은 등록하지 않는다 — 해제 목록이 이미 비워져 새는 것을 막음
+  _on(target, type, fn, opt) { if (!target || this._dead) return; target.addEventListener(type, fn, opt); this._offs.push(() => target.removeEventListener(type, fn, opt)); },
+  _seen: new WeakMap(),
+  _once(target, key) { let s = this._seen.get(target); if (!s) this._seen.set(target, (s = new Set())); if (s.has(key)) return false; s.add(key); return true; },
 };
 
 // ── 테마: 관리 화면과 같은 규칙(저장값 없으면 시스템) ──
@@ -63,6 +66,7 @@ community.theme = {
   set(v) { cmSet("theme", v); this.apply(v); community.emit("theme", { value: this.get(), saved: v }); },
   init() {
     this.apply(this.saved());
+    if (!community._once(document, "theme")) return;   // 재호출 시 클릭이 두 번 처리돼 토글이 상쇄되지 않게
     const mq = matchMedia("(prefers-color-scheme: dark)");
     community._on(mq, "change", () => { if (this.saved() === "system") this.apply("system"); });
     community._on(document, "click", (e) => { if (e.target.closest("[data-catui-cm-theme]")) this.set(this.get() === "dark" ? "light" : "dark"); });
@@ -205,30 +209,34 @@ community.tone = (id) => (String(id).split("").reduce((a, c) => a + c.charCodeAt
 community.avatar = (u, size = "sm") => catui.html`<span class="Catui_av Catui_av-${size}" data-tone="${community.tone(u.id || u.nick)}" aria-hidden="true">${String(u.nick).slice(0, 1)}</span>`;
 // 회원 레벨 배지
 community.badge = (u) => catui.html`<span class="Catui_cm-lv" data-lv="${Math.min(u.level, 9)}" title="레벨 ${u.level}"><span class="Catui_clip">레벨 </span>${u.level}</span>`;
+// 숫자 표시의 읽을 이름: 역할 없는 span의 aria-label은 화면 낭독기가 무시하므로 숨김 글자로 앞뒤를 붙인다
+const cmCmt = (n, word = "댓글") => catui.html`<span class="Catui_cm-cmt"><span class="Catui_clip"> ${word} </span>${n}<span class="Catui_clip">개</span></span>`;
+const cmNew = () => catui.html`<span class="Catui_cm-new"><span aria-hidden="true">N</span><span class="Catui_clip"> 새 글</span></span>`;
+const cmUp = (score, hot) => catui.html`<span class="Catui_cm-up${hot ? " Catui_cm-up-hot" : ""}"><span class="Catui_clip">추천 </span>${catui.icon("arrow-up", 12)}${score}</span>`;
 // 목록 한 줄: <li> — 제목(말머리·사진·댓글 수) · 작성자 · 시간 · 추천 · 조회
 community.row = function (p, { board = true, rank } = {}) {
   const read = this.read.has(p.id);
   return catui.html`<li class="Catui_cm-row${read ? " Catui_cm-read" : ""}${p.hot ? " Catui_cm-hot" : ""}">
-    ${rank ? catui.html`<span class="Catui_cm-rank" aria-label="${rank}위">${rank}</span>` : ""}
+    ${rank ? catui.html`<span class="Catui_cm-rank">${rank}<span class="Catui_clip">위</span></span>` : ""}
     <div class="Catui_cm-row-main">
-      <a class="Catui_cm-title" href="post.html?id=${p.id}">${board ? catui.html`<span class="Catui_cm-board" data-tone="${p.boardTone}">${p.boardName}</span>` : ""}${p.cat ? catui.html`<span class="Catui_cm-cat">${p.cat}</span>` : ""}<span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}${read ? catui.html`<span class="Catui_clip"> (읽음)</span>` : ""}</a>
+      <a class="Catui_cm-title" href="post.html?id=${p.id}">${board ? catui.html`<span class="Catui_cm-board" data-tone="${p.boardTone}">${p.boardName}</span>` : ""}${p.cat ? catui.html`<span class="Catui_cm-cat">${p.cat}</span>` : ""}<span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? cmCmt(p.comments) : ""}${read ? catui.html`<span class="Catui_clip"> (읽음)</span>` : ""}</a>
       <span class="Catui_cm-meta"><span class="Catui_cm-nick">${this.avatar(p.author)}${this.badge(p.author)}${p.author.nick}</span><time datetime="${p.time}">${this.ago(p.time)}</time><span>조회 ${this.format(p.views, "compact")}</span></span>
     </div>
-    <span class="Catui_cm-score-n" aria-label="${p.hot ? `인기글, ` : ""}추천 ${p.score}"><b>${p.score}</b><span>추천</span></span>
+    <span class="Catui_cm-score-n">${p.hot ? catui.html`<i class="Catui_clip">인기 글, </i>` : ""}<b>${p.score}</b><span>추천</span></span>
   </li>`;
 };
 // 위젯 한 줄: 제목 [댓글] · 새 글 표시(N, 3시간 이내) · 날짜
 community.isNew = (p) => community.now() - new Date(p.time) < 3 * 36e5;
 community.mini = function (p, { rank } = {}) {
   const t = new Date(p.time), today = t.toDateString() === this.now().toDateString();
-  return catui.html`<li${this.read.has(p.id) ? catui.html` class="Catui_cm-read"` : ""}>${rank ? catui.html`<span class="Catui_cm-rank">${rank}</span>` : ""}<a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}${this.isNew(p) ? catui.html`<span class="Catui_cm-new" aria-label="새 글">N</span>` : ""}<time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></li>`;
+  return catui.html`<li${this.read.has(p.id) ? catui.html` class="Catui_cm-read"` : ""}>${rank ? catui.html`<span class="Catui_cm-rank">${rank}</span>` : ""}<a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}<time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></li>`;
 };
 // 게시판 표 한 줄: 분류 · 제목[댓글] · 글쓴이 · 날짜 · 조회 · 추천
 community.tr = function (p) {
   const t = new Date(p.time), today = t.toDateString() === this.now().toDateString();
   return catui.html`<tr class="${[this.read.has(p.id) ? "Catui_cm-read" : "", p.cat === "공지" ? "Catui_cm-tr-notice" : ""].filter(Boolean).join(" ")}">
     <td class="Catui_cm-td-cat">${p.cat}</td>
-    <td class="Catui_cm-td-t"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}${this.isNew(p) ? catui.html`<span class="Catui_cm-new" aria-label="새 글">N</span>` : ""}</a></td>
+    <td class="Catui_cm-td-t"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}</a></td>
     <td><span class="Catui_cm-nick">${this.badge(p.author)}${p.author.nick}</span></td>
     <td><time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></td>
     <td><span class="Catui_clip">조회 </span>${this.format(p.views, "number")}</td>
@@ -257,7 +265,7 @@ community.shell = {
   init(root) {
     root.querySelectorAll("[data-catui-cm-search]").forEach((f) => community._on(f, "submit", (e) => {
       const q = f.querySelector("input[name=q]");
-      if (!q.value.trim()) { e.preventDefault(); q.focus(); }
+      if (q && !q.value.trim()) { e.preventDefault(); q.focus(); }
     }));
     const top = root.querySelector("[data-catui-cm-top]");
     if (top) {
@@ -283,7 +291,7 @@ community.shell = {
       const day = community.now() - 864e5;
       const live = d.posts.filter((p) => new Date(p.time) > day).sort((a, b) => b.score - a.score).slice(0, 10);
       const week = d.posts.filter((p) => new Date(p.time) > community.now() - 7 * 864e5).sort((a, b) => b.score - a.score).slice(0, 10);
-      const rank = (list) => catui.html`<ol class="Catui_cm-ranks">${list.map((p, i) => catui.html`<li><span class="Catui_cm-rank${i < 3 ? " Catui_cm-rank-top" : ""}">${i + 1}</span><a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}</li>`)}</ol>`;
+      const rank = (list) => catui.html`<ol class="Catui_cm-ranks">${list.map((p, i) => catui.html`<li><span class="Catui_cm-rank${i < 3 ? " Catui_cm-rank-top" : ""}">${i + 1}</span><a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? cmCmt(p.comments) : ""}</li>`)}</ol>`;
       const favs = d.boards.filter((b) => community.fav.has(b.id));
       const me = d.U.me, myPosts = d.posts.filter((p) => p.user === "me").length;
       catui.mount(box, catui.html`
@@ -335,8 +343,8 @@ community.list = {
         document.title = `${title} · Catui 커뮤니티`;
         const body = !shown.length ? catui.html`<ul class="Catui_cm-list">${community.empty(cat ? `[${cat}] 말머리 글이 없습니다.` : "아직 글이 없습니다. 첫 글을 남겨 보세요.")}</ul>`
           : kind === "gallery" ? catui.html`<ul class="Catui_cm-gallery">${shown.map((p) => catui.html`<li><a class="Catui_cm-shot" href="post.html?id=${p.id}"><figure><img src="${community.thumb(p)}" alt="" loading="lazy" width="320" height="240"></figure><b>${p.title}</b><span class="Catui_cm-meta"><span>${p.author.nick}</span><span>추천 ${p.score}</span>${p.comments ? catui.html`<span>댓글 ${p.comments}</span>` : ""}</span></a></li>`)}</ul>`
-          : kind === "card" ? catui.html`<ul class="Catui_cm-cards">${shown.map((p) => catui.html`<li class="Catui_cm-card"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-cat">${p.cat}</span><span class="Catui_cm-title-t">${p.title}</span>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}</a><p>${p.summary}</p><span class="Catui_cm-meta"><span class="Catui_cm-nick">${community.badge(p.author)}${p.author.nick}</span><time datetime="${p.time}">${community.ago(p.time)}</time><span>추천 ${p.score}</span><span>조회 ${community.format(p.views, "compact")}</span></span></li>`)}</ul>`
-          : kind === "deal" ? catui.html`<ul class="Catui_cm-list">${shown.map((p, i) => catui.html`<li class="Catui_cm-row Catui_cm-deal" data-catui-cm-deal><span class="Catui_cm-ph" data-tone="${(i % 4) + 1}" aria-hidden="true">${catui.icon("shopping-cart", 20)}</span><div class="Catui_cm-row-main"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-cat">${p.cat}</span><span class="Catui_cm-title-t">${p.title}</span>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="댓글 ${p.comments}개">${p.comments}</span>` : ""}</a><span class="Catui_cm-meta"><b class="Catui_cm-price">${catui.util.number(p.price)}원</b><span>${p.shop}</span><span>배송 ${p.ship}</span><time data-catui-cm-until="${p.until}"></time></span></div><span class="Catui_cm-up${p.hot ? " Catui_cm-up-hot" : ""}" aria-label="추천 ${p.score}">${catui.icon("arrow-up", 12)}${p.score}</span></li>`)}</ul>`
+          : kind === "card" ? catui.html`<ul class="Catui_cm-cards">${shown.map((p) => catui.html`<li class="Catui_cm-card"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-cat">${p.cat}</span><span class="Catui_cm-title-t">${p.title}</span>${p.comments ? cmCmt(p.comments) : ""}</a><p>${p.summary}</p><span class="Catui_cm-meta"><span class="Catui_cm-nick">${community.badge(p.author)}${p.author.nick}</span><time datetime="${p.time}">${community.ago(p.time)}</time><span>추천 ${p.score}</span><span>조회 ${community.format(p.views, "compact")}</span></span></li>`)}</ul>`
+          : kind === "deal" ? catui.html`<ul class="Catui_cm-list">${shown.map((p, i) => catui.html`<li class="Catui_cm-row Catui_cm-deal" data-catui-cm-deal><span class="Catui_cm-ph" data-tone="${(i % 4) + 1}" aria-hidden="true">${catui.icon("shopping-cart", 20)}</span><div class="Catui_cm-row-main"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-cat">${p.cat}</span><span class="Catui_cm-title-t">${p.title}</span>${p.comments ? cmCmt(p.comments) : ""}</a><span class="Catui_cm-meta">${p.price == null ? "" : catui.html`<b class="Catui_cm-price">${catui.util.number(p.price)}원</b>`}${p.shop ? catui.html`<span>${p.shop}</span>` : ""}${p.ship ? catui.html`<span>배송 ${p.ship}</span>` : ""}${p.until ? catui.html`<time data-catui-cm-until="${p.until}"></time>` : ""}</span></div>${cmUp(p.score, p.hot)}</li>`)}</ul>`
           : kind === "list" || kind === "hot" ? catui.html`<div class="Catui_cm-list">${community.table(shown)}</div>`
           : catui.html`<ul class="Catui_cm-list">${shown.map((p, i) => kind === "qna" ? this.qnaRow(p) : community.row(p, { board: kind === "hot", rank: kind === "hot" && sort === "hot" && page === 1 && i < 10 ? i + 1 : 0 }))}</ul>`;
         catui.mount(box, catui.html`
@@ -365,7 +373,7 @@ community.list = {
     });
   },
   qnaRow(p) {
-    return catui.html`<li class="Catui_cm-row"><span class="Catui_badge ${p.solved ? "Catui_badge-success" : "Catui_badge-neutral"} Catui_cm-solved">${p.solved ? "해결" : "답변 대기"}</span><div class="Catui_cm-row-main"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-cat">${p.cat}</span><span class="Catui_cm-title-t">${p.title}</span>${p.comments ? catui.html`<span class="Catui_cm-cmt" aria-label="답변 ${p.comments}개">${p.comments}</span>` : ""}</a><span class="Catui_cm-meta"><span class="Catui_cm-nick">${community.badge(p.author)}${p.author.nick}</span><time datetime="${p.time}">${community.ago(p.time)}</time><span>조회 ${community.format(p.views, "compact")}</span></span></div><span class="Catui_cm-up" aria-label="추천 ${p.score}">${catui.icon("arrow-up", 12)}${p.score}</span></li>`;
+    return catui.html`<li class="Catui_cm-row"><span class="Catui_badge ${p.solved ? "Catui_badge-success" : "Catui_badge-neutral"} Catui_cm-solved">${p.solved ? "해결" : "답변 대기"}</span><div class="Catui_cm-row-main"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-cat">${p.cat}</span><span class="Catui_cm-title-t">${p.title}</span>${p.comments ? cmCmt(p.comments, "답변") : ""}</a><span class="Catui_cm-meta"><span class="Catui_cm-nick">${community.badge(p.author)}${p.author.nick}</span><time datetime="${p.time}">${community.ago(p.time)}</time><span>조회 ${community.format(p.views, "compact")}</span></span></div>${cmUp(p.score)}</li>`;
   },
 };
 // 사진 자리표시: 토큰 색으로 그린 풍경 SVG (외부 이미지 없음). 실서비스는 p.thumb 주소를 쓴다
@@ -386,6 +394,7 @@ community.thumb = function (p) {
 //   · 숫자가 바뀌면 짧게 위로 밀려 들어옴(피드백, 200ms) — 모션 줄이기면 즉시
 community.voteRequest = () => Promise.resolve(true);   // 실서비스: (id, dir) => fetch('/api/vote', …)
 community.vote = {
+  _seq: {},
   get: (key) => cmGet("votes", {})[key] || "",
   set(key, dir) { const v = cmGet("votes", {}); if (dir) v[key] = dir; else delete v[key]; cmSet("votes", v); },
   paint(box) {
@@ -415,11 +424,14 @@ community.vote = {
       const box = b.closest("[data-catui-cm-vote]"), key = box.dataset.catuiCmVote, before = this.get(key);
       const dir = before === b.dataset.dir ? "" : b.dataset.dir;
       this.set(key, dir); this.paint(box);
+      // 연달아 누르면 마지막 요청만 결과를 반영한다(먼저 보낸 요청이 늦게 실패해도 최신 선택을 되돌리지 않음)
+      const seq = (this._seq[key] = (this._seq[key] || 0) + 1);
       community.voteRequest(key, dir).then((ok) => {
         if (!ok) throw new Error("vote");
+        if (seq !== this._seq[key]) return;
         community.emit("vote", { key, dir });
         if (dir) catui.layer.msg(dir === "up" ? "추천했습니다" : "비추천했습니다", { time: 1000 });
-      }).catch(() => { this.set(key, before); this.paint(box); catui.layer.msg("반영하지 못했습니다. 다시 시도해 주세요", { icon: "warn" }); });
+      }).catch(() => { if (seq !== this._seq[key]) return; this.set(key, before); this.paint(box); catui.layer.msg("반영하지 못했습니다. 다시 시도해 주세요", { icon: "warn" }); });
     });
   },
 };
@@ -461,7 +473,7 @@ community.comments = {
         }
       });
       community._on(box, "keydown", (e) => {
-        if (e.key !== "Enter" || !(e.ctrlKey || e.metaKey) || e.isComposing || e.keyCode === 229) return;
+        if (e.key !== "Enter" || !(e.ctrlKey || e.metaKey) || catui.imeBusy(e)) return;
         const f = e.target.closest("form.Catui_cm-c-form");
         if (f) { e.preventDefault(); f.requestSubmit(); }
       });
@@ -549,6 +561,8 @@ community.editor = {
     const f = root.querySelector("form[data-catui-cm-editor]");
     if (!f) return;
     const $ = (n) => f.elements[n], note = f.querySelector("[data-catui-cm-saved]");
+    const miss = ["board", "cat", "title", "body"].filter((n) => !$(n));
+    if (miss.length) { catui.hint.error(`CatuiCommunity: 글쓰기 폼에 ${miss.join(", ")} 칸이 없습니다`, "error", f); return; }
     const snapshot = () => JSON.stringify({ board: $("board").value, cat: $("cat").value, title: $("title").value, body: $("body").value });
     let base = snapshot(), timer;
     community.data("boards").then((boards) => {
@@ -623,6 +637,7 @@ community.widgets = {
   tick(scope = document) {
     scope.querySelectorAll("[data-catui-cm-until]").forEach((t) => {
       const left = new Date(t.getAttribute("data-catui-cm-until")) - community.now();
+      if (Number.isNaN(left)) return;   // 잘못된 날짜면 원래 글자를 둔다("NaN분 남음" 방지)
       const h = Math.floor(left / 36e5), m = Math.floor((left % 36e5) / 6e4);
       t.textContent = left <= 0 ? "종료" : h >= 24 ? `${Math.floor(h / 24)}일 남음` : h ? `${h}시간 ${m}분 남음` : `${m}분 남음`;
       t.closest("[data-catui-cm-deal]")?.toggleAttribute("data-ended", left <= 0);
@@ -671,7 +686,8 @@ community.widgets = {
 // 초기화 — 테마는 어느 화면에서나, 셸·추천·댓글·글쓰기는 [data-catui-cm] 루트가 있을 때
 //   모의 데이터의 "지금" 기준 시각: <html data-catui-cm-now="2026-11-02T10:00:00+09:00"> (없으면 실제 시각)
 community.init = function (scope = document) {
-  this.fixedNow = document.documentElement.getAttribute("data-catui-cm-now") || this.fixedNow;
+  this.fixedNow = document.documentElement.getAttribute("data-catui-cm-now") || undefined;
+  this._dead = false;
   this.theme.init();
   const root = scope.matches?.("[data-catui-cm]") ? scope : scope.querySelector?.("[data-catui-cm]");
   if (root && !root.hasAttribute("data-catui-cm-ready")) {
@@ -685,7 +701,10 @@ community.init = function (scope = document) {
   return this;
 };
 community.destroy = function () {
+  this._dead = true;
   this._offs.splice(0).forEach((off) => { try { off(); } catch {} });
+  this._seen = new WeakMap();
+  this.ready = undefined;
   this.root?.removeAttribute("data-catui-cm-ready");
   this.root = null;
 };

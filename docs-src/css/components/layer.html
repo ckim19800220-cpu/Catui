@@ -36,8 +36,8 @@
 <catui-example title="Catui_layer-tabs · Catui_layer-frame">
   <div class="Catui_modal" role="dialog" aria-label="탭 대화상자 예시" style="display:flex;position:static;transform:none;width:100%">
     <div class="Catui_modal-b">
-      <div class="Catui_layer-tabs" role="tablist" aria-label="설정"><button type="button" role="tab" aria-selected="true">일반</button><button type="button" role="tab" aria-selected="false" tabindex="-1">알림</button><button type="button" role="tab" aria-selected="false" tabindex="-1">미리보기</button></div>
-      <iframe class="Catui_layer-frame" title="미리보기 예시" style="height:120px" srcdoc="&lt;body style='margin:0;display:grid;place-items:center;height:100vh;font:13px sans-serif;background:#F7F8FA'&gt;iframe 레이어 자리&lt;/body&gt;"></iframe>
+      <div class="Catui_layer-tabs" role="tablist" aria-label="설정"><button type="button" role="tab" id="ltx-t1" aria-controls="ltx-p" aria-selected="true">일반</button><button type="button" role="tab" aria-controls="ltx-p" aria-selected="false" tabindex="-1">알림</button><button type="button" role="tab" aria-controls="ltx-p" aria-selected="false" tabindex="-1">미리보기</button></div>
+      <div role="tabpanel" id="ltx-p" aria-labelledby="ltx-t1"><iframe class="Catui_layer-frame" title="미리보기 예시" style="height:120px" srcdoc="&lt;body style='margin:0;display:grid;place-items:center;height:100vh;font:13px sans-serif;background:#F7F8FA'&gt;iframe 레이어 자리&lt;/body&gt;"></iframe></div>
     </div>
   </div>
 </catui-example>
@@ -50,8 +50,8 @@
     <header class="Catui_modal-h"><span>설정</span></header>
     <div class="Catui_modal-b">
       <div class="Catui_layer-vtabs">
-        <div class="Catui_layer-tabs Catui_layer-tabs-v" role="tablist" aria-orientation="vertical" aria-label="설정"><button type="button" role="tab" aria-selected="false" tabindex="-1">일반</button><button type="button" role="tab" aria-selected="true">알림</button><button type="button" role="tab" aria-selected="false" tabindex="-1">보안</button><button type="button" role="tab" aria-selected="false" tabindex="-1">결제</button></div>
-        <div class="Catui_layer-vtabs-panels"><div role="tabpanel"><p class="Catui_h3">알림</p><p class="Catui_help">받을 알림을 고릅니다.</p></div></div>
+        <div class="Catui_layer-tabs Catui_layer-tabs-v" role="tablist" aria-orientation="vertical" aria-label="설정"><button type="button" role="tab" aria-controls="ltv-p" aria-selected="false" tabindex="-1">일반</button><button type="button" role="tab" id="ltv-t2" aria-controls="ltv-p" aria-selected="true">알림</button><button type="button" role="tab" aria-controls="ltv-p" aria-selected="false" tabindex="-1">보안</button><button type="button" role="tab" aria-controls="ltv-p" aria-selected="false" tabindex="-1">결제</button></div>
+        <div class="Catui_layer-vtabs-panels"><div role="tabpanel" id="ltv-p" aria-labelledby="ltv-t2"><p class="Catui_h3">알림</p><p class="Catui_help">받을 알림을 고릅니다.</p></div></div>
       </div>
     </div>
   </div>
@@ -80,7 +80,8 @@
   </form>
 </catui-example>
 <catui-example title="Catui_layer-tabs-card (테두리 카드형 탭)">
-  <div class="Catui_layer-tabs Catui_layer-tabs-card" role="tablist" aria-label="백업"><button type="button" role="tab" aria-selected="true">일반 백업</button><button type="button" role="tab" aria-selected="false" tabindex="-1">증분 백업</button></div>
+  <div class="Catui_layer-tabs Catui_layer-tabs-card" role="tablist" aria-label="백업"><button type="button" role="tab" id="ltc-t1" aria-controls="ltc-p" aria-selected="true">일반 백업</button><button type="button" role="tab" aria-controls="ltc-p" aria-selected="false" tabindex="-1">증분 백업</button></div>
+  <div role="tabpanel" id="ltc-p" aria-labelledby="ltc-t1"><p class="Catui_help">전체 파일을 한 번에 백업합니다.</p></div>
 </catui-example>
 </section>
 

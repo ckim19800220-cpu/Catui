@@ -12,6 +12,12 @@ input:not(:disabled) + .Catui_chip:active,input:not(:disabled) + .Catui_optcard:
 /* 호버 전환 (색·배경·테두리·그림자) */
 :is(.Catui_link,.Catui_pagehead-back,.Catui_totop,a.Catui_card,.Catui_tbl tbody tr,.Catui_list-item,.Catui_subnav a,.Catui_vnav a,.Catui_dd-item,.Catui_cal-cell,.Catui_chip,.Catui_dp-cell,.Catui_pg,.Catui_pills a,.Catui_pills button,.Catui_react,.Catui_optcard,.Catui_swatch){transition:background var(--Catui_dur-fast) var(--Catui_ease),color var(--Catui_dur-fast) var(--Catui_ease),border-color var(--Catui_dur-fast) var(--Catui_ease),box-shadow var(--Catui_dur-fast) var(--Catui_ease),transform var(--Catui_dur-fast) var(--Catui_ease),translate var(--Catui_dur-fast) var(--Catui_ease),scale var(--Catui_dur-fast) var(--Catui_ease)}
 
+/* 포커스 링: 자체 규칙이 없던 요약(summary)·링크·작은 버튼도 같은 링으로 (브라우저 기본 링 대신) */
+:is(.Catui_faq summary,.Catui_tree summary,.Catui_tree-row,.Catui_dd summary,.Catui_mega summary,.Catui_item,.Catui_side summary,.Catui_site-nav a,.Catui_site-menu summary,.Catui_tag button,.Catui_crumb a,.Catui_stepper button,.Catui_totop,.Catui_layer-nav,.Catui_react):focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+
+/* hidden 속성: display:flex|grid 로 덮이지 않게 (JS가 hidden 으로 숨기는 요소) */
+:is(.Catui_layer-nav,.Catui_totop,.Catui_banner)[hidden]{display:none}
+
 /* 작은 대상: 보이는 크기는 그대로, 누르는 영역만 28px 이상으로 */
 .Catui_carousel-dot{position:relative}
 .Catui_carousel-dot::before{content:"";position:absolute;inset:calc((var(--Catui_control-h-sm) - var(--Catui_space-2)) / -2)}

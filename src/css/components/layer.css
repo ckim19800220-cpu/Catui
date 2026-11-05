@@ -37,7 +37,7 @@ dialog.Catui_layer-photos .Catui_close{color:inherit}
 
 /* 탭 대화상자 */
 .Catui_layer-tabs{display:flex;gap:var(--Catui_space-5);margin:calc(var(--Catui_modal-pad) * -1) calc(var(--Catui_modal-pad) * -1) var(--Catui_space-4);padding:0 var(--Catui_modal-pad);box-shadow:inset 0 -1px 0 var(--Catui_tab-border);overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
-.Catui_layer-tabs button{height:var(--Catui_tab-h);color:var(--Catui_tab-fg);border-bottom:var(--Catui_tab-indicator-w) solid transparent;white-space:nowrap;cursor:pointer;flex:none}
+.Catui_layer-tabs button{height:var(--Catui_tab-h);color:var(--Catui_tab-fg);border-bottom:var(--Catui_tab-indicator-w) solid transparent;white-space:nowrap;cursor:pointer;flex:none;line-height:1}   /* 세로 탭·카드형도 이 규칙을 물려받는다 */
 .Catui_layer-tabs button[aria-selected="true"]{color:var(--Catui_tab-active-fg);border-bottom-color:var(--Catui_tab-indicator);font-weight:600}
 .Catui_layer-tabs button:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
 

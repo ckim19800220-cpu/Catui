@@ -60,10 +60,13 @@ export function buildDocs({ css, icons }) {
   // catui.js 모듈 색인: nav.json "모듈" 묶음에서 자동 생성 ("layer 팝업" → 이름 + 한글 이름, desc는 설명)
   const jsModules = `<div class="doc-mods">${jsModPages.map((p) => {
     const [name, ...ko] = p.title.split(" ");
-    return `<a class="doc-mod" href="doc:${p.path}"><code>${esc(name)}</code><b>${esc(ko.join(" "))}</b><span>${esc(p.desc || "")}</span></a>`;
+    return `<a class="doc-mod" href="doc:${p.path}"><span class="doc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i16"><use href="{{dist}}/icons.svg?v=2#Catui_ic-component"></use></svg></span><code>${esc(name)}</code><b>${esc(ko.join(" "))}</b><span>${esc(p.desc || "")}</span></a>`;
   }).join("")}</div>`;
   // nav.json 설명(desc) 같은 글자 값용 — 이스케이프는 쓰는 쪽(esc)에서
-  const statText = (s) => String(s ?? "").replace(/\{\{stat:(\w+)\}\}/g, (m, k) => (stats[k] != null ? String(typeof stats[k] === "number" ? stats[k].toLocaleString("ko-KR") : stats[k]) : m));
+  const statText = (s) => String(s ?? "").replace(/\{\{stat:(\w+)\}\}/g, (m, k) => {
+    if (stats[k] == null) { errors.push(`nav.json: 없는 수치 {{stat:${k}}}`); return m; }
+    return String(typeof stats[k] === "number" ? stats[k].toLocaleString("ko-KR") : stats[k]);
+  });
   const fill = (html, where) => html
     .replace(/\{\{stat:(\w+)\}\}/g, (m, k) => { if (stats[k] == null) { errors.push(`${where}: 없는 수치 {{stat:${k}}}`); return m; } return typeof stats[k] === "number" ? stats[k].toLocaleString("ko-KR") : esc(stats[k]); })
     .replace(/\{\{js-modules\}\}/g, jsModules);
@@ -93,6 +96,10 @@ export function buildDocs({ css, icons }) {
     // 문서 링크
     html = html.replace(/href="doc:([^"#]+)(#[^"]*)?"/g, (_, target, hash = "") => {
       if (!byPath.has(target) && target !== "index") errors.push(`${page.path}: 없는 문서 링크 doc:${target}`);
+      else if (hash.length > 1 && target !== "index") {   // 다른 문서의 #앵커도 대상 조각에 그 id가 있는지 검사
+        const srcFile = path.join(P.docsSrc, `${target}.html`);
+        if (fs.existsSync(srcFile) && !fs.readFileSync(srcFile, "utf8").includes(`id="${hash.slice(1)}"`)) errors.push(`${page.path}: doc:${target}${hash} 앵커가 대상 문서에 없습니다`);
+      }
       return `href="${relTo(page.path, `${target}.html`)}${hash}"`;
     });
     return html.replace(/\{\{dist\}\}/g, distRel(page.path));
@@ -142,6 +149,8 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
       .replace(/\{\{home\}\}/g, relTo(page.path, "index.html"))
       .replace(/\{\{assets\}\}/g, relTo(page.path, "assets"))
       .replace(/\{\{tabs\}\}/g, tabs)
+      .replace(/\{\{tabs-foot\}\}/g, tabs.replace(/ aria-current="page"/g, ""))   // 바닥글은 현재 표시 없이(한 쪽에 aria-current 하나만)
+      .replace(/\{\{rel:([^}]+)\}\}/g, (_, target) => relTo(page.path, target))   // 레이아웃 안 문서 링크(현재 쪽 기준 상대 경로)
       .replace(/\{\{version\}\}/g, esc(version))
       .replace(/\{\{shellClass\}\}/g, home ? "doc-shell doc-shell-home" : "doc-shell")
       .replace(/\{\{sidebar\}\}/g, home ? "" : `<details class="doc-side" open><summary>${esc(page.section.title)} 메뉴</summary><nav aria-label="${esc(page.section.title)} 문서">${sidebar(page)}</nav></details>`)
@@ -159,6 +168,8 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
   // 문서 폴더 새로 쓰기 (assets 포함)
   fs.rmSync(P.docs, { recursive: true, force: true });
   for (const f of walk(path.join(P.docsSrc, "assets"))) write(path.join(P.docs, "assets", path.relative(path.join(P.docsSrc, "assets"), f)), fs.readFileSync(f));
+  // 문서 검색 색인: 쪽마다 넣지 않고 한 파일로(검색을 처음 열 때 docs.js가 불러온다). 주소는 docs/ 기준
+  write(path.join(P.docs, "assets", "search-index.js"), `window.catuiDocIndex=${JSON.stringify(pages.map((p) => ({ t: p.title, s: `${p.section.title} · ${p.group.title}`, d: statText(p.desc || ""), u: `${p.path}.html` }))).replace(/</g, "\\u003c")};\n`);
 
   const outputs = [];
   for (const page of pages) {

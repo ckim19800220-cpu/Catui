@@ -66,6 +66,7 @@ function catuiStore(kind, table, settings) {
   try {
     if (settings === null) { storage.removeItem(key); return {}; }
     if (settings && typeof settings === "object" && "key" in settings) {
+      if (settings.key === "__proto__") { hint.error(`data('${table}'): '__proto__'는 키로 쓸 수 없습니다`); return all; }
       if (settings.remove) delete all[settings.key];
       else all[settings.key] = settings.value;
       storage.setItem(key, JSON.stringify(all));
@@ -89,7 +90,8 @@ export function url(href = location.href) {
   const u = new URL(href, location.href);
   const search = Object.fromEntries(u.searchParams);
   const h = u.hash.replace(/^#/, "");
-  const [hPath, hQuery = ""] = h.split("?");
+  // 첫 '?'에서만 나눈다(#/p?x=1?y=2의 뒷부분을 버리지 않게). 같은 키가 여럿이면 마지막 값
+  const qi = h.indexOf("?"), hPath = qi < 0 ? h : h.slice(0, qi), hQuery = qi < 0 ? "" : h.slice(qi + 1);
   return {
     pathname: u.pathname.split("/").filter(Boolean),
     search,

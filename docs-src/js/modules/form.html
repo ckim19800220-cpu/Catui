@@ -114,6 +114,7 @@
 <tr><td><code>form.val(f, [값])</code> · <code>form.serialize(f)</code></td><td>값 읽기/쓰기 (같은 name은 배열) / 쿼리 문자열</td></tr>
 <tr><td><code>form.reset(f)</code></td><td>기본값으로 되돌리고 오류 표시 지우기</td></tr>
 <tr><td><code>form.validate(영역)</code> · <code>form.submit(f, [cb])</code></td><td>직접 검증 / 프로그램 제출</td></tr>
-<tr><td><code>form.render(영역)</code> · <code>form.setError(el, 문장)</code> · <code>form.clearError(el)</code></td><td>셀렉트 화살표 보충 / 오류 직접 표시 / 지우기</td></tr>
+<tr><td><code>form.render(영역)</code> · <code>form.setError(el, 문장)</code> · <code>form.clearError(el)</code></td><td>셀렉트 화살표 보충 / 오류 직접 표시 / 지우기 (<code>clearError</code>는 칸 하나를 받습니다 — 폼 전체는 <code>form.reset(f)</code>)</td></tr>
+<tr><td>한글 입력</td><td>글자 칸에서 조합을 끝내는 Enter(확정 직후 150ms 포함)로는 폼이 제출되지 않습니다. 모든 폼에 자동 적용</td></tr>
 </tbody></table></div>
 </section>

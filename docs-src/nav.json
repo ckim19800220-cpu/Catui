@@ -1352,7 +1352,7 @@
             {
               "path": "js/modules/tabs",
               "title": "tabs 탭",
-              "desc": "radio 탭 이벤트와 추가·닫기·전환."
+              "desc": "WAI-ARIA 탭 생성, radio 탭 이벤트, 추가·닫기·전환."
             },
             {
               "path": "js/modules/dropdown",
@@ -1382,7 +1382,7 @@
             {
               "path": "js/modules/tree",
               "title": "tree 트리",
-              "desc": "펼침·선택·체크 전파·키보드."
+              "desc": "WAI-ARIA 트리: 펼침·선택·체크 전파·키보드."
             },
             {
               "path": "js/modules/collapse",
@@ -1397,7 +1397,7 @@
             {
               "path": "js/modules/fx",
               "title": "fx 효과",
-              "desc": "텍스트·스크롤·커서·화면 기능·배경 효과 38종 (모션 줄이기·키보드·접근성 대응)."
+              "desc": "텍스트·스크롤·커서·화면 기능·배경 효과 46종 · 효과 등록·일시정지·조합 놀이터 (모션 줄이기·키보드·접근성 대응)."
             },
             {
               "path": "js/modules/util",

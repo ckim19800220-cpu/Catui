@@ -326,7 +326,7 @@
 <tr><td><code>type</code></td><td>'dialog'</td><td>'dialog' · 'drawer' · 'iframe'</td></tr>
 <tr><td><code>title</code> · <code>content</code></td><td>''</td><td>내용: 문자열(글자) · html`` · Element</td></tr>
 <tr><td><code>btn</code></td><td>[]</td><td>버튼 글자 배열. 첫 버튼이 주 버튼(<code>danger: true</code>면 위험색)</td></tr>
-<tr><td><code>yes(index, dlg)</code> · <code>btn2</code> · <code>cancel</code></td><td>—</td><td>버튼·닫기 콜백. <code>yes</code>가 있으면 그 안에서 <code>layer.close(index)</code>로 직접 닫음(layui와 같음). <code>btn2</code>·<code>cancel</code>은 false를 돌려주면 유지</td></tr>
+<tr><td><code>yes(index, dlg)</code> · <code>btn2</code> · <code>cancel</code></td><td>—</td><td>버튼·닫기 콜백. <code>yes</code>가 있으면 그 안에서 <code>layer.close(index)</code>로 직접 닫음(layui와 같음). <code>btn2</code>·<code>cancel</code>은 false를 돌려주면 유지. 세 번째 버튼부터는 <code>btn3</code>·<code>btn4</code>…, 두 번째 버튼은 <code>btn2</code>가 없으면 <code>cancel</code>을 부름</td></tr>
 <tr><td><code>success(dlg, index)</code> · <code>end(index, reason)</code></td><td>—</td><td>열린 뒤 / 닫힌 뒤 (reason: 'yes'·'cancel'·'close'·'time')</td></tr>
 <tr><td><code>area</code></td><td>'md'</td><td>'sm'·'md'·'lg'·'xl'·'full' 또는 ['너비', '높이']</td></tr>
 <tr><td><code>maxmin</code> · <code>move</code> · <code>resize</code></td><td>false</td><td>최대화 버튼 / 머리 끌어 옮기기 / 모서리 크기 조절</td></tr>
@@ -335,6 +335,7 @@
 <tr><td><code>type: 'iframe'</code></td><td>—</td><td>content에 주소 (같은 사이트·http·https만, javascript:·data: 차단)</td></tr>
 <tr><td><code>skin</code> · <code>full(index, on)</code></td><td>—</td><td>대화상자에 더할 클래스 / 최대화 전환 콜백</td></tr>
 <tr><td><code>msg: position</code> · <code>action</code> · <code>progress</code></td><td>'br'</td><td>'tr'·'tc'·'bc'·'br' / { text, onClick } 동작 버튼(5초) / 남은 시간 막대</td></tr>
+<tr><td><code>msg: time</code> · <code>layer.msg(글, 옵션, end)</code></td><td>3000</td><td>보이는 시간(ms, 동작 버튼이 있으면 5000). <code>end</code>는 시간이 다 되거나 직접 닫을 때 호출 — 옵션 자리에 함수를 바로 넘겨도 됨</td></tr>
 <tr><td><code>shadeClose</code> · <code>closeBtn</code></td><td>true</td><td>바깥 클릭으로 닫기 / 닫기 버튼</td></tr>
 </tbody></table></div>
 <p>함수: <code>msg · alert · confirm · prompt · open · load · progress(index, %) · tips(내용, 대상, { side, time }) · photos({ items, start, change }) · tab({ tabs, start, change, vertical, card }) · form({ title, fields, submit, okText, layout: 'horizontal', labelWidth }) → Promise&lt;값|null&gt; (field: readonly·disabled·addon:{ icon, label, onClick }) · ask(내용) → Promise&lt;boolean&gt; · input(옵션) → Promise&lt;값|null&gt; · close(index) · closeAll(type) · closeLast(type) · title(index, 글자) · setContent(index, 내용) · style(index, { width, height }) · full(index) · restore(index) · getNode(index) · list(type) · count</code>. type은 'msg'·'dialog'·'drawer'·'iframe'·'load'·'tips'·'photos'·'tab'·'form'.</p>

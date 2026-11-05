@@ -21,7 +21,7 @@ export const laypage = component({
     const info = () => ({ curr: c.curr, limit: lim(), count: c.count, pages: pages() });
     const draw = () => {
       const total = pages();
-      c.curr = Math.min(Math.max(1, Number(c.curr) || 1), total);
+      c.curr = Math.min(Math.max(1, Math.floor(Number(c.curr)) || 1), total);   // 소수(1.5)면 현재 쪽 표시·이전/다음 번호가 깨진다
       // 현재 쪽을 가운데 두는 번호 묶음 + 처음/끝, 사이가 비면 …
       const groups = Math.max(1, Number(c.groups) || 5);
       const half = Math.floor(groups / 2);
@@ -50,9 +50,10 @@ export const laypage = component({
       };
       mount(box, hide ? html`` : html`${parts.filter((p) => part[p]).map((p) => part[p]())}`);
     };
-    const go = (n, focusSel) => {
+    // force: 쪽 크기를 바꿔 같은 쪽 번호라도 내용이 달라질 때만. 이동 칸에 지금 쪽을 넣고 Enter는 jump를 다시 내지 않는다
+    const go = (n, focusSel, force) => {
       const next = Math.min(Math.max(1, Math.floor(Number(n)) || 1), pages());
-      if (next === c.curr && !focusSel) return;
+      if (next === c.curr && !force) { if (focusSel) box.querySelector(focusSel)?.focus(); return; }
       c.curr = next;
       draw();
       box.querySelector(focusSel || `[data-catui-page="${c.curr}"][aria-current]`)?.focus();
@@ -72,7 +73,7 @@ export const laypage = component({
       const first = (c.curr - 1) * lim();
       c.limit = Number(e.target.value);
       c.curr = Math.floor(first / lim()) + 1;
-      go(c.curr, "[data-catui-limit]");
+      go(c.curr, "[data-catui-limit]", true);
     };
     draw();
     box.addEventListener("click", onClick);
@@ -81,5 +82,12 @@ export const laypage = component({
     inst.use(() => { box.removeEventListener("click", onClick); box.removeEventListener("keydown", onKey); box.removeEventListener("change", onChange); });
     c.jump?.call(inst, info(), true);
   },
-  destroy(inst) { if (inst.elem) inst.elem.textContent = ""; },
+  destroy(inst) {
+    const box = inst.elem;
+    if (!box) return;
+    box.textContent = "";
+    box.classList.remove("Catui_pager");
+    box.removeAttribute("aria-label");
+    if (box.tagName !== "NAV") box.removeAttribute("role");
+  },
 });

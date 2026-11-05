@@ -38,7 +38,7 @@ function admDraw(type, d) {
       ctx.fillStyle = s.token("--Catui_color-text-primary"); ctx.textAlign = "center"; ctx.textBaseline = "middle";
       // 가운데: center를 주면 그 값, 없으면 가장 큰 조각의 비율과 이름
       const top = vals.indexOf(Math.max(...vals));
-      const big = d.center ?? `${Math.round((vals[top] / sum) * 100)}%`, small = d.center ? d.caption : d.labels?.[top];
+      const big = d.center ?? (vals.length ? `${Math.round((vals[top] / sum) * 100)}%` : "—"), small = d.center ? d.caption : d.labels?.[top];
       ctx.font = s.font(Math.round(r * 0.3), 700); ctx.fillText(big, cx, cy - (small ? r * 0.1 : 0));
       if (small) { ctx.font = s.font(11); ctx.fillStyle = s.token("--Catui_color-text-secondary"); ctx.fillText(small, cx, cy + r * 0.22); }
       return;
@@ -138,13 +138,16 @@ admin.widgets = {
       counts.forEach((el) => io.observe(el));
       admin._offs.push(() => io.disconnect());
     }
-    const ago = () => root.querySelectorAll("[data-catui-adm-ago]").forEach((el) => { const d = new Date(el.getAttribute("data-catui-adm-ago")); if (!Number.isNaN(d.getTime())) { el.textContent = catui.util.timeAgo(d); if (!el.getAttribute("datetime")) el.setAttribute("datetime", d.toISOString()); } });
+    // 상대 시간: 문서 전체를 1분마다(타이머는 한 개만)
+    const ago = () => document.querySelectorAll("[data-catui-adm-ago]").forEach((el) => { const d = new Date(el.getAttribute("data-catui-adm-ago")); if (!Number.isNaN(d.getTime())) { el.textContent = catui.util.timeAgo(d); if (!el.getAttribute("datetime")) el.setAttribute("datetime", d.toISOString()); } });
     ago();
-    const timer = setInterval(ago, 60000);
-    admin._offs.push(() => clearInterval(timer));
+    if (admin._once(document, "ago")) {
+      const timer = setInterval(ago, 60000);
+      admin._offs.push(() => clearInterval(timer));
+    }
     const prefs = admGet("prefs", {});
     root.querySelectorAll("input[data-catui-adm-pref]").forEach((el) => { const k = el.getAttribute("data-catui-adm-pref"); if (k in prefs) el.checked = !!prefs[k]; });
-    admin._on(root, "change", (e) => {
+    if (admin._once(root, "prefs")) admin._on(root, "change", (e) => {
       const el = e.target.closest?.("input[data-catui-adm-pref]");
       if (!el) return;
       admSet("prefs", { ...admGet("prefs", {}), [el.getAttribute("data-catui-adm-pref")]: el.checked });

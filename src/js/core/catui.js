@@ -1,7 +1,7 @@
 import { config, getConfig, hint, data, sessionData, url, device, csrfHeaders } from "./base.js";
 import { VERSION } from "./env.js";
 import { html, raw, escape } from "./html.js";
-import { $, el, mount, icon, scopeOf } from "./dom.js";
+import { $, el, mount, icon, scopeOf, imeBusy } from "./dom.js";
 import { onEvent, offEvent, emit } from "./events.js";
 import { component } from "./component.js";
 import { bindToggleOverlays } from "./init.js";
@@ -64,6 +64,7 @@ export const catui = {
   config(options) { const r = config(options); if (options && "autoDestroy" in options) catuiSyncWatch(); return r; },
   get cache() { return { config: getConfig(), modules: Object.keys(catuiModules) }; },
   $, el, html, raw, escape, mount, icon, hint, data, sessionData, url, device, component, csrfHeaders,
+  imeBusy,   // 한글 조합 중(확정 직후 150ms 포함)인 키 입력인지 — 확장(admin·community)도 같은 기준을 쓰게
   ...catuiModules,
 
   // 모듈 불러오기. 모두 한 파일에 들어 있으므로 즉시(문서 준비 후) 콜백한다. Promise도 돌려준다.

@@ -22,6 +22,7 @@ export const autocomplete = component({
     input.setAttribute("aria-autocomplete", "list");
     input.setAttribute("aria-expanded", "false");
     input.setAttribute("aria-controls", listId);
+    const prevAuto = input.getAttribute("autocomplete");   // 해제할 때 원래 값으로
     input.autocomplete = "off";
     let panel = null, items = [], active = -1, timer = 0, ctrl = null, seq = 0;
 
@@ -82,6 +83,7 @@ export const autocomplete = component({
           : html`<p class="Catui_dd-group" role="presentation" aria-live="polite">${c.empty}</p>`);
       input.setAttribute("aria-expanded", "true");
       active = -1;
+      input.removeAttribute("aria-activedescendant");   // 이전 후보는 지워졌으므로 가리키던 id도 비운다
       place();
     };
     const pick = (i) => {
@@ -123,10 +125,16 @@ export const autocomplete = component({
       timer = setTimeout(run, typeof c.data === "function" ? c.delay : 0);
     };
     const onInput = (e) => { if (e.isTrusted === false && !panel) return; search(input.value.trim()); };
+    // 고를 수 없는(disabled) 후보는 건너뛴다
+    const step = (dir) => {
+      const n = items.length, base = active < 0 && dir < 0 ? n : active;   // 아무것도 없을 때 ↑는 마지막 후보부터
+      for (let k = 1; k <= n; k++) { const i = (((base + dir * k) % n) + n) % n; if (!items[i].disabled) { setActive(i); return; } }
+    };
     const onKey = (e) => {
       const n = items.length;
-      if (e.key === "ArrowDown") { e.preventDefault(); if (!panel) { search(input.value.trim()); return; } if (n) setActive((active + 1) % n); }
-      else if (e.key === "ArrowUp") { e.preventDefault(); if (n) setActive((active - 1 + n) % n); }
+      if ((e.key === "ArrowDown" || e.key === "ArrowUp") && imeBusy(e)) return;   // 한글 조합 중 ↑↓는 조합 확정에 쓴다
+      if (e.key === "ArrowDown") { e.preventDefault(); if (!panel) { search(input.value.trim()); return; } if (n) step(1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); if (n) step(-1); }
       else if (e.key === "Enter" && panel && active >= 0 && !imeBusy(e)) { e.preventDefault(); pick(active); }
       else if (e.key === "Escape" && panel && !imeBusy(e)) { e.preventDefault(); e.stopPropagation(); close(); }   // 모달 안이면 목록만 닫힘
       else if (e.key === "Tab") close();
@@ -146,6 +154,7 @@ export const autocomplete = component({
       input.removeEventListener("focus", onFocus);
       input.removeEventListener("blur", onBlur);
       ["role", "aria-autocomplete", "aria-expanded", "aria-controls", "aria-activedescendant"].forEach((a) => input.removeAttribute(a));
+      if (prevAuto == null) input.removeAttribute("autocomplete"); else input.setAttribute("autocomplete", prevAuto);
     });
   },
 });

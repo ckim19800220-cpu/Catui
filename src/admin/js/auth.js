@@ -16,14 +16,14 @@ admin.auth = {
   init(root = document) {
     root.querySelectorAll("[data-catui-adm-pwtoggle]").forEach((b) => {
       const input = b.closest(".Catui_adm-pw")?.querySelector("input");
-      if (!input) return;
+      if (!input || !admin._once(b, "pw")) return;
       const sync = () => { const shown = input.type === "text"; b.setAttribute("aria-pressed", String(shown)); b.setAttribute("aria-label", shown ? "비밀번호 숨기기" : "비밀번호 보기"); catui.mount(b, catui.icon(shown ? "eye-off" : "eye", 16)); };
       admin._on(b, "click", () => { input.type = input.type === "password" ? "text" : "password"; sync(); input.focus(); });
       sync();
     });
     root.querySelectorAll("[data-catui-adm-caps]").forEach((note) => {
       const input = catui.el(note.getAttribute("data-catui-adm-caps"));
-      if (!input) return;
+      if (!input || !admin._once(note, "caps")) return;
       const check = (e) => { if (typeof e.getModifierState === "function") note.hidden = !e.getModifierState("CapsLock"); };
       admin._on(input, "keydown", check);
       admin._on(input, "keyup", check);
@@ -32,7 +32,7 @@ admin.auth = {
     const NAMES = ["", "약함", "보통", "좋음", "강함"];
     root.querySelectorAll("[data-catui-adm-strength]").forEach((meter) => {
       const input = catui.el(meter.getAttribute("data-catui-adm-strength"));
-      if (!input) return;
+      if (!input || !admin._once(meter, "strength")) return;
       const out = meter.querySelector("span");
       meter.setAttribute("role", "img");
       const sync = () => { const n = this.score(input.value); meter.dataset.level = String(n); if (out) out.textContent = NAMES[n] || ""; meter.setAttribute("aria-label", n ? `비밀번호 강도: ${NAMES[n]}` : "비밀번호 강도: 입력 전"); };

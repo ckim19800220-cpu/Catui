@@ -13,10 +13,15 @@
 
 ### 추가: CatuiCommunity (커뮤니티·게시판 확장)
 - `dist/community.css`(+min) · `dist/catcommunity.js`(+esm·min·map·d.ts) — `catui.community`: 목록(주소 동기화) · 추천/비추천 · 댓글 트리 · 글쓰기(임시 저장·안전 미리보기) · 투표 · 핫딜 남은 시간 · JSON 바인딩
-- 템플릿 22종(`docs/community/templates/`): 홈 · 인기글 · 게시판 6종 · 글 보기 · 투표 · 글쓰기 · 검색 · 프로필 · 쪽지 · 알림 · 스크랩 · 설정 · 순위 · 이벤트 · 로그인 · 가입 · 404
+- 템플릿 23종(`docs/community/templates/`): 홈 · 인기 글 · 게시판 6종 · 글 보기 · 투표 · 글쓰기 · 검색 · 프로필 · 쪽지 · 알림 · 스크랩 · 설정 · 순위 · 이벤트 · 채팅방 · 로그인 · 가입 · 404
 - JSON 모의 데이터 11종 — 인기글(추천 − 비추천 ≥ 게시판 기준)·레벨·합계·비율은 원자료에서 계산
 - 모션: React Bits 에이전트 스킬(Emil Kowalski 기준)로 고른 곳에만, 모션 줄이기 존중
 - 문서 상단 **CatuiCommunity** 탭, `exports`에 `./community` · `./community.css`
+
+### 변경
+- `package.json`의 `main`과 `exports`의 `default`가 ESM(`catui.esm.js` 등)을 가리킵니다. 브라우저 전용 IIFE를 Node·구형 번들러가 받아 `document` 오류가 나던 문제를 막습니다. `<script>`·CDN은 `unpkg`·`jsdelivr` 필드(`catui.min.js`)로 그대로 IIFE를 받습니다.
+- `fx.list()`(효과 이름 목록)를 `fx.names()`로 바꿨습니다 — `fx.list(ul)`은 차례 등장 효과입니다.
+- `tabs.render`·`tree.render`가 WAI-ARIA 탭·트리 패턴으로 그립니다(CSS만 쓰는 마크업은 그대로).
 
 ## 2.0.0 — 2026-11-02
 

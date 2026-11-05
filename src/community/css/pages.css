@@ -24,7 +24,7 @@
 .Catui_cm-poll-res{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-3)}
 .Catui_cm-poll-res li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--Catui_space-1) var(--Catui_space-3);align-items:center}
 .Catui_cm-poll-res li:focus{outline:none}
-.Catui_cm-poll-res:focus{outline:2px solid var(--Catui_color-focus-ring);outline-offset:4px;border-radius:var(--Catui_radius-xs)}
+.Catui_cm-poll-res:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:4px;border-radius:var(--Catui_radius-xs)}
 .Catui_cm-poll-lab{display:inline-flex;align-items:center;gap:var(--Catui_space-1);min-width:0}
 .Catui_cm-poll-bar{grid-column:1 / -1;height:var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-surface-muted);overflow:hidden;order:3}
 .Catui_cm-poll-bar i{display:block;height:100%;background:var(--Catui_color-text-secondary);border-radius:inherit}

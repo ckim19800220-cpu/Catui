@@ -23,7 +23,7 @@
     "wcag"
   ],
   "type": "module",
-  "main": "./dist/catui.js",
+  "main": "./dist/catui.esm.js",
   "module": "./dist/catui.esm.js",
   "types": "./dist/catui.d.ts",
   "unpkg": "./dist/catui.min.js",
@@ -33,23 +33,23 @@
     ".": {
       "types": "./dist/catui.d.ts",
       "import": "./dist/catui.esm.js",
-      "default": "./dist/catui.js"
+      "default": "./dist/catui.esm.js"
     },
     "./min": {
       "types": "./dist/catui.d.ts",
       "import": "./dist/catui.esm.min.js",
-      "default": "./dist/catui.min.js"
+      "default": "./dist/catui.esm.min.js"
     },
     "./admin": {
       "types": "./dist/catadmin.d.ts",
       "import": "./dist/catadmin.esm.js",
-      "default": "./dist/catadmin.js"
+      "default": "./dist/catadmin.esm.js"
     },
     "./admin.css": "./dist/admin.min.css",
     "./community": {
       "types": "./dist/catcommunity.d.ts",
       "import": "./dist/catcommunity.esm.js",
-      "default": "./dist/catcommunity.js"
+      "default": "./dist/catcommunity.esm.js"
     },
     "./community.css": "./dist/community.min.css",
     "./css": "./dist/catui.min.css",

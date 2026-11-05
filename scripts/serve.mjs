@@ -5,15 +5,16 @@ import path from "node:path";
 import { ROOT } from "./lib.mjs";
 
 const port = Number(process.argv[2]) || 8766;
-const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8", ".svg": "image/svg+xml", ".json": "application/json; charset=utf-8", ".png": "image/png", ".ico": "image/x-icon" };
+const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8", ".svg": "image/svg+xml", ".json": "application/json; charset=utf-8", ".png": "image/png", ".ico": "image/x-icon", ".map": "application/json; charset=utf-8", ".webp": "image/webp", ".jpg": "image/jpeg", ".woff2": "font/woff2", ".txt": "text/plain; charset=utf-8" };
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const page = (title, body) => `<!DOCTYPE html><html lang="ko"><meta charset="utf-8"><title>${esc(title)}</title><body style="font:14px/1.7 system-ui,sans-serif;padding:24px;max-width:720px">${body}</body></html>`;
 
 http.createServer((req, res) => {
-  const url = decodeURIComponent(new URL(req.url, "http://x").pathname);
+  let url;
+  try { url = decodeURIComponent(new URL(req.url, "http://x").pathname); } catch { res.writeHead(400).end(); return; }   // 잘못된 %인코딩으로 서버가 죽지 않게
   let file = path.normalize(path.join(ROOT, url));
-  if (!file.startsWith(ROOT)) { res.writeHead(403).end(); return; }   // 루트 밖 접근 차단
+  if (file !== ROOT && !file.startsWith(ROOT + path.sep)) { res.writeHead(403).end(); return; }   // 루트 밖 접근 차단
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) {
     // 폴더 주소는 끝에 / 를 붙여야 상대 링크가 맞는다
     if (!url.endsWith("/")) { res.writeHead(301, { Location: `${url}/` }).end(); return; }

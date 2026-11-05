@@ -87,7 +87,8 @@ export default admin;
     write(path.join(P.dist, `${name}.map`), JSON.stringify(map));
   }
   const dts = path.join(ROOT, "src/types/catadmin.d.ts");
-  if (fs.existsSync(dts)) write(path.join(P.dist, "catadmin.d.ts"), read(dts));
+  if (!fs.existsSync(dts)) fail("타입 선언이 없습니다: src/types/catadmin.d.ts (package.json types가 가리킴)");
+  write(path.join(P.dist, "catadmin.d.ts"), read(dts));
   const missing = new Set();
   for (const m of body.matchAll(/Catui_[A-Za-z0-9_-]*[A-Za-z0-9_]/g)) {
     const next = body[m.index + m[0].length];

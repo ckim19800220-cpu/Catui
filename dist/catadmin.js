@@ -53,6 +53,9 @@ const admin = {
   emit: (evt, payload) => catui.event("admin", evt, null, payload),
   _offs: [],
   _on(target, type, fn, opt) { if (!target) return; target.addEventListener(type, fn, opt); this._offs.push(() => target.removeEventListener(type, fn, opt)); },
+  // 같은 대상·같은 연결을 한 번만 (init 재호출 시 리스너 중복 방지). destroy가 기록을 비운다
+  _seen: new WeakMap(),
+  _once(target, key) { let s = this._seen.get(target); if (!s) this._seen.set(target, (s = new Set())); if (s.has(key)) return false; s.add(key); return true; },
 };
 
 // ── data.js ──
@@ -210,7 +213,7 @@ admin.shell = {
     admin._on(scrim, "click", () => close());
     admin._on(document, "keydown", (e) => {
       if (!isOpen()) return;
-      if (e.key === "Escape" && !e.isComposing) { e.preventDefault(); close(); return; }
+      if (e.key === "Escape" && !catui.imeBusy(e)) { e.preventDefault(); close(); return; }
       if (e.key !== "Tab") return;
       const f = admFocusables(side);
       if (!f.length) return;
@@ -248,6 +251,7 @@ admin.theme = {
   },
   init() {
     this.apply(this.saved());
+    if (!admin._once(document, "theme")) return;   // 재호출 시 클릭이 두 번 처리돼 토글이 상쇄되지 않게
     const mq = matchMedia("(prefers-color-scheme: dark)");
     admin._on(mq, "change", () => { if (this.saved() === "system") this.apply("system"); });
     admin._on(document, "click", (e) => { if (e.target.closest("[data-catui-adm-theme]")) this.set(this.get() === "dark" ? "light" : "dark"); });
@@ -293,7 +297,7 @@ admin.notify = {
     admin._on(btn, "click", () => (pop.hidden ? openPop() : close(false)));
     // 패널 안 버튼을 눌러 목록을 다시 그리면 눌린 요소가 DOM에서 빠진다 — 그건 바깥 클릭이 아니다
     admin._on(document, "click", (e) => { if (!pop.hidden && e.target.isConnected && !pop.contains(e.target) && !btn.contains(e.target)) close(false); });
-    admin._on(document, "keydown", (e) => { if (e.key === "Escape" && !e.isComposing && !pop.hidden) { e.preventDefault(); close(true); } });
+    admin._on(document, "keydown", (e) => { if (e.key === "Escape" && !catui.imeBusy(e) && !pop.hidden) { e.preventDefault(); close(true); } });
     admin._on(window, "resize", () => { if (!pop.hidden) place(); });
     admin._on(pop, "click", (e) => {
       if (e.target.closest("[data-catui-adm-readall]")) { this.markAll(); return; }
@@ -308,7 +312,7 @@ admin.notify = {
   render() {
     if (!this.pop) return;
     const n = this.count();
-    catui.mount(this.pop, catui.html`<div class="Catui_notifs-h"><span id="adm-notify-t">알림</span>${n ? catui.html`<span class="Catui_count" aria-label="읽지 않음 ${n}건">${n}</span>` : ""}<button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-adm-readall ${n ? "" : catui.raw("disabled")}>모두 읽음</button></div>
+    catui.mount(this.pop, catui.html`<div class="Catui_notifs-h"><span id="adm-notify-t">알림</span>${n ? catui.html`<span class="Catui_count"><span class="Catui_clip">읽지 않음 </span>${n}<span class="Catui_clip">건</span></span>` : ""}<button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-adm-readall ${n ? "" : catui.raw("disabled")}>모두 읽음</button></div>
       ${this.items.length ? catui.html`<ul class="Catui_notifs-list">${this.items.map((x) => catui.html`<li class="Catui_notif${x.unread ? " Catui_notif-unread" : ""}" data-catui-adm-nid="${x.id}">${x.who ? catui.html`<span class="Catui_av Catui_av-sm" aria-hidden="true">${String(x.who).slice(0, 1)}</span>` : catui.html`<span class="Catui_file-ico${[2, 3, 5].includes(x.tone) ? ` Catui_file-ico-${x.tone}` : ""}" aria-hidden="true">${catui.icon(x.icon || "bell", 16)}</span>`}<div class="Catui_notif-body"><p>${x.who ? catui.html`<b>${x.who}</b>님이 ` : ""}${x.text}${x.unread ? catui.html`<span class="Catui_clip"> (읽지 않음)</span>` : ""}</p><span class="Catui_notif-time">${this.when(x.time)}</span></div></li>`)}</ul>` : catui.html`<p class="Catui_adm-empty">새 알림이 없습니다.</p>`}
       ${this.more ? catui.html`<a class="Catui_notifs-f" href="${this.more}">전체 알림 보기</a>` : ""}`);
   },
@@ -394,7 +398,7 @@ function admDraw(type, d) {
       ctx.fillStyle = s.token("--Catui_color-text-primary"); ctx.textAlign = "center"; ctx.textBaseline = "middle";
       // 가운데: center를 주면 그 값, 없으면 가장 큰 조각의 비율과 이름
       const top = vals.indexOf(Math.max(...vals));
-      const big = d.center ?? `${Math.round((vals[top] / sum) * 100)}%`, small = d.center ? d.caption : d.labels?.[top];
+      const big = d.center ?? (vals.length ? `${Math.round((vals[top] / sum) * 100)}%` : "—"), small = d.center ? d.caption : d.labels?.[top];
       ctx.font = s.font(Math.round(r * 0.3), 700); ctx.fillText(big, cx, cy - (small ? r * 0.1 : 0));
       if (small) { ctx.font = s.font(11); ctx.fillStyle = s.token("--Catui_color-text-secondary"); ctx.fillText(small, cx, cy + r * 0.22); }
       return;
@@ -494,13 +498,16 @@ admin.widgets = {
       counts.forEach((el) => io.observe(el));
       admin._offs.push(() => io.disconnect());
     }
-    const ago = () => root.querySelectorAll("[data-catui-adm-ago]").forEach((el) => { const d = new Date(el.getAttribute("data-catui-adm-ago")); if (!Number.isNaN(d.getTime())) { el.textContent = catui.util.timeAgo(d); if (!el.getAttribute("datetime")) el.setAttribute("datetime", d.toISOString()); } });
+    // 상대 시간: 문서 전체를 1분마다(타이머는 한 개만)
+    const ago = () => document.querySelectorAll("[data-catui-adm-ago]").forEach((el) => { const d = new Date(el.getAttribute("data-catui-adm-ago")); if (!Number.isNaN(d.getTime())) { el.textContent = catui.util.timeAgo(d); if (!el.getAttribute("datetime")) el.setAttribute("datetime", d.toISOString()); } });
     ago();
-    const timer = setInterval(ago, 60000);
-    admin._offs.push(() => clearInterval(timer));
+    if (admin._once(document, "ago")) {
+      const timer = setInterval(ago, 60000);
+      admin._offs.push(() => clearInterval(timer));
+    }
     const prefs = admGet("prefs", {});
     root.querySelectorAll("input[data-catui-adm-pref]").forEach((el) => { const k = el.getAttribute("data-catui-adm-pref"); if (k in prefs) el.checked = !!prefs[k]; });
-    admin._on(root, "change", (e) => {
+    if (admin._once(root, "prefs")) admin._on(root, "change", (e) => {
       const el = e.target.closest?.("input[data-catui-adm-pref]");
       if (!el) return;
       admSet("prefs", { ...admGet("prefs", {}), [el.getAttribute("data-catui-adm-pref")]: el.checked });
@@ -539,7 +546,7 @@ admin.form = {
       admin._on(f, "change", check);
       admin._on(f, "reset", () => setTimeout(() => this.saved(f), 0));
     });
-    if (!this.forms.size) return;
+    if (!this.forms.size || !admin._once(document, "dirty")) return;   // 나가기 확인 창이 두 번 뜨지 않게
     const anyDirty = () => [...this.forms.keys()].some((f) => f.isConnected && this.isDirty(f));
     // 새로 고침·창 닫기: 브라우저 기본 확인 창
     admin._on(window, "beforeunload", (e) => { if (anyDirty()) { e.preventDefault(); e.returnValue = ""; } });
@@ -654,7 +661,7 @@ admin.chat = function ({ log, form, me = "나" }) {
   };
   const input = f.querySelector("input, textarea");
   // 한글 조합 중 Enter(확정용)는 보내지 않는다 — Safari는 keyCode 229
-  admin._on(input, "keydown", (e) => { if (e.key === "Enter" && (e.isComposing || e.keyCode === 229)) e.preventDefault(); });
+  admin._on(input, "keydown", (e) => { if (e.key === "Enter" && catui.imeBusy(e)) e.preventDefault(); });
   admin._on(f, "submit", (e) => {
     e.preventDefault();
     const text = input.value.trim();
@@ -753,14 +760,14 @@ admin.auth = {
   init(root = document) {
     root.querySelectorAll("[data-catui-adm-pwtoggle]").forEach((b) => {
       const input = b.closest(".Catui_adm-pw")?.querySelector("input");
-      if (!input) return;
+      if (!input || !admin._once(b, "pw")) return;
       const sync = () => { const shown = input.type === "text"; b.setAttribute("aria-pressed", String(shown)); b.setAttribute("aria-label", shown ? "비밀번호 숨기기" : "비밀번호 보기"); catui.mount(b, catui.icon(shown ? "eye-off" : "eye", 16)); };
       admin._on(b, "click", () => { input.type = input.type === "password" ? "text" : "password"; sync(); input.focus(); });
       sync();
     });
     root.querySelectorAll("[data-catui-adm-caps]").forEach((note) => {
       const input = catui.el(note.getAttribute("data-catui-adm-caps"));
-      if (!input) return;
+      if (!input || !admin._once(note, "caps")) return;
       const check = (e) => { if (typeof e.getModifierState === "function") note.hidden = !e.getModifierState("CapsLock"); };
       admin._on(input, "keydown", check);
       admin._on(input, "keyup", check);
@@ -769,7 +776,7 @@ admin.auth = {
     const NAMES = ["", "약함", "보통", "좋음", "강함"];
     root.querySelectorAll("[data-catui-adm-strength]").forEach((meter) => {
       const input = catui.el(meter.getAttribute("data-catui-adm-strength"));
-      if (!input) return;
+      if (!input || !admin._once(meter, "strength")) return;
       const out = meter.querySelector("span");
       meter.setAttribute("role", "img");
       const sync = () => { const n = this.score(input.value); meter.dataset.level = String(n); if (out) out.textContent = NAMES[n] || ""; meter.setAttribute("aria-label", n ? `비밀번호 강도: ${NAMES[n]}` : "비밀번호 강도: 입력 전"); };
@@ -804,6 +811,8 @@ admin.init = function (scope = document) {
 // 모든 리스너·차트·팝업 정리 (SPA에서 화면을 바꿀 때)
 admin.destroy = function () {
   this._offs.splice(0).forEach((off) => { try { off(); } catch {} });
+  this._seen = new WeakMap();
+  this.ready = undefined;
   this.widgets.destroy();
   this.form.destroy();
   this.root?.removeAttribute("data-catui-adm-ready");

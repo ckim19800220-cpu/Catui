@@ -236,7 +236,7 @@
 .Catui_adm-map > svg{position:absolute;inset:0;width:100%;height:100%}
 .Catui_adm-map-land{fill:var(--Catui_card-bg);stroke:var(--Catui_color-border);stroke-width:1.5}
 .Catui_adm-pin{position:absolute;transform:translate(-50%,-100%);display:inline-flex;align-items:center;gap:var(--Catui_space-1);padding:2px var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_btn-primary-bg);color:var(--Catui_btn-primary-fg);border:0;font-size:var(--Catui_type-caption-size);font-weight:600;cursor:pointer;box-shadow:var(--Catui_shadow-sm);white-space:nowrap}
-.Catui_adm-pin[aria-pressed="true"]{background:var(--Catui_color-amber);color:var(--Catui_color-text-primary);z-index:2}
+.Catui_adm-pin[aria-pressed="true"]{background:var(--Catui_color-amber);color:var(--Catui_color-navy-900);z-index:2}   /* 황색 위 글자는 두 모드 모두 어둡게(다크에서 text-primary는 밝아짐) */
 .Catui_adm-pin:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
 
 /* 캘린더 화면: 달력 + 옆 패널 */

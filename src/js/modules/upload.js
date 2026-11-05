@@ -22,11 +22,12 @@ export const upload = component({
     if (!zone) return;
     // 입력 찾기 또는 만들기 (zone이 label.Catui_upz면 안의 input 사용)
     let input = zone.querySelector('input[type="file"]');
+    const made = !input;   // 직접 만든 input은 해제할 때 지운다
     if (!input) {
       input = Object.assign(document.createElement("input"), { type: "file", className: "Catui_clip" });
       zone.appendChild(input);
     }
-    if (c.accept) input.accept = c.accept;
+    input.accept = c.accept || "";   // reload로 accept를 빼면 이전 제한도 풀린다
     input.multiple = !!c.multiple;
     if (!input.id) input.id = uid("catui-up");
     const listEl = el(c.list);
@@ -38,13 +39,16 @@ export const upload = component({
       zone.insertAdjacentElement("afterend", err);
       inst.use(() => err.remove());
     }
-    input.setAttribute("aria-describedby", [input.getAttribute("aria-describedby"), errId].filter(Boolean).join(" "));
+    // 다시 렌더해도 같은 오류 id가 쌓이지 않게(기존 설명 id는 유지)
+    const prevDesc = input.getAttribute("aria-describedby");
+    input.setAttribute("aria-describedby", [...new Set([...(prevDesc || "").split(/\s+/).filter(Boolean), errId])].join(" "));
+    const maxKB = Number(c.size) > 0 ? Number(c.size) : 0, maxN = Number(c.number) > 0 ? Math.floor(Number(c.number)) : 0;   // 0·음수·NaN = 제한 없음
 
     const items = (inst.files = []);          // { id, file, status: 'ready'|'uploading'|'done'|'error', percent, xhr, res }
-    const size = (b) => (b >= 1048576 ? `${(b / 1048576).toFixed(1).replace(/\.0$/, "")}MB` : `${Math.max(1, Math.round(b / 1024))}KB`);
+    const size = (b) => (b >= 1048576 ? `${(b / 1048576).toFixed(1).replace(/\.0$/, "")}MB` : b < 1024 ? `${b}B` : `${Math.round(b / 1024)}KB`);
     const acceptOk = (f) => {
       if (!c.accept) return true;
-      return c.accept.split(",").map((s) => s.trim().toLowerCase()).filter(Boolean).some((a) => (a.startsWith(".")
+      return c.accept.split(",").map((s) => s.trim().toLowerCase()).filter(Boolean).some((a) => (a === "*/*" || a === "*" ? true : a.startsWith(".")
         ? f.name.toLowerCase().endsWith(a)
         : a.endsWith("/*") ? f.type.startsWith(a.slice(0, -1)) : f.type === a));
     };
@@ -122,8 +126,8 @@ export const upload = component({
       const list = c.multiple ? [...fileList] : [...fileList].slice(0, 1);
       for (const f of list) {
         if (!acceptOk(f)) bad.push({ file: f, msg: `${f.name}: 허용하지 않는 형식입니다` });
-        else if (c.size && f.size > c.size * 1024) bad.push({ file: f, msg: `${f.name}: ${size(f.size)} — ${size(c.size * 1024)}를 넘습니다` });
-        else if (c.number && items.length + ok.length >= c.number) bad.push({ file: f, msg: `${f.name}: 최대 ${c.number}개까지 올릴 수 있습니다` });
+        else if (maxKB && f.size > maxKB * 1024) bad.push({ file: f, msg: `${f.name}: ${size(f.size)} — ${size(maxKB * 1024)}를 넘습니다` });
+        else if (maxN && items.length + ok.length >= maxN) bad.push({ file: f, msg: `${f.name}: 최대 ${maxN}개까지 올릴 수 있습니다` });
         else if (c.before?.call(inst, f) === false) continue;
         else ok.push(f);
       }
@@ -173,7 +177,8 @@ export const upload = component({
       inst.emit("remove", { file: it.file });
       zone.focus?.();
     };
-    if (zone.tagName !== "LABEL" && !zone.hasAttribute("tabindex")) { zone.tabIndex = 0; zone.setAttribute("role", "button"); }
+    const madeBtn = zone.tagName !== "LABEL" && !zone.hasAttribute("tabindex");
+    if (madeBtn) { zone.tabIndex = 0; zone.setAttribute("role", "button"); }
     input.addEventListener("change", onChange);
     zone.addEventListener("dragenter", onEnter);
     zone.addEventListener("dragover", onOver);
@@ -201,6 +206,12 @@ export const upload = component({
       hi(false);
       ["aria-disabled"].forEach((a) => zone.removeAttribute(a));
       zone.style.color = zone.style.cursor = zone.style.background = zone.style.borderColor = "";   // setDisabled가 바꾼 배경까지
+      // 렌더가 더한 것 되돌리기: 만든 input·버튼 역할·오류 설명 id·목록
+      if (madeBtn) { zone.removeAttribute("tabindex"); zone.removeAttribute("role"); }
+      if (prevDesc) input.setAttribute("aria-describedby", prevDesc); else input.removeAttribute("aria-describedby");
+      input.disabled = false;
+      if (made) input.remove();
+      if (listEl) listEl.textContent = "";
     });
   },
 });

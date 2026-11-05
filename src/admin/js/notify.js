@@ -36,7 +36,7 @@ admin.notify = {
     admin._on(btn, "click", () => (pop.hidden ? openPop() : close(false)));
     // 패널 안 버튼을 눌러 목록을 다시 그리면 눌린 요소가 DOM에서 빠진다 — 그건 바깥 클릭이 아니다
     admin._on(document, "click", (e) => { if (!pop.hidden && e.target.isConnected && !pop.contains(e.target) && !btn.contains(e.target)) close(false); });
-    admin._on(document, "keydown", (e) => { if (e.key === "Escape" && !e.isComposing && !pop.hidden) { e.preventDefault(); close(true); } });
+    admin._on(document, "keydown", (e) => { if (e.key === "Escape" && !catui.imeBusy(e) && !pop.hidden) { e.preventDefault(); close(true); } });
     admin._on(window, "resize", () => { if (!pop.hidden) place(); });
     admin._on(pop, "click", (e) => {
       if (e.target.closest("[data-catui-adm-readall]")) { this.markAll(); return; }
@@ -51,7 +51,7 @@ admin.notify = {
   render() {
     if (!this.pop) return;
     const n = this.count();
-    catui.mount(this.pop, catui.html`<div class="Catui_notifs-h"><span id="adm-notify-t">알림</span>${n ? catui.html`<span class="Catui_count" aria-label="읽지 않음 ${n}건">${n}</span>` : ""}<button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-adm-readall ${n ? "" : catui.raw("disabled")}>모두 읽음</button></div>
+    catui.mount(this.pop, catui.html`<div class="Catui_notifs-h"><span id="adm-notify-t">알림</span>${n ? catui.html`<span class="Catui_count"><span class="Catui_clip">읽지 않음 </span>${n}<span class="Catui_clip">건</span></span>` : ""}<button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-adm-readall ${n ? "" : catui.raw("disabled")}>모두 읽음</button></div>
       ${this.items.length ? catui.html`<ul class="Catui_notifs-list">${this.items.map((x) => catui.html`<li class="Catui_notif${x.unread ? " Catui_notif-unread" : ""}" data-catui-adm-nid="${x.id}">${x.who ? catui.html`<span class="Catui_av Catui_av-sm" aria-hidden="true">${String(x.who).slice(0, 1)}</span>` : catui.html`<span class="Catui_file-ico${[2, 3, 5].includes(x.tone) ? ` Catui_file-ico-${x.tone}` : ""}" aria-hidden="true">${catui.icon(x.icon || "bell", 16)}</span>`}<div class="Catui_notif-body"><p>${x.who ? catui.html`<b>${x.who}</b>님이 ` : ""}${x.text}${x.unread ? catui.html`<span class="Catui_clip"> (읽지 않음)</span>` : ""}</p><span class="Catui_notif-time">${this.when(x.time)}</span></div></li>`)}</ul>` : catui.html`<p class="Catui_adm-empty">새 알림이 없습니다.</p>`}
       ${this.more ? catui.html`<a class="Catui_notifs-f" href="${this.more}">전체 알림 보기</a>` : ""}`);
   },

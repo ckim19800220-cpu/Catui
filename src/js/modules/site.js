@@ -1,6 +1,6 @@
 import { component } from "../core/component.js";
 import { html } from "../core/html.js";
-import { mount, icon, uid, el, imeBusy, reducedMotion, within } from "../core/dom.js";
+import { mount, icon, el, imeBusy, reducedMotion, within } from "../core/dom.js";
 import { hint, data } from "../core/base.js";
 import { emit, onEvent } from "../core/events.js";
 import { util } from "./util.js";
