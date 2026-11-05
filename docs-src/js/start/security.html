@@ -17,7 +17,7 @@
   </script>
 </catui-example>
 <ul>
-  <li><code>catui.html`…${값}`</code> — 템플릿의 <code>${}</code> 값은 escape됩니다. 배열은 이어 붙고, false·null은 출력하지 않습니다.</li>
+  <li><code>catui.html`…${값}`</code> — 템플릿의 <code>${}</code> 값은 escape됩니다. 배열은 이어 붙고, false·null은 출력하지 않습니다. 단 따옴표 속성값 바로 안(<code>aria-pressed="${on}"</code>)의 false는 <code>"false"</code>로 씁니다.</li>
   <li><code>catui.raw(문자열)</code> — 직접 만든 신뢰 마크업에만 씁니다. 외부 값을 raw로 감싸면 XSS가 됩니다.</li>
   <li>신뢰 표식은 <code>raw()</code>·<code>html``</code>·<code>icon()</code>이 만든 객체에만 붙습니다. 서버 JSON의 <code>{ "__raw": "…" }</code>처럼 모양만 같은 객체는 글자로 escape됩니다.</li>
   <li>인라인 스크립트·on* 속성을 만들지 않으므로 <code>script-src 'self'</code> CSP와 함께 쓸 수 있습니다.</li>

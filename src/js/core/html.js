@@ -22,6 +22,8 @@ export function html(strings, ...values) {
     out += s;
     if (i >= values.length) return;
     const v = values[i];
+    // 따옴표 속성값 안(aria-pressed="${on}")의 false는 값이다 — "false"로 쓴다. 그 밖의 false·null은 출력하지 않는다
+    if (v === false && /=\s*["']$/.test(s)) { out += "false"; return; }
     if (v == null || v === false) return;
     if (Array.isArray(v)) out += v.flat(Infinity).map((x) => (x == null || x === false ? "" : isRaw(x) ? x.__raw : escape(x))).join("");
     else out += isRaw(v) ? v.__raw : escape(v);

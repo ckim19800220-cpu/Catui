@@ -3,18 +3,18 @@
   <div><h1 class="Catui_h1">분석</h1><p>방문·유입·전환 흐름을 한눈에 봅니다</p></div>
   <div class="Catui_actions">
     <div class="Catui_segment" role="radiogroup" aria-label="기간">
-      <input class="Catui_clip" type="radio" name="an-range" id="an-7" checked><label for="an-7">7일</label>
-      <input class="Catui_clip" type="radio" name="an-range" id="an-30"><label for="an-30">30일</label>
-      <input class="Catui_clip" type="radio" name="an-range" id="an-90"><label for="an-90">90일</label>
+      <input class="Catui_clip" type="radio" name="an-range" id="an-7" value="7" checked><label for="an-7">7일</label>
+      <input class="Catui_clip" type="radio" name="an-range" id="an-30" value="30"><label for="an-30">30일</label>
+      <input class="Catui_clip" type="radio" name="an-range" id="an-90" value="90"><label for="an-90">90일</label>
     </div>
   </div>
 </div>
 
 <section class="Catui_adm-stats" aria-label="방문 지표">
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:users:18}}</span><span class="Catui_stat-label">순방문자</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-analytics" data-catui-adm-text="kpi.visitors" data-catui-adm-format="number">31,902</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 6.4%<span class="Catui_clip"> 증가</span></span></div></article>
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:eye:18}}</span><span class="Catui_stat-label">페이지뷰</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-analytics" data-catui-adm-text="kpi.pageviews" data-catui-adm-format="number">86,410</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 3.1%<span class="Catui_clip"> 증가</span></span></div></article>
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:log-out:18}}</span><span class="Catui_stat-label">이탈률</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-analytics" data-catui-adm-text="kpi.bounceRate" data-catui-adm-format="percent">38.2%</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▼ 1.8%p<span class="Catui_clip"> 개선</span></span></div></article>
-  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:target:18}}</span><span class="Catui_stat-label">목표 달성</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-analytics" data-catui-adm-text="kpi.goals" data-catui-adm-format="number">1,142</span><span class="Catui_pill Catui_pill-danger Catui_delta-down">▼ 0.9%<span class="Catui_clip"> 감소</span></span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:users:18}}</span><span class="Catui_stat-label">순방문자</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-analytics" data-catui-adm-text="kpi.visitors" data-catui-adm-format="number">31,902</span><span class="Catui_pill Catui_pill-success Catui_delta-up" data-an-delta="visitors">▲ 6.4%<span class="Catui_clip"> 증가</span></span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:eye:18}}</span><span class="Catui_stat-label">페이지뷰</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-analytics" data-catui-adm-text="kpi.pageviews" data-catui-adm-format="number">86,410</span><span class="Catui_pill Catui_pill-success Catui_delta-up" data-an-delta="pageviews">▲ 3.1%<span class="Catui_clip"> 증가</span></span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:log-out:18}}</span><span class="Catui_stat-label">이탈률</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-analytics" data-catui-adm-text="kpi.bounceRate" data-catui-adm-format="percent">38.2%</span><span class="Catui_pill Catui_pill-success Catui_delta-up" data-an-delta="bounceRate">▼ 1.8%p<span class="Catui_clip"> 개선</span></span></div></article>
+  <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon">{{icon:target:18}}</span><span class="Catui_stat-label">목표 달성</span><span class="Catui_stat-value" data-catui-adm-count data-catui-adm-src="dashboard-analytics" data-catui-adm-text="kpi.goals" data-catui-adm-format="number">1,142</span><span class="Catui_pill Catui_pill-danger Catui_delta-down" data-an-delta="goals">▼ 0.9%<span class="Catui_clip"> 감소</span></span></div></article>
 </section>
 
 <div class="Catui_grid" data-catui-adm-src="dashboard-analytics">
@@ -51,3 +51,28 @@
     </div>
   </article>
 </div>
+<p class="Catui_clip" id="an-live" aria-live="polite"></p>
+<script>
+// 기간 선택: 지표 4개·증감·방문 추이 차트를 dashboard-analytics.json의 ranges[기간]으로 바꾼다
+catui.use(function () { catui.admin.ready.then(function () {
+  var A = catui.admin;
+  A.data('dashboard-analytics').then(function (d) {
+    var apply = function (key) {
+      var r = d.ranges && d.ranges[key];
+      if (!r) return;
+      Object.keys(r.kpi).forEach(function (k) {
+        var el = document.querySelector('[data-catui-adm-text="kpi.' + k + '"]');
+        if (el) el.textContent = A.format(r.kpi[k], el.getAttribute('data-catui-adm-format'));
+        var p = document.querySelector('[data-an-delta="' + k + '"]'), v = r.delta[k];
+        if (!p || v == null) return;
+        var good = k === 'bounceRate' ? v <= 0 : v >= 0;   // 이탈률은 줄어야 좋다
+        p.className = 'Catui_pill ' + (good ? 'Catui_pill-success Catui_delta-up' : 'Catui_pill-danger Catui_delta-down');
+        catui.mount(p, catui.html`${v >= 0 ? '▲' : '▼'} ${Math.abs(v)}${k === 'bounceRate' ? '%p' : '%'}<span class="Catui_clip"> ${k === 'bounceRate' ? (good ? '개선' : '악화') : (v >= 0 ? '증가' : '감소')}</span>`);
+      });
+      A.widgets.chart('#an-trend', Object.assign({ type: 'line', label: r.label + ' 방문 추이' }, r.trend));
+      document.getElementById('an-live').textContent = r.label + ' 기준으로 바꿨습니다';
+    };
+    document.querySelectorAll('[name=an-range]').forEach(function (x) { x.addEventListener('change', function () { if (x.checked) apply(x.value); }); });
+  });
+}); });
+</script>

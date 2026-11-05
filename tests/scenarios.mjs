@@ -6,9 +6,12 @@ export const scenarios = [
     page: "docs/js/core/dom.html",
     run: async () => {
       const spoof = JSON.parse('{"__raw":"<img src=x onerror=alert(1)>"}');
-      return { spoof: catui.html`<p>${spoof}</p>`.__raw, raw: catui.html`<p>${catui.raw("<b>ok</b>")}</p>`.__raw, version: catui.version, modules: catui.cache.modules.length };
+      const off = false;
+      return { spoof: catui.html`<p>${spoof}</p>`.__raw, raw: catui.html`<p>${catui.raw("<b>ok</b>")}</p>`.__raw, version: catui.version, modules: catui.cache.modules.length,
+        attrFalse: catui.html`<b aria-pressed="${off}">${off}</b>`.__raw };
     },
     expect: {
+      "속성값 안 false는 \"false\", 내용의 false는 생략": (r) => r.attrFalse === '<b aria-pressed="false"></b>',
       "위조 __raw 객체는 escape": (r) => !r.spoof.includes("<img"),
       "raw()는 마크업 유지": (r) => r.raw === "<p><b>ok</b></p>",
       "버전 주입 (dev 아님)": (r) => /^\d+\.\d+\.\d+/.test(r.version),
@@ -517,6 +520,26 @@ export const scenarios = [
       "조건 바꾸면 주소 갱신": (r) => r.toUrl,
       "선택하면 일괄 바 + 건수": (r) => r.bulk,
       "초기화하면 주소도 비움": (r) => r.reset,
+    },
+  },
+  {
+    name: "admin · 분석 기간 전환",
+    page: "docs/admin/templates/analytics.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      await catui.admin.ready; await sleep(300);
+      const v = () => document.querySelector('[data-catui-adm-text="kpi.visitors"]').textContent;
+      const before = v();
+      document.getElementById("an-30").click(); await sleep(150);
+      const r = { before, after: v(), live: document.getElementById("an-live").textContent,
+        delta: document.querySelector('[data-an-delta="goals"]').className.includes("success"),
+        label: document.querySelector("#an-trend canvas")?.getAttribute("aria-label") || "" };
+      return r;
+    },
+    expect: {
+      "30일: 지표 값이 바뀜": (r) => r.before !== r.after && r.after === "128,450",
+      "증감 색·문구도 바뀜(목표 +1.3% → 성공)": (r) => r.delta,
+      "차트 이름·안내": (r) => r.label.includes("최근 30일") && r.live.includes("최근 30일"),
     },
   },
   {

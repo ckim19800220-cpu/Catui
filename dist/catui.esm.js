@@ -27,6 +27,8 @@ function html(strings, ...values) {
     out += s;
     if (i >= values.length) return;
     const v = values[i];
+    // 따옴표 속성값 안(aria-pressed="${on}")의 false는 값이다 — "false"로 쓴다. 그 밖의 false·null은 출력하지 않는다
+    if (v === false && /=\s*["']$/.test(s)) { out += "false"; return; }
     if (v == null || v === false) return;
     if (Array.isArray(v)) out += v.flat(Infinity).map((x) => (x == null || x === false ? "" : isRaw(x) ? x.__raw : escape(x))).join("");
     else out += isRaw(v) ? v.__raw : escape(v);
@@ -2860,8 +2862,9 @@ const tree = component({
       if (!matches(n)) return "";
       const id = String(n.id), on = s.selected === id, parent = !!n.children?.length, open = parent && isOpen(n);
       const st = c.showCheckbox ? stateOf(n) : null;
-      return html`<div role="treeitem" data-catui-titem="${id}" aria-level="${level}" aria-selected="${on}" tabindex="-1"
-        ${parent ? html`aria-expanded="${open}"` : ""} ${n.disabled ? html`aria-disabled="true"` : ""} ${st ? html`aria-checked="${st === "on" ? "true" : st === "mixed" ? "mixed" : "false"}"` : ""}><div class="Catui_tree-row${on ? " Catui_tree-on" : ""}">${parent ? icon("chevron-right", 16, "Catui_tree-toggle") : ""}${st ? cbx(n, st) : ""}${icon(parent ? "folder" : n.icon || "file-text", 16)}<span>${n.title}</span></div>${parent ? html`<div role="group" class="Catui_tree-kids" ${open ? "" : "hidden"}>${n.children.map((k) => node(k, level + 1))}</div>` : ""}</div>`;
+      // html``은 false를 출력하지 않으므로 상태 값은 문자열로
+      return html`<div role="treeitem" data-catui-titem="${id}" aria-level="${level}" aria-selected="${String(on)}" tabindex="-1"
+        ${parent ? html`aria-expanded="${String(open)}"` : ""} ${n.disabled ? html`aria-disabled="true"` : ""} ${st ? html`aria-checked="${st === "on" ? "true" : st === "mixed" ? "mixed" : "false"}"` : ""}><div class="Catui_tree-row${on ? " Catui_tree-on" : ""}">${parent ? icon("chevron-right", 16, "Catui_tree-toggle") : ""}${st ? cbx(n, st) : ""}${icon(parent ? "folder" : n.icon || "file-text", 16)}<span>${n.title}</span></div>${parent ? html`<div role="group" class="Catui_tree-kids" ${open ? "" : "hidden"}>${n.children.map((k) => node(k, level + 1))}</div>` : ""}</div>`;
     };
     const items = () => [...inst.elem.querySelectorAll('[role="treeitem"]')];
     // 보이는 항목: 접힌 묶음(hidden) 안이 아닌 것
