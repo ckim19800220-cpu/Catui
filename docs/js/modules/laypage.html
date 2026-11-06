@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -93,6 +93,63 @@ catui.use([&#39;laypage&#39;], function (laypage) {
 <p>쪽 크기를 바꾸면 보던 첫 항목이 들어 있는 쪽으로 옮기고, 바로 가기는 1~끝 쪽 범위로 맞춥니다.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">목록과 연결 — 쪽만큼 잘라 그리기 · 검색하면 1쪽부터 (inst.reload)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_field"><label class="Catui_label" for="lp-q">공지 검색</label><input class="Catui_input" id="lp-q" type="search" placeholder="예: 점검" autocomplete="off"></div>
+  <ul class="Catui_list" id="lp-list"></ul>
+  <nav id="lp-list-pg"></nav>
+  <script>
+  catui.use(['laypage', 'util'], function (laypage, util) {
+    var kinds = ['점검', '업데이트', '이벤트', '정책'];
+    var all = Array.from({ length: 37 }, function (_, i) { return { no: 37 - i, title: kinds[i % 4] + ' 안내 ' + (37 - i) + '호' }; });
+    var rows = all;
+    var list = document.getElementById('lp-list');
+    var draw = function (obj) {
+      var part = rows.slice((obj.curr - 1) * obj.limit, obj.curr * obj.limit);   // 서버라면 ?page=curr&limit=limit 요청
+      catui.mount(list, part.length
+        ? catui.html`${part.map(function (r) { return catui.html`<li class="Catui_list-item"><span>${r.title}</span><span class="Catui_list-meta">#${r.no}</span></li>`; })}`
+        : catui.html`<li class="Catui_list-item">맞는 공지가 없습니다</li>`);
+    };
+    // jump는 처음 렌더·reload 때(first = true)와 쪽을 옮길 때 모두 불리므로 그리기를 한곳에서
+    var pg = laypage.render({ elem: '#lp-list-pg', count: rows.length, limit: 5, layout: ['count', 'prev', 'page', 'next'], jump: draw });
+    document.getElementById('lp-q').addEventListener('input', util.debounce(function (e) {
+      var q = e.target.value.trim();
+      rows = all.filter(function (r) { return r.title.indexOf(q) > -1; });
+      pg.reload({ count: rows.length, curr: 1 });                    // 건수가 바뀌면 1쪽부터
+    }, 250));
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="목록과 연결 — 쪽만큼 잘라 그리기 · 검색하면 1쪽부터 (inst.reload) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;lp-q&quot;&gt;공지 검색&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;lp-q&quot; type=&quot;search&quot; placeholder=&quot;예: 점검&quot; autocomplete=&quot;off&quot;&gt;&lt;/div&gt;
+&lt;ul class=&quot;Catui_list&quot; id=&quot;lp-list&quot;&gt;&lt;/ul&gt;
+&lt;nav id=&quot;lp-list-pg&quot;&gt;&lt;/nav&gt;
+&lt;script&gt;
+catui.use([&#39;laypage&#39;, &#39;util&#39;], function (laypage, util) {
+  var kinds = [&#39;점검&#39;, &#39;업데이트&#39;, &#39;이벤트&#39;, &#39;정책&#39;];
+  var all = Array.from({ length: 37 }, function (_, i) { return { no: 37 - i, title: kinds[i % 4] + &#39; 안내 &#39; + (37 - i) + &#39;호&#39; }; });
+  var rows = all;
+  var list = document.getElementById(&#39;lp-list&#39;);
+  var draw = function (obj) {
+    var part = rows.slice((obj.curr - 1) * obj.limit, obj.curr * obj.limit);   // 서버라면 ?page=curr&amp;limit=limit 요청
+    catui.mount(list, part.length
+      ? catui.html`${part.map(function (r) { return catui.html`&lt;li class=&quot;Catui_list-item&quot;&gt;&lt;span&gt;${r.title}&lt;/span&gt;&lt;span class=&quot;Catui_list-meta&quot;&gt;#${r.no}&lt;/span&gt;&lt;/li&gt;`; })}`
+      : catui.html`&lt;li class=&quot;Catui_list-item&quot;&gt;맞는 공지가 없습니다&lt;/li&gt;`);
+  };
+  // jump는 처음 렌더·reload 때(first = true)와 쪽을 옮길 때 모두 불리므로 그리기를 한곳에서
+  var pg = laypage.render({ elem: &#39;#lp-list-pg&#39;, count: rows.length, limit: 5, layout: [&#39;count&#39;, &#39;prev&#39;, &#39;page&#39;, &#39;next&#39;], jump: draw });
+  document.getElementById(&#39;lp-q&#39;).addEventListener(&#39;input&#39;, util.debounce(function (e) {
+    var q = e.target.value.trim();
+    rows = all.filter(function (r) { return r.title.indexOf(q) &gt; -1; });
+    pg.reload({ count: rows.length, curr: 1 });                    // 건수가 바뀌면 1쪽부터
+  }, 250));
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
 <section aria-labelledby="options">
 <h2 id="options">옵션</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">laypage 옵션</caption>
@@ -110,11 +167,11 @@ catui.use([&#39;laypage&#39;], function (laypage) {
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/table.html"><span>이전</span>table 표</a><a class="doc-pager-next" href="../../js/modules/tabs.html"><span>다음</span>tabs 탭</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">페이지 이동</a></li><li><a href="#layout">총 건수 · 쪽 크기 · 바로 가기</a></li><li><a href="#options">옵션</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">페이지 이동</a></li><li><a href="#layout">총 건수 · 쪽 크기 · 바로 가기</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#options">옵션</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

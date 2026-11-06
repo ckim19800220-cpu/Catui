@@ -30,6 +30,56 @@
 <p>입력이 멈추면(<code>delay</code>) 요청하고, 새 글자를 치면 이전 요청은 <code>signal</code>로 취소하며 늦게 온 결과는 버립니다. 실패하면 목록 안에 다시 시도 안내를 보입니다.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="원격 검색 — signal로 이전 요청 취소 · 고른 항목의 id 저장">
+  <div class="Catui_field"><label class="Catui_label" for="ac-prod">상품</label><input class="Catui_input" id="ac-prod" placeholder="예: 마우스, 키보드" aria-describedby="ac-prod-h"><input type="hidden" name="productId" id="ac-prod-id"><p class="Catui_help" id="ac-prod-h">빠르게 이어 치면 앞 요청은 취소됩니다.</p></div>
+  <p class="Catui_help" id="ac-prod-out" aria-live="polite"></p>
+  <script>
+  catui.use(['autocomplete'], function (autocomplete) {
+    var DB = [
+      { id: 'P-101', value: '무선 마우스', desc: '29,000원' }, { id: 'P-102', value: '버티컬 마우스', desc: '45,000원' },
+      { id: 'P-201', value: '기계식 키보드', desc: '89,000원' }, { id: 'P-202', value: '무선 키보드', desc: '39,000원' },
+      { id: 'P-301', value: '마우스 패드', desc: '9,000원' }, { id: 'P-401', value: '모니터 받침대', desc: '32,000원', disabled: true } ];
+    var hidden = document.getElementById('ac-prod-id'), out = document.getElementById('ac-prod-out'), aborted = 0;
+    // fetch(url, { signal })처럼 동작하는 가짜 서버: 늦게 답하고, signal이 취소되면 AbortError로 끝난다
+    var fakeFetch = function (q, signal) {
+      return new Promise(function (ok, fail) {
+        var t = setTimeout(function () { ok(DB.filter(function (p) { return p.value.indexOf(q) > -1; })); }, 300 + Math.random() * 400);
+        signal.addEventListener('abort', function () { clearTimeout(t); aborted += 1; fail(new DOMException('취소됨', 'AbortError')); }, { once: true });
+      });
+    };
+    autocomplete.render({ elem: '#ac-prod', delay: 200, data: function (q, signal) { return fakeFetch(q, signal); },
+      select: function (it) { hidden.value = it.id; out.textContent = '선택: ' + it.value + ' (보낼 값 productId=' + it.id + ') · 지금까지 취소한 요청 ' + aborted + '건'; } });
+    // 고른 뒤 사람이 글자를 고치면 id는 더 이상 맞지 않으므로 비운다 (select가 보내는 합성 input 이벤트는 건너뜀)
+    document.getElementById('ac-prod').addEventListener('input', function (e) { if (e.isTrusted && hidden.value) { hidden.value = ''; out.textContent = '선택이 풀렸습니다'; } });
+  });
+  </script>
+</catui-example>
+<catui-example title="정해진 목록에서 여러 개 고르기 — 고르면 태그로, 고른 것은 후보에서 빼기">
+  <div class="Catui_field"><label class="Catui_label" for="ac-skill">기술</label><input class="Catui_input" id="ac-skill" placeholder="예: 자바" aria-describedby="ac-skill-h"><p class="Catui_help" id="ac-skill-h">목록에 있는 기술만 고를 수 있습니다. 포커스만 해도 후보가 열립니다.</p></div>
+  <div class="Catui_tags" id="ac-skill-tags" role="list" aria-label="고른 기술"></div>
+  <script>
+  catui.use(['autocomplete'], function (autocomplete) {
+    var ALL = ['자바스크립트', '타입스크립트', '자바', '파이썬', '고', '러스트', '스위프트', '코틀린', 'SQL', 'CSS'];
+    var picked = [], box = document.getElementById('ac-skill-tags'), input = document.getElementById('ac-skill');
+    var draw = function () {
+      catui.mount(box, catui.html`${picked.map(function (t) { return catui.html`<span class="Catui_tag" role="listitem">${t} <button type="button" data-tag="${t}" aria-label="${t} 빼기"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></button></span>`; })}`);
+    };
+    autocomplete.render({ elem: input, minLength: 0, openOnFocus: true, delay: 0,
+      data: function (q) { return ALL.filter(function (t) { return picked.indexOf(t) < 0 && t.toLowerCase().indexOf(q.toLowerCase()) > -1; }); },
+      select: function (it) { picked.push(it.value); input.value = ''; draw(); } });
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-tag]');
+      if (!b) return;
+      picked.splice(picked.indexOf(b.dataset.tag), 1);
+      draw(); input.focus();                    // 지운 버튼 대신 입력으로 포커스 (뺀 기술은 다시 후보에 나온다)
+    });
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="api">
 <h2 id="api">옵션 · API</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">autocomplete 옵션</caption>

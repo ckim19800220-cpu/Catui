@@ -248,6 +248,8 @@ admin.theme = {
     admin.emit("theme", { value: this.get(), saved: v });
   },
   init() {
+    // <html data-catui-theme-lock>: 다른 쪽(예: 문서 사이트)이 테마를 관리하는 화면 — 덮어쓰지 않는다
+    if (document.documentElement.hasAttribute("data-catui-theme-lock")) return;
     this.apply(this.saved());
     if (!admin._once(document, "theme")) return;   // 재호출 시 클릭이 두 번 처리돼 토글이 상쇄되지 않게
     const mq = matchMedia("(prefers-color-scheme: dark)");

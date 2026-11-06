@@ -1,0 +1,56 @@
+<section aria-labelledby="rules">
+<h2 id="rules">규칙</h2>
+<ul>
+  <li>클래스는 <code>Catui_sh-*</code>, 토큰은 <code>--Catui_sh-*</code>(본체 토큰을 참조만). 새 색 값(hex)은 만들지 않습니다 — 빌드가 막습니다.</li>
+  <li>본체 클래스에 스타일을 더할 때는 항상 <code>.Catui_sh …</code> 아래로 — shop.css를 불러와도 쇼핑몰 밖은 바뀌지 않습니다.</li>
+  <li>할인율·품절·남은 재고·무료배송은 색 + 글자를 함께 — 색만으로 알리지 않습니다. 숫자 배지는 숨김 글자(<code>.Catui_clip</code>)로 뜻을 보충합니다.</li>
+  <li>반응형: 991px 이하 필터·주문 요약·마이페이지 메뉴를 위로/아래로, 767px 이하 하단 탭 + 상세 한 단, 599px 이하 장바구니 줄 2단, 399px 이하(320px 포함) 머리·카드 여백 축소.</li>
+  <li>가로로 넘치는 상자(카테고리 메뉴·칩·작은 사진·표)는 <code>position:relative</code> 스크롤 상자입니다.</li>
+</ul>
+</section>
+<section aria-labelledby="tokens">
+<h2 id="tokens">토큰</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">shop 토큰</caption>
+<thead><tr><th scope="col">토큰</th><th scope="col">기본값</th></tr></thead><tbody>
+<tr><td><code>--Catui_sh-wrap</code> · <code>--Catui_sh-gap</code> · <code>--Catui_sh-side-w</code></td><td>본문 최대 폭 ≈ 1216px · 간격 · 필터/주문 요약 옆줄 ≈ 346px</td></tr>
+<tr><td><code>--Catui_sh-card-min</code></td><td>상품 카드 최소 폭 ≈ 198px (599px 이하 ≈ 134px — 320px도 2열)</td></tr>
+<tr><td><code>--Catui_sh-sale</code> · <code>--Catui_sh-price</code></td><td>할인율(<code>--Catui_color-danger</code>, 늘 “%”·숨김 글자 “할인”과 함께) · 판매가</td></tr>
+<tr><td><code>--Catui_sh-accent</code> · <code>--Catui_sh-accent-soft</code> · <code>--Catui_sh-warn</code></td><td>혜택·선택 강조(<code>--Catui_color-brand-strong</code>) · 바탕 · 남은 재고 적음(<code>--Catui_color-orange</code>)</td></tr>
+<tr><td><code>--Catui_sh-ease-out</code> · <code>--Catui_sh-dur-*</code> · <code>--Catui_sh-press</code></td><td>누름 피드백 160ms · 작은 변화 200ms · 누를 때 0.97배</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="examples">
+<h2 id="examples">자주 쓰는 사용 예</h2>
+<p>스크립트 없이 클래스만 쓴 정적 견본입니다. 토큰이 <code>.Catui_sh</code> 아래에 있으므로 셸 밖에서는 <code>class="Catui_sh"</code> 상자로 감쌉니다(<code>data-catui-sh</code> 속성 없이, 문서용으로 <code>min-height</code>만 풀었습니다). 같은 마크업을 스크립트로 만드는 방법은 <a href="doc:shop/modules#recipes">catshop.js API · 자주 쓰는 사용 예</a>를 보세요.</p>
+
+<catui-example title="가격 · 혜택 태그 · 별점">
+  <div class="Catui_sh Catui_vstack Catui_gap-3" style="min-height:0;background:transparent">
+    <p class="Catui_sh-price Catui_sh-price-lg"><span class="Catui_sh-rate">30%<span class="Catui_clip"> 할인</span></span><b class="Catui_sh-sale"><span class="Catui_clip">판매가 </span>20,300원</b><del class="Catui_sh-list"><span class="Catui_clip">정가 </span>29,000원</del></p>
+    <ul class="Catui_sh-tags" aria-label="상품 혜택"><li class="Catui_sh-tag Catui_sh-tag-best">BEST</li><li class="Catui_sh-tag Catui_sh-tag-new">NEW</li><li class="Catui_sh-tag">무료배송</li><li class="Catui_sh-tag Catui_sh-tag-coupon">쿠폰</li></ul>
+    <p class="Catui_sh-card-meta"><span class="Catui_sh-stars" role="img" aria-label="5점 만점에 4점"><span data-on><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></span><span data-on><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></span><span data-on><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></span><span data-on><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></span><span><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-star"></use></svg></span></span><span class="Catui_num">4.0</span><span><span class="Catui_clip">리뷰 </span>(128)</span></p>
+  </div>
+</catui-example>
+
+<catui-example title="사이즈 버튼 (품절 · N개 남음 · 추가금)">
+  <div class="Catui_sh" style="min-height:0;background:transparent">
+    <fieldset class="Catui_sh-opt"><legend class="Catui_label">사이즈</legend>
+      <div class="Catui_sh-sizes">
+        <input class="Catui_clip" type="radio" name="dcs-s" id="dcs-s1"><label class="Catui_sh-size" for="dcs-s1"><b>S</b><small class="Catui_sh-low">3개 남음</small></label>
+        <input class="Catui_clip" type="radio" name="dcs-s" id="dcs-s2" checked><label class="Catui_sh-size" for="dcs-s2"><b>M</b></label>
+        <input class="Catui_clip" type="radio" name="dcs-s" id="dcs-s3" disabled><label class="Catui_sh-size" for="dcs-s3"><b>L</b><small class="Catui_sh-out">품절</small></label>
+        <input class="Catui_clip" type="radio" name="dcs-s" id="dcs-s4"><label class="Catui_sh-size" for="dcs-s4"><b>XL</b><small>+2,000원</small></label>
+      </div>
+    </fieldset>
+  </div>
+</catui-example>
+
+<catui-example title="금액 표 · 무료배송까지">
+  <div class="Catui_sh" style="min-height:0;background:transparent">
+    <div class="Catui_sh-box">
+      <div class="Catui_sh-free"><p><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-truck"></use></svg><span><b>9,700원</b> 더 담으면 무료배송</span></p><div class="Catui_prog Catui_prog-sm" role="progressbar" aria-label="무료배송 기준까지" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"><i class="Catui_pc1" style="width:67%"></i></div></div>
+      <dl class="Catui_sh-sum"><div><dt>상품 금액</dt><dd>29,000원</dd></div><div><dt>상품 할인</dt><dd>−8,700원</dd></div><div><dt>배송비</dt><dd>+3,000원</dd></div><div class="Catui_sh-sum-total"><dt>결제 예정</dt><dd>23,300원</dd></div></dl>
+    </div>
+  </div>
+</catui-example>
+</section>

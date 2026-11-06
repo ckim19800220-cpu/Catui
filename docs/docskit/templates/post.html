@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>블로그 글 · Catui 문서</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/docs.min.css">
+<!-- 깜빡임 방지: 저장된 테마를 그리기 전에 적용 (CSP로 인라인 스크립트를 막는다면 지워도 됩니다 — catdocs.js가 곧바로 적용) -->
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:docs")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_dk-body">
+<a class="Catui_skip" href="#dk-main">본문으로 이동</a>
+<div class="Catui_site Catui_dk" data-catui-dk data-page="post">
+  <header class="Catui_dk-head">
+    <div class="Catui_dk-head-in">
+      <a class="Catui_dk-brand" href="index.html" aria-label="Catui 문서 홈"><span class="Catui_dk-logo" aria-hidden="true"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-book-open"></use></svg></span><b>Catui <span>Docs</span></b></a>
+      <nav class="Catui_dk-nav" aria-label="사이트"><a class="Catui_dk-nav-item" href="index.html">홈</a><a class="Catui_dk-nav-item" href="doc.html">문서</a><a class="Catui_dk-nav-item" href="guide.html">시작 가이드</a><a class="Catui_dk-nav-item" href="api.html">API</a><a class="Catui_dk-nav-item" href="blog.html" aria-current="page">블로그</a><a class="Catui_dk-nav-item" href="changelog.html">변경 이력</a></nav>
+      <form class="Catui_dk-search" action="search.html" role="search" data-catui-dk-search>
+        <div class="Catui_search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="dk-q">문서 검색</label><input class="Catui_input" id="dk-q" name="q" type="search" placeholder="문서 검색 (초성 가능)" autocomplete="off" enterkeyhint="search"></div>
+      </form>
+      <div class="Catui_dk-head-acts">
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon Catui_dk-only-sm" href="search.html" aria-label="검색"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg></a>
+        <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-dk-theme aria-label="어두운 화면으로"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg></button>
+      </div>
+    </div>
+  </header>
+  <main class="Catui_dk-main" id="dk-main" tabindex="-1">
+<div class="Catui_readbar" data-catui-readbar="[data-catui-dk-post]" aria-hidden="true"><i></i></div>
+<div class="Catui_dk-read">
+  <aside class="Catui_dk-aside" id="dk-toc" aria-label="이 글 목차" hidden></aside>
+  <article class="Catui_dk-post" data-catui-dk-post data-catui-dk-toc="#dk-toc">
+    <header class="Catui_dk-post-h">
+      <ul class="Catui_dk-tags" data-tags aria-label="태그"></ul>
+      <h1 class="Catui_dk-post-t" data-title>블로그 글</h1>
+      <div class="Catui_dk-meta" data-meta></div>
+    </header>
+    <div data-cover></div>
+    <div class="Catui_dk-prose" data-body><p class="Catui_help">글을 불러오는 중입니다.</p></div>
+    <div class="Catui_dk-share" data-catui-dk-notoc>
+      <b>이 글 나누기</b>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-catui-share><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-share-2"></use></svg>공유</button>
+      <a class="Catui_btn Catui_btn-sm Catui_btn-ghost" href="blog.html"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-arrow-left"></use></svg>목록으로</a>
+    </div>
+    <div class="Catui_dk-who" data-author-box></div>
+  </article>
+</div>
+<section class="Catui_dk-sec" aria-labelledby="ps-rel">
+  <div class="Catui_dk-sec-h"><h2 class="Catui_h3" id="ps-rel">관련 글</h2></div>
+  <ul class="Catui_dk-cards" data-related aria-label="관련 글"></ul>
+</section>
+  </main>
+  <footer class="Catui_dk-foot">
+    <div class="Catui_dk-foot-in">
+      <nav aria-label="문서 안내"><a href="doc.html">문서</a><a href="versions.html">버전별 문서</a><a href="tag.html">태그</a><a href="author.html">저자</a><a href="search.html">검색</a></nav>
+      <p>Catui Docs는 catui 위에 얹는 문서·블로그 사이트 키트의 견본입니다. 글·저자·버전은 모두 가상 데이터입니다.</p>
+      <p>© 2026 Catui · Catui 2.0.0 · MIT License</p>
+    </div>
+  </footer>
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catdocs.min.js"></script>
+
+</body>
+</html>

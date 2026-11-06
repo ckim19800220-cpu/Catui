@@ -562,6 +562,14 @@
               ]
             },
             {
+              "path": "css/components/hnav",
+              "title": "가로 내비게이션",
+              "desc": "화면 위 가로 메뉴 바: 알약형·밑줄형·어두운 바, 아이콘·카운트·드롭다운·오른쪽 영역, 가로 스크롤.",
+              "css": [
+                "components/hnav.css"
+              ]
+            },
+            {
               "path": "css/components/breadcrumb",
               "title": "경로",
               "desc": "현재 항목만 굵게, 4단 이상이면 가운데를 …로 접습니다.",
@@ -1491,6 +1499,69 @@
           "pages": [
             { "path": "community/modules", "title": "catcommunity.js API", "desc": "load · data/bind · vote · comments · draft · fav · poll." },
             { "path": "community/css", "title": "community.css 클래스", "desc": "Catui_cm-* 클래스와 토큰.", "css": ["community/css/tokens.css", "community/css/shell.css", "community/css/list.css", "community/css/post.css", "community/css/pages.css", "community/css/motion.css"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shop",
+      "title": "CatuiShop",
+      "groups": [
+        {
+          "title": "시작",
+          "pages": [
+            { "path": "shop/start/introduction", "title": "소개 · 화면 지도", "desc": "catui 위에 얹는 한국형 쇼핑몰 앞단 확장과 템플릿 {{stat:shTpl}}종." },
+            { "path": "shop/start/install", "title": "설치 · 구조", "desc": "shop.css · catshop.js 로드, 템플릿·메뉴·JSON 모의 데이터." },
+            { "path": "shop/start/structure", "title": "금액 규칙", "desc": "판매가·쿠폰가·배송비·쿠폰·적립금·최종 결제 금액을 계산하는 순서." }
+          ]
+        },
+        {
+          "title": "확장",
+          "pages": [
+            { "path": "shop/modules", "title": "catshop.js API", "desc": "price · cart · picker · wish · recent · coupon · order · 선언형 속성." },
+            { "path": "shop/css", "title": "shop.css 클래스", "desc": "Catui_sh-* 클래스와 토큰.", "css": ["shop/css/tokens.css", "shop/css/shell.css", "shop/css/card.css", "shop/css/list.css", "shop/css/product.css", "shop/css/cart.css", "shop/css/mypage.css", "shop/css/motion.css"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "docskit",
+      "title": "CatuiDocs",
+      "groups": [
+        {
+          "title": "시작",
+          "pages": [
+            { "path": "docskit/start/introduction", "title": "소개 · 화면 지도", "desc": "catui 위에 얹는 문서·블로그 사이트 키트와 템플릿 {{stat:dkTpl}}종." },
+            { "path": "docskit/start/install", "title": "설치 · 구조", "desc": "docs.css · catdocs.js 로드, 템플릿·메뉴·JSON 모의 데이터." },
+            { "path": "docskit/start/structure", "title": "규칙 · 계산", "desc": "목차·읽는 시간·검색 점수·마크다운 일부·태그 필터 주소가 정해지는 규칙." }
+          ]
+        },
+        {
+          "title": "확장",
+          "pages": [
+            { "path": "docskit/modules", "title": "catdocs.js API", "desc": "toc · code · search · readTime · md · feedback · version · blog · 선언형 속성." },
+            { "path": "docskit/css", "title": "docs.css 클래스", "desc": "Catui_dk-* 클래스와 토큰.", "css": ["docskit/css/tokens.css", "docskit/css/shell.css", "docskit/css/prose.css", "docskit/css/blog.css", "docskit/css/parts.css", "docskit/css/motion.css"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "booking",
+      "title": "CatuiBooking",
+      "groups": [
+        {
+          "title": "시작",
+          "pages": [
+            { "path": "booking/start/introduction", "title": "소개 · 화면 지도", "desc": "catui 위에 얹는 예약·일정 확장과 템플릿 {{stat:bkTpl}}종." },
+            { "path": "booking/start/install", "title": "설치 · 구조", "desc": "booking.css · catbooking.js 로드, 템플릿·메뉴·JSON 모의 데이터." },
+            { "path": "booking/start/structure", "title": "규칙 · 계산", "desc": "시간 칸·남은 자리·인원 금액·숙박 요금·좌석 선택·환불 규정·일정 겹침이 정해지는 규칙." }
+          ]
+        },
+        {
+          "title": "확장",
+          "pages": [
+            { "path": "booking/modules", "title": "catbooking.js API", "desc": "slots · price · stay · seats · refund · layout · save · 선언형 속성." },
+            { "path": "booking/css", "title": "booking.css 클래스", "desc": "Catui_bk-* 클래스와 토큰.", "css": ["booking/css/tokens.css", "booking/css/shell.css", "booking/css/pick.css", "booking/css/seats.css", "booking/css/list.css", "booking/css/schedule.css", "booking/css/motion.css"] }
           ]
         }
       ]

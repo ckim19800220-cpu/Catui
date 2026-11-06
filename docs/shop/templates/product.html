@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-sh-now="2026-11-02T10:00:00+09:00">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>상품 상세 · Catui 쇼핑</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/shop.min.css">
+<!-- 깜빡임 방지: 저장된 테마를 그리기 전에 적용 (CSP로 인라인 스크립트를 막는다면 지워도 됩니다 — catshop.js가 곧바로 적용) -->
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:shop")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_sh-body">
+<a class="Catui_skip" href="#sh-main">본문으로 이동</a>
+<div class="Catui_site Catui_sh" data-catui-sh data-page="product">
+  <header class="Catui_sh-head">
+    <div class="Catui_sh-head-in">
+      <a class="Catui_sh-brand" href="index.html" aria-label="Catui 쇼핑 홈"><span class="Catui_sh-mark" aria-hidden="true"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-bag"></use></svg></span><b>Catui <span>쇼핑</span></b></a>
+      <form class="Catui_sh-search" action="search.html" role="search" data-catui-sh-search>
+        <div class="Catui_search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="sh-q">상품 검색</label><input class="Catui_input" id="sh-q" name="q" type="search" placeholder="상품명·브랜드 검색" autocomplete="off" enterkeyhint="search"></div>
+      </form>
+      <div class="Catui_sh-head-acts">
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon Catui_sh-only-sm" href="search.html" aria-label="검색"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg></a>
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" href="wish.html" aria-label="찜 목록"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-heart"></use></svg></a>
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon Catui_sh-dot" href="cart.html"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg><span class="Catui_clip">장바구니</span><span class="Catui_count" data-catui-sh-cart-count hidden></span></a>
+        <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-sh-theme aria-label="어두운 화면으로"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg></button>
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" href="mypage.html" aria-label="마이페이지"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-user"></use></svg></a>
+      </div>
+    </div>
+    <nav class="Catui_sh-gnb" aria-label="카테고리"><div class="Catui_sh-gnb-in"><a class="Catui_sh-gnb-item" href="index.html">홈</a><a class="Catui_sh-gnb-item" href="list.html?sort=best">베스트</a><a class="Catui_sh-gnb-item" href="event.html?e=autumn">기획전</a><a class="Catui_sh-gnb-item" href="list.html?c=fashion">패션</a><a class="Catui_sh-gnb-item" href="list.html?c=beauty">뷰티</a><a class="Catui_sh-gnb-item" href="list.html?c=food">식품</a><a class="Catui_sh-gnb-item" href="list.html?c=living">리빙</a><a class="Catui_sh-gnb-item" href="list.html?c=digital">디지털</a><a class="Catui_sh-gnb-item" href="list.html?c=kids">유아동</a><a class="Catui_sh-gnb-item" href="list.html?c=sports">스포츠</a><a class="Catui_sh-gnb-item" href="list.html?c=pet">반려동물</a></div></nav>
+  </header>
+  <main class="Catui_sh-main" id="sh-main" tabindex="-1">
+<article class="Catui_sh-pd-page" data-catui-sh-product>
+  <nav class="Catui_crumb" aria-label="경로" data-crumb><a href="index.html">홈</a></nav>
+  <div class="Catui_sh-pd">
+    <div class="Catui_sh-gallery" data-gallery></div>
+    <div class="Catui_sh-pd-info">
+      <p class="Catui_sh-pd-brand" data-brand></p>
+      <h1 class="Catui_sh-pd-name" data-name>상품 정보를 불러오는 중</h1>
+      <div data-rating></div>
+      <div data-price></div>
+      <dl class="Catui_sh-pd-ship" data-ship></dl>
+      <div class="Catui_sh-picker" data-picker></div>
+      <div class="Catui_sh-pd-acts" data-acts>
+        <button class="Catui_btn Catui_btn-lg Catui_btn-secondary Catui_btn-icon Catui_sh-wish" type="button" data-act="wish" aria-pressed="false" aria-label="찜하기"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-heart"></use></svg></button>
+        <button class="Catui_btn Catui_btn-lg Catui_btn-secondary" type="button" data-act="cart"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg>장바구니</button>
+        <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="button" data-act="buy">바로 구매</button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="Catui_sh-pd-nav" aria-label="상품 정보 바로가기"><a href="#pd-detail">상세 정보</a><a href="#pd-reviews">리뷰 <span class="Catui_num" data-rc></span></a><a href="#pd-qna">문의 <span class="Catui_num" data-qc></span></a><a href="#pd-ship">배송·교환</a></nav>
+
+  <section class="Catui_sh-box" id="pd-detail" aria-labelledby="pd-detail-h"><h2 class="Catui_h3" id="pd-detail-h">상세 정보</h2><div class="Catui_vstack Catui_gap-4" data-detail></div></section>
+  <section class="Catui_sh-box" id="pd-reviews" aria-labelledby="pd-reviews-h"><h2 class="Catui_h3" id="pd-reviews-h">리뷰</h2><div class="Catui_vstack Catui_gap-4" data-reviews></div></section>
+  <section class="Catui_sh-box" id="pd-qna" aria-labelledby="pd-qna-h"><h2 class="Catui_h3" id="pd-qna-h">상품 문의</h2><div class="Catui_vstack Catui_gap-4" data-qna></div></section>
+  <section class="Catui_sh-box" id="pd-ship" aria-labelledby="pd-ship-h"><h2 class="Catui_h3" id="pd-ship-h">배송 · 교환 · 반품</h2>
+    <dl class="Catui_dl">
+      <dt>배송비</dt><dd><span data-catui-sh-won="3000">3,000원</span> · <span data-catui-sh-won="30000">30,000원</span> 이상 구매 시 무료 (제주·도서 산간 3,000원 추가)</dd>
+      <dt>출발</dt><dd>오늘출발 상품은 평일 오후 2시 전 주문 시 당일 출발, 그 밖의 상품은 1~2일 안에 출발</dd>
+      <dt>교환 · 반품</dt><dd>받은 날부터 7일 안에 마이페이지 &gt; 주문 내역에서 신청. 단순 변심은 왕복 배송비 6,000원</dd>
+      <dt>안 되는 경우</dt><dd>사용·세탁한 상품, 포장을 뜯어 가치가 떨어진 식품·화장품</dd>
+    </dl>
+  </section>
+  <section class="Catui_sh-sec" aria-labelledby="pd-rel-h">
+    <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="pd-rel-h">같은 분류 다른 상품</h2></div>
+    <ul class="Catui_sh-grid" data-catui-sh-products="related:{id}" data-size="4" aria-label="관련 상품"></ul>
+  </section>
+
+  <div class="Catui_sh-buybar" data-buybar hidden>
+    <div class="Catui_sh-buybar-in">
+      <p class="Catui_sh-buybar-name" data-bar-name></p>
+      <b class="Catui_sh-buybar-total" data-bar-total></b>
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-act="cart">장바구니</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" data-act="buy">구매하기</button>
+    </div>
+  </div>
+</article>
+  </main>
+  <footer class="Catui_sh-foot">
+    <div class="Catui_sh-foot-in">
+      <nav aria-label="쇼핑 안내"><a href="mypage.html">마이페이지</a><a href="orders.html">주문 내역</a><a href="coupons.html">쿠폰·적립금</a><a href="login.html">로그인</a></nav>
+      <p><b>(주)캣유아이 쇼핑 (가상)</b> · 대표 김고양 · 사업자 등록 번호 000-00-00000 · 통신 판매업 신고 제2026-서울-0000호</p>
+      <p>고객센터 <a href="tel:15880000">1588-0000</a> (평일 09:00–18:00) · 결제 대금 예치: 모의 에스크로 · 모든 상품·브랜드·주문은 가상 데이터입니다.</p>
+      <p>© 2026 Catui 쇼핑 · Catui 2.0.0 · MIT License</p>
+    </div>
+  </footer>
+  <button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_btn-icon Catui_sh-totop" type="button" data-catui-sh-top aria-label="맨 위로" hidden><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-arrow-up"></use></svg></button>
+  <nav class="Catui_sh-tabs" aria-label="빠른 이동"><a class="Catui_sh-tab" href="index.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-house"></use></svg><span>홈</span></a><a class="Catui_sh-tab" href="list.html" aria-current="page"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-layout-grid"></use></svg><span>카테고리</span></a><a class="Catui_sh-tab" href="search.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span></a><a class="Catui_sh-tab" href="cart.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg><span>장바구니</span><span class="Catui_count Catui_sh-tab-n" data-catui-sh-cart-count hidden></span></a><a class="Catui_sh-tab" href="mypage.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-user"></use></svg><span>마이</span></a></nav>
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catshop.min.js"></script>
+
+</body>
+</html>

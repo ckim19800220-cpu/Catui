@@ -1,0 +1,56 @@
+<section aria-labelledby="files">
+<h2 id="files">파일 · 불러오기</h2>
+<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+&lt;link rel="stylesheet" href="dist/shop.min.css"&gt;
+…
+&lt;script src="dist/catui.min.js"&gt;&lt;/script&gt;
+&lt;script src="dist/catshop.min.js"&gt;&lt;/script&gt;      ← catui.js 다음 (순서가 틀리면 콘솔에 안내)
+
+// npm · ES 모듈
+import catui from '@imcat-ckim/catui';
+import shop from '@imcat-ckim/catui/shop';
+import '@imcat-ckim/catui/css';
+import '@imcat-ckim/catui/shop.css';</code></pre>
+<p>배포 파일: <code>shop.css</code>(+min) · <code>catshop.js</code> · <code>catshop.esm.js</code> · <code>*.min.js</code>(+map) · <code>catshop.d.ts</code></p>
+</section>
+
+<section aria-labelledby="shell">
+<h2 id="shell">사이트 셸</h2>
+<pre><code>&lt;html lang="ko" data-catui-sh-now="2026-11-02T10:00:00+09:00"&gt;   ← 모의 데이터 "지금"(없으면 실제 시각)
+&lt;div class="Catui_site Catui_sh" data-catui-sh&gt;
+  &lt;header class="Catui_sh-head"&gt; 로고 · 검색(form[data-catui-sh-search] → search.html?q=) · 찜 · 장바구니([data-catui-sh-cart-count]) · 테마([data-catui-sh-theme]) · 마이
+    &lt;nav class="Catui_sh-gnb"&gt; 카테고리 메뉴 (좁으면 가로 스크롤)
+  &lt;main class="Catui_sh-main"&gt; … &lt;/main&gt;
+  &lt;footer class="Catui_sh-foot"&gt; 사업자 정보 · 고객센터
+  &lt;nav class="Catui_sh-tabs"&gt; 767px 이하 하단 탭(홈·카테고리·검색·장바구니·마이)
+&lt;/div&gt;</code></pre>
+<p>테마는 커뮤니티와 같은 규칙(저장값이 없으면 시스템)이고, <code>&lt;html data-catui-theme-lock&gt;</code>이 있으면 건드리지 않습니다(이 문서 사이트가 그렇습니다).</p>
+</section>
+
+<section aria-labelledby="tpl">
+<h2 id="tpl">템플릿 · 메뉴</h2>
+<ul>
+  <li><code>templates/shop/pages/이름.html</code> — 머리 주석 <code>&lt;!-- title: 주문 내역 | nav: my | my: orders | layout: blank --&gt;</code>. <code>nav</code>는 상단 메뉴·하단 탭의 현재 위치, <code>my</code>는 마이페이지 옆 메뉴(<code>{{mynav}}</code> 자리)의 현재 위치입니다.</li>
+  <li><code>templates/shop/menu.json</code> — <code>gnb</code>(카테고리), <code>tabs</code>(하단 탭, <code>count: true</code>면 장바구니 배지), <code>my</code>(마이페이지 메뉴). 없는 화면은 메뉴에서 빠집니다.</li>
+  <li><code>npm run build</code> → <code>docs/shop/templates/</code>. 검사: 정의 안 된 클래스·없는 아이콘·id 중복·label·화면 링크·h1·안 쓰인 클래스·역할 없는 span의 aria-label·JSON 문법, CSS의 hex·없는 토큰·본체 클래스 재정의.</li>
+</ul>
+</section>
+
+<section aria-labelledby="data">
+<h2 id="data">JSON 모의 데이터</h2>
+<p><code>templates/shop/data/*.json</code> → <code>docs/shop/templates/data/</code>. 실서비스는 같은 모양의 API를 만들고 <code>catui.shop.dataBase = '/api/'</code>만 바꿉니다. 화면에 보이는 할인가·별점 평균·품절·적립금 잔액은 저장하지 않고 <b>원자료에서 계산</b>합니다(<code>shop.enrich</code>).</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">데이터 파일</caption>
+<thead><tr><th scope="col">파일</th><th scope="col">내용 · 계산</th></tr></thead><tbody>
+<tr><td><code>products.json</code></td><td>상품 {{stat:shProducts}}개 — 정가·할인율·옵션(색상·사이즈·추가금)·조합별 재고·배송 종류. 판매가·품절·베스트(판매 수 상위 6)·신상품(14일)은 계산</td></tr>
+<tr><td><code>categories.json</code> · <code>promos.json</code></td><td>분류 8개(아이콘) · 기획전(마감 시각·묶음 상품)</td></tr>
+<tr><td><code>reviews.json</code> · <code>qna.json</code></td><td>리뷰 → 상품별 별점 평균·리뷰 수·분포 · 상품 문의(비밀글·답변)</td></tr>
+<tr><td><code>coupons.json</code></td><td>정률(최대 할인)·정액·배송비 쿠폰, 최소 주문 금액·분류 제한·만료 시각</td></tr>
+<tr><td><code>user.json</code></td><td>회원·배송지·적립 내역(잔액 = 합) · 처음 여는 브라우저에 채울 장바구니·찜·최근 본 상품</td></tr>
+<tr><td><code>orders.json</code></td><td>주문 5건 — 상태·결제 수단·택배 이동 기록. 결제 금액은 상품 × 수량 + 배송비 − 쿠폰 − 적립금으로 계산</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="store">
+<h2 id="store">기억하는 상태</h2>
+<p>모두 <code>catui.data('shop')</code>(localStorage <code>"catui:shop"</code>) 한 곳에 있습니다: <code>cart</code> · <code>wish</code> · <code>recent</code> · <code>now</code>(바로 구매) · <code>lastOrder</code> · <code>orders</code> · <code>view</code>(바둑판/목록) · <code>helped</code>(도움돼요) · <code>theme</code>. 다른 탭에서 바뀌면 장바구니 배지와 장바구니 화면이 따라 바뀝니다(<code>storage</code> 이벤트).</p>
+</section>

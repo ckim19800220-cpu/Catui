@@ -15,6 +15,35 @@ catui.offevent('form', 'submit(login)');                 // 해제 (필터 없�
 catui.event('form', 'submit', 'login', { field: {} });   // 직접 발생</code></pre>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="직접 만든 이벤트로 두 영역 잇기 — catui.event · onevent · 해제 함수">
+  <div class="Catui_hstack Catui_gap-3" style="flex-wrap:wrap">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ev-add">장바구니 담기</button>
+    <span class="Catui_badge Catui_badge-info"><span id="ev-n">0</span><span class="Catui_clip">개 담김</span></span>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="ev-off">문구 알림 끄기</button>
+  </div>
+  <p class="Catui_help" id="ev-log" aria-live="polite"></p>
+  <script>
+  catui.use([], function () {
+    var n = 0, log = document.getElementById('ev-log');
+    // 받는 쪽: 'shop' 모듈의 add 이벤트 중 필터가 ev-cart인 것만
+    catui.onevent('shop', 'add(ev-cart)', function (d) { n += 1; document.getElementById('ev-n').textContent = String(n); });
+    var offLog = catui.onevent('shop', 'add(ev-cart)', function (d) { log.textContent = d.name + '을(를) 담았습니다'; });
+    // 보내는 쪽: 서로를 몰라도 이벤트 이름과 필터만 맞추면 된다
+    document.getElementById('ev-add').addEventListener('click', function () { catui.event('shop', 'add', 'ev-cart', { name: '무선 마우스' }); });
+    document.getElementById('ev-off').addEventListener('click', function (e) {
+      if (!offLog) return;
+      offLog(); offLog = null;                 // on이 돌려준 함수로 그 등록 하나만 해제 (개수 세기는 계속)
+      e.currentTarget.disabled = true;
+      document.getElementById('ev-add').focus();   // 잠근 버튼에 있던 포커스를 옮김
+      log.textContent = '이제 담아도 문구는 나오지 않고 개수만 늘어납니다';
+    });
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="list">
 <h2 id="list">이벤트 목록</h2>
 <p>모듈별 이벤트는 <a href="doc:js/reference/events">이벤트 색인</a>에 모아 두었습니다.</p>

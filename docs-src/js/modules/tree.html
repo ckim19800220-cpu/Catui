@@ -25,6 +25,53 @@
 <p><code>tree.render</code>는 WAI-ARIA 트리 패턴(<code>role="tree"</code> · <code>treeitem</code> · <code>group</code>, <code>aria-expanded</code>·<code>aria-selected</code>·<code>aria-level</code>)으로 그립니다. 트리 전체가 Tab 정지점 하나이고, 안에서는 키보드로 움직입니다: ↑↓ 이동, → 펼치기·첫 자식으로, ← 접기·부모로, Home/End, Enter 선택, Space 체크(체크박스가 없으면 선택). 체크하면 자식에 전파되고, 일부만 체크된 부모는 <code>aria-checked="mixed"</code>(화면에는 indeterminate)가 됩니다. 막힌 항목(<code>disabled</code>)은 포커스는 받지만 선택·체크되지 않습니다. 스크립트 없이 쓰는 <code>&lt;details&gt;</code> 트리는 <a href="doc:css/views/tree">CSS 트리</a>.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="권한 설정 — 저장된 권한 체크(setChecked) · 개수 실시간(oncheck) · 저장(getChecked)">
+  <div id="tr-perm"></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button" id="tr-perm-save">권한 저장</button><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="tr-perm-undo">저장한 상태로</button><span class="Catui_help" id="tr-perm-out" aria-live="polite"></span></div>
+  <script>
+  catui.use(['tree'], function (tree) {
+    var out = function (t) { document.getElementById('tr-perm-out').textContent = t; };
+    var saved = ['order.view', 'order.edit', 'member.view'];      // 서버에서 받은 권한 (잎 노드 id)
+    var count = function () { out('권한 ' + tree.getChecked('perm').length + '개 선택'); };
+    tree.render({ elem: '#tr-perm', id: 'perm', showCheckbox: true, label: '편집자 권한', data: [
+      { id: 'order', title: '주문', spread: true, children: [{ id: 'order.view', title: '보기' }, { id: 'order.edit', title: '수정' }, { id: 'order.refund', title: '환불' }] },
+      { id: 'member', title: '회원', spread: true, children: [{ id: 'member.view', title: '보기' }, { id: 'member.edit', title: '수정' }, { id: 'member.del', title: '탈퇴 처리', disabled: true }] },
+      { id: 'setting', title: '설정', children: [{ id: 'setting.site', title: '사이트' }, { id: 'setting.pay', title: '결제' }] } ],
+      oncheck: count });                                             // 사용자가 체크를 바꿀 때마다
+    tree.setChecked('perm', saved);                                  // setChecked는 oncheck를 부르지 않으므로 직접 갱신
+    count();
+    document.getElementById('tr-perm-save').addEventListener('click', function () {
+      saved = tree.getChecked('perm').map(function (n) { return n.id; });   // 체크된 잎만 — 부모(주문·회원)는 빠짐
+      out('저장: ' + (saved.join(', ') || '권한 없음'));
+    });
+    document.getElementById('tr-perm-undo').addEventListener('click', function () { tree.clearChecked('perm'); tree.setChecked('perm', saved); count(); });
+  });
+  </script>
+</catui-example>
+<catui-example title="폴더 트리 + 상세 패널 — selected · accordion · click">
+  <div class="Catui_grid">
+    <div class="Catui_span-5" id="tr-files"></div>
+    <div class="Catui_span-7 Catui_card" style="padding:var(--Catui_space-4)" aria-live="polite"><dl class="Catui_dl" id="tr-files-info"></dl></div>
+  </div>
+  <script>
+  catui.use(['tree'], function (tree) {
+    var info = document.getElementById('tr-files-info');
+    var show = function (n) {
+      catui.mount(info, n ? catui.html`<dt>이름</dt><dd>${n.title}</dd><dt>종류</dt><dd>${n.children ? '폴더 · ' + n.children.length + '개 항목' : '파일'}</dd>${n.size ? catui.html`<dt>크기</dt><dd>${n.size}</dd>` : ''}` : catui.html`<dt>선택</dt><dd>없음</dd>`);
+    };
+    tree.render({ elem: '#tr-files', id: 'files', label: '파일', accordion: true, selected: 'f-plan', data: [
+      { id: 'd-2026', title: '2026', spread: true, children: [{ id: 'f-plan', title: '사업계획.pdf', size: '2.4MB' }, { id: 'f-budget', title: '예산.xlsx', size: '310KB' }] },
+      { id: 'd-2025', title: '2025', children: [{ id: 'f-report', title: '결산 보고서.pdf', size: '5.1MB' }] },
+      { id: 'd-share', title: '공유', children: [{ id: 'f-logo', title: '로고.svg', size: '18KB' }] } ],
+      click: function (o) { show(o.data); } });                      // 한 폴더를 펼치면 형제 폴더는 접힘(accordion)
+    show(tree.getSelected('files'));                                  // 처음 선택(selected) 내용
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="options">
 <h2 id="options">옵션 · 메서드</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">tree API</caption>

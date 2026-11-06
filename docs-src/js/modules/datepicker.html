@@ -18,6 +18,51 @@
 <p>입력 칸을 누르거나 ↓ 키로 엽니다. 달력에서 ↑↓←→(하루·한 주), PageUp/PageDown(한 달), Home/End(주의 처음·끝), Enter(선택), Esc(닫기). 범위 밖 날짜는 고를 수 없습니다.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="오늘부터 60일 안에서 예약 · 빠른 선택(shortcuts)">
+  <div class="Catui_field"><label class="Catui_label" for="dp-book">방문 예약일</label><input class="Catui_input" id="dp-book" aria-describedby="dp-book-h"><p class="Catui_help" id="dp-book-h">오늘부터 60일 안, 주말 제외</p></div>
+  <p class="Catui_help" id="dp-book-out" aria-live="polite"></p>
+  <script>
+  catui.use(['datePicker', 'util'], function (datePicker, util) {
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var plus = function (n) { return new Date(today.getFullYear(), today.getMonth(), today.getDate() + n); };
+    var weekend = function (d) { return d.getDay() === 0 || d.getDay() === 6; };
+    datePicker.render({ elem: '#dp-book', min: today, max: plus(60), disabled: weekend,
+      // 범위 밖이거나 막힌 날(주말)이면 눌러도 고르지 않는다
+      shortcuts: [
+        { text: '오늘', value: function () { return today; } },
+        { text: '내일', value: function () { return plus(1); } },
+        { text: '다음 주 월요일', value: function () { return plus(((8 - today.getDay()) % 7) || 7); } } ],
+      done: function (value, date) { document.getElementById('dp-book-out').textContent = value ? util.toDateString(date, "M'월' d'일' E'요일'") + '에 방문합니다' : '날짜를 지웠습니다'; } });
+  });
+  </script>
+</catui-example>
+<catui-example title="시작일 · 종료일 두 칸 연동 (reload로 min·max 바꾸기)">
+  <div class="Catui_grid">
+    <div class="Catui_span-6 Catui_field"><label class="Catui_label" for="dp-from">시작일</label><input class="Catui_input" id="dp-from"></div>
+    <div class="Catui_span-6 Catui_field"><label class="Catui_label" for="dp-to">종료일</label><input class="Catui_input" id="dp-to"></div>
+  </div>
+  <p class="Catui_help" id="dp-span-out" aria-live="polite">시작일을 고르면 종료일은 그 뒤 날짜만, 종료일을 고르면 시작일은 그 앞 날짜만 고를 수 있습니다.</p>
+  <script>
+  catui.use(['datePicker'], function (datePicker) {
+    var from = document.getElementById('dp-from'), to = document.getElementById('dp-to');
+    var say = function () {
+      if (!from.value || !to.value) return;
+      var days = Math.round((new Date(to.value) - new Date(from.value)) / 86400000) + 1;
+      document.getElementById('dp-span-out').textContent = from.value + ' ~ ' + to.value + ' (' + days + '일)';
+    };
+    datePicker.render({ elem: from, done: function (v) {
+      if (to.value && v && to.value < v) to.value = '';          // 순서가 뒤집히면 종료일 비우기
+      datePicker.reload('dp-to', { min: v });                     // 인스턴스 id는 입력의 id
+      say();
+    } });
+    datePicker.render({ elem: to, done: function (v) { datePicker.reload('dp-from', { max: v }); say(); } });
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="options">
 <h2 id="options">옵션</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">datePicker 옵션</caption>

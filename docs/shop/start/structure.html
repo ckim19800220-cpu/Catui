@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-theme-lock>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>금액 규칙 · CatuiShop · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="판매가·쿠폰가·배송비·쿠폰·적립금·최종 결제 금액을 계산하는 순서.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../../dist/shop.css">
+<script src="../../../dist/catui.js"></script>
+<script src="../../../dist/catshop.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top">
+<div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html" aria-current="page">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
+  <div class="doc-top-end">
+    <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
+    <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+    <a class="Catui_btn Catui_btn-sm Catui_btn-primary doc-cta" href="../../css/start/introduction.html">시작하기</a>
+  </div>
+</div>
+</header>
+<dialog class="doc-search" aria-label="문서 검색" data-index="../../assets/search-index.js" data-home="../../index.html"><div class="doc-search-box"><label class="Catui_clip" for="doc-search-q">문서 검색</label><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><input id="doc-search-q" type="search" placeholder="페이지·설명 검색" autocomplete="off" aria-describedby="doc-search-count"><kbd>Esc</kbd></div><p class="doc-search-count" id="doc-search-count" aria-live="polite"></p><ul id="doc-search-list" aria-label="검색 결과"></ul></dialog>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CatuiShop 메뉴</summary><nav aria-label="CatuiShop 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../shop/start/introduction.html">소개 · 화면 지도</a></li><li><a href="../../shop/start/install.html">설치 · 구조</a></li><li><a href="../../shop/start/structure.html" aria-current="page">금액 규칙</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../../shop/modules.html">catshop.js API</a></li><li><a href="../../shop/css.html">shop.css 클래스</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<header class="doc-head">
+<p class="doc-crumb"><span>CatuiShop</span><span>시작</span><span>금액 규칙</span></p>
+<h1 class="Catui_h1">금액 규칙</h1>
+<p class="Catui_lead">판매가·쿠폰가·배송비·쿠폰·적립금·최종 결제 금액을 계산하는 순서.</p>
+
+
+</header>
+<section aria-labelledby="order">
+<h2 id="order">계산 순서</h2>
+<p>모든 금액은 원(정수)으로 계산하고, 표시만 <code>shop.won()</code>으로 바꿉니다. 규칙 값은 <code>catui.shop.rules</code>에 있어 실서비스 정책에 맞게 바꿀 수 있습니다.</p>
+<dl class="doc-formula">
+  <div><dt>판매가</dt><dd><code>⌊정가 × (100 − 할인율) ÷ 1000⌋ × 10</code><span>10원 단위 내림. 옵션 추가금은 할인 없이 판매가에 더합니다</span></dd></div>
+  <div><dt>쿠폰가</dt><dd><code>판매가 − 이 상품 하나에 쓸 수 있는 가장 큰 쿠폰</code><span>상세 화면의 “최대 혜택가”. 최소 주문 금액·분류 제한을 지킨 쿠폰만</span></dd></div>
+  <div><dt>상품 합계</dt><dd><code>Σ 판매가 × 수량 (선택한 줄, 품절 제외)</code><span>장바구니 체크를 푼 줄과 품절 줄은 합계에 넣지 않습니다</span></dd></div>
+  <div><dt>배송비</dt><dd><code>합계 ≥ 30,000원 또는 모두 무료배송 상품 → 0, 아니면 3,000원</code><span>무료까지 남은 금액을 막대와 글자로 보여 줍니다</span></dd></div>
+  <div><dt>쿠폰</dt><dd><code>정률: ⌊대상 금액 × 율 ÷ 1000⌋ × 10 (최대 할인까지) · 정액 · 배송비</code><span>분류 제한이 있으면 그 분류 상품 금액만 대상, 최소 주문 금액도 그 금액 기준</span></dd></div>
+  <div><dt>적립금</dt><dd><code>1,000원 이상 · 10원 단위 · 쿠폰 뒤 상품 금액까지</code><span>넘게 쓰면 최대치로 맞추고 이유를 알려 줍니다</span></dd></div>
+  <div><dt>최종 결제</dt><dd><code>상품 합계 − 쿠폰 − 적립금 + 배송비</code><span>적립 예정 = (상품 합계 − 쿠폰 − 적립금) × 1%</span></dd></div>
+</dl>
+</section>
+
+<section aria-labelledby="try">
+<h2 id="try">직접 계산해 보기</h2>
+<p>아래 예제는 문서 안의 배열만 씁니다(데이터 파일 없음). 수량·쿠폰·적립금을 바꾸면 <code>shop.calc.cart</code> → <code>shop.calc.order</code>가 다시 계산합니다.</p>
+<figure class="doc-example">
+<figcaption class="doc-example-title">장바구니 합계 · 쿠폰 · 적립금 · 최종 금액</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_sh Catui_vstack Catui_gap-3" style="min-height:0;background:transparent" id="dst-box">
+    <div class="Catui_sh-box">
+      <ul class="Catui_sh-cart" id="dst-lines" aria-label="예제 장바구니"></ul>
+      <div class="Catui_field"><label class="Catui_label" for="dst-coupon">쿠폰</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="dst-coupon"></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+      <div class="Catui_field"><label class="Catui_label" for="dst-points">적립금 (보유 4,820원)</label><input class="Catui_input" id="dst-points" inputmode="numeric" value="2000" aria-describedby="dst-note"><p class="Catui_help" id="dst-note" aria-live="polite"></p></div>
+      <dl class="Catui_sh-sum" id="dst-sum"></dl>
+    </div>
+  </div>
+  <script>
+  catui.use(['shop'], function (shop) {
+    var raw = [
+      { id: 'a', name: '오버핏 코튼 반팔 티셔츠', brand: '고양이옷장', cat: 'fashion', price: 29000, rate: 30, created: '2026-09-01', stock: 12 },
+      { id: 'b', name: '수분 진정 크림 50ml', brand: '맑은숲', cat: 'beauty', price: 32000, rate: 25, created: '2026-07-15', stock: 40 }
+    ];
+    var coupons = [
+      { id: 'W10', name: '신규 10%', type: 'rate', value: 10, max: 10000, min: 20000 },
+      { id: 'B3000', name: '뷰티 3,000원', type: 'amount', value: 3000, min: 15000, cats: ['beauty'] },
+      { id: 'BIG', name: '20만원 이상 2만원', type: 'amount', value: 20000, min: 200000 }
+    ];
+    var d = shop.enrich({ products: raw }), lines = [{ key: 'a', id: 'a', qty: 1, on: true }, { key: 'b', id: 'b', qty: 1, on: true }];
+    var $ = function (id) { return document.getElementById(id); };
+    var items = function (s) { return s.selected.map(function (l) { return { cat: l.product.cat, amount: l.amount }; }); };
+    var draw = function () {
+      var s = shop.calc.cart(lines, d.byId), sel = $('dst-coupon'), keep = sel.value;
+      catui.mount($('dst-lines'), catui.html`${s.lines.map(function (l) { return catui.html`<li class="Catui_sh-co-item"><span></span><div><b>${l.product.name}</b><p class="Catui_help">${shop.won(l.unit)} × ${l.qty}개</p></div><div class="Catui_stepper Catui_sh-qty" role="group" aria-label="${l.product.name} 수량"><button type="button" data-k="${l.key}" data-step="-1" aria-label="수량 줄이기"${l.qty <= 1 ? catui.html` disabled` : ''}>−</button><output>${l.qty}</output><button type="button" data-k="${l.key}" data-step="1" aria-label="수량 늘리기">+</button></div></li>`; })}`);
+      sel.replaceChildren(new Option('쿠폰 선택 안 함', ''));
+      coupons.forEach(function (c) { var r = shop.coupon.apply(c, { items: items(s), ship: s.ship }), o = new Option(c.name + (r.ok ? ' → −' + shop.won(r.amount) : ' (사용 불가: ' + r.reason + ')'), c.id); o.disabled = !r.ok; sel.add(o); });
+      sel.value = keep && !sel.querySelector('option[value="' + keep + '"]').disabled ? keep : '';
+      var o = shop.calc.order({ cart: s, coupon: coupons.find(function (c) { return c.id === sel.value; }) || null, points: $('dst-points').value, have: 4820 });
+      $('dst-note').textContent = o.pointNote || ('최대 ' + shop.won(o.maxPoints) + ' 사용 가능');
+      catui.mount($('dst-sum'), catui.html`<div><dt>상품 금액</dt><dd>${shop.won(o.listTotal)}</dd></div><div><dt>상품 할인</dt><dd>−${shop.won(o.discount)}</dd></div><div><dt>쿠폰</dt><dd>−${shop.won(o.coupon)}</dd></div><div><dt>적립금</dt><dd>−${shop.won(o.points)}</dd></div><div><dt>배송비</dt><dd>${o.ship ? '+' + shop.won(o.ship) : '무료'}</dd></div><div class="Catui_sh-sum-total"><dt>최종 결제</dt><dd>${shop.won(o.total)}</dd></div>`);
+    };
+    $('dst-box').addEventListener('click', function (e) { var b = e.target.closest('[data-step]'); if (!b) return; var l = lines.find(function (x) { return x.key === b.dataset.k; }); l.qty = Math.max(1, l.qty + Number(b.dataset.step)); draw(); $('dst-box').querySelector('[data-k="' + l.key + '"][data-step="' + b.dataset.step + '"]').focus(); });
+    $('dst-coupon').addEventListener('change', draw);
+    $('dst-points').addEventListener('input', draw);
+    draw();
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="장바구니 합계 · 쿠폰 · 적립금 · 최종 금액 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_sh Catui_vstack Catui_gap-3&quot; style=&quot;min-height:0;background:transparent&quot; id=&quot;dst-box&quot;&gt;
+  &lt;div class=&quot;Catui_sh-box&quot;&gt;
+    &lt;ul class=&quot;Catui_sh-cart&quot; id=&quot;dst-lines&quot; aria-label=&quot;예제 장바구니&quot;&gt;&lt;/ul&gt;
+    &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dst-coupon&quot;&gt;쿠폰&lt;/label&gt;&lt;div class=&quot;Catui_select-wrap&quot;&gt;&lt;select class=&quot;Catui_input Catui_select&quot; id=&quot;dst-coupon&quot;&gt;&lt;/select&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-chevron-down&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dst-points&quot;&gt;적립금 (보유 4,820원)&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dst-points&quot; inputmode=&quot;numeric&quot; value=&quot;2000&quot; aria-describedby=&quot;dst-note&quot;&gt;&lt;p class=&quot;Catui_help&quot; id=&quot;dst-note&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;&lt;/div&gt;
+    &lt;dl class=&quot;Catui_sh-sum&quot; id=&quot;dst-sum&quot;&gt;&lt;/dl&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;shop&#39;], function (shop) {
+  var raw = [
+    { id: &#39;a&#39;, name: &#39;오버핏 코튼 반팔 티셔츠&#39;, brand: &#39;고양이옷장&#39;, cat: &#39;fashion&#39;, price: 29000, rate: 30, created: &#39;2026-09-01&#39;, stock: 12 },
+    { id: &#39;b&#39;, name: &#39;수분 진정 크림 50ml&#39;, brand: &#39;맑은숲&#39;, cat: &#39;beauty&#39;, price: 32000, rate: 25, created: &#39;2026-07-15&#39;, stock: 40 }
+  ];
+  var coupons = [
+    { id: &#39;W10&#39;, name: &#39;신규 10%&#39;, type: &#39;rate&#39;, value: 10, max: 10000, min: 20000 },
+    { id: &#39;B3000&#39;, name: &#39;뷰티 3,000원&#39;, type: &#39;amount&#39;, value: 3000, min: 15000, cats: [&#39;beauty&#39;] },
+    { id: &#39;BIG&#39;, name: &#39;20만원 이상 2만원&#39;, type: &#39;amount&#39;, value: 20000, min: 200000 }
+  ];
+  var d = shop.enrich({ products: raw }), lines = [{ key: &#39;a&#39;, id: &#39;a&#39;, qty: 1, on: true }, { key: &#39;b&#39;, id: &#39;b&#39;, qty: 1, on: true }];
+  var $ = function (id) { return document.getElementById(id); };
+  var items = function (s) { return s.selected.map(function (l) { return { cat: l.product.cat, amount: l.amount }; }); };
+  var draw = function () {
+    var s = shop.calc.cart(lines, d.byId), sel = $(&#39;dst-coupon&#39;), keep = sel.value;
+    catui.mount($(&#39;dst-lines&#39;), catui.html`${s.lines.map(function (l) { return catui.html`&lt;li class=&quot;Catui_sh-co-item&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;div&gt;&lt;b&gt;${l.product.name}&lt;/b&gt;&lt;p class=&quot;Catui_help&quot;&gt;${shop.won(l.unit)} × ${l.qty}개&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;Catui_stepper Catui_sh-qty&quot; role=&quot;group&quot; aria-label=&quot;${l.product.name} 수량&quot;&gt;&lt;button type=&quot;button&quot; data-k=&quot;${l.key}&quot; data-step=&quot;-1&quot; aria-label=&quot;수량 줄이기&quot;${l.qty &lt;= 1 ? catui.html` disabled` : &#39;&#39;}&gt;−&lt;/button&gt;&lt;output&gt;${l.qty}&lt;/output&gt;&lt;button type=&quot;button&quot; data-k=&quot;${l.key}&quot; data-step=&quot;1&quot; aria-label=&quot;수량 늘리기&quot;&gt;+&lt;/button&gt;&lt;/div&gt;&lt;/li&gt;`; })}`);
+    sel.replaceChildren(new Option(&#39;쿠폰 선택 안 함&#39;, &#39;&#39;));
+    coupons.forEach(function (c) { var r = shop.coupon.apply(c, { items: items(s), ship: s.ship }), o = new Option(c.name + (r.ok ? &#39; → −&#39; + shop.won(r.amount) : &#39; (사용 불가: &#39; + r.reason + &#39;)&#39;), c.id); o.disabled = !r.ok; sel.add(o); });
+    sel.value = keep &amp;&amp; !sel.querySelector(&#39;option[value=&quot;&#39; + keep + &#39;&quot;]&#39;).disabled ? keep : &#39;&#39;;
+    var o = shop.calc.order({ cart: s, coupon: coupons.find(function (c) { return c.id === sel.value; }) || null, points: $(&#39;dst-points&#39;).value, have: 4820 });
+    $(&#39;dst-note&#39;).textContent = o.pointNote || (&#39;최대 &#39; + shop.won(o.maxPoints) + &#39; 사용 가능&#39;);
+    catui.mount($(&#39;dst-sum&#39;), catui.html`&lt;div&gt;&lt;dt&gt;상품 금액&lt;/dt&gt;&lt;dd&gt;${shop.won(o.listTotal)}&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;상품 할인&lt;/dt&gt;&lt;dd&gt;−${shop.won(o.discount)}&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;쿠폰&lt;/dt&gt;&lt;dd&gt;−${shop.won(o.coupon)}&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;적립금&lt;/dt&gt;&lt;dd&gt;−${shop.won(o.points)}&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;배송비&lt;/dt&gt;&lt;dd&gt;${o.ship ? &#39;+&#39; + shop.won(o.ship) : &#39;무료&#39;}&lt;/dd&gt;&lt;/div&gt;&lt;div class=&quot;Catui_sh-sum-total&quot;&gt;&lt;dt&gt;최종 결제&lt;/dt&gt;&lt;dd&gt;${shop.won(o.total)}&lt;/dd&gt;&lt;/div&gt;`);
+  };
+  $(&#39;dst-box&#39;).addEventListener(&#39;click&#39;, function (e) { var b = e.target.closest(&#39;[data-step]&#39;); if (!b) return; var l = lines.find(function (x) { return x.key === b.dataset.k; }); l.qty = Math.max(1, l.qty + Number(b.dataset.step)); draw(); $(&#39;dst-box&#39;).querySelector(&#39;[data-k=&quot;&#39; + l.key + &#39;&quot;][data-step=&quot;&#39; + b.dataset.step + &#39;&quot;]&#39;).focus(); });
+  $(&#39;dst-coupon&#39;).addEventListener(&#39;change&#39;, draw);
+  $(&#39;dst-points&#39;).addEventListener(&#39;input&#39;, draw);
+  draw();
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>티셔츠 20,300원 + 크림 24,000원 = 44,300원 → 30,000원 이상이라 배송비 무료. 신규 10% 쿠폰은 4,430원, 뷰티 쿠폰은 크림 금액(24,000원)만 대상이라 3,000원입니다. “20만원 이상 2만원” 쿠폰은 최소 금액이 모자라 고를 수 없고 이유가 함께 보입니다. 적립금에 500을 넣으면 1,000원 미만이라 쓰지 않고, 9,999를 넣으면 보유액 안에서 10원 단위(4,820원)로 맞춥니다.</p>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../shop/start/install.html"><span>이전</span>설치 · 구조</a><a class="doc-pager-next" href="../../shop/modules.html"><span>다음</span>catshop.js API</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#order">계산 순서</a></li><li><a href="#try">직접 계산해 보기</a></li></ul></aside>
+</div>
+<footer class="doc-foot"><div class="doc-foot-inner">
+  <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
+</div></footer>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

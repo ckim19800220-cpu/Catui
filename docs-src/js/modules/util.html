@@ -14,6 +14,61 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="숫자 · 파일 크기 · 날짜 서식 한눈에 (number · fileSize · toDateString · timeAgo)">
+  <div class="Catui_table-wrap"><table class="Catui_tbl Catui_tbl-compact">
+    <caption class="Catui_clip">util 서식 결과</caption>
+    <thead><tr><th scope="col">호출</th><th scope="col">결과</th><th scope="col">쓰는 곳</th></tr></thead>
+    <tbody id="ut-fmt"></tbody>
+  </table></div>
+  <script>
+  catui.use(['util'], function (util) {
+    var now = Date.now(), d = new Date(2026, 10, 3, 14, 5, 9);
+    var rows = [
+      ["number(1234567)", util.number(1234567), '금액·수량'],
+      ["number(0.5, 2)", util.number(0.5, 2), '소수 자리 고정'],
+      ["number(98000) + '원'", util.number(98000) + '원', '가격 표시'],
+      ["fileSize(1536)", util.fileSize(1536), '첨부 파일'],
+      ["fileSize(5242880)", util.fileSize(5242880), '업로드 제한 안내'],
+      ["fileSize(3221225472, 2)", util.fileSize(3221225472, 2), '저장 공간'],
+      ["toDateString(d, 'yyyy-MM-dd')", util.toDateString(d, 'yyyy-MM-dd'), '표 날짜 칸'],
+      ["toDateString(d, 'yyyy.MM.dd (E) HH:mm')", util.toDateString(d, 'yyyy.MM.dd (E) HH:mm'), '예약·일정'],
+      ["toDateString(d, \"M'월' d'일' a h:mm\")", util.toDateString(d, "M'월' d'일' a h:mm"), '알림 문구'],
+      ['timeAgo(5분 전)', util.timeAgo(now - 5 * 60000), '댓글·알림 시각'],
+      ['timeAgo(3일 전)', util.timeAgo(now - 3 * 86400000), '최근 활동'],
+      ['timeAgo(40일 전, true)', util.timeAgo(now - 40 * 86400000, true), '오래된 글은 날짜로'] ];
+    catui.mount(document.getElementById('ut-fmt'), catui.html`${rows.map(function (r) { return catui.html`<tr><td><code>${r[0]}</code></td><td>${r[1]}</td><td>${r[2]}</td></tr>`; })}`);
+  });
+  </script>
+</catui-example>
+<catui-example title="입력이 멈춘 뒤 거르기 (debounce) · 결과 복사 (copy)">
+  <div class="Catui_field"><label class="Catui_label" for="ut-q">지점 찾기</label><input class="Catui_input" id="ut-q" type="search" placeholder="예: 강남" autocomplete="off"></div>
+  <ul class="Catui_list" id="ut-list"></ul>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="ut-copy"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-copy"></use></svg>결과 복사</button><span class="Catui_help" id="ut-msg" aria-live="polite"></span></div>
+  <script>
+  catui.use(['util'], function (util) {
+    var ALL = ['강남점', '강남역점', '강서점', '서초점', '송파점', '잠실점', '판교점', '분당점'];
+    var shown = ALL, runs = 0;
+    var draw = function () {
+      runs += 1;
+      var q = document.getElementById('ut-q').value.trim();
+      shown = ALL.filter(function (s) { return s.indexOf(q) > -1; });
+      catui.mount(document.getElementById('ut-list'), shown.length ? catui.html`${shown.map(function (s) { return catui.html`<li class="Catui_list-item">${s}</li>`; })}` : catui.html`<li class="Catui_list-item">맞는 지점이 없습니다</li>`);
+      document.getElementById('ut-msg').textContent = shown.length + '곳 · 거르기 ' + runs + '번 실행';
+    };
+    // 글자마다가 아니라 입력이 0.3초 멈췄을 때 한 번 (서버 검색이면 요청 수가 크게 준다)
+    document.getElementById('ut-q').addEventListener('input', util.debounce(draw, 300));
+    document.getElementById('ut-copy').addEventListener('click', async function () {
+      var ok = await util.copy(shown.join('\n'));
+      document.getElementById('ut-msg').textContent = ok ? shown.length + '곳을 복사했습니다' : '복사하지 못했습니다. 직접 선택해 복사해 주세요';
+    });
+    draw();
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="api">
 <h2 id="api">API</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">util API</caption>

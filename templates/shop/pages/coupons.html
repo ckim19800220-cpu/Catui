@@ -1,0 +1,22 @@
+<!-- title: 쿠폰 · 적립금 | nav: my | my: coupons -->
+<div class="Catui_sh-my">
+  {{mynav}}
+  <div class="Catui_sh-my-main">
+    <h1 class="Catui_h2">쿠폰 · 적립금</h1>
+    <section class="Catui_sh-box" data-catui-sh-coupons aria-labelledby="my-cp-h">
+      <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="my-cp-h">쿠폰</h2><p class="Catui_help" data-count></p></div>
+      <form class="Catui_sh-points" data-coupon-form novalidate>
+        <label class="Catui_clip" for="cp-code">쿠폰 번호</label><input class="Catui_input" id="cp-code" name="code" placeholder="쿠폰 번호 입력" autocomplete="off" aria-describedby="cp-msg">
+        <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="submit">등록</button>
+      </form>
+      <p class="Catui_help" id="cp-msg" data-msg aria-live="polite"></p>
+      <ul class="Catui_sh-coupons" data-list></ul>
+    </section>
+    <section class="Catui_sh-box" data-catui-sh-points aria-labelledby="my-points-h">
+      <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="my-points-h">적립금</h2><p>잔액 <b class="Catui_num" data-balance>0원</b></p></div>
+      <p class="Catui_help">1,000원 이상 모이면 주문서에서 10원 단위로 쓸 수 있습니다. 구매 확정 시 결제 금액의 1%가 쌓입니다.</p>
+      <div class="Catui_table-wrap Catui_sh-scroll"><table class="Catui_tbl"><caption class="Catui_clip">적립금 내역</caption>
+        <thead><tr><th scope="col">날짜</th><th scope="col">내용</th><th scope="col" class="Catui_text-right">금액</th></tr></thead><tbody data-list></tbody></table></div>
+    </section>
+  </div>
+</div>

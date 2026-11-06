@@ -525,6 +525,25 @@ export const scenarios = [
     },
   },
   {
+    name: "docs · admin 문서 쪽 다크 모드 유지 · 콘솔 안내",
+    page: "docs/admin/start/introduction.html",
+    run: async () => {
+      // 문서 테마를 다크로 저장하고 다시 불러온 뒤, catadmin.js가 덮어쓰지 않는지
+      localStorage.setItem("catui-theme", "dark");
+      const f = document.createElement("iframe"); f.src = location.href; f.style.cssText = "width:800px;height:400px"; document.body.appendChild(f);
+      await new Promise((r) => f.addEventListener("load", r, { once: true }));
+      await new Promise((r) => setTimeout(r, 600));
+      const dark = f.contentDocument.documentElement.getAttribute("data-catui-theme") === "dark";
+      const lock = f.contentDocument.documentElement.hasAttribute("data-catui-theme-lock");
+      localStorage.removeItem("catui-theme"); f.remove();
+      return { dark, lock, banner: !!globalThis.__catuiBanner, cfg: catui.config().banner };
+    },
+    expect: {
+      "다시 들어와도 다크 유지(확장이 덮어쓰지 않음)": (r) => r.dark && r.lock,
+      "콘솔 안내 한 번 출력·설정 기본 true": (r) => r.banner && r.cfg === true,
+    },
+  },
+  {
     name: "admin · 분석 기간 전환",
     page: "docs/admin/templates/analytics.html",
     run: async () => {
@@ -1064,5 +1083,362 @@ export const scenarios = [
       return { mine };
     },
     expect: { "늦은 실패가 최신 선택을 지우지 않음": (r) => r.mine === "down" },
+  },
+  {
+    name: "shop · 장바구니 합계 (선택·수량·배송비·무료 기준)",
+    page: "docs/shop/templates/cart.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const sh = catui.shop; await sh.ready; const d = await sh.load();
+      const total = () => document.querySelector("[data-cart-total]")?.textContent;
+      sh.cart.clear();
+      sh.cart.add("101", { color: "black", size: "M", qty: 1, max: 12 });   // 20,300원 (정가 29,000 · 30%)
+      await sleep(50);
+      const a = sh.cart.summary(d.byId), r = { a: [a.subtotal, a.ship, a.freeLeft, a.total], domA: total(), badge: document.querySelector("[data-catui-sh-cart-count]")?.textContent };
+      sh.cart.add("201", { qty: 1, max: 40 });                               // 24,000원 → 44,300원, 무료배송
+      const b = sh.cart.summary(d.byId); r.b = [b.subtotal, b.ship, b.discount];
+      sh.cart.select("201:-/-", false);                                       // 선택 해제 → 합계에서 빠짐
+      const c = sh.cart.summary(d.byId); r.c = [c.subtotal, c.ship, c.count];
+      await sleep(50);
+      const plusBtn = document.querySelector('.Catui_sh-line [data-step="1"]'); plusBtn.focus(); plusBtn.click();   // 화면의 + 버튼 → 수량 2
+      await sleep(50);
+      const e = sh.cart.summary(d.byId); r.e = [e.lines[0].qty, e.subtotal, e.ship]; r.domE = total();
+      r.focus = document.activeElement?.dataset.fk || "";
+      sh.cart.clear(); sh.cart.add("301", { qty: 1, max: 64 });                // 무료배송 상품만 → 30,000원 미만이어도 0
+      const f = sh.cart.summary(d.byId); r.f = [f.subtotal, f.ship];
+      sh.cart.add("202", { qty: 1, max: 1 });                                  // 품절 상품(재고 0) → 합계·선택 제외
+      const g = sh.cart.summary(d.byId); r.g = [g.lines.length, g.count, g.subtotal];
+      await sleep(50); r.outText = document.querySelector(".Catui_sh-line-out")?.textContent.includes("품절");
+      sh.cart.clear();
+      return r;
+    },
+    expect: {
+      "할인 판매가·배송비 3,000원·무료까지 9,700원": (r) => JSON.stringify(r.a) === "[20300,3000,9700,23300]" && r.domA === "23,300원",
+      "배지 숫자 + 숨김 글자": (r) => r.badge === "1개 담김",
+      "30,000원 이상 무료배송 · 상품 할인 합": (r) => JSON.stringify(r.b) === "[44300,0,16700]",
+      "선택 해제한 줄은 합계 제외": (r) => JSON.stringify(r.c) === "[20300,3000,1]",
+      "+ 버튼 → 수량 2 · 무료배송 · 화면 합계": (r) => JSON.stringify(r.e) === "[2,40600,0]" && r.domE === "40,600원",
+      "다시 그려도 포커스 유지": (r) => r.focus.startsWith("q:101:black/M"),
+      "무료배송 상품만이면 배송비 0": (r) => JSON.stringify(r.f) === "[21910,0]",
+      "품절 줄은 선택·합계 제외 + 글자 표시": (r) => JSON.stringify(r.g) === "[2,1,21910]" && r.outText,
+    },
+  },
+  {
+    name: "shop · 옵션 조합 재고·품절 (picker)",
+    page: "docs/shop/templates/product.html?id=101",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const sh = catui.shop; await sh.ready; await sleep(300);
+      const box = document.querySelector("[data-picker]");
+      const radio = (part) => box.querySelector(`input[id$="-${part}"]`);
+      const label = (part) => box.querySelector(`label[for="${radio(part).id}"]`).textContent.replace(/\s+/g, " ").trim();
+      const r = { whiteOff: radio("c-white").disabled, whiteText: label("c-white"), sizesWait: radio("s-M").disabled };
+      radio("c-black").click(); await sleep(30);
+      r.L = [radio("s-L").disabled, label("s-L")]; r.S = label("s-S"); r.XL = label("s-XL");
+      radio("s-M").click(); await sleep(30);
+      radio("s-XL").click(); await sleep(30);
+      const plus = () => [...box.querySelectorAll('.Catui_sh-picked [data-step="1"]')].find((b) => b.dataset.k.endsWith("black/XL"));
+      plus().click(); await sleep(30);
+      r.xlMax = plus().disabled;
+      r.lines = box.querySelectorAll(".Catui_sh-picked li").length;
+      r.total = box.querySelector("[data-total]").textContent;
+      const st = sh.optionState((await sh.load()).byId["101"], "navy");
+      r.navyXL = st.sizes.find((s) => s.id === "XL").soldOut;
+      r.p202 = (await sh.load()).byId["202"].soldOut;
+      sh.cart.clear();
+      document.querySelector('[data-acts] [data-act="cart"]').click(); await sleep(50);
+      r.cart = sh.cart.list().map((l) => `${l.key}x${l.qty}`).sort().join(",");
+      catui.layer.closeAll();
+      sh.cart.clear();
+      return r;
+    },
+    expect: {
+      "모든 사이즈 0인 색상은 고를 수 없음 + 글자": (r) => r.whiteOff && r.whiteText.includes("품절"),
+      "색상 먼저: 사이즈 잠김": (r) => r.sizesWait,
+      "고른 색상 기준 품절 사이즈": (r) => r.L[0] && r.L[1].includes("품절"),
+      "적은 재고 'N개 남음' · 추가금 글자": (r) => r.S.includes("3개 남음") && r.XL.includes("+2,000원") && r.XL.includes("2개 남음"),
+      "수량은 조합 재고까지": (r) => r.xlMax,
+      "선택 목록 2줄 · 합계 = 20,300 + 22,300×2": (r) => r.lines === 2 && r.total === "64,900원",
+      "없는 조합(navy/XL)은 품절 · 재고 0 상품 품절": (r) => r.navyXL && r.p202,
+      "장바구니 담기: 옵션·수량 그대로": (r) => r.cart === "101:black/M x1,101:black/XL x2".replace(/ /g, ""),
+    },
+  },
+  {
+    name: "shop · 주문서 최종 금액 (쿠폰·적립금·배송비·약관)",
+    page: "docs/shop/templates/checkout.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const sh = catui.shop; await sh.ready;
+      sh.cart.clear();
+      sh.cart.add("101", { color: "black", size: "M", qty: 1, max: 12 });   // 패션 20,300
+      sh.cart.add("201", { qty: 1, max: 40 });                               // 뷰티 24,000 → 44,300 · 무료배송
+      sh.destroy(); sh.init(); await sh.ready; await sleep(100);
+      const f = document.querySelector("form[data-catui-sh-checkout]"), sel = f.elements.coupon, pts = f.elements.points;
+      const fin = () => f.querySelector("[data-final]")?.textContent;
+      const opt = (id) => [...sel.options].find((o) => o.value === id);
+      const r = { best: sel.value, free: opt("FREESHIP")?.disabled, big: [opt("BIG20000")?.disabled, opt("BIG20000")?.textContent.includes("200,000원 이상")], expired: !opt("FALL5000"), start: fin() };
+      pts.value = "500"; pts.dispatchEvent(new Event("change", { bubbles: true })); await sleep(20);
+      r.small = [pts.value, f.querySelector("[data-point-note]").textContent.includes("1,000원 이상")];
+      pts.value = "9999"; pts.dispatchEvent(new Event("change", { bubbles: true })); await sleep(20);
+      r.capped = [pts.value, fin()];
+      sel.value = "BEAUTY3000"; sel.dispatchEvent(new Event("change", { bubbles: true })); await sleep(20);
+      r.beauty = fin();
+      const o = sh.calc.order({ cart: sh.cart.summary((await sh.load()).byId), coupon: (await sh.load()).coupons.find((c) => c.id === "WELCOME10"), points: 4820, have: 4820 });
+      r.calc = [o.coupon, o.points, o.total, o.earn];
+      f.requestSubmit(); await sleep(50);
+      r.blocked = document.activeElement?.id === "co-ag-1" && location.pathname.endsWith("checkout.html");
+      f.querySelector("[data-agree-all]").click(); await sleep(20);
+      r.all = [...f.querySelectorAll("[data-agree]")].every((x) => x.checked);
+      f.querySelector("[data-agree]").click(); await sleep(20);
+      r.allOff = !f.querySelector("[data-agree-all]").checked;
+      sh.cart.clear();
+      return r;
+    },
+    expect: {
+      "가장 큰 할인 쿠폰을 골라 둠 (10% = 4,430원)": (r) => r.best === "WELCOME10" && r.start === "39,870원",
+      "쓸 수 없는 쿠폰은 잠김 + 이유, 만료 쿠폰은 숨김": (r) => r.free && r.big[0] && r.big[1] && r.expired,
+      "적립금 1,000원 미만은 쓰지 않음": (r) => r.small[0] === "" && r.small[1],
+      "보유액까지만 (4,820원) → 35,050원": (r) => r.capped[0] === "4820" && r.capped[1] === "35,050원",
+      "분류 쿠폰으로 바꾸면 다시 계산 (36,480원)": (r) => r.beauty === "36,480원",
+      "calc.order: 쿠폰·적립금·최종·적립 예정": (r) => JSON.stringify(r.calc) === "[4430,4820,35050,350]",
+      "필수 약관 없으면 결제 막음 + 포커스": (r) => r.blocked,
+      "전체 동의 ↔ 개별 동의": (r) => r.all && r.allOff,
+    },
+  },
+  {
+    name: "shop · 320px 화면 가로 넘침 없음",
+    page: "docs/shop/templates/index.html",
+    wait: 600,
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const pages = ["index.html", "list.html?c=fashion", "search.html?q=%ED%8B%B0", "event.html?e=autumn", "product.html?id=101", "cart.html", "checkout.html", "complete.html", "mypage.html", "orders.html", "order-track.html", "wish.html", "recent.html", "coupons.html", "profile.html", "review-write.html?id=101", "login.html", "register.html", "error-404.html"];
+      catui.shop.cart.clear(); catui.shop.cart.add("101", { color: "black", size: "M", qty: 2, max: 12 }); catui.shop.cart.add("501", { color: "black", qty: 1, max: 7 });
+      const frames = pages.map((p) => { const f = document.createElement("iframe"); f.style.cssText = "width:320px;height:640px;border:0;position:absolute;left:0;top:0"; f.src = p; document.body.appendChild(f); return f; });
+      await sleep(2500);
+      const bad = frames.map((f, i) => { const de = f.contentDocument.documentElement; return de.scrollWidth > de.clientWidth ? `${pages[i]} ${de.scrollWidth}` : ""; }).filter(Boolean);
+      frames.forEach((f) => f.remove());
+      catui.shop.cart.clear();
+      return { bad, n: pages.length };
+    },
+    expect: { "19개 화면 모두 320px 안": (r) => r.n === 19 && !r.bad.length },
+  },
+  {
+    name: "docskit · 목차 자동 생성 · 현재 위치 · 제목 앵커 · 피드백",
+    page: "docs/docskit/templates/doc.html?p=install",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const dk = catui.docs; await dk.ready; await sleep(50);
+      const art = document.querySelector("[data-catui-dk-page]");
+      const hs = [...art.querySelectorAll("h2, h3")].filter((h) => !h.closest("[data-catui-dk-notoc]"));
+      const links = [...document.querySelectorAll("#dk-toc a[href^='#']")];
+      const r = {
+        title: document.querySelector("[data-title]").textContent, n: [hs.length, links.length],
+        ids: hs.map((h) => h.id).join(","), linked: links.every((a) => document.getElementById(a.getAttribute("href").slice(1))),
+        nested: !!document.querySelector("#dk-toc ol ol a"), navName: document.querySelector("#dk-toc nav")?.getAttribute("aria-label"),
+        side: document.querySelector('[data-catui-dk-nav] a[aria-current="page"]')?.textContent, next: document.querySelector(".Catui_dk-pn-next b")?.textContent,
+        noFeedbackInToc: !links.some((a) => a.textContent.includes("도움")),
+      };
+      // 둘째 h2까지 내리면 그 링크가 현재 위치
+      const h2s = hs.filter((h) => h.tagName === "H2");
+      document.querySelector(".Catui_dk-main").style.paddingBottom = "2000px";   // 짧은 쪽도 끝까지 내려가지 않게
+      scrollTo(0, h2s[1].getBoundingClientRect().top + scrollY - 60); await sleep(120); dk.tocSync();
+      r.current = document.querySelector('#dk-toc a[aria-current="location"]')?.getAttribute("href");
+      r.want = `#${h2s[1].id}`;
+      // 앵커: 주소 복사 + 주소창 #id
+      const orig = catui.util.copy; let copied = ""; catui.util.copy = async (t) => { copied = t; return true; };
+      h2s[0].querySelector(".Catui_dk-anchor").click(); await sleep(60);
+      catui.util.copy = orig; catui.layer.closeAll();
+      r.anchor = [copied.endsWith(`#${h2s[0].id}`), location.hash === `#${encodeURIComponent(h2s[0].id)}` || decodeURIComponent(location.hash) === `#${h2s[0].id}`];
+      r.anchorName = h2s[0].querySelector(".Catui_dk-anchor .Catui_clip")?.textContent;
+      // 피드백: 누르면 aria-pressed + 기억, 다시 열어도 유지, 같은 답 다시 누르면 취소
+      const fb = document.querySelector("[data-catui-dk-feedback]"); dk.feedback.set(fb.getAttribute("data-catui-dk-feedback"), "");
+      dk.feedback.paint(fb);
+      fb.querySelector('[data-vote="yes"]').click(); await sleep(20);
+      r.fb = [fb.getAttribute("data-catui-dk-feedback"), fb.querySelector('[data-vote="yes"]').getAttribute("aria-pressed"), dk.feedback.get("doc:install"), !!fb.querySelector("[data-msg]").textContent];
+      dk.destroy(); dk.init(); await dk.ready;
+      r.fbKept = document.querySelector('[data-catui-dk-feedback] [data-vote="yes"]').getAttribute("aria-pressed");
+      document.querySelector('[data-catui-dk-feedback] [data-vote="yes"]').click(); await sleep(20);
+      r.fbOff = dk.feedback.get("doc:install");
+      return r;
+    },
+    expect: {
+      "pages.json 본문 + 제목": (r) => r.title === "설치와 파일 구조",
+      "h2·h3 모두 목차에 (피드백 제외)": (r) => r.n[0] === 3 && r.n[1] === 3 && r.noFeedbackInToc,
+      "한글 제목 → id · 링크 대상 존재 · h3는 안쪽 목록": (r) => r.ids === "npm으로-설치,불러오는-순서,배포-파일" && r.linked && r.nested,
+      "목차 nav 이름": (r) => r.navName === "이 쪽에서",
+      "스크롤 따라 aria-current=location": (r) => r.current === r.want,
+      "제목 앵커: 주소#id 복사 + 주소창 + 숨김 글자": (r) => r.anchor[0] && r.anchor[1] && r.anchorName === "npm으로 설치 제목 주소 복사",
+      "왼쪽 메뉴 현재 쪽 · 다음 문서": (r) => r.side === "설치와 파일 구조" && r.next === "토큰과 테마",
+      "피드백 예 → 눌림·기억·안내": (r) => r.fb[0] === "doc:install" && r.fb[1] === "true" && r.fb[2] === "yes" && r.fb[3],
+      "다시 열어도 유지 · 같은 답 다시 누르면 취소": (r) => r.fbKept === "true" && r.fbOff === "",
+    },
+  },
+  {
+    name: "docskit · 코드 블록 복사 버튼",
+    page: "docs/docskit/templates/guide.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const dk = catui.docs; await dk.ready;
+      const pres = document.querySelectorAll(".Catui_dk-prose pre"), btns = document.querySelectorAll("[data-catui-dk-copy]");
+      const orig = catui.util.copy; let copied = null; catui.util.copy = async (t) => { copied = t; return true; };
+      let evt = null; const off = dk.on("copy", (d) => { evt = d; });
+      const b = btns[1], name0 = b.textContent.replace(/\s+/g, " ").trim(); b.focus(); b.click(); await sleep(80);
+      const r = { n: [pres.length, btns.length], lang: b.closest(".Catui_dk-code").querySelector(".Catui_codeblock-h > span").textContent, copied, label: b.querySelector("[data-label]").textContent, evt: evt && [evt.kind, evt.ok], live: document.querySelector("[data-catui-dk-live]")?.textContent, name: name0, focus: document.activeElement === b, focusable: pres[0].tabIndex === 0 };
+      catui.util.copy = async () => false; btns[0].click(); await sleep(80);
+      r.fail = btns[0].querySelector("[data-label]").textContent;
+      catui.util.copy = orig; off?.();
+      await sleep(1600); r.back = b.querySelector("[data-label]").textContent;
+      r.again = dk.code(document); // 이미 붙인 블록은 다시 붙이지 않음
+      return r;
+    },
+    expect: {
+      "pre마다 복사 버튼 하나": (r) => r.n[0] === 4 && r.n[1] === 4,
+      "언어 이름 머리줄 · 버튼 이름(숨김 글자)": (r) => r.lang === "html" && r.name === "복사 html 코드",
+      "코드 글자 그대로 복사": (r) => typeof r.copied === "string" && r.copied.startsWith('<link rel="stylesheet" href="dist/catui.min.css">') && r.copied.includes("catdocs.min.js"),
+      "복사됨 표시 · 낭독기 알림 · copy 이벤트 · 포커스 유지": (r) => r.label === "복사됨" && r.live === "코드를 복사했습니다" && r.evt[0] === "code" && r.evt[1] === true && r.focus,
+      "실패도 글자로 · 1.5초 뒤 되돌림": (r) => r.fail === "실패" && r.back === "복사",
+      "코드 상자 키보드 스크롤 · 중복 없음": (r) => r.focusable && r.again === 0,
+    },
+  },
+  {
+    name: "docskit · 문서 검색 (초성 · 점수 · 주소 · 결과 표시)",
+    page: "docs/docskit/templates/search.html?q=%E3%85%81%E3%85%8A",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const dk = catui.docs; await dk.ready; await dk.search.ready;
+      const titles = () => [...document.querySelectorAll(".Catui_dk-result b")].map((b) => b.textContent);
+      const m = dk.search.match;
+      const r = {
+        pure: [m("대시보드", "ㄷㅅㅂㄷ"), m("대시보드", "대ㅅ"), m("대시보드", "ㄷ시"), m("대시 보드", "대시보드"), m("대시보드", "ㅂㄷㄷ"), m("Dark Mode", "darkmode")],
+        input: document.querySelector("#sr-q").value, first: titles()[0], count: document.querySelector("[data-catui-dk-count]").textContent,
+      };
+      const q = document.querySelector("#sr-q");
+      q.value = "다크 모드"; q.dispatchEvent(new Event("input", { bubbles: true })); await sleep(250);
+      r.dark = [titles()[0], new URL(location.href).searchParams.get("q"), document.querySelector(".Catui_dk-result mark")?.textContent];
+      // 조합 중(isComposing) 입력은 무시 → compositionend 뒤에 찾음
+      q.value = "클립"; q.dispatchEvent(new InputEvent("input", { bubbles: true, isComposing: true })); await sleep(250);
+      r.composing = new URL(location.href).searchParams.get("q");
+      q.dispatchEvent(new CompositionEvent("compositionend", { bubbles: true })); await sleep(250);
+      r.after = [new URL(location.href).searchParams.get("q"), titles().length];
+      q.value = "없는낱말xyz"; q.dispatchEvent(new Event("input", { bubbles: true })); await sleep(250);
+      r.none = [titles().length, document.querySelector("[data-catui-dk-count]").textContent.includes("없습니다")];
+      const xss = dk.search.find([{ t: "<img src=x onerror=alert(1)>목차", u: "#" }], "목차");
+      dk.search.render(document.querySelector("[data-catui-dk-results]"), xss, "목차");
+      r.safe = !document.querySelector(".Catui_dk-result img") && document.querySelector(".Catui_dk-result b").textContent.startsWith("<img");
+      r.scores = dk.search.find([{ t: "가", x: "목차" }, { t: "목차 만들기" }, { t: "가", k: "목차" }, { t: "모아 찾기" }], "목차").map((x) => x.score).join(",");
+      r.cho = dk.search.find([{ t: "가" }, { t: "목차 만들기" }], "ㅁㅊ").map((x) => x.score).join(",");
+      return r;
+    },
+    expect: {
+      "command와 같은 초성 규칙": (r) => JSON.stringify(r.pure) === "[true,true,true,true,false,true]",
+      "주소 ?q= → 입력칸 · 초성 ㅁㅊ → 목차 자동 생성": (r) => r.input === "ㅁㅊ" && r.first === "목차 자동 생성" && /검색 결과 \d+건/.test(r.count),
+      "입력하는 대로 · 주소 맞춤 · <mark>": (r) => r.dark[0] === "다크 모드" && r.dark[1] === "다크 모드" && r.dark[2] === "다크 모드",
+      "조합 중에는 찾지 않음 → 조합 끝나면 찾음": (r) => r.composing === "다크 모드" && r.after[0] === "클립" && r.after[1] >= 2,
+      "결과 없음 안내": (r) => r.none[0] === 0 && r.none[1],
+      "결과 글자 이스케이프": (r) => r.safe,
+      "점수: 제목 그대로 4 · 제목 초성 3 · 키워드 2 · 요약 1": (r) => r.scores === "4,2,1" && r.cho === "3",
+    },
+  },
+  {
+    name: "docskit · 읽는 시간 · 마크다운 일부(안전) · 블로그 글",
+    page: "docs/docskit/templates/post.html?id=ime-enter",
+    run: async () => {
+      const dk = catui.docs; await dk.ready;
+      const rt = (s) => dk.readTime(s).minutes;
+      const words = (n) => Array.from({ length: n }, () => "word").join(" ");
+      const box = document.createElement("div"); box.innerHTML = `<p>${"가".repeat(600)}</p><pre>${"나".repeat(5000)}</pre>`;
+      const r = {
+        rules: [rt("가".repeat(1000)), rt("가".repeat(1001)), rt(words(400)), rt(words(401)), rt(`${"가".repeat(250)} ${words(100)}`), rt(""), rt(box)],
+        label: dk.readTime("가".repeat(1200)).label,
+        title: document.querySelector("[data-title]").textContent, doc: document.title,
+        metaTime: [...document.querySelectorAll("[data-meta] span")].map((s) => s.textContent).find((t) => t.includes("읽기")),
+      };
+      const d = await dk.blog(); r.want = `${dk.postTime(d.byId["ime-enter"]).label} 읽기`;
+      const md = dk.md('<img src=x onerror=alert(1)> **굵게** [나쁜](javascript:alert(1)) [http](http://a.com) [좋은](https://example.com/a?b=1&c=2) `**코드**`\n\n- 하나\n- 둘');
+      r.md = { noTag: !/<img/.test(md), escaped: md.includes("&lt;img"), strong: md.includes("<strong>굵게</strong>"), noJs: !/href="javascript/.test(md), noHttp: !/href="http:/.test(md), https: md.includes('href="https://example.com/a?b=1&amp;c=2"') && md.includes("(새 창)"), code: md.includes("<code>**코드**</code>"), list: md.includes("<ul><li>하나</li><li>둘</li></ul>") };
+      r.attr = dk.mdInline('[x](https://a.com" onmouseover="alert(1))');
+      r.toc = document.querySelectorAll("#dk-toc a").length;
+      r.readbar = !!document.querySelector('.Catui_readbar[data-catui-readbar="[data-catui-dk-post]"]');
+      r.related = [...document.querySelectorAll("[data-related] .Catui_dk-card-t")].map((x) => x.textContent);
+      r.cover = document.querySelector("[data-cover] .Catui_dk-cover")?.getAttribute("aria-hidden");
+      r.code = document.querySelectorAll("[data-body] [data-catui-dk-copy]").length;
+      return r;
+    },
+    expect: {
+      "규칙: 한글 500자/분 · 단어 200개/분 · 올림 · 최소 1분 · 코드 제외": (r) => JSON.stringify(r.rules) === "[2,3,2,3,1,1,2]" && r.label === "3분",
+      "?id= 글 제목·문서 제목": (r) => r.title === "한글 조합 중 Enter가 폼을 보내는 문제" && r.doc.startsWith("한글 조합 중"),
+      "글 머리 읽는 시간 = postTime": (r) => r.metaTime === r.want,
+      "마크다운: 이스케이프 후 굵게·코드·https 링크·목록만": (r) => Object.values(r.md).every(Boolean),
+      "링크 주소로 속성 주입 불가": (r) => !/onmouseover="/.test(r.attr),
+      "목차 · 읽기 막대(본체 재사용) · 코드 복사 · 머리 그림 꾸밈": (r) => r.toc >= 2 && r.readbar && r.code === 1 && r.cover === "true",
+      "관련 글(태그 겹침)": (r) => r.related.length >= 1 && !r.related.includes("한글 조합 중 Enter가 폼을 보내는 문제"),
+    },
+  },
+  {
+    name: "docskit · 블로그 태그 필터 ↔ 주소 · 쪽 이동",
+    page: "docs/docskit/templates/blog.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const dk = catui.docs; await dk.ready;
+      const cards = () => document.querySelectorAll("[data-list] .Catui_dk-card").length;
+      const qs = () => new URL(location.href).search;
+      const pressed = () => document.querySelector('[data-filter] [aria-pressed="true"]')?.dataset.tag;
+      const r = { start: [cards(), document.querySelectorAll("[data-pager] [data-page]").length, pressed(), document.querySelector("[data-count]").textContent] };
+      document.querySelector('[data-pager] [data-page="2"]').click(); await sleep(60);
+      r.page2 = [qs(), cards(), document.querySelector('[data-pager] [aria-current="page"]')?.textContent, document.activeElement?.dataset.page];
+      document.querySelector('[data-filter] [data-tag="a11y"]').click(); await sleep(60);
+      r.tag = [qs(), cards(), pressed(), document.querySelector("[data-pager]").hidden, document.activeElement?.dataset.tag, !!document.querySelector('[data-tag="a11y"] svg')];
+      // 뒤로 가기: 실제 history.back()은 사용자 활성화 없이 쌓은 기록을 Chrome이 건너뛰어 다른 쪽으로 나갈 수 있으므로
+      // 주소를 이전 값으로 돌리고 popstate를 보내 같은 처리를 확인한다
+      const pop = (search) => { history.replaceState(null, "", `blog.html${search}`); dispatchEvent(new PopStateEvent("popstate", { state: null })); };
+      pop("?page=2"); await sleep(60);
+      r.back = [qs(), cards(), pressed()];
+      pop(""); await sleep(60);
+      r.back2 = [qs(), cards(), pressed()];
+      const all = (await dk.blog()).posts;
+      r.slice = [dk.blogList.slice(all, { tag: "", page: 9 }).page, dk.blogList.slice(all, { tag: "korean" }).total, dk.blogList.read(new URLSearchParams("tag=x&page=-3")).page];
+      return r;
+    },
+    expect: {
+      "처음: 6개 · 2쪽 · 전체 눌림": (r) => r.start[0] === 6 && r.start[1] === 4 && r.start[2] === "" && r.start[3] === "글 8개 · 1/2쪽",
+      "2쪽 → 주소 ?page=2 · 2개 · 현재 쪽 · 포커스": (r) => r.page2[0] === "?page=2" && r.page2[1] === 2 && r.page2[2] === "2" && r.page2[3] === "2",
+      "태그 → 주소 ?tag=a11y · 1쪽으로 · 눌림(체크 아이콘) · 쪽 이동 숨김": (r) => r.tag[0] === "?tag=a11y" && r.tag[1] === 3 && r.tag[2] === "a11y" && r.tag[3] && r.tag[4] === "a11y" && r.tag[5],
+      "뒤로 가기로 이전 화면": (r) => r.back[0] === "?page=2" && r.back[1] === 2 && r.back[2] === "" && r.back2[0] === "" && r.back2[1] === 6,
+      "쪽 범위 맞춤 · 태그 거르기 · 잘못된 쪽": (r) => JSON.stringify(r.slice) === "[2,3,1]",
+    },
+  },
+  {
+    name: "docskit · 버전 선택 (주소 이동 · 옛 버전 안내)",
+    page: "docs/docskit/templates/versions.html?v=1.2",
+    run: async () => {
+      const dk = catui.docs; await dk.ready;
+      const sel = document.querySelector("select[data-catui-dk-version]"), old = document.querySelector("[data-catui-dk-old]");
+      const r = { value: sel.value, oldShown: !old.hidden, oldText: old.querySelector("[data-ver]").textContent, name: document.querySelector("[data-catui-dk-vername]").textContent, side: document.querySelector('[data-catui-dk-nav] a[aria-current="page"]')?.textContent };
+      const go = dk.version.go; let went = ""; dk.version.go = (h) => { went = h; };
+      sel.value = "versions.html?v=2.1"; sel.dispatchEvent(new Event("change", { bubbles: true }));
+      dk.version.go = go;
+      r.went = went;
+      return r;
+    },
+    expect: {
+      "?v=1.2 → 그 항목 선택 · 옛 버전 안내 글자": (r) => r.value === "versions.html?v=1.2" && r.oldShown && r.oldText === "v1.2 (지원 종료)" && r.name === "v1.2",
+      "고르면 그 주소로 이동": (r) => r.went === "versions.html?v=2.1",
+      "왼쪽 메뉴 현재 쪽": (r) => r.side === "마이그레이션 가이드",
+    },
+  },
+  {
+    name: "docskit · 320px 화면 가로 넘침 없음",
+    page: "docs/docskit/templates/index.html",
+    wait: 600,
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const pages = ["index.html", "doc.html?p=intro", "doc.html?p=install", "api.html", "guide.html", "changelog.html", "blog.html", "post.html?id=catui-2-1", "tag.html?t=a11y", "author.html?a=lee", "search.html?q=%EB%AA%A9%EC%B0%A8", "versions.html?v=1.2", "error-404.html"];
+      const frames = pages.map((p) => { const f = document.createElement("iframe"); f.style.cssText = "width:320px;height:640px;border:0;position:absolute;left:0;top:0"; f.src = p; document.body.appendChild(f); return f; });
+      await sleep(2500);
+      const bad = frames.map((f, i) => { const de = f.contentDocument.documentElement; return de.scrollWidth > de.clientWidth ? `${pages[i]} ${de.scrollWidth}` : ""; }).filter(Boolean);
+      frames.forEach((f) => f.remove());
+      return { bad, n: pages.length };
+    },
+    expect: { "12종(13화면) 모두 320px 안": (r) => r.n === 13 && !r.bad.length },
   },
 ];

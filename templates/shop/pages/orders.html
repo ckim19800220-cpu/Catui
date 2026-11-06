@@ -1,0 +1,12 @@
+<!-- title: 주문 내역 | nav: my | my: orders -->
+<div class="Catui_sh-my">
+  {{mynav}}
+  <section class="Catui_sh-my-main" data-catui-sh-orders aria-labelledby="od-h">
+    <div class="Catui_sh-sec-h"><h1 class="Catui_h2" id="od-h">주문 내역</h1><p class="Catui_help" data-count aria-live="polite"></p></div>
+    <div class="Catui_sh-toolbar">
+      <div class="Catui_segment" role="group" aria-label="주문 상태"><button type="button" data-kind="all" aria-pressed="true">전체</button><button type="button" data-kind="live" aria-pressed="false">진행 중</button><button type="button" data-kind="done" aria-pressed="false">배송 완료</button><button type="button" data-kind="cancel" aria-pressed="false">취소</button></div>
+      <div class="Catui_select-wrap"><label class="Catui_clip" for="od-months">조회 기간</label><select class="Catui_input Catui_input-sm Catui_select" id="od-months" name="months"><option value="1">최근 1개월</option><option value="3" selected>최근 3개월</option><option value="all">전체</option></select>{{icon:chevron-down}}</div>
+    </div>
+    <ul class="Catui_sh-orders" data-list></ul>
+  </section>
+</div>

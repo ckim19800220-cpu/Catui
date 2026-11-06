@@ -1,0 +1,21 @@
+[
+  { "t": "소개", "u": "doc.html?p=intro", "s": "문서 · 시작하기", "x": "Catui는 한국어 화면을 위한 토큰 기반 UI 키트입니다.", "k": "개요 처음" },
+  { "t": "5분 만에 시작하기", "u": "guide.html", "s": "문서 · 시작하기", "x": "설치, 불러오기, 셸 마크업, 스크립트 네 단계.", "k": "빠른 시작 설치" },
+  { "t": "설치와 파일 구조", "u": "doc.html?p=install", "s": "문서 · 시작하기", "x": "배포 파일과 불러오는 순서.", "k": "npm cdn 배포" },
+  { "t": "토큰과 테마", "u": "doc.html?p=theme", "s": "문서 · 개념", "x": "색·간격은 토큰, 어두운 화면은 속성 한 줄.", "k": "다크 모드 테마 잠금" },
+  { "t": "다크 모드", "u": "doc.html?p=theme#다크-모드", "s": "문서 · 개념", "x": "data-catui-theme=\"dark\" 한 줄로 바뀝니다.", "k": "어두운 화면 theme" },
+  { "t": "접근성 기준", "u": "doc.html?p=a11y", "s": "문서 · 개념", "x": "색만으로 알리지 않기, 키보드, 320px 리플로.", "k": "a11y wcag 대비" },
+  { "t": "목차 자동 생성", "u": "api.html#api-toc", "s": "API", "x": "docs.toc(article, box) — h2·h3를 모아 목차 링크를 만듭니다.", "k": "toc 스크롤 현재 위치" },
+  { "t": "문서 검색", "u": "api.html#api-search", "s": "API", "x": "docs.search.find(index, q) — 초성 검색, 점수 순.", "k": "search 초성" },
+  { "t": "읽는 시간 계산", "u": "api.html#api-readtime", "s": "API", "x": "docs.readTime(text) — 한글 분당 500자, 단어 분당 200개.", "k": "read time 분" },
+  { "t": "코드 복사 버튼", "u": "guide.html#load", "s": "문서 · 시작하기", "x": "코드 블록마다 복사 버튼이 붙습니다.", "k": "copy 클립보드" },
+  { "t": "변경 이력", "u": "changelog.html", "s": "참조", "x": "버전마다 추가·변경·고침.", "k": "릴리스 changelog" },
+  { "t": "마이그레이션 가이드", "u": "versions.html", "s": "버전", "x": "1.x → 2.0 → 2.1로 올리는 순서.", "k": "버전 업그레이드" },
+  { "t": "Catui 2.1 — 확장 키트 네 가지", "u": "post.html?id=catui-2-1", "s": "블로그", "x": "관리자·커뮤니티·쇼핑몰·문서 키트.", "k": "릴리스" },
+  { "t": "한글 조합 중 Enter가 폼을 보내는 문제", "u": "post.html?id=ime-enter", "s": "블로그", "x": "catui.imeBusy로 확정 Enter를 막습니다.", "k": "입력기 ime" },
+  { "t": "목차가 스크롤을 따라가게 만들기", "u": "post.html?id=toc-spy", "s": "블로그", "x": "화면 위 30% 선을 지난 마지막 제목.", "k": "toc" },
+  { "t": "어두운 화면에서도 대비 4.5:1 지키기", "u": "post.html?id=contrast", "s": "블로그", "x": "토큰 두 벌로 대비 실측.", "k": "다크 모드 접근성" },
+  { "t": "한국어 줄바꿈: keep-all과 anywhere", "u": "post.html?id=line-break", "s": "블로그", "x": "낱말을 자르지 않고 넘치지도 않게.", "k": "word-break" },
+  { "t": "코드 복사 버튼, 비보안 주소에서도", "u": "post.html?id=copy-button", "s": "블로그", "x": "catui.util.copy의 대체 경로.", "k": "클립보드" },
+  { "t": "화면 낭독기로 문서를 읽어 보니", "u": "post.html?id=screen-reader", "s": "블로그", "x": "숨김 글자와 nav 이름.", "k": "접근성 스크린리더" }
+]

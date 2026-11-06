@@ -95,6 +95,73 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="서버 검사 결과를 칸에 표시 (setError) · 두 번 제출 막기">
+  <form class="Catui_fields" data-catui-form data-catui-filter="fm-srv" novalidate>
+    <div class="Catui_field"><label class="Catui_label" for="fm-srv-uid">아이디 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-srv-uid" name="uid" autocomplete="username" data-catui-verify="required|id" aria-describedby="fm-srv-uid-h"><p class="Catui_help" id="fm-srv-uid-h">예시: <code>admin</code>은 이미 쓰는 아이디로 처리합니다.</p></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-srv-mail">이메일 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-srv-mail" name="email" type="email" autocomplete="email" data-catui-verify="required|email"></div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit" data-catui-submit id="fm-srv-btn">가입</button></div>
+  </form>
+  <p class="Catui_help" id="fm-srv-out" aria-live="polite"></p>
+  <script>
+  catui.use(['form'], function (form) {
+    var btn = document.getElementById('fm-srv-btn'), out = document.getElementById('fm-srv-out'), busy = false;
+    // 가짜 서버: 0.7초 뒤 { ok } 또는 { errors: { 칸 이름: 문장 } }
+    var api = function (data) { return new Promise(function (r) { setTimeout(function () { r(data.uid.toLowerCase() === 'admin' ? { ok: false, errors: { uid: '이미 쓰는 아이디입니다. 다른 아이디를 입력해 주세요.' } } : { ok: true }); }, 700); }); };
+    form.on('submit(fm-srv)', function (d) {
+      if (busy) return false;                       // 응답을 기다리는 중이면 무시
+      busy = true; btn.disabled = true; btn.setAttribute('aria-busy', 'true'); out.textContent = '확인하는 중…';
+      api(d.field).then(function (res) {
+        if (res.ok) { out.textContent = d.field.uid + '님, 가입했습니다.'; return; }
+        out.textContent = '';
+        Object.keys(res.errors).forEach(function (name, i) {
+          var el = d.form.querySelector('[name="' + name + '"]');
+          form.setError(el, res.errors[name]);       // 칸 아래 문장 + aria-invalid. 고쳐 입력하면 저절로 다시 검사
+          if (i === 0) el.focus();
+        });
+      }).finally(function () { busy = false; btn.disabled = false; btn.removeAttribute('aria-busy'); });
+      return false;
+    });
+  });
+  </script>
+</catui-example>
+<catui-example title="수정 화면 — 불러와 채우기(form.val) · 바뀐 칸만 보내기 · 되돌리기">
+  <form class="Catui_fields" data-catui-form data-catui-filter="fm-edit" novalidate>
+    <div class="Catui_field"><label class="Catui_label" for="fm-edit-name">이름 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fm-edit-name" name="name" autocomplete="name" data-catui-verify="required"></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-edit-phone">휴대전화</label><input class="Catui_input" id="fm-edit-phone" name="phone" autocomplete="tel" data-catui-verify="phone"></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-edit-team">팀</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="fm-edit-team" name="team"><option value="design">디자인</option><option value="dev">개발</option><option value="ops">운영</option></select></div></div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit" data-catui-submit>저장</button><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="fm-edit-undo">되돌리기</button></div>
+  </form>
+  <p class="Catui_help" id="fm-edit-out" aria-live="polite">불러오는 중…</p>
+  <script>
+  catui.use(['form'], function (form) {
+    var out = function (t) { document.getElementById('fm-edit-out').textContent = t; };
+    var saved = null;
+    // 처음 값 불러오기 (실제로는 fetch) → 칸 채우고 원본을 기억
+    new Promise(function (r) { setTimeout(function () { r({ name: '이준', phone: '010-1234-5678', team: 'dev' }); }, 400); }).then(function (user) {
+      saved = form.val('fm-edit', user);
+      out('불러왔습니다. 값을 바꾼 뒤 저장해 보세요.');
+    });
+    form.on('submit(fm-edit)', function (d) {
+      var changed = {};
+      Object.keys(d.field).forEach(function (k) { if (saved && d.field[k] !== saved[k]) changed[k] = d.field[k]; });
+      if (!Object.keys(changed).length) { out('바뀐 내용이 없습니다.'); return false; }
+      out('보낼 값 (PATCH): ' + JSON.stringify(changed));
+      saved = form.val('fm-edit');                    // 저장한 값이 새 원본
+      return false;
+    });
+    document.getElementById('fm-edit-undo').addEventListener('click', function () {
+      if (!saved) return;
+      form.val('fm-edit', saved);
+      document.querySelectorAll('[data-catui-filter="fm-edit"] [data-catui-verify]').forEach(function (el) { form.clearError(el); });
+      out('저장한 값으로 되돌렸습니다.');
+    });
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="api">
 <h2 id="api">API</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">form API</caption>

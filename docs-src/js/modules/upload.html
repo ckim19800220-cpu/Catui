@@ -12,6 +12,63 @@
 <p>끌어 놓기와 선택을 모두 받고, 형식·용량·개수를 검사해 오류를 문장(<code>role=alert</code>)으로 알립니다. <code>url</code>을 주면 XHR로 진행률과 함께 올리고 목록에서 취소·다시 시도할 수 있습니다.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="프로필 사진 — 이미지 미리보기 · 한 장 · 1MB 제한">
+  <div class="Catui_hstack Catui_gap-4" style="align-items:flex-start;flex-wrap:wrap">
+    <img class="Catui_img-thumb" id="up-avatar-img" width="96" height="96" style="object-fit:cover" alt="프로필 사진 없음" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23EEF1F4'/%3E%3Ccircle cx='48' cy='38' r='16' fill='%23B8C1CC'/%3E%3Cpath d='M18 86c4-18 16-26 30-26s26 8 30 26Z' fill='%23B8C1CC'/%3E%3C/svg%3E">
+    <div class="Catui_vstack" style="flex:1 1 240px">
+      <label class="Catui_upz" id="up-avatar" data-catui-filter="up-avatar"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-image"></use></svg><span class="Catui_upz-title">사진 고르기</span><span class="Catui_upz-hint">JPG·PNG·WebP, 1MB 이하 한 장</span><input class="Catui_clip" type="file"></label>
+      <div id="up-avatar-list"></div>
+    </div>
+  </div>
+  <script>
+  catui.use(['upload'], function (upload) {
+    var img = document.getElementById('up-avatar-img'), empty = img.src, url = '';
+    var show = function (file) {
+      if (url) URL.revokeObjectURL(url);     // 앞서 만든 미리보기 주소는 풀어 메모리를 돌려준다
+      url = file ? URL.createObjectURL(file) : '';
+      img.src = url || empty;
+      img.alt = file ? '고른 프로필 사진 미리보기: ' + file.name : '프로필 사진 없음';
+    };
+    upload.render({ elem: '#up-avatar', list: '#up-avatar-list', accept: 'image/jpeg,image/png,image/webp', size: 1024, multiple: false,
+      choose: function (files) { show(files[0]); } });   // url이 없으니 고르기만 — 저장할 때 inst.files[0].file을 함께 보냄
+    upload.on('remove(up-avatar)', function () { show(null); });
+  });
+  </script>
+</catui-example>
+<catui-example title="양식과 함께 한 번에 보내기 — auto: false · 같은 이름 거르기(before) · 보내는 동안 잠금">
+  <div class="Catui_field"><label class="Catui_label" for="up-send-title">제목</label><input class="Catui_input" id="up-send-title" value="11월 정산 자료"></div>
+  <div id="up-send" class="Catui_upz" aria-label="첨부 파일 고르기" aria-describedby="up-send-h"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-paperclip"></use></svg><span class="Catui_upz-title">첨부 파일 (최대 5개)</span><span class="Catui_upz-hint" id="up-send-h">같은 이름의 파일은 한 번만 붙습니다</span></div>
+  <div id="up-send-list"></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="up-send-go">보내기</button><span class="Catui_help" id="up-send-out" aria-live="polite"></span></div>
+  <script>
+  catui.use(['upload'], function (upload) {
+    var out = function (t) { document.getElementById('up-send-out').textContent = t; };
+    var inst = upload.render({ elem: '#up-send', list: '#up-send-list', number: 5, auto: false,
+      before: function (file) {
+        var dup = this.files.some(function (it) { return it.file.name === file.name; });
+        if (dup) out(file.name + ' 파일은 이미 붙어 있습니다');
+        return !dup;                           // false면 목록에 넣지 않음
+      } });
+    var go = document.getElementById('up-send-go');
+    go.addEventListener('click', function () {
+      if (!inst.files.length) { out('첨부할 파일을 골라 주세요'); return; }
+      var fd = new FormData();
+      fd.append('title', document.getElementById('up-send-title').value);
+      inst.files.forEach(function (it) { fd.append('files', it.file); });
+      go.disabled = true; go.setAttribute('aria-busy', 'true'); inst.setDisabled(true); out('보내는 중…');
+      // 실제로는 fetch('/api/reports', { method: 'POST', body: fd })
+      setTimeout(function () {
+        out(fd.getAll('files').length + '개 파일을 보냈습니다');
+        inst.clear(); inst.setDisabled(false); go.disabled = false; go.removeAttribute('aria-busy');
+      }, 900);
+    });
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="options">
 <h2 id="options">옵션 · 이벤트</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">upload 옵션</caption>

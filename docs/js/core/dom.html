@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -48,6 +48,71 @@ catui.html`&lt;ul&gt;${rows.map(r =&gt; catui.html`&lt;li&gt;${r}&lt;/li&gt;`)}&
 catui.raw('&lt;b&gt;신뢰 마크업&lt;/b&gt;')      // escape 없이
 catui.escape('&lt;b&gt;')                    // '&amp;lt;b&amp;gt;'
 catui.mount(el, catui.html`…`)          // html``은 마크업으로, 문자열은 글자로, Element·배열도 받음</code></pre>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">배열로 목록 그리기 — html`` · mount · 위임 on (입력 글자는 자동 escape)</figcaption>
+<div class="doc-example-preview">
+  <form class="Catui_hstack Catui_gap-3" id="dom-todo-form">
+    <label class="Catui_clip" for="dom-todo-q">할 일</label><input class="Catui_input" id="dom-todo-q" placeholder="예: &lt;b&gt;굵게&lt;/b&gt; 를 넣어 보세요" autocomplete="off">
+    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">추가</button>
+  </form>
+  <ul class="Catui_list" id="dom-todo"></ul>
+  <script>
+  catui.use([], function () {
+    var $ = catui.$, todos = ['견적서 보내기', '회의실 예약'];
+    var draw = function () {
+      // 데이터가 바뀔 때마다 한 번에 다시 그린다. ${t}는 escape되어 글자로 보인다
+      catui.mount(catui.el('#dom-todo'), todos.length
+        ? catui.html`${todos.map(function (t, i) { return catui.html`<li class="Catui_list-item"><span>${t}</span><span class="Catui_list-meta"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-i="${i}" aria-label="${t} 지우기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-x"></use></svg></button></span></li>`; })}`
+        : catui.html`<li class="Catui_list-item Catui_help">할 일이 없습니다</li>`);
+    };
+    $('#dom-todo-form').on('submit', function (e) {
+      e.preventDefault();
+      var q = catui.el('#dom-todo-q'), v = q.value.trim();
+      if (!v) { q.focus(); return; }
+      todos.push(v); q.value = ''; draw();
+    });
+    // 다시 그려도 위임은 목록(ul)에 한 번만 걸면 된다
+    $('#dom-todo').on('click', '[data-i]', function (e, btn) {
+      todos.splice(Number(btn.dataset.i), 1); draw();
+      catui.el('#dom-todo-q').focus();
+    });
+    draw();
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="배열로 목록 그리기 — html`` · mount · 위임 on (입력 글자는 자동 escape) 코드 복사">복사</button><pre><code>&lt;form class=&quot;Catui_hstack Catui_gap-3&quot; id=&quot;dom-todo-form&quot;&gt;
+  &lt;label class=&quot;Catui_clip&quot; for=&quot;dom-todo-q&quot;&gt;할 일&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dom-todo-q&quot; placeholder=&quot;예: &amp;lt;b&amp;gt;굵게&amp;lt;/b&amp;gt; 를 넣어 보세요&quot; autocomplete=&quot;off&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;submit&quot;&gt;추가&lt;/button&gt;
+&lt;/form&gt;
+&lt;ul class=&quot;Catui_list&quot; id=&quot;dom-todo&quot;&gt;&lt;/ul&gt;
+&lt;script&gt;
+catui.use([], function () {
+  var $ = catui.$, todos = [&#39;견적서 보내기&#39;, &#39;회의실 예약&#39;];
+  var draw = function () {
+    // 데이터가 바뀔 때마다 한 번에 다시 그린다. ${t}는 escape되어 글자로 보인다
+    catui.mount(catui.el(&#39;#dom-todo&#39;), todos.length
+      ? catui.html`${todos.map(function (t, i) { return catui.html`&lt;li class=&quot;Catui_list-item&quot;&gt;&lt;span&gt;${t}&lt;/span&gt;&lt;span class=&quot;Catui_list-meta&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; data-i=&quot;${i}&quot; aria-label=&quot;${t} 지우기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-x&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/span&gt;&lt;/li&gt;`; })}`
+      : catui.html`&lt;li class=&quot;Catui_list-item Catui_help&quot;&gt;할 일이 없습니다&lt;/li&gt;`);
+  };
+  $(&#39;#dom-todo-form&#39;).on(&#39;submit&#39;, function (e) {
+    e.preventDefault();
+    var q = catui.el(&#39;#dom-todo-q&#39;), v = q.value.trim();
+    if (!v) { q.focus(); return; }
+    todos.push(v); q.value = &#39;&#39;; draw();
+  });
+  // 다시 그려도 위임은 목록(ul)에 한 번만 걸면 된다
+  $(&#39;#dom-todo&#39;).on(&#39;click&#39;, &#39;[data-i]&#39;, function (e, btn) {
+    todos.splice(Number(btn.dataset.i), 1); draw();
+    catui.el(&#39;#dom-todo-q&#39;).focus();
+  });
+  draw();
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
 </section>
 
 <section aria-labelledby="query">
@@ -93,11 +158,11 @@ catui.use([], function () {
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/core/events.html"><span>이전</span>이벤트</a><a class="doc-pager-next" href="../../js/core/helpers.html"><span>다음</span>저장소·주소·환경</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#html">html · raw · escape</a></li><li><a href="#query">$ — DOM 도우미</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#html">html · raw · escape</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#query">$ — DOM 도우미</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

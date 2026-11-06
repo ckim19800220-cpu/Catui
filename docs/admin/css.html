@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../index.html"><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html" aria-current="page">CatuiAdmin</a><a href="../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html" aria-current="page">CatuiAdmin</a><a href="../community/start/introduction.html">CatuiCommunity</a><a href="../shop/start/introduction.html">CatuiShop</a><a href="../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -67,14 +67,126 @@
 <p>예: 사이드바를 넓히려면 <code>.Catui_adm{--Catui_adm-side-w:260px}</code>.</p>
 </section>
 
+<section aria-labelledby="examples">
+<h2 id="examples">자주 쓰는 사용 예</h2>
+<p>아래는 스크립트 없이 클래스만 쓴 정적 견본입니다. 토큰이 <code>.Catui_adm</code>에 정의되므로 셸 밖에서 보여 줄 때는 <code>class="Catui_adm"</code> 상자로 감쌉니다(문서용으로 <code>min-height</code>만 풀었습니다). 실제 화면에서는 셸 루트가 이미 <code>.Catui_adm</code>이므로 감쌀 필요가 없습니다.</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">화면 머리 · 지표 카드 줄 (Catui_adm-head · Catui_adm-stats)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_adm Catui_vstack Catui_gap-4" style="min-height:0;padding:var(--Catui_space-4)">
+    <div class="Catui_adm-head">
+      <div><h3 class="Catui_h2">주문 관리</h3><p>오늘 들어온 주문 128건 · 처리 대기 12건</p></div>
+      <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-download"></use></svg>내보내기</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-plus"></use></svg>주문 등록</button></div>
+    </div>
+    <section class="Catui_adm-stats" aria-label="주요 지표">
+      <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg></span><span class="Catui_stat-label">주문</span><span class="Catui_stat-value">1,284</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 4.1%<span class="Catui_clip"> 증가</span></span><span class="Catui_adm-stat-sub">지난주 대비</span></div></article>
+      <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-wallet"></use></svg></span><span class="Catui_stat-label">매출</span><span class="Catui_stat-value">4,820만원</span><span class="Catui_pill Catui_pill-success Catui_delta-up">▲ 12.6%<span class="Catui_clip"> 증가</span></span><span class="Catui_adm-stat-sub">부가세 포함</span></div></article>
+      <article class="Catui_card"><div class="Catui_card-b Catui_stat"><span class="Catui_adm-stat-icon"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-rotate-ccw"></use></svg></span><span class="Catui_stat-label">취소</span><span class="Catui_stat-value">18</span><span class="Catui_pill Catui_pill-danger Catui_delta-down">▼ 2.3%<span class="Catui_clip"> 감소</span></span><span class="Catui_adm-stat-sub">환불 완료 15건</span></div></article>
+    </section>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="화면 머리 · 지표 카드 줄 (Catui_adm-head · Catui_adm-stats) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_adm Catui_vstack Catui_gap-4&quot; style=&quot;min-height:0;padding:var(--Catui_space-4)&quot;&gt;
+  &lt;div class=&quot;Catui_adm-head&quot;&gt;
+    &lt;div&gt;&lt;h3 class=&quot;Catui_h2&quot;&gt;주문 관리&lt;/h3&gt;&lt;p&gt;오늘 들어온 주문 128건 · 처리 대기 12건&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-download&quot;&gt;&lt;/use&gt;&lt;/svg&gt;내보내기&lt;/button&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;button&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-plus&quot;&gt;&lt;/use&gt;&lt;/svg&gt;주문 등록&lt;/button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;section class=&quot;Catui_adm-stats&quot; aria-label=&quot;주요 지표&quot;&gt;
+    &lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b Catui_stat&quot;&gt;&lt;span class=&quot;Catui_adm-stat-icon&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-shopping-cart&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/span&gt;&lt;span class=&quot;Catui_stat-label&quot;&gt;주문&lt;/span&gt;&lt;span class=&quot;Catui_stat-value&quot;&gt;1,284&lt;/span&gt;&lt;span class=&quot;Catui_pill Catui_pill-success Catui_delta-up&quot;&gt;▲ 4.1%&lt;span class=&quot;Catui_clip&quot;&gt; 증가&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;Catui_adm-stat-sub&quot;&gt;지난주 대비&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;
+    &lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b Catui_stat&quot;&gt;&lt;span class=&quot;Catui_adm-stat-icon&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-wallet&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/span&gt;&lt;span class=&quot;Catui_stat-label&quot;&gt;매출&lt;/span&gt;&lt;span class=&quot;Catui_stat-value&quot;&gt;4,820만원&lt;/span&gt;&lt;span class=&quot;Catui_pill Catui_pill-success Catui_delta-up&quot;&gt;▲ 12.6%&lt;span class=&quot;Catui_clip&quot;&gt; 증가&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;Catui_adm-stat-sub&quot;&gt;부가세 포함&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;
+    &lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b Catui_stat&quot;&gt;&lt;span class=&quot;Catui_adm-stat-icon&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-rotate-ccw&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/span&gt;&lt;span class=&quot;Catui_stat-label&quot;&gt;취소&lt;/span&gt;&lt;span class=&quot;Catui_stat-value&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;Catui_pill Catui_pill-danger Catui_delta-down&quot;&gt;▼ 2.3%&lt;span class=&quot;Catui_clip&quot;&gt; 감소&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;Catui_adm-stat-sub&quot;&gt;환불 완료 15건&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">큰 숫자 · 상태 요약 · 빈 상태 (Catui_adm-kpi · Catui_adm-health · Catui_adm-empty)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_adm" style="min-height:0;padding:var(--Catui_space-4)">
+    <div class="Catui_grid">
+      <article class="Catui_card Catui_span-4"><header class="Catui_card-h">가동률 <span class="Catui_adm-card-meta">최근 30일</span></header><div class="Catui_card-b">
+        <div class="Catui_adm-kpi"><b>99.94%</b><span class="Catui_help">목표 99.9% 달성</span></div>
+      </div></article>
+      <article class="Catui_card Catui_span-4"><header class="Catui_card-h">시스템 상태</header><div class="Catui_card-b">
+        <div class="Catui_adm-health">
+          <div class="Catui_adm-health-row"><span><i class="Catui_status Catui_status-on" aria-hidden="true"></i>API 서버</span><span class="Catui_pill Catui_pill-success">정상</span></div>
+          <div class="Catui_adm-health-row"><span><i class="Catui_status Catui_status-away" aria-hidden="true"></i>결제 연동</span><span class="Catui_pill Catui_pill-warning">지연</span></div>
+          <div class="Catui_adm-health-row"><span><i class="Catui_status Catui_status-busy" aria-hidden="true"></i>메일 발송</span><span class="Catui_pill Catui_pill-danger">중단</span></div>
+        </div>
+      </div></article>
+      <article class="Catui_card Catui_span-4"><header class="Catui_card-h">오늘 할 일</header><div class="Catui_card-b">
+        <div class="Catui_adm-empty"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-inbox"></use></svg><p>남은 할 일이 없습니다.</p></div>
+      </div></article>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="큰 숫자 · 상태 요약 · 빈 상태 (Catui_adm-kpi · Catui_adm-health · Catui_adm-empty) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_adm&quot; style=&quot;min-height:0;padding:var(--Catui_space-4)&quot;&gt;
+  &lt;div class=&quot;Catui_grid&quot;&gt;
+    &lt;article class=&quot;Catui_card Catui_span-4&quot;&gt;&lt;header class=&quot;Catui_card-h&quot;&gt;가동률 &lt;span class=&quot;Catui_adm-card-meta&quot;&gt;최근 30일&lt;/span&gt;&lt;/header&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;
+      &lt;div class=&quot;Catui_adm-kpi&quot;&gt;&lt;b&gt;99.94%&lt;/b&gt;&lt;span class=&quot;Catui_help&quot;&gt;목표 99.9% 달성&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;&lt;/article&gt;
+    &lt;article class=&quot;Catui_card Catui_span-4&quot;&gt;&lt;header class=&quot;Catui_card-h&quot;&gt;시스템 상태&lt;/header&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;
+      &lt;div class=&quot;Catui_adm-health&quot;&gt;
+        &lt;div class=&quot;Catui_adm-health-row&quot;&gt;&lt;span&gt;&lt;i class=&quot;Catui_status Catui_status-on&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;API 서버&lt;/span&gt;&lt;span class=&quot;Catui_pill Catui_pill-success&quot;&gt;정상&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;Catui_adm-health-row&quot;&gt;&lt;span&gt;&lt;i class=&quot;Catui_status Catui_status-away&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;결제 연동&lt;/span&gt;&lt;span class=&quot;Catui_pill Catui_pill-warning&quot;&gt;지연&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;Catui_adm-health-row&quot;&gt;&lt;span&gt;&lt;i class=&quot;Catui_status Catui_status-busy&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;메일 발송&lt;/span&gt;&lt;span class=&quot;Catui_pill Catui_pill-danger&quot;&gt;중단&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;&lt;/article&gt;
+    &lt;article class=&quot;Catui_card Catui_span-4&quot;&gt;&lt;header class=&quot;Catui_card-h&quot;&gt;오늘 할 일&lt;/header&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;
+      &lt;div class=&quot;Catui_adm-empty&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i20&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-inbox&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;p&gt;남은 할 일이 없습니다.&lt;/p&gt;&lt;/div&gt;
+    &lt;/div&gt;&lt;/article&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">폼 구역 · 2열 입력 · 저장 막대 (Catui_adm-section · Catui_adm-cols · Catui_adm-savebar)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_adm" style="min-height:0;padding:var(--Catui_space-4)">
+    <section class="Catui_adm-section" aria-labelledby="dc-s1">
+      <div class="Catui_adm-section-desc"><h3 id="dc-s1">기본 정보</h3><p>고객에게 보이는 이름과 연락처입니다.</p></div>
+      <div class="Catui_card"><div class="Catui_card-b Catui_adm-cols">
+        <div class="Catui_field Catui_adm-wide"><label class="Catui_label" for="dc-name">상점 이름 <span class="Catui_req">필수</span></label><input class="Catui_input" id="dc-name" value="캣유아이 스토어"></div>
+        <div class="Catui_field"><label class="Catui_label" for="dc-mail">대표 메일</label><input class="Catui_input" id="dc-mail" type="email" value="help@example.com"></div>
+        <div class="Catui_field"><label class="Catui_label" for="dc-tel">고객센터</label><input class="Catui_input" id="dc-tel" inputmode="tel" value="1588-0000"></div>
+      </div></div>
+    </section>
+    <div data-catui-adm-dirty>
+      <div class="Catui_adm-savebar">
+        <span class="Catui_adm-savenote">저장하지 않은 변경 사항이 있습니다</span>
+        <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button">되돌리기</button><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button">저장</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="폼 구역 · 2열 입력 · 저장 막대 (Catui_adm-section · Catui_adm-cols · Catui_adm-savebar) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_adm&quot; style=&quot;min-height:0;padding:var(--Catui_space-4)&quot;&gt;
+  &lt;section class=&quot;Catui_adm-section&quot; aria-labelledby=&quot;dc-s1&quot;&gt;
+    &lt;div class=&quot;Catui_adm-section-desc&quot;&gt;&lt;h3 id=&quot;dc-s1&quot;&gt;기본 정보&lt;/h3&gt;&lt;p&gt;고객에게 보이는 이름과 연락처입니다.&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b Catui_adm-cols&quot;&gt;
+      &lt;div class=&quot;Catui_field Catui_adm-wide&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dc-name&quot;&gt;상점 이름 &lt;span class=&quot;Catui_req&quot;&gt;필수&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dc-name&quot; value=&quot;캣유아이 스토어&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dc-mail&quot;&gt;대표 메일&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dc-mail&quot; type=&quot;email&quot; value=&quot;help@example.com&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dc-tel&quot;&gt;고객센터&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dc-tel&quot; inputmode=&quot;tel&quot; value=&quot;1588-0000&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;&lt;/div&gt;
+  &lt;/section&gt;
+  &lt;div data-catui-adm-dirty&gt;
+    &lt;div class=&quot;Catui_adm-savebar&quot;&gt;
+      &lt;span class=&quot;Catui_adm-savenote&quot;&gt;저장하지 않은 변경 사항이 있습니다&lt;/span&gt;
+      &lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost&quot; type=&quot;button&quot;&gt;되돌리기&lt;/button&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;button&quot;&gt;저장&lt;/button&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p class="Catui_help">저장 막대 문구는 조상에 <code>[data-catui-adm-dirty]</code>가 있으면 경고색 + "●" 표시로 바뀝니다. 실제 폼에서는 <code>form[data-catui-adm-form]</code>이 이 속성을 자동으로 붙이고 뗍니다 — 동작 예는 <a href="../admin/modules.html#recipes">catadmin.js API · 자주 쓰는 사용 예</a>.</p>
+</section>
+
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/admin/css/tokens.css</span></li><li><span class="doc-src">src/admin/css/shell.css</span><code>.Catui_adm-blank</code> <code>.Catui_adm-body</code> <code>.Catui_adm-caret</code> <code>.Catui_adm-content</code> <code>.Catui_adm-foot</code> <code>.Catui_adm-icon-btn</code> <code>.Catui_adm-item-on</code> <code>.Catui_adm-nest</code> <code>.Catui_adm-pop</code> <code>.Catui_adm-scrim</code> <code>.Catui_adm-search</code> <code>.Catui_adm-top</code></li><li><span class="doc-src">src/admin/css/widgets.css</span><code>.Catui_adm-blank</code> <code>.Catui_adm-body</code> <code>.Catui_adm-card-meta</code> <code>.Catui_adm-chart</code> <code>.Catui_adm-chart-lg</code> <code>.Catui_adm-empty</code> <code>.Catui_adm-feed</code> <code>.Catui_adm-flush</code> <code>.Catui_adm-head</code> <code>.Catui_adm-health</code> <code>.Catui_adm-health-row</code> <code>.Catui_adm-kpi</code> <code>.Catui_adm-legend</code> <code>.Catui_adm-stat-icon</code> <code>.Catui_adm-stat-sub</code> <code>.Catui_adm-stats</code> <code>.Catui_adm-sum</code></li><li><span class="doc-src">src/admin/css/pages.css</span><code>.Catui_adm-cal</code> <code>.Catui_adm-chart-sm</code> <code>.Catui_adm-cols</code> <code>.Catui_adm-demo</code> <code>.Catui_adm-map</code> <code>.Catui_adm-map-land</code> <code>.Catui_adm-map-layout</code> <code>.Catui_adm-pin</code> <code>.Catui_adm-savebar</code> <code>.Catui_adm-savenote</code> <code>.Catui_adm-section</code> <code>.Catui_adm-section-desc</code> <code>.Catui_adm-showcase</code> <code>.Catui_adm-thumb</code> <code>.Catui_adm-thumb-btn</code> <code>.Catui_adm-thumbs</code> <code>.Catui_adm-wide</code></li><li><span class="doc-src">src/admin/css/apps.css</span><code>.Catui_adm-back</code> <code>.Catui_adm-chat</code> <code>.Catui_adm-drag</code> <code>.Catui_adm-drop</code> <code>.Catui_adm-files-grid</code> <code>.Catui_adm-kanban</code> <code>.Catui_adm-mail-body</code> <code>.Catui_adm-mail-h</code> <code>.Catui_adm-pane</code> <code>.Catui_adm-pane-b</code> <code>.Catui_adm-pane-f</code> <code>.Catui_adm-pane-h</code> <code>.Catui_adm-row</code> <code>.Catui_adm-row-sub</code> <code>.Catui_adm-row-time</code> <code>.Catui_adm-row-title</code> <code>.Catui_adm-row-unread</code> <code>.Catui_adm-rows</code> <code>.Catui_adm-split</code></li><li><span class="doc-src">src/admin/css/commerce.css</span><code>.Catui_adm-gallery</code> <code>.Catui_adm-gallery-thumbs</code> <code>.Catui_adm-invoice</code> <code>.Catui_adm-invoice-h</code> <code>.Catui_adm-invoice-parties</code> <code>.Catui_adm-noprint</code> <code>.Catui_adm-pdp</code> <code>.Catui_adm-ph</code> <code>.Catui_adm-ph-2</code> <code>.Catui_adm-ph-3</code> <code>.Catui_adm-ph-4</code> <code>.Catui_adm-plan</code> <code>.Catui_adm-plan-badge</code> <code>.Catui_adm-plans</code> <code>.Catui_adm-price</code> <code>.Catui_adm-price-lg</code> <code>.Catui_adm-product</code> <code>.Catui_adm-products</code> <code>.Catui_adm-project</code> <code>.Catui_adm-project-f</code> <code>.Catui_adm-project-h</code> <code>.Catui_adm-projects</code> <code>.Catui_adm-sum</code> <code>.Catui_adm-sum-total</code></li><li><span class="doc-src">src/admin/css/auth.css</span><code>.Catui_adm-auth</code> <code>.Catui_adm-auth-alt</code> <code>.Catui_adm-auth-brand</code> <code>.Catui_adm-auth-card</code> <code>.Catui_adm-auth-main</code> <code>.Catui_adm-auth-row</code> <code>.Catui_adm-caps</code> <code>.Catui_adm-error</code> <code>.Catui_adm-error-code</code> <code>.Catui_adm-pw</code> <code>.Catui_adm-strength</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../admin/modules.html"><span>이전</span>catadmin.js API</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#rules">규칙</a></li><li><a href="#tokens">토큰</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#rules">규칙</a></li><li><a href="#tokens">토큰</a></li><li><a href="#examples">자주 쓰는 사용 예</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html">CatuiCommunity</a><a href="../shop/start/introduction.html">CatuiShop</a><a href="../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../assets/docs.js"></script>

@@ -1,0 +1,22 @@
+<!-- title: 마이페이지 | nav: my | my: home -->
+<div class="Catui_sh-my" data-catui-sh-my>
+  {{mynav}}
+  <div class="Catui_sh-my-main">
+    <section class="Catui_sh-box Catui_sh-me" aria-labelledby="my-h">
+      <div class="Catui_sh-me-top"><span class="Catui_av Catui_av-lg" aria-hidden="true">김</span><div><h1 class="Catui_h2" id="my-h"><span data-my="name">회원</span>님</h1><p class="Catui_help"><span data-my="grade">-</span> 등급 · 구매 금액의 1% 적립</p></div><a class="Catui_btn Catui_btn-sm Catui_btn-ghost" href="profile.html">회원 정보</a></div>
+      <ul class="Catui_sh-me-nums" aria-label="내 혜택">
+        <li><a href="coupons.html#my-points-h"><span>적립금</span><b data-my="points">0원</b></a></li>
+        <li><a href="coupons.html"><span>쿠폰</span><b data-my="coupons">0</b></a></li>
+        <li><a href="wish.html"><span>찜</span><b data-my="wish">0</b></a></li>
+      </ul>
+    </section>
+    <section class="Catui_sh-box" aria-labelledby="my-flow-h">
+      <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="my-flow-h">최근 30일 주문 현황</h2><a class="Catui_sh-more" href="orders.html">주문 내역{{icon:chevron-right}}</a></div>
+      <ol class="Catui_sh-my-flow" data-my="flow" aria-label="주문 단계별 건수"></ol>
+    </section>
+    <section class="Catui_sh-box" aria-labelledby="my-ord-h">
+      <h2 class="Catui_h3" id="my-ord-h">최근 주문</h2>
+      <ul class="Catui_sh-orders" data-my="recent-orders"></ul>
+    </section>
+  </div>
+</div>

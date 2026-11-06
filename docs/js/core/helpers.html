@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -50,6 +50,66 @@ catui.data('settings', null);                                // 표 삭제
 catui.sessionData(…)                                         // 같은 사용법, sessionStorage</code></pre>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">화면 설정 기억하기 — catui.data로 다음 방문에도 유지</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_hstack Catui_gap-4" style="flex-wrap:wrap">
+    <span class="Catui_choice"><input class="Catui_clip" id="hp-compact" type="checkbox" role="switch"><label class="Catui_tgl" for="hp-compact"></label><label for="hp-compact">촘촘하게 보기</label></span>
+    <label class="Catui_label" for="hp-limit">쪽당 개수</label>
+    <div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="hp-limit"><option>10</option><option>20</option><option>50</option></select></div>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="hp-reset">설정 지우기</button>
+  </div>
+  <p class="Catui_help" id="hp-out" aria-live="polite"></p>
+  <script>
+  catui.use([], function () {
+    var T = 'doc-list-prefs', sw = document.getElementById('hp-compact'), sel = document.getElementById('hp-limit');
+    var show = function (msg) { var s = catui.data(T); document.getElementById('hp-out').textContent = msg + ' · 저장된 값: ' + JSON.stringify(s); };
+    // 불러오기: 저장된 값이 없으면 기본값
+    var saved = catui.data(T);
+    sw.checked = !!saved.compact;
+    sel.value = String(saved.limit || 10);
+    show('불러왔습니다');
+    sw.addEventListener('change', function () { catui.data(T, { key: 'compact', value: sw.checked }); show('저장했습니다'); });
+    sel.addEventListener('change', function () { catui.data(T, { key: 'limit', value: Number(sel.value) }); show('저장했습니다'); });
+    document.getElementById('hp-reset').addEventListener('click', function () {
+      catui.data(T, null);                     // 표째 지우기
+      sw.checked = false; sel.value = '10';
+      show('지웠습니다');
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="화면 설정 기억하기 — catui.data로 다음 방문에도 유지 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_hstack Catui_gap-4&quot; style=&quot;flex-wrap:wrap&quot;&gt;
+  &lt;span class=&quot;Catui_choice&quot;&gt;&lt;input class=&quot;Catui_clip&quot; id=&quot;hp-compact&quot; type=&quot;checkbox&quot; role=&quot;switch&quot;&gt;&lt;label class=&quot;Catui_tgl&quot; for=&quot;hp-compact&quot;&gt;&lt;/label&gt;&lt;label for=&quot;hp-compact&quot;&gt;촘촘하게 보기&lt;/label&gt;&lt;/span&gt;
+  &lt;label class=&quot;Catui_label&quot; for=&quot;hp-limit&quot;&gt;쪽당 개수&lt;/label&gt;
+  &lt;div class=&quot;Catui_select-wrap&quot;&gt;&lt;select class=&quot;Catui_input Catui_select&quot; id=&quot;hp-limit&quot;&gt;&lt;option&gt;10&lt;/option&gt;&lt;option&gt;20&lt;/option&gt;&lt;option&gt;50&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost&quot; type=&quot;button&quot; id=&quot;hp-reset&quot;&gt;설정 지우기&lt;/button&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;hp-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([], function () {
+  var T = &#39;doc-list-prefs&#39;, sw = document.getElementById(&#39;hp-compact&#39;), sel = document.getElementById(&#39;hp-limit&#39;);
+  var show = function (msg) { var s = catui.data(T); document.getElementById(&#39;hp-out&#39;).textContent = msg + &#39; · 저장된 값: &#39; + JSON.stringify(s); };
+  // 불러오기: 저장된 값이 없으면 기본값
+  var saved = catui.data(T);
+  sw.checked = !!saved.compact;
+  sel.value = String(saved.limit || 10);
+  show(&#39;불러왔습니다&#39;);
+  sw.addEventListener(&#39;change&#39;, function () { catui.data(T, { key: &#39;compact&#39;, value: sw.checked }); show(&#39;저장했습니다&#39;); });
+  sel.addEventListener(&#39;change&#39;, function () { catui.data(T, { key: &#39;limit&#39;, value: Number(sel.value) }); show(&#39;저장했습니다&#39;); });
+  document.getElementById(&#39;hp-reset&#39;).addEventListener(&#39;click&#39;, function () {
+    catui.data(T, null);                     // 표째 지우기
+    sw.checked = false; sel.value = &#39;10&#39;;
+    show(&#39;지웠습니다&#39;);
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>새로 고쳐도 고른 값이 남습니다. 사파리 비공개 창처럼 저장소를 못 쓰는 환경에서도 예외 없이 빈 객체를 돌려주므로 기본값 처리만 해 두면 됩니다. 탭을 닫으면 사라져야 하는 값(작성 중 임시 값 등)은 <code>catui.sessionData</code>.</p>
+</section>
+
 <section aria-labelledby="url">
 <h2 id="url">주소 — url</h2>
 <pre><code>catui.url('https://a.com/docs/x.html?a=1#/user/set?id=3');
@@ -68,11 +128,11 @@ catui.hint.errorOnce('한 번만 알립니다', 'error');</code></pre>
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/core/dom.html"><span>이전</span>DOM과 템플릿</a><a class="doc-pager-next" href="../../js/modules/layer.html"><span>다음</span>layer 팝업</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#data">저장소 — data · sessionData</a></li><li><a href="#url">주소 — url</a></li><li><a href="#device">환경 — device · hint</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#data">저장소 — data · sessionData</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#url">주소 — url</a></li><li><a href="#device">환경 — device · hint</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

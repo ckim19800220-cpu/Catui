@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -172,6 +172,88 @@ catui.use([&#39;page&#39;, &#39;form&#39;], function (page, form) {
 </figure>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">종류를 바꾸면 처음부터 다시 — 더 보기 버튼만 (auto: false · inst.reset)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_segment" role="radiogroup" aria-label="알림 종류" id="pg-kind">
+    <input class="Catui_clip" type="radio" name="pg-kind" id="pg-kind-all" value="전체" checked><label for="pg-kind-all">전체</label>
+    <input class="Catui_clip" type="radio" name="pg-kind" id="pg-kind-order" value="주문"><label for="pg-kind-order">주문</label>
+    <input class="Catui_clip" type="radio" name="pg-kind" id="pg-kind-review" value="리뷰"><label for="pg-kind-review">리뷰</label>
+  </div>
+  <ul class="Catui_list" id="pg-flow2"></ul>
+  <script>
+  catui.use(['page'], function (page) {
+    var kind = '전체';
+    var inst = page.flow.render({ elem: '#pg-flow2', auto: false, more: '알림 더 보기', end: '이 종류의 알림을 모두 봤습니다.', done: function (n, next) {
+      var asked = kind;
+      setTimeout(function () {                       // 실제로는 fetch('/api/alerts?kind=…&page=' + n)
+        if (asked !== kind) return;                  // 그사이 종류를 바꿨으면 늦게 온 결과는 버림
+        var items = [];
+        for (var i = 1; i <= 4; i++) items.push(catui.html`<li class="Catui_list-item">${kind} 알림 ${(n - 1) * 4 + i}</li>`);
+        next(items, n < (kind === '전체' ? 3 : 2));
+      }, 400);
+    } });
+    document.getElementById('pg-kind').addEventListener('change', function (e) { kind = e.target.value; inst.reset(); });   // 목록 비우고 1쪽부터
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="종류를 바꾸면 처음부터 다시 — 더 보기 버튼만 (auto: false · inst.reset) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_segment&quot; role=&quot;radiogroup&quot; aria-label=&quot;알림 종류&quot; id=&quot;pg-kind&quot;&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;pg-kind&quot; id=&quot;pg-kind-all&quot; value=&quot;전체&quot; checked&gt;&lt;label for=&quot;pg-kind-all&quot;&gt;전체&lt;/label&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;pg-kind&quot; id=&quot;pg-kind-order&quot; value=&quot;주문&quot;&gt;&lt;label for=&quot;pg-kind-order&quot;&gt;주문&lt;/label&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;pg-kind&quot; id=&quot;pg-kind-review&quot; value=&quot;리뷰&quot;&gt;&lt;label for=&quot;pg-kind-review&quot;&gt;리뷰&lt;/label&gt;
+&lt;/div&gt;
+&lt;ul class=&quot;Catui_list&quot; id=&quot;pg-flow2&quot;&gt;&lt;/ul&gt;
+&lt;script&gt;
+catui.use([&#39;page&#39;], function (page) {
+  var kind = &#39;전체&#39;;
+  var inst = page.flow.render({ elem: &#39;#pg-flow2&#39;, auto: false, more: &#39;알림 더 보기&#39;, end: &#39;이 종류의 알림을 모두 봤습니다.&#39;, done: function (n, next) {
+    var asked = kind;
+    setTimeout(function () {                       // 실제로는 fetch(&#39;/api/alerts?kind=…&amp;page=&#39; + n)
+      if (asked !== kind) return;                  // 그사이 종류를 바꿨으면 늦게 온 결과는 버림
+      var items = [];
+      for (var i = 1; i &lt;= 4; i++) items.push(catui.html`&lt;li class=&quot;Catui_list-item&quot;&gt;${kind} 알림 ${(n - 1) * 4 + i}&lt;/li&gt;`);
+      next(items, n &lt; (kind === &#39;전체&#39; ? 3 : 2));
+    }, 400);
+  } });
+  document.getElementById(&#39;pg-kind&#39;).addEventListener(&#39;change&#39;, function (e) { kind = e.target.value; inst.reset(); });   // 목록 비우고 1쪽부터
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">복사 결과 받기 — catui:copy 이벤트로 토스트</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_hstack Catui_gap-3" id="pg-acct-box" style="flex-wrap:wrap">
+    <span>입금 계좌 <b id="pg-acct">국민 123456-01-234567</b> (예금주 캣유아이)</span>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-catui-copy="#pg-acct">계좌번호 복사</button>
+  </div>
+  <script>
+  catui.use(['page', 'layer'], function (page, layer) {
+    // 버튼 글자가 잠시 "복사됨"으로 바뀌는 것과 함께, 결과에 따라 토스트를 띄운다
+    document.getElementById('pg-acct-box').addEventListener('catui:copy', function (e) {
+      if (e.detail.ok) layer.msg('계좌번호를 복사했습니다', { icon: 'success', body: e.detail.text });
+      else layer.msg('복사하지 못했습니다', { icon: 'warn', body: '계좌번호를 길게 눌러 직접 복사해 주세요.' });
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="복사 결과 받기 — catui:copy 이벤트로 토스트 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_hstack Catui_gap-3&quot; id=&quot;pg-acct-box&quot; style=&quot;flex-wrap:wrap&quot;&gt;
+  &lt;span&gt;입금 계좌 &lt;b id=&quot;pg-acct&quot;&gt;국민 123456-01-234567&lt;/b&gt; (예금주 캣유아이)&lt;/span&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-secondary&quot; type=&quot;button&quot; data-catui-copy=&quot;#pg-acct&quot;&gt;계좌번호 복사&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;page&#39;, &#39;layer&#39;], function (page, layer) {
+  // 버튼 글자가 잠시 &quot;복사됨&quot;으로 바뀌는 것과 함께, 결과에 따라 토스트를 띄운다
+  document.getElementById(&#39;pg-acct-box&#39;).addEventListener(&#39;catui:copy&#39;, function (e) {
+    if (e.detail.ok) layer.msg(&#39;계좌번호를 복사했습니다&#39;, { icon: &#39;success&#39;, body: e.detail.text });
+    else layer.msg(&#39;복사하지 못했습니다&#39;, { icon: &#39;warn&#39;, body: &#39;계좌번호를 길게 눌러 직접 복사해 주세요.&#39; });
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
 <section aria-labelledby="totop">
 <h2 id="totop">맨 위로</h2>
 <pre><code>&lt;a class="Catui_totop" href=&quot;#main&quot; data-catui-totop="400" aria-label="맨 위로"&gt;…&lt;/a&gt;   // 마크업
@@ -196,11 +278,11 @@ page.totop({ offset: 400, target: '#main' });                                   
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/command.html"><span>이전</span>command 명령 팔레트</a><a class="doc-pager-next" href="../../js/modules/site.html"><span>다음</span>site 홈페이지 도구</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#copy">복사 버튼</a></li><li><a href="#tip">툴팁</a></li><li><a href="#lazy">이미지 지연 로딩</a></li><li><a href="#flow">무한 스크롤 · 더 보기</a></li><li><a href="#steps">단계 (wizard)</a></li><li><a href="#totop">맨 위로</a></li><li><a href="#api">API</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#copy">복사 버튼</a></li><li><a href="#tip">툴팁</a></li><li><a href="#lazy">이미지 지연 로딩</a></li><li><a href="#flow">무한 스크롤 · 더 보기</a></li><li><a href="#steps">단계 (wizard)</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#totop">맨 위로</a></li><li><a href="#api">API</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

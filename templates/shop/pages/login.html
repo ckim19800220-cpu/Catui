@@ -1,0 +1,22 @@
+<!-- title: 로그인 | layout: blank -->
+<main class="Catui_card Catui_sh-blank-card"><form class="Catui_card-b Catui_vstack Catui_gap-4" id="lg-form" data-catui-form data-catui-filter="sh-login" novalidate>
+  <a class="Catui_sh-brand" href="index.html"><span class="Catui_sh-mark" aria-hidden="true">{{icon:shopping-bag:20}}</span><b>Catui <span>쇼핑</span></b></a>
+  <div><h1 class="Catui_h2">로그인</h1><p class="Catui_help">주문 내역·쿠폰·적립금은 로그인 후 볼 수 있어요</p></div>
+  <div class="Catui_banner Catui_banner-danger" role="alert" id="lg-err" hidden>{{icon:alert-circle:16}}<span>이메일 또는 비밀번호가 맞지 않습니다. (예제: cat@catui.dev / catui1234)</span></div>
+  <div class="Catui_field"><label class="Catui_label" for="lg-mail">이메일</label><input class="Catui_input" id="lg-mail" name="email" type="email" autocomplete="username" value="cat@catui.dev" data-catui-verify="required|email"></div>
+  <div class="Catui_field"><label class="Catui_label" for="lg-pw">비밀번호</label><input class="Catui_input" id="lg-pw" name="pw" type="password" autocomplete="current-password" data-catui-verify="required"></div>
+  <label class="Catui_choice" for="lg-keep"><input class="Catui_clip" type="checkbox" id="lg-keep" name="keep"><span class="Catui_cbx">{{icon:check:12}}</span>로그인 상태 유지</label>
+  <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="submit">로그인</button>
+  <div class="Catui_divider-text"><span>또는</span></div>
+  <div class="Catui_sh-social">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-social="카카오">{{icon:message-circle}}카카오로 시작하기</button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-social="네이버">{{icon:user-circle}}네이버로 시작하기</button>
+  </div>
+  <p class="Catui_help">처음이신가요? <a class="Catui_link" href="register.html">회원가입</a> · <a class="Catui_link" href="orders.html">비회원 주문 조회</a></p>
+</form></main>
+<script>
+catui.use(['form', 'layer'], function (form, layer) {
+  form.on('submit(sh-login)', function (d) { var ok = d.field.email === 'cat@catui.dev' && d.field.pw === 'catui1234'; document.getElementById('lg-err').hidden = ok; if (ok) location.href = 'mypage.html'; else document.getElementById('lg-pw').select(); return false; });
+  document.getElementById('lg-form').addEventListener('click', function (e) { var b = e.target.closest('[data-social]'); if (b) layer.msg(b.dataset.social + ' 간편 로그인은 예제에서 연결하지 않았습니다'); });
+});
+</script>

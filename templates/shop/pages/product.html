@@ -1,0 +1,47 @@
+<!-- title: 상품 상세 | nav: list -->
+<article class="Catui_sh-pd-page" data-catui-sh-product>
+  <nav class="Catui_crumb" aria-label="경로" data-crumb><a href="index.html">홈</a></nav>
+  <div class="Catui_sh-pd">
+    <div class="Catui_sh-gallery" data-gallery></div>
+    <div class="Catui_sh-pd-info">
+      <p class="Catui_sh-pd-brand" data-brand></p>
+      <h1 class="Catui_sh-pd-name" data-name>상품 정보를 불러오는 중</h1>
+      <div data-rating></div>
+      <div data-price></div>
+      <dl class="Catui_sh-pd-ship" data-ship></dl>
+      <div class="Catui_sh-picker" data-picker></div>
+      <div class="Catui_sh-pd-acts" data-acts>
+        <button class="Catui_btn Catui_btn-lg Catui_btn-secondary Catui_btn-icon Catui_sh-wish" type="button" data-act="wish" aria-pressed="false" aria-label="찜하기">{{icon:heart:20}}</button>
+        <button class="Catui_btn Catui_btn-lg Catui_btn-secondary" type="button" data-act="cart">{{icon:shopping-cart:18}}장바구니</button>
+        <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="button" data-act="buy">바로 구매</button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="Catui_sh-pd-nav" aria-label="상품 정보 바로가기"><a href="#pd-detail">상세 정보</a><a href="#pd-reviews">리뷰 <span class="Catui_num" data-rc></span></a><a href="#pd-qna">문의 <span class="Catui_num" data-qc></span></a><a href="#pd-ship">배송·교환</a></nav>
+
+  <section class="Catui_sh-box" id="pd-detail" aria-labelledby="pd-detail-h"><h2 class="Catui_h3" id="pd-detail-h">상세 정보</h2><div class="Catui_vstack Catui_gap-4" data-detail></div></section>
+  <section class="Catui_sh-box" id="pd-reviews" aria-labelledby="pd-reviews-h"><h2 class="Catui_h3" id="pd-reviews-h">리뷰</h2><div class="Catui_vstack Catui_gap-4" data-reviews></div></section>
+  <section class="Catui_sh-box" id="pd-qna" aria-labelledby="pd-qna-h"><h2 class="Catui_h3" id="pd-qna-h">상품 문의</h2><div class="Catui_vstack Catui_gap-4" data-qna></div></section>
+  <section class="Catui_sh-box" id="pd-ship" aria-labelledby="pd-ship-h"><h2 class="Catui_h3" id="pd-ship-h">배송 · 교환 · 반품</h2>
+    <dl class="Catui_dl">
+      <dt>배송비</dt><dd><span data-catui-sh-won="3000">3,000원</span> · <span data-catui-sh-won="30000">30,000원</span> 이상 구매 시 무료 (제주·도서 산간 3,000원 추가)</dd>
+      <dt>출발</dt><dd>오늘출발 상품은 평일 오후 2시 전 주문 시 당일 출발, 그 밖의 상품은 1~2일 안에 출발</dd>
+      <dt>교환 · 반품</dt><dd>받은 날부터 7일 안에 마이페이지 &gt; 주문 내역에서 신청. 단순 변심은 왕복 배송비 6,000원</dd>
+      <dt>안 되는 경우</dt><dd>사용·세탁한 상품, 포장을 뜯어 가치가 떨어진 식품·화장품</dd>
+    </dl>
+  </section>
+  <section class="Catui_sh-sec" aria-labelledby="pd-rel-h">
+    <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="pd-rel-h">같은 분류 다른 상품</h2></div>
+    <ul class="Catui_sh-grid" data-catui-sh-products="related:{id}" data-size="4" aria-label="관련 상품"></ul>
+  </section>
+
+  <div class="Catui_sh-buybar" data-buybar hidden>
+    <div class="Catui_sh-buybar-in">
+      <p class="Catui_sh-buybar-name" data-bar-name></p>
+      <b class="Catui_sh-buybar-total" data-bar-total></b>
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-act="cart">장바구니</button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" data-act="buy">구매하기</button>
+    </div>
+  </div>
+</article>

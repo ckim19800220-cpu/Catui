@@ -1,0 +1,42 @@
+<!-- title: 홈 | nav: home -->
+<h1 class="Catui_clip">Catui 쇼핑 홈</h1>
+
+<div class="Catui_carousel Catui_sh-heroes" data-catui-carousel data-catui-autoplay="6000" data-catui-counter aria-label="기획전 배너">
+  <div class="Catui_carousel-track">
+    <div class="Catui_carousel-slide"><a class="Catui_sh-hero" data-tone="3" href="event.html?e=autumn"><small>11월 9일까지</small><b>가을 옷장 정리전</b><span>아우터·니트 최대 35% 할인</span></a></div>
+    <div class="Catui_carousel-slide"><a class="Catui_sh-hero" data-tone="4" href="event.html?e=fresh"><small>11월 5일까지</small><b>산지 직송 제철 먹거리</b><span>감귤·달걀 무료배송</span></a></div>
+    <div class="Catui_carousel-slide"><a class="Catui_sh-hero" data-tone="1" href="event.html?e=home"><small>11월 15일까지</small><b>포근한 겨울 집</b><span>침구·조명 최대 40% 할인</span></a></div>
+  </div>
+</div>
+
+<ul class="Catui_sh-perks" aria-label="쇼핑 혜택">
+  <li>{{icon:truck:20}}<span><b data-catui-sh-won="30000">30,000원</b> 이상 무료배송</span></li>
+  <li>{{icon:clock:20}}<span>오후 2시 전 주문 <b>오늘 출발</b></span></li>
+  <li>{{icon:coins:20}}<span>구매 금액 <b>1%</b> 적립</span></li>
+  <li>{{icon:rotate-ccw:20}}<span>받은 날부터 <b>7일</b> 무료 반품</span></li>
+</ul>
+
+<section class="Catui_sh-sec" aria-labelledby="hm-cat">
+  <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="hm-cat">카테고리</h2><a class="Catui_sh-more" href="list.html">전체 보기{{icon:chevron-right}}</a></div>
+  <div data-catui-sh-cats></div>
+</section>
+
+<section class="Catui_sh-sec" aria-labelledby="hm-deal">
+  <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="hm-deal">오늘의 특가</h2><p class="Catui_sh-left">{{icon:timer}}<time data-catui-sh-until="2026-11-02T23:59:59+09:00" datetime="2026-11-02T23:59:59+09:00">오늘 자정까지</time></p></div>
+  <ul class="Catui_sh-grid" data-catui-sh-products="sale" data-size="4" aria-label="오늘의 특가 상품"></ul>
+</section>
+
+<section class="Catui_sh-sec" aria-labelledby="hm-promo">
+  <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="hm-promo">기획전</h2></div>
+  <div data-catui-sh-promos></div>
+</section>
+
+<section class="Catui_sh-sec" aria-labelledby="hm-best">
+  <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="hm-best">베스트</h2><a class="Catui_sh-more" href="list.html?sort=best">더 보기{{icon:chevron-right}}</a></div>
+  <ul class="Catui_sh-grid" data-catui-sh-products="best" data-rank data-size="6" aria-label="베스트 상품"></ul>
+</section>
+
+<section class="Catui_sh-sec" aria-labelledby="hm-new">
+  <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="hm-new">새로 들어왔어요</h2><a class="Catui_sh-more" href="list.html?sort=new">더 보기{{icon:chevron-right}}</a></div>
+  <ul class="Catui_sh-grid" data-catui-sh-products="new" data-size="8" aria-label="신상품"></ul>
+</section>

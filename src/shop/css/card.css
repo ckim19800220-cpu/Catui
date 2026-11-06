@@ -1,0 +1,70 @@
+/* shop/card.css */
+/* 상품 카드 · 가격(할인율·판매가·정가) · 별점 · 혜택 태그 · 상품 바둑판/목록 · 카테고리 · 기획전 */
+.Catui_sh-grid{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--Catui_sh-card-min),1fr));gap:var(--Catui_space-5) var(--Catui_space-4)}
+.Catui_sh-card{position:relative;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:var(--Catui_space-1);min-width:0}
+.Catui_sh-card-link{display:grid;gap:var(--Catui_space-1);text-decoration:none;min-width:0}
+.Catui_sh-card-link:hover .Catui_sh-card-name{text-decoration:underline}
+.Catui_sh-card-img{position:relative;display:block;aspect-ratio:1 / 1;border-radius:var(--Catui_sh-radius);overflow:hidden;background:var(--Catui_sh-img-bg);margin-bottom:var(--Catui_space-1)}
+.Catui_sh-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_sh-card-brand{font-size:var(--Catui_type-caption-size);font-weight:700;color:var(--Catui_color-text-secondary)}
+.Catui_sh-card-name{font-weight:500;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:keep-all;overflow-wrap:anywhere}
+.Catui_sh-card-meta{display:flex;align-items:center;gap:var(--Catui_space-1);margin:0;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_sh-card-acts{position:absolute;top:var(--Catui_space-2);right:var(--Catui_space-2);display:grid;gap:var(--Catui_space-1)}
+.Catui_sh-card-acts .Catui_btn{background:color-mix(in srgb,var(--Catui_card-bg) 88%,transparent);box-shadow:var(--Catui_shadow-xs)}
+.Catui_sh-card-out .Catui_sh-card-img img{opacity:.45}
+/* 품절: 사진 위 글자 띠(색만으로 알리지 않음) */
+.Catui_sh-soldout{position:absolute;inset:auto 0 0 0;padding:var(--Catui_space-1) var(--Catui_space-2);background:color-mix(in srgb,var(--Catui_color-text-primary) 78%,transparent);color:var(--Catui_color-text-inverse);font-size:var(--Catui_type-caption-size);font-weight:700;text-align:center}
+.Catui_sh-rank{position:absolute;top:0;left:0;min-width:var(--Catui_control-h-sm);height:var(--Catui_control-h-sm);display:grid;place-items:center;padding-inline:var(--Catui_space-1);border-bottom-right-radius:var(--Catui_radius-md);background:var(--Catui_color-text-primary);color:var(--Catui_color-text-inverse);font-weight:800;font-variant-numeric:tabular-nums}
+
+/* 찜(하트): 누르면 채워진 하트 + aria-pressed */
+.Catui_sh-wish[aria-pressed="true"]{color:var(--Catui_sh-sale)}
+.Catui_sh-wish[aria-pressed="true"] .Catui_icon{fill:currentColor}
+
+/* 가격 */
+.Catui_sh-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 var(--Catui_space-1);margin:0;line-height:1.3}
+.Catui_sh-rate{font-weight:800;color:var(--Catui_sh-sale)}
+.Catui_sh-sale{font-weight:800;color:var(--Catui_sh-price)}
+.Catui_sh-list{flex-basis:100%;order:3;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-tertiary)}
+.Catui_sh-price-lg{font-size:var(--Catui_type-h2-size)}
+.Catui_sh-price-lg .Catui_sh-list{font-size:var(--Catui_type-body-size)}
+
+/* 별점(읽기 전용) */
+.Catui_sh-stars{display:inline-flex;align-items:center;gap:1px;color:var(--Catui_rating-off)}
+.Catui_sh-stars [data-on]{color:var(--Catui_rating-on)}
+.Catui_sh-stars [data-on] .Catui_icon{fill:currentColor}
+
+/* 혜택 태그 */
+.Catui_sh-tags{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:var(--Catui_space-1)}
+.Catui_sh-tag{display:inline-flex;align-items:center;height:var(--Catui_pill-h-sm);padding-inline:var(--Catui_space-1);border-radius:var(--Catui_radius-xs);background:var(--Catui_color-surface-muted);border:1px solid var(--Catui_color-border);font-size:11px;font-weight:700;color:var(--Catui_color-text-secondary)}
+.Catui_sh-tag-best{background:var(--Catui_color-text-primary);border-color:transparent;color:var(--Catui_color-text-inverse)}
+.Catui_sh-tag-new{border-color:var(--Catui_sh-accent);color:var(--Catui_sh-accent)}
+.Catui_sh-tag-coupon{background:var(--Catui_sh-accent-soft);border-color:transparent;color:var(--Catui_sh-accent)}
+
+/* 목록 보기: 한 줄에 사진 + 글 */
+.Catui_sh-rows{grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-3)}
+.Catui_sh-rows .Catui_sh-card{grid-template-columns:calc(var(--Catui_space-10) * 2.4) minmax(0,1fr);column-gap:var(--Catui_space-4);padding:var(--Catui_space-3);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_sh-rows .Catui_sh-card-link{display:contents}
+.Catui_sh-rows .Catui_sh-card-img{grid-row:1 / span 6;margin:0}
+.Catui_sh-rows .Catui_sh-card > :not(.Catui_sh-card-link,.Catui_sh-card-acts){grid-column:2}
+.Catui_sh-rows .Catui_sh-card-brand,.Catui_sh-rows .Catui_sh-card-name{grid-column:2}
+.Catui_sh-rows .Catui_sh-card-acts{position:static;grid-column:2;display:flex}
+@media (max-width:399px){.Catui_sh-rows .Catui_sh-card{grid-template-columns:calc(var(--Catui_space-10) * 1.8) minmax(0,1fr);column-gap:var(--Catui_space-3)}}
+
+/* 카테고리 바로가기 */
+.Catui_sh-cats{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:var(--Catui_space-3)}
+.Catui_sh-cats a{display:grid;justify-items:center;gap:var(--Catui_space-1);padding:var(--Catui_space-2) 0;text-decoration:none;font-size:var(--Catui_type-caption-size);font-weight:600;border-radius:var(--Catui_radius-md)}
+.Catui_sh-cat-ic{display:grid;place-items:center;width:min(100%,calc(var(--Catui_space-10) * 1.2));aspect-ratio:1 / 1;border-radius:var(--Catui_radius-pill);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);color:var(--Catui_sh-accent)}
+.Catui_sh-cats a:hover .Catui_sh-cat-ic{border-color:var(--Catui_sh-accent)}
+@media (max-width:767px){.Catui_sh-cats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* 기획전 카드 */
+.Catui_sh-promos{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 5.2)),1fr));gap:var(--Catui_space-4)}
+.Catui_sh-promo{display:grid;gap:var(--Catui_space-1);min-height:calc(var(--Catui_space-10) * 2.4);padding:var(--Catui_space-5);border-radius:var(--Catui_sh-radius);text-decoration:none;background:var(--Catui_sh-promo-bg,var(--Catui_color-brand-soft))}
+.Catui_sh-promo[data-tone="1"]{--Catui_sh-promo-bg:var(--Catui_color-brand-soft)}
+.Catui_sh-promo[data-tone="2"]{--Catui_sh-promo-bg:var(--Catui_color-info-soft)}
+.Catui_sh-promo[data-tone="3"]{--Catui_sh-promo-bg:var(--Catui_color-purple-soft)}
+.Catui_sh-promo[data-tone="4"]{--Catui_sh-promo-bg:var(--Catui_color-amber-soft)}
+.Catui_sh-promo b{font-size:var(--Catui_type-h3-size);word-break:keep-all}
+.Catui_sh-promo span{color:var(--Catui_color-text-secondary)}
+.Catui_sh-promo .Catui_sh-left{align-self:end}
+@media (max-width:399px){.Catui_sh-promos{grid-template-columns:minmax(0,1fr)}}

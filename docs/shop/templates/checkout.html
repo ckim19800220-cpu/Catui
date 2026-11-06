@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-sh-now="2026-11-02T10:00:00+09:00">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>주문서 · Catui 쇼핑</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/shop.min.css">
+<!-- 깜빡임 방지: 저장된 테마를 그리기 전에 적용 (CSP로 인라인 스크립트를 막는다면 지워도 됩니다 — catshop.js가 곧바로 적용) -->
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:shop")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_sh-body">
+<a class="Catui_skip" href="#sh-main">본문으로 이동</a>
+<div class="Catui_site Catui_sh" data-catui-sh data-page="checkout">
+  <header class="Catui_sh-head">
+    <div class="Catui_sh-head-in">
+      <a class="Catui_sh-brand" href="index.html" aria-label="Catui 쇼핑 홈"><span class="Catui_sh-mark" aria-hidden="true"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-bag"></use></svg></span><b>Catui <span>쇼핑</span></b></a>
+      <form class="Catui_sh-search" action="search.html" role="search" data-catui-sh-search>
+        <div class="Catui_search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="sh-q">상품 검색</label><input class="Catui_input" id="sh-q" name="q" type="search" placeholder="상품명·브랜드 검색" autocomplete="off" enterkeyhint="search"></div>
+      </form>
+      <div class="Catui_sh-head-acts">
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon Catui_sh-only-sm" href="search.html" aria-label="검색"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg></a>
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" href="wish.html" aria-label="찜 목록"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-heart"></use></svg></a>
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon Catui_sh-dot" href="cart.html"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg><span class="Catui_clip">장바구니</span><span class="Catui_count" data-catui-sh-cart-count hidden></span></a>
+        <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-sh-theme aria-label="어두운 화면으로"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg></button>
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" href="mypage.html" aria-label="마이페이지"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-user"></use></svg></a>
+      </div>
+    </div>
+    <nav class="Catui_sh-gnb" aria-label="카테고리"><div class="Catui_sh-gnb-in"><a class="Catui_sh-gnb-item" href="index.html">홈</a><a class="Catui_sh-gnb-item" href="list.html?sort=best">베스트</a><a class="Catui_sh-gnb-item" href="event.html?e=autumn">기획전</a><a class="Catui_sh-gnb-item" href="list.html?c=fashion">패션</a><a class="Catui_sh-gnb-item" href="list.html?c=beauty">뷰티</a><a class="Catui_sh-gnb-item" href="list.html?c=food">식품</a><a class="Catui_sh-gnb-item" href="list.html?c=living">리빙</a><a class="Catui_sh-gnb-item" href="list.html?c=digital">디지털</a><a class="Catui_sh-gnb-item" href="list.html?c=kids">유아동</a><a class="Catui_sh-gnb-item" href="list.html?c=sports">스포츠</a><a class="Catui_sh-gnb-item" href="list.html?c=pet">반려동물</a></div></nav>
+  </header>
+  <main class="Catui_sh-main" id="sh-main" tabindex="-1">
+<header class="Catui_sh-flow-head">
+  <h1 class="Catui_h2">주문서</h1>
+  <ol class="Catui_steps Catui_sh-flow" aria-label="주문 단계">
+    <li class="Catui_step Catui_step-done"><span class="Catui_step-dot"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span><span class="Catui_step-label">장바구니<span class="Catui_clip"> 완료</span></span></li>
+    <li class="Catui_step-line Catui_step-line-done" aria-hidden="true"></li>
+    <li class="Catui_step Catui_step-current" aria-current="step"><span class="Catui_step-dot">2</span><span class="Catui_step-label">주문서</span></li>
+    <li class="Catui_step-line" aria-hidden="true"></li>
+    <li class="Catui_step"><span class="Catui_step-dot">3</span><span class="Catui_step-label">주문 완료</span></li>
+  </ol>
+</header>
+<form class="Catui_sh-co" data-catui-sh-checkout novalidate aria-label="주문서">
+  <div class="Catui_sh-co-main">
+    <section class="Catui_sh-box" aria-labelledby="co-items-h">
+      <h2 class="Catui_h3" id="co-items-h">주문 상품 <span class="Catui_num" data-n></span></h2>
+      <ul class="Catui_sh-co-items" data-items><li class="Catui_help">주문 상품을 불러오는 중입니다…</li></ul>
+    </section>
+
+    <section class="Catui_sh-box" aria-labelledby="co-ship-h">
+      <h2 class="Catui_h3" id="co-ship-h">배송 정보</h2>
+      <fieldset class="Catui_optcards Catui_sh-addrs" data-addr><legend class="Catui_label">배송지</legend></fieldset>
+      <div class="Catui_field"><label class="Catui_label" for="co-memo">배송 요청 사항</label>
+        <div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="co-memo" name="memo">
+          <option value="door">문 앞에 놓아 주세요</option><option value="guard">경비실에 맡겨 주세요</option><option value="call">배송 전 연락 주세요</option><option value="box">택배함에 넣어 주세요</option><option value="etc">직접 입력</option>
+        </select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+      <div class="Catui_field" data-memo-etc hidden><label class="Catui_label" for="co-memo-t">요청 사항 직접 입력</label><textarea class="Catui_input" id="co-memo-t" name="memoText" rows="2" maxlength="50" data-catui-counter="50" placeholder="공동 현관 비밀번호 등 (50자)"></textarea></div>
+    </section>
+
+    <section class="Catui_sh-box" aria-labelledby="co-disc-h">
+      <h2 class="Catui_h3" id="co-disc-h">할인 · 적립금</h2>
+      <div class="Catui_field"><label class="Catui_label" for="co-coupon">쿠폰</label>
+        <div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="co-coupon" name="coupon"><option value="">쿠폰을 불러오는 중</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div>
+        <p class="Catui_help">가장 큰 할인 쿠폰을 골라 두었습니다. 쓸 수 없는 쿠폰은 이유를 함께 보여 줍니다.</p></div>
+      <div class="Catui_field"><label class="Catui_label" for="co-points">적립금 <span class="Catui_help">(보유 <span data-have>0원</span>)</span></label>
+        <div class="Catui_sh-points"><input class="Catui_input" id="co-points" name="points" inputmode="numeric" autocomplete="off" placeholder="0" aria-describedby="co-points-h"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-all-points>전액 사용</button></div>
+        <p class="Catui_help" id="co-points-h" data-point-note aria-live="polite"></p></div>
+    </section>
+
+    <section class="Catui_sh-box" aria-labelledby="co-pay-h">
+      <h2 class="Catui_h3" id="co-pay-h">결제 수단</h2>
+      <fieldset class="Catui_optcards Catui_sh-pays"><legend class="Catui_clip">결제 수단</legend>
+        <input class="Catui_clip" type="radio" name="pay" value="card" id="co-pay-card" checked><label class="Catui_optcard" for="co-pay-card"><span class="Catui_optcard-title"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-credit-card"></use></svg>신용·체크카드</span></label>
+        <input class="Catui_clip" type="radio" name="pay" value="kakao" id="co-pay-kakao"><label class="Catui_optcard" for="co-pay-kakao"><span class="Catui_optcard-title"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-wallet"></use></svg>카카오페이</span></label>
+        <input class="Catui_clip" type="radio" name="pay" value="naver" id="co-pay-naver"><label class="Catui_optcard" for="co-pay-naver"><span class="Catui_optcard-title"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-wallet"></use></svg>네이버페이</span></label>
+        <input class="Catui_clip" type="radio" name="pay" value="toss" id="co-pay-toss"><label class="Catui_optcard" for="co-pay-toss"><span class="Catui_optcard-title"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-wallet"></use></svg>토스페이</span></label>
+        <input class="Catui_clip" type="radio" name="pay" value="phone" id="co-pay-phone"><label class="Catui_optcard" for="co-pay-phone"><span class="Catui_optcard-title"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-smartphone"></use></svg>휴대폰 결제</span></label>
+        <input class="Catui_clip" type="radio" name="pay" value="bank" id="co-pay-bank"><label class="Catui_optcard" for="co-pay-bank"><span class="Catui_optcard-title"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-banknote"></use></svg>무통장 입금</span></label>
+      </fieldset>
+      <div class="Catui_sh-pay-detail" data-pay-detail="card">
+        <div class="Catui_field"><label class="Catui_label" for="co-card">카드사</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="co-card" name="card"><option>신한카드</option><option>국민카드</option><option>현대카드</option><option>삼성카드</option><option>우리카드</option><option>하나카드</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+        <div class="Catui_field"><label class="Catui_label" for="co-inst">할부</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="co-inst" name="inst"><option value="0">일시불</option><option value="2">2개월 (무이자)</option><option value="3">3개월 (무이자)</option><option value="6">6개월</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+      </div>
+      <div class="Catui_sh-pay-detail" data-pay-detail="bank" hidden>
+        <div class="Catui_field"><label class="Catui_label" for="co-bank">입금 은행</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="co-bank" name="bank"><option>국민은행 000-00-0000-000 (가상)</option><option>신한은행 000-000-000000 (가상)</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+        <div class="Catui_field"><label class="Catui_label" for="co-depositor">입금자명</label><input class="Catui_input" id="co-depositor" name="depositor" autocomplete="name"></div>
+        <p class="Catui_help">주문 후 3일 안에 입금하지 않으면 자동으로 취소됩니다.</p>
+      </div>
+    </section>
+
+    <section class="Catui_sh-box" aria-labelledby="co-agree-h">
+      <h2 class="Catui_h3" id="co-agree-h">약관 동의</h2>
+      <div class="Catui_sh-agree">
+        <label class="Catui_choice Catui_sh-agree-all" for="co-ag-all"><input class="Catui_clip" type="checkbox" id="co-ag-all" data-agree-all><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>주문 내용을 확인했으며 아래 약관에 모두 동의합니다</label>
+        <label class="Catui_choice" for="co-ag-1"><input class="Catui_clip" type="checkbox" id="co-ag-1" data-agree required><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>(필수) 구매 조건 확인 및 결제 진행 동의</label>
+        <label class="Catui_choice" for="co-ag-2"><input class="Catui_clip" type="checkbox" id="co-ag-2" data-agree required><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>(필수) 개인정보 수집·이용 및 제3자(판매자) 제공 동의</label>
+        <label class="Catui_choice" for="co-ag-3"><input class="Catui_clip" type="checkbox" id="co-ag-3" data-agree><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>(선택) 혜택·이벤트 알림 받기</label>
+      </div>
+    </section>
+  </div>
+  <aside class="Catui_sh-co-side Catui_sh-box" data-total aria-labelledby="co-total-h"><h2 class="Catui_h3" id="co-total-h">결제 금액</h2></aside>
+</form>
+  </main>
+  <footer class="Catui_sh-foot">
+    <div class="Catui_sh-foot-in">
+      <nav aria-label="쇼핑 안내"><a href="mypage.html">마이페이지</a><a href="orders.html">주문 내역</a><a href="coupons.html">쿠폰·적립금</a><a href="login.html">로그인</a></nav>
+      <p><b>(주)캣유아이 쇼핑 (가상)</b> · 대표 김고양 · 사업자 등록 번호 000-00-00000 · 통신 판매업 신고 제2026-서울-0000호</p>
+      <p>고객센터 <a href="tel:15880000">1588-0000</a> (평일 09:00–18:00) · 결제 대금 예치: 모의 에스크로 · 모든 상품·브랜드·주문은 가상 데이터입니다.</p>
+      <p>© 2026 Catui 쇼핑 · Catui 2.0.0 · MIT License</p>
+    </div>
+  </footer>
+  <button class="Catui_btn Catui_btn-md Catui_btn-secondary Catui_btn-icon Catui_sh-totop" type="button" data-catui-sh-top aria-label="맨 위로" hidden><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-arrow-up"></use></svg></button>
+  <nav class="Catui_sh-tabs" aria-label="빠른 이동"><a class="Catui_sh-tab" href="index.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-house"></use></svg><span>홈</span></a><a class="Catui_sh-tab" href="list.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-layout-grid"></use></svg><span>카테고리</span></a><a class="Catui_sh-tab" href="search.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span></a><a class="Catui_sh-tab" href="cart.html" aria-current="page"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg><span>장바구니</span><span class="Catui_count Catui_sh-tab-n" data-catui-sh-cart-count hidden></span></a><a class="Catui_sh-tab" href="mypage.html"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-user"></use></svg><span>마이</span></a></nav>
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catshop.min.js"></script>
+
+</body>
+</html>

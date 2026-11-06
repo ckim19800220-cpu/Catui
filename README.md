@@ -9,8 +9,10 @@
 <script>catui.use(['layer'], function (layer) { layer.msg('안녕하세요'); });</script>
 ```
 
+불러오면 콘솔에 `Catui 한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT by Ckim` 한 줄이 나옵니다. 끄려면 스크립트 바로 뒤에 `catui.config({ banner: false })`.
+
 ```js
-// ES 모듈 + TypeScript (dist/catui.d.ts 자동 인식)
+// ES 모듈 + TypeScript (dist/catui.d.ts 자동 인식) — package.json의 main·default도 ESM
 // npm install @imcat-ckim/catui
 import catui, { layer, carousel } from "@imcat-ckim/catui";
 import "@imcat-ckim/catui/css";
@@ -20,10 +22,10 @@ import "@imcat-ckim/catui/css";
 
 | 파일 | 용도 |
 |------|------|
-| `catui.min.js` (+ `.map`) | 전역 `window.catui`, 압축본 (gzip 약 57KB) |
+| `catui.min.js` (+ `.map`) | 전역 `window.catui`, 압축본 (gzip 약 62KB) |
 | `catui.esm.min.js` (+ `.map`) | ES 모듈 압축본 |
 | `catui.js` · `catui.esm.js` | 압축 전 (디버깅용) |
-| `catui.min.css` · `catui.css` | 스타일 (gzip 약 29KB) |
+| `catui.min.css` · `catui.css` | 스타일 (gzip 약 31KB) |
 | `icons.svg` | 아이콘 스프라이트 (`catui.js`와 같은 폴더에 둔다) |
 | `catui.d.ts` | TypeScript 타입 |
 
@@ -57,7 +59,8 @@ npm install
 npm run build       # CSS → 아이콘 → JS → 문서 (검사 포함)
 npm run build:css   # CSS·아이콘만
 npm run dev         # 정적 서버 :8766
-npm test            # E2E: 문서 전체 콘솔 오류 0건 + 모듈 시나리오 (시스템 Chrome/Edge 사용, CATUI_CHROME으로 경로 지정)
+npm test            # E2E: 문서·템플릿 전체 콘솔 오류 0건 + 모듈 시나리오 (시스템 Chrome/Edge 사용, CATUI_CHROME으로 경로 지정)
+npm test -- 이름     # 이름에 그 글자가 들어간 시나리오만
 npm run check       # 빌드 + 테스트
 ```
 
@@ -82,7 +85,9 @@ catui 위에 얹는 커뮤니티 확장입니다. CatuiAdmin과 같은 방식으
 <script src="dist/catui.min.js"></script><script src="dist/catcommunity.min.js"></script>
 ```
 
-- 소스: `src/community/`, 템플릿: `templates/community/`(menu.json · layout · data · pages 22종) → `docs/community/templates/`
+- 소스: `src/community/`, 템플릿: `templates/community/`(menu.json · layout · data · pages 23종) → `docs/community/templates/`
+
+두 확장은 자기 테마(라이트·다크·시스템)를 기억해 적용합니다. 다른 쪽이 테마를 관리하는 화면(예: 문서 사이트)에서는 `<html data-catui-theme-lock>`으로 덮어쓰기를 막습니다.
 - 문서: 상단 **CatuiCommunity** 탭 (`docs/community/start/introduction.html`)
 
 ## 라이선스

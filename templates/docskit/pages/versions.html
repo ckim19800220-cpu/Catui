@@ -1,0 +1,40 @@
+<!-- title: 버전별 문서 | nav: doc -->
+<div class="Catui_dk-docs">
+  <details class="Catui_dk-side" open>
+    <summary>문서 메뉴{{icon:chevron-down}}</summary>
+    <nav class="Catui_dk-sidenav" aria-label="문서 메뉴" data-catui-dk-nav></nav>
+  </details>
+  <aside class="Catui_dk-aside" id="dk-toc" aria-label="이 쪽 목차" hidden></aside>
+  <article class="Catui_dk-article" data-catui-dk-toc="#dk-toc">
+    <header class="Catui_dk-doc-h">
+      <p class="Catui_dk-crumb">버전 <span data-catui-dk-vername>v2.1</span></p>
+      <h1 class="Catui_h1">마이그레이션 가이드</h1>
+      <p class="Catui_lead">버전을 고르면 그 버전의 문서 주소로 이동합니다. 옛 버전을 보고 있으면 맨 위에 안내가 나옵니다.</p>
+      <div class="Catui_dk-ver">
+        <label class="Catui_label" for="dk-ver">문서 버전</label>
+        <div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="dk-ver" data-catui-dk-version>
+          <option value="versions.html?v=2.1">v2.1 (최신)</option>
+          <option value="versions.html?v=2.0">v2.0</option>
+          <option value="versions.html?v=1.2">v1.2 (지원 종료)</option>
+        </select>{{icon:chevron-down}}</div>
+      </div>
+    </header>
+    <div class="Catui_banner Catui_banner-warn" role="note" data-catui-dk-old hidden>{{icon:alert-triangle:18}}<p><b data-ver>옛 버전</b> 문서를 보고 있습니다. 최신 내용은 <a href="versions.html?v=2.1">v2.1 문서</a>를 보세요.</p></div>
+    <div class="Catui_dk-prose" id="ver-body">
+      <h2 id="v2-changes">2.0에서 2.1로</h2>
+      <p>깨지는 변경은 없습니다. 확장 키트(CatuiAdmin·CatuiCommunity·CatuiShop·CatuiDocs)가 더해졌고, <code>catui.imeBusy</code>가 공개되었습니다.</p>
+      <h3 id="v2-steps">올리는 순서</h3>
+      <ul>
+        <li><code>npm install @imcat-ckim/catui@2.1</code>로 올립니다.</li>
+        <li>확장을 쓸 때만 <code>dist/docs.css</code>·<code>catdocs.js</code>를 더 불러옵니다.</li>
+      </ul>
+      <pre data-lang="bash"><code>npm install @imcat-ckim/catui@2.1</code></pre>
+      <h2 id="v1-changes">1.x에서 2.0으로</h2>
+      <p>클래스 접두가 <code>Catui_</code>로 통일되었습니다. 옛 이름은 찾아 바꾸기로 옮깁니다.</p>
+      <div class="Catui_table-wrap Catui_dk-scroll"><table class="Catui_tbl"><caption class="Catui_clip">1.x → 2.0 이름 바꿈</caption>
+        <thead><tr><th scope="col">1.x</th><th scope="col">2.0</th></tr></thead>
+        <tbody><tr><td><code>.cu-btn</code></td><td><code>.Catui_btn</code></td></tr><tr><td><code>cu.layer</code></td><td><code>catui.layer</code></td></tr></tbody></table></div>
+    </div>
+    <nav class="Catui_dk-pager" aria-label="이전·다음 문서" data-catui-dk-pager></nav>
+  </article>
+</div>

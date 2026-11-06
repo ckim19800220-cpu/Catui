@@ -1,0 +1,24 @@
+<!-- title: 리뷰 쓰기 | nav: my | my: orders -->
+<div class="Catui_sh-my">
+  {{mynav}}
+  <div class="Catui_sh-my-main">
+    <h1 class="Catui_h2">리뷰 쓰기</h1>
+    <form class="Catui_sh-box Catui_vstack Catui_gap-4" data-catui-sh-review novalidate>
+      <div class="Catui_sh-co-item" data-rv-product><p class="Catui_help">상품을 불러오는 중입니다…</p></div>
+      <fieldset><legend class="Catui_label">상품은 어떠셨나요? <span class="Catui_req">필수</span></legend>
+        <div class="Catui_rating Catui_sh-rate-in">
+          <input class="Catui_clip" type="radio" name="rating" value="1" id="rv-1"><label for="rv-1">{{icon:star:24}}<span class="Catui_clip">1점 — 별로예요</span></label>
+          <input class="Catui_clip" type="radio" name="rating" value="2" id="rv-2"><label for="rv-2">{{icon:star:24}}<span class="Catui_clip">2점 — 그저 그래요</span></label>
+          <input class="Catui_clip" type="radio" name="rating" value="3" id="rv-3"><label for="rv-3">{{icon:star:24}}<span class="Catui_clip">3점 — 보통이에요</span></label>
+          <input class="Catui_clip" type="radio" name="rating" value="4" id="rv-4"><label for="rv-4">{{icon:star:24}}<span class="Catui_clip">4점 — 좋아요</span></label>
+          <input class="Catui_clip" type="radio" name="rating" value="5" id="rv-5"><label for="rv-5">{{icon:star:24}}<span class="Catui_clip">5점 — 최고예요</span></label>
+        </div>
+      </fieldset>
+      <div class="Catui_field"><label class="Catui_label" for="rv-text">리뷰 <span class="Catui_req">필수</span></label><textarea class="Catui_input" id="rv-text" name="text" rows="6" maxlength="1000" data-catui-counter="1000" placeholder="사이즈·색감·품질 등 다른 분께 도움이 되는 내용을 10자 이상 적어 주세요" aria-describedby="rv-text-h"></textarea>
+        <p class="Catui_help" id="rv-text-h">사진을 함께 올리면 포토 리뷰 적립금 500원을 드립니다.</p></div>
+      <div class="Catui_field"><label class="Catui_label" for="rv-file">사진 (최대 5장)</label><input class="Catui_input" id="rv-file" type="file" accept="image/*" multiple><div class="Catui_sh-pics" data-pics></div></div>
+      <p class="Catui_banner Catui_banner-danger" role="alert" data-err hidden></p>
+      <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">리뷰 등록</button><a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="orders.html">취소</a></div>
+    </form>
+  </div>
+</div>

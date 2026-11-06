@@ -1,0 +1,62 @@
+<!-- title: 시작 가이드 | nav: guide -->
+<div class="Catui_dk-docs">
+  <details class="Catui_dk-side" open>
+    <summary>문서 메뉴{{icon:chevron-down}}</summary>
+    <nav class="Catui_dk-sidenav" aria-label="문서 메뉴" data-catui-dk-nav></nav>
+  </details>
+  <aside class="Catui_dk-aside" id="dk-toc" aria-label="이 쪽 목차" hidden></aside>
+  <article class="Catui_dk-article" data-catui-dk-toc="#dk-toc">
+    <header class="Catui_dk-doc-h">
+      <p class="Catui_dk-crumb">시작하기</p>
+      <h1 class="Catui_h1">5분 만에 시작하기</h1>
+      <p class="Catui_lead">파일 두 개를 불러오고, 마크업을 붙이고, 스크립트 한 줄로 동작을 더하는 네 단계입니다. 코드 블록 오른쪽 위 ‘복사’로 그대로 가져가세요.</p>
+      <p class="Catui_dk-meta">{{icon:clock:16}}<span data-catui-dk-readtime="#guide-body"></span></p>
+    </header>
+    <div class="Catui_dk-prose" id="guide-body">
+      <div class="Catui_callout">{{icon:info:18}}<p class="Catui_callout-title">준비물</p><p>Node.js 20 이상(npm으로 설치할 때만)과 최신 Chrome·Edge·Safari·Firefox. 빌드 도구 없이 CDN 태그로도 됩니다.</p></div>
+      <ol class="Catui_dk-steps">
+        <li>
+          <h2 id="install">설치하기</h2>
+          <p>npm으로 받거나, <code>dist</code> 폴더를 그대로 복사합니다.</p>
+          <pre data-lang="bash"><code>npm install @imcat-ckim/catui</code></pre>
+        </li>
+        <li>
+          <h2 id="load">CSS와 스크립트 불러오기</h2>
+          <p>문서 사이트라면 <code>docs.css</code>와 <code>catdocs.js</code>를 본체 다음에 불러옵니다. 순서가 틀리면 콘솔에 안내가 나옵니다.</p>
+          <pre data-lang="html"><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+&lt;link rel="stylesheet" href="dist/docs.min.css"&gt;
+&lt;script src="dist/catui.min.js"&gt;&lt;/script&gt;
+&lt;script src="dist/catdocs.min.js"&gt;&lt;/script&gt;</code></pre>
+        </li>
+        <li>
+          <h2 id="markup">셸 마크업 붙이기</h2>
+          <p>루트에 <code>data-catui-dk</code>를 달면 메뉴·목차·검색·피드백이 자동으로 연결됩니다.</p>
+          <pre data-lang="html"><code>&lt;div class="Catui_site Catui_dk" data-catui-dk&gt;
+  &lt;aside id="toc"&gt;&lt;/aside&gt;
+  &lt;article data-catui-dk-toc="#toc"&gt;
+    &lt;h2&gt;설치&lt;/h2&gt; …
+  &lt;/article&gt;
+&lt;/div&gt;</code></pre>
+        </li>
+        <li>
+          <h2 id="script">스크립트로 더하기</h2>
+          <p>이벤트를 받아 분석 도구나 서버로 보낼 수 있습니다. 함수 목록은 <a href="api.html">API 참조</a>에 있습니다.</p>
+          <pre data-lang="js"><code>catui.docs.on('feedback', ({ key, value }) =&gt; {
+  fetch('/api/feedback', { method: 'POST', body: JSON.stringify({ key, value }) });
+});</code></pre>
+          <div class="Catui_callout Catui_callout-tip">{{icon:sparkles:18}}<p class="Catui_callout-title">팁</p><p>한글 입력 중에 누른 Enter는 검색을 제출하지 않습니다(<code>catui.imeBusy</code>).</p></div>
+        </li>
+      </ol>
+    </div>
+    <div class="Catui_dk-doc-f">
+      <p>{{icon:calendar:16}}마지막 수정 <time datetime="2026-10-25">2026.10.25</time></p>
+      <p><a class="Catui_link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener" target="_blank">{{icon:pencil:16}}이 쪽 고치기<span class="Catui_clip"> (GitHub, 새 창)</span></a></p>
+    </div>
+    <nav class="Catui_dk-pager" aria-label="이전·다음 문서" data-catui-dk-pager></nav>
+    <section class="Catui_dk-feedback" aria-labelledby="dk-fb-t" data-catui-dk-feedback="guide" data-catui-dk-notoc>
+      <h2 id="dk-fb-t">이 문서가 도움이 되었나요?</h2>
+      <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-vote="yes" aria-pressed="false">{{icon:thumbs-up}}예</button><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-vote="no" aria-pressed="false">{{icon:thumbs-down}}아니오</button></div>
+      <p class="Catui_help" role="status" data-msg></p>
+    </section>
+  </article>
+</div>

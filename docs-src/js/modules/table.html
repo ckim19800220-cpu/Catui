@@ -48,6 +48,96 @@ table.on('sort(t)', function (obj) { return true; });   // false면 기본 정�
 <p>불러오는 동안 스켈레톤과 <code>aria-busy</code>를 보이고, 실패하면 오류 배너를 보이고, 새 요청이 오면 이전 요청은 취소합니다.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="검색어 · 상태 필터와 연동 (reload + debounce)">
+  <div class="Catui_toolbar">
+    <div class="Catui_search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="tb-find-q">고객 검색</label><input class="Catui_input" id="tb-find-q" type="search" placeholder="고객 이름" autocomplete="off"></div>
+    <label class="Catui_clip" for="tb-find-st">상태</label>
+    <div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="tb-find-st"><option value="">모든 상태</option><option>배송</option><option>처리</option><option>대기</option><option>취소</option></select></div>
+    <div class="Catui_toolbar-end"><span class="Catui_help" id="tb-find-n" aria-live="polite"></span></div>
+  </div>
+  <div id="tb-find"></div>
+  <script>
+  catui.use(['table', 'util'], function (table, util) {
+    var KIND = { '배송': 'success', '처리': 'info', '대기': 'warning', '취소': 'danger' };
+    var names = ['김하늘', '이준', '박서연', '최민', '정수아', '강도현', '윤지호', '한소리', '임태윤', '신예진', '오준혁', '배가영', '김도윤', '이서준', '박지민', '최유나'];
+    var all = names.map(function (n, i) { return { id: String(2001 + i), customer: n, amount: 12000 + ((i * 53) % 17) * 7000, status: ['배송', '처리', '대기', '취소'][(i * 3) % 4] }; });
+    table.render({ elem: '#tb-find', id: 'tb-find', caption: '주문 검색 결과', data: all, limit: 5, page: { layout: ['count', 'prev', 'page', 'next'] },
+      text: { none: '조건에 맞는 주문이 없습니다.' },
+      cols: [
+        { field: 'id', title: '번호', sort: true }, { field: 'customer', title: '고객', sort: true },
+        { field: 'amount', title: '금액', sort: true, align: 'right', templet: function (d) { return util.number(d.amount) + '원'; } },
+        { field: 'status', title: '상태', templet: function (d) { return catui.html`<span class="Catui_pill Catui_pill-${KIND[d.status]}"><i class="Catui_dot"></i>${d.status}</span>`; } } ] });
+    var q = document.getElementById('tb-find-q'), st = document.getElementById('tb-find-st');
+    var run = function () {
+      var kw = q.value.trim(), s = st.value;
+      var rows = all.filter(function (r) { return (!kw || r.customer.indexOf(kw) > -1) && (!s || r.status === s); });
+      // where가 바뀌면 1쪽부터 다시 — 원격 표(url)라면 data 없이 where만 넘기면 ?q=…&status=… 로 다시 요청
+      table.reload('tb-find', { data: rows, where: { q: kw, status: s } });
+      document.getElementById('tb-find-n').textContent = '검색 결과 ' + rows.length + '건';
+    };
+    q.addEventListener('input', util.debounce(run, 250));   // 글자마다 다시 그리지 않게
+    st.addEventListener('change', run);
+    run();
+  });
+  </script>
+</catui-example>
+<catui-example title="선택 행 일괄 작업 · 행 수정 (checkbox 이벤트 · update)">
+  <div class="Catui_toolbar">
+    <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="tb-bulk-ship" disabled>배송 처리</button>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-danger" type="button" id="tb-bulk-del" disabled>선택 삭제</button>
+    <div class="Catui_toolbar-end"><span class="Catui_help" id="tb-bulk-n" aria-live="polite">선택한 행 없음</span></div>
+  </div>
+  <div id="tb-bulk" data-catui-filter="tb-bulk"></div>
+  <script>
+  catui.use(['table', 'layer'], function (table, layer) {
+    var KIND = { '배송': 'success', '처리': 'info', '대기': 'warning' };
+    var rows = ['김하늘', '이준', '박서연', '최민', '정수아', '강도현'].map(function (n, i) { return { id: String(3001 + i), customer: n, memo: '', status: ['처리', '대기'][i % 2] }; });
+    table.render({ elem: '#tb-bulk', id: 'tb-bulk', caption: '처리할 주문', data: rows, labelField: 'customer',
+      cols: [
+        { type: 'checkbox', width: 48 }, { field: 'id', title: '번호' }, { field: 'customer', title: '고객' }, { field: 'memo', title: '메모' },
+        { field: 'status', title: '상태', templet: function (d) { return catui.html`<span class="Catui_pill Catui_pill-${KIND[d.status]}"><i class="Catui_dot"></i>${d.status}</span>`; } },
+        { title: '동작', toolbar: [{ event: 'edit', text: '수정', icon: 'pencil' }] } ] });
+    var ship = document.getElementById('tb-bulk-ship'), del = document.getElementById('tb-bulk-del');
+    var sync = function () {
+      var n = table.checkStatus('tb-bulk').data.length;
+      ship.disabled = del.disabled = !n;
+      document.getElementById('tb-bulk-n').textContent = n ? '선택 ' + n + '건' : '선택한 행 없음';
+    };
+    // 작업 뒤 버튼이 잠기면 포커스가 사라지므로 표의 전체 선택 칸으로 옮긴다
+    var refocus = function () { var all = document.querySelector('#tb-bulk [data-catui-check="all"]'); if (all) all.focus(); };
+    table.on('checkbox(tb-bulk)', sync);
+    ship.addEventListener('click', function () {
+      var picked = table.checkStatus('tb-bulk').data;
+      picked.forEach(function (r) { r.status = '배송'; });
+      table.clearChecked('tb-bulk'); sync(); refocus();
+      layer.msg(picked.length + '건을 배송 처리했습니다', { icon: 'success' });
+    });
+    del.addEventListener('click', async function () {
+      var picked = table.checkStatus('tb-bulk').data;
+      if (!await layer.ask('선택한 ' + picked.length + '건을 삭제할까요?', { danger: true, okText: '삭제' })) return;
+      rows = rows.filter(function (r) { return picked.indexOf(r) < 0; });
+      table.reload('tb-bulk', { data: rows });
+      table.clearChecked('tb-bulk'); sync(); refocus();
+      layer.msg(picked.length + '건을 삭제했습니다', { icon: 'success' });
+    });
+    table.on('tool(tb-bulk)', async function (obj) {
+      if (obj.event !== 'edit') return;
+      var v = await layer.form({ title: obj.data.customer + ' 주문 수정', area: 'sm', okText: '저장', fields: [
+        { name: 'status', label: '상태', type: 'select', value: obj.data.status, options: ['처리', '대기', '배송'] },
+        { name: 'memo', label: '메모', maxlength: 40, value: obj.data.memo } ] });
+      if (!v) return;
+      obj.update(v);                        // 행 데이터를 바꾸고 표를 다시 그림
+      // 다시 그리면 버튼이 새로 생기므로 같은 행의 수정 버튼으로 포커스를 되돌린다 (aria-label = '수정 ' + labelField 값)
+      var again = document.querySelector('#tb-bulk [aria-label="수정 ' + obj.data.customer + '"]');
+      if (again) again.focus();
+    });
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="static">
 <h2 id="static">정적 표 향상</h2>
 <catui-example title="data-catui-table + th[data-catui-sort]">

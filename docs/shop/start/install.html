@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-theme-lock>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설치 · 구조 · CatuiShop · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="shop.css · catshop.js 로드, 템플릿·메뉴·JSON 모의 데이터.">
+<link rel="icon" href="../../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../../dist/shop.css">
+<script src="../../../dist/catui.js"></script>
+<script src="../../../dist/catshop.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top">
+<div class="doc-top-inner">
+  <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html" aria-current="page">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
+  <div class="doc-top-end">
+    <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
+    <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+    <a class="Catui_btn Catui_btn-sm Catui_btn-primary doc-cta" href="../../css/start/introduction.html">시작하기</a>
+  </div>
+</div>
+</header>
+<dialog class="doc-search" aria-label="문서 검색" data-index="../../assets/search-index.js" data-home="../../index.html"><div class="doc-search-box"><label class="Catui_clip" for="doc-search-q">문서 검색</label><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><input id="doc-search-q" type="search" placeholder="페이지·설명 검색" autocomplete="off" aria-describedby="doc-search-count"><kbd>Esc</kbd></div><p class="doc-search-count" id="doc-search-count" aria-live="polite"></p><ul id="doc-search-list" aria-label="검색 결과"></ul></dialog>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CatuiShop 메뉴</summary><nav aria-label="CatuiShop 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../../shop/start/introduction.html">소개 · 화면 지도</a></li><li><a href="../../shop/start/install.html" aria-current="page">설치 · 구조</a></li><li><a href="../../shop/start/structure.html">금액 규칙</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../../shop/modules.html">catshop.js API</a></li><li><a href="../../shop/css.html">shop.css 클래스</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<header class="doc-head">
+<p class="doc-crumb"><span>CatuiShop</span><span>시작</span><span>설치 · 구조</span></p>
+<h1 class="Catui_h1">설치 · 구조</h1>
+<p class="Catui_lead">shop.css · catshop.js 로드, 템플릿·메뉴·JSON 모의 데이터.</p>
+
+
+</header>
+<section aria-labelledby="files">
+<h2 id="files">파일 · 불러오기</h2>
+<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+&lt;link rel="stylesheet" href="dist/shop.min.css"&gt;
+…
+&lt;script src="dist/catui.min.js"&gt;&lt;/script&gt;
+&lt;script src="dist/catshop.min.js"&gt;&lt;/script&gt;      ← catui.js 다음 (순서가 틀리면 콘솔에 안내)
+
+// npm · ES 모듈
+import catui from '@imcat-ckim/catui';
+import shop from '@imcat-ckim/catui/shop';
+import '@imcat-ckim/catui/css';
+import '@imcat-ckim/catui/shop.css';</code></pre>
+<p>배포 파일: <code>shop.css</code>(+min) · <code>catshop.js</code> · <code>catshop.esm.js</code> · <code>*.min.js</code>(+map) · <code>catshop.d.ts</code></p>
+</section>
+
+<section aria-labelledby="shell">
+<h2 id="shell">사이트 셸</h2>
+<pre><code>&lt;html lang="ko" data-catui-sh-now="2026-11-02T10:00:00+09:00"&gt;   ← 모의 데이터 "지금"(없으면 실제 시각)
+&lt;div class="Catui_site Catui_sh" data-catui-sh&gt;
+  &lt;header class="Catui_sh-head"&gt; 로고 · 검색(form[data-catui-sh-search] → search.html?q=) · 찜 · 장바구니([data-catui-sh-cart-count]) · 테마([data-catui-sh-theme]) · 마이
+    &lt;nav class="Catui_sh-gnb"&gt; 카테고리 메뉴 (좁으면 가로 스크롤)
+  &lt;main class="Catui_sh-main"&gt; … &lt;/main&gt;
+  &lt;footer class="Catui_sh-foot"&gt; 사업자 정보 · 고객센터
+  &lt;nav class="Catui_sh-tabs"&gt; 767px 이하 하단 탭(홈·카테고리·검색·장바구니·마이)
+&lt;/div&gt;</code></pre>
+<p>테마는 커뮤니티와 같은 규칙(저장값이 없으면 시스템)이고, <code>&lt;html data-catui-theme-lock&gt;</code>이 있으면 건드리지 않습니다(이 문서 사이트가 그렇습니다).</p>
+</section>
+
+<section aria-labelledby="tpl">
+<h2 id="tpl">템플릿 · 메뉴</h2>
+<ul>
+  <li><code>templates/shop/pages/이름.html</code> — 머리 주석 <code>&lt;!-- title: 주문 내역 | nav: my | my: orders | layout: blank --&gt;</code>. <code>nav</code>는 상단 메뉴·하단 탭의 현재 위치, <code>my</code>는 마이페이지 옆 메뉴(<code>{{mynav}}</code> 자리)의 현재 위치입니다.</li>
+  <li><code>templates/shop/menu.json</code> — <code>gnb</code>(카테고리), <code>tabs</code>(하단 탭, <code>count: true</code>면 장바구니 배지), <code>my</code>(마이페이지 메뉴). 없는 화면은 메뉴에서 빠집니다.</li>
+  <li><code>npm run build</code> → <code>docs/shop/templates/</code>. 검사: 정의 안 된 클래스·없는 아이콘·id 중복·label·화면 링크·h1·안 쓰인 클래스·역할 없는 span의 aria-label·JSON 문법, CSS의 hex·없는 토큰·본체 클래스 재정의.</li>
+</ul>
+</section>
+
+<section aria-labelledby="data">
+<h2 id="data">JSON 모의 데이터</h2>
+<p><code>templates/shop/data/*.json</code> → <code>docs/shop/templates/data/</code>. 실서비스는 같은 모양의 API를 만들고 <code>catui.shop.dataBase = '/api/'</code>만 바꿉니다. 화면에 보이는 할인가·별점 평균·품절·적립금 잔액은 저장하지 않고 <b>원자료에서 계산</b>합니다(<code>shop.enrich</code>).</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">데이터 파일</caption>
+<thead><tr><th scope="col">파일</th><th scope="col">내용 · 계산</th></tr></thead><tbody>
+<tr><td><code>products.json</code></td><td>상품 24개 — 정가·할인율·옵션(색상·사이즈·추가금)·조합별 재고·배송 종류. 판매가·품절·베스트(판매 수 상위 6)·신상품(14일)은 계산</td></tr>
+<tr><td><code>categories.json</code> · <code>promos.json</code></td><td>분류 8개(아이콘) · 기획전(마감 시각·묶음 상품)</td></tr>
+<tr><td><code>reviews.json</code> · <code>qna.json</code></td><td>리뷰 → 상품별 별점 평균·리뷰 수·분포 · 상품 문의(비밀글·답변)</td></tr>
+<tr><td><code>coupons.json</code></td><td>정률(최대 할인)·정액·배송비 쿠폰, 최소 주문 금액·분류 제한·만료 시각</td></tr>
+<tr><td><code>user.json</code></td><td>회원·배송지·적립 내역(잔액 = 합) · 처음 여는 브라우저에 채울 장바구니·찜·최근 본 상품</td></tr>
+<tr><td><code>orders.json</code></td><td>주문 5건 — 상태·결제 수단·택배 이동 기록. 결제 금액은 상품 × 수량 + 배송비 − 쿠폰 − 적립금으로 계산</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="store">
+<h2 id="store">기억하는 상태</h2>
+<p>모두 <code>catui.data('shop')</code>(localStorage <code>"catui:shop"</code>) 한 곳에 있습니다: <code>cart</code> · <code>wish</code> · <code>recent</code> · <code>now</code>(바로 구매) · <code>lastOrder</code> · <code>orders</code> · <code>view</code>(바둑판/목록) · <code>helped</code>(도움돼요) · <code>theme</code>. 다른 탭에서 바뀌면 장바구니 배지와 장바구니 화면이 따라 바뀝니다(<code>storage</code> 이벤트).</p>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../shop/start/introduction.html"><span>이전</span>소개 · 화면 지도</a><a class="doc-pager-next" href="../../shop/start/structure.html"><span>다음</span>금액 규칙</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#files">파일 · 불러오기</a></li><li><a href="#shell">사이트 셸</a></li><li><a href="#tpl">템플릿 · 메뉴</a></li><li><a href="#data">JSON 모의 데이터</a></li><li><a href="#store">기억하는 상태</a></li></ul></aside>
+</div>
+<footer class="doc-foot"><div class="doc-foot-inner">
+  <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
+</div></footer>
+</div>
+<script src="../../assets/docs.js"></script>
+</body>
+</html>

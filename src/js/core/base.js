@@ -4,6 +4,7 @@ import { BASE } from "./env.js";
 const catuiSettings = {
   icons: `${BASE}icons.svg?v=2`, // 아이콘 스프라이트 경로
   autoInit: true,                // DOMContentLoaded에 data-catui-* 자동 초기화
+  banner: true,                  // 불러올 때 콘솔에 이름·버전 한 줄 (debug: "silent"이거나 false로 끔)
   autoDestroy: true,             // DOM에서 빠진 요소의 컴포넌트 인스턴스 자동 정리
   debug: true,                   // 콘솔 출력: true 경고·오류 / false 오류만(운영) / "silent" 모두 끔
   csrf: { meta: "csrf-token", header: "X-CSRF-Token" },   // 같은 출처 쓰기 요청에 붙일 CSRF 토큰 (false = 끔)

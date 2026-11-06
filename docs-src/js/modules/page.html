@@ -73,6 +73,48 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="종류를 바꾸면 처음부터 다시 — 더 보기 버튼만 (auto: false · inst.reset)">
+  <div class="Catui_segment" role="radiogroup" aria-label="알림 종류" id="pg-kind">
+    <input class="Catui_clip" type="radio" name="pg-kind" id="pg-kind-all" value="전체" checked><label for="pg-kind-all">전체</label>
+    <input class="Catui_clip" type="radio" name="pg-kind" id="pg-kind-order" value="주문"><label for="pg-kind-order">주문</label>
+    <input class="Catui_clip" type="radio" name="pg-kind" id="pg-kind-review" value="리뷰"><label for="pg-kind-review">리뷰</label>
+  </div>
+  <ul class="Catui_list" id="pg-flow2"></ul>
+  <script>
+  catui.use(['page'], function (page) {
+    var kind = '전체';
+    var inst = page.flow.render({ elem: '#pg-flow2', auto: false, more: '알림 더 보기', end: '이 종류의 알림을 모두 봤습니다.', done: function (n, next) {
+      var asked = kind;
+      setTimeout(function () {                       // 실제로는 fetch('/api/alerts?kind=…&page=' + n)
+        if (asked !== kind) return;                  // 그사이 종류를 바꿨으면 늦게 온 결과는 버림
+        var items = [];
+        for (var i = 1; i <= 4; i++) items.push(catui.html`<li class="Catui_list-item">${kind} 알림 ${(n - 1) * 4 + i}</li>`);
+        next(items, n < (kind === '전체' ? 3 : 2));
+      }, 400);
+    } });
+    document.getElementById('pg-kind').addEventListener('change', function (e) { kind = e.target.value; inst.reset(); });   // 목록 비우고 1쪽부터
+  });
+  </script>
+</catui-example>
+<catui-example title="복사 결과 받기 — catui:copy 이벤트로 토스트">
+  <div class="Catui_hstack Catui_gap-3" id="pg-acct-box" style="flex-wrap:wrap">
+    <span>입금 계좌 <b id="pg-acct">국민 123456-01-234567</b> (예금주 캣유아이)</span>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-catui-copy="#pg-acct">계좌번호 복사</button>
+  </div>
+  <script>
+  catui.use(['page', 'layer'], function (page, layer) {
+    // 버튼 글자가 잠시 "복사됨"으로 바뀌는 것과 함께, 결과에 따라 토스트를 띄운다
+    document.getElementById('pg-acct-box').addEventListener('catui:copy', function (e) {
+      if (e.detail.ok) layer.msg('계좌번호를 복사했습니다', { icon: 'success', body: e.detail.text });
+      else layer.msg('복사하지 못했습니다', { icon: 'warn', body: '계좌번호를 길게 눌러 직접 복사해 주세요.' });
+    });
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="totop">
 <h2 id="totop">맨 위로</h2>
 <pre><code>&lt;a class="Catui_totop" href=&quot;#main&quot; data-catui-totop="400" aria-label="맨 위로"&gt;…&lt;/a&gt;   // 마크업

@@ -1,0 +1,8 @@
+[
+  { "id": "WELCOME10", "name": "신규 회원 10% 할인", "type": "rate", "value": 10, "max": 10000, "min": 20000, "expires": "2026-12-31T23:59:59+09:00" },
+  { "id": "BEAUTY3000", "name": "뷰티 3,000원 할인", "type": "amount", "value": 3000, "min": 15000, "cats": ["beauty"], "expires": "2026-11-30T23:59:59+09:00" },
+  { "id": "FOOD15", "name": "식품 15% 할인", "type": "rate", "value": 15, "max": 5000, "min": 10000, "cats": ["food"], "expires": "2026-11-05T23:59:59+09:00" },
+  { "id": "FREESHIP", "name": "무료배송 쿠폰", "type": "ship", "value": 0, "min": 0, "expires": "2026-11-15T23:59:59+09:00" },
+  { "id": "BIG20000", "name": "20만원 이상 2만원 할인", "type": "amount", "value": 20000, "min": 200000, "expires": "2026-11-30T23:59:59+09:00" },
+  { "id": "FALL5000", "name": "가을 감사 5,000원", "type": "amount", "value": 5000, "min": 50000, "expires": "2026-10-31T23:59:59+09:00" }
+]

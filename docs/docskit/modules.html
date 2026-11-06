@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-theme-lock>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>catdocs.js API · CatuiDocs · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="toc · code · search · readTime · md · feedback · version · blog · 선언형 속성.">
+<link rel="icon" href="../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../dist/catui.min.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<link rel="stylesheet" href="../../dist/docs.css">
+<script src="../../dist/catui.js"></script>
+<script src="../../dist/catdocs.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top">
+<div class="doc-top-inner">
+  <a class="doc-brand" href="../index.html"><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html">CatuiCommunity</a><a href="../shop/start/introduction.html">CatuiShop</a><a href="../docskit/start/introduction.html" aria-current="page">CatuiDocs</a></nav>
+  <div class="doc-top-end">
+    <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
+    <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+    <a class="Catui_btn Catui_btn-sm Catui_btn-primary doc-cta" href="../css/start/introduction.html">시작하기</a>
+  </div>
+</div>
+</header>
+<dialog class="doc-search" aria-label="문서 검색" data-index="../assets/search-index.js" data-home="../index.html"><div class="doc-search-box"><label class="Catui_clip" for="doc-search-q">문서 검색</label><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><input id="doc-search-q" type="search" placeholder="페이지·설명 검색" autocomplete="off" aria-describedby="doc-search-count"><kbd>Esc</kbd></div><p class="doc-search-count" id="doc-search-count" aria-live="polite"></p><ul id="doc-search-list" aria-label="검색 결과"></ul></dialog>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CatuiDocs 메뉴</summary><nav aria-label="CatuiDocs 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../docskit/start/introduction.html">소개 · 화면 지도</a></li><li><a href="../docskit/start/install.html">설치 · 구조</a></li><li><a href="../docskit/start/structure.html">규칙 · 계산</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../docskit/modules.html" aria-current="page">catdocs.js API</a></li><li><a href="../docskit/css.html">docs.css 클래스</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<header class="doc-head">
+<p class="doc-crumb"><span>CatuiDocs</span><span>확장</span><span>catdocs.js API</span></p>
+<h1 class="Catui_h1">catdocs.js API</h1>
+<p class="Catui_lead">toc · code · search · readTime · md · feedback · version · blog · 선언형 속성.</p>
+
+
+</header>
+<section aria-labelledby="api">
+<h2 id="api">catui.docs</h2>
+<p><code>catdocs.js</code>가 <code>catui.extend({ docs })</code>로 등록하고, 문서가 준비되면 <code>[data-catui-dk]</code> 루트를 찾아 연결합니다. 루트가 없는 화면(이 문서처럼)에서는 데이터를 읽지 않으므로, 목차·코드 복사·검색·읽는 시간 같은 함수는 직접 넘긴 요소와 자료로 씁니다. 전체 타입은 <code>dist/catdocs.d.ts</code>.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">catui.docs API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead><tbody>
+<tr><td><code>init(scope?)</code> · <code>destroy()</code> · <code>ready</code></td><td>연결 · 정리(모든 리스너·타이머 해제) · 모든 부품이 데이터를 다 그린 뒤 풀리는 Promise</td></tr>
+<tr><td><code>on(이벤트, fn)</code></td><td><code>theme</code> · <code>copy</code> { text, ok, kind: "code"|"anchor" } · <code>feedback</code> { key, value } · <code>search</code> { q, count } · <code>filter</code> { tag, page, total } · <code>version</code> { href } · <code>data</code></td></tr>
+<tr><td><code>rules</code></td><td><code>{ readKo: 500, readWords: 200, perPage: 6, related: 3, recent: 3, searchLimit: 30, tocLevels: "h2, h3" }</code></td></tr>
+<tr><td><code>toc(본문, 상자?, { levels, title })</code> · <code>tocSync()</code></td><td>목차 생성 + 제목 앵커 → { items, el } · 현재 위치 다시 계산 — <a href="../docskit/start/structure.html#toc-rule">규칙</a></td></tr>
+<tr><td><code>anchor(id)</code> · <code>code(범위)</code> · <code>copyCode(버튼)</code></td><td>제목 주소 복사(주소창도 #id로) · <code>pre</code>마다 언어·복사 버튼 머리줄 · 복사(<code>catui.util.copy</code>)</td></tr>
+<tr><td><code>search.find(색인, q)</code> · <code>search.match(글자, q)</code> · <code>search.load(범위)</code> · <code>search.highlight</code></td><td>점수 순 결과 · 초성 포함 일치 · 인라인 색인 → <code>data/search-index.json</code> · <code>&lt;mark&gt;</code> 표시</td></tr>
+<tr><td><code>readTime(글자 | 요소)</code> · <code>postTime(글)</code></td><td>{ minutes, ko, words, label } — 한글 분당 500자 + 단어 분당 200개, 올림, 최소 1분</td></tr>
+<tr><td><code>md(글)</code> · <code>mdInline(글)</code> · <code>blocks(블록[])</code></td><td>이스케이프 후 굵게·코드·https 링크만 (문자열) · 본문 블록 마크업</td></tr>
+<tr><td><code>feedback</code> · <code>version</code></td><td><code>get · set · paint</code>(키마다 “예/아니오” 기억) · <code>go(주소)</code>(바꿔 끼울 수 있는 이동 함수)</td></tr>
+<tr><td><code>data(name)</code> · <code>dataBase</code> · <code>blog()</code></td><td>JSON 읽기(한 번) · 주소 앞부분 · 글·저자·태그를 합친 값(최신 순, 태그별 글 수)</td></tr>
+<tr><td><code>blogList.read()</code> · <code>blogList.slice(글, { tag, page })</code> · <code>blogList.go()</code></td><td>주소 → { tag, page } · 거르고 자르기 { rows, total, pages, page } · 상태 바꾸고 주소에 남기기</td></tr>
+<tr><td><code>card(글)</code> · <code>meta(글)</code> · <code>pager(쪽, 쪽수)</code> · <code>changelog.badge(종류)</code></td><td>글 카드 · 저자·날짜·읽는 시간 줄 · 쪽 이동 버튼 · “추가/변경/고침” 배지 (글자는 모두 이스케이프)</td></tr>
+<tr><td><code>store</code> · <code>theme</code> · <code>query()</code> · <code>slug()</code> · <code>chosung()</code></td><td>저장소(localStorage "catui:docs") · 테마(<code>data-catui-theme-lock</code> 존중) · 주소 매개변수 · 제목 → id · 한글 초성</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="attrs">
+<h2 id="attrs">선언형 속성</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">data-catui-dk 속성</caption>
+<thead><tr><th scope="col">속성</th><th scope="col">동작</th></tr></thead><tbody>
+<tr><td><code>[data-catui-dk]</code></td><td>화면 루트(이 안의 속성을 연결)</td></tr>
+<tr><td><code>&lt;article data-catui-dk-toc="#상자"&gt;</code> · <code>[data-catui-dk-notoc]</code></td><td>목차·제목 앵커·코드 복사 · 목차에서 뺄 영역</td></tr>
+<tr><td><code>[data-catui-dk-nav]</code> · <code>[data-catui-dk-pager]</code> · <code>[data-catui-dk-page="id"]</code></td><td>왼쪽 문서 메뉴(nav.json) · 이전/다음 · 문서 본문(pages.json, <code>?p=</code> 우선)</td></tr>
+<tr><td><code>[data-catui-dk-readtime="#본문"]</code></td><td>“3분 읽기”</td></tr>
+<tr><td><code>[data-catui-dk-feedback="키"]</code> 안 <code>[data-vote="yes|no"]</code> · <code>[data-msg]</code></td><td>도움 되었나요 — <code>aria-pressed</code>, 같은 답을 다시 누르면 취소, 키마다 기억</td></tr>
+<tr><td><code>select[data-catui-dk-version]</code> · <code>[data-catui-dk-old]</code></td><td>버전 이동(option value = 주소) · 옛 버전 안내</td></tr>
+<tr><td><code>form[data-catui-dk-search]</code> · <code>="live"</code> · <code>[data-catui-dk-results]</code> · <code>[data-catui-dk-count]</code></td><td>머리 검색(빈 값·조합 중 Enter 막음) · 입력하는 대로 결과 + 주소 <code>?q=</code> · 결과 · 결과 수</td></tr>
+<tr><td><code>script[type="application/json"][data-catui-dk-index]</code></td><td>인라인 검색 색인 (있으면 <code>search-index.json</code>보다 먼저)</td></tr>
+<tr><td><code>[data-catui-dk-blog]</code> · <code>[data-catui-dk-post]</code> · <code>[data-catui-dk-tagpage]</code> · <code>[data-catui-dk-author]</code> · <code>[data-catui-dk-posts="recent"]</code> · <code>[data-catui-dk-changelog]</code></td><td>블로그 목록(<code>?tag=&amp;page=</code>) · 글(<code>?id=</code>) · 태그(<code>?t=</code>) · 저자(<code>?a=</code>) · 최근 글 · 변경 이력</td></tr>
+<tr><td><code>[data-catui-dk-theme]</code> · <code>[data-catui-dk-nocopy]</code></td><td>테마 전환 · 복사 버튼을 붙이지 않을 <code>pre</code>(시그니처 등)</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="recipes">
+<h2 id="recipes">자주 쓰는 사용 예</h2>
+<p>문서 키트 토큰이 <code>.Catui_dk</code>에 정의되므로 예제는 <code>class="Catui_dk"</code> 상자로 감쌌습니다 — <code>data-catui-dk</code> 속성은 넣지 않아 셸 동작(데이터 읽기)은 켜지지 않습니다(문서용으로 <code>min-height</code>만 풀었습니다).</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">목차 자동 생성 (docs.toc) — h3·h4로</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_dk Catui_dk-read" style="min-height:0;background:transparent">
+    <div class="Catui_dk-aside" id="dm-toc"></div>
+    <div class="Catui_dk-prose Catui_dk-post" id="dm-art">
+      <h3>설치</h3><p>npm이나 CDN 태그로 불러옵니다.</p>
+      <h4>CDN</h4><p>dist 폴더의 파일을 그대로 씁니다.</p>
+      <h3>목차 붙이기</h3><p>본문과 상자를 넘기면 끝입니다. 제목에 마우스를 올리면 주소 복사 버튼이 보입니다.</p>
+      <h3>현재 위치</h3><p>스크롤하면 지나간 마지막 제목의 링크가 강조됩니다.</p>
+    </div>
+  </div>
+  <p class="Catui_help" id="dm-toc-out" aria-live="polite"></p>
+  <script>
+  catui.use(['docs'], function (docs) {
+    var r = docs.toc('#dm-art', '#dm-toc', { levels: 'h3, h4', title: '예제 목차' });
+    document.getElementById('dm-toc-out').textContent = '제목 ' + r.items.length + '개 → id: ' + r.items.map(function (x) { return x.id; }).join(', ');
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="목차 자동 생성 (docs.toc) — h3·h4로 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_dk Catui_dk-read&quot; style=&quot;min-height:0;background:transparent&quot;&gt;
+  &lt;div class=&quot;Catui_dk-aside&quot; id=&quot;dm-toc&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_dk-prose Catui_dk-post&quot; id=&quot;dm-art&quot;&gt;
+    &lt;h3&gt;설치&lt;/h3&gt;&lt;p&gt;npm이나 CDN 태그로 불러옵니다.&lt;/p&gt;
+    &lt;h4&gt;CDN&lt;/h4&gt;&lt;p&gt;dist 폴더의 파일을 그대로 씁니다.&lt;/p&gt;
+    &lt;h3&gt;목차 붙이기&lt;/h3&gt;&lt;p&gt;본문과 상자를 넘기면 끝입니다. 제목에 마우스를 올리면 주소 복사 버튼이 보입니다.&lt;/p&gt;
+    &lt;h3&gt;현재 위치&lt;/h3&gt;&lt;p&gt;스크롤하면 지나간 마지막 제목의 링크가 강조됩니다.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;dm-toc-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;docs&#39;], function (docs) {
+  var r = docs.toc(&#39;#dm-art&#39;, &#39;#dm-toc&#39;, { levels: &#39;h3, h4&#39;, title: &#39;예제 목차&#39; });
+  document.getElementById(&#39;dm-toc-out&#39;).textContent = &#39;제목 &#39; + r.items.length + &#39;개 → id: &#39; + r.items.map(function (x) { return x.id; }).join(&#39;, &#39;);
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>한글 제목이 그대로 id(<code>설치</code>·<code>cdn</code>·<code>목차-붙이기</code>)가 됩니다. 쪽 안에 같은 id가 이미 있으면 <code>-2</code>가 붙습니다. 좁은 화면에서는 목차가 위로 올라갑니다.</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">코드 블록 복사 (docs.code)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_dk" style="min-height:0;background:transparent" id="dm-code">
+    <pre data-lang="js"><code>catui.docs.on('copy', ({ kind, ok }) =&gt; console.log(kind, ok));</code></pre>
+  </div>
+  <p class="Catui_help" id="dm-code-out" aria-live="polite"></p>
+  <script>
+  catui.use(['docs'], function (docs) {
+    docs.code('#dm-code');
+    docs.on('copy', function (d) { if (d.kind === 'code') document.getElementById('dm-code-out').textContent = d.ok ? '복사했습니다 (' + d.text.length + '자)' : '이 환경에서는 복사할 수 없습니다'; });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="코드 블록 복사 (docs.code) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_dk&quot; style=&quot;min-height:0;background:transparent&quot; id=&quot;dm-code&quot;&gt;
+  &lt;pre data-lang=&quot;js&quot;&gt;&lt;code&gt;catui.docs.on(&#39;copy&#39;, ({ kind, ok }) =&amp;gt; console.log(kind, ok));&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;dm-code-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;docs&#39;], function (docs) {
+  docs.code(&#39;#dm-code&#39;);
+  docs.on(&#39;copy&#39;, function (d) { if (d.kind === &#39;code&#39;) document.getElementById(&#39;dm-code-out&#39;).textContent = d.ok ? &#39;복사했습니다 (&#39; + d.text.length + &#39;자)&#39; : &#39;이 환경에서는 복사할 수 없습니다&#39;; });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">문서 검색 — 인라인 색인 · 초성 (docs.search)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_dk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent" id="dm-sr">
+    <script type="application/json" data-catui-dk-index>[
+      { "t": "목차 자동 생성", "u": "#dm-sr", "s": "API", "x": "h2·h3를 모아 목차 링크를 만듭니다.", "k": "toc" },
+      { "t": "다크 모드", "u": "#dm-sr", "s": "개념", "x": "속성 한 줄로 어두운 화면.", "k": "theme 테마" },
+      { "t": "읽는 시간 계산", "u": "#dm-sr", "s": "API", "x": "한글 분당 500자.", "k": "read" },
+      { "t": "코드 복사 버튼", "u": "#dm-sr", "s": "가이드", "x": "비보안 주소에서도 복사.", "k": "copy 클립보드" }
+    ]</script>
+    <div><label class="Catui_label" for="dm-sr-q">찾기 (예: ㅁㅊ · 다크모드 · 클립보드)</label>
+    <div class="Catui_search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><input class="Catui_input" id="dm-sr-q" type="search" value="ㅁㅊ" autocomplete="off"></div></div>
+    <p class="Catui_help" role="status" id="dm-sr-n"></p>
+    <ol class="Catui_dk-results" id="dm-sr-list" aria-label="예제 검색 결과"></ol>
+  </div>
+  <script>
+  catui.use(['docs'], function (docs) {
+    var box = document.getElementById('dm-sr'), q = document.getElementById('dm-sr-q');
+    docs.search.load(box).then(function (index) {
+      var run = function () { var res = docs.search.find(index, q.value); docs.search.render(document.getElementById('dm-sr-list'), res, q.value.trim()); document.getElementById('dm-sr-n').textContent = q.value.trim() ? '결과 ' + res.length + '건' : '검색어를 입력해 주세요'; };
+      q.addEventListener('input', function (e) { if (!e.isComposing) run(); });
+      q.addEventListener('compositionend', run);
+      q.addEventListener('keydown', function (e) { if (e.key === 'Enter' && catui.imeBusy(e)) e.preventDefault(); });
+      run();
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="문서 검색 — 인라인 색인 · 초성 (docs.search) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_dk Catui_vstack Catui_gap-3&quot; style=&quot;min-height:0;background:transparent&quot; id=&quot;dm-sr&quot;&gt;
+  &lt;script type=&quot;application/json&quot; data-catui-dk-index&gt;[
+    { &quot;t&quot;: &quot;목차 자동 생성&quot;, &quot;u&quot;: &quot;#dm-sr&quot;, &quot;s&quot;: &quot;API&quot;, &quot;x&quot;: &quot;h2·h3를 모아 목차 링크를 만듭니다.&quot;, &quot;k&quot;: &quot;toc&quot; },
+    { &quot;t&quot;: &quot;다크 모드&quot;, &quot;u&quot;: &quot;#dm-sr&quot;, &quot;s&quot;: &quot;개념&quot;, &quot;x&quot;: &quot;속성 한 줄로 어두운 화면.&quot;, &quot;k&quot;: &quot;theme 테마&quot; },
+    { &quot;t&quot;: &quot;읽는 시간 계산&quot;, &quot;u&quot;: &quot;#dm-sr&quot;, &quot;s&quot;: &quot;API&quot;, &quot;x&quot;: &quot;한글 분당 500자.&quot;, &quot;k&quot;: &quot;read&quot; },
+    { &quot;t&quot;: &quot;코드 복사 버튼&quot;, &quot;u&quot;: &quot;#dm-sr&quot;, &quot;s&quot;: &quot;가이드&quot;, &quot;x&quot;: &quot;비보안 주소에서도 복사.&quot;, &quot;k&quot;: &quot;copy 클립보드&quot; }
+  ]&lt;/script&gt;
+  &lt;div&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dm-sr-q&quot;&gt;찾기 (예: ㅁㅊ · 다크모드 · 클립보드)&lt;/label&gt;
+  &lt;div class=&quot;Catui_search&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-search&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dm-sr-q&quot; type=&quot;search&quot; value=&quot;ㅁㅊ&quot; autocomplete=&quot;off&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;p class=&quot;Catui_help&quot; role=&quot;status&quot; id=&quot;dm-sr-n&quot;&gt;&lt;/p&gt;
+  &lt;ol class=&quot;Catui_dk-results&quot; id=&quot;dm-sr-list&quot; aria-label=&quot;예제 검색 결과&quot;&gt;&lt;/ol&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;docs&#39;], function (docs) {
+  var box = document.getElementById(&#39;dm-sr&#39;), q = document.getElementById(&#39;dm-sr-q&#39;);
+  docs.search.load(box).then(function (index) {
+    var run = function () { var res = docs.search.find(index, q.value); docs.search.render(document.getElementById(&#39;dm-sr-list&#39;), res, q.value.trim()); document.getElementById(&#39;dm-sr-n&#39;).textContent = q.value.trim() ? &#39;결과 &#39; + res.length + &#39;건&#39; : &#39;검색어를 입력해 주세요&#39;; };
+    q.addEventListener(&#39;input&#39;, function (e) { if (!e.isComposing) run(); });
+    q.addEventListener(&#39;compositionend&#39;, run);
+    q.addEventListener(&#39;keydown&#39;, function (e) { if (e.key === &#39;Enter&#39; &amp;&amp; catui.imeBusy(e)) e.preventDefault(); });
+    run();
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>‘ㅁㅊ’은 제목 초성(목차)으로 3점, ‘클립보드’는 키워드로 2점입니다. 화면 안 <code>&lt;script type="application/json" data-catui-dk-index&gt;</code>가 있으면 JSON 파일을 받지 않습니다.</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">읽는 시간 · 마크다운 일부 (docs.readTime · docs.md)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_dk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent">
+    <div><label class="Catui_label" for="dm-md-in">글 (굵게 **…** · 코드 `…` · 링크 [글](https://…))</label>
+    <textarea class="Catui_input" id="dm-md-in" rows="4" style="width:100%">**Catui Docs**는 `catui.docs` 하나로 목차와 검색을 붙입니다.
+[저장소](https://github.com/ckim19800220-cpu/Catui) · [위험한 링크](javascript:alert(1)) · &lt;img src=x onerror=alert(1)&gt;</textarea></div>
+    <p class="Catui_dk-meta"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-clock"></use></svg><span id="dm-md-time"></span></p>
+    <div class="Catui_dk-prose" id="dm-md-out" aria-live="polite"></div>
+  </div>
+  <script>
+  catui.use(['docs'], function (docs) {
+    var src = document.getElementById('dm-md-in');
+    var draw = function () {
+      var t = docs.readTime(src.value);
+      document.getElementById('dm-md-time').textContent = t.label + ' 읽기 · 한글 ' + t.ko + '자 · 단어 ' + t.words + '개';
+      catui.mount(document.getElementById('dm-md-out'), catui.raw(docs.md(src.value)));
+    };
+    src.addEventListener('input', draw);
+    draw();
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="읽는 시간 · 마크다운 일부 (docs.readTime · docs.md) 코드 복사">복사</button><pre><code>  &lt;div class=&quot;Catui_dk Catui_vstack Catui_gap-3&quot; style=&quot;min-height:0;background:transparent&quot;&gt;
+    &lt;div&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dm-md-in&quot;&gt;글 (굵게 **…** · 코드 `…` · 링크 [글](https://…))&lt;/label&gt;
+    &lt;textarea class=&quot;Catui_input&quot; id=&quot;dm-md-in&quot; rows=&quot;4&quot; style=&quot;width:100%&quot;&gt;**Catui Docs**는 `catui.docs` 하나로 목차와 검색을 붙입니다.
+[저장소](https://github.com/ckim19800220-cpu/Catui) · [위험한 링크](javascript:alert(1)) · &amp;lt;img src=x onerror=alert(1)&amp;gt;&lt;/textarea&gt;&lt;/div&gt;
+    &lt;p class=&quot;Catui_dk-meta&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-clock&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span id=&quot;dm-md-time&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;div class=&quot;Catui_dk-prose&quot; id=&quot;dm-md-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+  catui.use([&#39;docs&#39;], function (docs) {
+    var src = document.getElementById(&#39;dm-md-in&#39;);
+    var draw = function () {
+      var t = docs.readTime(src.value);
+      document.getElementById(&#39;dm-md-time&#39;).textContent = t.label + &#39; 읽기 · 한글 &#39; + t.ko + &#39;자 · 단어 &#39; + t.words + &#39;개&#39;;
+      catui.mount(document.getElementById(&#39;dm-md-out&#39;), catui.raw(docs.md(src.value)));
+    };
+    src.addEventListener(&#39;input&#39;, draw);
+    draw();
+  });
+  &lt;/script&gt;</code></pre></details>
+</figure>
+<p><code>javascript:</code> 링크와 <code>&lt;img&gt;</code> 태그는 글자 그대로 보입니다 — 이스케이프가 먼저이고 https 링크만 바꾸기 때문입니다.</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">변경 이력 배지 · 쪽 이동 (changelog.badge · pager)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_dk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent">
+    <ul class="Catui_dk-changes" id="dm-cl"></ul>
+    <nav class="Catui_pager" aria-label="예제 쪽 이동" id="dm-pg"></nav>
+  </div>
+  <script>
+  catui.use(['docs'], function (docs) {
+    var items = [{ type: 'added', text: '`docs.toc` 목차 자동 생성' }, { type: 'changed', text: '검색 점수 순서' }, { type: 'fixed', text: '조합 중 Enter 제출' }];
+    catui.mount(document.getElementById('dm-cl'), catui.html`${items.map(function (it) { return catui.html`<li>${docs.changelog.badge(it.type)}<span>${catui.raw(docs.mdInline(it.text))}</span></li>`; })}`);
+    var page = 2, pg = document.getElementById('dm-pg');
+    var draw = function () { catui.mount(pg, docs.pager(page, 3)); };
+    pg.addEventListener('click', function (e) { var b = e.target.closest('[data-page]'); if (b && !b.disabled) { page = Number(b.dataset.page); draw(); pg.querySelector('[aria-current="page"]').focus(); } });
+    draw();
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="변경 이력 배지 · 쪽 이동 (changelog.badge · pager) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_dk Catui_vstack Catui_gap-3&quot; style=&quot;min-height:0;background:transparent&quot;&gt;
+  &lt;ul class=&quot;Catui_dk-changes&quot; id=&quot;dm-cl&quot;&gt;&lt;/ul&gt;
+  &lt;nav class=&quot;Catui_pager&quot; aria-label=&quot;예제 쪽 이동&quot; id=&quot;dm-pg&quot;&gt;&lt;/nav&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;docs&#39;], function (docs) {
+  var items = [{ type: &#39;added&#39;, text: &#39;`docs.toc` 목차 자동 생성&#39; }, { type: &#39;changed&#39;, text: &#39;검색 점수 순서&#39; }, { type: &#39;fixed&#39;, text: &#39;조합 중 Enter 제출&#39; }];
+  catui.mount(document.getElementById(&#39;dm-cl&#39;), catui.html`${items.map(function (it) { return catui.html`&lt;li&gt;${docs.changelog.badge(it.type)}&lt;span&gt;${catui.raw(docs.mdInline(it.text))}&lt;/span&gt;&lt;/li&gt;`; })}`);
+  var page = 2, pg = document.getElementById(&#39;dm-pg&#39;);
+  var draw = function () { catui.mount(pg, docs.pager(page, 3)); };
+  pg.addEventListener(&#39;click&#39;, function (e) { var b = e.target.closest(&#39;[data-page]&#39;); if (b &amp;&amp; !b.disabled) { page = Number(b.dataset.page); draw(); pg.querySelector(&#39;[aria-current=&quot;page&quot;]&#39;).focus(); } });
+  draw();
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="events">
+<h2 id="events">이벤트 · 실서비스 연결</h2>
+<pre><code>catui.docs.on('feedback', ({ key, value }) =&gt; fetch('/api/feedback', { method: 'POST', body: JSON.stringify({ key, value }) }));
+catui.docs.on('search', ({ q, count }) =&gt; { if (!count) analytics.track('search-miss', q); });   // 못 찾은 검색어 모으기
+catui.docs.rules.readKo = 600;            // 읽는 시간 기준 바꾸기
+catui.docs.dataBase = '/api/docs/';       // 같은 모양의 JSON API
+catui.docs.version.go = (href) =&gt; router.push(href);   // SPA 라우터로 버전 이동</code></pre>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../docskit/start/structure.html"><span>이전</span>규칙 · 계산</a><a class="doc-pager-next" href="../docskit/css.html"><span>다음</span>docs.css 클래스</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#api">catui.docs</a></li><li><a href="#attrs">선언형 속성</a></li><li><a href="#recipes">자주 쓰는 사용 예</a></li><li><a href="#events">이벤트 · 실서비스 연결</a></li></ul></aside>
+</div>
+<footer class="doc-foot"><div class="doc-foot-inner">
+  <div><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
+  <nav aria-label="바닥글 문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html">CatuiCommunity</a><a href="../shop/start/introduction.html">CatuiShop</a><a href="../docskit/start/introduction.html">CatuiDocs</a></nav>
+</div></footer>
+</div>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

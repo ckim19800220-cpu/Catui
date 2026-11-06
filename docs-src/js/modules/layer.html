@@ -308,10 +308,87 @@
     });
     var files = [['demo_20260428_151943.tar.gz', '5.66 MB', '2026-04-28 15:19'], ['demo_20260427_175319.tar.gz', '5.66 MB', '2026-04-27 17:53'], ['demo_20260423_114623.tar.gz', '5.58 MB', '2026-04-23 11:46']];
     var list = h`<div class="Catui_toolbar"><button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button">사이트 백업</button><div class="Catui_toolbar-end"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary Catui_btn-icon" type="button" aria-label="새로 고침">${raw('<svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-refresh-cw"></use></svg>')}</button></div></div>
-<div class="Catui_table-wrap"><table class="Catui_tbl Catui_tbl-compact"><caption class="Catui_clip">백업 파일</caption><thead><tr><th scope="col">파일 이름</th><th scope="col">위치</th><th scope="col" class="Catui_num">크기</th><th scope="col">백업 시각</th><th scope="col" class="Catui_num">동작</th></tr></thead><tbody>${files.map(function (r) { return h`<tr><td>${r[0]}</td><td>로컬</td><td class="Catui_num">${r[1]}</td><td>${r[2]}</td><td class="Catui_num"><a class="Catui_link" href="#">받기</a> · <a class="Catui_link" href="#">삭제</a></td></tr>`; })}</tbody></table></div>
-<div class="Catui_hstack Catui_between" style="margin-top:12px"><span class="Catui_help">모두 3건</span><nav class="Catui_pager" aria-label="페이지"><a href="#" aria-current="page">1</a></nav></div>`;
+<div class="Catui_table-wrap"><table class="Catui_tbl Catui_tbl-compact"><caption class="Catui_clip">백업 파일</caption><thead><tr><th scope="col">파일 이름</th><th scope="col">위치</th><th scope="col" class="Catui_num">크기</th><th scope="col">백업 시각</th><th scope="col" class="Catui_num">동작</th></tr></thead><tbody>${files.map(function (r) { return h`<tr><td>${r[0]}</td><td>로컬</td><td class="Catui_num">${r[1]}</td><td>${r[2]}</td><td class="Catui_num"><button class="Catui_btn Catui_btn-sm Catui_btn-link" type="button">받기</button><button class="Catui_btn Catui_btn-sm Catui_btn-link" type="button">삭제</button></td></tr>`; })}</tbody></table></div>
+<div class="Catui_hstack Catui_between" style="margin-top:12px"><span class="Catui_help">모두 3건</span><nav class="Catui_pager" aria-label="페이지"><button class="Catui_pg Catui_pg-active" type="button" aria-current="page">1</button></nav></div>`;
     on('lc-backup', function () {
       layer.tab({ title: '사이트 백업 [demo.catui.dev]', card: true, area: 'xl', tabs: [{ title: '일반 백업', content: list }, { title: '증분 백업', content: '증분 백업 일정이 없습니다.' }] });
+    });
+  });
+  </script>
+</catui-example>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<p>실무 화면에서 자주 만드는 흐름입니다. 서버 요청 자리는 <code>setTimeout</code>으로 흉내 냈으니 실제로는 <code>await fetch(…)</code>로 바꾸세요.</p>
+<catui-example title="목록에서 확인 후 삭제 → 로딩 → 되돌리기 토스트">
+  <ul class="Catui_list" id="lr-list">
+    <li class="Catui_list-item"><span>견적서-0412.pdf</span><span class="Catui_list-meta"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-del aria-label="견적서-0412.pdf 삭제"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-trash-2"></use></svg></button></span></li>
+    <li class="Catui_list-item"><span>계약서-초안.docx</span><span class="Catui_list-meta"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-del aria-label="계약서-초안.docx 삭제"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-trash-2"></use></svg></button></span></li>
+    <li class="Catui_list-item"><span>회의록-11월.txt</span><span class="Catui_list-meta"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-del aria-label="회의록-11월.txt 삭제"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-trash-2"></use></svg></button></span></li>
+  </ul>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var list = document.getElementById('lr-list');
+    var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+    catui.$('#lr-list').on('click', '[data-del]', async function (e, b) {
+      var li = b.closest('li'), name = li.firstElementChild.textContent, next = li.nextElementSibling;
+      if (!await layer.ask(catui.html`<b>${name}</b> 파일을 삭제할까요?`, { danger: true, okText: '삭제' })) return;
+      var i = layer.load('삭제하는 중…');
+      await wait(700);                     // 실제로는 await fetch('/api/files/…', { method: 'DELETE' })
+      layer.close(i);
+      li.remove();
+      var focusTo = (next || list).querySelector('[data-del]');
+      if (focusTo) focusTo.focus();        // 지운 버튼에 있던 포커스를 이웃 항목으로
+      layer.msg(name + ' 파일을 삭제했습니다', { icon: 'success', action: { text: '되돌리기', onClick: function () {
+        list.insertBefore(li, next && next.parentNode === list ? next : null);
+      } } });
+    });
+  });
+  </script>
+</catui-example>
+<catui-example title="작성 중 닫기 확인 — cancel에서 false로 붙잡기">
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lr-memo-open">메모 쓰기</button></div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    document.getElementById('lr-memo-open').addEventListener('click', function () {
+      var dirty = false;
+      layer.open({ title: '메모 쓰기', btn: ['저장', '취소'],
+        content: catui.html`<div class="Catui_field"><label class="Catui_label" for="lr-memo">메모</label><textarea class="Catui_input" id="lr-memo" rows="4" placeholder="글자를 쓴 뒤 취소·Esc·바깥 클릭을 해 보세요"></textarea></div>`,
+        success: function (dlg) { dlg.querySelector('#lr-memo').addEventListener('input', function () { dirty = true; }); },
+        yes: function (index) { layer.close(index); layer.msg('메모를 저장했습니다', { icon: 'success' }); },
+        // 취소 버튼·닫기 버튼·Esc·바깥 클릭이 모두 여기로 온다
+        cancel: function (index) {
+          if (!dirty) return;              // 바뀐 것이 없으면 그냥 닫힘
+          layer.confirm('작성 중인 내용이 사라집니다. 닫을까요?', { danger: true, okText: '닫기', cancelText: '계속 쓰기' }, function (j) {
+            layer.close(j); layer.close(index);
+          });
+          return false;                    // 답을 들을 때까지 열어 둠
+        } });
+    });
+  });
+  </script>
+</catui-example>
+<catui-example title="불러온 값으로 수정 양식 열기 — load → form(value) → 서버 오류">
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lr-edit">사용자 수정</button></div>
+  <p class="Catui_help" id="lr-out" aria-live="polite"></p>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+    var fetchUser = function () { return wait(500).then(function () { return { name: '박서연', email: 'seoyeon@example.com', role: 'editor' }; }); };
+    document.getElementById('lr-edit').addEventListener('click', async function () {
+      var i = layer.load('사용자 정보를 불러오는 중…');
+      var user = await fetchUser();
+      layer.close(i);
+      var v = await layer.form({ title: '사용자 수정', okText: '저장', fields: [
+        { name: 'name', label: '이름', required: true, value: user.name, cols: 6 },
+        { name: 'role', label: '역할', type: 'select', value: user.role, cols: 6, options: [{ value: 'viewer', label: '보기' }, { value: 'editor', label: '편집' }, { value: 'admin', label: '관리' }] },
+        { name: 'email', label: '이메일', type: 'email', required: true, value: user.email, help: '예시: taken@example.com 으로 바꾸면 서버 오류를 보여 줍니다.' } ],
+        submit: async function (val) {
+          await wait(600);                 // 저장 중에는 저장 버튼이 잠겨 두 번 눌리지 않음
+          if (val.email === 'taken@example.com') throw new Error('이미 다른 사용자가 쓰는 이메일입니다.');
+        } });
+      document.getElementById('lr-out').textContent = v ? '저장: ' + v.name + ' · ' + v.role + ' · ' + v.email : '수정을 취소했습니다';
     });
   });
   </script>

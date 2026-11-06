@@ -135,7 +135,14 @@ export const catui = {
 };
 
 // 자동 초기화: catui.config({ autoInit: false })로 끌 수 있다(스크립트 직후 호출)
-const catuiAuto = () => { if (getConfig().autoInit && !catuiReady) catui.init(); };
+// 콘솔 안내 한 줄(페이지당 한 번). 스크립트 직후 catui.config({ banner: false })로 끌 수 있다
+const catuiBanner = () => {
+  const c = getConfig();
+  if (!c.banner || c.debug === "silent" || typeof console === "undefined" || globalThis.__catuiBanner) return;
+  globalThis.__catuiBanner = true;
+  console.info(`%cCatui%c 한국어 화면을 위한 토큰 기반 UI 키트 · v${VERSION} · MIT by Ckim`, "background:#0E7A63;color:#fff;font-weight:700;padding:2px 6px;border-radius:3px", "color:inherit;padding-left:6px");
+};
+const catuiAuto = () => { catuiBanner(); if (getConfig().autoInit && !catuiReady) catui.init(); };
 if (typeof document !== "undefined") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", catuiAuto, { once: true });
   else queueMicrotask(catuiAuto);

@@ -1,0 +1,76 @@
+/* shop/cart.css */
+/* 장바구니 · 주문서 · 주문 완료: 단계 머리 · 본문 + 요약 옆줄(991px 이하 아래로) · 상품 줄 · 무료배송 막대 · 금액 표 · 결제 수단 · 약관 */
+.Catui_sh-flow-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-3)}
+.Catui_sh-flow-head h1{margin:0}
+.Catui_sh-flow{flex:0 1 calc(var(--Catui_space-10) * 6);min-width:0}
+.Catui_sh-co{display:grid;grid-template-columns:minmax(0,1fr) var(--Catui_sh-side-w);gap:var(--Catui_sh-gap);align-items:start}
+.Catui_sh-co-main{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_sh-gap);min-width:0;align-content:start}
+.Catui_sh-co-side{position:sticky;top:calc(var(--Catui_sh-head-h) * 2)}
+
+/* 장바구니 줄 */
+.Catui_sh-cart-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2) var(--Catui_space-4);padding-bottom:var(--Catui_space-3);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_sh-cart-bar .Catui_choice{margin-right:auto}
+.Catui_sh-cart{margin:0;padding:0;list-style:none;display:grid}
+.Catui_sh-line{display:grid;grid-template-columns:auto calc(var(--Catui_space-10) * 1.5) minmax(0,1fr) auto auto auto;align-items:center;gap:var(--Catui_space-3);padding-block:var(--Catui_space-4);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_sh-line-check{align-self:start;padding-top:var(--Catui_space-1)}
+.Catui_sh-line-img{display:block;aspect-ratio:1 / 1;border-radius:var(--Catui_radius-sm);overflow:hidden;background:var(--Catui_sh-img-bg)}
+.Catui_sh-line-img img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_sh-line-main{display:grid;gap:2px;min-width:0}
+.Catui_sh-line-main p{margin:0}
+.Catui_sh-line-name{font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.Catui_sh-line-name:hover{text-decoration:underline}
+.Catui_sh-line-unit{font-size:var(--Catui_type-caption-size)}
+.Catui_sh-line-unit del{color:var(--Catui_color-text-tertiary)}
+.Catui_sh-line-amt{min-width:calc(var(--Catui_space-10) * 1.3);text-align:right;font-variant-numeric:tabular-nums}
+.Catui_sh-line-out .Catui_sh-line-img img{opacity:.45}
+.Catui_sh-line-out .Catui_sh-line-amt{text-decoration:line-through;color:var(--Catui_color-text-tertiary)}
+
+/* 무료배송까지 남은 금액 */
+.Catui_sh-free{display:grid;gap:var(--Catui_space-2);margin:0;padding:var(--Catui_space-3);border-radius:var(--Catui_radius-sm);background:var(--Catui_sh-accent-soft);font-size:var(--Catui_type-caption-size)}
+.Catui_sh-free p,p.Catui_sh-free{display:flex;align-items:center;gap:var(--Catui_space-2);margin:0}
+.Catui_sh-free .Catui_icon{color:var(--Catui_sh-accent)}
+
+/* 금액 표 (dl) */
+.Catui_sh-sum{display:grid;gap:var(--Catui_space-2);margin:0}
+.Catui_sh-sum > div{display:flex;justify-content:space-between;gap:var(--Catui_space-3)}
+.Catui_sh-sum dt{color:var(--Catui_color-text-secondary)}
+.Catui_sh-sum dd{margin:0;text-align:right;overflow-wrap:anywhere;min-width:0}
+.Catui_sh-sum dd del{color:var(--Catui_color-text-tertiary)}
+.Catui_sh-sum-total{padding-top:var(--Catui_space-3);border-top:1px solid var(--Catui_color-border);align-items:baseline}
+.Catui_sh-sum-total dt{color:var(--Catui_color-text-primary);font-weight:700}
+.Catui_sh-sum-total dd{font-size:var(--Catui_type-h2-size);font-weight:800;color:var(--Catui_sh-accent)}
+
+/* 주문서 */
+.Catui_sh-co-items{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-3)}
+.Catui_sh-co-item{display:grid;grid-template-columns:calc(var(--Catui_space-10)) minmax(0,1fr) auto;align-items:center;gap:var(--Catui_space-3)}
+.Catui_sh-co-item img{width:100%;aspect-ratio:1 / 1;object-fit:cover;border-radius:var(--Catui_radius-sm);background:var(--Catui_sh-img-bg)}
+.Catui_sh-co-item p{margin:0}
+.Catui_sh-co-item > div{min-width:0;overflow-wrap:anywhere}
+.Catui_sh-addrs,.Catui_sh-pays{grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 3.2)),1fr))}
+.Catui_sh-pays .Catui_optcard-title{display:inline-flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_sh-pay-detail{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,calc(var(--Catui_space-10) * 3)),1fr));gap:var(--Catui_space-3)}
+.Catui_sh-pay-detail .Catui_help{grid-column:1 / -1;margin:0}
+.Catui_sh-co .Catui_select,.Catui_sh-co textarea.Catui_input,.Catui_sh-pay-detail .Catui_input{width:100%}
+.Catui_sh-points{display:flex;gap:var(--Catui_space-2)}
+.Catui_sh-points .Catui_input{flex:1;min-width:0}
+.Catui_sh-agree{display:grid;gap:var(--Catui_space-2)}
+.Catui_sh-agree-all{padding-bottom:var(--Catui_space-2);border-bottom:1px solid var(--Catui_divider-color);font-weight:700}
+
+/* 주문 완료 */
+.Catui_sh-done{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_sh-gap);max-width:calc(var(--Catui_space-10) * 12);width:100%;margin-inline:auto}
+.Catui_sh-done-acts{justify-content:center;flex-wrap:wrap}
+
+@media (max-width:991px){
+  .Catui_sh-co{grid-template-columns:minmax(0,1fr)}
+  .Catui_sh-co-side{position:static}
+}
+@media (max-width:599px){
+  .Catui_sh-line{grid-template-columns:auto calc(var(--Catui_space-10) * 1.1) minmax(0,1fr) auto;grid-template-areas:"c i m x" "c i q a"}
+  .Catui_sh-line-check{grid-area:c}
+  .Catui_sh-line-img{grid-area:i;align-self:start}
+  .Catui_sh-line-main{grid-area:m}
+  .Catui_sh-line > .Catui_sh-qty{grid-area:q;justify-self:start}
+  .Catui_sh-line-amt{grid-area:a;min-width:0}
+  .Catui_sh-line-del{grid-area:x;align-self:start}
+  .Catui_sh-flow{flex-basis:100%}
+}

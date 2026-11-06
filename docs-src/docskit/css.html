@@ -1,0 +1,73 @@
+<section aria-labelledby="rules">
+<h2 id="rules">규칙</h2>
+<ul>
+  <li>클래스는 <code>Catui_dk-*</code>, 토큰은 <code>--Catui_dk-*</code>(본체 토큰을 참조만). 새 색 값(hex)은 만들지 않습니다 — 빌드가 막습니다.</li>
+  <li>본체 클래스에 스타일을 더할 때는 항상 <code>.Catui_dk …</code> 아래로 — docs.css를 불러와도 문서 사이트 밖은 바뀌지 않습니다. 코드 블록은 본체 <code>.Catui_codeblock</code> 위에 머리줄만 더합니다.</li>
+  <li>현재 위치·눌림은 색 + 막대·굵기·체크 아이콘·<code>aria-current</code>/<code>aria-pressed</code>를 함께, 변경 이력 종류는 배지 글자로 — 색만으로 알리지 않습니다.</li>
+  <li>반응형: 1199px 이하 오른쪽 목차를 본문 위로, 991px 이하 왼쪽 메뉴를 접는 상자로(한 단), 767px 이하 머리 메뉴를 둘째 줄 가로 스크롤 + 검색은 아이콘, 599px 이하 카드 한 열·이전/다음 세로.</li>
+  <li>가로로 넘치는 상자(머리 메뉴·태그 줄·코드·표)는 <code>position:relative</code> 스크롤 상자이고, 본문은 <code>word-break:keep-all</code> + <code>overflow-wrap:anywhere</code>로 320px에서도 넘치지 않습니다.</li>
+</ul>
+</section>
+<section aria-labelledby="tokens">
+<h2 id="tokens">토큰</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">docs 토큰</caption>
+<thead><tr><th scope="col">토큰</th><th scope="col">기본값</th></tr></thead><tbody>
+<tr><td><code>--Catui_dk-wrap</code> · <code>--Catui_dk-gap</code> · <code>--Catui_dk-head-h</code></td><td>본문 최대 폭 ≈ 1408px · 간격 · 머리 높이</td></tr>
+<tr><td><code>--Catui_dk-side-w</code> · <code>--Catui_dk-toc-w</code> · <code>--Catui_dk-measure</code></td><td>왼쪽 메뉴 ≈ 272px · 오른쪽 목차 ≈ 240px · 본문 한 줄 ≈ 768px</td></tr>
+<tr><td><code>--Catui_dk-card-min</code></td><td>글 카드 최소 폭 ≈ 282px (599px 이하 한 열)</td></tr>
+<tr><td><code>--Catui_dk-accent</code> · <code>--Catui_dk-accent-soft</code> · <code>--Catui_dk-muted</code> · <code>--Catui_dk-line</code></td><td>현재 위치·강조(<code>--Catui_color-brand-strong</code>) · 바탕 · 보조 글자 · 선</td></tr>
+<tr><td><code>--Catui_dk-mark-bg</code> · <code>--Catui_dk-radius</code></td><td>검색어 표시 바탕(<code>--Catui_color-amber-soft</code>, 굵기와 함께) · 둥글기</td></tr>
+<tr><td><code>--Catui_dk-ease-out</code> · <code>--Catui_dk-dur</code></td><td>나타남 곡선 · 180ms</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="examples">
+<h2 id="examples">자주 쓰는 사용 예</h2>
+<p>스크립트 없이 클래스만 쓴 정적 견본입니다. 토큰이 <code>.Catui_dk</code> 아래에 있으므로 셸 밖에서는 <code>class="Catui_dk"</code> 상자로 감쌉니다(<code>data-catui-dk</code> 속성 없이, 문서용으로 <code>min-height</code>만 풀었습니다). 같은 마크업을 스크립트로 만드는 방법은 <a href="doc:docskit/modules#recipes">catdocs.js API · 자주 쓰는 사용 예</a>를 보세요.</p>
+
+<catui-example title="글 카드 · 태그 · 저자 줄">
+  <div class="Catui_dk" style="min-height:0;background:transparent">
+    <ul class="Catui_dk-cards" aria-label="예제 글">
+      <li class="Catui_dk-card"><a class="Catui_dk-card-link" href="#examples"><span class="Catui_dk-cover" data-tone="2" aria-hidden="true"><svg class="Catui_icon Catui_i20"><use href="{{dist}}/icons.svg?v=2#Catui_ic-keyboard"></use></svg></span><span class="Catui_dk-card-b"><b class="Catui_dk-card-t">한글 조합 중 Enter가 폼을 보내는 문제</b><span class="Catui_dk-card-d">입력기가 글자를 확정하는 Enter와 제출 Enter를 구분하는 방법.</span></span></a>
+        <p class="Catui_dk-meta"><a href="#examples">이나비</a><span aria-hidden="true">·</span><time datetime="2026-10-24">2026.10.24</time><span aria-hidden="true">·</span><span>1분 읽기</span></p>
+        <ul class="Catui_dk-tags" aria-label="태그"><li><a class="Catui_dk-tag" href="#examples">#한국어</a></li><li><a class="Catui_dk-tag" href="#examples">#접근성</a></li></ul></li>
+    </ul>
+  </div>
+</catui-example>
+
+<catui-example title="태그 거르기 버튼 (눌림 = 체크 + 테두리 + 굵기)">
+  <div class="Catui_dk" style="min-height:0;background:transparent">
+    <div class="Catui_dk-filter" role="group" aria-label="예제 태그 거르기">
+      <button class="Catui_dk-chip" type="button" aria-pressed="false">전체<span class="Catui_dk-chip-n">8<span class="Catui_clip">개</span></span></button>
+      <button class="Catui_dk-chip" type="button" aria-pressed="true"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg>#접근성<span class="Catui_dk-chip-n">3<span class="Catui_clip">개</span></span></button>
+      <button class="Catui_dk-chip" type="button" aria-pressed="false">#릴리스<span class="Catui_dk-chip-n">2<span class="Catui_clip">개</span></span></button>
+    </div>
+  </div>
+</catui-example>
+
+<catui-example title="시작 가이드 단계 · API 시그니처">
+  <div class="Catui_dk Catui_vstack Catui_gap-4" style="min-height:0;background:transparent">
+    <pre class="Catui_dk-sig"><code>docs.toc(article, box?, { levels?, title? }) → { items, el }</code></pre>
+    <ol class="Catui_dk-steps">
+      <li><b>설치하기</b><p>npm으로 받거나 dist 폴더를 복사합니다.</p></li>
+      <li><b>불러오기</b><p>본체 다음에 docs.css · catdocs.js.</p></li>
+    </ol>
+  </div>
+</catui-example>
+
+<catui-example title="목차 · 이전/다음 · 피드백">
+  <div class="Catui_dk Catui_vstack Catui_gap-4" style="min-height:0;background:transparent">
+    <nav class="Catui_dk-toc" aria-label="예제 목차"><p class="Catui_dk-toc-t">이 쪽에서</p><ol><li><a href="#examples" aria-current="location">설치</a><ol><li><a href="#examples">CDN</a></li></ol></li><li><a href="#examples">목차 붙이기</a></li></ol></nav>
+    <nav class="Catui_dk-pager" aria-label="예제 이전·다음"><a class="Catui_dk-pn" href="#examples"><span>이전</span><b>소개</b></a><a class="Catui_dk-pn Catui_dk-pn-next" href="#examples"><span>다음</span><b>설치와 파일 구조</b></a></nav>
+    <div class="Catui_dk-feedback"><p><b>이 문서가 도움이 되었나요?</b></p><div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" aria-pressed="true">예</button><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" aria-pressed="false">아니오</button></div></div>
+  </div>
+</catui-example>
+
+<catui-example title="변경 이력 · 검색 결과">
+  <div class="Catui_dk Catui_vstack Catui_gap-4" style="min-height:0;background:transparent">
+    <div class="Catui_dk-release"><p><b>v2.1.0</b></p><p class="Catui_dk-meta"><time datetime="2026-10-30">2026.10.30</time></p>
+      <ul class="Catui_dk-changes"><li><span class="Catui_badge Catui_badge-success Catui_dk-kind">추가</span><span>문서 키트</span></li><li><span class="Catui_badge Catui_badge-warning Catui_dk-kind">고침</span><span>조합 중 Enter 제출</span></li></ul></div>
+    <ol class="Catui_dk-results" aria-label="예제 검색 결과"><li class="Catui_dk-result"><a href="#examples"><span class="Catui_dk-result-s">API</span><b><mark class="Catui_dk-mark">목차</mark> 자동 생성</b></a><p>h2·h3를 모아 목차 링크를 만듭니다.</p></li></ol>
+  </div>
+</catui-example>
+</section>

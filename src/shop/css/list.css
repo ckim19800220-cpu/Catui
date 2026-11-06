@@ -1,0 +1,32 @@
+/* shop/list.css */
+/* 상품 목록·검색: 머리 · 필터(991px 이하 접힘) · 정렬/보기 줄 · 쪽 번호 · 큰 검색창 */
+.Catui_sh-list-head{display:flex;flex-wrap:wrap;align-items:end;gap:var(--Catui_space-2)}
+.Catui_sh-list-head h1{margin:0}
+.Catui_sh-list-head h1:focus{outline:none}
+.Catui_sh-list-head p{margin:0}
+.Catui_sh [data-catui-sh-list]{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-4);min-width:0}
+.Catui_sh-list-body{display:grid;grid-template-columns:var(--Catui_sh-side-w) minmax(0,1fr);gap:var(--Catui_sh-gap);align-items:start}
+.Catui_sh-results{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-4);min-width:0}
+
+/* 필터: 넓은 화면은 펼친 옆줄, 좁으면 "필터" 단추로 접기 (<details>) */
+.Catui_sh-filter{position:sticky;top:calc(var(--Catui_sh-head-h) * 2);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_sh-filter > summary{display:flex;align-items:center;gap:var(--Catui_space-2);min-height:var(--Catui_control-h-lg);padding-inline:var(--Catui_space-4);font-weight:700;cursor:pointer;list-style:none}
+.Catui_sh-filter > summary::-webkit-details-marker{display:none}
+.Catui_sh-filter-form{display:grid;gap:var(--Catui_space-4);padding:0 var(--Catui_space-4) var(--Catui_space-4)}
+.Catui_sh-filter-form fieldset{display:grid;gap:var(--Catui_space-1);margin:0;padding:0;border:0;min-width:0}
+.Catui_sh-filter-form .Catui_btn{justify-self:start}
+
+/* 정렬 · 보기 · 줄 */
+.Catui_sh-toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-2)}
+.Catui_sh-toolbar .Catui_segment{max-width:100%;overflow-x:auto}
+.Catui_sh-pager{justify-content:center;flex-wrap:wrap}
+.Catui_sh-pager > span{align-self:center;color:var(--Catui_color-text-tertiary)}
+
+/* 검색 화면 큰 검색창 */
+.Catui_sh-search-big{display:grid;gap:var(--Catui_space-3)}
+.Catui_sh-search-big .Catui_input{width:100%}
+
+@media (max-width:991px){
+  .Catui_sh-list-body{grid-template-columns:minmax(0,1fr)}
+  .Catui_sh-filter{position:relative;top:auto}
+}

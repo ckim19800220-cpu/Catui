@@ -1,0 +1,35 @@
+/* components/hnav.css */
+/* Horizontal nav — 화면 위 가로 내비게이션 바(메뉴 링크·아이콘·카운트·드롭다운·오른쪽 영역).
+   기본은 알약형 강조, -line 밑줄형, -dark 어두운 바, -scroll 한 줄 가로 스크롤(좁은 화면). */
+.Catui_hnav{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-1);min-height:var(--Catui_control-h-lg);padding:var(--Catui_space-1) var(--Catui_space-2);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md)}
+.Catui_hnav-item,.Catui_hnav > a,.Catui_hnav-end > a{
+  display:inline-flex;align-items:center;gap:var(--Catui_space-2);height:var(--Catui_control-h-md);padding:0 var(--Catui_space-3);
+  border-radius:var(--Catui_radius-sm);color:var(--Catui_color-text-secondary);font-weight:500;white-space:nowrap;line-height:1;flex:none;cursor:pointer;
+  transition:background var(--Catui_dur-fast) var(--Catui_ease),color var(--Catui_dur-fast) var(--Catui_ease);
+}
+.Catui_hnav-item:hover,.Catui_hnav > a:hover,.Catui_hnav-end > a:hover{background:var(--Catui_color-brand-ghost);color:var(--Catui_color-text-primary)}
+.Catui_hnav [aria-current="page"],.Catui_hnav [aria-current="true"]{background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong);font-weight:600}
+.Catui_hnav-item:focus-visible,.Catui_hnav > a:focus-visible,.Catui_hnav-end > a:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
+.Catui_hnav .Catui_count{margin-left:2px}
+.Catui_hnav .Catui_dd[open] > .Catui_hnav-item{background:var(--Catui_color-neutral-100);color:var(--Catui_color-text-primary)}
+.Catui_hnav .Catui_dd[open] > .Catui_hnav-item .Catui_icon:last-child{transform:rotate(180deg)}
+/* 오른쪽으로 미는 영역(검색·버튼) */
+.Catui_hnav-end{margin-left:auto;display:flex;align-items:center;gap:var(--Catui_space-2)}
+
+/* 밑줄형: 바 아래선 위에 활성 2px 밑줄 */
+.Catui_hnav-line{padding:0 var(--Catui_space-2);gap:var(--Catui_space-4);border-width:0 0 1px;border-radius:0;background:transparent}
+.Catui_hnav-line > a,.Catui_hnav-line .Catui_hnav-item{height:var(--Catui_control-h-lg);padding:0 var(--Catui_space-1);border-radius:0;border-bottom:var(--Catui_tab-indicator-w) solid transparent;margin-bottom:-1px}
+.Catui_hnav-line > a:hover,.Catui_hnav-line .Catui_hnav-item:hover{background:transparent}
+.Catui_hnav-line [aria-current="page"],.Catui_hnav-line [aria-current="true"]{background:transparent;border-bottom-color:var(--Catui_tab-indicator)}
+
+/* 어두운 바: 관리 사이드바와 같은 남색 토큰 */
+.Catui_hnav-dark{background:var(--Catui_sidebar-bg);border-color:transparent}
+.Catui_hnav-dark > a,.Catui_hnav-dark .Catui_hnav-item,.Catui_hnav-dark .Catui_hnav-end > a{color:var(--Catui_sidebar-fg-muted)}
+.Catui_hnav-dark > a:hover,.Catui_hnav-dark .Catui_hnav-item:hover,.Catui_hnav-dark .Catui_hnav-end > a:hover{background:var(--Catui_sidebar-hover-bg);color:var(--Catui_sidebar-fg)}
+.Catui_hnav-dark [aria-current="page"],.Catui_hnav-dark [aria-current="true"]{background:var(--Catui_sidebar-active-bg);color:var(--Catui_sidebar-active-fg)}
+.Catui_hnav-dark :focus-visible{outline-color:currentColor}
+
+/* 한 줄 가로 스크롤(드롭다운은 잘리므로 넣지 않는다). relative: 안의 숨김 글자가 문서 폭을 넓히지 않게 */
+.Catui_hnav-scroll{position:relative;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.Catui_hnav-scroll::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion:reduce){.Catui_hnav .Catui_dd[open] > .Catui_hnav-item .Catui_icon:last-child{transform:none}}

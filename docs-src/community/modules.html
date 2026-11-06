@@ -21,3 +21,135 @@
 <tr><td><code>data(name)</code> · <code>bind()</code> · <code>derive</code> · <code>format(v, 형식)</code> · <code>ago(iso)</code></td><td>JSON 모의 데이터 (CatuiAdmin과 같은 API)</td></tr>
 </tbody></table></div>
 </section>
+
+<section aria-labelledby="recipes">
+<h2 id="recipes">자주 쓰는 사용 예</h2>
+<p>목록·위젯·글 화면에서 자주 쓰는 조합입니다. 자료는 모두 예제 안의 배열이고, 시간은 "지금"에서 몇 분 전처럼 계산해 넣었습니다. 커뮤니티 토큰이 <code>.Catui_cm</code>에 정의되므로 예제는 <code>class="Catui_cm"</code> 상자로 감쌌습니다 — <code>data-catui-cm</code> 속성은 넣지 않아 셸 동작은 켜지지 않습니다(문서용으로 <code>min-height</code>만 풀었습니다).</p>
+<p>글 링크(<code>post.html?id=…</code>)는 템플릿 기준 주소라 이 문서에서는 누르면 안내만 띄웁니다.</p>
+
+<catui-example title="목록 한 줄 · 위젯 줄 (row · mini)">
+  <div class="Catui_cm Catui_vstack Catui_gap-4" style="min-height:0" id="dy-lists">
+    <ul class="Catui_cm-list" id="dy-rows" aria-label="자유게시판 글"></ul>
+    <section class="Catui_card" aria-labelledby="dy-best-h"><header class="Catui_card-h"><span id="dy-best-h">실시간 베스트</span></header>
+      <div class="Catui_card-b"><ol class="Catui_cm-mini Catui_cm-best" id="dy-mini"></ol></div></section>
+  </div>
+  <script>
+  catui.use(['community', 'layer'], function (cm, layer) {
+    var ago = function (min) { return new Date(Date.now() - min * 6e4).toISOString(); };
+    var U = { a: { id: 'u1', nick: '고양이집사', level: 7 }, b: { id: 'u2', nick: '새벽코딩', level: 3 }, c: { id: 'u3', nick: '산책왕', level: 1 } };
+    // row()가 쓰는 값: 게시판 이름·색(boardName·boardTone), 말머리(cat), 점수(score = 추천 − 비추천), 인기(hot), 작성자(author)
+    var posts = [
+      { id: 'd1', title: '겨울 이불 언제 꺼내시나요?', boardName: '자유', boardTone: 1, cat: '잡담', comments: 42, photo: false, author: U.a, time: ago(8), views: 12840, score: 152, hot: true },
+      { id: 'd2', title: '키보드 윤활 처음 해 봤습니다 (사진 많음)', boardName: '취미', boardTone: 3, cat: '후기', comments: 7, photo: true, author: U.b, time: ago(95), views: 2310, score: 24, hot: false },
+      { id: 'd3', title: '동네 산책 코스 추천 부탁드려요', boardName: '질문', boardTone: 2, cat: '질문', comments: 0, photo: false, author: U.c, time: ago(60 * 26), views: 418, score: 3, hot: false }
+    ];
+    catui.mount(document.getElementById('dy-rows'), catui.html`${posts.map(function (p, i) { return cm.row(p, { rank: i + 1 }); })}`);
+    catui.mount(document.getElementById('dy-mini'), catui.html`${posts.map(function (p, i) { return cm.mini(p, { rank: i + 1 }); })}`);
+    document.getElementById('dy-lists').addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="post.html"]');
+      if (!a) return;
+      e.preventDefault();
+      layer.msg('템플릿에서는 ' + a.getAttribute('href') + ' 로 이동합니다');
+    });
+  });
+  </script>
+</catui-example>
+
+<catui-example title="레벨 배지 · 아바타 (level · badge · avatar)">
+  <div class="Catui_cm" style="min-height:0">
+    <div class="doc-table-wrap"><table class="Catui_tbl">
+      <caption class="Catui_clip">활동 점수별 레벨</caption>
+      <thead><tr><th scope="col">닉네임</th><th scope="col">활동 점수</th><th scope="col">레벨</th></tr></thead>
+      <tbody id="dy-lv"></tbody>
+    </table></div>
+  </div>
+  <script>
+  catui.use(['community'], function (cm) {
+    // 활동 점수 = 글 × 10 + 댓글 × 2 + 받은 추천 → level(점수)로 1~9 구간
+    var users = [{ id: 'n1', nick: '처음왔어요', score: 120 }, { id: 'n2', nick: '새벽코딩', score: 1400 }, { id: 'n3', nick: '산책왕', score: 5600 }, { id: 'n4', nick: '고양이집사', score: 13200 }, { id: 'n5', nick: '운영진', score: 30000 }];
+    catui.mount(document.getElementById('dy-lv'), catui.html`${users.map(function (u) {
+      u.level = cm.level(u.score);
+      return catui.html`<tr><td><span class="Catui_cm-nick">${cm.avatar(u)}${cm.badge(u)}${u.nick}</span></td><td class="Catui_num">${cm.format(u.score, 'number')}</td><td class="Catui_num">${u.level}</td></tr>`;
+    })}`);
+  });
+  </script>
+</catui-example>
+
+<catui-example title="추천 · 비추천 상자 (vote)">
+  <div class="Catui_cm Catui_vstack Catui_gap-4" style="min-height:0" id="dy-vote">
+    <div class="Catui_vstack Catui_gap-3" data-catui-cm-vote="post:doc-demo" data-up="152" data-down="4">
+      <div class="Catui_cm-vote Catui_cm-vote-lg">
+        <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-dir="up"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-thumbs-up"></use></svg><span>추천</span><b data-n>152</b></button>
+        <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-dir="down"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-thumbs-down"></use></svg><span>비추천</span><b data-n>4</b></button>
+      </div>
+      <p class="Catui_help">점수(추천 − 비추천): <b data-catui-cm-score>148</b></p>
+    </div>
+    <div class="Catui_cm-vote Catui_cm-vote-sm" data-catui-cm-vote="c:doc-demo" data-up="12" data-down="0">
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-dir="up"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-thumbs-up"></use></svg><b data-n>12</b></button>
+      <span class="Catui_help">댓글용 작은 추천</span>
+    </div>
+  </div>
+  <script>
+  catui.use(['community'], function (cm) {
+    // 셸 루트([data-catui-cm]) 안에서는 자동으로 연결된다. 루트 밖에서는 감싼 상자에 vote.init(상자)로 직접 연결
+    //   (상자 안 [data-catui-cm-score]는 추천 − 비추천 점수로 함께 바뀐다)
+    cm.vote.init(document.getElementById('dy-vote'));
+    // 실서비스: cm.voteRequest = (key, dir) => fetch(…).then((r) => r.ok) — false·실패면 화면을 되돌린다
+    cm.on('vote', function (d) { console.log('vote', d.key, d.dir || '취소'); });
+  });
+  </script>
+</catui-example>
+<p class="Catui_help">같은 버튼을 다시 누르면 취소, 반대 버튼을 누르면 바꾸기입니다. 고른 값은 <code>catui:community</code> 저장소의 <code>votes</code>에 기억되어 새로 고쳐도 눌린 상태로 보입니다.</p>
+
+<catui-example title="안전한 마크다운 미리보기 (md)">
+  <div class="Catui_cm Catui_vstack Catui_gap-3" style="min-height:0">
+    <div class="Catui_field"><label class="Catui_label" for="dy-md">본문</label>
+      <textarea class="Catui_input" id="dy-md" rows="6" aria-describedby="dy-md-h">**굵게**, [링크](https://example.com) 는 바뀌고
+&lt;script&gt; 같은 태그는 글자로 보입니다.
+
+&gt; 인용은 이렇게
+
+- 목록 하나
+- 목록 둘</textarea>
+      <p class="Catui_help" id="dy-md-h">굵게(**) · 인용(&gt; ) · 목록(- ) · https 링크만 바꿉니다. 나머지는 모두 이스케이프됩니다.</p></div>
+    <div class="Catui_card"><header class="Catui_card-h">미리보기</header><div class="Catui_card-b Catui_cm-prose" id="dy-md-out" aria-live="polite"></div></div>
+  </div>
+  <script>
+  catui.use(['community'], function (cm) {
+    var src = document.getElementById('dy-md'), out = document.getElementById('dy-md-out');
+    // md()가 먼저 모든 글자를 이스케이프하므로 innerHTML에 넣어도 마크업이 주입되지 않는다
+    var draw = function () { out.innerHTML = cm.md(src.value) || '<p class="Catui_help">미리 볼 내용이 없습니다.</p>'; };
+    src.addEventListener('input', draw);
+    draw();
+  });
+  </script>
+</catui-example>
+
+<catui-example title="숫자 · 시간 표시 (format · ago · 남은 시간)">
+  <div class="Catui_cm" style="min-height:0">
+    <div class="doc-table-wrap"><table class="Catui_tbl">
+      <caption class="Catui_clip">community.format · ago 결과</caption>
+      <thead><tr><th scope="col">호출</th><th scope="col">결과</th></tr></thead>
+      <tbody id="dy-fmt"></tbody>
+    </table></div>
+    <p>핫딜 마감: <time id="dy-until">계산 중</time> · 올린 시각: <time id="dy-ago">계산 중</time></p>
+  </div>
+  <script>
+  catui.use(['community'], function (cm) {
+    var now = Date.now(), iso = function (min) { return new Date(now - min * 6e4).toISOString(); };
+    var rows = [
+      ['format(980, "compact")', cm.format(980, 'compact')], ['format(3450, "compact")', cm.format(3450, 'compact')], ['format(128400, "compact")', cm.format(128400, 'compact')],
+      ['format(1234567, "number")', cm.format(1234567, 'number')], ['ago(30초 전)', cm.ago(new Date(now - 3e4).toISOString())], ['ago(12분 전)', cm.ago(iso(12))],
+      ['ago(어제 이 시각)', cm.ago(iso(60 * 24))], ['josa("게시판", "을")', cm.josa('게시판', '을')], ['josa("댓글", "로")', cm.josa('댓글', '로')]
+    ];
+    catui.mount(document.getElementById('dy-fmt'), catui.html`${rows.map(function (r) { return catui.html`<tr><td><code>${r[0]}</code></td><td>${r[1]}</td></tr>`; })}`);
+    // 선언형 [data-catui-cm-until] · [data-catui-cm-ago]는 셸 안에서 1분마다 갱신된다. 루트 밖에서는 widgets.tick(범위)로 한 번 채운다
+    var until = document.getElementById('dy-until'), at = document.getElementById('dy-ago');
+    until.setAttribute('data-catui-cm-until', new Date(now + (3 * 60 + 12) * 6e4).toISOString());
+    at.setAttribute('data-catui-cm-ago', iso(5));
+    at.setAttribute('datetime', iso(5));
+    cm.widgets.tick(until.parentNode);
+  });
+  </script>
+</catui-example>
+</section>

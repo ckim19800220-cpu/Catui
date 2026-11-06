@@ -1,0 +1,35 @@
+/* docskit/parts.css */
+/* 화면 부품 — 문서 홈(소개·검색·시작 카드) · 검색 결과 · 변경 이력 · 버전 선택 */
+.Catui_dk-hero{display:grid;justify-items:center;gap:var(--Catui_space-4);padding:calc(var(--Catui_space-10) * 1.2) var(--Catui_space-5);border-radius:var(--Catui_card-radius);background:linear-gradient(160deg,var(--Catui_color-brand-soft),var(--Catui_color-info-soft));text-align:center}
+.Catui_dk-hero > *{margin:0;max-width:var(--Catui_dk-measure)}
+.Catui_dk-hero h1{font-size:var(--Catui_type-display-size);line-height:1.2;word-break:keep-all}
+.Catui_dk-hero .Catui_actions{justify-content:center;flex-wrap:wrap}
+.Catui_dk-hero-search{width:min(100%,calc(var(--Catui_space-10) * 10))}
+.Catui_dk-hero-search .Catui_input{width:100%;height:var(--Catui_control-h-lg)}
+.Catui_dk-starts{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 4.2)),1fr));gap:var(--Catui_space-4)}
+.Catui_dk-start{display:grid;align-content:start;gap:var(--Catui_space-2);height:100%;padding:var(--Catui_space-5);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg);text-decoration:none}
+.Catui_dk-start:hover{border-color:var(--Catui_dk-accent)}
+.Catui_dk-start > .Catui_icon{color:var(--Catui_dk-accent)}
+.Catui_dk-start b{font-size:var(--Catui_type-h3-size)}
+.Catui_dk-start span{color:var(--Catui_dk-muted)}
+
+/* 검색 결과 */
+.Catui_dk-results{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-3);max-width:var(--Catui_dk-measure)}
+.Catui_dk-result{display:grid;gap:var(--Catui_space-1);padding:var(--Catui_space-4);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg)}
+.Catui_dk-result a{display:grid;gap:2px;text-decoration:none}
+.Catui_dk-result a:hover b{text-decoration:underline}
+.Catui_dk-result b{font-size:var(--Catui_type-h3-size)}
+.Catui_dk-result p{margin:0;color:var(--Catui_dk-muted);font-size:var(--Catui_type-caption-size)}
+.Catui_dk-result-s{font-size:var(--Catui_type-caption-size);font-weight:700;color:var(--Catui_dk-accent)}
+
+/* 변경 이력: 종류 배지는 글자(추가·변경·고침) + 색 */
+.Catui_dk-release{display:grid;gap:var(--Catui_space-3);padding-block:var(--Catui_space-5);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_dk-release > *{margin:0}
+.Catui_dk-release h2{margin:0}
+.Catui_dk-changes{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-2)}
+.Catui_dk-changes li{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;gap:var(--Catui_space-3)}
+.Catui_dk-kind{min-width:calc(var(--Catui_space-10) * 0.9);justify-content:center}
+
+/* 버전 선택 줄 */
+.Catui_dk-ver{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2)}
+.Catui_dk-ver .Catui_select-wrap{min-width:calc(var(--Catui_space-10) * 3.5)}

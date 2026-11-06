@@ -127,6 +127,52 @@
 <p>이 문서 맨 위의 얇은 막대가 읽은 만큼 찹니다(<code>data-catui-readbar</code>에 본문 선택자, 비우면 문서 전체). 공유 버튼은 휴대폰 등에서는 기기 공유 창을, 지원하지 않으면 주소를 복사하고 알립니다.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="동의한 뒤에만 분석 도구 시작 — site.consent() · catui:consent">
+  <p class="Catui_help" id="st-ana" aria-live="polite"></p>
+  <script>
+  catui.use(['site'], function (site) {
+    var el = document.getElementById('st-ana'), started = false;
+    var apply = function (value) {
+      if (value === 'all' && !started) {
+        started = true;
+        // 여기서 분석 스크립트를 넣는다: document.head.appendChild(Object.assign(document.createElement('script'), { src: '…', async: true }))
+        el.textContent = '분석 도구: 켜짐 (모두 허용을 골랐습니다)';
+      } else if (!started) {
+        el.textContent = value ? '분석 도구: 꺼짐 (필수만 허용)' : '분석 도구: 꺼짐 — 위 쿠키 동의 예제에서 "모두 허용"을 누르면 켜집니다';
+      }
+    };
+    var saved = site.consent();
+    apply(saved && saved.value);                                            // 이전 방문에서 고른 값
+    addEventListener('catui:consent', function (e) { apply(e.detail.value); });   // 이번에 고른 값
+  });
+  </script>
+</catui-example>
+<p>이미 불러온 분석 스크립트는 동의를 거두어도 그 페이지에서는 계속 돌므로, "쿠키 설정 다시 하기"(<code>site.resetConsent()</code>) 뒤에는 새로 고침을 안내하세요.</p>
+<catui-example title="마감되면 버튼 잠그기 — countdown end 콜백">
+  <div class="Catui_hstack Catui_gap-3" style="flex-wrap:wrap">
+    <span>선착순 쿠폰 마감까지 <b class="Catui_num" id="st-deal-t"></b></span>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button" id="st-deal-btn">쿠폰 받기</button>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="st-deal-again">다시 시작 (예제용)</button>
+  </div>
+  <script>
+  catui.use(['site'], function (site) {
+    var btn = document.getElementById('st-deal-btn');
+    var start = function () {
+      btn.disabled = false; btn.textContent = '쿠폰 받기';
+      // 같은 요소에 다시 render하면 앞의 타이머는 저절로 정리된다
+      site.countdown.render({ elem: '#st-deal-t', date: Date.now() + 15000, doneText: '마감', end: function () {
+        btn.disabled = true; btn.textContent = '마감된 쿠폰';
+      } });
+    };
+    start();
+    document.getElementById('st-deal-again').addEventListener('click', start);
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="api">
 <h2 id="api">API</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">site API</caption>

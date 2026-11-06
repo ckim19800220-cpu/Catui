@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -70,6 +70,65 @@ catui.use([&#39;collapse&#39;], function (collapse) {
 </figure>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">데이터로 그리기(render) · 모두 펼치기·접기 · 링크로 특정 질문 열기</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" id="cl-all-open">모두 펼치기</button>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="cl-all-close">모두 접기</button>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="cl-go-refund">환불 질문 바로 보기</button>
+  </div>
+  <div id="cl-help"></div>
+  <script>
+  catui.use(['collapse'], function (collapse) {
+    var FAQ = [
+      { title: '배송은 얼마나 걸리나요?', content: '결제 후 1~2일 안에 출발하고, 보통 다음 날 도착합니다.' },
+      { title: '주문을 바꾸거나 취소할 수 있나요?', content: '출발 전이면 주문 내역에서 바로 바꾸거나 취소할 수 있습니다.' },
+      { title: '환불은 언제 되나요?', content: catui.html`상품이 돌아온 뒤 <b>영업일 3일 안</b>에 결제한 수단으로 돌려 드립니다.` },
+      { title: '영수증을 받을 수 있나요?', content: '주문 상세에서 카드 영수증과 현금영수증을 내려받을 수 있습니다.' } ];
+    collapse.render({ elem: '#cl-help', filter: 'cl-help', data: FAQ });   // accordion을 빼면 여러 개를 함께 열 수 있다
+    document.getElementById('cl-all-open').addEventListener('click', function () { collapse.open('cl-help'); });
+    document.getElementById('cl-all-close').addEventListener('click', function () { collapse.close('cl-help'); });
+    document.getElementById('cl-go-refund').addEventListener('click', function () {
+      var i = FAQ.findIndex(function (q) { return q.title.indexOf('환불') > -1; });
+      collapse.open('cl-help', i);
+      var d = document.querySelectorAll('#cl-help > details')[i];
+      d.scrollIntoView({ block: 'nearest' });
+      d.querySelector('summary').focus();                               // 키보드 사용자도 그 자리에서 이어 읽게
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="데이터로 그리기(render) · 모두 펼치기·접기 · 링크로 특정 질문 열기 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;cl-all-open&quot;&gt;모두 펼치기&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost&quot; type=&quot;button&quot; id=&quot;cl-all-close&quot;&gt;모두 접기&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost&quot; type=&quot;button&quot; id=&quot;cl-go-refund&quot;&gt;환불 질문 바로 보기&lt;/button&gt;
+&lt;/div&gt;
+&lt;div id=&quot;cl-help&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;collapse&#39;], function (collapse) {
+  var FAQ = [
+    { title: &#39;배송은 얼마나 걸리나요?&#39;, content: &#39;결제 후 1~2일 안에 출발하고, 보통 다음 날 도착합니다.&#39; },
+    { title: &#39;주문을 바꾸거나 취소할 수 있나요?&#39;, content: &#39;출발 전이면 주문 내역에서 바로 바꾸거나 취소할 수 있습니다.&#39; },
+    { title: &#39;환불은 언제 되나요?&#39;, content: catui.html`상품이 돌아온 뒤 &lt;b&gt;영업일 3일 안&lt;/b&gt;에 결제한 수단으로 돌려 드립니다.` },
+    { title: &#39;영수증을 받을 수 있나요?&#39;, content: &#39;주문 상세에서 카드 영수증과 현금영수증을 내려받을 수 있습니다.&#39; } ];
+  collapse.render({ elem: &#39;#cl-help&#39;, filter: &#39;cl-help&#39;, data: FAQ });   // accordion을 빼면 여러 개를 함께 열 수 있다
+  document.getElementById(&#39;cl-all-open&#39;).addEventListener(&#39;click&#39;, function () { collapse.open(&#39;cl-help&#39;); });
+  document.getElementById(&#39;cl-all-close&#39;).addEventListener(&#39;click&#39;, function () { collapse.close(&#39;cl-help&#39;); });
+  document.getElementById(&#39;cl-go-refund&#39;).addEventListener(&#39;click&#39;, function () {
+    var i = FAQ.findIndex(function (q) { return q.title.indexOf(&#39;환불&#39;) &gt; -1; });
+    collapse.open(&#39;cl-help&#39;, i);
+    var d = document.querySelectorAll(&#39;#cl-help &gt; details&#39;)[i];
+    d.scrollIntoView({ block: &#39;nearest&#39; });
+    d.querySelector(&#39;summary&#39;).focus();                               // 키보드 사용자도 그 자리에서 이어 읽게
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
 <section aria-labelledby="api">
 <h2 id="api">API</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">collapse API</caption>
@@ -84,11 +143,11 @@ catui.use([&#39;collapse&#39;], function (collapse) {
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/tree.html"><span>이전</span>tree 트리</a><a class="doc-pager-next" href="../../js/modules/canvas.html"><span>다음</span>canvas 캔버스</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">아코디언</a></li><li><a href="#api">API</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">아코디언</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#api">API</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

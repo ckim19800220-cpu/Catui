@@ -1,0 +1,31 @@
+{
+  "gnb": [
+    { "id": "home", "title": "홈", "href": "index.html" },
+    { "id": "best", "title": "베스트", "href": "list.html?sort=best" },
+    { "id": "event", "title": "기획전", "href": "event.html?e=autumn" },
+    { "id": "fashion", "title": "패션", "href": "list.html?c=fashion" },
+    { "id": "beauty", "title": "뷰티", "href": "list.html?c=beauty" },
+    { "id": "food", "title": "식품", "href": "list.html?c=food" },
+    { "id": "living", "title": "리빙", "href": "list.html?c=living" },
+    { "id": "digital", "title": "디지털", "href": "list.html?c=digital" },
+    { "id": "kids", "title": "유아동", "href": "list.html?c=kids" },
+    { "id": "sports", "title": "스포츠", "href": "list.html?c=sports" },
+    { "id": "pet", "title": "반려동물", "href": "list.html?c=pet" }
+  ],
+  "tabs": [
+    { "id": "home", "title": "홈", "href": "index.html", "icon": "house" },
+    { "id": "list", "title": "카테고리", "href": "list.html", "icon": "layout-grid" },
+    { "id": "search", "title": "검색", "href": "search.html", "icon": "search" },
+    { "id": "cart", "title": "장바구니", "href": "cart.html", "icon": "shopping-cart", "count": true },
+    { "id": "my", "title": "마이", "href": "mypage.html", "icon": "user" }
+  ],
+  "my": [
+    { "id": "home", "title": "마이페이지", "href": "mypage.html", "icon": "house" },
+    { "id": "orders", "title": "주문 내역", "href": "orders.html", "icon": "receipt" },
+    { "id": "track", "title": "배송 조회", "href": "order-track.html", "icon": "truck" },
+    { "id": "wish", "title": "찜", "href": "wish.html", "icon": "heart" },
+    { "id": "recent", "title": "최근 본 상품", "href": "recent.html", "icon": "history" },
+    { "id": "coupons", "title": "쿠폰·적립금", "href": "coupons.html", "icon": "coupon" },
+    { "id": "profile", "title": "회원 정보", "href": "profile.html", "icon": "user" }
+  ]
+}

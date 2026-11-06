@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -77,6 +77,94 @@ catui.use([&#39;datePicker&#39;], function (datePicker) {
 <p>입력 칸을 누르거나 ↓ 키로 엽니다. 달력에서 ↑↓←→(하루·한 주), PageUp/PageDown(한 달), Home/End(주의 처음·끝), Enter(선택), Esc(닫기). 범위 밖 날짜는 고를 수 없습니다.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">오늘부터 60일 안에서 예약 · 빠른 선택(shortcuts)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_field"><label class="Catui_label" for="dp-book">방문 예약일</label><input class="Catui_input" id="dp-book" aria-describedby="dp-book-h"><p class="Catui_help" id="dp-book-h">오늘부터 60일 안, 주말 제외</p></div>
+  <p class="Catui_help" id="dp-book-out" aria-live="polite"></p>
+  <script>
+  catui.use(['datePicker', 'util'], function (datePicker, util) {
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var plus = function (n) { return new Date(today.getFullYear(), today.getMonth(), today.getDate() + n); };
+    var weekend = function (d) { return d.getDay() === 0 || d.getDay() === 6; };
+    datePicker.render({ elem: '#dp-book', min: today, max: plus(60), disabled: weekend,
+      // 범위 밖이거나 막힌 날(주말)이면 눌러도 고르지 않는다
+      shortcuts: [
+        { text: '오늘', value: function () { return today; } },
+        { text: '내일', value: function () { return plus(1); } },
+        { text: '다음 주 월요일', value: function () { return plus(((8 - today.getDay()) % 7) || 7); } } ],
+      done: function (value, date) { document.getElementById('dp-book-out').textContent = value ? util.toDateString(date, "M'월' d'일' E'요일'") + '에 방문합니다' : '날짜를 지웠습니다'; } });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="오늘부터 60일 안에서 예약 · 빠른 선택(shortcuts) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dp-book&quot;&gt;방문 예약일&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dp-book&quot; aria-describedby=&quot;dp-book-h&quot;&gt;&lt;p class=&quot;Catui_help&quot; id=&quot;dp-book-h&quot;&gt;오늘부터 60일 안, 주말 제외&lt;/p&gt;&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;dp-book-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;datePicker&#39;, &#39;util&#39;], function (datePicker, util) {
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  var plus = function (n) { return new Date(today.getFullYear(), today.getMonth(), today.getDate() + n); };
+  var weekend = function (d) { return d.getDay() === 0 || d.getDay() === 6; };
+  datePicker.render({ elem: &#39;#dp-book&#39;, min: today, max: plus(60), disabled: weekend,
+    // 범위 밖이거나 막힌 날(주말)이면 눌러도 고르지 않는다
+    shortcuts: [
+      { text: &#39;오늘&#39;, value: function () { return today; } },
+      { text: &#39;내일&#39;, value: function () { return plus(1); } },
+      { text: &#39;다음 주 월요일&#39;, value: function () { return plus(((8 - today.getDay()) % 7) || 7); } } ],
+    done: function (value, date) { document.getElementById(&#39;dp-book-out&#39;).textContent = value ? util.toDateString(date, &quot;M&#39;월&#39; d&#39;일&#39; E&#39;요일&#39;&quot;) + &#39;에 방문합니다&#39; : &#39;날짜를 지웠습니다&#39;; } });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">시작일 · 종료일 두 칸 연동 (reload로 min·max 바꾸기)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_grid">
+    <div class="Catui_span-6 Catui_field"><label class="Catui_label" for="dp-from">시작일</label><input class="Catui_input" id="dp-from"></div>
+    <div class="Catui_span-6 Catui_field"><label class="Catui_label" for="dp-to">종료일</label><input class="Catui_input" id="dp-to"></div>
+  </div>
+  <p class="Catui_help" id="dp-span-out" aria-live="polite">시작일을 고르면 종료일은 그 뒤 날짜만, 종료일을 고르면 시작일은 그 앞 날짜만 고를 수 있습니다.</p>
+  <script>
+  catui.use(['datePicker'], function (datePicker) {
+    var from = document.getElementById('dp-from'), to = document.getElementById('dp-to');
+    var say = function () {
+      if (!from.value || !to.value) return;
+      var days = Math.round((new Date(to.value) - new Date(from.value)) / 86400000) + 1;
+      document.getElementById('dp-span-out').textContent = from.value + ' ~ ' + to.value + ' (' + days + '일)';
+    };
+    datePicker.render({ elem: from, done: function (v) {
+      if (to.value && v && to.value < v) to.value = '';          // 순서가 뒤집히면 종료일 비우기
+      datePicker.reload('dp-to', { min: v });                     // 인스턴스 id는 입력의 id
+      say();
+    } });
+    datePicker.render({ elem: to, done: function (v) { datePicker.reload('dp-from', { max: v }); say(); } });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="시작일 · 종료일 두 칸 연동 (reload로 min·max 바꾸기) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_grid&quot;&gt;
+  &lt;div class=&quot;Catui_span-6 Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dp-from&quot;&gt;시작일&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dp-from&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_span-6 Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;dp-to&quot;&gt;종료일&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;dp-to&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;dp-span-out&quot; aria-live=&quot;polite&quot;&gt;시작일을 고르면 종료일은 그 뒤 날짜만, 종료일을 고르면 시작일은 그 앞 날짜만 고를 수 있습니다.&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;datePicker&#39;], function (datePicker) {
+  var from = document.getElementById(&#39;dp-from&#39;), to = document.getElementById(&#39;dp-to&#39;);
+  var say = function () {
+    if (!from.value || !to.value) return;
+    var days = Math.round((new Date(to.value) - new Date(from.value)) / 86400000) + 1;
+    document.getElementById(&#39;dp-span-out&#39;).textContent = from.value + &#39; ~ &#39; + to.value + &#39; (&#39; + days + &#39;일)&#39;;
+  };
+  datePicker.render({ elem: from, done: function (v) {
+    if (to.value &amp;&amp; v &amp;&amp; to.value &lt; v) to.value = &#39;&#39;;          // 순서가 뒤집히면 종료일 비우기
+    datePicker.reload(&#39;dp-to&#39;, { min: v });                     // 인스턴스 id는 입력의 id
+    say();
+  } });
+  datePicker.render({ elem: to, done: function (v) { datePicker.reload(&#39;dp-from&#39;, { max: v }); say(); } });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
 <section aria-labelledby="options">
 <h2 id="options">옵션</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">datePicker 옵션</caption>
@@ -96,11 +184,11 @@ catui.use([&#39;datePicker&#39;], function (datePicker) {
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/dropdown.html"><span>이전</span>dropdown 메뉴</a><a class="doc-pager-next" href="../../js/modules/upload.html"><span>다음</span>upload 업로드</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">날짜 · 기간</a></li><li><a href="#options">옵션</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">날짜 · 기간</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#options">옵션</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

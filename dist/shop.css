@@ -1,0 +1,531 @@
+/*! CatuiShop CSS 2.0.0 | MIT License (c) imcatDevs | catui 위에 로드 */
+/* shop/tokens.css */
+/* CatuiShop 토큰 — 본체 토큰을 참조만 한다(새 색 값 없음). */
+.Catui_sh{
+  --Catui_sh-wrap:calc(var(--Catui_space-10) * 19);            /* 본문 최대 폭 ≈ 1216px */
+  --Catui_sh-gap:var(--Catui_space-5);
+  --Catui_sh-head-h:calc(var(--Catui_space-10) + var(--Catui_space-2));
+  --Catui_sh-card-min:calc(var(--Catui_space-10) * 3.1);        /* 상품 카드 최소 폭 ≈ 198px (599px 이하 ≈ 134px — 320px 화면도 2열) */
+  --Catui_sh-side-w:calc(var(--Catui_space-10) * 5.4);           /* 주문 요약·필터 옆줄 ≈ 346px */
+  --Catui_sh-sale:var(--Catui_color-danger);                     /* 할인율 — 숫자 + "%" + 숨김 글자 "할인"을 함께(색만으로 알리지 않음) */
+  --Catui_sh-price:var(--Catui_color-text-primary);
+  --Catui_sh-muted:var(--Catui_color-text-secondary);
+  --Catui_sh-accent:var(--Catui_color-brand-strong);             /* 혜택·무료배송·선택 강조 */
+  --Catui_sh-accent-soft:var(--Catui_color-brand-soft);
+  --Catui_sh-warn:var(--Catui_color-orange);                     /* 남은 재고 적음 — 항상 "N개 남음" 글자와 함께 */
+  --Catui_sh-img-bg:var(--Catui_color-surface-muted);
+  --Catui_sh-radius:var(--Catui_radius-md);
+  /* 모션: 들어오고 나가는 것은 ease-out, 화면 안 이동은 ease-in-out. UI는 300ms 미만 */
+  --Catui_sh-ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  --Catui_sh-dur-press:160ms;
+  --Catui_sh-dur-ui:200ms;
+  --Catui_sh-press:0.97;
+}
+@media (max-width:599px){.Catui_sh{--Catui_sh-card-min:calc(var(--Catui_space-10) * 2.1);--Catui_sh-gap:var(--Catui_space-4)}}
+
+/* shop/shell.css */
+/* 사이트 머리(로고·검색·찜·장바구니·테마·마이) · 카테고리 메뉴 · 본문 · 바닥글(사업자 정보) · 767px 이하 하단 탭 · 마이페이지 2단 */
+.Catui_sh-body{margin:0;background:var(--Catui_color-page-bg)}
+.Catui_sh{min-height:100vh;display:flex;flex-direction:column;background:var(--Catui_color-page-bg)}
+.Catui_sh [hidden]{display:none !important}
+.Catui_sh :is(.Catui_label,.Catui_tbl th){text-transform:none;letter-spacing:0}
+.Catui_sh .Catui_req{color:var(--Catui_color-text-secondary)}
+.Catui_sh :is(.Catui_num,.Catui_tbl,.Catui_sh-sum dd,.Catui_sh-price){font-variant-numeric:tabular-nums}
+.Catui_sh img{max-width:100%;height:auto}
+.Catui_sh :is(a,button,summary,input,select,textarea):focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+
+/* 머리 */
+.Catui_sh-head{position:sticky;top:0;z-index:30;background:var(--Catui_card-bg);border-bottom:1px solid var(--Catui_color-border)}
+.Catui_sh-head-in{max-width:var(--Catui_sh-wrap);margin-inline:auto;display:flex;align-items:center;gap:var(--Catui_space-4);min-height:var(--Catui_sh-head-h);padding-inline:var(--Catui_space-4)}
+.Catui_sh-brand{display:inline-flex;align-items:center;gap:var(--Catui_space-2);font-weight:800;font-size:var(--Catui_type-h3-size);text-decoration:none;white-space:nowrap;color:var(--Catui_color-text-primary)}
+.Catui_sh-brand span{color:var(--Catui_sh-accent)}
+.Catui_sh-mark{display:inline-grid;place-items:center;width:var(--Catui_control-h-md);height:var(--Catui_control-h-md);border-radius:var(--Catui_radius-md);background:var(--Catui_sh-accent);color:var(--Catui_color-text-inverse)}
+.Catui_sh-mark .Catui_icon{color:inherit}
+.Catui_sh-search{flex:1;max-width:calc(var(--Catui_space-10) * 9);margin-left:auto}
+.Catui_sh-search .Catui_input{width:100%}
+.Catui_sh-head-acts{display:flex;align-items:center;gap:var(--Catui_space-1)}
+.Catui_sh-only-sm{display:none}
+.Catui_sh-dot{position:relative}
+.Catui_sh-dot .Catui_count{position:absolute;top:-2px;right:-4px}
+
+/* 카테고리 메뉴: 넓으면 한 줄, 좁으면 가로 스크롤 */
+.Catui_sh-gnb{border-top:1px solid var(--Catui_divider-color)}
+.Catui_sh-gnb-in{position:relative;max-width:var(--Catui_sh-wrap);margin-inline:auto;display:flex;align-items:center;gap:var(--Catui_space-1);padding-inline:var(--Catui_space-4);overflow-x:auto;scrollbar-width:none}
+.Catui_sh-gnb-in::-webkit-scrollbar{display:none}
+.Catui_sh-gnb-item{flex:none;display:inline-flex;align-items:center;min-height:calc(var(--Catui_space-10) * 0.75);padding-inline:var(--Catui_space-3);font-weight:600;text-decoration:none;color:var(--Catui_color-text-secondary);border-bottom:2px solid transparent}
+.Catui_sh-gnb-item:hover{color:var(--Catui_color-text-primary)}
+.Catui_sh-gnb-item[aria-current="page"]{color:var(--Catui_color-text-primary);border-bottom-color:var(--Catui_sh-accent)}
+.Catui_sh-gnb-item:focus-visible{outline-offset:-2px}
+
+/* 본문 */
+.Catui_sh-main{flex:1;width:100%;max-width:var(--Catui_sh-wrap);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_sh-gap);padding:var(--Catui_sh-gap) var(--Catui_space-4);align-content:start}
+.Catui_sh-main > *{min-width:0}
+.Catui_sh-main:focus{outline:none}
+.Catui_sh a:not(.Catui_btn,.Catui_link,.Catui_pg,.Catui_sh-gnb-item,.Catui_sh-tab){color:inherit}
+
+/* 상자 · 묶음 머리 */
+.Catui_sh-box{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-4);padding:var(--Catui_space-5);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);min-width:0}
+.Catui_sh-box > :is(h2,h3){margin:0}
+.Catui_sh-sec{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-3)}
+.Catui_sh-sec-h{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2) var(--Catui_space-3)}
+.Catui_sh-sec-h > :is(h1,h2){margin:0;margin-right:auto}
+.Catui_sh-more{display:inline-flex;align-items:center;gap:2px;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);text-decoration:none}
+.Catui_sh-more:hover{color:var(--Catui_color-text-primary);text-decoration:underline}
+.Catui_sh-wide{grid-column:1 / -1;list-style:none}
+.Catui_sh-empty{padding-block:var(--Catui_space-8)}
+.Catui_sh-off{opacity:.55;pointer-events:none}
+.Catui_sh-scroll{position:relative;overflow-x:auto}
+.Catui_sh-form-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-4)}
+.Catui_sh-form-cols .Catui_input{width:100%}
+
+/* 분류·검색어 칩 줄 (가로 스크롤) */
+.Catui_sh-chips{position:relative;display:flex;gap:var(--Catui_space-2);overflow-x:auto;scrollbar-width:none;padding-block:2px}
+.Catui_sh-chips::-webkit-scrollbar{display:none}
+.Catui_sh-chips a{flex:none;display:inline-flex;align-items:center;min-height:var(--Catui_control-h-sm);padding-inline:var(--Catui_space-3);border:1px solid var(--Catui_color-border);border-radius:var(--Catui_radius-pill);background:var(--Catui_card-bg);font-size:var(--Catui_type-caption-size);text-decoration:none}
+.Catui_sh-chips a[aria-current]{border-color:var(--Catui_sh-accent);color:var(--Catui_sh-accent);font-weight:700;box-shadow:inset 0 0 0 1px var(--Catui_sh-accent)}
+
+/* 홈 배너 · 혜택 줄 */
+.Catui_sh-hero{display:grid;align-content:center;gap:var(--Catui_space-2);min-height:calc(var(--Catui_space-10) * 4.5);padding:var(--Catui_space-8);border-radius:var(--Catui_sh-radius);text-decoration:none;background:linear-gradient(120deg,var(--Catui_sh-hero-a),var(--Catui_sh-hero-b));color:var(--Catui_color-text-primary)}
+.Catui_sh-hero[data-tone="1"]{--Catui_sh-hero-a:var(--Catui_color-brand-soft);--Catui_sh-hero-b:var(--Catui_color-info-soft)}
+.Catui_sh-hero[data-tone="2"]{--Catui_sh-hero-a:var(--Catui_color-info-soft);--Catui_sh-hero-b:var(--Catui_color-purple-soft)}
+.Catui_sh-hero[data-tone="3"]{--Catui_sh-hero-a:var(--Catui_color-purple-soft);--Catui_sh-hero-b:var(--Catui_color-amber-soft)}
+.Catui_sh-hero[data-tone="4"]{--Catui_sh-hero-a:var(--Catui_color-amber-soft);--Catui_sh-hero-b:var(--Catui_color-brand-soft)}
+.Catui_sh-hero b,.Catui_sh-hero h1{margin:0;font-size:var(--Catui_type-display-size);line-height:1.2;font-weight:800;word-break:keep-all}
+.Catui_sh-hero small{font-size:var(--Catui_type-caption-size);font-weight:700;color:var(--Catui_color-text-secondary)}
+.Catui_sh-heroes .Catui_carousel-slide{background:transparent}
+.Catui_sh-event-head{min-height:0}
+.Catui_sh-left{display:inline-flex;align-items:center;gap:var(--Catui_space-1);margin:0;font-size:var(--Catui_type-caption-size);font-weight:700;color:var(--Catui_sh-sale);font-variant-numeric:tabular-nums}
+.Catui_sh-perks{margin:0;padding:var(--Catui_space-3) var(--Catui_space-4);list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--Catui_space-3);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_sh-perks li{display:flex;align-items:center;gap:var(--Catui_space-2);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_sh-perks .Catui_icon{flex:none;color:var(--Catui_sh-accent)}
+.Catui_sh-perks b{color:var(--Catui_color-text-primary)}
+
+/* 바닥글 */
+.Catui_sh-foot{border-top:1px solid var(--Catui_color-border);background:var(--Catui_card-bg)}
+.Catui_sh-foot-in{max-width:var(--Catui_sh-wrap);margin-inline:auto;display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-6) var(--Catui_space-4);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_sh-foot-in p{margin:0;word-break:keep-all}
+.Catui_sh-foot nav{display:flex;flex-wrap:wrap;gap:var(--Catui_space-4);font-weight:600}
+
+/* 맨 위로 */
+.Catui_sh-totop{position:fixed;right:var(--Catui_space-4);bottom:var(--Catui_space-5);z-index:25;box-shadow:var(--Catui_shadow-md)}
+
+/* 하단 탭(767px 이하) */
+.Catui_sh-tabs{display:none}
+.Catui_sh-tab{position:relative;display:grid;justify-items:center;gap:2px;padding:var(--Catui_space-2) 0;font-size:11px;text-decoration:none;color:var(--Catui_color-text-secondary)}
+.Catui_sh-tab[aria-current="page"]{color:var(--Catui_sh-accent);font-weight:700}
+.Catui_sh-tab:focus-visible{outline-offset:-2px}
+.Catui_sh-tab-n{position:absolute;top:2px;left:calc(50% + 6px)}
+
+/* 셸 없는 화면(로그인·가입·오류) */
+.Catui_sh-blank{min-height:100vh;display:grid;place-items:center;padding:var(--Catui_space-8) var(--Catui_space-4)}
+.Catui_sh-blank-card{width:min(100%,calc(var(--Catui_space-10) * 7.5));display:grid;grid-template-columns:minmax(0,1fr)}
+.Catui_sh-blank-card .Catui_input{width:100%}
+.Catui_sh-social{display:grid;gap:var(--Catui_space-2)}
+.Catui_sh-404{text-align:center;max-width:calc(var(--Catui_space-10) * 10)}
+.Catui_sh-code{font-size:calc(var(--Catui_type-display-size) * 2);font-weight:800;line-height:1;color:var(--Catui_sh-accent)}
+
+/* 마이페이지 2단: 옆 메뉴 + 본문 */
+.Catui_sh-my{display:grid;grid-template-columns:calc(var(--Catui_space-10) * 4.4) minmax(0,1fr);gap:var(--Catui_sh-gap);align-items:start}
+.Catui_sh-my-main{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_sh-gap);min-width:0}
+.Catui_sh-my-main > h1{margin:0}
+.Catui_sh-mynav{position:sticky;top:calc(var(--Catui_sh-head-h) * 2);display:grid;gap:2px;padding:var(--Catui_space-2);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_sh-mynav a{display:flex;align-items:center;gap:var(--Catui_space-2);min-height:var(--Catui_control-h-md);padding-inline:var(--Catui_space-3);border-radius:var(--Catui_radius-sm);text-decoration:none;color:var(--Catui_color-text-secondary)}
+.Catui_sh-mynav a:hover{background:var(--Catui_color-surface-muted);color:var(--Catui_color-text-primary)}
+.Catui_sh-mynav a[aria-current="page"]{background:var(--Catui_sh-accent-soft);color:var(--Catui_sh-accent);font-weight:700}
+
+@media (max-width:991px){
+  .Catui_sh-my{grid-template-columns:minmax(0,1fr)}
+  .Catui_sh-mynav{position:relative;top:auto;display:flex;overflow-x:auto;scrollbar-width:none}
+  .Catui_sh-mynav a{flex:none}
+  .Catui_sh-perks{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:767px){
+  .Catui_sh-head-in{gap:var(--Catui_space-2)}
+  .Catui_sh-head .Catui_sh-search{display:none}
+  .Catui_sh-only-sm{display:inline-flex}
+  .Catui_sh-head-acts{margin-left:auto}
+  .Catui_sh-tabs{position:sticky;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:var(--Catui_card-bg);border-top:1px solid var(--Catui_color-border);padding-bottom:env(safe-area-inset-bottom)}
+  .Catui_sh-totop{bottom:calc(var(--Catui_space-10) + var(--Catui_space-4))}
+  .Catui_sh-box{padding:var(--Catui_space-4)}
+  .Catui_sh-hero{min-height:calc(var(--Catui_space-10) * 3.4);padding:var(--Catui_space-5)}
+  .Catui_sh-hero b,.Catui_sh-hero h1{font-size:var(--Catui_type-h1-size)}
+  .Catui_sh-form-cols{grid-template-columns:minmax(0,1fr)}
+}
+/* 320px(WCAG 리플로 기준): 로고 + 아이콘 버튼이 한 줄에 들어가도록 */
+@media (max-width:399px){
+  .Catui_sh-head-in{padding-inline:var(--Catui_space-2);gap:var(--Catui_space-1)}
+  .Catui_sh-head-acts{gap:0}
+  .Catui_sh-brand{font-size:var(--Catui_type-body-size)}
+  .Catui_sh-brand b > span{display:none}
+  .Catui_sh-main{padding-inline:var(--Catui_space-3)}
+  .Catui_sh-perks{grid-template-columns:minmax(0,1fr)}
+}
+
+/* shop/card.css */
+/* 상품 카드 · 가격(할인율·판매가·정가) · 별점 · 혜택 태그 · 상품 바둑판/목록 · 카테고리 · 기획전 */
+.Catui_sh-grid{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--Catui_sh-card-min),1fr));gap:var(--Catui_space-5) var(--Catui_space-4)}
+.Catui_sh-card{position:relative;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:var(--Catui_space-1);min-width:0}
+.Catui_sh-card-link{display:grid;gap:var(--Catui_space-1);text-decoration:none;min-width:0}
+.Catui_sh-card-link:hover .Catui_sh-card-name{text-decoration:underline}
+.Catui_sh-card-img{position:relative;display:block;aspect-ratio:1 / 1;border-radius:var(--Catui_sh-radius);overflow:hidden;background:var(--Catui_sh-img-bg);margin-bottom:var(--Catui_space-1)}
+.Catui_sh-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_sh-card-brand{font-size:var(--Catui_type-caption-size);font-weight:700;color:var(--Catui_color-text-secondary)}
+.Catui_sh-card-name{font-weight:500;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:keep-all;overflow-wrap:anywhere}
+.Catui_sh-card-meta{display:flex;align-items:center;gap:var(--Catui_space-1);margin:0;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_sh-card-acts{position:absolute;top:var(--Catui_space-2);right:var(--Catui_space-2);display:grid;gap:var(--Catui_space-1)}
+.Catui_sh-card-acts .Catui_btn{background:color-mix(in srgb,var(--Catui_card-bg) 88%,transparent);box-shadow:var(--Catui_shadow-xs)}
+.Catui_sh-card-out .Catui_sh-card-img img{opacity:.45}
+/* 품절: 사진 위 글자 띠(색만으로 알리지 않음) */
+.Catui_sh-soldout{position:absolute;inset:auto 0 0 0;padding:var(--Catui_space-1) var(--Catui_space-2);background:color-mix(in srgb,var(--Catui_color-text-primary) 78%,transparent);color:var(--Catui_color-text-inverse);font-size:var(--Catui_type-caption-size);font-weight:700;text-align:center}
+.Catui_sh-rank{position:absolute;top:0;left:0;min-width:var(--Catui_control-h-sm);height:var(--Catui_control-h-sm);display:grid;place-items:center;padding-inline:var(--Catui_space-1);border-bottom-right-radius:var(--Catui_radius-md);background:var(--Catui_color-text-primary);color:var(--Catui_color-text-inverse);font-weight:800;font-variant-numeric:tabular-nums}
+
+/* 찜(하트): 누르면 채워진 하트 + aria-pressed */
+.Catui_sh-wish[aria-pressed="true"]{color:var(--Catui_sh-sale)}
+.Catui_sh-wish[aria-pressed="true"] .Catui_icon{fill:currentColor}
+
+/* 가격 */
+.Catui_sh-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 var(--Catui_space-1);margin:0;line-height:1.3}
+.Catui_sh-rate{font-weight:800;color:var(--Catui_sh-sale)}
+.Catui_sh-sale{font-weight:800;color:var(--Catui_sh-price)}
+.Catui_sh-list{flex-basis:100%;order:3;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-tertiary)}
+.Catui_sh-price-lg{font-size:var(--Catui_type-h2-size)}
+.Catui_sh-price-lg .Catui_sh-list{font-size:var(--Catui_type-body-size)}
+
+/* 별점(읽기 전용) */
+.Catui_sh-stars{display:inline-flex;align-items:center;gap:1px;color:var(--Catui_rating-off)}
+.Catui_sh-stars [data-on]{color:var(--Catui_rating-on)}
+.Catui_sh-stars [data-on] .Catui_icon{fill:currentColor}
+
+/* 혜택 태그 */
+.Catui_sh-tags{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:var(--Catui_space-1)}
+.Catui_sh-tag{display:inline-flex;align-items:center;height:var(--Catui_pill-h-sm);padding-inline:var(--Catui_space-1);border-radius:var(--Catui_radius-xs);background:var(--Catui_color-surface-muted);border:1px solid var(--Catui_color-border);font-size:11px;font-weight:700;color:var(--Catui_color-text-secondary)}
+.Catui_sh-tag-best{background:var(--Catui_color-text-primary);border-color:transparent;color:var(--Catui_color-text-inverse)}
+.Catui_sh-tag-new{border-color:var(--Catui_sh-accent);color:var(--Catui_sh-accent)}
+.Catui_sh-tag-coupon{background:var(--Catui_sh-accent-soft);border-color:transparent;color:var(--Catui_sh-accent)}
+
+/* 목록 보기: 한 줄에 사진 + 글 */
+.Catui_sh-rows{grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-3)}
+.Catui_sh-rows .Catui_sh-card{grid-template-columns:calc(var(--Catui_space-10) * 2.4) minmax(0,1fr);column-gap:var(--Catui_space-4);padding:var(--Catui_space-3);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_sh-rows .Catui_sh-card-link{display:contents}
+.Catui_sh-rows .Catui_sh-card-img{grid-row:1 / span 6;margin:0}
+.Catui_sh-rows .Catui_sh-card > :not(.Catui_sh-card-link,.Catui_sh-card-acts){grid-column:2}
+.Catui_sh-rows .Catui_sh-card-brand,.Catui_sh-rows .Catui_sh-card-name{grid-column:2}
+.Catui_sh-rows .Catui_sh-card-acts{position:static;grid-column:2;display:flex}
+@media (max-width:399px){.Catui_sh-rows .Catui_sh-card{grid-template-columns:calc(var(--Catui_space-10) * 1.8) minmax(0,1fr);column-gap:var(--Catui_space-3)}}
+
+/* 카테고리 바로가기 */
+.Catui_sh-cats{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:var(--Catui_space-3)}
+.Catui_sh-cats a{display:grid;justify-items:center;gap:var(--Catui_space-1);padding:var(--Catui_space-2) 0;text-decoration:none;font-size:var(--Catui_type-caption-size);font-weight:600;border-radius:var(--Catui_radius-md)}
+.Catui_sh-cat-ic{display:grid;place-items:center;width:min(100%,calc(var(--Catui_space-10) * 1.2));aspect-ratio:1 / 1;border-radius:var(--Catui_radius-pill);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);color:var(--Catui_sh-accent)}
+.Catui_sh-cats a:hover .Catui_sh-cat-ic{border-color:var(--Catui_sh-accent)}
+@media (max-width:767px){.Catui_sh-cats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* 기획전 카드 */
+.Catui_sh-promos{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 5.2)),1fr));gap:var(--Catui_space-4)}
+.Catui_sh-promo{display:grid;gap:var(--Catui_space-1);min-height:calc(var(--Catui_space-10) * 2.4);padding:var(--Catui_space-5);border-radius:var(--Catui_sh-radius);text-decoration:none;background:var(--Catui_sh-promo-bg,var(--Catui_color-brand-soft))}
+.Catui_sh-promo[data-tone="1"]{--Catui_sh-promo-bg:var(--Catui_color-brand-soft)}
+.Catui_sh-promo[data-tone="2"]{--Catui_sh-promo-bg:var(--Catui_color-info-soft)}
+.Catui_sh-promo[data-tone="3"]{--Catui_sh-promo-bg:var(--Catui_color-purple-soft)}
+.Catui_sh-promo[data-tone="4"]{--Catui_sh-promo-bg:var(--Catui_color-amber-soft)}
+.Catui_sh-promo b{font-size:var(--Catui_type-h3-size);word-break:keep-all}
+.Catui_sh-promo span{color:var(--Catui_color-text-secondary)}
+.Catui_sh-promo .Catui_sh-left{align-self:end}
+@media (max-width:399px){.Catui_sh-promos{grid-template-columns:minmax(0,1fr)}}
+
+/* shop/list.css */
+/* 상품 목록·검색: 머리 · 필터(991px 이하 접힘) · 정렬/보기 줄 · 쪽 번호 · 큰 검색창 */
+.Catui_sh-list-head{display:flex;flex-wrap:wrap;align-items:end;gap:var(--Catui_space-2)}
+.Catui_sh-list-head h1{margin:0}
+.Catui_sh-list-head h1:focus{outline:none}
+.Catui_sh-list-head p{margin:0}
+.Catui_sh [data-catui-sh-list]{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-4);min-width:0}
+.Catui_sh-list-body{display:grid;grid-template-columns:var(--Catui_sh-side-w) minmax(0,1fr);gap:var(--Catui_sh-gap);align-items:start}
+.Catui_sh-results{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-4);min-width:0}
+
+/* 필터: 넓은 화면은 펼친 옆줄, 좁으면 "필터" 단추로 접기 (<details>) */
+.Catui_sh-filter{position:sticky;top:calc(var(--Catui_sh-head-h) * 2);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_sh-filter > summary{display:flex;align-items:center;gap:var(--Catui_space-2);min-height:var(--Catui_control-h-lg);padding-inline:var(--Catui_space-4);font-weight:700;cursor:pointer;list-style:none}
+.Catui_sh-filter > summary::-webkit-details-marker{display:none}
+.Catui_sh-filter-form{display:grid;gap:var(--Catui_space-4);padding:0 var(--Catui_space-4) var(--Catui_space-4)}
+.Catui_sh-filter-form fieldset{display:grid;gap:var(--Catui_space-1);margin:0;padding:0;border:0;min-width:0}
+.Catui_sh-filter-form .Catui_btn{justify-self:start}
+
+/* 정렬 · 보기 · 줄 */
+.Catui_sh-toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-2)}
+.Catui_sh-toolbar .Catui_segment{max-width:100%;overflow-x:auto}
+.Catui_sh-pager{justify-content:center;flex-wrap:wrap}
+.Catui_sh-pager > span{align-self:center;color:var(--Catui_color-text-tertiary)}
+
+/* 검색 화면 큰 검색창 */
+.Catui_sh-search-big{display:grid;gap:var(--Catui_space-3)}
+.Catui_sh-search-big .Catui_input{width:100%}
+
+@media (max-width:991px){
+  .Catui_sh-list-body{grid-template-columns:minmax(0,1fr)}
+  .Catui_sh-filter{position:relative;top:auto}
+}
+
+/* shop/product.css */
+/* 상품 상세: 사진 갤러리 · 머리 정보 · 배송 안내 · 옵션(사이즈 버튼·선택 목록·수량) · 구매 버튼 · 바로가기 · 리뷰 · 문의 · 고정 구매 막대 */
+.Catui_sh-pd-page{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_sh-gap);min-width:0}
+.Catui_sh-pd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:calc(var(--Catui_sh-gap) * 1.6);align-items:start}
+
+/* 사진 */
+.Catui_sh-gallery{display:grid;gap:var(--Catui_space-3);min-width:0}
+.Catui_sh-gallery-main{position:relative;margin:0;aspect-ratio:1 / 1;border-radius:var(--Catui_sh-radius);overflow:hidden;background:var(--Catui_sh-img-bg)}
+.Catui_sh-gallery-main img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_sh-thumbs{position:relative;display:flex;gap:var(--Catui_space-2);overflow-x:auto;padding:2px}
+.Catui_sh-thumbs button{flex:none;width:calc(var(--Catui_space-10) * 1.1);aspect-ratio:1 / 1;padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-sm);overflow:hidden;background:var(--Catui_sh-img-bg);cursor:pointer}
+.Catui_sh-thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_sh-thumbs button[aria-pressed="true"]{border-color:var(--Catui_sh-accent)}
+
+/* 머리 정보 */
+.Catui_sh-pd-info{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-3);min-width:0;position:sticky;top:calc(var(--Catui_sh-head-h) * 2)}
+.Catui_sh-pd-brand{margin:0;font-weight:700;color:var(--Catui_color-text-secondary)}
+.Catui_sh-pd-name{margin:0;font-size:var(--Catui_type-h1-size);line-height:1.35;word-break:keep-all;overflow-wrap:anywhere}
+.Catui_sh-pd-rating{display:inline-flex;align-items:center;gap:var(--Catui_space-1);text-decoration:none;font-size:var(--Catui_type-caption-size)}
+.Catui_sh-pd-rating span:last-child{color:var(--Catui_color-text-secondary);text-decoration:underline}
+.Catui_sh-benefit{display:flex;align-items:center;gap:var(--Catui_space-2);margin:var(--Catui_space-1) 0 0;padding:var(--Catui_space-2) var(--Catui_space-3);border-radius:var(--Catui_radius-sm);background:var(--Catui_sh-accent-soft);font-size:var(--Catui_type-caption-size)}
+.Catui_sh-benefit b{color:var(--Catui_sh-accent)}
+.Catui_sh-pd-ship{display:grid;gap:var(--Catui_space-2);margin:0;padding-block:var(--Catui_space-3);border-block:1px solid var(--Catui_divider-color);font-size:var(--Catui_type-caption-size)}
+.Catui_sh-pd-ship > div{display:grid;grid-template-columns:calc(var(--Catui_space-10) * 0.9) minmax(0,1fr);gap:var(--Catui_space-2)}
+.Catui_sh-pd-ship dt{color:var(--Catui_color-text-secondary)}
+.Catui_sh-pd-ship dd{margin:0}
+
+/* 옵션 */
+.Catui_sh-picker{display:grid;gap:var(--Catui_space-4);min-width:0}
+.Catui_sh-opt{margin:0;padding:0;border:0;min-width:0}
+.Catui_sh-opt > legend{margin-bottom:var(--Catui_space-2);padding:0}
+.Catui_sh-sizes{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2)}
+.Catui_sh-size{display:inline-grid;justify-items:center;align-content:center;min-width:calc(var(--Catui_space-10) * 0.9);min-height:var(--Catui_control-h-lg);padding:var(--Catui_space-1) var(--Catui_space-3);border:1px solid var(--Catui_input-border);border-radius:var(--Catui_radius-sm);background:var(--Catui_card-bg);cursor:pointer;line-height:1.2}
+.Catui_sh-size small{font-size:11px;color:var(--Catui_color-text-secondary)}
+.Catui_sh-size:hover{border-color:var(--Catui_color-text-secondary)}
+input:checked + .Catui_sh-size{border-color:var(--Catui_sh-accent);box-shadow:inset 0 0 0 1px var(--Catui_sh-accent)}
+input:focus-visible + .Catui_sh-size{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+input:disabled + .Catui_sh-size{cursor:not-allowed;color:var(--Catui_color-text-tertiary);background:var(--Catui_color-surface-muted);border-style:dashed}
+input:disabled + .Catui_sh-size b{text-decoration:line-through}
+.Catui_sh-out{display:inline-flex;align-items:center;gap:2px;margin:0;color:var(--Catui_color-danger);font-weight:700}
+.Catui_sh-low{display:inline-flex;align-items:center;gap:2px;margin:0;color:var(--Catui_sh-warn);font-weight:700}
+.Catui_sh-size .Catui_sh-out,.Catui_sh-size .Catui_sh-low{font-size:11px}
+.Catui_sh-picked{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-2)}
+.Catui_sh-picked li{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:var(--Catui_space-2) var(--Catui_space-3);padding:var(--Catui_space-3);border-radius:var(--Catui_radius-sm);background:var(--Catui_color-surface-muted)}
+.Catui_sh-picked-name{display:grid;gap:2px;min-width:0;overflow-wrap:anywhere}
+.Catui_sh-picked-name small{font-size:11px}
+.Catui_sh-picked-amt{white-space:nowrap;font-variant-numeric:tabular-nums}
+.Catui_sh-qty output{min-width:calc(var(--Catui_space-10) * 0.6)}
+.Catui_sh-total{display:flex;align-items:baseline;justify-content:space-between;gap:var(--Catui_space-3);margin:0}
+.Catui_sh-total b{font-size:var(--Catui_type-h2-size);color:var(--Catui_sh-accent);font-variant-numeric:tabular-nums}
+.Catui_sh-pd-acts{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:var(--Catui_space-2)}
+
+/* 바로가기 (상세 · 리뷰 · 문의 · 배송) — 머리 아래 붙음 */
+.Catui_sh-pd-nav{position:sticky;top:calc(var(--Catui_sh-head-h) + var(--Catui_space-10) * 0.75);z-index:20;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);overflow:hidden}
+.Catui_sh-pd-nav a{display:flex;align-items:center;justify-content:center;gap:var(--Catui_space-1);min-height:var(--Catui_control-h-lg);font-weight:600;text-decoration:none;font-size:var(--Catui_type-caption-size)}
+.Catui_sh-pd-nav a:focus-visible{outline-offset:-2px}
+.Catui_sh-pd-page > section[id]{scroll-margin-top:calc(var(--Catui_sh-head-h) * 2 + var(--Catui_control-h-lg))}
+.Catui_sh-detail-img{margin:0;max-width:calc(var(--Catui_space-10) * 9);border-radius:var(--Catui_sh-radius);overflow:hidden}
+
+/* 리뷰 */
+.Catui_sh-rv-sum{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:var(--Catui_space-5);padding:var(--Catui_space-4);border-radius:var(--Catui_radius-md);background:var(--Catui_color-surface-muted)}
+.Catui_sh-rv-avg{display:grid;justify-items:center;gap:var(--Catui_space-1)}
+.Catui_sh-rv-avg > b{font-size:calc(var(--Catui_type-display-size) * 1.2);line-height:1}
+.Catui_sh-rv-dist{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-1);font-size:var(--Catui_type-caption-size)}
+.Catui_sh-rv-dist li{display:grid;grid-template-columns:calc(var(--Catui_space-10) * 0.5) minmax(0,1fr) calc(var(--Catui_space-10) * 0.4);align-items:center;gap:var(--Catui_space-2)}
+.Catui_sh-rv-bar{height:var(--Catui_space-2);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-border);overflow:hidden}
+.Catui_sh-rv-bar i{display:block;height:100%;border-radius:inherit;background:var(--Catui_rating-on)}
+.Catui_sh-reviews{margin:0;padding:0;list-style:none;display:grid}
+.Catui_sh-review{display:grid;gap:var(--Catui_space-2);padding-block:var(--Catui_space-4);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_sh-review > p{margin:0;overflow-wrap:anywhere}
+.Catui_sh-review > .Catui_btn{justify-self:start}
+.Catui_sh-review-head{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2);font-size:var(--Catui_type-caption-size)}
+.Catui_sh-review-head time{color:var(--Catui_color-text-secondary)}
+.Catui_sh-review-img{width:calc(var(--Catui_space-10) * 1.5);height:auto;border-radius:var(--Catui_radius-sm)}
+
+/* 문의 */
+.Catui_sh-ask > summary{list-style:none;justify-self:start;width:max-content;max-width:100%}
+.Catui_sh-ask > summary::-webkit-details-marker{display:none}
+.Catui_sh-ask[open] > summary{margin-bottom:var(--Catui_space-3)}
+.Catui_sh-ask .Catui_input{width:100%}
+.Catui_sh-qna{margin:0;padding:0;list-style:none;display:grid}
+.Catui_sh-qna li{border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_sh-qna summary{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:var(--Catui_space-3);padding-block:var(--Catui_space-3);cursor:pointer;list-style:none}
+.Catui_sh-qna summary::-webkit-details-marker{display:none}
+.Catui_sh-qna-q{display:inline-flex;align-items:center;gap:var(--Catui_space-1);min-width:0;overflow-wrap:anywhere}
+.Catui_sh-qna-a{padding:0 var(--Catui_space-3) var(--Catui_space-3)}
+.Catui_sh-qna-a p{margin:0}
+
+/* 고정 구매 막대: 본래 구매 버튼이 화면 위로 지나가면 나타남 */
+.Catui_sh-buybar{position:fixed;inset:auto 0 0 0;z-index:28;background:var(--Catui_card-bg);border-top:1px solid var(--Catui_color-border);box-shadow:var(--Catui_shadow-lg);padding-bottom:env(safe-area-inset-bottom)}
+.Catui_sh-buybar-in{max-width:var(--Catui_sh-wrap);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:var(--Catui_space-3);padding:var(--Catui_space-3) var(--Catui_space-4)}
+.Catui_sh-buybar-name{margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.Catui_sh-buybar-total{font-size:var(--Catui_type-h3-size);font-variant-numeric:tabular-nums}
+
+@media (max-width:767px){
+  .Catui_sh-pd{grid-template-columns:minmax(0,1fr);gap:var(--Catui_sh-gap)}
+  .Catui_sh-pd-info{position:static}
+  .Catui_sh-pd-name{font-size:var(--Catui_type-h2-size)}
+  .Catui_sh-pd-nav{top:var(--Catui_sh-head-h)}
+  .Catui_sh-rv-sum{grid-template-columns:minmax(0,1fr)}
+  .Catui_sh-rv-avg{justify-items:start;grid-auto-flow:column;justify-content:start;align-items:center}
+  .Catui_sh-picked li{grid-template-columns:minmax(0,1fr) auto}
+  .Catui_sh-picked-name{grid-column:1 / -1}
+  .Catui_sh-buybar{bottom:calc(var(--Catui_space-10) * 0.85 + env(safe-area-inset-bottom))}
+  .Catui_sh-buybar-in{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-2);padding:var(--Catui_space-2) var(--Catui_space-3)}
+  .Catui_sh-buybar-name{display:none}
+  .Catui_sh-buybar-total{grid-column:1 / -1}
+}
+@media (max-width:399px){
+  .Catui_sh-pd-nav a{font-size:11px}
+  .Catui_sh-qna summary{grid-template-columns:minmax(0,1fr)}
+}
+
+/* shop/cart.css */
+/* 장바구니 · 주문서 · 주문 완료: 단계 머리 · 본문 + 요약 옆줄(991px 이하 아래로) · 상품 줄 · 무료배송 막대 · 금액 표 · 결제 수단 · 약관 */
+.Catui_sh-flow-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-3)}
+.Catui_sh-flow-head h1{margin:0}
+.Catui_sh-flow{flex:0 1 calc(var(--Catui_space-10) * 6);min-width:0}
+.Catui_sh-co{display:grid;grid-template-columns:minmax(0,1fr) var(--Catui_sh-side-w);gap:var(--Catui_sh-gap);align-items:start}
+.Catui_sh-co-main{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_sh-gap);min-width:0;align-content:start}
+.Catui_sh-co-side{position:sticky;top:calc(var(--Catui_sh-head-h) * 2)}
+
+/* 장바구니 줄 */
+.Catui_sh-cart-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2) var(--Catui_space-4);padding-bottom:var(--Catui_space-3);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_sh-cart-bar .Catui_choice{margin-right:auto}
+.Catui_sh-cart{margin:0;padding:0;list-style:none;display:grid}
+.Catui_sh-line{display:grid;grid-template-columns:auto calc(var(--Catui_space-10) * 1.5) minmax(0,1fr) auto auto auto;align-items:center;gap:var(--Catui_space-3);padding-block:var(--Catui_space-4);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_sh-line-check{align-self:start;padding-top:var(--Catui_space-1)}
+.Catui_sh-line-img{display:block;aspect-ratio:1 / 1;border-radius:var(--Catui_radius-sm);overflow:hidden;background:var(--Catui_sh-img-bg)}
+.Catui_sh-line-img img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_sh-line-main{display:grid;gap:2px;min-width:0}
+.Catui_sh-line-main p{margin:0}
+.Catui_sh-line-name{font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.Catui_sh-line-name:hover{text-decoration:underline}
+.Catui_sh-line-unit{font-size:var(--Catui_type-caption-size)}
+.Catui_sh-line-unit del{color:var(--Catui_color-text-tertiary)}
+.Catui_sh-line-amt{min-width:calc(var(--Catui_space-10) * 1.3);text-align:right;font-variant-numeric:tabular-nums}
+.Catui_sh-line-out .Catui_sh-line-img img{opacity:.45}
+.Catui_sh-line-out .Catui_sh-line-amt{text-decoration:line-through;color:var(--Catui_color-text-tertiary)}
+
+/* 무료배송까지 남은 금액 */
+.Catui_sh-free{display:grid;gap:var(--Catui_space-2);margin:0;padding:var(--Catui_space-3);border-radius:var(--Catui_radius-sm);background:var(--Catui_sh-accent-soft);font-size:var(--Catui_type-caption-size)}
+.Catui_sh-free p,p.Catui_sh-free{display:flex;align-items:center;gap:var(--Catui_space-2);margin:0}
+.Catui_sh-free .Catui_icon{color:var(--Catui_sh-accent)}
+
+/* 금액 표 (dl) */
+.Catui_sh-sum{display:grid;gap:var(--Catui_space-2);margin:0}
+.Catui_sh-sum > div{display:flex;justify-content:space-between;gap:var(--Catui_space-3)}
+.Catui_sh-sum dt{color:var(--Catui_color-text-secondary)}
+.Catui_sh-sum dd{margin:0;text-align:right;overflow-wrap:anywhere;min-width:0}
+.Catui_sh-sum dd del{color:var(--Catui_color-text-tertiary)}
+.Catui_sh-sum-total{padding-top:var(--Catui_space-3);border-top:1px solid var(--Catui_color-border);align-items:baseline}
+.Catui_sh-sum-total dt{color:var(--Catui_color-text-primary);font-weight:700}
+.Catui_sh-sum-total dd{font-size:var(--Catui_type-h2-size);font-weight:800;color:var(--Catui_sh-accent)}
+
+/* 주문서 */
+.Catui_sh-co-items{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-3)}
+.Catui_sh-co-item{display:grid;grid-template-columns:calc(var(--Catui_space-10)) minmax(0,1fr) auto;align-items:center;gap:var(--Catui_space-3)}
+.Catui_sh-co-item img{width:100%;aspect-ratio:1 / 1;object-fit:cover;border-radius:var(--Catui_radius-sm);background:var(--Catui_sh-img-bg)}
+.Catui_sh-co-item p{margin:0}
+.Catui_sh-co-item > div{min-width:0;overflow-wrap:anywhere}
+.Catui_sh-addrs,.Catui_sh-pays{grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 3.2)),1fr))}
+.Catui_sh-pays .Catui_optcard-title{display:inline-flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_sh-pay-detail{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,calc(var(--Catui_space-10) * 3)),1fr));gap:var(--Catui_space-3)}
+.Catui_sh-pay-detail .Catui_help{grid-column:1 / -1;margin:0}
+.Catui_sh-co .Catui_select,.Catui_sh-co textarea.Catui_input,.Catui_sh-pay-detail .Catui_input{width:100%}
+.Catui_sh-points{display:flex;gap:var(--Catui_space-2)}
+.Catui_sh-points .Catui_input{flex:1;min-width:0}
+.Catui_sh-agree{display:grid;gap:var(--Catui_space-2)}
+.Catui_sh-agree-all{padding-bottom:var(--Catui_space-2);border-bottom:1px solid var(--Catui_divider-color);font-weight:700}
+
+/* 주문 완료 */
+.Catui_sh-done{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_sh-gap);max-width:calc(var(--Catui_space-10) * 12);width:100%;margin-inline:auto}
+.Catui_sh-done-acts{justify-content:center;flex-wrap:wrap}
+
+@media (max-width:991px){
+  .Catui_sh-co{grid-template-columns:minmax(0,1fr)}
+  .Catui_sh-co-side{position:static}
+}
+@media (max-width:599px){
+  .Catui_sh-line{grid-template-columns:auto calc(var(--Catui_space-10) * 1.1) minmax(0,1fr) auto;grid-template-areas:"c i m x" "c i q a"}
+  .Catui_sh-line-check{grid-area:c}
+  .Catui_sh-line-img{grid-area:i;align-self:start}
+  .Catui_sh-line-main{grid-area:m}
+  .Catui_sh-line > .Catui_sh-qty{grid-area:q;justify-self:start}
+  .Catui_sh-line-amt{grid-area:a;min-width:0}
+  .Catui_sh-line-del{grid-area:x;align-self:start}
+  .Catui_sh-flow{flex-basis:100%}
+}
+
+/* shop/mypage.css */
+/* 마이페이지: 내 정보 · 혜택 숫자 · 주문 단계 건수 · 주문 카드 · 배송 단계/기록 · 쿠폰 · 리뷰 쓰기 */
+.Catui_sh-me{gap:var(--Catui_space-5)}
+.Catui_sh-me-top{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-3)}
+.Catui_sh-me-top > div{flex:1;min-width:0}
+.Catui_sh-me-top h1,.Catui_sh-me-top p{margin:0}
+.Catui_sh-me-nums{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--Catui_divider-color);border-radius:var(--Catui_radius-md)}
+.Catui_sh-me-nums li + li{border-left:1px solid var(--Catui_divider-color)}
+.Catui_sh-me-nums a{display:grid;justify-items:center;gap:2px;padding:var(--Catui_space-3) var(--Catui_space-1);text-decoration:none;text-align:center}
+.Catui_sh-me-nums span{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_sh-me-nums b{font-size:var(--Catui_type-h3-size);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.Catui_sh-my-flow{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));counter-reset:none}
+.Catui_sh-my-flow li{position:relative;display:grid;justify-items:center;gap:2px;padding:var(--Catui_space-2) var(--Catui_space-1);text-align:center;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
+.Catui_sh-my-flow li + li::before{content:"";position:absolute;left:-4px;top:50%;width:8px;height:8px;border-top:2px solid var(--Catui_color-border);border-right:2px solid var(--Catui_color-border);transform:translateY(-50%) rotate(45deg)}
+.Catui_sh-my-flow b{font-size:var(--Catui_type-h1-size);color:var(--Catui_color-text-primary)}
+
+/* 주문 카드 */
+.Catui_sh-orders{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-4)}
+.Catui_sh-order{display:grid;gap:var(--Catui_space-3);padding:var(--Catui_space-4);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
+.Catui_sh-order-head{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-1) var(--Catui_space-3)}
+.Catui_sh-order-head .Catui_pill{margin-left:auto}
+.Catui_sh-order-items{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-3)}
+.Catui_sh-order-items a{font-weight:600;text-decoration:none}
+.Catui_sh-order-items a:not(.Catui_btn):hover{text-decoration:underline}
+.Catui_sh-order-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-2);padding-top:var(--Catui_space-3);border-top:1px solid var(--Catui_divider-color)}
+
+/* 배송 단계 · 이동 기록 */
+.Catui_sh-steps{min-width:0}
+.Catui_sh-logs{margin:0;padding:0;list-style:none;display:grid}
+.Catui_sh-log{position:relative;display:grid;grid-template-columns:calc(var(--Catui_space-10) * 1.4) minmax(0,1fr);gap:2px var(--Catui_space-3);padding:var(--Catui_space-3) 0 var(--Catui_space-3) var(--Catui_space-5);border-left:2px solid var(--Catui_color-border);margin-left:var(--Catui_space-2)}
+.Catui_sh-log::before{content:"";position:absolute;left:-7px;top:calc(var(--Catui_space-3) + 3px);width:12px;height:12px;border-radius:50%;background:var(--Catui_card-bg);border:2px solid var(--Catui_color-border)}
+.Catui_sh-log time{grid-row:span 2;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);font-variant-numeric:tabular-nums}
+.Catui_sh-log .Catui_help{grid-column:2}
+.Catui_sh-log-now::before{background:var(--Catui_sh-accent);border-color:var(--Catui_sh-accent)}
+.Catui_sh-log-now b{color:var(--Catui_sh-accent)}
+
+/* 쿠폰 */
+.Catui_sh-coupons{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 4.4)),1fr));gap:var(--Catui_space-3)}
+.Catui_sh-coupon{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start;gap:var(--Catui_space-2) var(--Catui_space-3);padding:var(--Catui_space-4);border:1px dashed var(--Catui_sh-accent);border-radius:var(--Catui_radius-md);background:var(--Catui_sh-accent-soft)}
+.Catui_sh-coupon p{margin:0}
+.Catui_sh-coupon .Catui_pill{grid-column:1 / -1;justify-self:start}
+.Catui_sh-coupon-v{font-size:var(--Catui_type-h3-size);color:var(--Catui_sh-accent);max-width:calc(var(--Catui_space-10) * 1.8);overflow-wrap:anywhere}
+.Catui_sh-coupon-name{font-weight:700}
+.Catui_sh-coupon-off{border-color:var(--Catui_color-border);background:var(--Catui_color-surface-muted)}
+.Catui_sh-coupon-off .Catui_sh-coupon-v{color:var(--Catui_color-text-tertiary);text-decoration:line-through}
+
+/* 리뷰 쓰기 */
+.Catui_sh-rate-in .Catui_icon{width:var(--Catui_icon-24);height:var(--Catui_icon-24)}
+.Catui_sh-pics{display:grid;gap:var(--Catui_space-2);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 1.3),1fr));margin-top:var(--Catui_space-2)}
+.Catui_sh-pic{margin:0;aspect-ratio:1 / 1;border-radius:var(--Catui_radius-sm);overflow:hidden;background:var(--Catui_sh-img-bg)}
+.Catui_sh-pic img{width:100%;height:100%;object-fit:cover}
+
+@media (max-width:399px){
+  .Catui_sh-my-flow b{font-size:var(--Catui_type-h2-size)}
+  .Catui_sh-log{grid-template-columns:minmax(0,1fr);padding-left:var(--Catui_space-4)}
+  .Catui_sh-log time,.Catui_sh-log .Catui_help{grid-row:auto;grid-column:auto}
+}
+
+/* shop/motion.css */
+/* 모션 — 누름 피드백(담기·찜·구매·하단 탭), 카드 사진 살짝 확대(마우스 올림), 고정 구매 막대 올라오기.
+   · 움직이는 속성은 transform·opacity만, 모션 줄이기 설정이면 즉시 */
+.Catui_sh-wish,.Catui_sh-pd-acts .Catui_btn,.Catui_sh-buybar .Catui_btn,.Catui_sh-tab,.Catui_sh-size{transition:transform var(--Catui_sh-dur-press) var(--Catui_sh-ease-out)}
+.Catui_sh-wish:active,.Catui_sh-pd-acts .Catui_btn:active,.Catui_sh-buybar .Catui_btn:active,.Catui_sh-tab:active,.Catui_sh-size:active{transform:scale(var(--Catui_sh-press))}
+.Catui_sh-card-img img{transition:transform var(--Catui_sh-dur-ui) var(--Catui_sh-ease-out)}
+@media (hover:hover){.Catui_sh-card-link:hover .Catui_sh-card-img img{transform:scale(1.03)}}
+@keyframes Catui_sh-rise{from{transform:translateY(100%)}to{transform:none}}
+.Catui_sh-buybar:not([hidden]){animation:Catui_sh-rise var(--Catui_sh-dur-ui) var(--Catui_sh-ease-out)}
+
+@media (prefers-reduced-motion: reduce){
+  .Catui_sh-wish,.Catui_sh-pd-acts .Catui_btn,.Catui_sh-buybar .Catui_btn,.Catui_sh-tab,.Catui_sh-size,.Catui_sh-card-img img{transition:none}
+  .Catui_sh-wish:active,.Catui_sh-pd-acts .Catui_btn:active,.Catui_sh-buybar .Catui_btn:active,.Catui_sh-tab:active,.Catui_sh-size:active,.Catui_sh-card-link:hover .Catui_sh-card-img img{transform:none}
+  .Catui_sh-buybar:not([hidden]){animation:none}
+}
+

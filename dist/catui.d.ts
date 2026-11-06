@@ -16,6 +16,8 @@ export interface CatuiConfig {
   icons: string;
   /** 문서 준비 시 data-catui-* 자동 연결 */
   autoInit: boolean;
+  /** 불러올 때 콘솔 안내 한 줄 (기본 true) */
+  banner: boolean;
   /** DOM에서 빠진 요소의 인스턴스 자동 정리 */
   autoDestroy: boolean;
   /** true 경고·오류 / false 오류만 / "silent" 모두 끔 */

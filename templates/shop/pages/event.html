@@ -1,0 +1,32 @@
+<!-- title: 기획전 | nav: event -->
+<header class="Catui_sh-hero Catui_sh-event-head" data-tone="3" id="ev-head">
+  <small data-ev-until>기획전</small>
+  <h1 class="Catui_h1" data-ev-title>기획전</h1>
+  <span data-ev-desc></span>
+  <p class="Catui_sh-left">{{icon:timer}}<time data-ev-time>남은 시간 계산 중</time></p>
+</header>
+<nav class="Catui_sh-chips" aria-label="다른 기획전" id="ev-other"></nav>
+<section class="Catui_sh-sec" aria-labelledby="ev-items-h">
+  <div class="Catui_sh-sec-h"><h2 class="Catui_h3" id="ev-items-h">기획전 상품</h2></div>
+  <ul class="Catui_sh-grid" id="ev-grid" aria-label="기획전 상품"></ul>
+</section>
+<script>
+// 기획전: event.html?e=autumn — promos.json의 묶음 상품 · 남은 시간(1초마다)
+catui.use(function () {
+  var sh = catui.shop, id = sh.query().get('e') || 'autumn';
+  sh.load().then(function (d) {
+    var m = d.promos.find(function (x) { return x.id === id; }) || d.promos[0];
+    var head = document.getElementById('ev-head');
+    head.setAttribute('data-tone', m.tone);
+    head.querySelector('[data-ev-title]').textContent = m.title;
+    head.querySelector('[data-ev-desc]').textContent = m.desc;
+    head.querySelector('[data-ev-until]').textContent = sh.date(m.until, 'M월 d일') + '까지';
+    var t = head.querySelector('[data-ev-time]'); t.setAttribute('data-catui-sh-until', m.until); t.setAttribute('datetime', m.until);
+    sh.shell.tick(head);
+    document.title = m.title + ' · Catui 쇼핑';
+    catui.mount(document.getElementById('ev-other'), catui.html`${d.promos.map(function (x) { return catui.html`<a href="event.html?e=${x.id}"${x.id === m.id ? catui.html` aria-current="page"` : ''}>${x.title}</a>`; })}`);
+    catui.mount(document.getElementById('ev-grid'), catui.html`${sh.pick(d, 'ids:' + m.ids.join(',')).map(function (p) { return sh.card(p); })}`);
+    sh.wishPaint(document.getElementById('ev-grid'));
+  });
+});
+</script>

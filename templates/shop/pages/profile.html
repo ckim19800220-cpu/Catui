@@ -1,0 +1,21 @@
+<!-- title: 회원 정보 | nav: my | my: profile -->
+<div class="Catui_sh-my">
+  {{mynav}}
+  <div class="Catui_sh-my-main">
+    <h1 class="Catui_h2">회원 정보</h1>
+    <form class="Catui_sh-box Catui_vstack Catui_gap-4" data-catui-sh-profile novalidate>
+      <p class="Catui_help">가입일 <span data-joined>-</span></p>
+      <div class="Catui_sh-form-cols">
+        <div class="Catui_field"><label class="Catui_label" for="pf-name">이름 <span class="Catui_req">필수</span></label><input class="Catui_input" id="pf-name" name="name" autocomplete="name" data-catui-verify="required"></div>
+        <div class="Catui_field"><label class="Catui_label" for="pf-nick">닉네임</label><input class="Catui_input" id="pf-nick" name="nick" maxlength="12"></div>
+        <div class="Catui_field"><label class="Catui_label" for="pf-mail">이메일 <span class="Catui_req">필수</span></label><input class="Catui_input" id="pf-mail" name="email" type="email" autocomplete="email" data-catui-verify="required|email"></div>
+        <div class="Catui_field"><label class="Catui_label" for="pf-phone">휴대폰 번호 <span class="Catui_req">필수</span></label><input class="Catui_input" id="pf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-catui-verify="required|phone"></div>
+      </div>
+      <fieldset class="Catui_vstack Catui_gap-1"><legend class="Catui_label">마케팅 알림</legend>
+        <label class="Catui_choice" for="pf-sms"><input class="Catui_clip" type="checkbox" id="pf-sms" name="sms" checked><span class="Catui_cbx">{{icon:check:12}}</span>문자로 받기</label>
+        <label class="Catui_choice" for="pf-email"><input class="Catui_clip" type="checkbox" id="pf-email" name="mail"><span class="Catui_cbx">{{icon:check:12}}</span>이메일로 받기</label>
+      </fieldset>
+      <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">저장</button><a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="mypage.html">취소</a></div>
+    </form>
+  </div>
+</div>

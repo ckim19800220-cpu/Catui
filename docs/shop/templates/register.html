@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-sh-now="2026-11-02T10:00:00+09:00">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회원가입 · Catui 쇼핑</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/shop.min.css">
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:shop")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_sh-body">
+<!-- Catui 기본 스타일(리셋·링크·글꼴)은 루트 클래스 안에서만 적용되므로 Catui_site로 감싼다 -->
+<div class="Catui_site Catui_sh Catui_sh-blank" data-catui-sh>
+<main class="Catui_card Catui_sh-blank-card"><form class="Catui_card-b Catui_vstack Catui_gap-4" id="rg-form" data-catui-form data-catui-filter="sh-register" novalidate>
+  <a class="Catui_sh-brand" href="index.html"><span class="Catui_sh-mark" aria-hidden="true"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-bag"></use></svg></span><b>Catui <span>쇼핑</span></b></a>
+  <div><h1 class="Catui_h2">회원가입</h1><p class="Catui_help">가입하면 신규 회원 10% 할인 쿠폰을 드려요</p></div>
+  <div class="Catui_field"><label class="Catui_label" for="rg-name">이름</label><input class="Catui_input" id="rg-name" name="name" autocomplete="name" data-catui-verify="required"></div>
+  <div class="Catui_field"><label class="Catui_label" for="rg-mail">이메일</label><input class="Catui_input" id="rg-mail" name="email" type="email" autocomplete="email" data-catui-verify="required|email"></div>
+  <div class="Catui_field"><label class="Catui_label" for="rg-pw">비밀번호</label><input class="Catui_input" id="rg-pw" name="pw" type="password" autocomplete="new-password" data-catui-verify="required|password" aria-describedby="rg-pw-h"><p class="Catui_help" id="rg-pw-h">8자 이상, 영문과 숫자 포함</p></div>
+  <div class="Catui_field"><label class="Catui_label" for="rg-phone">휴대폰 번호</label><input class="Catui_input" id="rg-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-1234-5678" data-catui-verify="required|phone"></div>
+  <fieldset class="Catui_vstack Catui_gap-1"><legend class="Catui_label">약관 동의</legend>
+    <label class="Catui_choice" for="rg-ag-1"><input class="Catui_clip" type="checkbox" id="rg-ag-1" name="terms" data-catui-verify="required" data-catui-reqtext="이용 약관에 동의해 주세요."><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>(필수) 이용 약관 동의</label>
+    <label class="Catui_choice" for="rg-ag-2"><input class="Catui_clip" type="checkbox" id="rg-ag-2" name="privacy" data-catui-verify="required" data-catui-reqtext="개인정보 수집·이용에 동의해 주세요."><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>(필수) 개인정보 수집·이용 동의</label>
+    <label class="Catui_choice" for="rg-ag-3"><input class="Catui_clip" type="checkbox" id="rg-ag-3" name="ad"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>(선택) 혜택 알림 받기</label>
+  </fieldset>
+  <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="submit">가입하기</button>
+  <p class="Catui_help">이미 회원인가요? <a class="Catui_link" href="login.html">로그인</a></p>
+</form></main>
+
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catshop.min.js"></script>
+<script>
+catui.use(['form', 'layer'], function (form, layer) {
+  form.on('submit(sh-register)', function (d) { layer.alert(d.field.name + '님, 가입을 환영합니다. 신규 회원 쿠폰이 들어갔어요.', { title: '가입 완료' }, function () { location.href = 'coupons.html'; }); return false; });
+});
+</script>
+</body>
+</html>

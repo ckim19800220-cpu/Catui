@@ -1,0 +1,10 @@
+[
+  { "id": "fashion", "name": "패션", "icon": "shopping-bag", "desc": "매일 입는 옷과 신발" },
+  { "id": "beauty", "name": "뷰티", "icon": "sparkles", "desc": "피부·색조·클렌징" },
+  { "id": "food", "name": "식품", "icon": "apple", "desc": "산지 직송 신선 식품" },
+  { "id": "living", "name": "리빙", "icon": "sofa", "desc": "침구·욕실·조명" },
+  { "id": "digital", "name": "디지털", "icon": "laptop", "desc": "음향·충전·입력 기기" },
+  { "id": "kids", "name": "유아동", "icon": "gift", "desc": "아이 식기·장난감" },
+  { "id": "sports", "name": "스포츠", "icon": "dumbbell", "desc": "요가·러닝·홈트" },
+  { "id": "pet", "name": "반려동물", "icon": "paw", "desc": "고양이·강아지 용품" }
+]

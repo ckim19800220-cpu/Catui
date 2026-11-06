@@ -1,0 +1,58 @@
+<section aria-labelledby="files">
+<h2 id="files">파일 · 불러오기</h2>
+<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+&lt;link rel="stylesheet" href="dist/docs.min.css"&gt;
+…
+&lt;script src="dist/catui.min.js"&gt;&lt;/script&gt;
+&lt;script src="dist/catdocs.min.js"&gt;&lt;/script&gt;      ← catui.js 다음 (순서가 틀리면 콘솔에 안내)
+
+// npm · ES 모듈
+import catui from '@imcat-ckim/catui';
+import docs from '@imcat-ckim/catui/docs';
+import '@imcat-ckim/catui/css';
+import '@imcat-ckim/catui/docs.css';</code></pre>
+<p>배포 파일: <code>docs.css</code>(+min) · <code>catdocs.js</code> · <code>catdocs.esm.js</code> · <code>*.min.js</code>(+map) · <code>catdocs.d.ts</code></p>
+</section>
+
+<section aria-labelledby="shell">
+<h2 id="shell">사이트 셸</h2>
+<pre><code>&lt;div class="Catui_site Catui_dk" data-catui-dk&gt;
+  &lt;header class="Catui_dk-head"&gt; 로고 · 머리 메뉴(.Catui_dk-nav) · 검색(form[data-catui-dk-search]) · 테마([data-catui-dk-theme])
+  &lt;main class="Catui_dk-main"&gt;
+    &lt;div class="Catui_dk-docs"&gt;                         ← 문서 3단
+      &lt;details class="Catui_dk-side"&gt; &lt;nav data-catui-dk-nav&gt;   왼쪽 메뉴(data/nav.json)
+      &lt;aside class="Catui_dk-aside" id="dk-toc"&gt;               오른쪽 목차(좁으면 본문 위)
+      &lt;article class="Catui_dk-article" data-catui-dk-toc="#dk-toc"&gt; 본문 · 수정일 · 편집 링크 · 이전/다음 · 피드백
+  &lt;footer class="Catui_dk-foot"&gt;
+&lt;/div&gt;</code></pre>
+<p>테마는 다른 확장과 같은 규칙(저장값이 없으면 시스템)이고, <code>&lt;html data-catui-theme-lock&gt;</code>이 있으면 건드리지 않습니다(이 문서 사이트가 그렇습니다).</p>
+</section>
+
+<section aria-labelledby="tpl">
+<h2 id="tpl">템플릿 · 메뉴</h2>
+<ul>
+  <li><code>templates/docskit/pages/이름.html</code> — 머리 주석 <code>&lt;!-- title: 블로그 | nav: blog | layout: blank --&gt;</code>. <code>nav</code>는 머리 메뉴의 현재 위치입니다.</li>
+  <li><code>templates/docskit/menu.json</code> — <code>top</code>(머리 메뉴) · <code>foot</code>(바닥글 링크). 없는 화면은 메뉴에서 빠집니다. 문서 왼쪽 메뉴는 JSON 모의 데이터 <code>data/nav.json</code>에서 그립니다.</li>
+  <li><code>npm run build</code> → <code>docs/docskit/templates/</code>. 검사: 정의 안 된 클래스·없는 아이콘·id 중복·label·화면 링크(버전 선택 주소 포함)·h1·안 쓰인 클래스·역할 없는 span의 aria-label·JSON 문법, CSS의 hex·없는 토큰·본체 클래스 재정의.</li>
+</ul>
+</section>
+
+<section aria-labelledby="data">
+<h2 id="data">JSON 모의 데이터</h2>
+<p><code>templates/docskit/data/*.json</code> → <code>docs/docskit/templates/data/</code>. 실서비스는 같은 모양의 정적 JSON이나 API를 만들고 <code>catui.docs.dataBase = '/api/docs/'</code>만 바꿉니다. 읽는 시간·태그별 글 수·관련 글은 저장하지 않고 <b>원자료에서 계산</b>합니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">데이터 파일</caption>
+<thead><tr><th scope="col">파일</th><th scope="col">내용 · 계산</th></tr></thead><tbody>
+<tr><td><code>nav.json</code></td><td>문서 메뉴 묶음 <code>[{ title, items: [{ title, href }] }]</code> — 순서가 이전/다음, 지금 쪽은 파일 이름 + <code>?p=</code>로 판단</td></tr>
+<tr><td><code>pages.json</code></td><td>문서 본문 조각 <code>{ id: { title, group, desc, updated, edit, blocks } }</code> — <code>doc.html?p=id</code></td></tr>
+<tr><td><code>posts.json</code></td><td>블로그 글 {{stat:dkPosts}}개 — 저자·날짜·태그·머리 그림 색·본문 블록. 최신 순·읽는 시간·관련 글(태그 겹침 수)은 계산</td></tr>
+<tr><td><code>authors.json</code> · <code>tags.json</code></td><td>저자(역할·소개·사이트) · 태그(이름·설명) — 태그별 글 수는 계산</td></tr>
+<tr><td><code>changelog.json</code></td><td>버전·날짜·항목(<code>added</code>·<code>changed</code>·<code>fixed</code>) → 배지 “추가·변경·고침”</td></tr>
+<tr><td><code>search-index.json</code></td><td>검색 색인 <code>{ t, u, s, x, k }</code> — 화면 안 인라인 색인이 있으면 그쪽을 먼저 씀</td></tr>
+</tbody></table></div>
+<p>본문 블록: <code>{ h2 }</code> · <code>{ h3 }</code> · <code>{ p }</code> · <code>{ list: [] }</code> · <code>{ code, lang }</code> · <code>{ note, tone: "tip"|"warn" }</code>. 글자는 모두 이스케이프하고 <code>p</code>·<code>list</code>·<code>note</code>만 마크다운 일부(굵게·코드·https 링크)를 바꿉니다.</p>
+</section>
+
+<section aria-labelledby="store">
+<h2 id="store">기억하는 상태</h2>
+<p><code>catui.data('docs')</code>(localStorage <code>"catui:docs"</code>) 한 곳에 <code>theme</code>와 <code>helped</code>(쪽마다 피드백 “예/아니오”)를 둡니다. 블로그 태그·쪽 번호는 기억하지 않고 <b>주소</b>(<code>?tag=&amp;page=</code>)에 남겨 공유·뒤로 가기가 그대로 됩니다.</p>
+</section>

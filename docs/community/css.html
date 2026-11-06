@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../index.html"><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html" aria-current="page">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html" aria-current="page">CatuiCommunity</a><a href="../shop/start/introduction.html">CatuiShop</a><a href="../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -63,14 +63,201 @@
 </tbody></table></div>
 </section>
 
+<section aria-labelledby="examples">
+<h2 id="examples">자주 쓰는 사용 예</h2>
+<p>스크립트 없이 클래스만 쓴 정적 견본입니다. 행 간격·강조색 같은 토큰과 링크 색 규칙이 <code>.Catui_cm</code> 아래에 있으므로 셸 밖에서는 <code>class="Catui_cm"</code> 상자로 감쌉니다(<code>data-catui-cm</code> 속성 없이, 문서용으로 <code>min-height</code>만 풀었습니다). 같은 마크업을 스크립트로 만드는 방법은 <a href="../community/modules.html#recipes">catcommunity.js API · 자주 쓰는 사용 예</a>를 보세요. 글 링크는 템플릿 쪽으로 이어집니다.</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">게시판 머리 · 말머리 · 정렬 · 목록 행</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_cm Catui_vstack Catui_gap-3" style="min-height:0">
+    <header class="Catui_cm-board-head"><div><h3 class="Catui_h2">자유게시판</h3><p>아무 이야기나 편하게 · 글 <span class="Catui_num">1,204</span>개</p></div></header>
+    <div class="Catui_cm-bar">
+      <nav class="Catui_cm-cats" aria-label="말머리"><a href="templates/board.html" aria-current="page">전체</a><a href="templates/board.html?cat=%EC%9E%A1%EB%8B%B4">잡담</a><a href="templates/board.html?cat=%ED%9B%84%EA%B8%B0">후기</a><a href="templates/board.html?cat=%EC%A7%88%EB%AC%B8">질문</a></nav>
+      <nav class="Catui_cm-sort" aria-label="정렬"><a href="templates/board.html" aria-current="page">최신순</a><a href="templates/board.html?sort=up">추천순</a><a href="templates/board.html?sort=cmt">댓글순</a></nav>
+    </div>
+    <ul class="Catui_cm-list" aria-label="글 목록">
+      <li class="Catui_cm-row Catui_cm-hot">
+        <span class="Catui_cm-rank Catui_cm-rank-top">1<span class="Catui_clip">위</span></span>
+        <div class="Catui_cm-row-main">
+          <a class="Catui_cm-title" href="templates/post.html"><span class="Catui_cm-cat">잡담</span><span class="Catui_cm-title-t">겨울 이불 언제 꺼내시나요?</span><span class="Catui_cm-cmt"><span class="Catui_clip"> 댓글 </span>42<span class="Catui_clip">개</span></span><span class="Catui_cm-new"><span aria-hidden="true">N</span><span class="Catui_clip"> 새 글</span></span></a>
+          <span class="Catui_cm-meta"><span class="Catui_cm-nick"><span class="Catui_av Catui_av-sm" data-tone="2" aria-hidden="true">고</span><span class="Catui_cm-lv" data-lv="7" title="레벨 7"><span class="Catui_clip">레벨 </span>7</span>고양이집사</span><time datetime="2026-11-02T09:52:00+09:00">8분 전</time><span>조회 1.2만</span></span>
+        </div>
+        <span class="Catui_cm-score-n"><i class="Catui_clip">인기 글, </i><b>152</b><span>추천</span></span>
+      </li>
+      <li class="Catui_cm-row">
+        <span class="Catui_cm-rank">2<span class="Catui_clip">위</span></span>
+        <div class="Catui_cm-row-main">
+          <a class="Catui_cm-title" href="templates/post.html"><span class="Catui_cm-cat">후기</span><span class="Catui_cm-title-t">키보드 윤활 처음 해 봤습니다</span><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-image"></use></svg><span class="Catui_clip"> 사진</span><span class="Catui_cm-cmt"><span class="Catui_clip"> 댓글 </span>7<span class="Catui_clip">개</span></span></a>
+          <span class="Catui_cm-meta"><span class="Catui_cm-nick"><span class="Catui_av Catui_av-sm" data-tone="4" aria-hidden="true">새</span><span class="Catui_cm-lv" data-lv="3" title="레벨 3"><span class="Catui_clip">레벨 </span>3</span>새벽코딩</span><time datetime="2026-11-02T08:25:00+09:00">1시간 전</time><span>조회 2.3천</span></span>
+        </div>
+        <span class="Catui_cm-score-n"><b>24</b><span>추천</span></span>
+      </li>
+      <li class="Catui_cm-row Catui_cm-read">
+        <span class="Catui_cm-rank">3<span class="Catui_clip">위</span></span>
+        <div class="Catui_cm-row-main">
+          <a class="Catui_cm-title" href="templates/post.html"><span class="Catui_cm-cat">질문</span><span class="Catui_cm-title-t">동네 산책 코스 추천 부탁드려요</span><span class="Catui_clip"> (읽음)</span></a>
+          <span class="Catui_cm-meta"><span class="Catui_cm-nick"><span class="Catui_av Catui_av-sm" data-tone="1" aria-hidden="true">산</span><span class="Catui_cm-lv" data-lv="1" title="레벨 1"><span class="Catui_clip">레벨 </span>1</span>산책왕</span><time datetime="2026-11-01T08:00:00+09:00">어제</time><span>조회 418</span></span>
+        </div>
+        <span class="Catui_cm-up"><span class="Catui_clip">추천 </span><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-arrow-up"></use></svg>3</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="게시판 머리 · 말머리 · 정렬 · 목록 행 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_cm Catui_vstack Catui_gap-3&quot; style=&quot;min-height:0&quot;&gt;
+  &lt;header class=&quot;Catui_cm-board-head&quot;&gt;&lt;div&gt;&lt;h3 class=&quot;Catui_h2&quot;&gt;자유게시판&lt;/h3&gt;&lt;p&gt;아무 이야기나 편하게 · 글 &lt;span class=&quot;Catui_num&quot;&gt;1,204&lt;/span&gt;개&lt;/p&gt;&lt;/div&gt;&lt;/header&gt;
+  &lt;div class=&quot;Catui_cm-bar&quot;&gt;
+    &lt;nav class=&quot;Catui_cm-cats&quot; aria-label=&quot;말머리&quot;&gt;&lt;a href=&quot;templates/board.html&quot; aria-current=&quot;page&quot;&gt;전체&lt;/a&gt;&lt;a href=&quot;templates/board.html?cat=%EC%9E%A1%EB%8B%B4&quot;&gt;잡담&lt;/a&gt;&lt;a href=&quot;templates/board.html?cat=%ED%9B%84%EA%B8%B0&quot;&gt;후기&lt;/a&gt;&lt;a href=&quot;templates/board.html?cat=%EC%A7%88%EB%AC%B8&quot;&gt;질문&lt;/a&gt;&lt;/nav&gt;
+    &lt;nav class=&quot;Catui_cm-sort&quot; aria-label=&quot;정렬&quot;&gt;&lt;a href=&quot;templates/board.html&quot; aria-current=&quot;page&quot;&gt;최신순&lt;/a&gt;&lt;a href=&quot;templates/board.html?sort=up&quot;&gt;추천순&lt;/a&gt;&lt;a href=&quot;templates/board.html?sort=cmt&quot;&gt;댓글순&lt;/a&gt;&lt;/nav&gt;
+  &lt;/div&gt;
+  &lt;ul class=&quot;Catui_cm-list&quot; aria-label=&quot;글 목록&quot;&gt;
+    &lt;li class=&quot;Catui_cm-row Catui_cm-hot&quot;&gt;
+      &lt;span class=&quot;Catui_cm-rank Catui_cm-rank-top&quot;&gt;1&lt;span class=&quot;Catui_clip&quot;&gt;위&lt;/span&gt;&lt;/span&gt;
+      &lt;div class=&quot;Catui_cm-row-main&quot;&gt;
+        &lt;a class=&quot;Catui_cm-title&quot; href=&quot;templates/post.html&quot;&gt;&lt;span class=&quot;Catui_cm-cat&quot;&gt;잡담&lt;/span&gt;&lt;span class=&quot;Catui_cm-title-t&quot;&gt;겨울 이불 언제 꺼내시나요?&lt;/span&gt;&lt;span class=&quot;Catui_cm-cmt&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt; 댓글 &lt;/span&gt;42&lt;span class=&quot;Catui_clip&quot;&gt;개&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;Catui_cm-new&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;Catui_clip&quot;&gt; 새 글&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;
+        &lt;span class=&quot;Catui_cm-meta&quot;&gt;&lt;span class=&quot;Catui_cm-nick&quot;&gt;&lt;span class=&quot;Catui_av Catui_av-sm&quot; data-tone=&quot;2&quot; aria-hidden=&quot;true&quot;&gt;고&lt;/span&gt;&lt;span class=&quot;Catui_cm-lv&quot; data-lv=&quot;7&quot; title=&quot;레벨 7&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;레벨 &lt;/span&gt;7&lt;/span&gt;고양이집사&lt;/span&gt;&lt;time datetime=&quot;2026-11-02T09:52:00+09:00&quot;&gt;8분 전&lt;/time&gt;&lt;span&gt;조회 1.2만&lt;/span&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;span class=&quot;Catui_cm-score-n&quot;&gt;&lt;i class=&quot;Catui_clip&quot;&gt;인기 글, &lt;/i&gt;&lt;b&gt;152&lt;/b&gt;&lt;span&gt;추천&lt;/span&gt;&lt;/span&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;Catui_cm-row&quot;&gt;
+      &lt;span class=&quot;Catui_cm-rank&quot;&gt;2&lt;span class=&quot;Catui_clip&quot;&gt;위&lt;/span&gt;&lt;/span&gt;
+      &lt;div class=&quot;Catui_cm-row-main&quot;&gt;
+        &lt;a class=&quot;Catui_cm-title&quot; href=&quot;templates/post.html&quot;&gt;&lt;span class=&quot;Catui_cm-cat&quot;&gt;후기&lt;/span&gt;&lt;span class=&quot;Catui_cm-title-t&quot;&gt;키보드 윤활 처음 해 봤습니다&lt;/span&gt;&lt;svg class=&quot;Catui_icon Catui_i12&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-image&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_clip&quot;&gt; 사진&lt;/span&gt;&lt;span class=&quot;Catui_cm-cmt&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt; 댓글 &lt;/span&gt;7&lt;span class=&quot;Catui_clip&quot;&gt;개&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;
+        &lt;span class=&quot;Catui_cm-meta&quot;&gt;&lt;span class=&quot;Catui_cm-nick&quot;&gt;&lt;span class=&quot;Catui_av Catui_av-sm&quot; data-tone=&quot;4&quot; aria-hidden=&quot;true&quot;&gt;새&lt;/span&gt;&lt;span class=&quot;Catui_cm-lv&quot; data-lv=&quot;3&quot; title=&quot;레벨 3&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;레벨 &lt;/span&gt;3&lt;/span&gt;새벽코딩&lt;/span&gt;&lt;time datetime=&quot;2026-11-02T08:25:00+09:00&quot;&gt;1시간 전&lt;/time&gt;&lt;span&gt;조회 2.3천&lt;/span&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;span class=&quot;Catui_cm-score-n&quot;&gt;&lt;b&gt;24&lt;/b&gt;&lt;span&gt;추천&lt;/span&gt;&lt;/span&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;Catui_cm-row Catui_cm-read&quot;&gt;
+      &lt;span class=&quot;Catui_cm-rank&quot;&gt;3&lt;span class=&quot;Catui_clip&quot;&gt;위&lt;/span&gt;&lt;/span&gt;
+      &lt;div class=&quot;Catui_cm-row-main&quot;&gt;
+        &lt;a class=&quot;Catui_cm-title&quot; href=&quot;templates/post.html&quot;&gt;&lt;span class=&quot;Catui_cm-cat&quot;&gt;질문&lt;/span&gt;&lt;span class=&quot;Catui_cm-title-t&quot;&gt;동네 산책 코스 추천 부탁드려요&lt;/span&gt;&lt;span class=&quot;Catui_clip&quot;&gt; (읽음)&lt;/span&gt;&lt;/a&gt;
+        &lt;span class=&quot;Catui_cm-meta&quot;&gt;&lt;span class=&quot;Catui_cm-nick&quot;&gt;&lt;span class=&quot;Catui_av Catui_av-sm&quot; data-tone=&quot;1&quot; aria-hidden=&quot;true&quot;&gt;산&lt;/span&gt;&lt;span class=&quot;Catui_cm-lv&quot; data-lv=&quot;1&quot; title=&quot;레벨 1&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;레벨 &lt;/span&gt;1&lt;/span&gt;산책왕&lt;/span&gt;&lt;time datetime=&quot;2026-11-01T08:00:00+09:00&quot;&gt;어제&lt;/time&gt;&lt;span&gt;조회 418&lt;/span&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;span class=&quot;Catui_cm-up&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;추천 &lt;/span&gt;&lt;svg class=&quot;Catui_icon Catui_i12&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-arrow-up&quot;&gt;&lt;/use&gt;&lt;/svg&gt;3&lt;/span&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p class="Catui_help">인기 글(<code>Catui_cm-hot</code>)은 제목 굵기 + 강조색 점수 + 숨김 글자 "인기 글"로, 읽은 글(<code>Catui_cm-read</code>)은 흐린 제목 + "(읽음)"으로 — 색만으로 알리지 않습니다. 점수 칸은 <code>Catui_cm-score-n</code>(두 줄) 또는 <code>Catui_cm-up</code>(화살표 한 줄, <code>Catui_cm-up-hot</code>은 강조) 중 하나를 씁니다.</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">카드형 목록 · 위젯 줄 · 빈 목록</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_cm" style="min-height:0">
+    <div class="Catui_grid">
+      <div class="Catui_span-6">
+        <ul class="Catui_cm-cards" aria-label="요약 카드 목록">
+          <li class="Catui_cm-card"><a class="Catui_cm-title" href="templates/post.html"><span class="Catui_cm-cat">후기</span><span class="Catui_cm-title-t">한 달 써 본 무선 청소기</span><span class="Catui_cm-cmt"><span class="Catui_clip"> 댓글 </span>12<span class="Catui_clip">개</span></span></a><p>흡입력은 충분하고 배터리는 40분 정도 갑니다. 먼지통 비우기가 생각보다 편해서 만족스럽습니다.</p><span class="Catui_cm-meta"><span class="Catui_cm-nick"><span class="Catui_cm-lv" data-lv="5" title="레벨 5"><span class="Catui_clip">레벨 </span>5</span>살림고수</span><time datetime="2026-11-02T07:10:00+09:00">3시간 전</time><span>추천 31</span></span></li>
+        </ul>
+      </div>
+      <section class="Catui_card Catui_span-6" aria-labelledby="ec-best"><header class="Catui_card-h"><span id="ec-best">실시간 베스트</span></header><div class="Catui_card-b">
+        <ol class="Catui_cm-mini Catui_cm-best">
+          <li><span class="Catui_cm-rank">1</span><a href="templates/post.html">겨울 이불 언제 꺼내시나요?</a><span class="Catui_cm-cmt"><span class="Catui_clip"> 댓글 </span>42<span class="Catui_clip">개</span></span><time datetime="2026-11-02T09:52:00+09:00">09:52</time></li>
+          <li><span class="Catui_cm-rank">2</span><a href="templates/post.html">키보드 윤활 처음 해 봤습니다</a><span class="Catui_cm-new"><span aria-hidden="true">N</span><span class="Catui_clip"> 새 글</span></span><time datetime="2026-11-02T08:25:00+09:00">08:25</time></li>
+          <li class="Catui_cm-read"><span class="Catui_cm-rank">3</span><a href="templates/post.html">동네 산책 코스 추천</a><time datetime="2026-11-01T08:00:00+09:00">11.01</time></li>
+        </ol>
+      </div></section>
+      <div class="Catui_span-12"><ul class="Catui_cm-list" aria-label="검색 결과"><li class="Catui_cm-empty"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-inbox"></use></svg><p>조건에 맞는 글이 없습니다.</p></li></ul></div>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="카드형 목록 · 위젯 줄 · 빈 목록 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_cm&quot; style=&quot;min-height:0&quot;&gt;
+  &lt;div class=&quot;Catui_grid&quot;&gt;
+    &lt;div class=&quot;Catui_span-6&quot;&gt;
+      &lt;ul class=&quot;Catui_cm-cards&quot; aria-label=&quot;요약 카드 목록&quot;&gt;
+        &lt;li class=&quot;Catui_cm-card&quot;&gt;&lt;a class=&quot;Catui_cm-title&quot; href=&quot;templates/post.html&quot;&gt;&lt;span class=&quot;Catui_cm-cat&quot;&gt;후기&lt;/span&gt;&lt;span class=&quot;Catui_cm-title-t&quot;&gt;한 달 써 본 무선 청소기&lt;/span&gt;&lt;span class=&quot;Catui_cm-cmt&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt; 댓글 &lt;/span&gt;12&lt;span class=&quot;Catui_clip&quot;&gt;개&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;p&gt;흡입력은 충분하고 배터리는 40분 정도 갑니다. 먼지통 비우기가 생각보다 편해서 만족스럽습니다.&lt;/p&gt;&lt;span class=&quot;Catui_cm-meta&quot;&gt;&lt;span class=&quot;Catui_cm-nick&quot;&gt;&lt;span class=&quot;Catui_cm-lv&quot; data-lv=&quot;5&quot; title=&quot;레벨 5&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;레벨 &lt;/span&gt;5&lt;/span&gt;살림고수&lt;/span&gt;&lt;time datetime=&quot;2026-11-02T07:10:00+09:00&quot;&gt;3시간 전&lt;/time&gt;&lt;span&gt;추천 31&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;section class=&quot;Catui_card Catui_span-6&quot; aria-labelledby=&quot;ec-best&quot;&gt;&lt;header class=&quot;Catui_card-h&quot;&gt;&lt;span id=&quot;ec-best&quot;&gt;실시간 베스트&lt;/span&gt;&lt;/header&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;
+      &lt;ol class=&quot;Catui_cm-mini Catui_cm-best&quot;&gt;
+        &lt;li&gt;&lt;span class=&quot;Catui_cm-rank&quot;&gt;1&lt;/span&gt;&lt;a href=&quot;templates/post.html&quot;&gt;겨울 이불 언제 꺼내시나요?&lt;/a&gt;&lt;span class=&quot;Catui_cm-cmt&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt; 댓글 &lt;/span&gt;42&lt;span class=&quot;Catui_clip&quot;&gt;개&lt;/span&gt;&lt;/span&gt;&lt;time datetime=&quot;2026-11-02T09:52:00+09:00&quot;&gt;09:52&lt;/time&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;span class=&quot;Catui_cm-rank&quot;&gt;2&lt;/span&gt;&lt;a href=&quot;templates/post.html&quot;&gt;키보드 윤활 처음 해 봤습니다&lt;/a&gt;&lt;span class=&quot;Catui_cm-new&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;Catui_clip&quot;&gt; 새 글&lt;/span&gt;&lt;/span&gt;&lt;time datetime=&quot;2026-11-02T08:25:00+09:00&quot;&gt;08:25&lt;/time&gt;&lt;/li&gt;
+        &lt;li class=&quot;Catui_cm-read&quot;&gt;&lt;span class=&quot;Catui_cm-rank&quot;&gt;3&lt;/span&gt;&lt;a href=&quot;templates/post.html&quot;&gt;동네 산책 코스 추천&lt;/a&gt;&lt;time datetime=&quot;2026-11-01T08:00:00+09:00&quot;&gt;11.01&lt;/time&gt;&lt;/li&gt;
+      &lt;/ol&gt;
+    &lt;/div&gt;&lt;/section&gt;
+    &lt;div class=&quot;Catui_span-12&quot;&gt;&lt;ul class=&quot;Catui_cm-list&quot; aria-label=&quot;검색 결과&quot;&gt;&lt;li class=&quot;Catui_cm-empty&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i20&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-inbox&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;p&gt;조건에 맞는 글이 없습니다.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">레벨 배지 단계 (Catui_cm-lv)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_cm" style="min-height:0">
+    <p class="Catui_hstack Catui_gap-3"><span class="Catui_cm-lv" data-lv="1" title="레벨 1"><span class="Catui_clip">레벨 </span>1</span><span class="Catui_cm-lv" data-lv="3" title="레벨 3"><span class="Catui_clip">레벨 </span>3</span><span class="Catui_cm-lv" data-lv="4" title="레벨 4"><span class="Catui_clip">레벨 </span>4</span><span class="Catui_cm-lv" data-lv="6" title="레벨 6"><span class="Catui_clip">레벨 </span>6</span><span class="Catui_cm-lv" data-lv="7" title="레벨 7"><span class="Catui_clip">레벨 </span>7</span><span class="Catui_cm-lv" data-lv="9" title="레벨 9"><span class="Catui_clip">레벨 </span>9</span></p>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="레벨 배지 단계 (Catui_cm-lv) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_cm&quot; style=&quot;min-height:0&quot;&gt;
+  &lt;p class=&quot;Catui_hstack Catui_gap-3&quot;&gt;&lt;span class=&quot;Catui_cm-lv&quot; data-lv=&quot;1&quot; title=&quot;레벨 1&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;레벨 &lt;/span&gt;1&lt;/span&gt;&lt;span class=&quot;Catui_cm-lv&quot; data-lv=&quot;3&quot; title=&quot;레벨 3&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;레벨 &lt;/span&gt;3&lt;/span&gt;&lt;span class=&quot;Catui_cm-lv&quot; data-lv=&quot;4&quot; title=&quot;레벨 4&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;레벨 &lt;/span&gt;4&lt;/span&gt;&lt;span class=&quot;Catui_cm-lv&quot; data-lv=&quot;6&quot; title=&quot;레벨 6&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;레벨 &lt;/span&gt;6&lt;/span&gt;&lt;span class=&quot;Catui_cm-lv&quot; data-lv=&quot;7&quot; title=&quot;레벨 7&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;레벨 &lt;/span&gt;7&lt;/span&gt;&lt;span class=&quot;Catui_cm-lv&quot; data-lv=&quot;9&quot; title=&quot;레벨 9&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;레벨 &lt;/span&gt;9&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p class="Catui_help">1~3 회색, 4~6 파랑, 7~9 브랜드색 — 숫자가 항상 함께 보입니다. <code>data-lv</code>는 9까지(그 이상은 9로).</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">투표 결과 · 추천 버튼 상태 (Catui_cm-poll · Catui_cm-vote)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_cm Catui_vstack Catui_gap-4" style="min-height:0">
+    <div class="Catui_cm-poll">
+      <p class="Catui_label">겨울 이불, 언제 꺼내세요?</p>
+      <ul class="Catui_cm-poll-res">
+        <li aria-current="true"><span class="Catui_cm-poll-lab">10월 말 <span class="Catui_badge Catui_badge-success">내 선택</span></span><span class="Catui_cm-poll-bar" role="img" aria-label="10월 말 48퍼센트, 120표"><i style="width:48%"></i></span><span class="Catui_num">48% · 120표</span></li>
+        <li><span class="Catui_cm-poll-lab">11월 초</span><span class="Catui_cm-poll-bar" role="img" aria-label="11월 초 36퍼센트, 90표"><i style="width:36%"></i></span><span class="Catui_num">36% · 90표</span></li>
+        <li><span class="Catui_cm-poll-lab">첫눈 올 때</span><span class="Catui_cm-poll-bar" role="img" aria-label="첫눈 올 때 16퍼센트, 40표"><i style="width:16%"></i></span><span class="Catui_num">16% · 40표</span></li>
+      </ul>
+      <p class="Catui_help">250명 참여 · 3일 후 마감</p>
+    </div>
+    <div class="Catui_cm-vote Catui_cm-vote-lg" role="group" aria-label="추천 상태 견본">
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" aria-pressed="true" aria-label="추천 153 (누름)" data-dir="up"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-thumbs-up"></use></svg><span>추천</span><b>153</b></button>
+      <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" aria-pressed="false" aria-label="비추천 4" data-dir="down"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-thumbs-down"></use></svg><span>비추천</span><b>4</b></button>
+    </div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="투표 결과 · 추천 버튼 상태 (Catui_cm-poll · Catui_cm-vote) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_cm Catui_vstack Catui_gap-4&quot; style=&quot;min-height:0&quot;&gt;
+  &lt;div class=&quot;Catui_cm-poll&quot;&gt;
+    &lt;p class=&quot;Catui_label&quot;&gt;겨울 이불, 언제 꺼내세요?&lt;/p&gt;
+    &lt;ul class=&quot;Catui_cm-poll-res&quot;&gt;
+      &lt;li aria-current=&quot;true&quot;&gt;&lt;span class=&quot;Catui_cm-poll-lab&quot;&gt;10월 말 &lt;span class=&quot;Catui_badge Catui_badge-success&quot;&gt;내 선택&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;Catui_cm-poll-bar&quot; role=&quot;img&quot; aria-label=&quot;10월 말 48퍼센트, 120표&quot;&gt;&lt;i style=&quot;width:48%&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span class=&quot;Catui_num&quot;&gt;48% · 120표&lt;/span&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span class=&quot;Catui_cm-poll-lab&quot;&gt;11월 초&lt;/span&gt;&lt;span class=&quot;Catui_cm-poll-bar&quot; role=&quot;img&quot; aria-label=&quot;11월 초 36퍼센트, 90표&quot;&gt;&lt;i style=&quot;width:36%&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span class=&quot;Catui_num&quot;&gt;36% · 90표&lt;/span&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;span class=&quot;Catui_cm-poll-lab&quot;&gt;첫눈 올 때&lt;/span&gt;&lt;span class=&quot;Catui_cm-poll-bar&quot; role=&quot;img&quot; aria-label=&quot;첫눈 올 때 16퍼센트, 40표&quot;&gt;&lt;i style=&quot;width:16%&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span class=&quot;Catui_num&quot;&gt;16% · 40표&lt;/span&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p class=&quot;Catui_help&quot;&gt;250명 참여 · 3일 후 마감&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;Catui_cm-vote Catui_cm-vote-lg&quot; role=&quot;group&quot; aria-label=&quot;추천 상태 견본&quot;&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; aria-pressed=&quot;true&quot; aria-label=&quot;추천 153 (누름)&quot; data-dir=&quot;up&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-thumbs-up&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span&gt;추천&lt;/span&gt;&lt;b&gt;153&lt;/b&gt;&lt;/button&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot; aria-label=&quot;비추천 4&quot; data-dir=&quot;down&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-thumbs-down&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span&gt;비추천&lt;/span&gt;&lt;b&gt;4&lt;/b&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p class="Catui_help">눌린 추천은 <code>[data-dir="up"][aria-pressed="true"]</code>에 강조색 테두리·바탕, 비추천은 파랑입니다. 실제로 누르고 기억하는 동작은 <code>data-catui-cm-vote</code>가 붙은 상자에서 스크립트가 맡습니다(이 견본은 정적이라 누름 상태가 바뀌지 않습니다).</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">핫딜 행 (Catui_cm-deal)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_cm" style="min-height:0">
+    <ul class="Catui_cm-list" aria-label="핫딜 목록">
+      <li class="Catui_cm-row Catui_cm-deal"><span class="Catui_cm-ph" aria-hidden="true"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg></span><div class="Catui_cm-row-main"><a class="Catui_cm-title" href="templates/hotdeal.html"><span class="Catui_cm-cat">가전</span><span class="Catui_cm-title-t">무선 청소기 특가</span><span class="Catui_cm-cmt"><span class="Catui_clip"> 댓글 </span>18<span class="Catui_clip">개</span></span></a><span class="Catui_cm-meta"><b class="Catui_cm-price">189,000원</b><span>캣몰</span><span>배송 무료</span><span>3시간 12분 남음</span></span></div><span class="Catui_cm-up Catui_cm-up-hot"><span class="Catui_clip">추천 </span><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-arrow-up"></use></svg>64</span></li>
+      <li class="Catui_cm-row Catui_cm-deal" data-ended><span class="Catui_cm-ph" aria-hidden="true"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg></span><div class="Catui_cm-row-main"><a class="Catui_cm-title" href="templates/hotdeal.html"><span class="Catui_cm-cat">식품</span><span class="Catui_cm-title-t">원두 1kg 묶음</span></a><span class="Catui_cm-meta"><b class="Catui_cm-price">21,900원</b><span>커피상점</span><span>종료</span></span></div><span class="Catui_cm-up"><span class="Catui_clip">추천 </span><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-arrow-up"></use></svg>9</span></li>
+    </ul>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="핫딜 행 (Catui_cm-deal) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_cm&quot; style=&quot;min-height:0&quot;&gt;
+  &lt;ul class=&quot;Catui_cm-list&quot; aria-label=&quot;핫딜 목록&quot;&gt;
+    &lt;li class=&quot;Catui_cm-row Catui_cm-deal&quot;&gt;&lt;span class=&quot;Catui_cm-ph&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i20&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-shopping-cart&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/span&gt;&lt;div class=&quot;Catui_cm-row-main&quot;&gt;&lt;a class=&quot;Catui_cm-title&quot; href=&quot;templates/hotdeal.html&quot;&gt;&lt;span class=&quot;Catui_cm-cat&quot;&gt;가전&lt;/span&gt;&lt;span class=&quot;Catui_cm-title-t&quot;&gt;무선 청소기 특가&lt;/span&gt;&lt;span class=&quot;Catui_cm-cmt&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt; 댓글 &lt;/span&gt;18&lt;span class=&quot;Catui_clip&quot;&gt;개&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;Catui_cm-meta&quot;&gt;&lt;b class=&quot;Catui_cm-price&quot;&gt;189,000원&lt;/b&gt;&lt;span&gt;캣몰&lt;/span&gt;&lt;span&gt;배송 무료&lt;/span&gt;&lt;span&gt;3시간 12분 남음&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;Catui_cm-up Catui_cm-up-hot&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;추천 &lt;/span&gt;&lt;svg class=&quot;Catui_icon Catui_i12&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-arrow-up&quot;&gt;&lt;/use&gt;&lt;/svg&gt;64&lt;/span&gt;&lt;/li&gt;
+    &lt;li class=&quot;Catui_cm-row Catui_cm-deal&quot; data-ended&gt;&lt;span class=&quot;Catui_cm-ph&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i20&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-shopping-cart&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/span&gt;&lt;div class=&quot;Catui_cm-row-main&quot;&gt;&lt;a class=&quot;Catui_cm-title&quot; href=&quot;templates/hotdeal.html&quot;&gt;&lt;span class=&quot;Catui_cm-cat&quot;&gt;식품&lt;/span&gt;&lt;span class=&quot;Catui_cm-title-t&quot;&gt;원두 1kg 묶음&lt;/span&gt;&lt;/a&gt;&lt;span class=&quot;Catui_cm-meta&quot;&gt;&lt;b class=&quot;Catui_cm-price&quot;&gt;21,900원&lt;/b&gt;&lt;span&gt;커피상점&lt;/span&gt;&lt;span&gt;종료&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;Catui_cm-up&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;추천 &lt;/span&gt;&lt;svg class=&quot;Catui_icon Catui_i12&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-arrow-up&quot;&gt;&lt;/use&gt;&lt;/svg&gt;9&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p class="Catui_help">끝난 핫딜은 <code>[data-ended]</code>로 제목에 취소선 + "종료" 글자 — 실제 화면에서는 <code>[data-catui-cm-until]</code> 시간이 지나면 스크립트가 붙입니다.</p>
+</section>
+
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/community/css/tokens.css</span></li><li><span class="doc-src">src/community/css/shell.css</span><code>.Catui_cm-aside</code> <code>.Catui_cm-blank</code> <code>.Catui_cm-blank-card</code> <code>.Catui_cm-body</code> <code>.Catui_cm-brand</code> <code>.Catui_cm-dot</code> <code>.Catui_cm-foot</code> <code>.Catui_cm-foot-in</code> <code>.Catui_cm-gnb</code> <code>.Catui_cm-gnb-in</code> <code>.Catui_cm-gnb-item</code> <code>.Catui_cm-head</code> <code>.Catui_cm-head-acts</code> <code>.Catui_cm-head-in</code> <code>.Catui_cm-main</code> <code>.Catui_cm-meta</code> <code>.Catui_cm-search</code> <code>.Catui_cm-tab</code> <code>.Catui_cm-tabs</code> <code>.Catui_cm-totop</code> <code>.Catui_cm-up</code> <code>.Catui_cm-wrap</code> <code>.Catui_cm-write-btn</code></li><li><span class="doc-src">src/community/css/list.css</span><code>.Catui_cm-bar</code> <code>.Catui_cm-board</code> <code>.Catui_cm-board-head</code> <code>.Catui_cm-boards</code> <code>.Catui_cm-card</code> <code>.Catui_cm-cards</code> <code>.Catui_cm-cat</code> <code>.Catui_cm-cats</code> <code>.Catui_cm-cmt</code> <code>.Catui_cm-deal</code> <code>.Catui_cm-empty</code> <code>.Catui_cm-gallery</code> <code>.Catui_cm-links</code> <code>.Catui_cm-list</code> <code>.Catui_cm-lv</code> <code>.Catui_cm-meta</code> <code>.Catui_cm-nick</code> <code>.Catui_cm-ph</code> <code>.Catui_cm-price</code> <code>.Catui_cm-rank</code> <code>.Catui_cm-rank-top</code> <code>.Catui_cm-ranks</code> <code>.Catui_cm-read</code> <code>.Catui_cm-row</code> <code>.Catui_cm-row-main</code> <code>.Catui_cm-shot</code> <code>.Catui_cm-solved</code> <code>.Catui_cm-sort</code> <code>.Catui_cm-tabs-sm</code> <code>.Catui_cm-title</code> <code>.Catui_cm-title-t</code> <code>.Catui_cm-up</code> <code>.Catui_cm-up-hot</code></li><li><span class="doc-src">src/community/css/post.css</span><code>.Catui_cm-adjacent</code> <code>.Catui_cm-c</code> <code>.Catui_cm-c-acts</code> <code>.Catui_cm-c-best</code> <code>.Catui_cm-c-body</code> <code>.Catui_cm-c-form</code> <code>.Catui_cm-c-head</code> <code>.Catui_cm-c-kids</code> <code>.Catui_cm-c-more</code> <code>.Catui_cm-c-top</code> <code>.Catui_cm-comments</code> <code>.Catui_cm-cs</code> <code>.Catui_cm-cs-best</code> <code>.Catui_cm-meta</code> <code>.Catui_cm-post</code> <code>.Catui_cm-post-b</code> <code>.Catui_cm-post-f</code> <code>.Catui_cm-post-h</code> <code>.Catui_cm-prose</code> <code>.Catui_cm-score</code> <code>.Catui_cm-tags</code> <code>.Catui_cm-vote</code> <code>.Catui_cm-vote-lg</code> <code>.Catui_cm-vote-sm</code></li><li><span class="doc-src">src/community/css/pages.css</span><code>.Catui_cm-chat</code> <code>.Catui_cm-chat-b</code> <code>.Catui_cm-chat-form</code> <code>.Catui_cm-chat-log</code> <code>.Catui_cm-chat-main</code> <code>.Catui_cm-chat-nick</code> <code>.Catui_cm-chat-rooms</code> <code>.Catui_cm-chat-rules</code> <code>.Catui_cm-code</code> <code>.Catui_cm-cols</code> <code>.Catui_cm-links</code> <code>.Catui_cm-lvbar</code> <code>.Catui_cm-meta</code> <code>.Catui_cm-panel</code> <code>.Catui_cm-pic</code> <code>.Catui_cm-pics</code> <code>.Catui_cm-podium</code> <code>.Catui_cm-poll</code> <code>.Catui_cm-poll-bar</code> <code>.Catui_cm-poll-lab</code> <code>.Catui_cm-poll-res</code> <code>.Catui_cm-preview</code> <code>.Catui_cm-profile</code> <code>.Catui_cm-savebar</code> <code>.Catui_cm-stats</code> <code>.Catui_cm-toolbar</code></li><li><span class="doc-src">src/community/css/motion.css</span><code>.Catui_cm-bump</code> <code>.Catui_cm-c-kids</code> <code>.Catui_cm-c-more</code> <code>.Catui_cm-more-menu</code> <code>.Catui_cm-tab</code> <code>.Catui_cm-vote</code> <code>.Catui_cm-write-btn</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../community/modules.html"><span>이전</span>catcommunity.js API</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#rules">규칙</a></li><li><a href="#tokens">토큰</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#rules">규칙</a></li><li><a href="#tokens">토큰</a></li><li><a href="#examples">자주 쓰는 사용 예</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html">CatuiCommunity</a><a href="../shop/start/introduction.html">CatuiShop</a><a href="../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../assets/docs.js"></script>

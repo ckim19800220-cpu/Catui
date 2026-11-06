@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -58,6 +58,61 @@ catui.offevent('form', 'submit(login)');                 // 해제 (필터 없�
 catui.event('form', 'submit', 'login', { field: {} });   // 직접 발생</code></pre>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">직접 만든 이벤트로 두 영역 잇기 — catui.event · onevent · 해제 함수</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_hstack Catui_gap-3" style="flex-wrap:wrap">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="ev-add">장바구니 담기</button>
+    <span class="Catui_badge Catui_badge-info"><span id="ev-n">0</span><span class="Catui_clip">개 담김</span></span>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button" id="ev-off">문구 알림 끄기</button>
+  </div>
+  <p class="Catui_help" id="ev-log" aria-live="polite"></p>
+  <script>
+  catui.use([], function () {
+    var n = 0, log = document.getElementById('ev-log');
+    // 받는 쪽: 'shop' 모듈의 add 이벤트 중 필터가 ev-cart인 것만
+    catui.onevent('shop', 'add(ev-cart)', function (d) { n += 1; document.getElementById('ev-n').textContent = String(n); });
+    var offLog = catui.onevent('shop', 'add(ev-cart)', function (d) { log.textContent = d.name + '을(를) 담았습니다'; });
+    // 보내는 쪽: 서로를 몰라도 이벤트 이름과 필터만 맞추면 된다
+    document.getElementById('ev-add').addEventListener('click', function () { catui.event('shop', 'add', 'ev-cart', { name: '무선 마우스' }); });
+    document.getElementById('ev-off').addEventListener('click', function (e) {
+      if (!offLog) return;
+      offLog(); offLog = null;                 // on이 돌려준 함수로 그 등록 하나만 해제 (개수 세기는 계속)
+      e.currentTarget.disabled = true;
+      document.getElementById('ev-add').focus();   // 잠근 버튼에 있던 포커스를 옮김
+      log.textContent = '이제 담아도 문구는 나오지 않고 개수만 늘어납니다';
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="직접 만든 이벤트로 두 영역 잇기 — catui.event · onevent · 해제 함수 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_hstack Catui_gap-3&quot; style=&quot;flex-wrap:wrap&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;ev-add&quot;&gt;장바구니 담기&lt;/button&gt;
+  &lt;span class=&quot;Catui_badge Catui_badge-info&quot;&gt;&lt;span id=&quot;ev-n&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;Catui_clip&quot;&gt;개 담김&lt;/span&gt;&lt;/span&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost&quot; type=&quot;button&quot; id=&quot;ev-off&quot;&gt;문구 알림 끄기&lt;/button&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;ev-log&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([], function () {
+  var n = 0, log = document.getElementById(&#39;ev-log&#39;);
+  // 받는 쪽: &#39;shop&#39; 모듈의 add 이벤트 중 필터가 ev-cart인 것만
+  catui.onevent(&#39;shop&#39;, &#39;add(ev-cart)&#39;, function (d) { n += 1; document.getElementById(&#39;ev-n&#39;).textContent = String(n); });
+  var offLog = catui.onevent(&#39;shop&#39;, &#39;add(ev-cart)&#39;, function (d) { log.textContent = d.name + &#39;을(를) 담았습니다&#39;; });
+  // 보내는 쪽: 서로를 몰라도 이벤트 이름과 필터만 맞추면 된다
+  document.getElementById(&#39;ev-add&#39;).addEventListener(&#39;click&#39;, function () { catui.event(&#39;shop&#39;, &#39;add&#39;, &#39;ev-cart&#39;, { name: &#39;무선 마우스&#39; }); });
+  document.getElementById(&#39;ev-off&#39;).addEventListener(&#39;click&#39;, function (e) {
+    if (!offLog) return;
+    offLog(); offLog = null;                 // on이 돌려준 함수로 그 등록 하나만 해제 (개수 세기는 계속)
+    e.currentTarget.disabled = true;
+    document.getElementById(&#39;ev-add&#39;).focus();   // 잠근 버튼에 있던 포커스를 옮김
+    log.textContent = &#39;이제 담아도 문구는 나오지 않고 개수만 늘어납니다&#39;;
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
 <section aria-labelledby="list">
 <h2 id="list">이벤트 목록</h2>
 <p>모듈별 이벤트는 <a href="../../js/reference/events.html">이벤트 색인</a>에 모아 두었습니다.</p>
@@ -66,11 +121,11 @@ catui.event('form', 'submit', 'login', { field: {} });   // 직접 발생</code>
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/core/component.html"><span>이전</span>컴포넌트 빌더</a><a class="doc-pager-next" href="../../js/core/dom.html"><span>다음</span>DOM과 템플릿</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#syntax">문법</a></li><li><a href="#global">모듈 밖에서</a></li><li><a href="#list">이벤트 목록</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#syntax">문법</a></li><li><a href="#global">모듈 밖에서</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#list">이벤트 목록</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

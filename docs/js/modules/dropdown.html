@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -106,6 +106,120 @@ catui.use([&#39;dropdown&#39;], function (dropdown) {
 </figure>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">표 행마다 더보기(⋯) 메뉴 — align: &#39;right&#39;</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_table-wrap"><table class="Catui_tbl">
+    <caption class="Catui_clip">팀원</caption>
+    <thead><tr><th scope="col">이름</th><th scope="col">역할</th><th scope="col" class="Catui_num">동작</th></tr></thead>
+    <tbody id="dd-rows">
+      <tr><td>김하늘</td><td>관리자</td><td class="Catui_num"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-name="김하늘" aria-label="김하늘 더보기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-more-horizontal"></use></svg></button></td></tr>
+      <tr><td>이준</td><td>편집자</td><td class="Catui_num"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-name="이준" aria-label="이준 더보기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-more-horizontal"></use></svg></button></td></tr>
+      <tr><td>박서연</td><td>보기 전용</td><td class="Catui_num"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-name="박서연" aria-label="박서연 더보기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-more-horizontal"></use></svg></button></td></tr>
+    </tbody>
+  </table></div>
+  <p class="Catui_help" id="dd-rows-out" aria-live="polite"></p>
+  <script>
+  catui.use(['dropdown', 'layer'], function (dropdown, layer) {
+    var out = function (t) { document.getElementById('dd-rows-out').textContent = t; };
+    document.querySelectorAll('#dd-rows [data-name]').forEach(function (btn) {
+      dropdown.render({ elem: btn, align: 'right', width: 'sm', label: btn.dataset.name + ' 메뉴', data: [
+        { id: 'view', title: '프로필 보기', icon: 'user' }, { id: 'edit', title: '역할 바꾸기', icon: 'pencil' },
+        { id: 'mail', title: '메일 보내기', icon: 'mail' }, { type: '-' }, { id: 'del', title: '팀에서 빼기', icon: 'user-minus', danger: true } ],
+        click: function (item, trigger) {
+          var name = trigger.dataset.name;
+          if (item.id !== 'del') { out(name + ': ' + item.title); return; }
+          // 메뉴가 닫히며 포커스가 ⋯ 버튼으로 돌아간 뒤 대화상자를 연다(취소하면 그 버튼으로 복귀)
+          setTimeout(function () {
+            layer.confirm(name + '님을 팀에서 뺄까요?', { danger: true, okText: '빼기' }, function (i) {
+              layer.close(i);
+              var row = trigger.closest('tr'), next = row.nextElementSibling || row.previousElementSibling;
+              row.remove();                  // 행이 사라지면 메뉴 인스턴스도 자동 정리(autoDestroy)
+              if (next) next.querySelector('button').focus();
+              out(name + '님을 뺐습니다');
+            });
+          });
+        } });
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="표 행마다 더보기(⋯) 메뉴 — align: &#39;right&#39; 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_table-wrap&quot;&gt;&lt;table class=&quot;Catui_tbl&quot;&gt;
+  &lt;caption class=&quot;Catui_clip&quot;&gt;팀원&lt;/caption&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;이름&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;역할&lt;/th&gt;&lt;th scope=&quot;col&quot; class=&quot;Catui_num&quot;&gt;동작&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody id=&quot;dd-rows&quot;&gt;
+    &lt;tr&gt;&lt;td&gt;김하늘&lt;/td&gt;&lt;td&gt;관리자&lt;/td&gt;&lt;td class=&quot;Catui_num&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; data-name=&quot;김하늘&quot; aria-label=&quot;김하늘 더보기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-more-horizontal&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;이준&lt;/td&gt;&lt;td&gt;편집자&lt;/td&gt;&lt;td class=&quot;Catui_num&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; data-name=&quot;이준&quot; aria-label=&quot;이준 더보기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-more-horizontal&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;박서연&lt;/td&gt;&lt;td&gt;보기 전용&lt;/td&gt;&lt;td class=&quot;Catui_num&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; data-name=&quot;박서연&quot; aria-label=&quot;박서연 더보기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-more-horizontal&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;dd-rows-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;dropdown&#39;, &#39;layer&#39;], function (dropdown, layer) {
+  var out = function (t) { document.getElementById(&#39;dd-rows-out&#39;).textContent = t; };
+  document.querySelectorAll(&#39;#dd-rows [data-name]&#39;).forEach(function (btn) {
+    dropdown.render({ elem: btn, align: &#39;right&#39;, width: &#39;sm&#39;, label: btn.dataset.name + &#39; 메뉴&#39;, data: [
+      { id: &#39;view&#39;, title: &#39;프로필 보기&#39;, icon: &#39;user&#39; }, { id: &#39;edit&#39;, title: &#39;역할 바꾸기&#39;, icon: &#39;pencil&#39; },
+      { id: &#39;mail&#39;, title: &#39;메일 보내기&#39;, icon: &#39;mail&#39; }, { type: &#39;-&#39; }, { id: &#39;del&#39;, title: &#39;팀에서 빼기&#39;, icon: &#39;user-minus&#39;, danger: true } ],
+      click: function (item, trigger) {
+        var name = trigger.dataset.name;
+        if (item.id !== &#39;del&#39;) { out(name + &#39;: &#39; + item.title); return; }
+        // 메뉴가 닫히며 포커스가 ⋯ 버튼으로 돌아간 뒤 대화상자를 연다(취소하면 그 버튼으로 복귀)
+        setTimeout(function () {
+          layer.confirm(name + &#39;님을 팀에서 뺄까요?&#39;, { danger: true, okText: &#39;빼기&#39; }, function (i) {
+            layer.close(i);
+            var row = trigger.closest(&#39;tr&#39;), next = row.nextElementSibling || row.previousElementSibling;
+            row.remove();                  // 행이 사라지면 메뉴 인스턴스도 자동 정리(autoDestroy)
+            if (next) next.querySelector(&#39;button&#39;).focus();
+            out(name + &#39;님을 뺐습니다&#39;);
+          });
+        });
+      } });
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">고른 값을 버튼 글자와 체크로 표시 — 정렬 기준</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="dd-sort"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-arrow-up-down"></use></svg><span>정렬: 최신순</span></button>
+    <span class="Catui_help" id="dd-sort-out" aria-live="polite"></span>
+  </div>
+  <script>
+  catui.use(['dropdown'], function (dropdown) {
+    var btn = document.getElementById('dd-sort');
+    // 지금 고른 항목에만 check 아이콘. 메뉴는 열 때마다 data로 새로 그리므로 항목을 고치면 다음에 열 때 반영된다
+    var data = [{ id: 'new', title: '최신순', icon: 'check' }, { id: 'old', title: '오래된순' }, { id: 'price', title: '가격 낮은순' }, { id: 'pop', title: '인기순' }];
+    dropdown.render({ elem: btn, label: '정렬 기준', data: data, click: function (item) {
+      data.forEach(function (d) { d.icon = d === item ? 'check' : ''; });
+      btn.querySelector('span').textContent = '정렬: ' + item.title;
+      document.getElementById('dd-sort-out').textContent = item.title + '으로 정렬했습니다';
+    } });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="고른 값을 버튼 글자와 체크로 표시 — 정렬 기준 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;dd-sort&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-arrow-up-down&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span&gt;정렬: 최신순&lt;/span&gt;&lt;/button&gt;
+  &lt;span class=&quot;Catui_help&quot; id=&quot;dd-sort-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;dropdown&#39;], function (dropdown) {
+  var btn = document.getElementById(&#39;dd-sort&#39;);
+  // 지금 고른 항목에만 check 아이콘. 메뉴는 열 때마다 data로 새로 그리므로 항목을 고치면 다음에 열 때 반영된다
+  var data = [{ id: &#39;new&#39;, title: &#39;최신순&#39;, icon: &#39;check&#39; }, { id: &#39;old&#39;, title: &#39;오래된순&#39; }, { id: &#39;price&#39;, title: &#39;가격 낮은순&#39; }, { id: &#39;pop&#39;, title: &#39;인기순&#39; }];
+  dropdown.render({ elem: btn, label: &#39;정렬 기준&#39;, data: data, click: function (item) {
+    data.forEach(function (d) { d.icon = d === item ? &#39;check&#39; : &#39;&#39;; });
+    btn.querySelector(&#39;span&#39;).textContent = &#39;정렬: &#39; + item.title;
+    document.getElementById(&#39;dd-sort-out&#39;).textContent = item.title + &#39;으로 정렬했습니다&#39;;
+  } });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
 <section aria-labelledby="details">
 <h2 id="details">마크업 메뉴 자동 향상</h2>
 <figure class="doc-example">
@@ -137,11 +251,11 @@ catui.use([&#39;dropdown&#39;], function (dropdown) {
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/tabs.html"><span>이전</span>tabs 탭</a><a class="doc-pager-next" href="../../js/modules/datepicker.html"><span>다음</span>datePicker 날짜</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">메뉴</a></li><li><a href="#context">우클릭 메뉴</a></li><li><a href="#details">마크업 메뉴 자동 향상</a></li><li><a href="#options">옵션</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">메뉴</a></li><li><a href="#context">우클릭 메뉴</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#details">마크업 메뉴 자동 향상</a></li><li><a href="#options">옵션</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

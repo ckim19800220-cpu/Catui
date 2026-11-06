@@ -68,7 +68,7 @@ const catuiPageFlow = component({
     bar.setAttribute("aria-live", "polite");
     box.insertAdjacentElement("afterend", bar);
     box.setAttribute("aria-busy", "false");
-    let page = 0, busy = false, ended = false, io = null;
+    let page = 0, busy = false, ended = false, io = null, gen = 0;   // gen: reset할 때마다 늘어나는 세대 번호
     const status = (state) => {
       mount(bar, state === "loading"
         ? html`<span class="Catui_spin" aria-hidden="true"></span><span class="Catui_help">${c.loadingText}</span>`
@@ -92,11 +92,11 @@ const catuiPageFlow = component({
       page += 1;
       box.setAttribute("aria-busy", "true");
       status("loading");
-      const my = page;
+      const my = page, myGen = gen;
       let answered = false;
       // next(항목들, 더 있음?) — 항목은 html``·Element·배열
       const next = (items, more = true) => {
-        if (answered || my !== page) return;
+        if (answered || my !== page || myGen !== gen) return;   // reset 이전 요청의 늦은 응답은 버린다(쪽 번호만으로는 새 1쪽과 구분 안 됨)
         answered = true;
         append(items);
         busy = false;
@@ -107,7 +107,7 @@ const catuiPageFlow = component({
         inst.emit("load", { page: my, more: !ended });
       };
       // 실패하면 "다시 시도" 버튼으로만 재요청한다 — 감시를 멈춰 막대가 다시 보일 때 저절로 반복 요청하지 않게
-      const fail = (err) => { if (answered) return; answered = true; busy = false; page -= 1; box.setAttribute("aria-busy", "false"); io?.unobserve(bar); status("error"); hint.error("flow: 불러오기 실패", "error", err); };
+      const fail = (err) => { if (answered || myGen !== gen) return; answered = true; busy = false; page -= 1; box.setAttribute("aria-busy", "false"); io?.unobserve(bar); status("error"); hint.error("flow: 불러오기 실패", "error", err); };
       try {
         c.done.call(inst, my, next)?.catch?.(fail);
       } catch (err) { fail(err); }
@@ -122,7 +122,7 @@ const catuiPageFlow = component({
     status("more");
     if (!io) load();
     inst.load = load;
-    inst.reset = () => { page = 0; ended = false; busy = false; box.textContent = ""; status("more"); if (c.auto && io) { io.disconnect(); io.observe(bar); } else load(); };
+    inst.reset = () => { gen += 1; page = 0; ended = false; busy = false; box.textContent = ""; status("more"); if (c.auto && io) { io.disconnect(); io.observe(bar); } else load(); };
     inst.use(() => { io?.disconnect(); bar.removeEventListener("click", onClick); bar.remove(); box.removeAttribute("aria-busy"); });
   },
 });

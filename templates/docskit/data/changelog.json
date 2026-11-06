@@ -1,0 +1,21 @@
+[
+  { "version": "2.1.0", "date": "2026-10-30", "items": [
+    { "type": "added", "text": "CatuiDocs 확장 — `catui.docs`: 목차·코드 복사·초성 검색·읽는 시간·피드백·버전 선택" },
+    { "type": "added", "text": "`catui.imeBusy(e)` 공개" },
+    { "type": "changed", "text": "탭에 `.Catui_tabs-full` · `.Catui_tabs-scroll` 추가" },
+    { "type": "fixed", "text": "한글 조합을 끝내는 Enter로 폼이 제출되던 문제" }
+  ] },
+  { "version": "2.0.1", "date": "2026-09-12", "items": [
+    { "type": "fixed", "text": "어두운 화면에서 보조 글자 대비가 4.5:1 아래로 떨어지던 문제" },
+    { "type": "fixed", "text": "320px 화면에서 표가 쪽 전체를 넓히던 문제" }
+  ] },
+  { "version": "2.0.0", "date": "2026-08-30", "items": [
+    { "type": "changed", "text": "클래스 접두를 **Catui_**로 통일" },
+    { "type": "changed", "text": "토큰 이름을 L1·L2·L3 단계로 정리" },
+    { "type": "added", "text": "아이콘 스프라이트 `icons.svg`" }
+  ] },
+  { "version": "1.2.0", "date": "2026-05-02", "items": [
+    { "type": "added", "text": "읽기 진행 막대 `.Catui_readbar`" },
+    { "type": "fixed", "text": "모달 안 Esc가 바깥 서랍까지 닫던 문제" }
+  ] }
+]

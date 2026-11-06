@@ -1,0 +1,57 @@
+<section aria-labelledby="what">
+<h2 id="what">CatuiDocs는</h2>
+<p>Catui(CSS 키트 + catui.js) 위에 얹는 <b>문서·블로그 사이트 키트</b>입니다. CatuiAdmin·CatuiCommunity·CatuiShop과 같은 구조로, 본체 컴포넌트(탭·코드 블록·콜아웃·쪽 번호·읽기 막대·공유)를 그대로 쓰고 문서 사이트에 필요한 것만 더합니다.</p>
+<dl class="doc-spec" aria-label="CatuiDocs 사양">
+  <div><dt>템플릿</dt><dd>{{stat:dkTpl}}</dd></div>
+  <div><dt>모의 블로그 글</dt><dd>{{stat:dkPosts}}</dd></div>
+  <div><dt>CSS · gzip</dt><dd>{{stat:dkCssGz}}<small>KB</small></dd></div>
+  <div><dt>JS · gzip</dt><dd>{{stat:dkJsGz}}<small>KB</small></dd></div>
+</dl>
+<div class="doc-files">
+  <article><span class="doc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i16"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-code"></use></svg></span><p class="doc-file-n"><code>docs.css</code></p><p>머리·문서 3단(메뉴·본문·목차)·본문 글 모양·코드 머리줄·단계·시그니처·이전/다음·피드백·블로그 카드·태그·변경 이력 — 모든 규칙은 <code>.Catui_dk</code> 아래, 토큰만 사용</p></article>
+  <article><span class="doc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i16"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-code"></use></svg></span><p class="doc-file-n"><code>catdocs.js</code></p><p><code>catui.docs</code> — 목차 자동 생성(스크롤 따라 현재 위치), 코드·제목 주소 복사, 초성 검색, 읽는 시간, 피드백 기억, 버전 이동, 태그 필터 ↔ 주소, 안전한 마크다운 일부</p></article>
+  <article><span class="doc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i16"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-code"></use></svg></span><p class="doc-file-n"><code>templates/docskit/</code></p><p>같은 머리·바닥글을 공유하는 전체 화면 HTML {{stat:dkTpl}}종 — 빌드가 링크·클래스·접근성을 검사</p></article>
+</div>
+<p class="Catui_help">저장소의 <code>docs/</code>는 이 문서 사이트의 출력 폴더이므로 키트의 소스·템플릿 폴더 이름은 <code>docskit</code>입니다. 배포 파일 이름과 JS 전역은 <code>docs</code>(<code>docs.css</code> · <code>catdocs.js</code> · <code>catui.docs</code>)입니다.</p>
+</section>
+
+<section aria-labelledby="layers">
+<h2 id="layers">구성 계층</h2>
+<ol class="doc-stack" aria-label="CatuiDocs 구성 계층 (위가 확장)">
+  <li class="is-current" aria-current="true"><code>docs.css · catdocs.js</code><span>목차 · 검색 · 블로그 · 변경 이력</span><em>이 문서</em></li>
+  <li><code>catui.js</code><span>접근성 · 데이터 · 선언형 속성 · 오버레이</span></li>
+  <li><code>catui.css</code><span>토큰 · 리셋 · 컴포넌트</span></li>
+</ol>
+</section>
+
+<section aria-labelledby="map">
+<h2 id="map">화면 지도</h2>
+<p>각 화면은 새 창에서 전체 화면으로 열립니다.</p>
+<div class="doc-map">
+  <article class="doc-map-g"><h3>문서<span class="doc-map-n">6<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/index.html" target="_blank" rel="noopener">문서 홈</a></li><li><a href="../templates/doc.html?p=intro" target="_blank" rel="noopener">문서 쪽</a></li><li><a href="../templates/api.html" target="_blank" rel="noopener">API 참조</a></li><li><a href="../templates/guide.html" target="_blank" rel="noopener">시작 가이드</a></li><li><a href="../templates/versions.html?v=2.0" target="_blank" rel="noopener">버전 선택</a></li><li><a href="../templates/changelog.html" target="_blank" rel="noopener">변경 이력</a></li></ul></article>
+  <article class="doc-map-g"><h3>블로그<span class="doc-map-n">4<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/blog.html" target="_blank" rel="noopener">블로그 목록</a></li><li><a href="../templates/post.html?id=catui-2-1" target="_blank" rel="noopener">블로그 글</a></li><li><a href="../templates/tag.html?t=a11y" target="_blank" rel="noopener">태그</a></li><li><a href="../templates/author.html?a=lee" target="_blank" rel="noopener">저자</a></li></ul></article>
+  <article class="doc-map-g"><h3>찾기 · 오류<span class="doc-map-n">2<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/search.html?q=%E3%85%81%E3%85%8A" target="_blank" rel="noopener">검색 결과</a></li><li><a href="../templates/error-404.html" target="_blank" rel="noopener">404</a></li></ul></article>
+</div>
+</section>
+
+<section aria-labelledby="preview">
+<h2 id="preview">미리보기</h2>
+<figure class="doc-frame">
+  <figcaption class="doc-frame-bar"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><code>templates/doc.html</code><a href="../templates/doc.html?p=intro" target="_blank" rel="noopener">새 창에서 열기</a></figcaption>
+  <iframe src="../templates/doc.html?p=intro" title="문서 쪽 미리보기" loading="lazy"></iframe>
+</figure>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성 · 반응형 기준</h2>
+<ul>
+  <li>현재 위치(메뉴·목차·태그 버튼)는 <code>aria-current</code>/<code>aria-pressed</code> + 막대·굵기·체크 아이콘으로 — 색만으로 알리지 않습니다. 변경 이력 종류는 배지 <b>글자</b>(추가·변경·고침)로.</li>
+  <li>제목 앵커·쪽 이동 버튼의 뜻은 숨김 글자(<code>.Catui_clip</code>)나 <code>aria-label</code>(버튼·링크)로, 역할 없는 <code>span</code>에는 <code>aria-label</code>을 쓰지 않습니다(빌드가 검사).</li>
+  <li>한글 조합 중 Enter는 검색을 제출하지 않고(<code>catui.imeBusy</code>), 입력하는 대로 찾는 검색은 조합이 끝난 뒤에 돕니다.</li>
+  <li>320px 화면에서 쪽 가로 넘침 없음. 가로로 넘치는 상자(머리 메뉴·코드·표·태그 줄)는 <code>position:relative</code> 스크롤 상자이고 코드 블록은 Tab으로 들어가 밀 수 있습니다.</li>
+  <li>모션은 앵커 나타남·카드 아이콘 확대·누름 피드백뿐이며 <code>prefers-reduced-motion</code>이면 끕니다.</li>
+</ul>
+</section>

@@ -1,0 +1,17 @@
+{
+  "top": [
+    { "id": "home", "title": "홈", "href": "index.html" },
+    { "id": "doc", "title": "문서", "href": "doc.html" },
+    { "id": "guide", "title": "시작 가이드", "href": "guide.html" },
+    { "id": "api", "title": "API", "href": "api.html" },
+    { "id": "blog", "title": "블로그", "href": "blog.html" },
+    { "id": "changelog", "title": "변경 이력", "href": "changelog.html" }
+  ],
+  "foot": [
+    { "title": "문서", "href": "doc.html" },
+    { "title": "버전별 문서", "href": "versions.html" },
+    { "title": "태그", "href": "tag.html" },
+    { "title": "저자", "href": "author.html" },
+    { "title": "검색", "href": "search.html" }
+  ]
+}

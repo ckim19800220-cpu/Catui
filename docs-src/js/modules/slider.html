@@ -18,6 +18,33 @@
 <p>네이티브 range를 만들어 키보드·화면 낭독기 지원을 그대로 씁니다. <code>setTips</code>는 표시와 <code>aria-valuetext</code>에 함께 쓰입니다.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="가격 범위 필터 — 최소·최대 두 슬라이더가 서로 넘지 않게 (input · setValue)">
+  <div class="Catui_grid">
+    <div class="Catui_span-6" id="sl-min"></div>
+    <div class="Catui_span-6" id="sl-max"></div>
+  </div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="sl-range-reset">초기화</button><span class="Catui_help" id="sl-range-out" aria-live="polite"></span></div>
+  <script>
+  catui.use(['slider'], function (slider) {
+    var won = function (v) { return v.toLocaleString('ko-KR') + '원'; };
+    var say = function () { document.getElementById('sl-range-out').textContent = '검색 가격: ' + won(slider.getValue('pr-min')) + ' ~ ' + won(slider.getValue('pr-max')); };
+    var opt = { min: 0, max: 500000, step: 10000, setTips: won };
+    // 끄는 동안(input) 상대 값을 넘으면 그 자리에 멈춘다. setValue는 change만 내므로 서로 부르며 맴돌지 않음
+    slider.render(Object.assign({ elem: '#sl-min', id: 'pr-min', label: '최소 가격', value: 50000,
+      input: function (v) { var hi = slider.getValue('pr-max'); if (v > hi) slider.setValue('pr-min', hi); },
+      change: say }, opt));
+    slider.render(Object.assign({ elem: '#sl-max', id: 'pr-max', label: '최대 가격', value: 300000,
+      input: function (v) { var lo = slider.getValue('pr-min'); if (v < lo) slider.setValue('pr-max', lo); },
+      change: say }, opt));
+    document.getElementById('sl-range-reset').addEventListener('click', function () { slider.setValue('pr-min', 0); slider.setValue('pr-max', 500000); });
+    say();
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="options">
 <h2 id="options">옵션</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">slider 옵션</caption>

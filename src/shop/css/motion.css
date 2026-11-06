@@ -1,0 +1,15 @@
+/* shop/motion.css */
+/* 모션 — 누름 피드백(담기·찜·구매·하단 탭), 카드 사진 살짝 확대(마우스 올림), 고정 구매 막대 올라오기.
+   · 움직이는 속성은 transform·opacity만, 모션 줄이기 설정이면 즉시 */
+.Catui_sh-wish,.Catui_sh-pd-acts .Catui_btn,.Catui_sh-buybar .Catui_btn,.Catui_sh-tab,.Catui_sh-size{transition:transform var(--Catui_sh-dur-press) var(--Catui_sh-ease-out)}
+.Catui_sh-wish:active,.Catui_sh-pd-acts .Catui_btn:active,.Catui_sh-buybar .Catui_btn:active,.Catui_sh-tab:active,.Catui_sh-size:active{transform:scale(var(--Catui_sh-press))}
+.Catui_sh-card-img img{transition:transform var(--Catui_sh-dur-ui) var(--Catui_sh-ease-out)}
+@media (hover:hover){.Catui_sh-card-link:hover .Catui_sh-card-img img{transform:scale(1.03)}}
+@keyframes Catui_sh-rise{from{transform:translateY(100%)}to{transform:none}}
+.Catui_sh-buybar:not([hidden]){animation:Catui_sh-rise var(--Catui_sh-dur-ui) var(--Catui_sh-ease-out)}
+
+@media (prefers-reduced-motion: reduce){
+  .Catui_sh-wish,.Catui_sh-pd-acts .Catui_btn,.Catui_sh-buybar .Catui_btn,.Catui_sh-tab,.Catui_sh-size,.Catui_sh-card-img img{transition:none}
+  .Catui_sh-wish:active,.Catui_sh-pd-acts .Catui_btn:active,.Catui_sh-buybar .Catui_btn:active,.Catui_sh-tab:active,.Catui_sh-size:active,.Catui_sh-card-link:hover .Catui_sh-card-img img{transform:none}
+  .Catui_sh-buybar:not([hidden]){animation:none}
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -604,8 +604,8 @@ catui.use([&#39;layer&#39;], function (layer) {
     });
     var files = [['demo_20260428_151943.tar.gz', '5.66 MB', '2026-04-28 15:19'], ['demo_20260427_175319.tar.gz', '5.66 MB', '2026-04-27 17:53'], ['demo_20260423_114623.tar.gz', '5.58 MB', '2026-04-23 11:46']];
     var list = h`<div class="Catui_toolbar"><button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button">사이트 백업</button><div class="Catui_toolbar-end"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary Catui_btn-icon" type="button" aria-label="새로 고침">${raw('<svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-refresh-cw"></use></svg>')}</button></div></div>
-<div class="Catui_table-wrap"><table class="Catui_tbl Catui_tbl-compact"><caption class="Catui_clip">백업 파일</caption><thead><tr><th scope="col">파일 이름</th><th scope="col">위치</th><th scope="col" class="Catui_num">크기</th><th scope="col">백업 시각</th><th scope="col" class="Catui_num">동작</th></tr></thead><tbody>${files.map(function (r) { return h`<tr><td>${r[0]}</td><td>로컬</td><td class="Catui_num">${r[1]}</td><td>${r[2]}</td><td class="Catui_num"><a class="Catui_link" href="#">받기</a> · <a class="Catui_link" href="#">삭제</a></td></tr>`; })}</tbody></table></div>
-<div class="Catui_hstack Catui_between" style="margin-top:12px"><span class="Catui_help">모두 3건</span><nav class="Catui_pager" aria-label="페이지"><a href="#" aria-current="page">1</a></nav></div>`;
+<div class="Catui_table-wrap"><table class="Catui_tbl Catui_tbl-compact"><caption class="Catui_clip">백업 파일</caption><thead><tr><th scope="col">파일 이름</th><th scope="col">위치</th><th scope="col" class="Catui_num">크기</th><th scope="col">백업 시각</th><th scope="col" class="Catui_num">동작</th></tr></thead><tbody>${files.map(function (r) { return h`<tr><td>${r[0]}</td><td>로컬</td><td class="Catui_num">${r[1]}</td><td>${r[2]}</td><td class="Catui_num"><button class="Catui_btn Catui_btn-sm Catui_btn-link" type="button">받기</button><button class="Catui_btn Catui_btn-sm Catui_btn-link" type="button">삭제</button></td></tr>`; })}</tbody></table></div>
+<div class="Catui_hstack Catui_between" style="margin-top:12px"><span class="Catui_help">모두 3건</span><nav class="Catui_pager" aria-label="페이지"><button class="Catui_pg Catui_pg-active" type="button" aria-current="page">1</button></nav></div>`;
     on('lc-backup', function () {
       layer.tab({ title: '사이트 백업 [demo.catui.dev]', card: true, area: 'xl', tabs: [{ title: '일반 백업', content: list }, { title: '증분 백업', content: '증분 백업 일정이 없습니다.' }] });
     });
@@ -638,13 +638,165 @@ catui.use([&#39;layer&#39;], function (layer) {
     });
     var files = [[&#39;demo_20260428_151943.tar.gz&#39;, &#39;5.66 MB&#39;, &#39;2026-04-28 15:19&#39;], [&#39;demo_20260427_175319.tar.gz&#39;, &#39;5.66 MB&#39;, &#39;2026-04-27 17:53&#39;], [&#39;demo_20260423_114623.tar.gz&#39;, &#39;5.58 MB&#39;, &#39;2026-04-23 11:46&#39;]];
     var list = h`&lt;div class=&quot;Catui_toolbar&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-primary&quot; type=&quot;button&quot;&gt;사이트 백업&lt;/button&gt;&lt;div class=&quot;Catui_toolbar-end&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-secondary Catui_btn-icon&quot; type=&quot;button&quot; aria-label=&quot;새로 고침&quot;&gt;${raw(&#39;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-refresh-cw&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&#39;)}&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;div class=&quot;Catui_table-wrap&quot;&gt;&lt;table class=&quot;Catui_tbl Catui_tbl-compact&quot;&gt;&lt;caption class=&quot;Catui_clip&quot;&gt;백업 파일&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;파일 이름&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;위치&lt;/th&gt;&lt;th scope=&quot;col&quot; class=&quot;Catui_num&quot;&gt;크기&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;백업 시각&lt;/th&gt;&lt;th scope=&quot;col&quot; class=&quot;Catui_num&quot;&gt;동작&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;${files.map(function (r) { return h`&lt;tr&gt;&lt;td&gt;${r[0]}&lt;/td&gt;&lt;td&gt;로컬&lt;/td&gt;&lt;td class=&quot;Catui_num&quot;&gt;${r[1]}&lt;/td&gt;&lt;td&gt;${r[2]}&lt;/td&gt;&lt;td class=&quot;Catui_num&quot;&gt;&lt;a class=&quot;Catui_link&quot; href=&quot;#&quot;&gt;받기&lt;/a&gt; · &lt;a class=&quot;Catui_link&quot; href=&quot;#&quot;&gt;삭제&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;`; })}&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
-&lt;div class=&quot;Catui_hstack Catui_between&quot; style=&quot;margin-top:12px&quot;&gt;&lt;span class=&quot;Catui_help&quot;&gt;모두 3건&lt;/span&gt;&lt;nav class=&quot;Catui_pager&quot; aria-label=&quot;페이지&quot;&gt;&lt;a href=&quot;#&quot; aria-current=&quot;page&quot;&gt;1&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;`;
+&lt;div class=&quot;Catui_table-wrap&quot;&gt;&lt;table class=&quot;Catui_tbl Catui_tbl-compact&quot;&gt;&lt;caption class=&quot;Catui_clip&quot;&gt;백업 파일&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;파일 이름&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;위치&lt;/th&gt;&lt;th scope=&quot;col&quot; class=&quot;Catui_num&quot;&gt;크기&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;백업 시각&lt;/th&gt;&lt;th scope=&quot;col&quot; class=&quot;Catui_num&quot;&gt;동작&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;${files.map(function (r) { return h`&lt;tr&gt;&lt;td&gt;${r[0]}&lt;/td&gt;&lt;td&gt;로컬&lt;/td&gt;&lt;td class=&quot;Catui_num&quot;&gt;${r[1]}&lt;/td&gt;&lt;td&gt;${r[2]}&lt;/td&gt;&lt;td class=&quot;Catui_num&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-link&quot; type=&quot;button&quot;&gt;받기&lt;/button&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-link&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;`; })}&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;div class=&quot;Catui_hstack Catui_between&quot; style=&quot;margin-top:12px&quot;&gt;&lt;span class=&quot;Catui_help&quot;&gt;모두 3건&lt;/span&gt;&lt;nav class=&quot;Catui_pager&quot; aria-label=&quot;페이지&quot;&gt;&lt;button class=&quot;Catui_pg Catui_pg-active&quot; type=&quot;button&quot; aria-current=&quot;page&quot;&gt;1&lt;/button&gt;&lt;/nav&gt;&lt;/div&gt;`;
     on(&#39;lc-backup&#39;, function () {
       layer.tab({ title: &#39;사이트 백업 [demo.catui.dev]&#39;, card: true, area: &#39;xl&#39;, tabs: [{ title: &#39;일반 백업&#39;, content: list }, { title: &#39;증분 백업&#39;, content: &#39;증분 백업 일정이 없습니다.&#39; }] });
     });
   });
   &lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<p>실무 화면에서 자주 만드는 흐름입니다. 서버 요청 자리는 <code>setTimeout</code>으로 흉내 냈으니 실제로는 <code>await fetch(…)</code>로 바꾸세요.</p>
+<figure class="doc-example">
+<figcaption class="doc-example-title">목록에서 확인 후 삭제 → 로딩 → 되돌리기 토스트</figcaption>
+<div class="doc-example-preview">
+  <ul class="Catui_list" id="lr-list">
+    <li class="Catui_list-item"><span>견적서-0412.pdf</span><span class="Catui_list-meta"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-del aria-label="견적서-0412.pdf 삭제"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-trash-2"></use></svg></button></span></li>
+    <li class="Catui_list-item"><span>계약서-초안.docx</span><span class="Catui_list-meta"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-del aria-label="계약서-초안.docx 삭제"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-trash-2"></use></svg></button></span></li>
+    <li class="Catui_list-item"><span>회의록-11월.txt</span><span class="Catui_list-meta"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-del aria-label="회의록-11월.txt 삭제"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-trash-2"></use></svg></button></span></li>
+  </ul>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var list = document.getElementById('lr-list');
+    var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+    catui.$('#lr-list').on('click', '[data-del]', async function (e, b) {
+      var li = b.closest('li'), name = li.firstElementChild.textContent, next = li.nextElementSibling;
+      if (!await layer.ask(catui.html`<b>${name}</b> 파일을 삭제할까요?`, { danger: true, okText: '삭제' })) return;
+      var i = layer.load('삭제하는 중…');
+      await wait(700);                     // 실제로는 await fetch('/api/files/…', { method: 'DELETE' })
+      layer.close(i);
+      li.remove();
+      var focusTo = (next || list).querySelector('[data-del]');
+      if (focusTo) focusTo.focus();        // 지운 버튼에 있던 포커스를 이웃 항목으로
+      layer.msg(name + ' 파일을 삭제했습니다', { icon: 'success', action: { text: '되돌리기', onClick: function () {
+        list.insertBefore(li, next && next.parentNode === list ? next : null);
+      } } });
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="목록에서 확인 후 삭제 → 로딩 → 되돌리기 토스트 코드 복사">복사</button><pre><code>&lt;ul class=&quot;Catui_list&quot; id=&quot;lr-list&quot;&gt;
+  &lt;li class=&quot;Catui_list-item&quot;&gt;&lt;span&gt;견적서-0412.pdf&lt;/span&gt;&lt;span class=&quot;Catui_list-meta&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; data-del aria-label=&quot;견적서-0412.pdf 삭제&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-trash-2&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;Catui_list-item&quot;&gt;&lt;span&gt;계약서-초안.docx&lt;/span&gt;&lt;span class=&quot;Catui_list-meta&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; data-del aria-label=&quot;계약서-초안.docx 삭제&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-trash-2&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class=&quot;Catui_list-item&quot;&gt;&lt;span&gt;회의록-11월.txt&lt;/span&gt;&lt;span class=&quot;Catui_list-meta&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; data-del aria-label=&quot;회의록-11월.txt 삭제&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-trash-2&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  var list = document.getElementById(&#39;lr-list&#39;);
+  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+  catui.$(&#39;#lr-list&#39;).on(&#39;click&#39;, &#39;[data-del]&#39;, async function (e, b) {
+    var li = b.closest(&#39;li&#39;), name = li.firstElementChild.textContent, next = li.nextElementSibling;
+    if (!await layer.ask(catui.html`&lt;b&gt;${name}&lt;/b&gt; 파일을 삭제할까요?`, { danger: true, okText: &#39;삭제&#39; })) return;
+    var i = layer.load(&#39;삭제하는 중…&#39;);
+    await wait(700);                     // 실제로는 await fetch(&#39;/api/files/…&#39;, { method: &#39;DELETE&#39; })
+    layer.close(i);
+    li.remove();
+    var focusTo = (next || list).querySelector(&#39;[data-del]&#39;);
+    if (focusTo) focusTo.focus();        // 지운 버튼에 있던 포커스를 이웃 항목으로
+    layer.msg(name + &#39; 파일을 삭제했습니다&#39;, { icon: &#39;success&#39;, action: { text: &#39;되돌리기&#39;, onClick: function () {
+      list.insertBefore(li, next &amp;&amp; next.parentNode === list ? next : null);
+    } } });
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">작성 중 닫기 확인 — cancel에서 false로 붙잡기</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lr-memo-open">메모 쓰기</button></div>
+  <script>
+  catui.use(['layer'], function (layer) {
+    document.getElementById('lr-memo-open').addEventListener('click', function () {
+      var dirty = false;
+      layer.open({ title: '메모 쓰기', btn: ['저장', '취소'],
+        content: catui.html`<div class="Catui_field"><label class="Catui_label" for="lr-memo">메모</label><textarea class="Catui_input" id="lr-memo" rows="4" placeholder="글자를 쓴 뒤 취소·Esc·바깥 클릭을 해 보세요"></textarea></div>`,
+        success: function (dlg) { dlg.querySelector('#lr-memo').addEventListener('input', function () { dirty = true; }); },
+        yes: function (index) { layer.close(index); layer.msg('메모를 저장했습니다', { icon: 'success' }); },
+        // 취소 버튼·닫기 버튼·Esc·바깥 클릭이 모두 여기로 온다
+        cancel: function (index) {
+          if (!dirty) return;              // 바뀐 것이 없으면 그냥 닫힘
+          layer.confirm('작성 중인 내용이 사라집니다. 닫을까요?', { danger: true, okText: '닫기', cancelText: '계속 쓰기' }, function (j) {
+            layer.close(j); layer.close(index);
+          });
+          return false;                    // 답을 들을 때까지 열어 둠
+        } });
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="작성 중 닫기 확인 — cancel에서 false로 붙잡기 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lr-memo-open&quot;&gt;메모 쓰기&lt;/button&gt;&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  document.getElementById(&#39;lr-memo-open&#39;).addEventListener(&#39;click&#39;, function () {
+    var dirty = false;
+    layer.open({ title: &#39;메모 쓰기&#39;, btn: [&#39;저장&#39;, &#39;취소&#39;],
+      content: catui.html`&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;lr-memo&quot;&gt;메모&lt;/label&gt;&lt;textarea class=&quot;Catui_input&quot; id=&quot;lr-memo&quot; rows=&quot;4&quot; placeholder=&quot;글자를 쓴 뒤 취소·Esc·바깥 클릭을 해 보세요&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;`,
+      success: function (dlg) { dlg.querySelector(&#39;#lr-memo&#39;).addEventListener(&#39;input&#39;, function () { dirty = true; }); },
+      yes: function (index) { layer.close(index); layer.msg(&#39;메모를 저장했습니다&#39;, { icon: &#39;success&#39; }); },
+      // 취소 버튼·닫기 버튼·Esc·바깥 클릭이 모두 여기로 온다
+      cancel: function (index) {
+        if (!dirty) return;              // 바뀐 것이 없으면 그냥 닫힘
+        layer.confirm(&#39;작성 중인 내용이 사라집니다. 닫을까요?&#39;, { danger: true, okText: &#39;닫기&#39;, cancelText: &#39;계속 쓰기&#39; }, function (j) {
+          layer.close(j); layer.close(index);
+        });
+        return false;                    // 답을 들을 때까지 열어 둠
+      } });
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">불러온 값으로 수정 양식 열기 — load → form(value) → 서버 오류</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="lr-edit">사용자 수정</button></div>
+  <p class="Catui_help" id="lr-out" aria-live="polite"></p>
+  <script>
+  catui.use(['layer'], function (layer) {
+    var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+    var fetchUser = function () { return wait(500).then(function () { return { name: '박서연', email: 'seoyeon@example.com', role: 'editor' }; }); };
+    document.getElementById('lr-edit').addEventListener('click', async function () {
+      var i = layer.load('사용자 정보를 불러오는 중…');
+      var user = await fetchUser();
+      layer.close(i);
+      var v = await layer.form({ title: '사용자 수정', okText: '저장', fields: [
+        { name: 'name', label: '이름', required: true, value: user.name, cols: 6 },
+        { name: 'role', label: '역할', type: 'select', value: user.role, cols: 6, options: [{ value: 'viewer', label: '보기' }, { value: 'editor', label: '편집' }, { value: 'admin', label: '관리' }] },
+        { name: 'email', label: '이메일', type: 'email', required: true, value: user.email, help: '예시: taken@example.com 으로 바꾸면 서버 오류를 보여 줍니다.' } ],
+        submit: async function (val) {
+          await wait(600);                 // 저장 중에는 저장 버튼이 잠겨 두 번 눌리지 않음
+          if (val.email === 'taken@example.com') throw new Error('이미 다른 사용자가 쓰는 이메일입니다.');
+        } });
+      document.getElementById('lr-out').textContent = v ? '저장: ' + v.name + ' · ' + v.role + ' · ' + v.email : '수정을 취소했습니다';
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="불러온 값으로 수정 양식 열기 — load → form(value) → 서버 오류 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot; id=&quot;lr-edit&quot;&gt;사용자 수정&lt;/button&gt;&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;lr-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;layer&#39;], function (layer) {
+  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+  var fetchUser = function () { return wait(500).then(function () { return { name: &#39;박서연&#39;, email: &#39;seoyeon@example.com&#39;, role: &#39;editor&#39; }; }); };
+  document.getElementById(&#39;lr-edit&#39;).addEventListener(&#39;click&#39;, async function () {
+    var i = layer.load(&#39;사용자 정보를 불러오는 중…&#39;);
+    var user = await fetchUser();
+    layer.close(i);
+    var v = await layer.form({ title: &#39;사용자 수정&#39;, okText: &#39;저장&#39;, fields: [
+      { name: &#39;name&#39;, label: &#39;이름&#39;, required: true, value: user.name, cols: 6 },
+      { name: &#39;role&#39;, label: &#39;역할&#39;, type: &#39;select&#39;, value: user.role, cols: 6, options: [{ value: &#39;viewer&#39;, label: &#39;보기&#39; }, { value: &#39;editor&#39;, label: &#39;편집&#39; }, { value: &#39;admin&#39;, label: &#39;관리&#39; }] },
+      { name: &#39;email&#39;, label: &#39;이메일&#39;, type: &#39;email&#39;, required: true, value: user.email, help: &#39;예시: taken@example.com 으로 바꾸면 서버 오류를 보여 줍니다.&#39; } ],
+      submit: async function (val) {
+        await wait(600);                 // 저장 중에는 저장 버튼이 잠겨 두 번 눌리지 않음
+        if (val.email === &#39;taken@example.com&#39;) throw new Error(&#39;이미 다른 사용자가 쓰는 이메일입니다.&#39;);
+      } });
+    document.getElementById(&#39;lr-out&#39;).textContent = v ? &#39;저장: &#39; + v.name + &#39; · &#39; + v.role + &#39; · &#39; + v.email : &#39;수정을 취소했습니다&#39;;
+  });
+});
+&lt;/script&gt;</code></pre></details>
 </figure>
 </section>
 
@@ -674,11 +826,11 @@ catui.use([&#39;layer&#39;], function (layer) {
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/core/helpers.html"><span>이전</span>저장소·주소·환경</a><a class="doc-pager-next" href="../../js/modules/form.html"><span>다음</span>form 폼</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#msg">메시지</a></li><li><a href="#dialog">확인·입력·알림</a></li><li><a href="#open">자유 레이어 · 드로어 · 로딩</a></li><li><a href="#window">창 기능 · 크기</a></li><li><a href="#special">말풍선 · 사진 보기 · 탭</a></li><li><a href="#promise">Promise · 진행률 · 내용 바꾸기</a></li><li><a href="#toast2">토스트 위치 · 동작 버튼</a></li><li><a href="#vtab">세로 탭 대화상자</a></li><li><a href="#forms">자주 쓰는 양식 (layer.form)</a></li><li><a href="#clean">관리 화면형 대화상자</a></li><li><a href="#options">open 옵션</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#msg">메시지</a></li><li><a href="#dialog">확인·입력·알림</a></li><li><a href="#open">자유 레이어 · 드로어 · 로딩</a></li><li><a href="#window">창 기능 · 크기</a></li><li><a href="#special">말풍선 · 사진 보기 · 탭</a></li><li><a href="#promise">Promise · 진행률 · 내용 바꾸기</a></li><li><a href="#toast2">토스트 위치 · 동작 버튼</a></li><li><a href="#vtab">세로 탭 대화상자</a></li><li><a href="#forms">자주 쓰는 양식 (layer.form)</a></li><li><a href="#clean">관리 화면형 대화상자</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#options">open 옵션</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

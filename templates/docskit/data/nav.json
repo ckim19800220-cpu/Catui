@@ -1,0 +1,18 @@
+[
+  { "title": "시작하기", "items": [
+    { "title": "소개", "href": "doc.html?p=intro" },
+    { "title": "5분 만에 시작하기", "href": "guide.html" },
+    { "title": "설치와 파일 구조", "href": "doc.html?p=install" }
+  ] },
+  { "title": "개념", "items": [
+    { "title": "토큰과 테마", "href": "doc.html?p=theme" },
+    { "title": "접근성 기준", "href": "doc.html?p=a11y" }
+  ] },
+  { "title": "참조", "items": [
+    { "title": "catui.docs 함수", "href": "api.html" },
+    { "title": "변경 이력", "href": "changelog.html" }
+  ] },
+  { "title": "버전", "items": [
+    { "title": "마이그레이션 가이드", "href": "versions.html" }
+  ] }
+]

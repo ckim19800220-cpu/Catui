@@ -14,6 +14,40 @@
 <p>radio 그룹이라 화살표 키로 고릅니다. 읽기 전용은 <code>role="img"</code>로 "5점 중 4점"만 읽힙니다.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="리뷰 작성 — 별점 필수 검사 · 낮은 점수면 이유 칸 · 평균 갱신(setValue)">
+  <div class="Catui_hstack Catui_gap-3"><span class="Catui_help">상품 평균</span><div id="rt-avg2"></div><span class="Catui_help" id="rt-avg2-n">4.0점 · 3명</span></div>
+  <form class="Catui_fields" id="rt-form" novalidate>
+    <div class="Catui_field"><div id="rt-review"></div><p class="Catui_error" id="rt-review-err" role="alert" hidden>별점을 골라 주세요.</p></div>
+    <div class="Catui_field" id="rt-why-box" hidden><label class="Catui_label" for="rt-why">아쉬운 점</label><textarea class="Catui_input" id="rt-why" rows="2" placeholder="어떤 점이 아쉬웠나요?"></textarea></div>
+    <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">리뷰 등록</button></div>
+  </form>
+  <script>
+  catui.use(['rate'], function (rate) {
+    var scores = [5, 4, 3], err = document.getElementById('rt-review-err');
+    rate.render({ elem: '#rt-avg2', id: 'rt-avg2', label: '상품 평균', value: 4, readonly: true });
+    rate.render({ elem: '#rt-review', id: 'rt-review', label: '이 상품은 어땠나요?', text: true, choose: function (v) {
+      err.hidden = v > 0;                                        // 고르면 오류 문장 감추기
+      document.getElementById('rt-why-box').hidden = !(v > 0 && v <= 2);   // 1~2점이면 이유 칸
+    } });
+    document.getElementById('rt-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = rate.getValue('rt-review');
+      if (!v) { err.hidden = false; document.querySelector('#rt-review input').focus(); return; }
+      scores.push(v);
+      var avg = scores.reduce(function (a, b) { return a + b; }, 0) / scores.length;
+      rate.setValue('rt-avg2', avg);                              // 읽기 전용은 소수도 그대로 읽힘
+      document.getElementById('rt-avg2-n').textContent = avg.toFixed(1) + '점 · ' + scores.length + '명';
+      rate.setValue('rt-review', 0);
+      document.getElementById('rt-why-box').hidden = true;
+      document.getElementById('rt-why').value = '';
+    });
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="options">
 <h2 id="options">옵션</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">rate 옵션</caption>

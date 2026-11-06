@@ -1,0 +1,27 @@
+<!-- title: 문서 | nav: doc -->
+<div class="Catui_dk-docs">
+  <details class="Catui_dk-side" open>
+    <summary>문서 메뉴{{icon:chevron-down}}</summary>
+    <nav class="Catui_dk-sidenav" aria-label="문서 메뉴" data-catui-dk-nav></nav>
+  </details>
+  <aside class="Catui_dk-aside" id="dk-toc" aria-label="이 쪽 목차" hidden></aside>
+  <article class="Catui_dk-article" data-catui-dk-page="intro" data-catui-dk-toc="#dk-toc">
+    <header class="Catui_dk-doc-h">
+      <p class="Catui_dk-crumb" data-crumb>문서</p>
+      <h1 class="Catui_h1" data-title>문서</h1>
+      <p class="Catui_lead" data-desc>문서를 불러오는 중입니다.</p>
+      <p class="Catui_dk-meta">{{icon:clock:16}}<span data-catui-dk-readtime="[data-catui-dk-page] [data-body]">읽는 시간 계산 중</span></p>
+    </header>
+    <div class="Catui_dk-prose" data-body></div>
+    <div class="Catui_dk-doc-f">
+      <p>{{icon:calendar:16}}마지막 수정 <time data-updated datetime="2026-10-28">2026.10.28</time></p>
+      <p><a class="Catui_link" href="https://github.com/ckim19800220-cpu/Catui" data-edit rel="noopener" target="_blank">{{icon:pencil:16}}이 쪽 고치기<span class="Catui_clip"> (GitHub, 새 창)</span></a></p>
+    </div>
+    <nav class="Catui_dk-pager" aria-label="이전·다음 문서" data-catui-dk-pager></nav>
+    <section class="Catui_dk-feedback" aria-labelledby="dk-fb-t" data-catui-dk-feedback data-catui-dk-notoc>
+      <h2 id="dk-fb-t">이 문서가 도움이 되었나요?</h2>
+      <div class="Catui_actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-vote="yes" aria-pressed="false">{{icon:thumbs-up}}예</button><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-vote="no" aria-pressed="false">{{icon:thumbs-down}}아니오</button></div>
+      <p class="Catui_help" role="status" data-msg></p>
+    </section>
+  </article>
+</div>

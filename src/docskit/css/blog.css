@@ -1,0 +1,84 @@
+/* docskit/blog.css */
+/* 블로그 — 글 카드 · 머리 그림 자리 · 글쓴이 · 태그 · 태그 거르기 · 글 보기 2단 · 공유 · 저자 · 태그 모음 */
+.Catui_dk-cards{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,var(--Catui_dk-card-min)),1fr));gap:var(--Catui_space-5)}
+.Catui_dk-wide{grid-column:1 / -1;list-style:none}
+.Catui_dk-card{display:grid;grid-template-rows:auto 1fr;align-content:start;gap:var(--Catui_space-2);min-width:0}
+.Catui_dk-card-link{display:grid;gap:var(--Catui_space-3);text-decoration:none;border-radius:var(--Catui_card-radius)}
+.Catui_dk-card-b{display:grid;gap:var(--Catui_space-1)}
+.Catui_dk-card-t{font-size:var(--Catui_type-h3-size);line-height:1.4;word-break:keep-all}
+.Catui_dk-card-link:hover .Catui_dk-card-t{text-decoration:underline;text-underline-offset:3px}
+.Catui_dk-card-d{color:var(--Catui_dk-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.Catui_dk-card > .Catui_dk-meta,.Catui_dk-card > .Catui_dk-tags{margin:0}
+
+/* 머리 그림 자리: 토큰 색 띠 + 아이콘(외부 이미지 없음, 꾸밈이므로 aria-hidden) */
+.Catui_dk-cover{display:grid;place-items:center;aspect-ratio:16 / 9;border-radius:var(--Catui_card-radius);background:linear-gradient(135deg,var(--Catui_dk-cover-a),var(--Catui_dk-cover-b));color:var(--Catui_color-text-primary);overflow:hidden}
+.Catui_dk-cover .Catui_icon{width:calc(var(--Catui_space-10) * 0.9);height:calc(var(--Catui_space-10) * 0.9);opacity:.7}
+.Catui_dk-cover-lg{aspect-ratio:21 / 8}
+.Catui_dk-cover-lg .Catui_icon{width:calc(var(--Catui_space-10) * 1.4);height:calc(var(--Catui_space-10) * 1.4)}
+.Catui_dk-cover[data-tone="1"]{--Catui_dk-cover-a:var(--Catui_color-brand-soft);--Catui_dk-cover-b:var(--Catui_color-info-soft)}
+.Catui_dk-cover[data-tone="2"]{--Catui_dk-cover-a:var(--Catui_color-info-soft);--Catui_dk-cover-b:var(--Catui_color-purple-soft)}
+.Catui_dk-cover[data-tone="3"]{--Catui_dk-cover-a:var(--Catui_color-purple-soft);--Catui_dk-cover-b:var(--Catui_color-amber-soft)}
+.Catui_dk-cover[data-tone="4"]{--Catui_dk-cover-a:var(--Catui_color-amber-soft);--Catui_dk-cover-b:var(--Catui_color-brand-soft)}
+.Catui_dk-av[data-tone="2"]{background:var(--Catui_color-info-soft)}
+.Catui_dk-av[data-tone="3"]{background:var(--Catui_color-purple-soft)}
+.Catui_dk-av[data-tone="4"]{background:var(--Catui_color-amber-soft)}
+.Catui_dk-av{color:var(--Catui_color-text-primary)}
+
+/* 글쓴이·날짜·읽는 시간 줄 */
+.Catui_dk-meta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-1) var(--Catui_space-2);font-size:var(--Catui_type-caption-size);color:var(--Catui_dk-muted)}
+.Catui_dk-meta a{font-weight:700;text-decoration:none}
+.Catui_dk-meta a:hover{text-decoration:underline}
+
+/* 태그 */
+.Catui_dk-tags{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:var(--Catui_space-1) var(--Catui_space-2)}
+.Catui_dk-tag{display:inline-flex;align-items:center;gap:var(--Catui_space-1);font-size:var(--Catui_type-caption-size);font-weight:600;text-decoration:none;color:var(--Catui_dk-accent)}
+.Catui_dk-tag:hover{text-decoration:underline}
+.Catui_dk-tag[aria-current="page"]{text-decoration:underline;text-decoration-thickness:2px;font-weight:800}
+
+/* 태그 거르기 버튼 (눌림 = 체크 아이콘 + 테두리 + 굵기, 색만으로 알리지 않음) */
+.Catui_dk-filter{position:relative;display:flex;gap:var(--Catui_space-2);overflow-x:auto;scrollbar-width:none;padding-block:2px}
+.Catui_dk-filter::-webkit-scrollbar{display:none}
+.Catui_dk-chip{flex:none;display:inline-flex;align-items:center;gap:var(--Catui_space-1);min-height:var(--Catui_control-h-sm);padding-inline:var(--Catui_space-3);border:1px solid var(--Catui_dk-line);border-radius:var(--Catui_radius-pill);background:var(--Catui_card-bg);color:var(--Catui_color-text-primary);font:inherit;font-size:var(--Catui_type-caption-size);cursor:pointer}
+.Catui_dk-chip:hover{border-color:var(--Catui_dk-accent)}
+.Catui_dk-chip[aria-pressed="true"]{border-color:var(--Catui_dk-accent);color:var(--Catui_dk-accent);font-weight:700;box-shadow:inset 0 0 0 1px var(--Catui_dk-accent);background:var(--Catui_dk-accent-soft)}
+.Catui_dk-chip-n{margin-left:var(--Catui_space-1);font-variant-numeric:tabular-nums;color:var(--Catui_dk-muted);font-weight:600}
+.Catui_dk-pager-row{display:flex;justify-content:center;flex-wrap:wrap}
+
+/* 글 보기: 본문 + 오른쪽 목차 */
+.Catui_dk-read{display:grid;grid-template-columns:minmax(0,1fr) var(--Catui_dk-toc-w);gap:var(--Catui_dk-gap);align-items:start}
+.Catui_dk-read > *{min-width:0}
+.Catui_dk-read > .Catui_dk-post{grid-column:1;grid-row:1}
+.Catui_dk-read > .Catui_dk-aside{grid-column:2;grid-row:1}
+.Catui_dk-post{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-5);max-width:var(--Catui_dk-measure)}
+.Catui_dk-post-h{display:grid;gap:var(--Catui_space-3)}
+.Catui_dk-post-t{margin:0;font-size:var(--Catui_type-display-size);line-height:1.25;word-break:keep-all}
+.Catui_dk-post-h .Catui_dk-meta{gap:var(--Catui_space-2)}
+.Catui_dk-share{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2);padding-block:var(--Catui_space-4);border-block:1px solid var(--Catui_divider-color)}
+.Catui_dk-share > b{margin-right:auto}
+.Catui_dk-who{display:flex;align-items:flex-start;gap:var(--Catui_space-4);padding:var(--Catui_space-5);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg)}
+.Catui_dk-who p{margin:0}
+.Catui_dk-who > div{display:grid;gap:var(--Catui_space-1);min-width:0}
+.Catui_dk-who-n{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--Catui_space-2)}
+.Catui_dk-who-n a{font-weight:800;text-decoration:none}
+.Catui_dk-who-n span{font-size:var(--Catui_type-caption-size);color:var(--Catui_dk-muted)}
+
+/* 태그 모음 · 저자 */
+.Catui_dk-cloud{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:var(--Catui_space-2)}
+.Catui_dk-cloud .Catui_dk-tag{min-height:var(--Catui_control-h-sm);padding-inline:var(--Catui_space-3);border:1px solid var(--Catui_dk-line);border-radius:var(--Catui_radius-pill);background:var(--Catui_card-bg)}
+.Catui_dk-cloud .Catui_dk-tag[aria-current="page"]{border-color:var(--Catui_dk-accent);box-shadow:inset 0 0 0 1px var(--Catui_dk-accent)}
+.Catui_dk-profile{display:flex;align-items:center;gap:var(--Catui_space-5)}
+.Catui_dk-profile > div{display:grid;gap:var(--Catui_space-1);min-width:0}
+.Catui_dk-profile p{margin:0}
+.Catui_dk-people{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:var(--Catui_space-3)}
+.Catui_dk-people a{display:inline-flex;align-items:center;gap:var(--Catui_space-2);font-weight:600;text-decoration:none}
+.Catui_dk-people a:hover span{text-decoration:underline}
+
+@media (max-width:1199px){
+  .Catui_dk-read{grid-template-columns:minmax(0,1fr)}
+  .Catui_dk-read > :is(.Catui_dk-post,.Catui_dk-aside){grid-column:auto;grid-row:auto}
+}
+@media (max-width:599px){
+  .Catui_dk-post-t{font-size:var(--Catui_type-h1-size)}
+  .Catui_dk-profile,.Catui_dk-who{flex-direction:column;align-items:flex-start}
+  .Catui_dk-cover-lg{aspect-ratio:16 / 9}
+}

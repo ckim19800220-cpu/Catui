@@ -1,0 +1,84 @@
+<section aria-labelledby="basic">
+<h2 id="basic">기본 (알약형)</h2>
+<catui-example title="아이콘 · 현재 위치 · 카운트 · 오른쪽 영역">
+  <nav class="Catui_hnav" aria-label="주 메뉴">
+    <a href="doc:css/components/hnav" aria-current="page"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-layout-dashboard"></use></svg>대시보드</a>
+    <a href="doc:css/components/table"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg>주문<span class="Catui_count"><span class="Catui_clip">처리할 주문 </span>12<span class="Catui_clip">건</span></span></a>
+    <a href="doc:css/components/list"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-package"></use></svg>상품</a>
+    <a href="doc:css/components/avatar"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-users"></use></svg>고객</a>
+    <div class="Catui_hnav-end">
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="검색"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-search"></use></svg></button>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-plus"></use></svg>새 주문</button>
+    </div>
+  </nav>
+</catui-example>
+<catui-example title="글자만 (가장 단순한 메뉴)">
+  <nav class="Catui_hnav" aria-label="회사 소개">
+    <a href="doc:css/components/hnav" aria-current="page">소개</a><a href="doc:css/layout/site">제품</a><a href="doc:css/blocks/people">팀</a><a href="doc:css/blocks/proof">고객 사례</a><a href="doc:css/components/faq">자주 묻는 질문</a>
+  </nav>
+</catui-example>
+</section>
+
+<section aria-labelledby="dropdown">
+<h2 id="dropdown">하위 메뉴 (드롭다운)</h2>
+<catui-example title="details 드롭다운을 메뉴 항목으로">
+  <nav class="Catui_hnav" aria-label="제품 메뉴" style="padding-bottom:180px;align-items:flex-start">
+    <a href="doc:css/components/hnav" aria-current="page">홈</a>
+    <details class="Catui_dd" open>
+      <summary class="Catui_hnav-item">보고서 <svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></summary>
+      <div class="Catui_dd-menu">
+        <a class="Catui_dd-item" href="doc:css/charts/line"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chart-bar"></use></svg>매출 보고서</a>
+        <a class="Catui_dd-item" href="doc:css/charts/funnel">전환 보고서</a>
+        <a class="Catui_dd-item" href="doc:css/views/heatmap">활동 기록</a>
+      </div>
+    </details>
+    <a href="doc:css/components/setting">설정</a>
+  </nav>
+</catui-example>
+<p>하위 메뉴는 <a href="doc:css/components/dropdown">드롭다운</a>의 <code>details.Catui_dd</code>를 그대로 넣고, 메뉴 칸 모양은 <code>summary.Catui_hnav-item</code>으로 맞춥니다. 열리면 화살표가 뒤집힙니다. 여러 열이 필요하면 <a href="doc:css/components/mega">메가 메뉴</a>를 씁니다.</p>
+</section>
+
+<section aria-labelledby="line">
+<h2 id="line">밑줄형</h2>
+<catui-example title="hnav-line (탭처럼 보이는 링크 메뉴)">
+  <nav class="Catui_hnav Catui_hnav-line" aria-label="프로젝트 메뉴">
+    <a href="doc:css/components/hnav" aria-current="page">개요</a><a href="doc:css/views/kanban">작업<span class="Catui_count"><span class="Catui_clip">남은 작업 </span>8<span class="Catui_clip">개</span></span></a><a href="doc:css/views/gantt">일정</a><a href="doc:css/views/files">파일</a><a href="doc:css/components/setting">설정</a>
+  </nav>
+</catui-example>
+</section>
+
+<section aria-labelledby="dark">
+<h2 id="dark">어두운 바</h2>
+<catui-example title="hnav-dark (관리 화면 상단·브랜드 바)">
+  <nav class="Catui_hnav Catui_hnav-dark" aria-label="관리 메뉴">
+    <a href="doc:css/components/hnav" aria-current="page"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-home"></use></svg>홈</a>
+    <a href="doc:css/components/table">주문</a><a href="doc:css/components/list">상품</a><a href="doc:css/components/notifs"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-bell"></use></svg>알림<span class="Catui_count"><span class="Catui_clip">새 알림 </span>3<span class="Catui_clip">건</span></span></a>
+    <div class="Catui_hnav-end"><a href="doc:css/components/setting"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-settings"></use></svg>설정</a></div>
+  </nav>
+</catui-example>
+</section>
+
+<section aria-labelledby="scroll">
+<h2 id="scroll">가로 스크롤</h2>
+<catui-example title="hnav-scroll (항목이 많거나 좁은 화면)">
+  <nav class="Catui_hnav Catui_hnav-scroll" aria-label="게시판" style="max-width:420px">
+    <a href="doc:css/components/hnav" aria-current="page">전체</a><a href="doc:css/components/list">공지</a><a href="doc:css/views/thread">자유</a><a href="doc:css/views/thread">질문</a><a href="doc:css/blocks/gallery">사진</a><a href="doc:css/components/table">거래</a><a href="doc:css/views/calendar">모임</a><a href="doc:css/components/faq">도움말</a>
+  </nav>
+</catui-example>
+<p>한 줄을 유지하고 넘치는 항목은 가로로 밀어서 봅니다. 스크롤 상자가 바깥을 자르므로 드롭다운은 넣지 마세요(기본형은 넘치면 다음 줄로 내려갑니다).</p>
+</section>
+
+<section aria-labelledby="usage">
+<h2 id="usage">사용법</h2>
+<p><code>nav.Catui_hnav</code> 안에 <code>a</code>를 나열하고 현재 항목에 <code>aria-current="page"</code>를 줍니다. 버튼·드롭다운 칸은 <code>.Catui_hnav-item</code>, 오른쪽으로 미는 영역은 <code>.Catui_hnav-end</code>. 변형: <code>.Catui_hnav-line</code>(밑줄형), <code>.Catui_hnav-dark</code>(어두운 바), <code>.Catui_hnav-scroll</code>(한 줄 가로 스크롤). 화면 안 보조 탭은 <a href="doc:css/components/subnav">보조 탐색</a>, 세로 메뉴는 <a href="doc:css/components/vnav">세로 내비게이션</a>, 공개 홈 머리 메뉴는 <a href="doc:css/layout/site">공개 홈</a>의 <code>.Catui_site-nav</code>를 씁니다.</p>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성</h2>
+<ul>
+  <li><code>nav</code> + <code>aria-label</code>로 이름을 붙이고, 한 화면에 메뉴가 여럿이면 이름을 서로 다르게 합니다.</li>
+  <li>현재 위치는 색·배경(밑줄형은 밑줄)과 <code>aria-current="page"</code>를 함께 씁니다.</li>
+  <li>카운트는 숨김 글자로 무엇의 개수인지 보충합니다. 아이콘만 있는 버튼에는 <code>aria-label</code>.</li>
+  <li>포커스 링은 항목 안쪽에 그려 가로 스크롤형에서도 잘리지 않습니다.</li>
+</ul>
+</section>

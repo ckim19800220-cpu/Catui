@@ -1,0 +1,59 @@
+{
+  "intro": {
+    "title": "소개", "group": "시작하기", "updated": "2026-10-28",
+    "desc": "Catui가 무엇이고, 어떤 화면을 만들 때 쓰는지 짧게 설명합니다.",
+    "edit": "https://github.com/ckim19800220-cpu/Catui/blob/main/docs-src/css/start/introduction.html",
+    "blocks": [
+      { "h2": "Catui는" },
+      { "p": "**한국어 화면**을 위한 토큰 기반 UI 키트입니다. CSS만으로 동작하는 컴포넌트와 의존성 없는 `catui.js`로 이루어져 있습니다." },
+      { "list": ["토큰(`--Catui_*`)만 참조하는 컴포넌트", "포커스 표시·키보드 조작·모션 줄이기를 기본으로", "관리자·커뮤니티·쇼핑몰·문서 사이트 확장"] },
+      { "h3": "누가 쓰나요" },
+      { "p": "사내 관리 화면, 공공 서비스 안내 쪽, 제품 문서처럼 글이 많고 접근성이 중요한 화면에 맞습니다." },
+      { "h2": "다음에 읽을 것" },
+      { "p": "설치는 [GitHub 저장소](https://github.com/ckim19800220-cpu/Catui)의 안내나 시작 가이드를 보세요." },
+      { "note": "이 문서 사이트의 글·저자·버전은 모두 가상 데이터입니다.", "tone": "tip" }
+    ]
+  },
+  "install": {
+    "title": "설치와 파일 구조", "group": "시작하기", "updated": "2026-10-26",
+    "desc": "배포 파일과 불러오는 순서, 확장 파일의 위치를 정리합니다.",
+    "edit": "https://github.com/ckim19800220-cpu/Catui/blob/main/docs-src/css/start/install.html",
+    "blocks": [
+      { "h2": "npm으로 설치" },
+      { "code": "npm install @imcat-ckim/catui", "lang": "bash" },
+      { "h2": "불러오는 순서" },
+      { "p": "본체 CSS → 확장 CSS, 본체 JS → 확장 JS 순서입니다. 확장 JS를 먼저 불러오면 콘솔에 안내가 나옵니다." },
+      { "code": "import catui from '@imcat-ckim/catui';\nimport docs from '@imcat-ckim/catui/docs';\nimport '@imcat-ckim/catui/css';\nimport '@imcat-ckim/catui/docs.css';", "lang": "js" },
+      { "h3": "배포 파일" },
+      { "list": ["`dist/docs.css` · `docs.min.css`", "`dist/catdocs.js` · `catdocs.esm.js` · `*.min.js` · `catdocs.d.ts`"] },
+      { "note": "CDN으로 쓸 때도 순서는 같습니다. 순서가 바뀌면 `catui.docs`가 만들어지지 않습니다.", "tone": "warn" }
+    ]
+  },
+  "theme": {
+    "title": "토큰과 테마", "group": "개념", "updated": "2026-10-20",
+    "desc": "색·간격·반경은 모두 토큰이고, 어두운 화면은 속성 한 줄로 바뀝니다.",
+    "edit": "https://github.com/ckim19800220-cpu/Catui/blob/main/docs-src/css/foundation/tokens.html",
+    "blocks": [
+      { "h2": "토큰" },
+      { "p": "컴포넌트는 `--Catui_color-*` 같은 토큰만 참조합니다. 확장도 새 색 값을 만들지 않습니다." },
+      { "h2": "다크 모드" },
+      { "p": "`<html data-catui-theme=\"dark\">`만 주면 모든 컴포넌트가 따라옵니다. 머리의 달 모양 버튼이 이 값을 바꾸고 기억합니다." },
+      { "h3": "테마 잠금" },
+      { "p": "다른 쪽이 테마를 관리하는 화면이면 `<html data-catui-theme-lock>`을 달아 확장이 덮어쓰지 않게 합니다." },
+      { "code": "<html lang=\"ko\" data-catui-theme-lock>", "lang": "html" }
+    ]
+  },
+  "a11y": {
+    "title": "접근성 기준", "group": "개념", "updated": "2026-10-18",
+    "desc": "글자 대비, 키보드, 화면 낭독기, 320px 리플로 기준을 정리합니다.",
+    "edit": "https://github.com/ckim19800220-cpu/Catui/blob/main/docs-src/css/start/accessibility.html",
+    "blocks": [
+      { "h2": "색만으로 알리지 않기" },
+      { "p": "현재 위치는 색과 함께 **굵기·막대**로, 변경 이력의 종류는 배지 **글자**로 알립니다." },
+      { "h2": "키보드와 포커스" },
+      { "list": ["모든 버튼·링크에 `:focus-visible` 외곽선", "가로로 넘치는 코드 블록도 Tab으로 들어가 화살표로 밀기", "한글 조합 중 Enter는 제출하지 않음"] },
+      { "h2": "320px 리플로" },
+      { "p": "가로 스크롤은 코드·표·메뉴 줄처럼 그 상자 안에서만 생기고, 쪽 전체는 넘치지 않습니다." }
+    ]
+  }
+}

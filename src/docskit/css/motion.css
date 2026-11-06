@@ -1,0 +1,12 @@
+/* docskit/motion.css */
+/* 모션 — 앵커 나타남 · 카드 머리 그림 살짝 확대 · 버튼 누름. 움직이는 속성은 transform·opacity만, 모션 줄이기 설정이면 즉시 */
+.Catui_dk-anchor{transition:opacity var(--Catui_dk-dur) var(--Catui_dk-ease-out)}
+.Catui_dk-cover .Catui_icon{transition:transform var(--Catui_dk-dur) var(--Catui_dk-ease-out)}
+@media (hover:hover){.Catui_dk-card-link:hover .Catui_dk-cover .Catui_icon{transform:scale(1.08)}}
+.Catui_dk-chip,.Catui_dk-copy{transition:transform 140ms var(--Catui_dk-ease-out)}
+.Catui_dk-chip:active,.Catui_dk-copy:active{transform:scale(.97)}
+
+@media (prefers-reduced-motion: reduce){
+  .Catui_dk-anchor,.Catui_dk-cover .Catui_icon,.Catui_dk-chip,.Catui_dk-copy,.Catui_dk-side > summary .Catui_icon{transition:none}
+  .Catui_dk-card-link:hover .Catui_dk-cover .Catui_icon,.Catui_dk-chip:active,.Catui_dk-copy:active{transform:none}
+}

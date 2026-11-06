@@ -7,6 +7,38 @@ catui.data('settings', null);                                // 표 삭제
 catui.sessionData(…)                                         // 같은 사용법, sessionStorage</code></pre>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="화면 설정 기억하기 — catui.data로 다음 방문에도 유지">
+  <div class="Catui_hstack Catui_gap-4" style="flex-wrap:wrap">
+    <span class="Catui_choice"><input class="Catui_clip" id="hp-compact" type="checkbox" role="switch"><label class="Catui_tgl" for="hp-compact"></label><label for="hp-compact">촘촘하게 보기</label></span>
+    <label class="Catui_label" for="hp-limit">쪽당 개수</label>
+    <div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="hp-limit"><option>10</option><option>20</option><option>50</option></select></div>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" id="hp-reset">설정 지우기</button>
+  </div>
+  <p class="Catui_help" id="hp-out" aria-live="polite"></p>
+  <script>
+  catui.use([], function () {
+    var T = 'doc-list-prefs', sw = document.getElementById('hp-compact'), sel = document.getElementById('hp-limit');
+    var show = function (msg) { var s = catui.data(T); document.getElementById('hp-out').textContent = msg + ' · 저장된 값: ' + JSON.stringify(s); };
+    // 불러오기: 저장된 값이 없으면 기본값
+    var saved = catui.data(T);
+    sw.checked = !!saved.compact;
+    sel.value = String(saved.limit || 10);
+    show('불러왔습니다');
+    sw.addEventListener('change', function () { catui.data(T, { key: 'compact', value: sw.checked }); show('저장했습니다'); });
+    sel.addEventListener('change', function () { catui.data(T, { key: 'limit', value: Number(sel.value) }); show('저장했습니다'); });
+    document.getElementById('hp-reset').addEventListener('click', function () {
+      catui.data(T, null);                     // 표째 지우기
+      sw.checked = false; sel.value = '10';
+      show('지웠습니다');
+    });
+  });
+  </script>
+</catui-example>
+<p>새로 고쳐도 고른 값이 남습니다. 사파리 비공개 창처럼 저장소를 못 쓰는 환경에서도 예외 없이 빈 객체를 돌려주므로 기본값 처리만 해 두면 됩니다. 탭을 닫으면 사라져야 하는 값(작성 중 임시 값 등)은 <code>catui.sessionData</code>.</p>
+</section>
+
 <section aria-labelledby="url">
 <h2 id="url">주소 — url</h2>
 <pre><code>catui.url('https://a.com/docs/x.html?a=1#/user/set?id=3');

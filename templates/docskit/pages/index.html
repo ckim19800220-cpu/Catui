@@ -1,0 +1,25 @@
+<!-- title: 문서 홈 | nav: home -->
+<section class="Catui_dk-hero" aria-labelledby="hm-t">
+  <p class="Catui_pill Catui_pill-info">v{{version}} 문서</p>
+  <h1 id="hm-t">한국어 화면을 위한 UI 키트, Catui 문서</h1>
+  <p class="Catui_lead">토큰부터 컴포넌트, catui.js API, 블로그 소식까지 한곳에서 찾으세요. 검색은 띄어쓰기를 몰라도, 초성만 쳐도 됩니다.</p>
+  <form class="Catui_dk-hero-search" action="search.html" role="search" data-catui-dk-search>
+    <div class="Catui_search">{{icon:search:18}}<label class="Catui_clip" for="hm-q">문서 검색</label><input class="Catui_input" id="hm-q" name="q" type="search" placeholder="예: 목차, 다크 모드, ㅁㅊ" autocomplete="off" enterkeyhint="search"></div>
+  </form>
+  <div class="Catui_actions"><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="guide.html">5분 만에 시작하기{{icon:arrow-right}}</a><a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="api.html">API 참조</a></div>
+</section>
+
+<section class="Catui_dk-sec" aria-labelledby="hm-start">
+  <div class="Catui_dk-sec-h"><h2 class="Catui_h3" id="hm-start">어디서부터 볼까요?</h2></div>
+  <ul class="Catui_dk-starts">
+    <li><a class="Catui_dk-start" href="guide.html">{{icon:rocket:24}}<b>시작 가이드</b><span>설치부터 첫 화면까지 네 단계. 코드는 복사해서 그대로 씁니다.</span></a></li>
+    <li><a class="Catui_dk-start" href="doc.html?p=intro">{{icon:book-open:24}}<b>개념 문서</b><span>토큰·테마·접근성 기준과 파일 구조를 설명합니다.</span></a></li>
+    <li><a class="Catui_dk-start" href="api.html">{{icon:code-xml:24}}<b>API 참조</b><span>함수 시그니처·매개변수·반환 값과 예제.</span></a></li>
+    <li><a class="Catui_dk-start" href="changelog.html">{{icon:history:24}}<b>변경 이력</b><span>버전마다 추가·변경·고침을 배지로 정리했습니다.</span></a></li>
+  </ul>
+</section>
+
+<section class="Catui_dk-sec" aria-labelledby="hm-blog">
+  <div class="Catui_dk-sec-h"><h2 class="Catui_h3" id="hm-blog">블로그 새 글</h2><a class="Catui_link" href="blog.html">전체 보기</a></div>
+  <ul class="Catui_dk-cards" data-catui-dk-posts="recent" data-size="3" aria-label="블로그 새 글"></ul>
+</section>

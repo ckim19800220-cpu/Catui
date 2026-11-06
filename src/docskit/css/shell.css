@@ -1,0 +1,97 @@
+/* docskit/shell.css */
+/* 사이트 머리(로고·메뉴·검색·테마) · 본문 · 바닥글 · 문서 3단(왼쪽 메뉴 · 본문 · 오른쪽 목차) · 셸 없는 화면 */
+.Catui_dk-body{margin:0;background:var(--Catui_color-page-bg)}
+.Catui_dk{min-height:100vh;display:flex;flex-direction:column;background:var(--Catui_color-page-bg)}
+.Catui_dk [hidden]{display:none !important}
+.Catui_dk :is(.Catui_label,.Catui_tbl th){text-transform:none;letter-spacing:0}
+.Catui_dk :is(a,button,summary,input,select,textarea,pre):focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_dk img{max-width:100%;height:auto}
+
+/* 머리 */
+.Catui_dk-head{position:sticky;top:0;z-index:30;background:var(--Catui_card-bg);border-bottom:1px solid var(--Catui_dk-line)}
+.Catui_dk-head-in{max-width:var(--Catui_dk-wrap);margin-inline:auto;display:flex;align-items:center;gap:var(--Catui_space-4);min-height:var(--Catui_dk-head-h);padding-inline:var(--Catui_space-5)}
+.Catui_dk-brand{display:inline-flex;align-items:center;gap:var(--Catui_space-2);font-weight:800;font-size:var(--Catui_type-h3-size);text-decoration:none;white-space:nowrap;color:var(--Catui_color-text-primary)}
+.Catui_dk-brand span{color:var(--Catui_dk-accent)}
+.Catui_dk-logo{display:inline-grid;place-items:center;width:var(--Catui_control-h-md);height:var(--Catui_control-h-md);border-radius:var(--Catui_radius-md);background:var(--Catui_dk-accent);color:var(--Catui_color-text-inverse)}
+.Catui_dk-logo .Catui_icon{color:inherit}
+.Catui_dk-nav{position:relative;display:flex;align-items:center;gap:var(--Catui_space-1);min-width:0;overflow-x:auto;scrollbar-width:none}
+.Catui_dk-nav::-webkit-scrollbar{display:none}
+.Catui_dk-nav-item{flex:none;display:inline-flex;align-items:center;min-height:var(--Catui_control-h-md);padding-inline:var(--Catui_space-3);border-radius:var(--Catui_radius-sm);font-weight:600;text-decoration:none;color:var(--Catui_dk-muted)}
+.Catui_dk-nav-item:hover{color:var(--Catui_color-text-primary);background:var(--Catui_color-surface-muted)}
+.Catui_dk-nav-item[aria-current="page"]{color:var(--Catui_color-text-primary);box-shadow:inset 0 -2px 0 var(--Catui_dk-accent)}
+.Catui_dk-nav-item:focus-visible{outline-offset:-2px}
+.Catui_dk-search{flex:1;max-width:calc(var(--Catui_space-10) * 6.5);margin-left:auto}
+.Catui_dk-search .Catui_input{width:100%}
+.Catui_dk-head-acts{display:flex;align-items:center;gap:var(--Catui_space-1)}
+.Catui_dk-only-sm{display:none}
+
+/* 본문 */
+.Catui_dk-main{flex:1;width:100%;max-width:var(--Catui_dk-wrap);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_dk-gap);padding:var(--Catui_dk-gap) var(--Catui_space-5);align-content:start}
+.Catui_dk-main > *{min-width:0}
+.Catui_dk-main:focus{outline:none}
+.Catui_dk a:not(.Catui_btn,.Catui_link,.Catui_pg,.Catui_dk-nav-item,.Catui_dk-tag){color:inherit}
+.Catui_dk-sec{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-4)}
+.Catui_dk-sec-h{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2) var(--Catui_space-3)}
+.Catui_dk-sec-h > :is(h1,h2){margin:0;margin-right:auto}
+.Catui_dk-scroll{position:relative;overflow-x:auto}
+
+/* 문서 3단: 왼쪽 메뉴 · 본문 · 오른쪽 목차 */
+.Catui_dk-docs{display:grid;grid-template-columns:var(--Catui_dk-side-w) minmax(0,1fr) var(--Catui_dk-toc-w);gap:var(--Catui_dk-gap);align-items:start}
+.Catui_dk-docs > *{min-width:0}
+/* 마크업 순서: 메뉴 · 목차 · 본문 (좁은 화면에서 목차가 본문 앞에 오도록) — 넓은 화면은 칸을 직접 지정 */
+.Catui_dk-docs > .Catui_dk-side{grid-column:1;grid-row:1}
+.Catui_dk-docs > .Catui_dk-article{grid-column:2;grid-row:1}
+.Catui_dk-docs > .Catui_dk-aside{grid-column:3;grid-row:1}
+.Catui_dk-side{position:sticky;top:calc(var(--Catui_dk-head-h) + var(--Catui_space-4));max-height:calc(100vh - var(--Catui_dk-head-h) - var(--Catui_space-8));overflow-y:auto;overscroll-behavior:contain}
+.Catui_dk-side > summary{display:none}
+.Catui_dk-sidenav{display:grid;gap:var(--Catui_space-5);padding-bottom:var(--Catui_space-6)}
+.Catui_dk-nav-g ul{margin:0;padding:0;list-style:none;display:grid;gap:2px}
+.Catui_dk-nav-t{margin:0 0 var(--Catui_space-1);padding-inline:var(--Catui_space-3);font-size:var(--Catui_type-caption-size);font-weight:700;color:var(--Catui_dk-muted)}
+.Catui_dk-nav-g a{display:flex;align-items:center;min-height:var(--Catui_control-h-sm);padding:var(--Catui_space-1) var(--Catui_space-3);border-left:2px solid transparent;border-radius:0 var(--Catui_radius-sm) var(--Catui_radius-sm) 0;text-decoration:none;color:var(--Catui_dk-muted);line-height:1.35}
+.Catui_dk-nav-g a:hover{color:var(--Catui_color-text-primary);background:var(--Catui_color-surface-muted)}
+.Catui_dk-nav-g a[aria-current="page"]{border-left-color:var(--Catui_dk-accent);background:var(--Catui_dk-accent-soft);color:var(--Catui_dk-accent);font-weight:700}
+.Catui_dk-nav-g a:focus-visible{outline-offset:-2px}
+.Catui_dk-aside{position:sticky;top:calc(var(--Catui_dk-head-h) + var(--Catui_space-4));max-height:calc(100vh - var(--Catui_dk-head-h) - var(--Catui_space-8));overflow-y:auto}
+
+/* 바닥글 */
+.Catui_dk-foot{border-top:1px solid var(--Catui_dk-line);background:var(--Catui_card-bg)}
+.Catui_dk-foot-in{max-width:var(--Catui_dk-wrap);margin-inline:auto;display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-6) var(--Catui_space-5);font-size:var(--Catui_type-caption-size);color:var(--Catui_dk-muted)}
+.Catui_dk-foot-in p{margin:0;word-break:keep-all}
+.Catui_dk-foot nav{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2) var(--Catui_space-4);font-weight:600}
+
+/* 셸 없는 화면(404) */
+.Catui_dk-blank{min-height:100vh;display:grid;place-items:center;padding:var(--Catui_space-8) var(--Catui_space-4)}
+.Catui_dk-404{text-align:center;max-width:calc(var(--Catui_space-10) * 10)}
+.Catui_dk-404 .Catui_actions{justify-content:center;flex-wrap:wrap}
+.Catui_dk-code-n{font-size:calc(var(--Catui_type-display-size) * 2);font-weight:800;line-height:1;color:var(--Catui_dk-accent)}
+
+@media (max-width:1199px){
+  .Catui_dk-docs{grid-template-columns:var(--Catui_dk-side-w) minmax(0,1fr)}
+  .Catui_dk-aside{position:relative;top:auto;max-height:none}
+  .Catui_dk-docs > .Catui_dk-aside{grid-column:2;grid-row:1}
+  .Catui_dk-docs > .Catui_dk-side{grid-column:1;grid-row:1 / span 2}
+  .Catui_dk-docs > .Catui_dk-article{grid-column:2;grid-row:2}
+}
+@media (max-width:991px){
+  .Catui_dk-docs{grid-template-columns:minmax(0,1fr)}
+  .Catui_dk-docs > :is(.Catui_dk-aside,.Catui_dk-side,.Catui_dk-article){grid-column:auto;grid-row:auto}
+  .Catui_dk-side{position:relative;top:auto;max-height:none;border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg)}
+  .Catui_dk-side > summary{display:flex;align-items:center;gap:var(--Catui_space-2);min-height:var(--Catui_control-h-lg);padding-inline:var(--Catui_space-4);font-weight:700;cursor:pointer;list-style:none}
+  .Catui_dk-side > summary::-webkit-details-marker{display:none}
+  .Catui_dk-side > summary .Catui_icon{margin-left:auto;transition:transform var(--Catui_dk-dur) var(--Catui_dk-ease-out)}
+  .Catui_dk-side[open] > summary .Catui_icon{transform:rotate(180deg)}
+  .Catui_dk-sidenav{padding:0 var(--Catui_space-2) var(--Catui_space-4)}
+}
+@media (max-width:767px){
+  .Catui_dk-head-in{flex-wrap:wrap;gap:0 var(--Catui_space-2);padding-inline:var(--Catui_space-3)}
+  .Catui_dk-head .Catui_dk-search{display:none}
+  .Catui_dk-only-sm{display:inline-flex}
+  .Catui_dk-head-acts{margin-left:auto}
+  .Catui_dk-nav{order:3;flex-basis:100%;margin-inline:calc(var(--Catui_space-3) * -1);padding-inline:var(--Catui_space-2);border-top:1px solid var(--Catui_divider-color)}
+  .Catui_dk-main{padding-inline:var(--Catui_space-4)}
+}
+/* 320px(WCAG 리플로 기준) */
+@media (max-width:399px){
+  .Catui_dk-brand{font-size:var(--Catui_type-body-size)}
+  .Catui_dk-main{padding-inline:var(--Catui_space-3)}
+}

@@ -1,0 +1,59 @@
+<section aria-labelledby="order">
+<h2 id="order">계산 순서</h2>
+<p>모든 금액은 원(정수)으로 계산하고, 표시만 <code>shop.won()</code>으로 바꿉니다. 규칙 값은 <code>catui.shop.rules</code>에 있어 실서비스 정책에 맞게 바꿀 수 있습니다.</p>
+<dl class="doc-formula">
+  <div><dt>판매가</dt><dd><code>⌊정가 × (100 − 할인율) ÷ 1000⌋ × 10</code><span>10원 단위 내림. 옵션 추가금은 할인 없이 판매가에 더합니다</span></dd></div>
+  <div><dt>쿠폰가</dt><dd><code>판매가 − 이 상품 하나에 쓸 수 있는 가장 큰 쿠폰</code><span>상세 화면의 “최대 혜택가”. 최소 주문 금액·분류 제한을 지킨 쿠폰만</span></dd></div>
+  <div><dt>상품 합계</dt><dd><code>Σ 판매가 × 수량 (선택한 줄, 품절 제외)</code><span>장바구니 체크를 푼 줄과 품절 줄은 합계에 넣지 않습니다</span></dd></div>
+  <div><dt>배송비</dt><dd><code>합계 ≥ 30,000원 또는 모두 무료배송 상품 → 0, 아니면 3,000원</code><span>무료까지 남은 금액을 막대와 글자로 보여 줍니다</span></dd></div>
+  <div><dt>쿠폰</dt><dd><code>정률: ⌊대상 금액 × 율 ÷ 1000⌋ × 10 (최대 할인까지) · 정액 · 배송비</code><span>분류 제한이 있으면 그 분류 상품 금액만 대상, 최소 주문 금액도 그 금액 기준</span></dd></div>
+  <div><dt>적립금</dt><dd><code>1,000원 이상 · 10원 단위 · 쿠폰 뒤 상품 금액까지</code><span>넘게 쓰면 최대치로 맞추고 이유를 알려 줍니다</span></dd></div>
+  <div><dt>최종 결제</dt><dd><code>상품 합계 − 쿠폰 − 적립금 + 배송비</code><span>적립 예정 = (상품 합계 − 쿠폰 − 적립금) × 1%</span></dd></div>
+</dl>
+</section>
+
+<section aria-labelledby="try">
+<h2 id="try">직접 계산해 보기</h2>
+<p>아래 예제는 문서 안의 배열만 씁니다(데이터 파일 없음). 수량·쿠폰·적립금을 바꾸면 <code>shop.calc.cart</code> → <code>shop.calc.order</code>가 다시 계산합니다.</p>
+<catui-example title="장바구니 합계 · 쿠폰 · 적립금 · 최종 금액">
+  <div class="Catui_sh Catui_vstack Catui_gap-3" style="min-height:0;background:transparent" id="dst-box">
+    <div class="Catui_sh-box">
+      <ul class="Catui_sh-cart" id="dst-lines" aria-label="예제 장바구니"></ul>
+      <div class="Catui_field"><label class="Catui_label" for="dst-coupon">쿠폰</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="dst-coupon"></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+      <div class="Catui_field"><label class="Catui_label" for="dst-points">적립금 (보유 4,820원)</label><input class="Catui_input" id="dst-points" inputmode="numeric" value="2000" aria-describedby="dst-note"><p class="Catui_help" id="dst-note" aria-live="polite"></p></div>
+      <dl class="Catui_sh-sum" id="dst-sum"></dl>
+    </div>
+  </div>
+  <script>
+  catui.use(['shop'], function (shop) {
+    var raw = [
+      { id: 'a', name: '오버핏 코튼 반팔 티셔츠', brand: '고양이옷장', cat: 'fashion', price: 29000, rate: 30, created: '2026-09-01', stock: 12 },
+      { id: 'b', name: '수분 진정 크림 50ml', brand: '맑은숲', cat: 'beauty', price: 32000, rate: 25, created: '2026-07-15', stock: 40 }
+    ];
+    var coupons = [
+      { id: 'W10', name: '신규 10%', type: 'rate', value: 10, max: 10000, min: 20000 },
+      { id: 'B3000', name: '뷰티 3,000원', type: 'amount', value: 3000, min: 15000, cats: ['beauty'] },
+      { id: 'BIG', name: '20만원 이상 2만원', type: 'amount', value: 20000, min: 200000 }
+    ];
+    var d = shop.enrich({ products: raw }), lines = [{ key: 'a', id: 'a', qty: 1, on: true }, { key: 'b', id: 'b', qty: 1, on: true }];
+    var $ = function (id) { return document.getElementById(id); };
+    var items = function (s) { return s.selected.map(function (l) { return { cat: l.product.cat, amount: l.amount }; }); };
+    var draw = function () {
+      var s = shop.calc.cart(lines, d.byId), sel = $('dst-coupon'), keep = sel.value;
+      catui.mount($('dst-lines'), catui.html`${s.lines.map(function (l) { return catui.html`<li class="Catui_sh-co-item"><span></span><div><b>${l.product.name}</b><p class="Catui_help">${shop.won(l.unit)} × ${l.qty}개</p></div><div class="Catui_stepper Catui_sh-qty" role="group" aria-label="${l.product.name} 수량"><button type="button" data-k="${l.key}" data-step="-1" aria-label="수량 줄이기"${l.qty <= 1 ? catui.html` disabled` : ''}>−</button><output>${l.qty}</output><button type="button" data-k="${l.key}" data-step="1" aria-label="수량 늘리기">+</button></div></li>`; })}`);
+      sel.replaceChildren(new Option('쿠폰 선택 안 함', ''));
+      coupons.forEach(function (c) { var r = shop.coupon.apply(c, { items: items(s), ship: s.ship }), o = new Option(c.name + (r.ok ? ' → −' + shop.won(r.amount) : ' (사용 불가: ' + r.reason + ')'), c.id); o.disabled = !r.ok; sel.add(o); });
+      sel.value = keep && !sel.querySelector('option[value="' + keep + '"]').disabled ? keep : '';
+      var o = shop.calc.order({ cart: s, coupon: coupons.find(function (c) { return c.id === sel.value; }) || null, points: $('dst-points').value, have: 4820 });
+      $('dst-note').textContent = o.pointNote || ('최대 ' + shop.won(o.maxPoints) + ' 사용 가능');
+      catui.mount($('dst-sum'), catui.html`<div><dt>상품 금액</dt><dd>${shop.won(o.listTotal)}</dd></div><div><dt>상품 할인</dt><dd>−${shop.won(o.discount)}</dd></div><div><dt>쿠폰</dt><dd>−${shop.won(o.coupon)}</dd></div><div><dt>적립금</dt><dd>−${shop.won(o.points)}</dd></div><div><dt>배송비</dt><dd>${o.ship ? '+' + shop.won(o.ship) : '무료'}</dd></div><div class="Catui_sh-sum-total"><dt>최종 결제</dt><dd>${shop.won(o.total)}</dd></div>`);
+    };
+    $('dst-box').addEventListener('click', function (e) { var b = e.target.closest('[data-step]'); if (!b) return; var l = lines.find(function (x) { return x.key === b.dataset.k; }); l.qty = Math.max(1, l.qty + Number(b.dataset.step)); draw(); $('dst-box').querySelector('[data-k="' + l.key + '"][data-step="' + b.dataset.step + '"]').focus(); });
+    $('dst-coupon').addEventListener('change', draw);
+    $('dst-points').addEventListener('input', draw);
+    draw();
+  });
+  </script>
+</catui-example>
+<p>티셔츠 20,300원 + 크림 24,000원 = 44,300원 → 30,000원 이상이라 배송비 무료. 신규 10% 쿠폰은 4,430원, 뷰티 쿠폰은 크림 금액(24,000원)만 대상이라 3,000원입니다. “20만원 이상 2만원” 쿠폰은 최소 금액이 모자라 고를 수 없고 이유가 함께 보입니다. 적립금에 500을 넣으면 1,000원 미만이라 쓰지 않고, 9,999를 넣으면 보유액 안에서 10원 단위(4,820원)로 맞춥니다.</p>
+</section>

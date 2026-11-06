@@ -1,0 +1,23 @@
+/* shop/tokens.css */
+/* CatuiShop 토큰 — 본체 토큰을 참조만 한다(새 색 값 없음). */
+.Catui_sh{
+  --Catui_sh-wrap:calc(var(--Catui_space-10) * 19);            /* 본문 최대 폭 ≈ 1216px */
+  --Catui_sh-gap:var(--Catui_space-5);
+  --Catui_sh-head-h:calc(var(--Catui_space-10) + var(--Catui_space-2));
+  --Catui_sh-card-min:calc(var(--Catui_space-10) * 3.1);        /* 상품 카드 최소 폭 ≈ 198px (599px 이하 ≈ 134px — 320px 화면도 2열) */
+  --Catui_sh-side-w:calc(var(--Catui_space-10) * 5.4);           /* 주문 요약·필터 옆줄 ≈ 346px */
+  --Catui_sh-sale:var(--Catui_color-danger);                     /* 할인율 — 숫자 + "%" + 숨김 글자 "할인"을 함께(색만으로 알리지 않음) */
+  --Catui_sh-price:var(--Catui_color-text-primary);
+  --Catui_sh-muted:var(--Catui_color-text-secondary);
+  --Catui_sh-accent:var(--Catui_color-brand-strong);             /* 혜택·무료배송·선택 강조 */
+  --Catui_sh-accent-soft:var(--Catui_color-brand-soft);
+  --Catui_sh-warn:var(--Catui_color-orange);                     /* 남은 재고 적음 — 항상 "N개 남음" 글자와 함께 */
+  --Catui_sh-img-bg:var(--Catui_color-surface-muted);
+  --Catui_sh-radius:var(--Catui_radius-md);
+  /* 모션: 들어오고 나가는 것은 ease-out, 화면 안 이동은 ease-in-out. UI는 300ms 미만 */
+  --Catui_sh-ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  --Catui_sh-dur-press:160ms;
+  --Catui_sh-dur-ui:200ms;
+  --Catui_sh-press:0.97;
+}
+@media (max-width:599px){.Catui_sh{--Catui_sh-card-min:calc(var(--Catui_space-10) * 2.1);--Catui_sh-gap:var(--Catui_space-4)}}

@@ -7,6 +7,40 @@ catui.escape('&lt;b&gt;')                    // '&amp;lt;b&amp;gt;'
 catui.mount(el, catui.html`…`)          // html``은 마크업으로, 문자열은 글자로, Element·배열도 받음</code></pre>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="배열로 목록 그리기 — html`` · mount · 위임 on (입력 글자는 자동 escape)">
+  <form class="Catui_hstack Catui_gap-3" id="dom-todo-form">
+    <label class="Catui_clip" for="dom-todo-q">할 일</label><input class="Catui_input" id="dom-todo-q" placeholder="예: &lt;b&gt;굵게&lt;/b&gt; 를 넣어 보세요" autocomplete="off">
+    <button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">추가</button>
+  </form>
+  <ul class="Catui_list" id="dom-todo"></ul>
+  <script>
+  catui.use([], function () {
+    var $ = catui.$, todos = ['견적서 보내기', '회의실 예약'];
+    var draw = function () {
+      // 데이터가 바뀔 때마다 한 번에 다시 그린다. ${t}는 escape되어 글자로 보인다
+      catui.mount(catui.el('#dom-todo'), todos.length
+        ? catui.html`${todos.map(function (t, i) { return catui.html`<li class="Catui_list-item"><span>${t}</span><span class="Catui_list-meta"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-i="${i}" aria-label="${t} 지우기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-x"></use></svg></button></span></li>`; })}`
+        : catui.html`<li class="Catui_list-item Catui_help">할 일이 없습니다</li>`);
+    };
+    $('#dom-todo-form').on('submit', function (e) {
+      e.preventDefault();
+      var q = catui.el('#dom-todo-q'), v = q.value.trim();
+      if (!v) { q.focus(); return; }
+      todos.push(v); q.value = ''; draw();
+    });
+    // 다시 그려도 위임은 목록(ul)에 한 번만 걸면 된다
+    $('#dom-todo').on('click', '[data-i]', function (e, btn) {
+      todos.splice(Number(btn.dataset.i), 1); draw();
+      catui.el('#dom-todo-q').focus();
+    });
+    draw();
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="query">
 <h2 id="query">$ — DOM 도우미</h2>
 <catui-example title="위임 이벤트와 클래스">

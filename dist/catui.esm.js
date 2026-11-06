@@ -42,6 +42,7 @@ function html(strings, ...values) {
 const catuiSettings = {
   icons: `${BASE}icons.svg?v=2`, // 아이콘 스프라이트 경로
   autoInit: true,                // DOMContentLoaded에 data-catui-* 자동 초기화
+  banner: true,                  // 불러올 때 콘솔에 이름·버전 한 줄 (debug: "silent"이거나 false로 끔)
   autoDestroy: true,             // DOM에서 빠진 요소의 컴포넌트 인스턴스 자동 정리
   debug: true,                   // 콘솔 출력: true 경고·오류 / false 오류만(운영) / "silent" 모두 끔
   csrf: { meta: "csrf-token", header: "X-CSRF-Token" },   // 같은 출처 쓰기 요청에 붙일 CSRF 토큰 (false = 끔)
@@ -5120,7 +5121,7 @@ const catuiPageFlow = component({
     bar.setAttribute("aria-live", "polite");
     box.insertAdjacentElement("afterend", bar);
     box.setAttribute("aria-busy", "false");
-    let page = 0, busy = false, ended = false, io = null;
+    let page = 0, busy = false, ended = false, io = null, gen = 0;   // gen: reset할 때마다 늘어나는 세대 번호
     const status = (state) => {
       mount(bar, state === "loading"
         ? html`<span class="Catui_spin" aria-hidden="true"></span><span class="Catui_help">${c.loadingText}</span>`
@@ -5144,11 +5145,11 @@ const catuiPageFlow = component({
       page += 1;
       box.setAttribute("aria-busy", "true");
       status("loading");
-      const my = page;
+      const my = page, myGen = gen;
       let answered = false;
       // next(항목들, 더 있음?) — 항목은 html``·Element·배열
       const next = (items, more = true) => {
-        if (answered || my !== page) return;
+        if (answered || my !== page || myGen !== gen) return;   // reset 이전 요청의 늦은 응답은 버린다(쪽 번호만으로는 새 1쪽과 구분 안 됨)
         answered = true;
         append(items);
         busy = false;
@@ -5159,7 +5160,7 @@ const catuiPageFlow = component({
         inst.emit("load", { page: my, more: !ended });
       };
       // 실패하면 "다시 시도" 버튼으로만 재요청한다 — 감시를 멈춰 막대가 다시 보일 때 저절로 반복 요청하지 않게
-      const fail = (err) => { if (answered) return; answered = true; busy = false; page -= 1; box.setAttribute("aria-busy", "false"); io?.unobserve(bar); status("error"); hint.error("flow: 불러오기 실패", "error", err); };
+      const fail = (err) => { if (answered || myGen !== gen) return; answered = true; busy = false; page -= 1; box.setAttribute("aria-busy", "false"); io?.unobserve(bar); status("error"); hint.error("flow: 불러오기 실패", "error", err); };
       try {
         c.done.call(inst, my, next)?.catch?.(fail);
       } catch (err) { fail(err); }
@@ -5174,7 +5175,7 @@ const catuiPageFlow = component({
     status("more");
     if (!io) load();
     inst.load = load;
-    inst.reset = () => { page = 0; ended = false; busy = false; box.textContent = ""; status("more"); if (c.auto && io) { io.disconnect(); io.observe(bar); } else load(); };
+    inst.reset = () => { gen += 1; page = 0; ended = false; busy = false; box.textContent = ""; status("more"); if (c.auto && io) { io.disconnect(); io.observe(bar); } else load(); };
     inst.use(() => { io?.disconnect(); bar.removeEventListener("click", onClick); bar.remove(); box.removeAttribute("aria-busy"); });
   },
 });
@@ -5759,7 +5760,14 @@ const catui = {
 };
 
 // 자동 초기화: catui.config({ autoInit: false })로 끌 수 있다(스크립트 직후 호출)
-const catuiAuto = () => { if (getConfig().autoInit && !catuiReady) catui.init(); };
+// 콘솔 안내 한 줄(페이지당 한 번). 스크립트 직후 catui.config({ banner: false })로 끌 수 있다
+const catuiBanner = () => {
+  const c = getConfig();
+  if (!c.banner || c.debug === "silent" || typeof console === "undefined" || globalThis.__catuiBanner) return;
+  globalThis.__catuiBanner = true;
+  console.info(`%cCatui%c 한국어 화면을 위한 토큰 기반 UI 키트 · v${VERSION} · MIT by Ckim`, "background:#0E7A63;color:#fff;font-weight:700;padding:2px 6px;border-radius:3px", "color:inherit;padding-left:6px");
+};
+const catuiAuto = () => { catuiBanner(); if (getConfig().autoInit && !catuiReady) catui.init(); };
 if (typeof document !== "undefined") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", catuiAuto, { once: true });
   else queueMicrotask(catuiAuto);

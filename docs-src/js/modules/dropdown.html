@@ -34,6 +34,64 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<catui-example title="표 행마다 더보기(⋯) 메뉴 — align: 'right'">
+  <div class="Catui_table-wrap"><table class="Catui_tbl">
+    <caption class="Catui_clip">팀원</caption>
+    <thead><tr><th scope="col">이름</th><th scope="col">역할</th><th scope="col" class="Catui_num">동작</th></tr></thead>
+    <tbody id="dd-rows">
+      <tr><td>김하늘</td><td>관리자</td><td class="Catui_num"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-name="김하늘" aria-label="김하늘 더보기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-more-horizontal"></use></svg></button></td></tr>
+      <tr><td>이준</td><td>편집자</td><td class="Catui_num"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-name="이준" aria-label="이준 더보기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-more-horizontal"></use></svg></button></td></tr>
+      <tr><td>박서연</td><td>보기 전용</td><td class="Catui_num"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-name="박서연" aria-label="박서연 더보기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-more-horizontal"></use></svg></button></td></tr>
+    </tbody>
+  </table></div>
+  <p class="Catui_help" id="dd-rows-out" aria-live="polite"></p>
+  <script>
+  catui.use(['dropdown', 'layer'], function (dropdown, layer) {
+    var out = function (t) { document.getElementById('dd-rows-out').textContent = t; };
+    document.querySelectorAll('#dd-rows [data-name]').forEach(function (btn) {
+      dropdown.render({ elem: btn, align: 'right', width: 'sm', label: btn.dataset.name + ' 메뉴', data: [
+        { id: 'view', title: '프로필 보기', icon: 'user' }, { id: 'edit', title: '역할 바꾸기', icon: 'pencil' },
+        { id: 'mail', title: '메일 보내기', icon: 'mail' }, { type: '-' }, { id: 'del', title: '팀에서 빼기', icon: 'user-minus', danger: true } ],
+        click: function (item, trigger) {
+          var name = trigger.dataset.name;
+          if (item.id !== 'del') { out(name + ': ' + item.title); return; }
+          // 메뉴가 닫히며 포커스가 ⋯ 버튼으로 돌아간 뒤 대화상자를 연다(취소하면 그 버튼으로 복귀)
+          setTimeout(function () {
+            layer.confirm(name + '님을 팀에서 뺄까요?', { danger: true, okText: '빼기' }, function (i) {
+              layer.close(i);
+              var row = trigger.closest('tr'), next = row.nextElementSibling || row.previousElementSibling;
+              row.remove();                  // 행이 사라지면 메뉴 인스턴스도 자동 정리(autoDestroy)
+              if (next) next.querySelector('button').focus();
+              out(name + '님을 뺐습니다');
+            });
+          });
+        } });
+    });
+  });
+  </script>
+</catui-example>
+<catui-example title="고른 값을 버튼 글자와 체크로 표시 — 정렬 기준">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" id="dd-sort"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-arrow-up-down"></use></svg><span>정렬: 최신순</span></button>
+    <span class="Catui_help" id="dd-sort-out" aria-live="polite"></span>
+  </div>
+  <script>
+  catui.use(['dropdown'], function (dropdown) {
+    var btn = document.getElementById('dd-sort');
+    // 지금 고른 항목에만 check 아이콘. 메뉴는 열 때마다 data로 새로 그리므로 항목을 고치면 다음에 열 때 반영된다
+    var data = [{ id: 'new', title: '최신순', icon: 'check' }, { id: 'old', title: '오래된순' }, { id: 'price', title: '가격 낮은순' }, { id: 'pop', title: '인기순' }];
+    dropdown.render({ elem: btn, label: '정렬 기준', data: data, click: function (item) {
+      data.forEach(function (d) { d.icon = d === item ? 'check' : ''; });
+      btn.querySelector('span').textContent = '정렬: ' + item.title;
+      document.getElementById('dd-sort-out').textContent = item.title + '으로 정렬했습니다';
+    } });
+  });
+  </script>
+</catui-example>
+</section>
+
 <section aria-labelledby="details">
 <h2 id="details">마크업 메뉴 자동 향상</h2>
 <catui-example title="details.Catui_dd">

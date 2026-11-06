@@ -1,0 +1,21 @@
+/* docskit/tokens.css */
+/* CatuiDocs 토큰 — 본체 토큰을 참조만 한다(새 색 값 없음). */
+.Catui_dk{
+  --Catui_dk-wrap:calc(var(--Catui_space-10) * 22);              /* 본문 최대 폭 ≈ 1408px */
+  --Catui_dk-gap:var(--Catui_space-6);
+  --Catui_dk-head-h:calc(var(--Catui_space-10) + var(--Catui_space-4));
+  --Catui_dk-side-w:calc(var(--Catui_space-10) * 4.25);           /* 왼쪽 문서 메뉴 ≈ 272px */
+  --Catui_dk-toc-w:calc(var(--Catui_space-10) * 3.75);            /* 오른쪽 목차 ≈ 240px */
+  --Catui_dk-measure:calc(var(--Catui_space-10) * 12);            /* 본문 한 줄 최대 폭 ≈ 768px (한국어 40~45자) */
+  --Catui_dk-card-min:calc(var(--Catui_space-10) * 4.4);          /* 글 카드 최소 폭 ≈ 282px */
+  --Catui_dk-accent:var(--Catui_color-brand-strong);              /* 현재 위치·강조 — 늘 aria-current·굵기·막대와 함께(색만으로 알리지 않음) */
+  --Catui_dk-accent-soft:var(--Catui_color-brand-soft);
+  --Catui_dk-muted:var(--Catui_color-text-secondary);
+  --Catui_dk-line:var(--Catui_color-border);
+  --Catui_dk-mark-bg:var(--Catui_color-amber-soft);               /* 검색어 표시 */
+  --Catui_dk-radius:var(--Catui_radius-md);
+  /* 모션: 들어오고 나가는 것은 ease-out. UI는 300ms 미만 */
+  --Catui_dk-ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  --Catui_dk-dur:180ms;
+}
+@media (max-width:599px){.Catui_dk{--Catui_dk-gap:var(--Catui_space-4);--Catui_dk-card-min:100%}}

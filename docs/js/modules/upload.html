@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-catui-theme-lock>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -65,6 +65,118 @@ catui.use([&#39;upload&#39;], function (upload) {
 <p>끌어 놓기와 선택을 모두 받고, 형식·용량·개수를 검사해 오류를 문장(<code>role=alert</code>)으로 알립니다. <code>url</code>을 주면 XHR로 진행률과 함께 올리고 목록에서 취소·다시 시도할 수 있습니다.</p>
 </section>
 
+<section aria-labelledby="usage">
+<h2 id="usage">자주 쓰는 사용 예</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">프로필 사진 — 이미지 미리보기 · 한 장 · 1MB 제한</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_hstack Catui_gap-4" style="align-items:flex-start;flex-wrap:wrap">
+    <img class="Catui_img-thumb" id="up-avatar-img" width="96" height="96" style="object-fit:cover" alt="프로필 사진 없음" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23EEF1F4'/%3E%3Ccircle cx='48' cy='38' r='16' fill='%23B8C1CC'/%3E%3Cpath d='M18 86c4-18 16-26 30-26s26 8 30 26Z' fill='%23B8C1CC'/%3E%3C/svg%3E">
+    <div class="Catui_vstack" style="flex:1 1 240px">
+      <label class="Catui_upz" id="up-avatar" data-catui-filter="up-avatar"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-image"></use></svg><span class="Catui_upz-title">사진 고르기</span><span class="Catui_upz-hint">JPG·PNG·WebP, 1MB 이하 한 장</span><input class="Catui_clip" type="file"></label>
+      <div id="up-avatar-list"></div>
+    </div>
+  </div>
+  <script>
+  catui.use(['upload'], function (upload) {
+    var img = document.getElementById('up-avatar-img'), empty = img.src, url = '';
+    var show = function (file) {
+      if (url) URL.revokeObjectURL(url);     // 앞서 만든 미리보기 주소는 풀어 메모리를 돌려준다
+      url = file ? URL.createObjectURL(file) : '';
+      img.src = url || empty;
+      img.alt = file ? '고른 프로필 사진 미리보기: ' + file.name : '프로필 사진 없음';
+    };
+    upload.render({ elem: '#up-avatar', list: '#up-avatar-list', accept: 'image/jpeg,image/png,image/webp', size: 1024, multiple: false,
+      choose: function (files) { show(files[0]); } });   // url이 없으니 고르기만 — 저장할 때 inst.files[0].file을 함께 보냄
+    upload.on('remove(up-avatar)', function () { show(null); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="프로필 사진 — 이미지 미리보기 · 한 장 · 1MB 제한 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_hstack Catui_gap-4&quot; style=&quot;align-items:flex-start;flex-wrap:wrap&quot;&gt;
+  &lt;img class=&quot;Catui_img-thumb&quot; id=&quot;up-avatar-img&quot; width=&quot;96&quot; height=&quot;96&quot; style=&quot;object-fit:cover&quot; alt=&quot;프로필 사진 없음&quot; src=&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 96 96&#39;%3E%3Crect width=&#39;96&#39; height=&#39;96&#39; fill=&#39;%23EEF1F4&#39;/%3E%3Ccircle cx=&#39;48&#39; cy=&#39;38&#39; r=&#39;16&#39; fill=&#39;%23B8C1CC&#39;/%3E%3Cpath d=&#39;M18 86c4-18 16-26 30-26s26 8 30 26Z&#39; fill=&#39;%23B8C1CC&#39;/%3E%3C/svg%3E&quot;&gt;
+  &lt;div class=&quot;Catui_vstack&quot; style=&quot;flex:1 1 240px&quot;&gt;
+    &lt;label class=&quot;Catui_upz&quot; id=&quot;up-avatar&quot; data-catui-filter=&quot;up-avatar&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-image&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_upz-title&quot;&gt;사진 고르기&lt;/span&gt;&lt;span class=&quot;Catui_upz-hint&quot;&gt;JPG·PNG·WebP, 1MB 이하 한 장&lt;/span&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;file&quot;&gt;&lt;/label&gt;
+    &lt;div id=&quot;up-avatar-list&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;upload&#39;], function (upload) {
+  var img = document.getElementById(&#39;up-avatar-img&#39;), empty = img.src, url = &#39;&#39;;
+  var show = function (file) {
+    if (url) URL.revokeObjectURL(url);     // 앞서 만든 미리보기 주소는 풀어 메모리를 돌려준다
+    url = file ? URL.createObjectURL(file) : &#39;&#39;;
+    img.src = url || empty;
+    img.alt = file ? &#39;고른 프로필 사진 미리보기: &#39; + file.name : &#39;프로필 사진 없음&#39;;
+  };
+  upload.render({ elem: &#39;#up-avatar&#39;, list: &#39;#up-avatar-list&#39;, accept: &#39;image/jpeg,image/png,image/webp&#39;, size: 1024, multiple: false,
+    choose: function (files) { show(files[0]); } });   // url이 없으니 고르기만 — 저장할 때 inst.files[0].file을 함께 보냄
+  upload.on(&#39;remove(up-avatar)&#39;, function () { show(null); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">양식과 함께 한 번에 보내기 — auto: false · 같은 이름 거르기(before) · 보내는 동안 잠금</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_field"><label class="Catui_label" for="up-send-title">제목</label><input class="Catui_input" id="up-send-title" value="11월 정산 자료"></div>
+  <div id="up-send" class="Catui_upz" aria-label="첨부 파일 고르기" aria-describedby="up-send-h"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-paperclip"></use></svg><span class="Catui_upz-title">첨부 파일 (최대 5개)</span><span class="Catui_upz-hint" id="up-send-h">같은 이름의 파일은 한 번만 붙습니다</span></div>
+  <div id="up-send-list"></div>
+  <div class="Catui_actions"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button" id="up-send-go">보내기</button><span class="Catui_help" id="up-send-out" aria-live="polite"></span></div>
+  <script>
+  catui.use(['upload'], function (upload) {
+    var out = function (t) { document.getElementById('up-send-out').textContent = t; };
+    var inst = upload.render({ elem: '#up-send', list: '#up-send-list', number: 5, auto: false,
+      before: function (file) {
+        var dup = this.files.some(function (it) { return it.file.name === file.name; });
+        if (dup) out(file.name + ' 파일은 이미 붙어 있습니다');
+        return !dup;                           // false면 목록에 넣지 않음
+      } });
+    var go = document.getElementById('up-send-go');
+    go.addEventListener('click', function () {
+      if (!inst.files.length) { out('첨부할 파일을 골라 주세요'); return; }
+      var fd = new FormData();
+      fd.append('title', document.getElementById('up-send-title').value);
+      inst.files.forEach(function (it) { fd.append('files', it.file); });
+      go.disabled = true; go.setAttribute('aria-busy', 'true'); inst.setDisabled(true); out('보내는 중…');
+      // 실제로는 fetch('/api/reports', { method: 'POST', body: fd })
+      setTimeout(function () {
+        out(fd.getAll('files').length + '개 파일을 보냈습니다');
+        inst.clear(); inst.setDisabled(false); go.disabled = false; go.removeAttribute('aria-busy');
+      }, 900);
+    });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="양식과 함께 한 번에 보내기 — auto: false · 같은 이름 거르기(before) · 보내는 동안 잠금 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;up-send-title&quot;&gt;제목&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;up-send-title&quot; value=&quot;11월 정산 자료&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;up-send&quot; class=&quot;Catui_upz&quot; aria-label=&quot;첨부 파일 고르기&quot; aria-describedby=&quot;up-send-h&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-paperclip&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_upz-title&quot;&gt;첨부 파일 (최대 5개)&lt;/span&gt;&lt;span class=&quot;Catui_upz-hint&quot; id=&quot;up-send-h&quot;&gt;같은 이름의 파일은 한 번만 붙습니다&lt;/span&gt;&lt;/div&gt;
+&lt;div id=&quot;up-send-list&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;Catui_actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; type=&quot;button&quot; id=&quot;up-send-go&quot;&gt;보내기&lt;/button&gt;&lt;span class=&quot;Catui_help&quot; id=&quot;up-send-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;upload&#39;], function (upload) {
+  var out = function (t) { document.getElementById(&#39;up-send-out&#39;).textContent = t; };
+  var inst = upload.render({ elem: &#39;#up-send&#39;, list: &#39;#up-send-list&#39;, number: 5, auto: false,
+    before: function (file) {
+      var dup = this.files.some(function (it) { return it.file.name === file.name; });
+      if (dup) out(file.name + &#39; 파일은 이미 붙어 있습니다&#39;);
+      return !dup;                           // false면 목록에 넣지 않음
+    } });
+  var go = document.getElementById(&#39;up-send-go&#39;);
+  go.addEventListener(&#39;click&#39;, function () {
+    if (!inst.files.length) { out(&#39;첨부할 파일을 골라 주세요&#39;); return; }
+    var fd = new FormData();
+    fd.append(&#39;title&#39;, document.getElementById(&#39;up-send-title&#39;).value);
+    inst.files.forEach(function (it) { fd.append(&#39;files&#39;, it.file); });
+    go.disabled = true; go.setAttribute(&#39;aria-busy&#39;, &#39;true&#39;); inst.setDisabled(true); out(&#39;보내는 중…&#39;);
+    // 실제로는 fetch(&#39;/api/reports&#39;, { method: &#39;POST&#39;, body: fd })
+    setTimeout(function () {
+      out(fd.getAll(&#39;files&#39;).length + &#39;개 파일을 보냈습니다&#39;);
+      inst.clear(); inst.setDisabled(false); go.disabled = false; go.removeAttribute(&#39;aria-busy&#39;);
+    }, 900);
+  });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+</section>
+
 <section aria-labelledby="options">
 <h2 id="options">옵션 · 이벤트</h2>
 <div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">upload 옵션</caption>
@@ -84,11 +196,11 @@ catui.use([&#39;upload&#39;], function (upload) {
 
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../js/modules/datepicker.html"><span>이전</span>datePicker 날짜</a><a class="doc-pager-next" href="../../js/modules/slider.html"><span>다음</span>slider 슬라이더</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">파일 올리기</a></li><li><a href="#options">옵션 · 이벤트</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">파일 올리기</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#options">옵션 · 이벤트</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a></nav>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

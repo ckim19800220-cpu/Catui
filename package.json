@@ -52,6 +52,24 @@
       "default": "./dist/catcommunity.esm.js"
     },
     "./community.css": "./dist/community.min.css",
+    "./shop": {
+      "types": "./dist/catshop.d.ts",
+      "import": "./dist/catshop.esm.js",
+      "default": "./dist/catshop.esm.js"
+    },
+    "./shop.css": "./dist/shop.min.css",
+    "./docs": {
+      "types": "./dist/catdocs.d.ts",
+      "import": "./dist/catdocs.esm.js",
+      "default": "./dist/catdocs.esm.js"
+    },
+    "./docs.css": "./dist/docs.min.css",
+    "./booking": {
+      "types": "./dist/catbooking.d.ts",
+      "import": "./dist/catbooking.esm.js",
+      "default": "./dist/catbooking.esm.js"
+    },
+    "./booking.css": "./dist/booking.min.css",
     "./css": "./dist/catui.min.css",
     "./catui.css": "./dist/catui.css",
     "./catui.min.css": "./dist/catui.min.css",
@@ -79,7 +97,19 @@
     "./dist/catcommunity.js",
     "./dist/catcommunity.min.js",
     "./dist/catcommunity.esm.js",
-    "./dist/catcommunity.esm.min.js"
+    "./dist/catcommunity.esm.min.js",
+    "./dist/catshop.js",
+    "./dist/catshop.min.js",
+    "./dist/catshop.esm.js",
+    "./dist/catshop.esm.min.js",
+    "./dist/catdocs.js",
+    "./dist/catdocs.min.js",
+    "./dist/catdocs.esm.js",
+    "./dist/catdocs.esm.min.js",
+    "./dist/catbooking.js",
+    "./dist/catbooking.min.js",
+    "./dist/catbooking.esm.js",
+    "./dist/catbooking.esm.min.js"
   ],
   "browserslist": [
     "chrome >= 111",
