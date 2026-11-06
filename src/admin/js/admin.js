@@ -45,7 +45,8 @@ export const admin = {
   on: (evt, fn) => catui.onevent("admin", evt, fn),
   emit: (evt, payload) => catui.event("admin", evt, null, payload),
   _offs: [],
-  _on(target, type, fn, opt) { if (!target) return; target.addEventListener(type, fn, opt); this._offs.push(() => target.removeEventListener(type, fn, opt)); },
+  // destroy 뒤에 늦게 도착한 응답(.then 안의 연결)은 등록하지 않는다 — 해제 목록이 이미 비워져 새는 것을 막음
+  _on(target, type, fn, opt) { if (!target || this._dead) return; target.addEventListener(type, fn, opt); this._offs.push(() => target.removeEventListener(type, fn, opt)); },
   // 같은 대상·같은 연결을 한 번만 (init 재호출 시 리스너 중복 방지). destroy가 기록을 비운다
   _seen: new WeakMap(),
   _once(target, key) { let s = this._seen.get(target); if (!s) this._seen.set(target, (s = new Set())); if (s.has(key)) return false; s.add(key); return true; },

@@ -70,10 +70,72 @@
 </figure>
 </section>
 
+<section aria-labelledby="clip">
+<h2 id="clip">시각 숨김 (clip)</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">아이콘 버튼 · 숨긴 라벨 · 보충 문구</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-bell"></use></svg><span class="Catui_clip">알림 3건</span></button>
+    <label class="Catui_clip" for="util-q">주문 검색</label>
+    <input class="Catui_input" id="util-q" name="q" type="search" placeholder="주문 번호">
+  </div>
+  <p>새 글 <b>3</b><span class="Catui_clip">건, 마지막 확인 이후</span></p>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="아이콘 버튼 · 숨긴 라벨 · 보충 문구 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-bell&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_clip&quot;&gt;알림 3건&lt;/span&gt;&lt;/button&gt;
+  &lt;label class=&quot;Catui_clip&quot; for=&quot;util-q&quot;&gt;주문 검색&lt;/label&gt;
+  &lt;input class=&quot;Catui_input&quot; id=&quot;util-q&quot; name=&quot;q&quot; type=&quot;search&quot; placeholder=&quot;주문 번호&quot;&gt;
+&lt;/div&gt;
+&lt;p&gt;새 글 &lt;b&gt;3&lt;/b&gt;&lt;span class=&quot;Catui_clip&quot;&gt;건, 마지막 확인 이후&lt;/span&gt;&lt;/p&gt;</code></pre></details>
+</figure>
+<p><code>.Catui_clip</code>은 화면에는 보이지 않지만 자리를 1px로 줄여 남겨 두므로 화면 낭독기는 그대로 읽습니다. 위 예제의 "알림 3건", "주문 검색", "건, 마지막 확인 이후"는 눈에 보이지 않고 낭독기만 읽습니다. <code>display:none</code>·<code>hidden</code>은 낭독기도 읽지 않으니, 읽혀야 할 이름·보충 설명에는 <code>.Catui_clip</code>을 씁니다.</p>
+</section>
+
+<section aria-labelledby="skip">
+<h2 id="skip">본문 건너뛰기 (skip)</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">Tab을 누르면 나타나는 건너뛰기 링크</figcaption>
+<div class="doc-example-preview">
+  <div style="position:relative;overflow:hidden;padding:var(--Catui_space-9) var(--Catui_space-4) var(--Catui_space-4);border:1px dashed var(--Catui_card-border);border-radius:var(--Catui_radius-md)">
+    <a class="Catui_skip" href="#util-skip-main">본문으로 이동</a>
+    <p class="Catui_help">이 상자 안을 클릭한 뒤 Tab 키를 누르면 왼쪽 위에 링크가 나타납니다.</p>
+    <nav class="Catui_hstack" aria-label="예제 메뉴"><a class="Catui_link" href="../../index.html">홈</a><a class="Catui_link" href="../../css/components/button.html">버튼</a><a class="Catui_link" href="../../css/components/table.html">표</a></nav>
+    <div id="util-skip-main" tabindex="-1"><p>여기가 본문입니다.</p></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="Tab을 누르면 나타나는 건너뛰기 링크 코드 복사">복사</button><pre><code>&lt;div style=&quot;position:relative;overflow:hidden;padding:var(--Catui_space-9) var(--Catui_space-4) var(--Catui_space-4);border:1px dashed var(--Catui_card-border);border-radius:var(--Catui_radius-md)&quot;&gt;
+  &lt;a class=&quot;Catui_skip&quot; href=&quot;#util-skip-main&quot;&gt;본문으로 이동&lt;/a&gt;
+  &lt;p class=&quot;Catui_help&quot;&gt;이 상자 안을 클릭한 뒤 Tab 키를 누르면 왼쪽 위에 링크가 나타납니다.&lt;/p&gt;
+  &lt;nav class=&quot;Catui_hstack&quot; aria-label=&quot;예제 메뉴&quot;&gt;&lt;a class=&quot;Catui_link&quot; href=&quot;doc:index&quot;&gt;홈&lt;/a&gt;&lt;a class=&quot;Catui_link&quot; href=&quot;doc:css/components/button&quot;&gt;버튼&lt;/a&gt;&lt;a class=&quot;Catui_link&quot; href=&quot;doc:css/components/table&quot;&gt;표&lt;/a&gt;&lt;/nav&gt;
+  &lt;div id=&quot;util-skip-main&quot; tabindex=&quot;-1&quot;&gt;&lt;p&gt;여기가 본문입니다.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p><code>.Catui_skip</code>은 평소 위로 밀려 보이지 않다가 키보드 포커스를 받으면 나타납니다. <code>.Catui_app</code>·<code>.Catui_site</code> 안 첫 요소로 두고, 대상 본문(<code>main</code>)에 <code>id</code>를 줍니다. 위치는 가장 가까운 <code>position</code> 조상 기준이므로 실제 화면에서는 페이지 왼쪽 위에 뜹니다.</p>
+</section>
+
+<section aria-labelledby="num">
+<h2 id="num">고정폭 숫자 (num)</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">적용 전 · 후 자리 맞춤 비교</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_grid-3">
+    <div><p class="Catui_h4">적용 전</p><p style="text-align:right">1,111,111원</p><p style="text-align:right">8,888,888원</p><p style="text-align:right">410,070원</p></div>
+    <div><p class="Catui_h4"><code>.Catui_num</code> 적용</p><p class="Catui_num" style="text-align:right">1,111,111원</p><p class="Catui_num" style="text-align:right">8,888,888원</p><p class="Catui_num" style="text-align:right">410,070원</p></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="적용 전 · 후 자리 맞춤 비교 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_grid-3&quot;&gt;
+  &lt;div&gt;&lt;p class=&quot;Catui_h4&quot;&gt;적용 전&lt;/p&gt;&lt;p style=&quot;text-align:right&quot;&gt;1,111,111원&lt;/p&gt;&lt;p style=&quot;text-align:right&quot;&gt;8,888,888원&lt;/p&gt;&lt;p style=&quot;text-align:right&quot;&gt;410,070원&lt;/p&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;p class=&quot;Catui_h4&quot;&gt;&lt;code&gt;.Catui_num&lt;/code&gt; 적용&lt;/p&gt;&lt;p class=&quot;Catui_num&quot; style=&quot;text-align:right&quot;&gt;1,111,111원&lt;/p&gt;&lt;p class=&quot;Catui_num&quot; style=&quot;text-align:right&quot;&gt;8,888,888원&lt;/p&gt;&lt;p class=&quot;Catui_num&quot; style=&quot;text-align:right&quot;&gt;410,070원&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>기본 글꼴의 숫자는 1이 8보다 좁아 세로로 자리가 어긋납니다. <code>.Catui_num</code>(<code>font-variant-numeric:tabular-nums</code>)을 붙이면 모든 숫자 폭이 같아져 금액 열·카운터·타이머가 정렬되고, 값이 바뀌어도 글자가 흔들리지 않습니다.</p>
+</section>
+
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/foundation/utilities.css</span><code>.Catui_skip</code> <code>.Catui_clip</code> <code>.Catui_num</code> <code>.Catui_icon</code> <code>.Catui_i12</code> <code>.Catui_i16</code> <code>.Catui_i18</code> <code>.Catui_i20</code> <code>.Catui_actions</code> <code>.Catui_h1</code> <code>.Catui_btn</code> <code>.Catui_card-b</code> <code>.Catui_line</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/foundation/media.html"><span>이전</span>미디어·이미지</a><a class="doc-pager-next" href="../../css/foundation/helpers.html"><span>다음</span>도우미 클래스</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#list">유틸리티</a></li><li><a href="#examples">예제</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#list">유틸리티</a></li><li><a href="#examples">예제</a></li><li><a href="#clip">시각 숨김 (clip)</a></li><li><a href="#skip">본문 건너뛰기 (skip)</a></li><li><a href="#num">고정폭 숫자 (num)</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

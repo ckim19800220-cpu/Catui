@@ -24,6 +24,23 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="draw">
+<h2 id="draw">그리기 판</h2>
+<catui-example title="canvas-draw (십자 커서) + 그리기 도구">
+  <div class="Catui_canvas Catui_canvas-4x3 Catui_canvas-draw Catui_bg-dots" style="max-width:480px">
+    <canvas role="img" aria-label="서명 그리기 판, 비어 있음">서명을 그리려면 캔버스를 지원하는 브라우저가 필요합니다.</canvas>
+    <div class="Catui_canvas-tools">
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="펜" aria-pressed="true"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-pencil"></use></svg></button>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="지우개" aria-pressed="false"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-eraser"></use></svg></button>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="되돌리기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-undo-2"></use></svg></button>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="모두 지우기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-trash-2"></use></svg></button>
+    </div>
+    <p class="Catui_canvas-empty">여기에 서명하세요</p>
+  </div>
+</catui-example>
+<p>그리기를 받는 상자에 <code>.Catui_canvas-draw</code>를 붙이면 캔버스 위 커서가 십자로 바뀝니다. 펜·지우개처럼 고르는 도구는 <code>aria-pressed</code>로 상태를 알립니다. 첫 획이 그려지면 <code>.Catui_canvas-empty</code> 안내를 지웁니다.</p>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p><code>.Catui_canvas</code>(기본 16:9, <code>-1x1/4x3/21x9</code>) 안의 <code>canvas</code>는 상자를 꽉 채웁니다. 도구 막대 <code>.Catui_canvas-tools</code>(오른쪽 위), 범례 <code>.Catui_canvas-legend</code>(왼쪽 위), 빈 상태 <code>.Catui_canvas-empty</code>, 아래 캡션 <code>.Catui_canvas-cap</code>. 그리는 쪽에서 <code>.Catui_canvas-draw</code>를 붙이면 커서가 십자로 바뀝니다. 고해상도 보정·다시 그리기·토큰 색은 <a href="doc:js/modules/canvas">catui.js canvas</a>가 처리합니다.</p>

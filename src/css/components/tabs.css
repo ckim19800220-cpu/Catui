@@ -6,7 +6,7 @@
 .Catui_tabs:not(:has(> .Catui_panel)){border-bottom:1px solid var(--Catui_tab-border)}
 .Catui_tab{
   position:relative;z-index:1;
-  height:var(--Catui_tab-h);display:inline-flex;align-items:center;font-size:var(--Catui_tab-font);line-height:1;
+  height:var(--Catui_tab-h);display:inline-flex;align-items:center;gap:var(--Catui_space-2);font-size:var(--Catui_tab-font);line-height:1;
   color:var(--Catui_tab-fg);border-bottom:var(--Catui_tab-indicator-w) solid transparent;margin-bottom:-1px;cursor:pointer;
   transition:color var(--Catui_dur-fast) var(--Catui_ease);
 }
@@ -33,3 +33,29 @@
   .Catui_tabs-v > [role="tablist"]{flex-direction:row;flex-wrap:wrap}
   .Catui_tabs-v .Catui_panel{border-top:1px solid var(--Catui_tab-border);padding-top:var(--Catui_space-4)}
 }
+/* 탭 안 새 소식 점은 경고색 (숫자는 .Catui_count 그대로) */
+.Catui_tab > .Catui_dot{background:var(--Catui_badge-danger-fg)}
+/* 링크형 탭(패널 없는 nav): 현재 쪽은 aria-current="page" */
+a.Catui_tab{text-decoration:none}
+.Catui_tab[aria-current="page"]{color:var(--Catui_tab-active-fg);border-bottom-color:var(--Catui_tab-indicator);font-weight:600}
+
+/* 균등 분할: 탭들이 줄 폭을 똑같이 나눠 가진다 (패널은 order:1 이라 그대로 아래 줄) */
+.Catui_tabs.Catui_tabs-full{column-gap:0}
+.Catui_tabs-full > .Catui_tab,.Catui_tabs-full > [role="tablist"] > .Catui_tab{flex:1 1 0;min-width:0;justify-content:center;padding:0 var(--Catui_space-2)}
+.Catui_tabs-full > [role="tablist"]{column-gap:0}
+
+/* 가로 스크롤 탭 줄: 한 줄 유지, 넘치면 가로로 민다.
+   radio 구조(input·label·panel이 형제)에서는 탭만 따로 스크롤할 수 없으므로 패널 없는 링크형 탭 줄(nav)
+   또는 catui.js가 그리는 [role=tablist] 줄에 쓴다. 구분선은 스크롤 영역 안쪽 그림자로 그려 활성 밑줄이 잘리지 않게 한다. */
+.Catui_tabs.Catui_tabs-scroll{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:thin;border-bottom:0;box-shadow:inset 0 -1px 0 var(--Catui_tab-border)}
+.Catui_tabs-scroll > .Catui_tab,.Catui_tabs-scroll > [role="tablist"] > .Catui_tab{flex:none;white-space:nowrap;margin-bottom:0}
+.Catui_tabs-scroll > [role="tablist"]{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+/* 스크롤 영역이 바깥 외곽선을 잘라 내므로 포커스 외곽선을 안쪽에 그린다 */
+.Catui_tabs-scroll > .Catui_tab:focus-visible,.Catui_tabs-scroll [role="tablist"] > .Catui_tab:focus-visible{outline-offset:-2px}
+
+/* 카드형 탭: 테두리 상자 탭, 선택한 탭은 아래 패널 상자와 이어 붙는다 (radio 구조·[role=tablist] 공용) */
+.Catui_tabs.Catui_tabs-card,.Catui_tabs-card > [role="tablist"]{column-gap:0}
+.Catui_tabs-card .Catui_tab{height:var(--Catui_control-h-lg);padding:0 var(--Catui_space-5);border:1px solid transparent;border-bottom:0;border-radius:var(--Catui_radius-sm) var(--Catui_radius-sm) 0 0;margin-bottom:-1px;color:var(--Catui_color-text-secondary)}
+.Catui_tabs-card .Catui_tab:hover{color:var(--Catui_color-brand-strong)}
+.Catui_tabs-card input:checked + .Catui_tab,.Catui_tabs-card .Catui_tab[aria-selected="true"]{border-color:var(--Catui_card-border);background:var(--Catui_card-bg);color:var(--Catui_color-brand-strong)}
+.Catui_tabs-card .Catui_panel{padding:var(--Catui_space-4);border:1px solid var(--Catui_card-border);border-radius:0 var(--Catui_radius-sm) var(--Catui_radius-sm) var(--Catui_radius-sm);background:var(--Catui_card-bg)}

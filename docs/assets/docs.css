@@ -40,7 +40,7 @@
 .doc-main .doc-head .Catui_h1{font-size:var(--Catui_type-display-size);letter-spacing:-.02em;margin-bottom:var(--Catui_space-2)}
 .doc-head .Catui_lead{margin-bottom:0}
 .doc-head-src{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2);margin-top:var(--Catui_space-4);font-size:var(--Catui_type-caption-size)}
-.doc-head-src > span{font-family:var(--Catui_font-mono);font-size:var(--Catui_type-label-size);letter-spacing:.08em;color:var(--Catui_color-text-tertiary)}
+.doc-head-src > span{font-family:var(--Catui_font-mono);font-size:var(--Catui_type-label-size);letter-spacing:.08em;color:var(--Catui_color-text-secondary)}
 .doc-head .doc-rules{margin-top:var(--Catui_space-5)}
 .doc-rules{display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-4);background:var(--Catui_color-surface-muted);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md)}
 /* 본문 h2에 번호(01·02…) — 목차의 번호와 같은 순서 */
@@ -400,6 +400,7 @@ body{margin:0}
 .doc-shell-home .doc-main > .doc-hstats{position:relative;z-index:1;margin-top:calc(-1 * var(--Catui_space-7));background:var(--Catui_card-bg);box-shadow:var(--Catui_shadow-md)}
 /* 섹션 리듬: 간격을 고르게, 제목 위 키워드는 알약으로 */
 .doc-rsec{padding:var(--Catui_space-9) var(--Catui_space-8)}
+.doc-main .doc-rkey{color:var(--Catui_color-brand-strong)}   /* 본문 문단 색(보조)에 덮여 연한 배경 위 4.4:1이던 것 */
 .doc-rkey{display:inline-block;padding:2px var(--Catui_space-3);border:1px solid color-mix(in srgb,var(--Catui_color-brand) 35%,transparent);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-brand-soft)}
 .doc-rprod,.doc-rflow li,.doc-bx,.doc-hcat{box-shadow:var(--Catui_shadow-xs)}
 

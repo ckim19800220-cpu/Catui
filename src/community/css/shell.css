@@ -33,6 +33,7 @@
 .Catui_cm-wrap{flex:1;width:100%;max-width:var(--Catui_cm-wrap);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr) var(--Catui_cm-aside-w);gap:var(--Catui_cm-gap);padding:var(--Catui_cm-gap) var(--Catui_space-4);align-items:start}
 .Catui_cm[data-catui-cm-wide] .Catui_cm-wrap{grid-template-columns:minmax(0,1fr)}
 .Catui_cm-main{min-width:0;display:grid;gap:var(--Catui_cm-gap)}
+.Catui_cm-main > *{min-width:0}   /* 격자 칸이 안의 가로 스크롤 줄(말머리 등) 폭만큼 커지지 않게 */
 .Catui_cm-main:focus{outline:none}
 .Catui_cm-aside{display:grid;gap:var(--Catui_cm-gap);position:sticky;top:calc(var(--Catui_cm-head-h) * 2)}
 @media (max-width:991px){.Catui_cm-wrap{grid-template-columns:minmax(0,1fr)}.Catui_cm-aside{position:static}}
@@ -53,6 +54,8 @@
   .Catui_cm-tabs{position:sticky;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:var(--Catui_card-bg);border-top:1px solid var(--Catui_color-border);padding-bottom:env(safe-area-inset-bottom)}
   .Catui_cm-totop{bottom:calc(var(--Catui_space-10) + var(--Catui_space-4))}
 }
+/* 320px(WCAG 리플로 기준): 로고 + 아이콘 버튼들이 한 줄에 들어가도록 여백만 줄인다 */
+@media (max-width:359px){.Catui_cm-head-in{padding-inline:var(--Catui_space-2);gap:var(--Catui_space-1)}.Catui_cm-head-acts{gap:0}}
 .Catui_cm-tab{display:grid;justify-items:center;gap:2px;padding:var(--Catui_space-2) 0;font-size:11px;text-decoration:none;color:var(--Catui_color-text-secondary)}
 .Catui_cm-tab[aria-current="page"]{color:var(--Catui_color-brand-strong);font-weight:700}
 .Catui_cm-tab:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}

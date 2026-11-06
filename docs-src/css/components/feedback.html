@@ -17,13 +17,33 @@
 <section aria-labelledby="loading">
 <h2 id="loading">스켈레톤 · 구분선</h2>
 <catui-example title="불러오는 중 자리 표시">
-  <div aria-busy="true" aria-label="불러오는 중">
+  <div role="status" aria-busy="true" aria-label="불러오는 중">
     <div class="Catui_skeleton Catui_skeleton-title"></div>
     <div class="Catui_skeleton Catui_skeleton-text"></div>
     <div class="Catui_skeleton Catui_skeleton-text"></div>
   </div>
   <hr class="Catui_divider">
 </catui-example>
+<catui-example title="스켈레톤 조합 — 카드 모양">
+  <article class="Catui_card" style="max-width:320px" aria-busy="true">
+    <span class="Catui_clip">카드를 불러오는 중</span>
+    <div class="Catui_skeleton" style="aspect-ratio:16 / 9;border-radius:var(--Catui_card-radius) var(--Catui_card-radius) 0 0" aria-hidden="true"></div>
+    <div class="Catui_card-b Catui_vstack Catui_gap-3" aria-hidden="true">
+      <div class="Catui_skeleton Catui_skeleton-title"></div>
+      <div class="Catui_skeleton Catui_skeleton-text"></div>
+      <div class="Catui_skeleton Catui_skeleton-text" style="width:70%"></div>
+    </div>
+  </article>
+</catui-example>
+<catui-example title="스켈레톤 조합 — 목록 모양 (아바타 + 두 줄)">
+  <div class="Catui_vstack Catui_gap-4" style="max-width:420px" aria-busy="true">
+    <span class="Catui_clip">목록을 불러오는 중</span>
+    <div class="Catui_line" aria-hidden="true"><div class="Catui_skeleton" style="width:32px;height:32px;border-radius:var(--Catui_radius-pill);flex:none"></div><div class="Catui_vstack Catui_gap-1" style="flex:1"><div class="Catui_skeleton Catui_skeleton-title"></div><div class="Catui_skeleton Catui_skeleton-text"></div></div></div>
+    <div class="Catui_line" aria-hidden="true"><div class="Catui_skeleton" style="width:32px;height:32px;border-radius:var(--Catui_radius-pill);flex:none"></div><div class="Catui_vstack Catui_gap-1" style="flex:1"><div class="Catui_skeleton Catui_skeleton-title"></div><div class="Catui_skeleton Catui_skeleton-text"></div></div></div>
+    <div class="Catui_line" aria-hidden="true"><div class="Catui_skeleton" style="width:32px;height:32px;border-radius:var(--Catui_radius-pill);flex:none"></div><div class="Catui_vstack Catui_gap-1" style="flex:1"><div class="Catui_skeleton Catui_skeleton-title"></div><div class="Catui_skeleton Catui_skeleton-text"></div></div></div>
+  </div>
+</catui-example>
+<p>전용 원형·이미지 스켈레톤 클래스는 없으므로 <code>.Catui_skeleton</code>에 크기·반경만 인라인으로 주어 실제 화면(카드 이미지·아바타·제목·본문) 모양을 흉내 냅니다. 자리 표시 자체는 <code>aria-hidden</code>, 묶음에 <code>aria-busy="true"</code>와 숨김 글자로 "불러오는 중"을 알립니다.</p>
 </section>
 
 <section aria-labelledby="extra">

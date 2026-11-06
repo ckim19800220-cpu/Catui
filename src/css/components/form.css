@@ -35,6 +35,8 @@ textarea.Catui_input{height:auto;min-height:80px;padding-block:var(--Catui_space
   border-color:var(--Catui_input-error-border);
   box-shadow:0 0 0 var(--Catui_input-ring-w) var(--Catui_input-error-ring);
 }
+/* 오류 칸도 포커스가 보여야 한다 — 오류 링은 그대로 두고 바깥에 포커스 외곽선을 더한다 */
+.Catui_input[aria-invalid="true"]:focus-visible,.Catui_select[aria-invalid="true"]:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
 .Catui_input:disabled,.Catui_select:disabled{background:var(--Catui_input-disabled-bg);color:var(--Catui_color-text-tertiary);border-color:var(--Catui_btn-disabled-border)}
 .Catui_select{
   appearance:none;padding-right:var(--Catui_space-7);background-image:none;

@@ -66,6 +66,32 @@
 &lt;p class=&quot;Catui_metric&quot;&gt;5,400&lt;/p&gt;
 &lt;p class=&quot;Catui_metric-lg&quot;&gt;1,280 &lt;span class=&quot;Catui_help&quot;&gt;(metric-lg 22)&lt;/span&gt;&lt;/p&gt;</code></pre></details>
 </figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">큰 글자 단계 견본표 (display · lead · metric · metric-lg)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_table-wrap"><table class="Catui_tbl">
+    <caption>큰 글자 클래스 4종 — 이름, 크기, 쓰는 곳</caption>
+    <thead><tr><th scope="col">클래스</th><th scope="col">크기 · 굵기</th><th scope="col">견본</th></tr></thead>
+    <tbody>
+      <tr><td><code>.Catui_display</code></td><td>30px · 700 · 줄 높이 1.25<br><span class="Catui_help">히어로 대표 제목, 쪽당 하나</span></td><td><p class="Catui_display">화면을 한 벌로</p></td></tr>
+      <tr><td><code>.Catui_lead</code></td><td>15px · 보조 글자색 · 최대 640px<br><span class="Catui_help">제목 바로 아래 도입문</span></td><td><p class="Catui_lead">같은 토큰으로 대시보드와 홈을 만듭니다.</p></td></tr>
+      <tr><td><code>.Catui_metric</code></td><td>28px · 700 · 고정폭 숫자<br><span class="Catui_help">대표 지표, 요금 금액</span></td><td><p class="Catui_metric">5,400</p></td></tr>
+      <tr><td><code>.Catui_metric-lg</code></td><td>22px · 700 · 고정폭 숫자<br><span class="Catui_help">카드 안 보조 지표</span></td><td><p class="Catui_metric-lg">1,280</p></td></tr>
+    </tbody>
+  </table></div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="큰 글자 단계 견본표 (display · lead · metric · metric-lg) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_table-wrap&quot;&gt;&lt;table class=&quot;Catui_tbl&quot;&gt;
+  &lt;caption&gt;큰 글자 클래스 4종 — 이름, 크기, 쓰는 곳&lt;/caption&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;클래스&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;크기 · 굵기&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;견본&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;code&gt;.Catui_display&lt;/code&gt;&lt;/td&gt;&lt;td&gt;30px · 700 · 줄 높이 1.25&lt;br&gt;&lt;span class=&quot;Catui_help&quot;&gt;히어로 대표 제목, 쪽당 하나&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;p class=&quot;Catui_display&quot;&gt;화면을 한 벌로&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;code&gt;.Catui_lead&lt;/code&gt;&lt;/td&gt;&lt;td&gt;15px · 보조 글자색 · 최대 640px&lt;br&gt;&lt;span class=&quot;Catui_help&quot;&gt;제목 바로 아래 도입문&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;p class=&quot;Catui_lead&quot;&gt;같은 토큰으로 대시보드와 홈을 만듭니다.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;code&gt;.Catui_metric&lt;/code&gt;&lt;/td&gt;&lt;td&gt;28px · 700 · 고정폭 숫자&lt;br&gt;&lt;span class=&quot;Catui_help&quot;&gt;대표 지표, 요금 금액&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;p class=&quot;Catui_metric&quot;&gt;5,400&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;code&gt;.Catui_metric-lg&lt;/code&gt;&lt;/td&gt;&lt;td&gt;22px · 700 · 고정폭 숫자&lt;br&gt;&lt;span class=&quot;Catui_help&quot;&gt;카드 안 보조 지표&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;p class=&quot;Catui_metric-lg&quot;&gt;1,280&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;</code></pre></details>
+</figure>
+<p><code>.Catui_metric</code>·<code>.Catui_metric-lg</code>는 숫자 폭이 같아(tabular-nums) 값이 바뀌어도 글자가 흔들리지 않습니다. 크기는 <code>--Catui_type-display-*</code>·<code>--Catui_type-metric-xl-*</code>·<code>--Catui_type-metric-lg-*</code>·<code>--Catui_prose-lead-font</code> 토큰에서 옵니다.</p>
 <p>숫자 열·카운터에는 <code>.Catui_num</code>(고정폭 숫자)을 붙입니다. 글꼴 파일은 필수가 아닙니다 — <code>--Catui_font-ui</code>에 Inter 다음 한글 시스템 글꼴이 있습니다.</p>
 </section>
 

@@ -87,6 +87,36 @@
 </figure>
 </section>
 
+<section aria-labelledby="draw">
+<h2 id="draw">그리기 판</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">canvas-draw (십자 커서) + 그리기 도구</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_canvas Catui_canvas-4x3 Catui_canvas-draw Catui_bg-dots" style="max-width:480px">
+    <canvas role="img" aria-label="서명 그리기 판, 비어 있음">서명을 그리려면 캔버스를 지원하는 브라우저가 필요합니다.</canvas>
+    <div class="Catui_canvas-tools">
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="펜" aria-pressed="true"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-pencil"></use></svg></button>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="지우개" aria-pressed="false"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-eraser"></use></svg></button>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="되돌리기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-undo-2"></use></svg></button>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" aria-label="모두 지우기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-trash-2"></use></svg></button>
+    </div>
+    <p class="Catui_canvas-empty">여기에 서명하세요</p>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="canvas-draw (십자 커서) + 그리기 도구 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_canvas Catui_canvas-4x3 Catui_canvas-draw Catui_bg-dots&quot; style=&quot;max-width:480px&quot;&gt;
+  &lt;canvas role=&quot;img&quot; aria-label=&quot;서명 그리기 판, 비어 있음&quot;&gt;서명을 그리려면 캔버스를 지원하는 브라우저가 필요합니다.&lt;/canvas&gt;
+  &lt;div class=&quot;Catui_canvas-tools&quot;&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; aria-label=&quot;펜&quot; aria-pressed=&quot;true&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-pencil&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; aria-label=&quot;지우개&quot; aria-pressed=&quot;false&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-eraser&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; aria-label=&quot;되돌리기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-undo-2&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot; aria-label=&quot;모두 지우기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-trash-2&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;Catui_canvas-empty&quot;&gt;여기에 서명하세요&lt;/p&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>그리기를 받는 상자에 <code>.Catui_canvas-draw</code>를 붙이면 캔버스 위 커서가 십자로 바뀝니다. 펜·지우개처럼 고르는 도구는 <code>aria-pressed</code>로 상태를 알립니다. 첫 획이 그려지면 <code>.Catui_canvas-empty</code> 안내를 지웁니다.</p>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p><code>.Catui_canvas</code>(기본 16:9, <code>-1x1/4x3/21x9</code>) 안의 <code>canvas</code>는 상자를 꽉 채웁니다. 도구 막대 <code>.Catui_canvas-tools</code>(오른쪽 위), 범례 <code>.Catui_canvas-legend</code>(왼쪽 위), 빈 상태 <code>.Catui_canvas-empty</code>, 아래 캡션 <code>.Catui_canvas-cap</code>. 그리는 쪽에서 <code>.Catui_canvas-draw</code>를 붙이면 커서가 십자로 바뀝니다. 고해상도 보정·다시 그리기·토큰 색은 <a href="../../js/modules/canvas.html">catui.js canvas</a>가 처리합니다.</p>
@@ -103,7 +133,7 @@
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/canvas.css</span><code>.Catui_canvas</code> <code>.Catui_canvas-1x1</code> <code>.Catui_canvas-4x3</code> <code>.Catui_canvas-21x9</code> <code>.Catui_canvas-tools</code> <code>.Catui_canvas-legend</code> <code>.Catui_canvas-empty</code> <code>.Catui_canvas-cap</code> <code>.Catui_canvas-draw</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/components/carousel.html"><span>이전</span>캐러셀</a><a class="doc-pager-next" href="../../css/components/fx.html"><span>다음</span>효과(fx) 상태</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#frame">캔버스 틀</a></li><li><a href="#ratio">비율</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#frame">캔버스 틀</a></li><li><a href="#ratio">비율</a></li><li><a href="#draw">그리기 판</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

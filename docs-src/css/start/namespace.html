@@ -20,6 +20,33 @@
 <p>리셋·타이포는 이 세 루트 안에서만 적용되고, 루트 밖 DOM에는 영향을 주지 않습니다. <code>body</code>나 <code>*</code> 선택자로 전역 스타일을 넣지 마세요.</p>
 </section>
 
+<section aria-labelledby="scope-compare">
+<h2 id="scope-compare">루트 안과 밖 비교</h2>
+<p>이 문서 자체가 이미 <code>.Catui_site</code> 안에서 그려지므로 "루트 밖" 모습은 미리보기로 보일 수 없습니다. 같은 마크업을 루트 안·밖에 두었을 때의 차이를 코드로 설명합니다.</p>
+<pre><code>&lt;!-- ① 루트 밖: 호스트 페이지 그대로 --&gt;
+&lt;p&gt;안내 문단&lt;/p&gt;                    &lt;!-- 브라우저 기본 위아래 여백(1em), 호스트 글꼴 --&gt;
+&lt;button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button"&gt;저장&lt;/button&gt;
+                                    &lt;!-- 버튼 모양은 나오지만 box-sizing·글꼴 상속 리셋이 없어
+                                         호스트 CSS에 따라 크기·글꼴이 달라질 수 있음 --&gt;
+
+&lt;!-- ② 루트 안: Catui 리셋·타이포 적용 --&gt;
+&lt;div class="Catui_site"&gt;             &lt;!-- 관리 화면이면 .Catui_app --&gt;
+  &lt;p&gt;안내 문단&lt;/p&gt;                  &lt;!-- 여백 0, --Catui_font-ui · 13px · 줄 높이 1.55 · keep-all --&gt;
+  &lt;button class="Catui_btn Catui_btn-md Catui_btn-primary" type="button"&gt;저장&lt;/button&gt;
+                                    &lt;!-- border-box, 글꼴 상속 — 견본과 같은 크기 --&gt;
+&lt;/div&gt;</code></pre>
+<div class="Catui_table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">루트 안과 밖의 차이</caption>
+<thead><tr><th scope="col">항목</th><th scope="col">루트 밖</th><th scope="col">루트 안 (<code>.Catui_app</code> · <code>.Catui_site</code> · <code>.Catui_layer</code>)</th></tr></thead>
+<tbody>
+<tr><td>글꼴 · 크기 · 줄 높이</td><td>호스트 페이지 값</td><td><code>--Catui_font-ui</code>, 본문 토큰</td></tr>
+<tr><td><code>p</code> · <code>h1~h4</code> · <code>ul</code> 여백</td><td>브라우저 기본 여백</td><td>0, 목록 기호 없음 (간격은 레이아웃 클래스가 정함)</td></tr>
+<tr><td>링크 <code>a</code></td><td>파란 밑줄</td><td>글자색 상속, 밑줄 없음</td></tr>
+<tr><td><code>button</code> · <code>input</code></td><td>브라우저 기본 글꼴</td><td>글꼴·색 상속, <code>button</code>은 바탕·테두리·안쪽 여백도 0</td></tr>
+<tr><td><code>box-sizing</code></td><td>호스트 설정</td><td><code>border-box</code></td></tr>
+</tbody></table></div>
+<p>그래서 Catui 클래스는 반드시 루트 안에서 씁니다. 기존 페이지 일부에만 넣을 때는 그 부분을 <code>&lt;div class="Catui_site"&gt;</code>로 감싸면 바깥은 그대로 두고 안쪽만 견본대로 보입니다(<code>.Catui_app</code>·<code>.Catui_site</code>는 <code>min-height:100vh</code>와 페이지 바탕을 가지므로 작은 조각이면 높이를 따로 정하세요). 레이어·토스트는 catui.js가 <code>body</code> 끝에 <code>.Catui_layer</code>를 만들어 같은 리셋을 받습니다.</p>
+</section>
+
 <section aria-labelledby="layers">
 <h2 id="layers">토큰 3층</h2>
 <ul>

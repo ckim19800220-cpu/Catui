@@ -30,9 +30,77 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="select-text">
+<h2 id="select-text">셀렉트 · 여러 줄 입력</h2>
+<catui-example title="필수 셀렉트(안내 항목) · 도움말 붙은 여러 줄 입력">
+  <div class="Catui_fields">
+    <div class="Catui_field"><label class="Catui_label" for="fm-cat">문의 유형 <span class="Catui_req">필수</span></label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="fm-cat" name="category" required aria-describedby="fm-cat-help"><option value="">선택하세요</option><option>주문·결제</option><option>배송</option><option>교환·반품</option><option>기타</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div><p class="Catui_help" id="fm-cat-help">유형에 맞는 담당자에게 바로 전달됩니다.</p></div>
+    <div class="Catui_field"><label class="Catui_label" for="fm-body">문의 내용</label><textarea class="Catui_input" id="fm-body" name="body" rows="5" aria-describedby="fm-body-help"></textarea><p class="Catui_help" id="fm-body-help">주문 번호가 있으면 함께 적어 주세요. 높이는 아래로 늘릴 수 있습니다.</p></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="readonly">
+<h2 id="readonly">읽기 전용</h2>
+<catui-example title="input[readonly] — 값은 보이고 복사·전송되지만 바꿀 수 없음">
+  <div class="Catui_fields">
+    <div class="Catui_field"><label class="Catui_label" for="fm-id">회원 번호</label><input class="Catui_input" id="fm-id" name="member_id" value="CT-2025-00418" readonly aria-describedby="fm-id-help"><p class="Catui_help" id="fm-id-help">가입할 때 정해지며 바꿀 수 없습니다.</p></div>
+  </div>
+</catui-example>
+<p><code>disabled</code>는 포커스·전송이 모두 빠지고, <code>readonly</code>는 포커스·복사·전송이 됩니다. 사용자가 확인해야 하는 값은 <code>readonly</code>로 둡니다.</p>
+</section>
+
+<section aria-labelledby="combo">
+<h2 id="combo">자주 쓰는 조합</h2>
+<catui-example title="필수 + 도움말 + 글자 수 (한 줄 입력)">
+  <div class="Catui_field">
+    <label class="Catui_label" for="fm-title">제목 <span class="Catui_req">필수</span></label>
+    <input class="Catui_input" id="fm-title" name="title" required maxlength="40" value="배송 일정 문의" aria-describedby="fm-title-help fm-title-count">
+    <div class="Catui_hstack Catui_between">
+      <p class="Catui_help" id="fm-title-help">목록에 보이는 이름입니다.</p>
+      <p class="Catui_counter" id="fm-title-count" aria-live="polite">8/40</p>
+    </div>
+  </div>
+</catui-example>
+<catui-example title="두 칸 나란히 (작은 화면에서 자동 줄바꿈)">
+  <div class="Catui_hstack Catui_gap-4 Catui_wrap-row">
+    <div class="Catui_field" style="flex:1 1 200px"><label class="Catui_label" for="fm-start">시작일</label><input class="Catui_input" id="fm-start" name="start" type="date"></div>
+    <div class="Catui_field" style="flex:1 1 200px"><label class="Catui_label" for="fm-end">종료일</label><input class="Catui_input" id="fm-end" name="end" type="date"></div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="fieldset">
+<h2 id="fieldset">fieldset · legend 묶음</h2>
+<catui-example title="배송지 입력 묶음 + 선택 묶음">
+  <div class="Catui_fields">
+    <fieldset class="Catui_fields">
+      <legend class="Catui_h3">배송지</legend>
+      <div class="Catui_field"><label class="Catui_label" for="fs-name">받는 사람 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fs-name" name="ship_name" autocomplete="shipping name" required></div>
+      <div class="Catui_field"><label class="Catui_label" for="fs-tel">연락처 <span class="Catui_req">필수</span></label><input class="Catui_input" id="fs-tel" name="ship_tel" type="tel" autocomplete="shipping tel" inputmode="tel" required></div>
+      <div class="Catui_field"><label class="Catui_label" for="fs-addr">주소</label><input class="Catui_input" id="fs-addr" name="ship_addr" autocomplete="shipping street-address"></div>
+    </fieldset>
+    <fieldset class="Catui_choices">
+      <legend class="Catui_label">배송 요청</legend>
+      <label class="Catui_choice"><input class="Catui_clip" type="radio" name="fs-req" checked><span class="Catui_radio"></span>문 앞</label>
+      <label class="Catui_choice"><input class="Catui_clip" type="radio" name="fs-req"><span class="Catui_radio"></span>경비실</label>
+      <label class="Catui_choice"><input class="Catui_clip" type="radio" name="fs-req"><span class="Catui_radio"></span>직접 받기</label>
+    </fieldset>
+  </div>
+</catui-example>
+<p>관련 입력 여러 개는 <code>&lt;fieldset&gt;</code>으로 묶고 <code>&lt;legend&gt;</code>로 묶음 이름을 붙입니다. 큰 묶음은 <code>legend.Catui_h3</code>, 라디오·체크박스 묶음은 <code>legend.Catui_label</code>을 씁니다.</p>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p><code>.Catui_fields</code> 안에 <code>.Catui_field</code>(라벨·입력·도움말·오류)를 쌓습니다. 셀렉트는 <code>.Catui_select-wrap</code>으로 감싸고 화살표 아이콘을 둡니다(catui.js가 있으면 자동 보충). 검증을 스크립트로 붙이려면 <a href="doc:js/modules/form">catui.js form</a>을 쓰세요.</p>
+<ul>
+  <li><code>textarea.Catui_input</code> — 최소 높이 80px, 세로로만 늘릴 수 있습니다. 처음 높이는 <code>rows</code>로 정합니다.</li>
+  <li><code>.Catui_input[readonly]</code> — 옅은 면 색 + 보조 글자색. 값 확인용 칸에 씁니다.</li>
+  <li><code>.Catui_req</code> — 라벨 안 "필수" 표시(오류색 글자). 입력에는 <code>required</code>를 함께 줍니다.</li>
+  <li>도움말과 <a href="doc:css/forms/counter"><code>.Catui_counter</code></a>를 한 줄에 두려면 <code>.Catui_hstack.Catui_between</code>으로 감쌉니다.</li>
+  <li><code>fieldset</code>·<code>legend</code>는 <code>.Catui_site</code>/<code>.Catui_app</code> 안에서 테두리·여백이 초기화됩니다. 큰 묶음은 <code>legend.Catui_h3</code>, 선택 묶음은 <code>legend.Catui_label</code>.</li>
+</ul>
 </section>
 
 <section aria-labelledby="a11y">
@@ -41,5 +109,9 @@
   <li>모든 입력에 <code>label for</code>↔<code>id</code>. 도움말·오류는 <code>aria-describedby</code>로 연결합니다.</li>
   <li>오류는 색과 함께 문장으로 알리고 <code>aria-invalid="true"</code>를 줍니다.</li>
   <li>포커스는 테두리 + 3px 링을 함께 표시합니다. 적절한 <code>autocomplete</code>를 붙입니다.</li>
+  <li>필수 칸은 <code>.Catui_req</code> 글자("필수")와 <code>required</code>를 함께 씁니다 — 별표·색만으로 알리지 않습니다.</li>
+  <li>셀렉트 화살표 아이콘은 <code>aria-hidden="true"</code>, 안내 항목은 <code>value=""</code>로 두어 필수 검사에 걸리게 합니다.</li>
+  <li>여러 입력·라디오 묶음은 <code>fieldset</code> + <code>legend</code>로 묶어 화면 읽기 프로그램이 묶음 이름을 함께 읽게 합니다.</li>
+  <li>글자 수는 <code>aria-describedby</code>로 입력과 잇고 <code>aria-live="polite"</code>로 알립니다.</li>
 </ul>
 </section>

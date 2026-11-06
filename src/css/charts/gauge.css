@@ -1,7 +1,7 @@
 /* charts/gauge.css */
 .Catui_gauge{
-  width:var(--Catui_gauge-size);height:var(--Catui_gauge-size);border-radius:var(--Catui_radius-pill);
-  position:relative;flex:none;
+  width:var(--Catui_gauge-size);max-width:100%;aspect-ratio:1;border-radius:var(--Catui_radius-pill);   /* 칸이 좁으면 원 모양 그대로 줄어든다 */
+  position:relative;flex:0 1 auto;min-width:0;   /* 줄에 여럿 있으면 좁은 화면에서 함께 줄어든다(원 모양은 aspect-ratio로 유지) */
   background:conic-gradient(from 225deg,var(--Catui_g-color) 0 var(--Catui_g-deg),var(--Catui_gauge-track) var(--Catui_g-deg) 270deg,transparent 270deg 360deg);
 }
 .Catui_gauge::after{

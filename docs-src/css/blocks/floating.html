@@ -10,6 +10,18 @@
   <div class="Catui_cookie" role="region" aria-label="쿠키 안내" style="position:static"><p>더 나은 경험을 위해 쿠키를 씁니다. <a class="Catui_link" href="doc:index">자세히</a></p><div class="Catui_cookie-actions"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button">설정</button><button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button">동의</button></div></div>
 </catui-example>
 </section>
+<section aria-labelledby="readbar">
+<h2 id="readbar">읽기 진행 막대</h2>
+<catui-example title="readbar — 25% · 60% · 100% (정적 표시)">
+  <p class="Catui_help">25% 읽음</p>
+  <div class="Catui_readbar" aria-hidden="true" style="position:static;background:var(--Catui_color-neutral-100);--Catui_read:.25"><i></i></div>
+  <p class="Catui_help">60% 읽음</p>
+  <div class="Catui_readbar" aria-hidden="true" style="position:static;background:var(--Catui_color-neutral-100);--Catui_read:.6"><i></i></div>
+  <p class="Catui_help">다 읽음</p>
+  <div class="Catui_readbar" aria-hidden="true" style="position:static;background:var(--Catui_color-neutral-100);--Catui_read:1"><i></i></div>
+</catui-example>
+<p><code>.Catui_readbar</code>는 화면 맨 위에 고정(<code>position:fixed</code>, 높이 3px)되는 막대이고, 안의 <code>i</code>가 <code>--Catui_read</code>(0~1) 비율만큼 가로로 찹니다. 예제는 미리보기 안에 보이도록 <code>position:static</code>과 옅은 바탕을 주고 값을 <code>style</code>로 고정했습니다. 실제로는 <code>&lt;div class="Catui_readbar" data-catui-readbar="#본문-id" aria-hidden="true"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;</code>를 <code>body</code> 가까이에 두면 <a href="doc:js/modules/site#readbar">catui.js site 읽기 막대</a>가 스크롤에 맞춰 값을 바꿉니다(맨 위로 버튼 등 다른 화면 도구는 <a href="doc:js/modules/page">catui.js page</a>). 장식이므로 <code>aria-hidden="true"</code>를 줍니다.</p>
+</section>
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p>둘 다 실제로는 화면에 고정(<code>position:fixed</code>)됩니다. 예제는 미리보기 안에 보이도록 <code>position:static</code>으로 두었습니다. 맨 위로 버튼은 <code>href=&quot;#본문-id&quot;</code> 링크로 만들면 스크립트 없이 동작하고, 스크롤 후에만 보이게 하려면 <code>data-catui-totop="400"</code>을 달면 <a href="doc:js/modules/page">catui.js page</a>가 처리합니다. 쿠키 띠는 동의 후 스크립트로 닫습니다.</p>

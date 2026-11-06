@@ -6,7 +6,8 @@
 .Catui_cm-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2);justify-content:space-between}
 
 /* 말머리 탭: 가로 스크롤 칩 */
-.Catui_cm-cats{display:flex;gap:var(--Catui_space-1);overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.Catui_cm-cats{display:flex;gap:var(--Catui_space-1);overflow-x:auto;scrollbar-width:none;padding-bottom:2px;min-width:0;max-width:100%}   /* 말머리가 많아도 줄 폭을 넘지 않고 가로 스크롤 */
+.Catui_cm-bar{min-width:0}
 .Catui_cm-cats::-webkit-scrollbar{display:none}
 .Catui_cm-cats a{flex:none;padding:var(--Catui_space-1) var(--Catui_space-3);border:1px solid var(--Catui_color-border);border-radius:var(--Catui_radius-pill);text-decoration:none;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);background:var(--Catui_card-bg)}
 .Catui_cm-cats a[aria-current="page"]{border-color:var(--Catui_color-brand-strong);color:var(--Catui_color-brand-strong);font-weight:700;background:var(--Catui_color-brand-soft)}
@@ -48,7 +49,7 @@
 
 /* 레벨 배지: 숫자 + 단계별 진하기(색만으로 구분하지 않음) */
 .Catui_cm-lv{display:inline-grid;place-items:center;min-width:18px;height:18px;padding-inline:3px;border-radius:var(--Catui_radius-xs);font-size:11px;font-weight:800;line-height:1;background:var(--Catui_color-surface-muted);color:var(--Catui_color-text-secondary);border:1px solid var(--Catui_color-border)}
-.Catui_cm-lv[data-lv="4"],.Catui_cm-lv[data-lv="5"],.Catui_cm-lv[data-lv="6"]{background:var(--Catui_color-info-soft);color:var(--Catui_color-info);border-color:transparent}
+.Catui_cm-lv[data-lv="4"],.Catui_cm-lv[data-lv="5"],.Catui_cm-lv[data-lv="6"]{background:var(--Catui_color-info-soft);color:var(--Catui_badge-info-fg);border-color:transparent}   /* info(밝은 파랑)는 연한 바탕 위 대비 2.8:1 — 배지용 진한 글자색 */
 .Catui_cm-lv[data-lv="7"],.Catui_cm-lv[data-lv="8"],.Catui_cm-lv[data-lv="9"]{background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong);border-color:transparent}
 
 /* 카드형(요약) */
@@ -57,7 +58,7 @@
 .Catui_cm-card p{margin:0;color:var(--Catui_color-text-secondary);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
 /* 사진 갤러리형 */
-.Catui_cm-gallery{display:grid;gap:var(--Catui_space-3);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 3),1fr));margin:0;padding:0;list-style:none}
+.Catui_cm-gallery{display:grid;gap:var(--Catui_space-3);grid-template-columns:repeat(auto-fill,minmax(min(calc(var(--Catui_space-10) * 3),100%),1fr));margin:0;padding:0;list-style:none}
 .Catui_cm-shot{display:grid;gap:var(--Catui_space-1);text-decoration:none}
 .Catui_cm-shot figure{margin:0;aspect-ratio:4 / 3;border-radius:var(--Catui_radius-md);overflow:hidden;background:var(--Catui_color-surface-muted)}
 .Catui_cm-shot img{width:100%;height:100%;object-fit:cover;display:block}

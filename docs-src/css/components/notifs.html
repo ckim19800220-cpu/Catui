@@ -11,6 +11,17 @@
     <a class="Catui_notifs-f" href="doc:css/components/list">전체 알림 보기</a>
   </section>
 </catui-example>
+<catui-example title="모두 읽은 상태 + 꼬리 링크">
+  <section class="Catui_notifs" aria-labelledby="nf-t2">
+    <div class="Catui_notifs-h"><span id="nf-t2">알림</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" disabled>모두 읽음</button></div>
+    <ul class="Catui_notifs-list">
+      <li class="Catui_notif"><span class="Catui_av Catui_av-sm" aria-hidden="true">박</span><div class="Catui_notif-body"><p><b>박서연</b>님이 회의록을 공유했습니다</p><span class="Catui_notif-time">어제</span></div></li>
+      <li class="Catui_notif"><span class="Catui_av Catui_av-sm" aria-hidden="true">김</span><div class="Catui_notif-body"><p><b>김하늘</b>님이 견적서를 승인했습니다</p><span class="Catui_notif-time">3일 전</span></div></li>
+    </ul>
+    <a class="Catui_notifs-f" href="doc:css/components/list">지난 알림 모두 보기</a>
+  </section>
+</catui-example>
+<p>읽지 않은 알림이 없으면 머리의 카운트를 빼고 "모두 읽음" 버튼을 <code>disabled</code>로 둡니다. 항목에 <code>.Catui_notif-unread</code>가 없으므로 점·배경도 사라집니다.</p>
 </section>
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>

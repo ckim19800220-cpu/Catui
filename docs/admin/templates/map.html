@@ -77,7 +77,8 @@ catui.use(['util'], function (util) {
   var select = function (id, from) {
     cur = cur === id ? null : id;
     map.querySelectorAll('.Catui_adm-pin').forEach(function (p) { p.setAttribute('aria-pressed', String(p.dataset.id === cur)); });
-    list.querySelectorAll('[data-id]').forEach(function (li) { li.setAttribute('aria-current', String(li.dataset.id === cur)); li.style.background = li.dataset.id === cur ? 'var(--Catui_color-brand-soft)' : ''; });
+    // 선택 표시는 행(li)에만 — 안의 버튼까지 표시하지 않게
+    list.querySelectorAll('li[data-id]').forEach(function (li) { li.setAttribute('aria-current', String(li.dataset.id === cur)); li.style.background = li.dataset.id === cur ? 'var(--Catui_color-brand-soft)' : ''; });
     if (cur && from === 'pin') list.querySelector('[data-id="' + cur + '"]')?.scrollIntoView({ block: 'nearest' });
   };
   var drawList = function () {

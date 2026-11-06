@@ -83,6 +83,26 @@
 </figure>
 </section>
 
+<section aria-labelledby="disabled">
+<h2 id="disabled">비활성</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">고를 수 없는 체크박스 · 라디오 · 토글</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_choices">
+    <label class="Catui_choice"><input class="Catui_clip" type="checkbox" checked disabled><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>관리자만 바꿀 수 있음</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="ch-dis" disabled><span class="Catui_radio"></span>준비 중인 주기</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="checkbox" role="switch" disabled><span class="Catui_tgl"></span>요금제 업그레이드 후 사용</label>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="고를 수 없는 체크박스 · 라디오 · 토글 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_choices&quot;&gt;
+  &lt;label class=&quot;Catui_choice&quot;&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;checkbox&quot; checked disabled&gt;&lt;span class=&quot;Catui_cbx&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i12&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-check&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/span&gt;관리자만 바꿀 수 있음&lt;/label&gt;
+  &lt;label class=&quot;Catui_choice&quot;&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;ch-dis&quot; disabled&gt;&lt;span class=&quot;Catui_radio&quot;&gt;&lt;/span&gt;준비 중인 주기&lt;/label&gt;
+  &lt;label class=&quot;Catui_choice&quot;&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;checkbox&quot; role=&quot;switch&quot; disabled&gt;&lt;span class=&quot;Catui_tgl&quot;&gt;&lt;/span&gt;요금제 업그레이드 후 사용&lt;/label&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>input에 <code>disabled</code>를 주면 상자·스위치가 흐려지고 라벨 글자도 비활성색이 됩니다. 왜 고를 수 없는지 라벨에 함께 적어 주세요.</p>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p>실제 input은 <code>.Catui_clip</code>으로 숨기고 바로 뒤의 <code>.Catui_cbx</code>·<code>.Catui_radio</code>·<code>.Catui_tgl</code>이 상태를 그립니다. 묶음은 <code>fieldset.Catui_choices</code> + <code>legend</code>.</p>
@@ -100,7 +120,7 @@
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/choice.css</span><code>.Catui_choice</code> <code>.Catui_cbx</code> <code>.Catui_radio</code> <code>.Catui_icon</code> <code>.Catui_tgl</code> <code>.Catui_tgl-alt</code> <code>.Catui_choices</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/components/input-group.html"><span>이전</span>입력 그룹</a><a class="doc-pager-next" href="../../css/components/badge.html"><span>다음</span>배지·카운트</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#checkbox">체크박스 · 라디오</a></li><li><a href="#toggle">토글</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#checkbox">체크박스 · 라디오</a></li><li><a href="#toggle">토글</a></li><li><a href="#disabled">비활성</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

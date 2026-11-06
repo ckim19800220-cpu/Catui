@@ -11,6 +11,19 @@
   <p class="Catui_metric">5,400</p>
   <p class="Catui_metric-lg">1,280 <span class="Catui_help">(metric-lg 22)</span></p>
 </catui-example>
+<catui-example title="큰 글자 단계 견본표 (display · lead · metric · metric-lg)">
+  <div class="Catui_table-wrap"><table class="Catui_tbl">
+    <caption>큰 글자 클래스 4종 — 이름, 크기, 쓰는 곳</caption>
+    <thead><tr><th scope="col">클래스</th><th scope="col">크기 · 굵기</th><th scope="col">견본</th></tr></thead>
+    <tbody>
+      <tr><td><code>.Catui_display</code></td><td>30px · 700 · 줄 높이 1.25<br><span class="Catui_help">히어로 대표 제목, 쪽당 하나</span></td><td><p class="Catui_display">화면을 한 벌로</p></td></tr>
+      <tr><td><code>.Catui_lead</code></td><td>15px · 보조 글자색 · 최대 640px<br><span class="Catui_help">제목 바로 아래 도입문</span></td><td><p class="Catui_lead">같은 토큰으로 대시보드와 홈을 만듭니다.</p></td></tr>
+      <tr><td><code>.Catui_metric</code></td><td>28px · 700 · 고정폭 숫자<br><span class="Catui_help">대표 지표, 요금 금액</span></td><td><p class="Catui_metric">5,400</p></td></tr>
+      <tr><td><code>.Catui_metric-lg</code></td><td>22px · 700 · 고정폭 숫자<br><span class="Catui_help">카드 안 보조 지표</span></td><td><p class="Catui_metric-lg">1,280</p></td></tr>
+    </tbody>
+  </table></div>
+</catui-example>
+<p><code>.Catui_metric</code>·<code>.Catui_metric-lg</code>는 숫자 폭이 같아(tabular-nums) 값이 바뀌어도 글자가 흔들리지 않습니다. 크기는 <code>--Catui_type-display-*</code>·<code>--Catui_type-metric-xl-*</code>·<code>--Catui_type-metric-lg-*</code>·<code>--Catui_prose-lead-font</code> 토큰에서 옵니다.</p>
 <p>숫자 열·카운터에는 <code>.Catui_num</code>(고정폭 숫자)을 붙입니다. 글꼴 파일은 필수가 아닙니다 — <code>--Catui_font-ui</code>에 Inter 다음 한글 시스템 글꼴이 있습니다.</p>
 </section>
 

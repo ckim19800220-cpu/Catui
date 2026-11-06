@@ -110,15 +110,20 @@ function catuiTabsAppend(box, item) {
   else if (isRaw(item.content)) mount(panel, item.content);
   else panel.appendChild(Object.assign(document.createElement("p"), { textContent: String(item.content ?? "") }));
   if (aria) {
+    const tl = box.querySelector(':scope > [role="tablist"]');
+    if (!tl) { hint.error("tabs: data-catui-aria 탭에 role=\"tablist\"가 없습니다", "error", box); return; }
     const tab = Object.assign(document.createElement("button"), { type: "button", className: "Catui_tab", id, textContent: item.title ?? "" });
     tab.setAttribute("role", "tab");
     tab.setAttribute("aria-selected", "false");
     tab.setAttribute("aria-controls", `${id}-p`);
     tab.tabIndex = -1;
-    Object.assign(panel, { id: `${id}-p`, hidden: true, tabIndex: 0 });   // 패널에 포커스할 것이 없어도 Tab으로 내용에 닿게
+    // 패널 안에 포커스할 것이 없을 때만 패널 자체를 Tab 정지점으로(있으면 정지점이 겹친다 — APG)
+    const hasFocusable = !!panel.querySelector('a[href],button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
+    Object.assign(panel, { id: `${id}-p`, hidden: true, tabIndex: hasFocusable ? -1 : 0 });
+    if (hasFocusable) panel.removeAttribute("tabindex");
     panel.setAttribute("role", "tabpanel");
     panel.setAttribute("aria-labelledby", id);
-    box.querySelector(':scope > [role="tablist"]').appendChild(tab);
+    tl.appendChild(tab);
     box.appendChild(panel);
     return;
   }

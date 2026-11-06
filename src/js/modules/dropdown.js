@@ -20,8 +20,7 @@ export const dropdown = component({
     const ctx = c.trigger === "contextmenu";
     if (!ctx) {
       trigger.setAttribute("aria-haspopup", "menu");
-      trigger.setAttribute("aria-expanded", "false");
-      trigger.setAttribute("aria-controls", menuId);
+      trigger.setAttribute("aria-expanded", "false");   // aria-controls는 열려 있을 때만
     }
     let panel = null, offs = [], point = null, back = null;
 
@@ -41,7 +40,7 @@ export const dropdown = component({
       if (!panel) return;
       offs.forEach((f) => f()); offs = [];
       panel.remove(); panel = null;
-      if (!ctx) trigger.setAttribute("aria-expanded", "false");
+      if (!ctx) { trigger.setAttribute("aria-expanded", "false"); trigger.removeAttribute("aria-controls"); }   // 닫힌 메뉴는 DOM에 없으므로 가리키지 않는다
       if (focusTrigger) (ctx && back?.isConnected ? back : trigger).focus?.();
       point = null;
     };
@@ -63,7 +62,7 @@ export const dropdown = component({
             ? html`<a class="Catui_dd-item${d.danger ? " Catui_dd-danger" : ""}" role="menuitem" tabindex="-1" data-catui-i="${i}" href="${catuiSafeHref(d.href)}" ${d.target ? html`target="${d.target}" rel="noopener noreferrer"` : ""}>${d.icon ? icon(d.icon, 16) : ""}${d.title}</a>`
             : html`<button class="Catui_dd-item${d.danger ? " Catui_dd-danger" : ""}" type="button" role="menuitem" tabindex="-1" data-catui-i="${i}" ${d.disabled ? "disabled" : ""}>${d.icon ? icon(d.icon, 16) : ""}${d.title}</button>`))}`);
       floatRoot(trigger).appendChild(panel);
-      if (!ctx) trigger.setAttribute("aria-expanded", "true");
+      if (!ctx) { trigger.setAttribute("aria-expanded", "true"); trigger.setAttribute("aria-controls", menuId); }
       place();
       items()[0]?.focus();
       const onDoc = (e) => { if (!panel.contains(e.target) && (ctx || !trigger.contains(e.target))) close(false); };

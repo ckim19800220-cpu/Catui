@@ -9,6 +9,7 @@ a.Catui_list-item,button.Catui_list-item{width:100%;text-align:left;color:inheri
 a.Catui_list-item:hover,button.Catui_list-item:hover{background:var(--Catui_color-brand-ghost)}
 a.Catui_list-item:focus-visible,button.Catui_list-item:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
 .Catui_list-item[aria-current]{background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong);font-weight:600}
+.Catui_list-item[aria-current] :is(.Catui_list-meta,.Catui_help){color:var(--Catui_color-neutral-700)}   /* 선택 배경 위 보조 글자도 4.5:1 이상 */
 .Catui_list-flush{border:0;border-radius:0;background:transparent}
 
 .Catui_dl{display:grid;grid-template-columns:minmax(96px,max-content) minmax(0,1fr);gap:var(--Catui_space-2) var(--Catui_space-6)}

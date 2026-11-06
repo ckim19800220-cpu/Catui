@@ -61,6 +61,27 @@
 <details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="아래 고정 띠 (정적 표시) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_cookie&quot; role=&quot;region&quot; aria-label=&quot;쿠키 안내&quot; style=&quot;position:static&quot;&gt;&lt;p&gt;더 나은 경험을 위해 쿠키를 씁니다. &lt;a class=&quot;Catui_link&quot; href=&quot;doc:index&quot;&gt;자세히&lt;/a&gt;&lt;/p&gt;&lt;div class=&quot;Catui_cookie-actions&quot;&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-secondary&quot; type=&quot;button&quot;&gt;설정&lt;/button&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-primary&quot; type=&quot;button&quot;&gt;동의&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;</code></pre></details>
 </figure>
 </section>
+<section aria-labelledby="readbar">
+<h2 id="readbar">읽기 진행 막대</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">readbar — 25% · 60% · 100% (정적 표시)</figcaption>
+<div class="doc-example-preview">
+  <p class="Catui_help">25% 읽음</p>
+  <div class="Catui_readbar" aria-hidden="true" style="position:static;background:var(--Catui_color-neutral-100);--Catui_read:.25"><i></i></div>
+  <p class="Catui_help">60% 읽음</p>
+  <div class="Catui_readbar" aria-hidden="true" style="position:static;background:var(--Catui_color-neutral-100);--Catui_read:.6"><i></i></div>
+  <p class="Catui_help">다 읽음</p>
+  <div class="Catui_readbar" aria-hidden="true" style="position:static;background:var(--Catui_color-neutral-100);--Catui_read:1"><i></i></div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="readbar — 25% · 60% · 100% (정적 표시) 코드 복사">복사</button><pre><code>&lt;p class=&quot;Catui_help&quot;&gt;25% 읽음&lt;/p&gt;
+&lt;div class=&quot;Catui_readbar&quot; aria-hidden=&quot;true&quot; style=&quot;position:static;background:var(--Catui_color-neutral-100);--Catui_read:.25&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot;&gt;60% 읽음&lt;/p&gt;
+&lt;div class=&quot;Catui_readbar&quot; aria-hidden=&quot;true&quot; style=&quot;position:static;background:var(--Catui_color-neutral-100);--Catui_read:.6&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot;&gt;다 읽음&lt;/p&gt;
+&lt;div class=&quot;Catui_readbar&quot; aria-hidden=&quot;true&quot; style=&quot;position:static;background:var(--Catui_color-neutral-100);--Catui_read:1&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;</code></pre></details>
+</figure>
+<p><code>.Catui_readbar</code>는 화면 맨 위에 고정(<code>position:fixed</code>, 높이 3px)되는 막대이고, 안의 <code>i</code>가 <code>--Catui_read</code>(0~1) 비율만큼 가로로 찹니다. 예제는 미리보기 안에 보이도록 <code>position:static</code>과 옅은 바탕을 주고 값을 <code>style</code>로 고정했습니다. 실제로는 <code>&lt;div class="Catui_readbar" data-catui-readbar="#본문-id" aria-hidden="true"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;</code>를 <code>body</code> 가까이에 두면 <a href="../../js/modules/site.html#readbar">catui.js site 읽기 막대</a>가 스크롤에 맞춰 값을 바꿉니다(맨 위로 버튼 등 다른 화면 도구는 <a href="../../js/modules/page.html">catui.js page</a>). 장식이므로 <code>aria-hidden="true"</code>를 줍니다.</p>
+</section>
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p>둘 다 실제로는 화면에 고정(<code>position:fixed</code>)됩니다. 예제는 미리보기 안에 보이도록 <code>position:static</code>으로 두었습니다. 맨 위로 버튼은 <code>href=&quot;#본문-id&quot;</code> 링크로 만들면 스크립트 없이 동작하고, 스크롤 후에만 보이게 하려면 <code>data-catui-totop="400"</code>을 달면 <a href="../../js/modules/page.html">catui.js page</a>가 처리합니다. 쿠키 띠는 동의 후 스크립트로 닫습니다.</p>
@@ -76,7 +97,7 @@
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/blocks/floating.css</span><code>.Catui_totop</code> <code>.Catui_icon</code> <code>.Catui_cookie</code> <code>.Catui_cookie-actions</code> <code>.Catui_readbar</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/blocks/subscribe.html"><span>이전</span>구독 폼</a><a class="doc-pager-next" href="../../css/components/button.html"><span>다음</span>버튼</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#totop">맨 위로</a></li><li><a href="#cookie">쿠키 동의</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#totop">맨 위로</a></li><li><a href="#cookie">쿠키 동의</a></li><li><a href="#readbar">읽기 진행 막대</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

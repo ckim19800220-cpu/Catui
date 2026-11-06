@@ -1938,15 +1938,20 @@ function catuiTabsAppend(box, item) {
   else if (isRaw(item.content)) mount(panel, item.content);
   else panel.appendChild(Object.assign(document.createElement("p"), { textContent: String(item.content ?? "") }));
   if (aria) {
+    const tl = box.querySelector(':scope > [role="tablist"]');
+    if (!tl) { hint.error("tabs: data-catui-aria 탭에 role=\"tablist\"가 없습니다", "error", box); return; }
     const tab = Object.assign(document.createElement("button"), { type: "button", className: "Catui_tab", id, textContent: item.title ?? "" });
     tab.setAttribute("role", "tab");
     tab.setAttribute("aria-selected", "false");
     tab.setAttribute("aria-controls", `${id}-p`);
     tab.tabIndex = -1;
-    Object.assign(panel, { id: `${id}-p`, hidden: true, tabIndex: 0 });   // 패널에 포커스할 것이 없어도 Tab으로 내용에 닿게
+    // 패널 안에 포커스할 것이 없을 때만 패널 자체를 Tab 정지점으로(있으면 정지점이 겹친다 — APG)
+    const hasFocusable = !!panel.querySelector('a[href],button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
+    Object.assign(panel, { id: `${id}-p`, hidden: true, tabIndex: hasFocusable ? -1 : 0 });
+    if (hasFocusable) panel.removeAttribute("tabindex");
     panel.setAttribute("role", "tabpanel");
     panel.setAttribute("aria-labelledby", id);
-    box.querySelector(':scope > [role="tablist"]').appendChild(tab);
+    tl.appendChild(tab);
     box.appendChild(panel);
     return;
   }
@@ -1994,8 +1999,7 @@ const dropdown = component({
     const ctx = c.trigger === "contextmenu";
     if (!ctx) {
       trigger.setAttribute("aria-haspopup", "menu");
-      trigger.setAttribute("aria-expanded", "false");
-      trigger.setAttribute("aria-controls", menuId);
+      trigger.setAttribute("aria-expanded", "false");   // aria-controls는 열려 있을 때만
     }
     let panel = null, offs = [], point = null, back = null;
 
@@ -2015,7 +2019,7 @@ const dropdown = component({
       if (!panel) return;
       offs.forEach((f) => f()); offs = [];
       panel.remove(); panel = null;
-      if (!ctx) trigger.setAttribute("aria-expanded", "false");
+      if (!ctx) { trigger.setAttribute("aria-expanded", "false"); trigger.removeAttribute("aria-controls"); }   // 닫힌 메뉴는 DOM에 없으므로 가리키지 않는다
       if (focusTrigger) (ctx && back?.isConnected ? back : trigger).focus?.();
       point = null;
     };
@@ -2037,7 +2041,7 @@ const dropdown = component({
             ? html`<a class="Catui_dd-item${d.danger ? " Catui_dd-danger" : ""}" role="menuitem" tabindex="-1" data-catui-i="${i}" href="${catuiSafeHref(d.href)}" ${d.target ? html`target="${d.target}" rel="noopener noreferrer"` : ""}>${d.icon ? icon(d.icon, 16) : ""}${d.title}</a>`
             : html`<button class="Catui_dd-item${d.danger ? " Catui_dd-danger" : ""}" type="button" role="menuitem" tabindex="-1" data-catui-i="${i}" ${d.disabled ? "disabled" : ""}>${d.icon ? icon(d.icon, 16) : ""}${d.title}</button>`))}`);
       floatRoot(trigger).appendChild(panel);
-      if (!ctx) trigger.setAttribute("aria-expanded", "true");
+      if (!ctx) { trigger.setAttribute("aria-expanded", "true"); trigger.setAttribute("aria-controls", menuId); }
       place();
       items()[0]?.focus();
       const onDoc = (e) => { if (!panel.contains(e.target) && (ctx || !trigger.contains(e.target))) close(false); };
@@ -2324,8 +2328,7 @@ const datePicker = component({
       from = parse(a); to = c.range ? parse(b) : null;
     };
     input.setAttribute("aria-haspopup", "dialog");
-    input.setAttribute("aria-expanded", "false");
-    input.setAttribute("aria-controls", panelId);
+    input.setAttribute("aria-expanded", "false");   // aria-controls는 달력이 열려 있을 때만(없는 id를 가리키지 않게)
     if (!input.placeholder) input.placeholder = c.range ? `YYYY-MM-DD${c.separator}YYYY-MM-DD` : "YYYY-MM-DD";
     input.autocomplete = "off";
 
@@ -2374,6 +2377,7 @@ const datePicker = component({
       offs.forEach((f) => f()); offs = [];
       panel.remove(); panel = null;
       input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-controls");
       if (focusInput) input.focus();
     };
     const commit = () => {
@@ -2404,6 +2408,7 @@ const datePicker = component({
       panel.setAttribute("aria-label", c.range ? "기간 선택" : "날짜 선택");
       floatRoot(input).appendChild(panel);
       input.setAttribute("aria-expanded", "true");
+      input.setAttribute("aria-controls", panelId);
       draw(); place();
       const onDoc = (e) => { if (!panel.contains(e.target) && e.target !== input) close(false); };
       const onKey = (e) => {
@@ -4779,8 +4784,7 @@ const autocomplete = component({
     const listId = uid("catui-ac");
     input.setAttribute("role", "combobox");
     input.setAttribute("aria-autocomplete", "list");
-    input.setAttribute("aria-expanded", "false");
-    input.setAttribute("aria-controls", listId);
+    input.setAttribute("aria-expanded", "false");   // aria-controls는 목록이 실제로 있을 때만(없는 id를 가리키지 않게)
     const prevAuto = input.getAttribute("autocomplete");   // 해제할 때 원래 값으로
     input.autocomplete = "off";
     let panel = null, items = [], active = -1, timer = 0, ctrl = null, seq = 0;
@@ -4809,6 +4813,7 @@ const autocomplete = component({
       panel.style.maxHeight = "min(320px, 50vh)";
       panel.style.overflowY = "auto";
       floatRoot(input).appendChild(panel);
+      input.setAttribute("aria-controls", listId);
       // 목록을 누를 때 입력 칸이 포커스를 잃어 목록이 닫히지 않게
       panel.addEventListener("pointerdown", (e) => e.preventDefault());
       panel.addEventListener("click", onPick);
@@ -4820,6 +4825,7 @@ const autocomplete = component({
       if (!panel) return;
       panel.remove(); panel = null; items = []; active = -1;
       input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-controls");
       input.removeAttribute("aria-activedescendant");
       removeEventListener("resize", onMove);
       removeEventListener("scroll", onMove, true);

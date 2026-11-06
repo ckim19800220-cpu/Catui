@@ -66,6 +66,28 @@
   &lt;a class=&quot;Catui_notifs-f&quot; href=&quot;doc:css/components/list&quot;&gt;전체 알림 보기&lt;/a&gt;
 &lt;/section&gt;</code></pre></details>
 </figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">모두 읽은 상태 + 꼬리 링크</figcaption>
+<div class="doc-example-preview">
+  <section class="Catui_notifs" aria-labelledby="nf-t2">
+    <div class="Catui_notifs-h"><span id="nf-t2">알림</span><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" disabled>모두 읽음</button></div>
+    <ul class="Catui_notifs-list">
+      <li class="Catui_notif"><span class="Catui_av Catui_av-sm" aria-hidden="true">박</span><div class="Catui_notif-body"><p><b>박서연</b>님이 회의록을 공유했습니다</p><span class="Catui_notif-time">어제</span></div></li>
+      <li class="Catui_notif"><span class="Catui_av Catui_av-sm" aria-hidden="true">김</span><div class="Catui_notif-body"><p><b>김하늘</b>님이 견적서를 승인했습니다</p><span class="Catui_notif-time">3일 전</span></div></li>
+    </ul>
+    <a class="Catui_notifs-f" href="../../css/components/list.html">지난 알림 모두 보기</a>
+  </section>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="모두 읽은 상태 + 꼬리 링크 코드 복사">복사</button><pre><code>&lt;section class=&quot;Catui_notifs&quot; aria-labelledby=&quot;nf-t2&quot;&gt;
+  &lt;div class=&quot;Catui_notifs-h&quot;&gt;&lt;span id=&quot;nf-t2&quot;&gt;알림&lt;/span&gt;&lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost&quot; type=&quot;button&quot; disabled&gt;모두 읽음&lt;/button&gt;&lt;/div&gt;
+  &lt;ul class=&quot;Catui_notifs-list&quot;&gt;
+    &lt;li class=&quot;Catui_notif&quot;&gt;&lt;span class=&quot;Catui_av Catui_av-sm&quot; aria-hidden=&quot;true&quot;&gt;박&lt;/span&gt;&lt;div class=&quot;Catui_notif-body&quot;&gt;&lt;p&gt;&lt;b&gt;박서연&lt;/b&gt;님이 회의록을 공유했습니다&lt;/p&gt;&lt;span class=&quot;Catui_notif-time&quot;&gt;어제&lt;/span&gt;&lt;/div&gt;&lt;/li&gt;
+    &lt;li class=&quot;Catui_notif&quot;&gt;&lt;span class=&quot;Catui_av Catui_av-sm&quot; aria-hidden=&quot;true&quot;&gt;김&lt;/span&gt;&lt;div class=&quot;Catui_notif-body&quot;&gt;&lt;p&gt;&lt;b&gt;김하늘&lt;/b&gt;님이 견적서를 승인했습니다&lt;/p&gt;&lt;span class=&quot;Catui_notif-time&quot;&gt;3일 전&lt;/span&gt;&lt;/div&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;a class=&quot;Catui_notifs-f&quot; href=&quot;doc:css/components/list&quot;&gt;지난 알림 모두 보기&lt;/a&gt;
+&lt;/section&gt;</code></pre></details>
+</figure>
+<p>읽지 않은 알림이 없으면 머리의 카운트를 빼고 "모두 읽음" 버튼을 <code>disabled</code>로 둡니다. 항목에 <code>.Catui_notif-unread</code>가 없으므로 점·배경도 사라집니다.</p>
 </section>
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>

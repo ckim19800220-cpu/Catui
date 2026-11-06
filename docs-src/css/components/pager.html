@@ -28,6 +28,18 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="compact">
+<h2 id="compact">간결 페이저</h2>
+<catui-example title="이전 · 다음만 (마지막 쪽에서 다음 비활성)">
+  <nav class="Catui_pager" aria-label="페이지 (간결)">
+    <button class="Catui_pg" type="button" aria-label="이전 페이지"><svg class="Catui_icon Catui_i16 Catui_pg-prev" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button>
+    <span class="Catui_help Catui_num"><span class="Catui_clip">현재 </span>12 / 12<span class="Catui_clip">쪽</span></span>
+    <button class="Catui_pg" type="button" aria-label="다음 페이지" disabled><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button>
+  </nav>
+</catui-example>
+<p>좁은 카드 꼬리나 모바일 목록에서는 번호 대신 "현재 / 전체" 글자와 이전·다음 버튼만 둡니다. 첫 쪽에서는 이전, 마지막 쪽에서는 다음을 <code>disabled</code>로 막습니다.</p>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p><code>.Catui_pager</code> 안에 <code>.Catui_pg</code> 버튼, 현재 쪽은 <code>.Catui_pg-active</code> + <code>aria-current="page"</code>. 이전 화살표는 오른쪽 화살표에 <code>.Catui_pg-prev</code>(180° 회전)를 붙입니다. 번호 계산·이동은 <a href="doc:js/modules/laypage">catui.js laypage</a>.</p>

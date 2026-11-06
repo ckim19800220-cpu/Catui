@@ -20,6 +20,7 @@
 .Catui_adm-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--Catui_space-1) var(--Catui_space-3);align-items:center;width:100%;padding:var(--Catui_space-3) var(--Catui_space-4);border:0;border-bottom:1px solid var(--Catui_color-border);background:transparent;color:inherit;text-align:left;font:inherit;cursor:pointer}
 .Catui_adm-row:hover{background:var(--Catui_color-surface-muted)}
 .Catui_adm-row[aria-current="true"]{background:var(--Catui_color-brand-soft)}
+.Catui_adm-row[aria-current="true"] :is(.Catui_adm-row-sub,.Catui_adm-row-time){color:var(--Catui_color-neutral-700)}   /* 선택 배경 위 보조 글자 4.4 → AA */
 .Catui_adm-row:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
 .Catui_adm-row-title{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .Catui_adm-row-sub{grid-column:2 / -1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}

@@ -22,6 +22,18 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="disabled">
+<h2 id="disabled">비활성</h2>
+<catui-example title="고를 수 없는 체크박스 · 라디오 · 토글">
+  <div class="Catui_choices">
+    <label class="Catui_choice"><input class="Catui_clip" type="checkbox" checked disabled><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-check"></use></svg></span>관리자만 바꿀 수 있음</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="radio" name="ch-dis" disabled><span class="Catui_radio"></span>준비 중인 주기</label>
+    <label class="Catui_choice"><input class="Catui_clip" type="checkbox" role="switch" disabled><span class="Catui_tgl"></span>요금제 업그레이드 후 사용</label>
+  </div>
+</catui-example>
+<p>input에 <code>disabled</code>를 주면 상자·스위치가 흐려지고 라벨 글자도 비활성색이 됩니다. 왜 고를 수 없는지 라벨에 함께 적어 주세요.</p>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p>실제 input은 <code>.Catui_clip</code>으로 숨기고 바로 뒤의 <code>.Catui_cbx</code>·<code>.Catui_radio</code>·<code>.Catui_tgl</code>이 상태를 그립니다. 묶음은 <code>fieldset.Catui_choices</code> + <code>legend</code>.</p>

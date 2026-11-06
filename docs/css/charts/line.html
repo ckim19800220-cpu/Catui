@@ -80,6 +80,25 @@
 &lt;/svg&gt;</code></pre></details>
 </figure>
 </section>
+
+<section aria-labelledby="legend">
+<h2 id="legend">범례 단독</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">세로 범례 + 값 (차트 옆 요약)</figcaption>
+<div class="doc-example-preview">
+  <ul class="Catui_legend" style="max-width:240px"><li><i class="Catui_s1"></i>이번 달 매출<b>5,400만 원</b></li><li><i class="Catui_s2"></i>목표<b>4,800만 원</b></li><li><i class="Catui_s3"></i>지난해 같은 달<b>4,100만 원</b></li></ul>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="세로 범례 + 값 (차트 옆 요약) 코드 복사">복사</button><pre><code>&lt;ul class=&quot;Catui_legend&quot; style=&quot;max-width:240px&quot;&gt;&lt;li&gt;&lt;i class=&quot;Catui_s1&quot;&gt;&lt;/i&gt;이번 달 매출&lt;b&gt;5,400만 원&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i class=&quot;Catui_s2&quot;&gt;&lt;/i&gt;목표&lt;b&gt;4,800만 원&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i class=&quot;Catui_s3&quot;&gt;&lt;/i&gt;지난해 같은 달&lt;b&gt;4,100만 원&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">가로 범례 + 값 (legend-row)</figcaption>
+<div class="doc-example-preview">
+  <ul class="Catui_legend Catui_legend-row"><li><i class="Catui_s1"></i>신규<b>1,240</b></li><li><i class="Catui_s2"></i>재방문<b>860</b></li><li><i class="Catui_s3"></i>추천 유입<b>310</b></li><li><i class="Catui_s4"></i>광고<b>95</b></li></ul>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="가로 범례 + 값 (legend-row) 코드 복사">복사</button><pre><code>&lt;ul class=&quot;Catui_legend Catui_legend-row&quot;&gt;&lt;li&gt;&lt;i class=&quot;Catui_s1&quot;&gt;&lt;/i&gt;신규&lt;b&gt;1,240&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i class=&quot;Catui_s2&quot;&gt;&lt;/i&gt;재방문&lt;b&gt;860&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i class=&quot;Catui_s3&quot;&gt;&lt;/i&gt;추천 유입&lt;b&gt;310&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i class=&quot;Catui_s4&quot;&gt;&lt;/i&gt;광고&lt;b&gt;95&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;</code></pre></details>
+</figure>
+<p>범례만 따로 써도 됩니다. 세로 <code>.Catui_legend</code>는 <code>b</code> 값이 오른쪽 끝으로 붙어 숫자 열이 맞고, <code>.Catui_legend-row</code>는 이름 바로 뒤에 값이 붙어 한 줄로 흐릅니다. 색 견본은 <code>.Catui_s1~5</code>, 이름과 값을 글자로 함께 써서 색만으로 구분하지 않습니다.</p>
+</section>
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p><code>.Catui_chart</code> SVG(grid/area/series/axis), 범례 <code>.Catui_legend</code>, 도넛 <code>.Catui_donut</code>.</p>
@@ -96,7 +115,7 @@
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/charts/line.css</span><code>.Catui_chart</code></li><li><span class="doc-src">src/css/charts/legend.css</span><code>.Catui_legend</code> <code>.Catui_legend-row</code> <code>.Catui_s1</code> <code>.Catui_s2</code> <code>.Catui_s3</code> <code>.Catui_s4</code> <code>.Catui_s5</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/views/feed-meter.html"><span>이전</span>피드·미터·작업</a><a class="doc-pager-next" href="../../css/charts/donut.html"><span>다음</span>도넛</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#examples">예제</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#examples">예제</a></li><li><a href="#legend">범례 단독</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

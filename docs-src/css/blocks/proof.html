@@ -3,6 +3,15 @@
 <catui-example title="로고 띠 (회색조)">
   <div class="Catui_logos" role="list" aria-label="사용하는 회사"><span role="listitem">NORTHWIND</span><span role="listitem">Contoso</span><span role="listitem">FABRIKAM</span><span role="listitem">Tailspin</span><span role="listitem">Litware</span></div>
 </catui-example>
+<catui-example title="로고 무한 흐름 (logos-marquee + logos-track)">
+  <div class="Catui_logos Catui_logos-marquee" role="group" aria-label="고객사">
+    <div class="Catui_logos-track">
+      <span>NORTHWIND</span><span>Contoso</span><span>FABRIKAM</span><span>Tailspin</span><span>Litware</span>
+      <span aria-hidden="true">NORTHWIND</span><span aria-hidden="true">Contoso</span><span aria-hidden="true">FABRIKAM</span><span aria-hidden="true">Tailspin</span><span aria-hidden="true">Litware</span>
+    </div>
+  </div>
+</catui-example>
+<p><code>.Catui_logos-track</code>은 내용 폭(<code>max-content</code>)만큼 늘어난 줄을 30초에 한 번 왼쪽으로 절반(<code>-50%</code>)만큼 옮기고 처음으로 돌아갑니다. 그래서 로고를 <b>똑같이 두 벌</b> 넣어야 이음매 없이 이어지고, 복제한 벌에는 <code>aria-hidden="true"</code>를 줘 낭독기가 두 번 읽지 않게 합니다. 바깥 <code>.Catui_logos-marquee</code>는 넘친 부분을 자르고 양 끝을 흐리게 가립니다. 마우스를 올리거나 안에 포커스가 들어오면 멈추고, 운영체제의 <b>모션 줄이기</b>(<code>prefers-reduced-motion:reduce</code>)가 켜져 있으면 애니메이션을 아예 끕니다(이때 복제 벌도 그대로 보이므로 실제 화면에서는 스크립트 방식을 권합니다). 5초 넘게 움직이는 내용에는 정지 버튼이 있어야 하므로(WCAG 2.2.2), 실제 화면에서는 <code>.Catui_logos</code>에 <code>data-catui-marquee="30"</code>만 달아 <a href="doc:js/modules/site#marquee">catui.js site 로고 흐름</a>이 트랙·복제·정지 버튼을 만들게 하세요(모션 줄이기면 흐르지 않는 원래 배치 그대로).</p>
 </section>
 <section aria-labelledby="stats">
 <h2 id="stats">숫자 띠</h2>

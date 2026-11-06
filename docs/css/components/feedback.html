@@ -72,20 +72,61 @@
 <figure class="doc-example">
 <figcaption class="doc-example-title">불러오는 중 자리 표시</figcaption>
 <div class="doc-example-preview">
-  <div aria-busy="true" aria-label="불러오는 중">
+  <div role="status" aria-busy="true" aria-label="불러오는 중">
     <div class="Catui_skeleton Catui_skeleton-title"></div>
     <div class="Catui_skeleton Catui_skeleton-text"></div>
     <div class="Catui_skeleton Catui_skeleton-text"></div>
   </div>
   <hr class="Catui_divider">
 </div>
-<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="불러오는 중 자리 표시 코드 복사">복사</button><pre><code>&lt;div aria-busy=&quot;true&quot; aria-label=&quot;불러오는 중&quot;&gt;
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="불러오는 중 자리 표시 코드 복사">복사</button><pre><code>&lt;div role=&quot;status&quot; aria-busy=&quot;true&quot; aria-label=&quot;불러오는 중&quot;&gt;
   &lt;div class=&quot;Catui_skeleton Catui_skeleton-title&quot;&gt;&lt;/div&gt;
   &lt;div class=&quot;Catui_skeleton Catui_skeleton-text&quot;&gt;&lt;/div&gt;
   &lt;div class=&quot;Catui_skeleton Catui_skeleton-text&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;hr class=&quot;Catui_divider&quot;&gt;</code></pre></details>
 </figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">스켈레톤 조합 — 카드 모양</figcaption>
+<div class="doc-example-preview">
+  <article class="Catui_card" style="max-width:320px" aria-busy="true">
+    <span class="Catui_clip">카드를 불러오는 중</span>
+    <div class="Catui_skeleton" style="aspect-ratio:16 / 9;border-radius:var(--Catui_card-radius) var(--Catui_card-radius) 0 0" aria-hidden="true"></div>
+    <div class="Catui_card-b Catui_vstack Catui_gap-3" aria-hidden="true">
+      <div class="Catui_skeleton Catui_skeleton-title"></div>
+      <div class="Catui_skeleton Catui_skeleton-text"></div>
+      <div class="Catui_skeleton Catui_skeleton-text" style="width:70%"></div>
+    </div>
+  </article>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="스켈레톤 조합 — 카드 모양 코드 복사">복사</button><pre><code>&lt;article class=&quot;Catui_card&quot; style=&quot;max-width:320px&quot; aria-busy=&quot;true&quot;&gt;
+  &lt;span class=&quot;Catui_clip&quot;&gt;카드를 불러오는 중&lt;/span&gt;
+  &lt;div class=&quot;Catui_skeleton&quot; style=&quot;aspect-ratio:16 / 9;border-radius:var(--Catui_card-radius) var(--Catui_card-radius) 0 0&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_card-b Catui_vstack Catui_gap-3&quot; aria-hidden=&quot;true&quot;&gt;
+    &lt;div class=&quot;Catui_skeleton Catui_skeleton-title&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_skeleton Catui_skeleton-text&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_skeleton Catui_skeleton-text&quot; style=&quot;width:70%&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">스켈레톤 조합 — 목록 모양 (아바타 + 두 줄)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_vstack Catui_gap-4" style="max-width:420px" aria-busy="true">
+    <span class="Catui_clip">목록을 불러오는 중</span>
+    <div class="Catui_line" aria-hidden="true"><div class="Catui_skeleton" style="width:32px;height:32px;border-radius:var(--Catui_radius-pill);flex:none"></div><div class="Catui_vstack Catui_gap-1" style="flex:1"><div class="Catui_skeleton Catui_skeleton-title"></div><div class="Catui_skeleton Catui_skeleton-text"></div></div></div>
+    <div class="Catui_line" aria-hidden="true"><div class="Catui_skeleton" style="width:32px;height:32px;border-radius:var(--Catui_radius-pill);flex:none"></div><div class="Catui_vstack Catui_gap-1" style="flex:1"><div class="Catui_skeleton Catui_skeleton-title"></div><div class="Catui_skeleton Catui_skeleton-text"></div></div></div>
+    <div class="Catui_line" aria-hidden="true"><div class="Catui_skeleton" style="width:32px;height:32px;border-radius:var(--Catui_radius-pill);flex:none"></div><div class="Catui_vstack Catui_gap-1" style="flex:1"><div class="Catui_skeleton Catui_skeleton-title"></div><div class="Catui_skeleton Catui_skeleton-text"></div></div></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="스켈레톤 조합 — 목록 모양 (아바타 + 두 줄) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_vstack Catui_gap-4&quot; style=&quot;max-width:420px&quot; aria-busy=&quot;true&quot;&gt;
+  &lt;span class=&quot;Catui_clip&quot;&gt;목록을 불러오는 중&lt;/span&gt;
+  &lt;div class=&quot;Catui_line&quot; aria-hidden=&quot;true&quot;&gt;&lt;div class=&quot;Catui_skeleton&quot; style=&quot;width:32px;height:32px;border-radius:var(--Catui_radius-pill);flex:none&quot;&gt;&lt;/div&gt;&lt;div class=&quot;Catui_vstack Catui_gap-1&quot; style=&quot;flex:1&quot;&gt;&lt;div class=&quot;Catui_skeleton Catui_skeleton-title&quot;&gt;&lt;/div&gt;&lt;div class=&quot;Catui_skeleton Catui_skeleton-text&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_line&quot; aria-hidden=&quot;true&quot;&gt;&lt;div class=&quot;Catui_skeleton&quot; style=&quot;width:32px;height:32px;border-radius:var(--Catui_radius-pill);flex:none&quot;&gt;&lt;/div&gt;&lt;div class=&quot;Catui_vstack Catui_gap-1&quot; style=&quot;flex:1&quot;&gt;&lt;div class=&quot;Catui_skeleton Catui_skeleton-title&quot;&gt;&lt;/div&gt;&lt;div class=&quot;Catui_skeleton Catui_skeleton-text&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_line&quot; aria-hidden=&quot;true&quot;&gt;&lt;div class=&quot;Catui_skeleton&quot; style=&quot;width:32px;height:32px;border-radius:var(--Catui_radius-pill);flex:none&quot;&gt;&lt;/div&gt;&lt;div class=&quot;Catui_vstack Catui_gap-1&quot; style=&quot;flex:1&quot;&gt;&lt;div class=&quot;Catui_skeleton Catui_skeleton-title&quot;&gt;&lt;/div&gt;&lt;div class=&quot;Catui_skeleton Catui_skeleton-text&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>전용 원형·이미지 스켈레톤 클래스는 없으므로 <code>.Catui_skeleton</code>에 크기·반경만 인라인으로 주어 실제 화면(카드 이미지·아바타·제목·본문) 모양을 흉내 냅니다. 자리 표시 자체는 <code>aria-hidden</code>, 묶음에 <code>aria-busy="true"</code>와 숨김 글자로 "불러오는 중"을 알립니다.</p>
 </section>
 
 <section aria-labelledby="extra">

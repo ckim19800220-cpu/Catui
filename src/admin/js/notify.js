@@ -10,7 +10,7 @@ admin.notify = {
     if (!btn) return;
     this.btn = btn;
     this.more = btn.getAttribute("data-catui-adm-notify") || "";   // "전체 알림 보기" 주소 (비우면 링크 없음)
-    const take = (list) => { this.items = (list || []).map((x, i) => ({ id: x.id ?? `n${i}`, ...x })); this.badge(); if (this.pop && !this.pop.hidden) this.render(); };
+    const take = (list) => { if (admin._dead || !btn.isConnected) return; this.items = (list || []).map((x, i) => ({ id: x.id ?? `n${i}`, ...x })); this.badge(); if (this.pop && !this.pop.hidden) this.render(); };
     // 화면 안 JSON(#adm-notify-data)이 없으면 data/notifications.json 모의 데이터를 읽는다
     const inline = admJson("adm-notify-data");
     this.items = [];

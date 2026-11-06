@@ -15,6 +15,8 @@
 .Catui_pill-solid-warning{background:var(--Catui_banner-warn-fg);color:var(--Catui_color-text-inverse)}
 .Catui_pill-solid-danger{background:var(--Catui_badge-danger-fg);color:var(--Catui_color-text-inverse)}
 .Catui_pill-solid-neutral{background:var(--Catui_badge-neutral-fg);color:var(--Catui_color-text-inverse)}
+/* 외곽선 pill: 배경 없이 글자색 계열 테두리. soft 상태 변형(pill-success 등)과 겹쳐 쓰면 그 글자색을 따른다 */
+.Catui_pill.Catui_pill-outline{background:transparent;border:1px solid color-mix(in srgb,currentColor 55%,transparent)}
 .Catui_badge{
   display:inline-flex;align-items:center;height:22px;padding:0 var(--Catui_space-2);
   border-radius:var(--Catui_badge-radius);font-size:var(--Catui_badge-font);font-weight:600;line-height:1;white-space:nowrap;

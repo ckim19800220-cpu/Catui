@@ -86,6 +86,74 @@
 <p>칸 사이는 <code>--Catui_grid-gap</code>(20px)만 둡니다. 3열 카드는 <code>.Catui_grid-3</code> 한 클래스로도 됩니다.</p>
 </section>
 
+<section aria-labelledby="cols">
+<h2 id="cols">열 수 바꾸기</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">--Catui_grid-cols 덮어쓰기 (3열 · 4열 카드)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_grid" style="--Catui_grid-cols:3">
+    <article class="Catui_card"><div class="Catui_card-b">3열 · 1</div></article>
+    <article class="Catui_card"><div class="Catui_card-b">3열 · 2</div></article>
+    <article class="Catui_card"><div class="Catui_card-b">3열 · 3</div></article>
+  </div>
+  <div class="Catui_grid" style="--Catui_grid-cols:4">
+    <article class="Catui_card"><div class="Catui_card-b">4열 · 1</div></article>
+    <article class="Catui_card"><div class="Catui_card-b">4열 · 2</div></article>
+    <article class="Catui_card"><div class="Catui_card-b">4열 · 3</div></article>
+    <article class="Catui_card"><div class="Catui_card-b">4열 · 4</div></article>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="--Catui_grid-cols 덮어쓰기 (3열 · 4열 카드) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_grid&quot; style=&quot;--Catui_grid-cols:3&quot;&gt;
+  &lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;3열 · 1&lt;/div&gt;&lt;/article&gt;
+  &lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;3열 · 2&lt;/div&gt;&lt;/article&gt;
+  &lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;3열 · 3&lt;/div&gt;&lt;/article&gt;
+&lt;/div&gt;
+&lt;div class=&quot;Catui_grid&quot; style=&quot;--Catui_grid-cols:4&quot;&gt;
+  &lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;4열 · 1&lt;/div&gt;&lt;/article&gt;
+  &lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;4열 · 2&lt;/div&gt;&lt;/article&gt;
+  &lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;4열 · 3&lt;/div&gt;&lt;/article&gt;
+  &lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;4열 · 4&lt;/div&gt;&lt;/article&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p><code>.Catui_grid</code>는 <code>repeat(var(--Catui_grid-cols), …)</code>로 열을 만들므로(기본 12), 그 요소에 <code>style="--Catui_grid-cols:3"</code>처럼 주면 span 없이 자식이 한 칸씩 차지합니다. 단, 화면 너비 1199px 이하에서는 반응형 규칙이 열 수를 8 → 4 → 1로 고정하므로 이 값은 넓은 화면에서만 적용됩니다.</p>
+<figure class="doc-example">
+<figcaption class="doc-example-title">자주 쓰는 열 수 — span으로 2열 · 3열 · 4열</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_grid">
+    <div class="Catui_span-6"><article class="Catui_card"><div class="Catui_card-b">span-6</div></article></div>
+    <div class="Catui_span-6"><article class="Catui_card"><div class="Catui_card-b">span-6</div></article></div>
+  </div>
+  <div class="Catui_grid">
+    <div class="Catui_span-4"><article class="Catui_card"><div class="Catui_card-b">span-4</div></article></div>
+    <div class="Catui_span-4"><article class="Catui_card"><div class="Catui_card-b">span-4</div></article></div>
+    <div class="Catui_span-4"><article class="Catui_card"><div class="Catui_card-b">span-4</div></article></div>
+  </div>
+  <div class="Catui_grid">
+    <div class="Catui_span-3"><article class="Catui_card"><div class="Catui_card-b">span-3</div></article></div>
+    <div class="Catui_span-3"><article class="Catui_card"><div class="Catui_card-b">span-3</div></article></div>
+    <div class="Catui_span-3"><article class="Catui_card"><div class="Catui_card-b">span-3</div></article></div>
+    <div class="Catui_span-3"><article class="Catui_card"><div class="Catui_card-b">span-3</div></article></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="자주 쓰는 열 수 — span으로 2열 · 3열 · 4열 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_grid&quot;&gt;
+  &lt;div class=&quot;Catui_span-6&quot;&gt;&lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;span-6&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_span-6&quot;&gt;&lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;span-6&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;Catui_grid&quot;&gt;
+  &lt;div class=&quot;Catui_span-4&quot;&gt;&lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;span-4&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_span-4&quot;&gt;&lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;span-4&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_span-4&quot;&gt;&lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;span-4&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;Catui_grid&quot;&gt;
+  &lt;div class=&quot;Catui_span-3&quot;&gt;&lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;span-3&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_span-3&quot;&gt;&lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;span-3&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_span-3&quot;&gt;&lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;span-3&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_span-3&quot;&gt;&lt;article class=&quot;Catui_card&quot;&gt;&lt;div class=&quot;Catui_card-b&quot;&gt;span-3&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>반응형까지 맞추려면 12열 그대로 두고 <code>span-6</code>(2열)·<code>span-4</code>(3열)·<code>span-3</code>(4열)을 쓰는 편이 좋습니다. 좁은 화면에서는 아래 규칙대로 자동으로 전폭이 됩니다.</p>
+</section>
+
 <section aria-labelledby="responsive">
 <h2 id="responsive">반응형</h2>
 <ul>
@@ -98,7 +166,7 @@
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/layout/grid.css</span><code>.Catui_grid</code> <code>.Catui_span-1</code> <code>.Catui_span-2</code> <code>.Catui_span-3</code> <code>.Catui_span-4</code> <code>.Catui_span-5</code> <code>.Catui_span-6</code> <code>.Catui_span-7</code> <code>.Catui_span-8</code> <code>.Catui_span-9</code> <code>.Catui_span-10</code> <code>.Catui_span-11</code> <code>.Catui_span-12</code> <code>.Catui_grid-3</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/foundation/motion.html"><span>이전</span>모션</a><a class="doc-pager-next" href="../../css/layout/flex.html"><span>다음</span>정렬 도우미</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">12열 그리드</a></li><li><a href="#responsive">반응형</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">12열 그리드</a></li><li><a href="#cols">열 수 바꾸기</a></li><li><a href="#responsive">반응형</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

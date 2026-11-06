@@ -50,7 +50,7 @@
   <div class="Catui_app">
     <aside class="Catui_side" aria-label="주 메뉴">
       <div class="Catui_brand"><span class="Catui_logo">C</span><b>Catui</b></div>
-      <nav class="Catui_menu">
+      <nav class="Catui_menu" aria-label="주 메뉴">
         <div class="Catui_group">주요</div>
         <a class="Catui_item Catui_item-active" href="../../index.html" aria-current="page"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-layout-dashboard"></use></svg><span class="Catui_item-label">대시보드</span></a>
         <a class="Catui_item" href="../../index.html"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-folder"></use></svg><span class="Catui_item-label">프로젝트</span><span class="Catui_count">4</span></a>
@@ -105,7 +105,7 @@
 &lt;div class=&quot;Catui_app&quot;&gt;
   &lt;aside class=&quot;Catui_side&quot; aria-label=&quot;주 메뉴&quot;&gt;
     &lt;div class=&quot;Catui_brand&quot;&gt;&lt;span class=&quot;Catui_logo&quot;&gt;C&lt;/span&gt;&lt;b&gt;Catui&lt;/b&gt;&lt;/div&gt;
-    &lt;nav class=&quot;Catui_menu&quot;&gt;
+    &lt;nav class=&quot;Catui_menu&quot; aria-label=&quot;주 메뉴&quot;&gt;
       &lt;div class=&quot;Catui_group&quot;&gt;주요&lt;/div&gt;
       &lt;a class=&quot;Catui_item Catui_item-active&quot; href=&quot;doc:index&quot; aria-current=&quot;page&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-layout-dashboard&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_item-label&quot;&gt;대시보드&lt;/span&gt;&lt;/a&gt;
       &lt;a class=&quot;Catui_item&quot; href=&quot;doc:index&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-folder&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_item-label&quot;&gt;프로젝트&lt;/span&gt;&lt;span class=&quot;Catui_count&quot;&gt;4&lt;/span&gt;&lt;/a&gt;
@@ -158,6 +158,87 @@
 </figure>
 </section>
 
+<section aria-labelledby="parts">
+<h2 id="parts">부품 따로 쓰기</h2>
+<p>위 셸에 들어 있는 부품을 하나씩 떼어 복사할 수 있게 나눴습니다. 사이드바 부품은 색·글자 크기 토큰(<code>--Catui_sidebar-*</code>)과 <code>summary</code> 모양을 <code>.Catui_side</code>에서 받으므로 그 안에 둡니다. 예제에서는 높이를 줄이려고 <code>min-height</code>만 덮어썼습니다.</p>
+<figure class="doc-example">
+<figcaption class="doc-example-title">① 사이드바 메뉴 묶음 (group · item · count · nest)</figcaption>
+<div class="doc-example-preview">
+  <aside class="Catui_side" aria-label="메뉴 묶음 예제" style="min-height:0">
+    <nav class="Catui_menu" aria-label="업무 메뉴">
+      <div class="Catui_group">업무</div>
+      <a class="Catui_item Catui_item-active" href="../../index.html" aria-current="page"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-inbox"></use></svg><span class="Catui_item-label">받은함</span><span class="Catui_count">12</span></a>
+      <a class="Catui_item" href="../../index.html"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg><span class="Catui_item-label">주문</span><span class="Catui_count">5</span></a>
+      <details class="Catui_nest" open>
+        <summary class="Catui_item"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-folder"></use></svg><span class="Catui_item-label">프로젝트</span></summary>
+        <a class="Catui_item" href="../../index.html"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-file-text"></use></svg><span class="Catui_item-label">진행 중</span></a>
+        <a class="Catui_item" href="../../index.html"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-files"></use></svg><span class="Catui_item-label">보관함</span></a>
+      </details>
+      <div class="Catui_group">관리</div>
+      <a class="Catui_item" href="../../index.html"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-settings"></use></svg><span class="Catui_item-label">설정</span></a>
+    </nav>
+  </aside>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="① 사이드바 메뉴 묶음 (group · item · count · nest) 코드 복사">복사</button><pre><code>&lt;aside class=&quot;Catui_side&quot; aria-label=&quot;메뉴 묶음 예제&quot; style=&quot;min-height:0&quot;&gt;
+  &lt;nav class=&quot;Catui_menu&quot; aria-label=&quot;업무 메뉴&quot;&gt;
+    &lt;div class=&quot;Catui_group&quot;&gt;업무&lt;/div&gt;
+    &lt;a class=&quot;Catui_item Catui_item-active&quot; href=&quot;doc:index&quot; aria-current=&quot;page&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-inbox&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_item-label&quot;&gt;받은함&lt;/span&gt;&lt;span class=&quot;Catui_count&quot;&gt;12&lt;/span&gt;&lt;/a&gt;
+    &lt;a class=&quot;Catui_item&quot; href=&quot;doc:index&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-shopping-cart&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_item-label&quot;&gt;주문&lt;/span&gt;&lt;span class=&quot;Catui_count&quot;&gt;5&lt;/span&gt;&lt;/a&gt;
+    &lt;details class=&quot;Catui_nest&quot; open&gt;
+      &lt;summary class=&quot;Catui_item&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-folder&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_item-label&quot;&gt;프로젝트&lt;/span&gt;&lt;/summary&gt;
+      &lt;a class=&quot;Catui_item&quot; href=&quot;doc:index&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-file-text&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_item-label&quot;&gt;진행 중&lt;/span&gt;&lt;/a&gt;
+      &lt;a class=&quot;Catui_item&quot; href=&quot;doc:index&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-files&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_item-label&quot;&gt;보관함&lt;/span&gt;&lt;/a&gt;
+    &lt;/details&gt;
+    &lt;div class=&quot;Catui_group&quot;&gt;관리&lt;/div&gt;
+    &lt;a class=&quot;Catui_item&quot; href=&quot;doc:index&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i18&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-settings&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_item-label&quot;&gt;설정&lt;/span&gt;&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/aside&gt;</code></pre></details>
+</figure>
+<p>그룹 제목 <code>.Catui_group</code>, 항목 <code>a.Catui_item</code>(아이콘 + <code>.Catui_item-label</code>), 개수 <code>.Catui_count</code>(오른쪽 끝), 접는 하위 메뉴 <code>details.Catui_nest</code> &gt; <code>summary.Catui_item</code>. 현재 항목은 <code>aria-current="page"</code>(또는 <code>.Catui_item-active</code>)로 왼쪽 막대가 붙습니다.</p>
+<figure class="doc-example">
+<figcaption class="doc-example-title">② 사용자 카드 (user · user-txt)</figcaption>
+<div class="doc-example-preview">
+  <aside class="Catui_side" aria-label="사용자 카드 예제" style="min-height:0">
+    <div class="Catui_user"><span class="Catui_av Catui_av-md">이</span><span class="Catui_user-txt"><b>이운영</b><span>운영 담당</span></span></div>
+  </aside>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="② 사용자 카드 (user · user-txt) 코드 복사">복사</button><pre><code>&lt;aside class=&quot;Catui_side&quot; aria-label=&quot;사용자 카드 예제&quot; style=&quot;min-height:0&quot;&gt;
+  &lt;div class=&quot;Catui_user&quot;&gt;&lt;span class=&quot;Catui_av Catui_av-md&quot;&gt;이&lt;/span&gt;&lt;span class=&quot;Catui_user-txt&quot;&gt;&lt;b&gt;이운영&lt;/b&gt;&lt;span&gt;운영 담당&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/aside&gt;</code></pre></details>
+</figure>
+<p>사이드바 맨 아래에 두는 줄입니다. 이름은 <code>b</code>, 역할은 <code>span</code>(작은 옅은 글자). 991px 이하 레일에서는 글자가 숨김 처리되고 아바타만 남습니다.</p>
+<figure class="doc-example">
+<figcaption class="doc-example-title">③ 상단 바 검색 + 동작 (topbar-search · top-actions)</figcaption>
+<div class="doc-example-preview">
+  <header class="Catui_topbar">
+    <form class="Catui_topbar-search Catui_search" role="search">
+      <svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg>
+      <label class="Catui_clip" for="shell-q">주문·연락처 검색</label>
+      <input class="Catui_input" id="shell-q" name="q" type="search" placeholder="주문·연락처 검색">
+    </form>
+    <div class="Catui_top-actions">
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" aria-label="도움말"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-circle-help"></use></svg></button>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" aria-label="알림"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-bell"></use></svg></button>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-primary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-plus"></use></svg>새 주문</button>
+    </div>
+  </header>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="③ 상단 바 검색 + 동작 (topbar-search · top-actions) 코드 복사">복사</button><pre><code>&lt;header class=&quot;Catui_topbar&quot;&gt;
+  &lt;form class=&quot;Catui_topbar-search Catui_search&quot; role=&quot;search&quot;&gt;
+    &lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-search&quot;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;label class=&quot;Catui_clip&quot; for=&quot;shell-q&quot;&gt;주문·연락처 검색&lt;/label&gt;
+    &lt;input class=&quot;Catui_input&quot; id=&quot;shell-q&quot; name=&quot;q&quot; type=&quot;search&quot; placeholder=&quot;주문·연락처 검색&quot;&gt;
+  &lt;/form&gt;
+  &lt;div class=&quot;Catui_top-actions&quot;&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost&quot; type=&quot;button&quot; aria-label=&quot;도움말&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-circle-help&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost&quot; type=&quot;button&quot; aria-label=&quot;알림&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-bell&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;
+    &lt;button class=&quot;Catui_btn Catui_btn-sm Catui_btn-primary&quot; type=&quot;button&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-plus&quot;&gt;&lt;/use&gt;&lt;/svg&gt;새 주문&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</code></pre></details>
+</figure>
+<p><code>.Catui_topbar-search</code>는 남는 폭을 차지하되 최대 320px, <code>.Catui_top-actions</code>는 <code>margin-left:auto</code>로 오른쪽 끝에 붙고 안의 아이콘은 <code>--Catui_topbar-icon</code>(20px) 크기가 됩니다. 767px 이하에서는 검색이 다음 줄 전폭으로 내려갑니다.</p>
+</section>
+
 <section aria-labelledby="a11y">
 <h2 id="a11y">접근성</h2>
 <ul>
@@ -170,7 +251,7 @@
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/layout/app-shell.css</span><code>.Catui_app</code> <code>.Catui_side</code> <code>.Catui_brand</code> <code>.Catui_logo</code> <code>.Catui_menu</code> <code>.Catui_group</code> <code>.Catui_item</code> <code>.Catui_item-active</code> <code>.Catui_icon</code> <code>.Catui_nest</code> <code>.Catui_count</code> <code>.Catui_user</code> <code>.Catui_user-txt</code> <code>.Catui_main</code> <code>.Catui_topbar</code> <code>.Catui_topbar-search</code> <code>.Catui_content</code> <code>.Catui_top-actions</code> <code>.Catui_item-label</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/layout/masonry.html"><span>이전</span>벽돌·벤토·쌓임</a><a class="doc-pager-next" href="../../css/layout/site.html"><span>다음</span>공개 홈</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#examples">예제</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#examples">예제</a></li><li><a href="#parts">부품 따로 쓰기</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

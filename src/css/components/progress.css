@@ -12,6 +12,14 @@
 .Catui_pc4{background:var(--Catui_progress-bar-4)}
 .Catui_pc5{background:var(--Catui_progress-bar-5)}
 .Catui_pc6{background:var(--Catui_progress-bar-6)}
+/* 줄무늬: 막대 색 위에 비스듬한 옅은 줄 (정지 상태, prog-lg와 잘 어울린다) */
+.Catui_prog-striped > i{background-image:repeating-linear-gradient(45deg,color-mix(in srgb,var(--Catui_color-text-inverse) 28%,transparent) 0 6px,transparent 6px 12px)}
+/* 불확정 진행: 끝을 모를 때 막대 조각이 왼쪽→오른쪽으로 흐른다. 모션 줄이기에서는 멈춘 줄무늬 전체 막대 */
+.Catui_prog-indeterminate > i{width:40%;animation:Catui_prog-flow 1.4s var(--Catui_ease) infinite}
+@keyframes Catui_prog-flow{from{transform:translateX(-100%)}to{transform:translateX(250%)}}
+@media (prefers-reduced-motion:reduce){
+  .Catui_prog-indeterminate > i{animation:none;transform:none;width:100%;background-image:repeating-linear-gradient(45deg,color-mix(in srgb,var(--Catui_color-text-inverse) 28%,transparent) 0 6px,transparent 6px 12px)}
+}
 /* 원형 진행 (값은 --Catui_ring-val: 0~100) */
 .Catui_ring{--Catui_ring-val:0;width:var(--Catui_control-h-lg);height:var(--Catui_control-h-lg);border-radius:var(--Catui_radius-pill);display:inline-grid;place-items:center;flex:none;position:relative;background:conic-gradient(var(--Catui_color-brand-strong) calc(var(--Catui_ring-val) * 1%),var(--Catui_color-neutral-100) 0);line-height:1}
 .Catui_ring::before{content:"";position:absolute;inset:4px;border-radius:inherit;background:var(--Catui_card-bg)}

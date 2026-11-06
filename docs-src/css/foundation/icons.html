@@ -12,6 +12,23 @@
 <p>기본 24px, <code>Catui_i12/16/18/20</code>으로 줄입니다. 선 두께는 1.5, 색은 <code>currentColor</code>입니다. 장식 아이콘은 <code>aria-hidden="true"</code>, 아이콘만 있는 버튼은 <code>aria-label</code>을 줍니다.</p>
 </section>
 
+<section aria-labelledby="with-text">
+<h2 id="with-text">아이콘과 글자 정렬</h2>
+<catui-example title="버튼 안 아이콘 (sm·i16 / md·i18 / lg·i20)">
+  <div class="Catui_actions">
+    <button type="button" class="Catui_btn Catui_btn-sm Catui_btn-secondary"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-download"></use></svg>내려받기</button>
+    <button type="button" class="Catui_btn Catui_btn-md Catui_btn-primary"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-plus"></use></svg>새로 만들기</button>
+    <button type="button" class="Catui_btn Catui_btn-lg Catui_btn-ghost">다음 단계<svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-arrow-right"></use></svg></button>
+  </div>
+</catui-example>
+<catui-example title="문장 안 아이콘 (.Catui_line · i12/i16)">
+  <p class="Catui_line"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-calendar"></use></svg>2026년 5월 12일 오후 3시</p>
+  <p class="Catui_line"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-map-pin"></use></svg>서울 중구 세종대로 110</p>
+  <small class="Catui_line"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-clock"></use></svg>3분 전 수정</small>
+</catui-example>
+<p>버튼은 <code>.Catui_btn</code>이 <code>inline-flex</code>·<code>gap</code>으로 아이콘과 글자를 가운데 맞춥니다. 크기는 버튼 sm→<code>i16</code>, md→<code>i18</code>, lg→<code>i20</code>이 어울립니다. 문장 안에서는 <code>.Catui_line</code>으로 감싸 세로 가운데를 맞추고, 아이콘은 보조 색이 됩니다. 글자가 뜻을 전하므로 아이콘은 모두 <code>aria-hidden</code>입니다.</p>
+</section>
+
 <section aria-labelledby="add">
 <h2 id="add">아이콘 추가</h2>
 <p><code>src/icons/allow.json</code>에 이름(케밥 표기)을 넣고 빌드합니다. 빌드는 아래 순서로 원본을 찾고, 없으면 실패합니다.</p>

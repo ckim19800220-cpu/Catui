@@ -38,9 +38,52 @@
 </catui-example>
 </section>
 
+<section aria-labelledby="ring-large">
+<h2 id="ring-large">큰 링 + 설명</h2>
+<catui-example title="ring-lg (72px) 옆에 제목·설명">
+  <div class="Catui_hstack Catui_gap-4">
+    <span class="Catui_ring Catui_ring-lg" style="--Catui_ring-val:60" role="progressbar" aria-labelledby="pg-ring-t" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" aria-valuetext="5단계 중 3단계 완료"><span>3/5</span></span>
+    <div class="Catui_vstack Catui_gap-1">
+      <strong id="pg-ring-t">계정 설정</strong>
+      <span class="Catui_help">5단계 중 3단계를 마쳤습니다. 결제 수단과 팀원 초대가 남았습니다.</span>
+    </div>
+  </div>
+</catui-example>
+</section>
+
+<section aria-labelledby="indeterminate">
+<h2 id="indeterminate">불확정 진행</h2>
+<catui-example title="prog-indeterminate (끝을 모를 때, 값 없음)">
+  <div class="Catui_prog-row">
+    <div class="Catui_prog-label"><span id="pg-ind-t">파일 분석 중…</span></div>
+    <div class="Catui_prog Catui_prog-indeterminate" role="progressbar" aria-labelledby="pg-ind-t"><i class="Catui_pc1"></i></div>
+  </div>
+</catui-example>
+<p>막대 조각이 왼쪽에서 오른쪽으로 계속 흐릅니다. 모션 줄이기 설정에서는 흐름을 멈추고 줄무늬가 있는 전체 막대로 바뀝니다. 진행률을 알게 되면 클래스를 지우고 <code>aria-valuenow</code>를 붙여 일반 막대로 바꿉니다.</p>
+</section>
+
+<section aria-labelledby="striped">
+<h2 id="striped">줄무늬 막대</h2>
+<catui-example title="prog-striped (prog-lg와 함께)">
+  <div class="Catui_prog-row">
+    <div class="Catui_prog-label"><span>저장 공간</span><span class="Catui_num">68%</span></div>
+    <div class="Catui_prog Catui_prog-lg Catui_prog-striped" role="img" aria-label="저장 공간 68퍼센트 사용"><i class="Catui_pc1" style="width:68%"></i></div>
+  </div>
+  <div class="Catui_prog-row">
+    <div class="Catui_prog-label"><span>구간 + 줄무늬</span><span class="Catui_num">55%</span></div>
+    <div class="Catui_prog Catui_prog-lg Catui_prog-striped" role="img" aria-label="문서 35퍼센트, 사진 20퍼센트"><i class="Catui_pc1" style="width:35%"></i><i class="Catui_pc2" style="width:20%"></i></div>
+  </div>
+</catui-example>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p><code>.Catui_prog</code> 트랙(6px) 안에 <code>&lt;i class="Catui_pc1~6"&gt;</code>를 넣고 진행률만큼 너비를 지정합니다. 색은 pc1부터 순서대로 쓰고, 그라디언트나 새 색을 만들지 않습니다.</p>
+<ul>
+  <li><code>.Catui_ring-lg</code> — 72px 큰 원형 진행. 가운데 글자가 본문 크기라 "3/5"처럼 짧은 분수도 들어갑니다.</li>
+  <li><code>.Catui_prog-indeterminate</code> — 진행률을 모를 때. 트랙 안에 <code>&lt;i class="Catui_pc1"&gt;</code> 하나만 두고 <code>width</code>는 지정하지 않습니다(조각 폭 40% 자동).</li>
+  <li><code>.Catui_prog-striped</code> — 막대 위에 정지된 비스듬한 줄무늬. 굵은 <code>Catui_prog-lg</code>와 함께 쓰고, 구간 막대에도 겹칠 수 있습니다.</li>
+</ul>
 </section>
 
 <section aria-labelledby="a11y">
@@ -48,5 +91,7 @@
 <ul>
   <li>값이 바뀌는 진행은 <code>role="progressbar"</code> + <code>aria-valuenow/min/max</code>, 고정 표시는 <code>role="img"</code> + <code>aria-label</code>.</li>
   <li>퍼센트 글자를 막대 옆에 함께 보입니다.</li>
+  <li>불확정 진행은 <code>role="progressbar"</code>와 이름(<code>aria-label</code>/<code>aria-labelledby</code>)만 주고 <code>aria-valuenow</code>는 빼서 "값을 알 수 없음"을 알립니다. 흐르는 움직임은 <code>prefers-reduced-motion: reduce</code>에서 멈춥니다.</li>
+  <li>값이 숫자로 읽기 어려우면(단계 등) <code>aria-valuetext</code>로 "5단계 중 3단계 완료"처럼 문장을 줍니다.</li>
 </ul>
 </section>

@@ -110,9 +110,169 @@
 </figure>
 </section>
 
+<section aria-labelledby="tab-extras">
+<h2 id="tab-extras">아이콘 · 숫자 · 새 소식</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">아이콘 + 글자 탭</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_tabs">
+    <input class="Catui_clip" type="radio" name="ti-demo" id="ti-a" checked>
+    <label class="Catui_tab" for="ti-a"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-layout-dashboard"></use></svg>대시보드</label>
+    <div class="Catui_panel"><p>오늘의 요약 지표입니다.</p></div>
+    <input class="Catui_clip" type="radio" name="ti-demo" id="ti-b">
+    <label class="Catui_tab" for="ti-b"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chart-column"></use></svg>보고서</label>
+    <div class="Catui_panel"><p>기간별 보고서를 봅니다.</p></div>
+    <input class="Catui_clip" type="radio" name="ti-demo" id="ti-c">
+    <label class="Catui_tab" for="ti-c"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-settings"></use></svg>설정</label>
+    <div class="Catui_panel"><p>대시보드 표시 방식을 바꿉니다.</p></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="아이콘 + 글자 탭 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_tabs&quot;&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;ti-demo&quot; id=&quot;ti-a&quot; checked&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;ti-a&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-layout-dashboard&quot;&gt;&lt;/use&gt;&lt;/svg&gt;대시보드&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;오늘의 요약 지표입니다.&lt;/p&gt;&lt;/div&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;ti-demo&quot; id=&quot;ti-b&quot;&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;ti-b&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-chart-column&quot;&gt;&lt;/use&gt;&lt;/svg&gt;보고서&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;기간별 보고서를 봅니다.&lt;/p&gt;&lt;/div&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;ti-demo&quot; id=&quot;ti-c&quot;&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;ti-c&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-settings&quot;&gt;&lt;/use&gt;&lt;/svg&gt;설정&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;대시보드 표시 방식을 바꿉니다.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<figure class="doc-example">
+<figcaption class="doc-example-title">탭 안 숫자 배지(count) · 새 소식 점(dot)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_tabs">
+    <input class="Catui_clip" type="radio" name="tc-demo" id="tc-a" checked>
+    <label class="Catui_tab" for="tc-a">받은 편지<span class="Catui_count"><span class="Catui_clip">읽지 않은 편지 </span>12<span class="Catui_clip">통</span></span></label>
+    <div class="Catui_panel"><p>받은 편지 목록입니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tc-demo" id="tc-b">
+    <label class="Catui_tab" for="tc-b">공지<i class="Catui_dot"></i><span class="Catui_clip">새 소식 있음</span></label>
+    <div class="Catui_panel"><p>새 공지가 올라왔습니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tc-demo" id="tc-c">
+    <label class="Catui_tab" for="tc-c">보관함</label>
+    <div class="Catui_panel"><p>보관한 편지입니다.</p></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="탭 안 숫자 배지(count) · 새 소식 점(dot) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_tabs&quot;&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;tc-demo&quot; id=&quot;tc-a&quot; checked&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;tc-a&quot;&gt;받은 편지&lt;span class=&quot;Catui_count&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;읽지 않은 편지 &lt;/span&gt;12&lt;span class=&quot;Catui_clip&quot;&gt;통&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;받은 편지 목록입니다.&lt;/p&gt;&lt;/div&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;tc-demo&quot; id=&quot;tc-b&quot;&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;tc-b&quot;&gt;공지&lt;i class=&quot;Catui_dot&quot;&gt;&lt;/i&gt;&lt;span class=&quot;Catui_clip&quot;&gt;새 소식 있음&lt;/span&gt;&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;새 공지가 올라왔습니다.&lt;/p&gt;&lt;/div&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;tc-demo&quot; id=&quot;tc-c&quot;&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;tc-c&quot;&gt;보관함&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;보관한 편지입니다.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="tab-full">
+<h2 id="tab-full">균등 분할 탭</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">tabs-full (탭이 줄 폭을 똑같이 나눔)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_tabs Catui_tabs-full">
+    <input class="Catui_clip" type="radio" name="tf-demo" id="tf-a" checked>
+    <label class="Catui_tab" for="tf-a">전체</label>
+    <div class="Catui_panel"><p>모든 주문입니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tf-demo" id="tf-b">
+    <label class="Catui_tab" for="tf-b">진행 중</label>
+    <div class="Catui_panel"><p>배송 준비·배송 중인 주문입니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tf-demo" id="tf-c">
+    <label class="Catui_tab" for="tf-c">완료</label>
+    <div class="Catui_panel"><p>배송이 끝난 주문입니다.</p></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="tabs-full (탭이 줄 폭을 똑같이 나눔) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_tabs Catui_tabs-full&quot;&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;tf-demo&quot; id=&quot;tf-a&quot; checked&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;tf-a&quot;&gt;전체&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;모든 주문입니다.&lt;/p&gt;&lt;/div&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;tf-demo&quot; id=&quot;tf-b&quot;&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;tf-b&quot;&gt;진행 중&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;배송 준비·배송 중인 주문입니다.&lt;/p&gt;&lt;/div&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;tf-demo&quot; id=&quot;tf-c&quot;&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;tf-c&quot;&gt;완료&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;배송이 끝난 주문입니다.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="tab-scroll">
+<h2 id="tab-scroll">가로 스크롤 탭 줄</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">tabs-scroll (패널 없는 링크형 nav, 한 줄 유지)</figcaption>
+<div class="doc-example-preview">
+  <nav class="Catui_tabs Catui_tabs-scroll" aria-label="상품 분류">
+    <a class="Catui_tab" href="../../css/components/tabs.html" aria-current="page">전체</a>
+    <a class="Catui_tab" href="../../css/components/tabs.html">의류</a>
+    <a class="Catui_tab" href="../../css/components/tabs.html">신발</a>
+    <a class="Catui_tab" href="../../css/components/tabs.html">가방·잡화</a>
+    <a class="Catui_tab" href="../../css/components/tabs.html">뷰티</a>
+    <a class="Catui_tab" href="../../css/components/tabs.html">생활·주방</a>
+    <a class="Catui_tab" href="../../css/components/tabs.html">가전·디지털</a>
+    <a class="Catui_tab" href="../../css/components/tabs.html">스포츠·레저</a>
+    <a class="Catui_tab" href="../../css/components/tabs.html">도서·음반</a>
+    <a class="Catui_tab" href="../../css/components/tabs.html">반려동물</a>
+  </nav>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="tabs-scroll (패널 없는 링크형 nav, 한 줄 유지) 코드 복사">복사</button><pre><code>&lt;nav class=&quot;Catui_tabs Catui_tabs-scroll&quot; aria-label=&quot;상품 분류&quot;&gt;
+  &lt;a class=&quot;Catui_tab&quot; href=&quot;doc:css/components/tabs&quot; aria-current=&quot;page&quot;&gt;전체&lt;/a&gt;
+  &lt;a class=&quot;Catui_tab&quot; href=&quot;doc:css/components/tabs&quot;&gt;의류&lt;/a&gt;
+  &lt;a class=&quot;Catui_tab&quot; href=&quot;doc:css/components/tabs&quot;&gt;신발&lt;/a&gt;
+  &lt;a class=&quot;Catui_tab&quot; href=&quot;doc:css/components/tabs&quot;&gt;가방·잡화&lt;/a&gt;
+  &lt;a class=&quot;Catui_tab&quot; href=&quot;doc:css/components/tabs&quot;&gt;뷰티&lt;/a&gt;
+  &lt;a class=&quot;Catui_tab&quot; href=&quot;doc:css/components/tabs&quot;&gt;생활·주방&lt;/a&gt;
+  &lt;a class=&quot;Catui_tab&quot; href=&quot;doc:css/components/tabs&quot;&gt;가전·디지털&lt;/a&gt;
+  &lt;a class=&quot;Catui_tab&quot; href=&quot;doc:css/components/tabs&quot;&gt;스포츠·레저&lt;/a&gt;
+  &lt;a class=&quot;Catui_tab&quot; href=&quot;doc:css/components/tabs&quot;&gt;도서·음반&lt;/a&gt;
+  &lt;a class=&quot;Catui_tab&quot; href=&quot;doc:css/components/tabs&quot;&gt;반려동물&lt;/a&gt;
+&lt;/nav&gt;</code></pre></details>
+</figure>
+</section>
+
+<section aria-labelledby="tab-card">
+<h2 id="tab-card">카드형 탭</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">tabs-card (활성 탭이 패널 상자와 이어짐)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_tabs Catui_tabs-card">
+    <input class="Catui_clip" type="radio" name="tk-demo" id="tk-a" checked>
+    <label class="Catui_tab" for="tk-a">기본 정보</label>
+    <div class="Catui_panel"><p>상품명·가격·분류를 입력합니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tk-demo" id="tk-b">
+    <label class="Catui_tab" for="tk-b">상세 설명</label>
+    <div class="Catui_panel"><p>사진과 설명 글을 넣습니다.</p></div>
+    <input class="Catui_clip" type="radio" name="tk-demo" id="tk-c">
+    <label class="Catui_tab" for="tk-c">배송</label>
+    <div class="Catui_panel"><p>배송 방법과 비용을 정합니다.</p></div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="tabs-card (활성 탭이 패널 상자와 이어짐) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_tabs Catui_tabs-card&quot;&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;tk-demo&quot; id=&quot;tk-a&quot; checked&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;tk-a&quot;&gt;기본 정보&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;상품명·가격·분류를 입력합니다.&lt;/p&gt;&lt;/div&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;tk-demo&quot; id=&quot;tk-b&quot;&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;tk-b&quot;&gt;상세 설명&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;사진과 설명 글을 넣습니다.&lt;/p&gt;&lt;/div&gt;
+  &lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;tk-demo&quot; id=&quot;tk-c&quot;&gt;
+  &lt;label class=&quot;Catui_tab&quot; for=&quot;tk-c&quot;&gt;배송&lt;/label&gt;
+  &lt;div class=&quot;Catui_panel&quot;&gt;&lt;p&gt;배송 방법과 비용을 정합니다.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>알약형(둥근 배경) 탭은 <a href="../../css/components/subnav.html">하위 내비게이션의 <code>.Catui_pills</code></a>을, 값만 고르는 버튼 묶음은 위의 세그먼트를 씁니다.</p>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p>탭은 <code>input[type=radio].Catui_clip</code> → <code>label.Catui_tab</code> → <code>.Catui_panel</code> 순서를 반복합니다. 같은 <code>name</code>끼리 묶이고 <code>:checked</code> 형제 셀렉터로 패널을 보입니다. 세그먼트는 패널 없이 값만 고를 때 씁니다. 이벤트·추가·삭제는 <a href="../../js/modules/tabs.html">catui.js tabs</a>.</p>
+<ul>
+  <li><code>.Catui_tab</code> 안에 아이콘(<code>Catui_i16</code>)·<code>.Catui_count</code>·<code>.Catui_dot</code>을 글자와 함께 넣을 수 있습니다(간격 자동).</li>
+  <li><code>.Catui_tabs-full</code> — 탭들이 줄 폭을 똑같이 나눠 가운데 정렬합니다. 탭 2~4개, 짧은 글자에 씁니다.</li>
+  <li><code>.Catui_tabs-scroll</code> — 탭 줄을 한 줄로 두고 넘치면 가로로 스크롤합니다. radio 구조에서는 탭만 따로 스크롤할 수 없으므로 <strong>패널 없는 링크형 탭 줄</strong>(<code>&lt;nav&gt;</code> 안 <code>a.Catui_tab</code>, 현재 쪽은 <code>aria-current="page"</code>) 또는 catui.js가 그리는 <code>[role=tablist]</code> 줄에만 씁니다. 탭 모양을 그대로 쓰는 링크 줄이며, 쪽 이동 전용 밑줄 메뉴는 <a href="../../css/components/subnav.html"><code>.Catui_subnav</code></a>도 있습니다.</li>
+  <li><code>.Catui_tabs-card</code> — 탭을 테두리 상자로 그리고 선택한 탭을 패널 상자와 이어 붙입니다. radio 구조 그대로 씁니다.</li>
+</ul>
 </section>
 
 <section aria-labelledby="a11y">
@@ -121,13 +281,16 @@
   <li>radio 그룹이라 Tab으로 들어가 화살표 키로 이동합니다(스크립트 불필요).</li>
   <li>활성 탭은 색과 2px 밑줄을 함께 표시합니다 — 색만으로 구분하지 않습니다.</li>
   <li>세그먼트 묶음에 <code>role="radiogroup"</code> + <code>aria-label</code>.</li>
+  <li>탭 안 숫자는 <code>.Catui_clip</code> 숨김 글자로 "무엇이 몇 개"인지, 새 소식 점은 "새 소식 있음"을 함께 적습니다 — 점 색만으로 알리지 않습니다.</li>
+  <li>링크형 탭 줄(<code>.Catui_tabs-scroll</code>)은 <code>&lt;nav aria-label&gt;</code>로 감싸고 현재 쪽에 <code>aria-current="page"</code>를 줍니다. 스크롤 영역이 바깥을 잘라 내므로 포커스 외곽선은 탭 안쪽에 그립니다.</li>
+  <li>카드형 탭(<code>.Catui_tabs-card</code>)도 활성 탭을 테두리·면 색·글자 색 세 가지로 구분합니다.</li>
 </ul>
 </section>
 
-<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/tabs.css</span><code>.Catui_tabs</code> <code>.Catui_panel</code> <code>.Catui_tab</code> <code>.Catui_tabs-v</code></li><li><span class="doc-src">src/css/components/segment.css</span><code>.Catui_segment</code></li></ul></section>
+<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/tabs.css</span><code>.Catui_tabs</code> <code>.Catui_panel</code> <code>.Catui_tab</code> <code>.Catui_tabs-v</code> <code>.Catui_dot</code> <code>.Catui_tabs-full</code> <code>.Catui_tabs-scroll</code> <code>.Catui_tabs-card</code></li><li><span class="doc-src">src/css/components/segment.css</span><code>.Catui_segment</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/components/setting.html"><span>이전</span>설정 행</a><a class="doc-pager-next" href="../../css/components/subnav.html"><span>다음</span>보조 탐색</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#tabs">탭</a></li><li><a href="#segment">세그먼트</a></li><li><a href="#vertical">세로 탭</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#tabs">탭</a></li><li><a href="#segment">세그먼트</a></li><li><a href="#vertical">세로 탭</a></li><li><a href="#tab-extras">아이콘 · 숫자 · 새 소식</a></li><li><a href="#tab-full">균등 분할 탭</a></li><li><a href="#tab-scroll">가로 스크롤 탭 줄</a></li><li><a href="#tab-card">카드형 탭</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

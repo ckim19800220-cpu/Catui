@@ -20,8 +20,7 @@ export const autocomplete = component({
     const listId = uid("catui-ac");
     input.setAttribute("role", "combobox");
     input.setAttribute("aria-autocomplete", "list");
-    input.setAttribute("aria-expanded", "false");
-    input.setAttribute("aria-controls", listId);
+    input.setAttribute("aria-expanded", "false");   // aria-controls는 목록이 실제로 있을 때만(없는 id를 가리키지 않게)
     const prevAuto = input.getAttribute("autocomplete");   // 해제할 때 원래 값으로
     input.autocomplete = "off";
     let panel = null, items = [], active = -1, timer = 0, ctrl = null, seq = 0;
@@ -50,6 +49,7 @@ export const autocomplete = component({
       panel.style.maxHeight = "min(320px, 50vh)";
       panel.style.overflowY = "auto";
       floatRoot(input).appendChild(panel);
+      input.setAttribute("aria-controls", listId);
       // 목록을 누를 때 입력 칸이 포커스를 잃어 목록이 닫히지 않게
       panel.addEventListener("pointerdown", (e) => e.preventDefault());
       panel.addEventListener("click", onPick);
@@ -61,6 +61,7 @@ export const autocomplete = component({
       if (!panel) return;
       panel.remove(); panel = null; items = []; active = -1;
       input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-controls");
       input.removeAttribute("aria-activedescendant");
       removeEventListener("resize", onMove);
       removeEventListener("scroll", onMove, true);

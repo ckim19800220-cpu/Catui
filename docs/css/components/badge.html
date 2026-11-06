@@ -104,24 +104,76 @@
 </figure>
 </section>
 
+<section aria-labelledby="outline">
+<h2 id="outline">외곽선 pill</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">pill-outline (배경 없음, 글자색 테두리 · soft 상태 변형과 조합)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <span class="Catui_pill Catui_pill-outline">기본</span>
+    <span class="Catui_pill Catui_pill-outline Catui_pill-success"><i class="Catui_dot"></i>정상</span>
+    <span class="Catui_pill Catui_pill-outline Catui_pill-info">베타</span>
+    <span class="Catui_pill Catui_pill-outline Catui_pill-warning">검토 필요</span>
+    <span class="Catui_pill Catui_pill-outline Catui_pill-danger">만료</span>
+    <span class="Catui_pill Catui_pill-outline Catui_pill-neutral">보관</span>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="pill-outline (배경 없음, 글자색 테두리 · soft 상태 변형과 조합) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;span class=&quot;Catui_pill Catui_pill-outline&quot;&gt;기본&lt;/span&gt;
+  &lt;span class=&quot;Catui_pill Catui_pill-outline Catui_pill-success&quot;&gt;&lt;i class=&quot;Catui_dot&quot;&gt;&lt;/i&gt;정상&lt;/span&gt;
+  &lt;span class=&quot;Catui_pill Catui_pill-outline Catui_pill-info&quot;&gt;베타&lt;/span&gt;
+  &lt;span class=&quot;Catui_pill Catui_pill-outline Catui_pill-warning&quot;&gt;검토 필요&lt;/span&gt;
+  &lt;span class=&quot;Catui_pill Catui_pill-outline Catui_pill-danger&quot;&gt;만료&lt;/span&gt;
+  &lt;span class=&quot;Catui_pill Catui_pill-outline Catui_pill-neutral&quot;&gt;보관&lt;/span&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>표·카드처럼 이미 색이 많은 곳에서 눈에 덜 띄게 표시할 때 씁니다. 상태 색은 soft 변형(<code>Catui_pill-success</code> 등)의 글자색을 그대로 따릅니다.</p>
+</section>
+
+<section aria-labelledby="count-combo">
+<h2 id="count-combo">버튼과 카운트</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">버튼 안 카운트 · 아이콘 버튼 모서리 카운트</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-cart"></use></svg>장바구니<span class="Catui_count">3<span class="Catui_clip">개 담김</span></span></button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost" type="button">검토 요청<span class="Catui_count"><span class="Catui_clip">대기 </span>12<span class="Catui_clip">건</span></span></button>
+    <button class="Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon" type="button"><span class="Catui_indicator"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-bell"></use></svg><span class="Catui_count" aria-hidden="true">5</span></span><span class="Catui_clip">알림, 읽지 않음 5건</span></button>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="버튼 안 카운트 · 아이콘 버튼 모서리 카운트 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_actions&quot;&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-secondary&quot; type=&quot;button&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-shopping-cart&quot;&gt;&lt;/use&gt;&lt;/svg&gt;장바구니&lt;span class=&quot;Catui_count&quot;&gt;3&lt;span class=&quot;Catui_clip&quot;&gt;개 담김&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost&quot; type=&quot;button&quot;&gt;검토 요청&lt;span class=&quot;Catui_count&quot;&gt;&lt;span class=&quot;Catui_clip&quot;&gt;대기 &lt;/span&gt;12&lt;span class=&quot;Catui_clip&quot;&gt;건&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;
+  &lt;button class=&quot;Catui_btn Catui_btn-md Catui_btn-ghost Catui_btn-icon&quot; type=&quot;button&quot;&gt;&lt;span class=&quot;Catui_indicator&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-bell&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;span class=&quot;Catui_count&quot; aria-hidden=&quot;true&quot;&gt;5&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;Catui_clip&quot;&gt;알림, 읽지 않음 5건&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>메뉴 항목 끝의 카운트는 <a href="../../css/layout/app-shell.html">앱 셸 메뉴</a>·<a href="../../css/components/vnav.html">세로 내비게이션</a>, 탭 안 카운트는 <a href="../../css/components/tabs.html">탭</a>을 보세요.</p>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p>상태 표시는 soft pill이 기본입니다. solid는 한 화면에서 꼭 눈에 띄어야 하는 표식에만, 사각 <code>.Catui_badge</code>는 표 안 짧은 꼬리표에 씁니다. 카운트는 브랜드 실색 18px입니다.</p>
+<ul>
+  <li><code>.Catui_pill-outline</code> — 배경을 지우고 글자색 계열 1px 테두리를 그립니다. soft 상태 변형과 겹쳐 쓰고, solid 변형(흰 글자)과는 함께 쓰지 않습니다.</li>
+  <li>버튼 안 <code>.Catui_count</code>는 글자 뒤에 둡니다. 카운트가 브랜드 실색이라 primary 버튼보다 secondary·ghost 버튼과 어울립니다. 아이콘 모서리에 띄우려면 <a href="../../css/components/indicator.html"><code>.Catui_indicator</code></a>로 감쌉니다.</li>
+</ul>
 </section>
 
 <section aria-labelledby="a11y">
 <h2 id="a11y">접근성</h2>
 <ul>
   <li>색만으로 상태를 구분하지 않습니다 — 항상 글자를 함께 씁니다.</li>
-  <li>숫자만 있는 카운트에는 무엇의 개수인지 <code>aria-label</code>을 줍니다.</li>
+  <li>숫자만 있는 카운트에는 무엇의 개수인지 숨김 글자(<code>&lt;span class="Catui_clip"&gt;읽지 않음 &lt;/span&gt;3&lt;span class="Catui_clip"&gt;건&lt;/span&gt;</code>)로 보충합니다. 역할 없는 span의 <code>aria-label</code>은 화면 낭독기가 읽지 않습니다.</li>
   <li>pill 안에 pill을 넣거나 높이를 늘리지 않습니다.</li>
+  <li>외곽선 pill도 테두리 색만으로 상태를 구분하지 않고 글자로 상태를 적습니다.</li>
+  <li>버튼 안 숫자는 <code>.Catui_clip</code> 숨김 글자로 "무엇이 몇 개"인지 보충합니다. 아이콘만 있는 버튼은 숨김 글자에 이름과 개수를 함께 쓰고, 보이는 숫자는 <code>aria-hidden="true"</code>로 중복 낭독을 막습니다.</li>
 </ul>
 </section>
 
-<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/badge.css</span><code>.Catui_pill</code> <code>.Catui_dot</code> <code>.Catui_pill-success</code> <code>.Catui_pill-info</code> <code>.Catui_pill-warning</code> <code>.Catui_pill-danger</code> <code>.Catui_pill-neutral</code> <code>.Catui_pill-solid-success</code> <code>.Catui_pill-solid-info</code> <code>.Catui_pill-solid-warning</code> <code>.Catui_pill-solid-danger</code> <code>.Catui_pill-solid-neutral</code> <code>.Catui_badge</code> <code>.Catui_badge-success</code> <code>.Catui_badge-info</code> <code>.Catui_badge-warning</code> <code>.Catui_badge-danger</code> <code>.Catui_badge-neutral</code> <code>.Catui_count</code></li></ul></section>
+<section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/badge.css</span><code>.Catui_pill</code> <code>.Catui_dot</code> <code>.Catui_pill-success</code> <code>.Catui_pill-info</code> <code>.Catui_pill-warning</code> <code>.Catui_pill-danger</code> <code>.Catui_pill-neutral</code> <code>.Catui_pill-solid-success</code> <code>.Catui_pill-solid-info</code> <code>.Catui_pill-solid-warning</code> <code>.Catui_pill-solid-danger</code> <code>.Catui_pill-solid-neutral</code> <code>.Catui_pill-outline</code> <code>.Catui_badge</code> <code>.Catui_badge-success</code> <code>.Catui_badge-info</code> <code>.Catui_badge-warning</code> <code>.Catui_badge-danger</code> <code>.Catui_badge-neutral</code> <code>.Catui_count</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/components/choice.html"><span>이전</span>체크·라디오·토글</a><a class="doc-pager-next" href="../../css/components/indicator.html"><span>다음</span>알림·상태 표시</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#pill">상태 pill</a></li><li><a href="#solid">solid · 사각 badge · 카운트</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#pill">상태 pill</a></li><li><a href="#solid">solid · 사각 badge · 카운트</a></li><li><a href="#outline">외곽선 pill</a></li><li><a href="#count-combo">버튼과 카운트</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

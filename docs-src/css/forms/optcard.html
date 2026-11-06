@@ -17,9 +17,20 @@
   </fieldset>
 </catui-example>
 </section>
+<section aria-labelledby="multi">
+<h2 id="multi">여러 개 고르기</h2>
+<catui-example title="추가 기능 (checkbox)">
+  <fieldset class="Catui_optcards"><legend class="Catui_label">추가 기능 <span class="Catui_help">(여러 개 선택 가능)</span></legend>
+    <input class="Catui_clip" type="checkbox" name="oc-add" id="oc-add-backup" checked><label class="Catui_optcard" for="oc-add-backup"><span class="Catui_optcard-title">매일 백업</span><span class="Catui_optcard-text">30일 보관 · 복원 지원</span><span class="Catui_optcard-price">월 5,000원</span></label>
+    <input class="Catui_clip" type="checkbox" name="oc-add" id="oc-add-sso" checked><label class="Catui_optcard" for="oc-add-sso"><span class="Catui_optcard-title">회사 계정 로그인</span><span class="Catui_optcard-text">SSO · 구성원 자동 동기화</span><span class="Catui_optcard-price">월 9,000원</span></label>
+    <input class="Catui_clip" type="checkbox" name="oc-add" id="oc-add-log"><label class="Catui_optcard" for="oc-add-log"><span class="Catui_optcard-title">감사 기록</span><span class="Catui_optcard-text">1년 보관 · 내려받기</span><span class="Catui_optcard-price">월 7,000원</span></label>
+  </fieldset>
+</catui-example>
+<p>input만 checkbox로 바꾸면 같은 카드로 여러 개를 고릅니다. checkbox 카드는 선택 표시가 둥근 네모와 체크 모양이 되어 radio(원)와 구분되고, <code>legend</code> 글자로도 여러 개 고를 수 있음을 알립니다.</p>
+</section>
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
-<p><code>fieldset.Catui_optcards</code> 안에 <code>input.Catui_clip</code> + <code>label.Catui_optcard</code>(<code>-title</code>·<code>-text</code>·<code>-price</code>)를 짝으로 둡니다. 오른쪽 위 원이 선택 표시가 됩니다. 여러 개를 고르게 하려면 checkbox로 바꾸면 됩니다.</p>
+<p><code>fieldset.Catui_optcards</code> 안에 <code>input.Catui_clip</code> + <code>label.Catui_optcard</code>(<code>-title</code>·<code>-text</code>·<code>-price</code>)를 짝으로 둡니다. 오른쪽 위 원이 선택 표시가 됩니다. 여러 개를 고르게 하려면 checkbox로 바꾸면 됩니다(표시가 체크 상자로 바뀜).</p>
 </section>
 <section aria-labelledby="a11y">
 <h2 id="a11y">접근성</h2>

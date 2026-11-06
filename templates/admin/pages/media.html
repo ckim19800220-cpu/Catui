@@ -14,7 +14,7 @@ catui.use(['layer'], function (layer) {
   var items = ['매장 입구', '진열대', '신상품', '포장', '물류 창고', '팀 사진', '행사장', '촬영 현장'].map(function (t, i) { return { src: svg(i, t), alt: t, caption: t }; });
   var grid = document.getElementById('md-grid');
   var draw = function () {
-    catui.mount(grid, catui.html`${items.map(function (it, i) { return catui.html`<figure class="Catui_adm-thumb"><button type="button" data-i="${i}" aria-label="${it.alt} 크게 보기" style="all:unset;display:block;width:100%;height:100%;cursor:zoom-in"><img src="${it.src}" alt="${it.alt}"></button></figure>`; })}`);
+    catui.mount(grid, catui.html`${items.map(function (it, i) { return catui.html`<figure class="Catui_adm-thumb"><button class="Catui_adm-thumb-btn" type="button" data-i="${i}" aria-label="${it.alt} 크게 보기"><img src="${it.src}" alt="${it.alt}"></button></figure>`; })}`);
   };
   grid.addEventListener('click', function (e) { var b = e.target.closest('[data-i]'); if (b) layer.photos({ items: items, start: Number(b.dataset.i), title: '미디어' }); });
   document.getElementById('md-up').addEventListener('change', function (e) {

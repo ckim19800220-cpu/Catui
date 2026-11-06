@@ -41,3 +41,6 @@
 }
 .Catui_choice input:checked + .Catui_tgl-alt::after{transform:translateX(calc(var(--Catui_switch-alt-w) - var(--Catui_switch-alt-knob) - (var(--Catui_switch-alt-h) - var(--Catui_switch-alt-knob))))}
 .Catui_choices{display:flex;flex-wrap:wrap;gap:var(--Catui_space-4)}
+/* 비활성: 상자·스위치를 흐리게, 라벨 글자도 비활성색, 커서 기본 (상태는 disabled 속성이 낭독기에 알린다) */
+.Catui_choice:has(input:disabled){color:var(--Catui_btn-disabled-fg);cursor:not-allowed}
+.Catui_choice input:disabled + :is(.Catui_cbx,.Catui_radio,.Catui_tgl){opacity:.5}

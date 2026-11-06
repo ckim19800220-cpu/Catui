@@ -12,6 +12,7 @@
 .Catui_bg-brand{background:var(--Catui_color-brand-fill);color:var(--Catui_color-text-inverse)}
 .Catui_bg-dark{background:var(--Catui_sidebar-bg);color:var(--Catui_sidebar-fg)}
 :is(.Catui_bg-brand,.Catui_bg-dark,.Catui_overlay) :is(.Catui_lead,.Catui_help,.Catui_text-muted){color:inherit;opacity:.85}
+.Catui_bg-brand :is(.Catui_lead,.Catui_help,.Catui_text-muted){opacity:1}   /* 브랜드 바탕(흰 글자 5.27:1)은 흐리게 하면 4.3:1로 AA 미달 — 굵기·크기로만 구분 */
 :is(.Catui_bg-brand,.Catui_bg-dark,.Catui_overlay) a:not(.Catui_btn){color:inherit;text-decoration:underline;text-underline-offset:3px}
 :is(.Catui_bg-brand,.Catui_bg-dark,.Catui_overlay) :focus-visible{outline-color:currentColor}
 

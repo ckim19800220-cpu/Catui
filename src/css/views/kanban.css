@@ -1,5 +1,5 @@
 /* views/kanban.css */
-.Catui_kanban{display:flex;gap:var(--Catui_kanban-gap);overflow-x:auto;padding-bottom:var(--Catui_space-2)}
+.Catui_kanban{position:relative;display:flex;gap:var(--Catui_kanban-gap);overflow-x:auto;padding-bottom:var(--Catui_space-2)}   /* relative: 안의 숨김 글자(.Catui_clip, absolute)가 스크롤 상자 밖 문서 폭을 넓히지 않게 */
 .Catui_kanban-col{width:var(--Catui_kanban-col-w);flex:none;background:var(--Catui_kanban-col-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_kanban-radius);padding:var(--Catui_kanban-pad);display:grid;gap:var(--Catui_kanban-card-gap);align-content:start}
 .Catui_kanban-h{height:var(--Catui_kanban-head-h);font-size:var(--Catui_type-caption-size);font-weight:600;display:flex;align-items:center;gap:var(--Catui_space-2)}
 .Catui_kanban-h .Catui_count{margin-left:auto}

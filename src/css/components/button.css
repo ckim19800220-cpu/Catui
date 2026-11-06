@@ -21,6 +21,13 @@
   border-color:var(--Catui_btn-disabled-border);pointer-events:none;
 }
 .Catui_btn:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+/* 링크형 버튼: 배경·테두리 없이 글자만, 밑줄은 가리키거나 포커스할 때. 높이·패딩은 크기 클래스 그대로 */
+.Catui_btn-link{background:transparent;border-color:transparent;color:var(--Catui_color-brand-strong);text-underline-offset:3px}
+.Catui_btn-link:hover,.Catui_btn-link:focus-visible{text-decoration:underline;color:var(--Catui_color-brand-stronger)}
+.Catui_btn-link:disabled,.Catui_btn-link[aria-disabled="true"]{background:transparent;border-color:transparent}
+/* 처리 중: 글자는 그대로 두고 다시 누르지 못하게 막는다. 안에 .Catui_spin을 넣으면 글자색을 따라 돈다 */
+.Catui_btn[aria-busy="true"]{pointer-events:none}   /* 처리 중 다시 누르지 못하게(키보드는 disabled 또는 스크립트로 막는다) */
+.Catui_btn .Catui_spin{width:var(--Catui_icon-16);height:var(--Catui_icon-16);border-color:color-mix(in srgb,currentColor 30%,transparent);border-top-color:currentColor}
 /* 아이콘 전용(정사각) · 전폭 버튼 */
 .Catui_btn-icon{padding:0;aspect-ratio:1}
 .Catui_btn-icon.Catui_btn-sm{width:var(--Catui_btn-h-sm)}

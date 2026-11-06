@@ -63,7 +63,7 @@ catui.use(['layer'], function (layer) {
       .then(function (v) { if (v) layer.msg(v.to + '에게 보냈습니다', { icon: 'success' }); });
   };
   document.getElementById('ib-new').addEventListener('click', function () { compose(); });
-  document.getElementById('ib-reply').addEventListener('click', function () { compose('', 'Re: ' + cur.subj); });
+  document.getElementById('ib-reply').addEventListener('click', function () { if (!cur) return; compose('', 'Re: ' + cur.subj); });
   open(cur);
   });
 });

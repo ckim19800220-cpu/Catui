@@ -21,7 +21,7 @@
 .Catui_i16{width:var(--Catui_icon-16);height:var(--Catui_icon-16)}
 .Catui_i18{width:var(--Catui_icon-18);height:var(--Catui_icon-18)}
 .Catui_i20{width:var(--Catui_icon-20);height:var(--Catui_icon-20)}
-.Catui_actions{display:flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2)}   /* 좁은 화면(320px 리플로)에서는 버튼이 다음 줄로 */
 .Catui_actions:has(> .Catui_h1){width:100%}
 .Catui_actions:has(> .Catui_h1) > .Catui_btn{margin-left:auto}
 .Catui_card-b:has(> .Catui_line){display:grid;gap:var(--Catui_space-2)}

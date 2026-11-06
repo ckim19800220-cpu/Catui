@@ -49,7 +49,8 @@ const admin = {
   on: (evt, fn) => catui.onevent("admin", evt, fn),
   emit: (evt, payload) => catui.event("admin", evt, null, payload),
   _offs: [],
-  _on(target, type, fn, opt) { if (!target) return; target.addEventListener(type, fn, opt); this._offs.push(() => target.removeEventListener(type, fn, opt)); },
+  // destroy 뒤에 늦게 도착한 응답(.then 안의 연결)은 등록하지 않는다 — 해제 목록이 이미 비워져 새는 것을 막음
+  _on(target, type, fn, opt) { if (!target || this._dead) return; target.addEventListener(type, fn, opt); this._offs.push(() => target.removeEventListener(type, fn, opt)); },
   // 같은 대상·같은 연결을 한 번만 (init 재호출 시 리스너 중복 방지). destroy가 기록을 비운다
   _seen: new WeakMap(),
   _once(target, key) { let s = this._seen.get(target); if (!s) this._seen.set(target, (s = new Set())); if (s.has(key)) return false; s.add(key); return true; },
@@ -268,7 +269,7 @@ admin.notify = {
     if (!btn) return;
     this.btn = btn;
     this.more = btn.getAttribute("data-catui-adm-notify") || "";   // "전체 알림 보기" 주소 (비우면 링크 없음)
-    const take = (list) => { this.items = (list || []).map((x, i) => ({ id: x.id ?? `n${i}`, ...x })); this.badge(); if (this.pop && !this.pop.hidden) this.render(); };
+    const take = (list) => { if (admin._dead || !btn.isConnected) return; this.items = (list || []).map((x, i) => ({ id: x.id ?? `n${i}`, ...x })); this.badge(); if (this.pop && !this.pop.hidden) this.render(); };
     // 화면 안 JSON(#adm-notify-data)이 없으면 data/notifications.json 모의 데이터를 읽는다
     const inline = admJson("adm-notify-data");
     this.items = [];
@@ -786,6 +787,7 @@ admin.auth = {
 // ── init.js ──
 // 초기화 — 테마는 어느 화면(로그인 등 셸 없는 화면 포함)에서나, 셸 기능은 [data-catui-adm] 루트가 있을 때만
 admin.init = function (scope = document) {
+  this._dead = false;
   this.theme.init();
   const root = scope.matches?.("[data-catui-adm]") ? scope : scope.querySelector?.("[data-catui-adm]");
   if (root && !root.hasAttribute("data-catui-adm-ready")) {
@@ -798,6 +800,7 @@ admin.init = function (scope = document) {
   // JSON 모의 데이터([data-catui-adm-src])를 먼저 채운 뒤 위젯(차트·카운트업)을 연결한다
   const scope2 = root || document;
   this.ready = this.bind(scope2).then(() => {
+    if (this._dead) return this;   // 자료를 기다리는 사이 destroy됐으면 위젯·타이머를 만들지 않는다
     for (const part of ["widgets", "form", "auth"]) {
       try { this[part].init(scope2); } catch (err) { catui.hint.error(`CatuiAdmin: ${part} 연결 실패`, "error", err); }
     }
@@ -807,6 +810,7 @@ admin.init = function (scope = document) {
 };
 // 모든 리스너·차트·팝업 정리 (SPA에서 화면을 바꿀 때)
 admin.destroy = function () {
+  this._dead = true;
   this._offs.splice(0).forEach((off) => { try { off(); } catch {} });
   this._seen = new WeakMap();
   this.ready = undefined;

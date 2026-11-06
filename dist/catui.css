@@ -115,7 +115,7 @@
   --Catui_table-head-h:40px; --Catui_table-row-h:46px; --Catui_table-head-bg:var(--Catui_color-surface-muted); --Catui_table-head-fg:var(--Catui_color-text-secondary); --Catui_table-head-font:var(--Catui_type-label-size);
   --Catui_table-border:var(--Catui_color-border); --Catui_table-zebra:var(--Catui_color-surface-muted); --Catui_table-cell-px:var(--Catui_space-3); --Catui_table-font:var(--Catui_type-body-size); --Catui_table-row-hover:var(--Catui_color-brand-soft);
   --Catui_feed-dot:8px; --Catui_feed-dot-color:var(--Catui_color-brand); --Catui_feed-line:var(--Catui_color-border); --Catui_feed-gap:var(--Catui_space-4); --Catui_feed-time-size:var(--Catui_type-label-size); --Catui_feed-time-color:var(--Catui_color-text-secondary);
-  --Catui_task-h:var(--Catui_control-h-lg); --Catui_task-check:var(--Catui_check-size); --Catui_task-done-fg:var(--Catui_color-text-tertiary);
+  --Catui_task-h:var(--Catui_control-h-lg); --Catui_task-check:var(--Catui_check-size); --Catui_task-done-fg:var(--Catui_color-text-secondary);
   --Catui_task-priority-high:var(--Catui_color-danger); --Catui_task-priority-mid:var(--Catui_color-amber); --Catui_task-priority-low:var(--Catui_color-info);
   --Catui_meter-h:var(--Catui_space-2); --Catui_meter-track:var(--Catui_color-neutral-100); --Catui_meter-fill:var(--Catui_color-brand); --Catui_meter-radius:var(--Catui_radius-xs);
   /* sidebar / topbar / breadcrumb / segment */
@@ -125,7 +125,7 @@
   --Catui_sidebar-active-bar-w:3px; --Catui_sidebar-active-bar:var(--Catui_color-brand); --Catui_sidebar-rail-w:56px;
   --Catui_sidebar-pad:var(--Catui_space-4); --Catui_sidebar-font:var(--Catui_type-body-size); --Catui_sidebar-head-font:var(--Catui_type-label-size);
   --Catui_topbar-bg:var(--Catui_color-surface); --Catui_topbar-border:var(--Catui_color-border); --Catui_topbar-fg:var(--Catui_color-text-primary); --Catui_topbar-icon:20px; --Catui_topbar-pad:var(--Catui_space-4);
-  --Catui_breadcrumb-font:var(--Catui_type-caption-size); --Catui_breadcrumb-fg:var(--Catui_color-text-secondary); --Catui_breadcrumb-current:var(--Catui_color-text-primary); --Catui_breadcrumb-sep:var(--Catui_color-text-tertiary); --Catui_breadcrumb-gap:var(--Catui_space-2);
+  --Catui_breadcrumb-font:var(--Catui_type-caption-size); --Catui_breadcrumb-fg:var(--Catui_color-text-secondary); --Catui_breadcrumb-current:var(--Catui_color-text-primary); --Catui_breadcrumb-sep:var(--Catui_color-text-secondary); --Catui_breadcrumb-gap:var(--Catui_space-2);
   --Catui_segment-h:var(--Catui_control-h-sm); --Catui_segment-bg:var(--Catui_color-neutral-100); --Catui_segment-active-bg:var(--Catui_color-surface); --Catui_segment-fg:var(--Catui_color-neutral-700); --Catui_segment-active-fg:var(--Catui_color-text-primary);
   --Catui_segment-radius:var(--Catui_radius-sm); --Catui_segment-px:var(--Catui_space-3); --Catui_segment-font:var(--Catui_type-caption-size);
   /* tab / pager / banner / tooltip / empty / skeleton / divider / icon */
@@ -176,7 +176,7 @@
   --Catui_tree-toggle:var(--Catui_icon-16); --Catui_tree-icon:var(--Catui_icon-16); --Catui_tree-font:13px;
   --Catui_tree-fg-selected:var(--Catui_color-brand-strong); --Catui_tree-bg-selected:var(--Catui_color-brand-soft);
   --Catui_cal-cell-min:104px; --Catui_cal-head-h:36px; --Catui_cal-cell-pad:var(--Catui_space-2); --Catui_cal-num-font:12px;
-  --Catui_cal-num-fg:var(--Catui_color-text-secondary); --Catui_cal-num-fg-other:var(--Catui_color-text-tertiary);
+  --Catui_cal-num-fg:var(--Catui_color-text-secondary); --Catui_cal-num-fg-other:var(--Catui_color-text-secondary);
   --Catui_cal-today-bg:var(--Catui_color-brand-fill); --Catui_cal-today-fg:var(--Catui_color-text-inverse);
   --Catui_cal-event-h:20px; --Catui_cal-event-px:var(--Catui_space-2); --Catui_cal-event-font:11px; --Catui_cal-weekend-bg:var(--Catui_color-surface-muted);
   --Catui_gantt-row-h:36px; --Catui_gantt-bar-h:20px; --Catui_gantt-bar-radius:var(--Catui_radius-xs); --Catui_gantt-scale-h:32px;
@@ -280,6 +280,7 @@
   line-height:var(--Catui_type-body-lh);
   color:var(--Catui_color-text-primary);
   word-break:keep-all;
+  overflow-wrap:break-word;   /* keep-all은 '가·나·다'처럼 공백 없는 긴 줄을 끊지 못해 좁은 화면에서 넘친다 — 넘칠 때만 끊는다 */
 }
 .Catui_app,.Catui_site{margin:0;min-height:100vh;background:var(--Catui_color-page-bg)}
 .Catui_app :where(h1,h2,h3,h4,p,ul,ol,figure,blockquote),
@@ -320,7 +321,7 @@
 .Catui_i16{width:var(--Catui_icon-16);height:var(--Catui_icon-16)}
 .Catui_i18{width:var(--Catui_icon-18);height:var(--Catui_icon-18)}
 .Catui_i20{width:var(--Catui_icon-20);height:var(--Catui_icon-20)}
-.Catui_actions{display:flex;align-items:center;gap:var(--Catui_space-2)}
+.Catui_actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2)}   /* 좁은 화면(320px 리플로)에서는 버튼이 다음 줄로 */
 .Catui_actions:has(> .Catui_h1){width:100%}
 .Catui_actions:has(> .Catui_h1) > .Catui_btn{margin-left:auto}
 .Catui_card-b:has(> .Catui_line){display:grid;gap:var(--Catui_space-2)}
@@ -791,6 +792,13 @@
   border-color:var(--Catui_btn-disabled-border);pointer-events:none;
 }
 .Catui_btn:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+/* 링크형 버튼: 배경·테두리 없이 글자만, 밑줄은 가리키거나 포커스할 때. 높이·패딩은 크기 클래스 그대로 */
+.Catui_btn-link{background:transparent;border-color:transparent;color:var(--Catui_color-brand-strong);text-underline-offset:3px}
+.Catui_btn-link:hover,.Catui_btn-link:focus-visible{text-decoration:underline;color:var(--Catui_color-brand-stronger)}
+.Catui_btn-link:disabled,.Catui_btn-link[aria-disabled="true"]{background:transparent;border-color:transparent}
+/* 처리 중: 글자는 그대로 두고 다시 누르지 못하게 막는다. 안에 .Catui_spin을 넣으면 글자색을 따라 돈다 */
+.Catui_btn[aria-busy="true"]{pointer-events:none}   /* 처리 중 다시 누르지 못하게(키보드는 disabled 또는 스크립트로 막는다) */
+.Catui_btn .Catui_spin{width:var(--Catui_icon-16);height:var(--Catui_icon-16);border-color:color-mix(in srgb,currentColor 30%,transparent);border-top-color:currentColor}
 /* 아이콘 전용(정사각) · 전폭 버튼 */
 .Catui_btn-icon{padding:0;aspect-ratio:1}
 .Catui_btn-icon.Catui_btn-sm{width:var(--Catui_btn-h-sm)}
@@ -856,6 +864,8 @@ textarea.Catui_input{height:auto;min-height:80px;padding-block:var(--Catui_space
   border-color:var(--Catui_input-error-border);
   box-shadow:0 0 0 var(--Catui_input-ring-w) var(--Catui_input-error-ring);
 }
+/* 오류 칸도 포커스가 보여야 한다 — 오류 링은 그대로 두고 바깥에 포커스 외곽선을 더한다 */
+.Catui_input[aria-invalid="true"]:focus-visible,.Catui_select[aria-invalid="true"]:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
 .Catui_input:disabled,.Catui_select:disabled{background:var(--Catui_input-disabled-bg);color:var(--Catui_color-text-tertiary);border-color:var(--Catui_btn-disabled-border)}
 .Catui_select{
   appearance:none;padding-right:var(--Catui_space-7);background-image:none;
@@ -925,6 +935,9 @@ input[type="file"].Catui_input{border:1px solid var(--Catui_input-border);border
 }
 .Catui_choice input:checked + .Catui_tgl-alt::after{transform:translateX(calc(var(--Catui_switch-alt-w) - var(--Catui_switch-alt-knob) - (var(--Catui_switch-alt-h) - var(--Catui_switch-alt-knob))))}
 .Catui_choices{display:flex;flex-wrap:wrap;gap:var(--Catui_space-4)}
+/* 비활성: 상자·스위치를 흐리게, 라벨 글자도 비활성색, 커서 기본 (상태는 disabled 속성이 낭독기에 알린다) */
+.Catui_choice:has(input:disabled){color:var(--Catui_btn-disabled-fg);cursor:not-allowed}
+.Catui_choice input:disabled + :is(.Catui_cbx,.Catui_radio,.Catui_tgl){opacity:.5}
 
 /* components/badge.css */
 /* Badge — pill (round), badge (square), count, dot. Status fg uses AA shades. */
@@ -943,6 +956,8 @@ input[type="file"].Catui_input{border:1px solid var(--Catui_input-border);border
 .Catui_pill-solid-warning{background:var(--Catui_banner-warn-fg);color:var(--Catui_color-text-inverse)}
 .Catui_pill-solid-danger{background:var(--Catui_badge-danger-fg);color:var(--Catui_color-text-inverse)}
 .Catui_pill-solid-neutral{background:var(--Catui_badge-neutral-fg);color:var(--Catui_color-text-inverse)}
+/* 외곽선 pill: 배경 없이 글자색 계열 테두리. soft 상태 변형(pill-success 등)과 겹쳐 쓰면 그 글자색을 따른다 */
+.Catui_pill.Catui_pill-outline{background:transparent;border:1px solid color-mix(in srgb,currentColor 55%,transparent)}
 .Catui_badge{
   display:inline-flex;align-items:center;height:22px;padding:0 var(--Catui_space-2);
   border-radius:var(--Catui_badge-radius);font-size:var(--Catui_badge-font);font-weight:600;line-height:1;white-space:nowrap;
@@ -1114,6 +1129,14 @@ a.Catui_card:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outli
 .Catui_pc4{background:var(--Catui_progress-bar-4)}
 .Catui_pc5{background:var(--Catui_progress-bar-5)}
 .Catui_pc6{background:var(--Catui_progress-bar-6)}
+/* 줄무늬: 막대 색 위에 비스듬한 옅은 줄 (정지 상태, prog-lg와 잘 어울린다) */
+.Catui_prog-striped > i{background-image:repeating-linear-gradient(45deg,color-mix(in srgb,var(--Catui_color-text-inverse) 28%,transparent) 0 6px,transparent 6px 12px)}
+/* 불확정 진행: 끝을 모를 때 막대 조각이 왼쪽→오른쪽으로 흐른다. 모션 줄이기에서는 멈춘 줄무늬 전체 막대 */
+.Catui_prog-indeterminate > i{width:40%;animation:Catui_prog-flow 1.4s var(--Catui_ease) infinite}
+@keyframes Catui_prog-flow{from{transform:translateX(-100%)}to{transform:translateX(250%)}}
+@media (prefers-reduced-motion:reduce){
+  .Catui_prog-indeterminate > i{animation:none;transform:none;width:100%;background-image:repeating-linear-gradient(45deg,color-mix(in srgb,var(--Catui_color-text-inverse) 28%,transparent) 0 6px,transparent 6px 12px)}
+}
 /* 원형 진행 (값은 --Catui_ring-val: 0~100) */
 .Catui_ring{--Catui_ring-val:0;width:var(--Catui_control-h-lg);height:var(--Catui_control-h-lg);border-radius:var(--Catui_radius-pill);display:inline-grid;place-items:center;flex:none;position:relative;background:conic-gradient(var(--Catui_color-brand-strong) calc(var(--Catui_ring-val) * 1%),var(--Catui_color-neutral-100) 0);line-height:1}
 .Catui_ring::before{content:"";position:absolute;inset:4px;border-radius:inherit;background:var(--Catui_card-bg)}
@@ -1219,6 +1242,7 @@ a.Catui_list-item,button.Catui_list-item{width:100%;text-align:left;color:inheri
 a.Catui_list-item:hover,button.Catui_list-item:hover{background:var(--Catui_color-brand-ghost)}
 a.Catui_list-item:focus-visible,button.Catui_list-item:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}
 .Catui_list-item[aria-current]{background:var(--Catui_color-brand-soft);color:var(--Catui_color-brand-strong);font-weight:600}
+.Catui_list-item[aria-current] :is(.Catui_list-meta,.Catui_help){color:var(--Catui_color-neutral-700)}   /* 선택 배경 위 보조 글자도 4.5:1 이상 */
 .Catui_list-flush{border:0;border-radius:0;background:transparent}
 
 .Catui_dl{display:grid;grid-template-columns:minmax(96px,max-content) minmax(0,1fr);gap:var(--Catui_space-2) var(--Catui_space-6)}
@@ -1254,7 +1278,7 @@ a.Catui_list-item:focus-visible,button.Catui_list-item:focus-visible{outline:2px
 .Catui_tabs:not(:has(> .Catui_panel)){border-bottom:1px solid var(--Catui_tab-border)}
 .Catui_tab{
   position:relative;z-index:1;
-  height:var(--Catui_tab-h);display:inline-flex;align-items:center;font-size:var(--Catui_tab-font);line-height:1;
+  height:var(--Catui_tab-h);display:inline-flex;align-items:center;gap:var(--Catui_space-2);font-size:var(--Catui_tab-font);line-height:1;
   color:var(--Catui_tab-fg);border-bottom:var(--Catui_tab-indicator-w) solid transparent;margin-bottom:-1px;cursor:pointer;
   transition:color var(--Catui_dur-fast) var(--Catui_ease);
 }
@@ -1281,6 +1305,32 @@ a.Catui_list-item:focus-visible,button.Catui_list-item:focus-visible{outline:2px
   .Catui_tabs-v > [role="tablist"]{flex-direction:row;flex-wrap:wrap}
   .Catui_tabs-v .Catui_panel{border-top:1px solid var(--Catui_tab-border);padding-top:var(--Catui_space-4)}
 }
+/* 탭 안 새 소식 점은 경고색 (숫자는 .Catui_count 그대로) */
+.Catui_tab > .Catui_dot{background:var(--Catui_badge-danger-fg)}
+/* 링크형 탭(패널 없는 nav): 현재 쪽은 aria-current="page" */
+a.Catui_tab{text-decoration:none}
+.Catui_tab[aria-current="page"]{color:var(--Catui_tab-active-fg);border-bottom-color:var(--Catui_tab-indicator);font-weight:600}
+
+/* 균등 분할: 탭들이 줄 폭을 똑같이 나눠 가진다 (패널은 order:1 이라 그대로 아래 줄) */
+.Catui_tabs.Catui_tabs-full{column-gap:0}
+.Catui_tabs-full > .Catui_tab,.Catui_tabs-full > [role="tablist"] > .Catui_tab{flex:1 1 0;min-width:0;justify-content:center;padding:0 var(--Catui_space-2)}
+.Catui_tabs-full > [role="tablist"]{column-gap:0}
+
+/* 가로 스크롤 탭 줄: 한 줄 유지, 넘치면 가로로 민다.
+   radio 구조(input·label·panel이 형제)에서는 탭만 따로 스크롤할 수 없으므로 패널 없는 링크형 탭 줄(nav)
+   또는 catui.js가 그리는 [role=tablist] 줄에 쓴다. 구분선은 스크롤 영역 안쪽 그림자로 그려 활성 밑줄이 잘리지 않게 한다. */
+.Catui_tabs.Catui_tabs-scroll{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:thin;border-bottom:0;box-shadow:inset 0 -1px 0 var(--Catui_tab-border)}
+.Catui_tabs-scroll > .Catui_tab,.Catui_tabs-scroll > [role="tablist"] > .Catui_tab{flex:none;white-space:nowrap;margin-bottom:0}
+.Catui_tabs-scroll > [role="tablist"]{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+/* 스크롤 영역이 바깥 외곽선을 잘라 내므로 포커스 외곽선을 안쪽에 그린다 */
+.Catui_tabs-scroll > .Catui_tab:focus-visible,.Catui_tabs-scroll [role="tablist"] > .Catui_tab:focus-visible{outline-offset:-2px}
+
+/* 카드형 탭: 테두리 상자 탭, 선택한 탭은 아래 패널 상자와 이어 붙는다 (radio 구조·[role=tablist] 공용) */
+.Catui_tabs.Catui_tabs-card,.Catui_tabs-card > [role="tablist"]{column-gap:0}
+.Catui_tabs-card .Catui_tab{height:var(--Catui_control-h-lg);padding:0 var(--Catui_space-5);border:1px solid transparent;border-bottom:0;border-radius:var(--Catui_radius-sm) var(--Catui_radius-sm) 0 0;margin-bottom:-1px;color:var(--Catui_color-text-secondary)}
+.Catui_tabs-card .Catui_tab:hover{color:var(--Catui_color-brand-strong)}
+.Catui_tabs-card input:checked + .Catui_tab,.Catui_tabs-card .Catui_tab[aria-selected="true"]{border-color:var(--Catui_card-border);background:var(--Catui_card-bg);color:var(--Catui_color-brand-strong)}
+.Catui_tabs-card .Catui_panel{padding:var(--Catui_space-4);border:1px solid var(--Catui_card-border);border-radius:0 var(--Catui_radius-sm) var(--Catui_radius-sm) var(--Catui_radius-sm);background:var(--Catui_card-bg)}
 
 /* components/subnav.css */
 /* Sub navigation — 화면 안 보조 탐색: 필(pill) 탭, 밑줄 탭 링크. 현재 항목은 aria-current="page". */
@@ -1822,7 +1872,7 @@ dialog.Catui_cmdk::backdrop{background:var(--Catui_overlay-scrim)}
 .Catui_gantt-dep{position:absolute;top:0;bottom:0;border-left:1px dashed var(--Catui_gantt-dependency)}
 
 /* views/kanban.css */
-.Catui_kanban{display:flex;gap:var(--Catui_kanban-gap);overflow-x:auto;padding-bottom:var(--Catui_space-2)}
+.Catui_kanban{position:relative;display:flex;gap:var(--Catui_kanban-gap);overflow-x:auto;padding-bottom:var(--Catui_space-2)}   /* relative: 안의 숨김 글자(.Catui_clip, absolute)가 스크롤 상자 밖 문서 폭을 넓히지 않게 */
 .Catui_kanban-col{width:var(--Catui_kanban-col-w);flex:none;background:var(--Catui_kanban-col-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_kanban-radius);padding:var(--Catui_kanban-pad);display:grid;gap:var(--Catui_kanban-card-gap);align-content:start}
 .Catui_kanban-h{height:var(--Catui_kanban-head-h);font-size:var(--Catui_type-caption-size);font-weight:600;display:flex;align-items:center;gap:var(--Catui_space-2)}
 .Catui_kanban-h .Catui_count{margin-left:auto}
@@ -1993,6 +2043,10 @@ input:disabled + .Catui_chip{opacity:1;color:var(--Catui_color-text-tertiary);ba
 .Catui_optcard-price{margin-top:var(--Catui_space-2);font-weight:700;font-variant-numeric:tabular-nums}
 input:checked + .Catui_optcard{border-color:var(--Catui_color-brand-strong);box-shadow:0 0 0 1px var(--Catui_color-brand-strong);background:color-mix(in srgb,var(--Catui_color-brand-soft) 40%,var(--Catui_card-bg))}
 input:checked + .Catui_optcard::after{border:5px solid var(--Catui_color-brand-strong)}
+/* checkbox 카드: 둥근 네모 + 체크 표시(여러 개 고를 수 있음을 모양으로도 알림) */
+input[type="checkbox"] + .Catui_optcard::after{border-radius:var(--Catui_check-radius)}
+input[type="checkbox"]:checked + .Catui_optcard::after{border:0;background:var(--Catui_color-brand-strong)}
+input[type="checkbox"]:checked + .Catui_optcard::before{content:"";position:absolute;z-index:1;top:calc(var(--Catui_space-4) + var(--Catui_check-size) * .22);right:calc(var(--Catui_space-4) + var(--Catui_check-size) * .32);width:calc(var(--Catui_check-size) * .32);height:calc(var(--Catui_check-size) * .5);border:solid var(--Catui_color-text-inverse);border-width:0 2px 2px 0;transform:rotate(45deg)}
 input:focus-visible + .Catui_optcard{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
 input:disabled + .Catui_optcard{cursor:not-allowed;color:var(--Catui_color-text-tertiary);background:var(--Catui_input-disabled-bg)}
 
@@ -2074,8 +2128,8 @@ button.Catui_dp-cell:not(.Catui_dp-dis):not(.Catui_dp-sel):hover{background:var(
 
 /* charts/gauge.css */
 .Catui_gauge{
-  width:var(--Catui_gauge-size);height:var(--Catui_gauge-size);border-radius:var(--Catui_radius-pill);
-  position:relative;flex:none;
+  width:var(--Catui_gauge-size);max-width:100%;aspect-ratio:1;border-radius:var(--Catui_radius-pill);   /* 칸이 좁으면 원 모양 그대로 줄어든다 */
+  position:relative;flex:0 1 auto;min-width:0;   /* 줄에 여럿 있으면 좁은 화면에서 함께 줄어든다(원 모양은 aspect-ratio로 유지) */
   background:conic-gradient(from 225deg,var(--Catui_g-color) 0 var(--Catui_g-deg),var(--Catui_gauge-track) var(--Catui_g-deg) 270deg,transparent 270deg 360deg);
 }
 .Catui_gauge::after{
@@ -2447,6 +2501,7 @@ input:not(:disabled) + .Catui_chip:active,input:not(:disabled) + .Catui_optcard:
 .Catui_bg-brand{background:var(--Catui_color-brand-fill);color:var(--Catui_color-text-inverse)}
 .Catui_bg-dark{background:var(--Catui_sidebar-bg);color:var(--Catui_sidebar-fg)}
 :is(.Catui_bg-brand,.Catui_bg-dark,.Catui_overlay) :is(.Catui_lead,.Catui_help,.Catui_text-muted){color:inherit;opacity:.85}
+.Catui_bg-brand :is(.Catui_lead,.Catui_help,.Catui_text-muted){opacity:1}   /* 브랜드 바탕(흰 글자 5.27:1)은 흐리게 하면 4.3:1로 AA 미달 — 굵기·크기로만 구분 */
 :is(.Catui_bg-brand,.Catui_bg-dark,.Catui_overlay) a:not(.Catui_btn){color:inherit;text-decoration:underline;text-underline-offset:3px}
 :is(.Catui_bg-brand,.Catui_bg-dark,.Catui_overlay) :focus-visible{outline-color:currentColor}
 

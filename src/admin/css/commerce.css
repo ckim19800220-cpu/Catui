@@ -40,11 +40,11 @@
 .Catui_adm-sum-total{padding-top:var(--Catui_space-2);border-top:1px solid var(--Catui_color-border);font-weight:700;font-size:var(--Catui_type-h3-size)}
 
 /* 청구서: 종이 한 장처럼, 인쇄 시 셸 없이 그 장만 */
-.Catui_adm-invoice{max-width:calc(var(--Catui_space-10) * 13);margin-inline:auto;padding:var(--Catui_space-8);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);box-shadow:var(--Catui_shadow-sm)}
+.Catui_adm-invoice{width:100%;max-width:calc(var(--Catui_space-10) * 13);margin-inline:auto;padding:var(--Catui_space-8);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);box-shadow:var(--Catui_shadow-sm)}
 .Catui_adm-invoice-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--Catui_space-4);padding-bottom:var(--Catui_space-5);margin-bottom:var(--Catui_space-5);border-bottom:2px solid var(--Catui_color-text-primary)}
 .Catui_adm-invoice-parties{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-5);margin-bottom:var(--Catui_space-5)}
 .Catui_adm-invoice .Catui_adm-sum{max-width:calc(var(--Catui_space-10) * 5);margin-left:auto;margin-top:var(--Catui_space-5)}
-@media (max-width:767px){.Catui_adm-invoice{padding:var(--Catui_space-5)}.Catui_adm-invoice-parties{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:767px){.Catui_adm-invoice{padding:var(--Catui_space-5);overflow-x:auto}.Catui_adm-invoice-parties{grid-template-columns:minmax(0,1fr)}}   /* 품목 표(숫자 칸 nowrap)가 좁은 화면을 밀어내지 않게 청구서 안에서 가로 스크롤 */
 @media print{
   .Catui_adm-noprint{display:none}
   .Catui_adm-invoice{max-width:none;border:0;box-shadow:none;padding:0}
@@ -64,5 +64,5 @@
 .Catui_adm-projects{display:grid;gap:var(--Catui_adm-gap);grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 4.4),1fr))}
 .Catui_adm-project .Catui_card-b{display:grid;gap:var(--Catui_space-3)}
 .Catui_adm-project-h{display:flex;align-items:center;gap:var(--Catui_space-3)}
-.Catui_adm-project-h a{color:inherit;font-weight:700}
+.Catui_adm-project-h a:not(.Catui_btn){color:inherit;font-weight:700}   /* 버튼은 제외 — 주 버튼 글자가 본문색으로 덮여 대비 2:1이 되던 문제 */
 .Catui_adm-project-f{display:flex;align-items:center;justify-content:space-between;gap:var(--Catui_space-3)}

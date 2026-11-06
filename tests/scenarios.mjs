@@ -100,6 +100,8 @@ export const scenarios = [
       r.collapse = P().getAttribute("aria-expanded") === "false" && document.activeElement === P();
       key("ArrowRight"); r.expand = P().getAttribute("aria-expanded") === "true" && document.activeElement === P();
       key("ArrowRight"); r.child = document.activeElement.parentElement.closest('[role="treeitem"]') === P();
+      // 첫 자식이 펼쳐진 폴더면 첫 ←는 그 폴더를 접고(APG), 다음 ←가 부모로 간다
+      if (document.activeElement.getAttribute("aria-expanded") === "true") key("ArrowLeft");
       key("ArrowLeft"); r.toParent = document.activeElement === P();
       const cur = document.activeElement; key(" ");
       const after = root.querySelector(`[data-catui-titem="${cur.dataset.catuiTitem}"]`);
@@ -370,8 +372,8 @@ export const scenarios = [
       r.step3 = document.querySelector("#rc-steps [aria-current=step]")?.textContent.trim();
       r.nextLabel = next.textContent;
       // 4) 대시보드: 탭 '월간' → 합계, 명령 팔레트로 '연간'
-      const radios = document.querySelectorAll("#rc-tabs input[type=radio]");
-      radios[1].click(); await sleep(100);
+      const tabBtns = document.querySelectorAll('#rc-tabs [role="tab"]');
+      tabBtns[1].click(); await sleep(100);
       r.month = document.getElementById("rc-total").textContent;
       catui.command.open("rc-cmd");
       const q = catui.command.getThis("rc-cmd").dialog.querySelector("input");

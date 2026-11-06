@@ -143,6 +143,40 @@
 <p><code>.Catui_hero-center</code>는 글·버튼을 가운데로, <code>.Catui_hero-media</code>는 <code>.Catui_wrap</code>에 붙여 글과 그림을 2열로 둡니다. 대표 제목은 문서당 하나입니다.</p>
 </section>
 
+<section aria-labelledby="price-featured">
+<h2 id="price-featured">추천 요금제 카드</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">추천 요금제 하나 (price + price-featured)</figcaption>
+<div class="doc-example-preview">
+  <article class="Catui_card Catui_price Catui_price-featured" style="max-width:320px">
+    <div class="Catui_card-b Catui_vstack Catui_gap-3">
+      <div class="Catui_hstack Catui_between"><h3 class="Catui_h3">팀</h3><span class="Catui_pill Catui_pill-info">추천</span></div>
+      <p><span class="Catui_metric">29,000</span><span class="Catui_help">원 / 월</span></p>
+      <ul class="Catui_vstack">
+        <li class="Catui_line"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg>사용자 10명</li>
+        <li class="Catui_line"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg>대시보드 무제한</li>
+        <li class="Catui_line"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg>이메일 지원</li>
+      </ul>
+      <a class="Catui_btn Catui_btn-md Catui_btn-primary" href="../../css/start/install.html">팀으로 시작</a>
+    </div>
+  </article>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="추천 요금제 하나 (price + price-featured) 코드 복사">복사</button><pre><code>&lt;article class=&quot;Catui_card Catui_price Catui_price-featured&quot; style=&quot;max-width:320px&quot;&gt;
+  &lt;div class=&quot;Catui_card-b Catui_vstack Catui_gap-3&quot;&gt;
+    &lt;div class=&quot;Catui_hstack Catui_between&quot;&gt;&lt;h3 class=&quot;Catui_h3&quot;&gt;팀&lt;/h3&gt;&lt;span class=&quot;Catui_pill Catui_pill-info&quot;&gt;추천&lt;/span&gt;&lt;/div&gt;
+    &lt;p&gt;&lt;span class=&quot;Catui_metric&quot;&gt;29,000&lt;/span&gt;&lt;span class=&quot;Catui_help&quot;&gt;원 / 월&lt;/span&gt;&lt;/p&gt;
+    &lt;ul class=&quot;Catui_vstack&quot;&gt;
+      &lt;li class=&quot;Catui_line&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-check&quot;&gt;&lt;/use&gt;&lt;/svg&gt;사용자 10명&lt;/li&gt;
+      &lt;li class=&quot;Catui_line&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-check&quot;&gt;&lt;/use&gt;&lt;/svg&gt;대시보드 무제한&lt;/li&gt;
+      &lt;li class=&quot;Catui_line&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-check&quot;&gt;&lt;/use&gt;&lt;/svg&gt;이메일 지원&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;a class=&quot;Catui_btn Catui_btn-md Catui_btn-primary&quot; href=&quot;doc:css/start/install&quot;&gt;팀으로 시작&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></details>
+</figure>
+<p><code>.Catui_price</code> 카드에 <code>.Catui_price-featured</code>를 더하면 테두리가 주 버튼 색으로 바뀌어 눈에 띕니다. 색만으로 구분하지 않도록 "추천" 글자(<code>.Catui_pill</code>)를 함께 두고, 추천 카드의 버튼만 primary로 둡니다. 모바일 메뉴 <code>.Catui_site-menu</code>는 위 "헤더 + 히어로" 예제에 있으며 991px 이하에서만 보입니다(넓은 화면에서는 <code>.Catui_site-nav</code>가 대신 보임).</p>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p><code>.Catui_site-header</code> > <code>.Catui_wrap</code> + <code>.Catui_brand</code> + <code>.Catui_site-nav</code>. 모바일에서는 <code>.Catui_site-menu</code>(details)가 메뉴를 접습니다.</p>
@@ -160,7 +194,7 @@
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/layout/site.css</span><code>.Catui_site</code> <code>.Catui_wrap</code> <code>.Catui_site-header</code> <code>.Catui_site-nav</code> <code>.Catui_btn-primary</code> <code>.Catui_btn-secondary</code> <code>.Catui_site-menu</code> <code>.Catui_hero</code> <code>.Catui_display</code> <code>.Catui_lead</code> <code>.Catui_section</code> <code>.Catui_content</code> <code>.Catui_h1</code> <code>.Catui_split</code> <code>.Catui_cta</code> <code>.Catui_site-footer</code> <code>.Catui_foot-grid</code> <code>.Catui_foot-title</code> <code>.Catui_foot-copy</code> <code>.Catui_price</code> <code>.Catui_price-featured</code> <code>.Catui_actions</code> <code>.Catui_hero-center</code> <code>.Catui_hero-media</code> <code>.Catui_ratio</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/layout/app-shell.html"><span>이전</span>관리 셸</a><a class="doc-pager-next" href="../../css/blocks/head.html"><span>다음</span>섹션 머리·공지 띠</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#examples">예제</a></li><li><a href="#hero-variants">히어로 변형</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#examples">예제</a></li><li><a href="#hero-variants">히어로 변형</a></li><li><a href="#price-featured">추천 요금제 카드</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

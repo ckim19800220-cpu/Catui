@@ -52,8 +52,7 @@ export const datePicker = component({
       from = parse(a); to = c.range ? parse(b) : null;
     };
     input.setAttribute("aria-haspopup", "dialog");
-    input.setAttribute("aria-expanded", "false");
-    input.setAttribute("aria-controls", panelId);
+    input.setAttribute("aria-expanded", "false");   // aria-controls는 달력이 열려 있을 때만(없는 id를 가리키지 않게)
     if (!input.placeholder) input.placeholder = c.range ? `YYYY-MM-DD${c.separator}YYYY-MM-DD` : "YYYY-MM-DD";
     input.autocomplete = "off";
 
@@ -102,6 +101,7 @@ export const datePicker = component({
       offs.forEach((f) => f()); offs = [];
       panel.remove(); panel = null;
       input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-controls");
       if (focusInput) input.focus();
     };
     const commit = () => {
@@ -132,6 +132,7 @@ export const datePicker = component({
       panel.setAttribute("aria-label", c.range ? "기간 선택" : "날짜 선택");
       floatRoot(input).appendChild(panel);
       input.setAttribute("aria-expanded", "true");
+      input.setAttribute("aria-controls", panelId);
       draw(); place();
       const onDoc = (e) => { if (!panel.contains(e.target) && e.target !== input) close(false); };
       const onKey = (e) => {

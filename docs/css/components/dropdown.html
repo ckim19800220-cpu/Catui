@@ -121,6 +121,58 @@
 <p><code>.Catui_dd-float</code>는 <a href="../../js/modules/dropdown.html">dropdown.render()</a>·<a href="../../js/modules/datepicker.html">datePicker</a>가 <code>body &gt; .Catui_layer</code>에 붙이는 화면 고정(<code>position:fixed</code>, z-index 60) 메뉴입니다. 위치는 스크립트가 버튼 아래(공간이 없으면 위)에 메뉴가 놓이도록 계산합니다. 예제는 모양만 보이려고 <code>position:static</code>으로 두었습니다.</p>
 </section>
 
+<section aria-labelledby="select">
+<h2 id="select">선택형 메뉴 (listbox)</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">하나를 고르는 목록 — option · aria-selected (정적 표시)</figcaption>
+<div class="doc-example-preview">
+  <p class="Catui_help" id="dd-sort-label">정렬 기준</p>
+  <div class="Catui_dd-menu" role="listbox" aria-labelledby="dd-sort-label">
+    <div class="Catui_dd-item" role="option" aria-selected="false">최신순</div>
+    <div class="Catui_dd-item" role="option" aria-selected="true"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg>금액 높은순</div>
+    <div class="Catui_dd-item" role="option" aria-selected="false">금액 낮은순</div>
+    <div class="Catui_dd-item" role="option" aria-selected="false" aria-disabled="true">평점순 (준비 중)</div>
+  </div>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="하나를 고르는 목록 — option · aria-selected (정적 표시) 코드 복사">복사</button><pre><code>&lt;p class=&quot;Catui_help&quot; id=&quot;dd-sort-label&quot;&gt;정렬 기준&lt;/p&gt;
+&lt;div class=&quot;Catui_dd-menu&quot; role=&quot;listbox&quot; aria-labelledby=&quot;dd-sort-label&quot;&gt;
+  &lt;div class=&quot;Catui_dd-item&quot; role=&quot;option&quot; aria-selected=&quot;false&quot;&gt;최신순&lt;/div&gt;
+  &lt;div class=&quot;Catui_dd-item&quot; role=&quot;option&quot; aria-selected=&quot;true&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-check&quot;&gt;&lt;/use&gt;&lt;/svg&gt;금액 높은순&lt;/div&gt;
+  &lt;div class=&quot;Catui_dd-item&quot; role=&quot;option&quot; aria-selected=&quot;false&quot;&gt;금액 낮은순&lt;/div&gt;
+  &lt;div class=&quot;Catui_dd-item&quot; role=&quot;option&quot; aria-selected=&quot;false&quot; aria-disabled=&quot;true&quot;&gt;평점순 (준비 중)&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+</figure>
+<p>값을 하나 고르는 목록은 부모에 <code>role="listbox"</code>, 항목에 <code>role="option"</code>을 줍니다. 고른 항목 <code>aria-selected="true"</code>는 바탕색과 왼쪽 강조선, 못 고르는 항목 <code>aria-disabled="true"</code>는 옅은 글자로 보입니다. 이 모양은 자동완성처럼 포커스가 입력 칸에 남는 목록을 위한 것이라, ↑↓ 이동·선택은 <a href="../../js/modules/autocomplete.html">catui.js autocomplete</a>·<a href="../../js/modules/dropdown.html">dropdown</a>이 붙입니다. 명령을 실행하는 메뉴는 위의 버튼(<code>role="menuitem"</code>)을 씁니다.</p>
+</section>
+
+<section aria-labelledby="small">
+<h2 id="small">작은 메뉴 (dd-sm)</h2>
+<figure class="doc-example">
+<figcaption class="doc-example-title">행 끝 더보기 버튼의 좁은 메뉴</figcaption>
+<div class="doc-example-preview">
+  <details class="Catui_dd" open>
+    <summary class="Catui_btn Catui_btn-sm Catui_btn-ghost" aria-label="더보기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-more-horizontal"></use></svg></summary>
+    <div class="Catui_dd-menu Catui_dd-sm">
+      <button class="Catui_dd-item" type="button">열기</button>
+      <button class="Catui_dd-item" type="button">이름 바꾸기</button>
+      <div class="Catui_dd-sep"></div>
+      <button class="Catui_dd-item Catui_dd-danger" type="button">삭제</button>
+    </div>
+  </details>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="행 끝 더보기 버튼의 좁은 메뉴 코드 복사">복사</button><pre><code>&lt;details class=&quot;Catui_dd&quot; open&gt;
+  &lt;summary class=&quot;Catui_btn Catui_btn-sm Catui_btn-ghost&quot; aria-label=&quot;더보기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-more-horizontal&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/summary&gt;
+  &lt;div class=&quot;Catui_dd-menu Catui_dd-sm&quot;&gt;
+    &lt;button class=&quot;Catui_dd-item&quot; type=&quot;button&quot;&gt;열기&lt;/button&gt;
+    &lt;button class=&quot;Catui_dd-item&quot; type=&quot;button&quot;&gt;이름 바꾸기&lt;/button&gt;
+    &lt;div class=&quot;Catui_dd-sep&quot;&gt;&lt;/div&gt;
+    &lt;button class=&quot;Catui_dd-item Catui_dd-danger&quot; type=&quot;button&quot;&gt;삭제&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/details&gt;</code></pre></details>
+</figure>
+<p><code>.Catui_dd-sm</code>은 메뉴 최소 너비를 <code>--Catui_dropdown-w-sm</code>으로 줄입니다. 너비 클래스가 없으면 메뉴는 여는 버튼(details)과 같은 너비가 되므로, 아이콘 버튼처럼 좁은 버튼에는 <code>dd-sm</code>이나 <code>dd-lg</code>를 붙여 너비를 정합니다.</p>
+</section>
+
 <section aria-labelledby="usage">
 <h2 id="usage">사용법</h2>
 <p><code>details.Catui_dd</code> &gt; <code>summary</code>(버튼) + <code>.Catui_dd-menu</code> &gt; <code>.Catui_dd-item</code>. 구분선 <code>.Catui_dd-sep</code>, 그룹 라벨 <code>.Catui_dd-group</code>, 너비 <code>.Catui_dd-sm/lg</code>. 메뉴는 흐름 안에 있으므로 겹쳐 띄우려면 감싼 요소에 위치를 주거나 <a href="../../js/modules/dropdown.html">catui.js dropdown</a>을 씁니다.</p>
@@ -129,7 +181,7 @@
 <section aria-labelledby="a11y">
 <h2 id="a11y">접근성</h2>
 <ul>
-  <li>summary 안에 버튼·링크를 넣지 않습니다.</li>
+  <li>summary 안에 버튼·링크를 넣지 않습니다. 아이콘만 있는 summary에는 <code>aria-label</code>을 줍니다.</li>
   <li>catui.js가 있으면 바깥 클릭·Esc로 닫히고 summary로 포커스가 돌아갑니다. 키보드 메뉴(↑↓)가 필요하면 <code>dropdown.render</code>.</li>
   <li>위험 항목은 구분선 아래 맨 끝, 비활성 항목은 <code>disabled</code>와 이유를 글자로.</li>
 </ul>
@@ -138,7 +190,7 @@
 <section aria-labelledby="classes"><h2 id="classes">클래스</h2><p>소스 CSS에서 자동으로 모은 목록입니다.</p><ul class="doc-classes"><li><span class="doc-src">src/css/components/dropdown.css</span><code>.Catui_dd</code> <code>.Catui_dd-menu</code> <code>.Catui_dd-sm</code> <code>.Catui_dd-lg</code> <code>.Catui_dd-item</code> <code>.Catui_icon</code> <code>.Catui_dd-group</code> <code>.Catui_dd-sep</code> <code>.Catui_dd-danger</code> <code>.Catui_dd-float</code> <code>.Catui_dp</code></li></ul></section>
 <nav class="doc-pager" aria-label="이전·다음 문서"><a href="../../css/components/layer.html"><span>이전</span>레이어 확장</a><a class="doc-pager-next" href="../../css/components/toast.html"><span>다음</span>토스트</a></nav>
 </main>
-<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">기본 메뉴</a></li><li><a href="#group">그룹 · 비활성 · 너비</a></li><li><a href="#float">떠 있는 메뉴 (dd-float)</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#basic">기본 메뉴</a></li><li><a href="#group">그룹 · 비활성 · 너비</a></li><li><a href="#float">떠 있는 메뉴 (dd-float)</a></li><li><a href="#select">선택형 메뉴 (listbox)</a></li><li><a href="#small">작은 메뉴 (dd-sm)</a></li><li><a href="#usage">사용법</a></li><li><a href="#a11y">접근성</a></li><li><a href="#classes">클래스</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
   <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>

@@ -20,3 +20,40 @@
   <p>보조 문구<span class="Catui_clip"> (화면 낭독기 전용 설명)</span></p>
 </catui-example>
 </section>
+
+<section aria-labelledby="clip">
+<h2 id="clip">시각 숨김 (clip)</h2>
+<catui-example title="아이콘 버튼 · 숨긴 라벨 · 보충 문구">
+  <div class="Catui_actions">
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-bell"></use></svg><span class="Catui_clip">알림 3건</span></button>
+    <label class="Catui_clip" for="util-q">주문 검색</label>
+    <input class="Catui_input" id="util-q" name="q" type="search" placeholder="주문 번호">
+  </div>
+  <p>새 글 <b>3</b><span class="Catui_clip">건, 마지막 확인 이후</span></p>
+</catui-example>
+<p><code>.Catui_clip</code>은 화면에는 보이지 않지만 자리를 1px로 줄여 남겨 두므로 화면 낭독기는 그대로 읽습니다. 위 예제의 "알림 3건", "주문 검색", "건, 마지막 확인 이후"는 눈에 보이지 않고 낭독기만 읽습니다. <code>display:none</code>·<code>hidden</code>은 낭독기도 읽지 않으니, 읽혀야 할 이름·보충 설명에는 <code>.Catui_clip</code>을 씁니다.</p>
+</section>
+
+<section aria-labelledby="skip">
+<h2 id="skip">본문 건너뛰기 (skip)</h2>
+<catui-example title="Tab을 누르면 나타나는 건너뛰기 링크">
+  <div style="position:relative;overflow:hidden;padding:var(--Catui_space-9) var(--Catui_space-4) var(--Catui_space-4);border:1px dashed var(--Catui_card-border);border-radius:var(--Catui_radius-md)">
+    <a class="Catui_skip" href="#util-skip-main">본문으로 이동</a>
+    <p class="Catui_help">이 상자 안을 클릭한 뒤 Tab 키를 누르면 왼쪽 위에 링크가 나타납니다.</p>
+    <nav class="Catui_hstack" aria-label="예제 메뉴"><a class="Catui_link" href="doc:index">홈</a><a class="Catui_link" href="doc:css/components/button">버튼</a><a class="Catui_link" href="doc:css/components/table">표</a></nav>
+    <div id="util-skip-main" tabindex="-1"><p>여기가 본문입니다.</p></div>
+  </div>
+</catui-example>
+<p><code>.Catui_skip</code>은 평소 위로 밀려 보이지 않다가 키보드 포커스를 받으면 나타납니다. <code>.Catui_app</code>·<code>.Catui_site</code> 안 첫 요소로 두고, 대상 본문(<code>main</code>)에 <code>id</code>를 줍니다. 위치는 가장 가까운 <code>position</code> 조상 기준이므로 실제 화면에서는 페이지 왼쪽 위에 뜹니다.</p>
+</section>
+
+<section aria-labelledby="num">
+<h2 id="num">고정폭 숫자 (num)</h2>
+<catui-example title="적용 전 · 후 자리 맞춤 비교">
+  <div class="Catui_grid-3">
+    <div><p class="Catui_h4">적용 전</p><p style="text-align:right">1,111,111원</p><p style="text-align:right">8,888,888원</p><p style="text-align:right">410,070원</p></div>
+    <div><p class="Catui_h4"><code>.Catui_num</code> 적용</p><p class="Catui_num" style="text-align:right">1,111,111원</p><p class="Catui_num" style="text-align:right">8,888,888원</p><p class="Catui_num" style="text-align:right">410,070원</p></div>
+  </div>
+</catui-example>
+<p>기본 글꼴의 숫자는 1이 8보다 좁아 세로로 자리가 어긋납니다. <code>.Catui_num</code>(<code>font-variant-numeric:tabular-nums</code>)을 붙이면 모든 숫자 폭이 같아져 금액 열·카운터·타이머가 정렬되고, 값이 바뀌어도 글자가 흔들리지 않습니다.</p>
+</section>
