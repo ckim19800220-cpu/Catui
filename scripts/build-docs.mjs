@@ -55,8 +55,8 @@ export function buildDocs({ css, icons }) {
   const gz = (f) => { try { return (zlib.gzipSync(fs.readFileSync(path.join(P.dist, f))).length / 1024).toFixed(1); } catch { return "—"; } };
   const stats = {
     pages: allPages.length + 1, classes: css.defined.size, files: Object.keys(css.byFile || {}).length, icons: icons.names.length, tokens: tokenCount,
-    modules: jsModPages.length, version, adminTpl: tplCount("admin"), cmTpl: tplCount("community"), shTpl: tplCount("shop"), dkTpl: tplCount("docskit"), bkTpl: tplCount("booking"),
-    totalTpl: ["admin", "community", "shop", "docskit", "booking"].reduce((sum, dir) => sum + tplCount(dir), 0),
+    modules: jsModPages.length, version, adminTpl: tplCount("admin"), cmTpl: tplCount("community"), shTpl: tplCount("shop"), dkTpl: tplCount("docskit"), bkTpl: tplCount("booking"), drTpl: tplCount("drama"),
+    totalTpl: ["admin", "community", "shop", "docskit", "booking", "drama"].reduce((sum, dir) => sum + tplCount(dir), 0),
     cmPosts: (() => { try { const j = readJson(path.join(ROOT, "templates/community/data/posts.json")); return (Array.isArray(j) ? j : j.posts || j.data || []).length; } catch { return 0; } })(),
     shProducts: (() => { try { const j = readJson(path.join(ROOT, "templates/shop/data/products.json")); return (Array.isArray(j) ? j : j.products || []).length; } catch { return 0; } })(),
     dkPosts: (() => { try { const j = readJson(path.join(ROOT, "templates/docskit/data/posts.json")); return (Array.isArray(j) ? j : j.posts || []).length; } catch { return 0; } })(),
@@ -143,7 +143,7 @@ export function buildDocs({ css, icons }) {
   function head(page) {
     const rules = (page.rules || []).map(([k, t]) => `<li><span class="Catui_pill ${k === "MUST" ? "Catui_pill-success" : k === "NEVER" ? "Catui_pill-danger" : "Catui_pill-info"}">${esc(k)}</span> ${esc(t)}</li>`).join("");
     // 기술 문서형 머리: 경로(분류 / 묶음 / 쪽) · 제목 · 설명 · 소스 파일 · 견본 계약
-    const srcs = (page.css || []).map((f) => `<code>src/${/^(admin|community|shop|docskit|booking)\//.test(f) ? "" : "css/"}${esc(f)}</code>`).join("");
+    const srcs = (page.css || []).map((f) => `<code>src/${/^(admin|community|shop|docskit|booking|drama)\//.test(f) ? "" : "css/"}${esc(f)}</code>`).join("");
     return `<header class="doc-head">
 <p class="doc-crumb"><span>${esc(page.section.title)}</span><span>${esc(page.group.title)}</span><span>${esc(page.title)}</span></p>
 <h1 class="Catui_h1">${esc(page.title)}</h1>
@@ -156,7 +156,7 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
   function classTable(page) {
     if (!page.css?.length) return "";
     const items = page.css.map((f) => {
-      const ext = /^(admin|community|shop|docskit|booking)\//.test(f);   // admin/css/… = src/admin/css/…, community/css/… = src/community/css/…, shop/css/… = src/shop/css/…, docskit/css/… = src/docskit/css/…, booking/css/… = src/booking/css/…
+      const ext = /^(admin|community|shop|docskit|booking|drama)\//.test(f);   // admin/css/… = src/admin/css/…, community/css/… = src/community/css/…, shop/css/… = src/shop/css/…, docskit/css/… = src/docskit/css/…, booking/css/… = src/booking/css/…
       const own = ext ? css.adminByFile?.[f] : css.byFile[f];
       if (!own) { errors.push(`${page.path}: nav.json css 파일이 index.json에 없습니다 (${f})`); return ""; }
       return `<li><span class="doc-src">src/${ext ? "" : "css/"}${esc(f)}</span>${own.map((c) => `<code>.${esc(c)}</code>`).join(" ")}</li>`;
@@ -188,7 +188,7 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
       .replace(/\{\{content\}\}/g, home ? bodyHtml : `${head(page)}\n${bodyHtml}\n${classTable(page)}\n${pager}`)
       .replace(/\{\{toc\}\}/g, toc && !home ? `<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul>${toc}${page.css?.length ? '<li><a href="#classes">클래스</a></li>' : ""}</ul></aside>` : "")
       .replace(/\{\{scripts\}\}/g, () => {
-        const d = distRel(page.path), EXT = { admin: ["admin.css", "catadmin.js"], community: ["community.css", "catcommunity.js"], shop: ["shop.css", "catshop.js"], docskit: ["docs.css", "catdocs.js"], booking: ["booking.css", "catbooking.js"] }[page.section.id];
+        const d = distRel(page.path), EXT = { admin: ["admin.css", "catadmin.js"], community: ["community.css", "catcommunity.js"], shop: ["shop.css", "catshop.js"], docskit: ["docs.css", "catdocs.js"], booking: ["booking.css", "catbooking.js"], drama: ["drama.css", "catdrama.js"] }[page.section.id];
         if (EXT && !home) return `<link rel="stylesheet" href="${d}/${EXT[0]}">\n<script src="${d}/catui.js"></script>\n<script src="${d}/${EXT[1]}"></script>`;
         return (home || page.section.id === "js" || page.js) ? `<script src="${d}/catui.js"></script>` : "";
       })
@@ -227,7 +227,7 @@ ${rules ? `<ul class="doc-rules" aria-label="견본 계약">${rules}</ul>` : ""}
   const iconSet = new Set(icons.names);
   const planned = new Set(outputs.map(([p]) => path.join(P.docs, `${p}.html`)));   // 아직 쓰기 전이므로 생성 예정 목록과 대조
   // CatuiAdmin 템플릿(templates/admin/pages → docs/admin/templates)은 문서 뒤에 만들어지므로 미리 목록에 넣는다
-  for (const ext of ["admin", "community", "shop", "docskit", "booking"]) for (const f of walk(path.join(P.docs, "..", `templates/${ext}/pages`), ".html")) planned.add(path.join(P.docs, `${ext}/templates`, path.basename(f)));
+  for (const ext of ["admin", "community", "shop", "docskit", "booking", "drama"]) for (const f of walk(path.join(P.docs, "..", `templates/${ext}/pages`), ".html")) planned.add(path.join(P.docs, `${ext}/templates`, path.basename(f)));
   for (const [p, html] of outputs) {
     const file = path.join(P.docs, `${p}.html`);
     const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);

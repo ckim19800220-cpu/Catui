@@ -30,7 +30,7 @@ shop.list = {
   mount(box) {
     if (!shop._once(box, "list")) return;
     const kind = box.getAttribute("data-catui-sh-list"), size = Number(box.dataset.size || 12);
-    shop.load().then((d) => {
+    return shLoadView(box, () => shop.load(), (d) => {
       const o0 = this.read();
       const cat = d.C[o0.c];
       const base = this.filter(d.products, { c: o0.c, q: o0.q });
@@ -50,6 +50,7 @@ shop.list = {
             </form>
           </details>
           <div class="Catui_sh-results">
+            <div class="Catui_sh-active-filters" data-active-filters role="group" aria-label="선택한 조건" hidden></div>
             <div class="Catui_sh-toolbar">
               <div class="Catui_select-wrap"><label class="Catui_clip" for="${uid}-sort">정렬</label><select class="Catui_input Catui_input-sm Catui_select" id="${uid}-sort" data-sort>${Object.entries(SH_SORTS).map(([k, v]) => catui.html`<option value="${k}">${v}</option>`)}</select>${catui.icon("chevron-down", 16)}</div>
               <div class="Catui_segment" role="group" aria-label="보기 방식"><button type="button" data-view="grid" aria-pressed="true">${catui.icon("layout-grid", 16)}<span class="Catui_clip">바둑판으로 보기</span></button><button type="button" data-view="rows" aria-pressed="false">${catui.icon("layout-list", 16)}<span class="Catui_clip">목록으로 보기</span></button></div>
@@ -80,6 +81,10 @@ shop.list = {
         const nf = (o.price ? 1 : 0) + ["free", "today", "instock"].filter((n) => o[n]).length + o.brands.length;
         const fn = box.querySelector("[data-fn]");
         fn.hidden = !nf; catui.mount(fn, catui.html`${nf}${shClip("개 조건 적용")}`);
+        const active = box.querySelector("[data-active-filters]");
+        const filters = [...(o.price ? [["price", SH_PRICES.find(([v]) => v === o.price)?.[1] || o.price, ""]] : []), ...[["free", "무료배송"], ["today", "오늘출발"], ["instock", "품절 상품 빼기"]].filter(([n]) => o[n]).map(([n, label]) => [n, label, ""]), ...o.brands.map((b) => ["brand", b, b])];
+        active.hidden = !nf;
+        catui.mount(active, catui.html`${filters.map(([key, label, value]) => catui.html`<button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-remove-filter="${key}" data-value="${value}" aria-label="${label} 조건 해제">${label}${catui.icon("x", 12)}</button>`)}${nf ? catui.html`<button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-clear-filters>전체 초기화</button>` : ""}`);
         box.querySelector("[data-count]").textContent = `상품 ${catui.util.number(rows.length)}개${pages > 1 ? ` · ${page}/${pages}쪽` : ""}`;
         if (!rows.length) {
           const tips = kind === "search" ? catui.html`<nav class="Catui_sh-chips" aria-label="추천 분류">${d.categories.map((c) => catui.html`<a href="list.html?c=${c.id}">${c.name}</a>`)}</nav>` : "";
@@ -99,6 +104,7 @@ shop.list = {
         if (!keepPage) qs.delete("page");
         if (qs.get("sort") === "best") qs.delete("sort");
         history.pushState(null, "", `${location.pathname}${qs.toString() ? `?${qs}` : ""}`);
+        sync(this.read());
         draw();
       };
       shop._on(form, "change", (e) => {
@@ -110,6 +116,13 @@ shop.list = {
       shop._on(form, "reset", () => setTimeout(() => go({ price: "", free: false, today: false, instock: false, brand: [] }), 0));
       shop._on(sortSel, "change", () => go({ sort: sortSel.value }));
       shop._on(box, "click", (e) => {
+        const remove = e.target.closest("[data-remove-filter]"), clear = e.target.closest("[data-clear-filters]");
+        if (remove || clear) {
+          if (clear) go({ price: "", free: false, today: false, instock: false, brand: [] });
+          else { const key = remove.dataset.removeFilter; go({ [key]: key === "brand" ? this.read().brands.filter((b) => b !== remove.dataset.value) : "" }); }
+          (box.querySelector("[data-remove-filter]") || box.querySelector("[data-h]")).focus({ preventScroll: true });
+          return;
+        }
         const v = e.target.closest("[data-view]");
         if (v) { shSet("view", v.dataset.view); paintView(); return; }
         const pg = e.target.closest("button[data-page]");
@@ -123,6 +136,6 @@ shop.list = {
       shop._on(window, "popstate", () => { sync(this.read()); draw(); });
       sync(o0);
       draw();
-    }).catch(() => {});
+    });
   },
 };

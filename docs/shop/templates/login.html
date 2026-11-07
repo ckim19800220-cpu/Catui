@@ -17,7 +17,14 @@
   <div><h1 class="Catui_h2">로그인</h1><p class="Catui_help">주문 내역·쿠폰·적립금은 로그인 후 볼 수 있어요</p></div>
   <div class="Catui_banner Catui_banner-danger" role="alert" id="lg-err" hidden><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-alert-circle"></use></svg><span>이메일 또는 비밀번호가 맞지 않습니다. (예제: cat@catui.dev / catui1234)</span></div>
   <div class="Catui_field"><label class="Catui_label" for="lg-mail">이메일</label><input class="Catui_input" id="lg-mail" name="email" type="email" autocomplete="username" value="cat@catui.dev" data-catui-verify="required|email"></div>
-  <div class="Catui_field"><label class="Catui_label" for="lg-pw">비밀번호</label><input class="Catui_input" id="lg-pw" name="pw" type="password" autocomplete="current-password" data-catui-verify="required"></div>
+  <div class="Catui_field">
+  <label class="Catui_label" for="lg-pw">비밀번호</label>
+  <div class="Catui_line"><input class="Catui_input" id="lg-pw" name="pw" type="password" autocomplete="current-password" data-catui-verify="required" aria-describedby="lg-pw-help"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-catui-password-toggle="lg-pw" aria-controls="lg-pw" aria-pressed="false" aria-label="비밀번호 보기"><span data-catui-password-label>보기</span></button></div>
+  <p class="Catui_help" id="lg-pw-help">시연용 로그인입니다. 실제 계정의 비밀번호를 입력하지 마세요.</p>
+</div>
+
+  <nav class="Catui_actions" aria-label="계정 안내" data-catui-account-links><a class="Catui_link" href="login.html" aria-current="page">로그인 예제</a><a class="Catui_link" href="profile.html">회원 정보</a><a class="Catui_link" href="error-403.html">권한 없음 안내</a></nav>
+
   <label class="Catui_choice" for="lg-keep"><input class="Catui_clip" type="checkbox" id="lg-keep" name="keep"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>로그인 상태 유지</label>
   <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="submit">로그인</button>
   <div class="Catui_divider-text"><span>또는</span></div>

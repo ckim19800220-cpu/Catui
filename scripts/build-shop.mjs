@@ -7,7 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { transform } from "lightningcss";
 import { transformSync } from "esbuild";
-import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes, visualErrors } from "./lib.mjs";
+import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes, visualErrors, sharedAccount } from "./lib.mjs";
 
 const C = { src: path.join(ROOT, "src/shop"), tpl: path.join(ROOT, "templates/shop") };
 const noComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, "");
@@ -141,7 +141,7 @@ export function buildShopTemplates({ defined, icons, shopByFile = {} }) {
     const scripts = [];
     const body = p.body.replace(/<script(?![^>]*type="application\/json")[^>]*>[\s\S]*?<\/script>\s*/g, (s) => { scripts.push(s.trim()); return ""; });
     let html = (layouts[p.layout || "site"] || fail(`없는 layout: ${p.layout} (${f})`))
-      .replace(/\{\{content\}\}/g, () => body)
+      .replace(/\{\{content\}\}/g, () => sharedAccount(body, "shop", f))
       .replace(/\{\{scripts\}\}/g, () => scripts.join("\n"))
       .replace(/\{\{mynav\}\}/g, () => mynav(p.my))
       .replace(/\{\{gnb\}\}/g, () => gnb(p.nav))

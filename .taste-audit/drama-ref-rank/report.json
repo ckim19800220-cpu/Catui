@@ -1,0 +1,990 @@
+{
+ "url": "https://hongguoduanju.com/rank/hot-drama",
+ "at": "2026-11-07T15:44:00.458Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.23,
+    0.22
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 1025,
+     "screens": 1.1,
+     "words": 37,
+     "img": 9,
+     "video": 0,
+     "canvas": 0,
+     "svg": 5,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 1,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "1787571328034-1cnhqwcg~tplv-wu9im5hjhw-image.web"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "榜单加载失败，请稍后重试",
+     "words": 1,
+     "chars": 12,
+     "lines": 1,
+     "size": 64,
+     "vw": 4.4,
+     "font": "PingFang SC",
+     "weight": 400,
+     "tracking": 0,
+     "leading": 1.2,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.83,
+     "top": 388,
+     "tag": "p",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "红果热播榜",
+     "words": 1,
+     "lines": 1,
+     "size": 32,
+     "font": "PingFang SC"
+    },
+    "headings": [
+     {
+      "text": "红果热播榜",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 32,
+      "vw": 2.2,
+      "font": "PingFang SC",
+      "weight": 500,
+      "tracking": 0,
+      "leading": 1.41,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.11,
+      "top": 141,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "榜单加载失败，请稍后重试",
+      "words": 1,
+      "chars": 12,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "PingFang SC",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.83,
+      "top": 388,
+      "tag": "p",
+      "kind": "heading"
+     },
+     {
+      "text": "重新加载",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "PingFang SC",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.21,
+      "top": 493,
+      "tag": "button",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 3,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 2,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "PingFang SC",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      14,
+      16,
+      22,
+      32,
+      64
+     ],
+     "sizeCount": 5,
+     "notLoaded": [
+      "PingFang SC"
+     ],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 64,
+      "vw": 4.4,
+      "font": "PingFang SC",
+      "text": "榜单加载失败，请稍后重试"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.08,
+     "centerShare": 0.79,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#131414",
+     "bodyBgHsl": {
+      "h": 180,
+      "s": 0.03,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#131414",
+       "top": 0,
+       "hsl": {
+        "h": 180,
+        "s": 0.03,
+        "l": 0.08
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#747474",
+       "share": 0.73
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.27
+      }
+     ],
+     "button": null,
+     "lowContrast": [
+      {
+       "text": "北京笔墨留香科技有限公司 | 地址 : 北京市门头沟区石龙经济开发区永安路20号",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "电子营业执照",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "京ICP备2021028909号-43",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "京公网安备 11010802040767",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "网络文化经营许可证：京网文〔2025〕0222-071号",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "增值电信业务经营许可证：京B2-20220790",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "footer.pc-container-RbJZ85.m-container-wX_1Z7 1240px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 1,
+     "boxRadius": 8,
+     "squareMedia": 1,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.28
+     }
+    ],
+    "nav": {
+     "links": 8,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 1025,
+    "margins": {
+     "left": 100,
+     "right": 336
+    },
+    "sections": [
+     {
+      "sel": "section.pc-hero-QEbapp",
+      "tag": "section",
+      "top": 0,
+      "height": 254,
+      "words": 4,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "红果热播榜",
+       "size": 32,
+       "tag": "h1"
+      },
+      "left": 100,
+      "right": 997,
+      "textLeft": 100,
+      "textRight": 997,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "main.pc-main-hA8uwe",
+      "tag": "main",
+      "top": 254,
+      "height": 410,
+      "words": 6,
+      "media": 0,
+      "middle": 40,
+      "heading": {
+       "text": "榜单加载失败，请稍后重试",
+       "size": 64,
+       "tag": "p"
+      },
+      "left": 100,
+      "right": 336,
+      "textLeft": 100,
+      "textRight": 336,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.pc-page-c99OQM.rank-page-pzAdE9",
+      "tag": "div",
+      "top": 664,
+      "height": 361,
+      "words": 14,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 378,
+      "right": 378,
+      "textLeft": 378,
+      "textRight": 378,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "红果热播榜",
+      "size": 32,
+      "top": 141,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 119,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.2,
+    "voidBox": {
+     "x": 0,
+     "y": 600,
+     "w": 1440,
+     "h": 180
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.86,
+    0.99,
+    0.96,
+    0.99
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 3023,
+     "screens": 3.6,
+     "words": 228,
+     "img": 26,
+     "video": 0,
+     "canvas": 0,
+     "svg": 166,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 1,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "1787571296323-y5dk1sje~tplv-wu9im5hjhw-image.web"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "红果热播榜",
+     "words": 1,
+     "chars": 5,
+     "lines": 1,
+     "size": 22,
+     "vw": 5.6,
+     "font": "PingFang SC",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.41,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.28,
+     "top": 112,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "红果热播榜",
+     "words": 1,
+     "lines": 1,
+     "size": 22,
+     "font": "PingFang SC"
+    },
+    "headings": [
+     {
+      "text": "红果热播榜",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 22,
+      "vw": 5.6,
+      "font": "PingFang SC",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.41,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.28,
+      "top": 112,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "PingFang SC",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "DIN Alternate",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      12,
+      14,
+      15,
+      16,
+      22
+     ],
+     "sizeCount": 6,
+     "notLoaded": [
+      "PingFang SC",
+      "DIN Alternate"
+     ],
+     "body": {
+      "font": "PingFang SC",
+      "size": 12,
+      "leading": 1.33,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 19.3
+     },
+     "measureChars": 47,
+     "max": {
+      "size": 22,
+      "vw": 5.6,
+      "font": "PingFang SC",
+      "text": "红果热播榜"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.09,
+     "centerShare": 0.01,
+     "smallText": 22
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#131414",
+     "bodyBgHsl": {
+      "h": 180,
+      "s": 0.03,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#131414",
+       "top": 0,
+       "hsl": {
+        "h": 180,
+        "s": 0.03,
+        "l": 0.08
+       }
+      },
+      {
+       "color": "#0e0e0e",
+       "top": 177,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 0.05
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#ffffff",
+       "share": 0.86
+      },
+      {
+       "color": "#d7a461",
+       "share": 0.07
+      },
+      {
+       "color": "#fa6725",
+       "share": 0.03
+      },
+      {
+       "color": "#fa7705",
+       "share": 0.02
+      },
+      {
+       "color": "#00d0a0",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#ff7e0d",
+      "hsl": {
+       "h": 28,
+       "s": 1,
+       "l": 0.53
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 12,
+     "height": 44,
+     "withShadow": 0,
+     "withGradient": 1,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "前往「红果短剧」免费看全集"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 1,
+     "scrims": 1,
+     "gradientSamples": [
+      "a.mobile-guide-MrAZje → linear-gradient(92.27deg, rgb(255, 126, 13) 0.32%, rgb(255, 146, 51))"
+     ],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 1,
+     "boxRadius": 24,
+     "squareMedia": 1,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.23
+     }
+    ],
+    "nav": {
+     "links": 5,
+     "fixed": true,
+     "height": 48,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 3023,
+    "margins": {
+     "left": 12,
+     "right": 12
+    },
+    "sections": [
+     {
+      "sel": "section.pc-hero-QEbapp",
+      "tag": "section",
+      "top": 48,
+      "height": 190,
+      "words": 4,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "红果热播榜",
+       "size": 22,
+       "tag": "h1"
+      },
+      "left": 16,
+      "right": 80,
+      "textLeft": 16,
+      "textRight": 80,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "main.pc-main-hA8uwe",
+      "tag": "main",
+      "top": 177,
+      "height": 2762,
+      "words": 529,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "谁让这个文盲修仙的第六季",
+       "size": 14,
+       "tag": "h2"
+      },
+      "left": 12,
+      "right": 12,
+      "textLeft": 16,
+      "textRight": 12,
+      "fullBleed": false,
+      "footer": true,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "红果热播榜",
+      "size": 22,
+      "top": 112,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "漫剧热播榜",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "9839万热度",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "陈极与林琅天奉青天之命前往尧家追查青天尸身，识破假尸阴谋，联手天道雷龙阻击敌人、闯通天之塔。青天本体",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "8119万热度",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "纪家大少爷那个势利前妻突然回来，非要跟女儿朵朵认亲！太奶奶容遇带领纪家全体，扮穷测试前妻真心，最后却",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "8061万热度",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "我是陈昊宇，带着恶鬼之牙奔赴龙目城化解边境危机。旧敌赤帅同样在此坚守，私人恩怨只能暂且搁置。我孤身闯",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "7567万热度",
+      "side": "right",
+      "px": 12
+     }
+    ],
+    "edges": [
+     {
+      "x": 30,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "hairline",
+   "width": 1440,
+   "message": "1 thin rule(s)/divider line(s): footer.pc-container-RbJZ85.m-container-wX_1Z7 1240px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields."
+  },
+  {
+   "level": "WARN",
+   "id": "outlined-box",
+   "width": 1440,
+   "message": "1 box(es) drawn with a 1px outline.",
+   "fix": "Prefer a filled surface or no box."
+  },
+  {
+   "level": "WARN",
+   "id": "contrast",
+   "width": 1440,
+   "message": "Low-contrast text: \"北京笔墨留香科技有限公司 | 地址 : 北京市门头沟区石龙经济开发区永安路20号\" 3.9:1 needs 4.5:1; \"电子营业执照\" 3.9:1 needs 4.5:1; \"京ICP备2021028909号-43\" 3.9:1 needs 4.5:1; \"京公网安备 11010802040767\" 3.9:1 needs 4.5:1",
+   "fix": "Darken or lighten the text colour."
+  },
+  {
+   "level": "WARN",
+   "id": "font-fallback",
+   "width": 1440,
+   "message": "Typeface(s) declared but not loaded, so a fallback is rendering: PingFang SC",
+   "fix": "Fix the font URL / family name, or the screenshots you are judging are not the design.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "first-action",
+   "width": 1440,
+   "message": "No visible button in the first screen.",
+   "fix": "Give the one primary action a real button in the first screen (a filled or solid-bordered control, 44px or taller), not only a link in the navigation."
+  },
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 1 picture(s) on the page (1 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "FAIL",
+   "id": "focal-point",
+   "width": 1440,
+   "message": "The first screen has no dominant element: the largest type is 64px (4.4vw) and no single picture holds a third of the viewport.",
+   "fix": "Make one thing lead: the headline at display size, or one large picture. A grid of many small pictures is not one thing; in blind tests jurors marked a first screen without a headline down every time. On the strongest studied sites the largest type has a median of 8.4vw."
+  },
+  {
+   "level": "FAIL",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The page sits off-centre: its content comes to 100px from the left edge but only to 336px from the right, at 1440px.",
+   "fix": "Give the page one pair of equal margins. Check the wrapper for a max-width without margin-inline: auto, a grid with an empty last column, or padding on one side only. If one side is meant to hold air, it must still be closed by something that reaches the margin (a picture, the navigation's last item, a figure)."
+  },
+  {
+   "level": "WARN",
+   "id": "name-only-title",
+   "width": 1440,
+   "message": "The h1 is a bare name (\"红果热播榜\") and nothing else on the first screen says what this is.",
+   "fix": "Keep the name if it leads, and give the line under it (18px or more) the plain words: what it is, for whom, where or when. In the study of 97 Sites of the Day, first screens that named nothing lost usability and content points.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "still-page",
+   "width": 1440,
+   "message": "Only 1 element(s) moved while the page loaded and scrolled.",
+   "fix": "Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback."
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 390,
+   "message": "1 gradient fill(s): a.mobile-guide-MrAZje → linear-gradient(92.27deg, rgb(255, 126, 13) 0.32%, rgb(255, 146, 51))",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility."
+  },
+  {
+   "level": "FAIL",
+   "id": "button-fx",
+   "width": 390,
+   "message": "Buttons with gradient fill.",
+   "fix": "Flat fill, one colour."
+  },
+  {
+   "level": "FAIL",
+   "id": "body-size",
+   "width": 390,
+   "message": "Body text is 12px (the size most of the running text is set in).",
+   "fix": "Body copy 16–20px. Map small sizes from blueprints onto your body step."
+  },
+  {
+   "level": "FAIL",
+   "id": "small-text",
+   "width": 390,
+   "message": "22 text blocks under 13px.",
+   "fix": "Nothing meant to be read goes below 13px."
+  },
+  {
+   "level": "WARN",
+   "id": "small-title",
+   "width": 390,
+   "message": "The h1 is 22px (\"红果热播榜\").",
+   "fix": "Set the title at display size, or make the large text of the first screen the h1."
+  },
+  {
+   "level": "WARN",
+   "id": "edge-text",
+   "width": 390,
+   "message": "8 text block(s) sit 12–15px from the phone's edge: \"漫剧热播榜\" (12px); \"9839万热度\" (12px); \"陈极与林琅天奉青天之命前往尧家追查青天尸身，识破假尸阴谋，联\" (12px)",
+   "fix": "The page margin is 16–20px on a phone; the header and the corner labels sit on it too."
+  },
+  {
+   "level": "FAIL",
+   "id": "reduced-hidden",
+   "width": 1440,
+   "message": "With reduced motion requested, 10 text block(s) on the first screen stay invisible: \"真人剧\", \"AI剧\", \"红果热播榜\", \"真人剧热播榜\"",
+   "fix": "Put every hidden starting state inside @media (prefers-reduced-motion: no-preference); the reduced page is the finished page (references/motion.md §8)."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\drama-ref-rank\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\drama-ref-rank\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\drama-ref-rank\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\drama-ref-rank\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

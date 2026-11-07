@@ -1,0 +1,4 @@
+{
+  "top": [{"id":"home","title":"홈","href":"index.html"},{"id":"catalog","title":"작품 찾기","href":"catalog.html"},{"id":"ranking","title":"랭킹","href":"ranking.html"},{"id":"library","title":"찜 보관함","href":"library.html"}],
+  "pages": {"search":{"title":"작품 검색","nav":"catalog"},"index":{"title":"짧게 보고, 길게 남는 이야기","nav":"home"},"catalog":{"title":"작품 찾기","nav":"catalog"},"ranking":{"title":"편집 랭킹","nav":"ranking"},"series":{"title":"작품 소개","nav":"catalog"},"library":{"title":"찜 보관함","nav":"library"}}
+}

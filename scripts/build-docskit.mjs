@@ -176,6 +176,27 @@ export function buildDocskitTemplates({ defined, icons, docskitByFile = {} }) {
     try { JSON.parse(read(f)); } catch (e) { errors.push(`data/${name}: JSON 문법 오류 — ${e.message}`); continue; }
     write(path.join(out, "data", name), read(f));
   }
+  const index = readJson(path.join(C.tpl, "data/search-index.json"));
+  for (const [id, page] of Object.entries(readJson(path.join(C.tpl, "data/pages.json")))) {
+    const taken = new Set();
+    let section = null;
+    for (const block of page.blocks || []) {
+      const heading = block.h2 || block.h3;
+      if (heading) {
+        const base = String(heading).trim().toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-+|-+$/g, "") || "sec";
+        let slug = base, n = 1;
+        while (taken.has(slug)) slug = `${base}-${++n}`;
+        taken.add(slug);
+        const url = `doc.html?p=${encodeURIComponent(id)}#${slug}`;
+        section = index.find((it) => it.u === url);
+        if (!section) { section = { t: `${page.title} · ${heading}`, u: url, s: `문서 · ${page.group || "개념"}`, x: "", k: heading }; index.push(section); }
+      } else if (section) {
+        const text = block.p || block.note || block.code || (block.list || []).join(" ");
+        section.x = `${section.x} ${text}`.trim();
+      }
+    }
+  }
+  write(path.join(out, "data/search-index.json"), JSON.stringify(index, null, 2));
   if (errors.length) fail(`docskit 템플릿 검사 실패\n  ${errors.join("\n  ")}`);
   return { pages: files.length };
 }

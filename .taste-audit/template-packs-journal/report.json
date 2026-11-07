@@ -1,0 +1,1691 @@
+{
+ "url": "docs/docskit/templates/journal.html",
+ "at": "2026-11-07T14:23:56.000Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.32,
+    0.23,
+    0.31
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 2176,
+     "screens": 2.4,
+     "words": 250,
+     "img": 5,
+     "video": 0,
+     "canvas": 0,
+     "svg": 13,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 5,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "workspace.png",
+      "keyboard.jpg",
+      "reading.jpg",
+      "reading.jpg",
+      "workspace.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "화면을 만드는 기록",
+     "words": 3,
+     "chars": 10,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.95,
+     "top": 105,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "화면을 만드는 기록",
+     "words": 3,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      12,
+      13,
+      15,
+      16,
+      24
+     ],
+     "sizeCount": 5,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 85,
+     "max": {
+      "size": 24,
+      "vw": 1.7,
+      "font": "Inter",
+      "text": "화면을 만드는 기록"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.03,
+     "smallText": 7
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.72
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.15
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.12
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#2c3e50"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 8,
+     "radius": "pill",
+     "height": 28,
+     "withShadow": 2,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "블로그",
+      "전체 8 개",
+      "#릴리스 2 개",
+      "#접근성 3 개"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 6,
+     "scrims": 0,
+     "gradientSamples": [
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(230, 247, 243), rgb(234, 244, 251))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(234, 244, 251), rgb(245, 235, 248))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(245, 235, 248), rgb(254, 247, 224))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(254, 247, 224), rgb(230, 247, 243))"
+     ],
+     "gradientText": 0,
+     "hairlines": 2,
+     "hairlineSamples": [
+      "header.Catui_dk-head 1440px",
+      "footer.Catui_dk-foot 1440px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 5,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.14
+     }
+    ],
+    "nav": {
+     "links": 7,
+     "fixed": true,
+     "height": 81,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 2176,
+    "margins": {
+     "left": 36,
+     "right": 194
+    },
+    "sections": [
+     {
+      "sel": "main#dk-main.Catui_dk-main",
+      "tag": "main",
+      "top": 81,
+      "height": 1948,
+      "words": 178,
+      "media": 5,
+      "middle": 0,
+      "heading": {
+       "text": "화면을 만드는 기록",
+       "size": 24,
+       "tag": "h1"
+      },
+      "left": 36,
+      "right": 194,
+      "textLeft": 36,
+      "textRight": 194,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_dk-foot",
+      "tag": "footer",
+      "top": 2029,
+      "height": 147,
+      "words": 67,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 36,
+      "right": 315,
+      "textLeft": 36,
+      "textRight": 315,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "화면을 만드는 기록",
+      "size": 24,
+      "top": 105,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 36,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 2,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.17,
+    "voidBox": {
+     "x": 720,
+     "y": 120,
+     "w": 720,
+     "h": 300
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.41,
+    0.4
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 1956,
+     "screens": 1.9,
+     "words": 250,
+     "img": 5,
+     "video": 0,
+     "canvas": 0,
+     "svg": 13,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 5,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "workspace.png",
+      "keyboard.jpg",
+      "reading.jpg",
+      "reading.jpg",
+      "workspace.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "화면을 만드는 기록",
+     "words": 3,
+     "chars": 10,
+     "lines": 1,
+     "size": 24,
+     "vw": 3.1,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.95,
+     "top": 105,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "화면을 만드는 기록",
+     "words": 3,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      12,
+      13,
+      15,
+      16,
+      24
+     ],
+     "sizeCount": 5,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 85,
+     "max": {
+      "size": 24,
+      "vw": 3.1,
+      "font": "Inter",
+      "text": "화면을 만드는 기록"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.03,
+     "smallText": 7
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.72
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.15
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.12
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#2c3e50"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 8,
+     "radius": "pill",
+     "height": 28,
+     "withShadow": 2,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "블로그",
+      "전체 8 개",
+      "#릴리스 2 개",
+      "#접근성 3 개"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 6,
+     "scrims": 0,
+     "gradientSamples": [
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(230, 247, 243), rgb(234, 244, 251))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(234, 244, 251), rgb(245, 235, 248))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(245, 235, 248), rgb(254, 247, 224))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(254, 247, 224), rgb(230, 247, 243))"
+     ],
+     "gradientText": 0,
+     "hairlines": 2,
+     "hairlineSamples": [
+      "header.Catui_dk-head 768px",
+      "footer.Catui_dk-foot 768px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 5,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 7,
+     "fixed": true,
+     "height": 81,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 1956,
+    "margins": {
+     "left": 20,
+     "right": 23
+    },
+    "sections": [
+     {
+      "sel": "main#dk-main.Catui_dk-main",
+      "tag": "main",
+      "top": 81,
+      "height": 1728,
+      "words": 178,
+      "media": 5,
+      "middle": 0,
+      "heading": {
+       "text": "화면을 만드는 기록",
+       "size": 24,
+       "tag": "h1"
+      },
+      "left": 20,
+      "right": 21,
+      "textLeft": 20,
+      "textRight": 21,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_dk-foot",
+      "tag": "footer",
+      "top": 1809,
+      "height": 147,
+      "words": 67,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 31,
+      "textLeft": 20,
+      "textRight": 31,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "화면을 만드는 기록",
+      "size": 24,
+      "top": 105,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 20,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 2,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.71,
+    0.76,
+    0.8,
+    0.7
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 2796,
+     "screens": 3.3,
+     "words": 248,
+     "img": 5,
+     "video": 0,
+     "canvas": 0,
+     "svg": 13,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 5,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "workspace.png",
+      "keyboard.jpg",
+      "reading.jpg",
+      "reading.jpg",
+      "workspace.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Catui 2.1 — 확장 키트 네 가지",
+     "words": 7,
+     "chars": 22,
+     "lines": 1,
+     "size": 24,
+     "vw": 6.2,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.4,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.94,
+     "top": 580,
+     "tag": "b",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "화면을 만드는 기록",
+     "words": 3,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "화면을 만드는 기록",
+      "words": 3,
+      "chars": 10,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 123,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Catui 2.1 — 확장 키트 네 가지",
+      "words": 7,
+      "chars": 22,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 580,
+      "tag": "b",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 2,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      12,
+      13,
+      15,
+      16,
+      24
+     ],
+     "sizeCount": 5,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 49,
+     "max": {
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "text": "화면을 만드는 기록"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.03,
+     "smallText": 7
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.72
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.15
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.12
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#2c3e50"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 8,
+     "radius": "pill",
+     "height": 28,
+     "withShadow": 2,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "블로그",
+      "전체 8 개",
+      "#릴리스 2 개",
+      "#접근성 3 개"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 6,
+     "scrims": 0,
+     "gradientSamples": [
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(230, 247, 243), rgb(234, 244, 251))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(234, 244, 251), rgb(245, 235, 248))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(245, 235, 248), rgb(254, 247, 224))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(254, 247, 224), rgb(230, 247, 243))"
+     ],
+     "gradientText": 0,
+     "hairlines": 2,
+     "hairlineSamples": [
+      "header.Catui_dk-head 390px",
+      "footer.Catui_dk-foot 390px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 5,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.23
+     },
+     {
+      "type": "img",
+      "ratio": 0.12
+     }
+    ],
+    "nav": {
+     "links": 8,
+     "fixed": true,
+     "height": 107,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 2796,
+    "margins": {
+     "left": 12,
+     "right": 12
+    },
+    "sections": [
+     {
+      "sel": "main#dk-main.Catui_dk-main",
+      "tag": "main",
+      "top": 107,
+      "height": 2497,
+      "words": 175,
+      "media": 5,
+      "middle": 80,
+      "heading": {
+       "text": "화면을 만드는 기록",
+       "size": 24,
+       "tag": "h1"
+      },
+      "left": 12,
+      "right": 0,
+      "textLeft": 12,
+      "textRight": 14,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_dk-foot",
+      "tag": "footer",
+      "top": 2604,
+      "height": 193,
+      "words": 56,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 27,
+      "textLeft": 20,
+      "textRight": 27,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "화면을 만드는 기록",
+      "size": 24,
+      "top": 123,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "변경 이력",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "화면을 만드는 기록",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "같은 글을 큰 대표 이미지와 읽기 흐름 중심으로 구성한 에디토리얼 템플릿입니다. 글·태그·",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "카드형",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "글 8개 · 1/2쪽",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "Catui 2.1 — 확장 키트 네 가지",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "관리자·커뮤니티·쇼핑몰에 이어 문서·블로그 사이트 키트까지, 같은 토큰으로 이어지는 네 확",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "김고양",
+      "side": "left",
+      "px": 12
+     }
+    ],
+    "edges": [
+     {
+      "x": 12,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 2,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 320,
+   "height": 200,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.58,
+    0.59,
+    0.51,
+    0.62,
+    0.54,
+    0.76,
+    0.42,
+    0.55,
+    0.76,
+    0.57,
+    0.68,
+    0.52
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "page": {
+     "height": 2633,
+     "screens": 13.2,
+     "words": 248,
+     "img": 5,
+     "video": 0,
+     "canvas": 0,
+     "svg": 13,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 5,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "workspace.png",
+      "keyboard.jpg",
+      "reading.jpg",
+      "reading.jpg",
+      "workspace.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "화면을 만드는 기록",
+     "words": 3,
+     "chars": 10,
+     "lines": 1,
+     "size": 24,
+     "vw": 7.5,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.93,
+     "top": 123,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "화면을 만드는 기록",
+     "words": 3,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "화면을 만드는 기록",
+      "words": 3,
+      "chars": 10,
+      "lines": 1,
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.93,
+      "top": 123,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Catui 2.1 — 확장 키트 네 가지",
+      "words": 7,
+      "chars": 22,
+      "lines": 2,
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.93,
+      "top": 561,
+      "tag": "b",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 2,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 1,
+     "centered": 0,
+     "medianWords": 7,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      12,
+      13,
+      15,
+      16,
+      24
+     ],
+     "sizeCount": 5,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 39,
+     "max": {
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "text": "화면을 만드는 기록"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.03,
+     "smallText": 7
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 2422,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.72
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.15
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.12
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#2c3e50"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 2,
+     "radius": "pill",
+     "height": 28,
+     "withShadow": 2,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "블로그"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 6,
+     "scrims": 0,
+     "gradientSamples": [
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(230, 247, 243), rgb(234, 244, 251))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(234, 244, 251), rgb(245, 235, 248))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(245, 235, 248), rgb(254, 247, 224))",
+      "span.Catui_dk-cover → linear-gradient(135deg, rgb(254, 247, 224), rgb(230, 247, 243))"
+     ],
+     "gradientText": 0,
+     "hairlines": 2,
+     "hairlineSamples": [
+      "header.Catui_dk-head 320px",
+      "footer.Catui_dk-foot 320px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 5,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 8,
+     "fixed": true,
+     "height": 107,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "pageH": 2633,
+    "margins": {
+     "left": 12,
+     "right": 12
+    },
+    "sections": [
+     {
+      "sel": "main#dk-main.Catui_dk-main",
+      "tag": "main",
+      "top": 107,
+      "height": 2315,
+      "words": 175,
+      "media": 5,
+      "middle": 150,
+      "heading": {
+       "text": "화면을 만드는 기록",
+       "size": 24,
+       "tag": "h1"
+      },
+      "left": 12,
+      "right": 0,
+      "textLeft": 12,
+      "textRight": 12,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_dk-foot",
+      "tag": "footer",
+      "top": 2422,
+      "height": 211,
+      "words": 45,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 39,
+      "textLeft": 20,
+      "textRight": 39,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "화면을 만드는 기록",
+      "size": 24,
+      "top": 123,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "화면을 만드는 기록",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "같은 글을 큰 대표 이미지와 읽기 흐름 중심으로 구성한 에디토리얼 템플릿입니다. 글·태그·",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "카드형",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "#한국어",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "글 8개 · 1/2쪽",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "Catui 2.1 — 확장 키트 네 가지",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "관리자·커뮤니티·쇼핑몰에 이어 문서·블로그 사이트 키트까지, 같은 토큰으로 이어지는 네 확",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "김고양",
+      "side": "left",
+      "px": 12
+     }
+    ],
+    "edges": [
+     {
+      "x": 12,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 2,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 1440,
+   "message": "6 gradient fill(s): span.Catui_dk-cover → linear-gradient(135deg, rgb(230, 247, 243), rgb(234, 244, 251)) | span.Catui_dk-cover → linear-gradient(135deg, rgb(234, 244, 251), rgb(245, 235, 248)) | span.Catui_dk-cover → linear-gradient(135deg, rgb(245, 235, 248), rgb(254, 247, 224))",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "button-fx",
+   "width": 1440,
+   "message": "Buttons with shadow/glow.",
+   "fix": "Flat fill, one colour.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "hairline",
+   "width": 1440,
+   "message": "2 thin rule(s)/divider line(s): header.Catui_dk-head 1440px | footer.Catui_dk-foot 1440px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "body-size",
+   "width": 1440,
+   "message": "Body text is 12px (the size most of the running text is set in).",
+   "fix": "Body copy 16–20px. Map small sizes from blueprints onto your body step.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "grey-body",
+   "width": 1440,
+   "message": "The running text is a soft grey on its ground (4.9:1).",
+   "fix": "Set body copy in the full ink (7:1 or more). Keep the muted ink for secondary notes; pages read thin and unfinished when everything is grey.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "FAIL",
+   "id": "small-text",
+   "width": 1440,
+   "message": "7 text blocks under 13px.",
+   "fix": "Nothing meant to be read goes below 13px.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "focal-point",
+   "width": 1440,
+   "message": "The first screen has no dominant element: the largest type is 24px (1.7vw) and no single picture holds a third of the viewport.",
+   "fix": "Make one thing lead: the headline at display size, or one large picture. A grid of many small pictures is not one thing; in blind tests jurors marked a first screen without a headline down every time. On the strongest studied sites the largest type has a median of 8.4vw.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The page sits off-centre: its content comes to 36px from the left edge but only to 194px from the right, at 1440px.",
+   "fix": "Give the page one pair of equal margins. Check the wrapper for a max-width without margin-inline: auto, a grid with an empty last column, or padding on one side only. If one side is meant to hold air, it must still be closed by something that reaches the margin (a picture, the navigation's last item, a figure)."
+  },
+  {
+   "level": "WARN",
+   "id": "small-title",
+   "width": 1440,
+   "message": "The h1 is 24px (\"화면을 만드는 기록\").",
+   "fix": "Set the title at display size, or make the large text of the first screen the h1.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "name-only-title",
+   "width": 1440,
+   "message": "The h1 is a bare name (\"화면을 만드는 기록\") and nothing else on the first screen says what this is.",
+   "fix": "Keep the name if it leads, and give the line under it (18px or more) the plain words: what it is, for whom, where or when. In the study of 97 Sites of the Day, first screens that named nothing lost usability and content points.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "still-page",
+   "width": 1440,
+   "message": "Only 0 element(s) moved while the page loaded and scrolled.",
+   "fix": "Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback."
+  },
+  {
+   "level": "WARN",
+   "id": "edge-text",
+   "width": 390,
+   "message": "8 text block(s) sit 12–15px from the phone's edge: \"변경 이력\" (12px); \"화면을 만드는 기록\" (12px); \"같은 글을 큰 대표 이미지와 읽기 흐름 중심으로 구성한\" (12px)",
+   "fix": "The page margin is 16–20px on a phone; the header and the corner labels sit on it too.",
+   "alsoAt": [
+    320
+   ]
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-journal\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-journal\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-journal\\tablet-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-journal\\tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-journal\\mobile-390-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-journal\\mobile-390-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 320,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-journal\\mobile-320-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-journal\\mobile-320-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\template-packs-journal\\mobile-320-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

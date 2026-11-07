@@ -4,6 +4,11 @@
 //   레벨    = 활동 점수(글 10 · 댓글 2 · 받은 추천 1) 구간 → LEVELS
 //   community.row(post, opt)    → 목록 한 줄 마크업 (catui.html, 글자는 모두 이스케이프)
 const CM_LEVELS = [0, 300, 1000, 2500, 5000, 8000, 12000, 18000, 26000];
+const CM_BOARD_PAGES = { list: "board.html", card: "board-card.html", gallery: "board-gallery.html", deal: "hotdeal.html", qna: "qna.html", notice: "notice.html" };
+community.boardHref = (b) => {
+  const page = Object.hasOwn(CM_BOARD_PAGES, b?.type) ? CM_BOARD_PAGES[b.type] : "board.html";
+  return ["board.html", "board-card.html", "board-gallery.html"].includes(page) ? `${page}?b=${encodeURIComponent(b?.id || "free")}` : page;
+};
 community.level = (score) => { let lv = 1; CM_LEVELS.forEach((c, i) => { if (score >= c) lv = i + 1; }); return Math.min(lv, CM_LEVELS.length); };
 community.load = function () {
   if (this._loaded) return this._loaded;
@@ -48,16 +53,16 @@ community.row = function (p, { board = true, rank } = {}) {
 };
 // 위젯 한 줄: 제목 [댓글] · 새 글 표시(N, 3시간 이내) · 날짜
 community.isNew = (p) => community.now() - new Date(p.time) < 3 * 36e5;
-community.mini = function (p, { rank } = {}) {
+community.mini = function (p, { rank, board = false } = {}) {
   const t = new Date(p.time), today = t.toDateString() === this.now().toDateString();
-  return catui.html`<li${this.read.has(p.id) ? catui.html` class="Catui_cm-read"` : ""}>${rank ? catui.html`<span class="Catui_cm-rank">${rank}</span>` : ""}<a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}<time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></li>`;
+  return catui.html`<li${this.read.has(p.id) ? catui.html` class="Catui_cm-read"` : ""}>${rank ? catui.html`<span class="Catui_cm-rank${rank <= 3 ? " Catui_cm-rank-top" : ""}">${rank}</span>` : ""}<a href="post.html?id=${p.id}">${board ? catui.html`<span class="Catui_cm-board">${p.boardName}</span>` : ""}${p.title}</a>${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}<time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></li>`;
 };
 // 게시판 표 한 줄: 분류 · 제목[댓글] · 글쓴이 · 날짜 · 조회 · 추천
 community.tr = function (p) {
   const t = new Date(p.time), today = t.toDateString() === this.now().toDateString();
   return catui.html`<tr class="${[this.read.has(p.id) ? "Catui_cm-read" : "", p.cat === "공지" ? "Catui_cm-tr-notice" : ""].filter(Boolean).join(" ")}">
     <td class="Catui_cm-td-cat">${p.cat}</td>
-    <td class="Catui_cm-td-t"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}</a></td>
+    <td class="Catui_cm-td-t"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-cat Catui_cm-mobile-cat">${p.cat}</span><span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}</a></td>
     <td><span class="Catui_cm-nick">${this.badge(p.author)}${p.author.nick}</span></td>
     <td><time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></td>
     <td><span class="Catui_clip">조회 </span>${this.format(p.views, "number")}</td>

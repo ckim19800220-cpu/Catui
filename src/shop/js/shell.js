@@ -48,7 +48,7 @@ shop.shell = {
   init(root) {
     if (shop._once(root, "hero-error")) shop._on(root, "error", (e) => {
       if (e.target.matches?.(".Catui_sh-hero-img, .Catui_sh-promo-img")) e.target.hidden = true;
-      else if (e.target.matches?.(".Catui_sh-card-img img, .Catui_sh-gallery-main img, .Catui_sh-thumbs img, .Catui_sh-review-img") && !e.target.src.startsWith("data:")) e.target.src = shop.thumb({ id: 0 }, 0, true);
+      else if (e.target.matches?.(".Catui_sh-card-img img, .Catui_sh-gallery-main img, .Catui_sh-thumbs img, .Catui_sh-review-img, img[src*='/assets/photos/']") && !e.target.src.startsWith("data:")) e.target.src = shop.thumb({ id: 0 }, 0, true);
     }, true);
     root.querySelectorAll(".Catui_sh-hero-img").forEach((img) => { if (img.complete && !img.naturalWidth) img.hidden = true; });
     root.querySelectorAll("form[data-catui-sh-search]").forEach((f) => shop._on(f, "submit", (e) => {

@@ -1,0 +1,1897 @@
+{
+ "url": "docs/shop/templates/food-store.html",
+ "at": "2026-11-07T14:23:53.879Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.57,
+    0.66
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 1292,
+     "screens": 1.4,
+     "words": 260,
+     "img": 5,
+     "video": 0,
+     "canvas": 0,
+     "svg": 38,
+     "sections": 2,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 5,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "fresh.jpg",
+      "fresh.jpg",
+      "eggs.jpg",
+      "coffee.jpg",
+      "granola.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "오늘의 식탁을 고르세요",
+     "words": 3,
+     "chars": 12,
+     "lines": 1,
+     "size": 30,
+     "vw": 2.1,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": 0,
+     "leading": 1.2,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.4,
+     "top": 200,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "오늘의 식탁을 고르세요",
+     "words": 3,
+     "lines": 1,
+     "size": 30,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "오늘의 식탁을 고르세요",
+      "words": 3,
+      "chars": 12,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.4,
+      "top": 200,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      30
+     ],
+     "sizeCount": 9,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 197,
+     "max": {
+      "size": 30,
+      "vw": 2.1,
+      "font": "Inter",
+      "text": "오늘의 식탁을 고르세요"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 17
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.55
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.3
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.12
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      },
+      {
+       "color": "#c0392b",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 5,
+     "inHero": 5,
+     "radius": "pill",
+     "height": 28,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "식품 전체·배송 조건 보기",
+      "템플릿 팩",
+      "식품 편집숍",
+      "리빙 스토어"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 1,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "section.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 3,
+     "hairlineSamples": [
+      "header.Catui_sh-head 1440px",
+      "nav.Catui_sh-gnb 1440px",
+      "footer.Catui_sh-foot 1440px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 6,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 5,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.11
+     }
+    ],
+    "nav": {
+     "links": 16,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 1292,
+    "margins": {
+     "left": 128,
+     "right": 141
+    },
+    "sections": [
+     {
+      "sel": "main#sh-main.Catui_sh-main",
+      "tag": "main",
+      "top": 118,
+      "height": 1000,
+      "words": 171,
+      "media": 5,
+      "middle": 0,
+      "heading": {
+       "text": "오늘의 식탁을 고르세요",
+       "size": 30,
+       "tag": "h1"
+      },
+      "left": 128,
+      "right": 128,
+      "textLeft": 128,
+      "textRight": 128,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_sh-foot",
+      "tag": "footer",
+      "top": 1118,
+      "height": 174,
+      "words": 91,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 128,
+      "right": 141,
+      "textLeft": 128,
+      "textRight": 141,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "오늘의 식탁을 고르세요",
+      "size": 30,
+      "top": 200,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 128,
+      "n": 1
+     },
+     {
+      "x": 149,
+      "n": 1
+     },
+     {
+      "x": 160,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 3,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.1,
+    "voidBox": {
+     "x": 1080,
+     "y": 540,
+     "w": 360,
+     "h": 360
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.76,
+    0.64
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 1767,
+     "screens": 1.7,
+     "words": 260,
+     "img": 5,
+     "video": 0,
+     "canvas": 0,
+     "svg": 38,
+     "sections": 2,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 5,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "fresh.jpg",
+      "fresh.jpg",
+      "eggs.jpg",
+      "coffee.jpg",
+      "granola.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "오늘의 식탁을 고르세요",
+     "words": 3,
+     "chars": 12,
+     "lines": 1,
+     "size": 30,
+     "vw": 3.9,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": 0,
+     "leading": 1.2,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.44,
+     "top": 190,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "오늘의 식탁을 고르세요",
+     "words": 3,
+     "lines": 1,
+     "size": 30,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "오늘의 식탁을 고르세요",
+      "words": 3,
+      "chars": 12,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.44,
+      "top": 190,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      30
+     ],
+     "sizeCount": 9,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 123,
+     "max": {
+      "size": 30,
+      "vw": 3.9,
+      "font": "Inter",
+      "text": "오늘의 식탁을 고르세요"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 17
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.55
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.3
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.12
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      },
+      {
+       "color": "#c0392b",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 5,
+     "inHero": 5,
+     "radius": "pill",
+     "height": 28,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "식품 전체·배송 조건 보기",
+      "템플릿 팩",
+      "식품 편집숍",
+      "리빙 스토어"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 1,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "section.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 3,
+     "hairlineSamples": [
+      "header.Catui_sh-head 768px",
+      "nav.Catui_sh-gnb 768px",
+      "footer.Catui_sh-foot 768px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 6,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 5,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.11
+     }
+    ],
+    "nav": {
+     "links": 16,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 1767,
+    "margins": {
+     "left": 16,
+     "right": 16
+    },
+    "sections": [
+     {
+      "sel": "main#sh-main.Catui_sh-main",
+      "tag": "main",
+      "top": 118,
+      "height": 1475,
+      "words": 171,
+      "media": 5,
+      "middle": 0,
+      "heading": {
+       "text": "오늘의 식탁을 고르세요",
+       "size": 30,
+       "tag": "h1"
+      },
+      "left": 16,
+      "right": 16,
+      "textLeft": 16,
+      "textRight": 16,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_sh-foot",
+      "tag": "footer",
+      "top": 1593,
+      "height": 174,
+      "words": 85,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 27,
+      "textLeft": 16,
+      "textRight": 27,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "오늘의 식탁을 고르세요",
+      "size": 30,
+      "top": 190,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 16,
+      "n": 1
+     },
+     {
+      "x": 37,
+      "n": 1
+     },
+     {
+      "x": 48,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 3,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.76,
+    0.79,
+    0.78
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 0,
+    "transitions": 1,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 1805,
+     "screens": 2.1,
+     "words": 265,
+     "img": 5,
+     "video": 0,
+     "canvas": 0,
+     "svg": 38,
+     "sections": 2,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 5,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "fresh.jpg",
+      "fresh.jpg",
+      "eggs.jpg",
+      "coffee.jpg",
+      "granola.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "오늘의 식탁을 고르세요",
+     "words": 3,
+     "chars": 12,
+     "lines": 2,
+     "size": 24,
+     "vw": 6.2,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": 0,
+     "leading": 1.2,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.51,
+     "top": 165,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "오늘의 식탁을 고르세요",
+     "words": 3,
+     "lines": 2,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "오늘의 식탁을 고르세요",
+      "words": 3,
+      "chars": 12,
+      "lines": 2,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.51,
+      "top": 165,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      24
+     ],
+     "sizeCount": 9,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 60,
+     "max": {
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "text": "오늘의 식탁을 고르세요"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 17
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.56
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.3
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.11
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      },
+      {
+       "color": "#c0392b",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 5,
+     "inHero": 5,
+     "radius": "pill",
+     "height": 28,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "식품 전체·배송 조건 보기",
+      "템플릿 팩",
+      "식품 편집숍",
+      "리빙 스토어"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 1,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "section.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 4,
+     "hairlineSamples": [
+      "header.Catui_sh-head 390px",
+      "nav.Catui_sh-gnb 390px",
+      "footer.Catui_sh-foot 390px",
+      "nav.Catui_sh-tabs 390px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 6,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.13
+     },
+     {
+      "type": "img",
+      "ratio": 0.09
+     },
+     {
+      "type": "img",
+      "ratio": 0.09
+     }
+    ],
+    "nav": {
+     "links": 17,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 1805,
+    "margins": {
+     "left": 12,
+     "right": 12
+    },
+    "sections": [
+     {
+      "sel": "header.Catui_sh-hero",
+      "tag": "header",
+      "top": 134,
+      "height": 256,
+      "words": 20,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "오늘의 식탁을 고르세요",
+       "size": 24,
+       "tag": "h1"
+      },
+      "left": 28,
+      "right": 12,
+      "textLeft": 28,
+      "textRight": 179,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 454,
+      "height": 811,
+      "words": 107,
+      "media": 4,
+      "middle": 16,
+      "heading": {
+       "text": "식품 상품",
+       "size": 18,
+       "tag": "h2"
+      },
+      "left": 12,
+      "right": 12,
+      "textLeft": 12,
+      "textRight": 12,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_card",
+      "tag": "section",
+      "top": 1281,
+      "height": 240,
+      "words": 38,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "배송과 주문 전에",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 33,
+      "right": 36,
+      "textLeft": 33,
+      "textRight": 36,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_sh-foot",
+      "tag": "footer",
+      "top": 1537,
+      "height": 211,
+      "words": 67,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 23,
+      "textLeft": 16,
+      "textRight": 23,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "오늘의 식탁을 고르세요",
+      "size": 24,
+      "top": 165,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "식품 상품",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "필터·정렬로 고르기",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "귤밭농원",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "제주 노지 감귤 5kg (로얄과)",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "12%",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "24,900원",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "기본 배송 무료",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "1개 예상 합계",
+      "side": "left",
+      "px": 12
+     }
+    ],
+    "edges": [
+     {
+      "x": 28,
+      "n": 2
+     },
+     {
+      "x": 12,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 3,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 320,
+   "height": 200,
+   "load": "load",
+   "screens": 10,
+   "filled": [
+    0.39,
+    0.57,
+    0.49,
+    0.68,
+    0.46,
+    0.7,
+    0.53,
+    0.61,
+    0.83,
+    0.74
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 0,
+    "transitions": 1,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "page": {
+     "height": 1852,
+     "screens": 9.3,
+     "words": 265,
+     "img": 5,
+     "video": 0,
+     "canvas": 0,
+     "svg": 38,
+     "sections": 2,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 5,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "fresh.jpg",
+      "fresh.jpg",
+      "eggs.jpg",
+      "coffee.jpg",
+      "granola.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "오늘의 식탁을 고르세요",
+     "words": 3,
+     "chars": 12,
+     "lines": 2,
+     "size": 24,
+     "vw": 7.5,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": 0,
+     "leading": 1.2,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.62,
+     "top": 165,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "오늘의 식탁을 고르세요",
+     "words": 3,
+     "lines": 2,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "오늘의 식탁을 고르세요",
+      "words": 3,
+      "chars": 12,
+      "lines": 2,
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.62,
+      "top": 165,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      24
+     ],
+     "sizeCount": 9,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 48,
+     "max": {
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "text": "오늘의 식탁을 고르세요"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0,
+     "smallText": 17
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      },
+      {
+       "color": "#fafbfc",
+       "top": 134,
+       "hsl": {
+        "h": 210,
+        "s": 0.25,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 1252,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.56
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.3
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.11
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      },
+      {
+       "color": "#c0392b",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 5,
+     "inHero": 1,
+     "radius": "pill",
+     "height": 28,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 1,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "section.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 4,
+     "hairlineSamples": [
+      "header.Catui_sh-head 320px",
+      "nav.Catui_sh-gnb 320px",
+      "footer.Catui_sh-foot 320px",
+      "nav.Catui_sh-tabs 320px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 2,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.14
+     }
+    ],
+    "nav": {
+     "links": 17,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "pageH": 1852,
+    "margins": {
+     "left": 12,
+     "right": 12
+    },
+    "sections": [
+     {
+      "sel": "header.Catui_sh-hero",
+      "tag": "header",
+      "top": 134,
+      "height": 256,
+      "words": 20,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "오늘의 식탁을 고르세요",
+       "size": 24,
+       "tag": "h1"
+      },
+      "left": 28,
+      "right": 12,
+      "textLeft": 28,
+      "textRight": 109,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 454,
+      "height": 782,
+      "words": 107,
+      "media": 4,
+      "middle": 16,
+      "heading": {
+       "text": "식품 상품",
+       "size": 18,
+       "tag": "h2"
+      },
+      "left": 12,
+      "right": 12,
+      "textLeft": 12,
+      "textRight": 12,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_card",
+      "tag": "section",
+      "top": 1252,
+      "height": 280,
+      "words": 38,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "배송과 주문 전에",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 33,
+      "right": 45,
+      "textLeft": 33,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_sh-foot",
+      "tag": "footer",
+      "top": 1548,
+      "height": 248,
+      "words": 64,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 25,
+      "textLeft": 16,
+      "textRight": 25,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "오늘의 식탁을 고르세요",
+      "size": 24,
+      "top": 165,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "식품 상품",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "필터·정렬로 고르기",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "귤밭농원",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "제주 노지 감귤 5kg (로얄과)",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "12%",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "24,900원",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "기본 배송 무료",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "1개 예상 합계",
+      "side": "left",
+      "px": 12
+     }
+    ],
+    "edges": [
+     {
+      "x": 28,
+      "n": 2
+     },
+     {
+      "x": 12,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 3,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "shadow",
+   "width": 1440,
+   "message": "1 box-shadow(s) on elements at rest: section.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+   "fix": "Remove. Separate surfaces with a tone step or space. Shadows are for things that really float (menus, dialogs, sticky bars).",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "button-fx",
+   "width": 1440,
+   "message": "Buttons with shadow/glow.",
+   "fix": "Flat fill, one colour.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "hairline",
+   "width": 1440,
+   "message": "3 thin rule(s)/divider line(s): header.Catui_sh-head 1440px | nav.Catui_sh-gnb 1440px | footer.Catui_sh-foot 1440px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "outlined-box",
+   "width": 1440,
+   "message": "1 box(es) drawn with a 1px outline.",
+   "fix": "Prefer a filled surface or no box.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "palette-terracotta",
+   "width": 1440,
+   "message": "Terracotta / rust-orange accent (text #c0392b).",
+   "fix": "Use the accent from the drawn palette.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "body-size",
+   "width": 1440,
+   "message": "Body text is 12px (the size most of the running text is set in).",
+   "fix": "Body copy 16–20px. Map small sizes from blueprints onto your body step.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "grey-body",
+   "width": 1440,
+   "message": "The running text is a soft grey on its ground (4.9:1).",
+   "fix": "Set body copy in the full ink (7:1 or more). Keep the muted ink for secondary notes; pages read thin and unfinished when everything is grey.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "measure",
+   "width": 1440,
+   "message": "Longest paragraph runs about 197 characters per line.",
+   "fix": "Cap paragraphs at 45–75 characters (max-width: 60ch).",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "small-text",
+   "width": 1440,
+   "message": "17 text blocks under 13px.",
+   "fix": "Nothing meant to be read goes below 13px.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "focal-point",
+   "width": 1440,
+   "message": "The first screen has no dominant element: the largest type is 30px (2.1vw) and no single picture holds a third of the viewport.",
+   "fix": "Make one thing lead: the headline at display size, or one large picture. A grid of many small pictures is not one thing; in blind tests jurors marked a first screen without a headline down every time. On the strongest studied sites the largest type has a median of 8.4vw.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "small-title",
+   "width": 1440,
+   "message": "The h1 is 30px (\"오늘의 식탁을 고르세요\").",
+   "fix": "Set the title at display size, or make the large text of the first screen the h1.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "name-only-title",
+   "width": 1440,
+   "message": "The h1 is a bare name (\"오늘의 식탁을 고르세요\") and nothing else on the first screen says what this is.",
+   "fix": "Keep the name if it leads, and give the line under it (18px or more) the plain words: what it is, for whom, where or when. In the study of 97 Sites of the Day, first screens that named nothing lost usability and content points.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "still-page",
+   "width": 1440,
+   "message": "Only 0 element(s) moved while the page loaded and scrolled.",
+   "fix": "Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback."
+  },
+  {
+   "level": "WARN",
+   "id": "side-scroll",
+   "width": 390,
+   "message": "1 row(s) scroll sideways with content past their edge.",
+   "fix": "Jurors and most visitors read a row cut at the edge as clipped, not as scrollable. Wrap it onto more lines, or end it inside the grid.",
+   "alsoAt": [
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "edge-text",
+   "width": 390,
+   "message": "8 text block(s) sit 12–15px from the phone's edge: \"식품 상품\" (12px); \"필터·정렬로 고르기\" (12px); \"귤밭농원\" (12px)",
+   "fix": "The page margin is 16–20px on a phone; the header and the corner labels sit on it too.",
+   "alsoAt": [
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "covered-text",
+   "width": 320,
+   "message": "Large text lies under another element at some scroll position: \"오늘의 식탁을 고르세요\" (screen 1, 50% hidden)",
+   "fix": "Nothing may sit on top of a headline or statement. Move the picture, shorten the pinned run, or raise the text above it (z-index) and give it a ground."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-food\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-food\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-food\\tablet-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-food\\tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-food\\mobile-390-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-food\\mobile-390-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 320,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-food\\mobile-320-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-food\\mobile-320-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\template-packs-food\\mobile-320-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

@@ -39,7 +39,18 @@ docs.toc = function (article, box, { levels = docs.rules.tocLevels, title = "이
   const groups = [];
   for (const it of items) { if (it.level === top || !groups.length) groups.push({ it, kids: [] }); else groups[groups.length - 1].kids.push(it); }
   const link = (it) => catui.html`<a href="#${it.id}">${it.text}</a>`;
-  catui.mount(out, catui.html`<nav class="Catui_dk-toc" aria-label="${title}"><p class="Catui_dk-toc-t">${title}</p><ol>${groups.map((g) => catui.html`<li>${link(g.it)}${g.kids.length ? catui.html`<ol>${g.kids.map((k) => catui.html`<li>${link(k)}</li>`)}</ol>` : ""}</li>`)}</ol></nav>`);
+  const mobile = matchMedia("(max-width: 991px)");
+  const opened = out.querySelector("details")?.open ?? !mobile.matches;
+  catui.mount(out, catui.html`<details class="Catui_dk-toc"${opened ? catui.html` open` : ""}><summary class="Catui_dk-toc-t">${title}${catui.icon("chevron-down", 16)}</summary><nav aria-label="${title}"><ol>${groups.map((g) => catui.html`<li>${link(g.it)}${g.kids.length ? catui.html`<ol>${g.kids.map((k) => catui.html`<li>${link(k)}</li>`)}</ol>` : ""}</li>`)}</ol></nav></details>`);
+  if (out.closest(".Catui_dk-docs") && docs._once(out, "toc-layout")) {
+    const parent = out.parentElement, next = out.nextSibling;
+    const place = () => {
+      if (mobile.matches) art.querySelector(":scope > header")?.after(out);
+      else parent.insertBefore(out, next?.parentNode === parent ? next : art);
+    };
+    docs._on(mobile, "change", () => { place(); out.querySelector("details").open = !mobile.matches; });
+    place();
+  }
   const t = { items, links: [...out.querySelectorAll("a[href^='#']")], box: out };
   docs._tocs = docs._tocs.filter((x) => x.box !== out && x.box.isConnected).concat(t);
   if (docs._once(window, "spy")) {

@@ -1,0 +1,1933 @@
+{
+ "url": "http://127.0.0.1:8766/docs/shop/templates/list.html",
+ "at": "2026-11-07T12:04:37.951Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.58,
+    0.69,
+    0.71
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 2157,
+     "screens": 2.4,
+     "words": 326,
+     "img": 12,
+     "video": 0,
+     "canvas": 0,
+     "svg": 124,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 12,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "fresh.jpg",
+      "shirt.jpg",
+      "charger.jpg",
+      "cream.jpg",
+      "eggs.jpg",
+      "lipstick.jpg",
+      "scratcher.jpg",
+      "yoga.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "전체 상품",
+     "words": 2,
+     "chars": 5,
+     "lines": 1,
+     "size": 18,
+     "vw": 1.3,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.4,
+     "top": 138,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "전체 상품",
+     "words": 2,
+     "lines": 1,
+     "size": 18,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      18
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 197,
+     "max": {
+      "size": 18,
+      "vw": 1.3,
+      "font": "Inter",
+      "text": "전체 상품"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.03,
+     "centerShare": 0.01,
+     "smallText": 11
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.52
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.32
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.11
+      },
+      {
+       "color": "#c0392b",
+       "share": 0.03
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 2,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "반려동물"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 3,
+     "hairlineSamples": [
+      "header.Catui_sh-head 1440px",
+      "nav.Catui_sh-gnb 1440px",
+      "footer.Catui_sh-foot 1440px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 13,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 12,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 15,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 2157,
+    "margins": {
+     "left": 128,
+     "right": 136
+    },
+    "sections": [
+     {
+      "sel": "main#sh-main.Catui_sh-main",
+      "tag": "main",
+      "top": 118,
+      "height": 1865,
+      "words": 190,
+      "media": 12,
+      "middle": 34,
+      "heading": {
+       "text": "전체 상품",
+       "size": 18,
+       "tag": "h1"
+      },
+      "left": 128,
+      "right": 128,
+      "textLeft": 128,
+      "textRight": 240,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "footer.Catui_sh-foot",
+      "tag": "footer",
+      "top": 1983,
+      "height": 174,
+      "words": 91,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 128,
+      "right": 141,
+      "textLeft": 128,
+      "textRight": 141,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "전체 상품",
+      "size": 18,
+      "top": 138,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 128,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.09,
+    "voidBox": {
+     "x": 300,
+     "y": 240,
+     "w": 180,
+     "h": 660
+    }
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": false,
+    "ground": "#f7f8fa",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 128,
+     "right": 130
+    },
+    "hero": {
+     "text": "전체 상품",
+     "words": 2,
+     "chars": 5,
+     "lines": 1,
+     "size": 18,
+     "vw": 1.3,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.4,
+     "top": 138,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 1,
+     "firstScreen": 1,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 1,
+     "radii": [
+      [
+       6,
+       1
+      ]
+     ],
+     "heavyBorders": 1,
+     "borderSamples": [
+      "#2a404e on #ffffff (10.81:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 2,
+     "hues": 2,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      },
+      {
+       "hue": 210,
+       "size": 30,
+       "radius": "4px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 12,
+     "tabularShare": 1,
+     "kpiMax": 12
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.62,
+     "tiny": 3,
+     "tinySamples": [
+      "개 담김 10px",
+      "개 조건 적용 10px",
+      "개 담김 10px"
+     ],
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      18
+     ]
+    },
+    "title": {
+     "text": "전체 상품",
+     "size": 18,
+     "top": 138
+    },
+    "colourShare": 0.058
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.61,
+    0.7,
+    0.77
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 2109,
+     "screens": 2.1,
+     "words": 292,
+     "img": 12,
+     "video": 0,
+     "canvas": 0,
+     "svg": 124,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 12,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "fresh.jpg",
+      "shirt.jpg",
+      "charger.jpg",
+      "cream.jpg",
+      "eggs.jpg",
+      "lipstick.jpg",
+      "scratcher.jpg",
+      "yoga.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "전체 상품",
+     "words": 2,
+     "chars": 5,
+     "lines": 1,
+     "size": 18,
+     "vw": 2.3,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.4,
+     "top": 138,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "전체 상품",
+     "words": 2,
+     "lines": 1,
+     "size": 18,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      18
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 123,
+     "max": {
+      "size": 18,
+      "vw": 2.3,
+      "font": "Inter",
+      "text": "전체 상품"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.03,
+     "centerShare": 0.01,
+     "smallText": 11
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.52
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.32
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.11
+      },
+      {
+       "color": "#c0392b",
+       "share": 0.03
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 2,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "반려동물"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 3,
+     "hairlineSamples": [
+      "header.Catui_sh-head 768px",
+      "nav.Catui_sh-gnb 768px",
+      "footer.Catui_sh-foot 768px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 12,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 12,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 15,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 2109,
+    "margins": {
+     "left": 16,
+     "right": 24
+    },
+    "sections": [
+     {
+      "sel": "main#sh-main.Catui_sh-main",
+      "tag": "main",
+      "top": 118,
+      "height": 1817,
+      "words": 190,
+      "media": 12,
+      "middle": 16,
+      "heading": {
+       "text": "전체 상품",
+       "size": 18,
+       "tag": "h1"
+      },
+      "left": 16,
+      "right": 16,
+      "textLeft": 16,
+      "textRight": 100,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_sh-foot",
+      "tag": "footer",
+      "top": 1935,
+      "height": 174,
+      "words": 85,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 27,
+      "textLeft": 16,
+      "textRight": 27,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "전체 상품",
+      "size": 18,
+      "top": 138,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 16,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "dark": false,
+    "ground": "#f7f8fa",
+    "sidebar": null,
+    "topbar": {
+     "h": 72
+    },
+    "canvas": {
+     "left": 16,
+     "right": 18
+    },
+    "hero": {
+     "text": "전체 상품",
+     "words": 2,
+     "chars": 5,
+     "lines": 1,
+     "size": 18,
+     "vw": 2.3,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.4,
+     "top": 138,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 0,
+     "firstScreen": 0,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 0,
+     "radii": [],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 2,
+     "hues": 2,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      },
+      {
+       "hue": 210,
+       "size": 30,
+       "radius": "4px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 12,
+     "tabularShare": 1,
+     "kpiMax": 12
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.62,
+     "tiny": 3,
+     "tinySamples": [
+      "개 담김 10px",
+      "개 조건 적용 10px",
+      "개 담김 10px"
+     ],
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      18
+     ]
+    },
+    "title": {
+     "text": "전체 상품",
+     "size": 18,
+     "top": 138
+    },
+    "colourShare": 0.086
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.68,
+    0.66,
+    0.63,
+    0.71
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 0,
+    "transitions": 1,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 2602,
+     "screens": 3.1,
+     "words": 297,
+     "img": 12,
+     "video": 0,
+     "canvas": 0,
+     "svg": 124,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 12,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "fresh.jpg",
+      "shirt.jpg",
+      "charger.jpg",
+      "cream.jpg",
+      "eggs.jpg",
+      "lipstick.jpg",
+      "scratcher.jpg",
+      "yoga.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "전체 상품",
+     "words": 2,
+     "chars": 5,
+     "lines": 1,
+     "size": 18,
+     "vw": 4.6,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.4,
+     "top": 134,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "전체 상품",
+     "words": 2,
+     "lines": 1,
+     "size": 18,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+     ],
+     "sizeCount": 6,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 60,
+     "max": {
+      "size": 18,
+      "vw": 4.6,
+      "font": "Inter",
+      "text": "전체 상품"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.03,
+     "centerShare": 0.01,
+     "smallText": 11
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.52
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.32
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.11
+      },
+      {
+       "color": "#c0392b",
+       "share": 0.03
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 2,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "반려동물"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 4,
+     "hairlineSamples": [
+      "header.Catui_sh-head 390px",
+      "nav.Catui_sh-gnb 390px",
+      "footer.Catui_sh-foot 390px",
+      "nav.Catui_sh-tabs 390px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 12,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.09
+     },
+     {
+      "type": "img",
+      "ratio": 0.09
+     },
+     {
+      "type": "img",
+      "ratio": 0.09
+     },
+     {
+      "type": "img",
+      "ratio": 0.09
+     }
+    ],
+    "nav": {
+     "links": 16,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 2602,
+    "margins": {
+     "left": 12,
+     "right": 12
+    },
+    "sections": [
+     {
+      "sel": "main#sh-main.Catui_sh-main",
+      "tag": "main",
+      "top": 118,
+      "height": 2216,
+      "words": 187,
+      "media": 12,
+      "middle": 4,
+      "heading": {
+       "text": "전체 상품",
+       "size": 18,
+       "tag": "h1"
+      },
+      "left": 12,
+      "right": 12,
+      "textLeft": 12,
+      "textRight": 37,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_sh-foot",
+      "tag": "footer",
+      "top": 2334,
+      "height": 211,
+      "words": 67,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 23,
+      "textLeft": 16,
+      "textRight": 23,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "전체 상품",
+      "size": 18,
+      "top": 134,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "전체 상품",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "상품 24개 · 1/2쪽",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "귤밭농원",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "제주 노지 감귤 5kg (로얄과)",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "12%",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "24,900원",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "소리공방",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "65W 3포트 고속 충전기",
+      "side": "left",
+      "px": 12
+     }
+    ],
+    "edges": [
+     {
+      "x": 12,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "dark": false,
+    "ground": "#f7f8fa",
+    "sidebar": null,
+    "topbar": {
+     "h": 72
+    },
+    "canvas": {
+     "left": 11,
+     "right": -54
+    },
+    "hero": {
+     "text": "전체 상품",
+     "words": 2,
+     "chars": 5,
+     "lines": 1,
+     "size": 18,
+     "vw": 4.6,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.4,
+     "top": 134,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 0,
+     "firstScreen": 0,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 0,
+     "radii": [],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 3,
+     "hues": 2,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      },
+      {
+       "hue": 210,
+       "size": 28,
+       "radius": "4px"
+      },
+      {
+       "hue": 210,
+       "size": 30,
+       "radius": "4px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 12,
+     "tabularShare": 1,
+     "kpiMax": 12
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.62,
+     "tiny": 3,
+     "tinySamples": [
+      "개 담김 10px",
+      "개 조건 적용 10px",
+      "개 담김 10px"
+     ],
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+     ]
+    },
+    "title": {
+     "text": "전체 상품",
+     "size": 18,
+     "top": 134
+    },
+    "colourShare": 0.077
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 320,
+   "height": 200,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.31,
+    0.38,
+    0.55,
+    0.51,
+    0.57,
+    0.49,
+    0.44,
+    0.51,
+    0.42,
+    0.42,
+    0.54,
+    0.71
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 0,
+    "transitions": 1,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "page": {
+     "height": 2530,
+     "screens": 12.7,
+     "words": 297,
+     "img": 12,
+     "video": 0,
+     "canvas": 0,
+     "svg": 124,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 12,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "fresh.jpg",
+      "shirt.jpg",
+      "charger.jpg",
+      "cream.jpg",
+      "eggs.jpg",
+      "lipstick.jpg",
+      "scratcher.jpg",
+      "yoga.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "전체 상품",
+     "words": 2,
+     "chars": 5,
+     "lines": 1,
+     "size": 18,
+     "vw": 5.6,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.4,
+     "top": 134,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "전체 상품",
+     "words": 2,
+     "lines": 1,
+     "size": 18,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+     ],
+     "sizeCount": 6,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 48,
+     "max": {
+      "size": 18,
+      "vw": 5.6,
+      "font": "Inter",
+      "text": "전체 상품"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.03,
+     "centerShare": 0.01,
+     "smallText": 11
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      },
+      {
+       "color": "#fafbfc",
+       "top": 343,
+       "hsl": {
+        "h": 210,
+        "s": 0.25,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 2226,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.52
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.32
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.11
+      },
+      {
+       "color": "#c0392b",
+       "share": 0.03
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 2,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "반려동물"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 4,
+     "hairlineSamples": [
+      "header.Catui_sh-head 320px",
+      "nav.Catui_sh-gnb 320px",
+      "footer.Catui_sh-foot 320px",
+      "nav.Catui_sh-tabs 320px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 16,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "pageH": 2530,
+    "margins": {
+     "left": 12,
+     "right": 12
+    },
+    "sections": [
+     {
+      "sel": "main#sh-main.Catui_sh-main",
+      "tag": "main",
+      "top": 118,
+      "height": 2108,
+      "words": 186,
+      "media": 12,
+      "middle": 0,
+      "heading": {
+       "text": "전체 상품",
+       "size": 18,
+       "tag": "h1"
+      },
+      "left": 12,
+      "right": 12,
+      "textLeft": 12,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_sh-foot",
+      "tag": "footer",
+      "top": 2226,
+      "height": 248,
+      "words": 64,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 25,
+      "textLeft": 16,
+      "textRight": 25,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "전체 상품",
+      "size": 18,
+      "top": 134,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "전체 상품",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "상품 24개 · 1/2쪽",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "귤밭농원",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "제주 노지 감귤 5kg (로얄과)",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "12%",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "24,900원",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "소리공방",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "65W 3포트 고속 충전기",
+      "side": "left",
+      "px": 12
+     }
+    ],
+    "edges": [
+     {
+      "x": 12,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "dark": false,
+    "ground": "#f7f8fa",
+    "sidebar": null,
+    "topbar": {
+     "h": 72
+    },
+    "canvas": {
+     "left": 11,
+     "right": -67
+    },
+    "hero": {
+     "text": "전체 상품",
+     "words": 2,
+     "chars": 5,
+     "lines": 1,
+     "size": 18,
+     "vw": 5.6,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.4,
+     "top": 134,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 0,
+     "firstScreen": 0,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 0,
+     "radii": [],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 3,
+     "hues": 2,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      },
+      {
+       "hue": 210,
+       "size": 28,
+       "radius": "4px"
+      },
+      {
+       "hue": 210,
+       "size": 30,
+       "radius": "4px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 12,
+     "tabularShare": 1,
+     "kpiMax": 12
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.62,
+     "tiny": 3,
+     "tinySamples": [
+      "개 담김 10px",
+      "개 조건 적용 10px",
+      "개 담김 10px"
+     ],
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+     ]
+    },
+    "title": {
+     "text": "전체 상품",
+     "size": 18,
+     "top": 134
+    },
+    "colourShare": 0.014
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "palette-terracotta",
+   "width": 1440,
+   "message": "Terracotta / rust-orange accent (text #c0392b).",
+   "fix": "Use the accent from the drawn palette.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "tiny-text",
+   "width": 1440,
+   "message": "3 text blocks under 11px: 개 담김 10px, 개 조건 적용 10px, 개 담김 10px.",
+   "fix": "Nothing below 11px; secondary text 12px, data 13–14px.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "edge-text",
+   "width": 390,
+   "message": "8 text block(s) sit 12–15px from the phone's edge: \"전체 상품\" (12px); \"상품 24개 · 1/2쪽\" (12px); \"귤밭농원\" (12px)",
+   "fix": "The page margin is 16–20px on a phone; the header and the corner labels sit on it too.",
+   "alsoAt": [
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "icon-chips",
+   "width": 390,
+   "message": "3 icons sit in tinted squares or circles in 2 different colours.",
+   "fix": "This is the commonest tell of a generated dashboard. Drop the tinted square: a KPI is a label and a number; an icon, if it helps, is plain and in the text colour.",
+   "alsoAt": [
+    320
+   ]
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\review-shop-list\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\review-shop-list\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "D:\\Catui_design\\.taste-audit\\review-shop-list\\tablet-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\review-shop-list\\tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\review-shop-list\\mobile-390-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\review-shop-list\\mobile-390-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 320,
+   "fold": "D:\\Catui_design\\.taste-audit\\review-shop-list\\mobile-320-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\review-shop-list\\mobile-320-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\review-shop-list\\mobile-320-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

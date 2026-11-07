@@ -21,6 +21,14 @@
 <p>제출하면 검증하고, 처음 틀린 칸에 포커스한 뒤 오류를 색 + 문장(<code>aria-invalid</code>, <code>aria-describedby</code>)으로 알립니다. 틀린 칸은 입력할 때마다 다시 검사합니다. 빈 값은 <code>required</code>만 검사합니다.</p>
 </section>
 
+<section aria-labelledby="password-visibility">
+<h2 id="password-visibility">비밀번호 표시·가림</h2>
+<catui-example title="같은 폼의 비밀번호 토글">
+  <div class="Catui_field"><label class="Catui_label" for="fm-visible-pw">예제 비밀번호</label><div class="Catui_line"><input class="Catui_input" id="fm-visible-pw" type="password" autocomplete="new-password"><button class="Catui_btn Catui_btn-sm Catui_btn-secondary" type="button" data-catui-password-toggle="fm-visible-pw" aria-controls="fm-visible-pw" aria-pressed="false" aria-label="비밀번호 보기"><span data-catui-password-label>보기</span></button></div></div>
+</catui-example>
+<p><code>data-catui-password-toggle</code> 값은 대상 입력의 id입니다. 버튼과 입력은 같은 폼에 두거나 둘 다 폼 밖에 둡니다. <code>aria-pressed</code>와 접근 가능한 이름을 함께 갱신하며, 폼을 초기화하거나 탭을 숨기거나 모듈을 해제하면 다시 가립니다. 입력값을 저장·기록·전송하지 않습니다.</p>
+</section>
+
 <section aria-labelledby="rules">
 <h2 id="rules">매개변수 규칙 · 확인 칸 · 그룹 필수</h2>
 <catui-example title="minlen · same · min/max · 라디오 그룹 required">

@@ -7,7 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { transform } from "lightningcss";
 import { transformSync } from "esbuild";
-import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes, visualErrors } from "./lib.mjs";
+import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes, visualErrors, sharedAccount } from "./lib.mjs";
 
 const C = { src: path.join(ROOT, "src/community"), tpl: path.join(ROOT, "templates/community") };
 const noComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, "");
@@ -141,7 +141,7 @@ export function buildCommunityTemplates({ defined, icons, communityByFile = {} }
     const scripts = [];
     const body = p.body.replace(/<script(?![^>]*type="application\/json")[^>]*>[\s\S]*?<\/script>\s*/g, (s) => { scripts.push(s.trim()); return ""; });
     let html = (layouts[p.layout || "site"] || fail(`없는 layout: ${p.layout} (${f})`))
-      .replace(/\{\{content\}\}/g, () => body)
+      .replace(/\{\{content\}\}/g, () => sharedAccount(body, "community", f))
       .replace(/\{\{scripts\}\}/g, () => scripts.join("\n"))
       .replace(/\{\{aside\}\}/g, () => (p.aside === "none" ? "" : '<aside class="Catui_cm-aside" aria-label="인기·공지" data-catui-cm-aside></aside>'))
       .replace(/\{\{rootattrs\}\}/g, () => (p.aside === "none" ? " data-catui-cm-wide" : ""))

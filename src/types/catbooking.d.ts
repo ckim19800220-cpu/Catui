@@ -13,7 +13,7 @@ export interface BkOption { id: string; name: string; price: number; per: "perso
 export interface BkService {
   id: string; kind: "slot" | "seat" | "room"; name: string; icon?: string; tone?: number; desc?: string;
   price?: number; childPrice?: number; childOff?: number; duration: number; step?: number; capacity?: number; maxPeople?: number;
-  map?: string; times?: BkTime[]; adjacent?: boolean; branches: string[]; options?: BkOption[];
+  map?: string; times?: BkTime[]; dates?: BkDate[]; adjacent?: boolean; branches: string[]; options?: BkOption[];
 }
 export interface BkBranch { id: string; name: string; addr?: string; phone?: string; open: BkTime; close: BkTime; breaks: Array<[BkTime, BkTime]>; closed: number[] }
 export interface BkSeatMap { title: string; stage?: string; unit?: string; rows: Array<{ id: string; cells: string }>; grades?: Array<{ id: string; price: number; rows: string[] }>; cap?: Record<string, number> }

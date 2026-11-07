@@ -1,5 +1,11 @@
 [
   {
+    "id": "catui-day", "image": "../../../assets/photos/workspace.png", "kind": "seat", "name": "Catui 실무 워크숍", "icon": "calendar-check", "tone": 1,
+    "desc": "문서 검색·접근성·예약 복구를 실습하는 가상 개발 행사. 11월 14일 한 회차만 진행합니다.",
+    "map": "workshop", "dates": ["2026-11-14"], "times": ["14:00"], "duration": 150, "maxPeople": 4, "adjacent": true,
+    "branches": ["daehak"], "options": []
+  },
+  {
     "id": "pottery", "image": "../../../assets/photos/pottery.jpg", "kind": "slot", "name": "도자기 원데이 클래스", "icon": "palette", "tone": 1,
     "desc": "물레 체험 후 초벌 작품을 2주 뒤 받아 가요. 앞치마·도구 제공.",
     "price": 45000, "childPrice": 30000, "duration": 90, "step": 30, "capacity": 6, "maxPeople": 6,

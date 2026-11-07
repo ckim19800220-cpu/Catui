@@ -29,6 +29,18 @@ docs.readTimeFill = function (scope = document) {
 
 docs.shell = {
   init(root) {
+    const topnav = root.querySelector(".Catui_dk-nav");
+    if (topnav && docs._once(topnav, "current-visible")) {
+      const layout = () => {
+        const active = topnav.querySelector('[aria-current="page"]');
+        if (!active) return;
+        const outer = topnav.getBoundingClientRect(), item = active.getBoundingClientRect();
+        if (item.left < outer.left) topnav.scrollLeft += item.left - outer.left;
+        else if (item.right > outer.right) topnav.scrollLeft += item.right - outer.right;
+      };
+      docs._on(window, "resize", layout);
+      layout();
+    }
     if (docs._once(root, "cover-error")) docs._on(root, "error", (e) => { if (e.target.matches?.(".Catui_dk-cover img")) e.target.hidden = true; }, true);
     // 좁은 화면은 메뉴를 접어서 시작 (스크립트가 없으면 펼친 그대로)
     root.querySelectorAll("details.Catui_dk-side").forEach((d) => { d.open = !matchMedia("(max-width: 991px)").matches; });
@@ -37,8 +49,17 @@ docs.shell = {
     docs.readTimeFill(root);
     const nav = root.querySelector("[data-catui-dk-nav]"), pager = root.querySelector("[data-catui-dk-pager]"), page = root.querySelector("[data-catui-dk-page]");
     if (!nav && !pager && !page) return;
-    this.ready = Promise.all([docs.data("nav"), page ? docs.data("pages") : null]).then(([groups, pages]) => {
+    const content = page?.querySelector("[data-body]") || nav;
+    const footer = page ? [...page.querySelectorAll(".Catui_dk-doc-f, [data-catui-dk-feedback]")] : [];
+    const load = () => {
+      if (docs._dead || !root.isConnected) return Promise.resolve(null);
+      content?.setAttribute("aria-busy", "true");
+      footer.forEach((el) => { el.hidden = true; });
+      if (page?.querySelector("[data-desc]")) page.querySelector("[data-desc]").textContent = "문서 정보를 불러오는 중입니다…";
+      return Promise.all([docs.data("nav"), page ? docs.data("pages") : null]).then(([groups, pages]) => {
+      if (docs._dead || !root.isConnected) return null;
       const flat = groups.flatMap((g) => g.items);
+      footer.forEach((el) => { el.hidden = false; });
       let key = docs.pageKey();
       if (page) {
         const id = pages[docs.query().get("p")] ? docs.query().get("p") : page.getAttribute("data-catui-dk-page");
@@ -50,8 +71,31 @@ docs.shell = {
         const i = flat.findIndex((it) => docs.pageKey(it.href) === key), prev = flat[i - 1], next = i < 0 ? null : flat[i + 1];
         catui.mount(pager, catui.html`${prev ? catui.html`<a class="Catui_dk-pn" href="${prev.href}"><span>${catui.icon("arrow-left", 16)}이전</span><b>${prev.title}</b></a>` : catui.html`<span></span>`}${next ? catui.html`<a class="Catui_dk-pn Catui_dk-pn-next" href="${next.href}"><span>다음${catui.icon("arrow-right", 16)}</span><b>${next.title}</b></a>` : ""}`);
       }
+      if (page && location.hash) return new Promise((resolve) => requestAnimationFrame(() => {
+        if (docs._dead || !page.isConnected) return resolve(groups);
+        let anchor;
+        try { anchor = decodeURIComponent(location.hash.slice(1)); } catch { anchor = ""; }
+        const target = anchor && document.getElementById(anchor);
+        if (target && page.contains(target)) {
+          const head = root.querySelector(".Catui_dk-head");
+          const gap = parseFloat(getComputedStyle(page).getPropertyValue("--Catui_space-4")) || 0;
+          scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + scrollY - (head?.getBoundingClientRect().height || 0) - gap), behavior: "instant" });
+        }
+        resolve(groups);
+      }));
       return groups;
-    }, () => null);
+      }, () => {
+        if (docs._dead || !root.isConnected) return null;
+        if (page?.querySelector("[data-desc]")) page.querySelector("[data-desc]").textContent = "문서 정보를 불러오지 못했습니다.";
+        if (nav && nav !== content) nav.textContent = "문서 메뉴를 불러오지 못했습니다. 본문에서 다시 시도해 주세요.";
+        if (content) {
+          catui.mount(content, catui.html`<div class="Catui_empty" role="alert"><p class="Catui_empty-title">문서 정보를 불러오지 못했습니다</p><p class="Catui_empty-text">연결 상태를 확인하고 다시 시도해 주세요.</p><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-retry>다시 시도</button></div>`);
+          docs._on(content.querySelector("[data-retry]"), "click", (e) => { e.currentTarget.disabled = true; this.ready = load(); }, { once: true });
+        }
+        return null;
+      }).finally(() => content?.removeAttribute("aria-busy"));
+    };
+    this.ready = load();
   },
   /** pages.json 한 쪽 → 제목·수정일·편집 링크·본문 */
   drawPage(box, pg, id) {

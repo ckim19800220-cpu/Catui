@@ -231,7 +231,18 @@ docs.toc = function (article, box, { levels = docs.rules.tocLevels, title = "이
   const groups = [];
   for (const it of items) { if (it.level === top || !groups.length) groups.push({ it, kids: [] }); else groups[groups.length - 1].kids.push(it); }
   const link = (it) => catui.html`<a href="#${it.id}">${it.text}</a>`;
-  catui.mount(out, catui.html`<nav class="Catui_dk-toc" aria-label="${title}"><p class="Catui_dk-toc-t">${title}</p><ol>${groups.map((g) => catui.html`<li>${link(g.it)}${g.kids.length ? catui.html`<ol>${g.kids.map((k) => catui.html`<li>${link(k)}</li>`)}</ol>` : ""}</li>`)}</ol></nav>`);
+  const mobile = matchMedia("(max-width: 991px)");
+  const opened = out.querySelector("details")?.open ?? !mobile.matches;
+  catui.mount(out, catui.html`<details class="Catui_dk-toc"${opened ? catui.html` open` : ""}><summary class="Catui_dk-toc-t">${title}${catui.icon("chevron-down", 16)}</summary><nav aria-label="${title}"><ol>${groups.map((g) => catui.html`<li>${link(g.it)}${g.kids.length ? catui.html`<ol>${g.kids.map((k) => catui.html`<li>${link(k)}</li>`)}</ol>` : ""}</li>`)}</ol></nav></details>`);
+  if (out.closest(".Catui_dk-docs") && docs._once(out, "toc-layout")) {
+    const parent = out.parentElement, next = out.nextSibling;
+    const place = () => {
+      if (mobile.matches) art.querySelector(":scope > header")?.after(out);
+      else parent.insertBefore(out, next?.parentNode === parent ? next : art);
+    };
+    docs._on(mobile, "change", () => { place(); out.querySelector("details").open = !mobile.matches; });
+    place();
+  }
   const t = { items, links: [...out.querySelectorAll("a[href^='#']")], box: out };
   docs._tocs = docs._tocs.filter((x) => x.box !== out && x.box.isConnected).concat(t);
   if (docs._once(window, "spy")) {
@@ -381,7 +392,21 @@ docs.search = {
       docs._on(input, "input", (e) => { if (e.isComposing) return; clearTimeout(timer); timer = setTimeout(() => { if (index) run(); }, 120); });
       docs._on(input, "compositionend", () => { clearTimeout(timer); timer = setTimeout(() => { if (index) run(); }, 120); });
       docs._offs.push(() => clearTimeout(timer));
-      this.ready = this.load(root).then((ix) => { index = ix; this.index = ix; run(); return ix; }, () => null);
+      const load = () => {
+        if (list) list.setAttribute("aria-busy", "true");
+        if (count) count.textContent = "검색 데이터를 불러오는 중입니다…";
+        return this.load(root).then((ix) => {
+          index = ix; this.index = ix; run(); return ix;
+        }, () => {
+          if (count) count.textContent = "검색 데이터를 불러오지 못했습니다. 연결 상태를 확인하고 다시 시도해 주세요.";
+          if (list) {
+            catui.mount(list, catui.html`<li><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-retry>다시 시도</button></li>`);
+            docs._on(list.querySelector("[data-retry]"), "click", (e) => { e.currentTarget.disabled = true; this.ready = load(); }, { once: true });
+          }
+          return null;
+        }).finally(() => list?.removeAttribute("aria-busy"));
+      };
+      this.ready = load();
     });
   },
 };
@@ -402,7 +427,7 @@ const dkTags = (p) => (p.tagObjs?.length ? catui.html`<ul class="Catui_dk-tags" 
 
 docs.meta = (p) => catui.html`<p class="Catui_dk-meta"><a href="author.html?a=${encodeURIComponent(p.authorObj.id)}">${p.authorObj.name}</a><span aria-hidden="true">·</span><time datetime="${p.date}">${docs.date(p.date)}</time><span aria-hidden="true">·</span><span>${docs.postTime(p).label} 읽기</span></p>`;
 /** 글 카드 (글자는 모두 이스케이프) */
-docs.card = (p) => catui.html`<li class="Catui_dk-card"><a class="Catui_dk-card-link" href="post.html?id=${encodeURIComponent(p.id)}">${dkCover(p)}<span class="Catui_dk-card-b"><b class="Catui_dk-card-t">${p.title}</b><span class="Catui_dk-card-d">${p.summary || ""}</span></span></a>${docs.meta(p)}${dkTags(p)}</li>`;
+docs.card = (p, { cover = true } = {}) => catui.html`<li class="Catui_dk-card"><a class="Catui_dk-card-link" href="post.html?id=${encodeURIComponent(p.id)}">${cover ? dkCover(p) : ""}<span class="Catui_dk-card-b"><b class="Catui_dk-card-t">${p.title}</b><span class="Catui_dk-card-d">${p.summary || ""}</span></span></a>${docs.meta(p)}${dkTags(p)}</li>`;
 docs.empty = (title, text = "") => catui.html`<li class="Catui_dk-wide"><div class="Catui_empty">${catui.icon("file-search", 24)}<p class="Catui_empty-title">${title}</p>${text ? catui.html`<p class="Catui_empty-text">${text}</p>` : ""}</div></li>`;
 /** 쪽 이동 버튼 (현재 aria-current="page", 끝에서는 이전/다음 잠김) */
 docs.pager = (page, pages) => (pages > 1 ? catui.html`<button class="Catui_pg" type="button" data-page="${page - 1}" aria-label="이전 쪽" ${page <= 1 ? catui.html`disabled` : ""}>${catui.icon("chevron-left", 16)}</button>${Array.from({ length: pages }, (_, i) => i + 1).map((n) => catui.html`<button class="Catui_pg" type="button" data-page="${n}" aria-label="${n}쪽" ${n === page ? catui.html`aria-current="page"` : ""}>${n}</button>`)}<button class="Catui_pg" type="button" data-page="${page + 1}" aria-label="다음 쪽" ${page >= pages ? catui.html`disabled` : ""}>${catui.icon("chevron-right", 16)}</button>` : "");
@@ -426,7 +451,26 @@ docs.blogList = {
       else if (pg && !pg.disabled) this.go({ ...this.read(), page: Number(pg.dataset.page) }, `[data-page="${pg.dataset.page}"]`);
     });
     docs._on(window, "popstate", () => this.draw());
-    this.ready = docs.blog().then((d) => { this.d = d; this.draw(); return d; }, () => null);
+    const load = (retry = false) => {
+      box.setAttribute("aria-busy", "true");
+      this.d = null;
+      return docs.blog().then((d) => {
+        if (docs._dead) return null;
+        this.d = d; this.draw();
+        if (retry) box.querySelector('[data-tag][aria-pressed="true"]')?.focus({ preventScroll: true });
+        return d;
+      }).catch(() => {
+        if (docs._dead) return null;
+        const list = box.querySelector("[data-list]"), count = box.querySelector("[data-count]");
+        if (count) count.textContent = "글을 불러오지 못했습니다. 연결 상태를 확인하고 다시 시도해 주세요.";
+        if (list) {
+          catui.mount(list, catui.html`<li class="Catui_dk-wide"><div class="Catui_empty" role="alert"><p class="Catui_empty-title">블로그 글을 불러오지 못했습니다</p><p class="Catui_empty-text">연결 상태를 확인하고 다시 시도해 주세요. 선택한 태그와 페이지는 유지됩니다.</p><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-retry>다시 시도</button></div></li>`);
+          docs._on(list.querySelector("[data-retry]"), "click", (e) => { e.currentTarget.disabled = true; this.ready = load(true); }, { once: true });
+        }
+        return null;
+      }).finally(() => box.removeAttribute("aria-busy"));
+    };
+    this.ready = load();
   },
   /** 상태를 바꾸고 주소에 남긴다(뒤로 가기로 돌아올 수 있게) */
   go(state, focusSel) {
@@ -443,7 +487,7 @@ docs.blogList = {
     const chips = this.box.querySelector("[data-filter]"), list = this.box.querySelector("[data-list]"), pager = this.box.querySelector("[data-pager]"), count = this.box.querySelector("[data-count]");
     const chip = (id, name, n) => catui.html`<button class="Catui_dk-chip" type="button" data-tag="${id}" aria-pressed="${id === tag}">${id === tag ? catui.icon("check", 16) : ""}${name}<span class="Catui_dk-chip-n">${n}${dkClip("개")}</span></button>`;
     if (chips) catui.mount(chips, catui.html`${chip("", "전체", d.posts.length)}${d.tags.map((t) => chip(t.id, `#${t.name}`, d.count[t.id] || 0))}`);
-    if (list) catui.mount(list, v.rows.length ? catui.html`${v.rows.map((p) => docs.card(p))}` : docs.empty("이 태그의 글이 아직 없습니다"));
+    if (list) catui.mount(list, v.rows.length ? catui.html`${v.rows.map((p) => docs.card(p, { cover: !this.box.hasAttribute("data-catui-dk-text-only") }))}` : docs.empty("이 태그의 글이 아직 없습니다"));
     if (pager) { catui.mount(pager, docs.pager(v.page, v.pages)); pager.hidden = v.pages <= 1; }
     if (count) count.textContent = `${tag ? `#${d.T[tag].name} ` : ""}글 ${v.total}개 · ${v.page}/${v.pages}쪽`;
     if (focusSel) {
@@ -585,6 +629,18 @@ docs.readTimeFill = function (scope = document) {
 
 docs.shell = {
   init(root) {
+    const topnav = root.querySelector(".Catui_dk-nav");
+    if (topnav && docs._once(topnav, "current-visible")) {
+      const layout = () => {
+        const active = topnav.querySelector('[aria-current="page"]');
+        if (!active) return;
+        const outer = topnav.getBoundingClientRect(), item = active.getBoundingClientRect();
+        if (item.left < outer.left) topnav.scrollLeft += item.left - outer.left;
+        else if (item.right > outer.right) topnav.scrollLeft += item.right - outer.right;
+      };
+      docs._on(window, "resize", layout);
+      layout();
+    }
     if (docs._once(root, "cover-error")) docs._on(root, "error", (e) => { if (e.target.matches?.(".Catui_dk-cover img")) e.target.hidden = true; }, true);
     // 좁은 화면은 메뉴를 접어서 시작 (스크립트가 없으면 펼친 그대로)
     root.querySelectorAll("details.Catui_dk-side").forEach((d) => { d.open = !matchMedia("(max-width: 991px)").matches; });
@@ -593,8 +649,17 @@ docs.shell = {
     docs.readTimeFill(root);
     const nav = root.querySelector("[data-catui-dk-nav]"), pager = root.querySelector("[data-catui-dk-pager]"), page = root.querySelector("[data-catui-dk-page]");
     if (!nav && !pager && !page) return;
-    this.ready = Promise.all([docs.data("nav"), page ? docs.data("pages") : null]).then(([groups, pages]) => {
+    const content = page?.querySelector("[data-body]") || nav;
+    const footer = page ? [...page.querySelectorAll(".Catui_dk-doc-f, [data-catui-dk-feedback]")] : [];
+    const load = () => {
+      if (docs._dead || !root.isConnected) return Promise.resolve(null);
+      content?.setAttribute("aria-busy", "true");
+      footer.forEach((el) => { el.hidden = true; });
+      if (page?.querySelector("[data-desc]")) page.querySelector("[data-desc]").textContent = "문서 정보를 불러오는 중입니다…";
+      return Promise.all([docs.data("nav"), page ? docs.data("pages") : null]).then(([groups, pages]) => {
+      if (docs._dead || !root.isConnected) return null;
       const flat = groups.flatMap((g) => g.items);
+      footer.forEach((el) => { el.hidden = false; });
       let key = docs.pageKey();
       if (page) {
         const id = pages[docs.query().get("p")] ? docs.query().get("p") : page.getAttribute("data-catui-dk-page");
@@ -606,8 +671,31 @@ docs.shell = {
         const i = flat.findIndex((it) => docs.pageKey(it.href) === key), prev = flat[i - 1], next = i < 0 ? null : flat[i + 1];
         catui.mount(pager, catui.html`${prev ? catui.html`<a class="Catui_dk-pn" href="${prev.href}"><span>${catui.icon("arrow-left", 16)}이전</span><b>${prev.title}</b></a>` : catui.html`<span></span>`}${next ? catui.html`<a class="Catui_dk-pn Catui_dk-pn-next" href="${next.href}"><span>다음${catui.icon("arrow-right", 16)}</span><b>${next.title}</b></a>` : ""}`);
       }
+      if (page && location.hash) return new Promise((resolve) => requestAnimationFrame(() => {
+        if (docs._dead || !page.isConnected) return resolve(groups);
+        let anchor;
+        try { anchor = decodeURIComponent(location.hash.slice(1)); } catch { anchor = ""; }
+        const target = anchor && document.getElementById(anchor);
+        if (target && page.contains(target)) {
+          const head = root.querySelector(".Catui_dk-head");
+          const gap = parseFloat(getComputedStyle(page).getPropertyValue("--Catui_space-4")) || 0;
+          scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + scrollY - (head?.getBoundingClientRect().height || 0) - gap), behavior: "instant" });
+        }
+        resolve(groups);
+      }));
       return groups;
-    }, () => null);
+      }, () => {
+        if (docs._dead || !root.isConnected) return null;
+        if (page?.querySelector("[data-desc]")) page.querySelector("[data-desc]").textContent = "문서 정보를 불러오지 못했습니다.";
+        if (nav && nav !== content) nav.textContent = "문서 메뉴를 불러오지 못했습니다. 본문에서 다시 시도해 주세요.";
+        if (content) {
+          catui.mount(content, catui.html`<div class="Catui_empty" role="alert"><p class="Catui_empty-title">문서 정보를 불러오지 못했습니다</p><p class="Catui_empty-text">연결 상태를 확인하고 다시 시도해 주세요.</p><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-retry>다시 시도</button></div>`);
+          docs._on(content.querySelector("[data-retry]"), "click", (e) => { e.currentTarget.disabled = true; this.ready = load(); }, { once: true });
+        }
+        return null;
+      }).finally(() => content?.removeAttribute("aria-busy"));
+    };
+    this.ready = load();
   },
   /** pages.json 한 쪽 → 제목·수정일·편집 링크·본문 */
   drawPage(box, pg, id) {

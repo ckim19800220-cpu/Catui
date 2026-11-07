@@ -1,4 +1,9 @@
 {
+  "workshop": {
+    "title": "워크숍 지정 좌석", "stage": "실습 화면", "unit": "석",
+    "rows": [{ "id": "A", "cells": "ssss" }, { "id": "B", "cells": "ss_ss" }, { "id": "C", "cells": "ww_ss" }],
+    "grades": [{ "id": "일반", "price": 29000, "rows": ["A", "B", "C"] }]
+  },
   "hall": {
     "title": "캣아트홀 1층",
     "stage": "무대",

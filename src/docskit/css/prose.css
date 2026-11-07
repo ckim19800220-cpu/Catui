@@ -26,8 +26,10 @@
 @media (hover:none){.Catui_dk-anchor{opacity:1}}
 
 /* 목차 */
-.Catui_dk-toc{display:grid;gap:var(--Catui_space-2);font-size:var(--Catui_type-caption-size)}
-.Catui_dk-toc-t{margin:0;font-weight:700;color:var(--Catui_color-text-primary)}
+.Catui_dk-toc{font-size:var(--Catui_type-caption-size)}
+.Catui_dk-toc-t{display:flex;align-items:center;justify-content:space-between;gap:var(--Catui_space-2);min-height:var(--Catui_control-h-md);margin:0;font-weight:700;color:var(--Catui_color-text-primary);cursor:pointer;list-style:none}
+.Catui_dk-toc-t::-webkit-details-marker{display:none}
+.Catui_dk-toc[open] > nav{margin-top:var(--Catui_space-2)}
 .Catui_dk-toc ol{margin:0;padding:0;list-style:none;display:grid;gap:2px}
 .Catui_dk-toc ol ol{padding-left:var(--Catui_space-3)}
 .Catui_dk-toc a{display:block;padding:var(--Catui_space-1) var(--Catui_space-2);border-left:var(--Catui_tab-indicator-w) solid var(--Catui_line);text-decoration:none;color:var(--Catui_dk-muted);line-height:1.4}

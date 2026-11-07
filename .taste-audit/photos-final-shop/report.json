@@ -1,0 +1,1582 @@
+{
+ "url": "docs/shop/templates/index.html",
+ "at": "2026-11-07T06:46:51.973Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.54,
+    0.51,
+    0.49,
+    0.52
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 3022,
+     "screens": 3.4,
+     "words": 486,
+     "img": 27,
+     "video": 0,
+     "canvas": 0,
+     "svg": 149,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 23,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "home.jpg",
+      "autumn.jpg",
+      "fresh.jpg",
+      "home.jpg",
+      "autumn.jpg",
+      "bedroom.jpg",
+      "coat.jpg",
+      "yoga.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Catui 쇼핑 홈",
+     "words": 3,
+     "chars": 10,
+     "lines": 1,
+     "size": 26,
+     "vw": 1.8,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": 0,
+     "leading": 1.55,
+     "top": 137,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Catui 쇼핑 홈",
+     "words": 3,
+     "lines": 1,
+     "size": 26,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "포근한 겨울 집",
+      "words": 3,
+      "chars": 8,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.4,
+      "top": 247,
+      "tag": "b",
+      "kind": "heading"
+     },
+     {
+      "text": "가을 옷장 정리전",
+      "words": 3,
+      "chars": 9,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.4,
+      "top": 247,
+      "tag": "b",
+      "kind": "heading"
+     },
+     {
+      "text": "산지 직송 제철 먹거리",
+      "words": 4,
+      "chars": 12,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.4,
+      "top": 247,
+      "tag": "b",
+      "kind": "heading"
+     },
+     {
+      "text": "포근한 겨울 집",
+      "words": 3,
+      "chars": 8,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.4,
+      "top": 247,
+      "tag": "b",
+      "kind": "heading"
+     },
+     {
+      "text": "가을 옷장 정리전",
+      "words": 3,
+      "chars": 9,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.4,
+      "top": 247,
+      "tag": "b",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 5,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 1,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      30
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 197,
+     "max": {
+      "size": 30,
+      "vw": 2.1,
+      "font": "Inter",
+      "text": "포근한 겨울 집"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.05,
+     "centerShare": 0,
+     "smallText": 15
+    },
+    "eyebrows": [
+     {
+      "text": "11월 15일까지",
+      "above": "포근한 겨울 집",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 221
+     },
+     {
+      "text": "11월 9일까지",
+      "above": "가을 옷장 정리전",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 221
+     },
+     {
+      "text": "11월 5일까지",
+      "above": "산지 직송 제철 먹거리",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 221
+     },
+     {
+      "text": "11월 15일까지",
+      "above": "포근한 겨울 집",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 221
+     },
+     {
+      "text": "11월 9일까지",
+      "above": "가을 옷장 정리전",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 221
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.44
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.37
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.09
+      },
+      {
+       "color": "#c0392b",
+       "share": 0.07
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 4,
+     "height": 34,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 3,
+     "hairlineSamples": [
+      "header.Catui_sh-head 1440px",
+      "nav.Catui_sh-gnb 1440px",
+      "footer.Catui_sh-foot 1440px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 27,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 23,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.11
+     }
+    ],
+    "nav": {
+     "links": 15,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 3022,
+    "margins": {
+     "left": 128,
+     "right": 136
+    },
+    "sections": [
+     {
+      "sel": "div.Catui_carousel.Catui_sh-heroes",
+      "tag": "div",
+      "top": 138,
+      "height": 296,
+      "words": 12,
+      "media": 5,
+      "middle": 2922,
+      "heading": {
+       "text": "가을 옷장 정리전",
+       "size": 30,
+       "tag": "b"
+      },
+      "left": 0,
+      "right": 0,
+      "textLeft": 160,
+      "textRight": 660,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 520,
+      "height": 148,
+      "words": 11,
+      "media": 0,
+      "middle": 126,
+      "heading": {
+       "text": "카테고리",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 128,
+      "right": 146,
+      "textLeft": 128,
+      "textRight": 146,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 688,
+      "height": 387,
+      "words": 52,
+      "media": 4,
+      "middle": 165,
+      "heading": {
+       "text": "오늘의 특가",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 128,
+      "right": 128,
+      "textLeft": 128,
+      "textRight": 128,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 1095,
+      "height": 187,
+      "words": 35,
+      "media": 0,
+      "middle": 56,
+      "heading": {
+       "text": "기획전",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 128,
+      "right": 148,
+      "textLeft": 128,
+      "textRight": 280,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 1302,
+      "height": 745,
+      "words": 80,
+      "media": 6,
+      "middle": 16,
+      "heading": {
+       "text": "베스트",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 128,
+      "right": 128,
+      "textLeft": 128,
+      "textRight": 146,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 2067,
+      "height": 761,
+      "words": 92,
+      "media": 8,
+      "middle": 16,
+      "heading": {
+       "text": "새로 들어왔어요",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 128,
+      "right": 128,
+      "textLeft": 128,
+      "textRight": 146,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_sh-foot",
+      "tag": "footer",
+      "top": 2848,
+      "height": 174,
+      "words": 91,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 128,
+      "right": 141,
+      "textLeft": 128,
+      "textRight": 141,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 128,
+      "n": 5
+     }
+    ],
+    "leftBlocks": 5,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.07,
+    "voidBox": {
+     "x": 1320,
+     "y": 120,
+     "w": 120,
+     "h": 780
+    }
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": false,
+    "ground": "#f7f8fa",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 128,
+     "right": -28
+    },
+    "hero": {
+     "text": "Catui 쇼핑 홈",
+     "words": 3,
+     "chars": 10,
+     "lines": 1,
+     "size": 26,
+     "vw": 1.8,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": 0,
+     "leading": 1.55,
+     "top": 137,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 3,
+     "firstScreen": 0,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 3,
+     "radii": [
+      [
+       6,
+       3
+      ]
+     ],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 17,
+     "tabularShare": 0.94,
+     "kpiMax": 12
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.59,
+     "tiny": 2,
+     "tinySamples": [
+      "개 담김 10px",
+      "개 담김 10px"
+     ],
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      26,
+      30
+     ]
+    },
+    "title": {
+     "text": "Catui 쇼핑 홈",
+     "size": 26,
+     "top": 137
+    },
+    "colourShare": 0.011
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 320,
+   "height": 200,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.37,
+    0.51,
+    0.5,
+    0.37,
+    0.45,
+    0.52,
+    0.45,
+    0.55,
+    0.47,
+    0.45,
+    0.49,
+    0.46
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 0,
+    "transitions": 1,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "page": {
+     "height": 4750,
+     "screens": 23.8,
+     "words": 491,
+     "img": 27,
+     "video": 0,
+     "canvas": 0,
+     "svg": 149,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 20,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "home.jpg",
+      "autumn.jpg",
+      "fresh.jpg",
+      "home.jpg",
+      "autumn.jpg",
+      "bedroom.jpg",
+      "coat.jpg",
+      "yoga.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 2,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Catui 쇼핑 홈",
+     "words": 3,
+     "chars": 10,
+     "lines": 1,
+     "size": 26,
+     "vw": 8.1,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": 0,
+     "leading": 1.55,
+     "top": 133,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Catui 쇼핑 홈",
+     "words": 3,
+     "lines": 1,
+     "size": 26,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "포근한 겨울 집",
+      "words": 3,
+      "chars": 8,
+      "lines": 2,
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.4,
+      "top": 222,
+      "tag": "b",
+      "kind": "heading"
+     },
+     {
+      "text": "가을 옷장 정리전",
+      "words": 3,
+      "chars": 9,
+      "lines": 2,
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.4,
+      "top": 222,
+      "tag": "b",
+      "kind": "heading"
+     },
+     {
+      "text": "포근한 겨울 집",
+      "words": 3,
+      "chars": 8,
+      "lines": 2,
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.4,
+      "top": 222,
+      "tag": "b",
+      "kind": "heading"
+     },
+     {
+      "text": "가을 옷장 정리전",
+      "words": 3,
+      "chars": 9,
+      "lines": 2,
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.4,
+      "top": 222,
+      "tag": "b",
+      "kind": "heading"
+     },
+     {
+      "text": "산지 직송 제철 먹거리",
+      "words": 4,
+      "chars": 12,
+      "lines": 2,
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.4,
+      "top": 232,
+      "tag": "b",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 5,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 1,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      24
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 48,
+     "max": {
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "text": "포근한 겨울 집"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.05,
+     "centerShare": 0,
+     "smallText": 15
+    },
+    "eyebrows": [
+     {
+      "text": "11월 15일까지",
+      "above": "포근한 겨울 집",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 196
+     },
+     {
+      "text": "11월 9일까지",
+      "above": "가을 옷장 정리전",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 196
+     },
+     {
+      "text": "11월 15일까지",
+      "above": "포근한 겨울 집",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 196
+     },
+     {
+      "text": "11월 9일까지",
+      "above": "가을 옷장 정리전",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 196
+     },
+     {
+      "text": "11월 5일까지",
+      "above": "산지 직송 제철 먹거리",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 206
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      },
+      {
+       "color": "#fafbfc",
+       "top": 134,
+       "hsl": {
+        "h": 210,
+        "s": 0.25,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 446,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#f5ebf8",
+       "top": 1532,
+       "hsl": {
+        "h": 286,
+        "s": 0.48,
+        "l": 0.95
+       }
+      },
+      {
+       "color": "#fef7e0",
+       "top": 1702,
+       "hsl": {
+        "h": 46,
+        "s": 0.94,
+        "l": 0.94
+       }
+      },
+      {
+       "color": "#e6f7f3",
+       "top": 1871,
+       "hsl": {
+        "h": 166,
+        "s": 0.52,
+        "l": 0.94
+       }
+      },
+      {
+       "color": "#eaf4fb",
+       "top": 2041,
+       "hsl": {
+        "h": 205,
+        "s": 0.68,
+        "l": 0.95
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.45
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.37
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.08
+      },
+      {
+       "color": "#c0392b",
+       "share": 0.07
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 4,
+     "height": 34,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 4,
+     "hairlineSamples": [
+      "header.Catui_sh-head 320px",
+      "nav.Catui_sh-gnb 320px",
+      "footer.Catui_sh-foot 320px",
+      "nav.Catui_sh-tabs 320px"
+     ],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 10,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.14
+     }
+    ],
+    "nav": {
+     "links": 16,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "pageH": 4750,
+    "margins": {
+     "left": 12,
+     "right": 12
+    },
+    "sections": [
+     {
+      "sel": "div.Catui_carousel.Catui_sh-heroes",
+      "tag": "div",
+      "top": 134,
+      "height": 296,
+      "words": 11,
+      "media": 5,
+      "middle": 469,
+      "heading": {
+       "text": "산지 직송 제철 먹거리",
+       "size": 24,
+       "tag": "b"
+      },
+      "left": 0,
+      "right": 0,
+      "textLeft": 28,
+      "textRight": 100,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "ul.Catui_sh-perks",
+      "tag": "ul",
+      "top": 446,
+      "height": 142,
+      "words": 18,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 57,
+      "right": 120,
+      "textLeft": 57,
+      "textRight": 120,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 604,
+      "height": 252,
+      "words": 11,
+      "media": 0,
+      "middle": 41,
+      "heading": {
+       "text": "카테고리",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 12,
+      "right": 21,
+      "textLeft": 12,
+      "textRight": 21,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 872,
+      "height": 611,
+      "words": 52,
+      "media": 4,
+      "middle": 16,
+      "heading": {
+       "text": "오늘의 특가",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 12,
+      "right": 12,
+      "textLeft": 12,
+      "textRight": 12,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 1499,
+      "height": 695,
+      "words": 35,
+      "media": 0,
+      "middle": 28,
+      "heading": {
+       "text": "기획전",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 12,
+      "right": 32,
+      "textLeft": 12,
+      "textRight": 140,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 2210,
+      "height": 966,
+      "words": 80,
+      "media": 6,
+      "middle": 16,
+      "heading": {
+       "text": "베스트",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 12,
+      "right": 12,
+      "textLeft": 12,
+      "textRight": 16,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_sh-sec",
+      "tag": "section",
+      "top": 3192,
+      "height": 1237,
+      "words": 92,
+      "media": 8,
+      "middle": 16,
+      "heading": {
+       "text": "새로 들어왔어요",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 12,
+      "right": 12,
+      "textLeft": 12,
+      "textRight": 15,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_sh-foot",
+      "tag": "footer",
+      "top": 4445,
+      "height": 248,
+      "words": 64,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 25,
+      "textLeft": 16,
+      "textRight": 25,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [],
+    "edgeText": [
+     {
+      "text": "카테고리",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "오늘의 특가",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "13:59:59 남음",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "포근한방",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "호텔식 구스다운 이불",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "40%",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "159,000원",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "숨고르기",
+      "side": "left",
+      "px": 12
+     }
+    ],
+    "edges": [
+     {
+      "x": 12,
+      "n": 5
+     }
+    ],
+    "leftBlocks": 5,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "dark": false,
+    "ground": "#f7f8fa",
+    "sidebar": null,
+    "topbar": {
+     "h": 72
+    },
+    "canvas": {
+     "left": 11,
+     "right": -130
+    },
+    "hero": {
+     "text": "Catui 쇼핑 홈",
+     "words": 3,
+     "chars": 10,
+     "lines": 1,
+     "size": 26,
+     "vw": 8.1,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": 0,
+     "leading": 1.55,
+     "top": 133,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 4,
+     "firstScreen": 0,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 4,
+     "radii": [
+      [
+       6,
+       4
+      ]
+     ],
+     "heavyBorders": 1,
+     "borderSamples": [
+      "#2a404e on #ffffff (10.81:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 2,
+     "hues": 2,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      },
+      {
+       "hue": 210,
+       "size": 28,
+       "radius": "4px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 17,
+     "tabularShare": 0.94,
+     "kpiMax": 12
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.59,
+     "tiny": 2,
+     "tinySamples": [
+      "개 담김 10px",
+      "개 담김 10px"
+     ],
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      24,
+      26
+     ]
+    },
+    "title": {
+     "text": "Catui 쇼핑 홈",
+     "size": 26,
+     "top": 133
+    },
+    "colourShare": 0.014
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "palette-terracotta",
+   "width": 1440,
+   "message": "Terracotta / rust-orange accent (text #c0392b).",
+   "fix": "Use the accent from the drawn palette."
+  },
+  {
+   "level": "WARN",
+   "id": "tiny-text",
+   "width": 1440,
+   "message": "59% of the text is under 13px.",
+   "fix": "Data and labels read at 13–14px; keep 11–12px for sublines and axis ticks.",
+   "alsoAt": [
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "palette-claude",
+   "width": 320,
+   "message": "Cream + terracotta palette (section #fef7e0, text #c0392b).",
+   "fix": "Re-draw the palette from the library. This pairing reads as an assistant brand, not yours."
+  },
+  {
+   "level": "WARN",
+   "id": "edge-text",
+   "width": 320,
+   "message": "8 text block(s) sit 12–15px from the phone's edge: \"카테고리\" (12px); \"오늘의 특가\" (12px); \"13:59:59 남음\" (12px)",
+   "fix": "The page margin is 16–20px on a phone; the header and the corner labels sit on it too."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\photos-final-shop\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\photos-final-shop\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 320,
+   "fold": "D:\\Catui_design\\.taste-audit\\photos-final-shop\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\photos-final-shop\\mobile-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\photos-final-shop\\mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

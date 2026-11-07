@@ -9,7 +9,7 @@ community.list = {
   mount(box) {
     const kind = box.getAttribute("data-catui-cm-list"), size = Number(box.dataset.size || 20);
     community.load().then((d) => {
-      const draw = (push) => {
+      const draw = (focus) => {
         const q = community.query(), bid = q.get("b") || box.dataset.board || (kind === "hot" ? "" : "free");
         const b = d.B[bid], cat = q.get("cat") || "", sort = CM_SORTS[q.get("sort")] ? q.get("sort") : kind === "hot" ? "hot" : "new";
         let rows = kind === "hot" ? d.posts.filter((p) => p.hot) : d.posts.filter((p) => p.board === bid);
@@ -37,15 +37,16 @@ community.list = {
           ${body}
           ${pages > 1 ? catui.html`<nav class="Catui_pager" aria-label="페이지">${page > 1 ? catui.html`<a class="Catui_pg" href="${link({ page: page - 1 })}" aria-label="이전 페이지">${catui.icon("chevron-left", 16)}</a>` : ""}${Array.from({ length: pages }, (_, i) => i + 1).map((n) => catui.html`<a class="Catui_pg${n === page ? " Catui_pg-active" : ""}" href="${link({ page: n > 1 ? n : "" })}"${n === page ? catui.html` aria-current="page"` : ""}>${n}</a>`)}${page < pages ? catui.html`<a class="Catui_pg" href="${link({ page: page + 1 })}" aria-label="다음 페이지">${catui.icon("chevron-right", 16)}</a>` : ""}</nav>` : ""}`);
         community.widgets.tick(box);
-        if (push) box.querySelector("h1")?.focus?.();
+        if (focus) box.querySelector(focus)?.focus({ preventScroll: true });
       };
       // 말머리·정렬·페이지는 새로 읽지 않고 주소만 바꿔 다시 그린다(뒤로 가기 지원)
       community._on(box, "click", (e) => {
         const a = e.target.closest(".Catui_cm-cats a, .Catui_cm-sort a, .Catui_pager a");
-        if (!a || e.ctrlKey || e.metaKey) return;
+        if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button) return;
         e.preventDefault();
+        const group = a.closest(".Catui_cm-cats") ? ".Catui_cm-cats" : a.closest(".Catui_cm-sort") ? ".Catui_cm-sort" : ".Catui_pager";
         history.pushState(null, "", a.getAttribute("href"));
-        draw(true);
+        draw(`${group} a[aria-current="page"]`);
         box.scrollIntoView({ block: "start", behavior: "auto" });
       });
       community._on(window, "popstate", () => draw(false));

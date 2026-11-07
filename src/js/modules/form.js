@@ -224,6 +224,28 @@ export const form = (() => {
   // 전역 위임 (catui.init에서 1회 연결)
   function bind() {
     const offs = [];
+    const passwordState = (button, show) => {
+      const input = document.getElementById(button.getAttribute("data-catui-password-toggle"));
+      if (!(input instanceof HTMLInputElement) || input.form !== button.form || !/^(password|text)$/.test(input.type)) return;
+      input.type = show ? "text" : "password";
+      button.setAttribute("aria-pressed", String(show));
+      button.setAttribute("aria-label", show ? "비밀번호 숨기기" : "비밀번호 보기");
+      const label = button.querySelector("[data-catui-password-label]");
+      if (label) label.textContent = show ? "숨기기" : "보기";
+    };
+    const onPassword = (e) => {
+      const button = e.target.closest?.("button[data-catui-password-toggle]");
+      if (!button || button.disabled) return;
+      e.preventDefault();
+      passwordState(button, button.getAttribute("aria-pressed") !== "true");
+    };
+    const hidePasswords = (root = document) => root.querySelectorAll('button[data-catui-password-toggle][aria-pressed="true"]').forEach((b) => passwordState(b, false));
+    const onReset = (e) => queueMicrotask(() => { if (!e.defaultPrevented && e.target instanceof HTMLFormElement) hidePasswords(e.target); });
+    const onVisibility = () => { if (document.hidden) hidePasswords(); };
+    document.addEventListener("click", onPassword);
+    document.addEventListener("reset", onReset);
+    document.addEventListener("visibilitychange", onVisibility);
+    offs.push(() => { document.removeEventListener("click", onPassword); document.removeEventListener("reset", onReset); document.removeEventListener("visibilitychange", onVisibility); hidePasswords(); });
     const onSubmit = (e) => {
       const f = e.target;
       if (!(f instanceof HTMLFormElement) || !f.matches("[data-catui-form]")) return;

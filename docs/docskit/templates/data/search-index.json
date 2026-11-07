@@ -1,21 +1,212 @@
 [
-  { "t": "소개", "u": "doc.html?p=intro", "s": "문서 · 시작하기", "x": "Catui는 한국어 화면을 위한 토큰 기반 UI 키트입니다.", "k": "개요 처음" },
-  { "t": "5분 만에 시작하기", "u": "guide.html", "s": "문서 · 시작하기", "x": "설치, 불러오기, 셸 마크업, 스크립트 네 단계.", "k": "빠른 시작 설치" },
-  { "t": "설치와 파일 구조", "u": "doc.html?p=install", "s": "문서 · 시작하기", "x": "배포 파일과 불러오는 순서.", "k": "npm cdn 배포" },
-  { "t": "토큰과 테마", "u": "doc.html?p=theme", "s": "문서 · 개념", "x": "색·간격은 토큰, 어두운 화면은 속성 한 줄.", "k": "다크 모드 테마 잠금" },
-  { "t": "다크 모드", "u": "doc.html?p=theme#다크-모드", "s": "문서 · 개념", "x": "data-catui-theme=\"dark\" 한 줄로 바뀝니다.", "k": "어두운 화면 theme" },
-  { "t": "접근성 기준", "u": "doc.html?p=a11y", "s": "문서 · 개념", "x": "색만으로 알리지 않기, 키보드, 320px 리플로.", "k": "a11y wcag 대비" },
-  { "t": "목차 자동 생성", "u": "api.html#api-toc", "s": "API", "x": "docs.toc(article, box) — h2·h3를 모아 목차 링크를 만듭니다.", "k": "toc 스크롤 현재 위치" },
-  { "t": "문서 검색", "u": "api.html#api-search", "s": "API", "x": "docs.search.find(index, q) — 초성 검색, 점수 순.", "k": "search 초성" },
-  { "t": "읽는 시간 계산", "u": "api.html#api-readtime", "s": "API", "x": "docs.readTime(text) — 한글 분당 500자, 단어 분당 200개.", "k": "read time 분" },
-  { "t": "코드 복사 버튼", "u": "guide.html#load", "s": "문서 · 시작하기", "x": "코드 블록마다 복사 버튼이 붙습니다.", "k": "copy 클립보드" },
-  { "t": "변경 이력", "u": "changelog.html", "s": "참조", "x": "버전마다 추가·변경·고침.", "k": "릴리스 changelog" },
-  { "t": "마이그레이션 가이드", "u": "versions.html", "s": "버전", "x": "1.x → 2.0 → 2.1로 올리는 순서.", "k": "버전 업그레이드" },
-  { "t": "Catui 2.1 — 확장 키트 네 가지", "u": "post.html?id=catui-2-1", "s": "블로그", "x": "관리자·커뮤니티·쇼핑몰·문서 키트.", "k": "릴리스" },
-  { "t": "한글 조합 중 Enter가 폼을 보내는 문제", "u": "post.html?id=ime-enter", "s": "블로그", "x": "catui.imeBusy로 확정 Enter를 막습니다.", "k": "입력기 ime" },
-  { "t": "목차가 스크롤을 따라가게 만들기", "u": "post.html?id=toc-spy", "s": "블로그", "x": "화면 위 30% 선을 지난 마지막 제목.", "k": "toc" },
-  { "t": "어두운 화면에서도 대비 4.5:1 지키기", "u": "post.html?id=contrast", "s": "블로그", "x": "토큰 두 벌로 대비 실측.", "k": "다크 모드 접근성" },
-  { "t": "한국어 줄바꿈: keep-all과 anywhere", "u": "post.html?id=line-break", "s": "블로그", "x": "낱말을 자르지 않고 넘치지도 않게.", "k": "word-break" },
-  { "t": "코드 복사 버튼, 비보안 주소에서도", "u": "post.html?id=copy-button", "s": "블로그", "x": "catui.util.copy의 대체 경로.", "k": "클립보드" },
-  { "t": "화면 낭독기로 문서를 읽어 보니", "u": "post.html?id=screen-reader", "s": "블로그", "x": "숨김 글자와 nav 이름.", "k": "접근성 스크린리더" }
+  {
+    "t": "소개",
+    "u": "doc.html?p=intro",
+    "s": "문서 · 시작하기",
+    "x": "Catui는 한국어 화면을 위한 토큰 기반 UI 키트입니다.",
+    "k": "개요 처음"
+  },
+  {
+    "t": "5분 만에 시작하기",
+    "u": "guide.html",
+    "s": "문서 · 시작하기",
+    "x": "설치, 불러오기, 셸 마크업, 스크립트 네 단계.",
+    "k": "빠른 시작 설치"
+  },
+  {
+    "t": "설치와 파일 구조",
+    "u": "doc.html?p=install",
+    "s": "문서 · 시작하기",
+    "x": "배포 파일과 불러오는 순서.",
+    "k": "npm cdn 배포"
+  },
+  {
+    "t": "토큰과 테마",
+    "u": "doc.html?p=theme",
+    "s": "문서 · 개념",
+    "x": "색·간격은 토큰, 어두운 화면은 속성 한 줄.",
+    "k": "다크 모드 테마 잠금"
+  },
+  {
+    "t": "다크 모드",
+    "u": "doc.html?p=theme#다크-모드",
+    "s": "문서 · 개념",
+    "x": "data-catui-theme=\"dark\" 한 줄로 바뀝니다. `<html data-catui-theme=\"dark\">`만 주면 모든 컴포넌트가 따라옵니다. 머리의 달 모양 버튼이 이 값을 바꾸고 기억합니다.",
+    "k": "어두운 화면 theme"
+  },
+  {
+    "t": "접근성 기준",
+    "u": "doc.html?p=a11y",
+    "s": "문서 · 개념",
+    "x": "색만으로 알리지 않기, 키보드, 320px 리플로.",
+    "k": "a11y wcag 대비"
+  },
+  {
+    "t": "목차 자동 생성",
+    "u": "api.html#api-toc",
+    "s": "API",
+    "x": "docs.toc(article, box) — h2·h3를 모아 목차 링크를 만듭니다.",
+    "k": "toc 스크롤 현재 위치"
+  },
+  {
+    "t": "문서 검색",
+    "u": "api.html#api-search",
+    "s": "API",
+    "x": "docs.search.find(index, q) — 초성 검색, 점수 순.",
+    "k": "search 초성"
+  },
+  {
+    "t": "읽는 시간 계산",
+    "u": "api.html#api-readtime",
+    "s": "API",
+    "x": "docs.readTime(text) — 한글 분당 500자, 단어 분당 200개.",
+    "k": "read time 분"
+  },
+  {
+    "t": "코드 복사 버튼",
+    "u": "guide.html#load",
+    "s": "문서 · 시작하기",
+    "x": "코드 블록마다 복사 버튼이 붙습니다.",
+    "k": "copy 클립보드"
+  },
+  {
+    "t": "변경 이력",
+    "u": "changelog.html",
+    "s": "참조",
+    "x": "버전마다 추가·변경·고침.",
+    "k": "릴리스 changelog"
+  },
+  {
+    "t": "마이그레이션 가이드",
+    "u": "versions.html",
+    "s": "버전",
+    "x": "1.x → 2.0 → 2.1로 올리는 순서.",
+    "k": "버전 업그레이드"
+  },
+  {
+    "t": "Catui 2.1 — 확장 키트 네 가지",
+    "u": "post.html?id=catui-2-1",
+    "s": "블로그",
+    "x": "관리자·커뮤니티·쇼핑몰·문서 키트.",
+    "k": "릴리스"
+  },
+  {
+    "t": "한글 조합 중 Enter가 폼을 보내는 문제",
+    "u": "post.html?id=ime-enter",
+    "s": "블로그",
+    "x": "catui.imeBusy로 확정 Enter를 막습니다.",
+    "k": "입력기 ime"
+  },
+  {
+    "t": "목차가 스크롤을 따라가게 만들기",
+    "u": "post.html?id=toc-spy",
+    "s": "블로그",
+    "x": "화면 위 30% 선을 지난 마지막 제목.",
+    "k": "toc"
+  },
+  {
+    "t": "어두운 화면에서도 대비 4.5:1 지키기",
+    "u": "post.html?id=contrast",
+    "s": "블로그",
+    "x": "토큰 두 벌로 대비 실측.",
+    "k": "다크 모드 접근성"
+  },
+  {
+    "t": "한국어 줄바꿈: keep-all과 anywhere",
+    "u": "post.html?id=line-break",
+    "s": "블로그",
+    "x": "낱말을 자르지 않고 넘치지도 않게.",
+    "k": "word-break"
+  },
+  {
+    "t": "코드 복사 버튼, 비보안 주소에서도",
+    "u": "post.html?id=copy-button",
+    "s": "블로그",
+    "x": "catui.util.copy의 대체 경로.",
+    "k": "클립보드"
+  },
+  {
+    "t": "화면 낭독기로 문서를 읽어 보니",
+    "u": "post.html?id=screen-reader",
+    "s": "블로그",
+    "x": "숨김 글자와 nav 이름.",
+    "k": "접근성 스크린리더"
+  },
+  {
+    "t": "소개 · Catui는",
+    "u": "doc.html?p=intro#catui는",
+    "s": "문서 · 시작하기",
+    "x": "**한국어 화면**을 위한 토큰 기반 UI 키트입니다. CSS만으로 동작하는 컴포넌트와 의존성 없는 `catui.js`로 이루어져 있습니다. 토큰(`--Catui_*`)만 참조하는 컴포넌트 포커스 표시·키보드 조작·모션 줄이기를 기본으로 관리자·커뮤니티·쇼핑몰·문서 사이트 확장",
+    "k": "Catui는"
+  },
+  {
+    "t": "소개 · 누가 쓰나요",
+    "u": "doc.html?p=intro#누가-쓰나요",
+    "s": "문서 · 시작하기",
+    "x": "사내 관리 화면, 공공 서비스 안내 쪽, 제품 문서처럼 글이 많고 접근성이 중요한 화면에 맞습니다.",
+    "k": "누가 쓰나요"
+  },
+  {
+    "t": "소개 · 다음에 읽을 것",
+    "u": "doc.html?p=intro#다음에-읽을-것",
+    "s": "문서 · 시작하기",
+    "x": "설치는 [GitHub 저장소](https://github.com/ckim19800220-cpu/Catui)의 안내나 시작 가이드를 보세요. 이 문서 사이트의 글·저자·버전은 모두 가상 데이터입니다.",
+    "k": "다음에 읽을 것"
+  },
+  {
+    "t": "설치와 파일 구조 · npm으로 설치",
+    "u": "doc.html?p=install#npm으로-설치",
+    "s": "문서 · 시작하기",
+    "x": "npm install @imcat-ckim/catui",
+    "k": "npm으로 설치"
+  },
+  {
+    "t": "설치와 파일 구조 · 불러오는 순서",
+    "u": "doc.html?p=install#불러오는-순서",
+    "s": "문서 · 시작하기",
+    "x": "본체 CSS → 확장 CSS, 본체 JS → 확장 JS 순서입니다. 확장 JS를 먼저 불러오면 콘솔에 안내가 나옵니다. import catui from '@imcat-ckim/catui';\nimport docs from '@imcat-ckim/catui/docs';\nimport '@imcat-ckim/catui/css';\nimport '@imcat-ckim/catui/docs.css';",
+    "k": "불러오는 순서"
+  },
+  {
+    "t": "설치와 파일 구조 · 배포 파일",
+    "u": "doc.html?p=install#배포-파일",
+    "s": "문서 · 시작하기",
+    "x": "`dist/docs.css` · `docs.min.css` `dist/catdocs.js` · `catdocs.esm.js` · `*.min.js` · `catdocs.d.ts` CDN으로 쓸 때도 순서는 같습니다. 순서가 바뀌면 `catui.docs`가 만들어지지 않습니다.",
+    "k": "배포 파일"
+  },
+  {
+    "t": "토큰과 테마 · 토큰",
+    "u": "doc.html?p=theme#토큰",
+    "s": "문서 · 개념",
+    "x": "컴포넌트는 `--Catui_color-*` 같은 토큰만 참조합니다. 확장도 새 색 값을 만들지 않습니다.",
+    "k": "토큰"
+  },
+  {
+    "t": "토큰과 테마 · 테마 잠금",
+    "u": "doc.html?p=theme#테마-잠금",
+    "s": "문서 · 개념",
+    "x": "다른 쪽이 테마를 관리하는 화면이면 `<html data-catui-theme-lock>`을 달아 확장이 덮어쓰지 않게 합니다. <html lang=\"ko\" data-catui-theme-lock>",
+    "k": "테마 잠금"
+  },
+  {
+    "t": "접근성 기준 · 색만으로 알리지 않기",
+    "u": "doc.html?p=a11y#색만으로-알리지-않기",
+    "s": "문서 · 개념",
+    "x": "현재 위치는 색과 함께 **굵기·막대**로, 변경 이력의 종류는 배지 **글자**로 알립니다.",
+    "k": "색만으로 알리지 않기"
+  },
+  {
+    "t": "접근성 기준 · 키보드와 포커스",
+    "u": "doc.html?p=a11y#키보드와-포커스",
+    "s": "문서 · 개념",
+    "x": "모든 버튼·링크에 `:focus-visible` 외곽선 가로로 넘치는 코드 블록도 Tab으로 들어가 화살표로 밀기 한글 조합 중 Enter는 제출하지 않음",
+    "k": "키보드와 포커스"
+  },
+  {
+    "t": "접근성 기준 · 320px 리플로",
+    "u": "doc.html?p=a11y#320px-리플로",
+    "s": "문서 · 개념",
+    "x": "가로 스크롤은 코드·표·메뉴 줄처럼 그 상자 안에서만 생기고, 쪽 전체는 넘치지 않습니다.",
+    "k": "320px 리플로"
+  }
 ]

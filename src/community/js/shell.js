@@ -58,7 +58,7 @@ community.shell = {
             <input class="Catui_clip" type="radio" name="cm-rank" id="cm-rank-2"><label class="Catui_tab" for="cm-rank-2">7일</label><div class="Catui_panel">${rank(week)}</div>
           </div></div></section>
         <section class="Catui_card" aria-labelledby="cm-aside-fav"><header class="Catui_card-h" id="cm-aside-fav">즐겨찾는 게시판</header>
-          <div class="Catui_card-b">${favs.length ? catui.html`<ul class="Catui_cm-links">${favs.map((b) => catui.html`<li><a href="board.html?b=${b.id}">${b.name}</a><span class="Catui_cm-meta">오늘 ${b.today}</span></li>`)}</ul>` : catui.html`<p class="Catui_help">게시판의 ☆ 버튼으로 추가합니다.</p>`}</div></section>
+          <div class="Catui_card-b">${favs.length ? catui.html`<ul class="Catui_cm-links">${favs.map((b) => catui.html`<li><a href="${community.boardHref(b)}">${b.name}</a><span class="Catui_cm-meta">오늘 ${b.today}</span></li>`)}</ul>` : catui.html`<p class="Catui_help">게시판의 ☆ 버튼으로 추가합니다.</p>`}</div></section>
         <section class="Catui_card" aria-labelledby="cm-aside-notice"><header class="Catui_card-h" id="cm-aside-notice">공지</header>
           <div class="Catui_card-b"><ul class="Catui_cm-links">${notices.slice(0, 4).map((n) => catui.html`<li><a href="notice.html#n${n.id}">${n.title}</a></li>`)}</ul></div></section>`);
     }).catch(() => {});

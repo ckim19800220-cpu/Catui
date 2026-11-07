@@ -11,6 +11,25 @@ const BK_STEPS = {
 const bkNextOf = (kind, step) => { const s = BK_STEPS[kind] || BK_STEPS.slot, i = s.findIndex((x) => x[0] === step); return `${(s[i + 1] || ["complete"])[0]}.html`; };
 const bkPrevOf = (kind, step) => { const s = BK_STEPS[kind] || BK_STEPS.slot, i = s.findIndex((x) => x[0] === step); return `${(s[i - 1] || ["index"])[0].replace("home", "index")}.html`; };
 const bkGo = (url) => booking.go(url);
+const bkStepLayouts = new WeakMap();
+const bkStepLayout = (box) => {
+  let layout = bkStepLayouts.get(box);
+  if (!layout) {
+    const tabindex = box.getAttribute("tabindex");
+    layout = () => {
+      if (!box.isConnected) return;
+      if (tabindex === null) { if (box.scrollWidth > box.clientWidth) box.setAttribute("tabindex", "0"); else box.removeAttribute("tabindex"); }
+      const active = box.querySelector('[aria-current="step"]');
+      if (!active) return;
+      const outer = box.getBoundingClientRect(), item = active.getBoundingClientRect();
+      if (item.left < outer.left) box.scrollLeft += item.left - outer.left;
+      else if (item.right > outer.right) box.scrollLeft += item.right - outer.right;
+    };
+    bkStepLayouts.set(box, layout); booking._on(window, "resize", layout);
+    booking._offs.push(() => { if (tabindex === null) box.removeAttribute("tabindex"); else box.setAttribute("tabindex", tabindex); bkStepLayouts.delete(box); });
+  }
+  layout();
+};
 
 booking.flow = {
   steps: BK_STEPS,
@@ -20,6 +39,7 @@ booking.flow = {
   steps_(box, kind, cur) {
     const s = BK_STEPS[kind] || BK_STEPS.slot, at = s.findIndex((x) => x[0] === cur);
     catui.mount(box, catui.html`${s.map(([, t], i) => catui.html`${i ? catui.html`<li class="Catui_step-line${i <= at ? " Catui_step-line-done" : ""}" aria-hidden="true"></li>` : ""}<li class="Catui_step${i < at ? " Catui_step-done" : i === at ? " Catui_step-current" : ""}"${i === at ? catui.html` aria-current="step"` : ""}><span class="Catui_step-dot">${i < at ? catui.icon("check", 14) : i + 1}</span><span class="Catui_step-label">${t}${i < at ? bkClip(" 완료") : ""}</span></li>`)}`);
+    bkStepLayout(box);
   },
   /** 금액 줄 마크업 */
   lines(lines, total, { label = "합계" } = {}) {
@@ -30,7 +50,7 @@ booking.flow = {
   summary(box, d, v) {
     if (!box) return;
     const svc = d.S[v.svc], br = d.B[v.branch];
-    if (!svc) { catui.mount(box, catui.html`<h2 class="Catui_h3">예약 내용</h2><p class="Catui_help">서비스를 먼저 골라 주세요.</p>`); return; }
+    if (!svc || !bkHasBranch(d, v)) { catui.mount(box, catui.html`<h2 class="Catui_h3">예약 내용</h2><p class="Catui_help">${svc ? bkBranchMessage : "서비스를 먼저 골라 주세요."}</p>`); return; }
     const a = booking.amountOf(d, v), none = catui.html`<span class="Catui_bk-muted">고르지 않음</span>`;
     const rows = [["서비스", svc.name], ["지점", br?.name || none]];
     if (svc.kind === "room") {
@@ -49,8 +69,8 @@ booking.flow = {
   /** 서비스·지점이 없으면 안내를 그리고 false */
   need(box, d, v, { kind } = {}) {
     const svc = d.S[v.svc];
-    if (svc && d.B[v.branch] && (!kind || [].concat(kind).includes(svc.kind))) { this.empty(box, null); return true; }
-    this.empty(box, catui.html`<p class="Catui_empty-title">예약할 서비스를 먼저 골라 주세요</p><p class="Catui_empty-text">${svc ? "이 단계는 고른 서비스에서 쓰지 않습니다." : "진행 중인 예약이 없습니다."}</p><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="index.html">서비스 고르기</a>`);
+    if (bkHasBranch(d, v) && (!kind || [].concat(kind).includes(svc.kind))) { this.empty(box, null); return true; }
+    this.empty(box, catui.html`<p class="Catui_empty-title">예약할 서비스를 먼저 골라 주세요</p><p class="Catui_empty-text">${!svc ? "진행 중인 예약이 없습니다." : !bkHasBranch(d, v) ? bkBranchMessage : "이 단계는 고른 서비스에서 쓰지 않습니다."}</p><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="index.html">서비스 고르기</a>`);
     return false;
   },
   /** 빈 상태 안내 — 상자의 원래 마크업은 지우지 않고 숨겼다가(다시 연결하면 되살림) 안내만 끼운다. markup이 null이면 되돌림 */
@@ -72,7 +92,7 @@ booking.flow = {
     root.querySelectorAll("[data-catui-bk-steps]").forEach((b) => this.steps_(b, svc?.kind || "slot", b.getAttribute("data-catui-bk-steps") || step));
     root.querySelectorAll("[data-catui-bk-summary]").forEach((b) => this.summary(b, d, v));
     root.querySelectorAll("[data-catui-bk-prev]").forEach((a) => { a.href = bkPrevOf(svc?.kind, step); });
-    root.querySelectorAll("[data-svc-name]").forEach((x) => { x.textContent = svc ? `${svc.name} · ${d.B[v.branch]?.name || ""}` : ""; });
+    root.querySelectorAll("[data-svc-name]").forEach((x) => { x.textContent = svc ? `${svc.name} · ${bkHasBranch(d, v) ? d.B[v.branch].name : "지점 재선택 필요"}` : ""; });
   },
 };
 /** 주소 이동 (테스트·SPA 라우터에서 바꿔 끼울 수 있음) */
@@ -87,15 +107,18 @@ booking.warn = function (msgBox, text, focusEl) {
 // ── 홈: 서비스·지점 ──
 booking.home = {
   from(d, svc) {
-    if (svc.kind === "room") return `1박 ${booking.won(Math.min(...d.rooms.map((r) => r.price)))}부터`;
-    if (svc.kind === "seat" && d.maps[svc.map]?.grades) return `${booking.won(Math.min(...d.maps[svc.map].grades.map((g) => g.price)))}부터`;
+    if (svc.kind === "room") {
+      const room = [...d.rooms].sort((a, b) => a.price - b.price)[0];
+      return room ? `평일 1박 · 기준 ${room.base}인 ${booking.won(room.price)}부터` : "객실 요금 확인";
+    }
+    if (svc.kind === "seat" && d.maps[svc.map]?.grades) return `성인 1인 ${booking.won(Math.min(...d.maps[svc.map].grades.map((g) => g.price)))}부터`;
     if (svc.kind === "seat") return `예약금 1인 ${booking.won(svc.price)}`;
-    return `${booking.won(svc.price)}부터`;
+    return `성인 1인 ${booking.won(svc.price)}부터`;
   },
   init(root) {
     const box = root.querySelector("[data-catui-bk-home]"), nextBox = root.querySelector("[data-catui-bk-next]");
     if (!box && !nextBox) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box || nextBox, () => booking.load(), (d) => {
       if (box) catui.mount(box, catui.html`${d.services.map((s) => {
         const first = s.kind === "room" ? "rooms" : "date";
         return catui.html`<li class="Catui_bk-svc" data-tone="${s.tone || 1}">
@@ -118,7 +141,7 @@ booking.home = {
           : catui.html`<p class="Catui_help">다가오는 예약이 없습니다.</p>`);
       }
       return d;
-    }).catch(() => null);
+    }, () => { if (nextBox && box) nextBox.textContent = "예약 내역을 불러오지 못했습니다. 서비스 목록의 다시 시도를 눌러 주세요."; });
   },
 };
 
@@ -145,7 +168,7 @@ booking.datePage = {
   init(root) {
     const box = root.querySelector("[data-catui-bk-date]");
     if (!box) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box, () => booking.load(), (d) => {
       let v = booking.draft.fromQuery();
       const svc = d.S[v.svc];
       if (svc && !v.branch) v = booking.draft.set({ branch: svc.branches[0] });
@@ -177,7 +200,7 @@ booking.datePage = {
         bkGo(bkNextOf(svc.kind, "date"));
       });
       return d;
-    }).catch(() => null);
+    });
   },
 };
 
@@ -219,7 +242,7 @@ booking.peoplePage = {
   init(root) {
     const box = root.querySelector("[data-catui-bk-people]");
     if (!box) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box, () => booking.load(), (d) => {
       let v = booking.draft.fromQuery();
       booking.flow.frame(root, d, v, "people");
       if (!booking.flow.need(box.querySelector("[data-body]") || box, d, v, { kind: ["slot", "seat"] })) return d;
@@ -252,6 +275,6 @@ booking.peoplePage = {
       });
       sync();
       return d;
-    }).catch(() => null);
+    });
   },
 };

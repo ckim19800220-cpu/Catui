@@ -1,0 +1,995 @@
+{
+ "url": "docs/community/templates/index.html",
+ "at": "2026-11-07T06:46:56.077Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.37,
+    0.29,
+    0.35
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 1944,
+     "screens": 2.2,
+     "words": 751,
+     "img": 4,
+     "video": 0,
+     "canvas": 0,
+     "svg": 14,
+     "sections": 14,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "sky.jpg",
+      "cat.jpg",
+      "leaves.jpg",
+      "kimbap.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Catui 커뮤니티 홈",
+     "words": 3,
+     "chars": 12,
+     "lines": 1,
+     "size": 28,
+     "vw": 1.9,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": 0,
+     "leading": 1.6,
+     "top": 137,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Catui 커뮤니티 홈",
+     "words": 3,
+     "lines": 1,
+     "size": 28,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 1,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 16,
+      "vw": 1.1,
+      "font": "Noto Sans SC",
+      "text": "본문으로 이동"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.01,
+     "smallText": 1
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.67
+      },
+      {
+       "color": "#66727e",
+       "share": 0.24
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.07
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.01
+      },
+      {
+       "color": "#fdecea",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#2c3e50"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 3,
+     "radius": 6,
+     "height": 31,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "글쓰기",
+      "글쓰기"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 1,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "div.Catui_dd-menu.Catui_dd-sm → rgba(16, 24, 40, 0.08) 0px 4px 10px -2px, rgba(16, 24, 40, 0.05) 0px 2px 4px -2p"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 17,
+     "hairlineSamples": [
+      "header.Catui_cm-head 1440px",
+      "nav.Catui_cm-gnb 1440px",
+      "header.Catui_card-h 868px",
+      "header.Catui_card-h 425px",
+      "header.Catui_card-h 425px"
+     ],
+     "outlinedBoxes": 15,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 19,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 4,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 3,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 138
+      },
+      {
+       "count": 7,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 434
+      },
+      {
+       "count": 3,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 358
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 18,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 1944,
+    "margins": {
+     "left": 143,
+     "right": 147
+    },
+    "sections": [
+     {
+      "sel": "section.Catui_card",
+      "tag": "section",
+      "top": 138,
+      "height": 280,
+      "words": 94,
+      "media": 0,
+      "middle": 131,
+      "heading": null,
+      "left": 143,
+      "right": 457,
+      "textLeft": 143,
+      "textRight": 457,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div#hm-board-list.Catui_cm-boards",
+      "tag": "div",
+      "top": 434,
+      "height": 1048,
+      "words": 274,
+      "media": 0,
+      "middle": 93,
+      "heading": null,
+      "left": 143,
+      "right": 457,
+      "textLeft": 143,
+      "textRight": 457,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_card",
+      "tag": "section",
+      "top": 1498,
+      "height": 247,
+      "words": 14,
+      "media": 4,
+      "middle": 12,
+      "heading": null,
+      "left": 143,
+      "right": 457,
+      "textLeft": 143,
+      "textRight": 467,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [],
+    "edgeText": [],
+    "edges": [],
+    "leftBlocks": 0,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.07,
+    "voidBox": {
+     "x": 0,
+     "y": 120,
+     "w": 120,
+     "h": 780
+    }
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": false,
+    "ground": "#ffffff",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 143,
+     "right": 137
+    },
+    "hero": {
+     "text": "Catui 커뮤니티 홈",
+     "words": 3,
+     "chars": 12,
+     "lines": 1,
+     "size": 28,
+     "vw": 1.9,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": 0,
+     "leading": 1.6,
+     "top": 137,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 14,
+     "firstScreen": 8,
+     "ragged": [
+      {
+       "diff": 63,
+       "top": 966
+      },
+      {
+       "diff": 63,
+       "top": 966
+      }
+     ],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 15,
+     "radii": [
+      [
+       6,
+       14
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "heavyBorders": 15,
+     "borderSamples": [
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 39,
+     "tabularShare": 1,
+     "kpiMax": 14
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.34,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      28
+     ]
+    },
+    "title": {
+     "text": "Catui 커뮤니티 홈",
+     "size": 28,
+     "top": 137
+    },
+    "colourShare": 0.01
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 320,
+   "height": 200,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.39,
+    0.83,
+    0.61,
+    0.57,
+    0.54,
+    0.55,
+    0.6,
+    0.59,
+    0.53,
+    0.54,
+    0.56,
+    0.52
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "page": {
+     "height": 4824,
+     "screens": 24.1,
+     "words": 754,
+     "img": 4,
+     "video": 0,
+     "canvas": 0,
+     "svg": 14,
+     "sections": 14,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "sky.jpg",
+      "cat.jpg",
+      "leaves.jpg",
+      "kimbap.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Catui 커뮤니티 홈",
+     "words": 3,
+     "chars": 12,
+     "lines": 1,
+     "size": 28,
+     "vw": 8.8,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": 0,
+     "leading": 1.6,
+     "top": 137,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Catui 커뮤니티 홈",
+     "words": 3,
+     "lines": 1,
+     "size": 28,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 1,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 16,
+      "vw": 5,
+      "font": "Noto Sans SC",
+      "text": "본문으로 이동"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.01,
+     "smallText": 1
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#fafbfc",
+       "top": 2553,
+       "hsl": {
+        "h": 210,
+        "s": 0.25,
+        "l": 0.98
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.67
+      },
+      {
+       "color": "#66727e",
+       "share": 0.25
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.07
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.01
+      },
+      {
+       "color": "#fdecea",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#2c3e50"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 7,
+     "inHero": 1,
+     "radius": 6,
+     "height": 31,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 1,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "div.Catui_dd-menu.Catui_dd-sm → rgba(16, 24, 40, 0.08) 0px 4px 10px -2px, rgba(16, 24, 40, 0.05) 0px 2px 4px -2p"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 18,
+     "hairlineSamples": [
+      "header.Catui_cm-head 320px",
+      "nav.Catui_cm-gnb 320px",
+      "header.Catui_card-h 286px",
+      "header.Catui_card-h 286px",
+      "header.Catui_card-h 286px"
+     ],
+     "outlinedBoxes": 15,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 19,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 4,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 17,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "pageH": 4824,
+    "margins": {
+     "left": 31,
+     "right": 31
+    },
+    "sections": [
+     {
+      "sel": "section.Catui_card",
+      "tag": "section",
+      "top": 138,
+      "height": 476,
+      "words": 94,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 31,
+      "right": 31,
+      "textLeft": 31,
+      "textRight": 31,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div#hm-board-list.Catui_cm-boards",
+      "tag": "div",
+      "top": 630,
+      "height": 1846,
+      "words": 274,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 31,
+      "right": 31,
+      "textLeft": 31,
+      "textRight": 31,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_card",
+      "tag": "section",
+      "top": 2492,
+      "height": 986,
+      "words": 14,
+      "media": 4,
+      "middle": 0,
+      "heading": null,
+      "left": 31,
+      "right": 31,
+      "textLeft": 31,
+      "textRight": 41,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "aside.Catui_cm-aside",
+      "tag": "aside",
+      "top": 3616,
+      "height": 1009,
+      "words": 109,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 31,
+      "right": 31,
+      "textLeft": 31,
+      "textRight": 31,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_cm-foot",
+      "tag": "footer",
+      "top": 4645,
+      "height": 123,
+      "words": 17,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 38,
+      "textLeft": 16,
+      "textRight": 38,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [],
+    "edgeText": [
+     {
+      "text": "내 정보",
+      "side": "right",
+      "px": 14
+     }
+    ],
+    "edges": [],
+    "leftBlocks": 0,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "dark": false,
+    "ground": "#ffffff",
+    "sidebar": null,
+    "topbar": {
+     "h": 72
+    },
+    "canvas": {
+     "left": 28,
+     "right": -126
+    },
+    "hero": {
+     "text": "Catui 커뮤니티 홈",
+     "words": 3,
+     "chars": 12,
+     "lines": 1,
+     "size": 28,
+     "vw": 8.8,
+     "font": "Inter",
+     "weight": 700,
+     "tracking": 0,
+     "leading": 1.6,
+     "top": 137,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 14,
+     "firstScreen": 1,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 15,
+     "radii": [
+      [
+       6,
+       14
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "heavyBorders": 15,
+     "borderSamples": [
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 39,
+     "tabularShare": 1,
+     "kpiMax": 14
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.33,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      28
+     ]
+    },
+    "title": {
+     "text": "Catui 커뮤니티 홈",
+     "size": 28,
+     "top": 137
+    },
+    "colourShare": 0.012
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "heavy-borders",
+   "width": 1440,
+   "message": "15 panel borders are dark against their ground: #2a404e on #ffffff (10.81:1) | #2a404e on #ffffff (10.81:1) | #2a404e on #ffffff (10.81:1)",
+   "fix": "A panel border is a whisper: about 1.1–1.3:1 against its ground on a light screen (#e5e7eb–#ededed on white), and about 1.2–1.5:1 on a dark one (#1a1a1a on #000, #2e2e2e on #111). Darker lines turn the screen into a grid of boxes; keep the stronger line for controls.",
+   "alsoAt": [
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "ragged-row",
+   "width": 1440,
+   "message": "2 pair(s) of cards in one row end at different heights (by 63px, 63px).",
+   "fix": "Cards that share a row share a bottom edge: balance them by their content (the same number of rows, a block of similar height beside it), or stack them. In testing, ragged rows were marked down every time."
+  },
+  {
+   "level": "WARN",
+   "id": "edge-text",
+   "width": 320,
+   "message": "1 text block(s) sit 12–15px from the phone's edge: \"내 정보\" (14px)",
+   "fix": "The page margin is 16–20px on a phone; the header and the corner labels sit on it too."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\photos-final-community\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\photos-final-community\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 320,
+   "fold": "D:\\Catui_design\\.taste-audit\\photos-final-community\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\photos-final-community\\mobile-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\photos-final-community\\mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

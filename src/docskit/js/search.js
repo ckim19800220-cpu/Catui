@@ -78,7 +78,21 @@ docs.search = {
       docs._on(input, "input", (e) => { if (e.isComposing) return; clearTimeout(timer); timer = setTimeout(() => { if (index) run(); }, 120); });
       docs._on(input, "compositionend", () => { clearTimeout(timer); timer = setTimeout(() => { if (index) run(); }, 120); });
       docs._offs.push(() => clearTimeout(timer));
-      this.ready = this.load(root).then((ix) => { index = ix; this.index = ix; run(); return ix; }, () => null);
+      const load = () => {
+        if (list) list.setAttribute("aria-busy", "true");
+        if (count) count.textContent = "검색 데이터를 불러오는 중입니다…";
+        return this.load(root).then((ix) => {
+          index = ix; this.index = ix; run(); return ix;
+        }, () => {
+          if (count) count.textContent = "검색 데이터를 불러오지 못했습니다. 연결 상태를 확인하고 다시 시도해 주세요.";
+          if (list) {
+            catui.mount(list, catui.html`<li><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-retry>다시 시도</button></li>`);
+            docs._on(list.querySelector("[data-retry]"), "click", (e) => { e.currentTarget.disabled = true; this.ready = load(); }, { once: true });
+          }
+          return null;
+        }).finally(() => list?.removeAttribute("aria-busy"));
+      };
+      this.ready = load();
     });
   },
 };

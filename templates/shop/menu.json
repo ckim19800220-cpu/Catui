@@ -1,6 +1,7 @@
 {
   "gnb": [
     { "id": "home", "title": "홈", "href": "index.html" },
+    { "id": "packs", "title": "템플릿 팩", "href": "packs.html" },
     { "id": "best", "title": "베스트", "href": "list.html?sort=best" },
     { "id": "event", "title": "기획전", "href": "event.html?e=autumn" },
     { "id": "fashion", "title": "패션", "href": "list.html?c=fashion" },

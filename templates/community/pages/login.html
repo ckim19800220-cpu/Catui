@@ -4,7 +4,8 @@
   <div><h1 class="Catui_h2">로그인</h1><p class="Catui_help">글쓰기·추천·댓글은 로그인한 회원만 할 수 있어요</p></div>
   <div class="Catui_banner Catui_banner-danger" role="alert" id="lg-err" hidden>{{icon:alert-circle:16}}<span>이메일 또는 비밀번호가 맞지 않습니다. (예제: cat@catui.dev / catui1234)</span></div>
   <div class="Catui_field"><label class="Catui_label" for="lg-mail">이메일</label><input class="Catui_input" id="lg-mail" name="email" type="email" autocomplete="username" value="cat@catui.dev" data-catui-verify="required|email"></div>
-  <div class="Catui_field"><label class="Catui_label" for="lg-pw">비밀번호</label><input class="Catui_input" id="lg-pw" name="pw" type="password" autocomplete="current-password" data-catui-verify="required"></div>
+  {{account:password}}
+  {{account:links}}
   <label class="Catui_choice"><input class="Catui_clip" type="checkbox" name="keep"><span class="Catui_cbx">{{icon:check:12}}</span>로그인 상태 유지</label>
   <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="submit">로그인</button>
   <p class="Catui_help">처음이신가요? <a class="Catui_link" href="register.html">회원가입</a></p>

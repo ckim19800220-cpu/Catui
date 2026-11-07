@@ -1573,6 +1573,10 @@
           ]
         }
       ]
+    },
+    {
+      "id": "drama", "title": "CatuiDrama",
+      "groups": [{"title":"시작", "pages":[{"path":"drama/start/introduction","title":"소개 · 화면 지도 · API","desc":"한국어 숏드라마 탐색 확장. 홈·분류·검색·편집 랭킹·작품 소개·찜 보관함 {{stat:drTpl}}종.","css":["drama/css/drama.css"]}]}]
     }
   ]
 }

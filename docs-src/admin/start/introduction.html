@@ -53,6 +53,23 @@
 </div>
 </section>
 
+<section aria-labelledby="shared-account">
+<h2 id="shared-account">공통 계정 화면 조각</h2>
+<p><code>templates/shared/account-password.html</code>·<code>account-links.html</code>·<code>account-denied.html</code>을 Admin·Community·Shop·Booking 빌드가 함께 사용합니다. 각 확장의 기존 로그인 검증·프로필 저장 방식은 유지하고 비밀번호 입력·계정 안내·403 표시를 통일합니다.</p>
+<p><code>data-catui-password-toggle</code>은 같은 폼의 비밀번호 표시와 가림을 전환합니다. 폼 초기화·탭 비활성화·모듈 해제 시 다시 가리며 값을 저장하거나 서버로 보내지 않습니다. <a href="doc:js/modules/form">폼 사용법</a>에 선언형 예제가 있습니다. 이 조합은 실제 세션·통합 로그인·RBAC 구현이 아닙니다.</p>
+</section>
+
+<section aria-labelledby="extension-boundary">
+<h2 id="extension-boundary">채팅·파일의 확장 경계</h2>
+<p>현재는 독립 확장을 추가하지 않고 기존 Admin·Community 화면을 재사용합니다. 현재 구현과 서버 연동이 필요한 범위를 구분합니다.</p>
+<div class="Catui_table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">채팅·파일의 구현 범위와 독립 확장 조건</caption><thead><tr><th scope="col">기능</th><th scope="col">현재 예제</th><th scope="col">독립 확장 전에 필요한 계약</th></tr></thead><tbody>
+<tr><th scope="row"><a href="../templates/chat.html">Admin 상담 채팅</a></th><td>대화 목록·검색·모바일 전환·한글 입력 보호·메모리 기록·시간 지연 모의 답장</td><td>대화 참여 권한·전달 확인·재연결·메시지 보관·실시간 전송 API</td></tr>
+<tr><th scope="row"><a href="../../community/templates/chat.html">Community 공개 대화방</a></th><td>게시판별 방·대화 로그·반복 메시지 제한·가상 접속자·모의 답장</td><td>회원·방 접근 정책·신고·차단·서버 속도 제한·실제 접속 상태</td></tr>
+<tr><th scope="row"><a href="../templates/files.html">Admin 파일 목록</a></th><td>폴더·검색·보기 전환·이름과 크기 추가·메모리 목록 삭제. 실제 업로드·다운로드는 없음</td><td>저장소·파일별 인가·업로드 제한·형식 검증·보관·공유 만료 정책</td></tr>
+</tbody></table></div>
+<p>위 계약 없이 이름과 화면만 분리한 CatuiChat·CatuiFiles는 만들지 않습니다. 목록·로그·분할 화면·파일 컴포넌트는 기존 본체와 Admin 자산을 우선 사용합니다.</p>
+</section>
+
 <section aria-labelledby="preview">
 <h2 id="preview">미리보기</h2>
 <figure class="doc-frame">

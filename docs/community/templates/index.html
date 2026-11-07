@@ -38,11 +38,16 @@
     <main class="Catui_cm-main" id="cm-main" tabindex="-1">
 <h1 class="Catui_clip">Catui 커뮤니티 홈</h1>
 
+<section class="Catui_card" aria-labelledby="hm-topic-title">
+  <header class="Catui_card-h"><h2 class="Catui_h3" id="hm-topic-title">관심 주제로 바로가기</h2><a class="Catui_cm-more" href="notice.html#rules">이용 규칙</a></header>
+  <div class="Catui_card-b"><nav class="Catui_cm-cats Catui_cm-topics" id="hm-topics" aria-label="게시판 바로가기"></nav></div>
+</section>
+
 <section class="Catui_card" aria-labelledby="hm-best">
-  <header class="Catui_card-h"><span id="hm-best">베스트</span>
-    <span class="Catui_cm-sort" role="group" aria-label="기간"><a href="#best-day" aria-current="page" data-best="1">오늘</a><a href="#best-week" data-best="7">주간</a></span>
-    <a class="Catui_cm-more" href="hot.html">더보기</a></header>
-  <div class="Catui_card-b"><div class="Catui_cm-boards"><ol class="Catui_cm-mini Catui_cm-best" id="hm-best-a"></ol><ol class="Catui_cm-mini Catui_cm-best" id="hm-best-b"></ol></div></div>
+  <header class="Catui_card-h Catui_cm-feed-head"><h2 class="Catui_h3" id="hm-best">글 모아보기</h2>
+    <nav class="Catui_cm-sort" id="hm-feed-controls" aria-label="글 모아보기 기준"><a href="?feed=1" aria-current="page" data-best="1">24시간</a><a href="?feed=7" data-best="7">주간</a><a href="?feed=new" data-best="new">최신</a><a href="?feed=fav" data-best="fav">즐겨찾기</a></nav>
+    <a class="Catui_cm-more" href="hot.html">전체 인기글</a></header>
+  <div class="Catui_card-b"><p class="Catui_help" id="hm-feed-state" role="status" aria-live="polite"></p><div class="Catui_cm-boards"><ol class="Catui_cm-mini Catui_cm-best" id="hm-best-a"></ol><ol class="Catui_cm-mini Catui_cm-best" id="hm-best-b"></ol></div></div>
 </section>
 
 <div class="Catui_cm-boards" id="hm-board-list" aria-label="게시판 최신글"></div>
@@ -72,24 +77,33 @@ catui.use(function () {
   var cm = catui.community;
   Promise.all([cm.load(), cm.data('trends')]).then(function (res) {
     var d = res[0];
-    var best = function (days) {
-      var since = cm.now() - days * 864e5, list = d.posts.filter(function (p) { return p.hot && new Date(p.time) > since; }).sort(function (a, b) { return b.score - a.score; });
-      if (list.length < 10) list = d.posts.filter(function (p) { return p.hot; }).sort(function (a, b) { return b.score - a.score; });
+    var controls = document.getElementById('hm-feed-controls'), modes = ['1', '7', 'new', 'fav'];
+    catui.mount(document.getElementById('hm-topics'), catui.html`${d.boards.filter(function (b) { return b.write !== false; }).map(function (b) { return catui.html`<a href="${cm.boardHref(b)}" title="${b.desc}">${b.name}</a>`; })}`);
+    var best = function () {
+      var requested = cm.query().get('feed'), saved = cm.store.get('home-feed', '1');
+      var mode = modes.indexOf(requested) > -1 ? requested : modes.indexOf(saved) > -1 ? saved : '1';
+      var popular = mode === '1' || mode === '7', now = cm.now(), since = now - Number(mode) * 864e5;
+      var list = d.posts.filter(function (p) { return p.board !== 'notice' && ['공지', '이벤트'].indexOf(p.cat) === -1 && new Date(p.time) <= now && (popular ? p.hot && new Date(p.time) > since : mode !== 'fav' || cm.fav.has(p.board)); });
+      list.sort(function (a, b) { return popular ? b.score - a.score || new Date(b.time) - new Date(a.time) : new Date(b.time) - new Date(a.time); });
       list = list.slice(0, 20);
-      var split = Math.ceil(list.length / 2), second = document.getElementById('hm-best-b');
-      catui.mount(document.getElementById('hm-best-a'), catui.html`${list.slice(0, split).map(function (p, i) { return cm.mini(p, { rank: i + 1 }); })}`);
-      catui.mount(second, catui.html`${list.slice(split).map(function (p, i) { return cm.mini(p, { rank: split + i + 1 }); })}`);
+      var split = Math.ceil(list.length / 2), first = document.getElementById('hm-best-a'), second = document.getElementById('hm-best-b');
+      catui.mount(first, list.length ? catui.html`${list.slice(0, split).map(function (p, i) { return cm.mini(p, { rank: popular ? i + 1 : 0, board: true }); })}` : cm.empty(mode === 'fav' ? '즐겨찾는 게시판의 글이 없습니다. 게시판에서 즐겨찾기를 추가해 보세요.' : popular ? '이 기간에 해당하는 인기글이 없습니다. 주간이나 최신 글을 확인해 보세요.' : '아직 등록된 글이 없습니다. 첫 이야기를 남겨 보세요.'));
+      catui.mount(second, catui.html`${list.slice(split).map(function (p, i) { return cm.mini(p, { rank: popular ? split + i + 1 : 0, board: true }); })}`);
       second.setAttribute('start', String(split + 1));
       second.hidden = split === list.length;
       second.parentElement.style.gridTemplateColumns = second.hidden ? 'minmax(0,1fr)' : '';
+      controls.querySelectorAll('a').forEach(function (a) { if (a.dataset.best === mode) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+      document.getElementById('hm-feed-state').textContent = ({ '1': '최근 24시간 · 추천순', '7': '최근 7일 · 추천순', new: '전체 게시판 · 최신순', fav: '즐겨찾는 게시판 · 최신순' })[mode] + ' · ' + list.length + '개 표시';
+      cm.store.set('home-feed', mode);
+      if (modes.indexOf(requested) === -1) { var url = new URL(location.href); url.searchParams.set('feed', mode); history.replaceState(null, '', url); }
     };
-    document.querySelector('[aria-label="기간"]').addEventListener('click', function (e) {
-      var a = e.target.closest('[data-best]'); if (!a) return; e.preventDefault();
-      this.querySelectorAll('a').forEach(function (x) { if (x === a) x.setAttribute('aria-current', 'page'); else x.removeAttribute('aria-current'); });
-      best(Number(a.dataset.best));
+    cm._on(controls, 'click', function (e) {
+      var a = e.target.closest('[data-best]'); if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button) return; e.preventDefault();
+      var url = new URL(location.href); url.searchParams.set('feed', a.dataset.best); history.pushState(null, '', url); best();
     });
-    best(1);
-    var href = function (b) { return ({ info: 'board-card.html?b=info', qna: 'qna.html', hotdeal: 'hotdeal.html' })[b.id] || 'board.html?b=' + b.id; };
+    cm._on(window, 'popstate', best);
+    best();
+    var href = cm.boardHref;
     var boards = d.boards.filter(function (b) { return ['free', 'humor', 'info', 'qna', 'hotdeal', 'hobby', 'local'].indexOf(b.id) > -1; });
     catui.mount(document.getElementById('hm-board-list'), catui.html`${boards.map(function (b) {
       return catui.html`<section class="Catui_card" aria-labelledby="hb-${b.id}"><header class="Catui_card-h"><a id="hb-${b.id}" href="${href(b)}">${b.name}</a><span class="Catui_cm-meta">오늘 ${b.today}</span><a class="Catui_cm-more" href="${href(b)}">더보기</a></header><div class="Catui_card-b"><ul class="Catui_cm-mini">${d.posts.filter(function (p) { return p.board === b.id; }).slice(0, 6).map(function (p) { return cm.mini(p); })}</ul></div></section>`;

@@ -1,0 +1,777 @@
+{
+ "url": "docs/admin/templates/media.html",
+ "at": "2026-11-07T06:46:57.864Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 1,
+   "filled": [
+    0.32
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 900,
+     "screens": 1,
+     "words": 94,
+     "img": 8,
+     "video": 0,
+     "canvas": 0,
+     "svg": 50,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "미디어 보관함",
+     "words": 2,
+     "chars": 7,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 80,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "미디어 보관함",
+     "words": 2,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.98,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.02,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      24
+     ],
+     "sizeCount": 6,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 24,
+      "vw": 1.7,
+      "font": "Inter",
+      "text": "미디어 보관함"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.07,
+     "centerShare": 0.03,
+     "smallText": 2
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#fafbfc",
+     "bodyBgHsl": {
+      "h": 210,
+      "s": 0.25,
+      "l": 0.98
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#fafbfc",
+       "top": 0,
+       "hsl": {
+        "h": 210,
+        "s": 0.25,
+        "l": 0.98
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#9facbb",
+       "share": 0.38
+      },
+      {
+       "color": "#dde4ea",
+       "share": 0.3
+      },
+      {
+       "color": "#66727e",
+       "share": 0.19
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.05
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 3,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "검색 Ctrl K",
+      "김"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 2,
+     "hairlineSamples": [
+      "header.Catui_topbar.Catui_adm-top 1240px",
+      "footer.Catui_adm-foot 1240px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 1,
+     "fixed": true,
+     "height": 900,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 900,
+    "margins": {
+     "left": 16,
+     "right": 24
+    },
+    "sections": [],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "미디어 보관함",
+      "size": 24,
+      "top": 80,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 224,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.53,
+    "voidBox": {
+     "x": 180,
+     "y": 300,
+     "w": 1260,
+     "h": 540
+    }
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": false,
+    "ground": "#fafbfc",
+    "sidebar": {
+     "w": 200,
+     "tag": "aside",
+     "links": 53,
+     "share": 0.14
+    },
+    "topbar": {
+     "h": 56
+    },
+    "canvas": {
+     "left": 16,
+     "right": 16
+    },
+    "hero": {
+     "text": "미디어 보관함",
+     "words": 2,
+     "chars": 7,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 80,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 1,
+     "firstScreen": 1,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 1,
+     "radii": [
+      [
+       0,
+       1
+      ]
+     ],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.27,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      16,
+      24
+     ]
+    },
+    "title": {
+     "text": "미디어 보관함",
+     "size": 24,
+     "top": 80
+    },
+    "colourShare": 0.02
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 320,
+   "height": 200,
+   "load": "load",
+   "screens": 5,
+   "filled": [
+    0.35,
+    0.61,
+    0.62,
+    0.64,
+    0.65
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "page": {
+     "height": 860,
+     "screens": 4.3,
+     "words": 33,
+     "img": 8,
+     "video": 0,
+     "canvas": 0,
+     "svg": 50,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "미디어 보관함",
+     "words": 2,
+     "chars": 7,
+     "lines": 1,
+     "size": 24,
+     "vw": 7.5,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 80,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "미디어 보관함",
+     "words": 2,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "미디어 보관함",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 80,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.94,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.06,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      24
+     ],
+     "sizeCount": 6,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "text": "미디어 보관함"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.02,
+     "smallText": 2
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#fafbfc",
+     "bodyBgHsl": {
+      "h": 210,
+      "s": 0.25,
+      "l": 0.98
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#fafbfc",
+       "top": 0,
+       "hsl": {
+        "h": 210,
+        "s": 0.25,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 781,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.68
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.13
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.11
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.08
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 2,
+     "radius": 4,
+     "height": 34,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "김"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 2,
+     "hairlineSamples": [
+      "header.Catui_topbar.Catui_adm-top 320px",
+      "footer.Catui_adm-foot 320px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 0,
+     "fixed": true,
+     "height": 200,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "pageH": 860,
+    "margins": {
+     "left": 24,
+     "right": 25
+    },
+    "sections": [],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "미디어 보관함",
+      "size": 24,
+      "top": 80,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 24,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "dark": false,
+    "ground": "#fafbfc",
+    "sidebar": null,
+    "topbar": {
+     "h": 56
+    },
+    "canvas": {
+     "left": 16,
+     "right": 16
+    },
+    "hero": {
+     "text": "미디어 보관함",
+     "words": 2,
+     "chars": 7,
+     "lines": 1,
+     "size": 24,
+     "vw": 7.5,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 80,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 0,
+     "firstScreen": 0,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 0,
+     "radii": [],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.59,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      12,
+      13,
+      16,
+      24
+     ]
+    },
+    "title": {
+     "text": "미디어 보관함",
+     "size": 24,
+     "top": 80
+    },
+    "colourShare": 0.06
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "hero-void",
+   "width": 1440,
+   "message": "53% of the first screen is one empty block (1260×540px at 180,300).",
+   "fix": "Place the void on purpose or fill it: move the picture, the film or one fact into it, grow the headline to meet it, or shrink the screen to its content. A void reads as placed only when something closes it on the far side and it is the screen's one rest."
+  },
+  {
+   "level": "WARN",
+   "id": "tiny-text",
+   "width": 320,
+   "message": "59% of the text is under 13px.",
+   "fix": "Data and labels read at 13–14px; keep 11–12px for sublines and axis ticks."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\photos-final-media\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\photos-final-media\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 320,
+   "fold": "D:\\Catui_design\\.taste-audit\\photos-final-media\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\photos-final-media\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

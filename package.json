@@ -70,6 +70,12 @@
       "default": "./dist/catbooking.esm.js"
     },
     "./booking.css": "./dist/booking.min.css",
+    "./drama": {
+      "types": "./dist/catdrama.d.ts",
+      "import": "./dist/catdrama.esm.js",
+      "default": "./dist/catdrama.esm.js"
+    },
+    "./drama.css": "./dist/drama.min.css",
     "./css": "./dist/catui.min.css",
     "./catui.css": "./dist/catui.css",
     "./catui.min.css": "./dist/catui.min.css",
@@ -109,7 +115,11 @@
     "./dist/catbooking.js",
     "./dist/catbooking.min.js",
     "./dist/catbooking.esm.js",
-    "./dist/catbooking.esm.min.js"
+    "./dist/catbooking.esm.min.js",
+    "./dist/catdrama.js",
+    "./dist/catdrama.min.js",
+    "./dist/catdrama.esm.js",
+    "./dist/catdrama.esm.min.js"
   ],
   "browserslist": [
     "chrome >= 111",

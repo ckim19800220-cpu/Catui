@@ -111,7 +111,7 @@ shop.product = {
         ${rows.length ? catui.html`<ul class="Catui_sh-reviews">${rows.slice(0, st.shown).map((r) => { const mine = st.helped.has(r.id); return catui.html`<li class="Catui_sh-review">
           <div class="Catui_sh-review-head">${shop.stars(r.rating)}<b>${r.user}</b><time datetime="${r.time}">${shop.date(r.time)}</time>${r.photo ? catui.html`<span class="Catui_badge Catui_badge-info">포토</span>` : ""}</div>
           ${r.opt ? catui.html`<p class="Catui_help">옵션: ${r.opt}</p>` : ""}
-          ${r.photo ? catui.html`<img class="Catui_sh-review-img" src="${shop.thumb(p, 3)}" alt="${r.user}님이 올린 사진" width="96" height="96" loading="lazy">` : ""}
+          ${r.photo ? catui.html`<img class="Catui_sh-review-img" src="${shop.thumb(p, 3)}" alt="${r.user}님 리뷰의 예시 사진" width="96" height="96" loading="lazy">` : ""}
           <p>${r.text}</p>
           <button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-help="${r.id}" aria-pressed="${mine}">${catui.icon("thumbs-up", 16)}도움돼요 <span class="Catui_num">${r.helpful + (mine ? 1 : 0)}</span></button>
         </li>`; })}</ul>

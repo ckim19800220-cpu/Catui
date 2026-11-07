@@ -1,0 +1,18 @@
+[
+ {"id":"last-train","title":"막차가 떠난 뒤","genre":"로맨스","format":"실사","episodes":12,"minutes":3,"status":"완결","date":"2026-11-06","photo":"bridge.jpg","desc":"매일 같은 막차를 놓치는 두 사람. 돌아가는 길이 길어질수록 서로의 내일이 궁금해집니다."},
+ {"id":"autumn-letter","title":"가을이 보낸 편지","genre":"로맨스","format":"실사","episodes":16,"minutes":2,"status":"완결","date":"2026-11-05","photo":"leaves.jpg","desc":"이름 없는 편지 한 장이 도착한 서점. 답장을 쓰는 사이 잊고 있던 약속이 되살아납니다."},
+ {"id":"other-sky","title":"두 번째 하늘","genre":"판타지","format":"애니","episodes":20,"minutes":4,"status":"연재 중","date":"2026-11-04","photo":"sky.jpg","desc":"하루에 딱 3분, 어제의 하늘이 열리는 도시. 작은 선택이 내일의 풍경을 바꾸기 시작합니다."},
+ {"id":"sunset-room","title":"해 질 무렵의 방","genre":"스릴러","format":"실사","episodes":10,"minutes":3,"status":"완결","date":"2026-11-03","photo":"sunset.jpg","desc":"매일 해 질 때마다 옆방에서 같은 소리가 들립니다. 이사 온 첫날의 기록에는 그 방이 없습니다."},
+ {"id":"courtyard","title":"마당 끝 우체통","genre":"일상","format":"실사","episodes":8,"minutes":3,"status":"완결","date":"2026-11-02","photo":"hanok.jpg","desc":"오래된 집을 고치는 세 친구에게 이웃들의 작은 부탁이 도착합니다. 느린 동네의 짧고 다정한 기록."},
+ {"id":"cafe-tomorrow","title":"내일도 같은 자리","genre":"로맨스","format":"실사","episodes":14,"minutes":2,"status":"연재 중","date":"2026-11-01","photo":"cafe.jpg","desc":"폐점을 앞둔 카페의 단골과 새 주인. 마지막 한 달의 메뉴를 함께 만들기로 합니다."},
+ {"id":"blue-hour","title":"푸른 시간의 손님","genre":"스릴러","format":"AI","episodes":9,"minutes":3,"status":"완결","date":"2026-10-31","photo":"bridge.jpg","desc":"문을 닫은 뒤 찾아오는 손님들은 모두 다음 날의 일을 말합니다. 마지막 손님은 자신의 이름을 알고 있습니다."},
+ {"id":"small-forest","title":"작은 숲의 약속","genre":"판타지","format":"애니","episodes":18,"minutes":2,"status":"완결","date":"2026-10-30","photo":"leaves.jpg","desc":"도시 한가운데 생긴 작은 숲에서 잃어버린 물건들이 말을 걸기 시작합니다."},
+ {"id":"sunday-sky","title":"일요일의 구름","genre":"일상","format":"애니","episodes":12,"minutes":2,"status":"완결","date":"2026-10-29","photo":"sky.jpg","desc":"한 주의 끝에 옥상에서 만나는 이웃들. 대단한 일 없이도 함께 보낼 이유는 충분합니다."},
+ {"id":"one-minute","title":"1분 뒤에 만나요","genre":"판타지","format":"AI","episodes":24,"minutes":1,"status":"연재 중","date":"2026-10-28","photo":"sunset.jpg","desc":"서로 다른 시간대에 사는 두 사람이 하루 1분, 같은 노을 아래에서만 만날 수 있습니다."},
+ {"id":"empty-house","title":"빈집의 계절","genre":"스릴러","format":"실사","episodes":11,"minutes":4,"status":"완결","date":"2026-10-27","photo":"hanok-room.jpg","desc":"아무도 살지 않는 집의 창문이 매일 열립니다. 동네의 오래된 지도에는 그 집의 주소가 두 개입니다."},
+ {"id":"coffee-note","title":"커피 한 잔의 용기","genre":"일상","format":"실사","episodes":8,"minutes":2,"status":"완결","date":"2026-10-26","photo":"cafe.jpg","desc":"말로 하지 못한 마음을 영수증 뒤에 적는 바리스타. 손님들의 답장이 하루를 바꿉니다."},
+ {"id":"wind-path","title":"바람이 놓고 간 길","genre":"로맨스","format":"애니","episodes":16,"minutes":3,"status":"완결","date":"2026-10-25","photo":"leaves.jpg","desc":"다시 만난 동창 두 사람이 폐선된 철길을 따라 한 번도 하지 못했던 이야기를 꺼냅니다."},
+ {"id":"cloud-shop","title":"구름 수선실","genre":"판타지","format":"AI","episodes":15,"minutes":2,"status":"연재 중","date":"2026-10-24","photo":"sky.jpg","desc":"찢어진 구름을 고치는 수선실. 맡겨진 구름 안에는 아직 끝나지 않은 꿈이 담겨 있습니다."},
+ {"id":"window-light","title":"창문 너머의 불빛","genre":"스릴러","format":"실사","episodes":10,"minutes":3,"status":"완결","date":"2026-10-23","photo":"bridge.jpg","desc":"맞은편 창문의 불빛이 보내는 신호. 우연이라 생각했던 패턴이 오래전 사라진 친구의 암호와 같습니다."},
+ {"id":"home-again","title":"오늘도 돌아오는 집","genre":"일상","format":"실사","episodes":12,"minutes":3,"status":"완결","date":"2026-10-22","photo":"hanok-living.jpg","desc":"낯선 사람 네 명의 공동생활. 저마다 다른 하루가 저녁 식탁 위에서 하나의 이야기가 됩니다."}
+]

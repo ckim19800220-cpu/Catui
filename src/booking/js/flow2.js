@@ -55,7 +55,7 @@ booking.seatPage = {
   init(root) {
     const box = root.querySelector("[data-catui-bk-seats]");
     if (!box) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box, () => booking.load(), (d) => {
       let v = booking.draft.fromQuery();
       booking.flow.frame(root, d, v, "seats");
       const body = box.querySelector("[data-body]") || box;
@@ -89,7 +89,7 @@ booking.seatPage = {
       });
       paint();
       return d;
-    }).catch(() => null);
+    });
   },
 };
 
@@ -136,7 +136,7 @@ booking.roomPage = {
   init(root) {
     const box = root.querySelector("[data-catui-bk-rooms]");
     if (!box) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box, () => booking.load(), (d) => {
       let v = booking.draft.fromQuery();
       const svc = d.S[v.svc];
       if (svc && !v.branch) v = booking.draft.set({ branch: svc.branches[0] });
@@ -188,7 +188,7 @@ booking.roomPage = {
       });
       sync();
       return d;
-    }).catch(() => null);
+    });
   },
 };
 
@@ -197,28 +197,35 @@ booking.infoPage = {
   init(root) {
     const form = root.querySelector("form[data-catui-bk-info]");
     if (!form) return;
-    this.ready = booking.load().then((d) => {
-      let v = booking.draft.get();
+    const fields = ["name", "phone", "email", "request"], edited = new Set();
+    const all = form.querySelector("[data-agree-all]"), each = () => [...form.querySelectorAll("[data-agree]")], msg = form.querySelector("[data-msg]");
+    let loaded = false;
+    const track = (e) => { if (fields.includes(e.target.name)) edited.add(e.target.name); };
+    booking._on(form, "input", track);
+    booking._on(form, "change", (e) => {
+      track(e);
+      if (e.target === all) each().forEach((x) => { x.checked = all.checked; });
+      else if (e.target.matches("[data-agree]")) all.checked = each().every((x) => x.checked);
+    });
+    booking._on(form, "submit", (e) => {
+      e.preventDefault();
+      if (!loaded) return;
+      if (!catui.form.validate(form)) { booking.warn(msg, "입력 내용을 확인해 주세요", form.querySelector("[aria-invalid=true]")); return; }
+      const miss = each().find((x) => x.required && !x.checked);
+      if (miss) { booking.warn(msg, "필수 약관에 동의해 주세요", miss); return; }
+      const f = form.elements;
+      booking.draft.set({ name: f.name.value.trim(), phone: f.phone.value.trim(), email: f.email.value.trim(), request: f.request.value.trim(), notify: !!f.notify?.checked });
+      bkGo("confirm.html");
+    });
+    this.ready = bkLoadView(form, () => booking.load(), (d) => {
+      const v = booking.draft.get();
       booking.flow.frame(root, d, v, "info");
       if (!booking.flow.need(form, d, v)) return d;
-      for (const k of ["name", "phone", "email", "request"]) if (v[k] && form.elements[k]) form.elements[k].value = v[k];
+      for (const k of fields) if (!edited.has(k) && v[k] && form.elements[k]) form.elements[k].value = v[k];
       root.querySelectorAll("[data-refund-table]").forEach((b) => catui.mount(b, booking.view.refund(v.date ? { date: v.date, time: v.time } : null)));
-      const all = form.querySelector("[data-agree-all]"), each = () => [...form.querySelectorAll("[data-agree]")], msg = form.querySelector("[data-msg]");
-      booking._on(form, "change", (e) => {
-        if (e.target === all) each().forEach((x) => { x.checked = all.checked; });
-        else if (e.target.matches("[data-agree]")) all.checked = each().every((x) => x.checked);
-      });
-      booking._on(form, "submit", (e) => {
-        e.preventDefault();
-        if (!catui.form.validate(form)) { booking.warn(msg, "입력 내용을 확인해 주세요", form.querySelector("[aria-invalid=true]")); return; }
-        const miss = each().find((x) => x.required && !x.checked);
-        if (miss) { booking.warn(msg, "필수 약관에 동의해 주세요", miss); return; }
-        const f = form.elements;
-        v = booking.draft.set({ name: f.name.value.trim(), phone: f.phone.value.trim(), email: f.email.value.trim(), request: f.request.value.trim(), notify: !!f.notify?.checked });
-        bkGo("confirm.html");
-      });
+      loaded = true;
       return d;
-    }).catch(() => null);
+    }, () => { loaded = false; });
   },
 };
 
@@ -227,7 +234,7 @@ booking.confirmPage = {
   init(root) {
     const box = root.querySelector("[data-catui-bk-confirm]");
     if (!box) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box, () => booking.load(), (d) => {
       const v = booking.draft.get();
       booking.flow.frame(root, d, v, "confirm");
       const body = box.querySelector("[data-body]") || box;
@@ -248,7 +255,7 @@ booking.confirmPage = {
         bkGo(`complete.html?no=${encodeURIComponent(r.no)}`);
       });
       return d;
-    }).catch(() => null);
+    });
   },
 };
 

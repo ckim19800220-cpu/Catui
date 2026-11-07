@@ -5,7 +5,28 @@
 //   [data-catui-bk-theme]           테마 전환 (booking.theme)
 booking.shell = {
   init(root) {
-    if (booking._once(root, "photo-errors")) booking._on(root, "error", (e) => { if (e.target.matches?.(".Catui_bk-photo, .Catui_bk-hero-img")) e.target.hidden = true; }, true);
+    const nav = root.querySelector(".Catui_bk-nav");
+    if (nav && booking._once(nav, "current-visible")) {
+      const layout = () => {
+        const active = nav.querySelector('[aria-current="page"]');
+        if (!active) return;
+        const outer = nav.getBoundingClientRect(), item = active.getBoundingClientRect();
+        if (item.left < outer.left) nav.scrollLeft += item.left - outer.left;
+        else if (item.right > outer.right) nav.scrollLeft += item.right - outer.right;
+      };
+      booking._on(window, "resize", layout);
+      layout();
+    }
+    root.querySelectorAll("[data-catui-bk-summary]").forEach((summary) => {
+      if (!booking._once(summary, "responsive-summary")) return;
+      const parent = summary.parentElement, main = parent.querySelector(".Catui_bk-flow-main"), bar = main?.querySelector(".Catui_bk-next-bar");
+      if (!bar) return;
+      const mobile = matchMedia("(max-width: 991px)");
+      const layout = () => { if (mobile.matches) bar.before(summary); else parent.appendChild(summary); };
+      booking._on(mobile, "change", layout);
+      layout();
+    });
+    if (booking._once(root, "photo-errors")) booking._on(root, "error", (e) => { if (e.target.matches?.(".Catui_bk-photo, .Catui_bk-hero-img, .Catui_bk-pack-intro > img")) e.target.hidden = true; }, true);
     root.querySelectorAll("[data-catui-bk-won]").forEach((el) => { el.textContent = booking.won(el.getAttribute("data-catui-bk-won")); });
     root.querySelectorAll("[data-catui-bk-today]").forEach((el) => { el.textContent = booking.dateLabel(booking.today(), { year: true }); });
     booking._on(root, "click", (e) => {

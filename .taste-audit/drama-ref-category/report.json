@@ -1,0 +1,690 @@
+{
+ "url": "https://hongguoduanju.com/category/real-drama",
+ "at": "2026-11-07T15:43:58.428Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.55,
+    0.62,
+    0.45
+   ],
+   "motion": {
+    "elements": 24,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 24,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 2159,
+     "screens": 2.4,
+     "words": 183,
+     "img": 54,
+     "video": 0,
+     "canvas": 0,
+     "svg": 6,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 24,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "84a71f1a5d7ef5c9c16a73b74011ef75~tplv-shrink:640",
+      "adef31dd5cafc28d1cb9d52b0c5e2818~tplv-shrink:640",
+      "74da14930bec1c4f19fe146e95fb7ea1~tplv-shrink:640",
+      "d86ad3371ad3fe22b1fedd4fb5eeb8c4~tplv-shrink:640",
+      "af4265adcf792e8e6cfb895b6a5ff52f~tplv-shrink:640",
+      "f46efa4c55e9b146f7d4906fd88ceb4e~tplv-shrink:640",
+      "0f46fdba7ce0ccfd0e96dcb94209b6ba~tplv-shrink:640",
+      "734201989a0f4857f7fac10257e1e003~tplv-shrink:640"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "十八岁太奶奶驾到，重整家族荣耀第五部",
+     "words": 1,
+     "chars": 18,
+     "lines": 1,
+     "size": 18,
+     "vw": 1.3,
+     "font": "PingFang SC",
+     "weight": 400,
+     "tracking": 0,
+     "leading": 1.56,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.13,
+     "top": 559,
+     "tag": "p",
+     "kind": "statement"
+    },
+    "h1": {
+     "text": "真人剧",
+     "words": 1,
+     "lines": 3,
+     "size": 23,
+     "font": "PingFang SC"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "PingFang SC",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      14,
+      16,
+      18,
+      20,
+      23
+     ],
+     "sizeCount": 6,
+     "notLoaded": [
+      "PingFang SC"
+     ],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 23,
+      "vw": 1.6,
+      "font": "PingFang SC",
+      "text": "…"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.02,
+     "centerShare": 0.27,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#131414",
+     "bodyBgHsl": {
+      "h": 180,
+      "s": 0.03,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#131414",
+       "top": 0,
+       "hsl": {
+        "h": 180,
+        "s": 0.03,
+        "l": 0.08
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#ffffff",
+       "share": 0.74
+      },
+      {
+       "color": "#747474",
+       "share": 0.26
+      },
+      {
+       "color": "#fa7705",
+       "share": 0
+      }
+     ],
+     "button": null,
+     "lowContrast": [
+      {
+       "text": "北京笔墨留香科技有限公司 | 地址 : 北京市门头沟区石龙经济开发区永安路20号",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "电子营业执照",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "京ICP备2021028909号-43",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "京公网安备 11010802040767",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "网络文化经营许可证：京网文〔2025〕0222-071号",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "增值电信业务经营许可证：京B2-20220790",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 1,
+     "scrims": 0,
+     "gradientSamples": [
+      "div.pc-cover-img-q9oXCo → radial-gradient(79.79% 63.64% at 51.35% -3.04%, rgba(250, 119, 5, 0.1) 0px, rgba(0, 0, 0, 0) 100%), radial-gra"
+     ],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "footer.pc-container-RbJZ85.m-container-wX_1Z7 1240px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 23,
+     "boxRadius": 12,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 8,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 2159,
+    "margins": {
+     "left": 100,
+     "right": 100
+    },
+    "sections": [
+     {
+      "sel": "div.pc-cover-x4A4V5",
+      "tag": "div",
+      "top": 0,
+      "height": 920,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.pc-list-section-lVSfTC",
+      "tag": "section",
+      "top": 290,
+      "height": 1520,
+      "words": 121,
+      "media": 48,
+      "middle": 22,
+      "heading": null,
+      "left": 100,
+      "right": 100,
+      "textLeft": 100,
+      "textRight": 100,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.pc-page-c99OQM",
+      "tag": "div",
+      "top": 1810,
+      "height": 349,
+      "words": 14,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 378,
+      "right": 378,
+      "textLeft": 378,
+      "textRight": 378,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [],
+    "edgeText": [],
+    "edges": [],
+    "leftBlocks": 0,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.05,
+    "voidBox": {
+     "x": 420,
+     "y": 120,
+     "w": 1020,
+     "h": 60
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.89,
+    0.93,
+    0.88
+   ],
+   "motion": {
+    "elements": 24,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 24,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 2155,
+     "screens": 2.6,
+     "words": 164,
+     "img": 50,
+     "video": 0,
+     "canvas": 0,
+     "svg": 2,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": null,
+    "h1": {
+     "text": "真人剧",
+     "words": 1,
+     "lines": 3,
+     "size": 14,
+     "font": "PingFang SC"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "PingFang SC",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      10,
+      12,
+      14,
+      15,
+      16,
+      18
+     ],
+     "sizeCount": 6,
+     "notLoaded": [
+      "PingFang SC"
+     ],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 18,
+      "vw": 4.6,
+      "font": "PingFang SC",
+      "text": "真人剧"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.07,
+     "smallText": 1
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#131414",
+     "bodyBgHsl": {
+      "h": 180,
+      "s": 0.03,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#ffffff",
+       "share": 1
+      },
+      {
+       "color": "#fa7705",
+       "share": 0
+      }
+     ],
+     "button": null,
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 1,
+     "scrims": 1,
+     "gradientSamples": [
+      "div.m-btn-VZM03v → linear-gradient(92.27deg, rgb(255, 126, 13) 0.32%, rgb(255, 146, 51))"
+     ],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 5,
+     "fixed": true,
+     "height": 48,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 2155,
+    "margins": {
+     "left": 16,
+     "right": 16
+    },
+    "sections": [],
+    "gaps": [],
+    "h1s": [],
+    "edgeText": [
+     {
+      "text": "真人剧",
+      "side": "left",
+      "px": 6
+     }
+    ],
+    "edges": [],
+    "leftBlocks": 0,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 1440,
+   "message": "1 gradient fill(s): div.pc-cover-img-q9oXCo → radial-gradient(79.79% 63.64% at 51.35% -3.04%, rgba(250, 119, 5, 0.1) 0px, rgba(0, 0, 0, 0) 100%), radial-gra",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "hairline",
+   "width": 1440,
+   "message": "1 thin rule(s)/divider line(s): footer.pc-container-RbJZ85.m-container-wX_1Z7 1240px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields."
+  },
+  {
+   "level": "WARN",
+   "id": "contrast",
+   "width": 1440,
+   "message": "Low-contrast text: \"北京笔墨留香科技有限公司 | 地址 : 北京市门头沟区石龙经济开发区永安路20号\" 3.9:1 needs 4.5:1; \"电子营业执照\" 3.9:1 needs 4.5:1; \"京ICP备2021028909号-43\" 3.9:1 needs 4.5:1; \"京公网安备 11010802040767\" 3.9:1 needs 4.5:1",
+   "fix": "Darken or lighten the text colour."
+  },
+  {
+   "level": "WARN",
+   "id": "font-fallback",
+   "width": 1440,
+   "message": "Typeface(s) declared but not loaded, so a fallback is rendering: PingFang SC",
+   "fix": "Fix the font URL / family name, or the screenshots you are judging are not the design.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "first-action",
+   "width": 1440,
+   "message": "No visible button in the first screen.",
+   "fix": "Give the one primary action a real button in the first screen (a filled or solid-bordered control, 44px or taller), not only a link in the navigation.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "FAIL",
+   "id": "focal-point",
+   "width": 1440,
+   "message": "The first screen has no dominant element: the largest type is 18px (1.3vw) and no single picture holds a third of the viewport.",
+   "fix": "Make one thing lead: the headline at display size, or one large picture. A grid of many small pictures is not one thing; in blind tests jurors marked a first screen without a headline down every time. On the strongest studied sites the largest type has a median of 8.4vw."
+  },
+  {
+   "level": "FAIL",
+   "id": "late-title",
+   "width": 1440,
+   "message": "The title is not readable 1.2s after the page loaded (it has no size yet).",
+   "fix": "Put the headline in the HTML, painted on the first frame; the load sequence only adds arrival and is settled by 1.2s (references/motion.md, \"Load sequence in 1.2 seconds\"). No preloader, no gate, no waiting for the load event.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "no-title",
+   "width": 1440,
+   "message": "The page has no visible h1.",
+   "fix": "Give the first screen a clear title in an h1 that says what this is (a name with what it does, the product with what it is for, the event with its date and place).",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "small-text",
+   "width": 390,
+   "message": "1 text block(s) under 13px.",
+   "fix": "Nothing meant to be read goes below 13px."
+  },
+  {
+   "level": "WARN",
+   "id": "no-hero",
+   "width": 390,
+   "message": "No headline found in the first viewport.",
+   "fix": "The first screen needs a clear focal statement or image."
+  },
+  {
+   "level": "FAIL",
+   "id": "edge-text",
+   "width": 390,
+   "message": "1 text block(s) sit within 12px of the screen edge: \"真人剧\" (6px from the left)",
+   "fix": "Keep text inside the page margin (16–20px). Only display type deliberately bled past the edge may touch it."
+  },
+  {
+   "level": "FAIL",
+   "id": "reduced-hidden",
+   "width": 1440,
+   "message": "With reduced motion requested, 10 text block(s) on the first screen stay invisible: \"真人剧\", \"AI剧\", \"红果热播榜\", \"真人剧热播榜\"",
+   "fix": "Put every hidden starting state inside @media (prefers-reduced-motion: no-preference); the reduced page is the finished page (references/motion.md §8)."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\drama-ref-category\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\drama-ref-category\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\drama-ref-category\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\drama-ref-category\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

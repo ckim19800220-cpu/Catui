@@ -34,6 +34,17 @@ export function walk(dir, ext) {
   });
 }
 
+export function sharedAccount(src, scope, page) {
+  const profile = { admin: ["profile.html", "프로필·계정"], community: ["settings.html", "프로필·설정"], shop: ["profile.html", "회원 정보"], booking: ["mine.html", "내 예약·예약자 정보"] }[scope];
+  if (!profile) fail(`알 수 없는 계정 화면 범위: ${scope}`);
+  return src.replace(/\{\{account:(password|links|denied)\}\}/g, (_, part) => {
+    const markup = read(path.join(ROOT, "templates/shared", `account-${part}.html`))
+      .replace(/\{\{account:profile\}\}/g, profile[0]).replace(/\{\{account:profileLabel\}\}/g, profile[1]);
+    if (part === "password" && scope === "admin") return markup.replace('aria-describedby="lg-pw-help"', 'aria-describedby="lg-pw-help lg-caps"');
+    return part === "links" ? markup.replace(/href="([^"]+)"/g, (attr, href) => href === `${page}.html` ? `${attr} aria-current="page"` : attr) : markup;
+  });
+}
+
 export const pkg = () => readJson(path.join(ROOT, "package.json"));
 export const bytes = (s) => Buffer.byteLength(s);
 

@@ -1,12 +1,14 @@
 {
   "top": [
     { "id": "home", "title": "예약하기", "href": "index.html" },
+    { "id": "packs", "title": "템플릿 팩", "href": "packs.html" },
     { "id": "mine", "title": "내 예약", "href": "mine.html" },
     { "id": "wait", "title": "대기 명단", "href": "waitlist.html" },
     { "id": "admin", "title": "관리자 일정", "href": "admin.html" }
   ],
   "foot": [
     { "title": "예약하기", "href": "index.html" },
+    { "title": "템플릿 팩", "href": "packs.html" },
     { "title": "내 예약", "href": "mine.html" },
     { "title": "대기 명단", "href": "waitlist.html" },
     { "title": "관리자 일정표", "href": "admin.html" },

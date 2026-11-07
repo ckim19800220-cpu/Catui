@@ -7,7 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { transform } from "lightningcss";
 import { transformSync } from "esbuild";
-import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes, visualErrors } from "./lib.mjs";
+import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes, visualErrors, sharedAccount } from "./lib.mjs";
 
 const C = { src: path.join(ROOT, "src/booking"), tpl: path.join(ROOT, "templates/booking") };
 const noComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, "");
@@ -134,18 +134,54 @@ export function buildBookingTemplates({ defined, icons, bookingByFile = {} }) {
   const live = (list) => (list || []).filter((x) => exists.has(pageOf(x.href)));
   const topnav = (nav) => live(menu.top).map((it) => `<a class="Catui_hnav-item" href="${esc(it.href)}"${it.id === nav ? ' aria-current="page"' : ""}>${esc(it.title)}</a>`).join("");
   const foot = () => live(menu.foot).map((it) => `<a href="${esc(it.href)}">${esc(it.title)}</a>`).join("");
+  const packs = readJson(path.join(C.tpl, "data/packs.json"));
+  const services = Object.fromEntries(readJson(path.join(C.tpl, "data/services.json")).map((s) => [s.id, s]));
+  const branches = Object.fromEntries(readJson(path.join(C.tpl, "data/branches.json")).map((b) => [b.id, b]));
+  const maps = readJson(path.join(C.tpl, "data/seats.json")), rooms = readJson(path.join(C.tpl, "data/rooms.json")).rooms;
+  const won = (n) => `${Number(n).toLocaleString("ko-KR")}원`;
+  const from = (s) => {
+    if (s.kind === "room") { const r = [...rooms].sort((a, b) => a.price - b.price)[0]; return r ? `평일 1박 · 기준 ${r.base}인 ${won(r.price)}부터` : "객실 요금 확인"; }
+    if (s.kind === "seat" && maps[s.map]?.grades) return `성인 1인 ${won(Math.min(...maps[s.map].grades.map((g) => g.price)))}부터`;
+    return `${s.kind === "seat" ? "예약금" : "수업료"} 성인 1인 ${won(s.price)}`;
+  };
+  const offers = (p, primary = false) => p.offers.map((o, i) => {
+    const s = services[o.svc], b = branches[o.branch];
+    if (!s || !b || !s.branches.includes(o.branch) || (o.date && s.dates && !s.dates.includes(o.date))) fail(`템플릿 팩의 서비스·지점·날짜 연결이 잘못되었습니다: ${o.svc}/${o.branch}`);
+    const q = new URLSearchParams({ svc: o.svc, branch: o.branch, ...(o.date ? { date: o.date } : {}) });
+    const href = `${s.kind === "room" ? "rooms" : "date"}.html?${q}`;
+    return `<li class="Catui_bk-box"><h3 class="Catui_h3">${esc(s.name)}</h3><p>${esc(s.desc)}</p><p class="Catui_num"><b>${esc(from(s))}</b></p><p>${esc(b.name)} · ${esc(b.addr)}</p><a class="Catui_btn Catui_btn-md Catui_btn-${primary && i === 0 ? "primary" : "secondary"}" data-pack-booking href="${esc(href)}">${esc(s.kind === "room" ? "기간·객실 고르기" : "회차·남은 자리 확인")}</a></li>`;
+  }).join("");
+  const packParts = (key, page) => {
+    const p = packs[key];
+    if (!p || !/^[a-z-]+\.(png|jpe?g|webp)$/.test(p.photo) || !fs.existsSync(path.join(ROOT, "assets/photos", p.photo))) fail(`템플릿 팩 또는 로컬 사진이 없습니다: ${key}`);
+    const eventPages = [["event", "행사 소개"], ["event-program", "프로그램"], ["event-speakers", "연사"], ["event-guide", "참가 안내"]];
+    const nav = key === "event" ? eventPages.map(([href, title]) => `<a class="Catui_btn Catui_btn-sm Catui_btn-${href === page ? "secondary" : "ghost"}" href="${href}.html"${href === page ? ' aria-current="page"' : ""}>${title}</a>`).join("") : '<a class="Catui_link" href="packs.html">다른 템플릿 팩 보기</a>';
+    const program = (p.program || []).map((s, i) => {
+      const who = s.speaker ? p.speakers.find((v) => v.id === s.speaker) : null;
+      if (s.speaker && !who) fail(`행사 프로그램의 연사가 없습니다: ${s.speaker}`);
+      return `<li class="Catui_bk-box"><p class="Catui_num">${esc(s.time)}</p><h3 class="Catui_h3" id="program-${i}">${esc(s.title)}</h3><p>${esc(s.text)}</p>${who ? `<a class="Catui_link" href="event-speakers.html#speaker-${esc(who.id)}">${esc(who.name)} · ${esc(who.role)}</a>` : ""}</li>`;
+    }).join("");
+    const speakers = (p.speakers || []).map((s) => {
+      if (!/^[a-z0-9-]+$/.test(s.id)) fail(`연사 id가 잘못되었습니다: ${s.id}`);
+      return `<li class="Catui_bk-box" id="speaker-${s.id}"><h3 class="Catui_h3">${esc(s.name)} <small class="Catui_bk-muted">가상 연사</small></h3><p><b>${esc(s.role)}</b></p><p>${esc(s.bio)}</p><a class="Catui_link" href="event-program.html">발표 프로그램 보기</a></li>`;
+    }).join("");
+    return { ...Object.fromEntries(Object.entries(p).filter(([, v]) => typeof v === "string").map(([k, v]) => [k, esc(v)])), nav, offers: offers(p, page.startsWith("event-")), program: program || '<li class="Catui_bk-box">프로그램을 준비하고 있습니다. 참가 안내에서 공개 여부를 확인해 주세요.</li>', speakers: speakers || '<li class="Catui_bk-box">연사 소개를 준비하고 있습니다.</li>', guide: p.guide.map(([title, text]) => `<details class="Catui_bk-box"><summary>${esc(title)}</summary><p>${esc(text)}</p></details>`).join("") };
+  };
+  const packCards = Object.entries(packs).map(([key, p]) => `<li class="Catui_bk-svc"><img class="Catui_bk-photo" src="../../../assets/photos/${esc(p.photo)}" width="640" height="280" alt="" loading="lazy" decoding="async"><div class="Catui_bk-svc-b"><h2 class="Catui_h3"><a class="Catui_link" href="${key}.html">${esc(p.title)}</a></h2><p>${esc(p.intro)}</p><p class="Catui_bk-muted">${esc(p.summary)}</p></div><a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="${key}.html">${esc(p.title)} 둘러보기</a></li>`).join("");
 
   for (const f of files) {
     const p = meta(read(path.join(pagesDir, `${f}.html`)), f);
+    const parts = p.pack ? packParts(p.pack, f) : {};
     const scripts = [];
     const body = p.body.replace(/<script(?![^>]*type="application\/json")[^>]*>[\s\S]*?<\/script>\s*/g, (s) => { scripts.push(s.trim()); return ""; });
     let html = (layouts[p.layout || "site"] || fail(`없는 layout: ${p.layout} (${f})`))
-      .replace(/\{\{content\}\}/g, () => body)
+      .replace(/\{\{content\}\}/g, () => sharedAccount(body, "booking", f))
       .replace(/\{\{scripts\}\}/g, () => scripts.join("\n"))
       .replace(/\{\{topnav\}\}/g, () => topnav(p.nav))
       .replace(/\{\{foot\}\}/g, () => foot())
       .replace(/\{\{title\}\}/g, esc(p.title))
       .replace(/\{\{page\}\}/g, f)
+      .replace(/\{\{pack:([a-zA-Z]+)\}\}/g, (_, k) => k === "cards" ? packCards : parts[k] ?? fail(`없는 팩 항목: ${f}/${k}`))
       .replace(/\{\{version\}\}/g, pkg().version)
       .replace(/\{\{icon:([a-z0-9-]+)(?::(\d+))?\}\}/g, (_, n, s) => ico(n, s ? Number(s) : 16))
       .replace(/\{\{dist\}\}/g, dist);

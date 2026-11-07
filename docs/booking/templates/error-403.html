@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-bk-now="2026-11-04T13:10:00+09:00">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>권한 없음 · Catui 예약</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/booking.min.css">
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:booking")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_bk-body">
+<!-- Catui 기본 스타일(리셋·링크·글꼴)은 루트 클래스 안에서만 적용되므로 Catui_site로 감싼다 -->
+<div class="Catui_site Catui_bk Catui_bk-blank" data-catui-bk>
+<main class="Catui_card Catui_bk-blank-card"><div class="Catui_card-b"><div class="Catui_result Catui_result-warning" role="status">
+  <span class="Catui_result-icon" aria-hidden="true"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-lock"></use></svg></span>
+  <h1 class="Catui_result-title">이 화면을 볼 권한이 없습니다</h1>
+  <p class="Catui_result-text">로그인한 계정과 필요한 권한을 확인해 주세요. 권한이 없다면 서비스 관리자에게 접근 권한을 요청하세요.</p>
+  <p class="Catui_help">이 화면은 안내용 예제입니다. 실제 인증·인가와 개인정보 접근 검사는 서버에서 수행해야 하며, 이 페이지를 숨기는 것만으로 접근이 차단되지는 않습니다.</p>
+  <div class="Catui_actions"><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="login.html">다른 계정으로 로그인</a><a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="index.html">홈으로</a></div>
+</div>
+</div></main>
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catbooking.min.js"></script>
+
+</body>
+</html>

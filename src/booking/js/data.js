@@ -3,6 +3,48 @@
 //   catui.booking.dataBase = '/api/'             주소 앞부분 바꾸기 (기본: 화면 옆 data/)
 //   catui.booking.load()                         services·branches·slots·seats·rooms·reservations·staff·schedule·waitlist 를 합쳐 한 번만
 //     · 남은 자리 = 정원 − (slots.json 예약 현황 + 이 브라우저에서 저장한 예약), 금액 = 서비스 원자료로 계산(저장하지 않음)
+const bkFocusView = (el) => {
+  if (!el?.isConnected || el.closest("[hidden]")) return;
+  if (!el.matches('input,select,textarea,button,a[href],[tabindex]')) {
+    el.setAttribute("tabindex", "-1");
+    const clear = () => { if (el.getAttribute("tabindex") === "-1") el.removeAttribute("tabindex"); };
+    booking._on(el, "blur", clear, { once: true }); booking._offs.push(clear);
+  }
+  el.focus({ preventScroll: true });
+};
+const bkLoadView = (box, load, draw, fail = () => {}) => {
+  const children = [...box.childNodes], actions = [...box.querySelectorAll('[data-go], [data-confirm], [type="submit"]')].map((el) => [el, el.disabled]);
+  const run = (retry = false, restoreFocus = false) => {
+    if (retry) box.replaceChildren(...children);
+    actions.forEach(([el]) => { el.disabled = true; });
+    box.setAttribute("aria-busy", "true");
+    return Promise.resolve().then(load).then((d) => {
+      if (booking._dead) return null;
+      actions.forEach(([el, disabled]) => { el.disabled = disabled; });
+      const result = draw(d);
+      if (restoreFocus && document.activeElement === document.body) {
+        const visible = (el) => !el.disabled && !el.closest("[hidden]") && el.getClientRects().length;
+        const field = box.matches("form") && [...box.querySelectorAll('input:not([type="hidden"]),select,textarea')].find(visible);
+        bkFocusView(field || [...box.querySelectorAll("h1,h2,h3,.Catui_empty-title")].find(visible) || box);
+      }
+      return result;
+    }).catch(() => {
+      if (booking._dead) return null;
+      const owned = box.contains(document.activeElement) || (restoreFocus && document.activeElement === document.body);
+      fail();
+      const error = document.createElement(box.matches("ul,ol") ? "li" : "div");
+      error.className = "Catui_empty";
+      error.setAttribute("role", "alert");
+      catui.mount(error, catui.html`<p class="Catui_empty-title">예약 정보를 불러오지 못했습니다</p><p class="Catui_empty-text">연결 상태를 확인하고 다시 시도해 주세요. 선택한 예약 내용은 유지됩니다.</p><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-retry>다시 시도</button>`);
+      box.replaceChildren(error);
+      const button = box.querySelector("[data-retry]");
+      booking._on(button, "click", (e) => run(true, document.activeElement === e.currentTarget), { once: true });
+      if (owned) bkFocusView(button);
+      return null;
+    }).finally(() => box.removeAttribute("aria-busy"));
+  };
+  return run();
+};
 booking.dataBase = "data/";
 booking._dataCache = new Map();
 booking.data = function (name) {
@@ -16,6 +58,8 @@ booking.data = function (name) {
   return this._dataCache.get(url);
 };
 const bkById = (list) => Object.fromEntries((list || []).map((x) => [x.id, x]));
+const bkHasBranch = (d, v) => !!(d.B[v.branch] && d.S[v.svc]?.branches?.includes(v.branch));
+const bkBranchMessage = "선택한 서비스에 맞는 지점을 다시 골라 주세요.";
 booking.load = function () {
   if (this._loaded) return this._loaded;
   const names = ["services", "branches", "slots", "seats", "rooms", "reservations", "staff", "schedule", "waitlist"];
@@ -118,6 +162,7 @@ booking.find = (d, no) => booking.mine(d).find((r) => r.no === no) || null;
 booking.check = function (d, v) {
   const out = [], svc = d.S[v.svc], branch = d.B[v.branch];
   if (!svc || !branch) return ["서비스와 지점을 골라 주세요"];
+  if (!bkHasBranch(d, v)) return [bkBranchMessage];
   const people = (v.adult || 0) + (v.child || 0);
   if (!(v.adult >= 1)) out.push("어른 1명 이상이어야 합니다");
   if (svc.kind === "room") {
@@ -146,7 +191,7 @@ booking.check = function (d, v) {
 /** 진행 중 예약(서비스·지점·날짜)의 시간 칸 */
 booking.slotsFor = function (d, v, date = v.date) {
   const svc = d.S[v.svc], br = d.B[v.branch];
-  if (!svc || !br || !date) return [];
+  if (!bkHasBranch(d, v) || !date || (svc.dates && !svc.dates.includes(date))) return [];
   if (svc.kind === "seat") {
     // 좌석·테이블 회차: 정원 = 배치도의 좌석(테이블) 수, 찬 자리 = 그 회차에 예약된 좌석 수
     return booking.slots({ date, times: svc.times, duration: svc.duration, closed: br.closed, capacity: booking.seatCount(d.maps[svc.map]), booked: booking.seatBooked(d, v.svc, date, { except: v.change }) });

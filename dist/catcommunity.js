@@ -185,6 +185,11 @@ community.ago = function (iso) {
 //   레벨    = 활동 점수(글 10 · 댓글 2 · 받은 추천 1) 구간 → LEVELS
 //   community.row(post, opt)    → 목록 한 줄 마크업 (catui.html, 글자는 모두 이스케이프)
 const CM_LEVELS = [0, 300, 1000, 2500, 5000, 8000, 12000, 18000, 26000];
+const CM_BOARD_PAGES = { list: "board.html", card: "board-card.html", gallery: "board-gallery.html", deal: "hotdeal.html", qna: "qna.html", notice: "notice.html" };
+community.boardHref = (b) => {
+  const page = Object.hasOwn(CM_BOARD_PAGES, b?.type) ? CM_BOARD_PAGES[b.type] : "board.html";
+  return ["board.html", "board-card.html", "board-gallery.html"].includes(page) ? `${page}?b=${encodeURIComponent(b?.id || "free")}` : page;
+};
 community.level = (score) => { let lv = 1; CM_LEVELS.forEach((c, i) => { if (score >= c) lv = i + 1; }); return Math.min(lv, CM_LEVELS.length); };
 community.load = function () {
   if (this._loaded) return this._loaded;
@@ -229,16 +234,16 @@ community.row = function (p, { board = true, rank } = {}) {
 };
 // 위젯 한 줄: 제목 [댓글] · 새 글 표시(N, 3시간 이내) · 날짜
 community.isNew = (p) => community.now() - new Date(p.time) < 3 * 36e5;
-community.mini = function (p, { rank } = {}) {
+community.mini = function (p, { rank, board = false } = {}) {
   const t = new Date(p.time), today = t.toDateString() === this.now().toDateString();
-  return catui.html`<li${this.read.has(p.id) ? catui.html` class="Catui_cm-read"` : ""}>${rank ? catui.html`<span class="Catui_cm-rank">${rank}</span>` : ""}<a href="post.html?id=${p.id}">${p.title}</a>${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}<time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></li>`;
+  return catui.html`<li${this.read.has(p.id) ? catui.html` class="Catui_cm-read"` : ""}>${rank ? catui.html`<span class="Catui_cm-rank${rank <= 3 ? " Catui_cm-rank-top" : ""}">${rank}</span>` : ""}<a href="post.html?id=${p.id}">${board ? catui.html`<span class="Catui_cm-board">${p.boardName}</span>` : ""}${p.title}</a>${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}<time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></li>`;
 };
 // 게시판 표 한 줄: 분류 · 제목[댓글] · 글쓴이 · 날짜 · 조회 · 추천
 community.tr = function (p) {
   const t = new Date(p.time), today = t.toDateString() === this.now().toDateString();
   return catui.html`<tr class="${[this.read.has(p.id) ? "Catui_cm-read" : "", p.cat === "공지" ? "Catui_cm-tr-notice" : ""].filter(Boolean).join(" ")}">
     <td class="Catui_cm-td-cat">${p.cat}</td>
-    <td class="Catui_cm-td-t"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}</a></td>
+    <td class="Catui_cm-td-t"><a class="Catui_cm-title" href="post.html?id=${p.id}"><span class="Catui_cm-cat Catui_cm-mobile-cat">${p.cat}</span><span class="Catui_cm-title-t">${p.title}</span>${p.photo ? catui.html`${catui.icon("image", 12)}<span class="Catui_clip"> 사진</span>` : ""}${p.comments ? cmCmt(p.comments) : ""}${this.isNew(p) ? cmNew() : ""}</a></td>
     <td><span class="Catui_cm-nick">${this.badge(p.author)}${p.author.nick}</span></td>
     <td><time datetime="${p.time}">${today ? catui.util.toDateString(t, "HH:mm") : catui.util.toDateString(t, "MM.dd")}</time></td>
     <td><span class="Catui_clip">조회 </span>${this.format(p.views, "number")}</td>
@@ -313,7 +318,7 @@ community.shell = {
             <input class="Catui_clip" type="radio" name="cm-rank" id="cm-rank-2"><label class="Catui_tab" for="cm-rank-2">7일</label><div class="Catui_panel">${rank(week)}</div>
           </div></div></section>
         <section class="Catui_card" aria-labelledby="cm-aside-fav"><header class="Catui_card-h" id="cm-aside-fav">즐겨찾는 게시판</header>
-          <div class="Catui_card-b">${favs.length ? catui.html`<ul class="Catui_cm-links">${favs.map((b) => catui.html`<li><a href="board.html?b=${b.id}">${b.name}</a><span class="Catui_cm-meta">오늘 ${b.today}</span></li>`)}</ul>` : catui.html`<p class="Catui_help">게시판의 ☆ 버튼으로 추가합니다.</p>`}</div></section>
+          <div class="Catui_card-b">${favs.length ? catui.html`<ul class="Catui_cm-links">${favs.map((b) => catui.html`<li><a href="${community.boardHref(b)}">${b.name}</a><span class="Catui_cm-meta">오늘 ${b.today}</span></li>`)}</ul>` : catui.html`<p class="Catui_help">게시판의 ☆ 버튼으로 추가합니다.</p>`}</div></section>
         <section class="Catui_card" aria-labelledby="cm-aside-notice"><header class="Catui_card-h" id="cm-aside-notice">공지</header>
           <div class="Catui_card-b"><ul class="Catui_cm-links">${notices.slice(0, 4).map((n) => catui.html`<li><a href="notice.html#n${n.id}">${n.title}</a></li>`)}</ul></div></section>`);
     }).catch(() => {});
@@ -332,7 +337,7 @@ community.list = {
   mount(box) {
     const kind = box.getAttribute("data-catui-cm-list"), size = Number(box.dataset.size || 20);
     community.load().then((d) => {
-      const draw = (push) => {
+      const draw = (focus) => {
         const q = community.query(), bid = q.get("b") || box.dataset.board || (kind === "hot" ? "" : "free");
         const b = d.B[bid], cat = q.get("cat") || "", sort = CM_SORTS[q.get("sort")] ? q.get("sort") : kind === "hot" ? "hot" : "new";
         let rows = kind === "hot" ? d.posts.filter((p) => p.hot) : d.posts.filter((p) => p.board === bid);
@@ -360,15 +365,16 @@ community.list = {
           ${body}
           ${pages > 1 ? catui.html`<nav class="Catui_pager" aria-label="페이지">${page > 1 ? catui.html`<a class="Catui_pg" href="${link({ page: page - 1 })}" aria-label="이전 페이지">${catui.icon("chevron-left", 16)}</a>` : ""}${Array.from({ length: pages }, (_, i) => i + 1).map((n) => catui.html`<a class="Catui_pg${n === page ? " Catui_pg-active" : ""}" href="${link({ page: n > 1 ? n : "" })}"${n === page ? catui.html` aria-current="page"` : ""}>${n}</a>`)}${page < pages ? catui.html`<a class="Catui_pg" href="${link({ page: page + 1 })}" aria-label="다음 페이지">${catui.icon("chevron-right", 16)}</a>` : ""}</nav>` : ""}`);
         community.widgets.tick(box);
-        if (push) box.querySelector("h1")?.focus?.();
+        if (focus) box.querySelector(focus)?.focus({ preventScroll: true });
       };
       // 말머리·정렬·페이지는 새로 읽지 않고 주소만 바꿔 다시 그린다(뒤로 가기 지원)
       community._on(box, "click", (e) => {
         const a = e.target.closest(".Catui_cm-cats a, .Catui_cm-sort a, .Catui_pager a");
-        if (!a || e.ctrlKey || e.metaKey) return;
+        if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button) return;
         e.preventDefault();
+        const group = a.closest(".Catui_cm-cats") ? ".Catui_cm-cats" : a.closest(".Catui_cm-sort") ? ".Catui_cm-sort" : ".Catui_pager";
         history.pushState(null, "", a.getAttribute("href"));
-        draw(true);
+        draw(`${group} a[aria-current="page"]`);
         box.scrollIntoView({ block: "start", behavior: "auto" });
       });
       community._on(window, "popstate", () => draw(false));

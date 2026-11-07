@@ -271,6 +271,48 @@ booking.place = function (b, { from = "09:00", to = "21:00" } = {}) {
 //   catui.booking.dataBase = '/api/'             주소 앞부분 바꾸기 (기본: 화면 옆 data/)
 //   catui.booking.load()                         services·branches·slots·seats·rooms·reservations·staff·schedule·waitlist 를 합쳐 한 번만
 //     · 남은 자리 = 정원 − (slots.json 예약 현황 + 이 브라우저에서 저장한 예약), 금액 = 서비스 원자료로 계산(저장하지 않음)
+const bkFocusView = (el) => {
+  if (!el?.isConnected || el.closest("[hidden]")) return;
+  if (!el.matches('input,select,textarea,button,a[href],[tabindex]')) {
+    el.setAttribute("tabindex", "-1");
+    const clear = () => { if (el.getAttribute("tabindex") === "-1") el.removeAttribute("tabindex"); };
+    booking._on(el, "blur", clear, { once: true }); booking._offs.push(clear);
+  }
+  el.focus({ preventScroll: true });
+};
+const bkLoadView = (box, load, draw, fail = () => {}) => {
+  const children = [...box.childNodes], actions = [...box.querySelectorAll('[data-go], [data-confirm], [type="submit"]')].map((el) => [el, el.disabled]);
+  const run = (retry = false, restoreFocus = false) => {
+    if (retry) box.replaceChildren(...children);
+    actions.forEach(([el]) => { el.disabled = true; });
+    box.setAttribute("aria-busy", "true");
+    return Promise.resolve().then(load).then((d) => {
+      if (booking._dead) return null;
+      actions.forEach(([el, disabled]) => { el.disabled = disabled; });
+      const result = draw(d);
+      if (restoreFocus && document.activeElement === document.body) {
+        const visible = (el) => !el.disabled && !el.closest("[hidden]") && el.getClientRects().length;
+        const field = box.matches("form") && [...box.querySelectorAll('input:not([type="hidden"]),select,textarea')].find(visible);
+        bkFocusView(field || [...box.querySelectorAll("h1,h2,h3,.Catui_empty-title")].find(visible) || box);
+      }
+      return result;
+    }).catch(() => {
+      if (booking._dead) return null;
+      const owned = box.contains(document.activeElement) || (restoreFocus && document.activeElement === document.body);
+      fail();
+      const error = document.createElement(box.matches("ul,ol") ? "li" : "div");
+      error.className = "Catui_empty";
+      error.setAttribute("role", "alert");
+      catui.mount(error, catui.html`<p class="Catui_empty-title">예약 정보를 불러오지 못했습니다</p><p class="Catui_empty-text">연결 상태를 확인하고 다시 시도해 주세요. 선택한 예약 내용은 유지됩니다.</p><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-retry>다시 시도</button>`);
+      box.replaceChildren(error);
+      const button = box.querySelector("[data-retry]");
+      booking._on(button, "click", (e) => run(true, document.activeElement === e.currentTarget), { once: true });
+      if (owned) bkFocusView(button);
+      return null;
+    }).finally(() => box.removeAttribute("aria-busy"));
+  };
+  return run();
+};
 booking.dataBase = "data/";
 booking._dataCache = new Map();
 booking.data = function (name) {
@@ -284,6 +326,8 @@ booking.data = function (name) {
   return this._dataCache.get(url);
 };
 const bkById = (list) => Object.fromEntries((list || []).map((x) => [x.id, x]));
+const bkHasBranch = (d, v) => !!(d.B[v.branch] && d.S[v.svc]?.branches?.includes(v.branch));
+const bkBranchMessage = "선택한 서비스에 맞는 지점을 다시 골라 주세요.";
 booking.load = function () {
   if (this._loaded) return this._loaded;
   const names = ["services", "branches", "slots", "seats", "rooms", "reservations", "staff", "schedule", "waitlist"];
@@ -386,6 +430,7 @@ booking.find = (d, no) => booking.mine(d).find((r) => r.no === no) || null;
 booking.check = function (d, v) {
   const out = [], svc = d.S[v.svc], branch = d.B[v.branch];
   if (!svc || !branch) return ["서비스와 지점을 골라 주세요"];
+  if (!bkHasBranch(d, v)) return [bkBranchMessage];
   const people = (v.adult || 0) + (v.child || 0);
   if (!(v.adult >= 1)) out.push("어른 1명 이상이어야 합니다");
   if (svc.kind === "room") {
@@ -414,7 +459,7 @@ booking.check = function (d, v) {
 /** 진행 중 예약(서비스·지점·날짜)의 시간 칸 */
 booking.slotsFor = function (d, v, date = v.date) {
   const svc = d.S[v.svc], br = d.B[v.branch];
-  if (!svc || !br || !date) return [];
+  if (!bkHasBranch(d, v) || !date || (svc.dates && !svc.dates.includes(date))) return [];
   if (svc.kind === "seat") {
     // 좌석·테이블 회차: 정원 = 배치도의 좌석(테이블) 수, 찬 자리 = 그 회차에 예약된 좌석 수
     return booking.slots({ date, times: svc.times, duration: svc.duration, closed: br.closed, capacity: booking.seatCount(d.maps[svc.map]), booked: booking.seatBooked(d, v.svc, date, { except: v.change }) });
@@ -677,6 +722,25 @@ const BK_STEPS = {
 const bkNextOf = (kind, step) => { const s = BK_STEPS[kind] || BK_STEPS.slot, i = s.findIndex((x) => x[0] === step); return `${(s[i + 1] || ["complete"])[0]}.html`; };
 const bkPrevOf = (kind, step) => { const s = BK_STEPS[kind] || BK_STEPS.slot, i = s.findIndex((x) => x[0] === step); return `${(s[i - 1] || ["index"])[0].replace("home", "index")}.html`; };
 const bkGo = (url) => booking.go(url);
+const bkStepLayouts = new WeakMap();
+const bkStepLayout = (box) => {
+  let layout = bkStepLayouts.get(box);
+  if (!layout) {
+    const tabindex = box.getAttribute("tabindex");
+    layout = () => {
+      if (!box.isConnected) return;
+      if (tabindex === null) { if (box.scrollWidth > box.clientWidth) box.setAttribute("tabindex", "0"); else box.removeAttribute("tabindex"); }
+      const active = box.querySelector('[aria-current="step"]');
+      if (!active) return;
+      const outer = box.getBoundingClientRect(), item = active.getBoundingClientRect();
+      if (item.left < outer.left) box.scrollLeft += item.left - outer.left;
+      else if (item.right > outer.right) box.scrollLeft += item.right - outer.right;
+    };
+    bkStepLayouts.set(box, layout); booking._on(window, "resize", layout);
+    booking._offs.push(() => { if (tabindex === null) box.removeAttribute("tabindex"); else box.setAttribute("tabindex", tabindex); bkStepLayouts.delete(box); });
+  }
+  layout();
+};
 
 booking.flow = {
   steps: BK_STEPS,
@@ -686,6 +750,7 @@ booking.flow = {
   steps_(box, kind, cur) {
     const s = BK_STEPS[kind] || BK_STEPS.slot, at = s.findIndex((x) => x[0] === cur);
     catui.mount(box, catui.html`${s.map(([, t], i) => catui.html`${i ? catui.html`<li class="Catui_step-line${i <= at ? " Catui_step-line-done" : ""}" aria-hidden="true"></li>` : ""}<li class="Catui_step${i < at ? " Catui_step-done" : i === at ? " Catui_step-current" : ""}"${i === at ? catui.html` aria-current="step"` : ""}><span class="Catui_step-dot">${i < at ? catui.icon("check", 14) : i + 1}</span><span class="Catui_step-label">${t}${i < at ? bkClip(" 완료") : ""}</span></li>`)}`);
+    bkStepLayout(box);
   },
   /** 금액 줄 마크업 */
   lines(lines, total, { label = "합계" } = {}) {
@@ -696,7 +761,7 @@ booking.flow = {
   summary(box, d, v) {
     if (!box) return;
     const svc = d.S[v.svc], br = d.B[v.branch];
-    if (!svc) { catui.mount(box, catui.html`<h2 class="Catui_h3">예약 내용</h2><p class="Catui_help">서비스를 먼저 골라 주세요.</p>`); return; }
+    if (!svc || !bkHasBranch(d, v)) { catui.mount(box, catui.html`<h2 class="Catui_h3">예약 내용</h2><p class="Catui_help">${svc ? bkBranchMessage : "서비스를 먼저 골라 주세요."}</p>`); return; }
     const a = booking.amountOf(d, v), none = catui.html`<span class="Catui_bk-muted">고르지 않음</span>`;
     const rows = [["서비스", svc.name], ["지점", br?.name || none]];
     if (svc.kind === "room") {
@@ -715,8 +780,8 @@ booking.flow = {
   /** 서비스·지점이 없으면 안내를 그리고 false */
   need(box, d, v, { kind } = {}) {
     const svc = d.S[v.svc];
-    if (svc && d.B[v.branch] && (!kind || [].concat(kind).includes(svc.kind))) { this.empty(box, null); return true; }
-    this.empty(box, catui.html`<p class="Catui_empty-title">예약할 서비스를 먼저 골라 주세요</p><p class="Catui_empty-text">${svc ? "이 단계는 고른 서비스에서 쓰지 않습니다." : "진행 중인 예약이 없습니다."}</p><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="index.html">서비스 고르기</a>`);
+    if (bkHasBranch(d, v) && (!kind || [].concat(kind).includes(svc.kind))) { this.empty(box, null); return true; }
+    this.empty(box, catui.html`<p class="Catui_empty-title">예약할 서비스를 먼저 골라 주세요</p><p class="Catui_empty-text">${!svc ? "진행 중인 예약이 없습니다." : !bkHasBranch(d, v) ? bkBranchMessage : "이 단계는 고른 서비스에서 쓰지 않습니다."}</p><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="index.html">서비스 고르기</a>`);
     return false;
   },
   /** 빈 상태 안내 — 상자의 원래 마크업은 지우지 않고 숨겼다가(다시 연결하면 되살림) 안내만 끼운다. markup이 null이면 되돌림 */
@@ -738,7 +803,7 @@ booking.flow = {
     root.querySelectorAll("[data-catui-bk-steps]").forEach((b) => this.steps_(b, svc?.kind || "slot", b.getAttribute("data-catui-bk-steps") || step));
     root.querySelectorAll("[data-catui-bk-summary]").forEach((b) => this.summary(b, d, v));
     root.querySelectorAll("[data-catui-bk-prev]").forEach((a) => { a.href = bkPrevOf(svc?.kind, step); });
-    root.querySelectorAll("[data-svc-name]").forEach((x) => { x.textContent = svc ? `${svc.name} · ${d.B[v.branch]?.name || ""}` : ""; });
+    root.querySelectorAll("[data-svc-name]").forEach((x) => { x.textContent = svc ? `${svc.name} · ${bkHasBranch(d, v) ? d.B[v.branch].name : "지점 재선택 필요"}` : ""; });
   },
 };
 /** 주소 이동 (테스트·SPA 라우터에서 바꿔 끼울 수 있음) */
@@ -753,15 +818,18 @@ booking.warn = function (msgBox, text, focusEl) {
 // ── 홈: 서비스·지점 ──
 booking.home = {
   from(d, svc) {
-    if (svc.kind === "room") return `1박 ${booking.won(Math.min(...d.rooms.map((r) => r.price)))}부터`;
-    if (svc.kind === "seat" && d.maps[svc.map]?.grades) return `${booking.won(Math.min(...d.maps[svc.map].grades.map((g) => g.price)))}부터`;
+    if (svc.kind === "room") {
+      const room = [...d.rooms].sort((a, b) => a.price - b.price)[0];
+      return room ? `평일 1박 · 기준 ${room.base}인 ${booking.won(room.price)}부터` : "객실 요금 확인";
+    }
+    if (svc.kind === "seat" && d.maps[svc.map]?.grades) return `성인 1인 ${booking.won(Math.min(...d.maps[svc.map].grades.map((g) => g.price)))}부터`;
     if (svc.kind === "seat") return `예약금 1인 ${booking.won(svc.price)}`;
-    return `${booking.won(svc.price)}부터`;
+    return `성인 1인 ${booking.won(svc.price)}부터`;
   },
   init(root) {
     const box = root.querySelector("[data-catui-bk-home]"), nextBox = root.querySelector("[data-catui-bk-next]");
     if (!box && !nextBox) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box || nextBox, () => booking.load(), (d) => {
       if (box) catui.mount(box, catui.html`${d.services.map((s) => {
         const first = s.kind === "room" ? "rooms" : "date";
         return catui.html`<li class="Catui_bk-svc" data-tone="${s.tone || 1}">
@@ -784,7 +852,7 @@ booking.home = {
           : catui.html`<p class="Catui_help">다가오는 예약이 없습니다.</p>`);
       }
       return d;
-    }).catch(() => null);
+    }, () => { if (nextBox && box) nextBox.textContent = "예약 내역을 불러오지 못했습니다. 서비스 목록의 다시 시도를 눌러 주세요."; });
   },
 };
 
@@ -811,7 +879,7 @@ booking.datePage = {
   init(root) {
     const box = root.querySelector("[data-catui-bk-date]");
     if (!box) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box, () => booking.load(), (d) => {
       let v = booking.draft.fromQuery();
       const svc = d.S[v.svc];
       if (svc && !v.branch) v = booking.draft.set({ branch: svc.branches[0] });
@@ -843,7 +911,7 @@ booking.datePage = {
         bkGo(bkNextOf(svc.kind, "date"));
       });
       return d;
-    }).catch(() => null);
+    });
   },
 };
 
@@ -885,7 +953,7 @@ booking.peoplePage = {
   init(root) {
     const box = root.querySelector("[data-catui-bk-people]");
     if (!box) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box, () => booking.load(), (d) => {
       let v = booking.draft.fromQuery();
       booking.flow.frame(root, d, v, "people");
       if (!booking.flow.need(box.querySelector("[data-body]") || box, d, v, { kind: ["slot", "seat"] })) return d;
@@ -918,7 +986,7 @@ booking.peoplePage = {
       });
       sync();
       return d;
-    }).catch(() => null);
+    });
   },
 };
 
@@ -980,7 +1048,7 @@ booking.seatPage = {
   init(root) {
     const box = root.querySelector("[data-catui-bk-seats]");
     if (!box) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box, () => booking.load(), (d) => {
       let v = booking.draft.fromQuery();
       booking.flow.frame(root, d, v, "seats");
       const body = box.querySelector("[data-body]") || box;
@@ -1014,7 +1082,7 @@ booking.seatPage = {
       });
       paint();
       return d;
-    }).catch(() => null);
+    });
   },
 };
 
@@ -1061,7 +1129,7 @@ booking.roomPage = {
   init(root) {
     const box = root.querySelector("[data-catui-bk-rooms]");
     if (!box) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box, () => booking.load(), (d) => {
       let v = booking.draft.fromQuery();
       const svc = d.S[v.svc];
       if (svc && !v.branch) v = booking.draft.set({ branch: svc.branches[0] });
@@ -1113,7 +1181,7 @@ booking.roomPage = {
       });
       sync();
       return d;
-    }).catch(() => null);
+    });
   },
 };
 
@@ -1122,28 +1190,35 @@ booking.infoPage = {
   init(root) {
     const form = root.querySelector("form[data-catui-bk-info]");
     if (!form) return;
-    this.ready = booking.load().then((d) => {
-      let v = booking.draft.get();
+    const fields = ["name", "phone", "email", "request"], edited = new Set();
+    const all = form.querySelector("[data-agree-all]"), each = () => [...form.querySelectorAll("[data-agree]")], msg = form.querySelector("[data-msg]");
+    let loaded = false;
+    const track = (e) => { if (fields.includes(e.target.name)) edited.add(e.target.name); };
+    booking._on(form, "input", track);
+    booking._on(form, "change", (e) => {
+      track(e);
+      if (e.target === all) each().forEach((x) => { x.checked = all.checked; });
+      else if (e.target.matches("[data-agree]")) all.checked = each().every((x) => x.checked);
+    });
+    booking._on(form, "submit", (e) => {
+      e.preventDefault();
+      if (!loaded) return;
+      if (!catui.form.validate(form)) { booking.warn(msg, "입력 내용을 확인해 주세요", form.querySelector("[aria-invalid=true]")); return; }
+      const miss = each().find((x) => x.required && !x.checked);
+      if (miss) { booking.warn(msg, "필수 약관에 동의해 주세요", miss); return; }
+      const f = form.elements;
+      booking.draft.set({ name: f.name.value.trim(), phone: f.phone.value.trim(), email: f.email.value.trim(), request: f.request.value.trim(), notify: !!f.notify?.checked });
+      bkGo("confirm.html");
+    });
+    this.ready = bkLoadView(form, () => booking.load(), (d) => {
+      const v = booking.draft.get();
       booking.flow.frame(root, d, v, "info");
       if (!booking.flow.need(form, d, v)) return d;
-      for (const k of ["name", "phone", "email", "request"]) if (v[k] && form.elements[k]) form.elements[k].value = v[k];
+      for (const k of fields) if (!edited.has(k) && v[k] && form.elements[k]) form.elements[k].value = v[k];
       root.querySelectorAll("[data-refund-table]").forEach((b) => catui.mount(b, booking.view.refund(v.date ? { date: v.date, time: v.time } : null)));
-      const all = form.querySelector("[data-agree-all]"), each = () => [...form.querySelectorAll("[data-agree]")], msg = form.querySelector("[data-msg]");
-      booking._on(form, "change", (e) => {
-        if (e.target === all) each().forEach((x) => { x.checked = all.checked; });
-        else if (e.target.matches("[data-agree]")) all.checked = each().every((x) => x.checked);
-      });
-      booking._on(form, "submit", (e) => {
-        e.preventDefault();
-        if (!catui.form.validate(form)) { booking.warn(msg, "입력 내용을 확인해 주세요", form.querySelector("[aria-invalid=true]")); return; }
-        const miss = each().find((x) => x.required && !x.checked);
-        if (miss) { booking.warn(msg, "필수 약관에 동의해 주세요", miss); return; }
-        const f = form.elements;
-        v = booking.draft.set({ name: f.name.value.trim(), phone: f.phone.value.trim(), email: f.email.value.trim(), request: f.request.value.trim(), notify: !!f.notify?.checked });
-        bkGo("confirm.html");
-      });
+      loaded = true;
       return d;
-    }).catch(() => null);
+    }, () => { loaded = false; });
   },
 };
 
@@ -1152,7 +1227,7 @@ booking.confirmPage = {
   init(root) {
     const box = root.querySelector("[data-catui-bk-confirm]");
     if (!box) return;
-    this.ready = booking.load().then((d) => {
+    this.ready = bkLoadView(box, () => booking.load(), (d) => {
       const v = booking.draft.get();
       booking.flow.frame(root, d, v, "confirm");
       const body = box.querySelector("[data-body]") || box;
@@ -1173,7 +1248,7 @@ booking.confirmPage = {
         bkGo(`complete.html?no=${encodeURIComponent(r.no)}`);
       });
       return d;
-    }).catch(() => null);
+    });
   },
 };
 
@@ -1477,7 +1552,28 @@ booking.adminPage = {
 //   [data-catui-bk-theme]           테마 전환 (booking.theme)
 booking.shell = {
   init(root) {
-    if (booking._once(root, "photo-errors")) booking._on(root, "error", (e) => { if (e.target.matches?.(".Catui_bk-photo, .Catui_bk-hero-img")) e.target.hidden = true; }, true);
+    const nav = root.querySelector(".Catui_bk-nav");
+    if (nav && booking._once(nav, "current-visible")) {
+      const layout = () => {
+        const active = nav.querySelector('[aria-current="page"]');
+        if (!active) return;
+        const outer = nav.getBoundingClientRect(), item = active.getBoundingClientRect();
+        if (item.left < outer.left) nav.scrollLeft += item.left - outer.left;
+        else if (item.right > outer.right) nav.scrollLeft += item.right - outer.right;
+      };
+      booking._on(window, "resize", layout);
+      layout();
+    }
+    root.querySelectorAll("[data-catui-bk-summary]").forEach((summary) => {
+      if (!booking._once(summary, "responsive-summary")) return;
+      const parent = summary.parentElement, main = parent.querySelector(".Catui_bk-flow-main"), bar = main?.querySelector(".Catui_bk-next-bar");
+      if (!bar) return;
+      const mobile = matchMedia("(max-width: 991px)");
+      const layout = () => { if (mobile.matches) bar.before(summary); else parent.appendChild(summary); };
+      booking._on(mobile, "change", layout);
+      layout();
+    });
+    if (booking._once(root, "photo-errors")) booking._on(root, "error", (e) => { if (e.target.matches?.(".Catui_bk-photo, .Catui_bk-hero-img, .Catui_bk-pack-intro > img")) e.target.hidden = true; }, true);
     root.querySelectorAll("[data-catui-bk-won]").forEach((el) => { el.textContent = booking.won(el.getAttribute("data-catui-bk-won")); });
     root.querySelectorAll("[data-catui-bk-today]").forEach((el) => { el.textContent = booking.dateLabel(booking.today(), { year: true }); });
     booking._on(root, "click", (e) => {

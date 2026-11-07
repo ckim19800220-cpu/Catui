@@ -1,0 +1,1019 @@
+{
+ "url": "https://hongguoduanju.com/detail?series_id=7703101760604212248",
+ "at": "2026-11-07T15:44:02.748Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.48,
+    0.55,
+    0.43
+   ],
+   "motion": {
+    "elements": 17,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 17,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 2275,
+     "screens": 2.5,
+     "words": 201,
+     "img": 117,
+     "video": 0,
+     "canvas": 0,
+     "svg": 122,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 19,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "687ebdc03b4d5b2aed7771647b16327c~tplv-shrink:640",
+      "170b7b36a64c7494e505a6c5b47d46a2~tplv-shrink:640",
+      "3767fb89e381942dde8a0e9a66654830~tplv-shrink:640",
+      "10dceda80aa9dc7bdb8d7b2de6082d83~tplv-shrink:640",
+      "0aa6041a9d6c405bf5f7ea33604ec2d3~tplv-shrink:640",
+      "4613df365e9f3eee2c909b5b2412c7c8~tplv-shrink:640",
+      "5c0636af638231d58c4c188c4f88d1c2~tplv-shrink:640",
+      "93075d976a6f258056006d2287724565~tplv-shrink:640"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [
+      "⚈",
+      "🍔",
+      "🍰"
+     ],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "重生！丑小鸭逆袭成了万人迷第五季",
+     "words": 1,
+     "chars": 16,
+     "lines": 1,
+     "size": 20,
+     "vw": 1.4,
+     "font": "PingFang SC",
+     "weight": 500,
+     "tracking": 0,
+     "leading": 1.6,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.22,
+     "top": 134,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "重生！丑小鸭逆袭成了万人迷第五季",
+     "words": 1,
+     "lines": 1,
+     "size": 20,
+     "font": "PingFang SC"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "PingFang SC",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      14,
+      16,
+      18,
+      20
+     ],
+     "sizeCount": 5,
+     "notLoaded": [
+      "PingFang SC"
+     ],
+     "body": {
+      "font": "PingFang SC",
+      "size": 14,
+      "leading": 1.57,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 18.5
+     },
+     "measureChars": 38,
+     "max": {
+      "size": 20,
+      "vw": 1.4,
+      "font": "PingFang SC",
+      "text": "重生！丑小鸭逆袭成了万人迷第五季"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.08,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#131414",
+     "bodyBgHsl": {
+      "h": 180,
+      "s": 0.03,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#131414",
+       "top": 0,
+       "hsl": {
+        "h": 180,
+        "s": 0.03,
+        "l": 0.08
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#ffffff",
+       "share": 0.92
+      },
+      {
+       "color": "#747474",
+       "share": 0.08
+      },
+      {
+       "color": "#d7a461",
+       "share": 0.01
+      },
+      {
+       "color": "#fa7705",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#ff7e0d",
+      "hsl": {
+       "h": 28,
+       "s": 1,
+       "l": 0.53
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": [
+      {
+       "text": "北京笔墨留香科技有限公司 | 地址 : 北京市门头沟区石龙经济开发区永安路20号",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "电子营业执照",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "京ICP备2021028909号-43",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "京公网安备 11010802040767",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "网络文化经营许可证：京网文〔2025〕0222-071号",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "增值电信业务经营许可证：京B2-20220790",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 12,
+     "height": 45,
+     "withShadow": 0,
+     "withGradient": 1,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "播放正片"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 1,
+     "scrims": 0,
+     "gradientSamples": [
+      "div.pc-cover-img-iEdwqI → radial-gradient(79.79% 63.64% at 51.35% -3.04%, rgba(250, 119, 5, 0.1) 0px, rgba(0, 0, 0, 0) 100%), radial-gra"
+     ],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "footer.pc-container-RbJZ85.m-container-wX_1Z7 1240px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 26,
+     "boxRadius": 12,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 9,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 538
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 8,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 2275,
+    "margins": {
+     "left": 100,
+     "right": 100
+    },
+    "sections": [
+     {
+      "sel": "div.pc-cover-Iw3ETM",
+      "tag": "div",
+      "top": 0,
+      "height": 920,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.pc-page-rVNRMR",
+      "tag": "div",
+      "top": 0,
+      "height": 426,
+      "words": 35,
+      "media": 2,
+      "middle": 49,
+      "heading": {
+       "text": "重生！丑小鸭逆袭成了万人迷第五季",
+       "size": 20,
+       "tag": "h1"
+      },
+      "left": 100,
+      "right": 187,
+      "textLeft": 276,
+      "textRight": 187,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.pc-section-vYH8jE.mobile-review-section-RK_zVK",
+      "tag": "section",
+      "top": 490,
+      "height": 186,
+      "words": 241,
+      "media": 0,
+      "middle": 1574,
+      "heading": null,
+      "left": 100,
+      "right": 0,
+      "textLeft": 100,
+      "textRight": 114,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.pc-page-hDe3cf.pc-compact-E2ZVFW",
+      "tag": "div",
+      "top": 676,
+      "height": 808,
+      "words": 61,
+      "media": 24,
+      "middle": 22,
+      "heading": null,
+      "left": 100,
+      "right": 100,
+      "textLeft": 100,
+      "textRight": 108,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.pc-page-hDe3cf.pc-compact-E2ZVFW",
+      "tag": "div",
+      "top": 1484,
+      "height": 442,
+      "words": 29,
+      "media": 12,
+      "middle": 22,
+      "heading": null,
+      "left": 100,
+      "right": 100,
+      "textLeft": 100,
+      "textRight": 100,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.pc-page-c99OQM",
+      "tag": "div",
+      "top": 1926,
+      "height": 349,
+      "words": 14,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 378,
+      "right": 378,
+      "textLeft": 378,
+      "textRight": 378,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "重生！丑小鸭逆袭成了万人迷第五季",
+      "size": 20,
+      "top": 134,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 276,
+      "n": 2
+     },
+     {
+      "x": 116,
+      "n": 1
+     },
+     {
+      "x": 430,
+      "n": 1
+     },
+     {
+      "x": 744,
+      "n": 1
+     },
+     {
+      "x": 1058,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 6,
+    "bodySize": 14,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.12,
+    "voidBox": {
+     "x": 180,
+     "y": 660,
+     "w": 1260,
+     "h": 120
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.86,
+    0.95,
+    0.94
+   ],
+   "motion": {
+    "elements": 16,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 16,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 1917,
+     "screens": 2.3,
+     "words": 176,
+     "img": 112,
+     "video": 0,
+     "canvas": 0,
+     "svg": 116,
+     "sections": 1,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 3,
+     "brokenImages": [],
+     "emoji": [
+      "⚈",
+      "🍔",
+      "🍰"
+     ],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "重生！丑小鸭逆袭成了万人迷第五季",
+     "words": 1,
+     "chars": 16,
+     "lines": 2,
+     "size": 20,
+     "vw": 5.1,
+     "font": "PingFang SC",
+     "weight": 500,
+     "tracking": 0,
+     "leading": 1.5,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "right",
+     "widthRatio": 0.63,
+     "top": 108,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "重生！丑小鸭逆袭成了万人迷第五季",
+     "words": 1,
+     "lines": 2,
+     "size": 20,
+     "font": "PingFang SC"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "PingFang SC",
+       "share": 1,
+       "mono": false
+      },
+      {
+       "family": "HongguoRating",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      12,
+      14,
+      15,
+      16,
+      20
+     ],
+     "sizeCount": 6,
+     "notLoaded": [
+      "PingFang SC"
+     ],
+     "body": {
+      "font": "PingFang SC",
+      "size": 16,
+      "leading": 1.62,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 18.5
+     },
+     "measureChars": 36,
+     "max": {
+      "size": 20,
+      "vw": 5.1,
+      "font": "PingFang SC",
+      "text": "重生！丑小鸭逆袭成了万人迷第五季"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.06,
+     "smallText": 1
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#131414",
+     "bodyBgHsl": {
+      "h": 180,
+      "s": 0.03,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#ffffff",
+       "share": 1
+      },
+      {
+       "color": "#82a5cd",
+       "share": 0
+      }
+     ],
+     "button": null,
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 2,
+     "scrims": 1,
+     "gradientSamples": [
+      "div.m-container-Kg6gsa → radial-gradient(95% 45% at 85% 0px, rgba(58, 227, 221, 0.12) 0px, rgba(0, 0, 0, 0) 100%), radial-gradient(60% ",
+      "div.m-btn-VZM03v → linear-gradient(92.27deg, rgb(255, 126, 13) 0.32%, rgb(255, 146, 51))"
+     ],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 9,
+     "boxRadius": 12,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 9,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 661
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 5,
+     "fixed": true,
+     "height": 48,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "hongguorating"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 1917,
+    "margins": {
+     "left": 16,
+     "right": 0
+    },
+    "sections": [
+     {
+      "sel": "div.m-page-PUpuv6",
+      "tag": "div",
+      "top": 0,
+      "height": 521,
+      "words": 30,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "重生！丑小鸭逆袭成了万人迷第五季",
+       "size": 20,
+       "tag": "h1"
+      },
+      "left": 16,
+      "right": 0,
+      "textLeft": 16,
+      "textRight": 0,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.pc-section-vYH8jE.mobile-review-section-RK_zVK",
+      "tag": "section",
+      "top": 549,
+      "height": 240,
+      "words": 219,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 0,
+      "textLeft": 16,
+      "textRight": 0,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.m-page-lZ92O1.m-detail-design-LA0NHx",
+      "tag": "div",
+      "top": 821,
+      "height": 478,
+      "words": 24,
+      "media": 0,
+      "middle": 8,
+      "heading": null,
+      "left": 16,
+      "right": 16,
+      "textLeft": 16,
+      "textRight": 16,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.m-page-lZ92O1.m-detail-design-LA0NHx",
+      "tag": "div",
+      "top": 1331,
+      "height": 478,
+      "words": 24,
+      "media": 0,
+      "middle": 8,
+      "heading": null,
+      "left": 16,
+      "right": 16,
+      "textLeft": 16,
+      "textRight": 16,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "重生！丑小鸭逆袭成了万人迷第五季",
+      "size": 20,
+      "top": 108,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "151-180",
+      "side": "right",
+      "px": 0
+     },
+     {
+      "text": "2026-11-06",
+      "side": "right",
+      "px": 0
+     },
+     {
+      "text": "曾经有一段时间，我以为人生被一场意外按下了暂停键，窗外的光和我隔着一层玻璃。后来我慢慢明白，暂停不等",
+      "side": "right",
+      "px": 0
+     },
+     {
+      "text": "姜叙臣",
+      "side": "right",
+      "px": 0
+     }
+    ],
+    "edges": [
+     {
+      "x": 32,
+      "n": 1
+     },
+     {
+      "x": 130,
+      "n": 1
+     },
+     {
+      "x": 368,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 3,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "emoji",
+   "width": 1440,
+   "message": "Emoji in the page: ⚈ 🍔 🍰",
+   "fix": "Remove. Use words or real imagery.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 1440,
+   "message": "1 gradient fill(s): div.pc-cover-img-iEdwqI → radial-gradient(79.79% 63.64% at 51.35% -3.04%, rgba(250, 119, 5, 0.1) 0px, rgba(0, 0, 0, 0) 100%), radial-gra",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "button-fx",
+   "width": 1440,
+   "message": "Buttons with gradient fill.",
+   "fix": "Flat fill, one colour."
+  },
+  {
+   "level": "WARN",
+   "id": "hairline",
+   "width": 1440,
+   "message": "1 thin rule(s)/divider line(s): footer.pc-container-RbJZ85.m-container-wX_1Z7 1240px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields."
+  },
+  {
+   "level": "WARN",
+   "id": "contrast",
+   "width": 1440,
+   "message": "Low-contrast text: \"北京笔墨留香科技有限公司 | 地址 : 北京市门头沟区石龙经济开发区永安路20号\" 3.9:1 needs 4.5:1; \"电子营业执照\" 3.9:1 needs 4.5:1; \"京ICP备2021028909号-43\" 3.9:1 needs 4.5:1; \"京公网安备 11010802040767\" 3.9:1 needs 4.5:1",
+   "fix": "Darken or lighten the text colour."
+  },
+  {
+   "level": "WARN",
+   "id": "font-fallback",
+   "width": 1440,
+   "message": "Typeface(s) declared but not loaded, so a fallback is rendering: PingFang SC",
+   "fix": "Fix the font URL / family name, or the screenshots you are judging are not the design.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "body-size",
+   "width": 1440,
+   "message": "Body text is 14px (the size most of the running text is set in).",
+   "fix": "Body copy 16–20px. Map small sizes from blueprints onto your body step."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "side-scroll",
+   "width": 1440,
+   "message": "1 row(s) scroll sideways with content past their edge.",
+   "fix": "Jurors and most visitors read a row cut at the edge as clipped, not as scrollable. Wrap it onto more lines, or end it inside the grid.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "focal-point",
+   "width": 1440,
+   "message": "The first screen has no dominant element: the largest type is 20px (1.4vw) and no single picture holds a third of the viewport.",
+   "fix": "Make one thing lead: the headline at display size, or one large picture. A grid of many small pictures is not one thing; in blind tests jurors marked a first screen without a headline down every time. On the strongest studied sites the largest type has a median of 8.4vw."
+  },
+  {
+   "level": "WARN",
+   "id": "empty-middle",
+   "width": 1440,
+   "message": "1 section(s) have content at both edges and 1574px of nothing between: section.pc-section-vYH8jE.mobile-review-section-RK_zVK",
+   "fix": "Bring the two parts together on the grid, or put the picture or figure of the section in the middle. An empty middle third reads as a hole, the same as an empty half."
+  },
+  {
+   "level": "WARN",
+   "id": "small-title",
+   "width": 1440,
+   "message": "The h1 is 20px (\"重生！丑小鸭逆袭成了万人迷第五季\").",
+   "fix": "Set the title at display size, or make the large text of the first screen the h1.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "name-only-title",
+   "width": 1440,
+   "message": "The h1 is a bare name (\"重生！丑小鸭逆袭成了万人迷第五季\") and nothing else on the first screen says what this is.",
+   "fix": "Keep the name if it leads, and give the line under it (18px or more) the plain words: what it is, for whom, where or when. In the study of 97 Sites of the Day, first screens that named nothing lost usability and content points.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "first-action",
+   "width": 390,
+   "message": "No visible button in the first phone screen.",
+   "fix": "On a phone the first screen still holds the headline, the supporting sentence and the action; move navigation into one row or a menu so it does not push them down."
+  },
+  {
+   "level": "WARN",
+   "id": "small-text",
+   "width": 390,
+   "message": "1 text block(s) under 13px.",
+   "fix": "Nothing meant to be read goes below 13px."
+  },
+  {
+   "level": "WARN",
+   "id": "off-centre",
+   "width": 390,
+   "message": "The margins differ: 16px on the left, 0px on the right, at 390px.",
+   "fix": "Put the navigation and the content on one pair of margins; check for padding on one side only, a scrollbar gutter, or a header on another inset than the page."
+  },
+  {
+   "level": "WARN",
+   "id": "untitled-section",
+   "width": 390,
+   "message": "A section carries text but no heading: section.pc-section-vYH8jE.mobile-review-section-RK_zVK at 549px.",
+   "fix": "Name it with a short heading unless it is the continuation of the section above."
+  },
+  {
+   "level": "FAIL",
+   "id": "edge-text",
+   "width": 390,
+   "message": "4 text block(s) sit within 12px of the screen edge: \"151-180\" (0px from the right); \"2026-11-06\" (0px from the right); \"曾经有一段时间，我以为人生被一场意外按下了暂停键，窗外的光和\" (0px from the right); \"姜叙臣\" (0px from the right)",
+   "fix": "Keep text inside the page margin (16–20px). Only display type deliberately bled past the edge may touch it."
+  },
+  {
+   "level": "FAIL",
+   "id": "reduced-hidden",
+   "width": 1440,
+   "message": "With reduced motion requested, 14 text block(s) on the first screen stay invisible: \"真人剧\", \"AI剧\", \"红果热播榜\", \"真人剧热播榜\"",
+   "fix": "Put every hidden starting state inside @media (prefers-reduced-motion: no-preference); the reduced page is the finished page (references/motion.md §8)."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\drama-ref-detail\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\drama-ref-detail\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\drama-ref-detail\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\drama-ref-detail\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

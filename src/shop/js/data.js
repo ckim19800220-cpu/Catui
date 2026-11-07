@@ -4,6 +4,23 @@
 //   catui.shop.load()                             상품·분류·리뷰·쿠폰·회원·기획전을 합쳐 화면에 쓰는 값으로 (한 번만 계산)
 //     · 판매가·할인율·재고 합·품절 = 상품 원자료에서, 별점 평균·리뷰 수·분포 = reviews.json에서, 적립금 = 회원 적립 내역 합
 //     · 베스트 = 판매 수 상위 6개, 신상품 = 등록 14일 이내, 쿠폰 만료 = shop.now() 기준
+const shLoadView = (box, load, draw) => {
+  const children = [...box.childNodes];
+  const run = (retry = false) => {
+    if (retry) box.replaceChildren(...children);
+    box.setAttribute("aria-busy", "true");
+    return Promise.resolve().then(load).then((d) => shop._dead ? null : draw(d)).catch(() => {
+      if (shop._dead) return null;
+      const error = document.createElement(box.matches("ul,ol") ? "li" : "div");
+      if (box.matches("ul,ol")) error.className = "Catui_sh-wide";
+      catui.mount(error, catui.html`<div class="Catui_empty" role="alert"><p class="Catui_empty-title">상품 정보를 불러오지 못했습니다</p><p class="Catui_empty-text">연결 상태를 확인하고 다시 시도해 주세요.</p><button class="Catui_btn Catui_btn-md Catui_btn-secondary" type="button" data-retry>다시 시도</button></div>`);
+      box.replaceChildren(error);
+      shop._on(box.querySelector("[data-retry]"), "click", () => run(true), { once: true });
+      return null;
+    }).finally(() => box.removeAttribute("aria-busy"));
+  };
+  return run();
+};
 shop.dataBase = "data/";
 shop._dataCache = new Map();
 shop.data = function (name) {

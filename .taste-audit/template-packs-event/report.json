@@ -1,0 +1,1725 @@
+{
+ "url": "docs/booking/templates/event.html",
+ "at": "2026-11-07T14:23:51.113Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.46,
+    0.5
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 1224,
+     "screens": 1.4,
+     "words": 244,
+     "img": 1,
+     "video": 0,
+     "canvas": 0,
+     "svg": 3,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 1,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "workspace.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Catui 실무 워크숍",
+     "words": 3,
+     "chars": 12,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "right",
+     "widthRatio": 0.47,
+     "top": 187,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Catui 실무 워크숍",
+     "words": 3,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      24
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 13,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 11
+     },
+     "measureChars": 196,
+     "max": {
+      "size": 24,
+      "vw": 1.7,
+      "font": "Inter",
+      "text": "Catui 실무 워크숍"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.05,
+     "centerShare": 0,
+     "smallText": 3
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.51
+      },
+      {
+       "color": "#66727e",
+       "share": 0.4
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.06
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 7,
+     "inHero": 6,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "템플릿 팩",
+      "참가 회차·요금 확인",
+      "행사 소개",
+      "프로그램"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 2,
+     "hairlineSamples": [
+      "header.Catui_bk-head 1440px",
+      "footer.Catui_bk-foot 1440px"
+     ],
+     "outlinedBoxes": 3,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 3,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 1,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.13
+     }
+    ],
+    "nav": {
+     "links": 7,
+     "fixed": true,
+     "height": 81,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 1224,
+    "margins": {
+     "left": 132,
+     "right": 165
+    },
+    "sections": [
+     {
+      "sel": "main#bk-main.Catui_bk-main",
+      "tag": "main",
+      "top": 81,
+      "height": 1023,
+      "words": 175,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Catui 실무 워크숍",
+       "size": 24,
+       "tag": "h1"
+      },
+      "left": 132,
+      "right": 165,
+      "textLeft": 132,
+      "textRight": 165,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_bk-foot",
+      "tag": "footer",
+      "top": 1104,
+      "height": 121,
+      "words": 51,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 132,
+      "right": 191,
+      "textLeft": 132,
+      "textRight": 191,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Catui 실무 워크숍",
+      "size": 24,
+      "top": 187,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 132,
+      "n": 1
+     },
+     {
+      "x": 153,
+      "n": 1
+     },
+     {
+      "x": 636,
+      "n": 1
+     },
+     {
+      "x": 977,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 4,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.09,
+    "voidBox": {
+     "x": 1200,
+     "y": 120,
+     "w": 240,
+     "h": 480
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.64,
+    0.8
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 1314,
+     "screens": 1.3,
+     "words": 244,
+     "img": 1,
+     "video": 0,
+     "canvas": 0,
+     "svg": 3,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 1,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "workspace.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Catui 실무 워크숍",
+     "words": 3,
+     "chars": 12,
+     "lines": 1,
+     "size": 24,
+     "vw": 3.1,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "right",
+     "widthRatio": 0.53,
+     "top": 105,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Catui 실무 워크숍",
+     "words": 3,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      24
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 13,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 11
+     },
+     "measureChars": 121,
+     "max": {
+      "size": 24,
+      "vw": 3.1,
+      "font": "Inter",
+      "text": "Catui 실무 워크숍"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.05,
+     "centerShare": 0,
+     "smallText": 3
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.51
+      },
+      {
+       "color": "#66727e",
+       "share": 0.4
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.06
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 7,
+     "inHero": 6,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "템플릿 팩",
+      "참가 회차·요금 확인",
+      "행사 소개",
+      "프로그램"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 2,
+     "hairlineSamples": [
+      "header.Catui_bk-head 768px",
+      "footer.Catui_bk-foot 768px"
+     ],
+     "outlinedBoxes": 3,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 3,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 1,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.08
+     }
+    ],
+    "nav": {
+     "links": 7,
+     "fixed": true,
+     "height": 81,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 1314,
+    "margins": {
+     "left": 20,
+     "right": 35
+    },
+    "sections": [
+     {
+      "sel": "main#bk-main.Catui_bk-main",
+      "tag": "main",
+      "top": 81,
+      "height": 1094,
+      "words": 175,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Catui 실무 워크숍",
+       "size": 24,
+       "tag": "h1"
+      },
+      "left": 20,
+      "right": 24,
+      "textLeft": 20,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_bk-foot",
+      "tag": "footer",
+      "top": 1175,
+      "height": 139,
+      "words": 51,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 35,
+      "textLeft": 20,
+      "textRight": 35,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Catui 실무 워크숍",
+      "size": 24,
+      "top": 105,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 41,
+      "n": 2
+     },
+     {
+      "x": 20,
+      "n": 1
+     },
+     {
+      "x": 337,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 4,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.61,
+    0.88
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 1669,
+     "screens": 2,
+     "words": 244,
+     "img": 1,
+     "video": 0,
+     "canvas": 0,
+     "svg": 3,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 1,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "workspace.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Catui 실무 워크숍",
+     "words": 3,
+     "chars": 12,
+     "lines": 1,
+     "size": 24,
+     "vw": 6.2,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.94,
+     "top": 345,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Catui 실무 워크숍",
+     "words": 3,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "Catui 실무 워크숍",
+      "words": 3,
+      "chars": 12,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 345,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      24
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 13,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 11
+     },
+     "measureChars": 58,
+     "max": {
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "text": "Catui 실무 워크숍"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.05,
+     "centerShare": 0,
+     "smallText": 3
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.51
+      },
+      {
+       "color": "#66727e",
+       "share": 0.4
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.06
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 7,
+     "inHero": 6,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "템플릿 팩",
+      "참가 회차·요금 확인",
+      "행사 소개",
+      "프로그램"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 2,
+     "hairlineSamples": [
+      "header.Catui_bk-head 390px",
+      "footer.Catui_bk-foot 390px"
+     ],
+     "outlinedBoxes": 3,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 3,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 1,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.23
+     }
+    ],
+    "nav": {
+     "links": 7,
+     "fixed": true,
+     "height": 107,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 1669,
+    "margins": {
+     "left": 12,
+     "right": 12
+    },
+    "sections": [
+     {
+      "sel": "main#bk-main.Catui_bk-main",
+      "tag": "main",
+      "top": 107,
+      "height": 1341,
+      "words": 175,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Catui 실무 워크숍",
+       "size": 24,
+       "tag": "h1"
+      },
+      "left": 12,
+      "right": 12,
+      "textLeft": 12,
+      "textRight": 21,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_bk-foot",
+      "tag": "footer",
+      "top": 1448,
+      "height": 222,
+      "words": 51,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 21,
+      "textLeft": 20,
+      "textRight": 21,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Catui 실무 워크숍",
+      "size": 24,
+      "top": 345,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "관리자 일정",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "Catui 실무 워크숍",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "2026년 11월 14일 (토) · 14:00–16:30 · 한국 시간",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "문서 탐색부터 예약 복구까지, 접근성 있는 웹 화면을 함께 설계하는 가상 개발 행사입니다.",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "한 회차 150분 · 지정 좌석 12석 · 성인·어린이 동일 요금 · 최대 4명까지 함께 ",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "참가 신청",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "남은 자리는 회차 선택 화면에서 확인합니다. 예제에서는 실제 결제 없이 이 브라우저에 예약",
+      "side": "left",
+      "px": 12
+     }
+    ],
+    "edges": [
+     {
+      "x": 12,
+      "n": 2
+     },
+     {
+      "x": 25,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 4,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 320,
+   "height": 200,
+   "load": "load",
+   "screens": 10,
+   "filled": [
+    0.61,
+    0.51,
+    0.6,
+    0.78,
+    0.83,
+    0.78,
+    0.68,
+    0.62,
+    0.86,
+    0.92
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "page": {
+     "height": 1852,
+     "screens": 9.3,
+     "words": 244,
+     "img": 1,
+     "video": 0,
+     "canvas": 0,
+     "svg": 3,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 1,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "workspace.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": null,
+    "h1": {
+     "text": "Catui 실무 워크숍",
+     "words": 3,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "Catui 실무 워크숍",
+      "words": 3,
+      "chars": 12,
+      "lines": 1,
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.93,
+      "top": 306,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      24
+     ],
+     "sizeCount": 7,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 13,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 11
+     },
+     "measureChars": 47,
+     "max": {
+      "size": 24,
+      "vw": 7.5,
+      "font": "Inter",
+      "text": "Catui 실무 워크숍"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.05,
+     "centerShare": 0,
+     "smallText": 3
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 637,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.51
+      },
+      {
+       "color": "#66727e",
+       "share": 0.4
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.06
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 7,
+     "inHero": 2,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "템플릿 팩"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 2,
+     "hairlineSamples": [
+      "header.Catui_bk-head 320px",
+      "footer.Catui_bk-foot 320px"
+     ],
+     "outlinedBoxes": 3,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 3,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 1,
+     "mediaRadius": 6,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.36
+     }
+    ],
+    "nav": {
+     "links": 7,
+     "fixed": true,
+     "height": 107,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "pageH": 1852,
+    "margins": {
+     "left": 12,
+     "right": 12
+    },
+    "sections": [
+     {
+      "sel": "img",
+      "tag": "img",
+      "top": 123,
+      "height": 167,
+      "words": 0,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": 12,
+      "right": 12,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div",
+      "tag": "div",
+      "top": 306,
+      "height": 236,
+      "words": 44,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Catui 실무 워크숍",
+       "size": 24,
+       "tag": "h1"
+      },
+      "left": 12,
+      "right": 18,
+      "textLeft": 12,
+      "textRight": 18,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.Catui_bk-box",
+      "tag": "div",
+      "top": 637,
+      "height": 309,
+      "words": 47,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "읽고, 고르고, 다시 이어가기",
+       "size": 18,
+       "tag": "h2"
+      },
+      "left": 25,
+      "right": 36,
+      "textLeft": 25,
+      "textRight": 36,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "aside.Catui_bk-box",
+      "tag": "aside",
+      "top": 962,
+      "height": 236,
+      "words": 33,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "장소·참가 조건",
+       "size": 15,
+       "tag": "h2"
+      },
+      "left": 25,
+      "right": 26,
+      "textLeft": 25,
+      "textRight": 26,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.Catui_bk-sec",
+      "tag": "section",
+      "top": 1214,
+      "height": 363,
+      "words": 45,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "참가 신청",
+       "size": 18,
+       "tag": "h2"
+      },
+      "left": 12,
+      "right": 26,
+      "textLeft": 12,
+      "textRight": 26,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_bk-foot",
+      "tag": "footer",
+      "top": 1593,
+      "height": 259,
+      "words": 51,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 32,
+      "textLeft": 20,
+      "textRight": 32,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Catui 실무 워크숍",
+      "size": 24,
+      "top": 306,
+      "firstScreen": false
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "대기 명단",
+      "side": "right",
+      "px": 12
+     },
+     {
+      "text": "Catui 실무 워크숍",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "2026년 11월 14일 (토) · 14:00–16:30 · 한국 시간",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "문서 탐색부터 예약 복구까지, 접근성 있는 웹 화면을 함께 설계하는 가상 개발 행사입니다.",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "한 회차 150분 · 지정 좌석 12석 · 성인·어린이 동일 요금 · 최대 4명까지 함께 ",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "참가 신청",
+      "side": "left",
+      "px": 12
+     },
+     {
+      "text": "남은 자리는 회차 선택 화면에서 확인합니다. 예제에서는 실제 결제 없이 이 브라우저에 예약",
+      "side": "left",
+      "px": 12
+     }
+    ],
+    "edges": [
+     {
+      "x": 12,
+      "n": 2
+     },
+     {
+      "x": 25,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 4,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "button-fx",
+   "width": 1440,
+   "message": "Buttons with shadow/glow.",
+   "fix": "Flat fill, one colour.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "hairline",
+   "width": 1440,
+   "message": "2 thin rule(s)/divider line(s): header.Catui_bk-head 1440px | footer.Catui_bk-foot 1440px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "outlined-box",
+   "width": 1440,
+   "message": "3 boxes drawn with a 1px outline.",
+   "fix": "Define a surface by its fill (one tone step from the page) or leave the content unboxed.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "body-size",
+   "width": 1440,
+   "message": "Body text is 13px (the size most of the running text is set in).",
+   "fix": "Body copy 16–20px. Map small sizes from blueprints onto your body step.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 1 picture(s) on the page (1 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "measure",
+   "width": 1440,
+   "message": "Longest paragraph runs about 196 characters per line.",
+   "fix": "Cap paragraphs at 45–75 characters (max-width: 60ch).",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "small-text",
+   "width": 1440,
+   "message": "3 text block(s) under 13px.",
+   "fix": "Nothing meant to be read goes below 13px.",
+   "alsoAt": [
+    768,
+    390,
+    320
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "focal-point",
+   "width": 1440,
+   "message": "The first screen has no dominant element: the largest type is 24px (1.7vw) and no single picture holds a third of the viewport.",
+   "fix": "Make one thing lead: the headline at display size, or one large picture. A grid of many small pictures is not one thing; in blind tests jurors marked a first screen without a headline down every time. On the strongest studied sites the largest type has a median of 8.4vw.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The margins differ: 132px on the left, 165px on the right, at 1440px.",
+   "fix": "Put the navigation and the content on one pair of margins; check for padding on one side only, a scrollbar gutter, or a header on another inset than the page."
+  },
+  {
+   "level": "WARN",
+   "id": "small-title",
+   "width": 1440,
+   "message": "The h1 is 24px (\"Catui 실무 워크숍\").",
+   "fix": "Set the title at display size, or make the large text of the first screen the h1.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "name-only-title",
+   "width": 1440,
+   "message": "The h1 is a bare name (\"Catui 실무 워크숍\") and nothing else on the first screen says what this is.",
+   "fix": "Keep the name if it leads, and give the line under it (18px or more) the plain words: what it is, for whom, where or when. In the study of 97 Sites of the Day, first screens that named nothing lost usability and content points.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "still-page",
+   "width": 1440,
+   "message": "Only 0 element(s) moved while the page loaded and scrolled.",
+   "fix": "Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback."
+  },
+  {
+   "level": "WARN",
+   "id": "edge-text",
+   "width": 390,
+   "message": "7 text block(s) sit 12–15px from the phone's edge: \"관리자 일정\" (12px); \"Catui 실무 워크숍\" (12px); \"2026년 11월 14일 (토) · 14:00–16:3\" (12px)",
+   "fix": "The page margin is 16–20px on a phone; the header and the corner labels sit on it too.",
+   "alsoAt": [
+    320
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-hero",
+   "width": 320,
+   "message": "No headline found in the first viewport.",
+   "fix": "The first screen needs a clear focal statement or image."
+  },
+  {
+   "level": "FAIL",
+   "id": "no-title",
+   "width": 320,
+   "message": "The h1 (\"Catui 실무 워크숍\") is not on the first screen (it starts 306px down).",
+   "fix": "The title belongs on the first screen, where a visitor decides whether to stay."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-event\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-event\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-event\\tablet-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-event\\tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-event\\mobile-390-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-event\\mobile-390-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 320,
+   "fold": "D:\\Catui_design\\.taste-audit\\template-packs-event\\mobile-320-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\template-packs-event\\mobile-320-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\template-packs-event\\mobile-320-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

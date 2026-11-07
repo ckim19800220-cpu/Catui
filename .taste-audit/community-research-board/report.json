@@ -1,0 +1,1426 @@
+{
+ "url": "docs/community/templates/board.html",
+ "at": "2026-11-07T11:50:38.152Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 320,
+   "height": 200,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.34,
+    0.39,
+    0.63,
+    0.64,
+    0.59,
+    0.6,
+    0.62,
+    0.42,
+    0.47,
+    0.6,
+    0.66,
+    0.36
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "page": {
+     "height": 2779,
+     "screens": 13.9,
+     "words": 469,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 21,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "자유",
+     "words": 1,
+     "chars": 2,
+     "lines": 1,
+     "size": 22,
+     "vw": 6.9,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": -0.03,
+     "leading": 1.3,
+     "top": 155,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "자유",
+     "words": 1,
+     "lines": 1,
+     "size": 22,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "자유",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 22,
+      "vw": 6.9,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.56,
+      "top": 155,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      22
+     ],
+     "sizeCount": 8,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 22,
+      "vw": 6.9,
+      "font": "Inter",
+      "text": "자유"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.01,
+     "smallText": 1
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.57
+      },
+      {
+       "color": "#66727e",
+       "share": 0.32
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.09
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.02
+      },
+      {
+       "color": "#1f6fa8",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 1,
+     "radius": 4,
+     "height": 34,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 1,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "div.Catui_dd-menu.Catui_dd-sm → rgba(16, 24, 40, 0.08) 0px 4px 10px -2px, rgba(16, 24, 40, 0.05) 0px 2px 4px -2p"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 8,
+     "hairlineSamples": [
+      "header.Catui_cm-head 320px",
+      "nav.Catui_cm-gnb 320px",
+      "header#cm-aside-rank.Catui_card-h 286px",
+      "div.Catui_panel 258px",
+      "header#cm-aside-fav.Catui_card-h 286px"
+     ],
+     "outlinedBoxes": 7,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 7,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 17,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "pageH": 2779,
+    "margins": {
+     "left": 16,
+     "right": 29
+    },
+    "sections": [
+     {
+      "sel": "main#cm-main.Catui_cm-main",
+      "tag": "main",
+      "top": 138,
+      "height": 1413,
+      "words": 170,
+      "media": 0,
+      "middle": 7,
+      "heading": {
+       "text": "자유",
+       "size": 22,
+       "tag": "h1"
+      },
+      "left": 16,
+      "right": 29,
+      "textLeft": 16,
+      "textRight": 29,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "aside.Catui_cm-aside",
+      "tag": "aside",
+      "top": 1571,
+      "height": 1009,
+      "words": 109,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 31,
+      "right": 31,
+      "textLeft": 31,
+      "textRight": 31,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.Catui_cm-foot",
+      "tag": "footer",
+      "top": 2600,
+      "height": 123,
+      "words": 17,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 38,
+      "textLeft": 16,
+      "textRight": 38,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "자유",
+      "size": 22,
+      "top": 155,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "내 정보",
+      "side": "right",
+      "px": 14
+     }
+    ],
+    "edges": [
+     {
+      "x": 35,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 320,
+     "h": 200
+    },
+    "dark": false,
+    "ground": "#ffffff",
+    "sidebar": null,
+    "topbar": {
+     "h": 72
+    },
+    "canvas": {
+     "left": 16,
+     "right": -26
+    },
+    "hero": {
+     "text": "자유",
+     "words": 1,
+     "chars": 2,
+     "lines": 1,
+     "size": 22,
+     "vw": 6.9,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": -0.03,
+     "leading": 1.3,
+     "top": 155,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 6,
+     "firstScreen": 1,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 7,
+     "radii": [
+      [
+       6,
+       6
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "heavyBorders": 7,
+     "borderSamples": [
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 11,
+     "leftAligned": 11,
+     "figures": 22,
+     "tabularShare": 1,
+     "kpiMax": 14
+    },
+    "rows": {
+     "count": 15,
+     "median": 67
+    },
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.44,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      22
+     ]
+    },
+    "title": {
+     "text": "자유",
+     "size": 22,
+     "top": 155
+    },
+    "colourShare": 0.012
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.54,
+    0.42,
+    0.43,
+    0.37
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 2607,
+     "screens": 3.1,
+     "words": 469,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 21,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "자유",
+     "words": 1,
+     "chars": 2,
+     "lines": 1,
+     "size": 22,
+     "vw": 5.6,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": -0.03,
+     "leading": 1.3,
+     "top": 166,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "자유",
+     "words": 1,
+     "lines": 1,
+     "size": 22,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "자유",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 22,
+      "vw": 5.6,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.46,
+      "top": 166,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      22
+     ],
+     "sizeCount": 8,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 22,
+      "vw": 5.6,
+      "font": "Inter",
+      "text": "자유"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.01,
+     "smallText": 1
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.57
+      },
+      {
+       "color": "#66727e",
+       "share": 0.32
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.09
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.02
+      },
+      {
+       "color": "#1f6fa8",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 3,
+     "radius": 4,
+     "height": 34,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "즐겨찾기",
+      "글쓰기"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 1,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "div.Catui_dd-menu.Catui_dd-sm → rgba(16, 24, 40, 0.08) 0px 4px 10px -2px, rgba(16, 24, 40, 0.05) 0px 2px 4px -2p"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 8,
+     "hairlineSamples": [
+      "header.Catui_cm-head 390px",
+      "nav.Catui_cm-gnb 390px",
+      "header#cm-aside-rank.Catui_card-h 356px",
+      "div.Catui_panel 328px",
+      "header#cm-aside-fav.Catui_card-h 356px"
+     ],
+     "outlinedBoxes": 7,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 7,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 17,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 2607,
+    "margins": {
+     "left": 28,
+     "right": 29
+    },
+    "sections": [
+     {
+      "sel": "main#cm-main.Catui_cm-main",
+      "tag": "main",
+      "top": 138,
+      "height": 1276,
+      "words": 170,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "자유",
+       "size": 22,
+       "tag": "h1"
+      },
+      "left": 16,
+      "right": 29,
+      "textLeft": 16,
+      "textRight": 29,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "aside.Catui_cm-aside",
+      "tag": "aside",
+      "top": 1434,
+      "height": 1009,
+      "words": 109,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 31,
+      "right": 31,
+      "textLeft": 31,
+      "textRight": 31,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "자유",
+      "size": 22,
+      "top": 166,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 35,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "dark": false,
+    "ground": "#ffffff",
+    "sidebar": null,
+    "topbar": {
+     "h": 72
+    },
+    "canvas": {
+     "left": 20,
+     "right": 12
+    },
+    "hero": {
+     "text": "자유",
+     "words": 1,
+     "chars": 2,
+     "lines": 1,
+     "size": 22,
+     "vw": 5.6,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": -0.03,
+     "leading": 1.3,
+     "top": 166,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 6,
+     "firstScreen": 2,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 7,
+     "radii": [
+      [
+       6,
+       6
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "heavyBorders": 7,
+     "borderSamples": [
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 11,
+     "leftAligned": 11,
+     "figures": 22,
+     "tabularShare": 1,
+     "kpiMax": 14
+    },
+    "rows": {
+     "count": 15,
+     "median": 67
+    },
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.44,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      22
+     ]
+    },
+    "title": {
+     "text": "자유",
+     "size": 22,
+     "top": 166
+    },
+    "colourShare": 0.012
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    0.26,
+    0.26
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 1227,
+     "screens": 1.4,
+     "words": 472,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 21,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "자유",
+     "words": 1,
+     "chars": 2,
+     "lines": 1,
+     "size": 22,
+     "vw": 1.5,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": -0.03,
+     "leading": 1.3,
+     "top": 155,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "자유",
+     "words": 1,
+     "lines": 1,
+     "size": 22,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      22
+     ],
+     "sizeCount": 8,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 22,
+      "vw": 1.5,
+      "font": "Inter",
+      "text": "자유"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.29,
+     "smallText": 1
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.57
+      },
+      {
+       "color": "#66727e",
+       "share": 0.32
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.09
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.02
+      },
+      {
+       "color": "#1f6fa8",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 5,
+     "inHero": 5,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "글쓰기",
+      "즐겨찾기",
+      "글쓰기",
+      "글쓰기"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 1,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "div.Catui_dd-menu.Catui_dd-sm → rgba(16, 24, 40, 0.08) 0px 4px 10px -2px, rgba(16, 24, 40, 0.05) 0px 2px 4px -2p"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 7,
+     "hairlineSamples": [
+      "header.Catui_cm-head 1440px",
+      "nav.Catui_cm-gnb 1440px",
+      "header#cm-aside-rank.Catui_card-h 292px",
+      "div.Catui_panel 264px",
+      "header#cm-aside-fav.Catui_card-h 292px"
+     ],
+     "outlinedBoxes": 7,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 7,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 3,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 352
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 18,
+     "fixed": true,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 1227,
+    "margins": {
+     "left": 147,
+     "right": 143
+    },
+    "sections": [
+     {
+      "sel": "colgroup",
+      "tag": "colgroup",
+      "top": 284,
+      "height": 701,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "tbody",
+      "tag": "tbody",
+      "top": 324,
+      "height": 660,
+      "words": 153,
+      "media": 0,
+      "middle": 232,
+      "heading": null,
+      "left": 152,
+      "right": 462,
+      "textLeft": 152,
+      "textRight": 462,
+      "fullBleed": false,
+      "footer": true,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "자유",
+      "size": 22,
+      "top": 155,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 147,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.11,
+    "voidBox": {
+     "x": 480,
+     "y": 120,
+     "w": 180,
+     "h": 780
+    }
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": false,
+    "ground": "#ffffff",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 141,
+     "right": 137
+    },
+    "hero": {
+     "text": "자유",
+     "words": 1,
+     "chars": 2,
+     "lines": 1,
+     "size": 22,
+     "vw": 1.5,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": -0.03,
+     "leading": 1.3,
+     "top": 155,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 6,
+     "firstScreen": 5,
+     "ragged": [
+      {
+       "diff": 107,
+       "top": 138
+      }
+     ],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 7,
+     "radii": [
+      [
+       6,
+       6
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "heavyBorders": 7,
+     "borderSamples": [
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 167,
+       "size": 24,
+       "radius": "2px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 11,
+     "leftAligned": 0,
+     "figures": 22,
+     "tabularShare": 1,
+     "kpiMax": 14
+    },
+    "rows": {
+     "count": 15,
+     "median": 44
+    },
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.21,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      22
+     ]
+    },
+    "title": {
+     "text": "자유",
+     "size": 22,
+     "top": 155
+    },
+    "colourShare": 0.01
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "edge-text",
+   "width": 320,
+   "message": "1 text block(s) sit 12–15px from the phone's edge: \"내 정보\" (14px)",
+   "fix": "The page margin is 16–20px on a phone; the header and the corner labels sit on it too."
+  },
+  {
+   "level": "WARN",
+   "id": "heavy-borders",
+   "width": 320,
+   "message": "7 panel borders are dark against their ground: #2a404e on #ffffff (10.81:1) | #2a404e on #ffffff (10.81:1) | #2a404e on #ffffff (10.81:1)",
+   "fix": "A panel border is a whisper: about 1.1–1.3:1 against its ground on a light screen (#e5e7eb–#ededed on white), and about 1.2–1.5:1 on a dark one (#1a1a1a on #000, #2e2e2e on #111). Darker lines turn the screen into a grid of boxes; keep the stronger line for controls.",
+   "alsoAt": [
+    390,
+    1440
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "numeric-align",
+   "width": 320,
+   "message": "11 of 11 numeric table cells are left-aligned.",
+   "fix": "Right-align numbers, amounts and percentages (and their column headers) so the digits line up.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "ragged-row",
+   "width": 1440,
+   "message": "1 pair(s) of cards in one row end at different heights (by 107px).",
+   "fix": "Cards that share a row share a bottom edge: balance them by their content (the same number of rows, a block of similar height beside it), or stack them. In testing, ragged rows were marked down every time."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "mobile",
+   "width": 320,
+   "fold": "D:\\Catui_design\\.taste-audit\\community-research-board\\mobile-320-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\community-research-board\\mobile-320-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\community-research-board\\mobile-320-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\community-research-board\\mobile-390-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\community-research-board\\mobile-390-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\community-research-board\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\community-research-board\\desktop-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

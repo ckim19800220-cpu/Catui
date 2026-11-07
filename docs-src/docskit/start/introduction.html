@@ -37,6 +37,17 @@
 </div>
 </section>
 
+<section aria-labelledby="blog-variants">
+<h2 id="blog-variants">같은 글, 세 가지 블로그 표현</h2>
+<ul>
+  <li><a href="../templates/blog.html">카드형</a>: 이미지·요약으로 여러 글을 비교하는 기본 목록입니다.</li>
+  <li><a href="../templates/journal.html">에디토리얼</a>: 첫 글을 강조하고 사진과 읽기 영역의 축을 맞춘 목록입니다.</li>
+  <li><a href="../templates/notes.html">텍스트형 개발 노트</a>: 사진을 요청하지 않고 제목·요약·날짜·저자를 우선합니다. <code>data-catui-dk-text-only</code>로 같은 목록의 커버 출력을 생략합니다.</li>
+</ul>
+<p>세 화면은 <code>posts.json</code>·<code>authors.json</code>·<code>tags.json</code>과 <code>docs.blogList</code>를 함께 사용합니다. 태그·페이지는 현재 변형 화면의 URL에 유지하며 글 본문·저자·태그 상세는 기존 화면으로 연결합니다.</p>
+<p>실패·재시도·빈 목록 안내를 함께 제공하고, 재시도 후 선택한 태그로 포커스를 돌립니다. 소개 문구와 목록 클래스를 바꾸는 템플릿 변형이며 별도 블로그 엔진이나 CMS를 추가하지 않습니다.</p>
+</section>
+
 <section aria-labelledby="preview">
 <h2 id="preview">미리보기</h2>
 <figure class="doc-frame">

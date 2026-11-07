@@ -11,6 +11,8 @@
     { "title": "문서", "href": "doc.html" },
     { "title": "버전별 문서", "href": "versions.html" },
     { "title": "태그", "href": "tag.html" },
+    { "title": "에디토리얼 블로그", "href": "journal.html" },
+    { "title": "텍스트 블로그", "href": "notes.html" },
     { "title": "저자", "href": "author.html" },
     { "title": "검색", "href": "search.html" }
   ]

@@ -71,7 +71,7 @@ export interface CatuiDocs {
   blog(): Promise<DkBlog>;
   postTime(p: DkPost): DkReadTime;
   // 마크업 (글자는 모두 이스케이프)
-  card(p: DkPostEx): unknown;
+  card(p: DkPostEx, options?: { cover?: boolean }): unknown;
   meta(p: DkPostEx): unknown;
   empty(title: string, text?: string): unknown;
   pager(page: number, pages: number): unknown;

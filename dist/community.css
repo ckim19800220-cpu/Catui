@@ -368,7 +368,8 @@
 .Catui_cm-new{display:inline-grid;place-items:center;width:var(--Catui_space-4);height:var(--Catui_space-4);border-radius:var(--Catui_radius-xs);background:var(--Catui_badge-danger-fg);color:var(--Catui_badge-danger-bg);font-size:var(--Catui_type-label-size);font-weight:800;flex:none}
 
 /* 베스트 상자: 1~3위 굵게 */
-.Catui_cm-best li:nth-child(-n+3) .Catui_cm-rank{color:var(--Catui_color-brand-strong)}
+.Catui_cm-best .Catui_cm-rank-top{color:var(--Catui_color-brand-strong)}
+.Catui_cm-best .Catui_cm-board{margin-inline-end:var(--Catui_space-1)}
 .Catui_cm-best .Catui_cm-rank{min-width:18px;font-size:13px;font-weight:800}
 .Catui_cm-best li::before{content:none}
 
@@ -383,6 +384,7 @@
 .Catui_cm-table tr.Catui_cm-tr-notice td{background:var(--Catui_color-brand-soft);font-weight:700}
 .Catui_cm-table .Catui_cm-up-hot,.Catui_cm-table .Catui_cm-td-up b{color:var(--Catui_color-brand-strong);font-weight:800}
 .Catui_cm-table .Catui_cm-nick{justify-content:center}
+.Catui_cm-mobile-cat{display:none}
 .Catui_cm-read .Catui_cm-td-t .Catui_cm-title-t{color:var(--Catui_cm-read)}
 .Catui_cm-c-cat{width:72px}.Catui_cm-c-nick{width:140px}.Catui_cm-c-date{width:72px}.Catui_cm-c-n{width:64px}
 @media (max-width:767px){
@@ -394,6 +396,9 @@
   .Catui_cm-table td.Catui_cm-td-cat{display:none}
   .Catui_cm-table tr{grid-template-columns:auto auto auto 1fr auto}
   .Catui_cm-table td.Catui_cm-td-up{grid-column:5;text-align:right}
+  .Catui_cm-table .Catui_cm-title{align-items:flex-start}
+  .Catui_cm-table .Catui_cm-title-t{flex:1;min-width:0;white-space:normal;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .Catui_cm-table .Catui_cm-mobile-cat{display:inline;white-space:nowrap}
 }
 
 /* 목록(행)형: 다른 화면(검색·프로필·스크랩)에서 쓰는 한 줄 */
@@ -427,6 +432,11 @@
 
 /* 홈 위젯 격자 */
 .Catui_cm-boards{gap:16px}
+.Catui_cm-topics{flex-wrap:wrap;overflow:visible;gap:var(--Catui_space-2);padding-block:var(--Catui_space-1)}
+.Catui_cm-topics a,.Catui_cm-sort a{display:inline-flex;align-items:center;min-height:var(--Catui_control-h-sm)}
+.Catui_cm .Catui_cm-feed-head{flex-wrap:wrap;row-gap:var(--Catui_space-1);padding-block:var(--Catui_space-2)}
+.Catui_cm-best .Catui_cm-empty{display:grid;padding:var(--Catui_space-5) var(--Catui_space-3);font-size:var(--Catui_type-body-size)}
+@media (max-width:767px){.Catui_cm-feed-head .Catui_cm-sort{order:1;flex-basis:100%}.Catui_cm-best li{padding-block:var(--Catui_space-1)}.Catui_cm-best a{white-space:normal;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}}
 
 /* 글 보기 */
 .Catui_cm-post-h{border-bottom:1px solid var(--Catui_cm-line);background:var(--Catui_cm-soft)}

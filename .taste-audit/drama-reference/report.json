@@ -1,0 +1,911 @@
+{
+ "url": "https://hongguoduanju.com",
+ "at": "2026-11-07T15:13:28.392Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.13,
+    0.43,
+    0.48,
+    0.34
+   ],
+   "motion": {
+    "elements": 66,
+    "css": 19,
+    "transitions": 2,
+    "scripted": 45,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 2988,
+     "screens": 3.3,
+     "words": 203,
+     "img": 153,
+     "video": 0,
+     "canvas": 0,
+     "svg": 16,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 100,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "34444936719e6ae3de4947a3e2f52c35~tplv-shrink:640",
+      "84a71f1a5d7ef5c9c16a73b74011ef75~tplv-shrink:640",
+      "5bb45f6738c90ddbf4a72fafa6a5963f~tplv-shrink:640",
+      "dd47bf8f4357b931ef542a2f91478aed~tplv-shrink:640",
+      "c37eb63db868db08eb95e0d8bacd0129~tplv-shrink:640",
+      "10dceda80aa9dc7bdb8d7b2de6082d83~tplv-shrink:640",
+      "687ebdc03b4d5b2aed7771647b16327c~tplv-shrink:640",
+      "63068305b1260ed6e32da41a60f539e5~tplv-shrink:640"
+     ],
+     "blendText": 0,
+     "sideScrollers": 4,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "下载红果短剧App",
+     "words": 1,
+     "chars": 9,
+     "lines": 1,
+     "size": 18,
+     "vw": 1.3,
+     "font": "Arial",
+     "weight": 500,
+     "tracking": 0,
+     "leading": 1.39,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.13,
+     "top": 333,
+     "tag": "button",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "红果短剧_免费短剧全集无广告_好看的短剧尽在红果短剧官网",
+     "words": 1,
+     "lines": 1,
+     "size": 23,
+     "font": "PingFang SC"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "PingFang SC",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Arial",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      12,
+      13,
+      14,
+      16,
+      18,
+      24
+     ],
+     "sizeCount": 6,
+     "notLoaded": [
+      "PingFang SC"
+     ],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 24,
+      "vw": 1.7,
+      "font": "PingFang SC",
+      "text": "热播真人剧"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.04,
+     "centerShare": 0.23,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#131414",
+     "bodyBgHsl": {
+      "h": 180,
+      "s": 0.03,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#131414",
+       "top": 0,
+       "hsl": {
+        "h": 180,
+        "s": 0.03,
+        "l": 0.08
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#ffffff",
+       "share": 0.79
+      },
+      {
+       "color": "#747474",
+       "share": 0.21
+      }
+     ],
+     "button": {
+      "bg": "#ff7e0d",
+      "hsl": {
+       "h": 28,
+       "s": 1,
+       "l": 0.53
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": [
+      {
+       "text": "北京笔墨留香科技有限公司 | 地址 : 北京市门头沟区石龙经济开发区永安路20号",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "电子营业执照",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "京ICP备2021028909号-43",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "京公网安备 11010802040767",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "网络文化经营许可证：京网文〔2025〕0222-071号",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      },
+      {
+       "text": "增值电信业务经营许可证：京B2-20220790",
+       "ratio": 3.9,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#747474",
+       "bg": "#131414"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 1,
+     "radius": 12,
+     "height": 44,
+     "withShadow": 0,
+     "withGradient": 1,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "下载红果短剧App"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 54,
+     "shadowOverlay": 8,
+     "shadowSamples": [
+      "img.pc-background-tile-N5dJe5 → rgba(0, 0, 0, 0.24) 0px 16px 44px 0px",
+      "img.pc-background-tile-N5dJe5 → rgba(0, 0, 0, 0.24) 0px 16px 44px 0px",
+      "img.pc-background-tile-N5dJe5 → rgba(0, 0, 0, 0.24) 0px 16px 44px 0px",
+      "img.pc-background-tile-N5dJe5 → rgba(0, 0, 0, 0.24) 0px 16px 44px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "footer.pc-container-RbJZ85.m-container-wX_1Z7 1240px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 69,
+     "boxRadius": 12,
+     "squareMedia": 2,
+     "roundedMedia": 8,
+     "mediaRadius": 12,
+     "textShadow": 35,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.76
+     },
+     {
+      "type": "img",
+      "ratio": 0.56
+     }
+    ],
+    "nav": {
+     "links": 8,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 2988,
+    "margins": {
+     "left": 100,
+     "right": 104
+    },
+    "sections": [
+     {
+      "sel": "div.pc-banner-biYink.pc-intro-ready-yHIqhb",
+      "tag": "div",
+      "top": 0,
+      "height": 1262,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.pc-section-ar9_zS.pc-featured-section-P4JdzB",
+      "tag": "section",
+      "top": 803,
+      "height": 391,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.pc-section-ar9_zS.pc-following-section-R4rkNJ",
+      "tag": "section",
+      "top": 1262,
+      "height": 391,
+      "words": 31,
+      "media": 18,
+      "middle": 340,
+      "heading": {
+       "text": "热播真人剧",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 100,
+      "right": 0,
+      "textLeft": 100,
+      "textRight": 114,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.pc-section-ar9_zS.pc-following-section-R4rkNJ",
+      "tag": "section",
+      "top": 1721,
+      "height": 391,
+      "words": 30,
+      "media": 18,
+      "middle": 340,
+      "heading": {
+       "text": "热播漫剧",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 100,
+      "right": 0,
+      "textLeft": 100,
+      "textRight": 114,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.pc-section-ar9_zS.pc-following-section-R4rkNJ",
+      "tag": "section",
+      "top": 2180,
+      "height": 391,
+      "words": 28,
+      "media": 18,
+      "middle": 340,
+      "heading": {
+       "text": "热播AI剧",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 100,
+      "right": 0,
+      "textLeft": 100,
+      "textRight": 114,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.pc-page-c99OQM",
+      "tag": "div",
+      "top": 2639,
+      "height": 349,
+      "words": 14,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 378,
+      "right": 378,
+      "textLeft": 378,
+      "textRight": 378,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 100,
+      "n": 3
+     }
+    ],
+    "leftBlocks": 3,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.01,
+    "voidBox": {
+     "x": 0,
+     "y": 840,
+     "w": 120,
+     "h": 60
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.78,
+    0.73,
+    0.74
+   ],
+   "motion": {
+    "elements": 55,
+    "css": 19,
+    "transitions": 0,
+    "scripted": 36,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 1887,
+     "screens": 2.2,
+     "words": 213,
+     "img": 103,
+     "video": 0,
+     "canvas": 0,
+     "svg": 1,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 14,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "1793870658528-mkhjf17r~tplv-wu9im5hjhw-image.web",
+      "1788852184898-kxvyiwzy~tplv-wu9im5hjhw-image.web",
+      "1793870655801-fi8lw2tl~tplv-wu9im5hjhw-image.web",
+      "1788852184898-kxvyiwzy~tplv-wu9im5hjhw-image.web",
+      "1793870655835-g2psnb4h~tplv-wu9im5hjhw-image.web",
+      "1788852184898-kxvyiwzy~tplv-wu9im5hjhw-image.web",
+      "1793870655780-iyubarxv~tplv-wu9im5hjhw-image.web",
+      "1788852184898-kxvyiwzy~tplv-wu9im5hjhw-image.web"
+     ],
+     "blendText": 0,
+     "sideScrollers": 4,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": null,
+    "h1": {
+     "text": "红果短剧_免费短剧全集无广告_好看的短剧尽在红果短剧官网",
+     "words": 1,
+     "lines": 1,
+     "size": 14,
+     "font": "PingFang SC"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "PingFang SC",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      10,
+      12,
+      14,
+      15,
+      16
+     ],
+     "sizeCount": 5,
+     "notLoaded": [
+      "PingFang SC"
+     ],
+     "body": {
+      "font": "PingFang SC",
+      "size": 12,
+      "leading": 1.42,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": null
+     },
+     "measureChars": 53,
+     "max": {
+      "size": 16,
+      "vw": 4.1,
+      "font": "PingFang SC",
+      "text": "首页"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.02,
+     "centerShare": 0.02,
+     "smallText": 9
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#131414",
+     "bodyBgHsl": {
+      "h": 180,
+      "s": 0.03,
+      "l": 0.08
+     },
+     "dark": true,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#ffffff",
+       "share": 1
+      }
+     ],
+     "button": null,
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 1,
+     "scrims": 1,
+     "gradientSamples": [
+      "div.m-btn-VZM03v → linear-gradient(92.27deg, rgb(255, 126, 13) 0.32%, rgb(255, 146, 51))"
+     ],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 16,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 36,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.85
+     },
+     {
+      "type": "img",
+      "ratio": 0.85
+     }
+    ],
+    "nav": {
+     "links": 5,
+     "fixed": true,
+     "height": 62,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 1887,
+    "margins": {
+     "left": 16,
+     "right": 10
+    },
+    "sections": [
+     {
+      "sel": "div.m-banner-7ptzjW",
+      "tag": "div",
+      "top": 0,
+      "height": 655,
+      "words": 14,
+      "media": 0,
+      "middle": 1970,
+      "heading": null,
+      "left": 0,
+      "right": 0,
+      "textLeft": 20,
+      "textRight": 50,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.m-page-CKwOub",
+      "tag": "div",
+      "top": 655,
+      "height": 1100,
+      "words": 58,
+      "media": 72,
+      "middle": 666,
+      "heading": {
+       "text": "热播短剧",
+       "size": 16,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 0,
+      "textLeft": 16,
+      "textRight": 0,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [],
+    "edgeText": [
+     {
+      "text": "全213集",
+      "side": "right",
+      "px": 10
+     },
+     {
+      "text": "觉醒伪神：神明弃我我自为神8",
+      "side": "right",
+      "px": 0
+     },
+     {
+      "text": "全81集",
+      "side": "right",
+      "px": 10
+     },
+     {
+      "text": "全999集",
+      "side": "right",
+      "px": 10
+     },
+     {
+      "text": "和离后我带女儿横扫魔域",
+      "side": "right",
+      "px": 0
+     },
+     {
+      "text": "全43集",
+      "side": "right",
+      "px": 10
+     }
+    ],
+    "edges": [
+     {
+      "x": 16,
+      "n": 4
+     }
+    ],
+    "leftBlocks": 4,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "shadow",
+   "width": 1440,
+   "message": "54 box-shadow(s) on elements at rest: img.pc-background-tile-N5dJe5 → rgba(0, 0, 0, 0.24) 0px 16px 44px 0px | img.pc-background-tile-N5dJe5 → rgba(0, 0, 0, 0.24) 0px 16px 44px 0px | img.pc-background-tile-N5dJe5 → rgba(0, 0, 0, 0.24) 0px 16px 44px 0px",
+   "fix": "Remove. Separate surfaces with a tone step or space. Shadows are for things that really float (menus, dialogs, sticky bars)."
+  },
+  {
+   "level": "FAIL",
+   "id": "text-shadow",
+   "width": 1440,
+   "message": "35 text-shadow(s).",
+   "fix": "Remove; fix legibility with a scrim or a different crop.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "button-fx",
+   "width": 1440,
+   "message": "Buttons with gradient fill.",
+   "fix": "Flat fill, one colour."
+  },
+  {
+   "level": "WARN",
+   "id": "hairline",
+   "width": 1440,
+   "message": "1 thin rule(s)/divider line(s): footer.pc-container-RbJZ85.m-container-wX_1Z7 1240px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields."
+  },
+  {
+   "level": "WARN",
+   "id": "contrast",
+   "width": 1440,
+   "message": "Low-contrast text: \"北京笔墨留香科技有限公司 | 地址 : 北京市门头沟区石龙经济开发区永安路20号\" 3.9:1 needs 4.5:1; \"电子营业执照\" 3.9:1 needs 4.5:1; \"京ICP备2021028909号-43\" 3.9:1 needs 4.5:1; \"京公网安备 11010802040767\" 3.9:1 needs 4.5:1",
+   "fix": "Darken or lighten the text colour."
+  },
+  {
+   "level": "WARN",
+   "id": "font-fallback",
+   "width": 1440,
+   "message": "Typeface(s) declared but not loaded, so a fallback is rendering: PingFang SC",
+   "fix": "Fix the font URL / family name, or the screenshots you are judging are not the design.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "side-scroll",
+   "width": 1440,
+   "message": "4 row(s) scroll sideways with content past their edge.",
+   "fix": "Jurors and most visitors read a row cut at the edge as clipped, not as scrollable. Wrap it onto more lines, or end it inside the grid.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "late-title",
+   "width": 1440,
+   "message": "The title is not readable 1.2s after the page loaded (it has no size yet).",
+   "fix": "Put the headline in the HTML, painted on the first frame; the load sequence only adds arrival and is settled by 1.2s (references/motion.md, \"Load sequence in 1.2 seconds\"). No preloader, no gate, no waiting for the load event.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "no-title",
+   "width": 1440,
+   "message": "The page has no visible h1.",
+   "fix": "Give the first screen a clear title in an h1 that says what this is (a name with what it does, the product with what it is for, the event with its date and place).",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 390,
+   "message": "1 gradient fill(s): div.m-btn-VZM03v → linear-gradient(92.27deg, rgb(255, 126, 13) 0.32%, rgb(255, 146, 51))",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility."
+  },
+  {
+   "level": "FAIL",
+   "id": "body-size",
+   "width": 390,
+   "message": "Body text is 12px (the size most of the running text is set in).",
+   "fix": "Body copy 16–20px. Map small sizes from blueprints onto your body step."
+  },
+  {
+   "level": "WARN",
+   "id": "first-action",
+   "width": 390,
+   "message": "No visible button in the first phone screen.",
+   "fix": "On a phone the first screen still holds the headline, the supporting sentence and the action; move navigation into one row or a menu so it does not push them down."
+  },
+  {
+   "level": "FAIL",
+   "id": "small-text",
+   "width": 390,
+   "message": "9 text blocks under 13px.",
+   "fix": "Nothing meant to be read goes below 13px."
+  },
+  {
+   "level": "WARN",
+   "id": "no-hero",
+   "width": 390,
+   "message": "No headline found in the first viewport.",
+   "fix": "The first screen needs a clear focal statement or image."
+  },
+  {
+   "level": "FAIL",
+   "id": "edge-text",
+   "width": 390,
+   "message": "6 text block(s) sit within 12px of the screen edge: \"全213集\" (10px from the right); \"觉醒伪神：神明弃我我自为神8\" (0px from the right); \"全81集\" (10px from the right); \"全999集\" (10px from the right)",
+   "fix": "Keep text inside the page margin (16–20px). Only display type deliberately bled past the edge may touch it."
+  },
+  {
+   "level": "FAIL",
+   "id": "reduced-hidden",
+   "width": 1440,
+   "message": "With reduced motion requested, 11 text block(s) on the first screen stay invisible: \"真人剧\", \"AI剧\", \"红果热播榜\", \"真人剧热播榜\"",
+   "fix": "Put every hidden starting state inside @media (prefers-reduced-motion: no-preference); the reduced page is the finished page (references/motion.md §8)."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\drama-reference\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\drama-reference\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\drama-reference\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\drama-reference\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

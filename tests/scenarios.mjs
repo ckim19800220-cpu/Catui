@@ -2,6 +2,324 @@
 // run은 문자열로 직렬화되어 페이지에서 실행되므로 바깥 변수를 쓰지 않는다.
 export const scenarios = [
   {
+    name: 'drama 보완 · 노출형 분류·빈 결과·포커스·공유 주소', page: 'docs/drama/templates/catalog.html?q=%ED%95%98%EB%8A%98&g=%ED%8C%90%ED%83%80%EC%A7%80&t=%EC%95%A0%EB%8B%88&page=9', viewport: [320, 844],
+    run: async () => {
+      const dr = catui.drama; await dr.ready;
+      const facets = document.querySelectorAll('[data-facet-key]'), initial = facets.length === 9 && document.querySelector('[data-facet-key="g"][aria-current="true"]')?.textContent === '판타지' && document.querySelector('[data-facet-key="t"][aria-current="true"]')?.textContent === '애니';
+      const target = [...facets].find((a) => a.dataset.facetKey === 't' && new URL(a.href).searchParams.get('t') === 'AI'); target?.click(); await dr.ready;
+      const u = new URL(location.href), selected = document.querySelector('[data-facet-key="t"][aria-current="true"]');
+      return { initial, state: u.searchParams.get('q') === '하늘' && u.searchParams.get('g') === '판타지' && u.searchParams.get('t') === 'AI' && !u.searchParams.has('page'), focus: document.activeElement === selected && selected?.textContent === 'AI', empty: !!document.querySelector('.Catui_empty') && document.querySelectorAll('[data-facet-key]').length === 9, search: !!document.querySelector('header a[href="search.html"]'), overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { '분류·형식 두 단계와 직접 진입 선택 표시': (r) => r.initial, '변경 시 검색어·장르 유지·페이지 초기화': (r) => r.state, '선택 포커스와 빈 결과의 분류 제어 유지': (r) => r.focus && r.empty, '모든 화면 검색 진입·320px 넘침 없음': (r) => r.search && !r.overflow },
+  },
+  {
+    name: 'drama 보완 · 상세 연결·관련 작품·회차 접기', page: 'docs/drama/templates/series.html?id=other-sky', viewport: [320, 844],
+    run: async () => {
+      const dr = catui.drama; await dr.ready; const item = dr.items.find((s) => s.id === 'other-sky'), more = document.querySelector('[data-episode-more]'), related = [...document.querySelectorAll('[data-related] .Catui_dr-art')];
+      const initial = more && !more.open && document.querySelectorAll('[data-episodes-preview] li').length === 12;
+      if (more) more.open = true;
+      const cover = document.querySelector('.Catui_dr-detail > .Catui_dr-cover')?.getBoundingClientRect(), title = document.querySelector('#dr-series-title')?.getBoundingClientRect();
+      return { initial, episodes: document.querySelectorAll('.Catui_dr-episodes li').length === item.episodes, related: related.length > 0 && related.every((a) => { const s = dr.items.find((s) => s.id === new URL(a.href).searchParams.get('id')); return s && s.id !== item.id && (s.genre === item.genre || s.format === item.format); }), genre: [...document.querySelectorAll('.Catui_dr-copy a')].some((a) => new URL(a.href).searchParams.get('g') === item.genre), compact: !!cover && !!title && Math.abs(cover.top - title.top) < 4 && cover.width <= 100, honest: !document.querySelector('video') && document.body.textContent.includes('영상은 제공하지 않습니다'), overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { '긴 회차 기본 12개·나머지 접기·전체 개수 일치': (r) => r.initial && r.episodes, '장르 탐색·관련 작품이 동일 장르/형식이며 자기 작품 제외': (r) => r.related && r.genre, '모바일 포스터·작품명 나란히·320px 넘침 없음': (r) => r.compact && !r.overflow, '회차를 재생 버튼으로 위장하지 않음': (r) => r.honest },
+  },
+  {
+    name: 'drama 보완 · 형식별 편집 랭킹·줄거리', page: 'docs/drama/templates/ranking.html?t=AI', viewport: [320, 844],
+    run: async () => {
+      await catui.drama.ready;
+      const links = [...document.querySelectorAll('.Catui_dr-rank-art')], ids = links.map((a) => new URL(a.href).searchParams.get('id'));
+      return { current: document.querySelector('[data-facet-key="t"][aria-current="true"]')?.textContent === 'AI', rows: ids.length === 3 && ids.every((id) => catui.drama.items.find((s) => s.id === id)?.format === 'AI'), desc: links.length > 0 && links.every((a) => a.querySelector('.Catui_dr-rank-desc')?.textContent.trim()), honest: !document.querySelector('[data-rating], [data-views]') && document.body.textContent.includes('실제 인기 집계가 아닙니다'), overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { '선택 형식의 실제 예제만 순위에 표시': (r) => r.current && r.rows, '포스터·작품명·줄거리 같은 상세 링크로 연결': (r) => r.desc, '집계 지표를 만들지 않음·320px 넘침 없음': (r) => r.honest && !r.overflow },
+  },
+  {
+    name: 'drama · 홈·원자료·사진 대체', page: 'docs/drama/templates/index.html', viewport: [320, 844],
+    run: async () => {
+      const dr = catui.drama; await dr.ready;
+      const items = await dr.load(), image = document.querySelector('[data-feature] img');
+      const rows = document.querySelectorAll('[data-feature] .Catui_dr-card');
+      image?.dispatchEvent(new Event('error'));
+      return { count: items.length, hero: rows.length === 4 && document.querySelectorAll('h1').length === 1, links: [...document.querySelectorAll('.Catui_dr-art')].every((a) => items.some((s) => a.getAttribute('href') === `series.html?id=${s.id}`)), fallback: !!image?.hidden && !!image.parentElement.querySelector('span').textContent && !!image.closest('a')?.getAttribute('href'), honest: document.body.textContent.includes('가상 작품') && !document.querySelector('video, [download]'), overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { '16개 가상 작품·추천 4편·단일 제목': (r) => r.count === 16 && r.hero, '목록에서 같은 작품 상세로 연결': (r) => r.links, '이미지 오류에도 제목·상세 링크 유지': (r) => r.fallback, '시연 범위 명시·320px 넘침 없음': (r) => r.honest && !r.overflow },
+  },
+  {
+    name: 'drama · 검색·분류·한글 조합·뒤로 가기', page: 'docs/drama/templates/catalog.html?g=%EB%A1%9C%EB%A7%A8%EC%8A%A4&t=%EC%8B%A4%EC%82%AC&sort=short', viewport: [320, 844],
+    run: async () => {
+      const dr = catui.drama; await dr.ready; const form = document.querySelector('[data-filter]');
+      const initial = document.querySelectorAll('[data-view] .Catui_dr-card').length === 3 && dr.state().g === '로맨스' && dr.state().t === '실사' && dr.filtered()[0].minutes === 2;
+      form.elements.q.focus(); form.elements.q.value = '막 차';
+      const composing = new KeyboardEvent('keydown', { key: 'Enter', isComposing: true, bubbles: true, cancelable: true }); form.elements.q.dispatchEvent(composing);
+      form.requestSubmit(); await dr.ready;
+      const searched = document.querySelectorAll('[data-view] .Catui_dr-card').length === 1 && document.querySelector('[data-view]').textContent.includes('막차가 떠난 뒤') && new URL(location.href).searchParams.get('q') === '막 차';
+      const focus = document.activeElement === form.elements.q;
+      const popped = new Promise((resolve) => addEventListener('popstate', resolve, { once: true })); history.back(); await popped; await dr.ready;
+      const restored = form.elements.q.value === '' && document.querySelectorAll('[data-view] .Catui_dr-card').length === 3;
+      form.elements.q.value = '없는작품000'; form.requestSubmit(); await dr.ready;
+      const empty = !!document.querySelector('[data-view] .Catui_empty') && document.querySelector('[data-view]').textContent.includes('초기화');
+      return { initial, composing: composing.defaultPrevented, searched, focus, restored, empty };
+    },
+    expect: { '분류·형식·정렬 직접 진입 복원': (r) => r.initial, '띄어쓰기 무시 검색·주소 반영·조합 중 Enter 차단': (r) => r.searched && r.composing, '검색 후 입력 포커스·뒤로 가기 상태 복원': (r) => r.focus && r.restored, '빈 결과와 초기화 안내': (r) => r.empty },
+  },
+  {
+    name: 'drama · 찜·보관함·테마 중복 초기화', page: 'docs/drama/templates/library.html', viewport: [320, 844],
+    run: async () => {
+      const dr = catui.drama; await dr.ready; const saved = catui.data('drama').saved, theme = catui.data('drama').theme, root = dr.root;
+      try {
+        catui.data('drama', { key: 'saved', value: dr.items.slice(0, 2).map((x) => x.id) }); dr.render();
+        document.querySelector('[data-view] [data-save]').click();
+        const one = document.querySelectorAll('[data-view] .Catui_dr-card').length === 1 && document.activeElement === document.querySelector('[data-view] [data-save]');
+        document.querySelector('[data-view] [data-save]').click();
+        const empty = document.querySelector('[data-view]').textContent.includes('찜한 작품이 없습니다') && document.activeElement === document.querySelector('[data-status]');
+        dr.destroy(); dr.init(root); dr.init(root); await dr.ready;
+        const button = document.querySelector('[data-catui-dr-theme]'), before = button.getAttribute('aria-pressed'); button.click();
+        return { one, empty, stored: catui.data('drama').saved.length === 0, theme: button.getAttribute('aria-pressed') !== before && typeof catui.data('drama').theme === 'boolean', reinit: root.hasAttribute('data-catui-dr-ready') && !!dr._offs.length };
+      } finally { catui.data('drama', { key: 'saved', value: saved }); catui.data('drama', { key: 'theme', value: theme }); }
+    },
+    expect: { '찜 해제 후 다음 항목·빈 상태로 포커스 연결': (r) => r.one && r.empty, '브라우저 저장 유지·재연결 가능': (r) => r.stored && r.reinit, '중복 init 뒤 테마 토글 한 번': (r) => r.theme },
+  },
+  ...['last-train', 'missing'].map((id) => ({
+    name: `drama · 작품 상세 · ${id}`, page: `docs/drama/templates/series.html?id=${id}`, viewport: [320, 844],
+    run: async () => {
+      const dr = catui.drama; await dr.ready; const id = new URL(location.href).searchParams.get('id'), item = dr.items.find((x) => x.id === id);
+      return { detail: item ? document.querySelector('#dr-series-title')?.textContent === item.title && document.querySelectorAll('.Catui_dr-episodes li').length === item.episodes && document.querySelector('[data-save]')?.dataset.save === item.id : document.querySelector('[data-view]').textContent.includes('작품을 찾을 수 없습니다'), honest: !document.querySelector('video') && ![...document.querySelectorAll('button')].some((b) => b.textContent.includes('재생')), overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { '원자료와 같은 상세·회차 또는 없는 작품 안내': (r) => r.detail, '재생 기능으로 위장하지 않음·320px 넘침 없음': (r) => r.honest && !r.overflow },
+  })),
+  {
+    name: 'drama · 실패·재시도·입력 보존·안전 출력·늦은 응답', page: 'docs/drama/templates/catalog.html', viewport: [320, 844],
+    run: async () => {
+      const dr = catui.drama; await dr.ready; const rows = await dr.load(), fetcher = window.fetch, root = dr.root, host = document.createElement('div');
+      host.className = 'Catui_site Catui_dr'; host.setAttribute('data-catui-dr', ''); host.dataset.page = 'catalog';
+      catui.mount(host, catui.html`<form data-filter><input name="q" aria-label="시험 검색"><button type="submit">검색</button></form><p data-status tabindex="-1" role="status"></p><div data-view>처리 중</div><p data-catui-dr-live role="status"></p>`); document.querySelector('main').append(host);
+      let mode = 'fail', release;
+      window.fetch = () => mode === 'fail' ? Promise.reject(new Error('private backend trace')) : mode === 'late' ? new Promise((r) => { release = () => r({ ok: true, json: async () => rows }); }) : Promise.resolve({ ok: true, json: async () => mode === 'bad' ? [{ ...rows[0], photo: '../unsafe.jpg' }] : rows });
+      try {
+        dr.destroy(); dr._pending = null; dr.init(host); await dr.ready;
+        const error = !!host.querySelector('[data-retry]') && !host.textContent.includes('private backend');
+        host.querySelector('[name=q]').value = '작성 중'; mode = 'ok'; const retry = host.querySelector('[data-retry]'); retry.focus({ preventScroll: true }); retry.click(); await dr.ready;
+        const restored = host.querySelectorAll('.Catui_dr-card').length === 12 && host.querySelector('[name=q]').value === '작성 중' && document.activeElement === host.querySelector('[data-status]');
+        dr.items = [{ ...rows[0], title: '<img src=x onerror=alert(1)>' }]; dr.render(); const escaped = !host.querySelector('img[src="x"]') && host.textContent.includes('<img src=x');
+        mode = 'bad'; dr._pending = null; await dr.refresh(); const schema = !!host.querySelector('[data-retry]');
+        mode = 'late'; dr._pending = null; const pending = dr.refresh(); await Promise.resolve(); dr.destroy(); const text = host.textContent; release(); await pending;
+        return { error, restored, escaped, schema, destroyed: host.textContent === text && dr._offs.length === 0 && !host.hasAttribute('data-catui-dr-ready') };
+      } finally { window.fetch = fetcher; dr._pending = null; dr.destroy(); host.remove(); dr.init(root); await dr.ready; }
+    },
+    expect: { '요청 실패 원인·재시도·내부 오류 비노출': (r) => r.error, '복구 후 목록·작성 중 검색어·포커스 유지': (r) => r.restored, '사용자 문자열 안전 출력·잘못된 이미지 경로 거절': (r) => r.escaped && r.schema, 'destroy 후 늦은 응답 무시·리스너 해제': (r) => r.destroyed },
+  },
+  ...[320, 390, 1440].map((width) => ({
+    name: `예약 접근성 · 현재 단계 노출 · ${width}px`,
+    page: 'docs/booking/templates/packs.html', viewport: [width, 844],
+    run: async () => {
+      const bk = catui.booking; await bk.ready;
+      const host = document.createElement('div'); host.className = 'Catui_bk-flow-head';
+      catui.mount(host, catui.html`<ol class="Catui_steps" aria-label="예약 단계"></ol><button type="button">포커스 유지</button>`); document.querySelector('main').append(host);
+      const box = host.querySelector('ol'), other = host.querySelector('button');
+      const visible = () => { const a = box.getBoundingClientRect(), b = box.querySelector('[aria-current="step"]').getBoundingClientRect(); return b.left >= a.left - 1 && b.right <= a.right + 1; };
+      try {
+        other.focus({ preventScroll: true }); const y = scrollY;
+        bk.flow.steps_(box, 'seat', 'confirm'); const initial = visible(), keyboard = box.scrollWidth <= box.clientWidth || box.getAttribute('tabindex') === '0';
+        host.style.width = '180px'; dispatchEvent(new Event('resize')); const resized = visible();
+        bk.flow.steps_(box, 'room', 'info'); dispatchEvent(new Event('resize'));
+        return { initial, keyboard, resized, current: visible() && box.querySelectorAll('[aria-current="step"]').length === 1 && box.querySelector('[aria-current="step"]').textContent.includes('예약자 정보'), kept: document.activeElement === other && scrollY === y, overflow: document.documentElement.scrollWidth > innerWidth };
+      } finally { host.remove(); }
+    },
+    expect: { "직접 그리기·폭 변경·서비스 종류 변경 후 현재 단계 노출": (r) => r.initial && r.resized && r.current, "넘치는 단계는 키보드로 스크롤 가능": (r) => r.keyboard, "본문·포커스 이동·페이지 가로 넘침 없음": (r) => r.kept && !r.overflow },
+  })),
+  ...['restore', 'outside'].map((mode) => ({
+    name: `예약 접근성 · 재시도 포커스 · ${mode}`,
+    page: `docs/booking/templates/info.html?focus-mode=${mode}`, viewport: [320, 844],
+    run: async () => {
+      const bk = catui.booking; await bk.ready; const d = await bk.load(), saved = bk.draft.get(), load = bk.load;
+      const host = document.createElement('div');
+      catui.mount(host, catui.html`<form data-catui-bk-info><h2 class="Catui_h3">예약자 정보</h2><label for="focus-name">이름</label><input class="Catui_input" id="focus-name" name="name"><input name="phone" type="hidden"><input name="email" type="hidden"><textarea name="request" hidden></textarea><input type="checkbox" data-agree-all aria-label="전체 동의"><button type="submit">다음</button></form><button type="button" data-outside>다른 작업</button>`); document.querySelector('main').append(host);
+      const form = host.querySelector('form'), outside = host.querySelector('[data-outside]'); let submits = 0;
+      form.addEventListener('submit', () => { submits++; });
+      const until = async (test) => { for (let i = 0; i < 100 && !test(); i++) await new Promise((r) => setTimeout(r, 20)); };
+      try {
+        bk.draft.set({ svc: 'pottery', branch: 'gangnam', date: bk.today(), time: '14:00', adult: 1, child: 0 });
+        bk.load = () => Promise.reject(new Error('fixture offline'));
+        bk.infoPage.init(host); form.elements.name.value = '작성 중'; form.elements.name.dispatchEvent(new Event('input', { bubbles: true })); form.elements.name.focus({ preventScroll: true });
+        await bk.infoPage.ready;
+        let retry = form.querySelector('[data-retry]'); const initial = !!retry && document.activeElement === retry;
+        let repeated = true;
+        if (location.search.includes('outside')) {
+          retry.focus({ preventScroll: true }); retry.click(); await until(() => form.querySelector('[data-retry]') && !form.hasAttribute('aria-busy'));
+          retry = form.querySelector('[data-retry]'); repeated = document.activeElement === retry;
+          let resolve; bk.load = () => new Promise((r) => { resolve = r; }); retry.focus({ preventScroll: true }); retry.click(); await until(() => resolve);
+          outside.focus({ preventScroll: true }); resolve(d);
+        } else { bk.load = load; retry.focus({ preventScroll: true }); retry.click(); }
+        const y = scrollY; await until(() => !form.hasAttribute('aria-busy'));
+        return { initial, repeated, focus: document.activeElement === (location.search.includes('outside') ? outside : form.elements.name), retained: form.elements.name?.value === '작성 중', safe: submits === 0 && scrollY === y, overflow: document.documentElement.scrollWidth > innerWidth };
+      } finally { bk.load = load; bk.draft.clear(); bk.draft.set(saved); host.remove(); }
+    },
+    expect: { "사라지는 입력·반복 오류에서 재시도 버튼에 포커스": (r) => r.initial && r.repeated, "복구 후 입력으로 복귀·다른 작업 포커스는 빼앗지 않음": (r) => r.focus && r.retained, "자동 제출·스크롤 이동·가로 넘침 없음": (r) => r.safe && !r.overflow },
+  })),
+  {
+    name: "예약 조합 검증 · 서비스별 지점·객실",
+    page: "docs/booking/templates/packs.html",
+    run: async () => {
+      const bk = catui.booking, d = await bk.load();
+      const rows = d.services.map((svc) => {
+        const v = { svc: svc.id, branch: svc.branches[0], date: '2026-11-14', checkout: '2026-11-15', room: 'ondol', adult: 1, child: 0, seats: [], name: '예제', phone: '010-0000-0000' };
+        if (svc.kind !== 'room') v.time = bk.slotsFor(d, v).find((s) => s.state === 'open')?.time;
+        if (svc.kind === 'seat') v.seats = [bk.cells(d.maps[svc.map]).find((c) => c.kind === 'seat' && !bk.seatsTaken(d, v.svc, v.date, v.time).includes(c.id)).id];
+        const wrong = { ...v, branch: d.branches.find((b) => !svc.branches.includes(b.id)).id };
+        const fixture = document.createElement('div');
+        const gate = bk.flow.need(fixture, d, wrong);
+        const r = { id: svc.id, valid: bk.check(d, v).length === 0, blocked: bk.check(d, wrong).some((s) => s.includes('지점')), noSlots: bk.slotsFor(d, wrong).length === 0, gate: !gate && fixture.textContent.includes('지점') };
+        if (svc.kind === 'room') r.room = bk.check(d, { ...v, room: 'missing-room' }).some((s) => s.includes('객실'));
+        return r;
+      });
+      return { rows };
+    },
+    expect: { "기존 6종 서비스의 올바른 조합 유지": (r) => r.rows.length === 6 && r.rows.every((s) => s.valid), "다른 서비스의 실제 지점으로 확정 불가": (r) => r.rows.every((s) => s.blocked), "잘못된 지점은 시간 칸·진행 화면 차단": (r) => r.rows.every((s) => s.noSlots && s.gate), "존재하지 않는 객실 차단 유지": (r) => r.rows.find((s) => s.id === 'stay').room },
+  },
+  ...['date.html?svc=catui-day&branch=jeonju&date=2026-11-14', 'rooms.html?svc=stay&branch=daehak&in=2026-11-14&out=2026-11-15'].map((path) => ({
+    name: `예약 조합 검증 · 잘못된 지점 직접 진입 · ${path.split('.')[0]}`,
+    page: `docs/booking/templates/${path}`,
+    viewport: [320, 844],
+    run: async () => {
+      const bk = catui.booking; await Promise.all([bk.datePage.ready, bk.roomPage.ready]);
+      const box = document.querySelector('[data-catui-bk-date], [data-catui-bk-rooms]'), action = box.querySelector('[data-go]');
+      return { notice: !!box.querySelector('[data-bk-empty] a[href="index.html"]') && box.querySelector('[data-bk-empty]').textContent.includes('지점'), blocked: !action || action.disabled || !!action.closest('[hidden]'), summary: !document.querySelector('[data-catui-bk-summary] [data-sum-total]'), overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { "지점 불일치 안내·서비스 재선택 연결": (r) => r.notice, "다음 단계·유효하지 않은 예상 금액 숨김": (r) => r.blocked && r.summary, "320px 오류 화면 넘침 없음": (r) => !r.overflow },
+  })),
+  {
+    name: "예약 조합 검증 · 확인 후 지점이 바뀐 초안",
+    page: "docs/booking/templates/packs.html",
+    run: async () => {
+      const bk = catui.booking; await bk.load(); const before = bk.draft.get(), save = bk.save, go = bk.go, fixture = document.createElement('div'); let saves = 0, moved = false;
+      catui.mount(fixture, catui.html`<section data-catui-bk-confirm><div data-body><div data-detail></div><div data-amount></div><div data-refund-table></div><p data-msg hidden></p><button type="button" data-confirm>예약 확정</button></div></section>`); document.querySelector('main').append(fixture);
+      try {
+        bk.save = () => { saves++; return { no: 'fixture' }; }; bk.go = () => { moved = true; };
+        bk.draft.set({ svc: 'catui-day', branch: 'daehak', date: '2026-11-14', time: '14:00', adult: 1, child: 0, seats: ['A1'], options: [], name: '예제', phone: '010-0000-0000', change: '' });
+        bk.confirmPage.init(fixture); await bk.confirmPage.ready;
+        bk.draft.set({ branch: 'jeonju' }); fixture.querySelector('[data-confirm]').click();
+        return { blocked: saves === 0 && !moved, reason: fixture.querySelector('[data-msg]').textContent.includes('지점') };
+      } finally { bk.save = save; bk.go = go; bk.draft.clear(); bk.draft.set(before); fixture.remove(); }
+    },
+    expect: { "확인 화면 이후 바뀐 초안도 저장·이동 차단": (r) => r.blocked, "지점 재선택 이유 안내": (r) => r.reason },
+  },
+  {
+    name: "템플릿 팩 복구 · Shop 상품 묶음",
+    page: "docs/shop/templates/food-store.html",
+    run: async () => {
+      const sh = catui.shop; await sh.load(); await sh.cards.ready;
+      const original = sh.load, fixture = document.createElement('div');
+      catui.mount(fixture, catui.html`<ul data-catui-sh-products="cat:food" data-size="24"><li>불러오는 중</li></ul>`); document.querySelector('main').append(fixture);
+      let fail = true;
+      try {
+        sh.load = () => fail ? Promise.reject(new Error('fixture')) : original.call(sh);
+        sh.cards.init(fixture); await sh.cards.ready;
+        const box = fixture.querySelector('ul'), error = !!box.querySelector('[data-retry]') && box.firstElementChild.tagName === 'LI' && !box.hasAttribute('aria-busy');
+        fail = false; box.querySelector('[data-retry]').click();
+        for (let i = 0; i < 100 && !box.querySelector('a[href^="product.html"]'); i++) await new Promise((r) => setTimeout(r, 20));
+        return { error, recovered: !!box.querySelector('a[href^="product.html"]') && !box.querySelector('[data-retry]') && !box.hasAttribute('aria-busy') };
+      } finally { sh.load = original; fixture.remove(); }
+    },
+    expect: { "실패 원인·재시도·올바른 목록 구조": (r) => r.error, "재시도 후 같은 상품 묶음 복구": (r) => r.recovered },
+  },
+  {
+    name: "템플릿 팩 복구 · Docs 태그·포커스·빈 목록",
+    page: "docs/docskit/templates/notes.html?tag=a11y",
+    run: async () => {
+      const dk = catui.docs; await dk.ready; await dk.blogList.ready;
+      const original = dk.blog, previous = { box: dk.blogList.box, d: dk.blogList.d, ready: dk.blogList.ready }, d = await original.call(dk), fixture = document.createElement('div');
+      catui.mount(fixture, catui.html`<section data-catui-dk-blog data-catui-dk-text-only><div data-filter></div><p data-count></p><ul data-list></ul><nav data-pager></nav></section>`); document.querySelector('main').append(fixture);
+      let fail = true;
+      try {
+        dk.blog = () => fail ? Promise.reject(new Error('fixture')) : Promise.resolve(d);
+        dk.blogList.init(fixture); await dk.blogList.ready;
+        const error = !!fixture.querySelector('[data-retry]') && !!fixture.querySelector('[role="alert"]');
+        fail = false; fixture.querySelector('[data-retry]').click(); await dk.blogList.ready;
+        const recovered = !fixture.querySelector('[data-retry]') && fixture.querySelector('[data-tag="a11y"]')?.getAttribute('aria-pressed') === 'true' && document.activeElement?.dataset.tag === 'a11y' && location.search === '?tag=a11y';
+        const textOnly = !fixture.querySelector('[data-list] img');
+        dk.blogList.d = { ...d, posts: [] }; dk.blogList.draw();
+        return { error, recovered, textOnly, empty: fixture.querySelector('[data-list]').textContent.includes('아직 없습니다') };
+      } finally { dk.blog = original; Object.assign(dk.blogList, previous); fixture.remove(); }
+    },
+    expect: { "실패 안내·재시도 제공": (r) => r.error, "태그·주소 보존·선택한 필터에 포커스 복구": (r) => r.recovered, "텍스트형 이미지 요청 안 함·빈 목록 안내": (r) => r.textOnly && r.empty },
+  },
+  ...['admin', 'community', 'shop', 'booking'].map((scope) => ({
+    name: `공통 계정 · 비밀번호·권한 안내 · ${scope}`,
+    page: `docs/${scope}/templates/login.html`, viewport: [320, 844],
+    run: async () => {
+      const form = document.getElementById('lg-form'), input = document.getElementById('lg-pw'), button = form.querySelector('[data-catui-password-toggle]');
+      let submitted = 0; form.addEventListener('submit', (e) => { submitted++; e.preventDefault(); });
+      input.value = 'example-password'; const masked = input.type === 'password';
+      button?.click(); const shown = input.type === 'text' && button?.getAttribute('aria-pressed') === 'true' && button?.getAttribute('aria-label') === '비밀번호 숨기기';
+      button?.click(); const hidden = input.type === 'password' && button?.getAttribute('aria-pressed') === 'false';
+      button?.click(); form.reset(); await Promise.resolve();
+      const reset = input.type === 'password' && button?.getAttribute('aria-pressed') === 'false';
+      const response = await fetch('error-403.html'), doc = new DOMParser().parseFromString(await response.text(), 'text/html');
+      return { masked, shown, hidden, reset, submitted, denied: response.ok && doc.querySelectorAll('h1').length === 1 && !!doc.querySelector('a[href="login.html"]') && doc.body.textContent.includes('서버'), overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { "초기 가림·표시·다시 가림·ARIA 상태": (r) => r.masked && r.shown && r.hidden, "폼 초기화 시 비밀번호 가림·보기 버튼은 제출 안 함": (r) => r.reset && r.submitted === 0, "공통 403·계정 전환·실제 서버 검증 구분": (r) => r.denied, "320px 로그인 가로 넘침 없음": (r) => !r.overflow },
+  })),
+  ...['food', 'living'].map((cat) => ({
+    name: `템플릿 팩 · Shop 업종별 ${cat}`,
+    page: `docs/shop/templates/${cat}-store.html`, viewport: [320, 844],
+    run: async () => {
+      const sh = catui.shop, cat = location.pathname.includes('food-store') ? 'food' : 'living';
+      await sh.load(); await sh.cards.ready;
+      const d = await sh.load(), box = document.querySelector(`[data-catui-sh-products="cat:${cat}"]`), links = [...(box?.querySelectorAll('a[href^="product.html"]') || [])];
+      const ids = links.map((a) => new URL(a.href).searchParams.get('id'));
+      const hero = document.querySelector('.Catui_sh-hero'), copy = hero.querySelector('.Catui_sh-hero-copy').getBoundingClientRect(), action = hero.querySelector('a').getBoundingClientRect();
+      return { scoped: ids.length > 0 && ids.every((id) => d.byId[id]?.cat === cat), count: ids.length === sh.pick(d, `cat:${cat}`).length, nav: !!document.querySelector(`a[href="list.html?c=${cat}"]`), single: document.querySelectorAll('h1').length === 1, fits: action.right <= copy.right + 1 && action.bottom <= hero.getBoundingClientRect().bottom + 1 && hero.scrollHeight <= hero.clientHeight + 1, overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { "기존 상품 원자료·해당 분류만 표시": (r) => r.scoped && r.count, "기존 분류·구매 흐름 연결·제목 1개": (r) => r.nav && r.single, "히어로 설명·구매 링크 잘림 없음": (r) => r.fits, "320px 가로 넘침 없음": (r) => !r.overflow },
+  })),
+  ...['journal', 'notes'].map((page) => ({
+    name: `템플릿 팩 · Docs 블로그 ${page}`,
+    page: `docs/docskit/templates/${page}.html`, viewport: [320, 844],
+    run: async () => {
+      const dk = catui.docs; await dk.ready; await dk.blogList.ready;
+      const d = await dk.blog(), box = document.querySelector('[data-catui-dk-blog]'), posts = [...box.querySelectorAll('[data-list] a[href^="post.html"]')];
+      const original = location.pathname, initial = posts.length === Math.min(d.posts.length, dk.rules.perPage);
+      const button = box.querySelector('[data-tag="a11y"]'); button?.click();
+      const filtered = [...box.querySelectorAll('[data-list] a[href^="post.html"]')].every((a) => d.byId[new URL(a.href).searchParams.get('id')]?.tags.includes('a11y'));
+      return { initial, filtered: filtered && location.search.includes('tag=a11y') && location.pathname === original, focus: document.activeElement?.dataset.tag === 'a11y', same: document.querySelectorAll('h1').length === 1, overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { "같은 글 데이터·기존 페이지 크기 재사용": (r) => r.initial, "태그·주소·현재 변형 화면 유지": (r) => r.filtered, "필터 포커스·단일 제목·320px 넘침 없음": (r) => r.focus && r.same && !r.overflow },
+  })),
+  {
+    name: "템플릿 팩 · 행사·업종 소개와 예약 데이터 계약",
+    page: "docs/booking/templates/index.html",
+    run: async () => {
+      const bk = catui.booking; await bk.ready;
+      const pages = ['packs', 'event', 'event-program', 'event-speakers', 'event-guide', 'restaurant', 'stay', 'classes'];
+      const loaded = await Promise.all(pages.map(async (name) => {
+        const res = await fetch(`${name}.html`), text = await res.text(), doc = new DOMParser().parseFromString(text, 'text/html');
+        return { ok: res.ok, h1: doc.querySelectorAll('h1').length, tokens: /\{\{pack:/.test(text), links: [...doc.querySelectorAll('a[data-pack-booking]')].map((a) => a.getAttribute('href')), text: doc.body.textContent };
+      }));
+      const d = await bk.load(), svc = d.S['catui-day'];
+      const slot = svc ? bk.slotsFor(d, { svc: svc.id, branch: 'daehak', date: '2026-11-14' }) : [];
+      const unavailable = svc ? bk.slotsFor(d, { svc: svc.id, branch: 'daehak', date: '2026-11-15' }) : [1];
+      const source = await fetch('data/packs.json'), packs = source.ok ? await source.json() : {};
+      return { pages: loaded.every((x) => x.ok && x.h1 === 1 && !x.tokens), booking: loaded.slice(1).every((x) => x.links.length > 0 && x.links.every((u) => /^(date|rooms)\.html\?svc=/.test(u))), demo: loaded[1].text.includes('가상') && loaded[3].text.includes('가상'), event: !!svc && slot.some((s) => s.time === '14:00' && s.state === 'open') && unavailable.length === 0, metadata: packs.event?.offers?.[0]?.svc === 'catui-day' && ['restaurant', 'stay', 'classes'].every((k) => !!packs[k]) };
+    },
+    expect: { "8개 팩 화면·단일 제목·빌드 치환": (r) => r.pages, "소개에서 기존 날짜·객실 예약으로 연결": (r) => r.booking, "가상 행사·연사 표시": (r) => r.demo, "행사일만 예약 가능·실제 회차 연결": (r) => r.event, "팩 원자료·업종별 서비스 연결": (r) => r.metadata },
+  },
+  {
+    name: "템플릿 팩 · 행사 회차·좌석 요금·진행",
+    page: "docs/booking/templates/date.html?svc=catui-day&branch=daehak&date=2026-11-14", viewport: [320, 844],
+    run: async () => {
+      const bk = catui.booking; await bk.ready;
+      const d = await bk.load(), svc = d.S['catui-day'], go = bk.go;
+      let went = ''; bk.go = (u) => { went = u; };
+      try {
+        const time = document.querySelector('[name="bk-time"][value="14:00"]'); time?.click();
+        document.querySelector('[data-go]')?.click();
+        const price = svc ? bk.price(svc, { adult: 1, child: 0, seats: ['A1'], options: [], map: d.maps[svc.map] }) : null;
+        const invalid = svc ? bk.check(d, { svc: svc.id, branch: 'daehak', date: '2026-11-15', time: '14:00', adult: 1, child: 0, seats: ['A1'], name: '테스트', phone: '010-0000-0000' }) : [];
+        return { selected: !!time?.checked && went === 'people.html', price: price?.total, invalid: invalid.some((x) => x.includes('예약할 수 없는 시간')), overflow: document.documentElement.scrollWidth > innerWidth };
+      } finally { bk.go = go; }
+    },
+    expect: { "행사 회차 선택 후 인원 단계로 이동": (r) => r.selected, "성인 1인 행사 좌석 요금 29,000원": (r) => r.price === 29000, "다른 날짜의 직접 확정 차단": (r) => r.invalid, "320px 회차 선택 가로 넘침 없음": (r) => !r.overflow },
+  },
+  {
     name: "core · 안전한 마크업",
     page: "docs/js/core/dom.html",
     run: async () => {
@@ -688,6 +1006,268 @@ export const scenarios = [
       return r;
     },
     expect: { "게시판 이름": (r) => r.title === "유머", "말머리 → 주소·목록": (r) => r.cat, "인기글 = 추천−비추천 ≥ 기준": (r) => r.hotRule, "뒤로 가기": (r) => r.back },
+  },
+  {
+    name: "community · 연구 반영 홈 탐색·선택권·기간 신뢰성",
+    page: "docs/community/templates/index.html?feed=1",
+    wait: 900,
+    run: async () => {
+      const cm = catui.community, d = await cm.load(), fav = cm.fav.list();
+      const ids = () => [...document.querySelectorAll('#hm-best-a a, #hm-best-b a')].map((a) => new URL(a.href).searchParams.get('id'));
+      const links = [...document.querySelectorAll('#hm-topics a')];
+      const ranks = [...document.querySelectorAll('.Catui_cm-best .Catui_cm-rank-top')];
+      const topOnly = ranks.length === Math.min(3, ids().length) && ranks.every((el) => Number(el.textContent) <= 3);
+      const routes = links.length === d.boards.filter((b) => b.write !== false).length && links.some((a) => a.getAttribute('href') === 'board-gallery.html?b=photo') && links.some((a) => a.getAttribute('href') === 'board-card.html?b=info');
+      document.querySelector('[data-best="new"]').click();
+      const times = ids().map((id) => new Date(d.byId[id].time).getTime());
+      const latest = times.length > 0 && times.every((t, i) => !i || t <= times[i - 1]) && cm.store.get('home-feed') === 'new' && new URLSearchParams(location.search).get('feed') === 'new';
+      cm.store.set('fav', ['photo']); document.querySelector('[data-best="fav"]').click();
+      const favorite = ids().length > 0 && ids().every((id) => d.byId[id].board === 'photo');
+      cm.store.set('fav', []); document.querySelector('[data-best="fav"]').click();
+      const empty = ids().length === 0 && !!document.querySelector('#hm-best-a .Catui_cm-empty') && document.getElementById('hm-best-b').hidden;
+      const now = cm.now; cm.now = () => new Date(now().getTime() + 180 * 864e5);
+      document.querySelector('[data-best="1"]').click();
+      const honest = ids().length === 0;
+      cm.now = now; cm.store.set('fav', fav);
+      document.querySelector('[data-best="new"]').click();
+      history.replaceState(null, '', location.pathname); window.dispatchEvent(new PopStateEvent('popstate'));
+      const remembered = document.querySelector('[data-best="new"]').getAttribute('aria-current') === 'page';
+      return { routes: routes && topOnly, latest, favorite, empty, honest, remembered };
+    },
+    expect: {
+      "게시판 유형에 맞는 주제 바로가기·최신순·주소와 기억": (r) => r.routes && r.latest && r.remembered,
+      "즐겨찾기 필터·빈 상태·기간 밖 인기글로 채우지 않음": (r) => r.favorite && r.empty && r.honest,
+    },
+  },
+  ...[320, 390, 1440].map((width) => ({
+    name: `community · 연구 반영 목록 가독성·키보드 · ${width}px`,
+    page: "docs/community/templates/board.html?b=free",
+    viewport: [width, 900],
+    wait: 900,
+    run: async () => {
+      const title = document.querySelector('.Catui_cm-table .Catui_cm-title-t');
+      title.textContent = '주말에 동네에서 같이 운동할 분을 찾습니다. 처음 참여하는 사람도 편하게 함께할 수 있는 모임이면 좋겠습니다.';
+      const style = getComputedStyle(title), mobile = innerWidth < 768;
+      const readable = !mobile || (style.whiteSpace === 'normal' && title.getBoundingClientRect().height > parseFloat(style.lineHeight) * 1.5 && getComputedStyle(document.querySelector('.Catui_cm-mobile-cat')).display !== 'none');
+      const sort = document.querySelector('.Catui_cm-sort a:last-child'); sort.focus(); sort.click();
+      const focus = document.activeElement?.matches('.Catui_cm-sort a[aria-current="page"]');
+      return { readable, focus, overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: {
+      "모바일 두 줄 제목·말머리 유지": (r) => r.readable,
+      "정렬 후 키보드 포커스 유지·가로 넘침 없음": (r) => r.focus && !r.overflow,
+    },
+  })),
+  ...["seats", "confirm"].map((step) => ({
+    name: `예약 마무리 복구 · ${step}`,
+    page: `docs/booking/templates/${step}.html${step === 'seats' ? '?svc=musical&branch=daehak' : ''}`, viewport: [320, 844],
+    run: async () => {
+      const bk = catui.booking; await bk.ready;
+      const seats = !!document.querySelector('[data-catui-bk-seats]'), attr = seats ? 'data-catui-bk-seats' : 'data-catui-bk-confirm';
+      const source = new DOMParser().parseFromString(await (await fetch(location.pathname)).text(), 'text/html');
+      const host = document.createElement('div'); host.appendChild(source.querySelector(`[${attr}]`)); document.querySelector('main').appendChild(host);
+      const d = await bk.load(), saved = bk.draft.get(), date = bk.addDays(bk.today(), 10);
+      const taken = bk.seatsTaken(d, 'musical', date, '14:00');
+      const seat = bk.cells(d.maps.hall).find((c) => c.kind === 'seat' && !taken.includes(c.id)).id;
+      bk.draft.set({ svc: 'musical', branch: 'daehak', date, time: '14:00', adult: 1, child: 0, seats: [seat], options: [], name: '테스트', phone: '010-2345-6789' });
+      const before = JSON.stringify(bk.draft.get()), load = bk.load, part = seats ? bk.seatPage : bk.confirmPage;
+      let reject;
+      bk.load = () => new Promise((resolve, fail) => { reject = fail; });
+      try {
+        part.init(host); await new Promise((r) => setTimeout(r, 20));
+        const pending = !!host.querySelector('[data-go], [data-confirm]')?.disabled;
+        reject(new Error('test offline')); await part.ready;
+        const retry = host.querySelector('[data-retry]');
+        const error = !!retry && !host.querySelector('[data-go], [data-confirm]') && !host.textContent.includes('test offline');
+        const kept = JSON.stringify(bk.draft.get()) === before;
+        bk.load = load; retry?.click();
+        for (let i = 0; i < 50 && !host.querySelector('[data-price], [data-amount]')?.textContent.includes('원'); i++) await new Promise((r) => setTimeout(r, 20));
+        const restored = !host.querySelector('[data-retry]') && !!host.querySelector('[data-price], [data-amount]')?.textContent.includes('원') && !host.querySelector('[data-go], [data-confirm]')?.disabled;
+        const selected = seats ? host.querySelector('[data-picked]')?.textContent.includes(seat) && host.querySelectorAll('[data-map] [aria-pressed="true"]').length === 1 : host.querySelector('[data-detail]')?.textContent.includes(seat);
+        return { pending, error, kept, restored, selected, overflow: document.documentElement.scrollWidth > innerWidth };
+      } finally { bk.load = load; bk.draft.set(saved); host.remove(); }
+    },
+    expect: { "로딩 중 진행 잠금·실패 시 재시도만 제공": (r) => r.pending && r.error, "좌석·예약 내용 유지 및 금액 복구": (r) => r.kept && r.restored && r.selected, "320px 실패·복구 가로 넘침 없음": (r) => !r.overflow },
+  })),
+  ...[false, true].map((clear) => ({
+    name: `예약 마무리 복구 · 예약자 정보 ${clear ? '직접 지운 값' : '작성 중인 값'}`,
+    page: `docs/booking/templates/info.html${clear ? '?test-clear=1' : ''}`, viewport: [320, 844],
+    run: async () => {
+      const bk = catui.booking; await bk.ready;
+      const clear = location.search.includes('test-clear');
+      const source = new DOMParser().parseFromString(await (await fetch(location.pathname)).text(), 'text/html');
+      const host = document.createElement('div'); host.appendChild(source.querySelector('[data-catui-bk-info]')); document.querySelector('main').appendChild(host);
+      const form = host.querySelector('form'), saved = bk.draft.get(), load = bk.load, go = bk.go;
+      bk.draft.set({ svc: 'pottery', branch: 'gangnam', date: bk.today(), time: '14:00', adult: 1, child: 0, name: '이전 이름', phone: '010-1111-1111', email: 'saved@example.invalid', request: '이전 요청' });
+      const before = JSON.stringify(bk.draft.get()), values = { name: clear ? '' : '테스트', phone: '010-2345-6789', email: clear ? '' : 'test@example.invalid', request: clear ? '' : '테스트 요청' };
+      let reject, navigations = 0;
+      bk.load = () => new Promise((resolve, fail) => { reject = fail; }); bk.go = () => { navigations++; };
+      try {
+        bk.infoPage.init(host); await new Promise((r) => setTimeout(r, 20));
+        for (const [key, value] of Object.entries(values)) { form.elements[key].value = value; form.elements[key].dispatchEvent(new Event('input', { bubbles: true })); }
+        const all = form.querySelector('[data-agree-all]'); all.checked = true; all.dispatchEvent(new Event('change', { bubbles: true }));
+        const pending = form.querySelector('[type="submit"]').disabled;
+        const submit = new Event('submit', { bubbles: true, cancelable: true }); form.dispatchEvent(submit);
+        const guarded = submit.defaultPrevented && navigations === 0 && JSON.stringify(bk.draft.get()) === before;
+        reject(new Error('test offline')); await bk.infoPage.ready;
+        const retry = form.querySelector('[data-retry]'), error = !!retry && !form.querySelector('[type="submit"]');
+        bk.load = load; retry?.click();
+        for (let i = 0; i < 50 && (!form.elements.name || form.querySelector('[type="submit"]').disabled); i++) await new Promise((r) => setTimeout(r, 20));
+        const retained = Object.entries(values).every(([key, value]) => form.elements[key]?.value === value) && [...form.querySelectorAll('[data-agree]')].every((x) => x.checked);
+        const privateDraft = JSON.stringify(bk.draft.get()) === before;
+        form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+        return { pending, guarded, error, retained, privateDraft, once: navigations === (clear ? 0 : 1), overflow: document.documentElement.scrollWidth > innerWidth };
+      } finally { bk.load = load; bk.go = go; bk.draft.set(saved); host.remove(); }
+    },
+    expect: { "로드 완료 전 제출 차단·브라우저 기본 제출 방지": (r) => r.pending && r.guarded, "실패 안내·작성 값과 약관 선택 복구": (r) => r.error && r.retained, "미제출 정보는 초안에 기록하지 않음": (r) => r.privateDraft, "복구 후 제출·필수 검증 한 번 처리": (r) => r.once, "320px 입력 복구 가로 넘침 없음": (r) => !r.overflow },
+  })),
+  ...["doc.html?p=a11y", "guide.html"].map((page) => ({
+    name: `단계 복구 · 문서 본문·메뉴 · ${page}`,
+    page: `docs/docskit/templates/${page}`, viewport: [390, 844],
+    run: async () => {
+      const dk = catui.docs; await dk.ready;
+      const hasPage = !!document.querySelector('[data-catui-dk-page]');
+      const host = document.createElement('div'); host.setAttribute('data-catui-dk', '');
+      host.innerHTML = '<nav data-catui-dk-nav></nav><article><header><h1 data-title>문서</h1><p data-desc>불러오는 중</p></header><div data-body></div><section data-catui-dk-feedback><p>문서 평가</p></section><div class="Catui_dk-doc-f">수정 정보</div></article>';
+      if (hasPage) host.querySelector('article').setAttribute('data-catui-dk-page', 'intro');
+      else host.querySelector('[data-body]').textContent = '시작 가이드 내용';
+      document.querySelector('main').appendChild(host);
+      const data = dk.data;
+      dk.data = (name) => name === (hasPage ? 'pages' : 'nav') ? Promise.reject(new Error('test offline')) : data.call(dk, name);
+      try {
+        dk.shell.init(host); await dk.shell.ready;
+        const retry = host.querySelector('[data-retry]');
+        const error = !!retry && /불러오지 못했/.test(host.textContent) && !host.textContent.includes('test offline');
+        const state = hasPage ? host.querySelector('[data-catui-dk-feedback]').hidden && !host.querySelector('[data-desc]').textContent.includes('중') : host.textContent.includes('시작 가이드 내용');
+        dk.data = data; retry?.click(); await dk.shell.ready;
+        const recovered = !host.querySelector('[data-retry]') && !!host.querySelector('[data-catui-dk-nav] a') && (hasPage ? host.querySelector('[data-body]').textContent.includes('키보드와 포커스') && !host.querySelector('[data-catui-dk-feedback]').hidden : host.textContent.includes('시작 가이드 내용'));
+        return { error, state, recovered };
+      } finally { dk.data = data; host.remove(); }
+    },
+    expect: { "실패 안내·재시도·내부 오류 숨김": (r) => r.error, "미로딩 평가 숨김·정적 본문 유지": (r) => r.state, "재시도 후 문서·메뉴 복원": (r) => r.recovered },
+  })),
+  ...["people.html?svc=pottery&branch=gangnam", "rooms.html?svc=stay&branch=jeonju"].map((page) => ({
+    name: `단계 복구 · 예약 중간 선택 · ${page.split('?')[0]}`,
+    page: `docs/booking/templates/${page}`, viewport: [320, 844],
+    run: async () => {
+      const bk = catui.booking; await bk.ready;
+      const rooms = !!document.querySelector('[data-catui-bk-rooms]'), attr = rooms ? 'data-catui-bk-rooms' : 'data-catui-bk-people';
+      const source = new DOMParser().parseFromString(await (await fetch(location.pathname)).text(), 'text/html');
+      const host = document.createElement('div'); host.appendChild(source.querySelector(`[${attr}]`)); document.querySelector('main').appendChild(host);
+      const d = await bk.load(), saved = bk.draft.get(), svc = d.S[rooms ? 'stay' : 'pottery'], branch = rooms ? 'jeonju' : 'gangnam';
+      const date = rooms ? bk.addDays(bk.today(), 10) : bk.today();
+      const room = rooms ? d.rooms.find((r) => r.max >= 3 && bk.roomLeft(d, r.id, date, bk.addDays(date, 2)) > 0)?.id || '' : '';
+      bk.draft.set({ svc: svc.id, branch, date, checkout: rooms ? bk.addDays(date, 2) : '', time: rooms ? d.B[branch].open : '14:00', adult: 2, child: 1, options: svc.options?.[0] ? [svc.options[0].id] : [], room });
+      const before = JSON.stringify(bk.draft.get()), load = bk.load, part = rooms ? bk.roomPage : bk.peoplePage;
+      bk.load = () => Promise.reject(new Error('test offline'));
+      try {
+        part.init(host); await part.ready;
+        const retry = host.querySelector('[data-retry]');
+        const error = !!retry && host.textContent.includes('예약 정보를 불러오지 못했습니다');
+        const kept = before === JSON.stringify(bk.draft.get());
+        bk.load = load; retry?.click();
+        for (let i = 0; i < 50 && !host.querySelector('[data-price]')?.textContent.includes('원'); i++) await new Promise((r) => setTimeout(r, 20));
+        const recovered = !host.querySelector('[data-retry]') && host.querySelector('[data-price]').textContent.includes('원') && !!host.querySelector('[data-opts] input');
+        const retained = before === JSON.stringify(bk.draft.get());
+        const adult = bk.draft.get().adult; host.querySelector('[data-step="adult:1"]')?.click();
+        return { error, kept, recovered, retained, delta: bk.draft.get().adult - adult };
+      } finally { bk.load = load; bk.draft.set(saved); host.remove(); }
+    },
+    expect: { "실패 안내·선택한 일정·인원·옵션 유지": (r) => r.error && r.kept, "재시도 후 금액·옵션 복구·선택 유지": (r) => r.recovered && r.retained, "재연결 후 인원 버튼 한 번만 처리": (r) => r.delta === 1 },
+  })),
+  ...["shop/templates/list.html", "docskit/templates/search.html", "booking/templates/index.html"].map((page) => ({
+    name: `검토 보완 · 데이터 실패·재시도 · ${page.split('/')[0]}`,
+    page: `docs/${page}`,
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      await sleep(800);
+      const shop = !!document.querySelector('[data-catui-sh-list]'), docs = !!document.querySelector('[data-catui-dk-results]');
+      const client = shop ? catui.shop : docs ? catui.docs : catui.booking;
+      const owner = docs ? client.search : client, original = owner.load;
+      const host = document.createElement('div');
+      host.innerHTML = shop ? '<section data-catui-sh-list="list"><p>불러오는 중…</p></section>' : docs ? '<form data-catui-dk-search="live"><input name="q" value="목차"></form><p data-catui-dk-count role="status"></p><ol data-catui-dk-results></ol>' : '<ul data-catui-bk-home><li>불러오는 중…</li></ul>';
+      document.querySelector('main').appendChild(host);
+      owner.load = () => Promise.reject(new Error('test offline'));
+      try {
+        if (shop) client.list.mount(host.firstElementChild); else if (docs) client.search.init(host); else client.home.init(host);
+        await sleep(150);
+        const retry = [...host.querySelectorAll('button')].find((b) => b.textContent.includes('다시 시도'));
+        const error = !!retry && /못했|못했습|실패/.test(host.textContent) && !host.textContent.includes('test offline');
+        owner.load = original;
+        retry?.click(); await sleep(900);
+        const recovered = shop ? !!host.querySelector('.Catui_sh-card') : docs ? !!host.querySelector('.Catui_dk-result') : !!host.querySelector('.Catui_bk-svc');
+        return { error, recovered };
+      } finally { owner.load = original; host.remove(); }
+    },
+    expect: { "실패 안내·재시도 제공·내부 오류 숨김": (r) => r.error, "재시도 후 실제 데이터로 복구": (r) => r.recovered },
+  })),
+  {
+    name: "검토 보완 · 쇼핑 비용·선택 조건",
+    page: "docs/shop/templates/list.html?price=0-10000",
+    run: async () => {
+      await new Promise((r) => setTimeout(r, 900));
+      const card = [...document.querySelectorAll('.Catui_sh-card')].find((c) => c.textContent.includes('클렌징폼'));
+      const costs = !!card && card.textContent.includes('3,000원') && card.textContent.includes('12,900원');
+      const active = document.querySelector('[data-active-filters]');
+      const chip = active?.querySelector('[data-remove-filter]');
+      chip?.focus(); chip?.click();
+      return { costs, removable: !!chip && !location.search.includes('price=') && document.activeElement?.isConnected && document.activeElement !== document.body };
+    },
+    expect: { "상품가·배송비·1개 예상 합계 구분": (r) => r.costs, "조건 칩 해제·주소와 포커스 유지": (r) => r.removable },
+  },
+  {
+    name: "검토 보완 · 문서 본문 검색 색인",
+    page: "docs/docskit/templates/search.html?q=포커스",
+    run: async () => {
+      await catui.docs.search.ready;
+      const rows = [...document.querySelectorAll('.Catui_dk-result a')];
+      return { found: rows.some((a) => a.href.includes('p=a11y') && a.href.includes('#')), count: rows.length };
+    },
+    expect: { "본문 절 제목으로 검색·해당 절에 연결": (r) => r.found && r.count > 0 },
+  },
+  {
+    name: "검토 보완 · 검색 결과 절 주소 직접 진입",
+    page: "docs/docskit/templates/doc.html?p=a11y#%ED%82%A4%EB%B3%B4%EB%93%9C%EC%99%80-%ED%8F%AC%EC%BB%A4%EC%8A%A4", viewport: [390, 844],
+    run: async () => {
+      await catui.docs.shell.ready;
+      const target = document.getElementById('키보드와-포커스'), header = document.querySelector('.Catui_dk-head');
+      return { y: scrollY, top: target?.getBoundingClientRect().top, bottom: header.getBoundingClientRect().bottom };
+    },
+    expect: { "비동기 본문 절로 이동·고정 머리에 가리지 않음": (r) => r.y > 0 && r.top >= r.bottom && r.top < r.bottom + 40 },
+  },
+  ...[320, 390].map((width) => ({
+    name: `검토 보완 · Docs 모바일 목차 · ${width}px`,
+    page: "docs/docskit/templates/guide.html", viewport: [width, 844],
+    run: async () => {
+      await new Promise((r) => setTimeout(r, 600));
+      const title = document.querySelector('h1'), toc = document.querySelector('#dk-toc'), toggle = toc?.querySelector('details');
+      return { order: title.getBoundingClientRect().top < toc.getBoundingClientRect().top, collapsible: !!toggle && !toggle.open, overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { "제목 다음 접힌 목차·가로 넘침 없음": (r) => r.order && r.collapsible && !r.overflow },
+  })),
+  ...["docskit/templates/changelog.html", "booking/templates/admin.html"].map((page) => ({
+    name: `검토 보완 · 현재 메뉴 노출 · ${page.split('/')[0]}`,
+    page: `docs/${page}`, viewport: [320, 844],
+    run: async () => {
+      await new Promise((r) => setTimeout(r, 600));
+      const nav = document.querySelector('header nav'), active = nav.querySelector('[aria-current="page"]');
+      const a = active.getBoundingClientRect(), n = nav.getBoundingClientRect();
+      return { visible: a.left >= n.left - 1 && a.right <= n.right + 1, y: scrollY, overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { "직접 진입 현재 메뉴 전체 노출·본문 세로 이동 없음": (r) => r.visible && r.y === 0 && !r.overflow },
+  })),
+  {
+    name: "검토 보완 · Booking 모바일 요약·가격 단위",
+    page: "docs/booking/templates/date.html?svc=pottery&branch=gangnam", viewport: [390, 844],
+    run: async () => {
+      await catui.booking.datePage.ready;
+      document.querySelector('.Catui_bk-day:not([aria-disabled])')?.click();
+      document.querySelector('input[name="bk-time"]:not([disabled])')?.click();
+      const summary = document.querySelector('[data-catui-bk-summary]'), next = document.querySelector('[data-go]');
+      const d = await catui.booking.load(), price = catui.booking.home.from(d, d.S.pottery);
+      return { before: summary.getBoundingClientRect().top < next.getBoundingClientRect().top, values: summary.textContent.includes('14:00') && summary.textContent.includes('45,000원'), unit: price.includes('성인 1인'), overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: { "다음 버튼 전에 선택 일정·금액 확인": (r) => r.before && r.values, "요금 기준 단위·가로 넘침 없음": (r) => r.unit && !r.overflow },
   },
   {
     name: "community · 투표 (한 번 · 비율 계산)",
@@ -1775,7 +2355,7 @@ export const scenarios = [
   })),
   {
     name: "design · community 베스트 목록 균등 분할",
-    page: "docs/community/templates/index.html",
+    page: "docs/community/templates/index.html?feed=1",
     viewport: [768, 1024],
     wait: 700,
     run: () => {
@@ -1832,6 +2412,10 @@ export const scenarios = [
     viewport: [width, 900],
     wait: 800,
     run: async () => {
+      const module = document.querySelector('[data-catui-dk]') ? 'docs' : 'shop';
+      for (let i = 0; i < 50 && !window.catui?.[module]?.ready; i++) await new Promise((r) => setTimeout(r, 100));
+      if (!window.catui?.[module]?.ready) throw new Error('화면 초기화가 완료되지 않았습니다');
+      await catui[module].ready; await catui.shop?.cards?.ready;
       const imgs = [...document.querySelectorAll('.Catui_sh-hero-img, .Catui_dk-cover img')];
       imgs.forEach((img) => { img.loading = 'eager'; });
       await Promise.all(imgs.map((img) => img.decode().catch(() => {})));
@@ -1880,7 +2464,10 @@ export const scenarios = [
     page: "docs/shop/templates/list.html?c=pet",
     viewport: [width, 900],
     wait: 700,
-    run: () => {
+    run: async () => {
+      for (let i = 0; i < 50 && !window.catui?.shop?.ready; i++) await new Promise((r) => setTimeout(r, 100));
+      if (!window.catui?.shop?.ready) throw new Error('화면 초기화가 완료되지 않았습니다');
+      await catui.shop.ready;
       const nav = document.querySelector('.Catui_sh-gnb-in');
       const active = nav.querySelector('[aria-current="page"]');
       const visible = () => {
@@ -1970,20 +2557,22 @@ export const scenarios = [
       const [products, services, rooms, posts, credits] = await Promise.all(['data/products.json', '../../booking/templates/data/services.json', '../../booking/templates/data/rooms.json', '../../community/templates/data/posts.json', '../../../assets/photos/credits.json'].map((p) => fetch(p).then((r) => r.json())));
       const photoPosts = posts.filter((p) => p.board === 'photo');
       const paths = [...products.flatMap((p) => p.images || []), ...services.map((s) => s.image), ...rooms.rooms.map((r) => r.image), ...photoPosts.map((p) => p.thumb)];
-      const coverage = products.length === 24 && products.every((p) => p.images?.length) && services.length === 5 && rooms.rooms.length === 3 && photoPosts.length === 15 && paths.every((p) => p && credits.some((c) => p.endsWith('/' + c.file)));
+      const coverage = products.length === 24 && products.every((p) => p.images?.length) && services.length === 6 && rooms.rooms.length === 3 && photoPosts.length === 15 && paths.every((p) => p && credits.some((c) => p.endsWith('/' + c.file)));
       const decoded = await Promise.all(credits.map(async (c) => { const img = new Image(); img.src = '../../../assets/photos/' + c.file; try { await img.decode(); return img.naturalWidth > 0 && img.naturalHeight > 0; } catch { return false; } }));
       const response = await fetch('../../../assets/photos/index.html');
       const attribution = await response.text();
       return { coverage, files: credits.length >= 43 && decoded.every(Boolean), attribution: response.ok && credits.every((c) => attribution.includes(c.file) && attribution.includes(c.license)) };
     },
     expect: {
-      "상품 24·서비스 5·객실 3·사진 글 15건 실제 사진 연결": (r) => r.coverage,
+      "상품 24·서비스 6·객실 3·사진 글 15건 실제 사진 연결": (r) => r.coverage,
       "전체 사진 파일 디코딩·HTML 출처와 개별 라이선스": (r) => r.files && r.attribution,
     },
   },
   ...[
     ['shop', 'index.html', 12],
     ['shop', 'product.html?id=101', 2],
+    ['shop', 'cart.html', 1],
+    ['shop', 'checkout.html', 1],
     ['shop', 'event.html?e=pet', 1],
     ['booking', 'index.html', 5],
     ['booking', 'rooms.html?svc=stay&branch=jeonju&in=2026-11-06&out=2026-11-08', 3],
@@ -1998,7 +2587,12 @@ export const scenarios = [
     viewport: [width, 900],
     wait: 900,
     run: async () => {
-      const imgs = [...document.querySelectorAll('.Catui_sh-card-img img, .Catui_sh-promo-img, .Catui_sh-gallery-main img, .Catui_sh-hero-img, .Catui_bk-photo, .Catui_cm-shot img, #pv-body img, .Catui_dk-cover img, .Catui_adm-thumb img')];
+      if (document.querySelector('form[data-catui-sh-checkout]')) {
+        const sh = catui.shop; await sh.ready;
+        sh.cart.clear(); sh.cart.add('101', { color: 'black', size: 'M', qty: 1, max: 12 });
+        sh.destroy(); sh.init(); await sh.ready; await new Promise((r) => setTimeout(r, 100));
+      }
+      const imgs = [...document.querySelectorAll('main img[src*="/assets/photos/"], .Catui_sh-card-img img, .Catui_sh-promo-img, .Catui_sh-gallery-main img, .Catui_sh-hero-img, .Catui_bk-photo, .Catui_cm-shot img, #pv-body img, .Catui_dk-cover img, .Catui_adm-thumb img')];
       imgs.forEach((img) => { img.loading = 'eager'; });
       await Promise.all(imgs.map((img) => img.decode().catch(() => {})));
       const loaded = imgs.every((img) => img.naturalWidth > 0 && new URL(img.src).origin === location.origin && new URL(img.src).pathname.includes('/assets/photos/'));
