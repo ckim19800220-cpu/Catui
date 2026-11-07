@@ -1441,4 +1441,616 @@ export const scenarios = [
     },
     expect: { "12종(13화면) 모두 320px 안": (r) => r.n === 13 && !r.bad.length },
   },
+  {
+    name: "booking · 시간 칸 (지난 시간·마감·임박·휴게) · 달력 키보드",
+    page: "docs/booking/templates/date.html?svc=pottery&branch=gangnam&date=2026-11-04",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const bk = catui.booking; await bk.ready;
+      bk.store.clear(); bk.destroy(); bk.init(); await bk.ready; await sleep(30);
+      const slot = (t) => { const i = document.getElementById(`bk-t-${t.replace(":", "")}`); const l = i && document.querySelector(`label[for="${i.id}"]`); return i ? [i.disabled, l.dataset.state, l.textContent.replace(/\s+/g, " ").trim()] : null; };
+      const r = {
+        now: [bk.today(), bk.kst().min], n: document.querySelectorAll("[name=bk-time]").length,
+        s1330: slot("13:30"), s1400: slot("14:00"), s1500: slot("15:00"), s1600: slot("16:00"), s1830: slot("18:30"), s1900: slot("19:00"),
+        wait: !!document.querySelector('a[href*="waitlist.html"][href*="time=15:00"]'),
+      };
+      // 순수 함수: 다른 날짜는 휴게 시간이 보인다 (지난 시간이 먼저)
+      const p = bk.slots({ date: "2026-11-05", open: "10:00", close: "20:00", step: 30, duration: 90, breaks: [["12:30", "13:30"]], capacity: 6, booked: { "10:00": 6, "14:00": 3 } });
+      r.pure = ["10:00", "11:00", "11:30", "13:00", "13:30", "14:00"].map((t) => { const s = p.find((x) => x.time === t); return `${s.state}${s.state === "open" ? s.left : ""}`; }).join(",");
+      r.closed = bk.slots({ date: "2026-11-09", closed: [1] }).every((s) => s.state === "closed");
+      // 달력: 오늘 표시 · 지난 날짜 · 휴무
+      const day = (k) => document.querySelector(`.Catui_bk-day[data-date="${k}"]`);
+      r.today = [day("2026-11-04").getAttribute("aria-current"), day("2026-11-04").getAttribute("aria-pressed")];
+      r.past = [day("2026-11-02").getAttribute("aria-disabled"), day("2026-11-02").querySelector(".Catui_clip").textContent];
+      r.mon = [day("2026-11-09").getAttribute("aria-disabled"), day("2026-11-09").textContent.includes("휴무")];
+      r.noGrid = !document.querySelector(".Catui_bk-cal [role=grid]") && document.querySelectorAll('.Catui_bk-day[tabindex="0"]').length === 1;
+      // 키보드: → 하루, ↓ 한 주
+      day("2026-11-04").focus();
+      day("2026-11-04").dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+      r.right = document.activeElement?.dataset.date;
+      document.activeElement.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+      r.down = document.activeElement?.dataset.date;
+      day("2026-11-09").click(); await sleep(20);
+      r.closedClick = bk.draft.get().date;
+      day("2026-11-05").click(); await sleep(30);
+      r.d5 = [bk.draft.get().date, slot("10:00"), slot("12:00"), slot("14:00")];
+      // 시간 고르고 다음
+      const go = bk.go; let went = ""; bk.go = (u) => { went = u; };
+      document.querySelector('[data-catui-bk-date] [data-go]').click(); await sleep(20);
+      r.noTime = [went, !document.querySelector("[data-msg]").hidden];
+      document.getElementById("bk-t-1400").click(); await sleep(20);
+      document.querySelector('[data-catui-bk-date] [data-go]').click();
+      bk.go = go;
+      r.went = [went, bk.draft.get().time, document.querySelector("[data-sum-total]")?.textContent];
+      bk.store.clear();
+      return r;
+    },
+    expect: {
+      "한국 시간 고정 now (2026-11-04 13:10)": (r) => r.now[0] === "2026-11-04" && r.now[1] === 790,
+      "18칸 (90분이 20시 전에 끝나는 칸만)": (r) => r.n === 18 && r.s1830 && !r.s1900,
+      "지금+30분 이전은 지난 시간(잠김)": (r) => r.s1330[0] && r.s1330[1] === "past" && r.s1330[2].includes("지난 시간"),
+      "남은 자리 = 정원 − 예약": (r) => !r.s1400[0] && r.s1400[2].includes("4자리 남음") && r.s1830[2].includes("3자리 남음"),
+      "마감은 잠김 + 글자 + 대기 신청 링크": (r) => r.s1500[0] && r.s1500[1] === "full" && r.s1500[2].includes("마감") && r.wait,
+      "임박: 1자리 + 글자": (r) => !r.s1600[0] && r.s1600[2].includes("1자리 남음") && r.s1600[2].includes("임박"),
+      "휴게 겹침·마감·지난 순서 (순수 함수)": (r) => r.pure === "full,open6,break,break,open6,open3" && r.closed,
+      "달력: 오늘 aria-current · 지난 날짜/휴무 aria-disabled + 글자 · role=grid 없음": (r) => r.today[0] === "date" && r.today[1] === "true" && r.past[0] === "true" && r.past[1].includes("지난 날짜") && r.mon[0] === "true" && r.mon[1] && r.noGrid,
+      "화살표 키 → 하루 · ↓ 한 주": (r) => r.right === "2026-11-05" && r.down === "2026-11-12",
+      "휴무일은 고를 수 없음": (r) => r.closedClick === "2026-11-04",
+      "다른 날: 마감·휴게·남은 자리": (r) => r.d5[0] === "2026-11-05" && r.d5[1][1] === "full" && r.d5[2][1] === "break" && r.d5[2][2].includes("휴게") && r.d5[3][2].includes("3자리 남음"),
+      "시간 없으면 막고 안내 → 고르면 다음 단계": (r) => r.noTime[0] === "" && r.noTime[1] && r.went[0] === "people.html" && r.went[1] === "14:00" && r.went[2] === "45,000원",
+    },
+  },
+  {
+    name: "booking · 인원·옵션 금액 (한도·옵션·좌석 등급)",
+    page: "docs/booking/templates/people.html?svc=pottery&branch=gangnam&date=2026-11-05",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const bk = catui.booking; await bk.ready;
+      bk.store.clear(); bk.draft.set({ svc: "pottery", branch: "gangnam", date: "2026-11-05", time: "14:00", adult: 1, child: 0, options: [] });
+      bk.destroy(); bk.init(); await bk.ready; await sleep(30);
+      const box = document.querySelector("[data-catui-bk-people]"), btn = (s) => box.querySelector(`[data-step="${s}"]`);
+      const total = () => box.querySelector("[data-price] [data-total]").textContent;
+      const r = { start: [total(), btn("adult:-1").disabled, box.querySelector("[data-limit]").textContent] };
+      btn("adult:1").click(); await sleep(10); btn("child:1").click(); await sleep(10);
+      r.three = [box.querySelector('[data-out="adult"]').textContent, box.querySelector('[data-out="child"]').textContent, total(), btn("adult:1").disabled, btn("child:1").disabled];
+      document.getElementById("bk-o-glaze").click(); await sleep(10);
+      r.glaze = total();
+      document.getElementById("bk-o-ship").click(); await sleep(10);
+      r.ship = [total(), document.querySelector("[data-sum-total]").textContent, bk.draft.get().options.join(",")];
+      const d = await bk.load();
+      r.pure = bk.price(d.S.pottery, { adult: 2, child: 1, options: ["glaze", "ship"] }).lines.map((l) => `${l.label}:${l.qty}:${l.amount}`).join("|");
+      r.seat = bk.price(d.S.musical, { adult: 2, child: 1, seats: ["A1", "A2", "C3"], map: d.maps.hall }).total;
+      r.seatLines = bk.price(d.S.musical, { adult: 2, child: 1, seats: ["A1", "A2", "C3"], map: d.maps.hall }).lines.map((l) => l.label).join(",");
+      r.night = bk.price(d.S.stay, { adult: 2, child: 1, options: ["breakfast"], nights: 2 }).total;
+      bk.store.clear();
+      return r;
+    },
+    expect: {
+      "어른 1명 45,000원 · 줄이기 잠김 · 남은 자리 한도 안내": (r) => r.start[0] === "45,000원" && r.start[1] && r.start[2].includes("최대 3명"),
+      "어른 2 + 어린이 1 = 120,000원 · 남은 자리(3)에서 늘리기 잠김": (r) => JSON.stringify(r.three) === '["2","1","120,000원",true,true]',
+      "1인 옵션 × 3명 → 135,000원": (r) => r.glaze === "135,000원",
+      "한 번 옵션 +4,000원 → 139,000원 · 옆줄 금액 · 기억": (r) => r.ship[0] === "139,000원" && r.ship[1] === "139,000원" && r.ship[2] === "glaze,ship",
+      "price: 줄마다 수량·금액": (r) => r.pure === "어른:2:90000|어린이:1:30000|유약 색 추가:3:15000|작품 택배 배송:1:4000",
+      "좌석 등급 합 − 어린이 할인 (99,000×2 + 77,000 − 10,000)": (r) => r.seat === 265000 && r.seatLines === "VIP석,R석,어린이 할인",
+      "1인 1박 옵션 = 인원 × 박 수": (r) => r.night === 90000,
+    },
+  },
+  {
+    name: "booking · 숙박 박 수·주말 요금·남은 객실",
+    page: "docs/booking/templates/rooms.html?svc=stay&branch=jeonju&in=2026-11-06&out=2026-11-08",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const bk = catui.booking; await bk.ready;
+      bk.store.clear(); bk.destroy(); bk.init(); await bk.ready; await sleep(30);
+      const box = document.querySelector("[data-catui-bk-rooms]"), radio = (id) => document.getElementById(`bk-r-${id}`);
+      const card = (id) => radio(id).nextElementSibling.textContent.replace(/\s+/g, " ").trim();
+      const r = { nights: box.querySelector("[data-nights]").textContent, full: [radio("ondol").disabled, card("ondol").includes("만실"), radio("suite").disabled], family: [radio("family").disabled, card("family")] };
+      const inEl = box.querySelector("[data-in]"), outEl = box.querySelector("[data-out-date]");
+      inEl.value = "2026-11-05"; inEl.dispatchEvent(new Event("change", { bubbles: true }));
+      outEl.value = "2026-11-07"; outEl.dispatchEvent(new Event("change", { bubbles: true })); await sleep(20);
+      box.querySelector('[data-step="child:1"]').click(); await sleep(10);
+      r.mid = [box.querySelector("[data-nights]").textContent, radio("ondol").disabled, card("ondol")];
+      radio("ondol").click(); await sleep(20);
+      r.rows = [...box.querySelectorAll("[data-breakdown] tbody tr")].map((tr) => tr.textContent.replace(/\s+/g, " ").trim());
+      r.total = box.querySelector("[data-price] [data-total]").textContent;
+      document.getElementById("bk-o-breakfast").click(); await sleep(10);
+      r.withOpt = box.querySelector("[data-price] [data-total]").textContent;
+      // 체크아웃을 체크인과 같게 → 다음 날로 맞춤
+      outEl.value = "2026-11-05"; outEl.dispatchEvent(new Event("change", { bubbles: true })); await sleep(20);
+      r.fix = [outEl.value, bk.draft.get().checkout];
+      // 인원이 객실 최대를 넘으면 선택 풀림 + 잠김
+      for (let i = 0; i < 3; i++) { box.querySelector('[data-step="adult:1"]').click(); await sleep(5); }
+      r.over = [bk.draft.get().room, radio("ondol").disabled, card("ondol").includes("최대 3명")];
+      const d = await bk.load();
+      const xmas = bk.stay(d.R.ondol, "2026-12-23", "2026-12-26", { adult: 2, holidays: d.holidays });
+      r.xmas = [xmas.nights, xmas.weekday, xmas.weekend, xmas.lines.map((x) => x.holiday ? "H" : x.weekend ? "W" : "D").join(""), xmas.total];
+      r.bad = bk.stay(d.R.ondol, "2026-11-07", "2026-11-07").error;
+      r.nightsFn = [bk.nights("2026-11-30", "2026-12-02"), bk.nights("2026-11-07", "2026-11-05")];
+      bk.store.clear();
+      return r;
+    },
+    expect: {
+      "금·토 2박 = 주말 2박": (r) => r.nights === "2박 · 평일 0박 · 주말 2박",
+      "겹친 밤이 객실 수에 닿으면 만실(잠김 + 글자)": (r) => r.full[0] && r.full[1] && r.full[2],
+      "가족실 2박 주말 273,000원 × 2": (r) => !r.family[0] && r.family[1].includes("546,000원") && r.family[1].includes("남은 객실 1"),
+      "목·금 → 평일 1 · 주말 1 · 온돌방 다시 열림": (r) => r.mid[0] === "2박 · 평일 1박 · 주말 1박" && !r.mid[1] && r.mid[2].includes("293,000원"),
+      "박마다 표: 평일/주말 글자 · 추가 인원": (r) => r.rows.length === 2 && r.rows[0].includes("평일") && r.rows[0].includes("110,000원") && r.rows[1].includes("주말") && r.rows[1].includes("143,000원") && r.rows[1].includes("20,000원") && r.total === "293,000원",
+      "조식 1인 1박 × 3명 × 2박 → 383,000원": (r) => r.withOpt === "383,000원",
+      "체크아웃 ≤ 체크인이면 다음 날로": (r) => r.fix[0] === "2026-11-06" && r.fix[1] === "2026-11-06",
+      "최대 인원 넘으면 선택 풀림 + 잠김": (r) => r.over[0] === "" && r.over[1] && r.over[2],
+      "공휴일 전날 밤도 주말 요금": (r) => JSON.stringify(r.xmas) === '[3,1,2,"DHW",396000]',
+      "잘못된 기간 · 박 수": (r) => r.bad.includes("다음 날") && JSON.stringify(r.nightsFn) === "[2,0]",
+    },
+  },
+  {
+    name: "booking · 좌석 배치도 키보드 격자 · 최대 개수 · 붙은 좌석",
+    page: "docs/booking/templates/seats.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const bk = catui.booking; await bk.ready;
+      bk.store.clear(); bk.draft.set({ svc: "musical", branch: "daehak", date: "2026-11-07", time: "14:00", adult: 2, child: 1, options: [], seats: [] });
+      bk.destroy(); bk.init(); await bk.ready; await sleep(30);
+      const grid = document.querySelector("[data-catui-bk-grid]"), seat = (id) => grid.querySelector(`[data-seat="${id}"]`);
+      const key = (k, o = {}) => document.activeElement.dispatchEvent(new KeyboardEvent("keydown", { key: k, bubbles: true, ...o }));
+      const msg = () => document.querySelector("[data-seat-msg]").textContent;
+      const adj = document.querySelector("[data-adjacent]");
+      const r = {
+        roles: [grid.getAttribute("role"), grid.querySelectorAll("[role=row]").length, grid.querySelectorAll("[role=rowheader]").length, grid.querySelectorAll(".Catui_bk-seat").length],
+        tab: grid.querySelectorAll('.Catui_bk-seat[tabindex="0"]').length, adjOn: adj.checked,
+        taken: [seat("A3").getAttribute("aria-disabled"), seat("A3").textContent.includes("예약됨"), seat("A3").querySelector(".Catui_clip").textContent],
+        access: seat("F1").querySelector(".Catui_clip").textContent,
+      };
+      adj.click(); await sleep(10);   // 한 좌석씩 모드
+      seat("A1").focus();
+      key("ArrowRight"); r.k1 = document.activeElement.dataset.seat;
+      key("ArrowRight"); r.k2 = document.activeElement.dataset.seat;    // 통로 건너뜀 → A3(예약됨이어도 초점)
+      key("ArrowDown"); r.k3 = document.activeElement.dataset.seat;
+      document.activeElement.click(); await sleep(10);                   // B3 고름
+      r.pick1 = [seat("B3").getAttribute("aria-pressed"), seat("B3").querySelector(".Catui_clip").textContent.includes("선택됨"), seat("B3").tabIndex];
+      key("ArrowRight"); document.activeElement.click(); await sleep(10); // B4 예약됨
+      r.takenMsg = [msg(), seat("B4").getAttribute("aria-pressed")];
+      seat("B1").click(); seat("B2").click(); await sleep(10);
+      seat("C3").click(); await sleep(10);
+      r.max = [grid.querySelectorAll('[aria-pressed="true"]').length, msg(), bk.draft.get().seats.join(",")];
+      seat("B2").focus(); key("Home"); r.home = document.activeElement.dataset.seat;
+      key("End"); r.end = document.activeElement.dataset.seat;
+      key("End", { ctrlKey: true }); r.cend = document.activeElement.dataset.seat;
+      key("PageUp"); r.pgup = document.activeElement.dataset.seat;
+      r.oneTab = grid.querySelectorAll('.Catui_bk-seat[tabindex="0"]').length;
+      // 붙은 좌석 모드
+      adj.click(); await sleep(10);
+      seat("D2").click(); await sleep(10);
+      r.adjFail = [msg(), bk.draft.get().seats.join(",")];
+      seat("D5").click(); await sleep(10);
+      r.adjOk = [bk.draft.get().seats.join(","), document.querySelector("[data-picked]").textContent, document.querySelector("[data-price] [data-total]").textContent];
+      const go = bk.go; let went = ""; bk.go = (u) => { went = u; };
+      document.querySelector("[data-catui-bk-seats] [data-go]").click(); bk.go = go;
+      r.went = went;
+      const d = await bk.load();
+      r.pure = [bk.seats.pick({ map: d.maps.dining, max: 1, people: 5 }, "A3").ok, bk.seats.pick({ map: d.maps.dining, max: 1, people: 5 }, "B3").selected.join(","), bk.seats.pick({ map: d.maps.hall, selected: ["A1"], max: 1 }, "A2").selected.join(",")];
+      bk.store.clear();
+      return r;
+    },
+    expect: {
+      "grid 패턴: grid > row(6) > rowheader + gridcell > 버튼 60": (r) => JSON.stringify(r.roles) === '["grid",6,6,60]',
+      "roving tabindex: Tab 자리는 하나": (r) => r.tab === 1 && r.oneTab === 1,
+      "예약됨: aria-disabled + 글자 · 장애인석 글자": (r) => r.taken[0] === "true" && r.taken[2].includes("A열 3번") && r.taken[2].includes("예약됨") && r.access.includes("장애인석"),
+      "공연은 붙은 좌석 모드가 기본": (r) => r.adjOn,
+      "화살표: → A2 → (통로 건너뜀) A3 → ↓ B3": (r) => r.k1 === "A2" && r.k2 === "A3" && r.k3 === "B3",
+      "Space/Enter(클릭) → aria-pressed + 숨김 글자 + 초점 유지": (r) => r.pick1[0] === "true" && r.pick1[1] && r.pick1[2] === 0,
+      "예약된 좌석은 거절 + 이유": (r) => r.takenMsg[0].includes("이미 예약된") && r.takenMsg[1] === "false",
+      "최대 3석 넘으면 거절 + 안내": (r) => r.max[0] === 3 && r.max[1].includes("최대 3석") && r.max[2] === "B3,B1,B2",
+      "Home/End · Ctrl+End · PageUp": (r) => r.home === "B1" && r.end === "B10" && r.cend === "F10" && r.pgup === "A10",
+      "붙은 좌석: 통로 끼면 거절": (r) => r.adjFail[0].includes("붙어 있는 빈 좌석 3개") && r.adjFail[1] === "B3,B1,B2",
+      "붙은 좌석: 예약된 D7 피해 D4~D6 · R석 3 − 어린이 할인": (r) => r.adjOk[0] === "D4,D5,D6" && r.adjOk[1].includes("(3/3)") && r.adjOk[2] === "221,000원",
+      "다 고르면 다음 단계": (r) => r.went === "info.html",
+      "테이블: 인원보다 작은 테이블 거절 · 1개 바꿔 끼움": (r) => r.pure[0] === false && r.pure[1] === "B3" && r.pure[2] === "A2",
+    },
+  },
+  {
+    name: "booking · 환불 규정 · 취소 · 저장 · 일정 겹침",
+    page: "docs/booking/templates/mine.html",
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const bk = catui.booking; await bk.ready;
+      bk.store.clear(); bk.destroy(); bk.init(); await bk.ready; await sleep(30);
+      const f = (amt, date, time) => { const x = bk.refund(amt, date, time); return x.ok ? `${x.days}:${x.rate}:${x.refund}` : "no"; };
+      const r = { pure: [f(99000, "2026-11-15", "19:30"), f(99000, "2026-11-09", "19:30"), f(99000, "2026-11-06", "11:00"), f(99000, "2026-11-04", "18:00"), f(99000, "2026-11-04", "13:00"), f(33333, "2026-11-08", "10:00")] };
+      const tabN = () => [...document.querySelectorAll("[data-tab]")].map((b) => `${b.dataset.tab}:${b.querySelector(".Catui_bk-chip-n").textContent}`).join(",");
+      r.tabs = tabN();
+      const hair = [...document.querySelectorAll(".Catui_bk-res")].find((li) => li.textContent.includes("BK-261102-0003"));
+      r.card = hair.textContent.replace(/\s+/g, " ");
+      hair.querySelector("[data-cancel]").click(); await sleep(250);
+      r.dialog = document.querySelector(".Catui_bk-refundbox")?.textContent.replace(/\s+/g, " ");
+      document.querySelector('[data-catui-btn="0"]').click(); await sleep(250);
+      r.after = [tabN(), bk.store.get("cancelled", {})["BK-261102-0003"]?.refund];
+      catui.layer.closeAll();
+      // 지금 적용되는 줄
+      const box = document.createElement("div"); catui.mount(box, bk.view.refund({ date: "2026-11-15", time: "19:30" }));
+      r.now = box.querySelector('tr[aria-current="true"]')?.textContent.replace(/\s+/g, " ").trim();
+      // 저장: 확인 → 번호 · 남은 자리에 반영
+      const d = await bk.load();
+      const v = { svc: "pottery", branch: "gangnam", date: "2026-11-05", time: "14:00", adult: 2, child: 0, options: [], name: "테스트", phone: "010-0000-0000" };
+      r.check = bk.check(d, { ...v, time: "15:00", date: "2026-11-04" }).join(" | ");
+      r.check2 = bk.check(d, { ...v, adult: 4 }).join(" | ");
+      const saved = bk.save(v);
+      r.saved = [saved.no, bk.bookedAt(d, "pottery", "gangnam", "2026-11-05")["14:00"], bk.find(d, saved.no)?.amount, bk.find(d, saved.no)?.phase];
+      // 일정 겹침
+      const s1 = bk.layout(d.schedule.items.filter((x) => x.staff === "s1" && x.date === "2026-11-04"));
+      r.lay = s1.map((b) => `${b.id}:${b.lane}/${b.lanes}`).join(",");
+      const s3 = bk.layout(d.schedule.items.filter((x) => x.staff === "s3" && x.date === "2026-11-04"));
+      r.lay3 = s3.map((b) => `${b.id}:${b.lane}/${b.lanes}`).join(",");
+      r.place = bk.place({ start: "15:00", end: "16:30" }, { from: "09:00", to: "21:00" });
+      bk.store.clear();
+      return r;
+    },
+    expect: {
+      "남은 날 7↑ 100% · 3~6 70% · 1~2 50% · 당일 0% · 시작 후 불가 · 10원 내림": (r) => JSON.stringify(r.pure) === '["11:100:99000","5:70:69300","2:50:49500","0:0:0","no","4:70:23330"]',
+      "예정 3 · 지난 1 · 취소 1": (r) => r.tabs === "upcoming:3건,past:1건,cancelled:1건",
+      "카드에 금액·지금 취소 환불액": (r) => r.card.includes("33,000원") && r.card.includes("16,500원 환불(50%)") && r.card.includes("D-2"),
+      "취소 전 환불 금액을 보여 주고 묻기": (r) => r.dialog && r.dialog.includes("이용 2일 전 · 50% 환불") && r.dialog.includes("16,500원"),
+      "취소 → 목록·기록 반영": (r) => r.after[0] === "upcoming:2건,past:1건,cancelled:2건" && r.after[1] === 16500,
+      "규정 표: 지금 적용 줄(aria-current + 글자)": (r) => r.now && r.now.includes("7일 전까지") && r.now.includes("지금 적용"),
+      "저장 전 확인: 마감 시간 · 남은 자리 초과": (r) => r.check.includes("예약할 수 없는 시간") && r.check2.includes("남은 자리(3)"),
+      "저장: BK-YYMMDD-NNNN · 남은 자리 반영 · 금액 계산": (r) => r.saved[0] === "BK-261104-0001" && r.saved[1] === 5 && r.saved[2] === 90000 && r.saved[3] === "upcoming",
+      "일정 겹침: 이어서 겹치면 한 묶음·칸 재사용": (r) => r.lay === "a01:0/1,a02:0/1,a03:0/2,a04:1/2,a05:0/1" && r.lay3 === "a09:0/2,a10:1/2,a11:0/2",
+      "시간축 위치(%)": (r) => Math.abs(r.place.top - 50) < 0.01 && Math.abs(r.place.height - 12.5) < 0.01,
+    },
+  },
+  {
+    name: "booking · 320px 화면 가로 넘침 없음",
+    page: "docs/booking/templates/index.html",
+    wait: 600,
+    run: async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      const bk = catui.booking;
+      bk.store.clear(); bk.draft.set({ svc: "musical", branch: "daehak", date: "2026-11-07", time: "14:00", adult: 2, child: 1, options: ["program"], seats: ["D4", "D5", "D6"], name: "김고양", phone: "010-1234-5678" });
+      const open = async (pages) => {
+        const frames = pages.map((p) => { const f = document.createElement("iframe"); f.style.cssText = "width:320px;height:640px;border:0;position:absolute;left:0;top:0"; f.src = p; document.body.appendChild(f); return f; });
+        await sleep(2500);
+        const bad = frames.map((f, i) => { const de = f.contentDocument.documentElement; return de.scrollWidth > de.clientWidth ? `${pages[i]} ${de.scrollWidth}` : ""; }).filter(Boolean);
+        frames.forEach((f) => f.remove());
+        return bad;
+      };
+      const a = ["index.html", "date.html", "people.html", "seats.html", "info.html", "confirm.html", "complete.html?no=BK-261101-0012", "mine.html", "detail.html?no=BK-261103-0021", "admin.html", "admin.html?view=week", "waitlist.html?svc=pottery&branch=gangnam&date=2026-11-04&time=15:00", "login.html", "error-404.html"];
+      const bad = await open(a);
+      bad.push(...await open(["rooms.html?svc=stay&branch=jeonju&in=2026-11-05&out=2026-11-07", "date.html?svc=pottery&branch=gangnam&date=2026-11-04"]));
+      bk.store.clear();
+      return { bad, n: a.length + 2 };
+    },
+    expect: { "14종(16화면) 모두 320px 안": (r) => r.n === 16 && !r.bad.length },
+  },
+  ...[1440, 768, 390].map((width) => ({
+    name: `design · 홈 반응형 · ${width}px`,
+    page: "docs/index.html",
+    viewport: [width, 900],
+    wait: 600,
+    run: () => {
+      const flow = document.querySelector('.doc-rflow');
+      const stats = [...document.querySelectorAll('.doc-hstats dl > div')];
+      const tpl = stats.find((el) => el.querySelector('dt').textContent === '템플릿');
+      return {
+        columns: getComputedStyle(flow).gridTemplateColumns.split(' ').length,
+        expected: innerWidth > 1199 ? 4 : innerWidth > 767 ? 2 : 1,
+        summary: /^\d[\d,]*종$/.test(tpl.querySelector('dd').textContent.trim()),
+        details: !!tpl.querySelector('p')?.textContent.includes('예약'),
+        overflow: document.documentElement.scrollWidth > innerWidth,
+      };
+    },
+    expect: {
+      "화면 폭에 따라 4·2·1열": (r) => r.columns === r.expected,
+      "템플릿 총계와 확장별 설명 분리": (r) => r.summary && r.details,
+      "페이지 가로 넘침 없음": (r) => !r.overflow,
+    },
+  })),
+  ...["shop", "booking"].map((kit) => ({
+    name: `design · ${kit} 텍스트 대비 · 밝은/어두운 테마`,
+    page: `docs/${kit}/templates/index.html`,
+    wait: 700,
+    run: async () => {
+      const luminance = (rgb) => rgb.map((v) => v / 255).map((v) => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4).reduce((s, v, i) => s + v * [.2126, .7152, .0722][i], 0);
+      const ratio = (el) => {
+        const fg = getComputedStyle(el).color.match(/[\d.]+/g).slice(0, 3).map(Number);
+        let parent = el, bg;
+        while (parent) {
+          const color = getComputedStyle(parent).backgroundColor;
+          const nums = color.match(/[\d.]+/g)?.map(Number);
+          if (nums && (nums.length === 3 || nums[3] === 1)) { bg = nums.slice(0, 3); break; }
+          parent = parent.parentElement;
+        }
+        if (!bg) return 0;
+        const a = luminance(fg), b = luminance(bg);
+        return (Math.max(a, b) + .05) / (Math.min(a, b) + .05);
+      };
+      const values = [];
+      for (const theme of ['light', 'dark']) {
+        document.documentElement.setAttribute('data-catui-theme', theme);
+        await new Promise((r) => setTimeout(r, 250));
+        const texts = [...document.querySelectorAll('.Catui_sh-list, .Catui_sh-promo > span:not(.Catui_sh-left), .Catui_bk-hero p')];
+        values.push({ theme, count: texts.length, minimum: Math.min(...texts.map(ratio)) });
+      }
+      return values;
+    },
+    expect: { "정보 텍스트 대비 4.5:1 이상": (r) => r.length === 2 && r.every((v) => v.count > 0 && v.minimum >= 4.5) },
+  })),
+  {
+    name: "design · community 베스트 목록 균등 분할",
+    page: "docs/community/templates/index.html",
+    viewport: [768, 1024],
+    wait: 700,
+    run: () => {
+      const read = () => {
+        const a = document.querySelector('#hm-best-a'), b = document.querySelector('#hm-best-b');
+        return { a: a.children.length, b: b.children.length, start: Number(b.start), ranks: [...a.children, ...b.children].map((li) => Number(li.querySelector('.Catui_cm-rank').textContent)) };
+      };
+      const today = read();
+      document.querySelector('[data-best="7"]').click();
+      return [today, read()];
+    },
+    expect: {
+      "오늘·주간 좌우 항목 수 차이 1 이하": (r) => r.every((v) => v.a > 0 && Math.abs(v.a - v.b) <= 1),
+      "분할 뒤에도 순위 연속": (r) => r.every((v) => v.start === v.a + 1 && v.ranks.every((n, i) => n === i + 1)),
+    },
+  },
+  ...[320, 390].map((width) => ({
+    name: `design · admin 모바일 지표 밀도 · ${width}px`,
+    page: "docs/admin/templates/index.html",
+    viewport: [width, 900],
+    wait: 700,
+    run: () => {
+      const stats = document.querySelector('.Catui_adm-stats');
+      return {
+        columns: getComputedStyle(stats).gridTemplateColumns.split(' ').length,
+        height: stats.getBoundingClientRect().height,
+        overflow: document.documentElement.scrollWidth > innerWidth,
+        cards: [...document.querySelectorAll('.Catui_grid > .Catui_card')].every((el) => getComputedStyle(el).display === 'flex'),
+      };
+    },
+    expect: {
+      "두 열 요약 지표·높이 450px 이하": (r) => r.columns === 2 && r.height <= 450,
+      "카드 내용 기반 배치·가로 넘침 없음": (r) => r.cards && !r.overflow,
+    },
+  })),
+  {
+    name: "design · docskit 모바일 검색·시작 동선",
+    page: "docs/docskit/templates/index.html",
+    viewport: [390, 844],
+    wait: 600,
+    run: () => ({
+      heroHeight: document.querySelector('.Catui_dk-hero').getBoundingClientRect().height,
+      guideBottom: document.querySelector('.Catui_dk-start').getBoundingClientRect().bottom,
+      scrollbar: getComputedStyle(document.querySelector('.Catui_dk-nav')).scrollbarWidth,
+    }),
+    expect: {
+      "히어로 400px 이하·첫 가이드 화면 안": (r) => r.heroHeight <= 400 && r.guideBottom <= 844,
+      "숨긴 메뉴 스크롤 표시": (r) => r.scrollbar === 'thin',
+    },
+  },
+  ...["shop", "docskit"].flatMap((kit) => [1440, 320].map((width) => ({
+    name: `design · ${kit} 무료 API 사진 · ${width}px`,
+    page: `docs/${kit}/templates/index.html`,
+    viewport: [width, 900],
+    wait: 800,
+    run: async () => {
+      const imgs = [...document.querySelectorAll('.Catui_sh-hero-img, .Catui_dk-cover img')];
+      imgs.forEach((img) => { img.loading = 'eager'; });
+      await Promise.all(imgs.map((img) => img.decode().catch(() => {})));
+      const loaded = imgs.length > 0 && imgs.every((img) => img.naturalWidth > 0 && new URL(img.src).origin === location.origin);
+      const first = imgs[0];
+      first?.dispatchEvent(new Event('error'));
+      const fallback = first?.hidden && (first.closest('.Catui_sh-hero')?.textContent.trim().length > 0 || !!first.parentElement.querySelector('svg'));
+      if (first) first.hidden = false;
+      const credits = await (await fetch('../../../assets/photos/credits.json')).json();
+      return { loaded, fallback, compact: !document.querySelector('.Catui_sh-heroes') || document.querySelector('.Catui_sh-heroes .Catui_carousel-track').getBoundingClientRect().height <= 280, credits: credits.length >= 43 && credits.every((c) => /^(CC0|Public domain|CC BY(?:-SA)? [234]\.[05])$/.test(c.license) && c.source && c.api && c.licenseUrl), overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: {
+      "로컬 이미지 로딩·출처와 무료 이용 조건": (r) => r.loaded && r.credits,
+      "이미지 오류 시 글자·아이콘 유지": (r) => r.fallback,
+      "이미지 적용 후 과도한 배너 높이·가로 넘침 없음": (r) => r.compact && !r.overflow,
+    },
+  }))),
+  {
+    name: "design · admin 카드 하단 정렬",
+    page: "docs/admin/templates/index.html",
+    viewport: [1440, 900],
+    wait: 800,
+    run: () => {
+      const cards = [...document.querySelectorAll('.Catui_grid > .Catui_card')].map((el) => el.getBoundingClientRect());
+      return [[0, 1], [2, 3], [3, 4]].map(([a, b]) => Math.abs(cards[a].bottom - cards[b].bottom));
+    },
+    expect: { "같은 줄 카드 하단 오차 1px 이하": (r) => r.every((v) => v <= 1) },
+  },
+  {
+    name: "design · admin 짧은 패널 자연 높이",
+    page: "docs/admin/templates/index.html",
+    viewport: [1440, 1000],
+    wait: 700,
+    run: () => [...document.querySelectorAll('.Catui_grid .Catui_card')].filter((el) => /^(저장 공간|할 일|앱 버전 사용 비율)/.test(el.querySelector('header')?.textContent.trim())).map((el) => {
+      const clone = el.cloneNode(true);
+      clone.style.cssText = `position:absolute;visibility:hidden;width:${el.getBoundingClientRect().width}px;align-self:start`;
+      el.parentElement.append(clone);
+      const surplus = el.getBoundingClientRect().height - clone.getBoundingClientRect().height;
+      clone.remove();
+      return surplus;
+    }),
+    expect: { "짧은 세 패널 강제 늘어남 1px 이하": (r) => r.length === 3 && r.every((v) => v <= 1) },
+  },
+  ...[1440, 390, 320].map((width) => ({
+    name: `design · shop 현재 카테고리 노출 · ${width}px`,
+    page: "docs/shop/templates/list.html?c=pet",
+    viewport: [width, 900],
+    wait: 700,
+    run: () => {
+      const nav = document.querySelector('.Catui_sh-gnb-in');
+      const active = nav.querySelector('[aria-current="page"]');
+      const visible = () => {
+        const outer = nav.getBoundingClientRect(), item = active.getBoundingClientRect();
+        return item.left >= outer.left - 1 && item.right <= outer.right + 1;
+      };
+      const initial = visible(), y = scrollY;
+      const wrap = nav.parentElement;
+      const original = wrap.style.maxWidth;
+      wrap.style.maxWidth = '200px';
+      dispatchEvent(new Event('resize'));
+      const resized = visible();
+      wrap.style.maxWidth = original;
+      dispatchEvent(new Event('resize'));
+      return { initial, resized, active: nav.querySelectorAll('[aria-current="page"]').length === 1 && new URL(active.href).searchParams.get('c') === 'pet', vertical: scrollY === y, overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: {
+      "직접 진입·폭 변경 후 현재 카테고리 온전히 표시": (r) => r.initial && r.resized && r.active,
+      "본문 세로 이동·페이지 가로 넘침 없음": (r) => r.vertical && !r.overflow,
+    },
+  })),
+  {
+    name: "design · admin 최근 주문 전체 보기 연결",
+    page: "docs/admin/templates/index.html",
+    wait: 600,
+    run: async () => {
+      const header = [...document.querySelectorAll('.Catui_card-h')].find((el) => el.textContent.trim().startsWith('최근 주문'));
+      const link = header.querySelector('a');
+      const response = await fetch(link.href);
+      return { target: new URL(link.href).pathname.endsWith('/orders.html'), exists: response.ok && (await response.text()).includes('전체 주문') };
+    },
+    expect: { "전체 주문 목록으로 연결·대상 페이지 존재": (r) => r.target && r.exists },
+  },
+  ...[1440, 390, 320].map((width) => ({
+    name: `design · shop 메뉴 탐색 버튼 · ${width}px`,
+    page: "docs/shop/templates/index.html",
+    viewport: [width, 900],
+    wait: 600,
+    run: async () => {
+      const nav = document.querySelector('.Catui_sh-gnb-in');
+      const buttons = [...document.querySelectorAll('[data-catui-sh-nav-step]')];
+      const prev = buttons.find((b) => b.dataset.catuiShNavStep === '-1');
+      const next = buttons.find((b) => b.dataset.catuiShNavStep === '1');
+      if (!prev || !next) return { controls: false };
+      const overflow = nav.scrollWidth > nav.clientWidth + 1;
+      const initial = !overflow ? prev.hidden && next.hidden : !prev.hidden && !next.hidden && prev.disabled && !next.disabled;
+      next.click();
+      await new Promise((r) => setTimeout(r, 700));
+      const forward = !overflow || nav.scrollLeft > 0;
+      nav.scrollLeft = nav.scrollWidth;
+      await new Promise((r) => setTimeout(r, 150));
+      const end = !overflow || next.disabled && !prev.disabled;
+      const last = nav.scrollLeft;
+      prev.click();
+      await new Promise((r) => setTimeout(r, 700));
+      return { controls: initial && buttons.every((b) => b.type === 'button' && b.getAttribute('aria-label') && b.getAttribute('aria-controls') === nav.id), forward, end, back: !overflow || nav.scrollLeft < last, pageOverflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: {
+      "넘칠 때만 이름 있는 탐색 버튼 표시": (r) => r.controls,
+      "앞뒤 이동·끝에서 잠김·페이지 넘침 없음": (r) => r.forward && r.end && r.back && !r.pageOverflow,
+    },
+  })),
+  ...['css/components/carousel', 'js/modules/carousel', 'css/components/card', 'css/components/layer', 'css/components/media', 'css/blocks/gallery', 'css/foundation/media', 'js/modules/layer', 'js/modules/site', 'js/modules/page', 'css/views/files'].map((page) => ({
+    name: `design · 본체 사진 예제 ${page}`,
+    page: `docs/${page}.html`,
+    viewport: [1280, 900],
+    wait: 600,
+    run: async () => {
+      document.getElementById('ly-photo')?.click();
+      await new Promise((r) => setTimeout(r, 200));
+      const imgs = [...document.querySelectorAll('img')].filter((img) => img.src.includes('/assets/photos/'));
+      imgs.forEach((img) => { img.loading = 'eager'; });
+      await Promise.all(imgs.map((img) => img.decode().catch(() => {})));
+      const pairs = [...document.querySelectorAll('[data-catui-lightbox] a')];
+      return { loaded: imgs.length > 0 && imgs.every((img) => img.naturalWidth > 0 && new URL(img.src).origin === location.origin), pairs: pairs.every((a) => !a.querySelector('img') || a.href === a.querySelector('img').src), credit: !!document.querySelector('footer a[href$="assets/photos/index.html"]') };
+    },
+    expect: {
+      "사진 예제 실제 로컬 이미지·원본 링크 일치": (r) => r.loaded && r.pairs,
+      "문서 하단 사진 라이선스 연결": (r) => r.credit,
+    },
+  })),
+  {
+    name: "design · 전체 이미지 카탈로그·라이선스·파일",
+    page: "docs/shop/templates/index.html",
+    wait: 600,
+    run: async () => {
+      const [products, services, rooms, posts, credits] = await Promise.all(['data/products.json', '../../booking/templates/data/services.json', '../../booking/templates/data/rooms.json', '../../community/templates/data/posts.json', '../../../assets/photos/credits.json'].map((p) => fetch(p).then((r) => r.json())));
+      const photoPosts = posts.filter((p) => p.board === 'photo');
+      const paths = [...products.flatMap((p) => p.images || []), ...services.map((s) => s.image), ...rooms.rooms.map((r) => r.image), ...photoPosts.map((p) => p.thumb)];
+      const coverage = products.length === 24 && products.every((p) => p.images?.length) && services.length === 5 && rooms.rooms.length === 3 && photoPosts.length === 15 && paths.every((p) => p && credits.some((c) => p.endsWith('/' + c.file)));
+      const decoded = await Promise.all(credits.map(async (c) => { const img = new Image(); img.src = '../../../assets/photos/' + c.file; try { await img.decode(); return img.naturalWidth > 0 && img.naturalHeight > 0; } catch { return false; } }));
+      const response = await fetch('../../../assets/photos/index.html');
+      const attribution = await response.text();
+      return { coverage, files: credits.length >= 43 && decoded.every(Boolean), attribution: response.ok && credits.every((c) => attribution.includes(c.file) && attribution.includes(c.license)) };
+    },
+    expect: {
+      "상품 24·서비스 5·객실 3·사진 글 15건 실제 사진 연결": (r) => r.coverage,
+      "전체 사진 파일 디코딩·HTML 출처와 개별 라이선스": (r) => r.files && r.attribution,
+    },
+  },
+  ...[
+    ['shop', 'index.html', 12],
+    ['shop', 'product.html?id=101', 2],
+    ['shop', 'event.html?e=pet', 1],
+    ['booking', 'index.html', 5],
+    ['booking', 'rooms.html?svc=stay&branch=jeonju&in=2026-11-06&out=2026-11-08', 3],
+    ['community', 'index.html', 4],
+    ['community', 'post.html?id=1197', 1],
+    ['community', 'post.html?id=1201', 1],
+    ['docskit', 'index.html', 1],
+    ['admin', 'media.html', 8],
+  ].flatMap(([kit, page, count]) => [1440, 320].map((width) => ({
+    name: `design · 사진 보충 ${kit}/${page} · ${width}px`,
+    page: `docs/${kit}/templates/${page}`,
+    viewport: [width, 900],
+    wait: 900,
+    run: async () => {
+      const imgs = [...document.querySelectorAll('.Catui_sh-card-img img, .Catui_sh-promo-img, .Catui_sh-gallery-main img, .Catui_sh-hero-img, .Catui_bk-photo, .Catui_cm-shot img, #pv-body img, .Catui_dk-cover img, .Catui_adm-thumb img')];
+      imgs.forEach((img) => { img.loading = 'eager'; });
+      await Promise.all(imgs.map((img) => img.decode().catch(() => {})));
+      const loaded = imgs.every((img) => img.naturalWidth > 0 && new URL(img.src).origin === location.origin && new URL(img.src).pathname.includes('/assets/photos/'));
+      const controls = document.querySelectorAll('main a, main button, main input').length;
+      const first = imgs[0];
+      first?.dispatchEvent(new Event('error'));
+      const fallback = first && (first.hidden || first.src.startsWith('data:image/svg+xml')) && document.querySelectorAll('main a, main button, main input').length === controls;
+      const credit = !!document.querySelector('footer a[href$="assets/photos/index.html"]');
+      return { count: imgs.length, loaded, fallback, credit, overflow: document.documentElement.scrollWidth > innerWidth };
+    },
+    expect: {
+      "필요한 사진 로컬 로딩·이미지 오류 대체 표시": (r) => r.count >= count && r.loaded && r.fallback,
+      "사진 출처 연결·320px 가로 넘침 없음": (r) => r.credit && !r.overflow,
+    },
+  }))),
+  {
+    name: "design · admin 도넛 범례 아래 공백",
+    page: "docs/admin/templates/index.html",
+    viewport: [1440, 900],
+    wait: 700,
+    run: () => {
+      const chart = document.querySelector('[data-catui-adm-chart="donut"]');
+      const body = chart.closest('.Catui_card-b');
+      const style = getComputedStyle(body);
+      return body.getBoundingClientRect().bottom - body.lastElementChild.getBoundingClientRect().bottom - parseFloat(style.paddingBottom);
+    },
+    expect: { "범례 뒤 불필요한 빈 띠 1px 이하": (r) => Math.abs(r) <= 1 },
+  },
+  ...["docskit", "booking"].flatMap((kit) => [1280, 320].map((width) => ({
+    name: `${kit} · 알약형 메뉴 · ${width}px`,
+    page: `docs/${kit}/templates/index.html`,
+    viewport: [width, 900],
+    wait: 600,
+    run: () => {
+      const nav = document.querySelector('.Catui_dk-nav, .Catui_bk-nav');
+      const active = nav.querySelector('[aria-current="page"]');
+      const style = getComputedStyle(nav), item = getComputedStyle(active);
+      const links = [...nav.querySelectorAll('a')];
+      nav.scrollLeft = nav.scrollWidth;
+      return {
+        pill: parseFloat(style.borderRadius) > 100,
+        activePill: parseFloat(item.borderRadius) > 100 && item.boxShadow !== 'none' && parseFloat(item.borderBottomWidth) === 0,
+        activeCount: nav.querySelectorAll('[aria-current="page"]').length,
+        links: links.every((a) => a.getAttribute('href') && a.getAttribute('href') !== '#'),
+        overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+        scroll: nav.scrollWidth <= nav.clientWidth || nav.scrollLeft > 0,
+      };
+    },
+    expect: {
+      "알약형 외곽·활성 항목, 밑줄 없음": (r) => r.pill && r.activePill,
+      "현재 메뉴 1개·링크 유지": (r) => r.activeCount === 1 && r.links,
+      "페이지 넘침 없이 메뉴 가로 스크롤": (r) => !r.overflow && r.scroll,
+    },
+  }))),
 ];

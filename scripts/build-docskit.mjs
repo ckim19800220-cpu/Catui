@@ -8,7 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { transform } from "lightningcss";
 import { transformSync } from "esbuild";
-import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes } from "./lib.mjs";
+import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes, visualErrors } from "./lib.mjs";
 
 const C = { src: path.join(ROOT, "src/docskit"), tpl: path.join(ROOT, "templates/docskit") };
 const noComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, "");
@@ -28,6 +28,7 @@ export function buildDocskitCss() {
   for (const f of order) {
     const src = read(path.join(C.src, f));
     if (/#[0-9a-f]{3,8}\b/i.test(noComments(src).replace(/url\([^)]*\)/g, ""))) fail(`docskit CSS에 직접 쓴 색(hex)이 있습니다 — 토큰을 쓰세요: src/docskit/${f}`);
+    { const ve = visualErrors(src, `src/docskit/${f}`); if (ve.length) fail(`docskit CSS 시각 원칙 검사 실패\n  ${ve.join("\n  ")}`); }   // 1px 선 · 모서리 토큰 · 유리 폴백 (lib.mjs)
     css += `${src}\n`;
     byFile[`docskit/${f}`] = [...new Set([...noComments(src).matchAll(/\.(Catui_dk-[A-Za-z0-9_-]+)/g)].map((m) => m[1]))].sort();
   }
@@ -132,7 +133,7 @@ export function buildDocskitTemplates({ defined, icons, docskitByFile = {} }) {
   const used = new Set(Object.values(layouts).flatMap((l) => [...l.matchAll(CLASS_ATTR)].flatMap((m) => m[1].split(/\s+/))));
   const pageOf = (href) => href.split(/[?#]/)[0].replace(/\.html$/, "");
   const live = (list) => (list || []).filter((x) => exists.has(pageOf(x.href)));
-  const topnav = (nav) => live(menu.top).map((it) => `<a class="Catui_dk-nav-item" href="${esc(it.href)}"${it.id === nav ? ' aria-current="page"' : ""}>${esc(it.title)}</a>`).join("");
+  const topnav = (nav) => live(menu.top).map((it) => `<a class="Catui_hnav-item" href="${esc(it.href)}"${it.id === nav ? ' aria-current="page"' : ""}>${esc(it.title)}</a>`).join("");
   const foot = () => live(menu.foot).map((it) => `<a href="${esc(it.href)}">${esc(it.title)}</a>`).join("");
 
   for (const f of files) {

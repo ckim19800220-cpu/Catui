@@ -49,9 +49,22 @@ booking.flow = {
   /** 서비스·지점이 없으면 안내를 그리고 false */
   need(box, d, v, { kind } = {}) {
     const svc = d.S[v.svc];
-    if (svc && d.B[v.branch] && (!kind || [].concat(kind).includes(svc.kind))) return true;
-    catui.mount(box, catui.html`<div class="Catui_empty"><p class="Catui_empty-title">예약할 서비스를 먼저 골라 주세요</p><p class="Catui_empty-text">${svc ? "이 단계는 고른 서비스에서 쓰지 않습니다." : "진행 중인 예약이 없습니다."}</p><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="index.html">서비스 고르기</a></div>`);
+    if (svc && d.B[v.branch] && (!kind || [].concat(kind).includes(svc.kind))) { this.empty(box, null); return true; }
+    this.empty(box, catui.html`<p class="Catui_empty-title">예약할 서비스를 먼저 골라 주세요</p><p class="Catui_empty-text">${svc ? "이 단계는 고른 서비스에서 쓰지 않습니다." : "진행 중인 예약이 없습니다."}</p><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="index.html">서비스 고르기</a>`);
     return false;
+  },
+  /** 빈 상태 안내 — 상자의 원래 마크업은 지우지 않고 숨겼다가(다시 연결하면 되살림) 안내만 끼운다. markup이 null이면 되돌림 */
+  empty(box, markup) {
+    if (!box) return;
+    let e = [...box.children].find((c) => c.hasAttribute("data-bk-empty"));
+    for (const c of box.children) {
+      if (c === e) continue;
+      if (markup) { if (!c.hasAttribute("data-bk-shown")) { c.setAttribute("data-bk-shown", c.hidden ? "0" : "1"); c.hidden = true; } }
+      else if (c.hasAttribute("data-bk-shown")) { c.hidden = c.getAttribute("data-bk-shown") === "0"; c.removeAttribute("data-bk-shown"); }
+    }
+    if (!markup) { e?.remove(); return; }
+    if (!e) { e = Object.assign(document.createElement("div"), { className: "Catui_empty" }); e.setAttribute("data-bk-empty", ""); box.prepend(e); }
+    catui.mount(e, markup);
   },
   /** 공통: 단계 표시·옆줄·이전 링크 */
   frame(root, d, v, step) {
@@ -86,6 +99,7 @@ booking.home = {
       if (box) catui.mount(box, catui.html`${d.services.map((s) => {
         const first = s.kind === "room" ? "rooms" : "date";
         return catui.html`<li class="Catui_bk-svc" data-tone="${s.tone || 1}">
+          ${s.image ? catui.html`<img class="Catui_bk-photo" src="${s.image}" alt="" aria-hidden="true" width="640" height="280" loading="lazy" decoding="async">` : ""}
           <span class="Catui_bk-svc-ic" aria-hidden="true">${catui.icon(s.icon || "calendar", 24)}</span>
           <div class="Catui_bk-svc-b">
             <h3 class="Catui_bk-svc-t">${s.name}</h3>

@@ -1,0 +1,37 @@
+<!-- title: 인원·옵션 선택 | nav: home -->
+<header class="Catui_bk-flow-head">
+  <h1 class="Catui_h2">인원·옵션 <small class="Catui_bk-muted" data-svc-name></small></h1>
+  <ol class="Catui_steps" data-catui-bk-steps="people" aria-label="예약 단계"></ol>
+</header>
+<div class="Catui_bk-flow">
+  <div class="Catui_bk-flow-main" data-catui-bk-people>
+    <div class="Catui_bk-flow-main" data-body>
+      <section class="Catui_bk-box" aria-labelledby="pp-h">
+        <h2 class="Catui_h3" id="pp-h">인원</h2>
+        <div class="Catui_bk-count">
+          <div><p class="Catui_bk-count-t" id="pp-a">어른</p><p class="Catui_help" data-unit-adult></p></div>
+          <div class="Catui_stepper" role="group" aria-labelledby="pp-a"><button type="button" data-step="adult:-1" aria-label="어른 한 명 줄이기">{{icon:minus}}</button><output data-out="adult">1</output><button type="button" data-step="adult:1" aria-label="어른 한 명 늘리기">{{icon:plus}}</button></div>
+        </div>
+        <div class="Catui_bk-count">
+          <div><p class="Catui_bk-count-t" id="pp-c">어린이 <small class="Catui_bk-muted">(초등학생 이하)</small></p><p class="Catui_help" data-unit-child></p></div>
+          <div class="Catui_stepper" role="group" aria-labelledby="pp-c"><button type="button" data-step="child:-1" aria-label="어린이 한 명 줄이기">{{icon:minus}}</button><output data-out="child">0</output><button type="button" data-step="child:1" aria-label="어린이 한 명 늘리기">{{icon:plus}}</button></div>
+        </div>
+        <p class="Catui_help" data-limit></p>
+      </section>
+      <section class="Catui_bk-box" aria-labelledby="pp-o-h">
+        <h2 class="Catui_h3" id="pp-o-h">추가 옵션</h2>
+        <div class="Catui_bk-opts" data-opts></div>
+      </section>
+      <section class="Catui_bk-box" aria-labelledby="pp-p-h">
+        <h2 class="Catui_h3" id="pp-p-h">금액</h2>
+        <div data-price aria-live="polite"></div>
+      </section>
+      <p class="Catui_bk-msg" role="alert" data-msg hidden></p>
+      <div class="Catui_bk-next-bar">
+        <a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="date.html" data-catui-bk-prev>{{icon:arrow-left}}이전 단계</a>
+        <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="button" data-go>다음 단계{{icon:arrow-right}}</button>
+      </div>
+    </div>
+  </div>
+  <aside class="Catui_bk-flow-side Catui_bk-box" data-catui-bk-summary aria-label="예약 내용"></aside>
+</div>

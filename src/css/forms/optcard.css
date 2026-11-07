@@ -8,7 +8,7 @@
 .Catui_optcard-text{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
 .Catui_optcard-price{margin-top:var(--Catui_space-2);font-weight:700;font-variant-numeric:tabular-nums}
 input:checked + .Catui_optcard{border-color:var(--Catui_color-brand-strong);box-shadow:0 0 0 1px var(--Catui_color-brand-strong);background:color-mix(in srgb,var(--Catui_color-brand-soft) 40%,var(--Catui_card-bg))}
-input:checked + .Catui_optcard::after{border:5px solid var(--Catui_color-brand-strong)}
+input:checked + .Catui_optcard::after{border:5px solid var(--Catui_color-brand-strong)}   /* 굵은선 허용: 라디오 점(선택 상태) */
 /* checkbox 카드: 둥근 네모 + 체크 표시(여러 개 고를 수 있음을 모양으로도 알림) */
 input[type="checkbox"] + .Catui_optcard::after{border-radius:var(--Catui_check-radius)}
 input[type="checkbox"]:checked + .Catui_optcard::after{border:0;background:var(--Catui_color-brand-strong)}

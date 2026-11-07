@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-theme-lock>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>catbooking.js API · CatuiBooking · Catui</title>
+<script>try{if(localStorage.getItem("catui-theme")==="dark")document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+<meta name="description" content="slots · price · stay · seats · refund · layout · save · 선언형 속성.">
+<link rel="icon" href="../assets/brand/favicon.ico" sizes="any">
+<link rel="icon" href="../assets/brand/favo.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="../assets/brand/site.webmanifest">
+<link rel="stylesheet" href="../../dist/catui.min.css">
+<link rel="stylesheet" href="../assets/docs.css">
+<link rel="stylesheet" href="../../dist/booking.css">
+<script src="../../dist/catui.js"></script>
+<script src="../../dist/catbooking.js"></script>
+</head>
+<body>
+<a class="Catui_skip" href="#doc-main">본문으로 이동</a>
+<div class="Catui_site">
+<header class="Catui_site-header doc-top">
+<div class="doc-top-inner">
+  <a class="doc-brand" href="../index.html"><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html">CatuiCommunity</a><a href="../shop/start/introduction.html">CatuiShop</a><a href="../docskit/start/introduction.html">CatuiDocs</a><a href="../booking/start/introduction.html" aria-current="page">CatuiBooking</a></nav>
+  <div class="doc-top-end">
+    <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
+    <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
+    <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon doc-theme" type="button" aria-pressed="false" aria-label="다크 모드" title="다크 모드"><svg class="Catui_icon Catui_i16 doc-theme-moon" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg><svg class="Catui_icon Catui_i16 doc-theme-sun" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-sun"></use></svg></button>
+    <a class="Catui_btn Catui_btn-sm Catui_btn-primary doc-cta" href="../css/start/introduction.html">시작하기</a>
+  </div>
+</div>
+</header>
+<dialog class="doc-search" aria-label="문서 검색" data-index="../assets/search-index.js" data-home="../index.html"><div class="doc-search-box"><label class="Catui_clip" for="doc-search-q">문서 검색</label><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><input id="doc-search-q" type="search" placeholder="페이지·설명 검색" autocomplete="off" aria-describedby="doc-search-count"><kbd>Esc</kbd></div><p class="doc-search-count" id="doc-search-count" aria-live="polite"></p><ul id="doc-search-list" aria-label="검색 결과"></ul></dialog>
+<div class="doc-shell">
+<details class="doc-side" open><summary>CatuiBooking 메뉴</summary><nav aria-label="CatuiBooking 문서"><div class="doc-side-group"><p class="doc-side-title">시작</p><ul><li><a href="../booking/start/introduction.html">소개 · 화면 지도</a></li><li><a href="../booking/start/install.html">설치 · 구조</a></li><li><a href="../booking/start/structure.html">규칙 · 계산</a></li></ul></div><div class="doc-side-group"><p class="doc-side-title">확장</p><ul><li><a href="../booking/modules.html" aria-current="page">catbooking.js API</a></li><li><a href="../booking/css.html">booking.css 클래스</a></li></ul></div></nav></details>
+<main class="doc-main" id="doc-main" tabindex="-1">
+<header class="doc-head">
+<p class="doc-crumb"><span>CatuiBooking</span><span>확장</span><span>catbooking.js API</span></p>
+<h1 class="Catui_h1">catbooking.js API</h1>
+<p class="Catui_lead">slots · price · stay · seats · refund · layout · save · 선언형 속성.</p>
+
+
+</header>
+<section aria-labelledby="api">
+<h2 id="api">catui.booking</h2>
+<p><code>catbooking.js</code>가 <code>catui.extend({ booking })</code>로 등록하고, 문서가 준비되면 <code>[data-catui-bk]</code> 루트를 찾아 연결합니다. 루트가 없는 화면(이 문서처럼)에서는 데이터를 읽지 않으므로 계산 함수와 부품(<code>seats.mount</code>·<code>calendar.mount</code>)을 직접 씁니다. 날짜는 <code>"YYYY-MM-DD"</code>, 시각은 <code>"HH:MM"</code> 한국 시간 글자입니다. 전체 타입은 <code>dist/catbooking.d.ts</code>.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">catui.booking API</caption>
+<thead><tr><th scope="col">API</th><th scope="col">설명</th></tr></thead><tbody>
+<tr><td><code>init(scope?)</code> · <code>destroy()</code> · <code>ready</code></td><td>연결 · 정리(모든 리스너 해제, 늦은 응답은 연결하지 않음) · 화면 부품이 데이터를 다 그린 뒤 풀리는 Promise</td></tr>
+<tr><td><code>on(이벤트, fn)</code></td><td><code>theme</code> · <code>date</code> { date } · <code>slot</code> { time } · <code>people</code> { adult, child, options, total } · <code>seats</code> { selected, reason } · <code>stay</code> { checkin, checkout, room, total } · <code>save</code> { reservation } · <code>cancel</code> { no, refund } · <code>wait</code> { entry } · <code>data</code></td></tr>
+<tr><td><code>rules</code></td><td><code>{ lead: 30, fewLeft: 2, maxDays: 60, weekendDays: [5, 6], weekendRate: 30, priceUnit: 100, refund: [{ days: 7, rate: 100 }, { days: 3, rate: 70 }, { days: 1, rate: 50 }, { days: 0, rate: 0 }], refundUnit: 10 }</code></td></tr>
+<tr><td><code>slots({ date, open, close, step, duration, breaks, closed, capacity, booked, times, now })</code></td><td>시간 칸 [{ time, end, state: open|full|past|break|closed, left, few }] — <a href="../booking/start/structure.html#time-rule">규칙</a> · <code>slotText(칸)</code> “3자리 남음”/“마감”</td></tr>
+<tr><td><code>left(정원, 찬 인원)</code> · <code>dayState(날짜, opt)</code> · <code>dayText(상태)</code></td><td>남은 자리 · 달력 날짜 상태(open·few·full·closed·past·beyond) · 글자</td></tr>
+<tr><td><code>price(서비스, { adult, child, options, seats, map, nights })</code></td><td>{ lines: [{ label, unit, qty, amount }], people, total } — <a href="../booking/start/structure.html#price-rule">규칙</a></td></tr>
+<tr><td><code>stay(객실, 체크인, 체크아웃, { adult, child, holidays })</code> · <code>nights(a, b)</code></td><td>{ nights, weekday, weekend, lines(밤마다), room, extra, total, over, error } — 주말·공휴일 전날 할증, 추가 인원</td></tr>
+<tr><td><code>refund(금액, 이용일, 시각, { now })</code> · <code>refundTable()</code></td><td>{ ok, days, rate, refund, fee, label } — 시작 뒤엔 ok:false · 규정 표 글자</td></tr>
+<tr><td><code>seats.pick(상태, id)</code> · <code>seats.mount(상자, { map, taken, selected, max, mode, people, onChange })</code></td><td>선택 규칙(최대 개수·붙은 좌석·테이블 인원) → { ok, selected, reason } · 키보드 격자 배치도 → { selected(), set(), focus() }</td></tr>
+<tr><td><code>calendar.mount(상자, { selected, stateOf, onSelect })</code></td><td>표 + 날짜 단추 달력(roving tabindex, ←→↑↓·Home/End·PageUp/Down)</td></tr>
+<tr><td><code>layout(블록[])</code> · <code>place(블록, { from, to })</code></td><td>겹침 처리 → 블록마다 lane·lanes · 시간축 위치 { top, height }(%)</td></tr>
+<tr><td><code>now()</code> · <code>kst(시각)</code> · <code>today()</code> · <code>addDays()</code> · <code>diffDays()</code> · <code>dow()</code> · <code>toMin()</code> · <code>fromMin()</code> · <code>at()</code> · <code>dateLabel()</code></td><td>한국 시간 도우미 — <code>&lt;html data-catui-bk-now&gt;</code>가 있으면 그 시각이 “지금”</td></tr>
+<tr><td><code>load()</code> · <code>data(name)</code> · <code>dataBase</code> · <code>draft</code></td><td>JSON 9종을 합친 값 · 한 파일 읽기(캐시) · 주소 앞부분 · 진행 중 예약 get/set/clear/fromQuery</td></tr>
+<tr><td><code>slotsFor(d, v)</code> · <code>bookedAt</code> · <code>seatsTaken</code> · <code>roomLeft</code> · <code>amountOf(d, 예약)</code></td><td>데이터 기준 시간 칸 · 찬 인원 · 예약된 좌석 · 남은 객실 · 예약 한 건 금액</td></tr>
+<tr><td><code>check(d, v)</code> · <code>save(v)</code> · <code>mine(d)</code> · <code>find(d, 번호)</code> · <code>cancel(d, 번호)</code> · <code>cancelAsk</code> · <code>changeStart</code></td><td>저장 전 확인(문제 글자 목록) · 저장(BK-YYMMDD-NNNN, 변경이면 같은 번호) · 내 예약(phase) · 취소 기록(환불 계산) · 환불을 보여 주고 묻기 · 변경 시작</td></tr>
+<tr><td><code>wait.list(d)</code> · <code>wait.add()</code> · <code>wait.set(id, 상태)</code> · <code>mask(이름)</code></td><td>대기 명단(회차마다 순번) · 신청 · 호출/삭제 · 이름 가리기</td></tr>
+<tr><td><code>store</code> · <code>theme</code> · <code>query()</code> · <code>won()</code> · <code>announce()</code> · <code>go(주소)</code></td><td>저장소(localStorage "catui:booking") · 테마(<code>data-catui-theme-lock</code> 존중) · 주소 매개변수 · “45,000원” · 낭독기 알림 · 이동(바꿔 끼울 수 있음)</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="attrs">
+<h2 id="attrs">선언형 속성</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">data-catui-bk 속성</caption>
+<thead><tr><th scope="col">속성</th><th scope="col">동작</th></tr></thead><tbody>
+<tr><td><code>[data-catui-bk]</code> · <code>&lt;html data-catui-bk-now="ISO"&gt;</code></td><td>화면 루트(이 안의 속성을 연결) · 모의 데이터의 “지금”</td></tr>
+<tr><td><code>[data-catui-bk-steps="date"]</code> · <code>[data-catui-bk-summary]</code> · <code>[data-catui-bk-prev]</code></td><td>단계 표시(서비스 종류별) · 예약 내용·예상 금액 · 이전 단계 링크</td></tr>
+<tr><td><code>[data-catui-bk-home]</code> · <code>[data-catui-bk-next]</code></td><td>서비스·지점 카드 · 다가오는 내 예약</td></tr>
+<tr><td><code>[data-catui-bk-date]</code> 안 <code>[data-cal]</code> · <code>[data-times]</code> · <code>[data-go]</code> · <code>[data-msg]</code></td><td>달력 · 시간 칸(라디오) · 다음 단계 · 안내</td></tr>
+<tr><td><code>[data-catui-bk-people]</code> 안 <code>[data-step="adult:1"]</code> · <code>[data-out]</code> · <code>[data-opts]</code> · <code>[data-price]</code></td><td>인원 증감 · 숫자 · 옵션 · 금액 줄</td></tr>
+<tr><td><code>[data-catui-bk-seats]</code> 안 <code>[data-map]</code> · <code>[data-adjacent]</code> · <code>[data-picked]</code></td><td>좌석 배치도 · 붙은 좌석 모드 · 고른 좌석</td></tr>
+<tr><td><code>[data-catui-bk-rooms]</code> 안 <code>[data-in]</code> · <code>[data-out-date]</code> · <code>[data-rooms]</code> · <code>[data-breakdown]</code></td><td>체크인 · 체크아웃 · 객실 카드 · 박마다 요금 표 (<code>?in=&amp;out=</code>)</td></tr>
+<tr><td><code>form[data-catui-bk-info]</code> · <code>[data-catui-bk-confirm]</code> · <code>[data-catui-bk-complete]</code></td><td>예약자 정보·약관 · 확인 후 저장 · 예약 번호·QR 자리(<code>?no=</code>)</td></tr>
+<tr><td><code>[data-catui-bk-mine]</code> · <code>[data-catui-bk-detail]</code> · <code>[data-cancel="번호"]</code> · <code>[data-change="번호"]</code></td><td>내 예약(<code>?tab=</code>) · 상세(<code>?no=</code>) · 취소(환불 확인) · 변경</td></tr>
+<tr><td><code>[data-catui-bk-waitlist]</code> · <code>[data-catui-bk-admin]</code></td><td>대기 신청·명단 · 관리자 일정표(<code>?view=day|week&amp;date=&amp;staff=</code>)</td></tr>
+<tr><td><code>[data-catui-bk-theme]</code> · <code>[data-catui-bk-won]</code> · <code>[data-catui-bk-today]</code> · <code>[data-catui-bk-reset]</code></td><td>테마 전환 · 금액 글자 · 오늘 날짜 · 진행 중 예약 비우기</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="recipes">
+<h2 id="recipes">자주 쓰는 사용 예</h2>
+<p>예약 토큰이 <code>.Catui_bk</code>에 정의되므로 예제는 <code>class="Catui_bk"</code> 상자로 감쌌습니다 — <code>data-catui-bk</code> 속성은 넣지 않아 화면 부품(데이터 읽기)은 켜지지 않습니다(문서용으로 <code>min-height</code>만 풀었습니다). “지금”은 2026-11-04 13:10 KST로 넘깁니다.</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">시간 칸 — 휴게·지난 시간·마감·임박 (booking.slots)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_bk" style="min-height:0;background:transparent">
+    <fieldset class="Catui_bk-times"><legend class="Catui_bk-legend">11월 4일 (수) · 도자기 클래스 90분 · 정원 6</legend><ul class="Catui_bk-slots" id="bm-slots"></ul></fieldset>
+  </div>
+  <p class="Catui_help" id="bm-slots-out" aria-live="polite"></p>
+  <script>
+  catui.use(['booking'], function (bk) {
+    var list = bk.slots({ date: '2026-11-04', open: '10:00', close: '20:00', step: 30, duration: 90, breaks: [['12:30', '13:30']], capacity: 6,
+      booked: { '14:00': 2, '15:00': 6, '16:00': 5 }, now: new Date('2026-11-04T13:10:00+09:00') });
+    catui.mount(document.getElementById('bm-slots'), catui.html`${list.map(function (s) {
+      var id = 'bm-t-' + s.time.replace(':', ''), off = s.state !== 'open';
+      return catui.html`<li><input class="Catui_clip" type="radio" name="bm-time" id="${id}"${off ? catui.html` disabled` : ''}><label class="Catui_bk-slot" for="${id}" data-state="${s.state}"${s.few ? catui.html` data-few` : ''}><b>${s.time}</b><span>${bk.slotText(s)}${s.few ? ' · 임박' : ''}</span></label></li>`;
+    })}`);
+    var count = function (st) { return list.filter(function (s) { return s.state === st; }).length; };
+    document.getElementById('bm-slots-out').textContent = '칸 ' + list.length + '개 — 지난 ' + count('past') + ' · 휴게 ' + count('break') + ' · 마감 ' + count('full') + ' · 가능 ' + count('open');
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="시간 칸 — 휴게·지난 시간·마감·임박 (booking.slots) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_bk&quot; style=&quot;min-height:0;background:transparent&quot;&gt;
+  &lt;fieldset class=&quot;Catui_bk-times&quot;&gt;&lt;legend class=&quot;Catui_bk-legend&quot;&gt;11월 4일 (수) · 도자기 클래스 90분 · 정원 6&lt;/legend&gt;&lt;ul class=&quot;Catui_bk-slots&quot; id=&quot;bm-slots&quot;&gt;&lt;/ul&gt;&lt;/fieldset&gt;
+&lt;/div&gt;
+&lt;p class=&quot;Catui_help&quot; id=&quot;bm-slots-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+catui.use([&#39;booking&#39;], function (bk) {
+  var list = bk.slots({ date: &#39;2026-11-04&#39;, open: &#39;10:00&#39;, close: &#39;20:00&#39;, step: 30, duration: 90, breaks: [[&#39;12:30&#39;, &#39;13:30&#39;]], capacity: 6,
+    booked: { &#39;14:00&#39;: 2, &#39;15:00&#39;: 6, &#39;16:00&#39;: 5 }, now: new Date(&#39;2026-11-04T13:10:00+09:00&#39;) });
+  catui.mount(document.getElementById(&#39;bm-slots&#39;), catui.html`${list.map(function (s) {
+    var id = &#39;bm-t-&#39; + s.time.replace(&#39;:&#39;, &#39;&#39;), off = s.state !== &#39;open&#39;;
+    return catui.html`&lt;li&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;radio&quot; name=&quot;bm-time&quot; id=&quot;${id}&quot;${off ? catui.html` disabled` : &#39;&#39;}&gt;&lt;label class=&quot;Catui_bk-slot&quot; for=&quot;${id}&quot; data-state=&quot;${s.state}&quot;${s.few ? catui.html` data-few` : &#39;&#39;}&gt;&lt;b&gt;${s.time}&lt;/b&gt;&lt;span&gt;${bk.slotText(s)}${s.few ? &#39; · 임박&#39; : &#39;&#39;}&lt;/span&gt;&lt;/label&gt;&lt;/li&gt;`;
+  })}`);
+  var count = function (st) { return list.filter(function (s) { return s.state === st; }).length; };
+  document.getElementById(&#39;bm-slots-out&#39;).textContent = &#39;칸 &#39; + list.length + &#39;개 — 지난 &#39; + count(&#39;past&#39;) + &#39; · 휴게 &#39; + count(&#39;break&#39;) + &#39; · 마감 &#39; + count(&#39;full&#39;) + &#39; · 가능 &#39; + count(&#39;open&#39;);
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>11:30~13:00 시작은 90분 이용이 휴게(12:30~13:30)와 겹쳐 닫히고, 13:30은 “지금 + 30분”보다 이르므로 지난 시간입니다.</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">인원·옵션 금액 (booking.price)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_bk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent" id="bm-pr">
+    <div class="Catui_bk-count"><p class="Catui_bk-count-t" id="bm-pr-a">어른 45,000원</p><div class="Catui_stepper" role="group" aria-labelledby="bm-pr-a"><button type="button" data-k="adult" data-n="-1" aria-label="어른 줄이기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-minus"></use></svg></button><output data-o="adult">2</output><button type="button" data-k="adult" data-n="1" aria-label="어른 늘리기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-plus"></use></svg></button></div></div>
+    <div class="Catui_bk-count"><p class="Catui_bk-count-t" id="bm-pr-c">어린이 30,000원</p><div class="Catui_stepper" role="group" aria-labelledby="bm-pr-c"><button type="button" data-k="child" data-n="-1" aria-label="어린이 줄이기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-minus"></use></svg></button><output data-o="child">1</output><button type="button" data-k="child" data-n="1" aria-label="어린이 늘리기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-plus"></use></svg></button></div></div>
+    <label class="Catui_choice Catui_bk-opt" for="bm-pr-g"><input class="Catui_clip" type="checkbox" id="bm-pr-g" checked><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span><span class="Catui_bk-opt-t">유약 색 추가</span><span class="Catui_bk-opt-p">+5,000원 / 1인</span></label>
+    <div id="bm-pr-out" aria-live="polite"></div>
+  </div>
+  <script>
+  catui.use(['booking'], function (bk) {
+    var svc = { kind: 'slot', price: 45000, childPrice: 30000, options: [{ id: 'glaze', name: '유약 색 추가', price: 5000, per: 'person' }] };
+    var st = { adult: 2, child: 1 }, box = document.getElementById('bm-pr');
+    var draw = function () {
+      box.querySelectorAll('[data-o]').forEach(function (o) { o.textContent = st[o.dataset.o]; });
+      var p = bk.price(svc, { adult: st.adult, child: st.child, options: document.getElementById('bm-pr-g').checked ? ['glaze'] : [] });
+      catui.mount(document.getElementById('bm-pr-out'), bk.flow.lines(p.lines, p.total));
+    };
+    box.addEventListener('click', function (e) { var b = e.target.closest('[data-k]'); if (!b) return; var k = b.dataset.k; st[k] = Math.max(k === 'adult' ? 1 : 0, Math.min(6, st[k] + Number(b.dataset.n))); draw(); });
+    box.addEventListener('change', draw);
+    draw();
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="인원·옵션 금액 (booking.price) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_bk Catui_vstack Catui_gap-3&quot; style=&quot;min-height:0;background:transparent&quot; id=&quot;bm-pr&quot;&gt;
+  &lt;div class=&quot;Catui_bk-count&quot;&gt;&lt;p class=&quot;Catui_bk-count-t&quot; id=&quot;bm-pr-a&quot;&gt;어른 45,000원&lt;/p&gt;&lt;div class=&quot;Catui_stepper&quot; role=&quot;group&quot; aria-labelledby=&quot;bm-pr-a&quot;&gt;&lt;button type=&quot;button&quot; data-k=&quot;adult&quot; data-n=&quot;-1&quot; aria-label=&quot;어른 줄이기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-minus&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;output data-o=&quot;adult&quot;&gt;2&lt;/output&gt;&lt;button type=&quot;button&quot; data-k=&quot;adult&quot; data-n=&quot;1&quot; aria-label=&quot;어른 늘리기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-plus&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;Catui_bk-count&quot;&gt;&lt;p class=&quot;Catui_bk-count-t&quot; id=&quot;bm-pr-c&quot;&gt;어린이 30,000원&lt;/p&gt;&lt;div class=&quot;Catui_stepper&quot; role=&quot;group&quot; aria-labelledby=&quot;bm-pr-c&quot;&gt;&lt;button type=&quot;button&quot; data-k=&quot;child&quot; data-n=&quot;-1&quot; aria-label=&quot;어린이 줄이기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-minus&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;output data-o=&quot;child&quot;&gt;1&lt;/output&gt;&lt;button type=&quot;button&quot; data-k=&quot;child&quot; data-n=&quot;1&quot; aria-label=&quot;어린이 늘리기&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-plus&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;label class=&quot;Catui_choice Catui_bk-opt&quot; for=&quot;bm-pr-g&quot;&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;checkbox&quot; id=&quot;bm-pr-g&quot; checked&gt;&lt;span class=&quot;Catui_cbx&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i12&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-check&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/span&gt;&lt;span class=&quot;Catui_bk-opt-t&quot;&gt;유약 색 추가&lt;/span&gt;&lt;span class=&quot;Catui_bk-opt-p&quot;&gt;+5,000원 / 1인&lt;/span&gt;&lt;/label&gt;
+  &lt;div id=&quot;bm-pr-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;booking&#39;], function (bk) {
+  var svc = { kind: &#39;slot&#39;, price: 45000, childPrice: 30000, options: [{ id: &#39;glaze&#39;, name: &#39;유약 색 추가&#39;, price: 5000, per: &#39;person&#39; }] };
+  var st = { adult: 2, child: 1 }, box = document.getElementById(&#39;bm-pr&#39;);
+  var draw = function () {
+    box.querySelectorAll(&#39;[data-o]&#39;).forEach(function (o) { o.textContent = st[o.dataset.o]; });
+    var p = bk.price(svc, { adult: st.adult, child: st.child, options: document.getElementById(&#39;bm-pr-g&#39;).checked ? [&#39;glaze&#39;] : [] });
+    catui.mount(document.getElementById(&#39;bm-pr-out&#39;), bk.flow.lines(p.lines, p.total));
+  };
+  box.addEventListener(&#39;click&#39;, function (e) { var b = e.target.closest(&#39;[data-k]&#39;); if (!b) return; var k = b.dataset.k; st[k] = Math.max(k === &#39;adult&#39; ? 1 : 0, Math.min(6, st[k] + Number(b.dataset.n))); draw(); });
+  box.addEventListener(&#39;change&#39;, draw);
+  draw();
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">숙박 박 수 · 주말 요금 (booking.stay)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_bk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent">
+    <div class="Catui_bk-dates">
+      <div class="Catui_field"><label class="Catui_label" for="bm-in">체크인</label><input class="Catui_input" id="bm-in" type="date" value="2026-11-05"></div>
+      <div class="Catui_field"><label class="Catui_label" for="bm-out">체크아웃</label><input class="Catui_input" id="bm-out" type="date" value="2026-11-08"></div>
+    </div>
+    <p class="Catui_bk-nights" id="bm-st-n" aria-live="polite"></p>
+    <div id="bm-st-out"></div>
+  </div>
+  <script>
+  catui.use(['booking'], function (bk) {
+    var room = { name: '온돌방', price: 110000, base: 2, max: 3, extraPerson: 20000 };
+    var draw = function () {
+      var r = bk.stay(room, document.getElementById('bm-in').value, document.getElementById('bm-out').value, { adult: 3, holidays: ['2026-12-25'] });
+      document.getElementById('bm-st-n').textContent = r.error || (r.nights + '박 (평일 ' + r.weekday + ' · 주말 ' + r.weekend + ') · 어른 3명 · 합계 ' + bk.won(r.total));
+      catui.mount(document.getElementById('bm-st-out'), r.error ? '' : catui.html`<div class="Catui_table-wrap Catui_bk-scroll"><table class="Catui_tbl Catui_tbl-compact"><caption class="Catui_clip">박마다 요금</caption><thead><tr><th scope="col">밤</th><th scope="col">구분</th><th scope="col" class="Catui_text-right">객실 + 추가 인원</th></tr></thead><tbody>${r.lines.map(function (x) { return catui.html`<tr><td>${bk.dateLabel(x.date)}</td><td>${x.weekend ? '주말 +30%' : '평일'}</td><td class="Catui_text-right">${bk.won(x.rate)} + ${bk.won(x.extra)}</td></tr>`; })}</tbody></table></div>`);
+    };
+    document.getElementById('bm-in').addEventListener('change', draw);
+    document.getElementById('bm-out').addEventListener('change', draw);
+    draw();
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="숙박 박 수 · 주말 요금 (booking.stay) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_bk Catui_vstack Catui_gap-3&quot; style=&quot;min-height:0;background:transparent&quot;&gt;
+  &lt;div class=&quot;Catui_bk-dates&quot;&gt;
+    &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;bm-in&quot;&gt;체크인&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;bm-in&quot; type=&quot;date&quot; value=&quot;2026-11-05&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;bm-out&quot;&gt;체크아웃&lt;/label&gt;&lt;input class=&quot;Catui_input&quot; id=&quot;bm-out&quot; type=&quot;date&quot; value=&quot;2026-11-08&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;Catui_bk-nights&quot; id=&quot;bm-st-n&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+  &lt;div id=&quot;bm-st-out&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;booking&#39;], function (bk) {
+  var room = { name: &#39;온돌방&#39;, price: 110000, base: 2, max: 3, extraPerson: 20000 };
+  var draw = function () {
+    var r = bk.stay(room, document.getElementById(&#39;bm-in&#39;).value, document.getElementById(&#39;bm-out&#39;).value, { adult: 3, holidays: [&#39;2026-12-25&#39;] });
+    document.getElementById(&#39;bm-st-n&#39;).textContent = r.error || (r.nights + &#39;박 (평일 &#39; + r.weekday + &#39; · 주말 &#39; + r.weekend + &#39;) · 어른 3명 · 합계 &#39; + bk.won(r.total));
+    catui.mount(document.getElementById(&#39;bm-st-out&#39;), r.error ? &#39;&#39; : catui.html`&lt;div class=&quot;Catui_table-wrap Catui_bk-scroll&quot;&gt;&lt;table class=&quot;Catui_tbl Catui_tbl-compact&quot;&gt;&lt;caption class=&quot;Catui_clip&quot;&gt;박마다 요금&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;밤&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;구분&lt;/th&gt;&lt;th scope=&quot;col&quot; class=&quot;Catui_text-right&quot;&gt;객실 + 추가 인원&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;${r.lines.map(function (x) { return catui.html`&lt;tr&gt;&lt;td&gt;${bk.dateLabel(x.date)}&lt;/td&gt;&lt;td&gt;${x.weekend ? &#39;주말 +30%&#39; : &#39;평일&#39;}&lt;/td&gt;&lt;td class=&quot;Catui_text-right&quot;&gt;${bk.won(x.rate)} + ${bk.won(x.extra)}&lt;/td&gt;&lt;/tr&gt;`; })}&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;`);
+  };
+  document.getElementById(&#39;bm-in&#39;).addEventListener(&#39;change&#39;, draw);
+  document.getElementById(&#39;bm-out&#39;).addEventListener(&#39;change&#39;, draw);
+  draw();
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>11/5(목)은 평일, 11/6(금)·11/7(토)은 주말(143,000원)입니다. 기준 2명을 넘는 1명은 밤마다 20,000원. 12/24(목) 밤은 다음 날이 공휴일이라 주말 요금입니다.</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">좌석 배치도 — 키보드 격자 · 최대 개수 · 붙은 좌석 (booking.seats.mount)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_bk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent">
+    <label class="Catui_choice" for="bm-adj"><input class="Catui_clip" type="checkbox" id="bm-adj"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>붙어 있는 좌석 3개 한 번에</label>
+    <div id="bm-seat"></div>
+  </div>
+  <script>
+  catui.use(['booking'], function (bk) {
+    var map = { title: '예제 홀', stage: '무대', rows: [{ id: 'A', cells: 'ss_ssss_ss' }, { id: 'B', cells: 'ss_ssss_ss' }, { id: 'C', cells: 'ww_ssss_ww' }], grades: [{ id: 'R', price: 77000, rows: ['A', 'B'] }, { id: 'S', price: 55000, rows: ['C'] }] };
+    var ctrl = bk.seats.mount('#bm-seat', { map: map, taken: ['A3', 'A4', 'B6'], max: 3, label: '예제 좌석 배치도' });
+    document.getElementById('bm-adj').addEventListener('change', function (e) { ctrl.set({ mode: e.target.checked ? 'adjacent' : 'single' }); });
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="좌석 배치도 — 키보드 격자 · 최대 개수 · 붙은 좌석 (booking.seats.mount) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_bk Catui_vstack Catui_gap-3&quot; style=&quot;min-height:0;background:transparent&quot;&gt;
+  &lt;label class=&quot;Catui_choice&quot; for=&quot;bm-adj&quot;&gt;&lt;input class=&quot;Catui_clip&quot; type=&quot;checkbox&quot; id=&quot;bm-adj&quot;&gt;&lt;span class=&quot;Catui_cbx&quot;&gt;&lt;svg class=&quot;Catui_icon Catui_i12&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-check&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/span&gt;붙어 있는 좌석 3개 한 번에&lt;/label&gt;
+  &lt;div id=&quot;bm-seat&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;booking&#39;], function (bk) {
+  var map = { title: &#39;예제 홀&#39;, stage: &#39;무대&#39;, rows: [{ id: &#39;A&#39;, cells: &#39;ss_ssss_ss&#39; }, { id: &#39;B&#39;, cells: &#39;ss_ssss_ss&#39; }, { id: &#39;C&#39;, cells: &#39;ww_ssss_ww&#39; }], grades: [{ id: &#39;R&#39;, price: 77000, rows: [&#39;A&#39;, &#39;B&#39;] }, { id: &#39;S&#39;, price: 55000, rows: [&#39;C&#39;] }] };
+  var ctrl = bk.seats.mount(&#39;#bm-seat&#39;, { map: map, taken: [&#39;A3&#39;, &#39;A4&#39;, &#39;B6&#39;], max: 3, label: &#39;예제 좌석 배치도&#39; });
+  document.getElementById(&#39;bm-adj&#39;).addEventListener(&#39;change&#39;, function (e) { ctrl.set({ mode: e.target.checked ? &#39;adjacent&#39; : &#39;single&#39; }); });
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>Tab으로 배치도에 들어가 화살표로 움직이고 Space로 고릅니다. 4번째 좌석을 누르면 “최대 3석” 안내가 나오고, 예약된 좌석(빗금 ×)은 초점은 받지만 고를 수 없습니다.</p>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">취소 환불 규정 (booking.refund)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_bk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent">
+    <div class="Catui_field"><label class="Catui_label" for="bm-rf-d">취소하는 날 (이용일 11월 15일 19:30, 99,000원)</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="bm-rf-d"><option value="2026-11-04T13:10">11월 4일 (11일 전)</option><option value="2026-11-10T09:00">11월 10일 (5일 전)</option><option value="2026-11-13T20:00">11월 13일 (2일 전)</option><option value="2026-11-15T10:00">11월 15일 오전 (당일)</option><option value="2026-11-15T20:00">11월 15일 20:00 (시작 후)</option></select><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../dist/icons.svg?v=2#Catui_ic-chevron-down"></use></svg></div></div>
+    <p class="Catui_bk-refundnow" id="bm-rf-out" aria-live="polite"></p>
+  </div>
+  <script>
+  catui.use(['booking'], function (bk) {
+    var sel = document.getElementById('bm-rf-d');
+    var draw = function () {
+      var r = bk.refund(99000, '2026-11-15', '19:30', { now: new Date(sel.value + ':00+09:00') });
+      document.getElementById('bm-rf-out').textContent = r.ok ? r.label + ' → 환불 ' + bk.won(r.refund) + ' · 수수료 ' + bk.won(r.fee) : r.label;
+    };
+    sel.addEventListener('change', draw); draw();
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="취소 환불 규정 (booking.refund) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_bk Catui_vstack Catui_gap-3&quot; style=&quot;min-height:0;background:transparent&quot;&gt;
+  &lt;div class=&quot;Catui_field&quot;&gt;&lt;label class=&quot;Catui_label&quot; for=&quot;bm-rf-d&quot;&gt;취소하는 날 (이용일 11월 15일 19:30, 99,000원)&lt;/label&gt;&lt;div class=&quot;Catui_select-wrap&quot;&gt;&lt;select class=&quot;Catui_input Catui_select&quot; id=&quot;bm-rf-d&quot;&gt;&lt;option value=&quot;2026-11-04T13:10&quot;&gt;11월 4일 (11일 전)&lt;/option&gt;&lt;option value=&quot;2026-11-10T09:00&quot;&gt;11월 10일 (5일 전)&lt;/option&gt;&lt;option value=&quot;2026-11-13T20:00&quot;&gt;11월 13일 (2일 전)&lt;/option&gt;&lt;option value=&quot;2026-11-15T10:00&quot;&gt;11월 15일 오전 (당일)&lt;/option&gt;&lt;option value=&quot;2026-11-15T20:00&quot;&gt;11월 15일 20:00 (시작 후)&lt;/option&gt;&lt;/select&gt;&lt;svg class=&quot;Catui_icon Catui_i16&quot; aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;dist/icons.svg?v=2#Catui_ic-chevron-down&quot;&gt;&lt;/use&gt;&lt;/svg&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;p class=&quot;Catui_bk-refundnow&quot; id=&quot;bm-rf-out&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;booking&#39;], function (bk) {
+  var sel = document.getElementById(&#39;bm-rf-d&#39;);
+  var draw = function () {
+    var r = bk.refund(99000, &#39;2026-11-15&#39;, &#39;19:30&#39;, { now: new Date(sel.value + &#39;:00+09:00&#39;) });
+    document.getElementById(&#39;bm-rf-out&#39;).textContent = r.ok ? r.label + &#39; → 환불 &#39; + bk.won(r.refund) + &#39; · 수수료 &#39; + bk.won(r.fee) : r.label;
+  };
+  sel.addEventListener(&#39;change&#39;, draw); draw();
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+
+<figure class="doc-example">
+<figcaption class="doc-example-title">일정 블록 겹침 (booking.layout · booking.place)</figcaption>
+<div class="doc-example-preview">
+  <div class="Catui_bk" style="min-height:0;background:transparent">
+    <ol class="Catui_bk-res-list" id="bm-ly"></ol>
+  </div>
+  <script>
+  catui.use(['booking'], function (bk) {
+    var laid = bk.layout([{ start: '14:00', end: '15:00', who: '한지민' }, { start: '14:30', end: '15:30', who: '오세훈' }, { start: '15:00', end: '16:00', who: '임수아' }, { start: '17:00', end: '18:00', who: '윤아름' }]);
+    catui.mount(document.getElementById('bm-ly'), catui.html`${laid.map(function (b) { var p = bk.place(b, { from: '09:00', to: '21:00' }); return catui.html`<li class="Catui_bk-refundnow"><b>${b.start}–${b.end} ${b.who}</b> 칸 ${b.lane + 1}/${b.lanes}${b.lanes > 1 ? ' · 겹침' : ''} · 위 ${p.top.toFixed(1)}% · 높이 ${p.height.toFixed(1)}%</li>`; })}`);
+  });
+  </script>
+</div>
+<details class="doc-example-code"><summary>코드</summary><button class="doc-copy" type="button" aria-label="일정 블록 겹침 (booking.layout · booking.place) 코드 복사">복사</button><pre><code>&lt;div class=&quot;Catui_bk&quot; style=&quot;min-height:0;background:transparent&quot;&gt;
+  &lt;ol class=&quot;Catui_bk-res-list&quot; id=&quot;bm-ly&quot;&gt;&lt;/ol&gt;
+&lt;/div&gt;
+&lt;script&gt;
+catui.use([&#39;booking&#39;], function (bk) {
+  var laid = bk.layout([{ start: &#39;14:00&#39;, end: &#39;15:00&#39;, who: &#39;한지민&#39; }, { start: &#39;14:30&#39;, end: &#39;15:30&#39;, who: &#39;오세훈&#39; }, { start: &#39;15:00&#39;, end: &#39;16:00&#39;, who: &#39;임수아&#39; }, { start: &#39;17:00&#39;, end: &#39;18:00&#39;, who: &#39;윤아름&#39; }]);
+  catui.mount(document.getElementById(&#39;bm-ly&#39;), catui.html`${laid.map(function (b) { var p = bk.place(b, { from: &#39;09:00&#39;, to: &#39;21:00&#39; }); return catui.html`&lt;li class=&quot;Catui_bk-refundnow&quot;&gt;&lt;b&gt;${b.start}–${b.end} ${b.who}&lt;/b&gt; 칸 ${b.lane + 1}/${b.lanes}${b.lanes &gt; 1 ? &#39; · 겹침&#39; : &#39;&#39;} · 위 ${p.top.toFixed(1)}% · 높이 ${p.height.toFixed(1)}%&lt;/li&gt;`; })}`);
+});
+&lt;/script&gt;</code></pre></details>
+</figure>
+<p>14:00·14:30·15:00 세 블록은 이어서 겹치는 한 묶음(칸 2개 — 15:00 블록은 14:00 블록이 끝난 첫 칸을 다시 씀), 17:00은 따로입니다.</p>
+</section>
+
+<section aria-labelledby="events">
+<h2 id="events">이벤트 · 실서비스 연결</h2>
+<pre><code>catui.booking.on('save', ({ reservation }) =&gt; fetch('/api/reservations', { method: 'POST', body: JSON.stringify(reservation) }));
+catui.booking.on('cancel', ({ no, refund }) =&gt; fetch(`/api/reservations/${no}/cancel`, { method: 'POST', body: JSON.stringify(refund) }));
+catui.booking.rules.refund = [{ days: 3, rate: 100 }, { days: 1, rate: 50 }, { days: 0, rate: 0 }];   // 규정 바꾸기
+catui.booking.rules.weekendRate = 20;          // 주말 할증 20%
+catui.booking.dataBase = '/api/booking/';      // 같은 모양의 JSON API
+catui.booking.go = (url) =&gt; router.push(url);  // SPA 라우터로 단계 이동</code></pre>
+<p>금액·남은 자리·환불은 화면에서 계산해 보여 주지만, 실서비스에서는 <b>서버가 같은 규칙으로 다시 계산해 확정</b>해야 합니다 — 계산 함수는 화면과 무관한 순수 함수라 Node에서도 그대로 쓸 수 있습니다.</p>
+</section>
+
+
+<nav class="doc-pager" aria-label="이전·다음 문서"><a href="../booking/start/structure.html"><span>이전</span>규칙 · 계산</a><a class="doc-pager-next" href="../booking/css.html"><span>다음</span>booking.css 클래스</a></nav>
+</main>
+<aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#api">catui.booking</a></li><li><a href="#attrs">선언형 속성</a></li><li><a href="#recipes">자주 쓰는 사용 예</a></li><li><a href="#events">이벤트 · 실서비스 연결</a></li></ul></aside>
+</div>
+<footer class="doc-foot"><div class="doc-foot-inner">
+  <div><img class="doc-logo" src="../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT · <a href="../../dist/../assets/photos/index.html">예시 사진 출처·라이선스</a></p></div>
+  <nav aria-label="바닥글 문서 분류"><a href="../css/start/introduction.html">CSS</a><a href="../js/start/introduction.html">catui.js</a><a href="../admin/start/introduction.html">CatuiAdmin</a><a href="../community/start/introduction.html">CatuiCommunity</a><a href="../shop/start/introduction.html">CatuiShop</a><a href="../docskit/start/introduction.html">CatuiDocs</a><a href="../booking/start/introduction.html">CatuiBooking</a></nav>
+</div></footer>
+</div>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

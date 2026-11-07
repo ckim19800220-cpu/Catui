@@ -6,7 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { transform } from "lightningcss";
 import { transformSync } from "esbuild";
-import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes } from "./lib.mjs";
+import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes, visualErrors } from "./lib.mjs";
 
 const A = { src: path.join(ROOT, "src/admin"), tpl: path.join(ROOT, "templates/admin") };
 const noComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, "");
@@ -24,6 +24,7 @@ export function buildAdminCss() {
   for (const f of order) {
     const src = read(path.join(A.src, f));
     if (/#[0-9a-f]{3,8}\b/i.test(noComments(src).replace(/url\([^)]*\)/g, ""))) fail(`admin CSS에 직접 쓴 색(hex)이 있습니다 — 토큰을 쓰세요: src/admin/${f}`);
+    { const ve = visualErrors(src, `src/admin/${f}`); if (ve.length) fail(`admin CSS 시각 원칙 검사 실패\n  ${ve.join("\n  ")}`); }   // 1px 선 · 모서리 토큰 · 유리 폴백 (lib.mjs)
     css += `${src}\n`;
     byFile[`admin/${f}`] = [...new Set([...noComments(src).matchAll(/\.(Catui_adm-[A-Za-z0-9_-]+)/g)].map((m) => m[1]))].sort();
   }

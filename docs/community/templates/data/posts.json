@@ -57,7 +57,7 @@
   "solved": false
  },
  {
-  "id": "1197",
+  "id": "1197", "thumb": "../../../assets/photos/sky.jpg",
   "board": "photo",
   "cat": "풍경",
   "title": "가을 하늘 사진",
@@ -175,7 +175,7 @@
   "solved": true
  },
  {
-  "id": "1189",
+  "id": "1189", "thumb": "../../../assets/photos/cat.jpg",
   "board": "photo",
   "cat": "풍경",
   "title": "우리 집 고양이 낮잠",
@@ -293,7 +293,7 @@
   "solved": true
  },
  {
-  "id": "1181",
+  "id": "1181", "thumb": "../../../assets/photos/leaves.jpg",
   "board": "photo",
   "cat": "풍경",
   "title": "동네 단풍길",
@@ -411,7 +411,7 @@
   "solved": false
  },
  {
-  "id": "1173",
+  "id": "1173", "thumb": "../../../assets/photos/kimbap.jpg",
   "board": "photo",
   "cat": "여행",
   "title": "오늘 만든 김밥",
@@ -529,7 +529,7 @@
   "solved": true
  },
  {
-  "id": "1165",
+  "id": "1165", "thumb": "../../../assets/photos/sunset.jpg",
   "board": "photo",
   "cat": "음식",
   "title": "바다 일몰",
@@ -647,7 +647,7 @@
   "solved": true
  },
  {
-  "id": "1157",
+  "id": "1157", "thumb": "../../../assets/photos/bridge.jpg",
   "board": "photo",
   "cat": "풍경",
   "title": "새벽 안개 낀 다리",
@@ -765,7 +765,7 @@
   "solved": false
  },
  {
-  "id": "1149",
+  "id": "1149", "thumb": "../../../assets/photos/cafe.jpg",
   "board": "photo",
   "cat": "반려동물",
   "title": "카페 창가",
@@ -883,7 +883,7 @@
   "solved": true
  },
  {
-  "id": "1141",
+  "id": "1141", "thumb": "../../../assets/photos/sky.jpg",
   "board": "photo",
   "cat": "음식",
   "title": "가을 하늘 사진",
@@ -1001,7 +1001,7 @@
   "solved": true
  },
  {
-  "id": "1133",
+  "id": "1133", "thumb": "../../../assets/photos/cat.jpg",
   "board": "photo",
   "cat": "풍경",
   "title": "우리 집 고양이 낮잠 (2)",
@@ -1119,7 +1119,7 @@
   "solved": false
  },
  {
-  "id": "1125",
+  "id": "1125", "thumb": "../../../assets/photos/leaves.jpg",
   "board": "photo",
   "cat": "풍경",
   "title": "동네 단풍길 (2)",
@@ -1237,7 +1237,7 @@
   "solved": true
  },
  {
-  "id": "1117",
+  "id": "1117", "thumb": "../../../assets/photos/kimbap.jpg",
   "board": "photo",
   "cat": "여행",
   "title": "오늘 만든 김밥 (2)",
@@ -1355,7 +1355,7 @@
   "solved": true
  },
  {
-  "id": "1109",
+  "id": "1109", "thumb": "../../../assets/photos/sunset.jpg",
   "board": "photo",
   "cat": "음식",
   "title": "바다 일몰 (2)",
@@ -1473,7 +1473,7 @@
   "solved": false
  },
  {
-  "id": "1101",
+  "id": "1101", "thumb": "../../../assets/photos/bridge.jpg",
   "board": "photo",
   "cat": "여행",
   "title": "새벽 안개 낀 다리 (2)",
@@ -1591,7 +1591,7 @@
   "solved": true
  },
  {
-  "id": "1093",
+  "id": "1093", "thumb": "../../../assets/photos/cafe.jpg",
   "board": "photo",
   "cat": "음식",
   "title": "카페 창가 (2)",
@@ -1709,7 +1709,7 @@
   "solved": true
  },
  {
-  "id": "1085",
+  "id": "1085", "thumb": "../../../assets/photos/sky.jpg",
   "board": "photo",
   "cat": "풍경",
   "title": "가을 하늘 사진 (2)",

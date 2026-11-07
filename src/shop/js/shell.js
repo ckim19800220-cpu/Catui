@@ -23,7 +23,34 @@ shop.shell = {
       t.textContent = left <= 0 ? "종료" : `${d ? `${d}일 ` : ""}${hms} 남음`;
     });
   },
+  nav(root) {
+    const nav = root.querySelector('.Catui_sh-gnb-in');
+    if (!nav || !shop._once(nav, 'scroll-controls')) return;
+    const buttons = [...root.querySelectorAll('[data-catui-sh-nav-step]')];
+    const state = () => buttons.forEach((b) => { b.disabled = Number(b.dataset.catuiShNavStep) < 0 ? nav.scrollLeft <= 1 : nav.scrollLeft >= nav.scrollWidth - nav.clientWidth - 1; });
+    const layout = () => {
+      buttons.forEach((b) => { b.hidden = true; });
+      const overflow = nav.scrollWidth > nav.clientWidth + 1;
+      buttons.forEach((b) => { b.hidden = !overflow; });
+      const active = nav.querySelector('[aria-current="page"]');
+      if (active) {
+        const outer = nav.getBoundingClientRect(), item = active.getBoundingClientRect();
+        if (item.left < outer.left) nav.scrollLeft += item.left - outer.left;
+        else if (item.right > outer.right) nav.scrollLeft += item.right - outer.right;
+      }
+      state();
+    };
+    buttons.forEach((b) => shop._on(b, 'click', () => nav.scrollBy({ left: Number(b.dataset.catuiShNavStep) * nav.clientWidth * .8, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })));
+    shop._on(nav, 'scroll', state, { passive: true });
+    shop._on(window, 'resize', layout);
+    layout();
+  },
   init(root) {
+    if (shop._once(root, "hero-error")) shop._on(root, "error", (e) => {
+      if (e.target.matches?.(".Catui_sh-hero-img, .Catui_sh-promo-img")) e.target.hidden = true;
+      else if (e.target.matches?.(".Catui_sh-card-img img, .Catui_sh-gallery-main img, .Catui_sh-thumbs img, .Catui_sh-review-img") && !e.target.src.startsWith("data:")) e.target.src = shop.thumb({ id: 0 }, 0, true);
+    }, true);
+    root.querySelectorAll(".Catui_sh-hero-img").forEach((img) => { if (img.complete && !img.naturalWidth) img.hidden = true; });
     root.querySelectorAll("form[data-catui-sh-search]").forEach((f) => shop._on(f, "submit", (e) => {
       const q = f.querySelector("input[name=q]");
       if (q && !q.value.trim()) { e.preventDefault(); q.focus(); }
@@ -32,7 +59,8 @@ shop.shell = {
     if (q) root.querySelectorAll("form[data-catui-sh-search] input[name=q]").forEach((i) => { i.value = q; });
     // 상단 분류 메뉴: 목록 화면은 주소의 ?c= 로 현재 위치를 다시 표시
     const c = shop.query().get("c");
-    if (c) root.querySelectorAll(".Catui_sh-gnb-item").forEach((a) => { if (new URL(a.href, location.href).searchParams.get("c") === c) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    if (c) root.querySelectorAll(".Catui_sh-gnb .Catui_hnav-item").forEach((a) => { if (new URL(a.href, location.href).searchParams.get("c") === c) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    this.nav(root);
     root.querySelectorAll("[data-catui-sh-won]").forEach((el) => { el.textContent = shop.won(el.getAttribute("data-catui-sh-won")); });
     this.count(root);
     shop.wishPaint(root);

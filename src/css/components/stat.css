@@ -13,7 +13,7 @@
   line-height:var(--Catui_type-metric-lg-lh);color:var(--Catui_stat-value-color);font-variant-numeric:tabular-nums;
 }
 .Catui_spark{display:flex;align-items:flex-end;gap:var(--Catui_space-1);height:var(--Catui_stat-spark-h)}
-.Catui_spark i{width:var(--Catui_stat-spark-bar-w);border-radius:1px;background:var(--Catui_stat-spark-bar);display:block}
+.Catui_spark i{width:var(--Catui_stat-spark-bar-w);border-radius:var(--Catui_radius-xs);background:var(--Catui_stat-spark-bar);display:block}
 .Catui_spark i:last-child{background:var(--Catui_stat-spark-bar-active)}
 .Catui_delta-up{color:var(--Catui_stat-delta-up)}
 .Catui_delta-down{color:var(--Catui_stat-delta-down)}

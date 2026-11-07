@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { transform } from "lightningcss";
-import { P, fail, read, readJson, write, walk, rel, pkg, bytes } from "./lib.mjs";
+import { P, fail, read, readJson, write, walk, rel, pkg, bytes, visualErrors } from "./lib.mjs";
 
 export function buildCss() {
   const order = readJson(path.join(P.css, "index.json"));
@@ -10,6 +10,10 @@ export function buildCss() {
   for (const f of order) if (!fs.existsSync(path.join(P.css, f))) fail(`index.json의 CSS 파일이 없습니다: src/css/${f}`);
   const orphans = walk(P.css, ".css").map((f) => path.relative(P.css, f).replace(/\\/g, "/")).filter((f) => !listed.has(f));
   if (orphans.length) fail(`index.json에 없는 CSS 파일: ${orphans.join(", ")} — 결합 순서에 넣어 주세요`);
+
+  // 시각 원칙 검사 — 1px 선 · 모서리 토큰 · 유리 폴백 (lib.mjs visualErrors, 원칙은 tokens.css 머리 주석)
+  const visual = order.flatMap((f) => visualErrors(read(path.join(P.css, f)), `src/css/${f}`));
+  if (visual.length) fail(`CSS 시각 원칙 검사 실패 ${visual.length}건\n  ${visual.join("\n  ")}`);
 
   let css = `/*! Catui UI ${pkg().version} | MIT License (c) imcatDevs | 토큰은 assets/spec/design_m.html 기준 | 아이콘 Line 01(CC0) */\n`;
   for (const f of order) css += read(path.join(P.css, f)) + "\n";

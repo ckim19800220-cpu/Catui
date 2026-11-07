@@ -1,0 +1,7 @@
+[
+  { "id": "w1", "svc": "pottery", "branch": "gangnam", "date": "2026-11-04", "time": "15:00", "name": "이도현", "phone": "010-2222-0001", "people": 2, "created": "2026-11-02T08:10:00+09:00", "status": "waiting" },
+  { "id": "w2", "svc": "pottery", "branch": "gangnam", "date": "2026-11-04", "time": "15:00", "name": "송하윤", "phone": "010-2222-0002", "people": 1, "created": "2026-11-03T19:22:00+09:00", "status": "called" },
+  { "id": "w3", "svc": "pottery", "branch": "gangnam", "date": "2026-11-07", "time": "14:00", "name": "장태오", "phone": "010-2222-0003", "people": 3, "created": "2026-11-03T11:00:00+09:00", "status": "waiting" },
+  { "id": "w4", "svc": "hair", "branch": "gangnam", "date": "2026-11-05", "time": "11:00", "name": "류시아", "phone": "010-2222-0004", "people": 1, "created": "2026-11-04T09:30:00+09:00", "status": "waiting" },
+  { "id": "w5", "svc": "pottery", "branch": "gangnam", "date": "2026-11-04", "time": "15:00", "name": "백현우", "phone": "010-2222-0005", "people": 2, "created": "2026-11-04T07:45:00+09:00", "status": "waiting" }
+]

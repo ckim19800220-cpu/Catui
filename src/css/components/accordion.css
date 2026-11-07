@@ -4,7 +4,7 @@
 .Catui_accordion > details + details{border-top:1px solid var(--Catui_divider-color)}
 .Catui_accordion summary,.Catui_details > summary{display:flex;align-items:center;gap:var(--Catui_space-2);min-height:var(--Catui_control-h-lg);padding:var(--Catui_space-2) var(--Catui_space-4);font-weight:600;cursor:pointer;list-style:none}
 .Catui_accordion summary::-webkit-details-marker,.Catui_details > summary::-webkit-details-marker{display:none}
-.Catui_accordion summary::after,.Catui_details > summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--Catui_dur-fast) var(--Catui_ease);flex:none;color:var(--Catui_color-text-secondary)}
+.Catui_accordion summary::after,.Catui_details > summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--Catui_dur-fast) var(--Catui_ease);flex:none;color:var(--Catui_color-text-secondary)}   /* 굵은선 허용: 테두리로 그린 화살표 아이콘 획 */
 .Catui_accordion details[open] > summary::after,.Catui_details[open] > summary::after{transform:rotate(-135deg)}
 .Catui_accordion summary:hover,.Catui_details > summary:hover{background:var(--Catui_color-brand-ghost)}
 .Catui_accordion summary:focus-visible,.Catui_details > summary:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:-2px}

@@ -1,0 +1,87 @@
+<section aria-labelledby="rules">
+<h2 id="rules">규칙</h2>
+<ul>
+  <li>클래스는 <code>Catui_bk-*</code>, 토큰은 <code>--Catui_bk-*</code>(본체 토큰을 참조만). 새 색 값(hex)은 만들지 않습니다 — 빌드가 막습니다.</li>
+  <li>본체 클래스에 스타일을 더할 때는 항상 <code>.Catui_bk …</code> 아래로 — booking.css를 불러와도 예약 화면 밖은 바뀌지 않습니다. 단계 표시·인원 증감·표·배지는 본체(<code>.Catui_steps</code>·<code>.Catui_stepper</code>·<code>.Catui_tbl</code>·<code>.Catui_badge</code>)를 그대로 씁니다.</li>
+  <li>상태는 색 + 글자 + 모양을 함께: 고름 = 채움 + 체크 아이콘 + <code>aria-pressed</code>, 마감·예약됨 = 빗금(<code>--Catui_bk-hatch</code>) + 점선 + × 아이콘 + “마감/예약됨” 글자, 임박 = 경고 아이콘 + “임박”, 지난 시간·날짜 = 취소선 + 글자, 장애인석 = 휠체어 아이콘 + 굵은 테두리 + 숨김 글자.</li>
+  <li>반응형: 991px 이하 옆줄(예약 내용)을 본문 아래로, 767px 이하 머리 메뉴를 둘째 줄 가로 스크롤, 599px 이하 객실 카드 금액을 아래로·기간 입력 한 열, 399px 이하 좌석 칸·달력 칸을 줄입니다. 좌석 배치도·일정표·표는 <code>position:relative</code> 스크롤 상자 안에서만 가로로 밀립니다.</li>
+  <li>모든 초점은 <code>:focus-visible</code> 외곽선(<code>--Catui_color-focus-ring</code>), 모션은 <code>prefers-reduced-motion: reduce</code>면 끕니다.</li>
+</ul>
+</section>
+<section aria-labelledby="tokens">
+<h2 id="tokens">토큰</h2>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">booking 토큰</caption>
+<thead><tr><th scope="col">토큰</th><th scope="col">기본값</th></tr></thead><tbody>
+<tr><td><code>--Catui_bk-wrap</code> · <code>--Catui_bk-gap</code> · <code>--Catui_bk-head-h</code> · <code>--Catui_bk-side-w</code></td><td>본문 최대 폭 ≈ 1216px · 간격 · 머리 높이 · 옆줄 ≈ 352px</td></tr>
+<tr><td><code>--Catui_bk-accent</code> · <code>--Catui_bk-accent-soft</code> · <code>--Catui_bk-muted</code> · <code>--Catui_bk-line</code></td><td>선택·현재 위치(<code>--Catui_color-brand-strong</code>) · 바탕 · 보조 글자 · 선</td></tr>
+<tr><td><code>--Catui_bk-off-bg</code> · <code>--Catui_bk-off-fg</code> · <code>--Catui_bk-hatch</code></td><td>마감·예약됨·지난 시간 바탕·글자 · 빗금 무늬(본체 선 색으로 그림)</td></tr>
+<tr><td><code>--Catui_bk-warn</code> · <code>--Catui_bk-warn-soft</code> · <code>--Catui_bk-danger</code></td><td>임박(아이콘·글자와 함께) · 안내·지금 선</td></tr>
+<tr><td><code>--Catui_bk-cell</code> · <code>--Catui_bk-hour</code> · <code>--Catui_bk-col-min</code></td><td>좌석 칸 ≈ 36px(399px 이하 28px) · 일정표 한 시간 ≈ 64px · 일정표 열 최소 폭</td></tr>
+<tr><td><code>--Catui_bk-radius</code> · <code>--Catui_bk-ease-out</code> · <code>--Catui_bk-dur</code></td><td>둥글기 · 나타남 곡선 · 160ms</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="examples">
+<h2 id="examples">자주 쓰는 사용 예</h2>
+<p>스크립트 없이 클래스만 쓴 정적 견본입니다. 토큰이 <code>.Catui_bk</code> 아래에 있으므로 셸 밖에서는 <code>class="Catui_bk"</code> 상자로 감쌉니다(<code>data-catui-bk</code> 속성 없이, 문서용으로 <code>min-height</code>만 풀었습니다). 같은 마크업을 스크립트로 만드는 방법은 <a href="doc:booking/modules#recipes">catbooking.js API · 자주 쓰는 사용 예</a>를 보세요.</p>
+
+<catui-example title="서비스 카드 · 다가오는 예약">
+  <div class="Catui_bk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent">
+    <ul class="Catui_bk-svcs" aria-label="예제 서비스">
+      <li class="Catui_bk-svc" data-tone="1"><span class="Catui_bk-svc-ic" aria-hidden="true"><svg class="Catui_icon"><use href="{{dist}}/icons.svg?v=2#Catui_ic-palette"></use></svg></span>
+        <div class="Catui_bk-svc-b"><h3 class="Catui_bk-svc-t">도자기 원데이 클래스</h3><p class="Catui_bk-svc-d">물레 체험 후 작품을 받아 가요.</p><p class="Catui_bk-svc-meta"><span>90분</span><span>최대 6명</span><b>45,000원부터</b></p></div>
+        <div class="Catui_bk-svc-go" role="group" aria-label="지점"><a class="Catui_btn Catui_btn-sm Catui_btn-secondary" href="#examples">강남점</a><a class="Catui_btn Catui_btn-sm Catui_btn-secondary" href="#examples">홍대점</a></div></li>
+    </ul>
+    <a class="Catui_bk-upnext" href="#examples"><span class="Catui_bk-svc-ic" data-tone="3" aria-hidden="true"><svg class="Catui_icon Catui_i20"><use href="{{dist}}/icons.svg?v=2#Catui_ic-theater-masks"></use></svg></span><span><b>뮤지컬 〈고양이 정원〉</b><small>11월 15일 (일) 19:30 · 대학로 캣아트홀</small></span><span class="Catui_badge Catui_badge-info">D-11</span></a>
+  </div>
+</catui-example>
+
+<catui-example title="시간 칸 · 범례 (상태 = 글자 + 모양)">
+  <div class="Catui_bk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent">
+    <ul class="Catui_bk-slots" aria-label="예제 시간">
+      <li><label class="Catui_bk-slot" data-state="past"><b>13:30</b><span>지난 시간</span></label></li>
+      <li><label class="Catui_bk-slot" data-state="open"><b>14:00</b><span>4자리 남음</span></label></li>
+      <li><label class="Catui_bk-slot" data-state="full"><b>15:00</b><span>마감</span></label></li>
+      <li><label class="Catui_bk-slot" data-state="open" data-few><b>16:00</b><span>1자리 남음 · 임박</span></label></li>
+    </ul>
+    <ul class="Catui_bk-keys" aria-label="예제 범례"><li><span class="Catui_bk-key" data-k="open" aria-hidden="true"></span>가능</li><li><span class="Catui_bk-key" data-k="few" aria-hidden="true"></span>임박</li><li><span class="Catui_bk-key" data-k="full" aria-hidden="true"></span>마감</li><li><span class="Catui_bk-key" data-k="past" aria-hidden="true"></span>지난 시간</li><li><span class="Catui_bk-key" data-k="on" aria-hidden="true"></span>고름</li><li><span class="Catui_bk-key" data-k="taken" aria-hidden="true"></span>예약됨</li></ul>
+  </div>
+</catui-example>
+
+<catui-example title="예약 내용 · 금액 줄 · 안내">
+  <div class="Catui_bk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent">
+    <div class="Catui_bk-box">
+      <dl class="Catui_bk-sum"><div><dt>서비스</dt><dd>도자기 원데이 클래스</dd></div><div><dt>날짜</dt><dd>11월 5일 (목) 14:00–15:30</dd></div><div><dt>인원</dt><dd>어른 2 · 어린이 1</dd></div></dl>
+      <ul class="Catui_bk-lines"><li><span>어른 <small>45,000원 × 2</small></span><b>90,000원</b></li><li><span>어린이 <small>30,000원 × 1</small></span><b>30,000원</b></li></ul>
+      <p class="Catui_bk-total"><span>합계</span><b>120,000원</b></p>
+    </div>
+    <p class="Catui_bk-msg" role="note"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="{{dist}}/icons.svg?v=2#Catui_ic-alert-circle"></use></svg><span>시간을 골라 주세요</span></p>
+    <p class="Catui_bk-ok">대기 2번째로 신청했습니다</p>
+  </div>
+</catui-example>
+
+<catui-example title="예약 카드 · 거르기 버튼 · 환불 안내">
+  <div class="Catui_bk Catui_vstack Catui_gap-3" style="min-height:0;background:transparent">
+    <div class="Catui_bk-chips" role="group" aria-label="예제 거르기"><button class="Catui_bk-chip" type="button" aria-pressed="true">예정<span class="Catui_bk-chip-n">3<span class="Catui_clip">건</span></span></button><button class="Catui_bk-chip" type="button" aria-pressed="false">취소<span class="Catui_bk-chip-n">1<span class="Catui_clip">건</span></span></button></div>
+    <ul class="Catui_bk-res-list" aria-label="예제 예약"><li class="Catui_bk-res" data-phase="upcoming"><span class="Catui_bk-svc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i20"><use href="{{dist}}/icons.svg?v=2#Catui_ic-scissors"></use></svg></span>
+      <div class="Catui_bk-res-b"><p class="Catui_bk-res-h"><span class="Catui_badge Catui_badge-info">예정 · D-2</span><span class="Catui_bk-no">BK-261102-0003</span></p><h3 class="Catui_bk-res-t"><a href="#examples">헤어 커트</a></h3><p class="Catui_bk-res-m">11월 6일 (금) 11:00 · 강남점 · <b>33,000원</b></p></div>
+      <div class="Catui_bk-res-acts"><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button">취소</button></div></li></ul>
+    <p class="Catui_bk-refundnow">지금 취소하면 <b>16,500원</b> 환불 (이용 2일 전 · 50%)</p>
+  </div>
+</catui-example>
+
+<catui-example title="일정표 블록 (상태 = 테두리 모양 + 글자)">
+  <div class="Catui_bk" style="min-height:0;background:transparent">
+    <div class="Catui_bk-sched-scroll"><div class="Catui_bk-sched" style="--Catui_bk-cols:1;--Catui_bk-hours:3">
+      <div class="Catui_bk-sched-axis" aria-hidden="true"><span style="--Catui_bk-i:0">14:00</span><span style="--Catui_bk-i:1">15:00</span><span style="--Catui_bk-i:2">16:00</span><span style="--Catui_bk-i:3">17:00</span></div>
+      <section class="Catui_bk-sched-col" aria-labelledby="ex-sc-h"><h3 class="Catui_bk-sched-h" id="ex-sc-h">김민지<small>디자이너 · 3건</small></h3>
+        <div class="Catui_bk-sched-body"><ol class="Catui_bk-sched-list">
+          <li class="Catui_bk-block" data-status="booked" style="top:0%;height:33.3%;--Catui_bk-lane:0;--Catui_bk-lanes:2"><b>14:00–15:00</b><span>한지민</span><span class="Catui_bk-block-st">확정 · 겹침</span></li>
+          <li class="Catui_bk-block" data-status="pending" style="top:16.7%;height:33.3%;--Catui_bk-lane:1;--Catui_bk-lanes:2"><b>14:30–15:30</b><span>오세훈</span><span class="Catui_bk-block-st">확인 대기 · 겹침</span></li>
+          <li class="Catui_bk-block" data-status="cancelled" style="top:66.7%;height:33.3%"><b>16:00–17:00</b><span>문가은</span><span class="Catui_bk-block-st">취소</span></li>
+        </ol><div class="Catui_bk-sched-now" style="top:40%" aria-hidden="true"></div></div>
+      </section>
+    </div></div>
+  </div>
+</catui-example>
+</section>

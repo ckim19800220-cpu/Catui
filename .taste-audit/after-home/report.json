@@ -1,0 +1,2557 @@
+{
+ "url": "docs/index.html",
+ "at": "2026-11-07T03:33:10.704Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 6,
+   "filled": [
+    0.86,
+    0.56,
+    0.81,
+    0.68,
+    0.63,
+    0.78
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 1,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 4976,
+     "screens": 5.5,
+     "words": 691,
+     "img": 2,
+     "video": 0,
+     "canvas": 0,
+     "svg": 10,
+     "sections": 7,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [
+      "✓"
+     ],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "한국어 화면을 위한 UI 개발 키트",
+     "words": 6,
+     "chars": 19,
+     "lines": 2,
+     "size": 48,
+     "vw": 3.3,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": -0.035,
+     "leading": 1.08,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.57,
+     "top": 156,
+     "gradientText": true,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "한국어 화면을 위한 UI 개발 키트",
+     "words": 6,
+     "lines": 2,
+     "size": 48,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "한국어 화면을 위한 UI 개발 키트",
+      "words": 6,
+      "chars": 19,
+      "lines": 2,
+      "size": 48,
+      "vw": 3.3,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1.08,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.57,
+      "top": 156,
+      "gradientText": true,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "1,348",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.11,
+      "top": 875,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "636",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.11,
+      "top": 875,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "21",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.11,
+      "top": 875,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "120종",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.11,
+      "top": 875,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "162쪽",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 28,
+      "vw": 1.9,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.11,
+      "top": 875,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "한 키트. 처음부터 끝까지.",
+      "words": 4,
+      "chars": 15,
+      "lines": 1,
+      "size": 40,
+      "vw": 2.8,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.78,
+      "top": 1073,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "불러오고, 쓰고, 움직이고, 넓힌다.",
+      "words": 4,
+      "chars": 20,
+      "lines": 1,
+      "size": 40,
+      "vw": 2.8,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.78,
+      "top": 2262,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "명세에서 화면까지, 한 벌의 규칙",
+      "words": 5,
+      "chars": 18,
+      "lines": 1,
+      "size": 40,
+      "vw": 2.8,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.78,
+      "top": 2717,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "문서 둘러보기",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 40,
+      "vw": 2.8,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.78,
+      "top": 3616,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "지금 첫 화면을 만들어 보세요",
+      "words": 5,
+      "chars": 16,
+      "lines": 1,
+      "size": 40,
+      "vw": 2.8,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.93,
+      "top": 4583,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 11,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 5,
+     "centered": 6,
+     "medianWords": 2,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.66,
+       "mono": false
+      },
+      {
+       "family": "ui-monospace",
+       "share": 0.2,
+       "mono": false
+      },
+      {
+       "family": "monospace",
+       "share": 0.14,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 4,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      22,
+      28,
+      40,
+      48
+     ],
+     "sizeCount": 14,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 15,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.6
+     },
+     "measureChars": 85,
+     "max": {
+      "size": 48,
+      "vw": 3.3,
+      "font": "Inter",
+      "text": "한국어 화면을 위한"
+     },
+     "monoShare": 0.34,
+     "monoProseShare": 0.16,
+     "monoFamilies": [
+      "ui-monospace",
+      "monospace"
+     ],
+     "monoSamples": [
+      "v2.0.0",
+      "admin.catui.dev",
+      "catui.js 2.0.0",
+      "모듈 21 · 의존성 0",
+      "62.4 KB gzip",
+      "1,348"
+     ],
+     "microLabels": 3,
+     "microLabelShare": 0.002,
+     "microSamples": [
+      "매출",
+      "주문",
+      "전환율"
+     ],
+     "upperShare": 0.08,
+     "centerShare": 0.13,
+     "smallText": 46
+    },
+    "eyebrows": [
+     {
+      "text": "새 기능 — fx 조합 놀이터와 효과 등록 API",
+      "above": "한국어 화면을 위한 UI 개발 키트",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 105
+     },
+     {
+      "text": "CSS 클래스",
+      "above": "1,348",
+      "upper": true,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 852
+     },
+     {
+      "text": "디자인 토큰",
+      "above": "636",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 852
+     },
+     {
+      "text": "catui.js 모듈",
+      "above": "21",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 852
+     },
+     {
+      "text": "템플릿",
+      "above": "120종",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 852
+     },
+     {
+      "text": "문서",
+      "above": "162쪽",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 852
+     },
+     {
+      "text": "구성",
+      "above": "한 키트. 처음부터 끝까지.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 1036
+     },
+     {
+      "text": "빠른 시작",
+      "above": "불러오고, 쓰고, 움직이고, 넓힌다.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 2226
+     },
+     {
+      "text": "기능",
+      "above": "명세에서 화면까지, 한 벌의 규칙",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 2681
+     },
+     {
+      "text": "문서",
+      "above": "문서 둘러보기",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 3579
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.57
+      },
+      {
+       "color": "#e5eaf0",
+       "share": 0.17
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.1
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.06
+      },
+      {
+       "color": "#dde4ea",
+       "share": 0.04
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 10,
+     "inHero": 6,
+     "radius": 4,
+     "height": 40,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "검색 Ctrl K",
+      "시작하기",
+      "v2.0.0 새 기능 — fx 조합 놀이터와 효과 등록 API",
+      "무료로 시작하기"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 44,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "div.doc-install → rgba(16, 24, 40, 0.05) 0px 1px 2px 0px",
+      "div.doc-hx-window.doc-rhero-shot → color(srgb 0.14902 0.72549 0.603922 / 0.45) 0px -10px 80px -10px",
+      "div.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "div.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px"
+     ],
+     "gradients": 1,
+     "scrims": 0,
+     "gradientSamples": [
+      "section.doc-rhero.doc-dark → linear-gradient(color(srgb 0.0875294 0.126431 0.165333) 72%, rgb(247, 248, 250) 72%)"
+     ],
+     "gradientText": 2,
+     "hairlines": 5,
+     "hairlineSamples": [
+      "header.Catui_site-header.doc-top 1440px",
+      "div.doc-hx-window.doc-rhero-shot 760px",
+      "div.doc-win-bar 758px",
+      "div.doc-win-foot 758px",
+      "footer.doc-foot 1440px"
+     ],
+     "outlinedBoxes": 43,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 48,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 7,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 1202
+      },
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 2332
+      },
+      {
+       "count": 22,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 3702
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 10,
+     "fixed": true,
+     "height": 57,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 4976,
+    "margins": {
+     "left": 181,
+     "right": 181
+    },
+    "sections": [
+     {
+      "sel": "div.doc-shell.doc-shell-home",
+      "tag": "div",
+      "top": 57,
+      "height": 4783,
+      "words": 674,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "한국어 화면을 위한",
+       "size": 48,
+       "tag": "h1"
+      },
+      "left": 161,
+      "right": 181,
+      "textLeft": 161,
+      "textRight": 181,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.doc-foot",
+      "tag": "footer",
+      "top": 4840,
+      "height": 136,
+      "words": 18,
+      "media": 0,
+      "middle": 602,
+      "heading": null,
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "한국어 화면을 위한 UI 개발 키트",
+      "size": 48,
+      "top": 156,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 185,
+      "n": 3
+     },
+     {
+      "x": 564,
+      "n": 1
+     },
+     {
+      "x": 942,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 5,
+    "bodySize": 11,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.17,
+    "voidBox": {
+     "x": 1080,
+     "y": 120,
+     "w": 360,
+     "h": 600
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 7,
+   "filled": [
+    0.62,
+    0.41,
+    0.42,
+    0.54,
+    0.56,
+    0.33,
+    0.77
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 1,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 6742,
+     "screens": 6.6,
+     "words": 688,
+     "img": 2,
+     "video": 0,
+     "canvas": 0,
+     "svg": 10,
+     "sections": 7,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [
+      "✓"
+     ],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "한국어 화면을 위한 UI 개발 키트",
+     "words": 6,
+     "chars": 19,
+     "lines": 2,
+     "size": 32.3,
+     "vw": 4.2,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": -0.035,
+     "leading": 1.08,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.94,
+     "top": 156,
+     "gradientText": true,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "한국어 화면을 위한 UI 개발 키트",
+     "words": 6,
+     "lines": 2,
+     "size": 32.3,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "한국어 화면을 위한 UI 개발 키트",
+      "words": 6,
+      "chars": 19,
+      "lines": 2,
+      "size": 32.3,
+      "vw": 4.2,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1.08,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 156,
+      "gradientText": true,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "1,348",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.23,
+      "top": 841,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "636",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.23,
+      "top": 841,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "21",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.23,
+      "top": 841,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "120종",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.23,
+      "top": 955,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "162쪽",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 28,
+      "vw": 3.6,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.23,
+      "top": 955,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "한 키트. 처음부터 끝까지.",
+      "words": 4,
+      "chars": 15,
+      "lines": 1,
+      "size": 26.1,
+      "vw": 3.4,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 1153,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "불러오고, 쓰고, 움직이고, 넓힌다.",
+      "words": 4,
+      "chars": 20,
+      "lines": 1,
+      "size": 26.1,
+      "vw": 3.4,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 3034,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "명세에서 화면까지, 한 벌의 규칙",
+      "words": 5,
+      "chars": 18,
+      "lines": 1,
+      "size": 26.1,
+      "vw": 3.4,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 3706,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "문서 둘러보기",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 26.1,
+      "vw": 3.4,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 4804,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "지금 첫 화면을 만들어 보세요",
+      "words": 5,
+      "chars": 16,
+      "lines": 1,
+      "size": 26.1,
+      "vw": 3.4,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 6323,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 11,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 5,
+     "centered": 6,
+     "medianWords": 2,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.66,
+       "mono": false
+      },
+      {
+       "family": "ui-monospace",
+       "share": 0.2,
+       "mono": false
+      },
+      {
+       "family": "monospace",
+       "share": 0.14,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 4,
+     "sizes": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      22,
+      26,
+      28,
+      32
+     ],
+     "sizeCount": 13,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 15,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.6
+     },
+     "measureChars": 85,
+     "max": {
+      "size": 32.3,
+      "vw": 4.2,
+      "font": "Inter",
+      "text": "한국어 화면을 위한"
+     },
+     "monoShare": 0.34,
+     "monoProseShare": 0.16,
+     "monoFamilies": [
+      "ui-monospace",
+      "monospace"
+     ],
+     "monoSamples": [
+      "v2.0.0",
+      "admin.catui.dev",
+      "catui.js 2.0.0",
+      "모듈 21 · 의존성 0",
+      "62.4 KB gzip",
+      "1,348"
+     ],
+     "microLabels": 3,
+     "microLabelShare": 0.002,
+     "microSamples": [
+      "매출",
+      "주문",
+      "전환율"
+     ],
+     "upperShare": 0.08,
+     "centerShare": 0.13,
+     "smallText": 46
+    },
+    "eyebrows": [
+     {
+      "text": "새 기능 — fx 조합 놀이터와 효과 등록 API",
+      "above": "한국어 화면을 위한 UI 개발 키트",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 105
+     },
+     {
+      "text": "CSS 클래스",
+      "above": "1,348",
+      "upper": true,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 818
+     },
+     {
+      "text": "디자인 토큰",
+      "above": "636",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 818
+     },
+     {
+      "text": "catui.js 모듈",
+      "above": "21",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 818
+     },
+     {
+      "text": "템플릿",
+      "above": "120종",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 932
+     },
+     {
+      "text": "문서",
+      "above": "162쪽",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 932
+     },
+     {
+      "text": "구성",
+      "above": "한 키트. 처음부터 끝까지.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 1116
+     },
+     {
+      "text": "빠른 시작",
+      "above": "불러오고, 쓰고, 움직이고, 넓힌다.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 2998
+     },
+     {
+      "text": "기능",
+      "above": "명세에서 화면까지, 한 벌의 규칙",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 3669
+     },
+     {
+      "text": "문서",
+      "above": "문서 둘러보기",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 4768
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.57
+      },
+      {
+       "color": "#e5eaf0",
+       "share": 0.17
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.1
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.06
+      },
+      {
+       "color": "#dde4ea",
+       "share": 0.04
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 10,
+     "inHero": 6,
+     "radius": 4,
+     "height": 40,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "검색",
+      "시작하기",
+      "v2.0.0 새 기능 — fx 조합 놀이터와 효과 등록 API",
+      "무료로 시작하기"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 44,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "div.doc-install → rgba(16, 24, 40, 0.05) 0px 1px 2px 0px",
+      "div.doc-hx-window.doc-rhero-shot → color(srgb 0.14902 0.72549 0.603922 / 0.45) 0px -10px 80px -10px",
+      "div.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "div.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px"
+     ],
+     "gradients": 1,
+     "scrims": 0,
+     "gradientSamples": [
+      "section.doc-rhero.doc-dark → linear-gradient(color(srgb 0.0875294 0.126431 0.165333) 72%, rgb(247, 248, 250) 72%)"
+     ],
+     "gradientText": 2,
+     "hairlines": 5,
+     "hairlineSamples": [
+      "header.Catui_site-header.doc-top 768px",
+      "div.doc-hx-window.doc-rhero-shot 720px",
+      "div.doc-win-bar 718px",
+      "div.doc-win-foot 718px",
+      "footer.doc-foot 768px"
+     ],
+     "outlinedBoxes": 43,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 47,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 7,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 1266
+      },
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 3088
+      },
+      {
+       "count": 3,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 3776
+      },
+      {
+       "count": 22,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 4874
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 9,
+     "fixed": true,
+     "height": 57,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 6742,
+    "margins": {
+     "left": 41,
+     "right": 61
+    },
+    "sections": [
+     {
+      "sel": "div.doc-shell.doc-shell-home",
+      "tag": "div",
+      "top": 57,
+      "height": 6507,
+      "words": 674,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "한국어 화면을 위한",
+       "size": 32,
+       "tag": "h1"
+      },
+      "left": 41,
+      "right": 37,
+      "textLeft": 41,
+      "textRight": 37,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.doc-foot",
+      "tag": "footer",
+      "top": 6564,
+      "height": 178,
+      "words": 18,
+      "media": 0,
+      "middle": 20,
+      "heading": null,
+      "left": 24,
+      "right": 228,
+      "textLeft": 24,
+      "textRight": 228,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "한국어 화면을 위한 UI 개발 키트",
+      "size": 32,
+      "top": 156,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 65,
+      "n": 4
+     },
+     {
+      "x": 417,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 5,
+    "bodySize": 11,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.79,
+    0.53,
+    0.46,
+    0.5,
+    0.51,
+    0.66,
+    0.5,
+    0.45,
+    0.44,
+    0.41,
+    0.91,
+    0.94
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 1,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 9346,
+     "screens": 11.1,
+     "words": 686,
+     "img": 2,
+     "video": 0,
+     "canvas": 0,
+     "svg": 10,
+     "sections": 7,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [
+      "✓"
+     ],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "한국어 화면을 위한 UI 개발 키트",
+     "words": 6,
+     "chars": 19,
+     "lines": 2,
+     "size": 30,
+     "vw": 7.7,
+     "font": "Inter",
+     "weight": 800,
+     "tracking": -0.035,
+     "leading": 1.08,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.88,
+     "top": 148,
+     "gradientText": true,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "한국어 화면을 위한 UI 개발 키트",
+     "words": 6,
+     "lines": 2,
+     "size": 30,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "한국어 화면을 위한 UI 개발 키트",
+      "words": 6,
+      "chars": 19,
+      "lines": 2,
+      "size": 30,
+      "vw": 7.7,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1.08,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 148,
+      "gradientText": true,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "5,480만",
+      "words": 1,
+      "chars": 6,
+      "lines": 1,
+      "size": 22,
+      "vw": 5.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.2,
+      "top": 702,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "1,284",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 22,
+      "vw": 5.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.14,
+      "top": 702,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "3.6%",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 22,
+      "vw": 5.6,
+      "font": "Inter",
+      "weight": 700,
+      "tracking": 0,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.13,
+      "top": 835,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "1,348",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 28,
+      "vw": 7.2,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 1029,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "636",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 28,
+      "vw": 7.2,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.41,
+      "top": 1029,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "21",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 28,
+      "vw": 7.2,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.42,
+      "top": 1127,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "120종",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 28,
+      "vw": 7.2,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.41,
+      "top": 1127,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "162쪽",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 28,
+      "vw": 7.2,
+      "font": "ui-monospace",
+      "weight": 600,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": true,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.42,
+      "top": 1270,
+      "tag": "dd",
+      "kind": "statement"
+     },
+     {
+      "text": "한 키트. 처음부터 끝까지.",
+      "words": 4,
+      "chars": 15,
+      "lines": 1,
+      "size": 26,
+      "vw": 6.7,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 1415,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "불러오고, 쓰고, 움직이고, 넓힌다.",
+      "words": 4,
+      "chars": 20,
+      "lines": 2,
+      "size": 26,
+      "vw": 6.7,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 3390,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "명세에서 화면까지, 한 벌의 규칙",
+      "words": 5,
+      "chars": 18,
+      "lines": 2,
+      "size": 26,
+      "vw": 6.7,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 4557,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "문서 둘러보기",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 26,
+      "vw": 6.7,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 5920,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "지금 첫 화면을 만들어 보세요",
+      "words": 5,
+      "chars": 16,
+      "lines": 2,
+      "size": 26,
+      "vw": 6.7,
+      "font": "Inter",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 8787,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 14,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 5,
+     "centered": 6,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.66,
+       "mono": false
+      },
+      {
+       "family": "ui-monospace",
+       "share": 0.2,
+       "mono": false
+      },
+      {
+       "family": "monospace",
+       "share": 0.14,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 4,
+     "sizes": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      22,
+      26,
+      28,
+      30
+     ],
+     "sizeCount": 13,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 15,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.6
+     },
+     "measureChars": 41,
+     "max": {
+      "size": 30,
+      "vw": 7.7,
+      "font": "Inter",
+      "text": "한국어 화면을 위한"
+     },
+     "monoShare": 0.34,
+     "monoProseShare": 0.16,
+     "monoFamilies": [
+      "ui-monospace",
+      "monospace"
+     ],
+     "monoSamples": [
+      "v2.0.0",
+      "admin.catui.dev",
+      "catui.js 2.0.0",
+      "모듈 21 · 의존성 0",
+      "62.4 KB gzip",
+      "1,348"
+     ],
+     "microLabels": 3,
+     "microLabelShare": 0.002,
+     "microSamples": [
+      "매출",
+      "주문",
+      "전환율"
+     ],
+     "upperShare": 0.08,
+     "centerShare": 0.13,
+     "smallText": 48
+    },
+    "eyebrows": [
+     {
+      "text": "새 기능 — fx 조합 놀이터와 효과 등록 API",
+      "above": "한국어 화면을 위한 UI 개발 키트",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 97
+     },
+     {
+      "text": "매출",
+      "above": "5,480만",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 11,
+      "top": 677
+     },
+     {
+      "text": "주문",
+      "above": "1,284",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 11,
+      "top": 677
+     },
+     {
+      "text": "전환율",
+      "above": "3.6%",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 11,
+      "top": 809
+     },
+     {
+      "text": "CSS 클래스",
+      "above": "1,348",
+      "upper": true,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1006
+     },
+     {
+      "text": "디자인 토큰",
+      "above": "636",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1006
+     },
+     {
+      "text": "catui.js 모듈",
+      "above": "21",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1104
+     },
+     {
+      "text": "템플릿",
+      "above": "120종",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1104
+     },
+     {
+      "text": "문서",
+      "above": "162쪽",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1247
+     },
+     {
+      "text": "구성",
+      "above": "한 키트. 처음부터 끝까지.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 1378
+     },
+     {
+      "text": "빠른 시작",
+      "above": "불러오고, 쓰고, 움직이고, 넓힌다.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 3353
+     },
+     {
+      "text": "기능",
+      "above": "명세에서 화면까지, 한 벌의 규칙",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 4520
+     },
+     {
+      "text": "문서",
+      "above": "문서 둘러보기",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 5884
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f7f8fa",
+       "top": 0,
+       "hsl": {
+        "h": 220,
+        "s": 0.23,
+        "l": 0.97
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 569,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#16202a",
+       "top": 8723,
+       "hsl": {
+        "h": 210,
+        "s": 0.31,
+        "l": 0.13
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#66727e",
+       "share": 0.57
+      },
+      {
+       "color": "#e5eaf0",
+       "share": 0.17
+      },
+      {
+       "color": "#2c3e50",
+       "share": 0.1
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.06
+      },
+      {
+       "color": "#dde4ea",
+       "share": 0.04
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 4,
+     "radius": 4,
+     "height": 40,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "v2.0.0 새 기능 — fx 조합 놀이터와 효과 등록 API",
+      "무료로 시작하기",
+      "catui.js 문서"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 44,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "div.doc-install → rgba(16, 24, 40, 0.05) 0px 1px 2px 0px",
+      "div.doc-hx-window.doc-rhero-shot → color(srgb 0.14902 0.72549 0.603922 / 0.45) 0px -10px 80px -10px",
+      "div.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "div.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px"
+     ],
+     "gradients": 1,
+     "scrims": 0,
+     "gradientSamples": [
+      "section.doc-rhero.doc-dark → linear-gradient(color(srgb 0.0875294 0.126431 0.165333) 72%, rgb(247, 248, 250) 72%)"
+     ],
+     "gradientText": 2,
+     "hairlines": 5,
+     "hairlineSamples": [
+      "header.Catui_site-header.doc-top 390px",
+      "div.doc-hx-window.doc-rhero-shot 342px",
+      "div.doc-win-bar 340px",
+      "div.doc-win-foot 340px",
+      "footer.doc-foot 390px"
+     ],
+     "outlinedBoxes": 40,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 43,
+     "boxRadius": 6,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 7,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 1574
+      },
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 3474
+      },
+      {
+       "count": 5,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 4656
+      },
+      {
+       "count": 22,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 5990
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 8,
+     "fixed": true,
+     "height": 57,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 9346,
+    "margins": {
+     "left": 17,
+     "right": 37
+    },
+    "sections": [
+     {
+      "sel": "div.doc-shell.doc-shell-home",
+      "tag": "div",
+      "top": 57,
+      "height": 9072,
+      "words": 674,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "한국어 화면을 위한",
+       "size": 30,
+       "tag": "h1"
+      },
+      "left": 17,
+      "right": 26,
+      "textLeft": 17,
+      "textRight": 26,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.doc-foot",
+      "tag": "footer",
+      "top": 9129,
+      "height": 217,
+      "words": 18,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 24,
+      "right": 91,
+      "textLeft": 24,
+      "textRight": 91,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "한국어 화면을 위한 UI 개발 키트",
+      "size": 30,
+      "top": 148,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 65,
+      "n": 5
+     }
+    ],
+    "leftBlocks": 5,
+    "bodySize": 11,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "eyebrow",
+   "width": 1440,
+   "message": "10 eyebrow/kicker label(s) above headings: \"새 기능 — fx 조합 놀이터와 효과 등록 API\" (pill) above \"한국어 화면을 위한 UI 개발 키트\"; \"CSS 클래스\" above \"1,348\"; \"디자인 토큰\" above \"636\"; \"catui.js 모듈\" above \"21\"; \"템플릿\" above \"120종\"",
+   "fix": "Delete them. If the label carried real information, fold it into the headline or the supporting sentence.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "mono",
+   "width": 1440,
+   "message": "Monospace type outside code: ui-monospace, monospace — e.g. \"v2.0.0\", \"admin.catui.dev\", \"catui.js 2.0.0\", \"모듈 21 · 의존성 0\"",
+   "fix": "Set it in the text face. Monospace is for literal code inside <pre>/<code> only.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "micro-label",
+   "width": 1440,
+   "message": "3 tiny uppercase letter-spaced labels (e.g. \"매출\", \"주문\", \"전환율\").",
+   "fix": "Use sentence-case text at a readable size, or delete the label.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "emoji",
+   "width": 1440,
+   "message": "Emoji in the page: ✓",
+   "fix": "Remove. Use words or real imagery.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 1440,
+   "message": "1 gradient fill(s): section.doc-rhero.doc-dark → linear-gradient(color(srgb 0.0875294 0.126431 0.165333) 72%, rgb(247, 248, 250) 72%)",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient-text",
+   "width": 1440,
+   "message": "2 gradient-filled text element(s).",
+   "fix": "Solid colour text.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "shadow",
+   "width": 1440,
+   "message": "44 box-shadow(s) on elements at rest: div.doc-install → rgba(16, 24, 40, 0.05) 0px 1px 2px 0px | div.doc-hx-window.doc-rhero-shot → color(srgb 0.14902 0.72549 0.603922 / 0.45) 0px -10px 80px -10px | div.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+   "fix": "Remove. Separate surfaces with a tone step or space. Shadows are for things that really float (menus, dialogs, sticky bars).",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "hairline",
+   "width": 1440,
+   "message": "5 thin rule(s)/divider line(s): header.Catui_site-header.doc-top 1440px | div.doc-hx-window.doc-rhero-shot 760px | div.doc-win-bar 758px | div.doc-win-foot 758px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "outlined-box",
+   "width": 1440,
+   "message": "43 boxes drawn with a 1px outline.",
+   "fix": "Define a surface by its fill (one tone step from the page) or leave the content unboxed.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "card-rows",
+   "width": 1440,
+   "message": "3 rows of identical boxed cards.",
+   "fix": "Vary the composition; not every section is a card grid.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "font-count",
+   "width": 1440,
+   "message": "3 typefaces in use (Inter, ui-monospace, monospace).",
+   "fix": "Two at most.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "size-count",
+   "width": 1440,
+   "message": "14 different font sizes (10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 22, 28, 40, 48).",
+   "fix": "A page needs about five: display, heading, lead, body, small.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "body-size",
+   "width": 1440,
+   "message": "Body text is 15px.",
+   "fix": "Body copy 16–20px.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "grey-body",
+   "width": 1440,
+   "message": "The running text is a soft grey on its ground (4.6:1).",
+   "fix": "Set body copy in the full ink (7:1 or more). Keep the muted ink for secondary notes; pages read thin and unfinished when everything is grey.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "FAIL",
+   "id": "small-text",
+   "width": 1440,
+   "message": "46 text blocks under 13px.",
+   "fix": "Nothing meant to be read goes below 13px.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "focal-point",
+   "width": 1440,
+   "message": "The first screen has no dominant element: the largest type is 48px (3.3vw) and no single picture holds a third of the viewport.",
+   "fix": "Make one thing lead: the headline at display size, or one large picture. A grid of many small pictures is not one thing; in blind tests jurors marked a first screen without a headline down every time. On the strongest studied sites the largest type has a median of 8.4vw.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "still-page",
+   "width": 1440,
+   "message": "Only 1 element(s) moved while the page loaded and scrolled.",
+   "fix": "Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback."
+  },
+  {
+   "level": "WARN",
+   "id": "off-centre",
+   "width": 768,
+   "message": "The margins differ: 41px on the left, 61px on the right, at 768px.",
+   "fix": "Put the navigation and the content on one pair of margins; check for padding on one side only, a scrollbar gutter, or a header on another inset than the page."
+  },
+  {
+   "level": "FAIL",
+   "id": "off-centre",
+   "width": 390,
+   "message": "The page sits off-centre: its content comes to 17px from the left edge but only to 37px from the right, at 390px.",
+   "fix": "Give the page one pair of equal margins. Check the wrapper for a max-width without margin-inline: auto, a grid with an empty last column, or padding on one side only. If one side is meant to hold air, it must still be closed by something that reaches the margin (a picture, the navigation's last item, a figure)."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\after-home\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\after-home\\desktop-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\after-home\\desktop-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "D:\\Catui_design\\.taste-audit\\after-home\\tablet-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\after-home\\tablet-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\after-home\\tablet-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\after-home\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\after-home\\mobile-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\after-home\\mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

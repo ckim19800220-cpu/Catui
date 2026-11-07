@@ -57,9 +57,9 @@ shop.load = function () {
 };
 
 // 상품 사진 자리표시: 토큰 색으로 그린 SVG (외부 이미지 없음). 실서비스는 p.thumb(또는 p.images[n]) 주소를 쓴다
-shop.thumb = function (p, n = 0) {
-  if (p.images?.[n]) return p.images[n];
-  if (p.thumb && !n) return p.thumb;
+shop.thumb = function (p, n = 0, fallback = false) {
+  if (!fallback && p.images?.length) return p.images[n % p.images.length];
+  if (!fallback && p.thumb && !n) return p.thumb;
   const css = getComputedStyle(document.documentElement);
   const pick = (k) => css.getPropertyValue(`--Catui_color-${k}`).trim() || "gray";
   const c = pick(["brand", "info", "purple", "amber"][((p.tone || 1) - 1 + n) % 4]), ink = pick("text-primary"), paper = pick("surface");

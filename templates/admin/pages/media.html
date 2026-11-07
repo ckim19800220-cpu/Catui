@@ -11,11 +11,12 @@ catui.use(['layer'], function (layer) {
     var c = tok(COLORS[i % 4]), s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="' + c + '" opacity=".18"/><circle cx="' + (120 + i * 22) + '" cy="150" r="60" fill="' + c + '" opacity=".6"/><path d="M0 330 L130 220 L230 300 L310 240 L400 300 V400 H0Z" fill="' + c + '"/><text x="24" y="380" font-family="sans-serif" font-size="28" fill="#fff">' + label + '</text></svg>';
     return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
   };
-  var items = ['매장 입구', '진열대', '신상품', '포장', '물류 창고', '팀 사진', '행사장', '촬영 현장'].map(function (t, i) { return { src: svg(i, t), alt: t, caption: t }; });
+  var items = [['pottery', '도자기 작업'], ['bakery', '빵집 진열대'], ['hanok', '한옥 실내'], ['theater', '공연장'], ['cafe', '카페 창가'], ['leaves', '가을 산책길'], ['dining', '한식 상차림'], ['sky', '푸른 하늘']].map(function (it) { return { src: '{{dist}}/../assets/photos/' + it[0] + '.jpg', alt: it[1], caption: it[1] + ' · 데모용 연출 사진' }; });
   var grid = document.getElementById('md-grid');
   var draw = function () {
     catui.mount(grid, catui.html`${items.map(function (it, i) { return catui.html`<figure class="Catui_adm-thumb"><button class="Catui_adm-thumb-btn" type="button" data-i="${i}" aria-label="${it.alt} 크게 보기"><img src="${it.src}" alt="${it.alt}"></button></figure>`; })}`);
   };
+  grid.addEventListener('error', function (e) { if (e.target.tagName !== 'IMG' || e.target.src.startsWith('data:')) return; var i = Number(e.target.closest('[data-i]').dataset.i); items[i].src = svg(i, items[i].alt); e.target.src = items[i].src; }, true);
   grid.addEventListener('click', function (e) { var b = e.target.closest('[data-i]'); if (b) layer.photos({ items: items, start: Number(b.dataset.i), title: '미디어' }); });
   document.getElementById('md-up').addEventListener('change', function (e) {
     [].slice.call(e.target.files).forEach(function (f) { items.unshift({ src: URL.createObjectURL(f), alt: f.name, caption: f.name }); });

@@ -262,6 +262,7 @@ community.fav = {
 };
 community.shell = {
   init(root) {
+    if (community._once(root, "photo-errors")) community._on(root, "error", (e) => { if (e.target.matches?.("img") && !e.target.src.startsWith("data:")) e.target.src = community.thumb({ id: 1 }, true); }, true);
     root.querySelectorAll("[data-catui-cm-search]").forEach((f) => community._on(f, "submit", (e) => {
       const q = f.querySelector("input[name=q]");
       if (q && !q.value.trim()) { e.preventDefault(); q.focus(); }
@@ -376,8 +377,8 @@ community.list = {
   },
 };
 // 사진 자리표시: 토큰 색으로 그린 풍경 SVG (외부 이미지 없음). 실서비스는 p.thumb 주소를 쓴다
-community.thumb = function (p) {
-  if (p.thumb) return p.thumb;
+community.thumb = function (p, fallback = false) {
+  if (!fallback && p.thumb) return p.thumb;
   const css = getComputedStyle(document.documentElement), c = css.getPropertyValue(["--Catui_color-brand", "--Catui_color-info", "--Catui_color-purple", "--Catui_color-amber"][((p.tone || 1) - 1) % 4]).trim() || "gray";
   const n = Number(p.id) % 5;
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240"><rect width="320" height="240" fill="${c}" opacity=".16"/><circle cx="${70 + n * 40}" cy="80" r="34" fill="${c}" opacity=".55"/><path d="M0 200 L${80 + n * 10} 130 L170 185 L250 120 L320 170 V240 H0Z" fill="${c}"/></svg>`;

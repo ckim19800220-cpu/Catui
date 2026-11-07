@@ -1,0 +1,12 @@
+/* booking/motion.css */
+/* 모션은 누름 피드백·고른 칸 나타남만 — 모션 줄이기 설정이면 끈다 */
+@media (prefers-reduced-motion:no-preference){
+  .Catui_bk :is(.Catui_bk-day,.Catui_bk-slot,.Catui_bk-seat,.Catui_bk-chip,.Catui_bk-room-l,.Catui_bk-opt){transition:background-color var(--Catui_bk-dur) var(--Catui_bk-ease-out),border-color var(--Catui_bk-dur) var(--Catui_bk-ease-out),transform var(--Catui_bk-dur) var(--Catui_bk-ease-out)}
+  .Catui_bk :is(.Catui_bk-day,.Catui_bk-slot,.Catui_bk-seat,.Catui_bk-chip):active:not([aria-disabled="true"]){transform:scale(.96)}
+  .Catui_bk-seat[aria-pressed="true"] .Catui_icon{animation:Catui_bk-pop var(--Catui_bk-dur) var(--Catui_bk-ease-out)}
+  .Catui_bk-done-ic{animation:Catui_bk-pop 260ms var(--Catui_bk-ease-out)}
+}
+@keyframes Catui_bk-pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .Catui_bk *{transition:none !important;animation:none !important}
+}

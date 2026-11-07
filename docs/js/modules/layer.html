@@ -21,7 +21,7 @@
 <header class="Catui_site-header doc-top">
 <div class="doc-top-inner">
   <a class="doc-brand" href="../../index.html"><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"></a>
-  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
+  <nav class="doc-tabs" aria-label="문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html" aria-current="page">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a><a href="../../booking/start/introduction.html">CatuiBooking</a></nav>
   <div class="doc-top-end">
     <button class="doc-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><span>검색</span><kbd>Ctrl K</kbd></button>
     <a class="doc-top-link" href="https://github.com/ckim19800220-cpu/Catui" rel="noopener">GitHub</a>
@@ -261,9 +261,9 @@ catui.use([&#39;layer&#39;], function (layer) {
     on('ly-tip', function (e) { layer.tips('복사했습니다', e.currentTarget, { side: 'top' }); });
     on('ly-tip2', function (e) { layer.tips('오른쪽에 뜨는 말풍선 (화면 밖이면 반대쪽으로)', e.currentTarget, { side: 'right', time: 4000 }); });
     on('ly-photo', function () { layer.photos({ title: '여행 사진', items: [
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23E6F7F3'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%2326B99A'/%3E%3C/svg%3E", caption: '제주 오름' },
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23EAF4FB'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%233498DB'/%3E%3C/svg%3E", caption: '속초 바다' },
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23F5EEF8'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%239B59B6'/%3E%3C/svg%3E", caption: '보라 언덕' } ] }); });
+      { src: "../../../dist/../assets/photos/leaves.jpg", caption: '가을 산책길 — 예시 사진' },
+      { src: "../../../dist/../assets/photos/sunset.jpg", caption: '해안 일몰 — 예시 사진' },
+      { src: "../../../dist/../assets/photos/sky.jpg", caption: '푸른 하늘 — 예시 사진' } ] }); });
     on('ly-tab', function () { layer.tab({ title: '설정', btn: ['저장', '취소'], tabs: [
       { title: '일반', content: '이름과 언어를 바꿉니다.' },
       { title: '알림', content: '받을 알림을 고릅니다.' },
@@ -283,9 +283,9 @@ catui.use([&#39;layer&#39;], function (layer) {
   on(&#39;ly-tip&#39;, function (e) { layer.tips(&#39;복사했습니다&#39;, e.currentTarget, { side: &#39;top&#39; }); });
   on(&#39;ly-tip2&#39;, function (e) { layer.tips(&#39;오른쪽에 뜨는 말풍선 (화면 밖이면 반대쪽으로)&#39;, e.currentTarget, { side: &#39;right&#39;, time: 4000 }); });
   on(&#39;ly-photo&#39;, function () { layer.photos({ title: &#39;여행 사진&#39;, items: [
-    { src: &quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 400&#39;%3E%3Crect width=&#39;640&#39; height=&#39;400&#39; fill=&#39;%23E6F7F3&#39;/%3E%3Cpath d=&#39;M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z&#39; fill=&#39;%2326B99A&#39;/%3E%3C/svg%3E&quot;, caption: &#39;제주 오름&#39; },
-    { src: &quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 400&#39;%3E%3Crect width=&#39;640&#39; height=&#39;400&#39; fill=&#39;%23EAF4FB&#39;/%3E%3Cpath d=&#39;M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z&#39; fill=&#39;%233498DB&#39;/%3E%3C/svg%3E&quot;, caption: &#39;속초 바다&#39; },
-    { src: &quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 640 400&#39;%3E%3Crect width=&#39;640&#39; height=&#39;400&#39; fill=&#39;%23F5EEF8&#39;/%3E%3Cpath d=&#39;M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z&#39; fill=&#39;%239B59B6&#39;/%3E%3C/svg%3E&quot;, caption: &#39;보라 언덕&#39; } ] }); });
+    { src: &quot;dist/../assets/photos/leaves.jpg&quot;, caption: &#39;가을 산책길 — 예시 사진&#39; },
+    { src: &quot;dist/../assets/photos/sunset.jpg&quot;, caption: &#39;해안 일몰 — 예시 사진&#39; },
+    { src: &quot;dist/../assets/photos/sky.jpg&quot;, caption: &#39;푸른 하늘 — 예시 사진&#39; } ] }); });
   on(&#39;ly-tab&#39;, function () { layer.tab({ title: &#39;설정&#39;, btn: [&#39;저장&#39;, &#39;취소&#39;], tabs: [
     { title: &#39;일반&#39;, content: &#39;이름과 언어를 바꿉니다.&#39; },
     { title: &#39;알림&#39;, content: &#39;받을 알림을 고릅니다.&#39; },
@@ -829,8 +829,8 @@ catui.use([&#39;layer&#39;], function (layer) {
 <aside class="doc-toc" aria-label="이 페이지"><p class="doc-side-title">이 페이지</p><ul><li><a href="#msg">메시지</a></li><li><a href="#dialog">확인·입력·알림</a></li><li><a href="#open">자유 레이어 · 드로어 · 로딩</a></li><li><a href="#window">창 기능 · 크기</a></li><li><a href="#special">말풍선 · 사진 보기 · 탭</a></li><li><a href="#promise">Promise · 진행률 · 내용 바꾸기</a></li><li><a href="#toast2">토스트 위치 · 동작 버튼</a></li><li><a href="#vtab">세로 탭 대화상자</a></li><li><a href="#forms">자주 쓰는 양식 (layer.form)</a></li><li><a href="#clean">관리 화면형 대화상자</a></li><li><a href="#usage">자주 쓰는 사용 예</a></li><li><a href="#options">open 옵션</a></li></ul></aside>
 </div>
 <footer class="doc-foot"><div class="doc-foot-inner">
-  <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT</p></div>
-  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a></nav>
+  <div><img class="doc-logo" src="../../assets/brand/catui-logo.svg" alt="Catui" width="76" height="28"><p>한국어 화면을 위한 토큰 기반 UI 키트 · v2.0.0 · MIT · <a href="../../../dist/../assets/photos/index.html">예시 사진 출처·라이선스</a></p></div>
+  <nav aria-label="바닥글 문서 분류"><a href="../../css/start/introduction.html">CSS</a><a href="../../js/start/introduction.html">catui.js</a><a href="../../admin/start/introduction.html">CatuiAdmin</a><a href="../../community/start/introduction.html">CatuiCommunity</a><a href="../../shop/start/introduction.html">CatuiShop</a><a href="../../docskit/start/introduction.html">CatuiDocs</a><a href="../../booking/start/introduction.html">CatuiBooking</a></nav>
 </div></footer>
 </div>
 <script src="../../assets/docs.js"></script>

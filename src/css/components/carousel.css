@@ -20,7 +20,7 @@
 .Catui_carousel-vertical .Catui_carousel-slide{flex:0 0 100%}
 /* 미리보기(썸네일) 줄 */
 .Catui_carousel-thumbs{display:flex;gap:var(--Catui_space-2);overflow-x:auto;scrollbar-width:thin;padding:2px}
-.Catui_carousel-thumb{flex:none;width:var(--Catui_space-10);height:var(--Catui_control-h-lg);padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-sm);overflow:hidden;background:var(--Catui_color-neutral-100);color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size);cursor:pointer;opacity:.75}
+.Catui_carousel-thumb{flex:none;width:var(--Catui_space-10);height:var(--Catui_control-h-lg);padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-sm);overflow:hidden;background:var(--Catui_color-neutral-100);color:var(--Catui_color-text-secondary);font-size:var(--Catui_type-caption-size);cursor:pointer;opacity:.75}   /* 굵은선 허용: 현재 썸네일 표시(상태) */
 .Catui_carousel-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .Catui_carousel-thumb:hover{opacity:1}
 .Catui_carousel-thumb[aria-current="true"]{border-color:var(--Catui_color-brand-strong);opacity:1}

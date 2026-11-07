@@ -1,0 +1,8 @@
+{
+  "holidays": ["2026-12-25", "2027-01-01"],
+  "rooms": [
+    { "id": "ondol", "image": "../../../assets/photos/hanok-room.jpg", "name": "온돌방 · 마당 쪽", "icon": "bed", "tone": 1, "size": 23, "beds": "요 2채", "base": 2, "max": 3, "price": 110000, "extraPerson": 20000, "count": 2, "amen": ["마당 툇마루", "개별 욕실", "다도 세트"] },
+    { "id": "suite", "image": "../../../assets/photos/hanok.jpg", "name": "별채 스위트", "icon": "sofa", "tone": 2, "size": 40, "beds": "퀸 침대 1 · 요 1채", "base": 2, "max": 4, "price": 180000, "extraPerson": 25000, "count": 1, "amen": ["편백 욕조", "개별 정원", "커피 머신"] },
+    { "id": "family", "image": "../../../assets/photos/hanok-living.jpg", "name": "가족실 · 다락", "icon": "home", "tone": 3, "size": 52, "beds": "더블 침대 1 · 요 3채", "base": 4, "max": 6, "price": 210000, "extraPerson": 20000, "count": 1, "amen": ["다락 놀이 공간", "주방", "바비큐 자리"] }
+  ]
+}

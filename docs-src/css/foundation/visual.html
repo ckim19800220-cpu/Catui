@@ -1,0 +1,103 @@
+<section aria-labelledby="principles">
+<h2 id="principles">여덟 가지 원칙</h2>
+<p>Catui의 화면은 <b>가는 선이 윤곽을 맡고, 그림자는 떠 있는 층에만, 유리는 겹쳐 뜨는 층에만</b> 쓰는 미니멀 방식입니다. 라이트·다크 어느 쪽에서도 같은 대비가 나오도록 선을 고정 회색이 아닌 <b>반투명 잉크</b>로 정의합니다. 원칙은 <code>src/css/foundation/tokens.css</code> 머리 주석과 같고, 일부는 빌드 검사가 강제합니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">시각 원칙</caption>
+<thead><tr><th scope="col">원칙</th><th scope="col">규칙</th><th scope="col">빌드 검사</th></tr></thead>
+<tbody>
+<tr><td>1. 선은 1px</td><td>모든 컴포넌트 테두리는 hairline 1px. 2px 이상은 포커스 링·활성 표시줄(탭 밑줄·옆 막대·진행)·상태 표식만</td><td>예 — <code>border:2px</code> 이상은 같은 줄에 <code>/* 굵은선 허용: 이유 */</code> 또는 굵기 토큰</td></tr>
+<tr><td>2. 잉크 테두리</td><td>선 색은 글자색(<code>text-primary</code>)을 반투명으로 섞은 <code>--Catui_line*</code> — 어떤 바탕 위에서도 같은 대비</td><td>hex 금지 검사(확장)</td></tr>
+<tr><td>3. 모서리 단계</td><td>xs 2 · sm 4 · md 6 · lg 8 · xl 10. 버튼·입력 4, 카드·메뉴·토스트·모달 6. pill은 배지·토글·아바타·칩만</td><td>예 — <code>border-radius</code>에 토큰이 아닌 길이 금지(0·50% 허용)</td></tr>
+<tr><td>4. 그림자는 층만</td><td>윤곽은 선이 맡고, 그림자는 떠 있는 층(메뉴·토스트·모달)에 얕고 짧게. 다크는 위쪽 1px 밝은 inset</td><td>—</td></tr>
+<tr><td>5. 유리는 떠 있는 층만</td><td>상단 바·메뉴·메가 메뉴·토스트·아래 고정 줄·대화상자 덮개. 본문 카드·표·폼·모달 패널에는 쓰지 않음</td><td>예 — <code>backdrop-filter</code>를 쓰면 같은 파일에 <code>@supports not</code> 폴백 + <code>prefers-reduced-transparency</code></td></tr>
+<tr><td>6. 대비</td><td>글자 4.5:1(큰 글자 3:1), 비텍스트(입력 테두리·포커스·상태 표식) 3:1</td><td>시각 QA(전 쪽 대비 측정)</td></tr>
+<tr><td>7. 상태는 색 + 형태</td><td>색만으로 알리지 않음 — 아이콘·글자·굵기·막대를 함께</td><td>—</td></tr>
+<tr><td>8. 간격 4px 격자</td><td><code>--Catui_space-*</code>만 사용</td><td>—</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="line">
+<h2 id="line">선 — 반투명 잉크 hairline</h2>
+<p>네 단계 선 토큰을 씁니다. 공개 이름 <code>--Catui_color-border</code>·<code>--Catui_card-border</code>·<code>--Catui_input-border</code>·<code>--Catui_divider-color</code>·<code>--Catui_tab-border</code> 등은 그대로이고, 값만 이 토큰으로 이어집니다.</p>
+<catui-example title="line-soft · line · line-strong · line-control">
+  <div class="Catui_grid">
+    <div class="Catui_span-3 Catui_rounded-md" style="padding:16px;border:1px solid var(--Catui_line-soft)">line-soft<br><span class="Catui_help">구분선·격자</span></div>
+    <div class="Catui_span-3 Catui_rounded-md" style="padding:16px;border:1px solid var(--Catui_line)">line<br><span class="Catui_help">카드·메뉴·표</span></div>
+    <div class="Catui_span-3 Catui_rounded-md" style="padding:16px;border:1px solid var(--Catui_line-strong)">line-strong<br><span class="Catui_help">hover·버튼</span></div>
+    <div class="Catui_span-3 Catui_rounded-md" style="padding:16px;border:1px solid var(--Catui_line-control)">line-control<br><span class="Catui_help">입력·체크 (3:1)</span></div>
+    <div class="Catui_span-6 Catui_bg-brand-soft Catui_rounded-md" style="padding:16px;border:1px solid var(--Catui_line)">연한 색 면 위에서도 같은 잉크 — 회색 덩어리가 되지 않습니다</div>
+    <div class="Catui_span-6 Catui_bg-dark Catui_rounded-md" style="padding:16px;border:1px solid var(--Catui_line)">진한 영역 안에서는 잉크가 흰 쪽으로 뒤집힙니다</div>
+  </div>
+</catui-example>
+<catui-tokens match="^line"></catui-tokens>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">선 대비 실측 (면 · 페이지 · 연한 면)</caption>
+<thead><tr><th scope="col">토큰</th><th scope="col">라이트 섞음</th><th scope="col" class="Catui_num">라이트 대비</th><th scope="col">다크 섞음</th><th scope="col" class="Catui_num">다크 대비</th></tr></thead>
+<tbody>
+<tr><td><code>line-soft</code></td><td>8%</td><td class="Catui_num">1.15</td><td>8%</td><td class="Catui_num">1.24</td></tr>
+<tr><td><code>line</code></td><td>14%</td><td class="Catui_num">1.28 (이전 1.22)</td><td>12%</td><td class="Catui_num">1.39 (이전 1.34)</td></tr>
+<tr><td><code>line-strong</code></td><td>24%</td><td class="Catui_num">1.54</td><td>22%</td><td class="Catui_num">1.91</td></tr>
+<tr><td><code>line-control</code> — 입력·체크·토글 꺼짐</td><td>56%</td><td class="Catui_num">3.06 ~ 3.13</td><td>42%</td><td class="Catui_num">3.42 ~ 3.59</td></tr>
+<tr><td><code>line-control-hover</code></td><td>74%</td><td class="Catui_num">4.89 ~ 5.06</td><td>62%</td><td class="Catui_num">5.71 ~ 6.29</td></tr>
+</tbody></table></div>
+<p class="Catui_help">카드·표의 선은 글자·면 색 차이가 경계를 함께 알려 주므로 3:1 대상이 아닙니다. 입력 칸처럼 테두리만으로 컨트롤을 알아보는 곳은 <code>line-control</code>로 WCAG 1.4.11(비텍스트 3:1)을 지킵니다.</p>
+</section>
+
+<section aria-labelledby="radius">
+<h2 id="radius">모서리 — 미니멀 단계</h2>
+<catui-example title="xs 2 · sm 4 · md 6 · lg 8 · xl 10">
+  <div class="Catui_hstack Catui_gap-3" style="flex-wrap:wrap">
+    <div style="width:88px;height:56px;border:1px solid var(--Catui_line-strong);border-radius:var(--Catui_radius-xs);display:grid;place-items:center">xs</div>
+    <div style="width:88px;height:56px;border:1px solid var(--Catui_line-strong);border-radius:var(--Catui_radius-sm);display:grid;place-items:center">sm</div>
+    <div style="width:88px;height:56px;border:1px solid var(--Catui_line-strong);border-radius:var(--Catui_radius-md);display:grid;place-items:center">md</div>
+    <div style="width:88px;height:56px;border:1px solid var(--Catui_line-strong);border-radius:var(--Catui_radius-lg);display:grid;place-items:center">lg</div>
+    <div style="width:88px;height:56px;border:1px solid var(--Catui_line-strong);border-radius:var(--Catui_radius-xl);display:grid;place-items:center">xl</div>
+  </div>
+</catui-example>
+<p>이전 단계(xs 4 · sm 6 · md 8 · lg 12)보다 한 단계씩 줄였습니다. 컴포넌트 반경 토큰(<code>--Catui_btn-radius</code>·<code>--Catui_card-radius</code>·<code>--Catui_modal-radius</code> 등)은 이 단계를 참조하므로 이름을 바꿀 필요가 없습니다.</p>
+</section>
+
+<section aria-labelledby="elevation">
+<h2 id="elevation">그림자 — 층(elevation)만</h2>
+<p>평면 요소(카드·표·폼)는 선으로 끝나고 그림자는 거의 없습니다(<code>xs</code>). 화면 위에 겹쳐 뜨는 층만 <code>md</code>(메뉴·토스트·팝오버)·<code>lg</code>(모달·드로어·명령 팔레트)를 씁니다. 다크에서는 어두운 바탕에 그림자가 묻히므로 위쪽 1px 밝은 inset으로 층을 드러냅니다.</p>
+<catui-tokens match="^shadow-"></catui-tokens>
+</section>
+
+<section aria-labelledby="glass">
+<h2 id="glass">유리 — 떠 있는 층만</h2>
+<catui-example title="상단 바 · 메뉴 위 유리 (뒤 글자는 흐려지고 앞 글자는 또렷하게)">
+  <div class="Catui_bg-gradient Catui_rounded-lg" style="position:relative;padding:24px;min-height:180px">
+    <p class="Catui_h2">뒤에 깔린 본문 제목</p>
+    <p class="Catui_lead">유리 층 아래에 있는 글자는 흐림 12px + 채도 140%로 형태만 남습니다.</p>
+    <div class="Catui_dd-menu" style="position:absolute;left:48px;top:40px;min-width:220px">
+      <span class="Catui_dd-group">유리 메뉴</span>
+      <span class="Catui_dd-item">면 82% + 흐림</span>
+      <span class="Catui_dd-item">hairline 잉크 테두리</span>
+      <span class="Catui_dd-item">짧은 md 그림자</span>
+    </div>
+  </div>
+</catui-example>
+<ul>
+  <li><b>쓰는 곳</b>: <code>.Catui_topbar</code>·<code>.Catui_site-header</code>(흐림은 <code>::before</code> 층 — 안쪽 메뉴의 흐림과 <code>position:fixed</code> 기준을 깨지 않게), <code>.Catui_dd-menu</code>(JS 메뉴 <code>.Catui_dd-float</code> 포함), <code>.Catui_mega-panel</code>, <code>.Catui_toast</code>, <code>.Catui_actionbar</code>, 확장의 고정 머리·아래 탭 줄, 대화상자 덮개(<code>.Catui_scrim</code>·<code>::backdrop</code> — 2px 젖빛 흐림).</li>
+  <li><b>쓰지 않는 곳</b>: 본문 카드·표·폼·말풍선(작은 글자) — 뒤 내용이 비치면 읽기가 나빠집니다. 모달·드로어·명령 팔레트 패널도 불투명 면입니다 — 어두운 덮개 위에 반투명 면을 겹치면 회색으로 탁해지므로, 유리 효과는 덮개 흐림이 맡습니다.</li>
+  <li><b>불투명도</b>: 작은 층 <code>--Catui_glass-bg</code> 82%, 글자가 많은 바 <code>--Catui_glass-bg-strong</code> 92%. 뒤가 남색(<code>navy-900</code>)이어도 본문 글자 7.5:1 이상이 남는 값입니다.</li>
+  <li><b>폴백</b>: <code>@supports not (backdrop-filter…)</code>이면 불투명 면, <code>prefers-reduced-transparency: reduce</code>이면 불투명 + 흐림 없음, <code>forced-colors</code>이면 시스템 색 <code>Canvas</code>.</li>
+</ul>
+<catui-tokens match="^glass-"></catui-tokens>
+</section>
+
+<section aria-labelledby="ring">
+<h2 id="ring">포커스 링</h2>
+<p>굵은 선이 허용되는 첫 번째 자리입니다. <code>outline:var(--Catui_ring);outline-offset:var(--Catui_ring-offset)</code> — 2px, 브랜드 강조색(면 위 3:1 이상), <code>:focus-visible</code>에만.</p>
+<catui-tokens match="^ring"></catui-tokens>
+<catui-tokens match="^accent-w"></catui-tokens>
+</section>
+
+<section aria-labelledby="checks">
+<h2 id="checks">빌드 검사</h2>
+<p><code>npm run build</code>가 본체(<code>src/css</code>)·확장(<code>src/admin</code>·<code>community</code>·<code>shop</code>·<code>docskit</code>·<code>booking</code>)·문서(<code>docs-src/assets</code>) CSS 전부를 <code>scripts/lib.mjs</code>의 <code>visualErrors</code>로 검사하고, 어기면 파일·줄과 함께 실패합니다.</p>
+<pre><code>/* 실패 */  .x{border:2px solid var(--Catui_line)}
+/* 통과 */  .x{border-bottom:var(--Catui_tab-indicator-w) solid transparent}
+/* 통과 */  .x[aria-pressed="true"]{border-width:2px}   /* 굵은선 허용: 선택 상태(색+굵기) */
+/* 실패 */  .x{border-radius:12px}
+/* 통과 */  .x{border-radius:var(--Catui_radius-md) var(--Catui_radius-md) 0 0}
+/* 실패 */  .x{backdrop-filter:blur(8px)}   ← 같은 파일에 @supports not · prefers-reduced-transparency 없음</code></pre>
+</section>

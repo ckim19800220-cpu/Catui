@@ -1,0 +1,1139 @@
+{
+ "url": "docs/admin/templates/index.html",
+ "at": "2026-11-07T03:33:13.473Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    0.62,
+    0.81,
+    0.74
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 1935,
+     "screens": 2.2,
+     "words": 402,
+     "img": 0,
+     "video": 0,
+     "canvas": 2,
+     "svg": 58,
+     "sections": 2,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "운영 대시보드",
+     "words": 2,
+     "chars": 7,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 80,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "운영 대시보드",
+     "words": 2,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      22,
+      24
+     ],
+     "sizeCount": 8,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 5.1
+     },
+     "measureChars": 113,
+     "max": {
+      "size": 24,
+      "vw": 1.7,
+      "font": "Inter",
+      "text": "운영 대시보드"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.13,
+     "centerShare": 0.01,
+     "smallText": 7
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#fafbfc",
+     "bodyBgHsl": {
+      "h": 210,
+      "s": 0.25,
+      "l": 0.98
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#fafbfc",
+       "top": 0,
+       "hsl": {
+        "h": 210,
+        "s": 0.25,
+        "l": 0.98
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.35
+      },
+      {
+       "color": "#66727e",
+       "share": 0.31
+      },
+      {
+       "color": "#9facbb",
+       "share": 0.11
+      },
+      {
+       "color": "#dde4ea",
+       "share": 0.09
+      },
+      {
+       "color": "#9a5b0f",
+       "share": 0.07
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 8,
+     "radius": 4,
+     "height": 28,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "운영",
+      "검색 Ctrl K",
+      "김",
+      "보고서 내려받기"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 15,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "article.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "article.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "article.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "article.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 19,
+     "hairlineSamples": [
+      "header.Catui_topbar.Catui_adm-top 1240px",
+      "header.Catui_card-h 786px",
+      "header.Catui_card-h 382px",
+      "header.Catui_card-h 786px",
+      "header.Catui_card-h 382px"
+     ],
+     "outlinedBoxes": 15,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 15,
+     "boxRadius": 6,
+     "squareMedia": 2,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 6,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 227
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "canvas",
+      "ratio": 0.16
+     }
+    ],
+    "nav": {
+     "links": 1,
+     "fixed": true,
+     "height": 900,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 1935,
+    "margins": {
+     "left": 46,
+     "right": 45
+    },
+    "sections": [
+     {
+      "sel": "section.Catui_adm-stats",
+      "tag": "section",
+      "top": 227,
+      "height": 150,
+      "words": 41,
+      "media": 0,
+      "middle": 135,
+      "heading": {
+       "text": "12,480",
+       "size": 22,
+       "tag": "span"
+      },
+      "left": 245,
+      "right": 109,
+      "textLeft": 245,
+      "textRight": 109,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.Catui_grid",
+      "tag": "div",
+      "top": 398,
+      "height": 1462,
+      "words": 214,
+      "media": 2,
+      "middle": 0,
+      "heading": null,
+      "left": 237,
+      "right": 45,
+      "textLeft": 237,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": true,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "운영 대시보드",
+      "size": 24,
+      "top": 80,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 224,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.06,
+    "voidBox": {
+     "x": 120,
+     "y": 180,
+     "w": 120,
+     "h": 660
+    }
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": false,
+    "ground": "#fafbfc",
+    "sidebar": {
+     "w": 200,
+     "tag": "aside",
+     "links": 53,
+     "share": 0.14
+    },
+    "topbar": {
+     "h": 56
+    },
+    "canvas": {
+     "left": 24,
+     "right": 45
+    },
+    "hero": {
+     "text": "운영 대시보드",
+     "words": 2,
+     "chars": 7,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 80,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 2,
+    "layout": {
+     "panels": 16,
+     "firstScreen": 11,
+     "ragged": [
+      {
+       "diff": 115,
+       "top": 398
+      },
+      {
+       "diff": 59,
+       "top": 811
+      },
+      {
+       "diff": 63,
+       "top": 1156
+      },
+      {
+       "diff": 121,
+       "top": 1504
+      }
+     ],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 16,
+     "radii": [
+      [
+       6,
+       15
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "heavyBorders": 15,
+     "borderSamples": [
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 15,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 25,
+     "tabularShare": 0.92,
+     "kpiMax": 22
+    },
+    "rows": {
+     "count": 5,
+     "median": 46
+    },
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.46,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      22,
+      24
+     ]
+    },
+    "title": {
+     "text": "운영 대시보드",
+     "size": 24,
+     "top": 80
+    },
+    "colourShare": 0.01
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 5,
+   "filled": [
+    0.63,
+    0.82,
+    0.84,
+    0.85,
+    0.91
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 4108,
+     "screens": 4.9,
+     "words": 336,
+     "img": 0,
+     "video": 0,
+     "canvas": 2,
+     "svg": 58,
+     "sections": 2,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "운영 대시보드",
+     "words": 2,
+     "chars": 7,
+     "lines": 1,
+     "size": 24,
+     "vw": 6.2,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 80,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "운영 대시보드",
+     "words": 2,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [
+     {
+      "text": "운영 대시보드",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.48,
+      "top": 80,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.99,
+       "mono": false
+      },
+      {
+       "family": "Noto Sans SC",
+       "share": 0.01,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      15,
+      16,
+      18,
+      24
+     ],
+     "sizeCount": 8,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 12,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 5.1
+     },
+     "measureChars": 32,
+     "max": {
+      "size": 24,
+      "vw": 6.2,
+      "font": "Inter",
+      "text": "운영 대시보드"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.14,
+     "centerShare": 0.01,
+     "smallText": 7
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#fafbfc",
+     "bodyBgHsl": {
+      "h": 210,
+      "s": 0.25,
+      "l": 0.98
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#fafbfc",
+       "top": 0,
+       "hsl": {
+        "h": 210,
+        "s": 0.25,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 717,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.44
+      },
+      {
+       "color": "#66727e",
+       "share": 0.39
+      },
+      {
+       "color": "#9a5b0f",
+       "share": 0.09
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.04
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#0e7a63",
+      "hsl": {
+       "h": 167,
+       "s": 0.79,
+       "l": 0.27
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 5,
+     "radius": 4,
+     "height": 34,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "본문으로 이동",
+      "김",
+      "보고서 내려받기",
+      "출고 처리 4 건",
+      "주문 보기"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 15,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "article.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "article.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "article.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "article.Catui_card → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 19,
+     "hairlineSamples": [
+      "header.Catui_topbar.Catui_adm-top 390px",
+      "header.Catui_card-h 340px",
+      "header.Catui_card-h 340px",
+      "header.Catui_card-h 340px",
+      "header.Catui_card-h 340px"
+     ],
+     "outlinedBoxes": 15,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 15,
+     "boxRadius": 6,
+     "squareMedia": 2,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 6,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 320
+      },
+      {
+       "count": 9,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 717
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 0,
+     "fixed": true,
+     "height": 844,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 4108,
+    "margins": {
+     "left": 24,
+     "right": 26
+    },
+    "sections": [
+     {
+      "sel": "section.Catui_adm-stats",
+      "tag": "section",
+      "top": 320,
+      "height": 378,
+      "words": 41,
+      "media": 0,
+      "middle": 97,
+      "heading": null,
+      "left": 37,
+      "right": 95,
+      "textLeft": 37,
+      "textRight": 95,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card.Catui_span-8",
+      "tag": "article",
+      "top": 717,
+      "height": 393,
+      "words": 8,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": 45,
+      "right": 45,
+      "textLeft": 45,
+      "textRight": 113,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card.Catui_span-4",
+      "tag": "article",
+      "top": 1130,
+      "height": 294,
+      "words": 36,
+      "media": 0,
+      "middle": 14,
+      "heading": null,
+      "left": 45,
+      "right": 45,
+      "textLeft": 45,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card.Catui_span-8",
+      "tag": "article",
+      "top": 1445,
+      "height": 325,
+      "words": 38,
+      "media": 0,
+      "middle": 24,
+      "heading": null,
+      "left": 37,
+      "right": 26,
+      "textLeft": 37,
+      "textRight": 26,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card.Catui_span-4",
+      "tag": "article",
+      "top": 1790,
+      "height": 266,
+      "words": 22,
+      "media": 0,
+      "middle": 3,
+      "heading": null,
+      "left": 45,
+      "right": 45,
+      "textLeft": 45,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card.Catui_span-4",
+      "tag": "article",
+      "top": 2076,
+      "height": 328,
+      "words": 10,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": 45,
+      "right": 45,
+      "textLeft": 45,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card.Catui_span-4",
+      "tag": "article",
+      "top": 2424,
+      "height": 266,
+      "words": 14,
+      "media": 0,
+      "middle": 197,
+      "heading": null,
+      "left": 45,
+      "right": 45,
+      "textLeft": 45,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card.Catui_span-4",
+      "tag": "article",
+      "top": 2710,
+      "height": 294,
+      "words": 30,
+      "media": 0,
+      "middle": 27,
+      "heading": null,
+      "left": 45,
+      "right": 45,
+      "textLeft": 45,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card.Catui_span-6",
+      "tag": "article",
+      "top": 3024,
+      "height": 235,
+      "words": 14,
+      "media": 0,
+      "middle": 158,
+      "heading": null,
+      "left": 45,
+      "right": 45,
+      "textLeft": 45,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "article.Catui_card.Catui_span-6",
+      "tag": "article",
+      "top": 3279,
+      "height": 754,
+      "words": 32,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 45,
+      "right": 281,
+      "textLeft": 45,
+      "textRight": 281,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "운영 대시보드",
+      "size": 24,
+      "top": 80,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 24,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 1,
+    "bodySize": 12,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "dark": false,
+    "ground": "#fafbfc",
+    "sidebar": null,
+    "topbar": {
+     "h": 56
+    },
+    "canvas": {
+     "left": 24,
+     "right": -65
+    },
+    "hero": {
+     "text": "운영 대시보드",
+     "words": 2,
+     "chars": 7,
+     "lines": 1,
+     "size": 24,
+     "vw": 6.2,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 80,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 2,
+    "layout": {
+     "panels": 15,
+     "firstScreen": 7,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 15,
+     "radii": [
+      [
+       6,
+       15
+      ]
+     ],
+     "heavyBorders": 15,
+     "borderSamples": [
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 15,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 25,
+     "tabularShare": 0.92,
+     "kpiMax": 18
+    },
+    "rows": {
+     "count": 5,
+     "median": 46
+    },
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.55,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      11,
+      12,
+      13,
+      15,
+      16,
+      18,
+      24
+     ]
+    },
+    "title": {
+     "text": "운영 대시보드",
+     "size": 24,
+     "top": 80
+    },
+    "colourShare": 0.018
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "heavy-borders",
+   "width": 1440,
+   "message": "15 panel borders are dark against their ground: #2a404e on #ffffff (10.81:1) | #2a404e on #ffffff (10.81:1) | #2a404e on #ffffff (10.81:1)",
+   "fix": "A panel border is a whisper: about 1.1–1.3:1 against its ground on a light screen (#e5e7eb–#ededed on white), and about 1.2–1.5:1 on a dark one (#1a1a1a on #000, #2e2e2e on #111). Darker lines turn the screen into a grid of boxes; keep the stronger line for controls.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "tiny-text",
+   "width": 1440,
+   "message": "46% of the text is under 13px.",
+   "fix": "Data and labels read at 13–14px; keep 11–12px for sublines and axis ticks.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "ragged-row",
+   "width": 1440,
+   "message": "4 pair(s) of cards in one row end at different heights (by 115px, 59px, 63px).",
+   "fix": "Cards that share a row share a bottom edge: balance them by their content (the same number of rows, a block of similar height beside it), or stack them. In testing, ragged rows were marked down every time."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\after-admin\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\after-admin\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Catui_design\\.taste-audit\\after-admin\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\after-admin\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

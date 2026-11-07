@@ -1,0 +1,33 @@
+<!-- title: 좌석 선택 | nav: home -->
+<header class="Catui_bk-flow-head">
+  <h1 class="Catui_h2">좌석 선택 <small class="Catui_bk-muted" data-svc-name></small></h1>
+  <ol class="Catui_steps" data-catui-bk-steps="seats" aria-label="예약 단계"></ol>
+</header>
+<div class="Catui_bk-flow">
+  <div class="Catui_bk-flow-main" data-catui-bk-seats>
+    <div class="Catui_bk-flow-main" data-body>
+      <section class="Catui_bk-box" aria-labelledby="st-h">
+        <div class="Catui_bk-box-h"><h2 class="Catui_h3" id="st-h">좌석 배치도</h2><p class="Catui_help" data-need></p></div>
+        <label class="Catui_choice" for="st-adj" data-adjacent-wrap><input class="Catui_clip" type="checkbox" id="st-adj" data-adjacent><span class="Catui_cbx">{{icon:check:12}}</span>붙어 있는 좌석으로 한 번에 고르기</label>
+        <ul class="Catui_bk-keys" aria-label="좌석 표시">
+          <li><span class="Catui_bk-key" aria-hidden="true">3</span>선택 가능</li>
+          <li><span class="Catui_bk-key" data-k="on" aria-hidden="true">{{icon:check:12}}</span>선택함</li>
+          <li><span class="Catui_bk-key" data-k="taken" aria-hidden="true">{{icon:x:12}}</span>예약됨(빗금)</li>
+          <li><span class="Catui_bk-key" aria-hidden="true">{{icon:accessible-person:12}}</span>장애인석(휠체어)</li>
+        </ul>
+        <ul class="Catui_bk-keys" data-grades aria-label="좌석 등급"></ul>
+        <div data-map><p class="Catui_help">배치도를 불러오는 중입니다…</p></div>
+      </section>
+      <section class="Catui_bk-box" aria-labelledby="st-p-h">
+        <div class="Catui_bk-box-h"><h2 class="Catui_h3" id="st-p-h">고른 좌석</h2><b data-picked></b></div>
+        <div data-price aria-live="polite"></div>
+      </section>
+      <p class="Catui_bk-msg" role="alert" data-msg hidden></p>
+      <div class="Catui_bk-next-bar">
+        <a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="people.html" data-catui-bk-prev>{{icon:arrow-left}}이전 단계</a>
+        <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="button" data-go>다음: 예약자 정보{{icon:arrow-right}}</button>
+      </div>
+    </div>
+  </div>
+  <aside class="Catui_bk-flow-side Catui_bk-box" data-catui-bk-summary aria-label="예약 내용"></aside>
+</div>

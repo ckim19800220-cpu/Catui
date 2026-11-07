@@ -1,0 +1,52 @@
+[
+  {
+    "id": "pottery", "image": "../../../assets/photos/pottery.jpg", "kind": "slot", "name": "도자기 원데이 클래스", "icon": "palette", "tone": 1,
+    "desc": "물레 체험 후 초벌 작품을 2주 뒤 받아 가요. 앞치마·도구 제공.",
+    "price": 45000, "childPrice": 30000, "duration": 90, "step": 30, "capacity": 6, "maxPeople": 6,
+    "branches": ["gangnam", "hongdae"],
+    "options": [
+      { "id": "glaze", "name": "유약 색 추가", "price": 5000, "per": "person" },
+      { "id": "ship", "name": "작품 택배 배송", "price": 4000, "per": "once" }
+    ]
+  },
+  {
+    "id": "hair", "image": "../../../assets/photos/salon.jpg", "kind": "slot", "name": "헤어 커트 · 디자이너 지정", "icon": "scissors", "tone": 2,
+    "desc": "상담 포함 60분. 어린이(초등 이하) 요금 별도.",
+    "price": 28000, "childPrice": 18000, "duration": 60, "step": 30, "capacity": 2, "maxPeople": 2,
+    "branches": ["gangnam"],
+    "options": [
+      { "id": "wash", "name": "샴푸 · 드라이", "price": 5000, "per": "person" },
+      { "id": "clinic", "name": "두피 클리닉", "price": 15000, "per": "person" }
+    ]
+  },
+  {
+    "id": "musical", "image": "../../../assets/photos/theater.jpg", "kind": "seat", "name": "뮤지컬 〈고양이 정원〉", "icon": "theater-masks", "tone": 3,
+    "desc": "150분(인터미션 15분). 8세 이상 관람가. 좌석 등급별 가격, 어린이 1인 10,000원 할인.",
+    "map": "hall", "times": ["14:00", "19:30"], "duration": 150, "childOff": 10000, "maxPeople": 4, "adjacent": true,
+    "branches": ["daehak"],
+    "options": [
+      { "id": "program", "name": "공연 프로그램북", "price": 12000, "per": "once" }
+    ]
+  },
+  {
+    "id": "dining", "image": "../../../assets/photos/dining.jpg", "kind": "seat", "name": "한식 코스 · 테이블 예약", "icon": "fork-knife", "tone": 4,
+    "desc": "예약금 1인 10,000원(식사 금액에서 차감). 테이블마다 앉을 수 있는 인원이 다릅니다.",
+    "map": "dining", "times": ["11:30", "12:00", "12:30", "13:00", "13:30", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"],
+    "duration": 90, "price": 10000, "childPrice": 5000, "maxPeople": 6,
+    "branches": ["hongdae"],
+    "options": [
+      { "id": "cake", "name": "기념일 케이크", "price": 25000, "per": "once" },
+      { "id": "corkage", "name": "콜키지(1병)", "price": 20000, "per": "once" }
+    ]
+  },
+  {
+    "id": "stay", "image": "../../../assets/photos/hanok.jpg", "kind": "room", "name": "캣 스테이 한옥 · 객실 예약", "icon": "hotel", "tone": 2,
+    "desc": "체크인 15:00 · 체크아웃 11:00. 금·토요일 밤과 공휴일 전날은 주말 요금.",
+    "duration": 0, "maxPeople": 6,
+    "branches": ["jeonju"],
+    "options": [
+      { "id": "breakfast", "name": "조식(1인 1박)", "price": 15000, "per": "person-night" },
+      { "id": "late", "name": "늦은 체크아웃(14시)", "price": 30000, "per": "once" }
+    ]
+  }
+]

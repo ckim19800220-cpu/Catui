@@ -4,6 +4,6 @@
 // 상단 메뉴의 현재 게시판 표시: board.html?b=humor 처럼 주소로 게시판이 바뀌므로 aria-current를 맞춘다
 catui.use(function () {
   var b = new URLSearchParams(location.search).get('b') || 'free';
-  document.querySelectorAll('.Catui_cm-gnb-item').forEach(function (a) { if (a.getAttribute('href') === 'board.html?b=' + b) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  document.querySelectorAll('.Catui_cm-gnb a.Catui_hnav-item').forEach(function (a) { if (a.getAttribute('href') === 'board.html?b=' + b) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
 });
 </script>

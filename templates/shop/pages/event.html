@@ -1,9 +1,12 @@
 <!-- title: 기획전 | nav: event -->
 <header class="Catui_sh-hero Catui_sh-event-head" data-tone="3" id="ev-head">
-  <small data-ev-until>기획전</small>
-  <h1 class="Catui_h1" data-ev-title>기획전</h1>
-  <span data-ev-desc></span>
-  <p class="Catui_sh-left">{{icon:timer}}<time data-ev-time>남은 시간 계산 중</time></p>
+  <div class="Catui_sh-hero-copy">
+    <small data-ev-until>기획전</small>
+    <h1 class="Catui_h1" data-ev-title>기획전</h1>
+    <span data-ev-desc></span>
+    <p class="Catui_sh-left">{{icon:timer}}<time data-ev-time>남은 시간 계산 중</time></p>
+  </div>
+  <img class="Catui_sh-hero-img" data-ev-image alt="" aria-hidden="true" width="960" height="640" decoding="async" hidden>
 </header>
 <nav class="Catui_sh-chips" aria-label="다른 기획전" id="ev-other"></nav>
 <section class="Catui_sh-sec" aria-labelledby="ev-items-h">
@@ -18,6 +21,7 @@ catui.use(function () {
     var m = d.promos.find(function (x) { return x.id === id; }) || d.promos[0];
     var head = document.getElementById('ev-head');
     head.setAttribute('data-tone', m.tone);
+    if (m.image) { var image = head.querySelector('[data-ev-image]'); image.src = m.image; image.hidden = false; }
     head.querySelector('[data-ev-title]').textContent = m.title;
     head.querySelector('[data-ev-desc]').textContent = m.desc;
     head.querySelector('[data-ev-until]').textContent = sh.date(m.until, 'M월 d일') + '까지';

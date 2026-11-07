@@ -11,7 +11,8 @@
 .Catui_dk-card > .Catui_dk-meta,.Catui_dk-card > .Catui_dk-tags{margin:0}
 
 /* 머리 그림 자리: 토큰 색 띠 + 아이콘(외부 이미지 없음, 꾸밈이므로 aria-hidden) */
-.Catui_dk-cover{display:grid;place-items:center;aspect-ratio:16 / 9;border-radius:var(--Catui_card-radius);background:linear-gradient(135deg,var(--Catui_dk-cover-a),var(--Catui_dk-cover-b));color:var(--Catui_color-text-primary);overflow:hidden}
+.Catui_dk-cover{position:relative;display:grid;place-items:center;aspect-ratio:16 / 9;border-radius:var(--Catui_card-radius);background:linear-gradient(135deg,var(--Catui_dk-cover-a),var(--Catui_dk-cover-b));color:var(--Catui_color-text-primary);overflow:hidden}
+.Catui_dk-cover img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 .Catui_dk-cover .Catui_icon{width:calc(var(--Catui_space-10) * 0.9);height:calc(var(--Catui_space-10) * 0.9);opacity:.7}
 .Catui_dk-cover-lg{aspect-ratio:21 / 8}
 .Catui_dk-cover-lg .Catui_icon{width:calc(var(--Catui_space-10) * 1.4);height:calc(var(--Catui_space-10) * 1.4)}

@@ -3,7 +3,7 @@
   width:min(var(--Catui_toast-w),100%);display:flex;gap:var(--Catui_toast-gap);
   padding:var(--Catui_toast-py) var(--Catui_toast-px);background:var(--Catui_card-bg);
   border-radius:var(--Catui_toast-radius);box-shadow:var(--Catui_toast-shadow);
-  border-left:var(--Catui_toast-accent-w) solid var(--Catui_btn-primary-bg);
+  border:1px solid var(--Catui_glass-border);border-left:var(--Catui_toast-accent-w) solid var(--Catui_btn-primary-bg);
 }
 .Catui_toast .Catui_icon{width:var(--Catui_toast-icon);height:var(--Catui_toast-icon);flex:none;color:var(--Catui_badge-success-fg)}
 .Catui_toast-info .Catui_icon{color:var(--Catui_banner-info-fg)}

@@ -15,7 +15,7 @@
 <div class="Catui_site Catui_sh" data-catui-sh data-page="list">
   <header class="Catui_sh-head">
     <div class="Catui_sh-head-in">
-      <a class="Catui_sh-brand" href="index.html" aria-label="Catui 쇼핑 홈"><span class="Catui_sh-mark" aria-hidden="true"><svg class="Catui_icon Catui_i20" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-bag"></use></svg></span><b>Catui <span>쇼핑</span></b></a>
+      <a class="Catui_sh-brand" href="index.html" aria-label="Catui 쇼핑 홈"><span class="Catui_logo" aria-hidden="true"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-shopping-bag"></use></svg></span><b>Catui <span>쇼핑</span></b></a>
       <form class="Catui_sh-search" action="search.html" role="search" data-catui-sh-search>
         <div class="Catui_search"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-search"></use></svg><label class="Catui_clip" for="sh-q">상품 검색</label><input class="Catui_input" id="sh-q" name="q" type="search" placeholder="상품명·브랜드 검색" autocomplete="off" enterkeyhint="search"></div>
       </form>
@@ -27,7 +27,11 @@
         <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" href="mypage.html" aria-label="마이페이지"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-user"></use></svg></a>
       </div>
     </div>
-    <nav class="Catui_sh-gnb" aria-label="카테고리"><div class="Catui_sh-gnb-in"><a class="Catui_sh-gnb-item" href="index.html">홈</a><a class="Catui_sh-gnb-item" href="list.html?sort=best">베스트</a><a class="Catui_sh-gnb-item" href="event.html?e=autumn">기획전</a><a class="Catui_sh-gnb-item" href="list.html?c=fashion">패션</a><a class="Catui_sh-gnb-item" href="list.html?c=beauty">뷰티</a><a class="Catui_sh-gnb-item" href="list.html?c=food">식품</a><a class="Catui_sh-gnb-item" href="list.html?c=living">리빙</a><a class="Catui_sh-gnb-item" href="list.html?c=digital">디지털</a><a class="Catui_sh-gnb-item" href="list.html?c=kids">유아동</a><a class="Catui_sh-gnb-item" href="list.html?c=sports">스포츠</a><a class="Catui_sh-gnb-item" href="list.html?c=pet">반려동물</a></div></nav>
+    <nav class="Catui_sh-gnb" aria-label="카테고리"><div class="Catui_sh-gnb-wrap">
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-sh-nav-step="-1" aria-controls="sh-gnb" aria-label="이전 카테고리 보기" hidden><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-left"></use></svg></button>
+      <div class="Catui_hnav Catui_hnav-line Catui_hnav-scroll Catui_sh-gnb-in" id="sh-gnb"><a class="Catui_hnav-item" href="index.html">홈</a><a class="Catui_hnav-item" href="list.html?sort=best">베스트</a><a class="Catui_hnav-item" href="event.html?e=autumn">기획전</a><a class="Catui_hnav-item" href="list.html?c=fashion">패션</a><a class="Catui_hnav-item" href="list.html?c=beauty">뷰티</a><a class="Catui_hnav-item" href="list.html?c=food">식품</a><a class="Catui_hnav-item" href="list.html?c=living">리빙</a><a class="Catui_hnav-item" href="list.html?c=digital">디지털</a><a class="Catui_hnav-item" href="list.html?c=kids">유아동</a><a class="Catui_hnav-item" href="list.html?c=sports">스포츠</a><a class="Catui_hnav-item" href="list.html?c=pet">반려동물</a></div>
+      <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-sh-nav-step="1" aria-controls="sh-gnb" aria-label="다음 카테고리 보기" hidden><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-chevron-right"></use></svg></button>
+    </div></nav>
   </header>
   <main class="Catui_sh-main" id="sh-main" tabindex="-1">
 <section data-catui-sh-list="list" data-size="12">
@@ -40,6 +44,7 @@
       <nav aria-label="쇼핑 안내"><a href="mypage.html">마이페이지</a><a href="orders.html">주문 내역</a><a href="coupons.html">쿠폰·적립금</a><a href="login.html">로그인</a></nav>
       <p><b>(주)캣유아이 쇼핑 (가상)</b> · 대표 김고양 · 사업자 등록 번호 000-00-00000 · 통신 판매업 신고 제2026-서울-0000호</p>
       <p>고객센터 <a href="tel:15880000">1588-0000</a> (평일 09:00–18:00) · 결제 대금 예치: 모의 에스크로 · 모든 상품·브랜드·주문은 가상 데이터입니다.</p>
+      <details><summary>사진 출처 · 이용 조건</summary><p>상품·배너·리뷰 사진은 실제 판매 상품이나 이용자 촬영물이 아닌 데모용 연출 이미지입니다. <a class="Catui_link" href="../../../dist/../assets/photos/index.html">전체 사진의 작가·출처·라이선스</a>. Wikimedia Commons API 제공: <a class="Catui_link" href="https://commons.wikimedia.org/wiki/File:Man_in_a_sweater_adjusting_tie_(Unsplash).jpg" rel="noopener">의류 — freestocks.org (CC0)</a> · <a class="Catui_link" href="https://commons.wikimedia.org/wiki/File:Ambersweet_oranges.jpg" rel="noopener">과일 — 퍼블릭 도메인</a> · <a class="Catui_link" href="https://commons.wikimedia.org/wiki/File:Coffee_tables_in_front_of_a_comfy_sofa_(Unsplash).jpg" rel="noopener">거실 — Sophia Baboolal (CC0)</a>. 화면 비율에 맞게 잘라 표시했습니다.</p></details>
       <p>© 2026 Catui 쇼핑 · Catui 2.0.0 · MIT License</p>
     </div>
   </footer>

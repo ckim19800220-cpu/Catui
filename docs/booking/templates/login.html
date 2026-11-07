@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-bk-now="2026-11-04T13:10:00+09:00">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>로그인 · Catui 예약</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/booking.min.css">
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:booking")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_bk-body">
+<!-- Catui 기본 스타일(리셋·링크·글꼴)은 루트 클래스 안에서만 적용되므로 Catui_site로 감싼다 -->
+<div class="Catui_site Catui_bk Catui_bk-blank" data-catui-bk>
+<main class="Catui_card Catui_bk-blank-card"><form class="Catui_card-b Catui_vstack Catui_gap-4" id="lg-form" data-catui-form data-catui-filter="bk-login" novalidate>
+  <a class="Catui_bk-brand" href="index.html"><span class="Catui_logo" aria-hidden="true"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-calendar-check"></use></svg></span><b>Catui <span>예약</span></b></a>
+  <div><h1 class="Catui_h2">로그인</h1><p class="Catui_help">내 예약 확인·변경·취소는 로그인 후 할 수 있어요</p></div>
+  <div class="Catui_banner Catui_banner-danger" role="alert" id="lg-err" hidden><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-alert-circle"></use></svg><span>휴대전화 또는 비밀번호가 맞지 않습니다. (예제: 010-1234-5678 / catui1234)</span></div>
+  <div class="Catui_field"><label class="Catui_label" for="lg-phone">휴대전화</label><input class="Catui_input" id="lg-phone" name="phone" type="tel" inputmode="tel" autocomplete="username" value="010-1234-5678" data-catui-verify="required|phone"></div>
+  <div class="Catui_field"><label class="Catui_label" for="lg-pw">비밀번호</label><input class="Catui_input" id="lg-pw" name="pw" type="password" autocomplete="current-password" data-catui-verify="required"></div>
+  <label class="Catui_choice" for="lg-keep"><input class="Catui_clip" type="checkbox" id="lg-keep" name="keep"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span>로그인 상태 유지</label>
+  <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="submit">로그인</button>
+  <p class="Catui_help">예약 번호만 있다면 <a class="Catui_link" href="detail.html?no=BK-261101-0012">비회원 예약 조회</a> · <a class="Catui_link" href="index.html">처음으로</a></p>
+</form></main>
+
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catbooking.min.js"></script>
+<script>
+catui.use(['form'], function (form) {
+  form.on('submit(bk-login)', function (d) { var ok = d.field.phone.replace(/-/g, '') === '01012345678' && d.field.pw === 'catui1234'; document.getElementById('lg-err').hidden = ok; if (ok) location.href = 'mine.html'; else document.getElementById('lg-pw').select(); return false; });
+});
+</script>
+</body>
+</html>

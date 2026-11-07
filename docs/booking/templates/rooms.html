@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" data-catui-bk-now="2026-11-04T13:10:00+09:00">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>객실 선택 · Catui 예약</title>
+<link rel="icon" href="../../../dist/../assets/favicon/favicon.ico" sizes="any">
+<link rel="stylesheet" href="../../../dist/catui.min.css">
+<link rel="stylesheet" href="../../../dist/booking.min.css">
+<!-- 깜빡임 방지: 저장된 테마를 그리기 전에 적용 (CSP로 인라인 스크립트를 막는다면 지워도 됩니다 — catbooking.js가 곧바로 적용) -->
+<script>try{var t=(JSON.parse(localStorage.getItem("catui:booking")||"{}").theme)||"system";if(t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-catui-theme","dark")}catch(e){}</script>
+</head>
+<body class="Catui_bk-body">
+<a class="Catui_skip" href="#bk-main">본문으로 이동</a>
+<div class="Catui_site Catui_bk" data-catui-bk data-page="rooms">
+  <header class="Catui_bk-head">
+    <div class="Catui_bk-head-in">
+      <a class="Catui_bk-brand" href="index.html" aria-label="Catui 예약 홈"><span class="Catui_logo" aria-hidden="true"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-calendar-check"></use></svg></span><b>Catui <span>예약</span></b></a>
+      <nav class="Catui_hnav Catui_hnav-scroll Catui_bk-nav" aria-label="사이트"><a class="Catui_hnav-item" href="index.html" aria-current="page">예약하기</a><a class="Catui_hnav-item" href="mine.html">내 예약</a><a class="Catui_hnav-item" href="waitlist.html">대기 명단</a><a class="Catui_hnav-item" href="admin.html">관리자 일정</a></nav>
+      <div class="Catui_bk-head-acts">
+        <button class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" type="button" data-catui-bk-theme aria-label="어두운 화면으로"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-moon"></use></svg></button>
+        <a class="Catui_btn Catui_btn-sm Catui_btn-ghost Catui_btn-icon" href="login.html" aria-label="로그인"><svg class="Catui_icon Catui_i18" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-user"></use></svg></a>
+      </div>
+    </div>
+  </header>
+  <main class="Catui_bk-main" id="bk-main" tabindex="-1">
+<header class="Catui_bk-flow-head">
+  <h1 class="Catui_h2">기간·객실 선택 <small class="Catui_bk-muted" data-svc-name></small></h1>
+  <ol class="Catui_steps" data-catui-bk-steps="rooms" aria-label="예약 단계"></ol>
+</header>
+<div class="Catui_bk-flow">
+  <div class="Catui_bk-flow-main" data-catui-bk-rooms>
+    <div class="Catui_bk-flow-main" data-body>
+      <section class="Catui_bk-box" aria-labelledby="rm-h">
+        <h2 class="Catui_h3" id="rm-h">숙박 기간 · 인원</h2>
+        <div class="Catui_bk-dates">
+          <div class="Catui_field"><label class="Catui_label" for="rm-in">체크인 (15:00부터)</label><input class="Catui_input" id="rm-in" type="date" data-in required></div>
+          <div class="Catui_field"><label class="Catui_label" for="rm-out">체크아웃 (11:00까지)</label><input class="Catui_input" id="rm-out" type="date" data-out-date required></div>
+        </div>
+        <p class="Catui_bk-nights" data-nights aria-live="polite"></p>
+        <div class="Catui_bk-count">
+          <div><p class="Catui_bk-count-t" id="rm-a">어른</p></div>
+          <div class="Catui_stepper" role="group" aria-labelledby="rm-a"><button type="button" data-step="adult:-1" aria-label="어른 한 명 줄이기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-minus"></use></svg></button><output data-out="adult">2</output><button type="button" data-step="adult:1" aria-label="어른 한 명 늘리기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-plus"></use></svg></button></div>
+        </div>
+        <div class="Catui_bk-count">
+          <div><p class="Catui_bk-count-t" id="rm-c">어린이</p></div>
+          <div class="Catui_stepper" role="group" aria-labelledby="rm-c"><button type="button" data-step="child:-1" aria-label="어린이 한 명 줄이기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-minus"></use></svg></button><output data-out="child">0</output><button type="button" data-step="child:1" aria-label="어린이 한 명 늘리기"><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-plus"></use></svg></button></div>
+        </div>
+        <p class="Catui_help">금·토요일 밤과 공휴일 전날은 주말 요금(+30%), 기준 인원을 넘으면 1인 1박마다 추가 요금이 붙습니다.</p>
+      </section>
+      <section class="Catui_bk-box" aria-labelledby="rm-r-h">
+        <h2 class="Catui_h3" id="rm-r-h">객실</h2>
+        <fieldset class="Catui_bk-times"><legend class="Catui_clip">객실 고르기</legend><ul class="Catui_bk-rooms" data-rooms><li class="Catui_help">객실을 불러오는 중입니다…</li></ul></fieldset>
+        <div data-breakdown></div>
+      </section>
+      <section class="Catui_bk-box" aria-labelledby="rm-o-h">
+        <h2 class="Catui_h3" id="rm-o-h">추가 옵션</h2>
+        <div class="Catui_bk-opts" data-opts></div>
+      </section>
+      <section class="Catui_bk-box" aria-labelledby="rm-p-h">
+        <h2 class="Catui_h3" id="rm-p-h">금액</h2>
+        <div data-price aria-live="polite"></div>
+      </section>
+      <p class="Catui_bk-msg" role="alert" data-msg hidden></p>
+      <div class="Catui_bk-next-bar">
+        <a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="index.html" data-catui-bk-prev><svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-arrow-left"></use></svg>이전 단계</a>
+        <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="button" data-go>다음: 예약자 정보<svg class="Catui_icon Catui_i16" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-arrow-right"></use></svg></button>
+      </div>
+    </div>
+  </div>
+  <aside class="Catui_bk-flow-side Catui_bk-box" data-catui-bk-summary aria-label="예약 내용"></aside>
+</div>
+  </main>
+  <footer class="Catui_bk-foot">
+    <div class="Catui_bk-foot-in">
+      <nav aria-label="예약 안내"><a href="index.html">예약하기</a><a href="mine.html">내 예약</a><a href="waitlist.html">대기 명단</a><a href="admin.html">관리자 일정표</a><a href="login.html">로그인</a></nav>
+      <p>모든 시각은 한국 시간(KST) 기준입니다. 견본의 "지금"은 <span data-catui-bk-today>2026년 11월 4일 (수)</span> 13:10으로 고정되어 있습니다.</p>
+      <p>Catui 예약은 catui 위에 얹는 예약·일정 확장의 견본입니다. 서비스·지점·예약은 모두 가상 데이터입니다. 사진은 실제 공간이 아닌 연출 이미지입니다. <a class="Catui_link" href="../../../dist/../assets/photos/index.html">사진 출처·라이선스</a> © 2026 Catui · Catui 2.0.0 · MIT License</p>
+    </div>
+  </footer>
+</div>
+<script src="../../../dist/catui.min.js"></script>
+<script src="../../../dist/catbooking.min.js"></script>
+
+</body>
+</html>

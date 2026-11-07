@@ -121,9 +121,9 @@
     on('ly-tip', function (e) { layer.tips('복사했습니다', e.currentTarget, { side: 'top' }); });
     on('ly-tip2', function (e) { layer.tips('오른쪽에 뜨는 말풍선 (화면 밖이면 반대쪽으로)', e.currentTarget, { side: 'right', time: 4000 }); });
     on('ly-photo', function () { layer.photos({ title: '여행 사진', items: [
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23E6F7F3'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%2326B99A'/%3E%3C/svg%3E", caption: '제주 오름' },
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23EAF4FB'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%233498DB'/%3E%3C/svg%3E", caption: '속초 바다' },
-      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23F5EEF8'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%239B59B6'/%3E%3C/svg%3E", caption: '보라 언덕' } ] }); });
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23E6F7F3'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%2326B99A'/%3E%3C/svg%3E", caption: '가을 산책길 — 예시 사진' },
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23EAF4FB'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%233498DB'/%3E%3C/svg%3E", caption: '해안 일몰 — 예시 사진' },
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23F5EEF8'/%3E%3Cpath d='M0 330 L180 210 L300 280 L460 140 L640 250 V400 H0Z' fill='%239B59B6'/%3E%3C/svg%3E", caption: '푸른 하늘 — 예시 사진' } ] }); });
     on('ly-tab', function () { layer.tab({ title: '설정', btn: ['저장', '취소'], tabs: [
       { title: '일반', content: '이름과 언어를 바꿉니다.' },
       { title: '알림', content: '받을 알림을 고릅니다.' },

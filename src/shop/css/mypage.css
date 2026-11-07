@@ -11,7 +11,7 @@
 .Catui_sh-me-nums b{font-size:var(--Catui_type-h3-size);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .Catui_sh-my-flow{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));counter-reset:none}
 .Catui_sh-my-flow li{position:relative;display:grid;justify-items:center;gap:2px;padding:var(--Catui_space-2) var(--Catui_space-1);text-align:center;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary)}
-.Catui_sh-my-flow li + li::before{content:"";position:absolute;left:-4px;top:50%;width:8px;height:8px;border-top:2px solid var(--Catui_color-border);border-right:2px solid var(--Catui_color-border);transform:translateY(-50%) rotate(45deg)}
+.Catui_sh-my-flow li + li::before{content:"";position:absolute;left:-4px;top:50%;width:8px;height:8px;border-top:2px solid var(--Catui_line-strong);border-right:2px solid var(--Catui_line-strong);transform:translateY(-50%) rotate(45deg)}   /* 굵은선 허용: 테두리로 그린 화살표 아이콘 획 */
 .Catui_sh-my-flow b{font-size:var(--Catui_type-h1-size);color:var(--Catui_color-text-primary)}
 
 /* 주문 카드 */
@@ -27,8 +27,8 @@
 /* 배송 단계 · 이동 기록 */
 .Catui_sh-steps{min-width:0}
 .Catui_sh-logs{margin:0;padding:0;list-style:none;display:grid}
-.Catui_sh-log{position:relative;display:grid;grid-template-columns:calc(var(--Catui_space-10) * 1.4) minmax(0,1fr);gap:2px var(--Catui_space-3);padding:var(--Catui_space-3) 0 var(--Catui_space-3) var(--Catui_space-5);border-left:2px solid var(--Catui_color-border);margin-left:var(--Catui_space-2)}
-.Catui_sh-log::before{content:"";position:absolute;left:-7px;top:calc(var(--Catui_space-3) + 3px);width:12px;height:12px;border-radius:50%;background:var(--Catui_card-bg);border:2px solid var(--Catui_color-border)}
+.Catui_sh-log{position:relative;display:grid;grid-template-columns:calc(var(--Catui_space-10) * 1.4) minmax(0,1fr);gap:2px var(--Catui_space-3);padding:var(--Catui_space-3) 0 var(--Catui_space-3) var(--Catui_space-5);border-left:1px solid var(--Catui_line-strong);margin-left:var(--Catui_space-2)}
+.Catui_sh-log::before{content:"";position:absolute;left:-7px;top:calc(var(--Catui_space-3) + 3px);width:12px;height:12px;border-radius:50%;background:var(--Catui_card-bg);border:2px solid var(--Catui_line-strong)}   /* 굵은선 허용: 기록 표식 점 */
 .Catui_sh-log time{grid-row:span 2;font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);font-variant-numeric:tabular-nums}
 .Catui_sh-log .Catui_help{grid-column:2}
 .Catui_sh-log-now::before{background:var(--Catui_sh-accent);border-color:var(--Catui_sh-accent)}

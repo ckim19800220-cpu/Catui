@@ -1,0 +1,33 @@
+{
+  "hall": {
+    "title": "캣아트홀 1층",
+    "stage": "무대",
+    "unit": "석",
+    "legend": "s 좌석 · w 장애인석(휠체어) · _ 통로",
+    "rows": [
+      { "id": "A", "cells": "ss_ssssss_ss" },
+      { "id": "B", "cells": "ss_ssssss_ss" },
+      { "id": "C", "cells": "ss_ssssss_ss" },
+      { "id": "D", "cells": "ss_ssssss_ss" },
+      { "id": "E", "cells": "ss_ssssss_ss" },
+      { "id": "F", "cells": "ww_ssssss_ww" }
+    ],
+    "grades": [
+      { "id": "VIP", "price": 99000, "rows": ["A", "B"] },
+      { "id": "R", "price": 77000, "rows": ["C", "D"] },
+      { "id": "S", "price": 55000, "rows": ["E", "F"] }
+    ]
+  },
+  "dining": {
+    "title": "홍대점 홀",
+    "stage": "주방 · 입구",
+    "unit": "번 테이블",
+    "legend": "t 테이블 · w 휠체어 이용 가능 테이블 · _ 통로",
+    "rows": [
+      { "id": "A", "cells": "tt_tt" },
+      { "id": "B", "cells": "wt_tt" },
+      { "id": "C", "cells": "tt_tt" }
+    ],
+    "cap": { "A1": 2, "A2": 2, "A3": 4, "A4": 4, "B1": 4, "B2": 4, "B3": 6, "B4": 6, "C1": 2, "C2": 2, "C3": 4, "C4": 8 }
+  }
+}

@@ -1,0 +1,30 @@
+<!-- title: 예약 홈 | nav: home -->
+<section class="Catui_bk-hero" aria-labelledby="hm-h">
+  <img class="Catui_bk-hero-img" src="{{dist}}/../assets/photos/pottery.jpg" alt="" aria-hidden="true" width="960" height="640" fetchpriority="high" decoding="async">
+  <div>
+    <h1 class="Catui_h1" id="hm-h">무엇을 예약할까요?</h1>
+    <p>클래스·미용·공연·식당·숙박을 한 곳에서. 서비스와 지점을 고르면 남은 자리가 있는 시간만 보여 드립니다.</p>
+  </div>
+  <a class="Catui_btn Catui_btn-md Catui_btn-secondary" href="mine.html">{{icon:calendar-check}}내 예약 보기</a>
+</section>
+
+<section class="Catui_bk-sec" aria-labelledby="hm-next-h">
+  <div class="Catui_bk-sec-h"><h2 class="Catui_h3" id="hm-next-h">다가오는 예약</h2><a class="Catui_link" href="mine.html">전체 보기</a></div>
+  <div data-catui-bk-next><p class="Catui_help">불러오는 중…</p></div>
+</section>
+
+<section class="Catui_bk-sec" aria-labelledby="hm-svc-h">
+  <div class="Catui_bk-sec-h"><h2 class="Catui_h2" id="hm-svc-h">서비스 · 지점 고르기</h2><button class="Catui_btn Catui_btn-sm Catui_btn-ghost" type="button" data-catui-bk-reset>{{icon:rotate-ccw}}진행 중인 예약 비우기</button></div>
+  <ul class="Catui_bk-svcs" data-catui-bk-home aria-label="서비스"><li class="Catui_help">서비스를 불러오는 중입니다…</li></ul>
+</section>
+
+<section class="Catui_bk-sec" aria-labelledby="hm-rule-h">
+  <h2 class="Catui_h3" id="hm-rule-h">예약 안내</h2>
+  <ul class="Catui_bk-keys" aria-label="시간 칸 표시">
+    <li><span class="Catui_bk-key" data-k="open" aria-hidden="true"></span>예약 가능(남은 자리 수)</li>
+    <li><span class="Catui_bk-key" data-k="few" aria-hidden="true">{{icon:alert-triangle:12}}</span>마감 임박(2자리 이하)</li>
+    <li><span class="Catui_bk-key" data-k="full" aria-hidden="true">{{icon:ban:12}}</span>마감(빗금) — 대기 신청 가능</li>
+    <li><span class="Catui_bk-key" data-k="past" aria-hidden="true"></span>지난 시간 · 휴게 시간(점선)</li>
+  </ul>
+  <p class="Catui_help">지금부터 30분 이후 시간만 예약할 수 있고, 60일 뒤까지 열려 있습니다. 취소 환불은 이용 7일 전까지 100% · 3일 전까지 70% · 1일 전까지 50% · 당일 0%입니다.</p>
+</section>

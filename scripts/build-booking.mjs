@@ -7,7 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { transform } from "lightningcss";
 import { transformSync } from "esbuild";
-import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes } from "./lib.mjs";
+import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes, visualErrors } from "./lib.mjs";
 
 const C = { src: path.join(ROOT, "src/booking"), tpl: path.join(ROOT, "templates/booking") };
 const noComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, "");
@@ -27,6 +27,7 @@ export function buildBookingCss() {
   for (const f of order) {
     const src = read(path.join(C.src, f));
     if (/#[0-9a-f]{3,8}\b/i.test(noComments(src).replace(/url\([^)]*\)/g, ""))) fail(`booking CSS에 직접 쓴 색(hex)이 있습니다 — 토큰을 쓰세요: src/booking/${f}`);
+    { const ve = visualErrors(src, `src/booking/${f}`); if (ve.length) fail(`booking CSS 시각 원칙 검사 실패\n  ${ve.join("\n  ")}`); }   // 1px 선 · 모서리 토큰 · 유리 폴백 (lib.mjs)
     css += `${src}\n`;
     byFile[`booking/${f}`] = [...new Set([...noComments(src).matchAll(/\.(Catui_bk-[A-Za-z0-9_-]+)/g)].map((m) => m[1]))].sort();
   }
@@ -114,8 +115,9 @@ function meta(src, file) {
   return { ...o, body: src.slice(m[0].length).trim() };
 }
 
-// menu.json: { top: [{ id, title, href, icon }], foot: [{ title, href }] }
-//   top  = 머리 메뉴 (머리 주석 nav와 id가 같으면 aria-current) — 좁은 화면에서는 둘째 줄 가로 스크롤
+// menu.json: { top: [{ id, title, href }], foot: [{ title, href }] }
+//   top  = 머리 메뉴 — 본체 .Catui_hnav-line 항목(.Catui_hnav-item, 글자만 · 확장 4종 공통). 머리 주석 nav와 id가 같으면 aria-current="page"
+//          좁은 화면에서는 둘째 줄 가로 스크롤(.Catui_hnav-scroll)
 //   foot = 바닥글 링크
 export function buildBookingTemplates({ defined, icons, bookingByFile = {} }) {
   if (!fs.existsSync(C.tpl)) return { pages: 0 };
@@ -130,7 +132,7 @@ export function buildBookingTemplates({ defined, icons, bookingByFile = {} }) {
   const used = new Set(Object.values(layouts).flatMap((l) => [...l.matchAll(CLASS_ATTR)].flatMap((m) => m[1].split(/\s+/))));
   const pageOf = (href) => href.split(/[?#]/)[0].replace(/\.html$/, "");
   const live = (list) => (list || []).filter((x) => exists.has(pageOf(x.href)));
-  const topnav = (nav) => live(menu.top).map((it) => `<a class="Catui_bk-nav-item" href="${esc(it.href)}"${it.id === nav ? ' aria-current="page"' : ""}>${it.icon ? ico(it.icon, 16) : ""}<span>${esc(it.title)}</span></a>`).join("");
+  const topnav = (nav) => live(menu.top).map((it) => `<a class="Catui_hnav-item" href="${esc(it.href)}"${it.id === nav ? ' aria-current="page"' : ""}>${esc(it.title)}</a>`).join("");
   const foot = () => live(menu.foot).map((it) => `<a href="${esc(it.href)}">${esc(it.title)}</a>`).join("");
 
   for (const f of files) {

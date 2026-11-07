@@ -29,9 +29,12 @@ catui.use(function () {
       var since = cm.now() - days * 864e5, list = d.posts.filter(function (p) { return p.hot && new Date(p.time) > since; }).sort(function (a, b) { return b.score - a.score; });
       if (list.length < 10) list = d.posts.filter(function (p) { return p.hot; }).sort(function (a, b) { return b.score - a.score; });
       list = list.slice(0, 20);
-      catui.mount(document.getElementById('hm-best-a'), catui.html`${list.slice(0, 10).map(function (p, i) { return cm.mini(p, { rank: i + 1 }); })}`);
-      catui.mount(document.getElementById('hm-best-b'), catui.html`${list.slice(10, 20).map(function (p, i) { return cm.mini(p, { rank: i + 11 }); })}`);
-      document.getElementById('hm-best-b').setAttribute('start', '11');
+      var split = Math.ceil(list.length / 2), second = document.getElementById('hm-best-b');
+      catui.mount(document.getElementById('hm-best-a'), catui.html`${list.slice(0, split).map(function (p, i) { return cm.mini(p, { rank: i + 1 }); })}`);
+      catui.mount(second, catui.html`${list.slice(split).map(function (p, i) { return cm.mini(p, { rank: split + i + 1 }); })}`);
+      second.setAttribute('start', String(split + 1));
+      second.hidden = split === list.length;
+      second.parentElement.style.gridTemplateColumns = second.hidden ? 'minmax(0,1fr)' : '';
     };
     document.querySelector('[aria-label="기간"]').addEventListener('click', function (e) {
       var a = e.target.closest('[data-best]'); if (!a) return; e.preventDefault();

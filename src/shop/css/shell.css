@@ -13,9 +13,8 @@
 .Catui_sh-head{position:sticky;top:0;z-index:30;background:var(--Catui_card-bg);border-bottom:1px solid var(--Catui_color-border)}
 .Catui_sh-head-in{max-width:var(--Catui_sh-wrap);margin-inline:auto;display:flex;align-items:center;gap:var(--Catui_space-4);min-height:var(--Catui_sh-head-h);padding-inline:var(--Catui_space-4)}
 .Catui_sh-brand{display:inline-flex;align-items:center;gap:var(--Catui_space-2);font-weight:800;font-size:var(--Catui_type-h3-size);text-decoration:none;white-space:nowrap;color:var(--Catui_color-text-primary)}
-.Catui_sh-brand span{color:var(--Catui_sh-accent)}
-.Catui_sh-mark{display:inline-grid;place-items:center;width:var(--Catui_control-h-md);height:var(--Catui_control-h-md);border-radius:var(--Catui_radius-md);background:var(--Catui_sh-accent);color:var(--Catui_color-text-inverse)}
-.Catui_sh-mark .Catui_icon{color:inherit}
+/* 로고 네모는 본체 .Catui_logo(브랜드 채움 + 흰 아이콘). 이름 강조색은 b 안의 span에만 — 로고 span까지 칠하면 아이콘이 배경색에 묻힌다 */
+.Catui_sh-brand b > span{color:var(--Catui_sh-accent)}
 .Catui_sh-search{flex:1;max-width:calc(var(--Catui_space-10) * 9);margin-left:auto}
 .Catui_sh-search .Catui_input{width:100%}
 .Catui_sh-head-acts{display:flex;align-items:center;gap:var(--Catui_space-1)}
@@ -23,20 +22,22 @@
 .Catui_sh-dot{position:relative}
 .Catui_sh-dot .Catui_count{position:absolute;top:-2px;right:-4px}
 
-/* 카테고리 메뉴: 넓으면 한 줄, 좁으면 가로 스크롤 */
+/* 카테고리 메뉴(머리 둘째 줄) — 본체 가로 메뉴 .Catui_hnav.Catui_hnav-line.Catui_hnav-scroll 을 그대로 쓴다(색·활성 표시는 본체 규칙:
+   aria-current="page" → brand 밑줄 + 굵게). 여기서는 머리 바 안 배치만: 바의 아래선·배경을 없애고
+   항목을 줄 높이만큼 늘려 밑줄이 머리 아래선 바로 위에 놓이게 한다(확장 4종 공통 규칙) */
 .Catui_sh-gnb{border-top:1px solid var(--Catui_divider-color)}
-.Catui_sh-gnb-in{position:relative;max-width:var(--Catui_sh-wrap);margin-inline:auto;display:flex;align-items:center;gap:var(--Catui_space-1);padding-inline:var(--Catui_space-4);overflow-x:auto;scrollbar-width:none}
-.Catui_sh-gnb-in::-webkit-scrollbar{display:none}
-.Catui_sh-gnb-item{flex:none;display:inline-flex;align-items:center;min-height:calc(var(--Catui_space-10) * 0.75);padding-inline:var(--Catui_space-3);font-weight:600;text-decoration:none;color:var(--Catui_color-text-secondary);border-bottom:2px solid transparent}
-.Catui_sh-gnb-item:hover{color:var(--Catui_color-text-primary)}
-.Catui_sh-gnb-item[aria-current="page"]{color:var(--Catui_color-text-primary);border-bottom-color:var(--Catui_sh-accent)}
-.Catui_sh-gnb-item:focus-visible{outline-offset:-2px}
+.Catui_sh-gnb-wrap{max-width:var(--Catui_sh-wrap);margin-inline:auto;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;padding-inline:var(--Catui_space-2)}
+.Catui_sh-gnb-wrap > [data-catui-sh-nav-step="-1"]{grid-column:1;grid-row:1}
+.Catui_sh-gnb-wrap > [data-catui-sh-nav-step="1"]{grid-column:3;grid-row:1}
+.Catui_sh-gnb-in{grid-column:2;grid-row:1;min-width:0;min-height:calc(var(--Catui_space-8) + var(--Catui_space-1));padding:0 var(--Catui_space-2);border:0;border-radius:0;background:transparent;font-size:var(--Catui_type-body-size)}
+.Catui_sh-gnb-in .Catui_hnav-item{align-self:stretch;height:auto;margin-bottom:0}
+.Catui_sh-gnb-in .Catui_hnav-item:focus-visible{outline-offset:-2px}
 
 /* 본문 */
 .Catui_sh-main{flex:1;width:100%;max-width:var(--Catui_sh-wrap);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_sh-gap);padding:var(--Catui_sh-gap) var(--Catui_space-4);align-content:start}
 .Catui_sh-main > *{min-width:0}
 .Catui_sh-main:focus{outline:none}
-.Catui_sh a:not(.Catui_btn,.Catui_link,.Catui_pg,.Catui_sh-gnb-item,.Catui_sh-tab){color:inherit}
+.Catui_sh a:not(.Catui_btn,.Catui_link,.Catui_pg,.Catui_hnav-item,.Catui_sh-tab){color:inherit}
 
 /* 상자 · 묶음 머리 */
 .Catui_sh-box{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-4);padding:var(--Catui_space-5);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);min-width:0}
@@ -60,7 +61,7 @@
 .Catui_sh-chips a[aria-current]{border-color:var(--Catui_sh-accent);color:var(--Catui_sh-accent);font-weight:700;box-shadow:inset 0 0 0 1px var(--Catui_sh-accent)}
 
 /* 홈 배너 · 혜택 줄 */
-.Catui_sh-hero{display:grid;align-content:center;gap:var(--Catui_space-2);min-height:calc(var(--Catui_space-10) * 4.5);padding:var(--Catui_space-8);border-radius:var(--Catui_sh-radius);text-decoration:none;background:linear-gradient(120deg,var(--Catui_sh-hero-a),var(--Catui_sh-hero-b));color:var(--Catui_color-text-primary)}
+.Catui_sh-hero{display:grid;align-content:center;gap:var(--Catui_space-2);min-height:calc(var(--Catui_space-10) * 3.5);padding:var(--Catui_space-7);border-radius:var(--Catui_sh-radius);text-decoration:none;background:linear-gradient(120deg,var(--Catui_sh-hero-a),var(--Catui_sh-hero-b));color:var(--Catui_color-text-primary)}
 .Catui_sh-hero[data-tone="1"]{--Catui_sh-hero-a:var(--Catui_color-brand-soft);--Catui_sh-hero-b:var(--Catui_color-info-soft)}
 .Catui_sh-hero[data-tone="2"]{--Catui_sh-hero-a:var(--Catui_color-info-soft);--Catui_sh-hero-b:var(--Catui_color-purple-soft)}
 .Catui_sh-hero[data-tone="3"]{--Catui_sh-hero-a:var(--Catui_color-purple-soft);--Catui_sh-hero-b:var(--Catui_color-amber-soft)}
@@ -68,6 +69,11 @@
 .Catui_sh-hero b,.Catui_sh-hero h1{margin:0;font-size:var(--Catui_type-display-size);line-height:1.2;font-weight:800;word-break:keep-all}
 .Catui_sh-hero small{font-size:var(--Catui_type-caption-size);font-weight:700;color:var(--Catui_color-text-secondary)}
 .Catui_sh-heroes .Catui_carousel-slide{background:transparent}
+.Catui_sh-hero:has(> .Catui_sh-hero-img){grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);height:calc(var(--Catui_space-10) * 4);min-height:0;align-content:stretch;padding:0;gap:0;overflow:hidden;background:var(--Catui_color-surface-muted)}
+.Catui_sh-hero-copy{display:grid;align-content:center;gap:var(--Catui_space-2);padding:var(--Catui_space-7);min-width:0}
+.Catui_sh-hero-img{display:block;width:100%;height:100%;min-height:0;object-fit:cover;align-self:stretch}
+.Catui_sh-hero:has(> .Catui_sh-hero-img[hidden]){grid-template-columns:minmax(0,1fr)}
+@media (max-width:767px){.Catui_sh-hero-copy{padding:var(--Catui_space-4)}.Catui_sh-hero:has(> .Catui_sh-hero-img){min-height:calc(var(--Catui_space-10) * 3)}}
 .Catui_sh-event-head{min-height:0}
 .Catui_sh-left{display:inline-flex;align-items:center;gap:var(--Catui_space-1);margin:0;font-size:var(--Catui_type-caption-size);font-weight:700;color:var(--Catui_sh-sale);font-variant-numeric:tabular-nums}
 .Catui_sh-perks{margin:0;padding:var(--Catui_space-3) var(--Catui_space-4);list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--Catui_space-3);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius)}
@@ -122,7 +128,7 @@
   .Catui_sh-tabs{position:sticky;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:var(--Catui_card-bg);border-top:1px solid var(--Catui_color-border);padding-bottom:env(safe-area-inset-bottom)}
   .Catui_sh-totop{bottom:calc(var(--Catui_space-10) + var(--Catui_space-4))}
   .Catui_sh-box{padding:var(--Catui_space-4)}
-  .Catui_sh-hero{min-height:calc(var(--Catui_space-10) * 3.4);padding:var(--Catui_space-5)}
+  .Catui_sh-hero{min-height:calc(var(--Catui_space-10) * 2.5);padding:var(--Catui_space-5)}
   .Catui_sh-hero b,.Catui_sh-hero h1{font-size:var(--Catui_type-h1-size)}
   .Catui_sh-form-cols{grid-template-columns:minmax(0,1fr)}
 }
@@ -135,3 +141,11 @@
   .Catui_sh-main{padding-inline:var(--Catui_space-3)}
   .Catui_sh-perks{grid-template-columns:minmax(0,1fr)}
 }
+
+/* 유리: 고정 머리·아래 탭 줄 — 본체 glass.css와 같은 방식(흐림은 ::before 층 — 안쪽 메뉴·fixed 요소에 영향 없게).
+   본문 카드·표·폼에는 쓰지 않는다. 미지원·투명도 줄이기·강제 색 모드에서는 불투명 면 */
+.Catui_sh-head,.Catui_sh-tabs{background:transparent;isolation:isolate}
+.Catui_sh-head::before,.Catui_sh-tabs::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--Catui_glass-bg-strong);-webkit-backdrop-filter:var(--Catui_glass-blur);backdrop-filter:var(--Catui_glass-blur)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.Catui_sh-head::before,.Catui_sh-tabs::before{background:var(--Catui_card-bg)}}
+@media (prefers-reduced-transparency:reduce){.Catui_sh-head::before,.Catui_sh-tabs::before{background:var(--Catui_card-bg);-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (forced-colors:active){.Catui_sh-head::before,.Catui_sh-tabs::before{background:Canvas;-webkit-backdrop-filter:none;backdrop-filter:none}}

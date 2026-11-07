@@ -1,0 +1,26 @@
+/* booking/tokens.css */
+/* CatuiBooking 토큰 — 본체 토큰을 참조만 한다(새 색 값 없음). 상태는 색 + 글자·아이콘·무늬를 늘 함께 쓴다 */
+.Catui_bk{
+  --Catui_bk-wrap:calc(var(--Catui_space-10) * 19);               /* 본문 최대 폭 ≈ 1216px */
+  --Catui_bk-gap:var(--Catui_space-6);
+  --Catui_bk-head-h:calc(var(--Catui_space-10) + var(--Catui_space-4));
+  --Catui_bk-side-w:calc(var(--Catui_space-10) * 5.5);             /* 옆줄 예약 내용 ≈ 352px */
+  --Catui_bk-accent:var(--Catui_color-brand-strong);               /* 선택·현재 위치 — aria-pressed·체크 아이콘과 함께 */
+  --Catui_bk-accent-soft:var(--Catui_color-brand-soft);
+  --Catui_bk-muted:var(--Catui_color-text-secondary);
+  --Catui_bk-line:var(--Catui_color-border);
+  --Catui_bk-off-bg:var(--Catui_color-surface-muted);              /* 마감·예약됨·지난 시간 바탕 (빗금·글자와 함께) */
+  --Catui_bk-off-fg:var(--Catui_color-text-secondary);
+  --Catui_bk-warn:var(--Catui_color-amber);                        /* 마감 임박 — 아이콘·"임박" 글자와 함께 */
+  --Catui_bk-warn-soft:var(--Catui_color-amber-soft);
+  --Catui_bk-danger:var(--Catui_color-danger);
+  --Catui_bk-hatch:repeating-linear-gradient(135deg, transparent 0 5px, var(--Catui_color-border) 5px 6px);  /* 빗금 무늬 */
+  --Catui_bk-radius:var(--Catui_radius-md);
+  --Catui_bk-cell:calc(var(--Catui_space-8) + var(--Catui_space-1));   /* 좌석 칸 ≈ 36px (누르는 크기 기준 이상) */
+  --Catui_bk-hour:calc(var(--Catui_space-10) + var(--Catui_space-6));  /* 일정표 한 시간 높이 ≈ 64px */
+  --Catui_bk-col-min:calc(var(--Catui_space-10) * 3.5);            /* 일정표 열 최소 폭 ≈ 224px */
+  /* 모션: 들어오고 나가는 것은 ease-out. UI는 300ms 미만 */
+  --Catui_bk-ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  --Catui_bk-dur:160ms;
+}
+@media (max-width:599px){.Catui_bk{--Catui_bk-gap:var(--Catui_space-4);--Catui_bk-col-min:calc(var(--Catui_space-10) * 2.75)}}

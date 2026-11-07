@@ -6,7 +6,8 @@
 //   [data-catui-dk-posts="recent"] 최근 글 카드 (data-size, 기본 rules.recent)
 //   [data-catui-dk-changelog]     변경 이력(data/changelog.json): 버전마다 추가·변경·고침 배지(글자 + 색), 종류 거르기
 const DK_KINDS = { added: ["추가", "Catui_badge-success"], changed: ["변경", "Catui_badge-info"], fixed: ["고침", "Catui_badge-warning"] };
-const dkCover = (p, lg = false) => catui.html`<span class="Catui_dk-cover${lg ? " Catui_dk-cover-lg" : ""}" data-tone="${p.tone || 1}" aria-hidden="true">${catui.icon(p.icon || "book-open", lg ? 24 : 20)}</span>`;
+const DK_COVERS = { workspace: "workspace.png", reading: "reading.jpg", keyboard: "keyboard.jpg" };
+const dkCover = (p, lg = false) => catui.html`<span class="Catui_dk-cover${lg ? " Catui_dk-cover-lg" : ""}" data-tone="${p.tone || 1}" aria-hidden="true">${catui.icon(p.icon || "book-open", lg ? 24 : 20)}${Object.hasOwn(DK_COVERS, p.cover) ? catui.html`<img src="../../../assets/photos/${DK_COVERS[p.cover]}" alt="" width="960" height="640" loading="${lg ? "eager" : "lazy"}" decoding="async">` : ""}</span>`;
 const dkAvatar = (a, size = "md") => catui.html`<span class="Catui_av Catui_av-${size} Catui_dk-av" data-tone="${a.tone || 1}" aria-hidden="true">${String(a.name || "?").slice(0, 1)}</span>`;
 const dkTags = (p) => (p.tagObjs?.length ? catui.html`<ul class="Catui_dk-tags" aria-label="태그">${p.tagObjs.map((t) => catui.html`<li><a class="Catui_dk-tag" href="tag.html?t=${encodeURIComponent(t.id)}">#${t.name}</a></li>`)}</ul>` : "");
 

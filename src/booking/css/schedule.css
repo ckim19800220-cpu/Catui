@@ -1,0 +1,30 @@
+/* booking/schedule.css */
+/* 관리자 일정표 — 시간축 + 열(직원 또는 요일) + 예약 블록. 보기 전용(목록 의미), 겹친 블록은 나란히 + "겹침" 글자 */
+.Catui_bk-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2) var(--Catui_space-3)}
+.Catui_bk-toolbar h2{margin:0;margin-right:auto;font-size:var(--Catui_type-h3-size)}
+.Catui_bk-toolbar .Catui_select-wrap{min-width:0}
+.Catui_bk-sched-scroll{position:relative;overflow:auto;max-width:100%;border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg)}
+.Catui_bk-sched{--Catui_bk-cols:4;--Catui_bk-hours:12;--Catui_bk-axis:calc(var(--Catui_space-10) + var(--Catui_space-4));position:relative;display:grid;grid-template-columns:var(--Catui_bk-axis) repeat(var(--Catui_bk-cols),minmax(var(--Catui_bk-col-min),1fr));min-width:max-content}
+.Catui_bk-sched-week{--Catui_bk-col-min:calc(var(--Catui_space-10) * 2.6)}
+.Catui_bk-sched-axis{position:relative;grid-row:1;grid-column:1;margin-top:calc(var(--Catui_space-10) + var(--Catui_space-2));height:calc(var(--Catui_bk-hour) * var(--Catui_bk-hours));border-right:1px solid var(--Catui_bk-line)}
+.Catui_bk-sched-axis span{--Catui_bk-i:0;position:absolute;top:calc(var(--Catui_bk-hour) * var(--Catui_bk-i));right:var(--Catui_space-2);transform:translateY(-50%);font-size:var(--Catui_type-micro-size);color:var(--Catui_bk-muted);font-variant-numeric:tabular-nums;background:var(--Catui_card-bg)}
+.Catui_bk-sched-col{grid-row:1;display:grid;grid-template-rows:auto 1fr;min-width:0;border-right:1px solid var(--Catui_divider-color)}
+.Catui_bk-sched-col:last-child{border-right:0}
+.Catui_bk-sched-h{position:sticky;top:0;z-index:2;display:grid;align-content:center;height:calc(var(--Catui_space-10) + var(--Catui_space-2));margin:0;padding-inline:var(--Catui_space-3);border-bottom:1px solid var(--Catui_bk-line);background:var(--Catui_card-bg);font-size:var(--Catui_type-body-size)}
+.Catui_bk-sched-h small{font-size:var(--Catui_type-caption-size);font-weight:400;color:var(--Catui_bk-muted)}
+.Catui_bk-sched-body{position:relative;height:calc(var(--Catui_bk-hour) * var(--Catui_bk-hours));background:repeating-linear-gradient(to bottom,var(--Catui_divider-color) 0 1px,transparent 1px var(--Catui_bk-hour))}
+.Catui_bk-sched-list{margin:0;padding:0;list-style:none}
+.Catui_bk-block{--Catui_bk-lane:0;--Catui_bk-lanes:1;position:absolute;left:calc(100% / var(--Catui_bk-lanes) * var(--Catui_bk-lane) + 2px);width:calc(100% / var(--Catui_bk-lanes) - 4px);display:flex;flex-direction:column;gap:1px;overflow:hidden;padding:var(--Catui_space-1) var(--Catui_space-2);border:1px solid var(--Catui_bk-accent);border-left-width:var(--Catui_accent-w);border-radius:var(--Catui_radius-sm);background:var(--Catui_bk-accent-soft);font-size:var(--Catui_type-caption-size);line-height:1.3;color:var(--Catui_color-text-primary)}
+.Catui_bk-block b{font-variant-numeric:tabular-nums}
+.Catui_bk-block span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.Catui_bk-block[data-tone="2"]{border-color:var(--Catui_color-info);background:var(--Catui_color-info-soft)}
+.Catui_bk-block[data-tone="3"]{border-color:var(--Catui_color-purple);background:var(--Catui_color-purple-soft)}
+.Catui_bk-block[data-tone="4"]{border-color:var(--Catui_bk-warn);background:var(--Catui_bk-warn-soft)}
+.Catui_bk-block-st{font-weight:700}
+.Catui_bk-block[data-status="pending"]{border-style:dashed}
+.Catui_bk-block[data-status="done"]{opacity:.75}
+.Catui_bk-block[data-status="noshow"]{border-style:dotted;background:var(--Catui_bk-hatch),var(--Catui_bk-off-bg)}
+.Catui_bk-block[data-status="cancelled"]{border-style:dashed;border-color:var(--Catui_bk-line);background:var(--Catui_bk-hatch),var(--Catui_bk-off-bg);color:var(--Catui_bk-off-fg)}
+.Catui_bk-block[data-status="cancelled"] b{text-decoration:line-through}
+.Catui_bk-sched-now{position:absolute;left:0;right:0;height:0;border-top:2px solid var(--Catui_bk-danger);pointer-events:none;z-index:1}   /* 굵은선 허용: 지금 시각 표시줄 */
+.Catui_bk-sched-now::before{content:"";position:absolute;left:-4px;top:-5px;width:8px;height:8px;border-radius:50%;background:var(--Catui_bk-danger)}

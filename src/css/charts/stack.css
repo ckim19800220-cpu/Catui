@@ -6,5 +6,5 @@
 .Catui_stack i:nth-child(4){background:var(--Catui_stack-seg-4)}
 .Catui_stack i:nth-child(5){background:var(--Catui_stack-seg-5)}
 .Catui_segbar{display:flex;gap:2px;height:var(--Catui_segbar-h)}
-.Catui_segbar i{flex:1;border-radius:1px;background:var(--Catui_color-border)}
+.Catui_segbar i{flex:1;border-radius:var(--Catui_radius-xs);background:var(--Catui_color-border)}
 .Catui_segbar i.Catui_seg-on{background:var(--Catui_progress-bar-1)}

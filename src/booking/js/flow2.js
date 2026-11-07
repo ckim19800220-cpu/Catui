@@ -60,7 +60,7 @@ booking.seatPage = {
       booking.flow.frame(root, d, v, "seats");
       const body = box.querySelector("[data-body]") || box;
       if (!booking.flow.need(body, d, v, { kind: "seat" })) return d;
-      if (!v.date || !v.time) { catui.mount(body, catui.html`<div class="Catui_empty"><p class="Catui_empty-title">날짜와 회차를 먼저 골라 주세요</p><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="date.html">날짜·회차 고르기</a></div>`); return d; }
+      if (!v.date || !v.time) { booking.flow.empty(body, catui.html`<p class="Catui_empty-title">날짜와 회차를 먼저 골라 주세요</p><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="date.html">날짜·회차 고르기</a>`); return d; }
       const svc = d.S[v.svc], map = d.maps[svc.map], table = !!map.cap, people = (v.adult || 0) + (v.child || 0), max = table ? 1 : people;
       const taken = booking.seatsTaken(d, v.svc, v.date, v.time, { except: v.change });
       const adj = box.querySelector("[data-adjacent]"), msg = box.querySelector("[data-msg]");
@@ -112,6 +112,7 @@ booking.roomPage = {
       const id = `bk-r-${r.id}`;
       return catui.html`<li class="Catui_bk-room" data-tone="${r.tone || 1}"><input class="Catui_clip" type="radio" name="bk-room" id="${id}" value="${r.id}"${why ? catui.html` disabled` : ""}${v.room === r.id && !why ? catui.html` checked` : ""}>
         <label class="Catui_bk-room-l" for="${id}">
+          ${r.image ? catui.html`<img class="Catui_bk-photo" src="${r.image}" alt="" aria-hidden="true" width="640" height="200" loading="lazy" decoding="async">` : ""}
           <span class="Catui_bk-room-ic" aria-hidden="true">${catui.icon(r.icon || "bed", 24)}</span>
           <span class="Catui_bk-room-b"><b class="Catui_bk-room-t">${r.name}</b><small>${r.size}㎡ · ${r.beds} · 기준 ${r.base}명 / 최대 ${r.max}명</small><small>${r.amen.join(" · ")}</small></span>
           <span class="Catui_bk-room-p">${why ? catui.html`<span class="Catui_badge Catui_badge-neutral">${why}</span>` : catui.html`<b>${booking.won(st.total)}</b><small>${n}박 합계 · 남은 객실 ${left}</small>`}</span>
@@ -145,7 +146,8 @@ booking.roomPage = {
       const q = booking.query(), today = booking.today();
       const cin = q.get("in") || (v.date && v.date >= today ? v.date : booking.addDays(today, 1));
       const cout = q.get("out") || (v.checkout && v.checkout > cin ? v.checkout : booking.addDays(cin, 1));
-      v = booking.draft.set({ date: cin, checkout: cout, time: d.B[v.branch]?.open || "15:00", adult: Math.max(1, v.adult || 2) });
+      // 새로 시작한 숙박(기간 없음)은 어른 2명부터 — 이미 고른 인원은 그대로
+      v = booking.draft.set({ date: cin, checkout: cout, time: d.B[v.branch]?.open || "15:00", adult: v.date && v.checkout ? Math.max(1, v.adult || 1) : 2 });
       const inEl = box.querySelector("[data-in]"), outEl = box.querySelector("[data-out-date]"), msg = box.querySelector("[data-msg]");
       const maxKey = booking.addDays(today, booking.rules.maxDays);
       inEl.min = today; inEl.max = maxKey; inEl.value = v.date;
@@ -198,7 +200,7 @@ booking.infoPage = {
     this.ready = booking.load().then((d) => {
       let v = booking.draft.get();
       booking.flow.frame(root, d, v, "info");
-      if (!d.S[v.svc]) { form.hidden = true; const e = document.createElement("div"); form.after(e); booking.flow.need(e, d, v); return d; }
+      if (!booking.flow.need(form, d, v)) return d;
       for (const k of ["name", "phone", "email", "request"]) if (v[k] && form.elements[k]) form.elements[k].value = v[k];
       root.querySelectorAll("[data-refund-table]").forEach((b) => catui.mount(b, booking.view.refund(v.date ? { date: v.date, time: v.time } : null)));
       const all = form.querySelector("[data-agree-all]"), each = () => [...form.querySelectorAll("[data-agree]")], msg = form.querySelector("[data-msg]");
@@ -258,7 +260,13 @@ booking.completePage = {
     this.ready = booking.load().then((d) => {
       const no = booking.query().get("no") || bkGet("last", "");
       const r = no ? booking.find(d, no) : null;
-      if (!r) { catui.mount(box, catui.html`<div class="Catui_empty"><p class="Catui_empty-title">예약 번호를 찾지 못했습니다</p><p class="Catui_empty-text">내 예약 목록에서 확인해 주세요.</p><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="mine.html">내 예약</a></div>`); return d; }
+      if (!r) {
+        const h = box.querySelector("h1"); if (h) h.textContent = "예약 번호를 찾지 못했습니다";
+        const t = box.querySelector(".Catui_bk-ticket"); if (t) catui.mount(t, catui.html`<p class="Catui_empty-text">내 예약 목록에서 확인해 주세요.</p><a class="Catui_btn Catui_btn-md Catui_btn-primary" href="mine.html">내 예약</a>`);
+        box.querySelector(".Catui_bk-done-ic")?.setAttribute("hidden", "");
+        box.querySelectorAll("[data-detail], [data-amount]").forEach((x) => x.closest("section")?.setAttribute("hidden", ""));
+        return d;
+      }
       box.querySelectorAll("[data-no]").forEach((x) => { x.textContent = r.no; });
       catui.mount(box.querySelector("[data-qr]"), booking.view.qr(r.no));
       catui.mount(box.querySelector("[data-detail]"), booking.view.dl(d, r));

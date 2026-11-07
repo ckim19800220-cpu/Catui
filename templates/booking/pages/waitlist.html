@@ -1,0 +1,24 @@
+<!-- title: 대기 명단 | nav: wait -->
+<section class="Catui_bk-sec" data-catui-bk-waitlist aria-labelledby="wt-h">
+  <div class="Catui_bk-sec-h"><h1 class="Catui_h2" id="wt-h">대기 명단</h1><span class="Catui_badge Catui_badge-warning" data-wait-n></span></div>
+  <section class="Catui_bk-box" aria-labelledby="wt-f-h">
+    <h2 class="Catui_h3" id="wt-f-h">대기 신청</h2>
+    <form class="Catui_bk-waitform" data-wait-form novalidate aria-labelledby="wt-f-h">
+      <div class="Catui_field"><label class="Catui_label" for="wt-svc">서비스 · 지점</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="wt-svc" name="svc"></select>{{icon:chevron-down}}</div></div>
+      <div class="Catui_field"><label class="Catui_label" for="wt-date">날짜</label><input class="Catui_input" id="wt-date" name="date" type="date" data-catui-verify="required"></div>
+      <div class="Catui_field"><label class="Catui_label" for="wt-time">시간</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="wt-time" name="time" aria-describedby="wt-time-h"></select>{{icon:chevron-down}}</div></div>
+      <div class="Catui_field"><label class="Catui_label" for="wt-people">인원</label><div class="Catui_select-wrap"><select class="Catui_input Catui_select" id="wt-people" name="people"><option>1</option><option selected>2</option><option>3</option><option>4</option></select>{{icon:chevron-down}}</div></div>
+      <div class="Catui_field"><label class="Catui_label" for="wt-name">이름</label><input class="Catui_input" id="wt-name" name="name" autocomplete="name" data-catui-verify="required"></div>
+      <div class="Catui_field"><label class="Catui_label" for="wt-phone">휴대전화</label><input class="Catui_input" id="wt-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-1234-5678" data-catui-verify="required|phone"></div>
+      <p class="Catui_help" id="wt-time-h" data-time-hint></p>
+      <p class="Catui_bk-msg" role="alert" data-msg hidden></p>
+      <p class="Catui_bk-ok" role="status" data-ok hidden></p>
+      <div class="Catui_bk-acts"><button class="Catui_btn Catui_btn-md Catui_btn-primary" type="submit">{{icon:hourglass}}대기 신청</button></div>
+    </form>
+  </section>
+  <section class="Catui_bk-sec" aria-labelledby="wt-l-h">
+    <h2 class="Catui_h3" id="wt-l-h" tabindex="-1">대기 중인 사람</h2>
+    <p class="Catui_help">회차마다 신청 순서대로 순번이 매겨집니다. 이름은 가려서 보여 줍니다. 자리가 나면 순번대로 호출합니다.</p>
+    <div data-wait-list><p class="Catui_help">불러오는 중…</p></div>
+  </section>
+</section>

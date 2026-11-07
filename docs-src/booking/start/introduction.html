@@ -1,0 +1,56 @@
+<section aria-labelledby="what">
+<h2 id="what">CatuiBooking은</h2>
+<p>Catui(CSS 키트 + catui.js) 위에 얹는 <b>예약·일정 확장</b>입니다. CatuiShop·CatuiDocs와 같은 구조로, 본체 컴포넌트(단계 표시·버튼·폼 검증·레이어·표)를 그대로 쓰고 예약 화면에 필요한 것 — 시간 칸, 남은 자리, 좌석 배치도, 숙박 요금, 환불 규정, 관리자 일정표 — 만 더합니다.</p>
+<dl class="doc-spec" aria-label="CatuiBooking 사양">
+  <div><dt>템플릿</dt><dd>{{stat:bkTpl}}</dd></div>
+  <div><dt>모의 서비스</dt><dd>{{stat:bkServices}}</dd></div>
+  <div><dt>CSS · gzip</dt><dd>{{stat:bkCssGz}}<small>KB</small></dd></div>
+  <div><dt>JS · gzip</dt><dd>{{stat:bkJsGz}}<small>KB</small></dd></div>
+</dl>
+<div class="doc-files">
+  <article><span class="doc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i16"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-code"></use></svg></span><p class="doc-file-n"><code>booking.css</code></p><p>머리·단계 2단(본문 + 예약 내용)·달력·시간 칸·인원·옵션·객실 카드·좌석 배치도·예약 카드·환불 규정·완료 표·대기 명단·일정표 — 모든 규칙은 <code>.Catui_bk</code> 아래, 토큰만 사용</p></article>
+  <article><span class="doc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i16"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-code"></use></svg></span><p class="doc-file-n"><code>catbooking.js</code></p><p><code>catui.booking</code> — 한국 시간 기준 시간 칸·남은 자리, 인원·옵션 금액, 숙박 박 수·주말 요금, 좌석 선택(최대 개수·붙은 좌석, 키보드 격자), 예약 저장·변경·취소 환불, 대기 명단, 일정 겹침 배치</p></article>
+  <article><span class="doc-ic" aria-hidden="true"><svg class="Catui_icon Catui_i16"><use href="{{dist}}/icons.svg?v=2#Catui_ic-file-code"></use></svg></span><p class="doc-file-n"><code>templates/booking/</code></p><p>같은 머리·바닥글을 공유하는 전체 화면 HTML {{stat:bkTpl}}종 — 빌드가 링크·클래스·접근성(보기 전용 <code>role="grid"</code> 금지 포함)을 검사</p></article>
+</div>
+</section>
+
+<section aria-labelledby="layers">
+<h2 id="layers">구성 계층</h2>
+<ol class="doc-stack" aria-label="CatuiBooking 구성 계층 (위가 확장)">
+  <li class="is-current" aria-current="true"><code>booking.css · catbooking.js</code><span>시간 칸 · 좌석 · 숙박 · 환불 · 일정표</span><em>이 문서</em></li>
+  <li><code>catui.js</code><span>접근성 · 데이터 · 선언형 속성 · 오버레이</span></li>
+  <li><code>catui.css</code><span>토큰 · 리셋 · 컴포넌트</span></li>
+</ol>
+</section>
+
+<section aria-labelledby="map">
+<h2 id="map">화면 지도</h2>
+<p>각 화면은 새 창에서 전체 화면으로 열립니다. 예약 단계는 서비스 종류마다 다릅니다 — 시간 예약(클래스·미용): 날짜·시간 → 인원·옵션 → 정보 → 확인, 좌석 예약(공연·식당): 날짜·회차 → 인원 → 좌석 → 정보 → 확인, 숙박: 기간·객실 → 정보 → 확인.</p>
+<div class="doc-map">
+  <article class="doc-map-g"><h3>예약하기<span class="doc-map-n">8<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/index.html" target="_blank" rel="noopener">예약 홈 (서비스·지점)</a></li><li><a href="../templates/date.html?svc=pottery&amp;branch=gangnam&amp;date=2026-11-04" target="_blank" rel="noopener">날짜·시간</a></li><li><a href="../templates/people.html" target="_blank" rel="noopener">인원·옵션</a></li><li><a href="../templates/date.html?svc=musical&amp;branch=daehak&amp;date=2026-11-07" target="_blank" rel="noopener">공연 회차</a> → <a href="../templates/seats.html" target="_blank" rel="noopener">좌석 배치도</a></li><li><a href="../templates/rooms.html?svc=stay&amp;branch=jeonju&amp;in=2026-11-06&amp;out=2026-11-08" target="_blank" rel="noopener">객실 (숙박)</a></li><li><a href="../templates/info.html" target="_blank" rel="noopener">예약자 정보·약관</a></li><li><a href="../templates/confirm.html" target="_blank" rel="noopener">예약 확인</a></li><li><a href="../templates/complete.html?no=BK-261101-0012" target="_blank" rel="noopener">예약 완료</a></li></ul></article>
+  <article class="doc-map-g"><h3>내 예약<span class="doc-map-n">3<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/mine.html" target="_blank" rel="noopener">내 예약 목록</a></li><li><a href="../templates/detail.html?no=BK-261102-0003" target="_blank" rel="noopener">예약 상세 · 취소</a></li><li><a href="../templates/waitlist.html" target="_blank" rel="noopener">대기 명단</a></li></ul></article>
+  <article class="doc-map-g"><h3>관리 · 기타<span class="doc-map-n">3<span class="Catui_clip">개</span></span></h3><ul>
+    <li><a href="../templates/admin.html" target="_blank" rel="noopener">관리자 일정표 (일·주)</a></li><li><a href="../templates/login.html" target="_blank" rel="noopener">로그인</a></li><li><a href="../templates/error-404.html" target="_blank" rel="noopener">404</a></li></ul></article>
+</div>
+</section>
+
+<section aria-labelledby="preview">
+<h2 id="preview">미리보기</h2>
+<figure class="doc-frame">
+  <figcaption class="doc-frame-bar"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><code>templates/date.html</code><a href="../templates/date.html?svc=pottery&amp;branch=gangnam&amp;date=2026-11-04" target="_blank" rel="noopener">새 창에서 열기</a></figcaption>
+  <iframe src="../templates/date.html?svc=pottery&amp;branch=gangnam&amp;date=2026-11-04" title="날짜·시간 선택 미리보기" loading="lazy"></iframe>
+</figure>
+</section>
+
+<section aria-labelledby="a11y">
+<h2 id="a11y">접근성 · 반응형 기준</h2>
+<ul>
+  <li>시간 칸·날짜·좌석·일정 블록의 상태는 <b>글자</b>(“3자리 남음”·“마감”·“지난 시간”·“예약됨”·“장애인석”·“겹침”)와 아이콘·빗금·점선을 함께 씁니다 — 색만으로 알리지 않습니다.</li>
+  <li>좌석 배치도는 키보드로 움직이는 격자이므로 ARIA grid 패턴(<code>role="grid"</code> &gt; <code>row</code> &gt; <code>rowheader</code>·<code>gridcell</code>)을 제대로 씁니다: Tab 한 번에 들어가 화살표로 이동(roving tabindex), 통로는 건너뜀, Space·Enter로 선택(<code>aria-pressed</code>), 예약된 좌석은 <code>aria-disabled</code>로 초점은 받되 고를 수 없음.</li>
+  <li>달력은 날짜를 고르는 단추 묶음이라 <code>role="grid"</code> 대신 표(요일 머리·caption) + 단추, 관리자 일정표는 보기 전용이라 열마다 제목 + 시간 순 목록입니다. 빌드가 키보드 격자가 아닌 곳의 <code>role="grid"</code>를 막습니다.</li>
+  <li>숨김 글자는 <code>.Catui_clip</code> — 역할 없는 <code>span</code>에 <code>aria-label</code>을 쓰지 않습니다(빌드가 검사). 한글 조합 중 키 입력은 <code>catui.imeBusy</code>로 거릅니다.</li>
+  <li>320px 화면에서 쪽 가로 넘침 없음. 좌석 배치도·일정표·표는 <code>position:relative</code> 스크롤 상자 안에서만 가로로 밀립니다. 모션은 누름·체크 나타남뿐이고 <code>prefers-reduced-motion</code>이면 끕니다.</li>
+</ul>
+</section>

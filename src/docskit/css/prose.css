@@ -14,10 +14,10 @@
 .Catui_dk-prose :is(ul,ol){padding-left:var(--Catui_space-6);display:grid;gap:var(--Catui_space-1)}
 .Catui_dk-prose :not(pre) > code{font-family:var(--Catui_font-mono);font-size:.9em;background:var(--Catui_prose-code-bg);color:var(--Catui_prose-code-fg);border-radius:var(--Catui_radius-xs);padding:1px 4px}
 .Catui_dk-prose > pre{position:relative;padding:var(--Catui_space-4);overflow-x:auto;border-radius:var(--Catui_dk-radius);background:var(--Catui_color-code-bg);color:var(--Catui_color-code-text);font-size:var(--Catui_type-caption-size)}
-.Catui_dk-prose blockquote{padding:var(--Catui_space-3) var(--Catui_space-4);border-left:4px solid var(--Catui_dk-accent);background:var(--Catui_color-surface-muted)}
+.Catui_dk-prose blockquote{padding:var(--Catui_space-3) var(--Catui_space-4);border-left:var(--Catui_accent-w) solid var(--Catui_dk-accent);background:var(--Catui_color-surface-muted)}
 .Catui_dk-prose a:not(.Catui_btn,.Catui_dk-anchor){color:var(--Catui_dk-accent);text-decoration:underline;text-underline-offset:2px}
 .Catui_dk-prose .Catui_callout p{margin:0}
-.Catui_dk-mark{background:var(--Catui_dk-mark-bg);color:inherit;border-radius:2px;padding:0 1px;font-weight:700}
+.Catui_dk-mark{background:var(--Catui_dk-mark-bg);color:inherit;border-radius:var(--Catui_radius-xs);padding:0 1px;font-weight:700}
 
 /* 제목 앵커: 마우스를 올리거나 포커스하면 보임 (터치 화면은 늘 보임) */
 .Catui_dk-anchor{display:inline-flex;align-items:center;vertical-align:middle;margin-left:var(--Catui_space-2);padding:2px;border-radius:var(--Catui_radius-xs);color:var(--Catui_dk-muted);opacity:0}
@@ -30,7 +30,7 @@
 .Catui_dk-toc-t{margin:0;font-weight:700;color:var(--Catui_color-text-primary)}
 .Catui_dk-toc ol{margin:0;padding:0;list-style:none;display:grid;gap:2px}
 .Catui_dk-toc ol ol{padding-left:var(--Catui_space-3)}
-.Catui_dk-toc a{display:block;padding:var(--Catui_space-1) var(--Catui_space-2);border-left:2px solid var(--Catui_divider-color);text-decoration:none;color:var(--Catui_dk-muted);line-height:1.4}
+.Catui_dk-toc a{display:block;padding:var(--Catui_space-1) var(--Catui_space-2);border-left:var(--Catui_tab-indicator-w) solid var(--Catui_line);text-decoration:none;color:var(--Catui_dk-muted);line-height:1.4}
 .Catui_dk-toc a:hover{color:var(--Catui_color-text-primary)}
 .Catui_dk-toc a[aria-current="location"]{border-left-color:var(--Catui_dk-accent);color:var(--Catui_dk-accent);font-weight:700}
 @media (max-width:1199px){.Catui_dk-toc{padding:var(--Catui_space-4);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg)}}
@@ -49,7 +49,7 @@
 .Catui_dk-steps > li > *{margin:0}
 
 /* API 시그니처 */
-.Catui_dk-sig{margin:0;padding:var(--Catui_space-3) var(--Catui_space-4);overflow-x:auto;border:1px solid var(--Catui_card-border);border-left:4px solid var(--Catui_dk-accent);border-radius:var(--Catui_dk-radius);background:var(--Catui_color-surface-muted);font-family:var(--Catui_font-mono);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-primary)}
+.Catui_dk-sig{margin:0;padding:var(--Catui_space-3) var(--Catui_space-4);overflow-x:auto;border:1px solid var(--Catui_card-border);border-left:var(--Catui_accent-w) solid var(--Catui_dk-accent);border-radius:var(--Catui_dk-radius);background:var(--Catui_color-surface-muted);font-family:var(--Catui_font-mono);font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-primary)}
 
 /* 문서 끝: 수정일·편집 링크 · 이전/다음 · 피드백 */
 .Catui_dk-doc-f{max-width:var(--Catui_dk-measure);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-2) var(--Catui_space-4);padding-top:var(--Catui_space-4);border-top:1px solid var(--Catui_divider-color);font-size:var(--Catui_type-caption-size);color:var(--Catui_dk-muted)}

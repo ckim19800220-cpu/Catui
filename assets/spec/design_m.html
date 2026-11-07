@@ -13,7 +13,8 @@ Design given: gentelella-design-tokens-template 01~08 토큰을 그대로 상속
   기존 05~08 → 09~12 번호 이동, CSS-only 네이티브 인터랙션 레이어(details/summary · 숨김 checkbox+label · 숨김 radio+label · 네이티브 form 요소, :target 미사용).
 Asset map: 래스터 이미지 없음. 아이콘 = 인라인 SVG symbol 스프라이트(24 그리드, stroke 1.5, currentColor) — v1.2 신규: chevron-up/down/right · search · filter · calendar · file · star · upload · clock · more · plus · minus.
   차트·도넛·게이지(conic-gradient)·레이더/스파크라인(인라인 SVG)·히트맵·간트·캘린더·업로드존·아바타 = CSS div / color-mix / conic-gradient.
-Palette: L1 원시색/표면/네이비/텍스트/코드, L2 파생(--color-brand-ghost 6%, --color-focus-ring 32%), L3 전량 var() 참조 체인.
+Palette: L1 원시색/표면/잉크 선(--line* = text-primary 반투명)/유리(--glass-*)/네이비/텍스트/코드, L2 파생(--color-brand-ghost 6%, AA 보정 --color-brand-strong·-fill, --color-focus-ring = brand-strong), L3 전량 var() 참조 체인.
+  v1.3 디자인 개편: 선 hairline 1px 잉크 · radius 2/4/6/8/10 · 얕은 shadow(다크는 위쪽 1px inset 하이라이트) · 포커스 링 2px(--ring) · 굵은 선 --accent-w 3px · 유리는 떠 있는 층만.
   v1.2 L3 확장 4패밀리(:root 별도 블록): L3a overlay(--overlay-scrim/--modal-*/--drawer-*/--dropdown-*/--toast-*/--popover-*/--mega-*/--wizard-*/--cmdk-*/--kbd-*),
   L3b composite(--tree-*/--cal-*/--gantt-*/--kanban-*/--file-*/--thread-*/--heat-*/--timeline-*), L3c form(--upload-*/--range-*/--rating-*/--tag-*/--step-*/--dp-*/--counter-*/--segbar-h/--search-*/--switch-alt-*),
   L3d chart&prose(--bar-*/--stack-*/--gauge-*/--funnel-*/--spark-*/--radar-*/--prose-*). 투명도 파생은 color-mix(in srgb, var(--color-x) N%, transparent), 순수 치수만 리터럴.
@@ -51,12 +52,20 @@ QA risks: 신규 2열 span 카드(cc-wide)와 일반 카드 혼재 그리드 정
   --color-danger:#E74C3C; --color-danger-soft:#FDECEA;
   /* surface & line */
   --color-page-bg:#F7F8FA; --color-surface:#FFFFFF; --color-surface-muted:#FAFBFC;
-  --color-border:#E6E9ED; --color-divider:#EEF1F4;
+  /* 선은 반투명 잉크(글자색 섞음) — 이전 고정값 border #E6E9ED · divider #EEF1F4 */
+  --color-border:var(--line); --color-divider:var(--line-soft);
+  --line:color-mix(in srgb, var(--color-text-primary) 14%, transparent); --line-strong:color-mix(in srgb, var(--color-text-primary) 24%, transparent); --line-soft:color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  --line-control:color-mix(in srgb, var(--color-text-primary) 56%, transparent); --line-control-hover:color-mix(in srgb, var(--color-text-primary) 74%, transparent);
+  --line-w:1px; --accent-w:3px;
+  /* 포커스 링 — outline:var(--ring); outline-offset:var(--ring-offset) */
+  --ring-w:2px; --ring-offset:2px; --ring:var(--ring-w) solid var(--color-focus-ring);
+  /* 유리(떠 있는 층 전용) — 폴백은 불투명 면 */
+  --glass-bg:color-mix(in srgb, var(--color-surface) 82%, transparent); --glass-bg-strong:color-mix(in srgb, var(--color-surface) 92%, transparent); --glass-border:var(--line); --glass-blur:saturate(140%) blur(12px);
   /* navy */
   --color-navy-900:#243444; --color-navy-800:#2A3F54; --color-navy-700:#334B63; --color-navy-500:#5A7184;
-  --color-navy-text:#DDE4EA; --color-navy-muted:#8FA0B3;
+  --color-navy-text:#DDE4EA; --color-navy-muted:#9FACBB;
   /* text & neutral */
-  --color-text-primary:#2C3E50; --color-text-secondary:#6C7A89; --color-text-tertiary:#9AA5B1; --color-text-inverse:#FFFFFF;
+  --color-text-primary:#2C3E50; --color-text-secondary:#66727E; --color-text-tertiary:#9AA5B1; --color-text-inverse:#FFFFFF;
   --color-neutral-100:#F2F4F6; --color-neutral-300:#D5DBE1; --color-neutral-500:#8C99A6; --color-neutral-700:#4A5A68;
   /* code */
   --color-code-bg:#1F2A37; --color-code-text:#E5EAF0; --color-code-key:#7FD8BE; --color-code-val:#F5C26B; --color-code-comment:#8FA0B3;
@@ -77,13 +86,13 @@ QA risks: 신규 2열 span 카드(cc-wide)와 일반 카드 혼재 그리드 정
   --type-micro-size:10px; --type-micro-weight:600; --type-micro-lh:1.2; --type-micro-ls:0.04em;
   /* space */
   --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:24px; --space-7:32px; --space-8:40px; --space-9:48px; --space-10:64px;
-  /* radius */
-  --radius-xs:4px; --radius-sm:6px; --radius-md:8px; --radius-lg:12px; --radius-pill:999px;
-  /* shadow */
-  --shadow-xs:0 1px 1px rgba(16,24,40,.04);
-  --shadow-sm:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.04);
-  --shadow-md:0 4px 12px rgba(16,24,40,.08);
-  --shadow-lg:0 12px 32px rgba(16,24,40,.12);
+  /* radius — 미니멀 단계 (이전 xs 4 · sm 6 · md 8 · lg 12) */
+  --radius-xs:2px; --radius-sm:4px; --radius-md:6px; --radius-lg:8px; --radius-xl:10px; --radius-pill:999px;
+  /* shadow — 윤곽은 선이 맡으므로 얕고 짧게, 떠 있는 층(md·lg)에만 의미 */
+  --shadow-xs:0 1px 0 rgba(16,24,40,.03);
+  --shadow-sm:0 1px 2px rgba(16,24,40,.05);
+  --shadow-md:0 4px 10px -2px rgba(16,24,40,.08),0 2px 4px -2px rgba(16,24,40,.05);
+  --shadow-lg:0 12px 24px -6px rgba(16,24,40,.14),0 4px 8px -4px rgba(16,24,40,.06);
   /* control */
   --control-h-sm:28px; --control-h-md:34px; --control-h-lg:40px;
   /* layout */
@@ -94,7 +103,10 @@ QA risks: 신규 2열 span 카드(cc-wide)와 일반 카드 혼재 그리드 정
 /* ============ L2 SEMANTIC (파생) ============ */
 :root{
   --color-brand-ghost:color-mix(in srgb, var(--color-brand) 6%, transparent);
-  --color-focus-ring:color-mix(in srgb, var(--color-brand) 32%, transparent);
+  /* WCAG AA 보정 계열: 밝은 배경 위 텍스트·포커스는 strong 계열 */
+  --color-brand-strong:#0E7A63; --color-brand-stronger:#0B6B57;
+  --color-brand-fill:var(--color-brand-strong); --color-brand-fill-hover:var(--color-brand-stronger);
+  --color-focus-ring:var(--color-brand-strong);
 }
 /* ============ L3 COMPONENT — 값은 전부 L1/L2 참조, 순수 치수만 리터럴 ============ */
 :root{
@@ -103,40 +115,40 @@ QA risks: 신규 2열 span 카드(cc-wide)와 일반 카드 혼재 그리드 정
   --btn-px-sm:var(--space-3); --btn-px-md:var(--space-4); --btn-px-lg:var(--space-5);
   --btn-font-sm:12px; --btn-font-md:var(--type-body-size); --btn-font-lg:14px;
   --btn-radius:var(--radius-sm);
-  --btn-primary-bg:var(--color-brand); --btn-primary-bg-hover:var(--color-brand-hover); --btn-primary-fg:var(--color-text-inverse);
-  --btn-secondary-bg:var(--color-surface); --btn-secondary-fg:var(--color-text-primary); --btn-secondary-border:var(--color-neutral-300); --btn-secondary-border-hover:var(--color-brand);
-  --btn-ghost-bg:transparent; --btn-ghost-fg:var(--color-brand-hover);
-  --btn-danger-bg:var(--color-danger); --btn-danger-fg:var(--color-text-inverse);
-  --btn-disabled-bg:var(--color-neutral-100); --btn-disabled-fg:var(--color-neutral-500); --btn-disabled-border:var(--color-border);
+  --btn-primary-bg:var(--color-brand-fill); --btn-primary-bg-hover:var(--color-brand-fill-hover); --btn-primary-fg:var(--color-text-inverse);
+  --btn-secondary-bg:var(--color-surface); --btn-secondary-fg:var(--color-text-primary); --btn-secondary-border:var(--line-strong); --btn-secondary-border-hover:var(--color-brand-strong);
+  --btn-ghost-bg:transparent; --btn-ghost-fg:var(--color-brand-strong);
+  --btn-danger-bg:#C0392B; --btn-danger-fg:var(--color-text-inverse);
+  --btn-disabled-bg:var(--color-neutral-100); --btn-disabled-fg:var(--color-neutral-500); --btn-disabled-border:var(--line);
   /* input & form */
   --input-h:var(--control-h-md); --input-px:var(--space-3); --input-font:var(--type-body-size);
   --input-bg:var(--color-surface); --input-fg:var(--color-text-primary); --input-placeholder:var(--color-text-tertiary);
-  --input-border:var(--color-neutral-300); --input-border-hover:var(--color-navy-500);
-  --input-border-focus:var(--color-brand); --input-ring-focus:var(--color-focus-ring); --input-ring-w:3px;
+  --input-border:var(--line-control); --input-border-hover:var(--line-control-hover);
+  --input-border-focus:var(--color-brand-strong); --input-ring-focus:color-mix(in srgb, var(--color-brand) 32%, transparent); --input-ring-w:var(--ring-w);
   --input-radius:var(--radius-sm);
   --input-error-border:var(--color-danger); --input-error-ring:color-mix(in srgb, var(--color-danger) 24%, transparent);
   --input-disabled-bg:var(--color-neutral-100);
-  --label-size:var(--type-label-size); --label-color:var(--color-text-secondary); --help-size:var(--type-caption-size); --help-color:var(--color-text-tertiary); --form-error-color:var(--color-danger);
+  --label-size:var(--type-label-size); --label-color:var(--color-text-secondary); --help-size:var(--type-caption-size); --help-color:var(--color-text-secondary); --form-error-color:var(--badge-danger-fg);
   /* checkbox / radio / toggle */
-  --check-size:16px; --check-radius:var(--radius-xs); --check-border:var(--color-neutral-300); --check-bg-on:var(--color-brand); --check-icon-color:var(--color-text-inverse); --check-label-gap:var(--space-2);
-  --radio-size:16px; --radio-dot:8px; --radio-border:var(--color-neutral-300); --radio-dot-color:var(--color-brand);
-  --toggle-w:34px; --toggle-h:20px; --toggle-knob:16px; --toggle-track-off:var(--color-neutral-300); --toggle-track-on:var(--color-brand); --toggle-knob-color:var(--color-surface); --toggle-radius:var(--radius-pill);
+  --check-size:16px; --check-radius:var(--radius-xs); --check-border:var(--line-control); --check-bg-on:var(--color-brand-fill); --check-icon-color:var(--color-text-inverse); --check-label-gap:var(--space-2);
+  --radio-size:16px; --radio-dot:8px; --radio-border:var(--line-control); --radio-dot-color:var(--color-brand);
+  --toggle-w:34px; --toggle-h:20px; --toggle-knob:16px; --toggle-track-off:var(--line-control); --toggle-track-on:var(--color-brand); --toggle-knob-color:var(--color-surface); --toggle-radius:var(--radius-pill);
   /* pill / badge / count / avatar */
   --pill-h-sm:18px; --pill-h-md:22px; --pill-radius:var(--radius-pill); --pill-font:11px; --pill-px:var(--space-2); --pill-dot:6px;
-  --badge-success-bg:var(--color-brand-soft); --badge-success-fg:var(--color-brand-hover);
-  --badge-info-bg:var(--color-info-soft); --badge-info-fg:var(--color-info);
-  --badge-warning-bg:var(--color-amber-soft); --badge-warning-fg:var(--color-orange);
-  --badge-danger-bg:var(--color-danger-soft); --badge-danger-fg:var(--color-danger);
+  --badge-success-bg:var(--color-brand-soft); --badge-success-fg:var(--color-brand-strong);
+  --badge-info-bg:var(--color-info-soft); --badge-info-fg:#1F6FA8;
+  --badge-warning-bg:var(--color-amber-soft); --badge-warning-fg:#9A5B0F;
+  --badge-danger-bg:var(--color-danger-soft); --badge-danger-fg:#C0392B;
   --badge-neutral-bg:var(--color-neutral-100); --badge-neutral-fg:var(--color-neutral-700);
   --badge-radius:var(--radius-xs); --badge-font:11px;
-  --count-bg:var(--color-brand); --count-fg:var(--color-text-inverse); --count-h:18px; --count-px:6px; --count-font:var(--type-micro-size); --count-radius:var(--radius-pill);
+  --count-bg:var(--color-brand-fill); --count-fg:var(--color-text-inverse); --count-h:18px; --count-px:6px; --count-font:var(--type-micro-size); --count-radius:var(--radius-pill);
   --avatar-xl:48px; --avatar-lg:40px; --avatar-md:32px; --avatar-sm:24px; --avatar-xs:18px; --avatar-stack-overlap:-8px;
-  --avatar-bg:var(--color-brand-soft); --avatar-fg:var(--color-brand-hover); --avatar-radius:var(--radius-pill); --avatar-border:var(--color-surface);
+  --avatar-bg:var(--color-brand-soft); --avatar-fg:var(--color-brand-strong); --avatar-radius:var(--radius-pill); --avatar-border:var(--color-surface);
   /* card / stat / progress */
-  --card-bg:var(--color-surface); --card-pad:var(--space-5); --card-radius:var(--radius-md); --card-border:var(--color-border); --card-shadow:var(--shadow-xs);
+  --card-bg:var(--color-surface); --card-pad:var(--space-5); --card-radius:var(--radius-md); --card-border:var(--line); --card-shadow:var(--shadow-xs);
   --card-header-h:52px; --card-footer-h:44px; --card-title-size:var(--type-h3-size); --card-title-color:var(--color-text-primary);
   --stat-label-size:var(--type-label-size); --stat-value-size:var(--type-metric-lg-size); --stat-value-color:var(--color-text-primary);
-  --stat-delta-up:var(--color-brand-hover); --stat-delta-down:var(--color-danger);
+  --stat-delta-up:var(--color-brand-strong); --stat-delta-down:var(--badge-danger-fg);
   --stat-spark-bar-w:4px; --stat-spark-h:24px; --stat-spark-bar:var(--color-brand-soft); --stat-spark-bar-active:var(--color-brand);
   --stat-dot:6px; --stat-dot-color:var(--color-brand);
   --progress-h-sm:4px; --progress-h-md:6px; --progress-h-lg:8px; --progress-track:var(--color-neutral-100); --progress-radius:var(--radius-pill);
@@ -151,73 +163,73 @@ QA risks: 신규 2열 span 카드(cc-wide)와 일반 카드 혼재 그리드 정
   --donut-center-size:var(--type-metric-lg-size); --donut-center-color:var(--color-text-primary); --donut-label-size:var(--type-label-size);
   /* table / feed / task / meter */
   --table-head-h:40px; --table-row-h:46px; --table-head-bg:var(--color-surface-muted); --table-head-fg:var(--color-text-secondary); --table-head-font:var(--type-label-size);
-  --table-border:var(--color-border); --table-zebra:var(--color-surface-muted); --table-cell-px:var(--space-3); --table-font:var(--type-body-size); --table-row-hover:var(--color-brand-soft);
-  --feed-dot:8px; --feed-dot-color:var(--color-brand); --feed-line:var(--color-border); --feed-gap:var(--space-4); --feed-time-size:var(--type-label-size); --feed-time-color:var(--color-text-tertiary);
-  --task-h:var(--control-h-lg); --task-check:var(--check-size); --task-done-fg:var(--color-text-tertiary);
+  --table-border:var(--line); --table-zebra:var(--color-surface-muted); --table-cell-px:var(--space-3); --table-font:var(--type-body-size); --table-row-hover:var(--color-brand-soft);
+  --feed-dot:8px; --feed-dot-color:var(--color-brand); --feed-line:var(--color-border); --feed-gap:var(--space-4); --feed-time-size:var(--type-label-size); --feed-time-color:var(--color-text-secondary);
+  --task-h:var(--control-h-lg); --task-check:var(--check-size); --task-done-fg:var(--color-text-secondary);
   --task-priority-high:var(--color-danger); --task-priority-mid:var(--color-amber); --task-priority-low:var(--color-info);
   --meter-h:var(--space-2); --meter-track:var(--color-neutral-100); --meter-fill:var(--color-brand); --meter-radius:var(--radius-xs);
   /* sidebar / topbar / breadcrumb / segment */
   --sidebar-bg:var(--color-navy-800); --sidebar-item-h:38px; --sidebar-icon:18px;
   --sidebar-fg:var(--color-navy-text); --sidebar-fg-muted:var(--color-navy-muted);
   --sidebar-hover-bg:var(--color-navy-700); --sidebar-active-bg:var(--color-navy-900); --sidebar-active-fg:var(--color-text-inverse);
-  --sidebar-active-bar-w:3px; --sidebar-active-bar:var(--color-brand); --sidebar-rail-w:56px;
+  --sidebar-active-bar-w:var(--accent-w); --sidebar-active-bar:var(--color-brand); --sidebar-rail-w:56px;
   --sidebar-pad:var(--space-4); --sidebar-font:var(--type-body-size); --sidebar-head-font:var(--type-label-size);
-  --topbar-bg:var(--color-surface); --topbar-border:var(--color-border); --topbar-fg:var(--color-text-primary); --topbar-icon:20px; --topbar-pad:var(--space-4);
-  --breadcrumb-font:var(--type-caption-size); --breadcrumb-fg:var(--color-text-secondary); --breadcrumb-current:var(--color-text-primary); --breadcrumb-sep:var(--color-text-tertiary); --breadcrumb-gap:var(--space-2);
-  --segment-h:var(--control-h-sm); --segment-bg:var(--color-neutral-100); --segment-active-bg:var(--color-surface); --segment-fg:var(--color-text-secondary); --segment-active-fg:var(--color-text-primary);
+  --topbar-bg:var(--color-surface); --topbar-border:var(--line); --topbar-fg:var(--color-text-primary); --topbar-icon:20px; --topbar-pad:var(--space-4);
+  --breadcrumb-font:var(--type-caption-size); --breadcrumb-fg:var(--color-text-secondary); --breadcrumb-current:var(--color-text-primary); --breadcrumb-sep:var(--color-text-secondary); --breadcrumb-gap:var(--space-2);
+  --segment-h:var(--control-h-sm); --segment-bg:var(--color-neutral-100); --segment-active-bg:var(--color-surface); --segment-fg:var(--color-neutral-700); --segment-active-fg:var(--color-text-primary);
   --segment-radius:var(--radius-sm); --segment-px:var(--space-3); --segment-font:var(--type-caption-size);
   /* tab / pager / banner / tooltip / empty / skeleton / divider / icon */
-  --tab-h:36px; --tab-font:var(--type-body-size); --tab-fg:var(--color-text-secondary); --tab-active-fg:var(--color-brand-hover);
-  --tab-indicator-w:2px; --tab-indicator:var(--color-brand); --tab-border:var(--color-border); --tab-gap:var(--space-6);
+  --tab-h:36px; --tab-font:var(--type-body-size); --tab-fg:var(--color-text-secondary); --tab-active-fg:var(--color-brand-strong);
+  --tab-indicator-w:2px; --tab-indicator:var(--color-brand); --tab-border:var(--line); --tab-gap:var(--space-6);
   --pager-size:30px; --pager-font:var(--type-caption-size); --pager-fg:var(--color-text-secondary);
-  --pager-active-bg:var(--color-brand); --pager-active-fg:var(--color-text-inverse); --pager-border:var(--color-neutral-300); --pager-radius:var(--radius-sm); --pager-gap:var(--space-1);
-  --banner-py:12px; --banner-px:16px; --banner-icon:16px; --banner-radius:var(--radius-md); --banner-font:var(--type-caption-size);
-  --banner-info-bg:var(--color-info-soft); --banner-info-fg:var(--color-info);
-  --banner-warn-bg:var(--color-amber-soft); --banner-warn-fg:var(--color-orange);
-  --banner-danger-bg:var(--color-danger-soft); --banner-danger-fg:var(--color-danger);
-  --tooltip-bg:var(--color-navy-900); --tooltip-fg:var(--color-text-inverse); --tooltip-font:11px; --tooltip-px:var(--space-2); --tooltip-py:var(--space-1); --tooltip-radius:var(--radius-xs);
+  --pager-active-bg:var(--color-brand-fill); --pager-active-fg:var(--color-text-inverse); --pager-border:var(--line-strong); --pager-radius:var(--radius-sm); --pager-gap:var(--space-1);
+  --banner-py:12px; --banner-px:16px; --banner-icon:16px; --banner-radius:var(--radius-sm); --banner-font:var(--type-caption-size);
+  --banner-info-bg:var(--color-info-soft); --banner-info-fg:#1F6FA8;
+  --banner-warn-bg:var(--color-amber-soft); --banner-warn-fg:#9A5B0F;
+  --banner-danger-bg:var(--color-danger-soft); --banner-danger-fg:#C0392B;
+  --tooltip-bg:var(--color-navy-900); --tooltip-fg:var(--color-text-inverse); --tooltip-font:11px; --tooltip-px:var(--space-2); --tooltip-py:var(--space-1); --tooltip-radius:var(--radius-sm);
   --empty-icon:40px; --empty-icon-color:var(--color-neutral-300); --empty-title-size:var(--type-h3-size); --empty-text-size:var(--type-body-size); --empty-text-color:var(--color-text-secondary); --empty-pad:var(--space-8);
   --skeleton-bg:var(--color-neutral-100); --skeleton-shine:color-mix(in srgb, var(--color-surface) 60%, transparent); --skeleton-radius:var(--radius-xs); --skeleton-h-text:12px; --skeleton-h-title:16px;
-  --divider-color:var(--color-divider); --divider-w:1px; --divider-gap:var(--space-4);
+  --divider-color:var(--line-soft); --divider-w:1px; --divider-gap:var(--space-4);
   --icon-12:12px; --icon-16:16px; --icon-18:18px; --icon-20:20px; --icon-24:24px; --icon-stroke:1.5; --icon-color:var(--color-text-secondary);
 }
 /* ============ L3a OVERLAY — v1.2 확장, 값은 전부 L1/L2 var() 참조 ============ */
 :root{
   --overlay-scrim:color-mix(in srgb, var(--color-navy-900) 48%, transparent);
   --modal-w-sm:400px; --modal-w-md:560px; --modal-w-lg:720px;
-  --modal-pad:var(--space-6); --modal-gap:var(--space-3); --modal-radius:var(--radius-lg);
-  --modal-bg:var(--color-surface); --modal-border:var(--color-border); --modal-shadow:var(--shadow-lg);
-  --modal-header-h:56px; --modal-footer-h:64px; --modal-footer-bg:var(--color-surface-muted);
+  --modal-pad:var(--space-5); --modal-gap:var(--space-3); --modal-radius:var(--radius-md);
+  --modal-bg:var(--color-surface); --modal-border:var(--line); --modal-shadow:var(--shadow-lg);
+  --modal-header-h:48px; --modal-footer-h:56px; --modal-footer-bg:var(--color-surface-muted);
   --modal-title-font:15px; --modal-title-weight:600; --modal-close:24px;
   --drawer-w:320px; --drawer-radius:0; --drawer-shadow:var(--shadow-lg);
   --dropdown-w-sm:160px; --dropdown-w-md:220px; --dropdown-w-lg:280px;
   --dropdown-max-h:280px; --dropdown-pad:var(--space-2); --dropdown-radius:var(--radius-md);
-  --dropdown-bg:var(--color-surface); --dropdown-border:var(--color-border); --dropdown-shadow:var(--shadow-md);
+  --dropdown-bg:var(--color-surface); --dropdown-border:var(--line); --dropdown-shadow:var(--shadow-md);
   --dropdown-item-h:32px; --dropdown-item-px:var(--space-3); --dropdown-item-gap:var(--space-2);
   --dropdown-item-font:13px; --dropdown-item-fg:var(--color-text-primary);
   --dropdown-item-bg-hover:var(--color-neutral-100); --dropdown-item-fg-disabled:var(--color-text-tertiary);
-  --dropdown-sep:var(--color-divider); --dropdown-group-font:10px; --dropdown-group-fg:var(--color-text-tertiary);
+  --dropdown-sep:var(--line-soft); --dropdown-group-font:10px; --dropdown-group-fg:var(--color-text-secondary);
   --dropdown-icon:var(--icon-16);
   --toast-w:340px; --toast-gap:var(--space-2); --toast-py:var(--space-3); --toast-px:var(--space-4);
   --toast-radius:var(--radius-md); --toast-shadow:var(--shadow-md); --toast-icon:var(--icon-18);
-  --toast-title-font:13px; --toast-body-font:12px; --toast-accent-w:3px;
+  --toast-title-font:13px; --toast-body-font:12px; --toast-accent-w:var(--accent-w);
   --popover-w:260px; --popover-py:var(--space-3); --popover-px:var(--space-4);
-  --popover-radius:var(--radius-md); --popover-arrow:7px; --popover-shadow:var(--shadow-md);
+  --popover-radius:var(--radius-md); --popover-arrow:7px; --popover-shadow:0 0 0 1px var(--line),var(--shadow-md);
   --mega-w:960px; --mega-cols:4; --mega-col-gap:var(--space-6); --mega-pad:var(--space-6); --mega-item-h:30px;
   --wizard-step:28px; --wizard-line-w:24px; --wizard-gap:var(--space-2); --wizard-font:12px;
-  --wizard-fg-done:var(--color-brand); --wizard-fg-current:var(--color-text-primary); --wizard-fg-todo:var(--color-neutral-300);
-  --cmdk-w:560px; --cmdk-max-h:360px; --cmdk-row-h:36px; --cmdk-radius:var(--radius-lg); --cmdk-shadow:var(--shadow-lg); --cmdk-hint-font:10px;
-  --kbd-w:22px; --kbd-h:20px; --kbd-radius:var(--radius-xs); --kbd-border:var(--color-neutral-300);
+  --wizard-fg-done:var(--color-brand-strong); --wizard-fg-current:var(--color-text-primary); --wizard-fg-todo:var(--color-neutral-300);
+  --cmdk-w:560px; --cmdk-max-h:360px; --cmdk-row-h:36px; --cmdk-radius:var(--radius-md); --cmdk-shadow:var(--shadow-lg); --cmdk-hint-font:10px;
+  --kbd-w:22px; --kbd-h:20px; --kbd-radius:var(--radius-xs); --kbd-border:var(--line-strong);
   --kbd-bg:var(--color-neutral-100); --kbd-fg:var(--color-neutral-700); --kbd-font:11px;
 }
 /* ============ L3b COMPOSITE DATA VIEWS — v1.2 확장 ============ */
 :root{
   --tree-indent:20px; --tree-row-h:32px; --tree-guide:var(--color-divider); --tree-guide-w:1px;
   --tree-toggle:var(--icon-16); --tree-icon:var(--icon-16); --tree-font:13px;
-  --tree-fg-selected:var(--color-brand-hover); --tree-bg-selected:var(--color-brand-soft);
+  --tree-fg-selected:var(--color-brand-strong); --tree-bg-selected:var(--color-brand-soft);
   --cal-cell-min:104px; --cal-head-h:36px; --cal-cell-pad:var(--space-2); --cal-num-font:12px;
-  --cal-num-fg:var(--color-text-secondary); --cal-num-fg-other:var(--color-text-tertiary);
-  --cal-today-bg:var(--color-brand); --cal-today-fg:var(--color-text-inverse);
+  --cal-num-fg:var(--color-text-secondary); --cal-num-fg-other:var(--color-text-secondary);
+  --cal-today-bg:var(--color-brand-fill); --cal-today-fg:var(--color-text-inverse);
   --cal-event-h:20px; --cal-event-px:var(--space-2); --cal-event-font:11px; --cal-weekend-bg:var(--color-surface-muted);
   --gantt-row-h:36px; --gantt-bar-h:20px; --gantt-bar-radius:var(--radius-xs); --gantt-scale-h:32px;
   --gantt-grid:var(--color-divider); --gantt-label-w:180px; --gantt-milestone:10px; --gantt-dependency:var(--color-neutral-500);
@@ -227,7 +239,7 @@ QA risks: 신규 2열 span 카드(cc-wide)와 일반 카드 혼재 그리드 정
   --kanban-tag-h:18px; --kanban-tag-font:10px;
   --file-row-h:48px; --file-icon:32px; --file-icon-radius:var(--radius-sm); --file-name-font:13px;
   --file-meta-font:11px; --file-thumb:32px;
-  --thread-gap:var(--space-4); --thread-depth-guide:var(--color-border); --thread-depth-guide-w:2px; --thread-indent:28px;
+  --thread-gap:var(--space-4); --thread-depth-guide:var(--color-border); --thread-depth-guide-w:1px; --thread-indent:28px;
   --thread-avatar:var(--avatar-md); --thread-body-fs:13px; --thread-meta-fs:11px;
   --thread-reaction-h:24px; --thread-reaction-px:var(--space-2); --thread-reaction-gap:var(--space-1);
   --heat-cell:12px; --heat-gap:3px; --heat-radius:var(--radius-xs);
@@ -237,25 +249,25 @@ QA risks: 신규 2열 span 카드(cc-wide)와 일반 카드 혼재 그리드 정
   --heat-4:color-mix(in srgb, var(--color-brand) 70%, transparent);
   --heat-5:color-mix(in srgb, var(--color-brand) 100%, transparent);
   --heat-label-font:10px;
-  --timeline-dot:10px; --timeline-line:var(--color-border); --timeline-line-w:2px; --timeline-gap:var(--space-5);
+  --timeline-dot:10px; --timeline-line:var(--color-border); --timeline-line-w:1px; --timeline-gap:var(--space-5);
 }
 /* ============ L3c ADVANCED FORM — v1.2 확장 ============ */
 :root{
   --upload-h:120px; --upload-pad:var(--space-6); --upload-gap:var(--space-2); --upload-radius:var(--radius-md);
-  --upload-border:var(--color-neutral-300); --upload-border-w:1px; --upload-dash:4 3;
+  --upload-border:var(--line-strong); --upload-border-w:1px; --upload-dash:4 3;
   --upload-bg-hover:var(--color-brand-soft); --upload-border-active:var(--color-brand);
   --upload-icon:var(--icon-24); --upload-font:13px; --upload-hint-font:11px;
-  --range-track-h:4px; --range-track:var(--color-neutral-100); --range-fill:var(--color-brand);
+  --range-track-h:4px; --range-track:var(--color-border); --range-fill:var(--color-brand);
   --range-thumb:16px; --range-thumb-border:var(--color-surface); --range-thumb-w:2px;
   --range-tick-h:6px; --range-label-font:11px;
   --rating-size:18px; --rating-gap:var(--space-1); --rating-on:var(--color-amber); --rating-off:var(--color-neutral-300);
   --tag-h:24px; --tag-px:var(--space-2); --tag-gap:var(--space-1); --tag-radius:var(--radius-sm);
-  --tag-bg:var(--color-neutral-100); --tag-fg:var(--color-neutral-700); --tag-font:12px; --tag-close:12px; --tag-limit-fg:var(--color-danger);
+  --tag-bg:var(--color-neutral-100); --tag-fg:var(--color-neutral-700); --tag-font:12px; --tag-close:12px; --tag-limit-fg:var(--badge-danger-fg);
   --step-h:28px; --step-w:36px; --step-radius:var(--radius-sm); --step-btn:var(--icon-16); --step-font:13px;
   --dp-w:260px; --dp-cell:32px; --dp-gap:var(--space-1); --dp-head-h:36px; --dp-cell-font:12px;
   --dp-fg-out:var(--color-text-tertiary); --dp-bg-today:var(--color-neutral-100); --dp-bg-range:var(--color-brand-soft);
-  --dp-bg-sel:var(--color-brand); --dp-fg-sel:var(--color-text-inverse); --dp-dis-fg:var(--color-neutral-300);
-  --counter-font:11px; --counter-warn:var(--color-orange); --counter-over:var(--color-danger);
+  --dp-bg-sel:var(--color-brand-fill); --dp-fg-sel:var(--color-text-inverse); --dp-dis-fg:var(--color-neutral-300);
+  --counter-font:11px; --counter-warn:var(--badge-warning-fg); --counter-over:var(--badge-danger-fg);
   --segbar-h:4px;
   --search-h:var(--control-h-md); --search-radius:var(--radius-sm);
   --switch-alt-w:44px; --switch-alt-h:24px; --switch-alt-knob:18px;
@@ -268,19 +280,36 @@ QA risks: 신규 2열 span 카드(cc-wide)와 일반 카드 혼재 그리드 정
   --stack-seg-1:var(--color-brand); --stack-seg-2:var(--color-info); --stack-seg-3:var(--color-purple);
   --stack-seg-4:var(--color-amber); --stack-seg-5:var(--color-neutral-300);
   --gauge-size:132px; --gauge-thickness:12px; --gauge-track:var(--color-neutral-100); --gauge-value-font:var(--type-metric-lg-size);
-  --funnel-row-h:34px; --funnel-gap:var(--space-1); --funnel-label-font:12px; --funnel-drop-font:11px; --funnel-drop-fg:var(--color-danger);
+  --funnel-row-h:34px; --funnel-gap:var(--space-1); --funnel-label-font:12px; --funnel-drop-font:11px; --funnel-drop-fg:var(--badge-danger-fg);
   --spark-h:24px; --spark-w:80px; --spark-line-w:1.5;
-  --radar-size:200px; --radar-ring:var(--color-divider); --radar-axis:var(--color-border);
+  --radar-size:200px; --radar-ring:var(--color-neutral-300); --radar-axis:var(--color-border);
   --radar-fill-1:color-mix(in srgb, var(--color-brand) 24%, transparent);
   --radar-fill-2:color-mix(in srgb, var(--color-info) 24%, transparent);
   --radar-label-font:11px;
   --prose-measure:640px; --prose-lead-font:15px; --prose-lead-fg:var(--color-text-secondary);
-  --prose-quote-bar:var(--color-brand); --prose-quote-w:3px; --prose-quote-fg:var(--color-text-secondary); --prose-quote-bg:var(--color-surface-muted);
-  --prose-mark-bg:var(--color-amber-soft); --prose-mark-fg:var(--color-orange);
-  --prose-code-bg:var(--color-neutral-100); --prose-code-fg:var(--color-brand-hover);
+  --prose-quote-bar:var(--color-brand); --prose-quote-w:var(--accent-w); --prose-quote-fg:var(--color-text-secondary); --prose-quote-bg:var(--color-surface-muted);
+  --prose-mark-bg:var(--color-amber-soft); --prose-mark-fg:var(--badge-warning-fg);
+  --prose-code-bg:var(--color-neutral-100); --prose-code-fg:var(--color-brand-strong);
   --prose-dt-fg:var(--color-text-secondary); --prose-row-gap:var(--space-3);
-  --prose-fig-cap-font:11px; --prose-fig-cap-fg:var(--color-text-tertiary);
-  --prose-table-head-h:36px; --prose-del-fg:var(--color-danger); --prose-ins-fg:var(--color-brand-hover);
+  --prose-fig-cap-font:11px; --prose-fig-cap-fg:var(--color-text-secondary);
+  --prose-table-head-h:36px; --prose-del-fg:var(--badge-danger-fg); --prose-ins-fg:var(--color-brand-strong);
+}
+/* ============ DARK — <html data-catui-theme="dark"> · L1/L2 원본만 다시 정의하면 L3는 같은 :root에서 다시 계산된다 ============ */
+:root[data-catui-theme="dark"]{
+  color-scheme:dark;
+  --color-page-bg:#111A24; --color-surface:#17222E; --color-surface-muted:#1C2835;
+  --line:color-mix(in srgb, var(--color-text-primary) 12%, transparent); --line-strong:color-mix(in srgb, var(--color-text-primary) 22%, transparent);
+  --line-soft:color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  --line-control:color-mix(in srgb, var(--color-text-primary) 42%, transparent);
+  --line-control-hover:color-mix(in srgb, var(--color-text-primary) 62%, transparent); --color-text-primary:#E6EBF0; --color-text-secondary:#A7B3BF;
+  --color-text-tertiary:#6F7E8C; --color-neutral-100:#223140; --color-neutral-300:#3A4A5A; --color-neutral-500:#7D8B99; --color-neutral-700:#C3CDD6;
+  --color-brand-strong:#4FD1B0; --color-brand-stronger:#6EE0C2; --color-brand-soft:#133A33; --color-brand-fill:#0E7A63;
+  --color-brand-fill-hover:#0B6B57; --color-info-soft:#13293A; --color-amber-soft:#332B12; --color-danger-soft:#3A1C1C; --color-purple-soft:#2C1F36;
+  --color-navy-900:#0D161E; --color-navy-800:#142029; --color-navy-700:#1E2D3A; --color-code-bg:#0B121A; --badge-info-fg:#7CC0EE;
+  --badge-warning-fg:#F2C46B; --badge-danger-fg:#F28B82; --banner-info-fg:#7CC0EE; --banner-warn-fg:#F2C46B; --banner-danger-fg:#F28B82;
+  --shadow-xs:inset 0 1px 0 0 rgba(255,255,255,.03); --shadow-sm:inset 0 1px 0 0 rgba(255,255,255,.04),0 1px 2px rgba(0,0,0,.3);
+  --shadow-md:inset 0 1px 0 0 rgba(255,255,255,.05),0 6px 14px -4px rgba(0,0,0,.5);
+  --shadow-lg:inset 0 1px 0 0 rgba(255,255,255,.06),0 16px 32px -8px rgba(0,0,0,.6);
 }
 /* ============ base reset ============ */
 *,*::before,*::after{box-sizing:border-box}
@@ -548,7 +577,7 @@ svg{display:block}
 .hbar .v{font-family:var(--font-mono);font-size:11px;color:var(--color-text-secondary)}
 .focus-demo{display:flex;flex-direction:column;gap:var(--space-2);align-items:flex-start}
 .focus-demo .fbtn{height:var(--control-h-md);padding:0 var(--space-4);border-radius:var(--btn-radius);background:var(--btn-primary-bg);color:var(--btn-primary-fg);font-size:var(--btn-font-md);font-weight:600;display:inline-flex;align-items:center}
-.focus-demo .fbtn.is-focus{outline:2px solid var(--color-focus-ring);outline-offset:2px}
+.focus-demo .fbtn.is-focus{outline:var(--ring);outline-offset:var(--ring-offset)}
 .focus-demo .fin.is-focus{border-color:var(--input-border-focus);box-shadow:0 0 0 var(--input-ring-w) var(--input-ring-focus)}
 .a11y-check{margin-top:var(--space-4);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-xs);padding:var(--space-4) var(--card-pad)}
 .a11y-check h3{font-size:var(--type-h3-size);font-weight:var(--type-h3-weight);margin-bottom:var(--space-3)}
@@ -573,7 +602,7 @@ svg{display:block}
 .doc-footer .r{font-family:var(--font-mono);font-size:11px;color:var(--color-text-tertiary)}
 /* ---- v1.2 native interaction layer (CSS-only, JS 0) ---- */
 .sr-input{position:absolute;width:1px;height:1px;margin:0;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-.sr-input:focus-visible + label,.sr-input:focus-visible + .lbl{outline:2px solid var(--color-focus-ring);outline-offset:2px;border-radius:var(--radius-xs)}
+.sr-input:focus-visible + label,.sr-input:focus-visible + .lbl{outline:var(--ring);outline-offset:var(--ring-offset);border-radius:var(--radius-xs)}
 .nat-lab{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:var(--type-micro-size);font-weight:var(--type-micro-weight);letter-spacing:var(--type-micro-ls);text-transform:uppercase;line-height:var(--type-micro-lh);color:var(--color-text-tertiary)}
 .dmt summary{list-style:none;cursor:pointer}
 .dmt summary::-webkit-details-marker{display:none}
@@ -785,7 +814,7 @@ svg{display:block}
 .rng::-moz-range-track{height:var(--range-track-h);border-radius:var(--radius-pill);background:var(--range-track)}
 .rng::-moz-range-progress{height:var(--range-track-h);border-radius:var(--radius-pill);background:var(--range-fill)}
 .rng::-moz-range-thumb{width:calc(var(--range-thumb) - 2 * var(--range-thumb-w));height:calc(var(--range-thumb) - 2 * var(--range-thumb-w));border-radius:var(--radius-pill);background:var(--color-brand);border:var(--range-thumb-w) solid var(--range-thumb-border);box-shadow:var(--shadow-xs)}
-.rng:focus-visible{outline:2px solid var(--color-focus-ring);outline-offset:4px;border-radius:var(--radius-xs)}
+.rng:focus-visible{outline:var(--ring);outline-offset:4px;border-radius:var(--radius-xs)}
 .rng-dual{position:relative;height:var(--range-thumb)}
 .rng-dual .rng{position:absolute;left:0;right:0;top:0;pointer-events:none}
 .rng-dual .rng::-webkit-slider-thumb{pointer-events:auto}
@@ -950,7 +979,7 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
 .fl-prog::-webkit-progress-value{background:var(--progress-bar-1);border-radius:var(--radius-pill)}
 .g-rows{position:relative}
 .rate .icon,.rate-half .icon,.rate-static .icon{fill:currentColor;stroke:none}
-.rate label:focus-visible{outline:2px solid var(--color-focus-ring);outline-offset:2px;border-radius:var(--radius-xs)}
+.rate label:focus-visible{outline:var(--ring);outline-offset:var(--ring-offset);border-radius:var(--radius-xs)}
 .dmt > summary.btn{user-select:none}
 .spk svg path.ln{fill:none;stroke:var(--chart-series-1);stroke-width:var(--spark-line-w);stroke-linejoin:round;stroke-linecap:round}
 .spk svg path.ar{fill:var(--chart-area-fill);stroke:none}
@@ -1060,14 +1089,14 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
     <a class="rl-item" href="#sec-12"><span class="n">12</span> Governance</a>
   </nav>
   <div class="rl-meta" data-lvt-eid="55629313e7">
-    <div class="rl-meta-row" data-lvt-eid="97e190b1da"><span class="rl-meta-k" data-lvt-eid="92f0a4da4f">Token set</span><span class="rl-meta-v" data-lvt-eid="96668a384f">v1.2</span></div>
+    <div class="rl-meta-row" data-lvt-eid="97e190b1da"><span class="rl-meta-k" data-lvt-eid="92f0a4da4f">Token set</span><span class="rl-meta-v" data-lvt-eid="96668a384f">v1.3</span></div>
     <div class="rl-meta-row" data-lvt-eid="8bbaac49f0"><span class="rl-meta-k" data-lvt-eid="4ac4db9c42">Base</span><span class="rl-meta-v" data-lvt-eid="8eae1920f9">Gentelella</span></div>
     <div class="rl-meta-row" data-lvt-eid="be01b69336"><span class="rl-meta-k" data-lvt-eid="f717476998">Runtime</span><span class="rl-meta-v" data-lvt-eid="34e44a7a3c">No JS</span></div>
   </div>
 </aside>
 <!-- <992px 상단 가로 스트립 -->
 <div class="m-strip" data-lvt-eid="bc467f5a59">
-  <div class="m-strip-row" data-lvt-eid="9c7cccbf7c"><span class="rl-tile" aria-hidden="true" data-lvt-eid="dd68522980">P</span><b data-lvt-eid="c57da2e82f">Playbook</b><span class="ms-meta" data-lvt-eid="04b8b45497">TOKEN SET v1.2 · BASE Gentelella · RUNTIME No JS</span></div>
+  <div class="m-strip-row" data-lvt-eid="9c7cccbf7c"><span class="rl-tile" aria-hidden="true" data-lvt-eid="dd68522980">P</span><b data-lvt-eid="c57da2e82f">Playbook</b><span class="ms-meta" data-lvt-eid="04b8b45497">TOKEN SET v1.3 · BASE Gentelella · RUNTIME No JS</span></div>
   <nav class="m-nav" aria-label="목차(모바일)" data-lvt-eid="625f1c1eb4">
     <a class="active" href="#sec-00">00 Overview</a><a href="#sec-01">01 Color Rules</a><a href="#sec-02">02 Typography Rules</a><a href="#sec-03">03 Spacing Rules</a><a href="#sec-04">04 Component Contracts</a><a href="#sec-05">05 Overlay &amp; Navigation</a><a href="#sec-06">06 Composite Data Views</a><a href="#sec-07">07 Advanced Form Controls</a><a href="#sec-08">08 Charts &amp; Prose</a><a href="#sec-09">09 Composition Patterns</a><a href="#sec-10">10 Accessibility</a><a href="#sec-11">11 Token Cheat Sheet</a><a href="#sec-12">12 Governance</a>
   </nav>
@@ -1117,6 +1146,17 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
       <span class="cov-note">기존 12 개 계약 + 신규 42 개 계약 = 총 54 종</span>
     </div>
   </figure>
+  <h3 class="sub-h"><span class="n">0-1</span>Visual principles</h3>
+  <ul class="rule-list">
+    <li><b>선은 1px</b> — 모든 테두리는 hairline <code>--line-w</code>. 2px 이상은 포커스 링·활성 표시줄(탭 밑줄·옆 막대·진행)만.</li>
+    <li><b>잉크 테두리</b> — 선 색은 고정 회색이 아니라 글자색 반투명: <code>--line</code> · <code>--line-strong</code>(hover·버튼) · <code>--line-soft</code>(구분선) · <code>--line-control</code>(입력·체크, 비텍스트 3:1).</li>
+    <li><b>모서리 단계</b> — xs 2 · sm 4 · md 6 · lg 8 · xl 10. 버튼·입력 4, 카드·메뉴·토스트·모달 6, 큰 면 8. pill 은 배지·토글·아바타만.</li>
+    <li><b>그림자는 층만</b> — 윤곽은 선이, 그림자는 떠 있는 층(메뉴·토스트·모달)에 얕고 짧게. 다크는 위쪽 1px 밝은 inset.</li>
+    <li><b>유리는 떠 있는 층만</b> — 상단 바·메뉴·토스트·아래 고정 줄·대화상자 덮개에 <code>--glass-*</code>. 본문 카드·표·폼 금지, 미지원·투명도 줄이기·강제 색에서는 불투명 면.</li>
+    <li><b>대비</b> — 글자 4.5:1(큰 글자 3:1), 비텍스트(입력 테두리·포커스·상태 표식) 3:1. 포커스는 <code>--ring</code> 2px + offset 2.</li>
+    <li><b>상태는 색 + 형태</b> — 색만으로 알리지 않는다(아이콘·글자·굵기·막대 <code>--accent-w</code>를 함께).</li>
+    <li><b>간격은 4px 격자</b> — <code>--space-*</code> 만 쓴다.</li>
+  </ul>
 </section>
 
 <!-- ========== 01 · Color Rules ========== -->
@@ -1137,12 +1177,12 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
   <div class="card" data-lvt-eid="86220cde3a"><div class="card-b" style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--space-7)" data-lvt-eid="0f58a68f6c">
     <div data-lvt-eid="7a71df5eae">
       <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-2) var(--space-5)" data-lvt-eid="0fadda8d4a">
-        <div class="sw-pair" data-lvt-eid="6b2fb2a2a2"><span class="sw sw-sm" style="background:var(--color-surface);color:var(--color-brand)" data-lvt-eid="d7c7b4a932">brand</span><span class="sw-aa" data-lvt-eid="143ecab591"><b data-lvt-eid="0cff008096">AA</b>13px</span></div>
+        <div class="sw-pair" data-lvt-eid="6b2fb2a2a2"><span class="sw sw-sm" style="background:var(--color-surface);color:var(--color-brand-strong)" data-lvt-eid="d7c7b4a932">brand-strong</span><span class="sw-aa" data-lvt-eid="143ecab591"><b data-lvt-eid="0cff008096">AA</b>13px</span></div>
         <div class="sw-pair" data-lvt-eid="27c946469a"><span class="sw sw-sm" style="background:var(--color-navy-800);color:var(--color-navy-text);border-color:var(--color-navy-800)" data-lvt-eid="ab84406a58">navy-text</span><span class="sw-aa" data-lvt-eid="51b0d0023d"><b data-lvt-eid="81a9efa699">AA</b>13px</span></div>
-        <div class="sw-pair" data-lvt-eid="d8dac6915a"><span class="sw sw-sm" style="background:var(--color-brand-soft);color:var(--color-brand-hover);border-color:var(--color-brand-soft)" data-lvt-eid="f615e07601">brand-hover</span><span class="sw-aa" data-lvt-eid="9e810420ce"><b data-lvt-eid="bb622116af">AA</b>13px</span></div>
-        <div class="sw-pair" data-lvt-eid="5b35997e12"><span class="sw sw-sm" style="background:var(--color-info-soft);color:var(--color-info);border-color:var(--color-info-soft)" data-lvt-eid="11a35e95b2">info</span><span class="sw-aa" data-lvt-eid="5a9b180354"><b data-lvt-eid="50e774a30f">AA</b>13px</span></div>
-        <div class="sw-pair" data-lvt-eid="7b159ef9be"><span class="sw sw-sm" style="background:var(--color-amber-soft);color:var(--color-orange);border-color:var(--color-amber-soft)" data-lvt-eid="22ad0a2c10">orange</span><span class="sw-aa" data-lvt-eid="c17d83be9d"><b data-lvt-eid="b65322de69">AA</b>13px</span></div>
-        <div class="sw-pair" data-lvt-eid="994ef19ea8"><span class="sw sw-sm" style="background:var(--color-danger-soft);color:var(--color-danger);border-color:var(--color-danger-soft)" data-lvt-eid="435831642d">danger</span><span class="sw-aa" data-lvt-eid="3e12b0413f"><b data-lvt-eid="b8ec426995">AA</b>13px</span></div>
+        <div class="sw-pair" data-lvt-eid="d8dac6915a"><span class="sw sw-sm" style="background:var(--color-brand-soft);color:var(--badge-success-fg);border-color:var(--color-brand-soft)" data-lvt-eid="f615e07601">badge-success-fg</span><span class="sw-aa" data-lvt-eid="9e810420ce"><b data-lvt-eid="bb622116af">AA</b>13px</span></div>
+        <div class="sw-pair" data-lvt-eid="5b35997e12"><span class="sw sw-sm" style="background:var(--color-info-soft);color:var(--badge-info-fg);border-color:var(--color-info-soft)" data-lvt-eid="11a35e95b2">badge-info-fg</span><span class="sw-aa" data-lvt-eid="5a9b180354"><b data-lvt-eid="50e774a30f">AA</b>13px</span></div>
+        <div class="sw-pair" data-lvt-eid="7b159ef9be"><span class="sw sw-sm" style="background:var(--color-amber-soft);color:var(--badge-warning-fg);border-color:var(--color-amber-soft)" data-lvt-eid="22ad0a2c10">badge-warning-fg</span><span class="sw-aa" data-lvt-eid="c17d83be9d"><b data-lvt-eid="b65322de69">AA</b>13px</span></div>
+        <div class="sw-pair" data-lvt-eid="994ef19ea8"><span class="sw sw-sm" style="background:var(--color-danger-soft);color:var(--badge-danger-fg);border-color:var(--color-danger-soft)" data-lvt-eid="435831642d">badge-danger-fg</span><span class="sw-aa" data-lvt-eid="3e12b0413f"><b data-lvt-eid="b8ec426995">AA</b>13px</span></div>
       </div>
     </div>
     <ul class="rule-list" data-lvt-eid="af2b384c2c">
@@ -1292,7 +1332,7 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
           <div style="display:flex;align-items:center;gap:var(--space-2)" data-lvt-eid="de503a01d0"><span class="state-tag" style="flex:none;width:40px" data-lvt-eid="b304753e5e">select</span><div class="input sel" data-lvt-eid="a112f667fa">All status</div></div>
         </div>
         <div class="cc-rules" data-lvt-eid="c13a82ad6f">
-          <div class="rule" data-lvt-eid="3043d6c616"><span class="rl rl-must" data-lvt-eid="2d9273dc20">MUST</span><p data-lvt-eid="d668b49feb">포커스는 테두리 + 3px 링을 동시에 표시한다.</p></div>
+          <div class="rule" data-lvt-eid="3043d6c616"><span class="rl rl-must" data-lvt-eid="2d9273dc20">MUST</span><p data-lvt-eid="d668b49feb">포커스는 테두리(brand-strong) + 2px 링(<code>--input-ring-w</code>)을 동시에 표시한다.</p></div>
           <div class="rule" data-lvt-eid="b13026a671"><span class="rl rl-should" data-lvt-eid="963311b342">SHOULD</span><p data-lvt-eid="5ba356739d">라벨은 위, 헬프는 아래 — placeholder 를 라벨 대신 쓰지 않는다.</p></div>
           <div class="rule" data-lvt-eid="c6c318d345"><span class="rl rl-never" data-lvt-eid="d372d7056e">NEVER</span><p data-lvt-eid="efaba2f9f9">에러를 색만으로 전달하지 않는다(헬프 문장 병기).</p></div>
         </div>
@@ -1391,7 +1431,7 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
         </div>
         <div class="cc-rules" data-lvt-eid="fb11b2b7a4">
           <div class="rule" data-lvt-eid="28a66fd6ff"><span class="rl rl-must" data-lvt-eid="5669028444">MUST</span><p data-lvt-eid="0963adcfd7">헤더 52px · 푸터 44px 높이를 고정한다.</p></div>
-          <div class="rule" data-lvt-eid="b43694f0c9"><span class="rl rl-should" data-lvt-eid="818a87197c">SHOULD</span><p data-lvt-eid="ece91ac64a">패딩 20 · radius 8 · shadow-xs 가 기본값.</p></div>
+          <div class="rule" data-lvt-eid="b43694f0c9"><span class="rl rl-should" data-lvt-eid="818a87197c">SHOULD</span><p data-lvt-eid="ece91ac64a">패딩 20 · radius 6(--radius-md) · 테두리 --line 1px · shadow-xs 가 기본값.</p></div>
           <div class="rule" data-lvt-eid="ba90348edb"><span class="rl rl-never" data-lvt-eid="f2d17d6d2a">NEVER</span><p data-lvt-eid="c255cfdb42">카드 안에 md 이상 그림자를 중첩하지 않는다.</p></div>
         </div>
       </div>
@@ -2159,7 +2199,7 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
             </div>
             <div style="display:flex;gap:var(--space-2);align-items:center"><span class="av av-md">JD</span><div class="input" style="flex:1"><span class="ph">답글 입력…</span></div></div>
           </div>
-          <span class="sample-note">깊이 3 · 들여쓰기 28 + 가이드 2px border · 리액션 칩 24</span>
+          <span class="sample-note">깊이 3 · 들여쓰기 28 + 가이드 1px border · 리액션 칩 24</span>
         </div>
         <div class="cc-rules">
           <div class="rule"><span class="rl rl-must">MUST</span><p>깊이 가이드는 2px <code>--thread-depth-guide</code> + 들여쓰기 28.</p></div>
@@ -2205,7 +2245,7 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
             <div class="atl-item"><span class="av av-sm">EL</span><span class="atl-main"><b>Emily L.</b> 가 초안을 폐기했습니다<span class="atl-time">Sep 12</span></span><span class="pill pill-danger">Cancelled</span></div>
             <div class="atl-item"><span class="av av-sm">MR</span><span class="atl-main"><b>Michael R.</b> 가 문서를 저장했습니다<span class="atl-time">Sep 12</span></span><span class="pill pill-neutral">Draft</span></div>
           </div>
-          <span class="sample-note">세로선 2px border + 도트 10 · 간격 --timeline-gap 20</span>
+          <span class="sample-note">세로선 1px border + 도트 10 · 간격 --timeline-gap 20</span>
         </div>
         <div class="cc-rules">
           <div class="rule"><span class="rl rl-must">MUST</span><p>선은 2px <code>--timeline-line</code>, 도트는 10px brand.</p></div>
@@ -2321,19 +2361,19 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
       <div class="focus-demo" data-lvt-eid="d9df42f9aa">
         <span class="fbtn is-focus" data-lvt-eid="6b120003b4">Focused button</span>
         <div class="input fin is-focus" style="width:100%" data-lvt-eid="12f95006cb">Focused input</div>
-        <span style="display:inline-flex;align-items:center;gap:var(--space-2)" data-lvt-eid="5a94478414"><span class="cbx on" style="outline:2px solid var(--color-focus-ring);outline-offset:2px" data-lvt-eid="356be7c555"><svg class="icon i12" data-lvt-eid="af72aa3a6c"><use href="#ic-check" data-lvt-eid="54d19592a0"></use></svg></span><span style="font-size:12px;color:var(--color-text-secondary)" data-lvt-eid="f3d48fb2b0">Focused checkbox</span></span>
+        <span style="display:inline-flex;align-items:center;gap:var(--space-2)" data-lvt-eid="5a94478414"><span class="cbx on" style="outline:var(--ring);outline-offset:var(--ring-offset)" data-lvt-eid="356be7c555"><svg class="icon i12" data-lvt-eid="af72aa3a6c"><use href="#ic-check" data-lvt-eid="54d19592a0"></use></svg></span><span style="font-size:12px;color:var(--color-text-secondary)" data-lvt-eid="f3d48fb2b0">Focused checkbox</span></span>
       </div>
-      <p data-lvt-eid="f984fde02f">링은 2px <code data-lvt-eid="b29e807f6b">--color-focus-ring</code> + offset 2. 호버와 포커스 스타일을 분리하고 색만으로 상태를 전달하지 않는다. JS 없는 페이지에서는 <code data-lvt-eid="3400f9c331">:focus-visible</code> CSS 만 사용한다.</p>
+      <p data-lvt-eid="f984fde02f">링은 <code data-lvt-eid="b29e807f6b">--ring</code>(2px <code>--color-focus-ring</code> = brand-strong) + <code>--ring-offset</code> 2. 호버와 포커스 스타일을 분리하고 색만으로 상태를 전달하지 않는다. JS 없는 페이지에서는 <code data-lvt-eid="3400f9c331">:focus-visible</code> CSS 만 사용한다.</p>
     </div>
     <div class="a11y-card" data-lvt-eid="64301501d1">
       <div class="lab" data-lvt-eid="c21a0b2326">Text contrast</div>
       <div style="display:grid;gap:4px" data-lvt-eid="9d9edbdec6">
-        <div class="sw-pair" data-lvt-eid="c6b7f45cd0"><span class="sw" style="height:32px;font-size:11px;background:var(--color-surface);color:var(--color-brand)" data-lvt-eid="c2f4d9f52c">brand</span><span class="sw-aa" data-lvt-eid="c3958f6ec1"><b data-lvt-eid="a065301f25">AA</b>13px</span></div>
+        <div class="sw-pair" data-lvt-eid="c6b7f45cd0"><span class="sw" style="height:32px;font-size:11px;background:var(--color-surface);color:var(--color-brand-strong)" data-lvt-eid="c2f4d9f52c">brand-strong</span><span class="sw-aa" data-lvt-eid="c3958f6ec1"><b data-lvt-eid="a065301f25">AA</b>13px</span></div>
         <div class="sw-pair" data-lvt-eid="c0a6181ea3"><span class="sw" style="height:32px;font-size:11px;background:var(--color-navy-800);color:var(--color-navy-text);border-color:var(--color-navy-800)" data-lvt-eid="ed912e02eb">navy-text</span><span class="sw-aa" data-lvt-eid="b7a7281b1f"><b data-lvt-eid="967f82c118">AA</b>13px</span></div>
-        <div class="sw-pair" data-lvt-eid="7bbacc5982"><span class="sw" style="height:32px;font-size:11px;background:var(--color-brand-soft);color:var(--color-brand-hover);border-color:var(--color-brand-soft)" data-lvt-eid="0af0a589b8">brand-hover</span><span class="sw-aa" data-lvt-eid="29587c748b"><b data-lvt-eid="caabfb1cab">AA</b>13px</span></div>
-        <div class="sw-pair" data-lvt-eid="25f23aae15"><span class="sw" style="height:32px;font-size:11px;background:var(--color-info-soft);color:var(--color-info);border-color:var(--color-info-soft)" data-lvt-eid="c7c8f24002">info</span><span class="sw-aa" data-lvt-eid="57aa71ba21"><b data-lvt-eid="fd26fd3bab">AA</b>13px</span></div>
-        <div class="sw-pair" data-lvt-eid="38f1d744cd"><span class="sw" style="height:32px;font-size:11px;background:var(--color-amber-soft);color:var(--color-orange);border-color:var(--color-amber-soft)" data-lvt-eid="73680f1fe1">orange</span><span class="sw-aa" data-lvt-eid="611746eb88"><b data-lvt-eid="7a71eb161f">AA</b>13px</span></div>
-        <div class="sw-pair" data-lvt-eid="13a5da192f"><span class="sw" style="height:32px;font-size:11px;background:var(--color-danger-soft);color:var(--color-danger);border-color:var(--color-danger-soft)" data-lvt-eid="a2928d5fe6">danger</span><span class="sw-aa" data-lvt-eid="49b72dc856"><b data-lvt-eid="6bd551aeb3">AA</b>13px</span></div>
+        <div class="sw-pair" data-lvt-eid="7bbacc5982"><span class="sw" style="height:32px;font-size:11px;background:var(--color-brand-soft);color:var(--badge-success-fg);border-color:var(--color-brand-soft)" data-lvt-eid="0af0a589b8">badge-success-fg</span><span class="sw-aa" data-lvt-eid="29587c748b"><b data-lvt-eid="caabfb1cab">AA</b>13px</span></div>
+        <div class="sw-pair" data-lvt-eid="25f23aae15"><span class="sw" style="height:32px;font-size:11px;background:var(--color-info-soft);color:var(--badge-info-fg);border-color:var(--color-info-soft)" data-lvt-eid="c7c8f24002">badge-info-fg</span><span class="sw-aa" data-lvt-eid="57aa71ba21"><b data-lvt-eid="fd26fd3bab">AA</b>13px</span></div>
+        <div class="sw-pair" data-lvt-eid="38f1d744cd"><span class="sw" style="height:32px;font-size:11px;background:var(--color-amber-soft);color:var(--badge-warning-fg);border-color:var(--color-amber-soft)" data-lvt-eid="73680f1fe1">badge-warning-fg</span><span class="sw-aa" data-lvt-eid="611746eb88"><b data-lvt-eid="7a71eb161f">AA</b>13px</span></div>
+        <div class="sw-pair" data-lvt-eid="13a5da192f"><span class="sw" style="height:32px;font-size:11px;background:var(--color-danger-soft);color:var(--badge-danger-fg);border-color:var(--color-danger-soft)" data-lvt-eid="a2928d5fe6">badge-danger-fg</span><span class="sw-aa" data-lvt-eid="49b72dc856"><b data-lvt-eid="6bd551aeb3">AA</b>13px</span></div>
       </div>
       <p data-lvt-eid="8e52ac2968">본문 4.5:1, 11px 라벨은 13px 이상 크기로 올린다.</p>
     </div>
@@ -2357,7 +2397,7 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
 <section class="sec" id="sec-11" data-lvt-eid="68ee6eb025">
   <header class="sec-head" data-lvt-eid="e0e4f7d506"><span class="sec-num" data-lvt-eid="3ecbde0776">11</span><h2 class="sec-title" data-lvt-eid="8acf7e5ebf">Token Cheat Sheet</h2><span class="sec-sub" data-lvt-eid="c48d7abdb5">1·2·3층 변수 전체 목록</span></header>
   <div class="cheat-head" data-lvt-eid="5c2ddece14">
-    <span class="meta-k" style="color:var(--color-text-secondary)" data-lvt-eid="f314a5f104">All layers · v1.1</span>
+    <span class="meta-k" style="color:var(--color-text-secondary)" data-lvt-eid="f314a5f104">All layers · v1.3</span>
     <div class="chips" aria-label="층 필터(정적)" data-lvt-eid="5ab3ce578a"><span class="chip" data-lvt-eid="c1969e5de2">L1</span><span class="chip" data-lvt-eid="ad9e808da5">L2</span><span class="chip active" data-lvt-eid="3fff1bb567">L3 Component</span></div>
   </div>
   <div class="cheat" data-lvt-eid="7aff651877">
@@ -2366,49 +2406,59 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
 <span class="k" data-lvt-eid="ed0e50e6df">--color-brand</span>: <span class="v" data-lvt-eid="180220fab8">#26B99A</span>;  <span class="k" data-lvt-eid="beda26a6bf">--color-brand-hover</span>: <span class="v" data-lvt-eid="ae74170c5b">#1FA188</span>;  <span class="k" data-lvt-eid="cc356208ee">--color-brand-soft</span>: <span class="v" data-lvt-eid="23f0128711">#E6F7F3</span>;
 <span class="k" data-lvt-eid="08e7800062">--color-info</span>: <span class="v" data-lvt-eid="b61ad1bcfc">#3498DB</span>;  <span class="k" data-lvt-eid="8cd84c1d64">--color-info-soft</span>: <span class="v" data-lvt-eid="20c80d1e38">#EAF4FB</span>;  <span class="k" data-lvt-eid="8dc2cdc537">--color-purple</span>: <span class="v" data-lvt-eid="65806d5d66">#9B59B6</span>;  <span class="k" data-lvt-eid="e57720f82e">--color-purple-soft</span>: <span class="v" data-lvt-eid="2722dd976f">#F5EBF8</span>;
 <span class="k" data-lvt-eid="cb1f98a93f">--color-amber</span>: <span class="v" data-lvt-eid="af5092f401">#F1C40F</span>;  <span class="k" data-lvt-eid="04f1aadb35">--color-amber-soft</span>: <span class="v" data-lvt-eid="cafefc0120">#FEF7E0</span>;  <span class="k" data-lvt-eid="464cf7c722">--color-orange</span>: <span class="v" data-lvt-eid="839ab446d1">#E67E22</span>;  <span class="k" data-lvt-eid="a82a2419ef">--color-danger</span>: <span class="v" data-lvt-eid="22451160bb">#E74C3C</span>;  <span class="k" data-lvt-eid="88762d44ca">--color-danger-soft</span>: <span class="v" data-lvt-eid="7ae4b1ad11">#FDECEA</span>;
-<span class="k" data-lvt-eid="3f29a954ae">--color-page-bg</span>: <span class="v" data-lvt-eid="eecf47eddb">#F7F8FA</span>;  <span class="k" data-lvt-eid="5e1c4baa9f">--color-surface</span>: <span class="v" data-lvt-eid="1f8db9afea">#FFFFFF</span>;  <span class="k" data-lvt-eid="cb234c1719">--color-surface-muted</span>: <span class="v" data-lvt-eid="d51ab1bfc5">#FAFBFC</span>;  <span class="k" data-lvt-eid="1f4eafae02">--color-border</span>: <span class="v" data-lvt-eid="2bbaaa3d3b">#E6E9ED</span>;  <span class="k" data-lvt-eid="04d56ab1d0">--color-divider</span>: <span class="v" data-lvt-eid="0c10be297a">#EEF1F4</span>;
-<span class="k" data-lvt-eid="258a9f37db">--color-navy-900</span>: <span class="v" data-lvt-eid="9c227b2660">#243444</span>;  <span class="k" data-lvt-eid="3380fe155b">--color-navy-800</span>: <span class="v" data-lvt-eid="f846371ecc">#2A3F54</span>;  <span class="k" data-lvt-eid="d4662adbfe">--color-navy-700</span>: <span class="v" data-lvt-eid="e18308976b">#334B63</span>;  <span class="k" data-lvt-eid="3c6fc0b719">--color-navy-500</span>: <span class="v" data-lvt-eid="adf1812ef2">#5A7184</span>;  <span class="k" data-lvt-eid="d403811dbd">--color-navy-text</span>: <span class="v" data-lvt-eid="620d440c8f">#DDE4EA</span>;  <span class="k" data-lvt-eid="cfeaae01db">--color-navy-muted</span>: <span class="v" data-lvt-eid="05ef06b823">#8FA0B3</span>;
-<span class="k" data-lvt-eid="7ac9b7cf0d">--color-text-primary</span>: <span class="v" data-lvt-eid="d8f41edecf">#2C3E50</span>;  <span class="k" data-lvt-eid="bf360bea64">--color-text-secondary</span>: <span class="v" data-lvt-eid="49bb75d828">#6C7A89</span>;  <span class="k" data-lvt-eid="c988fc1733">--color-text-tertiary</span>: <span class="v" data-lvt-eid="9d86b6c056">#9AA5B1</span>;  <span class="k" data-lvt-eid="b42cc3a7bd">--color-text-inverse</span>: <span class="v" data-lvt-eid="3a7bc1850b">#FFFFFF</span>;
+<span class="k" data-lvt-eid="3f29a954ae">--color-page-bg</span>: <span class="v" data-lvt-eid="eecf47eddb">#F7F8FA</span>;  <span class="k" data-lvt-eid="5e1c4baa9f">--color-surface</span>: <span class="v" data-lvt-eid="1f8db9afea">#FFFFFF</span>;  <span class="k" data-lvt-eid="cb234c1719">--color-surface-muted</span>: <span class="v" data-lvt-eid="d51ab1bfc5">#FAFBFC</span>;  <span class="k" data-lvt-eid="1f4eafae02">--color-border</span>: <span class="v" data-lvt-eid="2bbaaa3d3b">--line</span>;  <span class="k" data-lvt-eid="04d56ab1d0">--color-divider</span>: <span class="v" data-lvt-eid="0c10be297a">--line-soft</span>;
+<span class="c">/* line · ring · glass — 선은 text-primary 반투명 잉크, 굵은 선은 --accent-w 뿐 */</span>
+<span class="k">--line</span>: <span class="v">color-mix(--color-text-primary 14%)</span>;  <span class="k">--line-strong</span>: <span class="v">color-mix(--color-text-primary 24%)</span>;  <span class="k">--line-soft</span>: <span class="v">color-mix(--color-text-primary 8%)</span>;
+<span class="k">--line-control</span>: <span class="v">color-mix(--color-text-primary 56%)</span>;  <span class="k">--line-control-hover</span>: <span class="v">color-mix(--color-text-primary 74%)</span>;  <span class="k">--line-w</span>: <span class="v">1px</span>;  <span class="k">--accent-w</span>: <span class="v">3px</span>;
+<span class="k">--ring-w</span>: <span class="v">2px</span>;  <span class="k">--ring-offset</span>: <span class="v">2px</span>;  <span class="k">--ring</span>: <span class="v">--ring-w solid --color-focus-ring</span>;
+<span class="k">--glass-bg</span>: <span class="v">color-mix(--color-surface 82%)</span>;  <span class="k">--glass-bg-strong</span>: <span class="v">color-mix(--color-surface 92%)</span>;  <span class="k">--glass-border</span>: <span class="v">--line</span>;  <span class="k">--glass-blur</span>: <span class="v">saturate(140%) blur(12px)</span>;
+<span class="k" data-lvt-eid="258a9f37db">--color-navy-900</span>: <span class="v" data-lvt-eid="9c227b2660">#243444</span>;  <span class="k" data-lvt-eid="3380fe155b">--color-navy-800</span>: <span class="v" data-lvt-eid="f846371ecc">#2A3F54</span>;  <span class="k" data-lvt-eid="d4662adbfe">--color-navy-700</span>: <span class="v" data-lvt-eid="e18308976b">#334B63</span>;  <span class="k" data-lvt-eid="3c6fc0b719">--color-navy-500</span>: <span class="v" data-lvt-eid="adf1812ef2">#5A7184</span>;  <span class="k" data-lvt-eid="d403811dbd">--color-navy-text</span>: <span class="v" data-lvt-eid="620d440c8f">#DDE4EA</span>;  <span class="k" data-lvt-eid="cfeaae01db">--color-navy-muted</span>: <span class="v" data-lvt-eid="05ef06b823">#9FACBB</span>;
+<span class="k" data-lvt-eid="7ac9b7cf0d">--color-text-primary</span>: <span class="v" data-lvt-eid="d8f41edecf">#2C3E50</span>;  <span class="k" data-lvt-eid="bf360bea64">--color-text-secondary</span>: <span class="v" data-lvt-eid="49bb75d828">#66727E</span>;  <span class="k" data-lvt-eid="c988fc1733">--color-text-tertiary</span>: <span class="v" data-lvt-eid="9d86b6c056">#9AA5B1</span>;  <span class="k" data-lvt-eid="b42cc3a7bd">--color-text-inverse</span>: <span class="v" data-lvt-eid="3a7bc1850b">#FFFFFF</span>;
 <span class="k" data-lvt-eid="57c1280256">--color-neutral-100</span>: <span class="v" data-lvt-eid="e8fb814e6b">#F2F4F6</span>;  <span class="k" data-lvt-eid="14c2c42bf9">--color-neutral-300</span>: <span class="v" data-lvt-eid="7f4af053ec">#D5DBE1</span>;  <span class="k" data-lvt-eid="16270cae89">--color-neutral-500</span>: <span class="v" data-lvt-eid="5d606c2932">#8C99A6</span>;  <span class="k" data-lvt-eid="6acc9ac762">--color-neutral-700</span>: <span class="v" data-lvt-eid="66a5ffd441">#4A5A68</span>;
 <span class="k" data-lvt-eid="b8656efea0">--color-code-bg</span>: <span class="v" data-lvt-eid="baa3da648c">#1F2A37</span>;  <span class="k" data-lvt-eid="ecd190cb38">--color-code-text</span>: <span class="v" data-lvt-eid="258fbe3cd2">#E5EAF0</span>;  <span class="k" data-lvt-eid="d67449d44a">--color-code-key</span>: <span class="v" data-lvt-eid="0281792da1">#7FD8BE</span>;  <span class="k" data-lvt-eid="866fa47a71">--color-code-val</span>: <span class="v" data-lvt-eid="e6e0f36b3a">#F5C26B</span>;  <span class="k" data-lvt-eid="9cd34c243e">--color-code-comment</span>: <span class="v" data-lvt-eid="4e3324c7c3">#8FA0B3</span>;
-<span class="k" data-lvt-eid="c307c52a14">--font-ui</span>: <span class="v" data-lvt-eid="97edeea629">'Inter', … , sans-serif</span>;  <span class="k" data-lvt-eid="2a9032679b">--font-mono</span>: <span class="v" data-lvt-eid="7f5f9d6033">ui-monospace, … , monospace</span>;
+<span class="k" data-lvt-eid="c307c52a14">--font-ui</span>: <span class="v" data-lvt-eid="97edeea629">'Inter','Helvetica Neue',Helvetica,Arial,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif</span>;  <span class="k" data-lvt-eid="2a9032679b">--font-mono</span>: <span class="v" data-lvt-eid="7f5f9d6033">ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace</span>;
 <span class="c" data-lvt-eid="05c83cd578">/* type scale */</span>
 <span class="k" data-lvt-eid="bbf3153d95">--type-display</span>: <span class="v" data-lvt-eid="8e1b345139">30/700/1.25/-0.01em</span>;  <span class="k" data-lvt-eid="a21e8194fa">--type-h1</span>: <span class="v" data-lvt-eid="3124451a7c">24/600/1.3</span>;  <span class="k" data-lvt-eid="451123dd59">--type-h2</span>: <span class="v" data-lvt-eid="d7f04ac389">18/600/1.4</span>;  <span class="k" data-lvt-eid="630f1d0ecc">--type-h3</span>: <span class="v" data-lvt-eid="861ac8129c">15/600/1.4</span>;
 <span class="k" data-lvt-eid="e01252e872">--type-body</span>: <span class="v" data-lvt-eid="23662a2cfa">13/400/1.55</span>;  <span class="k" data-lvt-eid="8f274765eb">--type-body-strong</span>: <span class="v" data-lvt-eid="4f0bc9c99b">13/600/1.55</span>;  <span class="k" data-lvt-eid="f17232a652">--type-caption</span>: <span class="v" data-lvt-eid="0169bdc169">12/400/1.5</span>;  <span class="k" data-lvt-eid="38a5fdcd2b">--type-label</span>: <span class="v" data-lvt-eid="8554c6500c">11/600/1.2/.06em/up</span>;  <span class="k" data-lvt-eid="1fa38cb1bf">--type-micro</span>: <span class="v" data-lvt-eid="e5485e31d6">10/600/1.2/.04em/up</span>;
 <span class="k" data-lvt-eid="9cfdc869ce">--type-metric-xl</span>: <span class="v" data-lvt-eid="8229a9a925">28/700/1.1/tab</span>;  <span class="k" data-lvt-eid="74995e9f5d">--type-metric-lg</span>: <span class="v" data-lvt-eid="9c6b74c972">22/700/1.15/tab</span>;
 <span class="c" data-lvt-eid="a833e2b966">/* space · radius · shadow · control · layout · motion */</span>
-<span class="k" data-lvt-eid="3ff04b9dc1">--space-1..10</span>: <span class="v" data-lvt-eid="e19ac5c7b1">4 8 12 16 20 24 32 40 48 64</span>;  <span class="k" data-lvt-eid="28ae8f47e4">--radius-xs/sm/md/lg/pill</span>: <span class="v" data-lvt-eid="58029e3ad0">4 6 8 12 999</span>;
-<span class="k" data-lvt-eid="aee42c68cd">--shadow-xs</span>: <span class="v" data-lvt-eid="05fb08b3a5">0 1px 1px rgba(16,24,40,.04)</span>;  <span class="k" data-lvt-eid="a0b15ad734">--shadow-sm</span>: <span class="v" data-lvt-eid="dc2326c606">0 1px 2px …, 0 1px 3px …</span>;  <span class="k" data-lvt-eid="5a8b949df6">--shadow-md</span>: <span class="v" data-lvt-eid="90a9e0cea8">0 4px 12px rgba(16,24,40,.08)</span>;  <span class="k" data-lvt-eid="dd048b3efb">--shadow-lg</span>: <span class="v" data-lvt-eid="19e5154620">0 12px 32px rgba(16,24,40,.12)</span>;
+<span class="k" data-lvt-eid="3ff04b9dc1">--space-1..10</span>: <span class="v" data-lvt-eid="e19ac5c7b1">4 8 12 16 20 24 32 40 48 64</span>;  <span class="k">--radius-xs/sm/md/lg/xl/pill</span>: <span class="v">2 4 6 8 10 999</span>;
+<span class="k" data-lvt-eid="aee42c68cd">--shadow-xs</span>: <span class="v" data-lvt-eid="05fb08b3a5">0 1px 0 rgba(16,24,40,.03)</span>;  <span class="k" data-lvt-eid="a0b15ad734">--shadow-sm</span>: <span class="v" data-lvt-eid="dc2326c606">0 1px 2px rgba(16,24,40,.05)</span>;  <span class="k" data-lvt-eid="5a8b949df6">--shadow-md</span>: <span class="v" data-lvt-eid="90a9e0cea8">0 4px 10px -2px rgba(16,24,40,.08),0 2px 4px -2px rgba(16,24,40,.05)</span>;  <span class="k" data-lvt-eid="dd048b3efb">--shadow-lg</span>: <span class="v" data-lvt-eid="19e5154620">0 12px 24px -6px rgba(16,24,40,.14),0 4px 8px -4px rgba(16,24,40,.06)</span>;
 <span class="k" data-lvt-eid="d80b2431fc">--control-h-sm/md/lg</span>: <span class="v" data-lvt-eid="b6aab0f280">28 34 40</span>;  <span class="k" data-lvt-eid="4f3a03f014">--sidebar-w</span>: <span class="v" data-lvt-eid="502e0b7aaf">200px</span>;  <span class="k" data-lvt-eid="282c21aef0">--topbar-h</span>: <span class="v" data-lvt-eid="ff3d6027ae">56px</span>;  <span class="k" data-lvt-eid="d1ee5e96a8">--grid-gap</span>: <span class="v" data-lvt-eid="44819e4167">20px</span>;  <span class="k" data-lvt-eid="bafced212f">--content-pad</span>: <span class="v" data-lvt-eid="94184fe005">24px</span>;  <span class="k" data-lvt-eid="9413482865">--grid-cols</span>: <span class="v" data-lvt-eid="0ca87aa2ae">12</span>;
 <span class="k" data-lvt-eid="6e2251f842">--dur-fast</span>: <span class="v" data-lvt-eid="e7b96e3cb3">120ms</span>;  <span class="k" data-lvt-eid="9a3c03f29f">--ease</span>: <span class="v" data-lvt-eid="3d345eb094">cubic-bezier(.2,.8,.2,1)</span>;</div>
 <div class="grp" data-lvt-eid="c346bde3fb"><span class="c" data-lvt-eid="fd00a02071">/* L2 semantic */</span>
-<span class="k" data-lvt-eid="0cb1e83428">--color-brand-ghost</span>: <span class="v" data-lvt-eid="2fc7e37d23">color-mix(--color-brand 6%)</span>;  <span class="k" data-lvt-eid="9bd4b32501">--color-focus-ring</span>: <span class="v" data-lvt-eid="d91ef96da6">color-mix(--color-brand 32%)</span>;</div>
+<span class="k" data-lvt-eid="0cb1e83428">--color-brand-ghost</span>: <span class="v" data-lvt-eid="2fc7e37d23">color-mix(--color-brand 6%)</span>;  <span class="k" data-lvt-eid="9bd4b32501">--color-focus-ring</span>: <span class="v" data-lvt-eid="d91ef96da6">--color-brand-strong</span>;
+<span class="k">--color-brand-strong</span>: <span class="v">#0E7A63</span>;  <span class="k">--color-brand-stronger</span>: <span class="v">#0B6B57</span>;  <span class="k">--color-brand-fill</span>: <span class="v">--color-brand-strong</span>;  <span class="k">--color-brand-fill-hover</span>: <span class="v">--color-brand-stronger</span>;</div>
+<div class="grp"><span class="c">/* dark · [data-catui-theme="dark"] — L1/L2만 다시 정의 */</span>
+<span class="k">--color-page-bg</span>: <span class="v">#111A24</span>;  <span class="k">--color-surface</span>: <span class="v">#17222E</span>;  <span class="k">--color-surface-muted</span>: <span class="v">#1C2835</span>;  <span class="k">--color-text-primary</span>: <span class="v">#E6EBF0</span>;
+<span class="k">--line / -strong / -soft / -control</span>: <span class="v">text-primary 12 / 22 / 8 / 42%</span>;  <span class="k">--color-brand-strong</span>: <span class="v">#4FD1B0</span>;  <span class="k">--color-brand-fill</span>: <span class="v">#0E7A63</span>;
+<span class="k">--shadow-xs..lg</span>: <span class="v">inset 0 1px 0 rgba(255,255,255,.03–.06) + 짧은 그림자</span>;</div>
 <div class="grp" data-lvt-eid="b16830cedf"><span class="c" data-lvt-eid="6a97a47870">/* L3 component · button */</span>
 <span class="k" data-lvt-eid="00d265ae2e">--btn-h-sm/md/lg</span>: <span class="v" data-lvt-eid="c745c52cbf">--control-h-sm/md/lg</span>;  <span class="k" data-lvt-eid="28dbe3fd72">--btn-px-sm/md/lg</span>: <span class="v" data-lvt-eid="f938a74a3e">12 16 20</span>;  <span class="k" data-lvt-eid="8cd6bbc954">--btn-font-sm/md/lg</span>: <span class="v" data-lvt-eid="fff8dcfda8">12 13 14</span>;  <span class="k" data-lvt-eid="24d61e9136">--btn-radius</span>: <span class="v" data-lvt-eid="a4cc29ab92">--radius-sm</span>;
-<span class="k" data-lvt-eid="77cd1e75cc">--btn-primary-bg</span>: <span class="v" data-lvt-eid="ffc9ed2552">--color-brand</span>;  <span class="k" data-lvt-eid="a390086d2e">--btn-primary-bg-hover</span>: <span class="v" data-lvt-eid="96652ee876">--color-brand-hover</span>;  <span class="k" data-lvt-eid="0752944a4b">--btn-primary-fg</span>: <span class="v" data-lvt-eid="97ca48ef24">--color-text-inverse</span>;
-<span class="k" data-lvt-eid="ebc7ce2bd7">--btn-secondary-bg</span>: <span class="v" data-lvt-eid="aa1014beca">--color-surface</span>;  <span class="k" data-lvt-eid="58d2882fa8">--btn-secondary-fg</span>: <span class="v" data-lvt-eid="6cfc689bf9">--color-text-primary</span>;  <span class="k" data-lvt-eid="ba0157875d">--btn-secondary-border</span>: <span class="v" data-lvt-eid="3e9674e3e6">--color-neutral-300</span>;  <span class="k" data-lvt-eid="ebe5e2fa93">--btn-secondary-border-hover</span>: <span class="v" data-lvt-eid="20db226d44">--color-brand</span>;
-<span class="k" data-lvt-eid="2a105c1097">--btn-ghost-bg</span>: <span class="v" data-lvt-eid="28f1f83466">transparent</span>;  <span class="k" data-lvt-eid="b8bce32e5b">--btn-ghost-fg</span>: <span class="v" data-lvt-eid="7e903de28c">--color-brand-hover</span>;  <span class="k" data-lvt-eid="bd464a67fa">--btn-danger-bg</span>: <span class="v" data-lvt-eid="8e81520bd7">--color-danger</span>;  <span class="k" data-lvt-eid="ed93285ff1">--btn-danger-fg</span>: <span class="v" data-lvt-eid="76af614f18">--color-text-inverse</span>;
-<span class="k" data-lvt-eid="f1ad0dcb86">--btn-disabled-bg</span>: <span class="v" data-lvt-eid="7cb35da42f">--color-neutral-100</span>;  <span class="k" data-lvt-eid="9b6c625c99">--btn-disabled-fg</span>: <span class="v" data-lvt-eid="c0d5331252">--color-neutral-500</span>;  <span class="k" data-lvt-eid="4ea47b0566">--btn-disabled-border</span>: <span class="v" data-lvt-eid="15a77f9fc2">--color-border</span>;</div>
+<span class="k" data-lvt-eid="77cd1e75cc">--btn-primary-bg</span>: <span class="v" data-lvt-eid="ffc9ed2552">--color-brand-fill</span>;  <span class="k" data-lvt-eid="a390086d2e">--btn-primary-bg-hover</span>: <span class="v" data-lvt-eid="96652ee876">--color-brand-fill-hover</span>;  <span class="k" data-lvt-eid="0752944a4b">--btn-primary-fg</span>: <span class="v" data-lvt-eid="97ca48ef24">--color-text-inverse</span>;
+<span class="k" data-lvt-eid="ebc7ce2bd7">--btn-secondary-bg</span>: <span class="v" data-lvt-eid="aa1014beca">--color-surface</span>;  <span class="k" data-lvt-eid="58d2882fa8">--btn-secondary-fg</span>: <span class="v" data-lvt-eid="6cfc689bf9">--color-text-primary</span>;  <span class="k" data-lvt-eid="ba0157875d">--btn-secondary-border</span>: <span class="v" data-lvt-eid="3e9674e3e6">--line-strong</span>;  <span class="k" data-lvt-eid="ebe5e2fa93">--btn-secondary-border-hover</span>: <span class="v" data-lvt-eid="20db226d44">--color-brand-strong</span>;
+<span class="k" data-lvt-eid="2a105c1097">--btn-ghost-bg</span>: <span class="v" data-lvt-eid="28f1f83466">transparent</span>;  <span class="k" data-lvt-eid="b8bce32e5b">--btn-ghost-fg</span>: <span class="v" data-lvt-eid="7e903de28c">--color-brand-strong</span>;  <span class="k" data-lvt-eid="bd464a67fa">--btn-danger-bg</span>: <span class="v" data-lvt-eid="8e81520bd7">#C0392B</span>;  <span class="k" data-lvt-eid="ed93285ff1">--btn-danger-fg</span>: <span class="v" data-lvt-eid="76af614f18">--color-text-inverse</span>;
+<span class="k" data-lvt-eid="f1ad0dcb86">--btn-disabled-bg</span>: <span class="v" data-lvt-eid="7cb35da42f">--color-neutral-100</span>;  <span class="k" data-lvt-eid="9b6c625c99">--btn-disabled-fg</span>: <span class="v" data-lvt-eid="c0d5331252">--color-neutral-500</span>;  <span class="k" data-lvt-eid="4ea47b0566">--btn-disabled-border</span>: <span class="v" data-lvt-eid="15a77f9fc2">--line</span>;</div>
 <div class="grp" data-lvt-eid="25893d23a8"><span class="c" data-lvt-eid="35a20e27f4">/* L3 · input &amp; form */</span>
 <span class="k" data-lvt-eid="a82439036a">--input-h</span>: <span class="v" data-lvt-eid="677997b6f5">--control-h-md</span>;  <span class="k" data-lvt-eid="744e411cd4">--input-px</span>: <span class="v" data-lvt-eid="3ef2126e38">--space-3</span>;  <span class="k" data-lvt-eid="be7dc8b673">--input-font</span>: <span class="v" data-lvt-eid="25bd81911d">--type-body-size</span>;  <span class="k" data-lvt-eid="6705b10da7">--input-bg</span>: <span class="v" data-lvt-eid="9aed401299">--color-surface</span>;  <span class="k" data-lvt-eid="2df6821047">--input-fg</span>: <span class="v" data-lvt-eid="2325601d71">--color-text-primary</span>;  <span class="k" data-lvt-eid="cbedefbc8d">--input-placeholder</span>: <span class="v" data-lvt-eid="6de2a948c9">--color-text-tertiary</span>;
-<span class="k" data-lvt-eid="ca516fa0f8">--input-border</span>: <span class="v" data-lvt-eid="1e0d510d62">--color-neutral-300</span>;  <span class="k" data-lvt-eid="b7b0fd81c5">--input-border-hover</span>: <span class="v" data-lvt-eid="bbf0e9319e">--color-navy-500</span>;  <span class="k" data-lvt-eid="f21ed6254b">--input-border-focus</span>: <span class="v" data-lvt-eid="29d728ce9e">--color-brand</span>;  <span class="k" data-lvt-eid="30c0447ab7">--input-ring-focus</span>: <span class="v" data-lvt-eid="7c855f555e">--color-focus-ring</span>;  <span class="k" data-lvt-eid="a568b29762">--input-ring-w</span>: <span class="v" data-lvt-eid="63dc6a2388">3px</span>;  <span class="k" data-lvt-eid="a0c62ee699">--input-radius</span>: <span class="v" data-lvt-eid="fa2712a1ce">--radius-sm</span>;
+<span class="k" data-lvt-eid="ca516fa0f8">--input-border</span>: <span class="v" data-lvt-eid="1e0d510d62">--line-control</span>;  <span class="k" data-lvt-eid="b7b0fd81c5">--input-border-hover</span>: <span class="v" data-lvt-eid="bbf0e9319e">--line-control-hover</span>;  <span class="k" data-lvt-eid="f21ed6254b">--input-border-focus</span>: <span class="v" data-lvt-eid="29d728ce9e">--color-brand-strong</span>;  <span class="k" data-lvt-eid="30c0447ab7">--input-ring-focus</span>: <span class="v" data-lvt-eid="7c855f555e">color-mix(--color-brand 32%)</span>;  <span class="k" data-lvt-eid="a568b29762">--input-ring-w</span>: <span class="v" data-lvt-eid="63dc6a2388">--ring-w</span>;  <span class="k" data-lvt-eid="a0c62ee699">--input-radius</span>: <span class="v" data-lvt-eid="fa2712a1ce">--radius-sm</span>;
 <span class="k" data-lvt-eid="f9029ada9a">--input-error-border</span>: <span class="v" data-lvt-eid="dfca09aad7">--color-danger</span>;  <span class="k" data-lvt-eid="b550c0feb7">--input-error-ring</span>: <span class="v" data-lvt-eid="ae0af104ee">color-mix(--color-danger 24%)</span>;  <span class="k" data-lvt-eid="4cbb54c899">--input-disabled-bg</span>: <span class="v" data-lvt-eid="5f8a692f51">--color-neutral-100</span>;
-<span class="k" data-lvt-eid="fbbed049cf">--label-size</span>: <span class="v" data-lvt-eid="2d4359d4f4">--type-label-size</span>;  <span class="k" data-lvt-eid="2ffbc6e31a">--label-color</span>: <span class="v" data-lvt-eid="051543a11c">--color-text-secondary</span>;  <span class="k" data-lvt-eid="aec1c3e950">--help-size</span>: <span class="v" data-lvt-eid="d1ae62b2dd">--type-caption-size</span>;  <span class="k" data-lvt-eid="1469864e86">--help-color</span>: <span class="v" data-lvt-eid="9b4e4d96f2">--color-text-tertiary</span>;  <span class="k" data-lvt-eid="ec8ca21000">--form-error-color</span>: <span class="v" data-lvt-eid="9068f54a39">--color-danger</span>;</div>
+<span class="k" data-lvt-eid="fbbed049cf">--label-size</span>: <span class="v" data-lvt-eid="2d4359d4f4">--type-label-size</span>;  <span class="k" data-lvt-eid="2ffbc6e31a">--label-color</span>: <span class="v" data-lvt-eid="051543a11c">--color-text-secondary</span>;  <span class="k" data-lvt-eid="aec1c3e950">--help-size</span>: <span class="v" data-lvt-eid="d1ae62b2dd">--type-caption-size</span>;  <span class="k" data-lvt-eid="1469864e86">--help-color</span>: <span class="v" data-lvt-eid="9b4e4d96f2">--color-text-secondary</span>;  <span class="k" data-lvt-eid="ec8ca21000">--form-error-color</span>: <span class="v" data-lvt-eid="9068f54a39">--badge-danger-fg</span>;</div>
 <div class="grp" data-lvt-eid="02f5112d3b"><span class="c" data-lvt-eid="34b7e76941">/* L3 · check / radio / toggle */</span>
-<span class="k" data-lvt-eid="f1bd2884f4">--check-size</span>: <span class="v" data-lvt-eid="4e1cc462d6">16px</span>;  <span class="k" data-lvt-eid="25d2111f7d">--check-radius</span>: <span class="v" data-lvt-eid="c42054621d">--radius-xs</span>;  <span class="k" data-lvt-eid="204c31581e">--check-border</span>: <span class="v" data-lvt-eid="484fbcca38">--color-neutral-300</span>;  <span class="k" data-lvt-eid="87474b670e">--check-bg-on</span>: <span class="v" data-lvt-eid="018d807e76">--color-brand</span>;  <span class="k" data-lvt-eid="4f481038ff">--check-icon-color</span>: <span class="v" data-lvt-eid="07a77ced95">--color-text-inverse</span>;  <span class="k" data-lvt-eid="05762b31a2">--check-label-gap</span>: <span class="v" data-lvt-eid="c609e8ce62">--space-2</span>;
-<span class="k" data-lvt-eid="6a0b4639da">--radio-size</span>: <span class="v" data-lvt-eid="c0b1fd01be">16px</span>;  <span class="k" data-lvt-eid="509bbceb35">--radio-dot</span>: <span class="v" data-lvt-eid="63734be5a5">8px</span>;  <span class="k" data-lvt-eid="378c0570ec">--radio-border</span>: <span class="v" data-lvt-eid="a34c25e3dd">--color-neutral-300</span>;  <span class="k" data-lvt-eid="ae689f1302">--radio-dot-color</span>: <span class="v" data-lvt-eid="9d7b339b1a">--color-brand</span>;
-<span class="k" data-lvt-eid="f27887e513">--toggle-w</span>: <span class="v" data-lvt-eid="0ee03aec57">34px</span>;  <span class="k" data-lvt-eid="ad33d78ccb">--toggle-h</span>: <span class="v" data-lvt-eid="2ceb20f00c">20px</span>;  <span class="k" data-lvt-eid="22af2dd2dd">--toggle-knob</span>: <span class="v" data-lvt-eid="22fedf9237">16px</span>;  <span class="k" data-lvt-eid="a10d1b7886">--toggle-track-off</span>: <span class="v" data-lvt-eid="a7cfe7662b">--color-neutral-300</span>;  <span class="k" data-lvt-eid="6f6533a73c">--toggle-track-on</span>: <span class="v" data-lvt-eid="c9add32d80">--color-brand</span>;  <span class="k" data-lvt-eid="957f2dfe43">--toggle-knob-color</span>: <span class="v" data-lvt-eid="34ff2fc9b8">--color-surface</span>;  <span class="k" data-lvt-eid="4aabf6729f">--toggle-radius</span>: <span class="v" data-lvt-eid="760713a854">--radius-pill</span>;</div>
+<span class="k" data-lvt-eid="f1bd2884f4">--check-size</span>: <span class="v" data-lvt-eid="4e1cc462d6">16px</span>;  <span class="k" data-lvt-eid="25d2111f7d">--check-radius</span>: <span class="v" data-lvt-eid="c42054621d">--radius-xs</span>;  <span class="k" data-lvt-eid="204c31581e">--check-border</span>: <span class="v" data-lvt-eid="484fbcca38">--line-control</span>;  <span class="k" data-lvt-eid="87474b670e">--check-bg-on</span>: <span class="v" data-lvt-eid="018d807e76">--color-brand-fill</span>;  <span class="k" data-lvt-eid="4f481038ff">--check-icon-color</span>: <span class="v" data-lvt-eid="07a77ced95">--color-text-inverse</span>;  <span class="k" data-lvt-eid="05762b31a2">--check-label-gap</span>: <span class="v" data-lvt-eid="c609e8ce62">--space-2</span>;
+<span class="k" data-lvt-eid="6a0b4639da">--radio-size</span>: <span class="v" data-lvt-eid="c0b1fd01be">16px</span>;  <span class="k" data-lvt-eid="509bbceb35">--radio-dot</span>: <span class="v" data-lvt-eid="63734be5a5">8px</span>;  <span class="k" data-lvt-eid="378c0570ec">--radio-border</span>: <span class="v" data-lvt-eid="a34c25e3dd">--line-control</span>;  <span class="k" data-lvt-eid="ae689f1302">--radio-dot-color</span>: <span class="v" data-lvt-eid="9d7b339b1a">--color-brand</span>;
+<span class="k" data-lvt-eid="f27887e513">--toggle-w</span>: <span class="v" data-lvt-eid="0ee03aec57">34px</span>;  <span class="k" data-lvt-eid="ad33d78ccb">--toggle-h</span>: <span class="v" data-lvt-eid="2ceb20f00c">20px</span>;  <span class="k" data-lvt-eid="22af2dd2dd">--toggle-knob</span>: <span class="v" data-lvt-eid="22fedf9237">16px</span>;  <span class="k" data-lvt-eid="a10d1b7886">--toggle-track-off</span>: <span class="v" data-lvt-eid="a7cfe7662b">--line-control</span>;  <span class="k" data-lvt-eid="6f6533a73c">--toggle-track-on</span>: <span class="v" data-lvt-eid="c9add32d80">--color-brand</span>;  <span class="k" data-lvt-eid="957f2dfe43">--toggle-knob-color</span>: <span class="v" data-lvt-eid="34ff2fc9b8">--color-surface</span>;  <span class="k" data-lvt-eid="4aabf6729f">--toggle-radius</span>: <span class="v" data-lvt-eid="760713a854">--radius-pill</span>;</div>
 <div class="grp" data-lvt-eid="03c9025eff"><span class="c" data-lvt-eid="23067d77f8">/* L3 · pill / badge / count / avatar */</span>
 <span class="k" data-lvt-eid="63db0e7122">--pill-h-sm/md</span>: <span class="v" data-lvt-eid="d43e5c086e">18 22</span>;  <span class="k" data-lvt-eid="d56422efa6">--pill-radius</span>: <span class="v" data-lvt-eid="eb1034259d">--radius-pill</span>;  <span class="k" data-lvt-eid="10fd885e2b">--pill-font</span>: <span class="v" data-lvt-eid="8fc724a56e">11px</span>;  <span class="k" data-lvt-eid="98b75c3194">--pill-px</span>: <span class="v" data-lvt-eid="a94c061bfa">--space-2</span>;  <span class="k" data-lvt-eid="64e72d8b3f">--pill-dot</span>: <span class="v" data-lvt-eid="c01ea4593b">6px</span>;
-<span class="k" data-lvt-eid="41a24718c0">--badge-success-bg</span>: <span class="v" data-lvt-eid="3400de0688">--color-brand-soft</span>;  <span class="k" data-lvt-eid="d507e259c4">--badge-success-fg</span>: <span class="v" data-lvt-eid="020e16d4b4">--color-brand-hover</span>;  <span class="k" data-lvt-eid="4556623c16">--badge-info-bg</span>: <span class="v" data-lvt-eid="baf482d6af">--color-info-soft</span>;  <span class="k" data-lvt-eid="7f29182a0f">--badge-info-fg</span>: <span class="v" data-lvt-eid="3ab0034bb6">--color-info</span>;
-<span class="k" data-lvt-eid="1940511ed3">--badge-warning-bg</span>: <span class="v" data-lvt-eid="4d8da41f15">--color-amber-soft</span>;  <span class="k" data-lvt-eid="61bb6398e5">--badge-warning-fg</span>: <span class="v" data-lvt-eid="d91b7b7eaa">--color-orange</span>;  <span class="k" data-lvt-eid="5fecb2e21e">--badge-danger-bg</span>: <span class="v" data-lvt-eid="00f36f4d81">--color-danger-soft</span>;  <span class="k" data-lvt-eid="8b16005758">--badge-danger-fg</span>: <span class="v" data-lvt-eid="e83680baf6">--color-danger</span>;
+<span class="k" data-lvt-eid="41a24718c0">--badge-success-bg</span>: <span class="v" data-lvt-eid="3400de0688">--color-brand-soft</span>;  <span class="k" data-lvt-eid="d507e259c4">--badge-success-fg</span>: <span class="v" data-lvt-eid="020e16d4b4">--color-brand-strong</span>;  <span class="k" data-lvt-eid="4556623c16">--badge-info-bg</span>: <span class="v" data-lvt-eid="baf482d6af">--color-info-soft</span>;  <span class="k" data-lvt-eid="7f29182a0f">--badge-info-fg</span>: <span class="v" data-lvt-eid="3ab0034bb6">#1F6FA8</span>;
+<span class="k" data-lvt-eid="1940511ed3">--badge-warning-bg</span>: <span class="v" data-lvt-eid="4d8da41f15">--color-amber-soft</span>;  <span class="k" data-lvt-eid="61bb6398e5">--badge-warning-fg</span>: <span class="v" data-lvt-eid="d91b7b7eaa">#9A5B0F</span>;  <span class="k" data-lvt-eid="5fecb2e21e">--badge-danger-bg</span>: <span class="v" data-lvt-eid="00f36f4d81">--color-danger-soft</span>;  <span class="k" data-lvt-eid="8b16005758">--badge-danger-fg</span>: <span class="v" data-lvt-eid="e83680baf6">#C0392B</span>;
 <span class="k" data-lvt-eid="28d3d2fa7b">--badge-neutral-bg</span>: <span class="v" data-lvt-eid="c478555ade">--color-neutral-100</span>;  <span class="k" data-lvt-eid="c27ff7f664">--badge-neutral-fg</span>: <span class="v" data-lvt-eid="7e57bbeebc">--color-neutral-700</span>;  <span class="k" data-lvt-eid="1cbaa49a7c">--badge-radius</span>: <span class="v" data-lvt-eid="9c3f5e9c7a">--radius-xs</span>;  <span class="k" data-lvt-eid="4dc128ba08">--badge-font</span>: <span class="v" data-lvt-eid="831f61ab98">11px</span>;
-<span class="k" data-lvt-eid="251284e81f">--count-bg</span>: <span class="v" data-lvt-eid="d08e21a63b">--color-brand</span>;  <span class="k" data-lvt-eid="ae94a6b47e">--count-fg</span>: <span class="v" data-lvt-eid="aae7d8d580">--color-text-inverse</span>;  <span class="k" data-lvt-eid="78233c2629">--count-h</span>: <span class="v" data-lvt-eid="5d689f0c0e">18px</span>;  <span class="k" data-lvt-eid="9ca03ddcf5">--count-px</span>: <span class="v" data-lvt-eid="ded8b98a2a">6px</span>;  <span class="k" data-lvt-eid="c449e895b4">--count-font</span>: <span class="v" data-lvt-eid="817bc4532d">--type-micro-size</span>;  <span class="k" data-lvt-eid="a848bdd1ca">--count-radius</span>: <span class="v" data-lvt-eid="5707eb9b5b">--radius-pill</span>;
-<span class="k" data-lvt-eid="e5b0dfdc89">--avatar-xl/lg/md/sm/xs</span>: <span class="v" data-lvt-eid="e6feb05be9">48 40 32 24 18</span>;  <span class="k" data-lvt-eid="4e50961981">--avatar-stack-overlap</span>: <span class="v" data-lvt-eid="721109c7ac">-8px</span>;  <span class="k" data-lvt-eid="1c1fda0ff1">--avatar-bg</span>: <span class="v" data-lvt-eid="d7a71dc81f">--color-brand-soft</span>;  <span class="k" data-lvt-eid="d6019e1d04">--avatar-fg</span>: <span class="v" data-lvt-eid="b5ec07c6d8">--color-brand-hover</span>;  <span class="k" data-lvt-eid="d62aca0c09">--avatar-radius</span>: <span class="v" data-lvt-eid="42d0d04fe5">--radius-pill</span>;  <span class="k" data-lvt-eid="35ec569c2a">--avatar-border</span>: <span class="v" data-lvt-eid="cea90568e6">--color-surface</span>;</div>
+<span class="k" data-lvt-eid="251284e81f">--count-bg</span>: <span class="v" data-lvt-eid="d08e21a63b">--color-brand-fill</span>;  <span class="k" data-lvt-eid="ae94a6b47e">--count-fg</span>: <span class="v" data-lvt-eid="aae7d8d580">--color-text-inverse</span>;  <span class="k" data-lvt-eid="78233c2629">--count-h</span>: <span class="v" data-lvt-eid="5d689f0c0e">18px</span>;  <span class="k" data-lvt-eid="9ca03ddcf5">--count-px</span>: <span class="v" data-lvt-eid="ded8b98a2a">6px</span>;  <span class="k" data-lvt-eid="c449e895b4">--count-font</span>: <span class="v" data-lvt-eid="817bc4532d">--type-micro-size</span>;  <span class="k" data-lvt-eid="a848bdd1ca">--count-radius</span>: <span class="v" data-lvt-eid="5707eb9b5b">--radius-pill</span>;
+<span class="k" data-lvt-eid="e5b0dfdc89">--avatar-xl/lg/md/sm/xs</span>: <span class="v" data-lvt-eid="e6feb05be9">48 40 32 24 18</span>;  <span class="k" data-lvt-eid="4e50961981">--avatar-stack-overlap</span>: <span class="v" data-lvt-eid="721109c7ac">-8px</span>;  <span class="k" data-lvt-eid="1c1fda0ff1">--avatar-bg</span>: <span class="v" data-lvt-eid="d7a71dc81f">--color-brand-soft</span>;  <span class="k" data-lvt-eid="d6019e1d04">--avatar-fg</span>: <span class="v" data-lvt-eid="b5ec07c6d8">--color-brand-strong</span>;  <span class="k" data-lvt-eid="d62aca0c09">--avatar-radius</span>: <span class="v" data-lvt-eid="42d0d04fe5">--radius-pill</span>;  <span class="k" data-lvt-eid="35ec569c2a">--avatar-border</span>: <span class="v" data-lvt-eid="cea90568e6">--color-surface</span>;</div>
 <div class="grp" data-lvt-eid="5de34998f3"><span class="c" data-lvt-eid="9c11ac0201">/* L3 · card / stat / progress */</span>
-<span class="k" data-lvt-eid="3eccac66f1">--card-bg</span>: <span class="v" data-lvt-eid="3257ba4b68">--color-surface</span>;  <span class="k" data-lvt-eid="afe8508cbd">--card-pad</span>: <span class="v" data-lvt-eid="61a24cd3ab">--space-5</span>;  <span class="k" data-lvt-eid="4666defcca">--card-radius</span>: <span class="v" data-lvt-eid="70802e85d6">--radius-md</span>;  <span class="k" data-lvt-eid="3c819e8bb3">--card-border</span>: <span class="v" data-lvt-eid="a7f7815a0a">--color-border</span>;  <span class="k" data-lvt-eid="24308f957b">--card-shadow</span>: <span class="v" data-lvt-eid="4d00b98f86">--shadow-xs</span>;  <span class="k" data-lvt-eid="3cef3ee5af">--card-header-h</span>: <span class="v" data-lvt-eid="c78e0431e0">52px</span>;  <span class="k" data-lvt-eid="ee13f04a07">--card-footer-h</span>: <span class="v" data-lvt-eid="a289ff25c3">44px</span>;
+<span class="k" data-lvt-eid="3eccac66f1">--card-bg</span>: <span class="v" data-lvt-eid="3257ba4b68">--color-surface</span>;  <span class="k" data-lvt-eid="afe8508cbd">--card-pad</span>: <span class="v" data-lvt-eid="61a24cd3ab">--space-5</span>;  <span class="k" data-lvt-eid="4666defcca">--card-radius</span>: <span class="v" data-lvt-eid="70802e85d6">--radius-md</span>;  <span class="k" data-lvt-eid="3c819e8bb3">--card-border</span>: <span class="v" data-lvt-eid="a7f7815a0a">--line</span>;  <span class="k" data-lvt-eid="24308f957b">--card-shadow</span>: <span class="v" data-lvt-eid="4d00b98f86">--shadow-xs</span>;  <span class="k" data-lvt-eid="3cef3ee5af">--card-header-h</span>: <span class="v" data-lvt-eid="c78e0431e0">52px</span>;  <span class="k" data-lvt-eid="ee13f04a07">--card-footer-h</span>: <span class="v" data-lvt-eid="a289ff25c3">44px</span>;
 <span class="k" data-lvt-eid="391ed27c43">--card-title-size</span>: <span class="v" data-lvt-eid="2e5bfa448a">--type-h3-size</span>;  <span class="k" data-lvt-eid="1df37c0e03">--card-title-color</span>: <span class="v" data-lvt-eid="a8e0d02a74">--color-text-primary</span>;  <span class="k" data-lvt-eid="d77776d0ed">--stat-label-size</span>: <span class="v" data-lvt-eid="31d7b2b894">--type-label-size</span>;  <span class="k" data-lvt-eid="0cb3c9545b">--stat-value-size</span>: <span class="v" data-lvt-eid="23d4d143f4">--type-metric-lg-size</span>;  <span class="k" data-lvt-eid="59bccc1b5e">--stat-value-color</span>: <span class="v" data-lvt-eid="3cad25bf66">--color-text-primary</span>;
-<span class="k" data-lvt-eid="e1d458e883">--stat-delta-up</span>: <span class="v" data-lvt-eid="f5242ce9e6">--color-brand-hover</span>;  <span class="k" data-lvt-eid="66785c757f">--stat-delta-down</span>: <span class="v" data-lvt-eid="c5a9b6aaf0">--color-danger</span>;  <span class="k" data-lvt-eid="58ad02b520">--stat-spark-bar-w</span>: <span class="v" data-lvt-eid="60dc1315d4">4px</span>;  <span class="k" data-lvt-eid="dfbd9cb7c3">--stat-spark-h</span>: <span class="v" data-lvt-eid="88bb27295c">24px</span>;  <span class="k" data-lvt-eid="1a59f965a4">--stat-spark-bar</span>: <span class="v" data-lvt-eid="2e80e9f946">--color-brand-soft</span>;  <span class="k" data-lvt-eid="be30a57b8c">--stat-spark-bar-active</span>: <span class="v" data-lvt-eid="2298e7b9b7">--color-brand</span>;
+<span class="k" data-lvt-eid="e1d458e883">--stat-delta-up</span>: <span class="v" data-lvt-eid="f5242ce9e6">--color-brand-strong</span>;  <span class="k" data-lvt-eid="66785c757f">--stat-delta-down</span>: <span class="v" data-lvt-eid="c5a9b6aaf0">--badge-danger-fg</span>;  <span class="k" data-lvt-eid="58ad02b520">--stat-spark-bar-w</span>: <span class="v" data-lvt-eid="60dc1315d4">4px</span>;  <span class="k" data-lvt-eid="dfbd9cb7c3">--stat-spark-h</span>: <span class="v" data-lvt-eid="88bb27295c">24px</span>;  <span class="k" data-lvt-eid="1a59f965a4">--stat-spark-bar</span>: <span class="v" data-lvt-eid="2e80e9f946">--color-brand-soft</span>;  <span class="k" data-lvt-eid="be30a57b8c">--stat-spark-bar-active</span>: <span class="v" data-lvt-eid="2298e7b9b7">--color-brand</span>;
 <span class="k" data-lvt-eid="1295d7379f">--stat-dot</span>: <span class="v" data-lvt-eid="058cd3697b">6px</span>;  <span class="k" data-lvt-eid="ddc63bdc71">--stat-dot-color</span>: <span class="v" data-lvt-eid="112966813e">--color-brand</span>;  <span class="k" data-lvt-eid="0e2a1b2c3d">--progress-h-sm/md/lg</span>: <span class="v" data-lvt-eid="7ab5c3bd5f">4 6 8</span>;  <span class="k" data-lvt-eid="bdb8d6a4a7">--progress-track</span>: <span class="v" data-lvt-eid="81d2885ade">--color-neutral-100</span>;  <span class="k" data-lvt-eid="3c35407f3c">--progress-radius</span>: <span class="v" data-lvt-eid="86636eaf83">--radius-pill</span>;
 <span class="k" data-lvt-eid="87f51b602c">--progress-bar-1..6</span>: <span class="v" data-lvt-eid="b92d7d6214">--color-brand / info / purple / amber / orange / danger</span>;</div>
 <div class="grp" data-lvt-eid="a3ee3eb37c"><span class="c" data-lvt-eid="f518e29c7e">/* L3 · chart / donut */</span>
@@ -2418,28 +2468,28 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
 <span class="k" data-lvt-eid="f83ba1e2cf">--donut-center-size</span>: <span class="v" data-lvt-eid="9e30e35e59">--type-metric-lg-size</span>;  <span class="k" data-lvt-eid="ba9f862aeb">--donut-center-color</span>: <span class="v" data-lvt-eid="a444fdb3e0">--color-text-primary</span>;  <span class="k" data-lvt-eid="a9642ef468">--donut-label-size</span>: <span class="v" data-lvt-eid="c5bfe3a54b">--type-label-size</span>;</div>
 <div class="grp" data-lvt-eid="f3a793c814"><span class="c" data-lvt-eid="36c09297f6">/* L3 · table / feed / task / meter */</span>
 <span class="k" data-lvt-eid="8c986a7cd8">--table-head-h</span>: <span class="v" data-lvt-eid="747a78ffad">40px</span>;  <span class="k" data-lvt-eid="2b4a6a7f1b">--table-row-h</span>: <span class="v" data-lvt-eid="a0b6ff7cc2">46px</span>;  <span class="k" data-lvt-eid="bb85346fe1">--table-head-bg</span>: <span class="v" data-lvt-eid="108b21e584">--color-surface-muted</span>;  <span class="k" data-lvt-eid="8909d54a34">--table-head-fg</span>: <span class="v" data-lvt-eid="7ad7787610">--color-text-secondary</span>;  <span class="k" data-lvt-eid="26da97d2b3">--table-head-font</span>: <span class="v" data-lvt-eid="9996755234">--type-label-size</span>;
-<span class="k" data-lvt-eid="5652fa2f64">--table-border</span>: <span class="v" data-lvt-eid="49a2d15719">--color-border</span>;  <span class="k" data-lvt-eid="7a169ef632">--table-zebra</span>: <span class="v" data-lvt-eid="20bf2b8770">--color-surface-muted</span>;  <span class="k" data-lvt-eid="5930a5ae5e">--table-cell-px</span>: <span class="v" data-lvt-eid="2435926579">--space-3</span>;  <span class="k" data-lvt-eid="c82c9d4603">--table-font</span>: <span class="v" data-lvt-eid="2fb74ca46a">--type-body-size</span>;  <span class="k" data-lvt-eid="8424af69ce">--table-row-hover</span>: <span class="v" data-lvt-eid="3ae9f23f37">--color-brand-soft</span>;
-<span class="k" data-lvt-eid="750fb2d776">--feed-dot</span>: <span class="v" data-lvt-eid="2d66b20290">8px</span>;  <span class="k" data-lvt-eid="8027782dad">--feed-dot-color</span>: <span class="v" data-lvt-eid="e55e02fd32">--color-brand</span>;  <span class="k" data-lvt-eid="cb00c5fe53">--feed-line</span>: <span class="v" data-lvt-eid="4cda193663">--color-border</span>;  <span class="k" data-lvt-eid="9ee32bdecb">--feed-gap</span>: <span class="v" data-lvt-eid="424238f40d">--space-4</span>;  <span class="k" data-lvt-eid="1b5baae085">--feed-time-size</span>: <span class="v" data-lvt-eid="c07d737cab">--type-label-size</span>;  <span class="k" data-lvt-eid="9eb48ab44c">--feed-time-color</span>: <span class="v" data-lvt-eid="4a0c0c2f87">--color-text-tertiary</span>;
-<span class="k" data-lvt-eid="90f9637517">--task-h</span>: <span class="v" data-lvt-eid="d83eac5ada">--control-h-lg</span>;  <span class="k" data-lvt-eid="c75d298b5a">--task-check</span>: <span class="v" data-lvt-eid="5b9b935ffb">--check-size</span>;  <span class="k" data-lvt-eid="a533b0480e">--task-done-fg</span>: <span class="v" data-lvt-eid="d3b69f4a93">--color-text-tertiary</span>;  <span class="k" data-lvt-eid="bffcee5042">--task-priority-high</span>: <span class="v" data-lvt-eid="d9660af161">--color-danger</span>;  <span class="k" data-lvt-eid="9c519b6491">--task-priority-mid</span>: <span class="v" data-lvt-eid="5e3f19645f">--color-amber</span>;  <span class="k" data-lvt-eid="7a710a6a3d">--task-priority-low</span>: <span class="v" data-lvt-eid="84f533c969">--color-info</span>;
+<span class="k" data-lvt-eid="5652fa2f64">--table-border</span>: <span class="v" data-lvt-eid="49a2d15719">--line</span>;  <span class="k" data-lvt-eid="7a169ef632">--table-zebra</span>: <span class="v" data-lvt-eid="20bf2b8770">--color-surface-muted</span>;  <span class="k" data-lvt-eid="5930a5ae5e">--table-cell-px</span>: <span class="v" data-lvt-eid="2435926579">--space-3</span>;  <span class="k" data-lvt-eid="c82c9d4603">--table-font</span>: <span class="v" data-lvt-eid="2fb74ca46a">--type-body-size</span>;  <span class="k" data-lvt-eid="8424af69ce">--table-row-hover</span>: <span class="v" data-lvt-eid="3ae9f23f37">--color-brand-soft</span>;
+<span class="k" data-lvt-eid="750fb2d776">--feed-dot</span>: <span class="v" data-lvt-eid="2d66b20290">8px</span>;  <span class="k" data-lvt-eid="8027782dad">--feed-dot-color</span>: <span class="v" data-lvt-eid="e55e02fd32">--color-brand</span>;  <span class="k" data-lvt-eid="cb00c5fe53">--feed-line</span>: <span class="v" data-lvt-eid="4cda193663">--color-border</span>;  <span class="k" data-lvt-eid="9ee32bdecb">--feed-gap</span>: <span class="v" data-lvt-eid="424238f40d">--space-4</span>;  <span class="k" data-lvt-eid="1b5baae085">--feed-time-size</span>: <span class="v" data-lvt-eid="c07d737cab">--type-label-size</span>;  <span class="k" data-lvt-eid="9eb48ab44c">--feed-time-color</span>: <span class="v" data-lvt-eid="4a0c0c2f87">--color-text-secondary</span>;
+<span class="k" data-lvt-eid="90f9637517">--task-h</span>: <span class="v" data-lvt-eid="d83eac5ada">--control-h-lg</span>;  <span class="k" data-lvt-eid="c75d298b5a">--task-check</span>: <span class="v" data-lvt-eid="5b9b935ffb">--check-size</span>;  <span class="k" data-lvt-eid="a533b0480e">--task-done-fg</span>: <span class="v" data-lvt-eid="d3b69f4a93">--color-text-secondary</span>;  <span class="k" data-lvt-eid="bffcee5042">--task-priority-high</span>: <span class="v" data-lvt-eid="d9660af161">--color-danger</span>;  <span class="k" data-lvt-eid="9c519b6491">--task-priority-mid</span>: <span class="v" data-lvt-eid="5e3f19645f">--color-amber</span>;  <span class="k" data-lvt-eid="7a710a6a3d">--task-priority-low</span>: <span class="v" data-lvt-eid="84f533c969">--color-info</span>;
 <span class="k" data-lvt-eid="11254faecf">--meter-h</span>: <span class="v" data-lvt-eid="8d1bf662f4">--space-2</span>;  <span class="k" data-lvt-eid="4746719a62">--meter-track</span>: <span class="v" data-lvt-eid="75b0cf8698">--color-neutral-100</span>;  <span class="k" data-lvt-eid="116c0efa3d">--meter-fill</span>: <span class="v" data-lvt-eid="dc3d4b0815">--color-brand</span>;  <span class="k" data-lvt-eid="17367de403">--meter-radius</span>: <span class="v" data-lvt-eid="fcecef895e">--radius-xs</span>;</div>
 <div class="grp" data-lvt-eid="90c9359a55"><span class="c" data-lvt-eid="07c8b62ab4">/* L3 · sidebar / topbar / breadcrumb / segment */</span>
 <span class="k" data-lvt-eid="fc141f0797">--sidebar-bg</span>: <span class="v" data-lvt-eid="2427461c2b">--color-navy-800</span>;  <span class="k" data-lvt-eid="2e0dab14f8">--sidebar-item-h</span>: <span class="v" data-lvt-eid="c2ec58057f">38px</span>;  <span class="k" data-lvt-eid="9269a7684e">--sidebar-icon</span>: <span class="v" data-lvt-eid="74b02fc023">18px</span>;  <span class="k" data-lvt-eid="22b61249cd">--sidebar-fg</span>: <span class="v" data-lvt-eid="079f4d2381">--color-navy-text</span>;  <span class="k" data-lvt-eid="8f6275fef0">--sidebar-fg-muted</span>: <span class="v" data-lvt-eid="fafe5ad104">--color-navy-muted</span>;
-<span class="k" data-lvt-eid="b53bba2119">--sidebar-hover-bg</span>: <span class="v" data-lvt-eid="76803a6472">--color-navy-700</span>;  <span class="k" data-lvt-eid="0937e693c5">--sidebar-active-bg</span>: <span class="v" data-lvt-eid="4c7c2bed10">--color-navy-900</span>;  <span class="k" data-lvt-eid="66daa9a125">--sidebar-active-fg</span>: <span class="v" data-lvt-eid="252bc264f4">--color-text-inverse</span>;  <span class="k" data-lvt-eid="27a2458f48">--sidebar-active-bar-w</span>: <span class="v" data-lvt-eid="6736ccfdeb">3px</span>;  <span class="k" data-lvt-eid="79b6fc7c03">--sidebar-active-bar</span>: <span class="v" data-lvt-eid="fb7b49a9ae">--color-brand</span>;  <span class="k" data-lvt-eid="d6882eff24">--sidebar-rail-w</span>: <span class="v" data-lvt-eid="268ccdc7e4">56px</span>;
-<span class="k" data-lvt-eid="8b6f62d3f8">--sidebar-pad</span>: <span class="v" data-lvt-eid="88f7816cfe">--space-4</span>;  <span class="k" data-lvt-eid="191f6f34c0">--sidebar-font</span>: <span class="v" data-lvt-eid="7151d1c93d">--type-body-size</span>;  <span class="k" data-lvt-eid="51fb4a1ac9">--sidebar-head-font</span>: <span class="v" data-lvt-eid="c4ab9366b5">--type-label-size</span>;  <span class="k" data-lvt-eid="ba273538ca">--topbar-bg</span>: <span class="v" data-lvt-eid="1aab70b5f0">--color-surface</span>;  <span class="k" data-lvt-eid="efc54c1661">--topbar-border</span>: <span class="v" data-lvt-eid="1ea43ba9cb">--color-border</span>;  <span class="k" data-lvt-eid="1c04071ea2">--topbar-fg</span>: <span class="v" data-lvt-eid="c49af327a1">--color-text-primary</span>;
+<span class="k" data-lvt-eid="b53bba2119">--sidebar-hover-bg</span>: <span class="v" data-lvt-eid="76803a6472">--color-navy-700</span>;  <span class="k" data-lvt-eid="0937e693c5">--sidebar-active-bg</span>: <span class="v" data-lvt-eid="4c7c2bed10">--color-navy-900</span>;  <span class="k" data-lvt-eid="66daa9a125">--sidebar-active-fg</span>: <span class="v" data-lvt-eid="252bc264f4">--color-text-inverse</span>;  <span class="k" data-lvt-eid="27a2458f48">--sidebar-active-bar-w</span>: <span class="v" data-lvt-eid="6736ccfdeb">--accent-w</span>;  <span class="k" data-lvt-eid="79b6fc7c03">--sidebar-active-bar</span>: <span class="v" data-lvt-eid="fb7b49a9ae">--color-brand</span>;  <span class="k" data-lvt-eid="d6882eff24">--sidebar-rail-w</span>: <span class="v" data-lvt-eid="268ccdc7e4">56px</span>;
+<span class="k" data-lvt-eid="8b6f62d3f8">--sidebar-pad</span>: <span class="v" data-lvt-eid="88f7816cfe">--space-4</span>;  <span class="k" data-lvt-eid="191f6f34c0">--sidebar-font</span>: <span class="v" data-lvt-eid="7151d1c93d">--type-body-size</span>;  <span class="k" data-lvt-eid="51fb4a1ac9">--sidebar-head-font</span>: <span class="v" data-lvt-eid="c4ab9366b5">--type-label-size</span>;  <span class="k" data-lvt-eid="ba273538ca">--topbar-bg</span>: <span class="v" data-lvt-eid="1aab70b5f0">--color-surface</span>;  <span class="k" data-lvt-eid="efc54c1661">--topbar-border</span>: <span class="v" data-lvt-eid="1ea43ba9cb">--line</span>;  <span class="k" data-lvt-eid="1c04071ea2">--topbar-fg</span>: <span class="v" data-lvt-eid="c49af327a1">--color-text-primary</span>;
 <span class="k" data-lvt-eid="4844c877c7">--topbar-icon</span>: <span class="v" data-lvt-eid="c8f9d4c302">20px</span>;  <span class="k" data-lvt-eid="8ff0cfa369">--topbar-pad</span>: <span class="v" data-lvt-eid="4649e55d8c">--space-4</span>;  <span class="k" data-lvt-eid="9b6ba47533">--breadcrumb-font</span>: <span class="v" data-lvt-eid="b9701c4ba2">--type-caption-size</span>;  <span class="k" data-lvt-eid="e876f09436">--breadcrumb-fg</span>: <span class="v" data-lvt-eid="c01d51aaac">--color-text-secondary</span>;  <span class="k" data-lvt-eid="0e092b84b6">--breadcrumb-current</span>: <span class="v" data-lvt-eid="96af25a317">--color-text-primary</span>;
-<span class="k" data-lvt-eid="f7451d2020">--breadcrumb-sep</span>: <span class="v" data-lvt-eid="e098a03d48">--color-text-tertiary</span>;  <span class="k" data-lvt-eid="72f8b96fd9">--breadcrumb-gap</span>: <span class="v" data-lvt-eid="7d6e2d6b2e">--space-2</span>;  <span class="k" data-lvt-eid="d7a380ea0c">--segment-h</span>: <span class="v" data-lvt-eid="1e40d6855d">--control-h-sm</span>;  <span class="k" data-lvt-eid="4dcf094c3e">--segment-bg</span>: <span class="v" data-lvt-eid="d9fde345a3">--color-neutral-100</span>;  <span class="k" data-lvt-eid="ed2d860362">--segment-active-bg</span>: <span class="v" data-lvt-eid="7896d94b76">--color-surface</span>;
-<span class="k" data-lvt-eid="a62f097d97">--segment-fg</span>: <span class="v" data-lvt-eid="3fb7274bc8">--color-text-secondary</span>;  <span class="k" data-lvt-eid="31e20ea35e">--segment-active-fg</span>: <span class="v" data-lvt-eid="9d02276953">--color-text-primary</span>;  <span class="k" data-lvt-eid="84f7216d57">--segment-radius</span>: <span class="v" data-lvt-eid="cb8ef9c978">--radius-sm</span>;  <span class="k" data-lvt-eid="0d7a3ff0dc">--segment-px</span>: <span class="v" data-lvt-eid="d26bc68525">--space-3</span>;  <span class="k" data-lvt-eid="1ca2bb9358">--segment-font</span>: <span class="v" data-lvt-eid="813d2cd08d">--type-caption-size</span>;</div>
+<span class="k" data-lvt-eid="f7451d2020">--breadcrumb-sep</span>: <span class="v" data-lvt-eid="e098a03d48">--color-text-secondary</span>;  <span class="k" data-lvt-eid="72f8b96fd9">--breadcrumb-gap</span>: <span class="v" data-lvt-eid="7d6e2d6b2e">--space-2</span>;  <span class="k" data-lvt-eid="d7a380ea0c">--segment-h</span>: <span class="v" data-lvt-eid="1e40d6855d">--control-h-sm</span>;  <span class="k" data-lvt-eid="4dcf094c3e">--segment-bg</span>: <span class="v" data-lvt-eid="d9fde345a3">--color-neutral-100</span>;  <span class="k" data-lvt-eid="ed2d860362">--segment-active-bg</span>: <span class="v" data-lvt-eid="7896d94b76">--color-surface</span>;
+<span class="k" data-lvt-eid="a62f097d97">--segment-fg</span>: <span class="v" data-lvt-eid="3fb7274bc8">--color-neutral-700</span>;  <span class="k" data-lvt-eid="31e20ea35e">--segment-active-fg</span>: <span class="v" data-lvt-eid="9d02276953">--color-text-primary</span>;  <span class="k" data-lvt-eid="84f7216d57">--segment-radius</span>: <span class="v" data-lvt-eid="cb8ef9c978">--radius-sm</span>;  <span class="k" data-lvt-eid="0d7a3ff0dc">--segment-px</span>: <span class="v" data-lvt-eid="d26bc68525">--space-3</span>;  <span class="k" data-lvt-eid="1ca2bb9358">--segment-font</span>: <span class="v" data-lvt-eid="813d2cd08d">--type-caption-size</span>;</div>
 <div class="grp" data-lvt-eid="43726fd1c3"><span class="c" data-lvt-eid="7f3de9b06f">/* L3 · tab / pager / banner / tooltip / empty / skeleton / divider / icon */</span>
-<span class="k" data-lvt-eid="1970e35887">--tab-h</span>: <span class="v" data-lvt-eid="befaf60d1c">36px</span>;  <span class="k" data-lvt-eid="55fbab4b4d">--tab-font</span>: <span class="v" data-lvt-eid="83709f0364">--type-body-size</span>;  <span class="k" data-lvt-eid="ce75a3576f">--tab-fg</span>: <span class="v" data-lvt-eid="9dca1e6e66">--color-text-secondary</span>;  <span class="k" data-lvt-eid="595fb53359">--tab-active-fg</span>: <span class="v" data-lvt-eid="ac0031336d">--color-brand-hover</span>;  <span class="k" data-lvt-eid="24df7d45a0">--tab-indicator-w</span>: <span class="v" data-lvt-eid="f0b447da17">2px</span>;  <span class="k" data-lvt-eid="5fd571937f">--tab-indicator</span>: <span class="v" data-lvt-eid="de04f0c2e1">--color-brand</span>;
-<span class="k" data-lvt-eid="bae8bfe63e">--tab-border</span>: <span class="v" data-lvt-eid="21cb0124a2">--color-border</span>;  <span class="k" data-lvt-eid="91f6d0d6dd">--tab-gap</span>: <span class="v" data-lvt-eid="1bf527599b">--space-6</span>;  <span class="k" data-lvt-eid="f38564e3e7">--pager-size</span>: <span class="v" data-lvt-eid="c7f460d3a5">30px</span>;  <span class="k" data-lvt-eid="2878a41999">--pager-font</span>: <span class="v" data-lvt-eid="2ee0b509c2">--type-caption-size</span>;  <span class="k" data-lvt-eid="7b2e1eff7f">--pager-fg</span>: <span class="v" data-lvt-eid="41d5217b8c">--color-text-secondary</span>;
-<span class="k" data-lvt-eid="fececb21d5">--pager-active-bg</span>: <span class="v" data-lvt-eid="b73186128c">--color-brand</span>;  <span class="k" data-lvt-eid="65a8fb99dd">--pager-active-fg</span>: <span class="v" data-lvt-eid="4ee0ce8841">--color-text-inverse</span>;  <span class="k" data-lvt-eid="fb17c8319b">--pager-border</span>: <span class="v" data-lvt-eid="5eaffd627a">--color-neutral-300</span>;  <span class="k" data-lvt-eid="3f65618537">--pager-radius</span>: <span class="v" data-lvt-eid="6400aeed75">--radius-sm</span>;  <span class="k" data-lvt-eid="b404dd2999">--pager-gap</span>: <span class="v" data-lvt-eid="f04cbd7679">--space-1</span>;
-<span class="k" data-lvt-eid="27ea5aa391">--banner-py</span>: <span class="v" data-lvt-eid="44d8b80aff">12px</span>;  <span class="k" data-lvt-eid="1378486322">--banner-px</span>: <span class="v" data-lvt-eid="80e847b250">16px</span>;  <span class="k" data-lvt-eid="14ba723086">--banner-icon</span>: <span class="v" data-lvt-eid="654cc35083">16px</span>;  <span class="k" data-lvt-eid="e51d222463">--banner-radius</span>: <span class="v" data-lvt-eid="d5611356a6">--radius-md</span>;  <span class="k" data-lvt-eid="7e3827cc96">--banner-font</span>: <span class="v" data-lvt-eid="6fed5fb992">--type-caption-size</span>;
-<span class="k" data-lvt-eid="f2b0a2e05b">--banner-info-bg</span>: <span class="v" data-lvt-eid="020461afe4">--color-info-soft</span>;  <span class="k" data-lvt-eid="cf89890419">--banner-info-fg</span>: <span class="v" data-lvt-eid="068fe7239f">--color-info</span>;  <span class="k" data-lvt-eid="13537b4777">--banner-warn-bg</span>: <span class="v" data-lvt-eid="8ec16e3e25">--color-amber-soft</span>;  <span class="k" data-lvt-eid="930684e68c">--banner-warn-fg</span>: <span class="v" data-lvt-eid="d101bc6e19">--color-orange</span>;
-<span class="k" data-lvt-eid="17f3dbf7fe">--banner-danger-bg</span>: <span class="v" data-lvt-eid="04db065e66">--color-danger-soft</span>;  <span class="k" data-lvt-eid="1e34ab148f">--banner-danger-fg</span>: <span class="v" data-lvt-eid="4ece2a2d68">--color-danger</span>;  <span class="k" data-lvt-eid="1f00a3bbd9">--tooltip-bg</span>: <span class="v" data-lvt-eid="66f24030fe">--color-navy-900</span>;  <span class="k" data-lvt-eid="3945733d38">--tooltip-fg</span>: <span class="v" data-lvt-eid="5872eb046d">--color-text-inverse</span>;  <span class="k" data-lvt-eid="3d92fda63f">--tooltip-font</span>: <span class="v" data-lvt-eid="b8a34b30ad">11px</span>;
-<span class="k" data-lvt-eid="a45e245d0c">--tooltip-px</span>: <span class="v" data-lvt-eid="475a1c624a">--space-2</span>;  <span class="k" data-lvt-eid="4f5914f13b">--tooltip-py</span>: <span class="v" data-lvt-eid="e8bce28acf">--space-1</span>;  <span class="k" data-lvt-eid="6321c7360e">--tooltip-radius</span>: <span class="v" data-lvt-eid="2dfc3edd6c">--radius-xs</span>;  <span class="k" data-lvt-eid="d2c90da5b2">--empty-icon</span>: <span class="v" data-lvt-eid="fe49fe0e00">40px</span>;  <span class="k" data-lvt-eid="f2a06b4fef">--empty-icon-color</span>: <span class="v" data-lvt-eid="013fc950db">--color-neutral-300</span>;
+<span class="k" data-lvt-eid="1970e35887">--tab-h</span>: <span class="v" data-lvt-eid="befaf60d1c">36px</span>;  <span class="k" data-lvt-eid="55fbab4b4d">--tab-font</span>: <span class="v" data-lvt-eid="83709f0364">--type-body-size</span>;  <span class="k" data-lvt-eid="ce75a3576f">--tab-fg</span>: <span class="v" data-lvt-eid="9dca1e6e66">--color-text-secondary</span>;  <span class="k" data-lvt-eid="595fb53359">--tab-active-fg</span>: <span class="v" data-lvt-eid="ac0031336d">--color-brand-strong</span>;  <span class="k" data-lvt-eid="24df7d45a0">--tab-indicator-w</span>: <span class="v" data-lvt-eid="f0b447da17">2px</span>;  <span class="k" data-lvt-eid="5fd571937f">--tab-indicator</span>: <span class="v" data-lvt-eid="de04f0c2e1">--color-brand</span>;
+<span class="k" data-lvt-eid="bae8bfe63e">--tab-border</span>: <span class="v" data-lvt-eid="21cb0124a2">--line</span>;  <span class="k" data-lvt-eid="91f6d0d6dd">--tab-gap</span>: <span class="v" data-lvt-eid="1bf527599b">--space-6</span>;  <span class="k" data-lvt-eid="f38564e3e7">--pager-size</span>: <span class="v" data-lvt-eid="c7f460d3a5">30px</span>;  <span class="k" data-lvt-eid="2878a41999">--pager-font</span>: <span class="v" data-lvt-eid="2ee0b509c2">--type-caption-size</span>;  <span class="k" data-lvt-eid="7b2e1eff7f">--pager-fg</span>: <span class="v" data-lvt-eid="41d5217b8c">--color-text-secondary</span>;
+<span class="k" data-lvt-eid="fececb21d5">--pager-active-bg</span>: <span class="v" data-lvt-eid="b73186128c">--color-brand-fill</span>;  <span class="k" data-lvt-eid="65a8fb99dd">--pager-active-fg</span>: <span class="v" data-lvt-eid="4ee0ce8841">--color-text-inverse</span>;  <span class="k" data-lvt-eid="fb17c8319b">--pager-border</span>: <span class="v" data-lvt-eid="5eaffd627a">--line-strong</span>;  <span class="k" data-lvt-eid="3f65618537">--pager-radius</span>: <span class="v" data-lvt-eid="6400aeed75">--radius-sm</span>;  <span class="k" data-lvt-eid="b404dd2999">--pager-gap</span>: <span class="v" data-lvt-eid="f04cbd7679">--space-1</span>;
+<span class="k" data-lvt-eid="27ea5aa391">--banner-py</span>: <span class="v" data-lvt-eid="44d8b80aff">12px</span>;  <span class="k" data-lvt-eid="1378486322">--banner-px</span>: <span class="v" data-lvt-eid="80e847b250">16px</span>;  <span class="k" data-lvt-eid="14ba723086">--banner-icon</span>: <span class="v" data-lvt-eid="654cc35083">16px</span>;  <span class="k" data-lvt-eid="e51d222463">--banner-radius</span>: <span class="v" data-lvt-eid="d5611356a6">--radius-sm</span>;  <span class="k" data-lvt-eid="7e3827cc96">--banner-font</span>: <span class="v" data-lvt-eid="6fed5fb992">--type-caption-size</span>;
+<span class="k" data-lvt-eid="f2b0a2e05b">--banner-info-bg</span>: <span class="v" data-lvt-eid="020461afe4">--color-info-soft</span>;  <span class="k" data-lvt-eid="cf89890419">--banner-info-fg</span>: <span class="v" data-lvt-eid="068fe7239f">#1F6FA8</span>;  <span class="k" data-lvt-eid="13537b4777">--banner-warn-bg</span>: <span class="v" data-lvt-eid="8ec16e3e25">--color-amber-soft</span>;  <span class="k" data-lvt-eid="930684e68c">--banner-warn-fg</span>: <span class="v" data-lvt-eid="d101bc6e19">#9A5B0F</span>;
+<span class="k" data-lvt-eid="17f3dbf7fe">--banner-danger-bg</span>: <span class="v" data-lvt-eid="04db065e66">--color-danger-soft</span>;  <span class="k" data-lvt-eid="1e34ab148f">--banner-danger-fg</span>: <span class="v" data-lvt-eid="4ece2a2d68">#C0392B</span>;  <span class="k" data-lvt-eid="1f00a3bbd9">--tooltip-bg</span>: <span class="v" data-lvt-eid="66f24030fe">--color-navy-900</span>;  <span class="k" data-lvt-eid="3945733d38">--tooltip-fg</span>: <span class="v" data-lvt-eid="5872eb046d">--color-text-inverse</span>;  <span class="k" data-lvt-eid="3d92fda63f">--tooltip-font</span>: <span class="v" data-lvt-eid="b8a34b30ad">11px</span>;
+<span class="k" data-lvt-eid="a45e245d0c">--tooltip-px</span>: <span class="v" data-lvt-eid="475a1c624a">--space-2</span>;  <span class="k" data-lvt-eid="4f5914f13b">--tooltip-py</span>: <span class="v" data-lvt-eid="e8bce28acf">--space-1</span>;  <span class="k" data-lvt-eid="6321c7360e">--tooltip-radius</span>: <span class="v" data-lvt-eid="2dfc3edd6c">--radius-sm</span>;  <span class="k" data-lvt-eid="d2c90da5b2">--empty-icon</span>: <span class="v" data-lvt-eid="fe49fe0e00">40px</span>;  <span class="k" data-lvt-eid="f2a06b4fef">--empty-icon-color</span>: <span class="v" data-lvt-eid="013fc950db">--color-neutral-300</span>;
 <span class="k" data-lvt-eid="5bc5c51d93">--empty-title-size</span>: <span class="v" data-lvt-eid="2a8d8e72d6">--type-h3-size</span>;  <span class="k" data-lvt-eid="f88800a85f">--empty-text-size</span>: <span class="v" data-lvt-eid="8d70c6a8cf">--type-body-size</span>;  <span class="k" data-lvt-eid="d79c5f333c">--empty-text-color</span>: <span class="v" data-lvt-eid="4ef2b85e62">--color-text-secondary</span>;  <span class="k" data-lvt-eid="6baca97c12">--empty-pad</span>: <span class="v" data-lvt-eid="a7e8c7d449">--space-8</span>;
 <span class="k" data-lvt-eid="7873ac8ba2">--skeleton-bg</span>: <span class="v" data-lvt-eid="81144105b7">--color-neutral-100</span>;  <span class="k" data-lvt-eid="708b972e4b">--skeleton-shine</span>: <span class="v" data-lvt-eid="6190eadf99">color-mix(--color-surface 60%)</span>;  <span class="k" data-lvt-eid="6859982fb2">--skeleton-radius</span>: <span class="v" data-lvt-eid="ce207c0ccc">--radius-xs</span>;  <span class="k" data-lvt-eid="cd6e764f10">--skeleton-h-text</span>: <span class="v" data-lvt-eid="f5024a411d">12px</span>;  <span class="k" data-lvt-eid="10299bc2ed">--skeleton-h-title</span>: <span class="v" data-lvt-eid="4e40aad6b5">16px</span>;
-<span class="k" data-lvt-eid="4277df1f5d">--divider-color</span>: <span class="v" data-lvt-eid="d3d32a8c17">--color-divider</span>;  <span class="k" data-lvt-eid="fdfcb807d1">--divider-w</span>: <span class="v" data-lvt-eid="06e7ef8df8">1px</span>;  <span class="k" data-lvt-eid="19afcd69bc">--divider-gap</span>: <span class="v" data-lvt-eid="8e7616d649">--space-4</span>;  <span class="k" data-lvt-eid="4637cbc21a">--icon-12/16/18/20/24</span>: <span class="v" data-lvt-eid="3070094190">12 16 18 20 24</span>;  <span class="k" data-lvt-eid="381d8de510">--icon-stroke</span>: <span class="v" data-lvt-eid="7980fe60ee">1.5</span>;  <span class="k" data-lvt-eid="cd28f240d0">--icon-color</span>: <span class="v" data-lvt-eid="60f9172ad4">--color-text-secondary</span>;</div>
+<span class="k" data-lvt-eid="4277df1f5d">--divider-color</span>: <span class="v" data-lvt-eid="d3d32a8c17">--line-soft</span>;  <span class="k" data-lvt-eid="fdfcb807d1">--divider-w</span>: <span class="v" data-lvt-eid="06e7ef8df8">1px</span>;  <span class="k" data-lvt-eid="19afcd69bc">--divider-gap</span>: <span class="v" data-lvt-eid="8e7616d649">--space-4</span>;  <span class="k" data-lvt-eid="4637cbc21a">--icon-12/16/18/20/24</span>: <span class="v" data-lvt-eid="3070094190">12 16 18 20 24</span>;  <span class="k" data-lvt-eid="381d8de510">--icon-stroke</span>: <span class="v" data-lvt-eid="7980fe60ee">1.5</span>;  <span class="k" data-lvt-eid="cd28f240d0">--icon-color</span>: <span class="v" data-lvt-eid="60f9172ad4">--color-text-secondary</span>;</div>
   </div>
 </section>
 
@@ -2461,6 +2511,7 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
       <tr data-lvt-eid="20f55775f8"><td class="mono" style="font-size:12px;width:14%" data-lvt-eid="46bb54c021">v1.0</td><td class="mono" style="font-size:12px;width:18%" data-lvt-eid="3519839585">2026-10-29</td><td data-lvt-eid="9ad3ce7ade">초기 토큰 추출 — Gentelella 참조</td></tr>
       <tr data-lvt-eid="56f7352068"><td class="mono" style="font-size:12px" data-lvt-eid="637dcb89a8">v1.1</td><td class="mono" style="font-size:12px" data-lvt-eid="ef84874a46">2026-10-29</td><td data-lvt-eid="1620581509">사이드바 250→200px, 3층 컴포넌트 큰 추가</td></tr>
       <tr data-lvt-eid="3b8e37b548"><td class="mono" style="font-size:12px" data-lvt-eid="ae3983dc04">v1.1</td><td class="mono" style="font-size:12px" data-lvt-eid="ef8647be5c">2026-10-29</td><td data-lvt-eid="db410f3767">플레이북 페이지 분리</td></tr>
+      <tr><td class="mono" style="font-size:12px">v1.3</td><td class="mono" style="font-size:12px">Catui 2.0</td><td>디자인 개편 — 잉크 선 토큰(--line*) · radius 2/4/6/8/10 · 얕은 shadow + 다크 inset · 포커스 링 2px(--ring) · --accent-w · 유리(--glass-*) · AA 보정(brand-strong / badge-*-fg)</td></tr>
     </tbody>
   </table>
   <div class="banner banner-info" style="width:100%;margin-top:var(--space-6)" data-lvt-eid="b116c30794"><svg class="icon" data-lvt-eid="9ea89b4cc4"><use href="#ic-info" data-lvt-eid="361b617e6f"></use></svg><span data-lvt-eid="8d849fc767">이 문서의 모든 수치는 레이아웃 확인용입니다. 실데이터 교체 시에는 11 의 변수 이름만 유지하면 샘플이 자동으로 따라갑니다.</span></div>
@@ -2475,13 +2526,13 @@ figcaption{font-size:var(--prose-fig-cap-font);color:var(--prose-fig-cap-fg);mar
 
 <!-- 우측 레일: 섹션별 「여기서 쓰는 토큰」 -->
 <aside class="rail-right" aria-label="섹션별 사용 토큰" data-lvt-eid="31802c2b7e">
-  <div class="rr-block" data-lvt-eid="6a41c9974f"><div class="rr-sec" data-lvt-eid="cf94908e23">00 Overview</div><div class="rr-tok" data-lvt-eid="5d2e8ae663">--color-brand<br data-lvt-eid="a34a9180ea">--color-brand-soft<br data-lvt-eid="dc9f65e4ca">--shadow-sm<br data-lvt-eid="f06614967b">--radius-lg</div></div>
+  <div class="rr-block" data-lvt-eid="6a41c9974f"><div class="rr-sec" data-lvt-eid="cf94908e23">00 Overview</div><div class="rr-tok" data-lvt-eid="5d2e8ae663">--color-brand<br data-lvt-eid="a34a9180ea">--color-brand-soft<br data-lvt-eid="dc9f65e4ca">--shadow-sm<br data-lvt-eid="f06614967b">--radius-lg<br>--line / --glass-*</div></div>
   <div class="rr-block" data-lvt-eid="91db31e654"><div class="rr-sec" data-lvt-eid="ef2cf29b05">01 Color Rules</div><div class="rr-tok" data-lvt-eid="1bfe13fc73">--badge-*-bg / -fg<br data-lvt-eid="309d88afdf">--chart-series-1..5<br data-lvt-eid="ef0773213d">--btn-disabled-bg / -fg<br data-lvt-eid="50f29af6eb">--color-navy-text</div></div>
   <div class="rr-block" data-lvt-eid="381a5520c5"><div class="rr-sec" data-lvt-eid="fd12909f32">02 Typography Rules</div><div class="rr-tok" data-lvt-eid="93c3bfd88e">--type-display<br data-lvt-eid="80640db74d">--type-h1 / h2<br data-lvt-eid="5311369bb4">--type-body<br data-lvt-eid="4b08ef3640">--type-metric-xl<br data-lvt-eid="41541340bf">--type-label</div></div>
   <div class="rr-block" data-lvt-eid="f666702039"><div class="rr-sec" data-lvt-eid="cd8bc62cc0">03 Spacing Rules</div><div class="rr-tok" data-lvt-eid="bda60a8071">--space-1..10<br data-lvt-eid="93cccd923b">--card-pad<br data-lvt-eid="c02416f8df">--grid-gap<br data-lvt-eid="d086f2d869">--content-pad<br data-lvt-eid="03a6daddf5">--color-brand-ghost</div></div>
   <div class="rr-block" data-lvt-eid="8bed950f10"><div class="rr-sec" data-lvt-eid="1e45cf1c2f">04 Component Contracts</div><div class="rr-tok" data-lvt-eid="e02f7ce373">--btn-*<br data-lvt-eid="ae893b4b9b">--input-* / --check-*<br data-lvt-eid="67fb9b5cd1">--pill-* / --badge-*<br data-lvt-eid="8191805243">--card-* / --stat-*<br data-lvt-eid="a025480af2">--progress-* / --chart-*<br data-lvt-eid="ca7f74aeb7">--donut-* / --table-*<br data-lvt-eid="5f5e84816d">--sidebar-* / --tab-*</div></div>
   <div class="rr-block" data-lvt-eid="6325ccf0e5"><div class="rr-sec" data-lvt-eid="7e470b4d44">05 Composition Patterns</div><div class="rr-tok" data-lvt-eid="68e6a6fe7c">--grid-cols / --grid-gap<br data-lvt-eid="0ea609a7d3">--content-pad<br data-lvt-eid="9882fa6743">--card-header-h<br data-lvt-eid="2bfb9706e3">--table-row-h / --table-zebra<br data-lvt-eid="85de4bd42e">--pager-size</div></div>
-  <div class="rr-block" data-lvt-eid="87e6a09d1d"><div class="rr-sec" data-lvt-eid="a2ef23b664">06 Accessibility</div><div class="rr-tok" data-lvt-eid="65741cc98a">--control-h-sm/md/lg<br data-lvt-eid="f5c747af54">--color-focus-ring<br data-lvt-eid="7856b6587d">--check-size</div></div>
+  <div class="rr-block" data-lvt-eid="87e6a09d1d"><div class="rr-sec" data-lvt-eid="a2ef23b664">06 Accessibility</div><div class="rr-tok" data-lvt-eid="65741cc98a">--control-h-sm/md/lg<br data-lvt-eid="f5c747af54">--ring / --ring-offset<br>--color-focus-ring<br data-lvt-eid="7856b6587d">--check-size</div></div>
   <div class="rr-block" data-lvt-eid="17baf5a992"><div class="rr-sec" data-lvt-eid="e5da6dec76">07 Token Cheat Sheet</div><div class="rr-note" data-lvt-eid="d2ea0983d6">1·2·3층 전량 목록 — 코드 패널은 --color-code-bg 위에 code-key / code-val / code-comment 3색만 사용.</div></div>
   <div class="rr-block" data-lvt-eid="9cfd193c0c"><div class="rr-sec" data-lvt-eid="845b5ff811">08 Governance</div><div class="rr-tok" data-lvt-eid="9178524a62">--badge-success-bg<br data-lvt-eid="a0ffa4db21">--badge-danger-bg<br data-lvt-eid="48603352e5">--banner-info-bg<br data-lvt-eid="72977ae187">--table-row-h</div></div>
 </aside>

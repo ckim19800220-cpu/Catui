@@ -1,0 +1,15 @@
+{
+  "top": [
+    { "id": "home", "title": "예약하기", "href": "index.html" },
+    { "id": "mine", "title": "내 예약", "href": "mine.html" },
+    { "id": "wait", "title": "대기 명단", "href": "waitlist.html" },
+    { "id": "admin", "title": "관리자 일정", "href": "admin.html" }
+  ],
+  "foot": [
+    { "title": "예약하기", "href": "index.html" },
+    { "title": "내 예약", "href": "mine.html" },
+    { "title": "대기 명단", "href": "waitlist.html" },
+    { "title": "관리자 일정표", "href": "admin.html" },
+    { "title": "로그인", "href": "login.html" }
+  ]
+}

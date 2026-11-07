@@ -37,13 +37,13 @@ catui.use(['util', 'layer'], function (util, layer) {
     var bl = document.getElementById('pv-board'); bl.textContent = p.boardName; bl.href = href; document.getElementById('pv-list').href = href;
     catui.mount(document.getElementById('pv-author'), catui.html`${cm.badge(p.author)}<a href="profile.html?u=${p.user}">${p.author.nick}</a>`);
     var t = document.getElementById('pv-time'); t.dateTime = p.time; t.textContent = cm.ago(p.time) + ' · ' + util.toDateString(new Date(p.time), 'yyyy.MM.dd HH:mm');
-    document.querySelectorAll('.Catui_cm-gnb-item').forEach(function (a) { if (a.getAttribute('href') === href) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    document.querySelectorAll('.Catui_cm-gnb a.Catui_hnav-item').forEach(function (a) { if (a.getAttribute('href') === href) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     var v = document.getElementById('pv-vote'); v.dataset.catuiCmVote = 'post:' + p.id; v.dataset.up = p.up; v.dataset.down = p.down; cm.vote.paintAll(v.parentElement);
     cm.read.add(p.id);
     // 본문 블록: 문단(p)·사진(img)·인용(quote) — 글자는 모두 이스케이프해서 넣는다
-    (p.id === '1201' ? cm.data('post-1201') : Promise.resolve({ body: [{ p: p.summary || '본문 예시입니다. 실서비스는 post-' + p.id + '.json(또는 API)에서 본문을 읽습니다.' }], tags: [p.boardName, p.cat] })).then(function (x) {
+    (p.id === '1201' ? cm.data('post-1201') : Promise.resolve({ body: [{ p: p.summary || '본문 예시입니다. 실서비스는 post-' + p.id + '.json(또는 API)에서 본문을 읽습니다.' }].concat(p.thumb ? [{ img: p.thumb, caption: '주제에 맞춘 공개 라이선스 예시 사진' }] : []), tags: [p.boardName, p.cat] })).then(function (x) {
       catui.mount(document.getElementById('pv-body'), catui.html`${x.body.map(function (b) {
-        if (b.img) return catui.html`<figure><img src="${cm.thumb({ id: p.id, tone: 1 })}" alt="${b.caption || ''}" width="640" height="480"><figcaption>${b.caption || ''}</figcaption></figure>`;
+        if (b.img) return catui.html`<figure><img src="${b.img}" alt="${b.caption || ''}" width="640" height="480"><figcaption>${b.caption || ''}</figcaption></figure>`;
         if (b.quote) return catui.html`<blockquote><p>${b.quote}</p></blockquote>`;
         return catui.html`<p>${b.p}</p>`;
       })}`);

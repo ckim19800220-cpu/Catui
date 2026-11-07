@@ -58,7 +58,7 @@ shop.cards = {
       return;
     }
     if (box.hasAttribute("data-catui-sh-promos")) {
-      catui.mount(box, catui.html`<ul class="Catui_sh-promos">${d.promos.map((m) => catui.html`<li><a class="Catui_sh-promo" data-tone="${m.tone}" href="event.html?e=${m.id}"><b>${m.title}</b><span>${m.desc}</span><time class="Catui_sh-left" data-catui-sh-until="${m.until}" datetime="${m.until}"></time></a></li>`)}</ul>`);
+      catui.mount(box, catui.html`<ul class="Catui_sh-promos">${d.promos.map((m) => catui.html`<li><a class="Catui_sh-promo" data-tone="${m.tone}" href="event.html?e=${m.id}">${m.image ? catui.html`<img class="Catui_sh-promo-img" src="${m.image}" alt="" aria-hidden="true" width="80" height="96" loading="lazy" decoding="async">` : ""}<b>${m.title}</b><span>${m.desc}</span><time class="Catui_sh-left" data-catui-sh-until="${m.until}" datetime="${m.until}"></time></a></li>`)}</ul>`);
       shop.shell.tick(box);
       return;
     }

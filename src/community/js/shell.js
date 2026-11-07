@@ -10,6 +10,7 @@ community.fav = {
 };
 community.shell = {
   init(root) {
+    if (community._once(root, "photo-errors")) community._on(root, "error", (e) => { if (e.target.matches?.("img") && !e.target.src.startsWith("data:")) e.target.src = community.thumb({ id: 1 }, true); }, true);
     root.querySelectorAll("[data-catui-cm-search]").forEach((f) => community._on(f, "submit", (e) => {
       const q = f.querySelector("input[name=q]");
       if (q && !q.value.trim()) { e.preventDefault(); q.focus(); }

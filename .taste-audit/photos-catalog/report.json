@@ -1,0 +1,438 @@
+{
+ "url": "assets/photos/index.html",
+ "at": "2026-11-07T06:18:02.776Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 9,
+   "filled": [
+    0.65,
+    0.7,
+    0.7,
+    0.75,
+    0.75,
+    0.7,
+    0.7,
+    0.48,
+    0.48
+   ],
+   "motion": {
+    "elements": 0,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 7210,
+     "screens": 8,
+     "words": 1131,
+     "img": 43,
+     "video": 0,
+     "canvas": 0,
+     "svg": 0,
+     "sections": 0,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 43,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "autumn.jpg",
+      "fresh.jpg",
+      "home.jpg",
+      "workspace.png",
+      "reading.jpg",
+      "shirt.jpg",
+      "denim.jpg",
+      "coat.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "예시 사진 출처와 라이선스",
+     "words": 4,
+     "chars": 14,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 20,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "예시 사진 출처와 라이선스",
+     "words": 4,
+     "lines": 1,
+     "size": 24,
+     "font": "Inter"
+    },
+    "headings": [],
+    "headingSummary": {
+     "count": 0,
+     "maxLines": 0,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      13,
+      15,
+      24
+     ],
+     "sizeCount": 3,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 13,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 10.3
+     },
+     "measureChars": 191,
+     "max": {
+      "size": 24,
+      "vw": 1.7,
+      "font": "Inter",
+      "text": "예시 사진 출처와 라이선스"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.06,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f7f8fa",
+     "bodyBgHsl": {
+      "h": 220,
+      "s": 0.23,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#2c3e50",
+       "share": 0.9
+      },
+      {
+       "color": "#0e7a63",
+       "share": 0.1
+      }
+     ],
+     "button": null,
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 43,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "article.Catui_card.Catui_span-4 → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "article.Catui_card.Catui_span-4 → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "article.Catui_card.Catui_span-4 → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px",
+      "article.Catui_card.Catui_span-4 → rgba(16, 24, 40, 0.03) 0px 1px 0px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 43,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 43,
+     "boxRadius": 6,
+     "squareMedia": 43,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 43,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 112
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.09
+     },
+     {
+      "type": "img",
+      "ratio": 0.09
+     },
+     {
+      "type": "img",
+      "ratio": 0.09
+     },
+     {
+      "type": "img",
+      "ratio": 0.09
+     }
+    ],
+    "nav": null,
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 7210,
+    "margins": {
+     "left": 101,
+     "right": 101
+    },
+    "sections": [],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "예시 사진 출처와 라이선스",
+      "size": 24,
+      "top": 20,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 121,
+      "n": 15
+     },
+     {
+      "x": 541,
+      "n": 14
+     },
+     {
+      "x": 961,
+      "n": 14
+     },
+     {
+      "x": 100,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 44,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.04,
+    "voidBox": {
+     "x": 0,
+     "y": 120,
+     "w": 60,
+     "h": 780
+    }
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": false,
+    "ground": "#f7f8fa",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 101,
+     "right": 101
+    },
+    "hero": {
+     "text": "예시 사진 출처와 라이선스",
+     "words": 4,
+     "chars": 14,
+     "lines": 1,
+     "size": 24,
+     "vw": 1.7,
+     "font": "Inter",
+     "weight": 600,
+     "tracking": 0,
+     "leading": 1.3,
+     "top": 20,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 43,
+     "firstScreen": 6,
+     "ragged": [],
+     "voids": [
+      {
+       "gap": 65,
+       "at": 5716,
+       "panel": "Living room of a Hanok - panoramio.jpg"
+      },
+      {
+       "gap": 64,
+       "at": 1455,
+       "panel": "Jeans mexicanos.jpg"
+      },
+      {
+       "gap": 64,
+       "at": 1455,
+       "panel": "Ash and orange sneakers.jpg"
+      },
+      {
+       "gap": 64,
+       "at": 3365,
+       "panel": "Bedside Table Lamp.jpg"
+      }
+     ]
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 43,
+     "radii": [
+      [
+       6,
+       43
+      ]
+     ],
+     "heavyBorders": 43,
+     "borderSamples": [
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)",
+      "#2a404e on #ffffff (10.81:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 43,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      13,
+      15,
+      24
+     ]
+    },
+    "title": {
+     "text": "예시 사진 출처와 라이선스",
+     "size": 24,
+     "top": 20
+    },
+    "colourShare": 0.142
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "heavy-borders",
+   "width": 1440,
+   "message": "43 panel borders are dark against their ground: #2a404e on #ffffff (10.81:1) | #2a404e on #ffffff (10.81:1) | #2a404e on #ffffff (10.81:1)",
+   "fix": "A panel border is a whisper: about 1.1–1.3:1 against its ground on a light screen (#e5e7eb–#ededed on white), and about 1.2–1.5:1 on a dark one (#1a1a1a on #000, #2e2e2e on #111). Darker lines turn the screen into a grid of boxes; keep the stronger line for controls."
+  },
+  {
+   "level": "WARN",
+   "id": "colour-sprawl",
+   "width": 1440,
+   "message": "14% of the first screen is strongly coloured.",
+   "fix": "Keep the screen neutral and spend colour on data and status: the studied screens sit near 3%, and only tinted styles reach 10–15%, as pale tints rather than saturated fills."
+  },
+  {
+   "level": "WARN",
+   "id": "below-fold",
+   "width": 1440,
+   "message": "Only 6 of 43 blocks start on the first 1440px screen.",
+   "fix": "Every block the brief names shows its header and first rows on the first desktop screen: size the headline block to its question, cap long lists with \"View all\", and put time-sensitive blocks before long tables."
+  },
+  {
+   "level": "WARN",
+   "id": "panel-void",
+   "width": 1440,
+   "message": "4 card(s) hold a blank band inside: 65px in \"Living room of a Hanok - panoramio.jpg\", 64px in \"Jeans mexicanos.jpg\", 64px in \"Ash and orange sneakers.jpg\".",
+   "fix": "A card stretches to its neighbour only when it has content to fill. Keep a legend or a note directly under its chart (only an action or a total may sit at a stretched card's foot), let a short card keep its own height (align-items: start), and let a filtered block shrink to its rows."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Catui_design\\.taste-audit\\photos-catalog\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Catui_design\\.taste-audit\\photos-catalog\\desktop-page-01.jpg",
+    "D:\\Catui_design\\.taste-audit\\photos-catalog\\desktop-page-02.jpg",
+    "D:\\Catui_design\\.taste-audit\\photos-catalog\\desktop-page-03.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

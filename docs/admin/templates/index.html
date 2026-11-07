@@ -68,8 +68,9 @@
     </div>
   </article>
 
-  <article class="Catui_card Catui_span-8">
-    <header class="Catui_card-h">최근 주문 <span class="Catui_card-tools"><a class="Catui_btn Catui_btn-sm Catui_btn-ghost" href="index.html">전체 보기</a></span></header>
+  <div class="Catui_adm-panels Catui_span-8">
+  <article class="Catui_card">
+    <header class="Catui_card-h">최근 주문 <span class="Catui_card-tools"><a class="Catui_btn Catui_btn-sm Catui_btn-ghost" href="orders.html">전체 보기</a></span></header>
     <div class="Catui_card-b Catui_adm-flush">
       <table class="Catui_tbl">
         <caption class="Catui_clip">최근 주문 5건</caption>
@@ -78,7 +79,15 @@
       </table>
     </div>
   </article>
-  <article class="Catui_card Catui_span-4">
+  <article class="Catui_card">
+    <header class="Catui_card-h">앱 버전 사용 비율</header>
+    <div class="Catui_card-b">
+      <div class="Catui_bars" data-catui-adm-src="dashboard-ops" data-catui-adm-rows="bars.index_2"><template><div class="Catui_bar"><span class="Catui_bar-label" data-catui-adm-field="label"></span><span class="Catui_bar-track"><i class="Catui_bar-fill" data-catui-adm-class="Catui_bar-fill-:fill" data-catui-adm-attr="style:width:{pct}%"></i></span><span class="Catui_bar-value" data-catui-adm-field="value"></span></div></template></div>
+    </div>
+  </article>
+  </div>
+  <div class="Catui_adm-panels Catui_span-4">
+  <article class="Catui_card">
     <header class="Catui_card-h">저장 공간 <span class="Catui_adm-card-meta" data-catui-adm-src="dashboard-ops" data-catui-adm-text="storage.summary">500GB 중 340GB</span></header>
     <div class="Catui_card-b Catui_vstack Catui_gap-3">
       <div class="Catui_vstack Catui_gap-3" data-catui-adm-src="dashboard-ops" data-catui-adm-rows="storage.items"><template><div><div class="Catui_prog-label"><span data-catui-adm-field="label"></span><span class="Catui_num" data-catui-adm-field="pct" data-catui-adm-format="percent"></span></div><div class="Catui_meter" role="img" data-catui-adm-attr="aria-label:{label} {pct}퍼센트"><i data-catui-adm-attr="style:width:{pct}%"></i></div></div></template></div>
@@ -86,6 +95,14 @@
     </div>
   </article>
 
+  <article class="Catui_card">
+    <header class="Catui_card-h">할 일 <span class="Catui_adm-card-meta" data-catui-adm-src="dashboard-ops" data-catui-adm-text="tasksSummary">5개 중 2개 완료</span></header>
+    <div class="Catui_card-b">
+      <div role="list" aria-label="할 일" data-catui-adm-src="dashboard-ops" data-catui-adm-rows="tasks"><template><label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox" data-catui-adm-attr="data-catui-adm-pref:{id}" data-catui-adm-bool="checked:done"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri" data-catui-adm-class="Catui_pri-:priority" aria-hidden="true"></i><span><span data-catui-adm-field="title"></span><span class="Catui_clip"> (우선순위 <span data-catui-adm-field="priorityLabel"></span>)</span></span><span class="Catui_help" data-catui-adm-field="due"></span></label></template>
+      </div>
+    </div>
+  </article>
+  </div>
   <article class="Catui_card Catui_span-4">
     <header class="Catui_card-h">기기별 방문</header>
     <div class="Catui_card-b">
@@ -100,20 +117,6 @@
     </div>
   </article>
   <article class="Catui_card Catui_span-4">
-    <header class="Catui_card-h">할 일 <span class="Catui_adm-card-meta" data-catui-adm-src="dashboard-ops" data-catui-adm-text="tasksSummary">5개 중 2개 완료</span></header>
-    <div class="Catui_card-b">
-      <div role="list" aria-label="할 일" data-catui-adm-src="dashboard-ops" data-catui-adm-rows="tasks"><template><label class="Catui_task" role="listitem"><input class="Catui_clip" type="checkbox" data-catui-adm-attr="data-catui-adm-pref:{id}" data-catui-adm-bool="checked:done"><span class="Catui_cbx"><svg class="Catui_icon Catui_i12" aria-hidden="true"><use href="../../../dist/icons.svg?v=2#Catui_ic-check"></use></svg></span><i class="Catui_pri" data-catui-adm-class="Catui_pri-:priority" aria-hidden="true"></i><span><span data-catui-adm-field="title"></span><span class="Catui_clip"> (우선순위 <span data-catui-adm-field="priorityLabel"></span>)</span></span><span class="Catui_help" data-catui-adm-field="due"></span></label></template>
-      </div>
-    </div>
-  </article>
-
-  <article class="Catui_card Catui_span-6">
-    <header class="Catui_card-h">앱 버전 사용 비율</header>
-    <div class="Catui_card-b">
-      <div class="Catui_bars" data-catui-adm-src="dashboard-ops" data-catui-adm-rows="bars.index_2"><template><div class="Catui_bar"><span class="Catui_bar-label" data-catui-adm-field="label"></span><span class="Catui_bar-track"><i class="Catui_bar-fill" data-catui-adm-class="Catui_bar-fill-:fill" data-catui-adm-attr="style:width:{pct}%"></i></span><span class="Catui_bar-value" data-catui-adm-field="value"></span></div></template></div>
-    </div>
-  </article>
-  <article class="Catui_card Catui_span-6">
     <header class="Catui_card-h">빠른 설정</header>
     <div class="Catui_card-b">
       <div class="Catui_settings">
@@ -127,7 +130,7 @@
 </div>
 
     </main>
-    <footer class="Catui_adm-foot"><span>© 2026 CatuiAdmin · Catui 2.0.0</span><span>MIT License</span></footer>
+    <footer class="Catui_adm-foot"><span>© 2026 CatuiAdmin · Catui 2.0.0</span><span>MIT License · <a class="Catui_link" href="../../../dist/../assets/photos/index.html">예시 사진·출처</a></span></footer>
   </div>
 </div>
 <script type="application/json" id="adm-cmd-data">[{"group":"일반","title":"대시보드 · 운영","href":"index.html","icon":"layout-dashboard"},{"group":"일반","title":"대시보드 · 분석","href":"analytics.html","icon":"layout-dashboard"},{"group":"일반","title":"대시보드 · 매출","href":"sales.html","icon":"layout-dashboard"},{"group":"일반","title":"대시보드 · 시스템 상태","href":"health.html","icon":"layout-dashboard"},{"group":"일반","title":"폼 · 기본","href":"form.html","icon":"file-text"},{"group":"일반","title":"폼 · 고급 입력","href":"form-advanced.html","icon":"file-text"},{"group":"일반","title":"폼 · 버튼","href":"form-buttons.html","icon":"file-text"},{"group":"일반","title":"폼 · 업로드","href":"form-upload.html","icon":"file-text"},{"group":"일반","title":"폼 · 검증","href":"form-validation.html","icon":"file-text"},{"group":"일반","title":"폼 · 단계","href":"form-wizard.html","icon":"file-text"},{"group":"일반","title":"표 · 정적 표","href":"tables.html","icon":"table"},{"group":"일반","title":"표 · 동적 표","href":"tables-dynamic.html","icon":"table"},{"group":"일반","title":"차트 · 차트 카드","href":"charts.html","icon":"chart-column"},{"group":"일반","title":"차트 · 차트 갤러리","href":"chart-gallery.html","icon":"chart-column"},{"group":"일반","title":"차트 · SVG 차트","href":"charts-svg.html","icon":"chart-column"},{"group":"일반","title":"캘린더","href":"calendar.html","icon":"calendar"},{"group":"일반","title":"지도","href":"map.html","icon":"map"},{"group":"앱","title":"채팅","href":"chat.html","icon":"message-square"},{"group":"앱","title":"받은편지함","href":"inbox.html","icon":"inbox"},{"group":"앱","title":"칸반","href":"kanban.html","icon":"kanban"},{"group":"앱","title":"파일","href":"files.html","icon":"folder"},{"group":"앱","title":"알림","href":"notifications.html","icon":"bell"},{"group":"커머스","title":"상점","href":"shop.html","icon":"store"},{"group":"커머스","title":"상품 상세","href":"product.html","icon":"package"},{"group":"커머스","title":"주문 · 전체 주문","href":"orders.html","icon":"shopping-cart"},{"group":"커머스","title":"주문 · 주문 상세","href":"order-detail.html","icon":"shopping-cart"},{"group":"커머스","title":"청구서","href":"invoice.html","icon":"receipt"},{"group":"커머스","title":"요금표","href":"pricing.html","icon":"tag"},{"group":"프로젝트","title":"전체 프로젝트","href":"projects.html","icon":"briefcase"},{"group":"프로젝트","title":"프로젝트 상세","href":"project-detail.html","icon":"layers"},{"group":"UI","title":"요소","href":"elements.html","icon":"grid"},{"group":"UI","title":"위젯","href":"widgets.html","icon":"layout-grid"},{"group":"UI","title":"놀이터","href":"playground.html","icon":"sliders-horizontal"},{"group":"UI","title":"테마","href":"theme.html","icon":"palette"},{"group":"UI","title":"타이포그래피","href":"typography.html","icon":"type"},{"group":"UI","title":"아이콘","href":"icons.html","icon":"star"},{"group":"UI","title":"미디어","href":"media.html","icon":"image"},{"group":"관리","title":"연락처","href":"contacts.html","icon":"contact"},{"group":"관리","title":"사용자 관리","href":"users.html","icon":"users"},{"group":"관리","title":"프로필","href":"profile.html","icon":"user"},{"group":"관리","title":"설정","href":"settings.html","icon":"settings"},{"group":"관리","title":"도움말","href":"faq.html","icon":"help"},{"group":"레이아웃","title":"고정 사이드바","href":"fixed-sidebar.html","icon":"panel-left"},{"group":"레이아웃","title":"고정 바닥글","href":"fixed-footer.html","icon":"layout"},{"group":"레이아웃","title":"중첩 페이지","href":"nested.html","icon":"folder-open"},{"group":"레이아웃","title":"빈 페이지","href":"blank.html","icon":"file"},{"group":"페이지","title":"인증 · 로그인","href":"login.html","icon":"lock"},{"group":"페이지","title":"인증 · 회원가입","href":"register.html","icon":"lock"},{"group":"페이지","title":"인증 · 비밀번호 찾기","href":"forgot.html","icon":"lock"},{"group":"페이지","title":"오류 · 403 권한 없음","href":"error-403.html","icon":"alert-triangle"},{"group":"페이지","title":"오류 · 404 없는 페이지","href":"error-404.html","icon":"alert-triangle"},{"group":"페이지","title":"오류 · 500 서버 오류","href":"error-500.html","icon":"alert-triangle"}]</script>

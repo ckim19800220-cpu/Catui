@@ -11,15 +11,15 @@
 .Catui_dk-head{position:sticky;top:0;z-index:30;background:var(--Catui_card-bg);border-bottom:1px solid var(--Catui_dk-line)}
 .Catui_dk-head-in{max-width:var(--Catui_dk-wrap);margin-inline:auto;display:flex;align-items:center;gap:var(--Catui_space-4);min-height:var(--Catui_dk-head-h);padding-inline:var(--Catui_space-5)}
 .Catui_dk-brand{display:inline-flex;align-items:center;gap:var(--Catui_space-2);font-weight:800;font-size:var(--Catui_type-h3-size);text-decoration:none;white-space:nowrap;color:var(--Catui_color-text-primary)}
-.Catui_dk-brand span{color:var(--Catui_dk-accent)}
-.Catui_dk-logo{display:inline-grid;place-items:center;width:var(--Catui_control-h-md);height:var(--Catui_control-h-md);border-radius:var(--Catui_radius-md);background:var(--Catui_dk-accent);color:var(--Catui_color-text-inverse)}
-.Catui_dk-logo .Catui_icon{color:inherit}
-.Catui_dk-nav{position:relative;display:flex;align-items:center;gap:var(--Catui_space-1);min-width:0;overflow-x:auto;scrollbar-width:none}
-.Catui_dk-nav::-webkit-scrollbar{display:none}
-.Catui_dk-nav-item{flex:none;display:inline-flex;align-items:center;min-height:var(--Catui_control-h-md);padding-inline:var(--Catui_space-3);border-radius:var(--Catui_radius-sm);font-weight:600;text-decoration:none;color:var(--Catui_dk-muted)}
-.Catui_dk-nav-item:hover{color:var(--Catui_color-text-primary);background:var(--Catui_color-surface-muted)}
-.Catui_dk-nav-item[aria-current="page"]{color:var(--Catui_color-text-primary);box-shadow:inset 0 -2px 0 var(--Catui_dk-accent)}
-.Catui_dk-nav-item:focus-visible{outline-offset:-2px}
+/* 로고 네모는 본체 .Catui_logo(브랜드 채움 + 흰 아이콘). 이름 강조색은 b 안의 span에만 — 로고 span까지 칠하면 아이콘이 배경색에 묻힌다 */
+.Catui_dk-brand b > span{color:var(--Catui_dk-accent)}
+/* 머리 메뉴 — 본체 가로 메뉴 .Catui_hnav.Catui_hnav-line.Catui_hnav-scroll 을 그대로 쓴다(색·활성 표시는 본체 규칙:
+   aria-current="page" → brand 밑줄 + 굵게). 여기서는 머리 바 안 배치만: 바의 아래선·안쪽 여백을 없애고
+   항목을 줄 높이만큼 늘려 밑줄이 머리 아래선 바로 위에 놓이게 한다(확장 4종 공통 규칙) */
+.Catui_dk-nav{min-width:0;min-height:0;margin-inline:auto;padding:var(--Catui_space-1);gap:calc(var(--Catui_space-1) / 2);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-surface-muted);font-size:var(--Catui_type-body-size)}
+.Catui_dk-nav .Catui_hnav-item{height:var(--Catui_space-7);padding-inline:var(--Catui_space-4);border-radius:var(--Catui_radius-pill);font-weight:600}
+.Catui_dk-nav .Catui_hnav-item[aria-current="page"]{color:var(--Catui_color-brand-strong);background:var(--Catui_card-bg);box-shadow:var(--Catui_shadow-xs)}
+.Catui_dk-nav .Catui_hnav-item:focus-visible{outline-offset:-2px}
 .Catui_dk-search{flex:1;max-width:calc(var(--Catui_space-10) * 6.5);margin-left:auto}
 .Catui_dk-search .Catui_input{width:100%}
 .Catui_dk-head-acts{display:flex;align-items:center;gap:var(--Catui_space-1)}
@@ -29,7 +29,7 @@
 .Catui_dk-main{flex:1;width:100%;max-width:var(--Catui_dk-wrap);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_dk-gap);padding:var(--Catui_dk-gap) var(--Catui_space-5);align-content:start}
 .Catui_dk-main > *{min-width:0}
 .Catui_dk-main:focus{outline:none}
-.Catui_dk a:not(.Catui_btn,.Catui_link,.Catui_pg,.Catui_dk-nav-item,.Catui_dk-tag){color:inherit}
+.Catui_dk a:not(.Catui_btn,.Catui_link,.Catui_pg,.Catui_hnav-item,.Catui_dk-tag){color:inherit}
 .Catui_dk-sec{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-4)}
 .Catui_dk-sec-h{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2) var(--Catui_space-3)}
 .Catui_dk-sec-h > :is(h1,h2){margin:0;margin-right:auto}
@@ -47,7 +47,7 @@
 .Catui_dk-sidenav{display:grid;gap:var(--Catui_space-5);padding-bottom:var(--Catui_space-6)}
 .Catui_dk-nav-g ul{margin:0;padding:0;list-style:none;display:grid;gap:2px}
 .Catui_dk-nav-t{margin:0 0 var(--Catui_space-1);padding-inline:var(--Catui_space-3);font-size:var(--Catui_type-caption-size);font-weight:700;color:var(--Catui_dk-muted)}
-.Catui_dk-nav-g a{display:flex;align-items:center;min-height:var(--Catui_control-h-sm);padding:var(--Catui_space-1) var(--Catui_space-3);border-left:2px solid transparent;border-radius:0 var(--Catui_radius-sm) var(--Catui_radius-sm) 0;text-decoration:none;color:var(--Catui_dk-muted);line-height:1.35}
+.Catui_dk-nav-g a{display:flex;align-items:center;min-height:var(--Catui_control-h-sm);padding:var(--Catui_space-1) var(--Catui_space-3);border-left:var(--Catui_tab-indicator-w) solid transparent;border-radius:0 var(--Catui_radius-sm) var(--Catui_radius-sm) 0;text-decoration:none;color:var(--Catui_dk-muted);line-height:1.35}
 .Catui_dk-nav-g a:hover{color:var(--Catui_color-text-primary);background:var(--Catui_color-surface-muted)}
 .Catui_dk-nav-g a[aria-current="page"]{border-left-color:var(--Catui_dk-accent);background:var(--Catui_dk-accent-soft);color:var(--Catui_dk-accent);font-weight:700}
 .Catui_dk-nav-g a:focus-visible{outline-offset:-2px}
@@ -83,11 +83,14 @@
   .Catui_dk-sidenav{padding:0 var(--Catui_space-2) var(--Catui_space-4)}
 }
 @media (max-width:767px){
-  .Catui_dk-head-in{flex-wrap:wrap;gap:0 var(--Catui_space-2);padding-inline:var(--Catui_space-3)}
+  .Catui_dk-head-in{flex-wrap:wrap;gap:0 var(--Catui_space-2);min-height:0;padding-inline:var(--Catui_space-3)}
+  .Catui_dk-brand{min-height:var(--Catui_topbar-h)}   /* 첫 줄(로고·버튼) 높이 — 둘째 줄 메뉴가 머리 높이를 나눠 갖지 않게 */
   .Catui_dk-head .Catui_dk-search{display:none}
   .Catui_dk-only-sm{display:inline-flex}
   .Catui_dk-head-acts{margin-left:auto}
-  .Catui_dk-nav{order:3;flex-basis:100%;margin-inline:calc(var(--Catui_space-3) * -1);padding-inline:var(--Catui_space-2);border-top:1px solid var(--Catui_divider-color)}
+  .Catui_dk-nav{order:3;flex-basis:100%;margin:0 0 var(--Catui_space-2);scrollbar-width:thin;scrollbar-color:var(--Catui_color-text-secondary) transparent}
+  .Catui_dk-nav::-webkit-scrollbar{display:block;height:var(--Catui_space-1)}
+  .Catui_dk-nav::-webkit-scrollbar-thumb{background:var(--Catui_color-text-secondary);border-radius:var(--Catui_radius-pill)}
   .Catui_dk-main{padding-inline:var(--Catui_space-4)}
 }
 /* 320px(WCAG 리플로 기준) */
@@ -95,3 +98,11 @@
   .Catui_dk-brand{font-size:var(--Catui_type-body-size)}
   .Catui_dk-main{padding-inline:var(--Catui_space-3)}
 }
+
+/* 유리: 고정 머리 — 본체 glass.css와 같은 방식(흐림은 ::before 층 — 안쪽 메뉴·fixed 요소에 영향 없게).
+   본문 카드·표·폼에는 쓰지 않는다. 미지원·투명도 줄이기·강제 색 모드에서는 불투명 면 */
+.Catui_dk-head{background:transparent;isolation:isolate}
+.Catui_dk-head::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--Catui_glass-bg-strong);-webkit-backdrop-filter:var(--Catui_glass-blur);backdrop-filter:var(--Catui_glass-blur)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.Catui_dk-head::before{background:var(--Catui_card-bg)}}
+@media (prefers-reduced-transparency:reduce){.Catui_dk-head::before{background:var(--Catui_card-bg);-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (forced-colors:active){.Catui_dk-head::before{background:Canvas;-webkit-backdrop-filter:none;backdrop-filter:none}}

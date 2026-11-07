@@ -1,0 +1,22 @@
+<!-- title: 예약 확인 | nav: home -->
+<header class="Catui_bk-flow-head">
+  <h1 class="Catui_h2">예약 확인</h1>
+  <ol class="Catui_steps" data-catui-bk-steps="confirm" aria-label="예약 단계"></ol>
+</header>
+<div data-catui-bk-confirm>
+  <div class="Catui_bk-flow" data-body>
+    <div class="Catui_bk-flow-main">
+      <p class="Catui_banner Catui_banner-info" data-change-note hidden>{{icon:info:16}}<span>기존 예약을 변경합니다 — 같은 예약 번호로 저장되고, 이전 일정은 풀립니다.</span></p>
+      <section class="Catui_bk-box" aria-labelledby="cf-h"><h2 class="Catui_h3" id="cf-h">예약 내용</h2><div data-detail></div></section>
+      <section class="Catui_bk-box" aria-labelledby="cf-r-h"><h2 class="Catui_h3" id="cf-r-h">취소 환불 규정</h2><div data-refund-table></div></section>
+    </div>
+    <aside class="Catui_bk-flow-side Catui_bk-box" aria-labelledby="cf-p-h">
+      <h2 class="Catui_h3" id="cf-p-h">결제 금액</h2>
+      <div data-amount></div>
+      <p class="Catui_bk-msg" role="alert" data-msg hidden></p>
+      <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="button" data-confirm>{{icon:calendar-check}}예약 확정</button>
+      <a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="info.html">{{icon:arrow-left}}정보 고치기</a>
+      <p class="Catui_help">예제에서는 결제 없이 이 브라우저에 저장합니다.</p>
+    </aside>
+  </div>
+</div>

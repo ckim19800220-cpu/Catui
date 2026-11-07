@@ -1,6 +1,6 @@
 /* components/quote.css */
 /* Quote — 독립 인용(왼쪽 브랜드 선 + 출처), 강조 인용. */
-.Catui_quote{display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-3) var(--Catui_space-4);border-left:3px solid var(--Catui_color-brand);background:var(--Catui_color-surface-muted);border-radius:0 var(--Catui_radius-sm) var(--Catui_radius-sm) 0}
+.Catui_quote{display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-3) var(--Catui_space-4);border-left:var(--Catui_accent-w) solid var(--Catui_color-brand);background:var(--Catui_color-surface-muted);border-radius:0 var(--Catui_radius-sm) var(--Catui_radius-sm) 0}
 .Catui_quote > p{margin:0}
 .Catui_quote-cite{font-size:var(--Catui_type-caption-size);color:var(--Catui_color-text-secondary);font-style:normal}
 .Catui_quote-cite::before{content:"\2014\00a0"}

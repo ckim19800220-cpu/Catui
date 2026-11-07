@@ -6,9 +6,9 @@
 /* 사진 */
 .Catui_sh-gallery{display:grid;gap:var(--Catui_space-3);min-width:0}
 .Catui_sh-gallery-main{position:relative;margin:0;aspect-ratio:1 / 1;border-radius:var(--Catui_sh-radius);overflow:hidden;background:var(--Catui_sh-img-bg)}
-.Catui_sh-gallery-main img{width:100%;height:100%;object-fit:cover;display:block}
+.Catui_sh-gallery-main img{width:100%;height:100%;object-fit:contain;display:block}
 .Catui_sh-thumbs{position:relative;display:flex;gap:var(--Catui_space-2);overflow-x:auto;padding:2px}
-.Catui_sh-thumbs button{flex:none;width:calc(var(--Catui_space-10) * 1.1);aspect-ratio:1 / 1;padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-sm);overflow:hidden;background:var(--Catui_sh-img-bg);cursor:pointer}
+.Catui_sh-thumbs button{flex:none;width:calc(var(--Catui_space-10) * 1.1);aspect-ratio:1 / 1;padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-sm);overflow:hidden;background:var(--Catui_sh-img-bg);cursor:pointer}   /* 굵은선 허용: 선택한 사진 표시(상태) */
 .Catui_sh-thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
 .Catui_sh-thumbs button[aria-pressed="true"]{border-color:var(--Catui_sh-accent)}
 

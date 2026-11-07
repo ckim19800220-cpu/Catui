@@ -1,0 +1,63 @@
+/* booking/list.css */
+/* 내 예약 목록 · 거르기 버튼 · 예약 상세 · 환불 규정 · 완료(예약 번호·QR 자리) · 대기 명단 · 수치 줄 */
+.Catui_bk-chips{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2)}
+.Catui_bk-chip{display:inline-flex;align-items:center;gap:var(--Catui_space-1);min-height:var(--Catui_control-h-md);padding-inline:var(--Catui_space-3);border:1px solid var(--Catui_bk-line);border-radius:var(--Catui_radius-pill);background:var(--Catui_card-bg);color:var(--Catui_color-text-primary);font:inherit;font-weight:600;cursor:pointer}
+.Catui_bk-chip:hover{border-color:var(--Catui_bk-accent)}
+.Catui_bk-chip[aria-pressed="true"]{border-width:2px;border-color:var(--Catui_bk-accent);background:var(--Catui_bk-accent-soft);color:var(--Catui_bk-accent);font-weight:800}   /* 굵은선 허용: 선택 상태(색+굵기) */
+.Catui_bk-chip .Catui_icon{color:inherit}
+.Catui_bk-chip-n{min-width:1.5em;padding-inline:var(--Catui_space-1);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-surface-muted);font-size:var(--Catui_type-caption-size);text-align:center;color:var(--Catui_color-text-primary)}
+
+.Catui_bk-res-list{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-3)}
+.Catui_bk-res{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--Catui_space-3) var(--Catui_space-4);align-items:start;padding:var(--Catui_space-4);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg)}
+.Catui_bk-res[data-phase="cancelled"]{border-style:dashed}
+.Catui_bk-res[data-phase="cancelled"] .Catui_bk-res-t{text-decoration:line-through;text-decoration-thickness:1px}
+.Catui_bk-res-b{display:grid;gap:var(--Catui_space-1);min-width:0}
+.Catui_bk-res-h{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2);margin:0}
+.Catui_bk-res-t{margin:0;font-size:var(--Catui_type-h3-size)}
+.Catui_bk-res-t a{text-decoration:none}
+.Catui_bk-res-t a:hover{text-decoration:underline}
+.Catui_bk-res-m{margin:0;color:var(--Catui_bk-muted)}
+.Catui_bk-res-m b{color:var(--Catui_color-text-primary)}
+.Catui_bk-res-acts{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2);justify-content:flex-end}
+.Catui_bk-no{font-family:var(--Catui_font-mono);font-size:var(--Catui_type-caption-size);color:var(--Catui_bk-muted);overflow-wrap:anywhere}
+.Catui_bk-no-lg{margin:0;font-size:var(--Catui_type-h2-size);font-weight:800;color:var(--Catui_color-text-primary);letter-spacing:.02em}
+
+/* 환불 규정 */
+.Catui_bk-refund tr[data-now] td{font-weight:700;background:var(--Catui_bk-accent-soft)}
+.Catui_bk-refund tr[data-now] td:first-child{box-shadow:inset 4px 0 0 var(--Catui_bk-accent)}
+.Catui_bk-refundnow{display:flex;align-items:flex-start;gap:var(--Catui_space-2);margin:0;padding:var(--Catui_space-3);border-radius:var(--Catui_bk-radius);background:var(--Catui_color-surface-muted)}
+.Catui_bk-refundnow .Catui_icon{flex:none;margin-top:2px}
+.Catui_bk-refundbox{display:grid;gap:var(--Catui_space-3)}
+.Catui_bk-refundbox p{margin:0}
+
+/* 완료 */
+.Catui_bk-complete{display:grid;justify-items:center;gap:var(--Catui_space-3);text-align:center;padding:var(--Catui_space-6) var(--Catui_space-4)}
+.Catui_bk-complete h1{margin:0}
+.Catui_bk-done-ic{display:inline-grid;place-items:center;width:calc(var(--Catui_space-10) + var(--Catui_space-6));height:calc(var(--Catui_space-10) + var(--Catui_space-6));border-radius:50%;background:var(--Catui_badge-success-bg);color:var(--Catui_badge-success-fg)}
+.Catui_bk-done-ic .Catui_icon{color:inherit}
+.Catui_bk-ticket{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--Catui_space-4);align-items:center;width:100%;max-width:calc(var(--Catui_space-10) * 9);padding:var(--Catui_space-4);border:1px dashed var(--Catui_line-strong);border-radius:var(--Catui_card-radius);text-align:left}
+.Catui_bk-ticket p{margin:0}
+.Catui_bk-qr{display:block;width:calc(var(--Catui_space-10) * 2.5);height:auto;padding:var(--Catui_space-1);border-radius:var(--Catui_radius-sm);background:var(--Catui_color-surface);color:var(--Catui_color-text-primary);fill:currentColor}
+
+/* 대기 명단 */
+.Catui_bk-waitform{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 4.5)),1fr));gap:var(--Catui_space-3);align-items:end}
+.Catui_bk-waitform > .Catui_bk-acts,.Catui_bk-waitform > p{grid-column:1 / -1}
+.Catui_bk-waitform .Catui_input{width:100%;min-width:0}
+.Catui_bk-waittbl td{vertical-align:top}
+.Catui_bk-ok{display:flex;gap:var(--Catui_space-2);margin:0;padding:var(--Catui_space-3);border-radius:var(--Catui_bk-radius);border-left:var(--Catui_accent-w) solid var(--Catui_badge-success-fg);background:var(--Catui_badge-success-bg);color:var(--Catui_badge-success-fg);font-weight:600}
+
+/* 수치 줄 */
+.Catui_bk-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 3),1fr));gap:var(--Catui_space-3);margin:0;padding:0;list-style:none}
+.Catui_bk-stats li{display:grid;gap:2px;padding:var(--Catui_space-3) var(--Catui_space-4);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg)}
+.Catui_bk-stats span{font-size:var(--Catui_type-caption-size);color:var(--Catui_bk-muted)}
+.Catui_bk-stats b{font-size:var(--Catui_type-h2-size);font-variant-numeric:tabular-nums}
+
+@media (max-width:767px){
+  .Catui_bk-res{grid-template-columns:auto minmax(0,1fr)}
+  .Catui_bk-res-acts{grid-column:1 / -1;justify-content:flex-start}
+}
+@media (max-width:399px){
+  .Catui_bk-ticket{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}
+  .Catui_bk-res{grid-template-columns:minmax(0,1fr)}
+  .Catui_bk-res > .Catui_bk-svc-ic{display:none}
+}

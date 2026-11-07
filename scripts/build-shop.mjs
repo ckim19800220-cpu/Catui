@@ -7,7 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { transform } from "lightningcss";
 import { transformSync } from "esbuild";
-import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes } from "./lib.mjs";
+import { ROOT, P, fail, read, readJson, write, walk, pkg, bytes, visualErrors } from "./lib.mjs";
 
 const C = { src: path.join(ROOT, "src/shop"), tpl: path.join(ROOT, "templates/shop") };
 const noComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, "");
@@ -27,6 +27,7 @@ export function buildShopCss() {
   for (const f of order) {
     const src = read(path.join(C.src, f));
     if (/#[0-9a-f]{3,8}\b/i.test(noComments(src).replace(/url\([^)]*\)/g, ""))) fail(`shop CSS에 직접 쓴 색(hex)이 있습니다 — 토큰을 쓰세요: src/shop/${f}`);
+    { const ve = visualErrors(src, `src/shop/${f}`); if (ve.length) fail(`shop CSS 시각 원칙 검사 실패\n  ${ve.join("\n  ")}`); }   // 1px 선 · 모서리 토큰 · 유리 폴백 (lib.mjs)
     css += `${src}\n`;
     byFile[`shop/${f}`] = [...new Set([...noComments(src).matchAll(/\.(Catui_sh-[A-Za-z0-9_-]+)/g)].map((m) => m[1]))].sort();
   }
@@ -131,7 +132,7 @@ export function buildShopTemplates({ defined, icons, shopByFile = {} }) {
   const used = new Set(Object.values(layouts).flatMap((l) => [...l.matchAll(CLASS_ATTR)].flatMap((m) => m[1].split(/\s+/))));
   const pageOf = (href) => href.split(/[?#]/)[0].replace(/\.html$/, "");
   const live = (list) => (list || []).filter((x) => exists.has(pageOf(x.href)));
-  const gnb = (nav) => live(menu.gnb).map((it) => `<a class="Catui_sh-gnb-item" href="${esc(it.href)}"${it.id === nav ? ' aria-current="page"' : ""}>${esc(it.title)}</a>`).join("");
+  const gnb = (nav) => live(menu.gnb).map((it) => `<a class="Catui_hnav-item" href="${esc(it.href)}"${it.id === nav ? ' aria-current="page"' : ""}>${esc(it.title)}</a>`).join("");
   const tabs = (nav) => live(menu.tabs).map((it) => `<a class="Catui_sh-tab" href="${esc(it.href)}"${it.id === nav ? ' aria-current="page"' : ""}>${ico(it.icon, 20)}<span>${esc(it.title)}</span>${it.count ? '<span class="Catui_count Catui_sh-tab-n" data-catui-sh-cart-count hidden></span>' : ""}</a>`).join("");
   const mynav = (my) => `<nav class="Catui_sh-mynav" aria-label="마이페이지 메뉴">${live(menu.my).map((it) => `<a href="${esc(it.href)}"${it.id === my ? ' aria-current="page"' : ""}>${ico(it.icon, 16)}<span>${esc(it.title)}</span></a>`).join("")}</nav>`;
 

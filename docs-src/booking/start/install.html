@@ -1,0 +1,60 @@
+<section aria-labelledby="files">
+<h2 id="files">파일 · 불러오기</h2>
+<pre><code>&lt;link rel="stylesheet" href="dist/catui.min.css"&gt;
+&lt;link rel="stylesheet" href="dist/booking.min.css"&gt;
+…
+&lt;script src="dist/catui.min.js"&gt;&lt;/script&gt;
+&lt;script src="dist/catbooking.min.js"&gt;&lt;/script&gt;   ← catui.js 다음 (순서가 틀리면 콘솔에 안내)
+
+// npm · ES 모듈
+import catui from '@imcat-ckim/catui';
+import booking from '@imcat-ckim/catui/booking';
+import '@imcat-ckim/catui/css';
+import '@imcat-ckim/catui/booking.css';</code></pre>
+<p>배포 파일: <code>booking.css</code>(+min) · <code>catbooking.js</code> · <code>catbooking.esm.js</code> · <code>*.min.js</code>(+map) · <code>catbooking.d.ts</code></p>
+</section>
+
+<section aria-labelledby="shell">
+<h2 id="shell">사이트 셸 · 단계 화면</h2>
+<pre><code>&lt;html lang="ko" data-catui-bk-now="2026-11-04T13:10:00+09:00"&gt;   ← 모의 데이터의 "지금"(없으면 실제 시각)
+&lt;div class="Catui_site Catui_bk" data-catui-bk&gt;
+  &lt;header class="Catui_bk-head"&gt; 로고(.Catui_logo) · 머리 메뉴(.Catui_hnav.Catui_hnav-line.Catui_hnav-scroll + .Catui_bk-nav 배치) · 테마([data-catui-bk-theme])
+  &lt;main class="Catui_bk-main"&gt;
+    &lt;header class="Catui_bk-flow-head"&gt; h1 · &lt;ol class="Catui_steps" data-catui-bk-steps="date"&gt;
+    &lt;div class="Catui_bk-flow"&gt;
+      &lt;div class="Catui_bk-flow-main" data-catui-bk-date&gt;   ← 단계 본문 (data-cal · data-times · data-go · data-msg)
+      &lt;aside class="Catui_bk-flow-side" data-catui-bk-summary&gt;   ← 예약 내용·예상 금액
+  &lt;footer class="Catui_bk-foot"&gt;
+&lt;/div&gt;</code></pre>
+<p>날짜는 모두 <b>한국 시간</b>으로 셉니다 — 브라우저 시간대가 달라도 “오늘”·“지난 시간”·“며칠 전”이 같습니다. 테마는 다른 확장과 같은 규칙(저장값이 없으면 시스템)이고, <code>&lt;html data-catui-theme-lock&gt;</code>이 있으면 건드리지 않습니다(이 문서 사이트가 그렇습니다).</p>
+</section>
+
+<section aria-labelledby="tpl">
+<h2 id="tpl">템플릿 · 메뉴</h2>
+<ul>
+  <li><code>templates/booking/pages/이름.html</code> — 머리 주석 <code>&lt;!-- title: 내 예약 | nav: mine | layout: blank --&gt;</code>. <code>nav</code>는 머리 메뉴의 현재 위치입니다.</li>
+  <li><code>templates/booking/menu.json</code> — <code>top</code>(머리 메뉴 — 본체 <code>.Catui_hnav-item</code>, 글자만) · <code>foot</code>(바닥글 링크). 없는 화면은 메뉴에서 빠집니다.</li>
+  <li><code>npm run build</code> → <code>docs/booking/templates/</code>. 검사: 정의 안 된 클래스·없는 아이콘·id 중복·label·화면 링크·h1·안 쓰인 클래스·역할 없는 span의 aria-label·<b>키보드 격자가 아닌 곳의 role="grid"</b>·JSON 문법, CSS의 hex·없는 토큰·본체 클래스 재정의.</li>
+</ul>
+</section>
+
+<section aria-labelledby="data">
+<h2 id="data">JSON 모의 데이터</h2>
+<p><code>templates/booking/data/*.json</code> → <code>docs/booking/templates/data/</code>. 실서비스는 같은 모양의 API를 만들고 <code>catui.booking.dataBase = '/api/booking/'</code>만 바꿉니다. 금액·남은 자리·순번은 저장하지 않고 <b>원자료에서 계산</b>합니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">데이터 파일</caption>
+<thead><tr><th scope="col">파일</th><th scope="col">내용 · 계산</th></tr></thead><tbody>
+<tr><td><code>services.json</code></td><td>서비스 {{stat:bkServices}}개 — <code>kind</code>(<code>slot</code> 시간·<code>seat</code> 좌석·<code>room</code> 숙박), 가격·어린이 가격(또는 할인), 이용 시간·간격·정원·최대 인원, 회차(<code>times</code>), 배치도(<code>map</code>), 옵션(<code>per</code>: person·person-night·once)</td></tr>
+<tr><td><code>branches.json</code></td><td>지점 영업시간(<code>open</code>·<code>close</code>)·휴게시간(<code>breaks</code>)·휴무 요일(<code>closed</code>, 0=일)</td></tr>
+<tr><td><code>slots.json</code></td><td>예약 현황 — <code>people</code>(시간마다 찬 인원) · <code>seats</code>(회차마다 예약된 좌석) · <code>rooms</code>(객실 기간). 남은 자리 = 정원 − 합</td></tr>
+<tr><td><code>seats.json</code></td><td>배치도 — 줄마다 <code>cells</code> 글자(<code>s</code> 좌석 · <code>w</code> 장애인석 · <code>t</code> 테이블 · <code>_</code> 통로), 등급(<code>grades</code>)·테이블 인원(<code>cap</code>)</td></tr>
+<tr><td><code>rooms.json</code></td><td>객실(기준·최대 인원, 1박 요금, 추가 인원 요금, 객실 수) · 공휴일(<code>holidays</code> — 그 전날 밤이 주말 요금)</td></tr>
+<tr><td><code>reservations.json</code></td><td>내 예약 — 금액은 저장하지 않고 서비스·좌석·객실 원자료로 계산, 상태(예정·지난·취소)는 “지금”으로 판단</td></tr>
+<tr><td><code>staff.json</code> · <code>schedule.json</code></td><td>직원 · 관리자 일정 블록(직원·날짜·시작·끝·상태) — 겹침은 <code>booking.layout</code>이 계산</td></tr>
+<tr><td><code>waitlist.json</code></td><td>대기 신청 — 순번은 회차마다 신청 시각 순으로 계산</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="store">
+<h2 id="store">기억하는 상태</h2>
+<p><code>catui.data('booking')</code>(localStorage <code>"catui:booking"</code>) 한 곳에 <code>theme</code>, 진행 중 예약 <code>draft</code>(단계 사이), 이 브라우저에서 저장·변경한 예약 <code>saved</code>, 취소 기록 <code>cancelled</code>, 대기 신청 <code>wait</code>·상태 <code>waitState</code>, 일련번호 <code>seq</code>를 둡니다. 저장한 예약은 남은 자리 계산에도 들어갑니다.</p>
+</section>

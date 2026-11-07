@@ -71,6 +71,9 @@
 .Catui_fx-stroke{color:transparent;-webkit-text-stroke:1.5px var(--Catui_color-brand-strong);paint-order:stroke fill}
 .Catui_fx-edge{position:relative}
 .Catui_fx-edge::after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--Catui_fx-edge,64px);pointer-events:none;background:linear-gradient(transparent,var(--Catui_color-page-bg));-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);-webkit-mask:linear-gradient(transparent,#000);mask:linear-gradient(transparent,#000)}
+/* 흐림 폴백: 미지원이면 그라데이션을 더 짙게, 투명도 줄이기 설정이면 흐림 없이 */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.Catui_fx-edge::after{background:linear-gradient(transparent,var(--Catui_color-page-bg) 70%)}}
+@media (prefers-reduced-transparency:reduce){.Catui_fx-edge::after{-webkit-backdrop-filter:none;backdrop-filter:none}}
 .Catui_fx-noise{position:relative;isolation:isolate}
 .Catui_fx-noise::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:Catui_fx-grain .6s steps(4) infinite}
 /* 그레인 떨림: 무늬를 4단계로 옮겨 필름 질감처럼(요소 밖으로 넘치지 않게 위치만 바꾼다) */
@@ -113,7 +116,7 @@
 
 /* 커스텀 커서: 요소 위에서만 따라다니는 빛(기본) · 고리(data-type="ring") */
 .Catui_fx-cursor{position:fixed;z-index:70;left:0;top:0;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:var(--Catui_radius-pill);pointer-events:none;opacity:0;transform:translate(var(--Catui_fx-cx,0px),var(--Catui_fx-cy,0px));transition:opacity calc(var(--Catui_dur-fast) * 2) var(--Catui_ease);background:radial-gradient(circle,color-mix(in srgb,var(--Catui_color-brand) 28%,transparent),transparent 65%)}
-.Catui_fx-cursor[data-type="ring"]{width:32px;height:32px;margin:-16px 0 0 -16px;background:none;border:2px solid var(--Catui_color-brand-strong);transition:opacity calc(var(--Catui_dur-fast) * 2) var(--Catui_ease),width var(--Catui_dur-fast) var(--Catui_ease),height var(--Catui_dur-fast) var(--Catui_ease)}
+.Catui_fx-cursor[data-type="ring"]{width:32px;height:32px;margin:-16px 0 0 -16px;background:none;border:2px solid var(--Catui_color-brand-strong);transition:opacity calc(var(--Catui_dur-fast) * 2) var(--Catui_ease),width var(--Catui_dur-fast) var(--Catui_ease),height var(--Catui_dur-fast) var(--Catui_ease)}   /* 굵은선 허용: 커서 고리(장식 표식) */
 .Catui_fx-cursor.Catui_fx-on{opacity:1}
 
 @media (prefers-reduced-motion:reduce){

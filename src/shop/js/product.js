@@ -30,9 +30,9 @@ shop.product = {
       document.title = `${p.name} · Catui 쇼핑`;
       catui.mount($("[data-crumb]"), catui.html`<a href="index.html">홈</a><span class="Catui_crumb-sep">/</span><a href="list.html?c=${p.cat}">${p.catName}</a><span class="Catui_crumb-sep">/</span><span aria-current="page">${p.name}</span>`);
       // 사진
-      const n = 4, main = (i) => catui.html`<img src="${shop.thumb(p, i)}" alt="${p.name} 사진 ${i + 1}/${n}" width="600" height="600">`;
+      const n = p.images?.length || 4, main = (i) => catui.html`<img src="${shop.thumb(p, i)}" alt="${p.name} 사진 ${i + 1}/${n}" width="600" height="600">`;
       catui.mount($("[data-gallery]"), catui.html`<figure class="Catui_sh-gallery-main" data-main>${main(0)}${p.soldOut ? catui.html`<span class="Catui_sh-soldout">품절</span>` : ""}</figure>
-        <div class="Catui_sh-thumbs" role="group" aria-label="사진 고르기">${[0, 1, 2, 3].map((i) => catui.html`<button type="button" data-shot="${i}" aria-pressed="${i === 0}"><img src="${shop.thumb(p, i)}" alt="" width="80" height="80"><span class="Catui_clip">사진 ${i + 1}</span></button>`)}</div>`);
+        <div class="Catui_sh-thumbs" role="group" aria-label="사진 고르기">${Array.from({ length: n }, (_, i) => catui.html`<button type="button" data-shot="${i}" aria-pressed="${i === 0}"><img src="${shop.thumb(p, i)}" alt="" width="80" height="80"><span class="Catui_clip">사진 ${i + 1}</span></button>`)}</div><p class="Catui_help">데모용 연출 사진입니다. 실제 상품·옵션을 나타내지 않습니다.</p>`);
       shop._on($("[data-gallery]"), "click", (e) => {
         const b = e.target.closest("[data-shot]"); if (!b) return;
         catui.mount($("[data-main]"), catui.html`${main(Number(b.dataset.shot))}${p.soldOut ? catui.html`<span class="Catui_sh-soldout">품절</span>` : ""}`);

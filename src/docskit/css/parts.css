@@ -6,6 +6,7 @@
 .Catui_dk-hero .Catui_actions{justify-content:center;flex-wrap:wrap}
 .Catui_dk-hero-search{width:min(100%,calc(var(--Catui_space-10) * 10))}
 .Catui_dk-hero-search .Catui_input{width:100%;height:var(--Catui_control-h-lg)}
+@media (max-width:767px){.Catui_dk-hero{padding:var(--Catui_space-6) var(--Catui_space-4);gap:var(--Catui_space-3)}.Catui_dk-hero h1{font-size:var(--Catui_type-h1-size)}}
 .Catui_dk-starts{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 4.2)),1fr));gap:var(--Catui_space-4)}
 .Catui_dk-start{display:grid;align-content:start;gap:var(--Catui_space-2);height:100%;padding:var(--Catui_space-5);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg);text-decoration:none}
 .Catui_dk-start:hover{border-color:var(--Catui_dk-accent)}

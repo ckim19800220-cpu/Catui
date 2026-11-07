@@ -4,7 +4,12 @@
 :root[data-catui-theme="dark"]{
   color-scheme:dark;
   --Catui_color-page-bg:#111A24; --Catui_color-surface:#17222E; --Catui_color-surface-muted:#1C2835;
-  --Catui_color-border:#2A3846; --Catui_color-divider:#233140;
+  /* 선: 다크의 text-primary는 밝으므로 같은 잉크 식을 비율만 낮춰 쓴다 (이전 고정값 border #2A3846 · divider #233140) */
+  --Catui_line:color-mix(in srgb, var(--Catui_color-text-primary) 12%, transparent);
+  --Catui_line-strong:color-mix(in srgb, var(--Catui_color-text-primary) 22%, transparent);
+  --Catui_line-soft:color-mix(in srgb, var(--Catui_color-text-primary) 8%, transparent);
+  --Catui_line-control:color-mix(in srgb, var(--Catui_color-text-primary) 42%, transparent);
+  --Catui_line-control-hover:color-mix(in srgb, var(--Catui_color-text-primary) 62%, transparent);
   --Catui_color-text-primary:#E6EBF0; --Catui_color-text-secondary:#A7B3BF; --Catui_color-text-tertiary:#6F7E8C;
   --Catui_color-neutral-100:#223140; --Catui_color-neutral-300:#3A4A5A; --Catui_color-neutral-500:#7D8B99; --Catui_color-neutral-700:#C3CDD6;
   /* 글자용 브랜드는 밝게, 흰 글자를 올리는 채움은 그대로(5.27:1) */
@@ -15,10 +20,11 @@
   --Catui_color-code-bg:#0B121A;
   --Catui_badge-info-fg:#7CC0EE; --Catui_badge-warning-fg:#F2C46B; --Catui_badge-danger-fg:#F28B82;
   --Catui_banner-info-fg:#7CC0EE; --Catui_banner-warn-fg:#F2C46B; --Catui_banner-danger-fg:#F28B82;
-  --Catui_shadow-xs:0 1px 1px rgba(0,0,0,.3);
-  --Catui_shadow-sm:0 1px 2px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.25);
-  --Catui_shadow-md:0 4px 12px rgba(0,0,0,.4);
-  --Catui_shadow-lg:0 12px 32px rgba(0,0,0,.5);
+  /* 다크: 그림자는 어두운 바탕에서 잘 안 보이므로 위쪽 1px 밝은 inset(빛 받는 모서리) + 짧은 그림자 */
+  --Catui_shadow-xs:inset 0 1px 0 0 rgba(255,255,255,.03);
+  --Catui_shadow-sm:inset 0 1px 0 0 rgba(255,255,255,.04),0 1px 2px rgba(0,0,0,.3);
+  --Catui_shadow-md:inset 0 1px 0 0 rgba(255,255,255,.05),0 6px 14px -4px rgba(0,0,0,.5);
+  --Catui_shadow-lg:inset 0 1px 0 0 rgba(255,255,255,.06),0 16px 32px -8px rgba(0,0,0,.6);
 }
 /* 상태 글자색을 배경으로 쓰는 solid 표식은 다크에서 어두운 글자로 뒤집는다 */
 :root[data-catui-theme="dark"] :is(.Catui_pill-solid-info,.Catui_pill-solid-warning,.Catui_pill-solid-danger,.Catui_pill-solid-neutral){color:var(--Catui_color-page-bg)}

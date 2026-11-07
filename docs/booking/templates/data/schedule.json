@@ -1,0 +1,27 @@
+{
+  "from": "09:00",
+  "to": "21:00",
+  "items": [
+    { "id": "a01", "staff": "s1", "date": "2026-11-04", "start": "10:00", "end": "11:00", "customer": "박서준", "svc": "hair", "status": "done" },
+    { "id": "a02", "staff": "s1", "date": "2026-11-04", "start": "11:00", "end": "12:00", "customer": "정유나", "svc": "hair", "status": "done" },
+    { "id": "a03", "staff": "s1", "date": "2026-11-04", "start": "14:00", "end": "15:00", "customer": "한지민", "svc": "hair", "status": "booked" },
+    { "id": "a04", "staff": "s1", "date": "2026-11-04", "start": "14:30", "end": "15:30", "customer": "오세훈", "svc": "hair", "status": "booked", "memo": "겹침 — 보조 디자이너 배정 필요" },
+    { "id": "a05", "staff": "s1", "date": "2026-11-04", "start": "17:30", "end": "18:30", "customer": "윤아름", "svc": "hair", "status": "booked" },
+    { "id": "a06", "staff": "s2", "date": "2026-11-04", "start": "10:30", "end": "11:30", "customer": "서지후", "svc": "hair", "status": "noshow" },
+    { "id": "a07", "staff": "s2", "date": "2026-11-04", "start": "14:00", "end": "15:00", "customer": "강하늘", "svc": "hair", "status": "booked" },
+    { "id": "a08", "staff": "s2", "date": "2026-11-04", "start": "16:00", "end": "17:00", "customer": "임수아", "svc": "hair", "status": "pending" },
+    { "id": "a09", "staff": "s3", "date": "2026-11-04", "start": "14:00", "end": "15:30", "customer": "단체 2명", "svc": "pottery", "status": "booked" },
+    { "id": "a10", "staff": "s3", "date": "2026-11-04", "start": "15:00", "end": "16:30", "customer": "단체 6명", "svc": "pottery", "status": "booked" },
+    { "id": "a11", "staff": "s3", "date": "2026-11-04", "start": "16:00", "end": "17:30", "customer": "단체 5명", "svc": "pottery", "status": "booked" },
+    { "id": "a12", "staff": "s4", "date": "2026-11-04", "start": "18:30", "end": "20:00", "customer": "단체 3명", "svc": "pottery", "status": "booked" },
+    { "id": "a13", "staff": "s4", "date": "2026-11-04", "start": "10:00", "end": "11:30", "customer": "문가은", "svc": "pottery", "status": "cancelled" },
+    { "id": "b01", "staff": "s1", "date": "2026-11-05", "start": "11:00", "end": "12:00", "customer": "조민호", "svc": "hair", "status": "booked" },
+    { "id": "b02", "staff": "s1", "date": "2026-11-06", "start": "11:00", "end": "12:00", "customer": "김고양", "svc": "hair", "status": "booked" },
+    { "id": "b03", "staff": "s1", "date": "2026-11-07", "start": "13:30", "end": "14:30", "customer": "배수지", "svc": "hair", "status": "booked" },
+    { "id": "b04", "staff": "s1", "date": "2026-11-03", "start": "15:00", "end": "16:00", "customer": "남궁민", "svc": "hair", "status": "done" },
+    { "id": "b05", "staff": "s3", "date": "2026-11-05", "start": "10:00", "end": "11:30", "customer": "단체 6명", "svc": "pottery", "status": "booked" },
+    { "id": "b06", "staff": "s3", "date": "2026-11-07", "start": "10:00", "end": "11:30", "customer": "단체 6명", "svc": "pottery", "status": "booked" },
+    { "id": "b07", "staff": "s3", "date": "2026-11-07", "start": "10:30", "end": "12:00", "customer": "단체 6명", "svc": "pottery", "status": "booked" },
+    { "id": "b08", "staff": "s2", "date": "2026-11-08", "start": "12:00", "end": "13:00", "customer": "황보람", "svc": "hair", "status": "pending" }
+  ]
+}

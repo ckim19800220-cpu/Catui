@@ -66,6 +66,7 @@
   "components/wizard.css",
   "components/command.css",
   "components/spinner.css",
+  "components/glass.css",
   "views/tree.css",
   "views/calendar.css",
   "views/gantt.css",

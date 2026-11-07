@@ -29,6 +29,7 @@ docs.readTimeFill = function (scope = document) {
 
 docs.shell = {
   init(root) {
+    if (docs._once(root, "cover-error")) docs._on(root, "error", (e) => { if (e.target.matches?.(".Catui_dk-cover img")) e.target.hidden = true; }, true);
     // 좁은 화면은 메뉴를 접어서 시작 (스크립트가 없으면 펼친 그대로)
     root.querySelectorAll("details.Catui_dk-side").forEach((d) => { d.open = !matchMedia("(max-width: 991px)").matches; });
     root.querySelectorAll("[data-catui-dk-toc]").forEach((art) => { if (!art.hasAttribute("data-catui-dk-page")) docs.refresh(art); });

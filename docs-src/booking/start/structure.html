@@ -1,0 +1,57 @@
+<section aria-labelledby="time-rule">
+<h2 id="time-rule">시간 칸 · 남은 자리</h2>
+<ol>
+  <li>영업 시작부터 <code>step</code>분 간격으로, <b>이용 시간(duration)이 마감 전에 끝나는</b> 시작 시각만 칸이 됩니다(예: 10:00~20:00, 90분 → 마지막 칸 18:30). 공연·식당은 회차 목록(<code>times</code>)을 그대로 씁니다.</li>
+  <li>상태 우선순위: <b>휴무</b>(지점 휴무 요일) → <b>지난 시간</b>(오늘이면 “지금 + <code>rules.lead</code>(30분)” 이전) → <b>휴게 시간</b>(이용 시간이 휴게와 조금이라도 겹침) → <b>마감</b>(남은 자리 0) → 예약 가능.</li>
+  <li>남은 자리 = 정원 − (예약 현황 + 이 브라우저에서 저장한 예약 인원). 좌석 회차는 정원 = 배치도의 좌석(테이블) 수.</li>
+  <li>남은 자리가 <code>rules.fewLeft</code>(2) 이하면 “임박” 글자와 경고 아이콘을 붙입니다. 달력은 그날 칸들로 계산해 가능·임박·마감·휴무·지난 날짜를 글자로 보여 줍니다.</li>
+</ol>
+<p class="Catui_help">견본의 “지금”은 2026-11-04(수) 13:10 KST — 강남점 도자기 클래스는 13:30까지 지난 시간, 11:30~13:00은 휴게(12:30~13:30)와 겹쳐 닫힘, 15:00은 6명이 차서 마감입니다.</p>
+</section>
+
+<section aria-labelledby="price-rule">
+<h2 id="price-rule">인원 · 옵션 금액</h2>
+<ul>
+  <li>시간 예약: 어른 <code>price</code> × 어른 수 + 어린이 <code>childPrice</code> × 어린이 수.</li>
+  <li>좌석 예약(등급 있음): 고른 좌석의 등급 가격 합 − 어린이 수 × <code>childOff</code>(좌석 수까지). 등급 없는 테이블은 1인 예약금 기준.</li>
+  <li>옵션: <code>per: "person"</code>은 인원수만큼, <code>"person-night"</code>은 인원수 × 박 수, <code>"once"</code>는 한 번.</li>
+  <li>인원 한도 = min(서비스 최대 인원, 고른 시간의 남은 자리). 어른은 1명 이상.</li>
+</ul>
+</section>
+
+<section aria-labelledby="stay-rule">
+<h2 id="stay-rule">숙박 박 수 · 기간 요금</h2>
+<ol>
+  <li>박 수 = 체크아웃 날짜 − 체크인 날짜(한국 날짜). 0 이하면 고를 수 없습니다.</li>
+  <li>밤마다: 그 밤의 요일이 <code>rules.weekendDays</code>(금·토)이거나 <b>다음 날이 공휴일</b>이면 주말 요금 = 객실가 × (1 + <code>weekendRate</code> 30%)를 100원 단위로 반올림.</li>
+  <li>기준 인원(<code>base</code>)을 넘는 사람마다 밤마다 <code>extraPerson</code>. 최대 인원(<code>max</code>)을 넘으면 그 객실은 고를 수 없습니다.</li>
+  <li>남은 객실 = 객실 수 − 기간 중 <b>가장 많이 겹친 밤</b>의 예약 수.</li>
+</ol>
+<p class="Catui_help">예: 온돌방(110,000원) 11/6(금)~11/8(일) 2박 → 금·토 모두 주말 143,000원 × 2 = 286,000원.</p>
+</section>
+
+<section aria-labelledby="seat-rule">
+<h2 id="seat-rule">좌석 선택</h2>
+<ul>
+  <li>고를 좌석 수 = 인원수(테이블은 1개, 테이블 인원 ≥ 예약 인원). 최대 개수를 넘으면 거절하고 이유를 글자로 알립니다(<code>role="status"</code>).</li>
+  <li>“붙어 있는 좌석으로 고르기”(<code>mode: "adjacent"</code>): 누른 좌석을 포함해 같은 줄에서 연속된 빈 좌석 N개를 한 번에. 통로·예약된 좌석은 연속을 끊습니다. 누른 좌석부터 오른쪽을 먼저, 모자라면 왼쪽으로 당겨 찾습니다.</li>
+  <li>키보드: ←→ 같은 줄(통로 건너뜀), ↑↓ 앞뒤 줄의 같은 열(없으면 가장 가까운 좌석), Home/End 줄 처음·끝, Ctrl+Home/End 첫·마지막 좌석, PageUp/PageDown 맨 앞·뒤 줄.</li>
+</ul>
+</section>
+
+<section aria-labelledby="refund-rule">
+<h2 id="refund-rule">취소 환불 규정</h2>
+<p>이용일까지 남은 날 = 이용일 − 오늘(한국 날짜). <code>rules.refund</code>를 큰 날짜부터 보며 처음 맞는 규칙을 씁니다. 환불 금액은 10원 단위 내림, 이용 시작 시각이 지나면 취소할 수 없습니다.</p>
+<div class="doc-table-wrap"><table class="Catui_tbl"><caption class="Catui_clip">기본 환불 규정</caption>
+<thead><tr><th scope="col">남은 날</th><th scope="col">환불</th><th scope="col">99,000원 예약이면</th></tr></thead><tbody>
+<tr><td>7일 이상</td><td>100%</td><td>99,000원</td></tr>
+<tr><td>3~6일</td><td>70%</td><td>69,300원</td></tr>
+<tr><td>1~2일</td><td>50%</td><td>49,500원</td></tr>
+<tr><td>당일(시작 전)</td><td>0%</td><td>0원</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="sched-rule">
+<h2 id="sched-rule">일정 블록 겹침</h2>
+<p>같은 열(직원·날짜)의 블록을 시작 순(같으면 긴 것 먼저)으로 놓고, 이미 끝난 칸(lane)이 있으면 그 칸을 다시 씁니다. 서로 이어서 겹치는 블록끼리 한 묶음이 되고 묶음의 칸 수(<code>lanes</code>)로 폭을 나눕니다. 겹친 블록에는 “겹침” 글자가 붙습니다. 세로 위치는 <code>booking.place</code>가 일정표 범위(09:00~21:00) 기준 %로 계산합니다.</p>
+</section>

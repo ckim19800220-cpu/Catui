@@ -1,0 +1,35 @@
+<!-- title: 날짜·시간 선택 | nav: home -->
+<header class="Catui_bk-flow-head">
+  <h1 class="Catui_h2">날짜·시간 선택 <small class="Catui_bk-muted" data-svc-name></small></h1>
+  <ol class="Catui_steps" data-catui-bk-steps="date" aria-label="예약 단계"></ol>
+</header>
+<div class="Catui_bk-flow">
+  <div class="Catui_bk-flow-main" data-catui-bk-date>
+    <section class="Catui_bk-box" aria-labelledby="dt-cal-h">
+      <h2 class="Catui_h3" id="dt-cal-h">날짜</h2>
+      <div data-cal><p class="Catui_help">달력을 불러오는 중입니다…</p></div>
+      <ul class="Catui_bk-keys" aria-label="날짜 표시">
+        <li><span class="Catui_bk-key" data-k="on" aria-hidden="true">{{icon:check:12}}</span>고른 날짜</li>
+        <li><span class="Catui_bk-key" data-k="few" aria-hidden="true"></span>임박: 남은 자리 적음</li>
+        <li><span class="Catui_bk-key" data-k="full" aria-hidden="true"></span>마감</li>
+        <li><span class="Catui_bk-key" data-k="past" aria-hidden="true"></span>휴무 · 지난 날짜(취소선)</li>
+      </ul>
+    </section>
+    <section class="Catui_bk-box" aria-labelledby="dt-time-h">
+      <h2 class="Catui_h3" id="dt-time-h">시간</h2>
+      <div data-times></div>
+      <ul class="Catui_bk-keys" aria-label="시간 칸 표시">
+        <li><span class="Catui_bk-key" data-k="open" aria-hidden="true"></span>N자리 남음</li>
+        <li><span class="Catui_bk-key" data-k="few" aria-hidden="true">{{icon:alert-triangle:12}}</span>임박</li>
+        <li><span class="Catui_bk-key" data-k="full" aria-hidden="true">{{icon:ban:12}}</span>마감</li>
+        <li><span class="Catui_bk-key" data-k="past" aria-hidden="true"></span>지난 시간 · 휴게 시간</li>
+      </ul>
+    </section>
+    <p class="Catui_bk-msg" role="alert" data-msg hidden></p>
+    <div class="Catui_bk-next-bar">
+      <a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="index.html" data-catui-bk-prev>{{icon:arrow-left}}이전 단계</a>
+      <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="button" data-go>다음: 인원·옵션{{icon:arrow-right}}</button>
+    </div>
+  </div>
+  <aside class="Catui_bk-flow-side Catui_bk-box" data-catui-bk-summary aria-label="예약 내용"></aside>
+</div>

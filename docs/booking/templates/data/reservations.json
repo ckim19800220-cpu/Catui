@@ -1,0 +1,7 @@
+[
+  { "no": "BK-261101-0012", "svc": "musical", "branch": "daehak", "date": "2026-11-15", "time": "19:30", "adult": 2, "child": 0, "seats": ["C5", "C6"], "options": ["program"], "status": "booked", "name": "김고양", "phone": "010-1234-5678", "request": "", "created": "2026-11-01T21:14:00+09:00" },
+  { "no": "BK-261102-0003", "svc": "hair", "branch": "gangnam", "date": "2026-11-06", "time": "11:00", "adult": 1, "child": 0, "options": ["wash"], "status": "booked", "name": "김고양", "phone": "010-1234-5678", "request": "앞머리는 눈썹 위로 짧게 부탁드려요.", "created": "2026-11-02T09:40:00+09:00" },
+  { "no": "BK-261103-0021", "svc": "stay", "branch": "jeonju", "date": "2026-11-20", "checkout": "2026-11-22", "time": "15:00", "room": "ondol", "adult": 2, "child": 1, "options": ["breakfast"], "status": "booked", "name": "김고양", "phone": "010-1234-5678", "request": "늦게 도착할 수 있어요(21시쯤).", "created": "2026-11-03T22:05:00+09:00" },
+  { "no": "BK-261020-0007", "svc": "pottery", "branch": "gangnam", "date": "2026-10-20", "time": "14:00", "adult": 1, "child": 1, "options": ["glaze"], "status": "booked", "name": "김고양", "phone": "010-1234-5678", "request": "", "created": "2026-10-12T12:00:00+09:00" },
+  { "no": "BK-261015-0002", "svc": "dining", "branch": "hongdae", "date": "2026-10-25", "time": "18:30", "adult": 4, "child": 0, "seats": ["B3"], "options": ["cake"], "status": "cancelled", "name": "김고양", "phone": "010-1234-5678", "request": "", "created": "2026-10-15T18:00:00+09:00", "cancel": { "at": "2026-10-21T10:00:00+09:00", "rate": 70 } }
+]

@@ -1,0 +1,102 @@
+/* booking/shell.css */
+/* 사이트 머리(로고·메뉴·테마) · 본문 · 바닥글 · 단계 화면 2단(본문 + 예약 내용) · 상자 · 셸 없는 화면 */
+.Catui_bk-body{margin:0;background:var(--Catui_color-page-bg)}
+.Catui_bk{min-height:100vh;display:flex;flex-direction:column;background:var(--Catui_color-page-bg)}
+.Catui_bk [hidden]{display:none !important}
+.Catui_bk :is(.Catui_label,.Catui_tbl th){text-transform:none;letter-spacing:0}
+.Catui_bk :is(a,button,summary,input,select,textarea,[tabindex]):focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_bk :is(p,dd,li,td){overflow-wrap:break-word;word-break:keep-all}
+
+/* 머리 */
+.Catui_bk-head{position:sticky;top:0;z-index:30;background:var(--Catui_card-bg);border-bottom:1px solid var(--Catui_bk-line)}
+.Catui_bk-head-in{max-width:var(--Catui_bk-wrap);margin-inline:auto;display:flex;align-items:center;gap:var(--Catui_space-4);min-height:var(--Catui_bk-head-h);padding-inline:var(--Catui_space-5)}
+.Catui_bk-brand{display:inline-flex;align-items:center;gap:var(--Catui_space-2);font-weight:800;font-size:var(--Catui_type-h3-size);text-decoration:none;white-space:nowrap;color:var(--Catui_color-text-primary)}
+/* 로고 네모는 본체 .Catui_logo(브랜드 채움 + 흰 아이콘). 이름 강조색은 b 안의 span에만 — 로고 span까지 칠하면 아이콘이 배경색에 묻힌다 */
+.Catui_bk-brand b > span{color:var(--Catui_bk-accent)}
+/* 머리 메뉴 — 본체 가로 메뉴 .Catui_hnav.Catui_hnav-line.Catui_hnav-scroll 을 그대로 쓴다(색·활성 표시는 본체 규칙:
+   aria-current="page" → brand 밑줄 + 굵게). 여기서는 머리 바 안 배치만: 바의 아래선·안쪽 여백을 없애고
+   항목을 줄 높이만큼 늘려 밑줄이 머리 아래선 바로 위에 놓이게 한다(확장 4종 공통 규칙) */
+.Catui_bk-nav{min-width:0;min-height:0;margin-inline:auto;padding:var(--Catui_space-1);gap:calc(var(--Catui_space-1) / 2);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-pill);background:var(--Catui_color-surface-muted);font-size:var(--Catui_type-body-size)}
+.Catui_bk-nav .Catui_hnav-item{height:var(--Catui_space-7);padding-inline:var(--Catui_space-4);border-radius:var(--Catui_radius-pill);font-weight:600}
+.Catui_bk-nav .Catui_hnav-item[aria-current="page"]{color:var(--Catui_color-brand-strong);background:var(--Catui_card-bg);box-shadow:var(--Catui_shadow-xs)}
+.Catui_bk-nav .Catui_hnav-item:focus-visible{outline-offset:-2px}
+.Catui_bk-head-acts{display:flex;align-items:center;gap:var(--Catui_space-1);margin-left:auto}
+
+/* 본문 */
+.Catui_bk-main{flex:1;width:100%;max-width:var(--Catui_bk-wrap);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_bk-gap);padding:var(--Catui_bk-gap) var(--Catui_space-5);align-content:start}
+.Catui_bk-main > *{min-width:0}
+.Catui_bk-main:focus{outline:none}
+.Catui_bk a:not(.Catui_btn,.Catui_link,.Catui_hnav-item){color:inherit}
+.Catui_bk-sec{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--Catui_space-4)}
+.Catui_bk-sec-h{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2) var(--Catui_space-3)}
+.Catui_bk-sec-h > :is(h1,h2){margin:0;margin-right:auto}
+.Catui_bk-scroll{position:relative;overflow-x:auto;max-width:100%}
+.Catui_bk-muted{color:var(--Catui_bk-muted)}
+
+/* 홈 머리 */
+.Catui_bk-hero{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--Catui_space-4);align-items:center;padding:var(--Catui_space-6);border-radius:var(--Catui_card-radius);background:var(--Catui_bk-accent-soft)}
+.Catui_bk-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;z-index:-1}
+.Catui_bk-hero-img[hidden]{display:none}
+.Catui_bk-hero > div{max-width:calc(var(--Catui_space-10) * 10);padding:var(--Catui_space-4);border-radius:var(--Catui_radius-sm);background:var(--Catui_card-bg)}
+.Catui_bk-hero h1{margin:0 0 var(--Catui_space-2)}
+.Catui_bk-hero p{margin:0;color:var(--Catui_color-text-primary)}
+
+/* 단계 화면: 머리(제목·단계) · 2단(본문 + 옆줄) · 다음 단계 줄 */
+.Catui_bk-flow-head{display:grid;gap:var(--Catui_space-3)}
+.Catui_bk-flow-head h1{margin:0}
+.Catui_bk-flow-head .Catui_steps{position:relative;overflow-x:auto;padding-bottom:var(--Catui_space-1)}
+.Catui_bk-flow{display:grid;grid-template-columns:minmax(0,1fr) var(--Catui_bk-side-w);gap:var(--Catui_bk-gap);align-items:start}
+.Catui_bk-flow > *{min-width:0}
+.Catui_bk-flow-main{display:grid;gap:var(--Catui_bk-gap);min-width:0}
+.Catui_bk-flow-side{position:sticky;top:calc(var(--Catui_bk-head-h) + var(--Catui_space-4))}
+.Catui_bk-box{display:grid;gap:var(--Catui_space-4);padding:var(--Catui_space-5);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg);min-width:0}
+.Catui_bk-box > :is(h2,h3){margin:0}
+.Catui_bk-box-h{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2);justify-content:space-between}
+.Catui_bk-box-h > :is(h2,h3){margin:0}
+.Catui_bk-next-bar{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2);justify-content:space-between;align-items:center}
+.Catui_bk-msg{display:flex;align-items:flex-start;gap:var(--Catui_space-2);margin:0;padding:var(--Catui_space-3) var(--Catui_space-4);border-radius:var(--Catui_bk-radius);border-left:var(--Catui_accent-w) solid var(--Catui_bk-danger);background:var(--Catui_color-danger-soft);color:var(--Catui_color-text-primary);font-weight:600}
+.Catui_bk-msg .Catui_icon{flex:none;margin-top:2px;color:var(--Catui_bk-danger)}
+.Catui_bk-acts{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2)}
+
+/* 바닥글 */
+.Catui_bk-foot{border-top:1px solid var(--Catui_bk-line);background:var(--Catui_card-bg)}
+.Catui_bk-foot-in{max-width:var(--Catui_bk-wrap);margin-inline:auto;display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-6) var(--Catui_space-5);font-size:var(--Catui_type-caption-size);color:var(--Catui_bk-muted)}
+.Catui_bk-foot-in p{margin:0}
+.Catui_bk-foot nav{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2) var(--Catui_space-4);font-weight:600}
+
+/* 셸 없는 화면(로그인 · 404) */
+.Catui_bk-blank{min-height:100vh;display:grid;place-items:center;padding:var(--Catui_space-8) var(--Catui_space-4)}
+.Catui_bk-blank-card{width:100%;max-width:calc(var(--Catui_space-10) * 7)}
+.Catui_bk-404{text-align:center;max-width:calc(var(--Catui_space-10) * 10)}
+.Catui_bk-404 .Catui_actions{justify-content:center;flex-wrap:wrap}
+.Catui_bk-code-n{font-size:calc(var(--Catui_type-display-size) * 2);font-weight:800;line-height:1;color:var(--Catui_bk-accent)}
+
+@media (max-width:991px){
+  .Catui_bk-flow{grid-template-columns:minmax(0,1fr)}
+  .Catui_bk-flow-side{position:relative;top:auto}
+}
+@media (max-width:767px){
+  .Catui_bk-head-in{flex-wrap:wrap;gap:0 var(--Catui_space-2);min-height:0;padding-inline:var(--Catui_space-3)}
+  .Catui_bk-brand{min-height:var(--Catui_topbar-h)}   /* 첫 줄(로고·버튼) 높이 — 둘째 줄 메뉴가 머리 높이를 나눠 갖지 않게 */
+  .Catui_bk-nav{order:3;flex-basis:100%;margin:0 0 var(--Catui_space-2);scrollbar-width:thin;scrollbar-color:var(--Catui_color-text-secondary) transparent}
+  .Catui_bk-nav::-webkit-scrollbar{display:block;height:var(--Catui_space-1)}
+  .Catui_bk-nav::-webkit-scrollbar-thumb{background:var(--Catui_color-text-secondary);border-radius:var(--Catui_radius-pill)}
+  .Catui_bk-main{padding-inline:var(--Catui_space-4)}
+  .Catui_bk-hero{grid-template-columns:minmax(0,1fr);padding:var(--Catui_space-5)}
+  .Catui_bk-box{padding:var(--Catui_space-4)}
+}
+/* 320px(WCAG 리플로 기준) */
+@media (max-width:399px){
+  .Catui_bk-brand{font-size:var(--Catui_type-body-size)}
+  .Catui_bk-main{padding-inline:var(--Catui_space-3)}
+  .Catui_bk-box{padding:var(--Catui_space-3)}
+  .Catui_bk-next-bar > *{flex:1 1 100%}
+}
+
+/* 유리: 고정 머리 — 본체 glass.css와 같은 방식(흐림은 ::before 층 — 안쪽 메뉴·fixed 요소에 영향 없게).
+   본문 카드·표·폼에는 쓰지 않는다. 미지원·투명도 줄이기·강제 색 모드에서는 불투명 면 */
+.Catui_bk-head{background:transparent;isolation:isolate}
+.Catui_bk-head::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--Catui_glass-bg-strong);-webkit-backdrop-filter:var(--Catui_glass-blur);backdrop-filter:var(--Catui_glass-blur)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.Catui_bk-head::before{background:var(--Catui_card-bg)}}
+@media (prefers-reduced-transparency:reduce){.Catui_bk-head::before{background:var(--Catui_card-bg);-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (forced-colors:active){.Catui_bk-head::before{background:Canvas;-webkit-backdrop-filter:none;backdrop-filter:none}}

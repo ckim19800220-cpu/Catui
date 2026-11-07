@@ -172,9 +172,9 @@ shop.load = function () {
 };
 
 // 상품 사진 자리표시: 토큰 색으로 그린 SVG (외부 이미지 없음). 실서비스는 p.thumb(또는 p.images[n]) 주소를 쓴다
-shop.thumb = function (p, n = 0) {
-  if (p.images?.[n]) return p.images[n];
-  if (p.thumb && !n) return p.thumb;
+shop.thumb = function (p, n = 0, fallback = false) {
+  if (!fallback && p.images?.length) return p.images[n % p.images.length];
+  if (!fallback && p.thumb && !n) return p.thumb;
   const css = getComputedStyle(document.documentElement);
   const pick = (k) => css.getPropertyValue(`--Catui_color-${k}`).trim() || "gray";
   const c = pick(["brand", "info", "purple", "amber"][((p.tone || 1) - 1 + n) % 4]), ink = pick("text-primary"), paper = pick("surface");
@@ -386,7 +386,7 @@ shop.cards = {
       return;
     }
     if (box.hasAttribute("data-catui-sh-promos")) {
-      catui.mount(box, catui.html`<ul class="Catui_sh-promos">${d.promos.map((m) => catui.html`<li><a class="Catui_sh-promo" data-tone="${m.tone}" href="event.html?e=${m.id}"><b>${m.title}</b><span>${m.desc}</span><time class="Catui_sh-left" data-catui-sh-until="${m.until}" datetime="${m.until}"></time></a></li>`)}</ul>`);
+      catui.mount(box, catui.html`<ul class="Catui_sh-promos">${d.promos.map((m) => catui.html`<li><a class="Catui_sh-promo" data-tone="${m.tone}" href="event.html?e=${m.id}">${m.image ? catui.html`<img class="Catui_sh-promo-img" src="${m.image}" alt="" aria-hidden="true" width="80" height="96" loading="lazy" decoding="async">` : ""}<b>${m.title}</b><span>${m.desc}</span><time class="Catui_sh-left" data-catui-sh-until="${m.until}" datetime="${m.until}"></time></a></li>`)}</ul>`);
       shop.shell.tick(box);
       return;
     }
@@ -423,7 +423,34 @@ shop.shell = {
       t.textContent = left <= 0 ? "종료" : `${d ? `${d}일 ` : ""}${hms} 남음`;
     });
   },
+  nav(root) {
+    const nav = root.querySelector('.Catui_sh-gnb-in');
+    if (!nav || !shop._once(nav, 'scroll-controls')) return;
+    const buttons = [...root.querySelectorAll('[data-catui-sh-nav-step]')];
+    const state = () => buttons.forEach((b) => { b.disabled = Number(b.dataset.catuiShNavStep) < 0 ? nav.scrollLeft <= 1 : nav.scrollLeft >= nav.scrollWidth - nav.clientWidth - 1; });
+    const layout = () => {
+      buttons.forEach((b) => { b.hidden = true; });
+      const overflow = nav.scrollWidth > nav.clientWidth + 1;
+      buttons.forEach((b) => { b.hidden = !overflow; });
+      const active = nav.querySelector('[aria-current="page"]');
+      if (active) {
+        const outer = nav.getBoundingClientRect(), item = active.getBoundingClientRect();
+        if (item.left < outer.left) nav.scrollLeft += item.left - outer.left;
+        else if (item.right > outer.right) nav.scrollLeft += item.right - outer.right;
+      }
+      state();
+    };
+    buttons.forEach((b) => shop._on(b, 'click', () => nav.scrollBy({ left: Number(b.dataset.catuiShNavStep) * nav.clientWidth * .8, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })));
+    shop._on(nav, 'scroll', state, { passive: true });
+    shop._on(window, 'resize', layout);
+    layout();
+  },
   init(root) {
+    if (shop._once(root, "hero-error")) shop._on(root, "error", (e) => {
+      if (e.target.matches?.(".Catui_sh-hero-img, .Catui_sh-promo-img")) e.target.hidden = true;
+      else if (e.target.matches?.(".Catui_sh-card-img img, .Catui_sh-gallery-main img, .Catui_sh-thumbs img, .Catui_sh-review-img") && !e.target.src.startsWith("data:")) e.target.src = shop.thumb({ id: 0 }, 0, true);
+    }, true);
+    root.querySelectorAll(".Catui_sh-hero-img").forEach((img) => { if (img.complete && !img.naturalWidth) img.hidden = true; });
     root.querySelectorAll("form[data-catui-sh-search]").forEach((f) => shop._on(f, "submit", (e) => {
       const q = f.querySelector("input[name=q]");
       if (q && !q.value.trim()) { e.preventDefault(); q.focus(); }
@@ -432,7 +459,8 @@ shop.shell = {
     if (q) root.querySelectorAll("form[data-catui-sh-search] input[name=q]").forEach((i) => { i.value = q; });
     // 상단 분류 메뉴: 목록 화면은 주소의 ?c= 로 현재 위치를 다시 표시
     const c = shop.query().get("c");
-    if (c) root.querySelectorAll(".Catui_sh-gnb-item").forEach((a) => { if (new URL(a.href, location.href).searchParams.get("c") === c) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    if (c) root.querySelectorAll(".Catui_sh-gnb .Catui_hnav-item").forEach((a) => { if (new URL(a.href, location.href).searchParams.get("c") === c) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    this.nav(root);
     root.querySelectorAll("[data-catui-sh-won]").forEach((el) => { el.textContent = shop.won(el.getAttribute("data-catui-sh-won")); });
     this.count(root);
     shop.wishPaint(root);
@@ -730,9 +758,9 @@ shop.product = {
       document.title = `${p.name} · Catui 쇼핑`;
       catui.mount($("[data-crumb]"), catui.html`<a href="index.html">홈</a><span class="Catui_crumb-sep">/</span><a href="list.html?c=${p.cat}">${p.catName}</a><span class="Catui_crumb-sep">/</span><span aria-current="page">${p.name}</span>`);
       // 사진
-      const n = 4, main = (i) => catui.html`<img src="${shop.thumb(p, i)}" alt="${p.name} 사진 ${i + 1}/${n}" width="600" height="600">`;
+      const n = p.images?.length || 4, main = (i) => catui.html`<img src="${shop.thumb(p, i)}" alt="${p.name} 사진 ${i + 1}/${n}" width="600" height="600">`;
       catui.mount($("[data-gallery]"), catui.html`<figure class="Catui_sh-gallery-main" data-main>${main(0)}${p.soldOut ? catui.html`<span class="Catui_sh-soldout">품절</span>` : ""}</figure>
-        <div class="Catui_sh-thumbs" role="group" aria-label="사진 고르기">${[0, 1, 2, 3].map((i) => catui.html`<button type="button" data-shot="${i}" aria-pressed="${i === 0}"><img src="${shop.thumb(p, i)}" alt="" width="80" height="80"><span class="Catui_clip">사진 ${i + 1}</span></button>`)}</div>`);
+        <div class="Catui_sh-thumbs" role="group" aria-label="사진 고르기">${Array.from({ length: n }, (_, i) => catui.html`<button type="button" data-shot="${i}" aria-pressed="${i === 0}"><img src="${shop.thumb(p, i)}" alt="" width="80" height="80"><span class="Catui_clip">사진 ${i + 1}</span></button>`)}</div><p class="Catui_help">데모용 연출 사진입니다. 실제 상품·옵션을 나타내지 않습니다.</p>`);
       shop._on($("[data-gallery]"), "click", (e) => {
         const b = e.target.closest("[data-shot]"); if (!b) return;
         catui.mount($("[data-main]"), catui.html`${main(Number(b.dataset.shot))}${p.soldOut ? catui.html`<span class="Catui_sh-soldout">품절</span>` : ""}`);

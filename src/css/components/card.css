@@ -1,6 +1,6 @@
 /* components/card.css */
 /* Card — header/body/footer, link-card hover. */
-a.Catui_card:hover{box-shadow:var(--Catui_shadow-sm);border-color:var(--Catui_color-neutral-300)}
+a.Catui_card:hover{box-shadow:var(--Catui_shadow-sm);border-color:var(--Catui_line-strong)}
 .Catui_card{
   background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);
   border-radius:var(--Catui_card-radius);box-shadow:var(--Catui_card-shadow);min-width:0;

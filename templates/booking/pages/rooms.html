@@ -1,0 +1,47 @@
+<!-- title: 객실 선택 | nav: home -->
+<header class="Catui_bk-flow-head">
+  <h1 class="Catui_h2">기간·객실 선택 <small class="Catui_bk-muted" data-svc-name></small></h1>
+  <ol class="Catui_steps" data-catui-bk-steps="rooms" aria-label="예약 단계"></ol>
+</header>
+<div class="Catui_bk-flow">
+  <div class="Catui_bk-flow-main" data-catui-bk-rooms>
+    <div class="Catui_bk-flow-main" data-body>
+      <section class="Catui_bk-box" aria-labelledby="rm-h">
+        <h2 class="Catui_h3" id="rm-h">숙박 기간 · 인원</h2>
+        <div class="Catui_bk-dates">
+          <div class="Catui_field"><label class="Catui_label" for="rm-in">체크인 (15:00부터)</label><input class="Catui_input" id="rm-in" type="date" data-in required></div>
+          <div class="Catui_field"><label class="Catui_label" for="rm-out">체크아웃 (11:00까지)</label><input class="Catui_input" id="rm-out" type="date" data-out-date required></div>
+        </div>
+        <p class="Catui_bk-nights" data-nights aria-live="polite"></p>
+        <div class="Catui_bk-count">
+          <div><p class="Catui_bk-count-t" id="rm-a">어른</p></div>
+          <div class="Catui_stepper" role="group" aria-labelledby="rm-a"><button type="button" data-step="adult:-1" aria-label="어른 한 명 줄이기">{{icon:minus}}</button><output data-out="adult">2</output><button type="button" data-step="adult:1" aria-label="어른 한 명 늘리기">{{icon:plus}}</button></div>
+        </div>
+        <div class="Catui_bk-count">
+          <div><p class="Catui_bk-count-t" id="rm-c">어린이</p></div>
+          <div class="Catui_stepper" role="group" aria-labelledby="rm-c"><button type="button" data-step="child:-1" aria-label="어린이 한 명 줄이기">{{icon:minus}}</button><output data-out="child">0</output><button type="button" data-step="child:1" aria-label="어린이 한 명 늘리기">{{icon:plus}}</button></div>
+        </div>
+        <p class="Catui_help">금·토요일 밤과 공휴일 전날은 주말 요금(+30%), 기준 인원을 넘으면 1인 1박마다 추가 요금이 붙습니다.</p>
+      </section>
+      <section class="Catui_bk-box" aria-labelledby="rm-r-h">
+        <h2 class="Catui_h3" id="rm-r-h">객실</h2>
+        <fieldset class="Catui_bk-times"><legend class="Catui_clip">객실 고르기</legend><ul class="Catui_bk-rooms" data-rooms><li class="Catui_help">객실을 불러오는 중입니다…</li></ul></fieldset>
+        <div data-breakdown></div>
+      </section>
+      <section class="Catui_bk-box" aria-labelledby="rm-o-h">
+        <h2 class="Catui_h3" id="rm-o-h">추가 옵션</h2>
+        <div class="Catui_bk-opts" data-opts></div>
+      </section>
+      <section class="Catui_bk-box" aria-labelledby="rm-p-h">
+        <h2 class="Catui_h3" id="rm-p-h">금액</h2>
+        <div data-price aria-live="polite"></div>
+      </section>
+      <p class="Catui_bk-msg" role="alert" data-msg hidden></p>
+      <div class="Catui_bk-next-bar">
+        <a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="index.html" data-catui-bk-prev>{{icon:arrow-left}}이전 단계</a>
+        <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="button" data-go>다음: 예약자 정보{{icon:arrow-right}}</button>
+      </div>
+    </div>
+  </div>
+  <aside class="Catui_bk-flow-side Catui_bk-box" data-catui-bk-summary aria-label="예약 내용"></aside>
+</div>

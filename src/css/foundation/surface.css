@@ -19,6 +19,8 @@
 /* 그라디언트 · 패턴 (모두 토큰 색) */
 .Catui_bg-gradient{background:linear-gradient(135deg,var(--Catui_color-brand-soft) 0%,var(--Catui_color-surface) 60%)}
 .Catui_bg-gradient-dark{background:linear-gradient(135deg,var(--Catui_sidebar-bg) 0%,var(--Catui_color-brand-fill) 100%);color:var(--Catui_color-text-inverse)}
+/* 진한 영역 안의 선: 잉크를 흰 글자색 쪽으로 뒤집는다 (:root에서 계산된 파생 선 토큰도 함께 다시 정의) */
+:is(.Catui_bg-brand,.Catui_bg-dark,.Catui_bg-gradient-dark){--Catui_line:color-mix(in srgb,var(--Catui_color-text-inverse) 20%,transparent);--Catui_line-strong:color-mix(in srgb,var(--Catui_color-text-inverse) 32%,transparent);--Catui_line-soft:color-mix(in srgb,var(--Catui_color-text-inverse) 12%,transparent);--Catui_color-border:var(--Catui_line);--Catui_color-divider:var(--Catui_line-soft);--Catui_card-border:var(--Catui_line);--Catui_divider-color:var(--Catui_line-soft)}
 .Catui_bg-dots{background-color:var(--Catui_color-surface);background-image:radial-gradient(var(--Catui_color-neutral-300) 1px,transparent 1px);background-size:16px 16px}
 .Catui_bg-grid{background-color:var(--Catui_color-surface);background-image:linear-gradient(var(--Catui_color-neutral-100) 1px,transparent 1px),linear-gradient(90deg,var(--Catui_color-neutral-100) 1px,transparent 1px);background-size:24px 24px}
 

@@ -9,7 +9,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
-import { P, ROOT, fail, read, readJson, write, walk, rel, pkg } from "./lib.mjs";
+import { P, ROOT, fail, read, readJson, write, walk, rel, pkg, visualErrors } from "./lib.mjs";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -38,6 +38,8 @@ export function buildDocs({ css, icons }) {
   if (orphans.length) fail(`nav.json에 없는 문서 조각: ${orphans.join(", ")}`);
 
   const errors = [];
+  // 문서 사이트 CSS도 본체와 같은 시각 원칙(1px 선 · 모서리 토큰 · 유리 폴백)
+  for (const f of walk(path.join(P.docsSrc, "assets"), ".css")) errors.push(...visualErrors(read(f), rel(f)));
   const relTo = (fromPath, target) => {
     const depth = fromPath.split("/").length - 1;
     return `${"../".repeat(depth)}${target}`;
@@ -54,6 +56,7 @@ export function buildDocs({ css, icons }) {
   const stats = {
     pages: allPages.length + 1, classes: css.defined.size, files: Object.keys(css.byFile || {}).length, icons: icons.names.length, tokens: tokenCount,
     modules: jsModPages.length, version, adminTpl: tplCount("admin"), cmTpl: tplCount("community"), shTpl: tplCount("shop"), dkTpl: tplCount("docskit"), bkTpl: tplCount("booking"),
+    totalTpl: ["admin", "community", "shop", "docskit", "booking"].reduce((sum, dir) => sum + tplCount(dir), 0),
     cmPosts: (() => { try { const j = readJson(path.join(ROOT, "templates/community/data/posts.json")); return (Array.isArray(j) ? j : j.posts || j.data || []).length; } catch { return 0; } })(),
     shProducts: (() => { try { const j = readJson(path.join(ROOT, "templates/shop/data/products.json")); return (Array.isArray(j) ? j : j.products || []).length; } catch { return 0; } })(),
     dkPosts: (() => { try { const j = readJson(path.join(ROOT, "templates/docskit/data/posts.json")); return (Array.isArray(j) ? j : j.posts || []).length; } catch { return 0; } })(),
@@ -76,7 +79,30 @@ export function buildDocs({ css, icons }) {
     .replace(/\{\{stat:(\w+)\}\}/g, (m, k) => { if (stats[k] == null) { errors.push(`${where}: 없는 수치 {{stat:${k}}}`); return m; } return typeof stats[k] === "number" ? stats[k].toLocaleString("ko-KR") : esc(stats[k]); })
     .replace(/\{\{js-modules\}\}/g, jsModules);
 
+  const photoExamples = {
+    "css/components/carousel": ["leaves.jpg", "sunset.jpg", "home.jpg"],
+    "js/modules/carousel": ["leaves.jpg", "sunset.jpg", "home.jpg"],
+    "css/components/card": ["pottery.jpg", "cafe.jpg"],
+    "css/components/layer": ["sky.jpg"],
+    "css/components/media": ["sky.jpg"],
+    "css/blocks/gallery": ["sky.jpg", "sunset.jpg", "leaves.jpg", "cat.jpg", "cafe.jpg"],
+    "css/foundation/media": ["cat.jpg", "sky.jpg", "leaves.jpg"],
+    "js/modules/layer": ["leaves.jpg", "sunset.jpg", "sky.jpg"],
+    "js/modules/site": ["cafe.jpg", "bakery.jpg", "home.jpg"],
+    "js/modules/page": ["leaves.jpg"],
+    "css/views/files": ["sky.jpg"],
+  };
   function transform(html, page) {
+    const photos = Object.hasOwn(photoExamples, page.path) ? photoExamples[page.path] : null;
+    if (photos) {
+      const assigned = new Map();
+      html = html.replace(/data:image\/svg\+xml,[^"]*/g, (src) => {
+        if (/viewBox='0 0 (?:88 88|96 96)'/.test(src)) return src;
+        const key = src.match(/%23[\da-f]{6}/i)?.[0] || src;
+        if (!assigned.has(key)) assigned.set(key, photos[assigned.size % photos.length]);
+        return `{{dist}}/../assets/photos/${assigned.get(key)}`;
+      });
+    }
     let n = 0;
     // 예제 블록
     html = html.replace(/<catui-example([^>]*)>([\s\S]*?)<\/catui-example>/g, (_, attrs, body) => {

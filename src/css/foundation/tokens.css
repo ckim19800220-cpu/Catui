@@ -1,5 +1,18 @@
 /* foundation/tokens.css */
 /* Catui UI 1.2 — tokens from assets/design_m.html. L3 values reference L1/L2 only. */
+/* 시각 원칙 (문서: docs/css/foundation/visual.html · 빌드 검사 scripts/build-css.mjs가 일부를 강제한다)
+   1. 선은 1px — 모든 컴포넌트 테두리는 hairline 1px. 2px 이상은 포커스 링·활성 표시줄(탭 밑줄·옆 막대·진행)만.
+   2. 잉크 테두리 — 선 색은 고정 회색이 아니라 글자색(text-primary)을 반투명으로 섞은 잉크:
+      --Catui_line(기본) · --Catui_line-strong(hover·버튼) · --Catui_line-soft(구분선) · --Catui_line-control(입력·체크 = 비텍스트 3:1).
+      어떤 바탕(면·연한 색 면·다크) 위에서도 같은 대비를 유지한다.
+   3. 모서리 단계 — xs 2 · sm 4 · md 6 · lg 8 · xl 10. 버튼·입력 4, 카드·메뉴·토스트·모달 6, 큰 면 8. pill은 배지·토글·아바타만.
+      border-radius에는 토큰만(0·50% 예외).
+   4. 그림자는 층(elevation)만 — 윤곽은 선이 맡고, 그림자는 떠 있는 층(메뉴·토스트·모달)에 얕고 짧게. 다크는 위쪽 1px 밝은 inset.
+   5. 유리(glass)는 떠 있는 층만 — 상단 바·메뉴·메가 메뉴·토스트·아래 고정 줄·대화상자 덮개(모달 패널은 불투명, 덮개가 흐림). 본문 카드·표·폼에는 쓰지 않는다.
+      backdrop-filter 미지원·투명도 줄이기·강제 색 모드에서는 불투명 면으로 돌아간다.
+   6. 대비 — 글자 4.5:1(큰 글자 3:1), 비텍스트(입력 테두리·포커스·상태 표식) 3:1.
+   7. 상태는 색 + 형태 — 색만으로 알리지 않는다(아이콘·글자·굵기·막대를 함께).
+   8. 간격은 4px 격자 — --Catui_space-* 만 쓴다. */
 :root{
 
   /* brand & accent */
@@ -11,7 +24,22 @@
   --Catui_color-danger:#E74C3C; --Catui_color-danger-soft:#FDECEA;
   /* surface & line */
   --Catui_color-page-bg:#F7F8FA; --Catui_color-surface:#FFFFFF; --Catui_color-surface-muted:#FAFBFC;
-  --Catui_color-border:#E6E9ED; --Catui_color-divider:#EEF1F4;
+  /* 선은 반투명 잉크(글자색 섞음) — 이전 고정값 border #E6E9ED · divider #EEF1F4 */
+  --Catui_color-border:var(--Catui_line); --Catui_color-divider:var(--Catui_line-soft);
+  --Catui_line:color-mix(in srgb, var(--Catui_color-text-primary) 14%, transparent);           /* 기본 hairline (카드·메뉴·표) */
+  --Catui_line-strong:color-mix(in srgb, var(--Catui_color-text-primary) 24%, transparent);    /* hover · 버튼 · 강조 윤곽 */
+  --Catui_line-soft:color-mix(in srgb, var(--Catui_color-text-primary) 8%, transparent);       /* 구분선 · 격자 */
+  --Catui_line-control:color-mix(in srgb, var(--Catui_color-text-primary) 56%, transparent);   /* 입력·체크·토글 — 면 위 3:1 이상 (WCAG 1.4.11) */
+  --Catui_line-control-hover:color-mix(in srgb, var(--Catui_color-text-primary) 74%, transparent);
+  --Catui_line-w:1px;
+  --Catui_accent-w:3px;   /* 굵은 선은 이것뿐: 활성 표시줄·인용 막대·상태 막대(callout·toast 옆선) — 탭 밑줄은 --Catui_tab-indicator-w(2px) */
+  /* 포커스 링 — outline:var(--Catui_ring); outline-offset:var(--Catui_ring-offset) */
+  --Catui_ring-w:2px; --Catui_ring-offset:2px; --Catui_ring:var(--Catui_ring-w) solid var(--Catui_color-focus-ring);
+  /* 유리(떠 있는 층 전용) — glass.css · 폴백은 불투명 면. 82%/92%는 뒤가 남색이어도 본문 글자 7:1 이상이 남는 값 */
+  --Catui_glass-bg:color-mix(in srgb, var(--Catui_color-surface) 82%, transparent);
+  --Catui_glass-bg-strong:color-mix(in srgb, var(--Catui_color-surface) 92%, transparent);
+  --Catui_glass-border:var(--Catui_line);
+  --Catui_glass-blur:saturate(140%) blur(12px);
   /* navy */
   --Catui_color-navy-900:#243444; --Catui_color-navy-800:#2A3F54; --Catui_color-navy-700:#334B63; --Catui_color-navy-500:#5A7184;
   --Catui_color-navy-text:#DDE4EA; --Catui_color-navy-muted:#9FACBB;
@@ -38,12 +66,13 @@
   /* space */
   --Catui_space-1:4px; --Catui_space-2:8px; --Catui_space-3:12px; --Catui_space-4:16px; --Catui_space-5:20px; --Catui_space-6:24px; --Catui_space-7:32px; --Catui_space-8:40px; --Catui_space-9:48px; --Catui_space-10:64px;
   /* radius */
-  --Catui_radius-xs:4px; --Catui_radius-sm:6px; --Catui_radius-md:8px; --Catui_radius-lg:12px; --Catui_radius-pill:999px;
-  /* shadow */
-  --Catui_shadow-xs:0 1px 1px rgba(16,24,40,.04);
-  --Catui_shadow-sm:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.04);
-  --Catui_shadow-md:0 4px 12px rgba(16,24,40,.08);
-  --Catui_shadow-lg:0 12px 32px rgba(16,24,40,.12);
+  /* 미니멀 단계 — 이전 xs 4 · sm 6 · md 8 · lg 12 */
+  --Catui_radius-xs:2px; --Catui_radius-sm:4px; --Catui_radius-md:6px; --Catui_radius-lg:8px; --Catui_radius-xl:10px; --Catui_radius-pill:999px;
+  /* shadow — 윤곽은 선이 맡으므로 얕고 짧게, 겹쳐 뜨는 층(md·lg)에만 의미를 둔다 */
+  --Catui_shadow-xs:0 1px 0 rgba(16,24,40,.03);
+  --Catui_shadow-sm:0 1px 2px rgba(16,24,40,.05);
+  --Catui_shadow-md:0 4px 10px -2px rgba(16,24,40,.08),0 2px 4px -2px rgba(16,24,40,.05);
+  --Catui_shadow-lg:0 12px 24px -6px rgba(16,24,40,.14),0 4px 8px -4px rgba(16,24,40,.06);
   /* control */
   --Catui_control-h-sm:28px; --Catui_control-h-md:34px; --Catui_control-h-lg:40px;
   /* layout */
@@ -65,23 +94,23 @@
   --Catui_btn-font-sm:12px; --Catui_btn-font-md:var(--Catui_type-body-size); --Catui_btn-font-lg:14px;
   --Catui_btn-radius:var(--Catui_radius-sm);
   --Catui_btn-primary-bg:var(--Catui_color-brand-fill); --Catui_btn-primary-bg-hover:var(--Catui_color-brand-fill-hover); --Catui_btn-primary-fg:var(--Catui_color-text-inverse);
-  --Catui_btn-secondary-bg:var(--Catui_color-surface); --Catui_btn-secondary-fg:var(--Catui_color-text-primary); --Catui_btn-secondary-border:var(--Catui_color-neutral-300); --Catui_btn-secondary-border-hover:var(--Catui_color-brand);
+  --Catui_btn-secondary-bg:var(--Catui_color-surface); --Catui_btn-secondary-fg:var(--Catui_color-text-primary); --Catui_btn-secondary-border:var(--Catui_line-strong); --Catui_btn-secondary-border-hover:var(--Catui_color-brand-strong);
   --Catui_btn-ghost-bg:transparent; --Catui_btn-ghost-fg:var(--Catui_color-brand-strong);
   --Catui_btn-danger-bg:#C0392B; --Catui_btn-danger-fg:var(--Catui_color-text-inverse);
-  --Catui_btn-disabled-bg:var(--Catui_color-neutral-100); --Catui_btn-disabled-fg:var(--Catui_color-neutral-500); --Catui_btn-disabled-border:var(--Catui_color-border);
+  --Catui_btn-disabled-bg:var(--Catui_color-neutral-100); --Catui_btn-disabled-fg:var(--Catui_color-neutral-500); --Catui_btn-disabled-border:var(--Catui_line);
   /* input & form */
   --Catui_input-h:var(--Catui_control-h-md); --Catui_input-px:var(--Catui_space-3); --Catui_input-font:var(--Catui_type-body-size);
   --Catui_input-bg:var(--Catui_color-surface); --Catui_input-fg:var(--Catui_color-text-primary); --Catui_input-placeholder:var(--Catui_color-text-tertiary);
-  --Catui_input-border:var(--Catui_color-neutral-300); --Catui_input-border-hover:var(--Catui_color-navy-500);
-  --Catui_input-border-focus:var(--Catui_color-brand-strong); --Catui_input-ring-focus:color-mix(in srgb, var(--Catui_color-brand) 32%, transparent); --Catui_input-ring-w:3px;
+  --Catui_input-border:var(--Catui_line-control); --Catui_input-border-hover:var(--Catui_line-control-hover);
+  --Catui_input-border-focus:var(--Catui_color-brand-strong); --Catui_input-ring-focus:color-mix(in srgb, var(--Catui_color-brand) 32%, transparent); --Catui_input-ring-w:var(--Catui_ring-w);
   --Catui_input-radius:var(--Catui_radius-sm);
   --Catui_input-error-border:var(--Catui_color-danger); --Catui_input-error-ring:color-mix(in srgb, var(--Catui_color-danger) 24%, transparent);
   --Catui_input-disabled-bg:var(--Catui_color-neutral-100);
   --Catui_label-size:var(--Catui_type-label-size); --Catui_label-color:var(--Catui_color-text-secondary); --Catui_help-size:var(--Catui_type-caption-size); --Catui_help-color:var(--Catui_color-text-secondary); --Catui_form-error-color:var(--Catui_badge-danger-fg);
   /* checkbox / radio / toggle */
-  --Catui_check-size:16px; --Catui_check-radius:var(--Catui_radius-xs); --Catui_check-border:var(--Catui_color-neutral-300); --Catui_check-bg-on:var(--Catui_color-brand-fill); --Catui_check-icon-color:var(--Catui_color-text-inverse); --Catui_check-label-gap:var(--Catui_space-2);
-  --Catui_radio-size:16px; --Catui_radio-dot:8px; --Catui_radio-border:var(--Catui_color-neutral-300); --Catui_radio-dot-color:var(--Catui_color-brand);
-  --Catui_toggle-w:34px; --Catui_toggle-h:20px; --Catui_toggle-knob:16px; --Catui_toggle-track-off:var(--Catui_color-neutral-300); --Catui_toggle-track-on:var(--Catui_color-brand); --Catui_toggle-knob-color:var(--Catui_color-surface); --Catui_toggle-radius:var(--Catui_radius-pill);
+  --Catui_check-size:16px; --Catui_check-radius:var(--Catui_radius-xs); --Catui_check-border:var(--Catui_line-control); --Catui_check-bg-on:var(--Catui_color-brand-fill); --Catui_check-icon-color:var(--Catui_color-text-inverse); --Catui_check-label-gap:var(--Catui_space-2);
+  --Catui_radio-size:16px; --Catui_radio-dot:8px; --Catui_radio-border:var(--Catui_line-control); --Catui_radio-dot-color:var(--Catui_color-brand);
+  --Catui_toggle-w:34px; --Catui_toggle-h:20px; --Catui_toggle-knob:16px; --Catui_toggle-track-off:var(--Catui_line-control); --Catui_toggle-track-on:var(--Catui_color-brand); --Catui_toggle-knob-color:var(--Catui_color-surface); --Catui_toggle-radius:var(--Catui_radius-pill);
   /* pill / badge / count / avatar */
   --Catui_pill-h-sm:18px; --Catui_pill-h-md:22px; --Catui_pill-radius:var(--Catui_radius-pill); --Catui_pill-font:11px; --Catui_pill-px:var(--Catui_space-2); --Catui_pill-dot:6px;
   --Catui_badge-success-bg:var(--Catui_color-brand-soft); --Catui_badge-success-fg:var(--Catui_color-brand-strong);
@@ -94,7 +123,7 @@
   --Catui_avatar-xl:48px; --Catui_avatar-lg:40px; --Catui_avatar-md:32px; --Catui_avatar-sm:24px; --Catui_avatar-xs:18px; --Catui_avatar-stack-overlap:-8px;
   --Catui_avatar-bg:var(--Catui_color-brand-soft); --Catui_avatar-fg:var(--Catui_color-brand-strong); --Catui_avatar-radius:var(--Catui_radius-pill); --Catui_avatar-border:var(--Catui_color-surface);
   /* card / stat / progress */
-  --Catui_card-bg:var(--Catui_color-surface); --Catui_card-pad:var(--Catui_space-5); --Catui_card-radius:var(--Catui_radius-md); --Catui_card-border:var(--Catui_color-border); --Catui_card-shadow:var(--Catui_shadow-xs);
+  --Catui_card-bg:var(--Catui_color-surface); --Catui_card-pad:var(--Catui_space-5); --Catui_card-radius:var(--Catui_radius-md); --Catui_card-border:var(--Catui_line); --Catui_card-shadow:var(--Catui_shadow-xs);
   --Catui_card-header-h:52px; --Catui_card-footer-h:44px; --Catui_card-title-size:var(--Catui_type-h3-size); --Catui_card-title-color:var(--Catui_color-text-primary);
   --Catui_stat-label-size:var(--Catui_type-label-size); --Catui_stat-value-size:var(--Catui_type-metric-lg-size); --Catui_stat-value-color:var(--Catui_color-text-primary);
   --Catui_stat-delta-up:var(--Catui_color-brand-strong); --Catui_stat-delta-down:var(--Catui_badge-danger-fg);
@@ -112,7 +141,7 @@
   --Catui_donut-center-size:var(--Catui_type-metric-lg-size); --Catui_donut-center-color:var(--Catui_color-text-primary); --Catui_donut-label-size:var(--Catui_type-label-size);
   /* table / feed / task / meter */
   --Catui_table-head-h:40px; --Catui_table-row-h:46px; --Catui_table-head-bg:var(--Catui_color-surface-muted); --Catui_table-head-fg:var(--Catui_color-text-secondary); --Catui_table-head-font:var(--Catui_type-label-size);
-  --Catui_table-border:var(--Catui_color-border); --Catui_table-zebra:var(--Catui_color-surface-muted); --Catui_table-cell-px:var(--Catui_space-3); --Catui_table-font:var(--Catui_type-body-size); --Catui_table-row-hover:var(--Catui_color-brand-soft);
+  --Catui_table-border:var(--Catui_line); --Catui_table-zebra:var(--Catui_color-surface-muted); --Catui_table-cell-px:var(--Catui_space-3); --Catui_table-font:var(--Catui_type-body-size); --Catui_table-row-hover:var(--Catui_color-brand-soft);
   --Catui_feed-dot:8px; --Catui_feed-dot-color:var(--Catui_color-brand); --Catui_feed-line:var(--Catui_color-border); --Catui_feed-gap:var(--Catui_space-4); --Catui_feed-time-size:var(--Catui_type-label-size); --Catui_feed-time-color:var(--Catui_color-text-secondary);
   --Catui_task-h:var(--Catui_control-h-lg); --Catui_task-check:var(--Catui_check-size); --Catui_task-done-fg:var(--Catui_color-text-secondary);
   --Catui_task-priority-high:var(--Catui_color-danger); --Catui_task-priority-mid:var(--Catui_color-amber); --Catui_task-priority-low:var(--Catui_color-info);
@@ -121,53 +150,53 @@
   --Catui_sidebar-bg:var(--Catui_color-navy-800); --Catui_sidebar-item-h:38px; --Catui_sidebar-icon:18px;
   --Catui_sidebar-fg:var(--Catui_color-navy-text); --Catui_sidebar-fg-muted:var(--Catui_color-navy-muted);
   --Catui_sidebar-hover-bg:var(--Catui_color-navy-700); --Catui_sidebar-active-bg:var(--Catui_color-navy-900); --Catui_sidebar-active-fg:var(--Catui_color-text-inverse);
-  --Catui_sidebar-active-bar-w:3px; --Catui_sidebar-active-bar:var(--Catui_color-brand); --Catui_sidebar-rail-w:56px;
+  --Catui_sidebar-active-bar-w:var(--Catui_accent-w); --Catui_sidebar-active-bar:var(--Catui_color-brand); --Catui_sidebar-rail-w:56px;
   --Catui_sidebar-pad:var(--Catui_space-4); --Catui_sidebar-font:var(--Catui_type-body-size); --Catui_sidebar-head-font:var(--Catui_type-label-size);
-  --Catui_topbar-bg:var(--Catui_color-surface); --Catui_topbar-border:var(--Catui_color-border); --Catui_topbar-fg:var(--Catui_color-text-primary); --Catui_topbar-icon:20px; --Catui_topbar-pad:var(--Catui_space-4);
+  --Catui_topbar-bg:var(--Catui_color-surface); --Catui_topbar-border:var(--Catui_line); --Catui_topbar-fg:var(--Catui_color-text-primary); --Catui_topbar-icon:20px; --Catui_topbar-pad:var(--Catui_space-4);
   --Catui_breadcrumb-font:var(--Catui_type-caption-size); --Catui_breadcrumb-fg:var(--Catui_color-text-secondary); --Catui_breadcrumb-current:var(--Catui_color-text-primary); --Catui_breadcrumb-sep:var(--Catui_color-text-secondary); --Catui_breadcrumb-gap:var(--Catui_space-2);
   --Catui_segment-h:var(--Catui_control-h-sm); --Catui_segment-bg:var(--Catui_color-neutral-100); --Catui_segment-active-bg:var(--Catui_color-surface); --Catui_segment-fg:var(--Catui_color-neutral-700); --Catui_segment-active-fg:var(--Catui_color-text-primary);
   --Catui_segment-radius:var(--Catui_radius-sm); --Catui_segment-px:var(--Catui_space-3); --Catui_segment-font:var(--Catui_type-caption-size);
   /* tab / pager / banner / tooltip / empty / skeleton / divider / icon */
   --Catui_tab-h:36px; --Catui_tab-font:var(--Catui_type-body-size); --Catui_tab-fg:var(--Catui_color-text-secondary); --Catui_tab-active-fg:var(--Catui_color-brand-strong);
-  --Catui_tab-indicator-w:2px; --Catui_tab-indicator:var(--Catui_color-brand); --Catui_tab-border:var(--Catui_color-border); --Catui_tab-gap:var(--Catui_space-6);
+  --Catui_tab-indicator-w:2px; --Catui_tab-indicator:var(--Catui_color-brand); --Catui_tab-border:var(--Catui_line); --Catui_tab-gap:var(--Catui_space-6);
   --Catui_pager-size:30px; --Catui_pager-font:var(--Catui_type-caption-size); --Catui_pager-fg:var(--Catui_color-text-secondary);
-  --Catui_pager-active-bg:var(--Catui_color-brand-fill); --Catui_pager-active-fg:var(--Catui_color-text-inverse); --Catui_pager-border:var(--Catui_color-neutral-300); --Catui_pager-radius:var(--Catui_radius-sm); --Catui_pager-gap:var(--Catui_space-1);
-  --Catui_banner-py:12px; --Catui_banner-px:16px; --Catui_banner-icon:16px; --Catui_banner-radius:var(--Catui_radius-md); --Catui_banner-font:var(--Catui_type-caption-size);
+  --Catui_pager-active-bg:var(--Catui_color-brand-fill); --Catui_pager-active-fg:var(--Catui_color-text-inverse); --Catui_pager-border:var(--Catui_line-strong); --Catui_pager-radius:var(--Catui_radius-sm); --Catui_pager-gap:var(--Catui_space-1);
+  --Catui_banner-py:12px; --Catui_banner-px:16px; --Catui_banner-icon:16px; --Catui_banner-radius:var(--Catui_radius-sm); --Catui_banner-font:var(--Catui_type-caption-size);
   --Catui_banner-info-bg:var(--Catui_color-info-soft); --Catui_banner-info-fg:#1F6FA8;
   --Catui_banner-warn-bg:var(--Catui_color-amber-soft); --Catui_banner-warn-fg:#9A5B0F;
   --Catui_banner-danger-bg:var(--Catui_color-danger-soft); --Catui_banner-danger-fg:#C0392B;
-  --Catui_tooltip-bg:var(--Catui_color-navy-900); --Catui_tooltip-fg:var(--Catui_color-text-inverse); --Catui_tooltip-font:11px; --Catui_tooltip-px:var(--Catui_space-2); --Catui_tooltip-py:var(--Catui_space-1); --Catui_tooltip-radius:var(--Catui_radius-xs);
+  --Catui_tooltip-bg:var(--Catui_color-navy-900); --Catui_tooltip-fg:var(--Catui_color-text-inverse); --Catui_tooltip-font:11px; --Catui_tooltip-px:var(--Catui_space-2); --Catui_tooltip-py:var(--Catui_space-1); --Catui_tooltip-radius:var(--Catui_radius-sm);
   --Catui_empty-icon:40px; --Catui_empty-icon-color:var(--Catui_color-neutral-300); --Catui_empty-title-size:var(--Catui_type-h3-size); --Catui_empty-text-size:var(--Catui_type-body-size); --Catui_empty-text-color:var(--Catui_color-text-secondary); --Catui_empty-pad:var(--Catui_space-8);
   --Catui_skeleton-bg:var(--Catui_color-neutral-100); --Catui_skeleton-shine:color-mix(in srgb, var(--Catui_color-surface) 60%, transparent); --Catui_skeleton-radius:var(--Catui_radius-xs); --Catui_skeleton-h-text:12px; --Catui_skeleton-h-title:16px;
-  --Catui_divider-color:var(--Catui_color-divider); --Catui_divider-w:1px; --Catui_divider-gap:var(--Catui_space-4);
+  --Catui_divider-color:var(--Catui_line-soft); --Catui_divider-w:1px; --Catui_divider-gap:var(--Catui_space-4);
   --Catui_icon-12:12px; --Catui_icon-16:16px; --Catui_icon-18:18px; --Catui_icon-20:20px; --Catui_icon-24:24px; --Catui_icon-stroke:1.5; --Catui_icon-color:var(--Catui_color-text-secondary);
 
 
   --Catui_overlay-scrim:color-mix(in srgb, var(--Catui_color-navy-900) 48%, transparent);
   --Catui_modal-w-sm:400px; --Catui_modal-w-md:560px; --Catui_modal-w-lg:720px;
-  --Catui_modal-pad:var(--Catui_space-5); --Catui_modal-gap:var(--Catui_space-3); --Catui_modal-radius:var(--Catui_radius-lg);
-  --Catui_modal-bg:var(--Catui_color-surface); --Catui_modal-border:var(--Catui_color-border); --Catui_modal-shadow:var(--Catui_shadow-lg);
+  --Catui_modal-pad:var(--Catui_space-5); --Catui_modal-gap:var(--Catui_space-3); --Catui_modal-radius:var(--Catui_radius-md);
+  --Catui_modal-bg:var(--Catui_color-surface); --Catui_modal-border:var(--Catui_line); --Catui_modal-shadow:var(--Catui_shadow-lg);
   --Catui_modal-header-h:48px; --Catui_modal-footer-h:56px; --Catui_modal-footer-bg:var(--Catui_color-surface-muted);
   --Catui_modal-title-font:15px; --Catui_modal-title-weight:600; --Catui_modal-close:24px;
   --Catui_drawer-w:320px; --Catui_drawer-radius:0; --Catui_drawer-shadow:var(--Catui_shadow-lg);
   --Catui_dropdown-w-sm:160px; --Catui_dropdown-w-md:220px; --Catui_dropdown-w-lg:280px;
   --Catui_dropdown-max-h:280px; --Catui_dropdown-pad:var(--Catui_space-2); --Catui_dropdown-radius:var(--Catui_radius-md);
-  --Catui_dropdown-bg:var(--Catui_color-surface); --Catui_dropdown-border:var(--Catui_color-border); --Catui_dropdown-shadow:var(--Catui_shadow-md);
+  --Catui_dropdown-bg:var(--Catui_color-surface); --Catui_dropdown-border:var(--Catui_line); --Catui_dropdown-shadow:var(--Catui_shadow-md);
   --Catui_dropdown-item-h:32px; --Catui_dropdown-item-px:var(--Catui_space-3); --Catui_dropdown-item-gap:var(--Catui_space-2);
   --Catui_dropdown-item-font:13px; --Catui_dropdown-item-fg:var(--Catui_color-text-primary);
   --Catui_dropdown-item-bg-hover:var(--Catui_color-neutral-100); --Catui_dropdown-item-fg-disabled:var(--Catui_color-text-tertiary);
-  --Catui_dropdown-sep:var(--Catui_color-divider); --Catui_dropdown-group-font:10px; --Catui_dropdown-group-fg:var(--Catui_color-text-secondary);
+  --Catui_dropdown-sep:var(--Catui_line-soft); --Catui_dropdown-group-font:10px; --Catui_dropdown-group-fg:var(--Catui_color-text-secondary);
   --Catui_dropdown-icon:var(--Catui_icon-16);
   --Catui_toast-w:340px; --Catui_toast-gap:var(--Catui_space-2); --Catui_toast-py:var(--Catui_space-3); --Catui_toast-px:var(--Catui_space-4);
   --Catui_toast-radius:var(--Catui_radius-md); --Catui_toast-shadow:var(--Catui_shadow-md); --Catui_toast-icon:var(--Catui_icon-18);
-  --Catui_toast-title-font:13px; --Catui_toast-body-font:12px; --Catui_toast-accent-w:3px;
+  --Catui_toast-title-font:13px; --Catui_toast-body-font:12px; --Catui_toast-accent-w:var(--Catui_accent-w);
   --Catui_popover-w:260px; --Catui_popover-py:var(--Catui_space-3); --Catui_popover-px:var(--Catui_space-4);
-  --Catui_popover-radius:var(--Catui_radius-md); --Catui_popover-arrow:7px; --Catui_popover-shadow:var(--Catui_shadow-md);
+  --Catui_popover-radius:var(--Catui_radius-md); --Catui_popover-arrow:7px; --Catui_popover-shadow:0 0 0 1px var(--Catui_line),var(--Catui_shadow-md);
   --Catui_mega-w:960px; --Catui_mega-cols:4; --Catui_mega-col-gap:var(--Catui_space-6); --Catui_mega-pad:var(--Catui_space-6); --Catui_mega-item-h:30px;
   --Catui_wizard-step:28px; --Catui_wizard-line-w:24px; --Catui_wizard-gap:var(--Catui_space-2); --Catui_wizard-font:12px;
   --Catui_wizard-fg-done:var(--Catui_color-brand-strong); --Catui_wizard-fg-current:var(--Catui_color-text-primary); --Catui_wizard-fg-todo:var(--Catui_color-neutral-300);
-  --Catui_cmdk-w:560px; --Catui_cmdk-max-h:360px; --Catui_cmdk-row-h:36px; --Catui_cmdk-radius:var(--Catui_radius-lg); --Catui_cmdk-shadow:var(--Catui_shadow-lg); --Catui_cmdk-hint-font:10px;
-  --Catui_kbd-w:22px; --Catui_kbd-h:20px; --Catui_kbd-radius:var(--Catui_radius-xs); --Catui_kbd-border:var(--Catui_color-neutral-300);
+  --Catui_cmdk-w:560px; --Catui_cmdk-max-h:360px; --Catui_cmdk-row-h:36px; --Catui_cmdk-radius:var(--Catui_radius-md); --Catui_cmdk-shadow:var(--Catui_shadow-lg); --Catui_cmdk-hint-font:10px;
+  --Catui_kbd-w:22px; --Catui_kbd-h:20px; --Catui_kbd-radius:var(--Catui_radius-xs); --Catui_kbd-border:var(--Catui_line-strong);
   --Catui_kbd-bg:var(--Catui_color-neutral-100); --Catui_kbd-fg:var(--Catui_color-neutral-700); --Catui_kbd-font:11px;
 
 
@@ -186,7 +215,7 @@
   --Catui_kanban-tag-h:18px; --Catui_kanban-tag-font:10px;
   --Catui_file-row-h:48px; --Catui_file-icon:32px; --Catui_file-icon-radius:var(--Catui_radius-sm); --Catui_file-name-font:13px;
   --Catui_file-meta-font:11px; --Catui_file-thumb:32px;
-  --Catui_thread-gap:var(--Catui_space-4); --Catui_thread-depth-guide:var(--Catui_color-border); --Catui_thread-depth-guide-w:2px; --Catui_thread-indent:28px;
+  --Catui_thread-gap:var(--Catui_space-4); --Catui_thread-depth-guide:var(--Catui_color-border); --Catui_thread-depth-guide-w:1px; --Catui_thread-indent:28px;
   --Catui_thread-avatar:var(--Catui_avatar-md); --Catui_thread-body-fs:13px; --Catui_thread-meta-fs:11px;
   --Catui_thread-reaction-h:24px; --Catui_thread-reaction-px:var(--Catui_space-2); --Catui_thread-reaction-gap:var(--Catui_space-1);
   --Catui_heat-cell:12px; --Catui_heat-gap:3px; --Catui_heat-radius:var(--Catui_radius-xs);
@@ -196,11 +225,11 @@
   --Catui_heat-4:color-mix(in srgb, var(--Catui_color-brand) 70%, transparent);
   --Catui_heat-5:color-mix(in srgb, var(--Catui_color-brand) 100%, transparent);
   --Catui_heat-label-font:10px;
-  --Catui_timeline-dot:10px; --Catui_timeline-line:var(--Catui_color-border); --Catui_timeline-line-w:2px; --Catui_timeline-gap:var(--Catui_space-5);
+  --Catui_timeline-dot:10px; --Catui_timeline-line:var(--Catui_color-border); --Catui_timeline-line-w:1px; --Catui_timeline-gap:var(--Catui_space-5);
 
 
   --Catui_upload-h:120px; --Catui_upload-pad:var(--Catui_space-6); --Catui_upload-gap:var(--Catui_space-2); --Catui_upload-radius:var(--Catui_radius-md);
-  --Catui_upload-border:var(--Catui_color-neutral-300); --Catui_upload-border-w:1px; --Catui_upload-dash:4 3;
+  --Catui_upload-border:var(--Catui_line-strong); --Catui_upload-border-w:1px; --Catui_upload-dash:4 3;
   --Catui_upload-bg-hover:var(--Catui_color-brand-soft); --Catui_upload-border-active:var(--Catui_color-brand);
   --Catui_upload-icon:var(--Catui_icon-24); --Catui_upload-font:13px; --Catui_upload-hint-font:11px;
   --Catui_range-track-h:4px; --Catui_range-track:var(--Catui_color-border); --Catui_range-fill:var(--Catui_color-brand);
@@ -232,7 +261,7 @@
   --Catui_radar-fill-2:color-mix(in srgb, var(--Catui_color-info) 24%, transparent);
   --Catui_radar-label-font:11px;
   --Catui_prose-measure:640px; --Catui_prose-lead-font:15px; --Catui_prose-lead-fg:var(--Catui_color-text-secondary);
-  --Catui_prose-quote-bar:var(--Catui_color-brand); --Catui_prose-quote-w:3px; --Catui_prose-quote-fg:var(--Catui_color-text-secondary); --Catui_prose-quote-bg:var(--Catui_color-surface-muted);
+  --Catui_prose-quote-bar:var(--Catui_color-brand); --Catui_prose-quote-w:var(--Catui_accent-w); --Catui_prose-quote-fg:var(--Catui_color-text-secondary); --Catui_prose-quote-bg:var(--Catui_color-surface-muted);
   --Catui_prose-mark-bg:var(--Catui_color-amber-soft); --Catui_prose-mark-fg:var(--Catui_badge-warning-fg);
   --Catui_prose-code-bg:var(--Catui_color-neutral-100); --Catui_prose-code-fg:var(--Catui_color-brand-strong);
   --Catui_prose-dt-fg:var(--Catui_color-text-secondary); --Catui_prose-row-gap:var(--Catui_space-3);

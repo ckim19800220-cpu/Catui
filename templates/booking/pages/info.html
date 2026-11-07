@@ -1,0 +1,38 @@
+<!-- title: 예약자 정보 | nav: home -->
+<header class="Catui_bk-flow-head">
+  <h1 class="Catui_h2">예약자 정보 <small class="Catui_bk-muted" data-svc-name></small></h1>
+  <ol class="Catui_steps" data-catui-bk-steps="info" aria-label="예약 단계"></ol>
+</header>
+<div class="Catui_bk-flow">
+  <form class="Catui_bk-flow-main" data-catui-bk-info novalidate aria-label="예약자 정보">
+    <section class="Catui_bk-box" aria-labelledby="if-h">
+      <h2 class="Catui_h3" id="if-h">연락처</h2>
+      <div class="Catui_field"><label class="Catui_label" for="if-name">이름</label><input class="Catui_input" id="if-name" name="name" autocomplete="name" data-catui-verify="required" value="김고양"></div>
+      <div class="Catui_field"><label class="Catui_label" for="if-phone">휴대전화</label><input class="Catui_input" id="if-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-1234-5678" data-catui-verify="required|phone" value="010-1234-5678" aria-describedby="if-phone-h"><p class="Catui_help" id="if-phone-h">예약 확인 문자를 보내 드립니다(예제).</p></div>
+      <div class="Catui_field"><label class="Catui_label" for="if-mail">이메일 <small class="Catui_bk-muted">(선택)</small></label><input class="Catui_input" id="if-mail" name="email" type="email" autocomplete="email" data-catui-verify="email"></div>
+    </section>
+    <section class="Catui_bk-box" aria-labelledby="if-r-h">
+      <h2 class="Catui_h3" id="if-r-h">요청사항</h2>
+      <div class="Catui_field"><label class="Catui_label" for="if-req">요청사항 <small class="Catui_bk-muted">(선택, 200자)</small></label><textarea class="Catui_input" id="if-req" name="request" rows="3" maxlength="200" data-catui-counter="200" placeholder="예: 유모차 보관, 알레르기, 늦은 도착 시간"></textarea></div>
+    </section>
+    <section class="Catui_bk-box" aria-labelledby="if-a-h">
+      <h2 class="Catui_h3" id="if-a-h">약관 동의</h2>
+      <div class="Catui_bk-agree">
+        <label class="Catui_choice" for="if-ag-all"><input class="Catui_clip" type="checkbox" id="if-ag-all" data-agree-all><span class="Catui_cbx">{{icon:check:12}}</span>아래 약관에 모두 동의합니다</label>
+        <label class="Catui_choice" for="if-ag-1"><input class="Catui_clip" type="checkbox" id="if-ag-1" data-agree required><span class="Catui_cbx">{{icon:check:12}}</span>(필수) 예약·취소 환불 규정 확인</label>
+        <label class="Catui_choice" for="if-ag-2"><input class="Catui_clip" type="checkbox" id="if-ag-2" data-agree required><span class="Catui_cbx">{{icon:check:12}}</span>(필수) 개인정보 수집·이용(예약 확인 목적, 이용일 후 1년 보관)</label>
+        <label class="Catui_choice" for="if-ag-3"><input class="Catui_clip" type="checkbox" id="if-ag-3" name="notify" data-agree><span class="Catui_cbx">{{icon:check:12}}</span>(선택) 하루 전 알림 문자 받기</label>
+      </div>
+      <details class="Catui_bk-box">
+        <summary>취소 환불 규정 보기</summary>
+        <div data-refund-table></div>
+      </details>
+    </section>
+    <p class="Catui_bk-msg" role="alert" data-msg hidden></p>
+    <div class="Catui_bk-next-bar">
+      <a class="Catui_btn Catui_btn-md Catui_btn-ghost" href="index.html" data-catui-bk-prev>{{icon:arrow-left}}이전 단계</a>
+      <button class="Catui_btn Catui_btn-lg Catui_btn-primary" type="submit">다음: 예약 확인{{icon:arrow-right}}</button>
+    </div>
+  </form>
+  <aside class="Catui_bk-flow-side Catui_bk-box" data-catui-bk-summary aria-label="예약 내용"></aside>
+</div>

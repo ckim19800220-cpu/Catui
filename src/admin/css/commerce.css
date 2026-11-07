@@ -29,7 +29,7 @@
 .Catui_adm-gallery{display:grid;gap:var(--Catui_space-3)}
 .Catui_adm-gallery > .Catui_adm-ph{border-radius:var(--Catui_radius-lg);aspect-ratio:1 / 1}
 .Catui_adm-gallery-thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--Catui_space-2)}
-.Catui_adm-gallery-thumbs button{padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-md);overflow:hidden;background:none;cursor:pointer}
+.Catui_adm-gallery-thumbs button{padding:0;border:2px solid transparent;border-radius:var(--Catui_radius-md);overflow:hidden;background:none;cursor:pointer}   /* 굵은선 허용: 선택한 썸네일 표시(상태) */
 .Catui_adm-gallery-thumbs button[aria-pressed="true"]{border-color:var(--Catui_color-brand-strong)}
 .Catui_adm-gallery-thumbs button:focus-visible{outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
 .Catui_adm-gallery-thumbs .Catui_adm-ph{aspect-ratio:1 / 1}
@@ -41,7 +41,7 @@
 
 /* 청구서: 종이 한 장처럼, 인쇄 시 셸 없이 그 장만 */
 .Catui_adm-invoice{width:100%;max-width:calc(var(--Catui_space-10) * 13);margin-inline:auto;padding:var(--Catui_space-8);background:var(--Catui_card-bg);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_radius-md);box-shadow:var(--Catui_shadow-sm)}
-.Catui_adm-invoice-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--Catui_space-4);padding-bottom:var(--Catui_space-5);margin-bottom:var(--Catui_space-5);border-bottom:2px solid var(--Catui_color-text-primary)}
+.Catui_adm-invoice-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--Catui_space-4);padding-bottom:var(--Catui_space-5);margin-bottom:var(--Catui_space-5);border-bottom:1px solid var(--Catui_color-text-primary)}
 .Catui_adm-invoice-parties{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-5);margin-bottom:var(--Catui_space-5)}
 .Catui_adm-invoice .Catui_adm-sum{max-width:calc(var(--Catui_space-10) * 5);margin-left:auto;margin-top:var(--Catui_space-5)}
 @media (max-width:767px){.Catui_adm-invoice{padding:var(--Catui_space-5);overflow-x:auto}.Catui_adm-invoice-parties{grid-template-columns:minmax(0,1fr)}}   /* 품목 표(숫자 칸 nowrap)가 좁은 화면을 밀어내지 않게 청구서 안에서 가로 스크롤 */

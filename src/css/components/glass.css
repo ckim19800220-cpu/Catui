@@ -1,0 +1,65 @@
+/* components/glass.css */
+/* 유리(glassmorphism) — 떠 있는 층에만: 상단 바·머리, 드롭다운 메뉴, 메가 메뉴, 토스트, 아래 고정 동작 줄, 대화상자 덮개(scrim·::backdrop).
+   본문 카드·표·폼에는 쓰지 않는다(가독성).
+   · 면: --Catui_glass-bg(작은 층 82%) · --Catui_glass-bg-strong(글자 많은 바 92%) — 뒤가 어두워도 글자 대비가 무너지지 않을 만큼 불투명하게
+   · 선: --Catui_glass-border(잉크 hairline) · 흐림: --Catui_glass-blur
+   · 상단 바는 ::before 층에 흐림을 둔다 — 바 자체에 backdrop-filter를 주면 안쪽 position:fixed 요소의 기준이 바뀌고
+     안쪽 메뉴의 흐림이 바 영역에 갇히기 때문(backdrop root)
+   · 폴백: backdrop-filter 미지원 → 불투명 면, 투명도 줄이기(prefers-reduced-transparency) · 강제 색 모드 → 불투명·흐림 없음 */
+
+/* 상단 바 · 공개 머리 */
+.Catui_topbar,.Catui_site-header{background:transparent;isolation:isolate}
+.Catui_content .Catui_site-header{position:relative;z-index:auto}
+.Catui_topbar::before,.Catui_site-header::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:var(--Catui_glass-bg-strong);-webkit-backdrop-filter:var(--Catui_glass-blur);backdrop-filter:var(--Catui_glass-blur);
+}
+@media (max-width:991px){
+  .Catui_site-menu[open] .Catui_site-nav{background:var(--Catui_glass-bg-strong);-webkit-backdrop-filter:var(--Catui_glass-blur);backdrop-filter:var(--Catui_glass-blur)}
+}
+
+/* 작은 떠 있는 층: 메뉴 · 메가 메뉴 · 토스트 */
+.Catui_dd-menu,.Catui_mega-panel,.Catui_toast{
+  background:var(--Catui_glass-bg);
+  -webkit-backdrop-filter:var(--Catui_glass-blur);backdrop-filter:var(--Catui_glass-blur);
+}
+
+/* 대화상자 층: 모달 · 드로어 · 명령 팔레트 — 패널은 불투명 면(덮개 위에 반투명 면을 겹치면 회색으로 탁해진다).
+   유리 효과는 아래 덮개 흐림이 맡는다 */
+/* 드로어는 여는 쪽 반대 모서리에 hairline (윤곽은 선, 그림자는 층) */
+:is(.Catui_drawer,dialog.Catui_drawer){border-inline-start:1px solid var(--Catui_glass-border)}
+:is(.Catui_drawer-left,dialog.Catui_drawer-left){border-inline-start:0;border-inline-end:1px solid var(--Catui_glass-border)}
+:is(.Catui_drawer-bottom,dialog.Catui_drawer-bottom){border-inline:0;border-top:1px solid var(--Catui_glass-border)}
+
+/* 아래 고정 동작 줄 */
+.Catui_actionbar{
+  background:var(--Catui_glass-bg-strong);
+  -webkit-backdrop-filter:var(--Catui_glass-blur);backdrop-filter:var(--Catui_glass-blur);
+}
+
+/* 덮개: 뒤 화면을 흐려(젖빛 유리) 대화상자에 시선을 모은다 */
+.Catui_scrim,dialog.Catui_modal::backdrop,dialog.Catui_drawer::backdrop,dialog.Catui_cmdk::backdrop{-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+
+/* 폴백 ① backdrop-filter 미지원: 불투명 면 */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .Catui_topbar::before,.Catui_site-header::before{background:var(--Catui_topbar-bg)}
+  .Catui_site-menu[open] .Catui_site-nav{background:var(--Catui_topbar-bg)}
+  .Catui_dd-menu{background:var(--Catui_dropdown-bg)}
+  .Catui_mega-panel,.Catui_toast,.Catui_actionbar{background:var(--Catui_card-bg)}
+}
+/* 폴백 ② 투명도 줄이기 설정: 불투명 면 + 흐림 없음 */
+@media (prefers-reduced-transparency:reduce){
+  .Catui_topbar::before,.Catui_site-header::before{background:var(--Catui_topbar-bg);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .Catui_site-menu[open] .Catui_site-nav{background:var(--Catui_topbar-bg);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .Catui_dd-menu{background:var(--Catui_dropdown-bg)}
+  .Catui_mega-panel,.Catui_toast,.Catui_actionbar{background:var(--Catui_card-bg)}
+  .Catui_dd-menu,.Catui_mega-panel,.Catui_toast,.Catui_actionbar,
+  .Catui_scrim,dialog.Catui_modal::backdrop,dialog.Catui_drawer::backdrop,dialog.Catui_cmdk::backdrop{-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+/* 폴백 ③ 강제 색 모드: 시스템 색 면, 흐림 없음, 윤곽선은 시스템 선 색 */
+@media (forced-colors:active){
+  .Catui_topbar::before,.Catui_site-header::before,.Catui_site-menu[open] .Catui_site-nav,
+  .Catui_dd-menu,.Catui_mega-panel,.Catui_toast,.Catui_actionbar{background:Canvas;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .Catui_dd-menu,.Catui_mega-panel,.Catui_toast,.Catui_modal,.Catui_cmdk{border-color:CanvasText}
+  .Catui_scrim,dialog.Catui_modal::backdrop,dialog.Catui_drawer::backdrop,dialog.Catui_cmdk::backdrop{-webkit-backdrop-filter:none;backdrop-filter:none}
+}

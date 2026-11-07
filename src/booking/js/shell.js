@@ -5,6 +5,7 @@
 //   [data-catui-bk-theme]           테마 전환 (booking.theme)
 booking.shell = {
   init(root) {
+    if (booking._once(root, "photo-errors")) booking._on(root, "error", (e) => { if (e.target.matches?.(".Catui_bk-photo, .Catui_bk-hero-img")) e.target.hidden = true; }, true);
     root.querySelectorAll("[data-catui-bk-won]").forEach((el) => { el.textContent = booking.won(el.getAttribute("data-catui-bk-won")); });
     root.querySelectorAll("[data-catui-bk-today]").forEach((el) => { el.textContent = booking.dateLabel(booking.today(), { year: true }); });
     booking._on(root, "click", (e) => {

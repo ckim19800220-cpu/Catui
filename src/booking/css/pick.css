@@ -1,0 +1,137 @@
+/* booking/pick.css */
+/* 고르기: 서비스 카드 · 달력 · 시간 칸 · 범례 · 인원 · 옵션 · 기간 · 객실 카드 · 예약 내용 · 금액 줄 · 약관 */
+
+/* 서비스 카드 (홈) */
+.Catui_bk-svcs{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(var(--Catui_space-10) * 8)),1fr));gap:var(--Catui_space-4)}
+.Catui_bk-svc{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--Catui_space-3) var(--Catui_space-4);padding:var(--Catui_space-5);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg)}
+.Catui_bk-svc-ic{display:inline-grid;place-items:center;flex:none;width:calc(var(--Catui_space-10) + var(--Catui_space-2));height:calc(var(--Catui_space-10) + var(--Catui_space-2));border-radius:var(--Catui_radius-md);background:var(--Catui_bk-accent-soft);color:var(--Catui_bk-accent)}
+.Catui_bk-svc-ic .Catui_icon{color:inherit}
+.Catui_bk-photo{grid-column:1/-1;display:block;width:100%;aspect-ratio:16/7;height:auto;object-fit:cover;border-radius:var(--Catui_radius-sm)}
+.Catui_bk-photo[hidden]{display:none}
+.Catui_bk-room-l > .Catui_bk-photo{aspect-ratio:16/5}
+.Catui_bk [data-tone="2"] > .Catui_bk-svc-ic,.Catui_bk .Catui_bk-svc-ic[data-tone="2"]{background:var(--Catui_color-info-soft);color:var(--Catui_color-info)}
+.Catui_bk [data-tone="3"] > .Catui_bk-svc-ic,.Catui_bk .Catui_bk-svc-ic[data-tone="3"]{background:var(--Catui_color-purple-soft);color:var(--Catui_color-purple)}
+.Catui_bk [data-tone="4"] > .Catui_bk-svc-ic,.Catui_bk .Catui_bk-svc-ic[data-tone="4"]{background:var(--Catui_bk-warn-soft);color:var(--Catui_color-text-primary)}
+.Catui_bk-svc-b{display:grid;gap:var(--Catui_space-1);min-width:0}
+.Catui_bk-svc-t{margin:0;font-size:var(--Catui_type-h3-size)}
+.Catui_bk-svc-d{margin:0;color:var(--Catui_bk-muted)}
+.Catui_bk-svc-meta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-1) var(--Catui_space-3);margin:0;font-size:var(--Catui_type-caption-size);color:var(--Catui_bk-muted)}
+.Catui_bk-svc-meta span{display:inline-flex;align-items:center;gap:var(--Catui_space-1)}
+.Catui_bk-svc-meta b{color:var(--Catui_color-text-primary);font-size:var(--Catui_type-body-size)}
+.Catui_bk-svc-go{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:var(--Catui_space-2)}
+.Catui_bk-upnext{display:flex;align-items:center;gap:var(--Catui_space-3);padding:var(--Catui_space-3) var(--Catui_space-4);border:1px solid var(--Catui_card-border);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg);text-decoration:none}
+.Catui_bk-upnext > span:nth-child(2){display:grid;flex:1;min-width:0}
+.Catui_bk-upnext small{color:var(--Catui_bk-muted)}
+
+/* 달력 */
+.Catui_bk-cal{display:grid;gap:var(--Catui_space-2);max-width:calc(var(--Catui_space-10) * 8)}
+.Catui_bk-cal-head{display:flex;align-items:center;justify-content:space-between;gap:var(--Catui_space-2)}
+.Catui_bk-cal-t{margin:0;font-weight:700;font-size:var(--Catui_type-h3-size)}
+.Catui_bk-cal-tbl{width:100%;border-collapse:separate;border-spacing:2px;table-layout:fixed}
+.Catui_bk-cal-tbl th{padding:var(--Catui_space-1) 0;font-size:var(--Catui_type-caption-size);font-weight:600;color:var(--Catui_bk-muted);text-align:center}
+.Catui_bk-cal-tbl td{padding:0}
+.Catui_bk-day{position:relative;display:grid;place-items:center;align-content:center;gap:1px;width:100%;min-height:calc(var(--Catui_space-10) + var(--Catui_space-3));padding:var(--Catui_space-1) 0;border:1px solid transparent;border-radius:var(--Catui_radius-sm);background:transparent;color:var(--Catui_color-text-primary);font:inherit;cursor:pointer}
+.Catui_bk-day:hover{border-color:var(--Catui_bk-line);background:var(--Catui_color-surface-muted)}
+.Catui_bk-day-n{font-weight:700;font-variant-numeric:tabular-nums}
+.Catui_bk-day-s{min-height:1em;font-size:var(--Catui_type-micro-size);line-height:1;color:var(--Catui_bk-muted)}
+.Catui_bk-day[aria-current="date"] .Catui_bk-day-n{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+.Catui_bk-day[data-state="few"] .Catui_bk-day-s{color:var(--Catui_color-text-primary);font-weight:700}
+.Catui_bk-day[data-state="full"]{background:var(--Catui_bk-hatch)}
+.Catui_bk-day[aria-disabled="true"]{cursor:not-allowed;color:var(--Catui_bk-off-fg)}
+.Catui_bk-day:is([data-state="past"],[data-state="beyond"]) .Catui_bk-day-n{text-decoration:line-through;font-weight:400}
+.Catui_bk-day[aria-pressed="true"]{border-color:var(--Catui_bk-accent);background:var(--Catui_bk-accent);color:var(--Catui_color-text-inverse)}
+.Catui_bk-day[aria-pressed="true"] .Catui_bk-day-s{color:inherit}
+.Catui_bk-day:focus-visible{outline-offset:1px;z-index:1}
+
+/* 시간 칸 */
+.Catui_bk-times{margin:0;padding:0;border:0;min-width:0}
+.Catui_bk-legend{padding:0;margin-bottom:var(--Catui_space-3);font-weight:700}
+.Catui_bk-slots{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 2),1fr));gap:var(--Catui_space-2)}
+.Catui_bk-slot{display:grid;gap:2px;min-height:var(--Catui_control-h-lg);padding:var(--Catui_space-2);border:1px solid var(--Catui_bk-line);border-radius:var(--Catui_bk-radius);background:var(--Catui_card-bg);text-align:center;cursor:pointer}
+.Catui_bk-slot b{font-variant-numeric:tabular-nums}
+.Catui_bk-slot span{display:inline-flex;align-items:center;justify-content:center;gap:2px;font-size:var(--Catui_type-caption-size);color:var(--Catui_bk-muted)}
+.Catui_bk-slot:hover{border-color:var(--Catui_bk-accent)}
+.Catui_bk-slot[data-few]{border-color:var(--Catui_bk-warn);background:var(--Catui_bk-warn-soft)}
+.Catui_bk-slot[data-few] span{color:var(--Catui_color-text-primary);font-weight:600}
+.Catui_bk-slot:is([data-state="full"],[data-state="past"],[data-state="break"],[data-state="closed"]){cursor:not-allowed;border-style:dashed;background:var(--Catui_bk-off-bg);color:var(--Catui_bk-off-fg)}
+.Catui_bk-slot[data-state="full"]{background:var(--Catui_bk-hatch),var(--Catui_bk-off-bg)}
+.Catui_bk-slot[data-state="past"] b{text-decoration:line-through;font-weight:400}
+.Catui_bk input:checked + .Catui_bk-slot{border-color:var(--Catui_bk-accent);background:var(--Catui_bk-accent);color:var(--Catui_color-text-inverse);box-shadow:inset 0 0 0 1px var(--Catui_bk-accent)}
+.Catui_bk input:checked + .Catui_bk-slot span{color:inherit}
+.Catui_bk input:focus-visible + :is(.Catui_bk-slot,.Catui_bk-room-l){outline:2px solid var(--Catui_color-focus-ring);outline-offset:2px}
+.Catui_bk-waithint{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-1) var(--Catui_space-2);margin:var(--Catui_space-3) 0 0;font-size:var(--Catui_type-caption-size)}
+
+/* 범례 — 화면의 상태 모양과 같은 견본 + 글자 */
+.Catui_bk-keys{display:flex;flex-wrap:wrap;gap:var(--Catui_space-2) var(--Catui_space-4);margin:0;padding:0;list-style:none;font-size:var(--Catui_type-caption-size);color:var(--Catui_bk-muted)}
+.Catui_bk-keys li{display:inline-flex;align-items:center;gap:var(--Catui_space-1)}
+.Catui_bk-key{display:inline-grid;place-items:center;width:var(--Catui_space-5);height:var(--Catui_space-5);border:1px solid var(--Catui_bk-line);border-radius:var(--Catui_radius-xs);background:var(--Catui_card-bg);color:var(--Catui_color-text-primary)}
+.Catui_bk-key .Catui_icon{color:inherit}
+.Catui_bk-key[data-k="few"]{border-color:var(--Catui_bk-warn);background:var(--Catui_bk-warn-soft)}
+.Catui_bk-key:is([data-k="full"],[data-k="taken"]){border-style:dashed;background:var(--Catui_bk-hatch),var(--Catui_bk-off-bg)}
+.Catui_bk-key[data-k="past"]{border-style:dashed;background:var(--Catui_bk-off-bg)}
+.Catui_bk-key[data-k="on"]{border-color:var(--Catui_bk-accent);background:var(--Catui_bk-accent);color:var(--Catui_color-text-inverse)}
+
+/* 인원 */
+.Catui_bk-count{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--Catui_space-2) var(--Catui_space-4);padding-block:var(--Catui_space-2);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_bk-count:last-of-type{border-bottom:0}
+.Catui_bk-count-t{margin:0;font-weight:700}
+.Catui_bk-count .Catui_help{margin:0}
+
+/* 옵션 */
+.Catui_bk-opts{display:grid;gap:var(--Catui_space-2)}
+.Catui_bk-opt{display:flex;flex-wrap:wrap;align-items:center;gap:var(--Catui_space-2);padding:var(--Catui_space-3);border:1px solid var(--Catui_bk-line);border-radius:var(--Catui_bk-radius)}
+.Catui_bk-opt-t{flex:1;min-width:0;font-weight:600}
+.Catui_bk-opt-p{font-variant-numeric:tabular-nums;color:var(--Catui_bk-muted)}
+.Catui_bk-opt:has(input:checked){border-color:var(--Catui_bk-accent);background:var(--Catui_bk-accent-soft)}
+
+/* 숙박 기간 */
+.Catui_bk-dates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--Catui_space-3)}
+.Catui_bk-dates .Catui_input{width:100%;min-width:0}
+.Catui_bk-nights{margin:0;font-weight:700}
+
+/* 객실 카드 */
+.Catui_bk-rooms{margin:0;padding:0;list-style:none;display:grid;gap:var(--Catui_space-3)}
+.Catui_bk-room{position:relative}
+.Catui_bk-room-l{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--Catui_space-2) var(--Catui_space-4);align-items:center;padding:var(--Catui_space-4);border:1px solid var(--Catui_bk-line);border-radius:var(--Catui_card-radius);background:var(--Catui_card-bg);cursor:pointer}
+.Catui_bk-room-ic{display:inline-grid;place-items:center;width:calc(var(--Catui_space-10) + var(--Catui_space-2));height:calc(var(--Catui_space-10) + var(--Catui_space-2));border-radius:var(--Catui_radius-md);background:var(--Catui_bk-accent-soft);color:var(--Catui_bk-accent)}
+.Catui_bk-room-ic .Catui_icon{color:inherit}
+.Catui_bk-room-b{display:grid;gap:2px;min-width:0}
+.Catui_bk-room-b small{color:var(--Catui_bk-muted)}
+.Catui_bk-room-t{font-size:var(--Catui_type-h3-size)}
+.Catui_bk-room-p{display:grid;justify-items:end;text-align:right;gap:2px}
+.Catui_bk-room-p b{font-size:var(--Catui_type-h3-size);font-variant-numeric:tabular-nums}
+.Catui_bk-room-p small{color:var(--Catui_bk-muted)}
+.Catui_bk input:checked + .Catui_bk-room-l{border-color:var(--Catui_bk-accent);box-shadow:inset 0 0 0 1px var(--Catui_bk-accent);background:var(--Catui_bk-accent-soft)}
+.Catui_bk input:checked + .Catui_bk-room-l::after{content:"선택함";position:absolute;top:var(--Catui_space-2);right:var(--Catui_space-3);font-size:var(--Catui_type-micro-size);font-weight:700;color:var(--Catui_bk-accent)}
+.Catui_bk input:disabled + .Catui_bk-room-l{cursor:not-allowed;border-style:dashed;background:var(--Catui_bk-off-bg)}
+
+/* 예약 내용 · 금액 */
+.Catui_bk-sum{display:grid;gap:var(--Catui_space-2);margin:0}
+.Catui_bk-sum > div{display:grid;grid-template-columns:calc(var(--Catui_space-10) * 1.75) minmax(0,1fr);gap:var(--Catui_space-3)}
+.Catui_bk-sum dt{color:var(--Catui_bk-muted)}
+.Catui_bk-sum dd{margin:0;font-weight:600;min-width:0}
+.Catui_bk-sum dd small{display:block;font-weight:400;color:var(--Catui_bk-muted)}
+.Catui_bk-sum-lg > div{padding-block:var(--Catui_space-2);border-bottom:1px solid var(--Catui_divider-color)}
+.Catui_bk-lines{display:grid;gap:var(--Catui_space-2);margin:0;padding:0;list-style:none}
+.Catui_bk-lines li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--Catui_space-1) var(--Catui_space-3)}
+.Catui_bk-lines small{color:var(--Catui_bk-muted);font-variant-numeric:tabular-nums}
+.Catui_bk-lines b{font-variant-numeric:tabular-nums}
+.Catui_bk-total{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:var(--Catui_space-2);margin:0;padding-top:var(--Catui_space-3);border-top:1px solid var(--Catui_bk-line);font-weight:700}
+.Catui_bk-total b{font-size:var(--Catui_type-h2-size);color:var(--Catui_bk-accent);font-variant-numeric:tabular-nums}
+
+/* 약관 */
+.Catui_bk-agree{display:grid;gap:var(--Catui_space-2);padding:var(--Catui_space-3) var(--Catui_space-4);border:1px solid var(--Catui_bk-line);border-radius:var(--Catui_bk-radius)}
+.Catui_bk-agree > :first-child{padding-bottom:var(--Catui_space-2);border-bottom:1px solid var(--Catui_divider-color);font-weight:700}
+
+@media (max-width:599px){
+  .Catui_bk-room-l{grid-template-columns:auto minmax(0,1fr)}
+  .Catui_bk-room-p{grid-column:1 / -1;justify-items:start;text-align:left}
+  .Catui_bk-dates{grid-template-columns:minmax(0,1fr)}
+  .Catui_bk-svc{padding:var(--Catui_space-4)}
+}
+@media (max-width:399px){
+  .Catui_bk-day{min-height:calc(var(--Catui_space-10) + var(--Catui_space-1))}
+  .Catui_bk-day-s{font-size:calc(var(--Catui_type-micro-size) * 0.9)}
+  .Catui_bk-slots{grid-template-columns:repeat(auto-fill,minmax(calc(var(--Catui_space-10) * 1.7),1fr))}
+  .Catui_bk-sum > div{grid-template-columns:minmax(0,1fr);gap:0}
+}
